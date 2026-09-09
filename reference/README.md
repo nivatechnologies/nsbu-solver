@@ -52,8 +52,16 @@ full fine-band coefficients at startup and the first endpoint. It also compares
 80 and 120 digits on the finest grid. This can take many minutes. Its results are
 diagnostic; it has no authority to qualify a force-resolution channel or PDE window.
 
+The N=8 and N=12 80/120-digit full-step comparisons also passed. Their full
+coefficient payloads are preserved with deterministic gzip compression:
+[N=8](../fixtures/reference/steps-n8.json.gz) and
+[N=12](../fixtures/reference/steps-n12.json.gz). The matching
+[N=8 report](../evidence/reference-steps-n8.json) and
+[N=12 report](../evidence/reference-steps-n12.json) record compressed and
+uncompressed SHA-256 hashes. Python’s standard `gzip` module can read them.
+
 P00B remains incomplete because the repository mutation gate is unmet and final
-large-grid/sampling evidence is still being collected. See the source-hashed
+force-sampling evidence is still being collected. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
 Rust implementation, current-grid binary64 comparison, concentrating trajectory

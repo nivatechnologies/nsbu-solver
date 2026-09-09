@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "grid": 8,
+  "scope": "N=8 smooth forced semidiscrete arithmetic fixture",
+  "comparisons": [
+    {
+      "method": "CM",
+      "path": "full_step",
+      "max_full_band_component_change": "2.84430614475e-83"
+    },
+    {
+      "method": "CM",
+      "path": "two_half_steps",
+      "max_full_band_component_change": "1.75353913847e-83"
+    },
+    {
+      "method": "HO",
+      "path": "full_step",
+      "max_full_band_component_change": "1.58132969178e-83"
+    },
+    {
+      "method": "HO",
+      "path": "two_half_steps",
+      "max_full_band_component_change": "1.58132969309e-83"
+    }
+  ],
+  "raw_local_discrepancies": [
+    {
+      "method": "CM",
+      "precision": 80,
+      "raw_local_discrepancy": "4.4713906373420534951e-9"
+    },
+    {
+      "method": "HO",
+      "precision": 80,
+      "raw_local_discrepancy": "6.0859362080277928885e-9"
+    },
+    {
+      "method": "CM",
+      "precision": 120,
+      "raw_local_discrepancy": "4.4713906373420534951e-9"
+    },
+    {
+      "method": "HO",
+      "precision": 120,
+      "raw_local_discrepancy": "6.0859362080277928885e-9"
+    }
+  ],
+  "payload": "fixtures/reference/steps-n8.json.gz",
+  "payload_sha256": "efa4ad8e0a235afdc432edc688df0ff8a1150a05142c1fbe8e055b43cdbac0f5",
+  "payload_bytes": 790150,
+  "uncompressed_sha256": "02bb29aca6ee80a9f05e8ef6d6fe0e5dfa05660b6a95dd4dcdf1db9a53d26d67",
+  "uncompressed_bytes": 2818337,
+  "source_sha256": {
+    "reference/__init__.py": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+    "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+    "reference/jets.py": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+    "reference/evaluator.py": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+    "reference/verify_fields.py": "36eabad7b058d993714ad834b3891ab2a87794a3cfa5b617f5532945c48dfcb4",
+    "reference/dft.py": "91739e8480e8134d7fc7f959021c33af4b714c5454873867610a0057b358c038",
+    "reference/steps.py": "0bf5071a8382f4236f41cb45f26c1a2faa2bc10a7cea4366ddb843e80ade3735",
+    "reference/verify_steps.py": "e3164903679b83e90dc49827cdeca64b848a20e531c62c3456814156969fe7e2",
+    "reference/tuples.py": "aa77b60f737e641f2e0672e04b4a18dc6aa0ba0efb7066c2f113b0f1279b4e53",
+    "reference/verify_trajectory.py": "66635f9071aef4977ae9c90974f58c63300b0129f9bf13ec26547837995e2dae",
+    "reference/regions.py": "f33d61f573e85eb1b9690dd3719bee0026743daca0ae8ef660743f8e2397ee3c"
+  },
+  "reference_assignments": 0,
+  "limitations": [
+    "Not similarity-mms-v2",
+    "No binary64 production comparison",
+    "No accepted PDE convergence window"
+  ]
+}

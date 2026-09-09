@@ -93,7 +93,6 @@
     "reference/tests/test_sampling.py": "606b7b665060021790916a240125d2446cdb9d3ae6e6f2c20f7289aa150cf9d5"
   },
   "not_complete": [
-    "N=12 arithmetic repeat against stabilized coefficient implementation is running",
     "Full v2 force-sampling study is running",
     "Repository-wide mutation gate and complete automated quality gate remain unmet",
     "Production binary64 comparisons belong to later packages"
@@ -103,5 +102,9 @@
   "accepted_pde_windows": 0,
   "smooth_trajectory_fixture": "fixtures/reference/smooth-trajectory.json",
   "region_fixture": "fixtures/reference/regions.json",
-  "non_executable_test_normalization": "Trailing blank lines normalized after the 78-test measurement; no executable test statements changed."
+  "non_executable_test_normalization": "Trailing blank lines normalized after the 78-test measurement; no executable test statements changed.",
+  "large_grid_evidence": [
+    "evidence/reference-steps-n8.json",
+    "evidence/reference-steps-n12.json"
+  ]
 }
