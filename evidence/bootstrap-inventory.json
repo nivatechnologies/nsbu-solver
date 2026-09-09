@@ -1,0 +1,92 @@
+{
+  "status": "blocked-missing-or-invalid-inputs",
+  "command": "python3 tools/audit_bootstrap.py --output evidence/bootstrap-inventory.json",
+  "python": "3.12.3",
+  "dependencies": "Python standard library only",
+  "frozen_hashes": {
+    "docs/design/COMPLETE_DESIGN.md": {
+      "expected": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+      "actual": null,
+      "matches": false
+    },
+    "docs/design/similarity-mms-v2.json": {
+      "expected": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "actual": null,
+      "matches": false
+    },
+    "benchmarks/similarity-mms-v2.json": {
+      "expected": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "actual": null,
+      "matches": false
+    },
+    "LICENSE": {
+      "expected": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "actual": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "matches": true
+    }
+  },
+  "missing_required_files": [
+    "tools/check_repository.py",
+    "tools/verify_design.py",
+    "docs/design/IMPLEMENTATION_PLAN.md",
+    "docs/design/SOURCE_FEASIBILITY.md",
+    "docs/design/CONSTRUCTION_LEDGER.md",
+    "docs/design/source-feasibility-policy.json",
+    "docs/design/navier-runtime-verification-results.json",
+    ".github/workflows/<CI workflow>"
+  ],
+  "broken_local_links": [
+    {
+      "document": "CONTRIBUTING.md",
+      "target": "docs/design/COMPLETE_DESIGN.md"
+    },
+    {
+      "document": "IMPLEMENTATION_PLAN.md",
+      "target": "docs/design/COMPLETE_DESIGN.md"
+    },
+    {
+      "document": "IMPLEMENTATION_PLAN.md",
+      "target": "docs/design/IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "document": "IMPLEMENTATION_PLAN.md",
+      "target": "docs/design/IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/design/COMPLETE_DESIGN.md"
+    },
+    {
+      "document": "README.md",
+      "target": "benchmarks/similarity-mms-v2.json"
+    },
+    {
+      "document": "docs/SCIENTIFIC_SCOPE.md",
+      "target": "design/source-feasibility-policy.json"
+    },
+    {
+      "document": "docs/SCIENTIFIC_SCOPE.md",
+      "target": "design/SOURCE_FEASIBILITY.md"
+    },
+    {
+      "document": "docs/SCIENTIFIC_SCOPE.md",
+      "target": "design/CONSTRUCTION_LEDGER.md"
+    },
+    {
+      "document": "docs/USAGE.md",
+      "target": "../benchmarks/similarity-mms-v2.json"
+    }
+  ],
+  "not_performed": [
+    "complete review-manifest verification",
+    "canonical problem identity verification",
+    "reviewed mathematical checks",
+    "CI execution",
+    "P00B reference evaluation",
+    "Rust implementation",
+    "PDE integration",
+    "verified bootstrap publication"
+  ],
+  "historical": true,
+  "superseded_by": "tools/check_repository.py"
+}

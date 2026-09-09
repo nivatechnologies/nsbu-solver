@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "design_revision": "0.7",
+  "case_id": "similarity-mms-v2",
+  "classification": "manufactured_concentrating_prescribed_force_problem",
+  "implementation_status": "Specification artifact; no implemented CLI parser or PDE run",
+  "mathematical_problem": {
+    "equation": "3D incompressible Navier-Stokes with prescribed force",
+    "coordinates": "Cartesian nondimensional x,y,z,t",
+    "periodic_box": {
+      "lengths": [
+        "1",
+        "1",
+        "1"
+      ],
+      "center": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "parameters": {
+      "nu": "1",
+      "h": "1/8",
+      "b": "1/4",
+      "j0": "1/32",
+      "T_star": "1/128",
+      "t_ramp": "1/512",
+      "R_in": "3/10",
+      "R_out": "21/50"
+    },
+    "derived_parameters": {
+      "A": "1/2+h",
+      "D": "1/2-h"
+    },
+    "time_domain": "0 <= t < T_star",
+    "similarity_coordinates": {
+      "tau": "T_star-t",
+      "q": "unique positive admissible root of q-z^2*q^(2*h)=tau",
+      "eta": "z*q^(-D)",
+      "X": "(x^2+y^2)/(2*q)"
+    },
+    "profiles": {
+      "a": "eta+j0",
+      "M": "a*X*exp(-X)",
+      "U": "a*(1-X)*exp(-X)",
+      "F": "b*exp(-X)",
+      "Pi": "-(b^2/2)*exp(-2*X)"
+    },
+    "smooth_step": {
+      "rho": "rho(s)=exp(-1/s) for s>0; rho(s)=0 otherwise",
+      "S": "S(s)=0 for s<=0; rho(s)/(rho(s)+rho(1-s)) for 0<s<1; 1 for s>=1"
+    },
+    "cutoffs": {
+      "c_x": "1-S((x^2+y^2+z^2-R_in^2)/(R_out^2-R_in^2))",
+      "c_t": "S(t/t_ramp)",
+      "c": "c_x*c_t"
+    },
+    "reference_fields": {
+      "G": "(1/2)*q^(-A)*(eta+j0)*exp(-X)",
+      "B": "b*q^(-A-1/2)*exp(-X)",
+      "A_vec": "G*(-y,x,0)",
+      "B_vec": "B*(-y,x,0)",
+      "u_S": "curl(c*A_vec)+c*B_vec",
+      "p_S_raw": "c^2*q^(-2*A)*Pi",
+      "p_S": "p_S_raw minus its periodic spatial mean at the same time"
+    },
+    "force": "partial_t(u_S)+(u_S dot grad)u_S-nu*Laplacian(u_S)+grad(p_S_raw)",
+    "initial_condition": {
+      "time": "0",
+      "velocity": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "force_dependence": "Prescribed by the fields above; never depends on integrated velocity or numerical grid",
+    "terminal_extension": "Unspecified: no smooth force extension through T_star is claimed"
+  },
+  "problem_identity": {
+    "algorithm": "SHA-256",
+    "canonicalization": "mathematical_problem only; json.dumps(sort_keys=True,separators=(',',':'),ensure_ascii=True), ASCII bytes, no final newline",
+    "sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f",
+    "scope": "Syntactic identity of this exact definition, not mathematical equivalence detection or a source-admissibility certificate",
+    "exact_input_policy": "All mathematical scalar input values are integer/rational strings, never binary64 literals"
+  },
+  "diagnostics": {
+    "identity_scope": "Separate from mathematical_problem; changes require a new comparison-protocol identity",
+    "nominal_eta": [
+      "-1/2",
+      "1/2"
+    ],
+    "core": "0 <= X <= 1/2",
+    "annulus": "1/2 < X <= 8",
+    "interior_mask": "Intersect each nominal region with mathematical c_x=1",
+    "coverage_measure": "Physical volume at each actual comparison time",
+    "empty_region_status": "RegionEmpty",
+    "additional_regions": [
+      "startup 0 <= t <= t_ramp",
+      "cutoff collar 0 < c_x < 1"
+    ],
+    "coverage_quadrature": {
+      "q": "tau/(1-eta^2)",
+      "z": "eta*q^D",
+      "X_limit": "(R_in^2-z^2)/(2*q)",
+      "weight": "q^(1+D)*(1-2*h*eta^2)/(1-eta^2)",
+      "fraction": "integral(weight*clamp(X_limit-X_low,0,X_high-X_low),eta=-1/2..1/2)/((X_high-X_low)*integral(weight,eta=-1/2..1/2))",
+      "accuracy_requirement": "Independent refinement or enclosure of this quadrature",
+      "executed": false
+    }
+  },
+  "experiment_proposal": {
+    "endpoint_rule": "tau_k=T_star*2^(-k), t_k=T_star-tau_k, integer k>=1",
+    "start": "Each refinement lineage originates from the exact initial rest state",
+    "successive_windows": "Extend the same immutable input; compare against independently evolved from-rest refinement trajectories",
+    "grid_screen": {
+      "rule": "N*sqrt(T_star*2^(-k)) >= 12",
+      "meaning": "Cells across the equatorial swirl-peak radius, not diameter",
+      "classification": "Heuristic resource screen; not an acceptance or convergence criterion",
+      "maximum_individual_grid_k": {
+        "128": 0,
+        "256": 1,
+        "512": 3,
+        "1024": 5
+      },
+      "caveat": "Coarser comparison grids can shorten the qualified frontier; memory preflight remains mandatory"
+    },
+    "acceptance_contract": "COMPLETE_DESIGN.md Sections 6 and 7; no accepted window exists"
+  },
+  "historical_case": {
+    "id": "similarity-mms-v1",
+    "T_star": "1/64",
+    "R_in": "1/4",
+    "R_out": "3/8",
+    "compatibility": "Different mathematical problem; cannot resume a v1 checkpoint as v2"
+  },
+  "source_instance": false,
+  "verified_pde_convergence": false
+}

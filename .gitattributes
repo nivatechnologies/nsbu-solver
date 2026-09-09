@@ -1,0 +1,4 @@
+* text=auto
+/docs/design/** -text
+/benchmarks/similarity-mms-v2.json -text
+/LICENSE -text

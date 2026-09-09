@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "revision": "0.8",
+  "runtime_design_revision": "0.7",
+  "adopted_baseline_sha256": {
+    "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+    "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+  },
+  "literal_target_status": "FeasibilityUnestablished",
+  "explicit_mesh_policy": {
+    "policy_id": "explicit-slow-mesh-v1",
+    "chart_segment_length": "1/4",
+    "required_spacing_at_most": "ell^-6",
+    "maximum_stored_intervals_per_axis": 1024,
+    "cap_origin": "Declared policy for this screen, not measured hardware capacity or a universal resource bound",
+    "minimum_tested_band": 119749,
+    "band_scope": "Both displayed relaxed bands and every larger integer under this same policy; required intervals increase as ell^6",
+    "scope": "Explicit subdivision of every mesh interval across the declared chart segment, conditional on undertaking that mesh-resolving plan; actual localized active support has not been admitted",
+    "status": "FeasibilityExcluded",
+    "reason": "ceil((1/4)*ell^6) exceeds the declared 1024-interval cap in each tested row",
+    "universal_representation_exclusion_claimed": false
+  },
+  "computed_rows": [
+    {
+      "ell": 119749,
+      "sqrt_epsilon_pure_asymptotic_factor": "0.499997926119871457568808853287950401416600628944563018721131691979822674458",
+      "chart_mesh_spacing": "3.39131887962803689435180465159829424524821724868525252196518455047739120995E-31",
+      "slow_support_full_extent_upper_bound": "6.78263775925607378870360930319658849049643449737050504393036910095478241990E-31",
+      "carrier_over_ell6": "1.01739566388841106830554139547948827357446517460557575658955536514321736298E-30",
+      "mesh_over_illustrative_core_radius": "1.35652755185121475774072186063931769809928689947410100878607382019095648398E-30",
+      "auxiliary_traversal_chart_proxy": "3584926011.23770668495331218565794420003682870561647028090530366998489077064",
+      "auxiliary_gaussian_chart_proxy": "29937.0016554435250812391935269433915943918421499676012401381528863279924729",
+      "auxiliary_traversal_proxy_over_slow_full_extent_bound": "5285445188850693990753466814108738977102.29096427342422016664864332209468536",
+      "auxiliary_gaussian_proxy_over_slow_full_extent_bound": "44137697925249429980655093688538016.8277170662324814755878266093522459033925",
+      "policy_required_intervals_per_axis": "737176328365264901456001617251",
+      "policy_exceeds_cap": true
+    },
+    {
+      "ell": 11217670,
+      "sqrt_epsilon_pure_asymptotic_factor": "6.31521039857611572137854393727287575481404936883605345946090917287410564370E-29",
+      "chart_mesh_spacing": "5.01861685621027701945479483312211290192633848273357532393670529210182518260E-43",
+      "slow_support_full_extent_upper_bound": "1.00372337124205540389095896662442258038526769654671506478734105842036503652E-42",
+      "carrier_over_ell6": "7.94687197966012284730899303197326463185149803510488014171908767652647492989E-15",
+      "mesh_over_illustrative_core_radius": "2.00744674248411080778191793324884516077053539309343012957468211684073007304E-42",
+      "auxiliary_traversal_chart_proxy": "5.01858134590858141192438235339119827284067628619905418377853804063270674042E-43",
+      "auxiliary_gaussian_chart_proxy": "4.47381795498403983351657015529178365279124478273924458802811817483729396606E-50",
+      "auxiliary_traversal_proxy_over_slow_full_extent_bound": "0.499996462142586989343365371278804553508732791971570236171613693438661501281",
+      "auxiliary_gaussian_proxy_over_slow_full_extent_bound": "4.45722206253693493696431942889035382132593303218556292145885637069606701999E-8",
+      "policy_required_intervals_per_axis": "498145220411950791845051572737215892250000",
+      "policy_exceeds_cap": true
+    }
+  ],
+  "direct_reproduction_in_current_release": false,
+  "compiler_scope": "MathematicsVerificationOnly",
+  "surrogate_status": "SeparateDecisionDeferred",
+  "source_profile_admitted": false,
+  "accepted_pde_windows": 0,
+  "runtime_implementation_exists": false,
+  "evidence_source": "navier-runtime-verification-results.json/source_mesh_review",
+  "provenance": {
+    "pdf_mesh_independently_inspected": true,
+    "source_pdf_sha256": null,
+    "lean_file": "NavierStokes/SlotColoring.lean",
+    "lean_commit_reported_by_reviewer": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+    "lean_file_independently_verified": false,
+    "formal_build_performed": false
+  }
+}

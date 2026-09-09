@@ -1,0 +1,169 @@
+{
+  "schema_version": 2,
+  "revision": "0.8",
+  "design_date": "2026-09-08",
+  "runtime_design_revision": "0.7",
+  "adopted_baseline_sha256": {
+    "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+    "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+  },
+  "component_revisions": {
+    "navier-runtime-adversarial-review-prompt.md": "0.8",
+    "ADVERSARIAL_REVIEW.md": "0.8",
+    "COMPLETE_DESIGN.md": "0.7",
+    "CONSTRUCTION_LEDGER.md": "0.8",
+    "IMPLEMENTATION_PLAN.md": "0.8",
+    "navier-runtime-verification.py": "0.8",
+    "navier-runtime-verification-results.json": "0.8",
+    "navier-runtime-design.md": "0.8",
+    "navier-runtime-construction-design.md": "0.8",
+    "SOURCE_FEASIBILITY.md": "0.8",
+    "similarity-mms-v2.json": "0.7",
+    "source-feasibility-policy.json": "0.8"
+  },
+  "components": [
+    {
+      "file": "navier-runtime-adversarial-review-prompt.md",
+      "bytes": 16058,
+      "words": 1944,
+      "sha256": "fc8de3d5e16ff23f36ba94fcb96b92f2c768cc798a3b2116480e1e6fcd1d359a"
+    },
+    {
+      "file": "ADVERSARIAL_REVIEW.md",
+      "bytes": 10427,
+      "words": 1414,
+      "sha256": "5a4e87fdfdf9035f35d58eb6f2b69053dcfce69f0963f77086b16463e239369d"
+    },
+    {
+      "file": "COMPLETE_DESIGN.md",
+      "bytes": 49791,
+      "words": 6816,
+      "sha256": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9"
+    },
+    {
+      "file": "CONSTRUCTION_LEDGER.md",
+      "bytes": 23085,
+      "words": 3086,
+      "sha256": "2a0ca934c8ec9016fdd24235dac7097ab0658213827a0952bce1705a89ed44db"
+    },
+    {
+      "file": "IMPLEMENTATION_PLAN.md",
+      "bytes": 19129,
+      "words": 2562,
+      "sha256": "c650a2db498112d827021430ab1438ce8ff74c8cb82d28942892e1c5e143f0a3"
+    },
+    {
+      "file": "navier-runtime-verification.py",
+      "bytes": 23525,
+      "words": 1883,
+      "sha256": "5824a71230c5c01766bce352a73bbfe39b9943ea400058495bec845d8209493d"
+    },
+    {
+      "file": "navier-runtime-verification-results.json",
+      "bytes": 23022,
+      "words": 1109,
+      "sha256": "92622218cc19c32d54cbf05765901a3e5e3a9d5c58cf4b5536bec47266d170a3"
+    },
+    {
+      "file": "navier-runtime-design.md",
+      "bytes": 2591,
+      "words": 283,
+      "sha256": "35abc3b87785d6583231dead5600bedfe83906a0d4f2f41a20487052d3951af9"
+    },
+    {
+      "file": "navier-runtime-construction-design.md",
+      "bytes": 2679,
+      "words": 309,
+      "sha256": "94be219ae1c500a9918223843d40201c465e3f90be711746a1dd7aed11ca6221"
+    },
+    {
+      "file": "SOURCE_FEASIBILITY.md",
+      "bytes": 23400,
+      "words": 3347,
+      "sha256": "a7d245d52be45d8b6cd358adf9104c447d9ada5f0c7e61f2102116b18e63ec00"
+    },
+    {
+      "file": "similarity-mms-v2.json",
+      "bytes": 4940,
+      "words": 451,
+      "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    },
+    {
+      "file": "source-feasibility-policy.json",
+      "bytes": 4509,
+      "words": 188,
+      "sha256": "b0c9440b7603f67f0b3405bc00cd249636fd060a82188968129e3ea47a4a2e23"
+    }
+  ],
+  "packet": {
+    "file": "navier-runtime-review-packet.md",
+    "bytes": 208008,
+    "words": 23852,
+    "sha256": "efe01c961f171eb4b8adee1286ae4051b7ce2af2abd3eb6334c5211f90254af8"
+  },
+  "archive": {
+    "file": "navier-runtime-review-bundle.zip",
+    "members": [
+      "navier-runtime-adversarial-review-prompt.md",
+      "ADVERSARIAL_REVIEW.md",
+      "COMPLETE_DESIGN.md",
+      "CONSTRUCTION_LEDGER.md",
+      "IMPLEMENTATION_PLAN.md",
+      "navier-runtime-verification.py",
+      "navier-runtime-verification-results.json",
+      "navier-runtime-design.md",
+      "navier-runtime-construction-design.md",
+      "SOURCE_FEASIBILITY.md",
+      "similarity-mms-v2.json",
+      "source-feasibility-policy.json",
+      "navier-runtime-review-packet.md",
+      "navier-runtime-review-manifest.json"
+    ],
+    "compression": "ZIP_STORED",
+    "fixed_timestamp": "2026-09-08T00:00:00"
+  },
+  "excluded": [
+    "navier-runtime-niva-adapter.md",
+    "historical design/review drafts"
+  ],
+  "source_provenance": {
+    "source_pdf_sha256": null,
+    "exact_repository_commits_verified": false,
+    "note": "Component hashes do not establish source-PDF or repository provenance."
+  },
+  "scientific_evidence": {
+    "status": "passed",
+    "scope": "Selected design algebra, arithmetic, geometry and relaxed source screens; no PDE trajectory",
+    "not_performed": [
+      "Rust compilation",
+      "PDE integration",
+      "source instance admissibility",
+      "formal proof build"
+    ]
+  },
+  "release_scope": {
+    "targets": [
+      "standalone runtime",
+      "similarity-mms-v2"
+    ],
+    "literal_reproduction": "ExcludedFromCurrentRelease",
+    "compiler": "MathematicsVerificationOnly",
+    "surrogate": "SeparateDecisionDeferred"
+  },
+  "hash_scope": "All components and the packet. The manifest and archive are not self-hashed.",
+  "checks": [
+    "All 12 components read completely and current Markdown revisions checked",
+    "V2 exact problem hash, rational parameters and non-source classification verified",
+    "Adopted runtime design and v2 case bytes match the archived revision-0.7 SHA-256 values",
+    "Scoped exclusion, broader unresolved gate and release decisions match executed policy rows",
+    "All seven replacement requirements and four required deliverables present",
+    "Full prompt, per-component BEGIN/END, and final packet markers checked",
+    "Every component embedded byte-for-byte as UTF-8 text",
+    "Markdown code fences balanced and local links included in the archive",
+    "Optional private adapter and historical files excluded",
+    "No private absolute workspace paths or session-only source references included",
+    "Scientific results parsed as passed with all four non-execution limits retained",
+    "Verification script syntax checked; scientific calculations not rerun by packaging",
+    "ZIP CRC, exact membership, exact bytes and all recorded SHA-256 values verified"
+  ]
+}

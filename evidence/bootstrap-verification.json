@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "scope": "bootstrap packaging and preserved mathematical checks only",
+  "status": "passed",
+  "repository_check": {
+    "schema_version": 1,
+    "status": "passed",
+    "scope": "bootstrap packaging only",
+    "checks": {
+      "review": {
+        "components_verified": 12,
+        "packet_verified": true,
+        "manifest_sha256": "4393e8766fe00cd4f3d92452479ac6fe1680d08319b05c9b7f1e4a3908fd2297",
+        "baseline_sha256": {
+          "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+          "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+        }
+      },
+      "case": {
+        "benchmark_copy_identical": true,
+        "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f"
+      },
+      "metadata": {
+        "project": "NSBU Solver",
+        "license": "Apache-2.0",
+        "private_dependency_declared": false
+      },
+      "public_content": {
+        "public_files_scanned": 36,
+        "markdown_files_checked": 19,
+        "local_file_links_checked": 128,
+        "private_inclusion_screen": "passed"
+      }
+    },
+    "errors": []
+  },
+  "guard_tests": {
+    "command": "python -m unittest discover -s tools/tests -v",
+    "passed": 10,
+    "failed": 0
+  },
+  "mathematical_verification": {
+    "generated_utc": "2026-09-09T05:33:13.232651+00:00",
+    "python_version": "3.12.3",
+    "platform": "Linux",
+    "machine": "x86_64",
+    "dependencies": {
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0"
+    },
+    "command": "python -E docs/design/navier-runtime-verification.py",
+    "source_script_sha256": "5824a71230c5c01766bce352a73bbfe39b9943ea400058495bec845d8209493d",
+    "baseline_sha256": {
+      "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+      "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    },
+    "repository_checks": "passed",
+    "assertions_enabled": true,
+    "matches_preserved_report": true,
+    "not_performed_by_bootstrap": [
+      "Rust compilation",
+      "PDE integration",
+      "source instance admissibility",
+      "formal proof build"
+    ]
+  },
+  "license": {
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "canonical_text_matches_ignoring_boundary_whitespace": true,
+    "existing_bytes_preserved": true
+  },
+  "archive_validation": "not performed: files were uploaded directly; no ZIP available",
+  "repairs": [
+    "Restored absent .gitattributes and .github files locally",
+    "Retained reviewed bytes and benchmark copy",
+    "Preserved current LICENSE",
+    "Added quality requirements and explicit unmeasured status",
+    "Retained earlier failed inventory as historical evidence"
+  ],
+  "hosted_ci": "not yet run",
+  "rust_compilation": false,
+  "pde_integration": false,
+  "quality_metrics": "not yet measured"
+}

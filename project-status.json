@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "project": "NSBU Solver",
+  "repository": "nivatechnologies/nsbu-solver",
+  "license": "Apache-2.0",
+  "development_stage": "design-and-verification-bootstrap",
+  "adopted_runtime_design_revision": "0.7",
+  "adopted_review_revision": "0.8",
+  "implementation_plan_revision": "1.1",
+  "rust_workspace_exists": false,
+  "runtime_implementation_exists": false,
+  "simulation_cli_exists": false,
+  "pde_integration_performed": false,
+  "accepted_pde_windows": 0,
+  "source_instance_admitted": false,
+  "formal_proof_build_performed": false,
+  "direct_reproduction_in_current_release": false,
+  "explicit_slow_mesh_strategy": "FeasibilityExcluded",
+  "literal_target_status": "FeasibilityUnestablished",
+  "compiler_scope": "MathematicsVerificationOnly",
+  "surrogate_status": "SeparateDecisionDeferred",
+  "niva_dependency": false,
+  "quality_gates": {
+    "status": "not-yet-measured",
+    "requirements": "IMPLEMENTATION_PLAN.md",
+    "review": "docs/QUALITY.md"
+  },
+  "packages": {
+    "B00": {
+      "status": "verification-passed-publication-pending",
+      "evidence": "evidence/bootstrap-verification.json",
+      "quality_review": "pending"
+    },
+    "P00": {
+      "status": "frozen-input-verification-passed",
+      "evidence": "evidence/bootstrap-verification.json"
+    },
+    "P00B": {
+      "status": "not-started"
+    }
+  }
+}

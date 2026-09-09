@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+work/
+target/
+runs/
+checkpoints/
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
