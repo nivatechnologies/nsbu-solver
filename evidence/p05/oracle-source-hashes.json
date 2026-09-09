@@ -1,0 +1,7 @@
+{
+  "reference/evaluator.py": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+  "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+  "reference/jets.py": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+  "reference/dft.py": "91739e8480e8134d7fc7f959021c33af4b714c5454873867610a0057b358c038",
+  "fixtures/reference/fields.json": "88a29b41aeef5b60057c9d7ad71644fa2dfe83ca2bc7bb7efc1bc59594fdf6f6"
+}

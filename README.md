@@ -46,7 +46,10 @@ The [independent Python reference](reference/README.md) now provides pointwise v
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved
 from rest with temporal and 80/120-digit arithmetic refinements. P00B and its Python quality gates pass. The [coarse concentrating diagnostic](evidence/p00c/README.md) also reaches the first endpoint
 from rest with both methods, with large tracking errors and unresolved spatial
-sampling. No qualified concentrating PDE trajectory is established.
+sampling. No qualified concentrating PDE trajectory is established. The Rust
+[benchmark library](crates/nsbu-benchmarks/README.md) now provides independent v2
+scalar/jet evaluations and a bounded sampled force provider; its final package
+verification is in progress.
 
 ## Implementation path
 

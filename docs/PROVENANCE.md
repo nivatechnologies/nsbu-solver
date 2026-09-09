@@ -49,3 +49,9 @@ The imported code and documents are project artifacts. No manuscript PDF, third-
 The preserved `navier-runtime-verification-results.json` is earlier execution evidence. New runs write to `work/` by default or to an explicitly reviewed evidence path. A successful bootstrap rerun must match the preserved scientific report before adding `bootstrap_execution` metadata. An evidence record must name its input hashes, command, interpreter/dependency versions, actual status and unperformed work. Never overwrite the preserved report to make a baseline check pass.
 
 The bootstrap's Git history describes repository initialization only. It must not imply that numerical implementation milestones are complete. Hosted CI and remote publication are verified separately from local checks.
+
+The public `nsbu-benchmarks` package also embeds a byte-identical copy at
+`crates/nsbu-benchmarks/data/similarity-mms-v2.json`. The Rust workflow compares it
+with the canonical benchmark before packaging. Both paths disable line-ending
+conversion. The embedded artifact's historical status text remains unchanged;
+current capability is recorded separately in `project-status.json`.

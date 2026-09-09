@@ -25,7 +25,9 @@ cargo run -p nsbu-cli -- --version
 ```
 
 Help/version and invalid-argument handling are implemented. The library provides validated domains, layouts, exact clocks, resource ledgers
-and from-rest state allocation. No Rust integration or benchmark execution is provided.
+and from-rest state allocation, spectral operators, transactional CM attempts, and
+independent exact-v2 reference/forcing APIs. `cargo test --workspace` exercises these
+library capabilities. There is still no numerical simulation command in the CLI.
 
 ## Intended runtime workflow, not yet executable
 
@@ -105,3 +107,12 @@ Force implementations declare their own complete work/storage limits. Undeclared
 callbacks may use the standalone research step kernel, but are refused by the
 bounded attempt API. The numerical CLI, Rust exact-v2 provider and convergence
 verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
+
+## Independent Rust exact-v2 evaluation
+
+`cargo test -p nsbu-benchmarks` exercises scalar and jet evaluations, exact clock
+separation, high-precision field/root/DFT fixtures, bounded provider admission, and
+allocation-free force requests. The crate [API overview](../crates/nsbu-benchmarks/README.md)
+describes its storage and arithmetic contracts. These tests do not integrate a
+concentrating trajectory. Force-sampling convergence and cancellation-sensitive
+arithmetic accuracy still require the later experiment studies.

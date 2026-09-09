@@ -24,7 +24,10 @@ jobs:
           cargo clippy --workspace --all-targets --locked -- -D warnings
           cargo build --workspace --locked
           cargo test --workspace --locked
-          cargo package --workspace --locked
+          cmp benchmarks/similarity-mms-v2.json crates/nsbu-benchmarks/data/similarity-mms-v2.json
+          # A fresh temporary registry avoids stale same-version package cache entries.
+          package_target=$(mktemp -d)
+          cargo package --workspace --locked --target-dir "$package_target"
           cargo install --path crates/nsbu-cli --locked --root work/install
           work/install/bin/nsbu --help
           work/install/bin/nsbu --version

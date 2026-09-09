@@ -1,0 +1,169 @@
+//! Bounded sampled v2 forcing. Sampling is a numerical approximation, never a qualification claim.
+use crate::{fields, time::BenchmarkTime};
+use nsbu_solver::{
+    domain::{Domain, Layout, TickClock},
+    integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
+    spectral::{transfer, FftPlan, FftWorkspace},
+    Complex64, SolverError,
+};
+
+/// Independent force samples and normalized FFT coefficients on a caller-selected evaluation grid.
+#[derive(Debug)]
+pub struct V2Force {
+    retained: Layout,
+    sampled: Layout,
+    plan: FftPlan,
+    workspace: FftWorkspace,
+    physical: [Vec<f64>; 3],
+    spectral: Vec<Complex64>,
+    limits: ForceLimits,
+    last_root_iterations: usize,
+}
+
+impl V2Force {
+    /// Full owned storage and finite work declaration, before allocating any provider buffer.
+    /// A work unit is one fixed degree-four field assembly or one safeguarded root iteration.
+    /// Each point uses at most one assembly plus 128 scalar iterations; each call uses three FFTs.
+    pub fn preflight(domain: Domain, sampled: Layout) -> Result<ForceLimits, SolverError> {
+        if domain.lengths() != [1.0; 3] || domain.viscosity() != 1.0 {
+            return Err(SolverError::InvalidDomain);
+        }
+        if sampled
+            .dimensions()
+            .iter()
+            .zip(domain.layout().dimensions())
+            .any(|(&a, b)| a < b)
+        {
+            return Err(SolverError::InvalidDomain);
+        }
+        let buffers = sampled
+            .real_len()
+            .checked_mul(24)
+            .and_then(|n| {
+                sampled
+                    .half_len()
+                    .checked_mul(16)
+                    .and_then(|m| n.checked_add(m))
+            })
+            .ok_or(SolverError::SizeOverflow)?;
+        // Includes allocator header/rounding allowance for eleven owned allocations.
+        let storage_bytes = FftPlan::reservation(sampled)?
+            .checked_add(buffers)
+            .and_then(|n| n.checked_add(std::mem::size_of::<Self>() + 11 * 64))
+            .ok_or(SolverError::SizeOverflow)?;
+        let work_units = sampled
+            .real_len()
+            .checked_mul(129)
+            .ok_or(SolverError::SizeOverflow)?;
+        Ok(ForceLimits {
+            storage_bytes,
+            work_units,
+            scalar_transforms: 3,
+            remaining_divisor: 20,
+        })
+    }
+
+    /// Admit the complete reservation before any allocation; sampling grids remain explicit.
+    pub fn new(domain: Domain, sampled: Layout, cap: usize) -> Result<Self, SolverError> {
+        let limits = Self::preflight(domain, sampled)?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let (plan, workspace) = FftPlan::new(sampled, cap)?;
+        Ok(Self {
+            retained: domain.layout(),
+            sampled,
+            plan,
+            workspace,
+            physical: [
+                buffer(sampled.real_len(), 0.0)?,
+                buffer(sampled.real_len(), 0.0)?,
+                buffer(sampled.real_len(), 0.0)?,
+            ],
+            spectral: buffer(sampled.half_len(), Complex64::new(0.0, 0.0))?,
+            limits,
+            last_root_iterations: 0,
+        })
+    }
+
+    /// Root iterations used by the latest successful sampling pass.
+    pub fn last_root_iterations(&self) -> usize {
+        self.last_root_iterations
+    }
+
+    fn sample(&mut self, time: BenchmarkTime) -> Result<usize, SolverError> {
+        let [nx, ny, nz] = self.sampled.dimensions();
+        let mut iterations = 0;
+        for i in 0..nx {
+            for j in 0..ny {
+                for k in 0..nz {
+                    let point = [
+                        i as f64 / nx as f64,
+                        j as f64 / ny as f64,
+                        k as f64 / nz as f64,
+                    ];
+                    let index = (i * ny + j) * nz + k;
+                    iterations += self.sample_point(point, index, time)?;
+                }
+            }
+        }
+        self.last_root_iterations = iterations;
+        Ok(self.sampled.real_len() + iterations)
+    }
+    fn sample_point(
+        &mut self,
+        point: [f64; 3],
+        index: usize,
+        time: BenchmarkTime,
+    ) -> Result<usize, SolverError> {
+        let sample =
+            fields::evaluate(point, time).map_err(|_| SolverError::ArithmeticResolutionLimited)?;
+        for (component, value) in self.physical.iter_mut().zip(sample.force) {
+            component[index] = value;
+        }
+        Ok(sample.root.map_or(0, |report| report.iterations))
+    }
+}
+
+impl PrescribedForce for V2Force {
+    fn limits(&self) -> Option<ForceLimits> {
+        Some(self.limits)
+    }
+
+    fn evaluate(
+        &mut self,
+        time: TickClock,
+        limit: ForceLimits,
+        output: [&mut [Complex64]; 3],
+    ) -> Result<ForceWork, SolverError> {
+        if limit != self.limits {
+            return Err(SolverError::ProviderBudgetExceeded);
+        }
+        if output
+            .iter()
+            .any(|component| component.len() != self.retained.half_len())
+        {
+            return Err(SolverError::InvalidPayload);
+        }
+        let time = BenchmarkTime::new(time).map_err(|_| SolverError::InvalidClock)?;
+        let work_units = self.sample(time)?;
+        for (physical, coefficients) in self.physical.iter().zip(output) {
+            self.plan
+                .forward(physical, &mut self.spectral, &mut self.workspace)?;
+            transfer(self.sampled, self.retained, &self.spectral, coefficients)?;
+        }
+        Ok(ForceWork {
+            work_units,
+            scalar_transforms: 3,
+        })
+    }
+}
+
+fn buffer<T: Clone>(length: usize, value: T) -> Result<Vec<T>, SolverError> {
+    let mut storage = Vec::new();
+    storage
+        .try_reserve_exact(length)
+        .map_err(|_| SolverError::AllocationFailed)?;
+    storage.resize(length, value);
+    Ok(storage)
+}

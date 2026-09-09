@@ -1,0 +1,18 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p05-draft/crates/nsbu-benchmarks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.34s
+     Running tests/fields.rs (work/p05-draft/target/debug/deps/fields-e9a4db65355181e7)
+
+running 1 test
+pointwise origin: force_scaled=0e0 gradient_absolute=0e0 gradient_scaled=0e0 root_jet_residual_absolute=0e0 divergence=0e0
+pointwise near-axis: force_scaled=2.5534650774219956e-16 gradient_absolute=5.638867150992155e-11 gradient_scaled=6.149249251325208e-15 root_jet_residual_absolute=3.637978807091713e-12 divergence=1.7763568394002505e-15
+pointwise interior: force_scaled=1.0077853775211912e-15 gradient_absolute=4.3655745685100555e-11 gradient_scaled=3.3472910499976648e-15 root_jet_residual_absolute=3.637978807091713e-12 divergence=0e0
+pointwise inner-edge: force_scaled=3.0413578334639127e-16 gradient_absolute=1.1368683772161603e-13 gradient_scaled=4.094557841593387e-16 root_jet_residual_absolute=0e0 divergence=0e0
+pointwise collar: force_scaled=1.5108039388781999e-15 gradient_absolute=5.115907697472721e-13 gradient_scaled=1.8914690665475823e-15 root_jet_residual_absolute=5.820766091346741e-11 divergence=3.469446951953614e-18
+pointwise outer-edge: force_scaled=0e0 gradient_absolute=0e0 gradient_scaled=0e0 root_jet_residual_absolute=0e0 divergence=0e0
+pointwise rest: force_scaled=0e0 gradient_absolute=0e0 gradient_scaled=0e0 root_jet_residual_absolute=0e0 divergence=0e0
+pointwise ramp-end: force_scaled=6.295506226294128e-16 gradient_absolute=4.3655745685100555e-11 gradient_scaled=8.31878236202647e-16 root_jet_residual_absolute=4.547473508864641e-13 divergence=0e0
+pointwise late: force_scaled=4.546417613959664e-15 gradient_absolute=3.2e1 gradient_scaled=8e0 root_jet_residual_absolute=1.953125e-3 divergence=0e0
+test independent_high_precision_field_fixtures ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

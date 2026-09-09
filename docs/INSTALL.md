@@ -89,3 +89,16 @@ metrics, strict typing, duplication, dead-code candidates, and mutations. The
 Python mutation gate passes in its declared execution profile. See [quality evidence](QUALITY.md) for
 per-metric results and limitations. A fresh installation of this pinned
 environment was tested on Linux with Python 3.12.3.
+
+For a local workspace packaging check, use a fresh target directory when retaining
+the same development version across source changes:
+
+```sh
+package_target=$(mktemp -d)
+cargo package --workspace --locked --target-dir "$package_target"
+```
+
+Cargo creates a temporary registry for workspace dependencies. Reusing that
+registry path and package version can retain an older extracted dependency in the
+local Cargo cache; a fresh target avoids this during package verification. This
+command verifies archives and does not publish to a registry.

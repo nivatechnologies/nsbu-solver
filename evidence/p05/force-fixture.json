@@ -1,0 +1,11 @@
+{
+  "precision_digits": [
+    80,
+    120
+  ],
+  "maximum_scaled_precision_change": "2.09328784564916632033674934107152892427106930363989698700249443542128990090945414596324605128182386641939818142812271447e-79",
+  "n": 4,
+  "time": "1/1024",
+  "classification": "sampled force coefficient oracle; sampling convergence not established",
+  "sha256": "524a545dcb82bd6b40dd23e0f7ea08831f0b3570ca6520ae69141baa22be8be3"
+}

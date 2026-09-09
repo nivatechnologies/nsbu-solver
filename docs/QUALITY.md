@@ -132,3 +132,8 @@ P04 adds an independently checked CM kernel, provider budgets, exact interval
 admission and transactional attempts. [The package evidence](../evidence/p04/README.md)
 records its expanded measurements and final verification state. Both allocation
 probe executables and all helper/test source remain in the measured scope.
+
+P05 adds the independent exact-v2 benchmark implementation and provider. Its
+[quality and numerical evidence](../evidence/p05/README.md) includes every current
+Rust source/test file, fixed-degree algebra, resource admission and allocation
+instrumentation. Cancellation-limited components remain explicitly unqualified.

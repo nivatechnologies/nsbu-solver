@@ -2,3 +2,4 @@
 /docs/design/** -text
 /benchmarks/similarity-mms-v2.json -text
 /LICENSE -text
+/crates/nsbu-benchmarks/data/similarity-mms-v2.json -text
