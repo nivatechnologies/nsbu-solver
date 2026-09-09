@@ -1,0 +1,247 @@
+{
+  "status": "passed",
+  "scope": "empirical geometry quadrature",
+  "records": [
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "0.605499628169480163854664553774742648223",
+      "refinement_change": "3.2385597084928958121e-10",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "0.605499628189725176972571133866193534407",
+      "refinement_change": "2.0245013117906580091e-11",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "0.6054996281909905530493106544376421033573",
+      "refinement_change": "1.2653760767395205714e-12",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 80,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "core",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "0.605499628169480163854664553774742648223",
+      "refinement_change": "3.2385597084928958121e-10",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "0.605499628189725176972571133866193534407",
+      "refinement_change": "2.0245013117906580091e-11",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/128",
+      "region": "annulus",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "0.6054996281909905530493106544376421033573",
+      "refinement_change": "1.2653760767395205714e-12",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "core",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 512,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 1024,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    },
+    {
+      "precision": 120,
+      "tau": "1/256",
+      "region": "annulus",
+      "panels": 2048,
+      "status": "Nonempty",
+      "fraction": "1.0",
+      "refinement_change": "0.0",
+      "classification": "EmpiricalQuadrature"
+    }
+  ],
+  "source_sha256": "f33d61f573e85eb1b9690dd3719bee0026743daca0ae8ef660743f8e2397ee3c"
+}

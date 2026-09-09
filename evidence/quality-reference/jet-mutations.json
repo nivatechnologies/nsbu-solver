@@ -1,0 +1,247 @@
+{
+  "tool": "cosmic-ray 8.7.0",
+  "scope": "reference/jets.py",
+  "generated": 601,
+  "killed": 592,
+  "raw_surviving": 9,
+  "equivalent": [
+    {
+      "job_id": "b23adbb5b7d94268a1547868e9c03060",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/ReplaceBinaryOperator_Add_LShift",
+          "occurrence": 9,
+          "start_pos": [
+            117,
+            37
+          ],
+          "end_pos": [
+            117,
+            38
+          ],
+          "operator_args": {},
+          "definition_name": "exp"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -114,7 +114,7 @@\n         delta = self-self.value\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree<<1):\n             term = term*delta / k\n             result = result+term\n         return result*mp.exp(self.value)",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "The extra Taylor powers vanish in the truncated algebra: delta has zero constant coefficient, so powers greater than degree are identically zero. Both shifted bounds include every required term for degrees 0 through 4. Inputs and exponents are required finite."
+    },
+    {
+      "job_id": "ed73edc7a90e497dbeb1509aaa5a052a",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/NumberReplacer",
+          "occurrence": 12,
+          "start_pos": [
+            20,
+            68
+          ],
+          "end_pos": [
+            20,
+            69
+          ],
+          "operator_args": {},
+          "definition_name": "indices"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -17,7 +17,7 @@\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')\n-    return tuple(sorted((quadruple(i) for i in product(range(degree+1), repeat=4) if sum(i) <= degree),\n+    return tuple(sorted((quadruple(i) for i in product(range(degree+ 2), repeat=4) if sum(i) <= degree),\n                         key=lambda i: (sum(i), i)))\n \n ",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "Additional tuples have a component degree+1 and fail the unchanged total-degree filter; the sorted retained index sequence is identical."
+    },
+    {
+      "job_id": "e5f41f3c0f68444b8f5a7e8482094016",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/NumberReplacer",
+          "occurrence": 1,
+          "start_pos": [
+            16,
+            19
+          ],
+          "end_pos": [
+            16,
+            20
+          ],
+          "operator_args": {},
+          "definition_name": null
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -13,7 +13,7 @@\n Index = tuple[int, int, int, int]\n \n \n-@lru_cache(maxsize=5)\n+@lru_cache(maxsize= 4)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "Caching a pure function changes reuse/performance, not returned indices or per-call bounded work; valid degrees are only 0 through 4."
+    },
+    {
+      "job_id": "5ef4525b1ae2488a8a76fdb4e1a7b872",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/NumberReplacer",
+          "occurrence": 0,
+          "start_pos": [
+            16,
+            19
+          ],
+          "end_pos": [
+            16,
+            20
+          ],
+          "operator_args": {},
+          "definition_name": null
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -13,7 +13,7 @@\n Index = tuple[int, int, int, int]\n \n \n-@lru_cache(maxsize=5)\n+@lru_cache(maxsize= 6)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "Caching a pure function changes reuse/performance, not returned indices or per-call bounded work; valid degrees are only 0 through 4."
+    },
+    {
+      "job_id": "e321707acfa5473780eef52f76c7713f",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/RemoveDecorator",
+          "occurrence": 0,
+          "start_pos": [
+            16,
+            0
+          ],
+          "end_pos": [
+            17,
+            0
+          ],
+          "operator_args": {},
+          "definition_name": null
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -11,9 +11,6 @@\n from reference.tuples import quadruple\n \n Index = tuple[int, int, int, int]\n-\n-\n-@lru_cache(maxsize=5)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "Caching a pure function changes reuse/performance, not returned indices or per-call bounded work; valid degrees are only 0 through 4."
+    },
+    {
+      "job_id": "2117b01710924e82987e4fac775c4625",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/ReplaceComparisonOperator_NotEq_IsNot",
+          "occurrence": 0,
+          "start_pos": [
+            30,
+            34
+          ],
+          "end_pos": [
+            30,
+            36
+          ],
+          "operator_args": {},
+          "definition_name": "__post_init__"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -27,7 +27,7 @@\n     coefficients: tuple[mpf, ...]\n \n     def __post_init__(self) -> None:\n-        if len(self.coefficients) != len(indices(self.degree)):\n+        if len(self.coefficients) is not len(indices(self.degree)):\n             raise ValueError('Incorrect coefficient count')\n         if not all(mp.isfinite(c) for c in self.coefficients):\n             raise ValueError('Jet coefficients must be finite')",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "In the tested CPython 3.12 profile, required lengths 1,5,15,35,70 are cached builtin integers. Equality and identity agree for these valid lengths; other lengths are refused by both predicates."
+    },
+    {
+      "job_id": "6810bb91c7bb4f5284e963483a8d1a17",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/NumberReplacer",
+          "occurrence": 62,
+          "start_pos": [
+            117,
+            38
+          ],
+          "end_pos": [
+            117,
+            39
+          ],
+          "operator_args": {},
+          "definition_name": "exp"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -114,7 +114,7 @@\n         delta = self-self.value\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree+ 2):\n             term = term*delta / k\n             result = result+term\n         return result*mp.exp(self.value)",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "The extra Taylor powers vanish in the truncated algebra: delta has zero constant coefficient, so powers greater than degree are identically zero. Both shifted bounds include every required term for degrees 0 through 4. Inputs and exponents are required finite."
+    },
+    {
+      "job_id": "a440c853e8bc4cb5ab7d89d3d8e8dfaf",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/NumberReplacer",
+          "occurrence": 50,
+          "start_pos": [
+            101,
+            38
+          ],
+          "end_pos": [
+            101,
+            39
+          ],
+          "operator_args": {},
+          "definition_name": "__pow__"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -98,7 +98,7 @@\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n         factor = mp.mpf(1)\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree+ 2):\n             term = term*delta\n             factor *= (exponent-k+1)/k\n             result = result + factor*term",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "The extra Taylor powers vanish in the truncated algebra: delta has zero constant coefficient, so powers greater than degree are identically zero. Both shifted bounds include every required term for degrees 0 through 4. Inputs and exponents are required finite."
+    },
+    {
+      "job_id": "067dd048699746a795f82233d10c7410",
+      "mutation": [
+        {
+          "module_path": "reference/jets.py",
+          "operator_name": "core/ReplaceBinaryOperator_Add_LShift",
+          "occurrence": 6,
+          "start_pos": [
+            101,
+            37
+          ],
+          "end_pos": [
+            101,
+            38
+          ],
+          "operator_args": {},
+          "definition_name": "__pow__"
+        }
+      ],
+      "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -98,7 +98,7 @@\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n         factor = mp.mpf(1)\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree<<1):\n             term = term*delta\n             factor *= (exponent-k+1)/k\n             result = result + factor*term",
+      "classification": "equivalent-in-declared-profile",
+      "justification": "The extra Taylor powers vanish in the truncated algebra: delta has zero constant coefficient, so powers greater than degree are identically zero. Both shifted bounds include every required term for degrees 0 through 4. Inputs and exponents are required finite."
+    }
+  ],
+  "timeouts": 0,
+  "untested": 0,
+  "abnormal": 0,
+  "source_hashes": {
+    "reference/__init__.py": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+    "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+    "reference/jets.py": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+    "reference/evaluator.py": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+    "reference/verify_fields.py": "36eabad7b058d993714ad834b3891ab2a87794a3cfa5b617f5532945c48dfcb4",
+    "reference/dft.py": "91739e8480e8134d7fc7f959021c33af4b714c5454873867610a0057b358c038",
+    "reference/steps.py": "0bf5071a8382f4236f41cb45f26c1a2faa2bc10a7cea4366ddb843e80ade3735",
+    "reference/verify_steps.py": "e3164903679b83e90dc49827cdeca64b848a20e531c62c3456814156969fe7e2",
+    "reference/tuples.py": "aa77b60f737e641f2e0672e04b4a18dc6aa0ba0efb7066c2f113b0f1279b4e53",
+    "reference/verify_trajectory.py": "66635f9071aef4977ae9c90974f58c63300b0129f9bf13ec26547837995e2dae",
+    "reference/regions.py": "f33d61f573e85eb1b9690dd3719bee0026743daca0ae8ef660743f8e2397ee3c",
+    "reference/tests/test_reference.py": "27486be45e7fe9270b26ef20ee1ee158d44d55634244382435416e21e06c5dc4",
+    "reference/tests/test_dft_steps.py": "00520a56171116563ededd73b4781ccb27ab8658ef2b69403bf4a0c335f575b6",
+    "reference/tests/test_jet_algebra.py": "9152748d13a0f3bc043a5d3ae544f39337573461ec7bc4fb06676eb655ae3ea7",
+    "reference/tests/test_reports.py": "b0523ac92048bd4889ef0ba3c2c09d848ebac32bc223de1f5800165b3cbb40b1",
+    "reference/tests/test_temporal_contracts.py": "cabec8d19fccfb690e3597a63d04847fe395e9c1aa3aca566aa736e796c7a3fe",
+    "reference/tests/test_trajectory.py": "c3e2618b663c471efc4b90c2de087656d911b0459e136916c4501f6a6bceaa71",
+    "reference/tests/test_regions.py": "90db4c9efaf69d6e9db85afbf6fa5bd83f79747049c438d23523a172d3594179",
+    "tools/verify_design.py": "84a17fc655a65384d5f546f7f0ffd94cacad959e63d0cbb0ac64639a9558521b",
+    "tools/check_repository.py": "30260bf055ce0f8ab1cf82cdb9297b4bfab7a6fd422ee09f9a07da015ebba94a",
+    "tools/json_types.py": "27631d96f17b1396d47a780760bd3d7e889eee736f3b757aee9ac36caeef8678",
+    "tools/tests/test_bootstrap_tools.py": "8be591726ed5d9f7d0dfdc4596c1e240b072e789c2b0f3d4a067db924fce085b",
+    "tools/tests/support.py": "3babf93ba13447626c2910cd39906fbca9624e149dcb6d2a453658f720901331",
+    "tools/tests/test_repository_checks.py": "a22a9afbd6d1a725e6bda66cbe3f4ea1c563587418eae30556fe47405be60398",
+    "tools/tests/test_verification_runner.py": "c2b164d7914b31993aeccbe76939c0b3cd124121ee46d5b04ae648ba0de2d887"
+  },
+  "overall_repository_gate": "unmet; comprehensive mutation run remains in progress"
+}

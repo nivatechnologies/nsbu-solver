@@ -1,0 +1,662 @@
+[
+  {
+    "name": "aiohappyeyeballs",
+    "version": "2.7.1",
+    "license_expression": null,
+    "license": "PSF-2.0",
+    "license_classifiers": [
+      "License :: OSI Approved :: Python Software Foundation License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "aiohttp",
+    "version": "3.14.3",
+    "license_expression": null,
+    "license": "Apache-2.0 AND MIT",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE.txt",
+      "vendor/llhttp/LICENSE"
+    ]
+  },
+  {
+    "name": "aiosignal",
+    "version": "1.4.0",
+    "license_expression": null,
+    "license": "Apache 2.0",
+    "license_classifiers": [
+      "License :: OSI Approved :: Apache Software License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "anybadge",
+    "version": "1.16.0",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS.rst"
+    ]
+  },
+  {
+    "name": "astroid",
+    "version": "3.3.11",
+    "license_expression": "LGPL-2.1-or-later",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "CONTRIBUTORS.txt"
+    ]
+  },
+  {
+    "name": "attrs",
+    "version": "26.1.0",
+    "license_expression": "MIT",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "basedpyright",
+    "version": "1.40.0",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": []
+  },
+  {
+    "name": "click",
+    "version": "8.5.0",
+    "license_expression": "BSD-3-Clause",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "colorama",
+    "version": "0.4.6",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "complexipy",
+    "version": "8.0.1",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "cosmic_ray",
+    "version": "8.7.0",
+    "license_expression": null,
+    "license": "Copyright (c) 2015-2017 Sixty North AS\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENCE.txt"
+    ]
+  },
+  {
+    "name": "coverage",
+    "version": "7.10.6",
+    "license_expression": null,
+    "license": "Apache-2.0",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "decorator",
+    "version": "5.3.1",
+    "license_expression": null,
+    "license": "BSD-2-Clause",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "dill",
+    "version": "0.4.1",
+    "license_expression": null,
+    "license": "BSD-3-Clause",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "exit-codes",
+    "version": "1.3.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [],
+    "license_files": []
+  },
+  {
+    "name": "frozenlist",
+    "version": "1.8.0",
+    "license_expression": null,
+    "license": "Apache-2.0",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "gitdb",
+    "version": "4.0.12",
+    "license_expression": null,
+    "license": "BSD License",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS"
+    ]
+  },
+  {
+    "name": "GitPython",
+    "version": "3.1.62",
+    "license_expression": null,
+    "license": "BSD-3-Clause",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS"
+    ]
+  },
+  {
+    "name": "greenlet",
+    "version": "3.5.5",
+    "license_expression": "MIT AND PSF-2.0",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "LICENSE.PSF"
+    ]
+  },
+  {
+    "name": "idna",
+    "version": "3.19",
+    "license_expression": "BSD-3-Clause",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE.md"
+    ]
+  },
+  {
+    "name": "iniconfig",
+    "version": "2.3.0",
+    "license_expression": "MIT",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "isort",
+    "version": "6.1.0",
+    "license_expression": "MIT",
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "libcst",
+    "version": "1.9.0",
+    "license_expression": null,
+    "license": "All contributions towards LibCST are MIT licensed.\n\nSome Python files have been derived from the standard library and are therefore\nPSF licensed. Modifications on these files are dual licensed (both MIT and\nPSF). These files are:\n\n- libcst/_parser/base_parser.py\n- libcst/_parser/parso/utils.py\n- libcst/_parser/parso/pgen2/generator.py\n- libcst/_parser/parso/pgen2/grammar_parser.py\n- libcst/_parser/parso/python/py_token.py\n- libcst/_parser/parso/python/tokenize.py\n- libcst/_parser/parso/tests/test_fstring.py\n- libcst/_parser/parso/tests/test_tokenize.py\n- libcst/_parser/parso/tests/test_utils.py\n- native/libcst/src/tokenizer/core/mod.rs\n- native/libcst/src/tokenizer/core/string_types.rs\n\nSome Python files have been taken from dataclasses and are therefore Apache\nlicensed. Modifications on these files are licensed under Apache 2.0 license.\nThese files are:\n\n- libcst/_add_slots.py\n\n-------------------------------------------------------------------------------\n\nMIT License\n\nCopyright (c) Meta Platforms, Inc. and affiliates.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n-------------------------------------------------------------------------------\n\nPYTHON SOFTWARE FOUNDATION LICENSE VERSION 2\n\n1. This LICENSE AGREEMENT is between the Python Software Foundation\n(\"PSF\"), and the Individual or Organization (\"Licensee\") accessing and\notherwise using this software (\"Python\") in source or binary form and\nits associated documentation.\n\n2. Subject to the terms and conditions of this License Agreement, PSF hereby\ngrants Licensee a nonexclusive, royalty-free, world-wide license to reproduce,\nanalyze, test, perform and/or display publicly, prepare derivative works,\ndistribute, and otherwise use Python alone or in any derivative version,\nprovided, however, that PSF's License Agreement and PSF's notice of copyright,\ni.e., \"Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,\n2011, 2012, 2013, 2014, 2015 Python Software Foundation; All Rights Reserved\"\nare retained in Python alone or in any derivative version prepared by Licensee.\n\n3. In the event Licensee prepares a derivative work that is based on\nor incorporates Python or any part thereof, and wants to make\nthe derivative work available to others as provided herein, then\nLicensee hereby agrees to include in any such work a brief summary of\nthe changes made to Python.\n\n4. PSF is making Python available to Licensee on an \"AS IS\"\nbasis.  PSF MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR\nIMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, PSF MAKES NO AND\nDISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS\nFOR ANY PARTICULAR PURPOSE OR THAT THE USE OF PYTHON WILL NOT\nINFRINGE ANY THIRD PARTY RIGHTS.\n\n5. PSF SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF PYTHON\nFOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR LOSS AS\nA RESULT OF MODIFYING, DISTRIBUTING, OR OTHERWISE USING PYTHON,\nOR ANY DERIVATIVE THEREOF, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.\n\n6. This License Agreement will automatically terminate upon a material\nbreach of its terms and conditions.\n\n7. Nothing in this License Agreement shall be deemed to create any\nrelationship of agency, partnership, or joint venture between PSF and\nLicensee.  This License Agreement does not grant permission to use PSF\ntrademarks or trade name in a trademark sense to endorse or promote\nproducts or services of Licensee, or any third party.\n\n8. By copying, installing or otherwise using Python, Licensee\nagrees to be bound by the terms and conditions of this License\nAgreement.\n\n-------------------------------------------------------------------------------\n\nAPACHE LICENSE, VERSION 2.0\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "linkify-it-py",
+    "version": "2.2.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "mando",
+    "version": "0.7.1",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "markdown-it-py",
+    "version": "4.2.0",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "LICENSE.markdown-it"
+    ]
+  },
+  {
+    "name": "mccabe",
+    "version": "0.7.0",
+    "license_expression": null,
+    "license": "Expat license",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "mdit-py-plugins",
+    "version": "0.6.1",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "mdurl",
+    "version": "0.1.2",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": []
+  },
+  {
+    "name": "mpmath",
+    "version": "1.3.0",
+    "license_expression": null,
+    "license": "BSD",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "multidict",
+    "version": "6.7.1",
+    "license_expression": null,
+    "license": "Apache License 2.0",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "mutmut",
+    "version": "3.7.0",
+    "license_expression": "BSD-3-Clause",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "nodejs-wheel-binaries",
+    "version": "24.19.0",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": []
+  },
+  {
+    "name": "packaging",
+    "version": "26.3",
+    "license_expression": "Apache-2.0 OR BSD-2-Clause",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "LICENSE.APACHE",
+      "LICENSE.BSD"
+    ]
+  },
+  {
+    "name": "parso",
+    "version": "0.8.7",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE.txt",
+      "AUTHORS.txt"
+    ]
+  },
+  {
+    "name": "pip",
+    "version": "24.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE.txt",
+      "AUTHORS.txt"
+    ]
+  },
+  {
+    "name": "platformdirs",
+    "version": "4.11.8",
+    "license_expression": "MIT",
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "pluggy",
+    "version": "1.6.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "propcache",
+    "version": "0.5.2",
+    "license_expression": null,
+    "license": "Apache-2.0",
+    "license_classifiers": [
+      "License :: OSI Approved :: Apache Software License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "NOTICE"
+    ]
+  },
+  {
+    "name": "Pygments",
+    "version": "2.21.0",
+    "license_expression": "BSD-2-Clause",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "AUTHORS",
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "pylint",
+    "version": "3.3.8",
+    "license_expression": "GPL-2.0-or-later",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "CONTRIBUTORS.txt"
+    ]
+  },
+  {
+    "name": "pytest",
+    "version": "8.4.2",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS"
+    ]
+  },
+  {
+    "name": "PyYAML",
+    "version": "6.0.3",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "radon",
+    "version": "6.0.1",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "rich",
+    "version": "15.0.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "setproctitle",
+    "version": "1.3.7",
+    "license_expression": null,
+    "license": "BSD-3-Clause",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "six",
+    "version": "1.17.0",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "smmap",
+    "version": "5.0.3",
+    "license_expression": null,
+    "license": "BSD-3-Clause",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "SQLAlchemy",
+    "version": "2.0.52",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "stevedore",
+    "version": "5.9.1",
+    "license_expression": "Apache-2.0",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS"
+    ]
+  },
+  {
+    "name": "sympy",
+    "version": "1.14.0",
+    "license_expression": null,
+    "license": "BSD",
+    "license_classifiers": [
+      "License :: OSI Approved :: BSD License"
+    ],
+    "license_files": [
+      "LICENSE",
+      "AUTHORS"
+    ]
+  },
+  {
+    "name": "textual",
+    "version": "8.2.8",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "toml",
+    "version": "0.10.2",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": []
+  },
+  {
+    "name": "tomlkit",
+    "version": "0.15.1",
+    "license_expression": null,
+    "license": "MIT",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "license_expression": "PSF-2.0",
+    "license": null,
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE"
+    ]
+  },
+  {
+    "name": "vulture",
+    "version": "2.16",
+    "license_expression": null,
+    "license": "The MIT License (MIT)\n\nCopyright (c) 2012-2020 Jendrik Seipp (jendrikseipp@gmail.com)\n\nPermission is hereby granted, free of charge, to any person obtaining a\ncopy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be included\nin all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS\nOR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+    "license_classifiers": [
+      "License :: OSI Approved :: MIT License"
+    ],
+    "license_files": [
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "name": "yarl",
+    "version": "1.24.5",
+    "license_expression": null,
+    "license": "Apache-2.0",
+    "license_classifiers": [],
+    "license_files": [
+      "LICENSE",
+      "NOTICE"
+    ]
+  },
+  {
+    "name": "yattag",
+    "version": "1.16.1",
+    "license_expression": null,
+    "license": null,
+    "license_classifiers": [
+      "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)"
+    ],
+    "license_files": []
+  }
+]

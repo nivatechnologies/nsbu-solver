@@ -21,10 +21,10 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "partial-measurement-requirements-unmet",
+    "status": "measured-mutation-gate-unmet",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/quality-baseline.json"
+    "evidence": "evidence/quality-reference/summary.json"
   },
   "packages": {
     "B00": {
@@ -42,6 +42,6 @@
       "evidence": "evidence/reference-progress.json"
     }
   },
-  "pde_integration_scope": "Python N=4 smooth semidiscrete full-step/two-half-step arithmetic fixtures only",
+  "pde_integration_scope": "Python N=4 smooth from-rest full-step/two-half-step fixtures and CM/HO temporal-refinement trajectories to t=1/32; no concentrating trajectory",
   "concentrating_pde_integration_performed": false
 }

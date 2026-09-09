@@ -43,8 +43,8 @@ The repository check verifies the frozen inputs, mathematical problem identity, 
 See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. There is currently no working `cargo install` or `nsbu` simulation command.
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
-scalar/jet evaluations and N=4 smooth from-rest time-step arithmetic fixtures at
-80 and 120 digits. P00B and its quality gates remain incomplete. These fixtures
+scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved
+from rest with temporal and 80/120-digit arithmetic refinements. P00B and its quality gates remain incomplete. These fixtures
 do not establish a qualified concentrating PDE trajectory.
 
 ## Implementation path

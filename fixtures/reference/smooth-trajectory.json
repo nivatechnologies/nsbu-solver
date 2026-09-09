@@ -1,0 +1,239 @@
+{
+  "status": "passed",
+  "case": "smooth-cyclic-mms-v1",
+  "grid": 4,
+  "nu": "1",
+  "target": "1/32",
+  "time_amplitude": "sin(13t)",
+  "initial_condition": "exact rest",
+  "reports": [
+    {
+      "method": "CM",
+      "refinements": [
+        {
+          "divisor": 128,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.0000077350516837541762636182487947951439936106388004767652549860470645730369822963428",
+          "h1_error": "0.000065046667240612110559192640029994798962697943206521532309665370475089415655857687",
+          "steps": 4,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 256,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.00000048727804690625112401402502587062402628545502040428647102725995565668980597381337",
+          "h1_error": "0.0000040982468461047040885620484215508153555812503401370397681621120230795747495744496",
+          "steps": 8,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 512,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.000000030514170418227985073631809279083387595826778820110410412364347374248479954140007",
+          "h1_error": "0.00000025660794115651678992871337620257655040727190203421392735882715060098767519358428",
+          "steps": 16,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 1024,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.0000000019080356372987309920262830596282240260965995997400279506484094115623772389973352",
+          "h1_error": "0.000000016043817275888131693615587372482802423509718578711926987409201314382532644373172",
+          "steps": 32,
+          "reference_assignments": 0
+        }
+      ],
+      "high_precision": {
+        "divisor": 1024,
+        "precision": 120,
+        "preflight": {
+          "n": 4,
+          "precision": 120,
+          "allocations": {
+            "retained_vectors": 50331648,
+            "padded_vectors_and_dft_temporaries": 63700992,
+            "metadata_and_interpreter_reservation": 67108864
+          },
+          "reserved_bytes": 181141504,
+          "cap_bytes": 1073741824,
+          "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+        },
+        "l2_error": "0.00000000190803563729873099202628305962822402609659959974002795064840941156237723790955350642808825896779657426263335358432218723",
+        "h1_error": "0.0000000160438172758881316936155873724828024235097185787119269874092013143825326399238971892665481670206006796514362357779242231",
+        "steps": 32,
+        "reference_assignments": 0
+      },
+      "h1_observed_orders": [
+        "3.9883963516220372649",
+        "3.9973691607385280831",
+        "3.9994764721784299176"
+      ],
+      "max_full_band_arithmetic_change": "2.7440577473281882519e-81"
+    },
+    {
+      "method": "HO",
+      "refinements": [
+        {
+          "divisor": 128,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.0000018848251187286540816838670757926657680931919659659534471316459971489045525365961",
+          "h1_error": "0.000014309626888326711187862805597985422207079520910835960105512806766161291783977249",
+          "steps": 4,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 256,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.00000011527915918390729870217652154262489333888193032846688509724358660665312971342315",
+          "h1_error": "0.0000008732966331472820757289846389806960797428132284049689917641959502434199274303198",
+          "steps": 8,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 512,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.0000000071034627079169271008206496883927525617044822850622623666716411925164631498595637",
+          "h1_error": "0.000000053712792617741299570200108422511259263176851997076113966335987508098376699558437",
+          "steps": 16,
+          "reference_assignments": 0
+        },
+        {
+          "divisor": 1024,
+          "precision": 80,
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 1073741824,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "l2_error": "0.00000000044044913765475778201063764882091559345531201935308078043235023296555570936539531",
+          "h1_error": "0.000000003326722030926050374760573561452268027767024854713839412353988976337148946247533",
+          "steps": 32,
+          "reference_assignments": 0
+        }
+      ],
+      "high_precision": {
+        "divisor": 1024,
+        "precision": 120,
+        "preflight": {
+          "n": 4,
+          "precision": 120,
+          "allocations": {
+            "retained_vectors": 50331648,
+            "padded_vectors_and_dft_temporaries": 63700992,
+            "metadata_and_interpreter_reservation": 67108864
+          },
+          "reserved_bytes": 181141504,
+          "cap_bytes": 1073741824,
+          "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+        },
+        "l2_error": "0.000000000440449137654757782010637648820915593455312019353080780432350232965555707856749406494601912230609939440824286926896172393",
+        "h1_error": "0.00000000332672203092605037476057356145226802776702485471383941235398897633714893864122544279713875990584917274134248173261793001",
+        "steps": 32,
+        "reference_assignments": 0
+      },
+      "h1_observed_orders": [
+        "4.0343704671338617676",
+        "4.0231341414378992878",
+        "4.0130925016693734017"
+      ],
+      "max_full_band_arithmetic_change": "2.189325005514056247e-81"
+    }
+  ],
+  "reference_assignments": 0,
+  "scope": "small-grid smooth reference trajectory verification",
+  "limitations": [
+    "Not a concentrating benchmark window",
+    "Not production Rust arithmetic"
+  ]
+}

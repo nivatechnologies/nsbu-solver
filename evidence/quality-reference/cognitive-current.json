@@ -1,0 +1,1311 @@
+[
+  {
+    "complexity": 0,
+    "file_name": "dft.py",
+    "function_name": "cross",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "dft.py",
+    "function_name": "grid",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "dft.py",
+    "function_name": "nonlinear",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "dft.py",
+    "function_name": "preflight",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "dft.py",
+    "function_name": "retained",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "dft.py",
+    "function_name": "project",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "dft.py",
+    "function_name": "curl",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "dft.py",
+    "function_name": "inverse_vector",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 8,
+    "file_name": "dft.py",
+    "function_name": "forward_vector",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 13,
+    "file_name": "dft.py",
+    "function_name": "transform",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 14,
+    "file_name": "dft.py",
+    "function_name": "convolution",
+    "path": "reference/dft.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "evaluator.py",
+    "function_name": "field_jets",
+    "path": "reference/evaluator.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "evaluator.py",
+    "function_name": "implicit_root",
+    "path": "reference/evaluator.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "evaluator.py",
+    "function_name": "smooth_step",
+    "path": "reference/evaluator.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 9,
+    "file_name": "evaluator.py",
+    "function_name": "evaluate",
+    "path": "reference/evaluator.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::__rsub__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::__rtruediv__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::__sub__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::__truediv__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::constant",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "jets.py",
+    "function_name": "Jet::value",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "jets.py",
+    "function_name": "Jet::__add__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "jets.py",
+    "function_name": "Jet::__neg__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "jets.py",
+    "function_name": "Jet::exp",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "jets.py",
+    "function_name": "Jet::partial",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "jets.py",
+    "function_name": "Jet::__post_init__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "jets.py",
+    "function_name": "Jet::_coerce",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "jets.py",
+    "function_name": "Jet::__pow__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "jets.py",
+    "function_name": "Jet::variable",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "jets.py",
+    "function_name": "indices",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "jets.py",
+    "function_name": "Jet::derivative",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 12,
+    "file_name": "jets.py",
+    "function_name": "Jet::__mul__",
+    "path": "reference/jets.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "regions.py",
+    "function_name": "radial_limit",
+    "path": "reference/regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "regions.py",
+    "function_name": "coverage",
+    "path": "reference/regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "regions.py",
+    "function_name": "integral",
+    "path": "reference/regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "scalar.py",
+    "function_name": "rational",
+    "path": "reference/scalar.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "scalar.py",
+    "function_name": "fields",
+    "path": "reference/scalar.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "scalar.py",
+    "function_name": "step_derivative",
+    "path": "reference/scalar.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "scalar.py",
+    "function_name": "step",
+    "path": "reference/scalar.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 12,
+    "file_name": "scalar.py",
+    "function_name": "root",
+    "path": "reference/scalar.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "steps.py",
+    "function_name": "cm_weights",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "steps.py",
+    "function_name": "coefficient_guard_digits",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "steps.py",
+    "function_name": "ho_tableau_values",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "steps.py",
+    "function_name": "combine",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "steps.py",
+    "function_name": "ho_tableau",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 8,
+    "file_name": "steps.py",
+    "function_name": "ho_phi",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 11,
+    "file_name": "steps.py",
+    "function_name": "cm_step",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 14,
+    "file_name": "steps.py",
+    "function_name": "ho_step",
+    "path": "reference/steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::setUp",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_gradient_projection_mean_and_curl",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_preflight_refusals",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_alias_negative_control",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_direct_transform_mode_and_roundtrip",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_actual_stage_times_and_constant_source",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_nonzero_ho_rows",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_modal_diffusion",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_dft_steps.py",
+    "function_name": "DftTests::test_product_matches_convolution_and_energy",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_dft_steps.py",
+    "function_name": "smooth_state",
+    "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "CompleteJetDomainTests::test_integer_substitutability",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::setUp",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::test_reference_work_refusals",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::test_mixed_polynomial_factorials",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "CompleteJetDomainTests::test_strict_shapes_nonfinite_values_and_freezing",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::test_shape_and_dimension_refusals",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::test_exp_power_and_reciprocal_derivatives",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "CompleteJetDomainTests::test_every_supported_degree",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_jet_algebra.py",
+    "function_name": "JetAlgebraTests::test_force_gradient_independent_difference",
+    "path": "reference/tests/test_jet_algebra.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_derivative_sensitive_error_norm",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_noncentral_region_geometry_and_touching_empty",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_resource_ledger_exact_caps",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_root_exact_work_boundary_and_flat_derivative",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_high_mode_diffusion",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_actual_step_fixture_discrepancy_and_mean",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 13,
+    "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::test_full_profile_and_source_at_nonzero_time",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::setUp",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_nonfinite_space_refused",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_root_refusals",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_implicit_derivatives_against_scalar_differentiation",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_scalar_difference_refinement",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_admissible_root_and_residual",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_axis_closed_form_and_startup",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_cutoff_derivatives_and_flats",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_reference.py",
+    "function_name": "ReferenceTests::test_scalar_field_agreement_and_divergence",
+    "path": "reference/tests/test_reference.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_regions.py",
+    "function_name": "RegionTests::test_empty_region_geometry",
+    "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_regions.py",
+    "function_name": "RegionTests::test_first_endpoint_complete_and_initial_partial_annulus",
+    "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_regions.py",
+    "function_name": "RegionTests::test_invalid_inputs",
+    "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::assert_report",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::setUp",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::test_field_failure_attribution",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::test_field_report_and_entry_point",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::test_step_failure_attribution",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::test_step_report_and_entry_point",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "fixed_step",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "zero_evaluation",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_reports.py",
+    "function_name": "zero_fields",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_reports.py",
+    "function_name": "ReportTests::test_actual_force_and_rhs",
+    "path": "reference/tests/test_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_entry_point",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_full_fine_band_high_mode",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_orchestration_and_arithmetic_refusal",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling.py",
+    "function_name": "fixed_sampling",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling.py",
+    "function_name": "smooth_force",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_normalization_and_origin",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_temporal_contracts.py",
+    "function_name": "TemporalContracts::setUp",
+    "path": "reference/tests/test_temporal_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_temporal_contracts.py",
+    "function_name": "TemporalContracts::test_extreme_weight_conditioning",
+    "path": "reference/tests/test_temporal_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_temporal_contracts.py",
+    "function_name": "TemporalContracts::test_coefficient_refusals",
+    "path": "reference/tests/test_temporal_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_temporal_contracts.py",
+    "function_name": "TemporalContracts::test_zero_operator_stability_polynomial",
+    "path": "reference/tests/test_temporal_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 8,
+    "file_name": "test_temporal_contracts.py",
+    "function_name": "TemporalContracts::test_nonautonomous_uniform_ode_order",
+    "path": "reference/tests/test_temporal_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_trajectory.py",
+    "function_name": "TrajectoryTests::test_entry_point_rejects_unconverged_double",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_trajectory.py",
+    "function_name": "TrajectoryTests::test_from_rest_and_invalid_divisors",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_trajectory.py",
+    "function_name": "TrajectoryTests::test_report_and_failures",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_trajectory.py",
+    "function_name": "manufactured_result",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "test_trajectory.py",
+    "function_name": "euler_probe",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 10,
+    "file_name": "test_trajectory.py",
+    "function_name": "TrajectoryTests::test_profile_and_exact_error",
+    "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "tuples.py",
+    "function_name": "quadruple",
+    "path": "reference/tuples.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "tuples.py",
+    "function_name": "triple",
+    "path": "reference/tuples.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "verify_fields.py",
+    "function_name": "compare",
+    "path": "reference/verify_fields.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "verify_fields.py",
+    "function_name": "sample",
+    "path": "reference/verify_fields.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "verify_fields.py",
+    "function_name": "run",
+    "path": "reference/verify_fields.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "verify_fields.py",
+    "function_name": "sample_report",
+    "path": "reference/verify_fields.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 13,
+    "file_name": "verify_fields.py",
+    "function_name": "scalar_force",
+    "path": "reference/verify_fields.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "verify_sampling.py",
+    "function_name": "difference",
+    "path": "reference/verify_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "verify_sampling.py",
+    "function_name": "run",
+    "path": "reference/verify_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 9,
+    "file_name": "verify_sampling.py",
+    "function_name": "sample_force",
+    "path": "reference/verify_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "verify_steps.py",
+    "function_name": "study_report",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "verify_steps.py",
+    "function_name": "encode",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "verify_steps.py",
+    "function_name": "right_hand_side",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "verify_steps.py",
+    "function_name": "run",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "verify_steps.py",
+    "function_name": "force",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "verify_steps.py",
+    "function_name": "study",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "verify_steps.py",
+    "function_name": "compare",
+    "path": "reference/verify_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "verify_trajectory.py",
+    "function_name": "prescribed_force",
+    "path": "reference/verify_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "verify_trajectory.py",
+    "function_name": "errors",
+    "path": "reference/verify_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "verify_trajectory.py",
+    "function_name": "spatial_profile",
+    "path": "reference/verify_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "verify_trajectory.py",
+    "function_name": "trajectory",
+    "path": "reference/verify_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 15,
+    "file_name": "verify_trajectory.py",
+    "function_name": "run",
+    "path": "reference/verify_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "check_repository.py",
+    "function_name": "sha256",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "check_repository.py",
+    "function_name": "main",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "check_repository.py",
+    "function_name": "check_case",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "check_repository.py",
+    "function_name": "check_metadata",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 6,
+    "file_name": "check_repository.py",
+    "function_name": "check_repository",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 11,
+    "file_name": "check_repository.py",
+    "function_name": "check_links",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 11,
+    "file_name": "check_repository.py",
+    "function_name": "unfenced_lines",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 12,
+    "file_name": "check_repository.py",
+    "function_name": "check_public_content",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 12,
+    "file_name": "check_repository.py",
+    "function_name": "public_files",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 13,
+    "file_name": "check_repository.py",
+    "function_name": "check_review",
+    "path": "tools/check_repository.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "json_types.py",
+    "function_name": "decode",
+    "path": "tools/json_types.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "json_types.py",
+    "function_name": "object_value",
+    "path": "tools/json_types.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "json_types.py",
+    "function_name": "string_value",
+    "path": "tools/json_types.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "json_types.py",
+    "function_name": "array_value",
+    "path": "tools/json_types.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "support.py",
+    "function_name": "CheckoutTestCase::setUp",
+    "path": "tools/tests/support.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::assert_check_fails",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_changed_baseline_bytes",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_changed_benchmark_copy",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_changed_original_manifest",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_complete_checkout_and_independent_cwd",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_missing_documentation_target",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_missing_hidden_workflow",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_missing_review_input",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_optimized_runner_refused_and_stale_success_replaced",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_preserved_evidence_cannot_be_overwritten",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::test_private_adapter_is_rejected",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_bootstrap_tools.py",
+    "function_name": "BootstrapTests::invoke_runner",
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_public_report_contract",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_longer_closing_fence_and_lazy_json_alias",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_identity_both_directions",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_component_size_and_digest_are_separate_guards",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::rewrite_manifest",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_independent_frozen_hash_guard",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_link_escape_and_fence_delimiters",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_symlink_and_private_text_refused",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_metadata_and_license_sections",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_json_shapes",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_manifest_schema_and_traversal",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_repository_checks.py",
+    "function_name": "RepositoryChecks::test_case_identity_and_false_evidence",
+    "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::invoke",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::scientific_output",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_cli_success_and_refusals",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_execution_success_and_repository_refusal",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_scientific_drift_refused",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::process",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_dependency_and_process_errors",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_optimized_cli_and_module_entries",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_runner.py",
+    "function_name": "RunnerTests::test_report_paths_and_atomic_failure",
+    "path": "tools/tests/test_verification_runner.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "verify_design.py",
+    "function_name": "write_report",
+    "path": "tools/verify_design.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "verify_design.py",
+    "function_name": "main",
+    "path": "tools/verify_design.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "verify_design.py",
+    "function_name": "output_path",
+    "path": "tools/verify_design.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 10,
+    "file_name": "verify_design.py",
+    "function_name": "execute",
+    "path": "tools/verify_design.py",
+    "refactor_plans": []
+  }
+]

@@ -3,34 +3,21 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
-import shutil
 import subprocess
 import sys
-import tempfile
-import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from check_repository import check_repository
+from tools.check_repository import check_repository
+from tools.tests.support import CheckoutTestCase
 
 
-CHECKOUT = Path(__file__).resolve().parents[2]
 
-
-class BootstrapTests(unittest.TestCase):
-    def setUp(self) -> None:
-        self.temporary = tempfile.TemporaryDirectory(prefix="nsbu-bootstrap-test-")
-        self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name) / "checkout"
-        shutil.copytree(CHECKOUT, self.root, ignore=shutil.ignore_patterns(
-            ".git", ".venv", "work", "target", "runs", "checkpoints", "__pycache__", ".DS_Store"))
-
+class BootstrapTests(CheckoutTestCase):
     def assert_check_fails(self, expected: str) -> None:
         report = check_repository(self.root)
         self.assertEqual(report["status"], "failed")
         self.assertIn(expected, json.dumps(report))
 
-    def invoke_runner(self, *args: str, optimized: bool = False) -> subprocess.CompletedProcess:
+    def invoke_runner(self, *args: str, optimized: bool = False) -> subprocess.CompletedProcess[str]:
         command = [sys.executable]
         if optimized:
             command.append("-O")
@@ -92,7 +79,3 @@ class BootstrapTests(unittest.TestCase):
         result = self.invoke_runner("--output", name)
         self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
         self.assertEqual((self.root / name).read_bytes(), before)
-
-
-if __name__ == "__main__":
-    unittest.main()

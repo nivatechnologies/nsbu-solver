@@ -1,0 +1,1402 @@
+[
+  {
+    "path": "reference/scalar.py",
+    "function": "root",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "reference/scalar.py",
+    "function": "step",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/scalar.py",
+    "function": "step_derivative",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/scalar.py",
+    "function": "fields",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/scalar.py",
+    "function": "rational",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__mul__",
+    "cc": 7,
+    "branch_coverage": 1.0,
+    "crap": 7.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "indices",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__post_init__",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.variable",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__pow__",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.derivative",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet._coerce",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__add__",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__neg__",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.exp",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.partial",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.constant",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.value",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__sub__",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__rsub__",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__truediv__",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/jets.py",
+    "function": "Jet.__rtruediv__",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/evaluator.py",
+    "function": "evaluate",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "reference/evaluator.py",
+    "function": "smooth_step",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/evaluator.py",
+    "function": "implicit_root",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/evaluator.py",
+    "function": "field_jets",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "scalar_force",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "scalar_force.u",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "scalar_force.p",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "sample_report",
+    "cc": 8,
+    "branch_coverage": 1,
+    "crap": 8
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "sample",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "run",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_fields.py",
+    "function": "compare",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "transform",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "convolution",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "forward_vector",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "inverse_vector",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "project",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "curl",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "retained",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "nonlinear",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "preflight",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "grid",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/dft.py",
+    "function": "cross",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "cm_step",
+    "cc": 11,
+    "branch_coverage": 1,
+    "crap": 11
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "ho_step",
+    "cc": 11,
+    "branch_coverage": 1.0,
+    "crap": 11.0
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "ho_phi",
+    "cc": 7,
+    "branch_coverage": 1.0,
+    "crap": 7.0
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "coefficient_guard_digits",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "combine",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "ho_tableau",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "cm_weights",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/steps.py",
+    "function": "ho_tableau_values",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "force",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "study",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "compare",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "run",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "encode",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "right_hand_side",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "right_hand_side.rhs",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/verify_steps.py",
+    "function": "study_report",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tuples.py",
+    "function": "triple",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tuples.py",
+    "function": "quadruple",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "run",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "spatial_profile",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "errors",
+    "cc": 5,
+    "branch_coverage": 1,
+    "crap": 5
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "trajectory",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "trajectory.rhs",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/verify_trajectory.py",
+    "function": "prescribed_force",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/regions.py",
+    "function": "coverage",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "reference/regions.py",
+    "function": "integral",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/regions.py",
+    "function": "radial_limit",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/verify_sampling.py",
+    "function": "sample_force",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/verify_sampling.py",
+    "function": "difference",
+    "cc": 7,
+    "branch_coverage": 1,
+    "crap": 7
+  },
+  {
+    "path": "reference/verify_sampling.py",
+    "function": "run",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_scalar_field_agreement_and_divergence",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_admissible_root_and_residual",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_axis_closed_form_and_startup",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_implicit_derivatives_against_scalar_differentiation",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_implicit_derivatives_against_scalar_differentiation.scalar_root",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_scalar_difference_refinement",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_cutoff_derivatives_and_flats",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_root_refusals",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.test_nonfinite_space_refused",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_reference.py",
+    "function": "ReferenceTests.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "smooth_state",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_product_matches_convolution_and_energy",
+    "cc": 5,
+    "branch_coverage": 1,
+    "crap": 5
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_direct_transform_mode_and_roundtrip",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_alias_negative_control",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_actual_stage_times_and_constant_source",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_actual_stage_times_and_constant_source.rhs",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_modal_diffusion",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_nonzero_ho_rows",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_preflight_refusals",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_dft_steps.py",
+    "function": "DftTests.test_gradient_projection_mean_and_curl",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_exp_power_and_reciprocal_derivatives",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_exp_power_and_reciprocal_derivatives.function",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_force_gradient_independent_difference",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "CompleteJetDomainTests.test_every_supported_degree",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_shape_and_dimension_refusals",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "CompleteJetDomainTests.test_strict_shapes_nonfinite_values_and_freezing",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_mixed_polynomial_factorials",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "JetAlgebraTests.test_reference_work_refusals",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_jet_algebra.py",
+    "function": "CompleteJetDomainTests.test_integer_substitutability",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.test_actual_force_and_rhs",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "zero_evaluation",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "zero_fields",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "fixed_step",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.test_field_failure_attribution",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.test_step_failure_attribution",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.assert_report",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.test_field_report_and_entry_point",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_reports.py",
+    "function": "ReportTests.test_step_report_and_entry_point",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_zero_operator_stability_polynomial",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_zero_operator_stability_polynomial.rhs",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_nonautonomous_uniform_ode_order",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_nonautonomous_uniform_ode_order.rhs",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_coefficient_refusals",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.test_extreme_weight_conditioning",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_temporal_contracts.py",
+    "function": "TemporalContracts.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "TrajectoryTests.test_profile_and_exact_error",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "euler_probe",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "manufactured_result",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "TrajectoryTests.test_from_rest_and_invalid_divisors",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "TrajectoryTests.test_report_and_failures",
+    "cc": 1,
+    "branch_coverage": 1.0,
+    "crap": 1.0
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "TrajectoryTests.test_report_and_failures.inaccurate",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_trajectory.py",
+    "function": "TrajectoryTests.test_entry_point_rejects_unconverged_double",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_regions.py",
+    "function": "RegionTests.test_invalid_inputs",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_regions.py",
+    "function": "RegionTests.test_first_endpoint_complete_and_initial_partial_annulus",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_regions.py",
+    "function": "RegionTests.test_empty_region_geometry",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_full_profile_and_source_at_nonzero_time",
+    "cc": 12,
+    "branch_coverage": 1.0,
+    "crap": 12.0
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_actual_step_fixture_discrepancy_and_mean",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_high_mode_diffusion",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_high_mode_diffusion.zero_rhs",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_resource_ledger_exact_caps",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_root_exact_work_boundary_and_flat_derivative",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_derivative_sensitive_error_norm",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_numerical_contracts.py",
+    "function": "NumericalContracts.test_noncentral_region_geometry_and_touching_empty",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "SamplingTests.test_normalization_and_origin",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "smooth_force",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "fixed_sampling",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "SamplingTests.test_full_fine_band_high_mode",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "SamplingTests.test_orchestration_and_arithmetic_refusal",
+    "cc": 1,
+    "branch_coverage": 1.0,
+    "crap": 1.0
+  },
+  {
+    "path": "reference/tests/test_sampling.py",
+    "function": "SamplingTests.test_entry_point",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/verify_design.py",
+    "function": "execute",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "tools/verify_design.py",
+    "function": "main",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "tools/verify_design.py",
+    "function": "output_path",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "tools/verify_design.py",
+    "function": "write_report",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_review",
+    "cc": 12,
+    "branch_coverage": 1.0,
+    "crap": 12.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_links",
+    "cc": 10,
+    "branch_coverage": 1.0,
+    "crap": 10.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "unfenced_lines",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_public_content",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "public_files",
+    "cc": 8,
+    "branch_coverage": 1.0,
+    "crap": 8.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_case",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_metadata",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "check_repository",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "main",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "tools/check_repository.py",
+    "function": "sha256",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/json_types.py",
+    "function": "array_value",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "tools/json_types.py",
+    "function": "object_value",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/json_types.py",
+    "function": "string_value",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/json_types.py",
+    "function": "decode",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.invoke_runner",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.assert_check_fails",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_complete_checkout_and_independent_cwd",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_missing_review_input",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_missing_hidden_workflow",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_changed_baseline_bytes",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_changed_original_manifest",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_changed_benchmark_copy",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_missing_documentation_target",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_private_adapter_is_rejected",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_optimized_runner_refused_and_stale_success_replaced",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_bootstrap_tools.py",
+    "function": "BootstrapTests.test_preserved_evidence_cannot_be_overwritten",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/support.py",
+    "function": "CheckoutTestCase.setUp",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_case_identity_and_false_evidence",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_json_shapes",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_metadata_and_license_sections",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.rewrite_manifest",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_manifest_schema_and_traversal",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_manifest_schema_and_traversal.hash_manifest",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_independent_frozen_hash_guard",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_symlink_and_private_text_refused",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_repository_checks.py",
+    "function": "RepositoryChecks.test_link_escape_and_fence_delimiters",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.process",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_dependency_and_process_errors",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_report_paths_and_atomic_failure",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_optimized_cli_and_module_entries",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.scientific_output",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_execution_success_and_repository_refusal",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_scientific_drift_refused",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.invoke",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_verification_runner.py",
+    "function": "RunnerTests.test_cli_success_and_refusals",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "tools/tests/test_integrity_contracts.py",
+    "function": "IntegrityContracts.test_identity_both_directions",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "tools/tests/test_integrity_contracts.py",
+    "function": "IntegrityContracts.test_component_size_and_digest_are_separate_guards",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "tools/tests/test_integrity_contracts.py",
+    "function": "IntegrityContracts.test_component_size_and_digest_are_separate_guards.admit_manifest",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "tools/tests/test_integrity_contracts.py",
+    "function": "IntegrityContracts.test_longer_closing_fence_and_lazy_json_alias",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "tools/tests/test_integrity_contracts.py",
+    "function": "IntegrityContracts.test_public_report_contract",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  }
+]

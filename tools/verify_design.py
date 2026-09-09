@@ -17,7 +17,12 @@ import subprocess
 import sys
 import tempfile
 
-from check_repository import check_repository, sha256
+if not __package__:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from tools.check_repository import check_repository, sha256
+from typing import cast
+from tools.json_types import JsonObject, decode, object_value
 
 
 UNPERFORMED = ["Rust compilation", "PDE integration", "source instance admissibility",
@@ -37,11 +42,11 @@ def output_path(root: Path, requested: Path) -> Path:
     return target
 
 
-def execute(root: Path) -> dict:
+def execute(root: Path) -> JsonObject:
     """Verify packaging before invoking the original script with assertions on."""
     repository = check_repository(root)
     if repository["status"] != "passed":
-        return {"status": "failed", "stage": "repository", "repository": repository}
+        return {"status": "failed", "stage": "repository", "repository": cast(JsonObject, dict(repository))}
     versions = {name: importlib.metadata.version(name) for name in DEPENDENCIES}
     if versions != DEPENDENCIES:
         raise ValueError(f"Install requirements-dev.txt with this interpreter; found {versions}")
@@ -52,11 +57,11 @@ def execute(root: Path) -> dict:
         return {"status": "failed", "stage": "mathematical_checks",
                 "returncode": completed.returncode,
                 "details": completed.stderr[-4000:].replace(str(root), "<repo>")}
-    result = json.loads(completed.stdout)
+    result: JsonObject = dict(object_value(decode(completed.stdout)))
     if result.get("status") != "passed" or result.get("not_performed") != UNPERFORMED:
         raise ValueError("Verification result has an unexpected status or evidence scope")
-    preserved = json.loads((root / "docs/design/navier-runtime-verification-results.json")
-                           .read_text(encoding="utf-8"))
+    preserved = object_value(decode((root / "docs/design/navier-runtime-verification-results.json")
+                           .read_text(encoding="utf-8")))
     if result != preserved:
         changed = sorted(key for key in result.keys() | preserved.keys()
                          if result.get(key) != preserved.get(key))
@@ -75,7 +80,7 @@ def execute(root: Path) -> dict:
     return result
 
 
-def write_report(path: Path, report: dict) -> None:
+def write_report(path: Path, report: JsonObject) -> None:
     """Replace the selected report atomically, including a failed-run report."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = None
@@ -90,18 +95,25 @@ def write_report(path: Path, report: dict) -> None:
             temporary.unlink(missing_ok=True)
 
 
+class Arguments(argparse.Namespace):
+    root: Path = Path(__file__).resolve().parents[1]
+    output: Path = Path('work/design-checks.json')
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, default=Path("work/design-checks.json"),
                         help="JSON report; relative paths resolve inside the checkout")
-    args = parser.parse_args()
+    args = Arguments()
+    parser.parse_args(namespace=args)
     root = args.root.resolve()
     try:
         target = output_path(root, args.output)
     except (OSError, ValueError) as error:
         print(json.dumps({"status": "failed", "stage": "arguments", "error": str(error)}))
         return 2
+    report: JsonObject
     try:
         if sys.flags.optimize:
             raise ValueError("Optimized Python is refused: run without -O, -OO or PYTHONOPTIMIZE")

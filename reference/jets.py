@@ -8,13 +8,16 @@ from itertools import product
 from functools import lru_cache
 from math import factorial
 from mpmath import mp, mpf
+from reference.tuples import quadruple
 
 Index = tuple[int, int, int, int]
 
 
 @lru_cache(maxsize=5)
 def indices(degree: int) -> tuple[Index, ...]:
-    return tuple(sorted((i for i in product(range(degree+1), repeat=4) if sum(i) <= degree),
+    if degree not in (0, 1, 2, 3, 4):
+        raise ValueError('Supported jet degrees are zero through four')
+    return tuple(sorted((quadruple(i) for i in product(range(degree+1), repeat=4) if sum(i) <= degree),
                         key=lambda i: (sum(i), i)))
 
 
@@ -24,13 +27,13 @@ class Jet:
     coefficients: tuple[mpf, ...]
 
     def __post_init__(self) -> None:
-        if self.degree not in (0, 1, 2, 3, 4):
-            raise ValueError('Supported jet degrees are zero through four')
         if len(self.coefficients) != len(indices(self.degree)):
             raise ValueError('Incorrect coefficient count')
+        if not all(mp.isfinite(c) for c in self.coefficients):
+            raise ValueError('Jet coefficients must be finite')
 
     @classmethod
-    def constant(cls, value: mpf, degree: int = 4) -> 'Jet':
+    def constant(cls, value: mpf | int, degree: int = 4) -> 'Jet':
         return cls(degree, (mp.mpf(value),) + (mp.mpf(0),)*(len(indices(degree))-1))
 
     @classmethod
@@ -40,7 +43,7 @@ class Jet:
         powers = indices(degree)
         coefficients = [mp.mpf(0)]*len(powers)
         coefficients[0] = mp.mpf(value)
-        unit = tuple(int(i == axis) for i in range(4))
+        unit = quadruple(int(i == axis) for i in range(4))
         coefficients[powers.index(unit)] = mp.mpf(1)
         return cls(degree, tuple(coefficients))
 
@@ -78,7 +81,7 @@ class Jet:
             if not ca:
                 continue
             for b, cb in zip(powers, right.coefficients):
-                power = tuple(x+y for x,y in zip(a,b))
+                power = quadruple(x+y for x,y in zip(a,b))
                 if sum(power) <= self.degree:
                     result[lookup[power]] += ca*cb
         return Jet(self.degree, tuple(result))
@@ -89,6 +92,8 @@ class Jet:
         if self.value <= 0:
             raise ValueError('Fractional jet powers require a positive constant')
         exponent = mp.mpf(exponent)
+        if not mp.isfinite(exponent):
+            raise ValueError('Jet exponents must be finite')
         delta = (self-self.value)*(1/self.value)
         term = Jet.constant(mp.mpf(1), self.degree)
         result = term
@@ -119,9 +124,9 @@ class Jet:
             raise ValueError('Invalid derivative axis')
         powers = indices(self.degree)
         lookup = dict(zip(powers, self.coefficients))
-        values = []
+        values: list[mpf] = []
         for power in powers:
-            source = tuple(v+int(i == axis) for i,v in enumerate(power))
+            source = quadruple(v+int(i == axis) for i,v in enumerate(power))
             values.append((power[axis]+1)*lookup.get(source, mp.mpf(0)))
         return Jet(self.degree, tuple(values))
 

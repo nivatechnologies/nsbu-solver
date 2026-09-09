@@ -8,6 +8,8 @@ future Rust runtime. Run from the repository root after installing requirements:
 python -m unittest discover -s reference/tests -v
 python -m reference.verify_fields > work/reference-fields.json
 python -m reference.verify_steps > work/reference-steps.json
+python -m reference.verify_trajectory > work/reference-trajectory.json
+python -m reference.verify_sampling > work/reference-sampling.json
 ```
 
 The field study compares degree-four implicit Taylor jets against independently
@@ -37,9 +39,22 @@ Committed fixtures are [field samples](../fixtures/reference/fields.json) and
 reports floating arithmetic changes explicitly; fixture regeneration alone is not
 an independent correctness oracle.
 
-P00B remains incomplete. Outstanding work includes N=8/12 arithmetic studies,
-short refined smooth trajectories and temporal-order evidence, comprehensive jet
-algebra/force-gradient and cancellation studies, region-coverage quadrature,
-force-sampling studies, and the required code-quality gates. No Rust implementation,
-current-grid binary64 arithmetic comparison, concentrating trajectory or accepted
-PDE window is supplied by this package.
+The [smooth trajectory study](../fixtures/reference/smooth-trajectory.json)
+evolves both methods independently from rest to `t=1/32`, with four time-step
+refinements and an 80/120-digit comparison. The last measured H1 orders are about
+4.00 (CM) and 4.01 (HO). This separate smooth case is not the concentrating case.
+The [region study](../fixtures/reference/regions.json) checks mathematical
+interior-volume coverage with explicit empty-region status and empirical Simpson
+refinements; it does not provide rigorous quadrature enclosures.
+
+`verify_sampling` evaluates the exact v2 force on grids 4, 8 and 12 and compares
+full fine-band coefficients at startup and the first endpoint. It also compares
+80 and 120 digits on the finest grid. This can take many minutes. Its results are
+diagnostic; it has no authority to qualify a force-resolution channel or PDE window.
+
+P00B remains incomplete because the repository mutation gate is unmet and final
+large-grid/sampling evidence is still being collected. See the source-hashed
+[progress report](../evidence/reference-progress.json) and
+[quality measurements](../evidence/quality-reference/summary.json). No production
+Rust implementation, current-grid binary64 comparison, concentrating trajectory
+or accepted PDE window is supplied by this package.

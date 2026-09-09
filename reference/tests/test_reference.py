@@ -1,6 +1,6 @@
 """Independent scalar, implicit residual and closed-form tests for early P00B work."""
 import unittest
-from mpmath import mp
+from mpmath import mp, mpf
 from reference.scalar import CoordinateUnresolved, fields, rational as r, root, step
 from reference.evaluator import evaluate, implicit_root, smooth_step
 from reference.jets import Jet
@@ -53,17 +53,20 @@ class ReferenceTests(unittest.TestCase):
 
     def test_implicit_derivatives_against_scalar_differentiation(self) -> None:
         z,t = r('1/10'),r('1/1024')
-        q,residual = implicit_root(Jet.variable(z,2),Jet.variable(t,3))
+        solution = implicit_root(Jet.variable(z,2),Jet.variable(t,3))
+        q, residual = solution.jet, solution.residual
+        def scalar_root(a: mpf, b: mpf) -> mpf:
+            return root(a,b).value
         for dz,dt in ((1,0),(0,1),(2,0),(1,1),(0,2),(2,1)):
-            oracle = mp.diff(lambda a,b: root(a,b).value,(z,t),(dz,dt))
+            oracle = mp.diff(scalar_root,(z,t),(dz,dt))
             self.assertLess(abs(q.partial((0,0,dz,dt))-oracle),mp.mpf('1e-65'))
         self.assertLess(max(abs(c) for c in residual.coefficients),mp.mpf('1e-65'))
 
     def test_scalar_difference_refinement(self) -> None:
         z,t = r('1/10'),r('1/1024')
-        q,_ = implicit_root(Jet.variable(z,2),Jet.variable(t,3))
+        q = implicit_root(Jet.variable(z,2),Jet.variable(t,3)).jet
         expected = q.partial((0,0,1,0))
-        errors = []
+        errors: list[mpf] = []
         for power in (3,4,5,6):
             h = mp.mpf(10)**(-power)
             numerical = (root(z+h,t).value-root(z-h,t).value)/(2*h)
@@ -84,7 +87,3 @@ class ReferenceTests(unittest.TestCase):
             for degree in range(5):
                 expected = mp.diff(step,value,degree)
                 self.assertLess(abs(jet.partial((degree,0,0,0))-expected),mp.mpf('1e-65'))
-
-
-if __name__ == '__main__':
-    unittest.main()

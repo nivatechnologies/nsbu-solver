@@ -13,6 +13,11 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import sys
+from typing import TypedDict, NotRequired
+if not __package__:
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from tools.json_types import JsonObject, decode, object_value, array_value, string_value
 from urllib.parse import unquote, urlsplit
 
 
@@ -43,7 +48,7 @@ REQUIRED = (
 ) + tuple(f"docs/design/{name}" for name in COMPONENTS)
 IGNORED_DIRS = {
     ".git", ".venv", "work", "target", "runs", "checkpoints", "__pycache__",
-    ".pytest_cache", ".mypy_cache", ".ruff_cache",
+    ".pytest_cache", ".mypy_cache", ".ruff_cache", "mutants", ".complexipy_cache",
 }
 IGNORED_FILES = {".DS_Store"}
 TEXT_SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".toml", ".txt", ".rs"}
@@ -58,18 +63,18 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def check_review(root: Path) -> dict:
+def check_review(root: Path) -> JsonObject:
     """Validate the original manifest before trusting its component list."""
     design = root / "docs/design"
     manifest_path = design / "navier-runtime-review-manifest.json"
     if sha256(manifest_path) != MANIFEST_SHA256:
         raise ValueError("Original review manifest SHA-256 mismatch")
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    entries = manifest["components"]
-    if len(entries) != len(COMPONENTS) or {e["file"] for e in entries} != set(COMPONENTS):
+    manifest = object_value(decode(manifest_path.read_text(encoding="utf-8")))
+    entries = [object_value(v) for v in array_value(manifest["components"])]
+    if len(entries) != len(COMPONENTS) or {string_value(e["file"]) for e in entries} != set(COMPONENTS):
         raise ValueError("Original review must contain exactly the 12 public components")
-    for entry in [*entries, manifest["packet"]]:
-        name = entry["file"]
+    for entry in [*entries, object_value(manifest["packet"]) ]:
+        name = string_value(entry["file"])
         if PurePosixPath(name).name != name:
             raise ValueError("Review manifest contains a nonlocal component name")
         path = design / name
@@ -82,17 +87,17 @@ def check_review(root: Path) -> dict:
             "manifest_sha256": MANIFEST_SHA256, "baseline_sha256": FROZEN_SHA256}
 
 
-def check_case(root: Path) -> dict:
+def check_case(root: Path) -> JsonObject:
     """Check both the complete artifact and its independently canonicalized input."""
     frozen = root / "docs/design/similarity-mms-v2.json"
     public = root / "benchmarks/similarity-mms-v2.json"
     if public.read_bytes() != frozen.read_bytes():
         raise ValueError("Benchmark copy differs from frozen similarity-mms-v2.json")
-    case = json.loads(public.read_text(encoding="utf-8"))
+    case = object_value(decode(public.read_text(encoding="utf-8")))
     canonical = json.dumps(case["mathematical_problem"], sort_keys=True,
                            separators=(",", ":"), ensure_ascii=True).encode("ascii")
     digest = hashlib.sha256(canonical).hexdigest()
-    if digest != PROBLEM_SHA256 or digest != case["problem_identity"]["sha256"]:
+    if digest != PROBLEM_SHA256 or digest != object_value(case["problem_identity"])["sha256"]:
         raise ValueError("Mathematical problem identity mismatch")
     if case["source_instance"] or case["verified_pde_convergence"]:
         raise ValueError("Frozen specification must not claim source admission or PDE convergence")
@@ -101,7 +106,7 @@ def check_case(root: Path) -> dict:
 
 def public_files(root: Path) -> list[Path]:
     """Enumerate source files without traversing caches, run output or symlinks."""
-    result = []
+    result: list[Path] = []
     for directory, dirs, files in os.walk(root, followlinks=False):
         base = Path(directory)
         dirs[:] = sorted(name for name in dirs if name not in IGNORED_DIRS)
@@ -115,7 +120,7 @@ def public_files(root: Path) -> list[Path]:
 
 def unfenced_lines(text: str) -> str:
     """Ignore fenced code, including four-backtick blocks in the review packet."""
-    output = []
+    output: list[str] = []
     opening = ""
     for line in text.splitlines():
         match = FENCE.match(line)
@@ -153,7 +158,7 @@ def check_links(root: Path, path: Path, text: str) -> int:
     return checked
 
 
-def check_public_content(root: Path) -> dict:
+def check_public_content(root: Path) -> JsonObject:
     """Catch common accidental private inclusions; this is not a secret scanner."""
     paths = public_files(root)
     local_links = 0
@@ -175,8 +180,8 @@ def check_public_content(root: Path) -> dict:
             "local_file_links_checked": local_links, "private_inclusion_screen": "passed"}
 
 
-def check_metadata(root: Path) -> dict:
-    status = json.loads((root / "project-status.json").read_text(encoding="utf-8"))
+def check_metadata(root: Path) -> JsonObject:
+    status = object_value(decode((root / "project-status.json").read_text(encoding="utf-8")))
     if status.get("project") != "NSBU Solver" or status.get("license") != "Apache-2.0":
         raise ValueError("Project naming or licensing metadata differs from the adopted decision")
     if status.get("niva_dependency") is not False:
@@ -190,10 +195,19 @@ def check_metadata(root: Path) -> dict:
             "private_dependency_declared": False}
 
 
-def check_repository(root: Path) -> dict:
+class RepositoryReport(TypedDict):
+    schema_version: int
+    status: str
+    scope: str
+    checks: dict[str, JsonObject]
+    errors: list[str]
+    missing_files: NotRequired[list[str]]
+
+
+def check_repository(root: Path) -> RepositoryReport:
     """Return a structured report; all failures stay active under Python -O."""
     root = root.resolve()
-    report = {"schema_version": 1, "status": "passed", "scope": "bootstrap packaging only",
+    report: RepositoryReport = {"schema_version": 1, "status": "passed", "scope": "bootstrap packaging only",
               "checks": {}, "errors": []}
     missing = [name for name in REQUIRED if not (root / name).is_file()]
     if missing:
@@ -210,11 +224,16 @@ def check_repository(root: Path) -> dict:
     return report
 
 
+class Arguments(argparse.Namespace):
+    root: Path = Path(__file__).resolve().parents[1]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1],
                         help="Checkout root; defaults to this script's parent checkout")
-    args = parser.parse_args()
+    args = Arguments()
+    parser.parse_args(namespace=args)
     report = check_repository(args.root)
     print(json.dumps(report, indent=2))
     return 0 if report["status"] == "passed" else 1

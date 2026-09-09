@@ -56,9 +56,17 @@ P00B is in progress. From the repository root, run:
 python -m unittest discover -s reference/tests -v
 python -m reference.verify_fields > work/reference-fields.json
 python -m reference.verify_steps > work/reference-steps.json
+python -m reference.verify_trajectory > work/reference-trajectory.json
+python -m reference.verify_sampling > work/reference-sampling.json
 ```
 
 Create `work/` first if the bootstrap runner has not created it. These commands
 validate pointwise v2 evaluations and N=4 smooth semidiscrete arithmetic fixtures.
 The step fixture starts from rest; its force is a separate smooth case. It does
 not qualify a concentrating PDE window. See [reference scope](../reference/README.md).
+
+The trajectory study reports measured temporal orders for a separate smooth MMS.
+The sampling study uses the exact v2 force, but performs no integration and grants
+no spatial qualification. Larger direct-DFT and sampling studies can take many
+minutes. Each numerical study reserves its diagnostic storage before allocation;
+these Python reservations are not hard allocator bounds for the future runtime.

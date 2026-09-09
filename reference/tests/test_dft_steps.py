@@ -1,18 +1,20 @@
 """Independent transform, convolution and step contract fixtures."""
 import unittest
-from mpmath import mp
-from reference.dft import (convolution, curl, grid, inverse_vector, nonlinear,
+from mpmath import mp, mpf
+from reference.dft import (convolution, curl, grid, nonlinear,
                            preflight, project, retained, transform)
+from reference.tuples import triple
+from reference.dft import Spectrum
 from reference.steps import cm_step, ho_step, ho_tableau, ho_phi
 
 
-def smooth_state(n: int) -> dict:
-    state = {k:(mp.mpc(0),)*3 for k in retained(n)}
+def smooth_state(n: int) -> Spectrum:
+    state: Spectrum = {k:(mp.mpc(0),mp.mpc(0),mp.mpc(0)) for k in retained(n)}
     for mode,component,amplitude in (((0,1,0),0,1),((0,0,1),1,2),((1,0,0),2,3)):
         vector = [mp.mpc(0)]*3
         vector[component] = amplitude/(2*mp.j)
-        state[mode] = tuple(vector)
-        state[tuple(-k for k in mode)] = tuple(mp.conj(v) for v in vector)
+        state[mode] = triple(vector)
+        state[triple(-k for k in mode)] = triple(mp.conj(v) for v in vector)
     return state
 
 
@@ -24,7 +26,7 @@ class DftTests(unittest.TestCase):
         self.addCleanup(context.__exit__,None,None,None)
 
     def test_direct_transform_mode_and_roundtrip(self) -> None:
-        values = [mp.exp(2*mp.pi*mp.j*(x-y)/4)+3 for x,y,z in grid(4)]
+        values = [mp.exp(2*mp.pi*mp.j*(x-y)/4)+3 for x,y,_z in grid(4)]
         coefficients = transform(values,4)
         self.assertLess(abs(coefficients[0]-3),mp.mpf('1e-75'))
         self.assertLess(abs(coefficients[(1*4+3)*4]-1),mp.mpf('1e-75'))
@@ -48,9 +50,9 @@ class DftTests(unittest.TestCase):
 
     def test_alias_negative_control(self) -> None:
         # A true mode 3 aliases to retained mode -1 on N=4.
-        values = [mp.exp(2*mp.pi*mp.j*3*x/4) for x,y,z in grid(4)]
+        values = [mp.exp(2*mp.pi*mp.j*3*x/4) for x,_y,_z in grid(4)]
         self.assertLess(abs(transform(values,4)[3*16]-1),mp.mpf('1e-75'))
-        padded = [mp.exp(2*mp.pi*mp.j*3*x/6) for x,y,z in grid(6)]
+        padded = [mp.exp(2*mp.pi*mp.j*3*x/6) for x,_y,_z in grid(6)]
         self.assertLess(abs(transform(padded,6)[5*36]),mp.mpf('1e-75'))
 
     def test_preflight_refusals(self) -> None:
@@ -58,7 +60,9 @@ class DftTests(unittest.TestCase):
             preflight(4,80,1)
         with self.assertRaises(ValueError):
             preflight(16,80,4*1024**3)
-        self.assertLess(preflight(4,80,4*1024**3)['reserved_bytes'],4*1024**3)
+        reserved = preflight(4,80,4*1024**3)['reserved_bytes']
+        assert isinstance(reserved,int)
+        self.assertLess(reserved,4*1024**3)
 
     def test_actual_stage_times_and_constant_source(self) -> None:
         state = {(0,0,0):(mp.mpc(1),mp.mpc(2),mp.mpc(3))}
@@ -66,8 +70,8 @@ class DftTests(unittest.TestCase):
         dt = mp.mpf('0.125')
         for method,expected in ((cm_step,(0,dt/2,dt/2,dt)),
                                 (ho_step,(0,dt/2,dt/2,dt,dt/2))):
-            requested = []
-            def rhs(current: dict, time: mp.mpf) -> dict:
+            requested: list[mpf] = []
+            def rhs(_current: Spectrum, time: mpf) -> Spectrum:
                 requested.append(time)
                 return source
             result = method(state,mp.mpf(0),dt,rhs,mp.mpf(1))
@@ -79,7 +83,7 @@ class DftTests(unittest.TestCase):
         state = {(1,0,0):(mp.mpc(0),mp.mpc(1),mp.mpc(2))}
         for method in (cm_step,ho_step):
             result = method(state,mp.mpf(0),mp.mpf('0.01'),
-                            lambda u,t: {k:(mp.mpc(0),)*3 for k in u},mp.mpf(1))
+                            lambda u,t: {k:(mp.mpc(0),mp.mpc(0),mp.mpc(0)) for k in u},mp.mpf(1))
             expected = mp.exp(-4*mp.pi**2/100)
             self.assertLess(abs(result[(1,0,0)][1]-expected),mp.mpf('1e-75'))
 
@@ -90,7 +94,3 @@ class DftTests(unittest.TestCase):
             for node,row in zip(nodes[1:],rows[1:]):
                 self.assertLess(abs(sum(row)-node*ho_phi(node*z,1)),mp.mpf('1e-70'))
             self.assertLess(abs(sum(weights)-ho_phi(z,1)),mp.mpf('1e-70'))
-
-
-if __name__ == '__main__':
-    unittest.main()

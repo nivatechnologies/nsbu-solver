@@ -1,0 +1,274 @@
+{
+  "status": "requirements-unmet",
+  "source_inventory": {
+    "reference/__init__.py": {
+      "sha256": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+      "physical_lines": 1
+    },
+    "reference/scalar.py": {
+      "sha256": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+      "physical_lines": 103
+    },
+    "reference/jets.py": {
+      "sha256": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+      "physical_lines": 138
+    },
+    "reference/evaluator.py": {
+      "sha256": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+      "physical_lines": 90
+    },
+    "reference/verify_fields.py": {
+      "sha256": "36eabad7b058d993714ad834b3891ab2a87794a3cfa5b617f5532945c48dfcb4",
+      "physical_lines": 106
+    },
+    "reference/dft.py": {
+      "sha256": "91739e8480e8134d7fc7f959021c33af4b714c5454873867610a0057b358c038",
+      "physical_lines": 113
+    },
+    "reference/steps.py": {
+      "sha256": "0bf5071a8382f4236f41cb45f26c1a2faa2bc10a7cea4366ddb843e80ade3735",
+      "physical_lines": 98
+    },
+    "reference/verify_steps.py": {
+      "sha256": "e3164903679b83e90dc49827cdeca64b848a20e531c62c3456814156969fe7e2",
+      "physical_lines": 97
+    },
+    "reference/tuples.py": {
+      "sha256": "aa77b60f737e641f2e0672e04b4a18dc6aa0ba0efb7066c2f113b0f1279b4e53",
+      "physical_lines": 12
+    },
+    "reference/verify_trajectory.py": {
+      "sha256": "66635f9071aef4977ae9c90974f58c63300b0129f9bf13ec26547837995e2dae",
+      "physical_lines": 91
+    },
+    "reference/regions.py": {
+      "sha256": "f33d61f573e85eb1b9690dd3719bee0026743daca0ae8ef660743f8e2397ee3c",
+      "physical_lines": 48
+    },
+    "reference/verify_sampling.py": {
+      "sha256": "713f2a3185cb8d9385bf15ea603c70cdae5abe0918c507e0cbfacb901e79e5ea",
+      "physical_lines": 69
+    },
+    "reference/tests/test_reference.py": {
+      "sha256": "27486be45e7fe9270b26ef20ee1ee158d44d55634244382435416e21e06c5dc4",
+      "physical_lines": 90
+    },
+    "reference/tests/test_dft_steps.py": {
+      "sha256": "00520a56171116563ededd73b4781ccb27ab8658ef2b69403bf4a0c335f575b6",
+      "physical_lines": 97
+    },
+    "reference/tests/test_jet_algebra.py": {
+      "sha256": "9152748d13a0f3bc043a5d3ae544f39337573461ec7bc4fb06676eb655ae3ea7",
+      "physical_lines": 139
+    },
+    "reference/tests/test_reports.py": {
+      "sha256": "b0523ac92048bd4889ef0ba3c2c09d848ebac32bc223de1f5800165b3cbb40b1",
+      "physical_lines": 89
+    },
+    "reference/tests/test_temporal_contracts.py": {
+      "sha256": "cabec8d19fccfb690e3597a63d04847fe395e9c1aa3aca566aa736e796c7a3fe",
+      "physical_lines": 63
+    },
+    "reference/tests/test_trajectory.py": {
+      "sha256": "c3e2618b663c471efc4b90c2de087656d911b0459e136916c4501f6a6bceaa71",
+      "physical_lines": 78
+    },
+    "reference/tests/test_regions.py": {
+      "sha256": "90db4c9efaf69d6e9db85afbf6fa5bd83f79747049c438d23523a172d3594179",
+      "physical_lines": 44
+    },
+    "reference/tests/test_numerical_contracts.py": {
+      "sha256": "2e87aa5489900441cdb6ba91fb749769f391589534872d0a6aa5ec09e5405ccd",
+      "physical_lines": 108
+    },
+    "reference/tests/test_sampling.py": {
+      "sha256": "606b7b665060021790916a240125d2446cdb9d3ae6e6f2c20f7289aa150cf9d5",
+      "physical_lines": 69
+    },
+    "tools/verify_design.py": {
+      "sha256": "84a17fc655a65384d5f546f7f0ffd94cacad959e63d0cbb0ac64639a9558521b",
+      "physical_lines": 135
+    },
+    "tools/check_repository.py": {
+      "sha256": "30260bf055ce0f8ab1cf82cdb9297b4bfab7a6fd422ee09f9a07da015ebba94a",
+      "physical_lines": 243
+    },
+    "tools/json_types.py": {
+      "sha256": "27631d96f17b1396d47a780760bd3d7e889eee736f3b757aee9ac36caeef8678",
+      "physical_lines": 31
+    },
+    "tools/tests/test_bootstrap_tools.py": {
+      "sha256": "8be591726ed5d9f7d0dfdc4596c1e240b072e789c2b0f3d4a067db924fce085b",
+      "physical_lines": 82
+    },
+    "tools/tests/support.py": {
+      "sha256": "3babf93ba13447626c2910cd39906fbca9624e149dcb6d2a453658f720901331",
+      "physical_lines": 19
+    },
+    "tools/tests/test_repository_checks.py": {
+      "sha256": "a22a9afbd6d1a725e6bda66cbe3f4ea1c563587418eae30556fe47405be60398",
+      "physical_lines": 96
+    },
+    "tools/tests/test_verification_runner.py": {
+      "sha256": "c2b164d7914b31993aeccbe76939c0b3cd124121ee46d5b04ae648ba0de2d887",
+      "physical_lines": 109
+    },
+    "tools/tests/test_integrity_contracts.py": {
+      "sha256": "b49bcf352c3cf080771822664608fe0405feaac3c662540e9a8c05f05657abf9",
+      "physical_lines": 72
+    },
+    "typings/mpmath/__init__.pyi": {
+      "sha256": "07c5baf4a309f80fd28d6849d426dd6ebb902bb2f773a285da1eb9a5801d1d9f",
+      "physical_lines": 136
+    }
+  },
+  "coverage": {
+    "covered_lines": 1948,
+    "num_statements": 1948,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "num_branches": 410,
+    "num_partial_branches": 0,
+    "covered_branches": 410,
+    "missing_branches": 0
+  },
+  "maximum_cyclomatic_complexity": 12,
+  "maximum_cognitive_complexity": 15,
+  "maximum_halstead_file_difficulty": 9.887323943661972,
+  "maximum_halstead_function_difficulty": 7.804878048780488,
+  "maximum_physical_lines": 243,
+  "maximum_crap": 12.0,
+  "typing": {
+    "filesAnalyzed": 29,
+    "errorCount": 0,
+    "warningCount": 0,
+    "informationCount": 0,
+    "timeInSec": 2.661
+  },
+  "duplicate_code_findings": 0,
+  "dead_code_review": {
+    "raw_findings": 7,
+    "confirmed_dead_code": 0,
+    "adjudications": [
+      "NumericalContracts, TemporalContracts, IntegrityContracts and RepositoryChecks are unittest classes discovered and executed by the test runners; coverage confirms execution.",
+      "RepositoryReport.schema_version, checks, and missing_files are TypedDict keys serialized into externally consumed JSON reports; they are schema declarations, not unused runtime storage."
+    ]
+  },
+  "mutation": "Repository-wide gate remains unmet. See jet-mutations.json for completed supplemental scope.",
+  "scope_notes": [
+    "Maintained Python source/tests and local mpmath typing interface inventoried. Typing stubs have no executable coverage obligations.",
+    "Mutation targets implementations; test oracles are not mutation targets. Tests remain in coverage, complexity, typing and duplicate/dead-code scope.",
+    "Frozen reviewed artifacts remain unchanged and excluded; work contains ignored transient experimental scripts, not shipped commands.",
+    "Zero reported duplication and reviewed static dead-code findings are scoped measurements, not proofs over arbitrary future use."
+  ],
+  "tests_passed": 78,
+  "generated_utc": "2026-09-09T06:55:55.656895+00:00",
+  "python_version": "3.12.3",
+  "base_commit": "a9039ad3dd1897c22cb76f1b5ea1a49daf76ff0e",
+  "revision_note": "Source hashes identify the measured uncommitted implementation relative to base_commit.",
+  "commands": [
+    "coverage erase",
+    "coverage run -m pytest -q",
+    "coverage combine",
+    "coverage json",
+    "basedpyright --outputjson",
+    "radon cc -j -s reference tools",
+    "radon hal -j -f reference tools",
+    "complexipy reference tools --output-format json --output work/cognitive-current.json",
+    "vulture reference tools",
+    "pylint --disable=all --enable=duplicate-code --output-format=json reference tools"
+  ],
+  "tool_versions": {
+    "aiohappyeyeballs": "2.7.1",
+    "aiohttp": "3.14.3",
+    "aiosignal": "1.4.0",
+    "anybadge": "1.16.0",
+    "astroid": "3.3.11",
+    "attrs": "26.1.0",
+    "basedpyright": "1.40.0",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "complexipy": "8.0.1",
+    "cosmic_ray": "8.7.0",
+    "coverage": "7.10.6",
+    "decorator": "5.3.1",
+    "dill": "0.4.1",
+    "exit-codes": "1.3.0",
+    "frozenlist": "1.8.0",
+    "gitdb": "4.0.12",
+    "GitPython": "3.1.62",
+    "greenlet": "3.5.5",
+    "idna": "3.19",
+    "iniconfig": "2.3.0",
+    "isort": "6.1.0",
+    "libcst": "1.9.0",
+    "linkify-it-py": "2.2.0",
+    "mando": "0.7.1",
+    "markdown-it-py": "4.2.0",
+    "mccabe": "0.7.0",
+    "mdit-py-plugins": "0.6.1",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "multidict": "6.7.1",
+    "mutmut": "3.7.0",
+    "nodejs-wheel-binaries": "24.19.0",
+    "packaging": "26.3",
+    "parso": "0.8.7",
+    "platformdirs": "4.11.8",
+    "pluggy": "1.6.0",
+    "propcache": "0.5.2",
+    "Pygments": "2.21.0",
+    "pylint": "3.3.8",
+    "pytest": "8.4.2",
+    "PyYAML": "6.0.3",
+    "radon": "6.0.1",
+    "rich": "15.0.0",
+    "setproctitle": "1.3.7",
+    "six": "1.17.0",
+    "smmap": "5.0.3",
+    "SQLAlchemy": "2.0.52",
+    "stevedore": "5.9.1",
+    "sympy": "1.14.0",
+    "textual": "8.2.8",
+    "toml": "0.10.2",
+    "tomlkit": "0.15.1",
+    "typing_extensions": "4.16.0",
+    "vulture": "2.16",
+    "yarl": "1.24.5",
+    "yattag": "1.16.1"
+  },
+  "raw_report_sha256": {
+    "dependencies.json": "39d93dac1c26b05c04d4ebf9c32a2f5ddf7340e1d2f0d7b9855dc09103656899",
+    "full-coverage.json": "cb51f3286c836b6fb3ff81cc5ace66964aefed164c71bafc4c1cbf7e8ca7cece",
+    "types.json": "faa92e59d490da425075c29949ec5d547c1934465bfb5ff0061589d88880426e",
+    "cyclomatic-current.json": "80dcc5cec1a2e33f76438bc5d76d614c3330b23cfa47b8f2f87e29193e77fb4c",
+    "halstead-current.json": "f07301f2479f432d7e7c8183a70a2db09421381888e9ecc7f25893102e7439db",
+    "cognitive-current.json": "bddd77d844c97eba27ee5339fb028d4133c43e21c29f7d409962208ec4c05e0f",
+    "dead-code-current.txt": "1c9f0bc0292c9bfef00dafa2a58edc16cfd1d4901cfe0899c1549194c4665970",
+    "duplicate-code-current.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "crap.json": "9ffa06d56f03ee1bff2786391cd6059eda1d0e9a41fe5f15bddb69080abd265e",
+    "jet-mutations.json": "abc1081c04e52e4c606474d6968da0ed76ad9659228159ce102dc82bf73a07fb"
+  },
+  "post_measurement_non_executable_changes": [
+    {
+      "path": "reference/tests/test_reference.py",
+      "measured_sha256": "27486be45e7fe9270b26ef20ee1ee158d44d55634244382435416e21e06c5dc4",
+      "current_sha256": "939112a88fc8d25487ea17664637d5c9b486dd81437d9ec32979c278d4f0217e",
+      "change": "Removed one trailing blank line after the final statement; executable text and statement line numbers unchanged."
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "measured_sha256": "00520a56171116563ededd73b4781ccb27ab8658ef2b69403bf4a0c335f575b6",
+      "current_sha256": "15724cd9d48b25522062c54b7821c3512dfde37d2880a53b8a97c02282598c62",
+      "change": "Removed one trailing blank line after the final statement; executable text and statement line numbers unchanged."
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "measured_sha256": "8be591726ed5d9f7d0dfdc4596c1e240b072e789c2b0f3d4a067db924fce085b",
+      "current_sha256": "67cf1f81a51f4625ec234e317f09d32b32ded5df02494c2faba04e527f5d77d9",
+      "change": "Removed one trailing blank line after the final statement; executable text and statement line numbers unchanged."
+    }
+  ]
+}

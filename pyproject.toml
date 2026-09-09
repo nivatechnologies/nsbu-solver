@@ -1,0 +1,33 @@
+[tool.basedpyright]
+include = ["reference", "tools"]
+exclude = ["docs/design", "work", ".venv"]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+reportAny = "error"
+reportExplicitAny = "error"
+stubPath = "typings"
+
+[tool.pytest.ini_options]
+testpaths = ["reference/tests", "tools/tests"]
+pythonpath = [".", "tools"]
+
+[tool.mutmut]
+source_paths = ["reference", "tools"]
+do_not_mutate = ["reference/tests/*", "tools/tests/*"]
+pytest_add_cli_args_test_selection = ["reference/tests", "tools/tests"]
+pytest_add_cli_args = ["-q", "-x"]
+also_copy = ["docs", "benchmarks", "fixtures", "evidence", ".github", ".gitattributes", ".gitignore", "README.md", "LICENSE", "NOTICE", "THIRD_PARTY.md", "CONTRIBUTING.md", "IMPLEMENTATION_PLAN.md", "requirements-dev.txt", "project-status.json"]
+
+[tool.coverage.run]
+branch = true
+source = ["reference", "tools"]
+patch = ["subprocess"]
+data_file = "work/.coverage"
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.coverage.json]
+output = "work/full-coverage.json"
