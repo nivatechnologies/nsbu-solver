@@ -60,8 +60,14 @@ coefficient payloads are preserved with deterministic gzip compression:
 [N=12 report](../evidence/reference-steps-n12.json) record compressed and
 uncompressed SHA-256 hashes. Python’s standard `gzip` module can read them.
 
-P00B remains incomplete because the repository mutation gate is unmet and final
-force-sampling evidence is still being collected. See the source-hashed
+The [force-sampling study](../fixtures/reference/force-sampling.json) completed:
+80/120-digit differences are below 3e-78 per coefficient, while full fine-band
+H1 differences grow across these small sampling grids. Spatial resolution remains
+unqualified. [Execution provenance](../evidence/reference-sampling.json) preserves
+the exact executed source hashes.
+
+P00B remains incomplete because its repository mutation and automation gates are
+unmet. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
 Rust implementation, current-grid binary64 comparison, concentrating trajectory

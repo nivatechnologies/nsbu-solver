@@ -225,7 +225,7 @@ def check_repository(root: Path) -> RepositoryReport:
 
 
 class Arguments(argparse.Namespace):
-    root: Path = Path(__file__).resolve().parents[1]
+    root: Path
 
 
 def main() -> int:

@@ -1,13 +1,13 @@
 
 {
     "version": "1.40.0",
-    "time": "1788936854008",
+    "time": "1788942532915",
     "generalDiagnostics": [],
     "summary": {
-        "filesAnalyzed": 29,
+        "filesAnalyzed": 42,
         "errorCount": 0,
         "warningCount": 0,
         "informationCount": 0,
-        "timeInSec": 2.661
+        "timeInSec": 2.712
     }
 }

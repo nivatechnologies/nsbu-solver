@@ -1,8 +1,8 @@
 # Quality evidence
 
 The active implementation plan defines the required SOLID review and quantitative
-gates. They have not yet been measured comprehensively. Passing the ten imported
-bootstrap guard tests does not imply 100% coverage or zero surviving mutants.
+gates. Current measurements appear below with exact source hashes. The complete
+repository gate remains unmet while mutation review and automation continue.
 
 The initial responsibility review identifies repository validation, mathematical
 execution and CLI/report I/O as distinct responsibilities. The verification runner
@@ -35,11 +35,11 @@ reads integrated velocity. No analytical field is assigned into evolving state.
 ## Expanded reference measurements
 
 The [current source-hashed report](../evidence/quality-reference/summary.json)
-records 78 passing tests, 100% executable-line and branch coverage (1,948 lines,
-410 branches), maximum cyclomatic complexity 12, cognitive complexity 15,
-Halstead file difficulty 9.888 or less, 243 physical lines per file, and CRAP 12.
+records 131 passing tests, 100% executable-line and branch coverage (2,660 lines,
+506 branches), maximum cyclomatic complexity 15, cognitive complexity 17,
+Halstead file difficulty 9.888 or less, 243 physical lines per file, and CRAP 15.
 Strict basedpyright analysis reports no errors, including explicit and implicit
-`Any`/unknown-type diagnostics. Pylint reports zero duplicated blocks. Seven
+`Any`/unknown-type diagnostics. Pylint reports zero duplicated blocks. Eight
 Vulture findings were individually reviewed as executed test classes or serialized
 TypedDict schema keys; none is confirmed dead code. These supersede the initial
 baseline for the exact source hashes in the report.
@@ -73,3 +73,10 @@ algebra remain separate, as do explicit convolution and grid-product evaluation.
 The trajectory integrators receive only an RHS callable, never a reference-state
 assignment interface. Report-flow doubles test orchestration only; numerical
 claims require separately executed high-precision studies.
+
+The [archived mutation runs](../evidence/quality-reference/mutations/runs.json)
+include inventories, raw outcomes, source hashes, commands and executor provenance.
+Cosmic Ray's raw `killed` label includes timeouts; the summaries explicitly separate
+those from failed assertions. Focused reruns and equivalent-mutant adjudication are
+still in progress. Removing duplicate argument-container defaults leaves argparse
+as the single owner of each CLI default; normal and invalid CLI tests pass.

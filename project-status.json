@@ -24,7 +24,8 @@
     "status": "measured-mutation-gate-unmet",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/quality-reference/summary.json"
+    "evidence": "evidence/quality-reference/summary.json",
+    "mutation_runs": "evidence/quality-reference/mutations/runs.json"
   },
   "packages": {
     "B00": {
@@ -39,7 +40,8 @@
     },
     "P00B": {
       "status": "in-progress",
-      "evidence": "evidence/reference-progress.json"
+      "evidence": "evidence/reference-progress.json",
+      "force_sampling": "evidence/reference-sampling.json"
     }
   },
   "pde_integration_scope": "Python N=4 smooth from-rest full-step/two-half-step fixtures and CM/HO temporal-refinement trajectories to t=1/32; no concentrating trajectory",

@@ -337,6 +337,97 @@
   },
   {
     "complexity": 0,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_default_series_capacity_boundary",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_axis_root_is_exact_without_iterations",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_guard_digit_provisioning_and_extreme_endpoint",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_recurrence_does_not_consume_a_taylor_budget",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_root_reports_actual_work_and_honors_default_cap",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_root_work_cap_at_residual_acceptance_boundary",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_taylor_work_cap_requires_relative_term_accuracy",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_ho_scaled_extreme_negative_coefficients",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_coupled_limits.py",
+    "function_name": "CoupledLimitTests::test_remaining_time_scaled_residual_and_nonfinite_input",
+    "path": "reference/tests/test_coupled_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_coupled_limits.py",
+    "function_name": "CoupledLimitTests::test_three_dimensional_collar_during_startup",
+    "path": "reference/tests/test_coupled_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "test_coupled_limits.py",
+    "function_name": "CoupledLimitTests::test_cutoff_derivatives_close_to_both_flat_regions",
+    "path": "reference/tests/test_coupled_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_coupled_limits.py",
+    "function_name": "CoupledLimitTests::test_nonautonomous_stages_with_nonzero_diffusion",
+    "path": "reference/tests/test_coupled_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_cutoff_work.py",
+    "function_name": "CutoffWorkTests::test_exponential_arguments_are_nonpositive",
+    "path": "reference/tests/test_cutoff_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
     "file_name": "test_dft_steps.py",
     "function_name": "DftTests::setUp",
     "path": "reference/tests/test_dft_steps.py",
@@ -407,6 +498,62 @@
   },
   {
     "complexity": 0,
+    "file_name": "test_field_contracts.py",
+    "function_name": "FieldContractTests::test_precision_comparison_scaling_and_exact_boundary",
+    "path": "reference/tests/test_field_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_field_contracts.py",
+    "function_name": "force_value",
+    "path": "reference/tests/test_field_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_field_contracts.py",
+    "function_name": "FieldContractTests::test_scaled_oracle_error_and_threshold",
+    "path": "reference/tests/test_field_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "test_field_contracts.py",
+    "function_name": "FieldContractTests::test_both_precisions_and_distinct_samples_are_compared",
+    "path": "reference/tests/test_field_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 11,
+    "file_name": "test_field_contracts.py",
+    "function_name": "FieldContractTests::test_derivative_requests_have_four_coordinates_and_one_sided_startup",
+    "path": "reference/tests/test_field_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_immutable_reports.py",
+    "function_name": "ImmutableReportTests::test_unresolvable_coordinate_exhausts_with_typed_failure",
+    "path": "reference/tests/test_immutable_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_immutable_reports.py",
+    "function_name": "ImmutableReportTests::test_actual_scalar_force_uses_valid_startup_time_domain",
+    "path": "reference/tests/test_immutable_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_immutable_reports.py",
+    "function_name": "ImmutableReportTests::test_result_objects_reject_field_assignment",
+    "path": "reference/tests/test_immutable_reports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
     "file_name": "test_jet_algebra.py",
     "function_name": "CompleteJetDomainTests::test_integer_substitutability",
     "path": "reference/tests/test_jet_algebra.py",
@@ -469,6 +616,27 @@
     "refactor_plans": []
   },
   {
+    "complexity": 1,
+    "file_name": "test_newton_safeguards.py",
+    "function_name": "NewtonSafeguardTests::test_fixed_coordinate_work_fixtures",
+    "path": "reference/tests/test_newton_safeguards.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_newton_safeguards.py",
+    "function_name": "NewtonSafeguardTests::test_reviewed_three_sweep_implicit_jet_budget",
+    "path": "reference/tests/test_newton_safeguards.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_newton_safeguards.py",
+    "function_name": "NewtonSafeguardTests::test_out_of_bracket_and_stagnating_proposals_use_bisection",
+    "path": "reference/tests/test_newton_safeguards.py",
+    "refactor_plans": []
+  },
+  {
     "complexity": 0,
     "file_name": "test_numerical_contracts.py",
     "function_name": "NumericalContracts::test_derivative_sensitive_error_norm",
@@ -506,6 +674,13 @@
   {
     "complexity": 7,
     "file_name": "test_numerical_contracts.py",
+    "function_name": "NumericalContracts::assert_spectrum_fixture",
+    "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 13,
+    "file_name": "test_numerical_contracts.py",
     "function_name": "NumericalContracts::test_actual_step_fixture_discrepancy_and_mean",
     "path": "reference/tests/test_numerical_contracts.py",
     "refactor_plans": []
@@ -515,6 +690,13 @@
     "file_name": "test_numerical_contracts.py",
     "function_name": "NumericalContracts::test_full_profile_and_source_at_nonzero_time",
     "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 17,
+    "file_name": "test_preserved_reference_fixtures.py",
+    "function_name": "PreservedFixtureTests::test_field_coordinates_and_values_against_verified_artifact",
+    "path": "reference/tests/test_preserved_reference_fixtures.py",
     "refactor_plans": []
   },
   {
@@ -590,6 +772,20 @@
   {
     "complexity": 1,
     "file_name": "test_regions.py",
+    "function_name": "RegionTests::test_declared_quadrature_nodes_and_refinement_order",
+    "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_regions.py",
+    "function_name": "RegionTests::test_empty_boundary_and_reversed_region",
+    "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_regions.py",
     "function_name": "RegionTests::test_first_endpoint_complete_and_initial_partial_annulus",
     "path": "reference/tests/test_regions.py",
     "refactor_plans": []
@@ -599,6 +795,27 @@
     "file_name": "test_regions.py",
     "function_name": "RegionTests::test_invalid_inputs",
     "path": "reference/tests/test_regions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_report_values.py",
+    "function_name": "ReportValueTests::test_field_decimal_precision_and_conditioning",
+    "path": "reference/tests/test_report_values.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_report_values.py",
+    "function_name": "ReportValueTests::test_full_step_report_preserves_complex_values",
+    "path": "reference/tests/test_report_values.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_report_values.py",
+    "function_name": "ReportValueTests::test_nonzero_arithmetic_differences",
+    "path": "reference/tests/test_report_values.py",
     "refactor_plans": []
   },
   {
@@ -688,13 +905,6 @@
   {
     "complexity": 0,
     "file_name": "test_sampling.py",
-    "function_name": "SamplingTests::test_orchestration_and_arithmetic_refusal",
-    "path": "reference/tests/test_sampling.py",
-    "refactor_plans": []
-  },
-  {
-    "complexity": 0,
-    "file_name": "test_sampling.py",
     "function_name": "fixed_sampling",
     "path": "reference/tests/test_sampling.py",
     "refactor_plans": []
@@ -707,10 +917,73 @@
     "refactor_plans": []
   },
   {
+    "complexity": 2,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_exact_rest_force_has_zero_conditioning",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_sampling.py",
+    "function_name": "SamplingTests::test_orchestration_and_arithmetic_refusal",
+    "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
     "complexity": 4,
     "file_name": "test_sampling.py",
     "function_name": "SamplingTests::test_normalization_and_origin",
     "path": "reference/tests/test_sampling.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_sampling_contracts.py",
+    "function_name": "SamplingContractTests::test_noninteger_full_band_norm_rendering",
+    "path": "reference/tests/test_sampling_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_sampling_contracts.py",
+    "function_name": "SamplingContractTests::test_signed_coordinates_and_nonunit_conditioning",
+    "path": "reference/tests/test_sampling_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_sampling_contracts.py",
+    "function_name": "SamplingContractTests::test_distinct_grid_comparisons_and_declared_profiles",
+    "path": "reference/tests/test_sampling_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_spectral_interactions.py",
+    "function_name": "SpectralInteractionTests::test_overlong_transform_payload_is_refused",
+    "path": "reference/tests/test_spectral_interactions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_spectral_interactions.py",
+    "function_name": "SpectralInteractionTests::test_largest_padded_transform_grid",
+    "path": "reference/tests/test_spectral_interactions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_spectral_interactions.py",
+    "function_name": "SpectralInteractionTests::test_overlapping_wavevector_convolution",
+    "path": "reference/tests/test_spectral_interactions.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 8,
+    "file_name": "test_spectral_interactions.py",
+    "function_name": "SpectralInteractionTests::test_actual_quadratic_padding_removes_retained_alias",
+    "path": "reference/tests/test_spectral_interactions.py",
     "refactor_plans": []
   },
   {
@@ -763,16 +1036,16 @@
     "refactor_plans": []
   },
   {
-    "complexity": 2,
+    "complexity": 3,
     "file_name": "test_trajectory.py",
-    "function_name": "TrajectoryTests::test_report_and_failures",
+    "function_name": "manufactured_result",
     "path": "reference/tests/test_trajectory.py",
     "refactor_plans": []
   },
   {
-    "complexity": 3,
+    "complexity": 5,
     "file_name": "test_trajectory.py",
-    "function_name": "manufactured_result",
+    "function_name": "TrajectoryTests::test_report_and_failures",
     "path": "reference/tests/test_trajectory.py",
     "refactor_plans": []
   },
@@ -788,6 +1061,20 @@
     "file_name": "test_trajectory.py",
     "function_name": "TrajectoryTests::test_profile_and_exact_error",
     "path": "reference/tests/test_trajectory.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_trajectory_contracts.py",
+    "function_name": "TrajectoryContractTests::test_complete_tick_schedule_and_viscosity",
+    "path": "reference/tests/test_trajectory_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "test_trajectory_contracts.py",
+    "function_name": "TrajectoryContractTests::test_only_final_h1_refinement_controls_order_gate",
+    "path": "reference/tests/test_trajectory_contracts.py",
     "refactor_plans": []
   },
   {
@@ -1143,7 +1430,21 @@
   {
     "complexity": 1,
     "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_hash_guards_in_both_directions",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_integrity_contracts.py",
     "function_name": "IntegrityContracts::test_longer_closing_fence_and_lazy_json_alias",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_metadata_requires_exact_names_and_boolean_false",
     "path": "tools/tests/test_integrity_contracts.py",
     "refactor_plans": []
   },
@@ -1155,10 +1456,59 @@
     "refactor_plans": []
   },
   {
+    "complexity": 2,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_nested_packet_name_is_refused_before_reading_identical_bytes",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_different_self_consistent_problems_are_refused",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
     "complexity": 4,
     "file_name": "test_integrity_contracts.py",
     "function_name": "IntegrityContracts::test_component_size_and_digest_are_separate_guards",
     "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "test_integrity_contracts.py",
+    "function_name": "IntegrityContracts::test_component_names_cardinality_and_packet_metadata",
+    "path": "tools/tests/test_integrity_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_public_content_contracts.py",
+    "function_name": "PublicContentTests::test_counts_and_markdown_only_link_scanning",
+    "path": "tools/tests/test_public_content_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_public_content_contracts.py",
+    "function_name": "PublicContentTests::test_external_links_do_not_hide_later_local_links",
+    "path": "tools/tests/test_public_content_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_public_content_contracts.py",
+    "function_name": "PublicContentTests::test_both_fence_kinds_must_close_with_their_own_kind",
+    "path": "tools/tests/test_public_content_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_public_content_contracts.py",
+    "function_name": "PublicContentTests::test_env_example_is_public_but_other_env_files_are_not",
+    "path": "tools/tests/test_public_content_contracts.py",
     "refactor_plans": []
   },
   {
@@ -1215,6 +1565,48 @@
     "file_name": "test_repository_checks.py",
     "function_name": "RepositoryChecks::test_case_identity_and_false_evidence",
     "path": "tools/tests/test_repository_checks.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::preserved",
+    "path": "tools/tests/test_verification_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::test_failure_tail_is_bounded_and_redacted",
+    "path": "tools/tests/test_verification_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::test_subprocess_budget_and_success_metadata",
+    "path": "tools/tests/test_verification_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::test_documented_default_root_from_another_directory",
+    "path": "tools/tests/test_verification_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::test_nested_report_creation_and_suffix_refusal",
+    "path": "tools/tests/test_verification_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_verification_contracts.py",
+    "function_name": "VerificationContracts::test_scope_mismatch_and_exact_changed_keys",
+    "path": "tools/tests/test_verification_contracts.py",
     "refactor_plans": []
   },
   {

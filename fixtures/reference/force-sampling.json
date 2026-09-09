@@ -1,0 +1,224 @@
+{
+  "status": "diagnostic-completed",
+  "case": "similarity-mms-v2",
+  "reports": [
+    {
+      "time": "1/1024",
+      "sampling": [
+        {
+          "grid": 4,
+          "precision": 80,
+          "time": "0.0009765625",
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 64,
+          "maximum_field_evaluations": 64,
+          "scalar_root_iterations": 352,
+          "max_assembly_conditioning": "25.449598336943008049"
+        },
+        {
+          "grid": 8,
+          "precision": 80,
+          "time": "0.0009765625",
+          "preflight": {
+            "n": 8,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 402653184,
+              "padded_vectors_and_dft_temporaries": 509607936,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 979369984,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 512,
+          "maximum_field_evaluations": 512,
+          "scalar_root_iterations": 3328,
+          "max_assembly_conditioning": "35.226955794531356455"
+        },
+        {
+          "grid": 12,
+          "precision": 80,
+          "time": "0.0009765625",
+          "preflight": {
+            "n": 12,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 1358954496,
+              "padded_vectors_and_dft_temporaries": 1719926784,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 3145990144,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 1728,
+          "maximum_field_evaluations": 1728,
+          "scalar_root_iterations": 11808,
+          "max_assembly_conditioning": "58.246396580874314124"
+        }
+      ],
+      "high_precision": {
+        "grid": 12,
+        "precision": 120,
+        "time": "0.0009765625",
+        "preflight": {
+          "n": 12,
+          "precision": 120,
+          "allocations": {
+            "retained_vectors": 1358954496,
+            "padded_vectors_and_dft_temporaries": 1719926784,
+            "metadata_and_interpreter_reservation": 67108864
+          },
+          "reserved_bytes": 3145990144,
+          "cap_bytes": 4294967296,
+          "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+        },
+        "field_evaluations": 1728,
+        "maximum_field_evaluations": 1728,
+        "scalar_root_iterations": 12672,
+        "max_assembly_conditioning": "58.246396580874314124"
+      },
+      "spatial_differences": [
+        {
+          "full_fine_band_l2": "2410.1551600385757207",
+          "full_fine_band_h1": "40477.622299808139112",
+          "max_component_change": "337.48003540668816593"
+        },
+        {
+          "full_fine_band_l2": "1917.4592913337311525",
+          "full_fine_band_h1": "63970.67410618691979",
+          "max_component_change": "121.12115866090314398"
+        }
+      ],
+      "arithmetic_difference": {
+        "full_fine_band_l2": "1.6693781777915701194e-77",
+        "full_fine_band_h1": "5.3413503286917154891e-76",
+        "max_component_change": "1.5632802161001881734e-78"
+      }
+    },
+    {
+      "time": "1/256",
+      "sampling": [
+        {
+          "grid": 4,
+          "precision": 80,
+          "time": "0.00390625",
+          "preflight": {
+            "n": 4,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 50331648,
+              "padded_vectors_and_dft_temporaries": 63700992,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 181141504,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 64,
+          "maximum_field_evaluations": 64,
+          "scalar_root_iterations": 384,
+          "max_assembly_conditioning": "1.7848192257341926379"
+        },
+        {
+          "grid": 8,
+          "precision": 80,
+          "time": "0.00390625",
+          "preflight": {
+            "n": 8,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 402653184,
+              "padded_vectors_and_dft_temporaries": 509607936,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 979369984,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 512,
+          "maximum_field_evaluations": 512,
+          "scalar_root_iterations": 3456,
+          "max_assembly_conditioning": "1.7848192257341926379"
+        },
+        {
+          "grid": 12,
+          "precision": 80,
+          "time": "0.00390625",
+          "preflight": {
+            "n": 12,
+            "precision": 80,
+            "allocations": {
+              "retained_vectors": 1358954496,
+              "padded_vectors_and_dft_temporaries": 1719926784,
+              "metadata_and_interpreter_reservation": 67108864
+            },
+            "reserved_bytes": 3145990144,
+            "cap_bytes": 4294967296,
+            "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+          },
+          "field_evaluations": 1728,
+          "maximum_field_evaluations": 1728,
+          "scalar_root_iterations": 12096,
+          "max_assembly_conditioning": "73.832444881139090133"
+        }
+      ],
+      "high_precision": {
+        "grid": 12,
+        "precision": 120,
+        "time": "0.00390625",
+        "preflight": {
+          "n": 12,
+          "precision": 120,
+          "allocations": {
+            "retained_vectors": 1358954496,
+            "padded_vectors_and_dft_temporaries": 1719926784,
+            "metadata_and_interpreter_reservation": 67108864
+          },
+          "reserved_bytes": 3145990144,
+          "cap_bytes": 4294967296,
+          "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+        },
+        "field_evaluations": 1728,
+        "maximum_field_evaluations": 1728,
+        "scalar_root_iterations": 12816,
+        "max_assembly_conditioning": "73.832444881139090133"
+      },
+      "spatial_differences": [
+        {
+          "full_fine_band_l2": "1592.5408066612611673",
+          "full_fine_band_h1": "31963.230946965045329",
+          "max_component_change": "277.15806543966184548"
+        },
+        {
+          "full_fine_band_l2": "2485.4952755156826966",
+          "full_fine_band_h1": "89097.466352630575436",
+          "max_component_change": "145.07629363088695637"
+        }
+      ],
+      "arithmetic_difference": {
+        "full_fine_band_l2": "3.8671832988270602154e-77",
+        "full_fine_band_h1": "1.2244740613507613751e-75",
+        "max_component_change": "2.9556994568519288114e-78"
+      }
+    }
+  ],
+  "spatial_qualification": "unresolved; no tolerance protocol passed",
+  "limitations": [
+    "Small sampling grids are not a force-resolution certificate",
+    "No integrated trajectory",
+    "Empirical sampled comparisons, not enclosures"
+  ]
+}

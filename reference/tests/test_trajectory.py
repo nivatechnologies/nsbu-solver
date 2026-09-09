@@ -10,7 +10,7 @@ from reference.dft import Spectrum
 from reference.steps import RightHandSide, cm_step
 from reference.tuples import triple
 from reference.verify_trajectory import Method, errors, prescribed_force, run, spatial_profile, trajectory
-from tools.json_types import JsonObject
+from tools.json_types import JsonObject, array_value, object_value
 
 
 def manufactured_result(_method: Method, divisor: int, precision: int) -> tuple[Spectrum,JsonObject]:
@@ -50,7 +50,11 @@ class TrajectoryTests(unittest.TestCase):
         self.assertEqual(state[(0,0,0)],(mp.mpf(13)/32,-mp.mpf(26)/32,mp.mpf(39)/32))
         self.assertEqual(report['steps'],1)
         self.assertEqual(report['reference_assignments'],0)
-        self.assertGreater(float(str(report['h1_error'])),0)
+        self.assertIs(type(report['steps']),int)
+        with mp.workdps(80):
+            delta = mp.mpf(13)/32-mp.sin(mp.mpf(13)/32)
+            self.assertLess(abs(mp.mpf(str(report['l2_error']))-mp.sqrt(21)*delta),mp.mpf('1e-75'))
+            self.assertLess(abs(mp.mpf(str(report['h1_error']))-mp.sqrt(21+28*mp.pi**2)*delta),mp.mpf('1e-75'))
 
     def test_report_and_failures(self) -> None:
         with patch('reference.verify_trajectory.trajectory',side_effect=manufactured_result):
@@ -58,6 +62,12 @@ class TrajectoryTests(unittest.TestCase):
             self.assertEqual(report['status'],'passed')
             self.assertEqual(report['reference_assignments'],0)
             self.assertEqual(report['case'],'smooth-cyclic-mms-v1')
+            for value,name in zip(array_value(report['reports']),('CM','HO'),strict=True):
+                row = object_value(value)
+                self.assertEqual(row['method'],name)
+                self.assertEqual(row['refinements'],[{'divisor':n,'precision':80} for n in (128,256,512,1024)])
+                self.assertEqual(row['high_precision'],{'divisor':1024,'precision':120})
+                self.assertEqual(row['h1_observed_orders'],['4.0']*3)
             with patch('reference.verify_trajectory.errors',return_value=(mp.mpf(1),mp.mpf(1))):
                 with self.assertRaisesRegex(ArithmeticError,'temporal order'):
                     run()

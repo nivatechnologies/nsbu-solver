@@ -244,5 +244,5 @@
     "tools/tests/test_verification_runner.py": "c2b164d7914b31993aeccbe76939c0b3cd124121ee46d5b04ae648ba0de2d887"
   },
   "overall_repository_gate": "unmet; timeout is not a kill and comprehensive mutation reconciliation remains in progress",
-  "correction": "Cosmic Ray 8.7.0 emits test_outcome=killed with output=timeout. The previous report incorrectly counted that timeout as a kill; this report separates it."
+  "correction": "Cosmic Ray labels timeout outcomes as killed; the original report included one timeout in its kill count. This report separates it."
 }

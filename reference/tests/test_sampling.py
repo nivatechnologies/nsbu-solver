@@ -9,7 +9,7 @@ from mpmath import mp, mpf
 from reference.dft import Spectrum
 from reference.evaluator import Evaluation
 from reference.verify_sampling import difference, run, sample_force
-from tools.json_types import JsonObject, decode, object_value
+from tools.json_types import JsonObject, array_value, decode, object_value
 
 
 def smooth_force(x: mpf, _y: mpf, _z: mpf, _time: mpf) -> Evaluation:
@@ -57,6 +57,14 @@ class SamplingTests(unittest.TestCase):
             self.assertEqual(result['status'],'diagnostic-completed')
             self.assertEqual(result['case'],'similarity-mms-v2')
             self.assertIn('unresolved',str(result['spatial_qualification']))
+            for value,time in zip(array_value(result['reports']),('1/1024','1/256'),strict=True):
+                row = object_value(value)
+                self.assertEqual(row['time'],time)
+                self.assertEqual(row['sampling'],[{'grid':n,'precision':80} for n in (4,8,12)])
+                self.assertEqual(row['high_precision'],{'grid':12,'precision':120})
+                zero_difference = {'full_fine_band_l2':'0.0','full_fine_band_h1':'0.0','max_component_change':'0.0'}
+                self.assertEqual(row['spatial_differences'],[zero_difference]*2)
+                self.assertEqual(row['arithmetic_difference'],zero_difference)
             with patch('reference.verify_sampling.difference',return_value={'max_component_change':'1e-60'}):
                 with self.assertRaisesRegex(ArithmeticError,'arithmetic refinement'):
                     run()
@@ -67,3 +75,8 @@ class SamplingTests(unittest.TestCase):
             runpy.run_path(str(Path(__file__).resolve().parents[1]/'verify_sampling.py'),run_name='__main__')
         result = object_value(decode(output.getvalue()))
         self.assertEqual(result['status'],'diagnostic-completed')
+
+    def test_exact_rest_force_has_zero_conditioning(self) -> None:
+        coefficients,report = sample_force(4,mp.mpf(0),80,4*1024**3)
+        self.assertTrue(all(v == 0 for vector in coefficients.values() for v in vector))
+        self.assertEqual(report['max_assembly_conditioning'],'0.0')

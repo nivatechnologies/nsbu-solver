@@ -96,8 +96,8 @@ def write_report(path: Path, report: JsonObject) -> None:
 
 
 class Arguments(argparse.Namespace):
-    root: Path = Path(__file__).resolve().parents[1]
-    output: Path = Path('work/design-checks.json')
+    root: Path
+    output: Path
 
 
 def main() -> int:

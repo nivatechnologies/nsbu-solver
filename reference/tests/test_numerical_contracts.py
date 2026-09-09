@@ -1,4 +1,5 @@
 """Physical normalization, resource bounds, and mutation-driven numerical contracts."""
+from pathlib import Path
 import unittest
 from mpmath import mp, mpf
 from reference.dft import Spectrum, preflight, retained
@@ -8,7 +9,7 @@ from reference.steps import cm_step, ho_step
 from reference.tuples import triple
 from reference.verify_steps import force, study
 from reference.verify_trajectory import errors, prescribed_force, spatial_profile
-from tools.json_types import object_value
+from tools.json_types import Json, array_value, decode, object_value, string_value
 
 
 class NumericalContracts(unittest.TestCase):
@@ -99,10 +100,27 @@ class NumericalContracts(unittest.TestCase):
                 self.assertEqual(step_derivative(mp.mpf(argument)),0)
 
     def test_actual_step_fixture_discrepancy_and_mean(self) -> None:
-        for item in study(4,80):
+        fixture = object_value(decode((Path(__file__).resolve().parents[2]/'fixtures/reference/steps-n4.json').read_text()))
+        rows = [object_value(row) for row in array_value(fixture['studies'])]
+        expected = {string_value(row['method']):row for row in rows if row['precision'] == 80}
+        studies = study(4,80)
+        self.assertEqual([item.method for item in studies],["CM","HO"])
+        for item in studies:
+            self.assertEqual(item.preflight['cap_bytes'],4*1024**3)
             with mp.workdps(80):
                 self.assertLess(max(abs(a-b) for a,b in zip(item.full_step[(0,0,0)],
                                                          (mp.mpf(1)/100,-mp.mpf(2)/100,mp.mpf(3)/100))),mp.mpf('1e-75'))
                 differences = [abs(a-b) for k in item.full_step for a,b in zip(item.full_step[k],item.two_half_steps[k])]
                 self.assertEqual(item.raw_local_discrepancy,max(differences))
                 self.assertGreater(item.raw_local_discrepancy,0)
+                for path,actual in (('full_step',item.full_step),('two_half_steps',item.two_half_steps)):
+                    self.assert_spectrum_fixture(actual,expected[item.method][path])
+
+    def assert_spectrum_fixture(self, actual: Spectrum, encoded_state: Json) -> None:
+        for encoded in array_value(encoded_state):
+            entry = object_value(encoded)
+            mode = triple(int(str(v)) for v in array_value(entry['mode']))
+            values = [array_value(v) for v in array_value(entry['value'])]
+            for component,pair in zip(actual[mode],values):
+                stored = mp.mpc(mp.mpf(string_value(pair[0])),mp.mpf(string_value(pair[1])))
+                self.assertLess(abs(component-stored),mp.mpf('1e-60'))

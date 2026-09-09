@@ -1,0 +1,9 @@
+# Run only in a disposable checkout: the local distributor edits its targets.
+[cosmic-ray]
+module-path = ["reference", "tools"]
+timeout = 180.0
+excluded-modules = ["reference/tests/**/*.py", "tools/tests/**/*.py"]
+test-command = "python -m pytest -q -x"
+
+[cosmic-ray.distributor]
+name = "local"
