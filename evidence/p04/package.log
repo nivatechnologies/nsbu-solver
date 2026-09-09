@@ -1,0 +1,18 @@
+   Packaging nsbu-benchmarks v0.1.0-alpha.0 (crates/nsbu-benchmarks)
+    Packaged 8 files, 13.5KiB (5.2KiB compressed)
+   Packaging nsbu-solver v0.1.0-alpha.0 (crates/nsbu-solver)
+    Updating crates.io index
+    Packaged 64 files, 231.8KiB (63.1KiB compressed)
+   Packaging nsbu-cli v0.1.0-alpha.0 (crates/nsbu-cli)
+    Updating crates.io index
+    Packaged 10 files, 16.9KiB (6.4KiB compressed)
+   Verifying nsbu-benchmarks v0.1.0-alpha.0 (crates/nsbu-benchmarks)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (target/package/nsbu-benchmarks-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.55s
+   Verifying nsbu-solver v0.1.0-alpha.0 (crates/nsbu-solver)
+   Compiling nsbu-solver v0.1.0-alpha.0 (target/package/nsbu-solver-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.99s
+   Verifying nsbu-cli v0.1.0-alpha.0 (crates/nsbu-cli)
+    Updating crates.io index
+   Compiling nsbu-cli v0.1.0-alpha.0 (target/package/nsbu-cli-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.31s

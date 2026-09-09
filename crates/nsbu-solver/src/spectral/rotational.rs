@@ -74,6 +74,31 @@ impl RotationalWorkspace {
         })
     }
 
+    /// Advective grid measure for the fields from the last successful evaluation.
+    /// Call only after evaluate succeeds; scratch is invalid after any evaluation error.
+    pub fn advective_number(&self, duration: f64) -> Result<f64, SolverError> {
+        if !duration.is_finite() || duration <= 0.0 {
+            return Err(SolverError::InvalidStep);
+        }
+        let dimensions = self.domain.layout().dimensions();
+        let lengths = self.domain.lengths();
+        let maximum_wave = std::array::from_fn::<_, 3, _>(|axis| {
+            std::f64::consts::TAU * (dimensions[axis] / 2 - 1) as f64 / lengths[axis]
+        });
+        let mut maximum = 0.0_f64;
+        for index in 0..self.padded.real_len() {
+            let measure = (0..3)
+                .map(|axis| self.velocity[axis][index].abs() * maximum_wave[axis])
+                .sum::<f64>();
+            maximum = maximum.max(measure);
+        }
+        let number = duration * maximum;
+        if !number.is_finite() {
+            return Err(SolverError::ArithmeticResolutionLimited);
+        }
+        Ok(number)
+    }
+
     /// Compute P Fourier(u cross curl(u)) + P f, and physical mean-zero pressure.
     /// Force coefficients remain unprojected until pressure has been reconstructed.
     /// Errors invalidate output scratch; this method cannot mutate the input state or time.

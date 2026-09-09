@@ -4,7 +4,9 @@ Public NSBU Solver library with geometry, half-spectrum layouts, exact dyadic
 clocks, checked epochs, resource reservations and independently owned from-rest
 state buffers. Spectral operators provide normalized transforms, strict-band
 three-halves transfers, projection, curl, rotational acceleration and physical
-pressure. Time integration remains planned. Licensed under Apache-2.0, with no
+pressure. Cox–Matthews coefficients, bounded full/two-half attempts, provider
+accounting and single-use transactional commits are implemented. Numerical CLI
+commands and concentrating-trajectory validation remain planned. Licensed under Apache-2.0, with no
 private Niva dependency.
 
 The built-in CPU FFT supports lengths at most 1024 with only factors 2 and 3.

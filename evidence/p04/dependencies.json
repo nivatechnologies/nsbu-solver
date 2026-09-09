@@ -1,0 +1,44 @@
+[
+  {
+    "name": "autocfg",
+    "version": "1.5.1",
+    "license": "Apache-2.0 OR MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index"
+  },
+  {
+    "name": "nsbu-benchmarks",
+    "version": "0.1.0-alpha.0",
+    "license": "Apache-2.0",
+    "source": null
+  },
+  {
+    "name": "nsbu-cli",
+    "version": "0.1.0-alpha.0",
+    "license": "Apache-2.0",
+    "source": null
+  },
+  {
+    "name": "nsbu-solver",
+    "version": "0.1.0-alpha.0",
+    "license": "Apache-2.0",
+    "source": null
+  },
+  {
+    "name": "num-complex",
+    "version": "0.4.6",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index"
+  },
+  {
+    "name": "num-traits",
+    "version": "0.2.19",
+    "license": "MIT OR Apache-2.0",
+    "source": "registry+https://github.com/rust-lang/crates.io-index"
+  },
+  {
+    "name": "stats_alloc",
+    "version": "0.1.10",
+    "license": "MIT",
+    "source": "registry+https://github.com/rust-lang/crates.io-index"
+  }
+]

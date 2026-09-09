@@ -21,3 +21,7 @@ stats_alloc = "=0.1.10"
 [[test]]
 name = "allocation"
 harness = false
+
+[[test]]
+name = "attempt_allocation"
+harness = false

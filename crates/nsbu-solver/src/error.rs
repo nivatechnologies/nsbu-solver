@@ -25,4 +25,16 @@ pub enum SolverError {
     InvalidPayload,
     /// Non-finite, Nyquist or conjugacy constraints failed.
     InvalidSpectrum,
+    /// Required binary64 arithmetic cannot represent the exact requested quantity.
+    ArithmeticResolutionLimited,
+    /// Acceptance identity no longer matches the committed or candidate storage.
+    StaleAttempt,
+    /// External scheduler exhausted its explicitly finite local-error retry allowance.
+    RetryLimit,
+    /// A bounded profile cannot admit a provider with undeclared or invalid costs.
+    UnknownProviderCost,
+    /// Provider work, transforms or invocation count exceeded the declared allowance.
+    ProviderBudgetExceeded,
+    /// A sampled advective timestep guard failed.
+    AdvectiveLimit,
 }

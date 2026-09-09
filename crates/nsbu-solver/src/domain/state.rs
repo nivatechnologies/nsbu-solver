@@ -7,10 +7,11 @@ use crate::{Complex64, SolverError};
 /// No reference evaluator or shared mutable storage is accepted by this constructor.
 #[derive(Debug)]
 pub struct SpectralState {
-    plan: ResourcePlan,
-    clock: TickClock,
-    epoch: Epoch,
-    components: [Vec<Complex64>; 3],
+    pub(crate) plan: ResourcePlan,
+    pub(crate) clock: TickClock,
+    pub(crate) epoch: Epoch,
+    pub(crate) components: [Vec<Complex64>; 3],
+    pub(crate) accepted_steps: u128,
 }
 
 impl SpectralState {
@@ -28,6 +29,7 @@ impl SpectralState {
             plan,
             clock,
             epoch,
+            accepted_steps: 0,
             components: [
                 filled(n, Complex64::new(0.0, 0.0))?,
                 filled(n, Complex64::new(0.0, 0.0))?,
@@ -49,6 +51,11 @@ impl SpectralState {
     /// Numerical generation, separate from the plan's immutable mathematical data.
     pub fn epoch(&self) -> Epoch {
         self.epoch
+    }
+
+    /// Number of accepted transactional advances, with no dynamic history allocation.
+    pub fn accepted_steps(&self) -> u128 {
+        self.accepted_steps
     }
 
     /// Read-only normalized Fourier component; invalid axes are refused.

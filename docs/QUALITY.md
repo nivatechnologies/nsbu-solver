@@ -127,3 +127,8 @@ P03 extends the Rust profile to spectral operators. [Its evidence](../evidence/p
 records direct-sum and convolution checks, allocation instrumentation, full quality
 measurements and the hosted verification status. Earlier package reports remain
 historical snapshots, not measurements of the expanded current source.
+
+P04 adds an independently checked CM kernel, provider budgets, exact interval
+admission and transactional attempts. [The package evidence](../evidence/p04/README.md)
+records its expanded measurements and final verification state. Both allocation
+probe executables and all helper/test source remain in the measured scope.

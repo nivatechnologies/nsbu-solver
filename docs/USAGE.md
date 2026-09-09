@@ -88,3 +88,20 @@ these Python reservations are not hard allocator bounds for the future runtime.
 The [saved CM/HO reports](../evidence/p00c/README.md) include the final spectra,
 resource reservations, force-sampling records and large reference-tracking errors.
 Neither method qualifies a concentrating window.
+
+## Rust numerical development checks
+
+The library implements CM steps, exact-interval full/two-half attempts and
+transactional commits. These commands exercise independent smooth step fixtures
+and allocation/rollback contracts; they do not qualify a concentrating trajectory:
+
+```sh
+cargo test -p nsbu-solver --test cm_dft
+cargo test -p nsbu-solver --test transaction
+cargo test -p nsbu-solver --test attempt_allocation
+```
+
+Force implementations declare their own complete work/storage limits. Undeclared
+callbacks may use the standalone research step kernel, but are refused by the
+bounded attempt API. The numerical CLI, Rust exact-v2 provider and convergence
+verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
