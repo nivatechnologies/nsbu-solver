@@ -1,5 +1,5 @@
 {
-  "status": "local-checks-passed-hosted-ci-pending",
+  "status": "passed",
   "source_inventory": {
     "reference/__init__.py": {
       "sha256": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
@@ -259,5 +259,6 @@
   "execution_batches": [
     "Complete 155-test suite passed",
     "Budget-probe test file rerun under coverage after adding operands to its assertion error message; no implementation target changed"
-  ]
+  ],
+  "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34339010780"
 }

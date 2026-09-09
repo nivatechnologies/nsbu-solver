@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.1 · 9 September 2026 · Bootstrap, P00B, P01 and P02 verified
+Revision 1.1 · 9 September 2026 · Bootstrap, P00B/P00C and P01/P02 verified
 
 ## Adopted decisions
 
@@ -14,7 +14,7 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-The Rust workspace and help/version CLI exist. No Rust numerical solver, numerical CLI, admitted source instance, accepted PDE window, or formal proof build exists at this point. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C hosted verification is pending. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+The Rust workspace and help/version CLI exist. No Rust numerical solver, numerical CLI, admitted source instance, accepted PDE window, or formal proof build exists at this point. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
 ## Planned public organization
 

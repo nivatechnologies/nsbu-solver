@@ -1,9 +1,8 @@
 # Quality evidence
 
-The Python implementation, including P00C diagnostic code, passes local numerical
-and quality checks. P00B and Rust foundations have passed hosted CI; the expanded
-Python profile is awaiting its hosted run. Concentrating PDE qualification remains
-separate from these checks.
+The Python implementation, including P00C diagnostic code, passes numerical and
+quality checks locally and in hosted CI. P00B, P00C and Rust foundations are
+complete. Concentrating PDE qualification remains separate from these checks.
 
 The [source-hashed measurement report](../evidence/quality-reference/summary.json)
 records 155 passing tests. The scope includes maintained Python implementations,

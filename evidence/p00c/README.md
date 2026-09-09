@@ -47,5 +47,6 @@ The reference is compared only after evolution. Python allocation and data-model
 limits remain separate from the Rust transaction contract.
 
 See [summary.json](summary.json) for exact source/artifact hashes and reproduction
-commands. Numerical diagnostic checks pass; hosted CI is required before P00C is
-marked complete. Rust numerical integration remains a later package.
+commands. Numerical and quality checks pass locally and in
+[hosted CI](hosted-ci.json). P00C is complete as a diagnostic package. Rust
+numerical integration remains a later package.

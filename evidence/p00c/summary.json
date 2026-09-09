@@ -1,6 +1,6 @@
 {
   "package": "P00C",
-  "status": "local-verification-passed-hosted-ci-pending",
+  "status": "complete",
   "case": "similarity-mms-v2",
   "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f",
   "grid": 4,
@@ -85,5 +85,6 @@
   "reproduction": [
     "python -m reference.pilot",
     "python -c 'import json; from reference.pilot import pilot; print(json.dumps(pilot(4,8192,80,\"HO\",1024**3),indent=2))'"
-  ]
+  ],
+  "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34339010780"
 }

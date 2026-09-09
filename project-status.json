@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "concentrating-diagnostic-verification",
+  "development_stage": "concentrating-diagnostic-and-foundations-complete",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "expanded-python-profile-local-passed-hosted-pending",
+    "status": "passed-python-reference-pilot-and-rust-foundation-profiles",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
@@ -57,7 +57,7 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34335710108"
     },
     "P00C": {
-      "status": "in-progress",
+      "status": "complete",
       "evidence": "evidence/p00c/summary.json",
       "classification": "diagnostic-only; spatial and force sampling unresolved"
     }
