@@ -1,5 +1,5 @@
 {
-  "status": "requirements-unmet",
+  "status": "local-checks-passed-hosted-ci-pending",
   "source_inventory": {
     "reference/__init__.py": {
       "sha256": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
@@ -98,8 +98,8 @@
       "physical_lines": 31
     },
     "reference/tests/test_coefficient_work_limits.py": {
-      "sha256": "16cfe804d199883dad289dfc3afd32c3931a916330c43424d6334ffbda773c67",
-      "physical_lines": 90
+      "sha256": "913080eaaa7e631ada22cd31f7f7a0e5dff677d3faec6eaf9e8811646627279a",
+      "physical_lines": 97
     },
     "reference/tests/test_spectral_interactions.py": {
       "sha256": "2eeb1e23086ff139c0c9a401c046a79bfbed8b9ac6b56d5cc73f6098617fe754",
@@ -128,6 +128,22 @@
     "reference/tests/test_field_contracts.py": {
       "sha256": "3cddb846117b67953b5a6207ff035d29e8ac6bd8ab1caa7097f5accc9b759fa4",
       "physical_lines": 77
+    },
+    "reference/tests/test_report_execution.py": {
+      "sha256": "939374ba76ddd14ec6944825a400b9d765156ffe5d7fc6ed7314d8ee3fb3208f",
+      "physical_lines": 28
+    },
+    "reference/tests/test_trajectory_reporting.py": {
+      "sha256": "706ff156e8c52c792bcd35825b628fb1ba11f03da41a56bbcefd72fcecb2452b",
+      "physical_lines": 42
+    },
+    "reference/tests/test_driver_imports.py": {
+      "sha256": "6e675ab72bf8ead2067cf7cc2514f5a888175dce1259f8e869cca3ef114d23ae",
+      "physical_lines": 20
+    },
+    "reference/tests/test_bounded_reference_work.py": {
+      "sha256": "56f7f80fef2b3008a2c51d40eb2198f222fbdb960c628f62e91ebb7bbc2babe7",
+      "physical_lines": 36
     },
     "tools/verify_design.py": {
       "sha256": "7caa29472275eef008e97d4330a238bcb6a5ad10151e3a08b9fb29ef1b25939f",
@@ -175,15 +191,15 @@
     }
   },
   "coverage": {
-    "covered_lines": 2660,
-    "num_statements": 2660,
+    "covered_lines": 2770,
+    "num_statements": 2770,
     "percent_covered": 100.0,
     "percent_covered_display": "100",
     "missing_lines": 0,
     "excluded_lines": 0,
-    "num_branches": 506,
+    "num_branches": 512,
     "num_partial_branches": 0,
-    "covered_branches": 506,
+    "covered_branches": 512,
     "missing_branches": 0
   },
   "maximum_cyclomatic_complexity": 15,
@@ -193,11 +209,11 @@
   "maximum_physical_lines": 243,
   "maximum_crap": 15.0,
   "typing": {
-    "filesAnalyzed": 42,
+    "filesAnalyzed": 46,
     "errorCount": 0,
     "warningCount": 0,
     "informationCount": 0,
-    "timeInSec": 2.712
+    "timeInSec": 2.784
   },
   "duplicate_code_findings": 0,
   "dead_code_review": {
@@ -208,16 +224,31 @@
       "RepositoryReport.schema_version, checks, and missing_files are TypedDict keys serialized into externally consumed JSON reports; they are schema declarations, not unused runtime storage."
     ]
   },
-  "mutation": "Repository-wide gate remains unmet. See jet-mutations.json for completed supplemental scope.",
+  "mutation": "evidence/quality-reference/mutations/summary.json",
   "scope_notes": [
     "Maintained Python source/tests and local mpmath typing interface inventoried. Typing stubs have no executable coverage obligations.",
     "Mutation targets implementations; test oracles are not mutation targets. Tests remain in coverage, complexity, typing and duplicate/dead-code scope.",
     "Frozen reviewed artifacts remain unchanged and excluded; work contains ignored transient experimental scripts, not shipped commands.",
-    "Zero reported duplication and reviewed static dead-code findings are scoped measurements, not proofs over arbitrary future use."
+    "Zero reported duplication and reviewed static dead-code findings are scoped measurements, not proofs over arbitrary future use.",
+    "Declarative workflow/configuration files are separately reviewed and hashed. Their tool-invocation commands do not enter Python function or coverage denominators; Python maintained sources and tests remain fully included."
   ],
   "tests": {
-    "passed": 131,
+    "passed": 139,
     "command": "coverage run -m pytest -q",
     "log": "evidence/quality-reference/tests.log"
-  }
+  },
+  "automation": {
+    "workflow": ".github/workflows/checks.yml",
+    "source_manifest": "evidence/quality-reference/source-inventory.sha256",
+    "config_manifest": "evidence/quality-reference/quality-config.sha256",
+    "mutation_policy": "CI validates the complete reconciled report against exact source and configuration hashes; source/test changes require renewed evidence. Mutation execution is isolated and archived, not silently represented as rerun by the artifact gate."
+  },
+  "post_measurement_non_executable_changes": [
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "measured_sha256": "1ef47f1ac3e2ca15d2da823a59dc75b8fed3dc80519fb6546f9c6b6053fe0098",
+      "current_sha256": "913080eaaa7e631ada22cd31f7f7a0e5dff677d3faec6eaf9e8811646627279a",
+      "change": "Removed one trailing blank line; parsed Python AST is identical. Hosted CI reruns coverage on the normalized file."
+    }
+  ]
 }

@@ -243,6 +243,6 @@
     "tools/tests/test_repository_checks.py": "a22a9afbd6d1a725e6bda66cbe3f4ea1c563587418eae30556fe47405be60398",
     "tools/tests/test_verification_runner.py": "c2b164d7914b31993aeccbe76939c0b3cd124121ee46d5b04ae648ba0de2d887"
   },
-  "overall_repository_gate": "unmet; timeout is not a kill and comprehensive mutation reconciliation remains in progress",
+  "overall_repository_gate": "Historical supplemental run; current comprehensive results, including the resolved timeout, are in evidence/quality-reference/mutations/summary.json",
   "correction": "Cosmic Ray labels timeout outcomes as killed; the original report included one timeout in its kill count. This report separates it."
 }

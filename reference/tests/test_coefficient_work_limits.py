@@ -88,3 +88,10 @@ class CoefficientWorkTests(unittest.TestCase):
                 actual = ho_phi(z,order,cap+1)
                 expected = mp.hyp1f1(1,order+1,z)/mp.factorial(order)
                 self.assertLess(abs(actual-expected),mp.mpf('1e-79'))
+
+    def test_exact_residual_and_series_acceptance_boundaries(self) -> None:
+        with mp.workdps(80):
+            result = root(mp.mpf(27)/100,mp.mpf(0),7)
+            self.assertEqual(abs(result.residual),16*mp.eps/128)
+            z = -2*mp.eps/(1+mp.eps)
+            self.assertEqual(ho_phi(z,1,2),1+z/2)

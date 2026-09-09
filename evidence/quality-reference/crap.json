@@ -1183,6 +1183,13 @@
     "crap": 2.0
   },
   {
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "function": "CoefficientWorkTests.test_exact_residual_and_series_acceptance_boundaries",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
     "path": "reference/tests/test_spectral_interactions.py",
     "function": "SpectralInteractionTests.test_actual_quadratic_padding_removes_retained_alias",
     "cc": 8,
@@ -1388,6 +1395,104 @@
   {
     "path": "reference/tests/test_field_contracts.py",
     "function": "FieldContractTests.test_precision_comparison_scaling_and_exact_boundary",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_report_execution.py",
+    "function": "ReportExecutionTests.test_comparison_precision_and_nonzero_equal_states",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_report_execution.py",
+    "function": "ReportExecutionTests.test_comparison_precision_and_nonzero_equal_states.rendered",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.test_noninteger_orders_and_nonzero_precision_changes",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.run_policy",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.run_policy.simulated",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.run_policy.measured",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.run_policy.rendered",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "function": "TrajectoryReportingTests.test_exact_arithmetic_boundary_is_refused",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_driver_imports.py",
+    "function": "DriverImportTests.test_report_imports_do_not_perform_numerical_work",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "function": "BoundedReferenceWorkTests.test_constant_jet_has_zero_derivative",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "function": "BoundedReferenceWorkTests.test_coefficient_context_budget",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "function": "BoundedReferenceWorkTests.test_coefficient_context_budget.bounded",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "function": "BoundedReferenceWorkTests.test_region_refinement_doubles_the_requested_work",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "function": "BoundedReferenceWorkTests.test_region_refinement_doubles_the_requested_work.integrated",
     "cc": 1,
     "branch_coverage": 1,
     "crap": 1

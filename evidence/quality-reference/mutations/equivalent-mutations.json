@@ -1,0 +1,1778 @@
+[
+  {
+    "job_id": "ea35e053065546248169091546602a1f",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 5,
+        "start_pos": [
+          105,
+          12
+        ],
+        "end_pos": [
+          105,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -102,6 +102,6 @@\n                            'No Fourier force-sampling qualification','No PDE trajectory']}\n \n \n-if __name__ == '__main__':\n+if __name__ <= '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "ea2e596a17f1470d9032a4ee60aaf4e8",
+    "module": "reference/dft.py",
+    "mutation": [
+      {
+        "module_path": "reference/dft.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 38,
+        "start_pos": [
+          31,
+          25
+        ],
+        "end_pos": [
+          31,
+          26
+        ],
+        "operator_args": {},
+        "definition_name": "transform"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/dft.py\n+++ b/reference/dft.py\n@@ -28,7 +28,7 @@\n     source = values[:]\n     for axis in range(3):\n         stride = (n*n,n,1)[axis]\n-        output = [mp.mpc(0)]*len(source)\n+        output = [mp.mpc( 1)]*len(source)\n         for point in grid(n):\n             index = (point[0]*n+point[1])*n+point[2]\n             base = index-point[axis]*stride",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "For every validated transform payload, the three nested grid loops overwrite every output slot before that buffer is read. The initial fill value is unobservable."
+  },
+  {
+    "job_id": "3d023d75fe5542b1973734717ccbfcca",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 12,
+        "start_pos": [
+          20,
+          68
+        ],
+        "end_pos": [
+          20,
+          69
+        ],
+        "operator_args": {},
+        "definition_name": "indices"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -17,7 +17,7 @@\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')\n-    return tuple(sorted((quadruple(i) for i in product(range(degree+1), repeat=4) if sum(i) <= degree),\n+    return tuple(sorted((quadruple(i) for i in product(range(degree+ 2), repeat=4) if sum(i) <= degree),\n                         key=lambda i: (sum(i), i)))\n \n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Every additional enumerated tuple has a coordinate degree+1 and fails the unchanged total-degree <= degree filter. The sorted output indices are identical; enumeration stays finite for the admitted degrees 0..4."
+  },
+  {
+    "job_id": "49751be9125943d5a5367a620bad2aec",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 2,
+        "start_pos": [
+          40,
+          39
+        ],
+        "end_pos": [
+          40,
+          41
+        ],
+        "operator_args": {},
+        "definition_name": "scalar_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -37,7 +37,7 @@\n         def p(*coordinates: mpf) -> mpf:\n             return fields(*quadruple(coordinates))[1]\n         pressure = mp.diff(p,point,\n-                           tuple(int(j == component) for j in range(4)))\n+                           tuple(int(j is component) for j in range(4)))\n         result.append(derivatives[3]+sum(velocity[j]*derivatives[j] for j in range(3))\n                       -laplacian+pressure)\n     return triple(result)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Both operands are builtin ints from the bounded ranges 0..3; all are cached in declared CPython 3.12. Identity and equality therefore select exactly the same derivative orders."
+  },
+  {
+    "job_id": "5f8c5bcb29644b08864f09f9cac8c28d",
+    "module": "reference/scalar.py",
+    "mutation": [
+      {
+        "module_path": "reference/scalar.py",
+        "operator_name": "core/ReplaceComparisonOperator_GtE_Eq",
+        "occurrence": 1,
+        "start_pos": [
+          71,
+          19
+        ],
+        "end_pos": [
+          71,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": "step_derivative"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/scalar.py\n+++ b/reference/scalar.py\n@@ -68,7 +68,7 @@\n \n \n def step_derivative(s: mpf) -> mpf:\n-    if s <= 0 or s >= 1:\n+    if s <= 0 or s == 1:\n         return mp.mpf(0)\n     value = step(s)\n     return value * (1-value) * (1/s**2 + 1/(1-s)**2)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The singular endpoints 0 and 1 remain guarded. Outside [0,1], step returns exactly 0 or 1, making value*(1-value) exactly zero in the unchanged derivative formula. Both paths return the same flat derivative."
+  },
+  {
+    "job_id": "bc06b991e61740bd8c5f27fbe5ece944",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 57,
+        "start_pos": [
+          106,
+          34
+        ],
+        "end_pos": [
+          106,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -103,5 +103,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 1))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "a99947080e4642769d2b71bf327bcbd3",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 0,
+        "start_pos": [
+          16,
+          19
+        ],
+        "end_pos": [
+          16,
+          20
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -13,7 +13,7 @@\n Index = tuple[int, int, int, int]\n \n \n-@lru_cache(maxsize=5)\n+@lru_cache(maxsize= 6)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "indices is pure, admits only degrees 0..4, and each uncached evaluation has bounded enumeration. Changing cache size 5 to 4/6 or removing caching changes reuse and timing, not returned coefficients, accepted inputs, or the per-call finite enumeration bound. The diagnostic resource reservation is conservative for uncached evaluation."
+  },
+  {
+    "job_id": "59789ada1f394c82978dde236481d0de",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 3,
+        "start_pos": [
+          105,
+          12
+        ],
+        "end_pos": [
+          105,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -102,6 +102,6 @@\n                            'No Fourier force-sampling qualification','No PDE trajectory']}\n \n \n-if __name__ == '__main__':\n+if __name__ is '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the declared CPython 3.12 execution profile, the standard __main__ name and the literal __main__ are interned; documented package import names are unequal under both predicates. Arbitrary user-created runpy alias strings are outside the documented entry points."
+  },
+  {
+    "job_id": "6a766343dede43149bdc20a1fe13bee1",
+    "module": "reference/steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/steps.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 4,
+        "start_pos": [
+          18,
+          47
+        ],
+        "end_pos": [
+          18,
+          48
+        ],
+        "operator_args": {},
+        "definition_name": "coefficient_guard_digits"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/steps.py\n+++ b/reference/steps.py\n@@ -15,7 +15,7 @@\n def coefficient_guard_digits(z: mpf) -> int:\n     if not mp.isfinite(z) or z > 0 or z < -mp.mpf('1e309'):\n         raise ValueError('Reference coefficients require finite -1e309 <= z <= 0')\n-    return 20 + int(mp.log10(max(abs(z),mp.mpf(1))))\n+    return 20 + int(mp.log10(max(abs(z),mp.mpf( 2))))\n \n \n def cm_weights(z: mpf) -> tuple[mpf, mpf, mpf, mpf]:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "For |z|<2, int(log10(max(|z|,1))) and int(log10(max(|z|,2))) are both zero. At |z|>=2 their arguments are identical. The guard-digit count is unchanged throughout the validated domain."
+  },
+  {
+    "job_id": "4c899815569b4210b6c392a1333a68a6",
+    "module": "reference/verify_trajectory.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_trajectory.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 157,
+        "start_pos": [
+          91,
+          34
+        ],
+        "end_pos": [
+          91,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_trajectory.py\n+++ b/reference/verify_trajectory.py\n@@ -88,5 +88,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 1))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "f8ccdba37e004474adcfa4fa7284d955",
+    "module": "reference/regions.py",
+    "mutation": [
+      {
+        "module_path": "reference/regions.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 51,
+        "start_pos": [
+          41,
+          16
+        ],
+        "end_pos": [
+          41,
+          17
+        ],
+        "operator_args": {},
+        "definition_name": "coverage"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/regions.py\n+++ b/reference/regions.py\n@@ -38,7 +38,7 @@\n         raise ValueError('Coverage inputs must be finite')\n     if tau <= 0 or low < 0 or high <= low or radius <= 0:\n         raise ValueError('Invalid coverage geometry')\n-    if panels < 2 or panels%2:\n+    if panels < 1 or panels%2:\n         raise ValueError('Simpson panel count must be positive and even')\n     coarse = integral(tau,low,high,radius,panels)\n     fine = integral(tau,low,high,radius,2*panels)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The only changed integer is panels=1, which the unchanged odd-panel predicate also rejects. Both versions accept exactly positive even panel counts."
+  },
+  {
+    "job_id": "eac75617449f4c0282d9e5f431f3764b",
+    "module": "reference/verify_trajectory.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_trajectory.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 156,
+        "start_pos": [
+          91,
+          34
+        ],
+        "end_pos": [
+          91,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_trajectory.py\n+++ b/reference/verify_trajectory.py\n@@ -88,5 +88,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 3))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "61cb22c000754ba0aeab9db982a3b071",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_GtE",
+        "occurrence": 2,
+        "start_pos": [
+          33,
+          69
+        ],
+        "end_pos": [
+          33,
+          71
+        ],
+        "operator_args": {},
+        "definition_name": "scalar_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -30,7 +30,7 @@\n         def u(*coordinates: mpf) -> mpf:\n             return fields(*quadruple(coordinates))[0][component]\n         derivatives = [mp.diff(u,point,tuple(int(j == axis) for j in range(4)),\n-                               direction=1 if point[3] == 0 and axis == 3 else 0)\n+                               direction=1 if point[3] == 0 and axis >= 3 else 0)\n                        for axis in range(4)]\n         laplacian = sum(mp.diff(u,point,tuple(2*int(j == axis) for j in range(4)))\n                         for axis in range(3))",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "axis is drawn from range(4). Its only value >=3 is 3, so the one-sided temporal-derivative condition is unchanged."
+  },
+  {
+    "job_id": "7758ae52de404cf4b1265bec9330bb65",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 72,
+        "start_pos": [
+          69,
+          34
+        ],
+        "end_pos": [
+          69,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -66,5 +66,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 3))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "c8e6e53f2aaa4744a24047b31f53d68f",
+    "module": "reference/regions.py",
+    "mutation": [
+      {
+        "module_path": "reference/regions.py",
+        "operator_name": "core/ReplaceBinaryOperator_Add_BitXor",
+        "occurrence": 0,
+        "start_pos": [
+          26,
+          29
+        ],
+        "end_pos": [
+          26,
+          30
+        ],
+        "operator_args": {},
+        "definition_name": "integral"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/regions.py\n+++ b/reference/regions.py\n@@ -23,7 +23,7 @@\n     \"\"\"Composite Simpson rule on the complete declared eta interval.\"\"\"\n     numerator = mp.mpf(0)\n     denominator = mp.mpf(0)\n-    for index in range(panels+1):\n+    for index in range(panels^1):\n         eta = -mp.mpf(1)/2+mp.mpf(index)/panels\n         limit,weight = radial_limit(eta,tau,radius)\n         coefficient = 1 if index in (0,panels) else 2 if index%2 == 0 else 4",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Simpson integral is called only with validated positive even panel counts. For even integers n, n XOR 1 = n OR 1 = n+1. The quadrature nodes and weights are unchanged."
+  },
+  {
+    "job_id": "28951fcb098d4be988bfca7e8ac10e0b",
+    "module": "reference/dft.py",
+    "mutation": [
+      {
+        "module_path": "reference/dft.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 39,
+        "start_pos": [
+          31,
+          25
+        ],
+        "end_pos": [
+          31,
+          26
+        ],
+        "operator_args": {},
+        "definition_name": "transform"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/dft.py\n+++ b/reference/dft.py\n@@ -28,7 +28,7 @@\n     source = values[:]\n     for axis in range(3):\n         stride = (n*n,n,1)[axis]\n-        output = [mp.mpc(0)]*len(source)\n+        output = [mp.mpc( -1)]*len(source)\n         for point in grid(n):\n             index = (point[0]*n+point[1])*n+point[2]\n             base = index-point[axis]*stride",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "For every validated transform payload, the three nested grid loops overwrite every output slot before that buffer is read. The initial fill value is unobservable."
+  },
+  {
+    "job_id": "eb4d2ef04d514d99a9e163562e389de7",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 0,
+        "start_pos": [
+          68,
+          12
+        ],
+        "end_pos": [
+          68,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -65,6 +65,6 @@\n                            'No integrated trajectory','Empirical sampled comparisons, not enclosures']}\n \n \n-if __name__ == '__main__':\n+if __name__ <= '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "d089a8e09ac1466ea9349a3d25b894b3",
+    "module": "reference/scalar.py",
+    "mutation": [
+      {
+        "module_path": "reference/scalar.py",
+        "operator_name": "core/ReplaceBinaryOperator_Sub_Mod",
+        "occurrence": 9,
+        "start_pos": [
+          83,
+          33
+        ],
+        "end_pos": [
+          83,
+          34
+        ],
+        "operator_args": {},
+        "definition_name": "fields"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/scalar.py\n+++ b/reference/scalar.py\n@@ -80,7 +80,7 @@\n         raise ValueError('Require finite spatial coordinates')\n     q = root(z, t).value\n     inner2 = rational('9/100')\n-    width = rational('441/2500') - inner2\n+    width = rational('441/2500') % inner2\n     radius2 = x*x + y*y + z*z\n     s = (radius2-inner2) / width\n     ramp = step(512*t)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The positive rational operands are 441/2500 and 9/100, whose quotient lies strictly between 1 and 2. Remainder therefore subtracts exactly one divisor, the same operation as the original subtraction, including in the tested 80/120-digit profile."
+  },
+  {
+    "job_id": "3148edd91b2342e182a8b2878fc9f76f",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 3,
+        "start_pos": [
+          17,
+          34
+        ],
+        "end_pos": [
+          17,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": "sample_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -14,7 +14,7 @@\n         raise ValueError('Force sampling requires 0 <= time < T_star')\n     with mp.workdps(precision):\n         samples: list[Vector] = []\n-        max_conditioning = mp.mpf(0)\n+        max_conditioning = mp.mpf( -1)\n         root_work = 0\n         for point in grid(n):\n             coordinates = triple(mp.mpf(j if j < n//2 else j-n)/n for j in point)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Each admitted sampling grid contains points and three momentum components. Every conditioning ratio is nonnegative, so the first maximum update overwrites either initial value (-1 or 0) with the same nonnegative value."
+  },
+  {
+    "job_id": "8414c3cc75ac42dc87792beadd2c3998",
+    "module": "reference/scalar.py",
+    "mutation": [
+      {
+        "module_path": "reference/scalar.py",
+        "operator_name": "core/ReplaceComparisonOperator_LtE_Eq",
+        "occurrence": 4,
+        "start_pos": [
+          71,
+          9
+        ],
+        "end_pos": [
+          71,
+          11
+        ],
+        "operator_args": {},
+        "definition_name": "step_derivative"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/scalar.py\n+++ b/reference/scalar.py\n@@ -68,7 +68,7 @@\n \n \n def step_derivative(s: mpf) -> mpf:\n-    if s <= 0 or s >= 1:\n+    if s == 0 or s >= 1:\n         return mp.mpf(0)\n     value = step(s)\n     return value * (1-value) * (1/s**2 + 1/(1-s)**2)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The singular endpoints 0 and 1 remain guarded. Outside [0,1], step returns exactly 0 or 1, making value*(1-value) exactly zero in the unchanged derivative formula. Both paths return the same flat derivative."
+  },
+  {
+    "job_id": "ccc37368d74e431592464f3aa29e336d",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 0,
+        "start_pos": [
+          32,
+          51
+        ],
+        "end_pos": [
+          32,
+          53
+        ],
+        "operator_args": {},
+        "definition_name": "scalar_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -29,7 +29,7 @@\n     for component in range(3):\n         def u(*coordinates: mpf) -> mpf:\n             return fields(*quadruple(coordinates))[0][component]\n-        derivatives = [mp.diff(u,point,tuple(int(j == axis) for j in range(4)),\n+        derivatives = [mp.diff(u,point,tuple(int(j is axis) for j in range(4)),\n                                direction=1 if point[3] == 0 and axis == 3 else 0)\n                        for axis in range(4)]\n         laplacian = sum(mp.diff(u,point,tuple(2*int(j == axis) for j in range(4)))",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Both operands are builtin ints from the bounded ranges 0..3; all are cached in declared CPython 3.12. Identity and equality therefore select exactly the same derivative orders."
+  },
+  {
+    "job_id": "0629eecc98d04e10b3ed25128ab1fa9b",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 1,
+        "start_pos": [
+          35,
+          54
+        ],
+        "end_pos": [
+          35,
+          56
+        ],
+        "operator_args": {},
+        "definition_name": "scalar_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -32,7 +32,7 @@\n         derivatives = [mp.diff(u,point,tuple(int(j == axis) for j in range(4)),\n                                direction=1 if point[3] == 0 and axis == 3 else 0)\n                        for axis in range(4)]\n-        laplacian = sum(mp.diff(u,point,tuple(2*int(j == axis) for j in range(4)))\n+        laplacian = sum(mp.diff(u,point,tuple(2*int(j is axis) for j in range(4)))\n                         for axis in range(3))\n         def p(*coordinates: mpf) -> mpf:\n             return fields(*quadruple(coordinates))[1]",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Both operands are builtin ints from the bounded ranges 0..3; all are cached in declared CPython 3.12. Identity and equality therefore select exactly the same derivative orders."
+  },
+  {
+    "job_id": "b40128b51b5942b1950fb4c193eaf94f",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 0,
+        "start_pos": [
+          68,
+          12
+        ],
+        "end_pos": [
+          68,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -65,6 +65,6 @@\n                            'No integrated trajectory','Empirical sampled comparisons, not enclosures']}\n \n \n-if __name__ == '__main__':\n+if __name__ is '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the declared CPython 3.12 execution profile, the standard __main__ name and the literal __main__ are interned; documented package import names are unequal under both predicates. Arbitrary user-created runpy alias strings are outside the documented entry points."
+  },
+  {
+    "job_id": "4af18909565346039f9695197ccb2bf4",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 73,
+        "start_pos": [
+          69,
+          34
+        ],
+        "end_pos": [
+          69,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -66,5 +66,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 1))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "0875c4321fe64dc481079fb5e7164ea5",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/ReplaceComparisonOperator_NotEq_IsNot",
+        "occurrence": 0,
+        "start_pos": [
+          30,
+          34
+        ],
+        "end_pos": [
+          30,
+          36
+        ],
+        "operator_args": {},
+        "definition_name": "__post_init__"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -27,7 +27,7 @@\n     coefficients: tuple[mpf, ...]\n \n     def __post_init__(self) -> None:\n-        if len(self.coefficients) != len(indices(self.degree)):\n+        if len(self.coefficients) is not len(indices(self.degree)):\n             raise ValueError('Incorrect coefficient count')\n         if not all(mp.isfinite(c) for c in self.coefficients):\n             raise ValueError('Jet coefficients must be finite')",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The only equal lengths are builtin integers 1, 5, 15, 35 and 70, all cached by declared CPython 3.12. Unequal lengths cannot be identical. Thus identity and equality agree for every accepted or rejected coefficient length."
+  },
+  {
+    "job_id": "55e92da10ced4a188103c962790b876e",
+    "module": "reference/verify_steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_steps.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 0,
+        "start_pos": [
+          96,
+          12
+        ],
+        "end_pos": [
+          96,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_steps.py\n+++ b/reference/verify_steps.py\n@@ -93,6 +93,6 @@\n             'No binary64 production comparison','No accepted PDE convergence window']}\n \n \n-if __name__ == '__main__':\n+if __name__ is '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the declared CPython 3.12 execution profile, the standard __main__ name and the literal __main__ are interned; documented package import names are unequal under both predicates. Arbitrary user-created runpy alias strings are outside the documented entry points."
+  },
+  {
+    "job_id": "f4674b24a61f4d00b41e0d8603284261",
+    "module": "reference/dft.py",
+    "mutation": [
+      {
+        "module_path": "reference/dft.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 0,
+        "start_pos": [
+          67,
+          15
+        ],
+        "end_pos": [
+          67,
+          17
+        ],
+        "operator_args": {},
+        "definition_name": "project"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/dft.py\n+++ b/reference/dft.py\n@@ -64,7 +64,7 @@\n \n def project(mode: Mode, vector: Vector) -> Vector:\n     squared = sum(k*k for k in mode)\n-    if squared == 0:\n+    if squared <= 0:\n         return vector\n     longitudinal = sum((k*v for k,v in zip(mode,vector)), mp.mpc(0))/squared\n     return triple(v-k*longitudinal for k,v in zip(mode,vector))",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "squared is a sum of integer squares and cannot be negative. Its zero and nonpositive predicates coincide."
+  },
+  {
+    "job_id": "924328ed666a4321856c99f6bcaeda20",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 50,
+        "start_pos": [
+          101,
+          38
+        ],
+        "end_pos": [
+          101,
+          39
+        ],
+        "operator_args": {},
+        "definition_name": "__pow__"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -98,7 +98,7 @@\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n         factor = mp.mpf(1)\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree+ 2):\n             term = term*delta\n             factor *= (exponent-k+1)/k\n             result = result + factor*term",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The nonconstant Taylor remainder has zero constant coefficient and is nilpotent in the degree-truncated jet algebra. All extra powers above degree are exactly zero. The changed bound retains all required powers for degrees 0..4; adding the extra zero terms leaves the computed jet unchanged."
+  },
+  {
+    "job_id": "d41e4d77af6e4c05bd2b7c0b3bf906cb",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/RemoveDecorator",
+        "occurrence": 0,
+        "start_pos": [
+          16,
+          0
+        ],
+        "end_pos": [
+          17,
+          0
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -11,9 +11,6 @@\n from reference.tuples import quadruple\n \n Index = tuple[int, int, int, int]\n-\n-\n-@lru_cache(maxsize=5)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "indices is pure, admits only degrees 0..4, and each uncached evaluation has bounded enumeration. Changing cache size 5 to 4/6 or removing caching changes reuse and timing, not returned coefficients, accepted inputs, or the per-call finite enumeration bound. The diagnostic resource reservation is conservative for uncached evaluation."
+  },
+  {
+    "job_id": "60fde5ab9a5246da855f3f6fe362c883",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 17,
+        "start_pos": [
+          130,
+          36
+        ],
+        "end_pos": [
+          130,
+          37
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -127,7 +127,7 @@\n     except OSError as error:\n         report = {\"status\": \"failed\", \"stage\": \"report_write\",\n                   \"error\": str(error).replace(str(root), \"<repo>\")}\n-    print(json.dumps(report, indent=2))\n+    print(json.dumps(report, indent= 1))\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "c42a4de75517401dac5c3c63635bb6c1",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceComparisonOperator_NotEq_IsNot",
+        "occurrence": 1,
+        "start_pos": [
+          74,
+          20
+        ],
+        "end_pos": [
+          74,
+          22
+        ],
+        "operator_args": {},
+        "definition_name": "check_review"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -71,7 +71,7 @@\n         raise ValueError(\"Original review manifest SHA-256 mismatch\")\n     manifest = object_value(decode(manifest_path.read_text(encoding=\"utf-8\")))\n     entries = [object_value(v) for v in array_value(manifest[\"components\"])]\n-    if len(entries) != len(COMPONENTS) or {string_value(e[\"file\"]) for e in entries} != set(COMPONENTS):\n+    if len(entries) is not len(COMPONENTS) or {string_value(e[\"file\"]) for e in entries} != set(COMPONENTS):\n         raise ValueError(\"Original review must contain exactly the 12 public components\")\n     for entry in [*entries, object_value(manifest[\"packet\"]) ]:\n         name = string_value(entry[\"file\"])",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Both lengths are builtin ints. Equality is possible only at 12, which is cached by declared CPython 3.12; unequal lengths cannot be identical. Both predicates therefore accept and reject the same lists."
+  },
+  {
+    "job_id": "74eb13cb50f04d639c920354f6e17059",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 25,
+        "start_pos": [
+          238,
+          36
+        ],
+        "end_pos": [
+          238,
+          37
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -235,7 +235,7 @@\n     args = Arguments()\n     parser.parse_args(namespace=args)\n     report = check_repository(args.root)\n-    print(json.dumps(report, indent=2))\n+    print(json.dumps(report, indent= 1))\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "2583b735ea064258981ae10042013343",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 24,
+        "start_pos": [
+          238,
+          36
+        ],
+        "end_pos": [
+          238,
+          37
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -235,7 +235,7 @@\n     args = Arguments()\n     parser.parse_args(namespace=args)\n     report = check_repository(args.root)\n-    print(json.dumps(report, indent=2))\n+    print(json.dumps(report, indent= 3))\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "18f19210371c4a74b14c07ec0b74d65c",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 1,
+        "start_pos": [
+          18,
+          20
+        ],
+        "end_pos": [
+          18,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -15,7 +15,7 @@\n import sys\n from typing import TypedDict, NotRequired\n if not __package__:\n-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n+    sys.path.insert( -1, str(Path(__file__).resolve().parents[1]))\n \n from tools.json_types import JsonObject, decode, object_value, array_value, string_value\n from urllib.parse import unquote, urlsplit",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the verified public-only environment, the repository is the sole provider of the tools package; neither the script directory nor pinned third-party distributions supplies a competing tools package. All insertion positions therefore resolve the same repository modules. Namespace-contaminated environments are outside this equivalence profile."
+  },
+  {
+    "job_id": "89ebcc2eb593406fbfae8d3bcc04d385",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 6,
+        "start_pos": [
+          131,
+          38
+        ],
+        "end_pos": [
+          131,
+          39
+        ],
+        "operator_args": {},
+        "definition_name": "unfenced_lines"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -128,7 +128,7 @@\n             marker, rest = match.groups()\n             if not opening:\n                 opening = marker\n-            elif marker[0] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n+            elif marker[0] == opening[ 1] and len(marker) >= len(opening) and not rest.strip():\n                 opening = \"\"\n             continue\n         if not opening:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The fence parser admits markers consisting of at least three repetitions of a single ASCII backtick or tilde. Indices 0, 1 and -1 select the same character; CPython caches these one-character ASCII strings, so the identity variant is also equivalent."
+  },
+  {
+    "job_id": "196a0708c98d4584858f3b19e3ce70b1",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 16,
+        "start_pos": [
+          130,
+          36
+        ],
+        "end_pos": [
+          130,
+          37
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -127,7 +127,7 @@\n     except OSError as error:\n         report = {\"status\": \"failed\", \"stage\": \"report_write\",\n                   \"error\": str(error).replace(str(root), \"<repo>\")}\n-    print(json.dumps(report, indent=2))\n+    print(json.dumps(report, indent= 3))\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "65041d8a2b2a44958ad33259542f2faf",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 0,
+        "start_pos": [
+          18,
+          20
+        ],
+        "end_pos": [
+          18,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -15,7 +15,7 @@\n import sys\n from typing import TypedDict, NotRequired\n if not __package__:\n-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n+    sys.path.insert( 1, str(Path(__file__).resolve().parents[1]))\n \n from tools.json_types import JsonObject, decode, object_value, array_value, string_value\n from urllib.parse import unquote, urlsplit",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the verified public-only environment, the repository is the sole provider of the tools package; neither the script directory nor pinned third-party distributions supplies a competing tools package. All insertion positions therefore resolve the same repository modules. Namespace-contaminated environments are outside this equivalence profile."
+  },
+  {
+    "job_id": "a0875ef18776444484932c7d13967cf0",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/ReplaceComparisonOperator_NotEq_Lt",
+        "occurrence": 1,
+        "start_pos": [
+          48,
+          28
+        ],
+        "end_pos": [
+          48,
+          30
+        ],
+        "operator_args": {},
+        "definition_name": "execute"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -45,7 +45,7 @@\n def execute(root: Path) -> JsonObject:\n     \"\"\"Verify packaging before invoking the original script with assertions on.\"\"\"\n     repository = check_repository(root)\n-    if repository[\"status\"] != \"passed\":\n+    if repository[\"status\"] < \"passed\":\n         return {\"status\": \"failed\", \"stage\": \"repository\", \"repository\": cast(JsonObject, dict(repository))}\n     versions = {name: importlib.metadata.version(name) for name in DEPENDENCIES}\n     if versions != DEPENDENCIES:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "These statuses are created internally from the literal strings failed and passed. Their ordering makes the changed relational test equivalent, and the passed literal is interned in declared CPython 3.12 for identity variants. Neither call site accepts an external arbitrary status value."
+  },
+  {
+    "job_id": "221264e1cf1d4c4f82577e009c6fe4cc",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 7,
+        "start_pos": [
+          131,
+          38
+        ],
+        "end_pos": [
+          131,
+          39
+        ],
+        "operator_args": {},
+        "definition_name": "unfenced_lines"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -128,7 +128,7 @@\n             marker, rest = match.groups()\n             if not opening:\n                 opening = marker\n-            elif marker[0] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n+            elif marker[0] == opening[ -1] and len(marker) >= len(opening) and not rest.strip():\n                 opening = \"\"\n             continue\n         if not opening:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The fence parser admits markers consisting of at least three repetitions of a single ASCII backtick or tilde. Indices 0, 1 and -1 select the same character; CPython caches these one-character ASCII strings, so the identity variant is also equivalent."
+  },
+  {
+    "job_id": "129722d87f7242599526cced194b1880",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 10,
+        "start_pos": [
+          91,
+          51
+        ],
+        "end_pos": [
+          91,
+          52
+        ],
+        "operator_args": {},
+        "definition_name": "write_report"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -88,7 +88,7 @@\n         with tempfile.NamedTemporaryFile(mode=\"w\", encoding=\"utf-8\", newline=\"\\n\",\n                                          dir=path.parent, suffix=\".tmp\", delete=False) as handle:\n             temporary = Path(handle.name)\n-            handle.write(json.dumps(report, indent=2) + \"\\n\")\n+            handle.write(json.dumps(report, indent= 3) + \"\\n\")\n         os.replace(temporary, path)\n     finally:\n         if temporary is not None:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "99dcb34d90734502aec887e1226d7d72",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 4,
+        "start_pos": [
+          131,
+          24
+        ],
+        "end_pos": [
+          131,
+          25
+        ],
+        "operator_args": {},
+        "definition_name": "unfenced_lines"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -128,7 +128,7 @@\n             marker, rest = match.groups()\n             if not opening:\n                 opening = marker\n-            elif marker[0] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n+            elif marker[ 1] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n                 opening = \"\"\n             continue\n         if not opening:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The fence parser admits markers consisting of at least three repetitions of a single ASCII backtick or tilde. Indices 0, 1 and -1 select the same character; CPython caches these one-character ASCII strings, so the identity variant is also equivalent."
+  },
+  {
+    "job_id": "0685d6040d2a4c32855554ab7fc0ad94",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_GtE",
+        "occurrence": 2,
+        "start_pos": [
+          239,
+          33
+        ],
+        "end_pos": [
+          239,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -236,7 +236,7 @@\n     parser.parse_args(namespace=args)\n     report = check_repository(args.root)\n     print(json.dumps(report, indent=2))\n-    return 0 if report[\"status\"] == \"passed\" else 1\n+    return 0 if report[\"status\"] >= \"passed\" else 1\n \n \n if __name__ == \"__main__\":",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "These statuses are created internally from the literal strings failed and passed. Their ordering makes the changed relational test equivalent, and the passed literal is interned in declared CPython 3.12 for identity variants. Neither call site accepts an external arbitrary status value."
+  },
+  {
+    "job_id": "579876f847684374a14730554573bdf7",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 3,
+        "start_pos": [
+          242,
+          12
+        ],
+        "end_pos": [
+          242,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -239,6 +239,6 @@\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n \n-if __name__ == \"__main__\":\n+if __name__ <= \"__main__\":\n     sys.exit(main())\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "9eb64f821b0c4505baa37d04084cc138",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/ReplaceTrueWithFalse",
+        "occurrence": 1,
+        "start_pos": [
+          55,
+          57
+        ],
+        "end_pos": [
+          55,
+          61
+        ],
+        "operator_args": {},
+        "definition_name": "execute"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -52,7 +52,7 @@\n         raise ValueError(f\"Install requirements-dev.txt with this interpreter; found {versions}\")\n     script = root / \"docs/design/navier-runtime-verification.py\"\n     completed = subprocess.run([sys.executable, \"-E\", str(script)], cwd=root,\n-                               capture_output=True, text=True, encoding=\"utf-8\", timeout=180)\n+                               capture_output=True, text=False, encoding=\"utf-8\", timeout=180)\n     if completed.returncode:\n         return {\"status\": \"failed\", \"stage\": \"mathematical_checks\",\n                 \"returncode\": completed.returncode,",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "subprocess.run explicitly specifies encoding=utf-8. Python enables text decoding when encoding is supplied regardless of the redundant text flag, so stdout/stderr types and content remain identical."
+  },
+  {
+    "job_id": "c1cf56abe4b84954ace3b4117aecde41",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 11,
+        "start_pos": [
+          91,
+          51
+        ],
+        "end_pos": [
+          91,
+          52
+        ],
+        "operator_args": {},
+        "definition_name": "write_report"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -88,7 +88,7 @@\n         with tempfile.NamedTemporaryFile(mode=\"w\", encoding=\"utf-8\", newline=\"\\n\",\n                                          dir=path.parent, suffix=\".tmp\", delete=False) as handle:\n             temporary = Path(handle.name)\n-            handle.write(json.dumps(report, indent=2) + \"\\n\")\n+            handle.write(json.dumps(report, indent= 1) + \"\\n\")\n         os.replace(temporary, path)\n     finally:\n         if temporary is not None:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "ddd8f23702944af387349735ef37e1ae",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceFalseWithTrue",
+        "occurrence": 0,
+        "start_pos": [
+          110,
+          60
+        ],
+        "end_pos": [
+          110,
+          65
+        ],
+        "operator_args": {},
+        "definition_name": "public_files"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -107,7 +107,7 @@\n def public_files(root: Path) -> list[Path]:\n     \"\"\"Enumerate source files without traversing caches, run output or symlinks.\"\"\"\n     result: list[Path] = []\n-    for directory, dirs, files in os.walk(root, followlinks=False):\n+    for directory, dirs, files in os.walk(root, followlinks=True):\n         base = Path(directory)\n         dirs[:] = sorted(name for name in dirs if name not in IGNORED_DIRS)\n         for name in [*dirs, *files]:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "public_files rejects every nonignored symlink before os.walk can descend and removes ignored directories from traversal. On the stable checkout used by the verifier, the followlinks option cannot expose an additional path."
+  },
+  {
+    "job_id": "9055e4bda7a541429492691b94ae1ea3",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 0,
+        "start_pos": [
+          131,
+          27
+        ],
+        "end_pos": [
+          131,
+          29
+        ],
+        "operator_args": {},
+        "definition_name": "unfenced_lines"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -128,7 +128,7 @@\n             marker, rest = match.groups()\n             if not opening:\n                 opening = marker\n-            elif marker[0] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n+            elif marker[0] is opening[0] and len(marker) >= len(opening) and not rest.strip():\n                 opening = \"\"\n             continue\n         if not opening:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The fence parser admits markers consisting of at least three repetitions of a single ASCII backtick or tilde. Indices 0, 1 and -1 select the same character; CPython caches these one-character ASCII strings, so the identity variant is also equivalent."
+  },
+  {
+    "job_id": "d25c79fcde38430fac3aea1764340ab3",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 2,
+        "start_pos": [
+          239,
+          33
+        ],
+        "end_pos": [
+          239,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -236,7 +236,7 @@\n     parser.parse_args(namespace=args)\n     report = check_repository(args.root)\n     print(json.dumps(report, indent=2))\n-    return 0 if report[\"status\"] == \"passed\" else 1\n+    return 0 if report[\"status\"] is \"passed\" else 1\n \n \n if __name__ == \"__main__\":",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "These statuses are created internally from the literal strings failed and passed. Their ordering makes the changed relational test equivalent, and the passed literal is interned in declared CPython 3.12 for identity variants. Neither call site accepts an external arbitrary status value."
+  },
+  {
+    "job_id": "475e5f7bae354435b5fda9a005ac9fc2",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 0,
+        "start_pos": [
+          21,
+          20
+        ],
+        "end_pos": [
+          21,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -18,7 +18,7 @@\n import tempfile\n \n if not __package__:\n-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n+    sys.path.insert( 1, str(Path(__file__).resolve().parents[1]))\n \n from tools.check_repository import check_repository, sha256\n from typing import cast",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the verified public-only environment, the repository is the sole provider of the tools package; neither the script directory nor pinned third-party distributions supplies a competing tools package. All insertion positions therefore resolve the same repository modules. Namespace-contaminated environments are outside this equivalence profile."
+  },
+  {
+    "job_id": "62db314560514aa0a072a1c227cb701c",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 1,
+        "start_pos": [
+          21,
+          20
+        ],
+        "end_pos": [
+          21,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -18,7 +18,7 @@\n import tempfile\n \n if not __package__:\n-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))\n+    sys.path.insert( -1, str(Path(__file__).resolve().parents[1]))\n \n from tools.check_repository import check_repository, sha256\n from typing import cast",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the verified public-only environment, the repository is the sole provider of the tools package; neither the script directory nor pinned third-party distributions supplies a competing tools package. All insertion positions therefore resolve the same repository modules. Namespace-contaminated environments are outside this equivalence profile."
+  },
+  {
+    "job_id": "ad54346a0fc94016bb106364a4675004",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_GtE",
+        "occurrence": 0,
+        "start_pos": [
+          131,
+          33
+        ],
+        "end_pos": [
+          131,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": "main"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -128,7 +128,7 @@\n         report = {\"status\": \"failed\", \"stage\": \"report_write\",\n                   \"error\": str(error).replace(str(root), \"<repo>\")}\n     print(json.dumps(report, indent=2))\n-    return 0 if report[\"status\"] == \"passed\" else 1\n+    return 0 if report[\"status\"] >= \"passed\" else 1\n \n \n if __name__ == \"__main__\":",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "These statuses are created internally from the literal strings failed and passed. Their ordering makes the changed relational test equivalent, and the passed literal is interned in declared CPython 3.12 for identity variants. Neither call site accepts an external arbitrary status value."
+  },
+  {
+    "job_id": "9f968da000c14f8bbcf897a49c5fe4bc",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/ReplaceTrueWithFalse",
+        "occurrence": 2,
+        "start_pos": [
+          98,
+          63
+        ],
+        "end_pos": [
+          98,
+          67
+        ],
+        "operator_args": {},
+        "definition_name": "check_case"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -95,7 +95,7 @@\n         raise ValueError(\"Benchmark copy differs from frozen similarity-mms-v2.json\")\n     case = object_value(decode(public.read_text(encoding=\"utf-8\")))\n     canonical = json.dumps(case[\"mathematical_problem\"], sort_keys=True,\n-                           separators=(\",\", \":\"), ensure_ascii=True).encode(\"ascii\")\n+                           separators=(\",\", \":\"), ensure_ascii=False).encode(\"ascii\")\n     digest = hashlib.sha256(canonical).hexdigest()\n     if digest != PROBLEM_SHA256 or digest != object_value(case[\"problem_identity\"])[\"sha256\"]:\n         raise ValueError(\"Mathematical problem identity mismatch\")",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The only accepted mathematical problem is the canonical frozen ASCII definition. Both serializers produce identical accepted bytes. A different problem still fails immutable identity checks; a non-ASCII altered problem is refused by either the identity guard or ASCII encoding. The acceptance result is unchanged; exact error wording for noncanonical input is not an equivalence claim."
+  },
+  {
+    "job_id": "831d147a3937442dbd7d6a3a5a0e73a8",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 1,
+        "start_pos": [
+          134,
+          12
+        ],
+        "end_pos": [
+          134,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -131,6 +131,6 @@\n     return 0 if report[\"status\"] == \"passed\" else 1\n \n \n-if __name__ == \"__main__\":\n+if __name__ <= \"__main__\":\n     sys.exit(main())\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "1f816796d6c44c8f9e11b408ecf18921",
+    "module": "tools/check_repository.py",
+    "mutation": [
+      {
+        "module_path": "tools/check_repository.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 5,
+        "start_pos": [
+          131,
+          24
+        ],
+        "end_pos": [
+          131,
+          25
+        ],
+        "operator_args": {},
+        "definition_name": "unfenced_lines"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/check_repository.py\n+++ b/tools/check_repository.py\n@@ -128,7 +128,7 @@\n             marker, rest = match.groups()\n             if not opening:\n                 opening = marker\n-            elif marker[0] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n+            elif marker[ -1] == opening[0] and len(marker) >= len(opening) and not rest.strip():\n                 opening = \"\"\n             continue\n         if not opening:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The fence parser admits markers consisting of at least three repetitions of a single ASCII backtick or tilde. Indices 0, 1 and -1 select the same character; CPython caches these one-character ASCII strings, so the identity variant is also equivalent."
+  },
+  {
+    "job_id": "6907714d25984ede99ce2d310de7715b",
+    "module": "tools/verify_design.py",
+    "mutation": [
+      {
+        "module_path": "tools/verify_design.py",
+        "operator_name": "core/ReplaceComparisonOperator_NotEq_IsNot",
+        "occurrence": 1,
+        "start_pos": [
+          48,
+          28
+        ],
+        "end_pos": [
+          48,
+          30
+        ],
+        "operator_args": {},
+        "definition_name": "execute"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/tools/verify_design.py\n+++ b/tools/verify_design.py\n@@ -45,7 +45,7 @@\n def execute(root: Path) -> JsonObject:\n     \"\"\"Verify packaging before invoking the original script with assertions on.\"\"\"\n     repository = check_repository(root)\n-    if repository[\"status\"] != \"passed\":\n+    if repository[\"status\"] is not \"passed\":\n         return {\"status\": \"failed\", \"stage\": \"repository\", \"repository\": cast(JsonObject, dict(repository))}\n     versions = {name: importlib.metadata.version(name) for name in DEPENDENCIES}\n     if versions != DEPENDENCIES:",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "These statuses are created internally from the literal strings failed and passed. Their ordering makes the changed relational test equivalent, and the passed literal is interned in declared CPython 3.12 for identity variants. Neither call site accepts an external arbitrary status value."
+  },
+  {
+    "job_id": "a2eb04805029434b9ca543ce625fcc81",
+    "module": "reference/evaluator.py",
+    "mutation": [
+      {
+        "module_path": "reference/evaluator.py",
+        "operator_name": "core/ReplaceComparisonOperator_LtE_Lt",
+        "occurrence": 1,
+        "start_pos": [
+          45,
+          23
+        ],
+        "end_pos": [
+          45,
+          25
+        ],
+        "operator_args": {},
+        "definition_name": "smooth_step"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/evaluator.py\n+++ b/reference/evaluator.py\n@@ -42,7 +42,7 @@\n     if s.value >= 1:\n         return Jet.constant(mp.mpf(1), s.degree)\n     log_ratio = 1/(1-s)-1/s\n-    if log_ratio.value <= 0:\n+    if log_ratio.value < 0:\n         exponential = log_ratio.exp()\n         return exponential/(1+exponential)\n     return 1/(1+(-log_ratio).exp())",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The branches differ only when the logistic log ratio is exactly zero. Both exponential expressions represent the same scalar and truncated-jet function there; their zero-argument exp and reciprocal arithmetic satisfy the declared reference tolerance. No positive exponential argument is introduced."
+  },
+  {
+    "job_id": "2eee4aeeb62d40a5962eadfdd7faffb0",
+    "module": "reference/verify_steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_steps.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 104,
+        "start_pos": [
+          97,
+          34
+        ],
+        "end_pos": [
+          97,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_steps.py\n+++ b/reference/verify_steps.py\n@@ -94,5 +94,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 3))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "099d9a6162934245a460f5f875268efd",
+    "module": "reference/scalar.py",
+    "mutation": [
+      {
+        "module_path": "reference/scalar.py",
+        "operator_name": "core/ReplaceComparisonOperator_Lt_LtE",
+        "occurrence": 2,
+        "start_pos": [
+          47,
+          20
+        ],
+        "end_pos": [
+          47,
+          21
+        ],
+        "operator_args": {},
+        "definition_name": "root"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/scalar.py\n+++ b/reference/scalar.py\n@@ -44,7 +44,7 @@\n         residual = q - z*z*q**rational('1/4') - tau\n         if abs(residual) <= 16 * mp.eps * tau:\n             return Root(q, lower, upper, residual, iteration)\n-        if residual < 0:\n+        if residual <= 0:\n             lower = q\n         else:\n             upper = q",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "A zero residual has already returned through the positive residual-tolerance acceptance test. Every residual reaching this branch is nonzero, so < and <= select the same bracket update."
+  },
+  {
+    "job_id": "40e1e3454bd44cf1b29dad79170ddee6",
+    "module": "reference/regions.py",
+    "mutation": [
+      {
+        "module_path": "reference/regions.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 0,
+        "start_pos": [
+          29,
+          65
+        ],
+        "end_pos": [
+          29,
+          67
+        ],
+        "operator_args": {},
+        "definition_name": "integral"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/regions.py\n+++ b/reference/regions.py\n@@ -26,7 +26,7 @@\n     for index in range(panels+1):\n         eta = -mp.mpf(1)/2+mp.mpf(index)/panels\n         limit,weight = radial_limit(eta,tau,radius)\n-        coefficient = 1 if index in (0,panels) else 2 if index%2 == 0 else 4\n+        coefficient = 1 if index in (0,panels) else 2 if index%2 <= 0 else 4\n         numerator += coefficient*weight*min(high-low,max(mp.mpf(0),limit-low))\n         denominator += coefficient*weight*(high-low)\n     return numerator/denominator",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Modulo by positive 2 yields only 0 or 1 for integer indices, so <=0 is equivalent to ==0."
+  },
+  {
+    "job_id": "1fb7ccd5ad5f49fb949143d20e1a3d4e",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 56,
+        "start_pos": [
+          106,
+          34
+        ],
+        "end_pos": [
+          106,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -103,5 +103,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 3))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "b215fbb7ad02458d99a6d846b25de732",
+    "module": "reference/verify_trajectory.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_trajectory.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 91,
+        "start_pos": [
+          42,
+          17
+        ],
+        "end_pos": [
+          42,
+          19
+        ],
+        "operator_args": {},
+        "definition_name": "trajectory"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_trajectory.py\n+++ b/reference/verify_trajectory.py\n@@ -39,7 +39,7 @@\n \n def trajectory(method: Method, divisor: int, precision: int) -> tuple[Spectrum,JsonObject]:\n     reservation = preflight(4,precision,1024**3)\n-    if divisor < 32 or divisor % 32:\n+    if divisor < 31 or divisor % 32:\n         raise ValueError('Timestep divisor must be a positive multiple of 32')\n     with mp.workdps(precision):\n         profile = spatial_profile()",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The only changed integer is divisor=31, rejected by the unchanged divisor%32 predicate. Both versions accept precisely positive multiples of 32."
+  },
+  {
+    "job_id": "691a563a23074b1e9bbbf899eab58fb8",
+    "module": "reference/verify_trajectory.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_trajectory.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 0,
+        "start_pos": [
+          90,
+          12
+        ],
+        "end_pos": [
+          90,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_trajectory.py\n+++ b/reference/verify_trajectory.py\n@@ -87,6 +87,6 @@\n             'limitations':['Not a concentrating benchmark window','Not production Rust arithmetic']}\n \n \n-if __name__ == '__main__':\n+if __name__ <= '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "3d6e8ddb9b5c40f8847758727251986c",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 1,
+        "start_pos": [
+          16,
+          19
+        ],
+        "end_pos": [
+          16,
+          20
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -13,7 +13,7 @@\n Index = tuple[int, int, int, int]\n \n \n-@lru_cache(maxsize=5)\n+@lru_cache(maxsize= 4)\n def indices(degree: int) -> tuple[Index, ...]:\n     if degree not in (0, 1, 2, 3, 4):\n         raise ValueError('Supported jet degrees are zero through four')",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "indices is pure, admits only degrees 0..4, and each uncached evaluation has bounded enumeration. Changing cache size 5 to 4/6 or removing caching changes reuse and timing, not returned coefficients, accepted inputs, or the per-call finite enumeration bound. The diagnostic resource reservation is conservative for uncached evaluation."
+  },
+  {
+    "job_id": "671a9297d0b3401ab3faa0a3121bcdbc",
+    "module": "reference/regions.py",
+    "mutation": [
+      {
+        "module_path": "reference/regions.py",
+        "operator_name": "core/ReplaceBinaryOperator_Add_BitOr",
+        "occurrence": 0,
+        "start_pos": [
+          26,
+          29
+        ],
+        "end_pos": [
+          26,
+          30
+        ],
+        "operator_args": {},
+        "definition_name": "integral"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/regions.py\n+++ b/reference/regions.py\n@@ -23,7 +23,7 @@\n     \"\"\"Composite Simpson rule on the complete declared eta interval.\"\"\"\n     numerator = mp.mpf(0)\n     denominator = mp.mpf(0)\n-    for index in range(panels+1):\n+    for index in range(panels|1):\n         eta = -mp.mpf(1)/2+mp.mpf(index)/panels\n         limit,weight = radial_limit(eta,tau,radius)\n         coefficient = 1 if index in (0,panels) else 2 if index%2 == 0 else 4",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Simpson integral is called only with validated positive even panel counts. For even integers n, n XOR 1 = n OR 1 = n+1. The quadrature nodes and weights are unchanged."
+  },
+  {
+    "job_id": "f24b108a08b1469783078cc7d7b15c85",
+    "module": "reference/verify_sampling.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_sampling.py",
+        "operator_name": "core/ReplaceBinaryOperator_FloorDiv_Div",
+        "occurrence": 0,
+        "start_pos": [
+          20,
+          50
+        ],
+        "end_pos": [
+          20,
+          52
+        ],
+        "operator_args": {},
+        "definition_name": "sample_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_sampling.py\n+++ b/reference/verify_sampling.py\n@@ -17,7 +17,7 @@\n         max_conditioning = mp.mpf(0)\n         root_work = 0\n         for point in grid(n):\n-            coordinates = triple(mp.mpf(j if j < n//2 else j-n)/n for j in point)\n+            coordinates = triple(mp.mpf(j if j < n/2 else j-n)/n for j in point)\n             value = evaluate(*coordinates,time)\n             samples.append(triple(mp.mpc(v) for v in value.force))\n             root_work += value.root_iterations",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Sampling accepts only n=4,8,12. Their integer halves are represented exactly by binary64 division and compare identically with integer grid coordinates."
+  },
+  {
+    "job_id": "b494151c15b54bc1b3f7fdf0f9fb903c",
+    "module": "reference/verify_fields.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_fields.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 1,
+        "start_pos": [
+          33,
+          55
+        ],
+        "end_pos": [
+          33,
+          57
+        ],
+        "operator_args": {},
+        "definition_name": "scalar_force"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_fields.py\n+++ b/reference/verify_fields.py\n@@ -30,7 +30,7 @@\n         def u(*coordinates: mpf) -> mpf:\n             return fields(*quadruple(coordinates))[0][component]\n         derivatives = [mp.diff(u,point,tuple(int(j == axis) for j in range(4)),\n-                               direction=1 if point[3] == 0 and axis == 3 else 0)\n+                               direction=1 if point[3] <= 0 and axis == 3 else 0)\n                        for axis in range(4)]\n         laplacian = sum(mp.diff(u,point,tuple(2*int(j == axis) for j in range(4)))\n                         for axis in range(3))",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Valid sample times satisfy 0<=t<T_star, enforced by scalar fields before derivative requests. Within that domain <=0 is exactly ==0; invalid negative times fail before this branch."
+  },
+  {
+    "job_id": "70da4f45cd5d4af882b4c208155e7273",
+    "module": "reference/verify_trajectory.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_trajectory.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_Is",
+        "occurrence": 0,
+        "start_pos": [
+          90,
+          12
+        ],
+        "end_pos": [
+          90,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_trajectory.py\n+++ b/reference/verify_trajectory.py\n@@ -87,6 +87,6 @@\n             'limitations':['Not a concentrating benchmark window','Not production Rust arithmetic']}\n \n \n-if __name__ == '__main__':\n+if __name__ is '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "In the declared CPython 3.12 execution profile, the standard __main__ name and the literal __main__ are interned; documented package import names are unequal under both predicates. Arbitrary user-created runpy alias strings are outside the documented entry points."
+  },
+  {
+    "job_id": "d5354bc6fc884983a05c2404d05413c7",
+    "module": "reference/verify_steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_steps.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 105,
+        "start_pos": [
+          97,
+          34
+        ],
+        "end_pos": [
+          97,
+          35
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_steps.py\n+++ b/reference/verify_steps.py\n@@ -94,5 +94,5 @@\n \n \n if __name__ == '__main__':\n-    print(json.dumps(run(),indent=2))\n+    print(json.dumps(run(),indent= 1))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Only JSON whitespace changes (indent 2 to 1 or 3). The documented report contract is parsed JSON values, not byte-identical fresh report formatting; frozen review reports are never written by these commands."
+  },
+  {
+    "job_id": "2795a931df0c42e7925cbd8fa80b5a6f",
+    "module": "reference/verify_steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/verify_steps.py",
+        "operator_name": "core/ReplaceComparisonOperator_Eq_LtE",
+        "occurrence": 0,
+        "start_pos": [
+          96,
+          12
+        ],
+        "end_pos": [
+          96,
+          14
+        ],
+        "operator_args": {},
+        "definition_name": null
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/verify_steps.py\n+++ b/reference/verify_steps.py\n@@ -93,6 +93,6 @@\n             'No binary64 production comparison','No accepted PDE convergence window']}\n \n \n-if __name__ == '__main__':\n+if __name__ <= '__main__':\n     print(json.dumps(run(),indent=2))\n ",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "Supported execution names are __main__ and this module's documented reference.* or tools.* import name. All documented import names sort after __main__, so this condition has exactly the same truth table as equality in the declared entry-point profile."
+  },
+  {
+    "job_id": "630b6c73bd26499bbf5c0f3d5f833352",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/NumberReplacer",
+        "occurrence": 62,
+        "start_pos": [
+          117,
+          38
+        ],
+        "end_pos": [
+          117,
+          39
+        ],
+        "operator_args": {},
+        "definition_name": "exp"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -114,7 +114,7 @@\n         delta = self-self.value\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree+ 2):\n             term = term*delta / k\n             result = result+term\n         return result*mp.exp(self.value)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The nonconstant Taylor remainder has zero constant coefficient and is nilpotent in the degree-truncated jet algebra. All extra powers above degree are exactly zero. The changed bound retains all required powers for degrees 0..4; adding the extra zero terms leaves the computed jet unchanged."
+  },
+  {
+    "job_id": "0e9086af5115401f826809ed2d3e0cdd",
+    "module": "reference/steps.py",
+    "mutation": [
+      {
+        "module_path": "reference/steps.py",
+        "operator_name": "core/ReplaceBinaryOperator_Sub_Mod",
+        "occurrence": 8,
+        "start_pos": [
+          76,
+          14
+        ],
+        "end_pos": [
+          76,
+          15
+        ],
+        "operator_args": {},
+        "definition_name": "ho_tableau_values"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/steps.py\n+++ b/reference/steps.py\n@@ -73,7 +73,7 @@\n     p1,p2,p3 = (ho_phi(z,j) for j in (1,2,3))\n     h1,h2,h3 = (ho_phi(z/2,j) for j in (1,2,3))\n     a52 = h2/2-p3+p2/4-h3/2\n-    a54 = h2/4-a52\n+    a54 = h2/4%a52\n     rows = [[],[h1/2],[h1/2-h2,h2],[p1-2*p2,p2,p2],\n             [h1/2-2*a52-a54,a52,a52,a54]]\n     return rows,[p1-3*p2+4*p3,mp.mpf(0),mp.mpf(0),-p2+4*p3,4*p2-8*p3]",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "For finite z<=0, let x=phi_2(z/2)/4. The integral-kernel proof in ho-modulo-equivalence.json gives 0<=a54<x/2 and a52=x-a54, hence x/2<a52<=x and x%a52=x-a52. The declared 80/120-digit profile was additionally checked at 6,476 arguments, including near-zero rounding and large negative arguments, with zero coefficient difference."
+  },
+  {
+    "job_id": "b485b02be05f43a99dbd7a50483826bc",
+    "module": "reference/scalar.py",
+    "mutation": [
+      {
+        "module_path": "reference/scalar.py",
+        "operator_name": "core/ReplaceComparisonOperator_LtE_Lt",
+        "occurrence": 3,
+        "start_pos": [
+          64,
+          17
+        ],
+        "end_pos": [
+          64,
+          19
+        ],
+        "operator_args": {},
+        "definition_name": "step"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/scalar.py\n+++ b/reference/scalar.py\n@@ -61,7 +61,7 @@\n     if s >= 1:\n         return mp.mpf(1)\n     log_ratio = 1/(1-s) - 1/s\n-    if log_ratio <= 0:\n+    if log_ratio < 0:\n         exponential = mp.exp(log_ratio)\n         return exponential / (1 + exponential)\n     return 1 / (1 + mp.exp(-log_ratio))",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The branches differ only when the logistic log ratio is exactly zero. Both exponential expressions represent the same scalar and truncated-jet function there; their zero-argument exp and reciprocal arithmetic satisfy the declared reference tolerance. No positive exponential argument is introduced."
+  },
+  {
+    "job_id": "ef9178932da64a3389aabea049642565",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/ReplaceBinaryOperator_Add_LShift",
+        "occurrence": 9,
+        "start_pos": [
+          117,
+          37
+        ],
+        "end_pos": [
+          117,
+          38
+        ],
+        "operator_args": {},
+        "definition_name": "exp"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -114,7 +114,7 @@\n         delta = self-self.value\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree<<1):\n             term = term*delta / k\n             result = result+term\n         return result*mp.exp(self.value)",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The nonconstant Taylor remainder has zero constant coefficient and is nilpotent in the degree-truncated jet algebra. All extra powers above degree are exactly zero. The changed bound retains all required powers for degrees 0..4; adding the extra zero terms leaves the computed jet unchanged."
+  },
+  {
+    "job_id": "4f427eb033aa4f849eb5af397d651f7f",
+    "module": "reference/jets.py",
+    "mutation": [
+      {
+        "module_path": "reference/jets.py",
+        "operator_name": "core/ReplaceBinaryOperator_Add_LShift",
+        "occurrence": 6,
+        "start_pos": [
+          101,
+          37
+        ],
+        "end_pos": [
+          101,
+          38
+        ],
+        "operator_args": {},
+        "definition_name": "__pow__"
+      }
+    ],
+    "diff": "--- mutation diff ---\n--- a/reference/jets.py\n+++ b/reference/jets.py\n@@ -98,7 +98,7 @@\n         term = Jet.constant(mp.mpf(1), self.degree)\n         result = term\n         factor = mp.mpf(1)\n-        for k in range(1, self.degree+1):\n+        for k in range(1, self.degree<<1):\n             term = term*delta\n             factor *= (exponent-k+1)/k\n             result = result + factor*term",
+    "classification": "equivalent-in-declared-profile",
+    "justification": "The nonconstant Taylor remainder has zero constant coefficient and is nilpotent in the degree-truncated jet algebra. All extra powers above degree are exactly zero. The changed bound retains all required powers for degrees 0..4; adding the extra zero terms leaves the computed jet unchanged."
+  }
+]

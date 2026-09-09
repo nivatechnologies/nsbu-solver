@@ -66,8 +66,8 @@ H1 differences grow across these small sampling grids. Spatial resolution remain
 unqualified. [Execution provenance](../evidence/reference-sampling.json) preserves
 the exact executed source hashes.
 
-P00B remains incomplete because its repository mutation and automation gates are
-unmet. See the source-hashed
+P00B has passed its local numerical and quality checks; hosted execution of the
+expanded CI gates is pending. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
 Rust implementation, current-grid binary64 comparison, concentrating trajectory

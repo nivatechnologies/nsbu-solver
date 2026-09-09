@@ -1,82 +1,106 @@
 # Quality evidence
 
-The active implementation plan defines the required SOLID review and quantitative
-gates. Current measurements appear below with exact source hashes. The complete
-repository gate remains unmet while mutation review and automation continue.
+The current Python implementation passes the local numerical and quality checks.
+Hosted verification of the expanded CI gates is pending. P00B remains in progress
+until that execution succeeds; Rust and concentrating-PDE validation remain separate.
 
-The initial responsibility review identifies repository validation, mathematical
-execution and CLI/report I/O as distinct responsibilities. The verification runner
-imports repository validation rather than duplicating frozen identity logic. The
-older provisional audit duplicates that logic and is superseded by the imported
-checker; its failure report is retained as historical evidence only.
+The [source-hashed measurement report](../evidence/quality-reference/summary.json)
+records 139 passing tests. The scope includes maintained Python implementations,
+reference oracles, tooling and tests. Typing stubs are inventoried and type checked;
+they have no executable coverage obligations. Frozen review files, generated
+fixtures, archived execution provenance and third-party dependencies are separately
+inventoried. Declarative workflow/configuration files are reviewed and hashed,
+without being counted as Python functions or executable Python lines.
 
-Next work: select and pin Python and Rust metric, strict typing, branch coverage,
-mutation and duplication tools; inventory their language support and limitations;
-review the imported maintained tools; establish measured baselines and close gaps.
-No unsupported metric receives a passing value. The independent reference and
-future production numerical kernels must remain independently implemented.
+| Metric | Measured result | Required |
+|---|---:|---:|
+| Cyclomatic complexity, maximum per function | 15 | <22 |
+| Cognitive complexity, maximum per function | 17 | <22 |
+| Halstead difficulty, maximum per file / function | 9.888 / 7.805 | <80 |
+| Physical lines per source/test file, maximum | 243 | <500 |
+| Executable line coverage | 2,770/2,770 | 100% |
+| Branch coverage | 512/512 | 100% |
+| CRAP, maximum per function | 15 | <25 |
+| Non-equivalent surviving mutants | 0 | 0 |
+| Confirmed dead code / duplicated blocks | 0 / 0 | 0 / 0 |
+| Strict typing errors, including Any/unknown diagnostics | 0 | 0 |
 
-## Initial measured baseline
+Vulture's eight findings were reviewed individually: five discovered and executed
+unittest classes, and three serialized TypedDict schema keys. Their exact findings
+are retained beside the summary and checked for drift in CI. Zero confirmed dead
+code and zero detected duplicated blocks are scoped review/analysis results, not
+proofs about arbitrary future use. Every measured function has full branch coverage;
+CRAP therefore equals its cyclomatic complexity under the adopted formula.
 
-See [measurement evidence](../evidence/quality-baseline.json) for the full source
-inventory, tool versions, commands, hashes and raw reports. Coverage includes
-maintained source, tests and both reference studies; bootstrap child processes
-are not instrumented. Coverage remains below 100%. Complexity, Halstead and file
-size have initial passing measurements; the full quality gate does not pass.
-Cognitive complexity, CRAP, mutation, dead-code, duplication and strict typing
-remain unmeasured. No timeout, omission or unknown measurement is counted as zero.
+## Mutation evidence
 
-The numerical responsibility review keeps scalar field formulas separate from jet
-algebra, and coefficient convolution separate from direct DFT/grid products. CM
-and HO coefficient construction are separate. Integration receives a mathematical
-RHS; the fixture's prescribed force accepts only grid selection and time and never
-reads integrated velocity. No analytical field is assigned into evolving state.
+The [reconciled mutation report](../evidence/quality-reference/mutations/summary.json)
+contains 7,905 current mutation specifications: 7,829 explicit test failures,
+74 individually documented equivalents, zero non-equivalent survivors, zero
+timeouts and zero untested cases. Two Cosmic Ray `ExceptionReplacer` construction
+errors on dotted exception names are invalid; neither is counted as a kill.
 
-## Expanded reference measurements
+Each equivalent retains its exact diff and justification. Some equivalences rely
+on the documented entry points and CPython 3.12 public-only execution profile;
+others follow from integer-domain constraints, overwritten buffers or identities
+in the truncated jet algebra. The HO coefficient remainder equivalence includes
+an integral-kernel argument and 6,476 arithmetic comparisons. Equivalents are never
+silently relabeled as killed mutants.
 
-The [current source-hashed report](../evidence/quality-reference/summary.json)
-records 131 passing tests, 100% executable-line and branch coverage (2,660 lines,
-506 branches), maximum cyclomatic complexity 15, cognitive complexity 17,
-Halstead file difficulty 9.888 or less, 243 physical lines per file, and CRAP 15.
-Strict basedpyright analysis reports no errors, including explicit and implicit
-`Any`/unknown-type diagnostics. Pylint reports zero duplicated blocks. Eight
-Vulture findings were individually reviewed as executed test classes or serialized
-TypedDict schema keys; none is confirmed dead code. These supersede the initial
-baseline for the exact source hashes in the report.
+The [raw runs](../evidence/quality-reference/mutations/runs.json) preserve complete
+inventories, source hashes, commands and outcomes. The original comprehensive run
+contained 7,909 specifications; removing redundant wrapper defaults required a new
+inventory for those modules. A fresh inventory matches all 7,905 consolidated
+specifications and their current implementation hashes.
 
-Mutation remains an unmet repository gate. The decorated jet implementation was
-checked separately with Cosmic Ray: 601 generated, 591 explicit test failures,
-one timeout, nine raw survivors individually classified as equivalent in the
-recorded execution profile, and zero abnormal results. The earlier 592-kill count
-incorrectly included a timeout because Cosmic Ray labels timeouts as killed; it
-is corrected here. The report preserves each surviving diff and its justification. mutmut skips decorated classes, so its results alone cannot
-establish the jet mutation gate. A comprehensive implementation mutation run is in
-progress; neither this subset nor equivalent classifications imply repository-wide
-zero survivors.
+Cosmic Ray labels process timeouts as `killed`. An earlier supplemental jet report
+incorrectly included one such timeout among its kills. That historical report is
+corrected and retained; the comprehensive reconciliation resolved the timeout with
+an explicit failure. Initial focused timeout reruns did not collect the complete
+suite; the later runs used explicit complete file lists. Import/work probes now
+run before full collection, so excessive numerical work produces an assertion
+failure rather than consuming the mutation-process timeout.
 
-Reproduce the coverage and type checks with `coverage run -m pytest -q`,
-`coverage combine`, `coverage json`, and `basedpyright --outputjson` after installing
-`requirements-quality.txt`. Complexity uses `radon cc -j -s reference tools`,
-`radon hal -j -f reference tools`, and `complexipy reference tools --output-format
-json --output work/cognitive.json`. Static review uses `vulture reference tools`
-and `pylint --disable=all --enable=duplicate-code --output-format=json reference tools`.
-CRAP is calculated per function from Radon's complexity and coverage.py's branch
-counts using the formula in the active plan; raw measurements are preserved next
-to the summary. Mutation work runs in isolated copies because Cosmic Ray modifies
-its target files in place. Never execute that mutation runner against the working
-checkout while implementation work is underway.
+## Reproduction and CI
 
-SOLID review: tuple shape checks and JSON boundary narrowing have dedicated small
-modules; field evaluation, quadrature, DFT operators, time steps and report drivers
-retain separate responsibilities. Independent scalar differentiation and jet
-algebra remain separate, as do explicit convolution and grid-product evaluation.
-The trajectory integrators receive only an RHS callable, never a reference-state
-assignment interface. Report-flow doubles test orchestration only; numerical
-claims require separately executed high-precision studies.
+Install `requirements-quality.txt` in the configured `.venv`. Run `coverage run -m
+pytest -q`, `coverage combine`, `coverage json`, `basedpyright`, Radon's `cc` and
+`hal` commands, `complexipy`, `vulture` and Pylint's `duplicate-code` check. The
+workflow records the exact invocations and enforces per-function limits, exact
+line/branch coverage, file sizes, duplication and reviewed dead-code findings.
+With full branch coverage, the CC gate also enforces CRAP <25.
 
-The [archived mutation runs](../evidence/quality-reference/mutations/runs.json)
-include inventories, raw outcomes, source hashes, commands and executor provenance.
-Cosmic Ray's raw `killed` label includes timeouts; the summaries explicitly separate
-those from failed assertions. Focused reruns and equivalent-mutant adjudication are
-still in progress. Removing duplicate argument-container defaults leaves argparse
-as the single owner of each CLI default; normal and invalid CLI tests pass.
+Mutation execution must use a disposable checkout because the local distributor
+changes target files in place. Activate its environment, then run:
+
+```sh
+cosmic-ray init .cosmic-ray.toml work/mutations.sqlite
+cosmic-ray baseline .cosmic-ray.toml
+cosmic-ray exec .cosmic-ray.toml work/mutations.sqlite
+cosmic-ray dump work/mutations.sqlite > work/mutation-results.jsonl
+```
+
+This serial reproduction can be lengthy. Preserve raw outcomes and review each
+survivor; the configuration does not hide equivalents or convert timeouts into
+project-level kills. Archived parallel runs include their precise executed commands.
+
+CI reruns static analysis, coverage and numerical checks. Its mutation-evidence
+gate checks the complete reconciled report against exact source/configuration
+hashes and refuses added or changed source files until their evidence is renewed.
+It reuses matching mutation evidence; it does not claim to rerun every mutation
+on every push. The [initial baseline](../evidence/quality-baseline.json) and earlier
+source snapshots remain historical evidence.
+
+## Responsibility review
+
+Scalar differentiation and implicit jets remain independent, as do coefficient
+convolution and grid products. CM and HO coefficient construction remain separate.
+Tuple-shape checks, JSON narrowing, field evaluation, quadrature, DFT operations,
+time stepping and report I/O have distinct responsibilities. Integrators receive
+an RHS callable, never a reference-state assignment interface. Argparse now owns
+each wrapper default in one place. Import tests prohibit numerical work during
+library loading; bounded-work tests cover root, coefficient and quadrature limits.
+
+Report doubles verify orchestration and policy only. Mathematical claims rely on
+separately executed high-precision studies, and those studies do not establish a
+qualified concentrating trajectory or a production Rust implementation.

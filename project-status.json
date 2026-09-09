@@ -21,11 +21,11 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "measured-mutation-gate-unmet",
+    "status": "local-checks-passed-hosted-ci-pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
-    "mutation_runs": "evidence/quality-reference/mutations/runs.json"
+    "mutation_runs": "evidence/quality-reference/mutations/summary.json"
   },
   "packages": {
     "B00": {

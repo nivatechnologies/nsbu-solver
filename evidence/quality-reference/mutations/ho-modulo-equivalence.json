@@ -1,0 +1,17 @@
+{
+  "proof": "Let x=phi_2(z/2)/4. For z<=0, a54=x-a52 lies in [0,x/2), so a52 is in (x/2,x]. Therefore x%a52=x-a52 in real arithmetic. Integral kernels establish the range: a54 has kernel (1-2s)(1-5s)/4 on [0,1/2] and (1-s)(1-2s)/4 on [1/2,1], with one sign change at s=1/5 and total integral zero at z=0. Weight exp(zs) is decreasing; hence a54>=0. The kernel of x/2-a54 is 5s(1-2s)/4 on [0,1/2] and -(1-s)(1-2s)/4 on [1/2,1], nonnegative and positive on intervals.",
+  "profile_checks": [
+    {
+      "precision": 80,
+      "cases": 3238,
+      "max_absolute_difference": "0.0"
+    },
+    {
+      "precision": 120,
+      "cases": 3238,
+      "max_absolute_difference": "0.0"
+    }
+  ],
+  "source_sha256": "0bf5071a8382f4236f41cb45f26c1a2faa2bc10a7cea4366ddb843e80ade3735",
+  "scope": "Integral-kernel identity on z<=0 plus sampled arithmetic checks in the declared precision profile; not a PDE result."
+}

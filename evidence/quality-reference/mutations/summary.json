@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "scope": "Maintained Python implementation; test oracles are not mutation targets",
+  "generated": 7905,
+  "explicit_test_failures": 7829,
+  "raw_survivors": 74,
+  "equivalent": 74,
+  "non_equivalent_survivors": 0,
+  "timeouts": 0,
+  "untested": 0,
+  "invalid": 2,
+  "invalid_reason": "Cosmic Ray 8.7.0 ExceptionReplacer cannot construct two dotted-exception mutations; neither is counted as a kill.",
+  "equivalence_policy": "Individual proofs and declared-profile assumptions are recorded in equivalent-mutations.json. Equivalents are not relabeled as kills.",
+  "execution_profile": {
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "dependency_inventory": "evidence/quality-reference/dependencies.json"
+  },
+  "consolidated_results": "evidence/quality-reference/mutations/consolidated-results.jsonl.gz",
+  "consolidated_uncompressed_sha256": "7a5f8da38f118fff99786e7258b174ae97d261b5e727d280530a83241238d3ad",
+  "current_inventory_matched": true,
+  "target_source_hashes_verified": true,
+  "fresh_inventory_sha256": "66cde2592123e42f9243263c98f2e0de24500c344dddc604b9977d1358f34699",
+  "limitations": [
+    "A finite mutation operator set is not a correctness proof.",
+    "Equivalence assumptions are scoped to documented entry points, CPython 3.12 and the pinned public-only dependency profile.",
+    "No Rust or concentrating-PDE validation is implied."
+  ]
+}

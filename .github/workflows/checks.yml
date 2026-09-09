@@ -22,9 +22,37 @@ jobs:
       - run: python -m reference.verify_steps > work/reference-steps.json
       - run: python -m reference.verify_trajectory > work/reference-trajectory.json
       - run: basedpyright
-      - run: complexipy reference tools --max-complexity-allowed 21
-      - run: |
+      - name: Per-function complexity and Halstead gates
+        run: |
+          radon cc -j -s reference tools > work/ci-cyclomatic.json
+          jq -e '[.. | objects | select(has("complexity") and .type != "class") | .complexity] | max < 22' work/ci-cyclomatic.json
+          radon hal -j -f reference tools > work/ci-halstead.json
+          jq -e '[.. | objects | select(has("difficulty")) | .difficulty] | max < 80' work/ci-halstead.json
+          complexipy reference tools --max-complexity-allowed 21
+      - name: Source size, duplication and reviewed dead-code findings
+        run: |
+          rg --files reference tools typings -g '*.py' -g '*.pyi' | LC_ALL=C sort > work/ci-source-files.txt
+          while IFS= read -r path; do awk 'END { exit !(NR < 500) }' "$path"; done < work/ci-source-files.txt
+          pylint --disable=all --enable=duplicate-code --output-format=json reference tools > work/ci-duplicates.json
+          jq -e 'length == 0' work/ci-duplicates.json
+          vulture_status=0
+          vulture reference tools > work/ci-dead-code.txt || vulture_status=$?
+          test "$vulture_status" -eq 0 -o "$vulture_status" -eq 3
+          diff -u evidence/quality-reference/dead-code-current.txt work/ci-dead-code.txt
+      - name: Exact line and branch coverage; CRAP
+        run: |
           coverage erase
           coverage run -m pytest -q
           coverage combine
+          coverage json
           coverage report --fail-under=100
+          jq -e '.totals.num_statements > 0 and .totals.missing_lines == 0 and .totals.missing_branches == 0' work/full-coverage.json
+          # With every branch covered, CRAP equals CC; the strict CC < 22 gate
+          # above therefore also establishes CRAP < 25 for every function.
+      - name: Source-bound mutation evidence
+        run: |
+          sha256sum --check evidence/quality-reference/quality-config.sha256
+          sha256sum --check evidence/quality-reference/source-inventory.sha256
+          sed -n 's/^[a-f0-9]\{64\}  //p' evidence/quality-reference/source-inventory.sha256 | LC_ALL=C sort > work/ci-evidence-files.txt
+          diff -u work/ci-source-files.txt work/ci-evidence-files.txt
+          jq -e '.status == "passed" and .non_equivalent_survivors == 0 and .timeouts == 0 and .untested == 0' evidence/quality-reference/mutations/summary.json

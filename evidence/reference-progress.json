@@ -2,7 +2,7 @@
   "package": "P00B",
   "status": "in-progress",
   "unit_tests": {
-    "combined_suite_passed": 131,
+    "combined_suite_passed": 139,
     "combined_command": "coverage run -m pytest -q",
     "quality_evidence": "evidence/quality-reference/summary.json"
   },
@@ -93,17 +93,21 @@
     "reference/tests/test_immutable_reports.py": "caa3316362bde70072ed43c8e237f56fc415e05b0cc144a5bb9244adafd97436",
     "reference/tests/test_coupled_limits.py": "7bfe78ac181035dd4047798bf4578e27a2af01ddc3d7a126d051e12d32deca2d",
     "reference/tests/test_preserved_reference_fixtures.py": "127800c889744df9b716d063a122f5653641375873903fa92b342911505f4017",
-    "reference/tests/test_coefficient_work_limits.py": "16cfe804d199883dad289dfc3afd32c3931a916330c43424d6334ffbda773c67",
+    "reference/tests/test_coefficient_work_limits.py": "913080eaaa7e631ada22cd31f7f7a0e5dff677d3faec6eaf9e8811646627279a",
     "reference/tests/test_spectral_interactions.py": "2eeb1e23086ff139c0c9a401c046a79bfbed8b9ac6b56d5cc73f6098617fe754",
     "reference/tests/test_newton_safeguards.py": "ba6fbcfb38ae9bc95882aa68bc90211038d824b0420ee1662426f2e527af8a35",
     "reference/tests/test_report_values.py": "f7aa06bcd7bf5b3d23fc67177775bcfed38d42226191db6e6ac6fc02e8302f2a",
     "reference/tests/test_cutoff_work.py": "403c32030f89ada19656dec060071987e02c0bef338ce56386305a1ebc0a5886",
     "reference/tests/test_sampling_contracts.py": "7b3856ed2ea2cc7082f9be37fb5ee4c2759744e3339f4167e5a714b43aa06ac6",
     "reference/tests/test_trajectory_contracts.py": "9ad98033080431423517845e5f647ef681e083ef6316edf61ce760ec01c8486e",
-    "reference/tests/test_field_contracts.py": "3cddb846117b67953b5a6207ff035d29e8ac6bd8ab1caa7097f5accc9b759fa4"
+    "reference/tests/test_field_contracts.py": "3cddb846117b67953b5a6207ff035d29e8ac6bd8ab1caa7097f5accc9b759fa4",
+    "reference/tests/test_report_execution.py": "939374ba76ddd14ec6944825a400b9d765156ffe5d7fc6ed7314d8ee3fb3208f",
+    "reference/tests/test_trajectory_reporting.py": "706ff156e8c52c792bcd35825b628fb1ba11f03da41a56bbcefd72fcecb2452b",
+    "reference/tests/test_driver_imports.py": "6e675ab72bf8ead2067cf7cc2514f5a888175dce1259f8e869cca3ef114d23ae",
+    "reference/tests/test_bounded_reference_work.py": "56f7f80fef2b3008a2c51d40eb2198f222fbdb960c628f62e91ebb7bbc2babe7"
   },
   "not_complete": [
-    "Repository-wide mutation gate and complete automated quality gate remain unmet"
+    "Hosted execution of the expanded CI quality gates remains pending"
   ],
   "production_rust_exists": false,
   "concentrating_trajectory_exists": false,
@@ -121,5 +125,5 @@
     "Concentrating from-rest PDE pilot",
     "Rust runtime"
   ],
-  "mutation_evidence": "evidence/quality-reference/mutations/runs.json"
+  "mutation_evidence": "evidence/quality-reference/mutations/summary.json"
 }

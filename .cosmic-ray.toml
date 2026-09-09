@@ -3,7 +3,13 @@
 module-path = ["reference", "tools"]
 timeout = 180.0
 excluded-modules = ["reference/tests/**/*.py", "tools/tests/**/*.py"]
-test-command = "python -m pytest -q -x"
+# Run import/work contracts before collecting modules that a mutation could make
+# execute an expensive study during import. The second phase runs the full suite.
+test-command = '''python -c 'import subprocess,sys
+for paths in (["reference/tests/test_driver_imports.py","reference/tests/test_bounded_reference_work.py"],[]):
+ result=subprocess.run([sys.executable,"-m","pytest","-q",*paths,"-x"])
+ if result.returncode: sys.exit(result.returncode)
+' '''
 
 [cosmic-ray.distributor]
 name = "local"

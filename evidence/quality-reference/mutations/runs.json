@@ -1,5 +1,5 @@
 {
-  "status": "gate-unmet",
+  "status": "reconciled",
   "tool": "cosmic-ray 8.7.0",
   "runs": [
     {
@@ -143,6 +143,76 @@
       }
     },
     {
+      "run": "cosmic-fifth",
+      "records": 127,
+      "explicit_test_failures": 49,
+      "timeouts": 0,
+      "raw_survivors": 78,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-fifth-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "dc96731263671bd0f541a5bed29cddd1e27f35863ceb54a3f6d450f8604a0886",
+          "bytes": 35122
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-fifth-all-results.jsonl.gz",
+          "uncompressed_sha256": "f0fd49cd7889cef3af63a0a6ed0278e15adbc3a6c83f0a59cef8830de24bf851",
+          "bytes": 219993
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-fifth-source-hashes.json.gz",
+          "uncompressed_sha256": "823b1647cc48f1f8366b40a9fdff5891e1247c9ba79e4b1ece6dd98b6df75689",
+          "bytes": 4470
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-fifth-progress.log.gz",
+          "uncompressed_sha256": "3429871377fb6237ebe0fcd71fd18b8c6e2feddfa5fd4b272484b70049d40a0d",
+          "bytes": 263
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-fifth-execute_all.py.gz",
+          "uncompressed_sha256": "663fda0be8e17c75b0adda3cc8e2279d92cf33bb5883b5fe72170176d87006ec",
+          "bytes": 2510
+        }
+      }
+    },
+    {
+      "run": "cosmic-timeouts",
+      "records": 87,
+      "explicit_test_failures": 19,
+      "timeouts": 21,
+      "raw_survivors": 47,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-timeouts-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "ab05f7c0ee87b1906654b7094e1c1570eb388224e38883216d207874a3425766",
+          "bytes": 24170
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-timeouts-all-results.jsonl.gz",
+          "uncompressed_sha256": "7188b968791f5edff4c445ec83e9c9eecc2dc5e625f486714de5e8f5de705e1c",
+          "bytes": 126659
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-timeouts-source-hashes.json.gz",
+          "uncompressed_sha256": "c7c16ed73d42ba1eb2d717e5e1e5958c832c79212f3b6ea8eb1414944532cb16",
+          "bytes": 4357
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-timeouts-progress.log.gz",
+          "uncompressed_sha256": "455471a164437e3a128b69d7860bb93050e040a811ac971ca4d5870b377b4fe1",
+          "bytes": 233
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-timeouts-execute_all.py.gz",
+          "uncompressed_sha256": "3c7ee40fbb14542799be54fb6cadbcfafc8d832dcbe5ada971d331cf8ecd4b52",
+          "bytes": 2868
+        }
+      }
+    },
+    {
       "run": "cosmic-tools-repaired",
       "records": 558,
       "explicit_test_failures": 529,
@@ -176,13 +246,120 @@
           "bytes": 2519
         }
       }
+    },
+    {
+      "run": "cosmic-reconcile",
+      "records": 173,
+      "explicit_test_failures": 66,
+      "timeouts": 13,
+      "raw_survivors": 94,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-reconcile-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "13287fecde4c0fb9d25c047ebd466d0cbc5e4b61593a39b3248d7dac8c35cca3",
+          "bytes": 47780
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-reconcile-all-results.jsonl.gz",
+          "uncompressed_sha256": "bc7aa1949f50adaabe46360e120f244fadc4e8b7b4bc0be3a33ca9384255ad6f",
+          "bytes": 469592
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-reconcile-source-hashes.json.gz",
+          "uncompressed_sha256": "6bde5909a5d2500c1f1cfd024838d0a5e82d28a091cbf745104c3c9f5d114437",
+          "bytes": 4470
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-reconcile-progress.log.gz",
+          "uncompressed_sha256": "b7f68c7b3e566f3f6351d4b6869a3c132a36cf9e3a7f2a27e2dd69060d714cb3",
+          "bytes": 289
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-reconcile-execute_all.py.gz",
+          "uncompressed_sha256": "433c89a641e4a9620df57ba617159281a4be098e6b2808041fe06083ccab8d82",
+          "bytes": 3249
+        }
+      }
+    },
+    {
+      "run": "cosmic-final-reference",
+      "records": 107,
+      "explicit_test_failures": 32,
+      "timeouts": 0,
+      "raw_survivors": 75,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-final-reference-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "8bc02fb8b277138b21b572c0d348b990393124a7dfdd37e818f4f4ec6d822908",
+          "bytes": 29583
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-final-reference-all-results.jsonl.gz",
+          "uncompressed_sha256": "331406d5fd393e0357bb237afa4682f1fdffb3e02cfc8f0c004bc59875390c13",
+          "bytes": 357787
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-final-reference-source-hashes.json.gz",
+          "uncompressed_sha256": "6ee7abbd6c5eb41ec915be3b907398ab72a4a9c2bae564cfecd91ef23a293306",
+          "bytes": 4934
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-final-reference-progress.log.gz",
+          "uncompressed_sha256": "25eec513ab85b6bdc0bf2e59aa40eff20e20c5f9e7d875ae42ab0d3138c87832",
+          "bytes": 261
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-final-reference-execute_all.py.gz",
+          "uncompressed_sha256": "c8d2b84d594354ef18c0fcfc0cf937e9957474eb5a8c4d6495e83eb170f2c25a",
+          "bytes": 3684
+        }
+      }
+    },
+    {
+      "run": "cosmic-last-report",
+      "records": 1,
+      "explicit_test_failures": 1,
+      "timeouts": 0,
+      "raw_survivors": 0,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-last-report-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "81b6a2ab272cbc9bfe39d861245083b6bc135f9b96c2a22c8eeb4ce1192682d6",
+          "bytes": 271
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-last-report-all-results.jsonl.gz",
+          "uncompressed_sha256": "db37dcc5ed453a9cf0781e346f6d52a178f2aa5732622bdcbb52969b94afe5a6",
+          "bytes": 4691
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-last-report-source-hashes.json.gz",
+          "uncompressed_sha256": "f1668741280a7d98a14a23592e2ad5bf72b51cc02b3510d4dd6c35a984bc161c",
+          "bytes": 4934
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-last-report-progress.log.gz",
+          "uncompressed_sha256": "dd0aaca906db39cd7abba1cecac0078067ab0247d770cbd0a6aefa9458b1cf2b",
+          "bytes": 204
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-last-report-execute_all.py.gz",
+          "uncompressed_sha256": "19bc4b187d9262abe538476143a4cedf30d19f0029f855cdfa7b75d2e3de37a9",
+          "bytes": 3678
+        }
+      }
     }
   ],
+  "summary": "evidence/quality-reference/mutations/summary.json",
   "notes": [
-    "Raw timeouts are separated from Cosmic Ray killed labels.",
-    "Focused reruns supersede earlier outcomes only for unchanged target source hashes.",
-    "The two wrapper modules were reinventoried after removing redundant argparse defaults.",
-    "These raw counts are not a repository-wide passing score; reconciliation and equivalent-mutant review continue.",
+    "Raw timeout outcomes are separated from Cosmic Ray killed labels.",
+    "The initial 7,909 inventory was replaced for the two repaired wrappers; the current fresh inventory contains 7,905 mutation specifications.",
+    "Every consolidated target source hash and mutation specification matches the current implementation.",
+    "The initial timeout rerun selected focused test files; passing that subset did not establish survival against the full suite. The later reconciliation used explicit complete file lists.",
+    "Import/work probes precede full test collection to detect excessive numerical work through assertions instead of mutation-process timeouts.",
     "Archived executor scripts are execution provenance, not maintained product commands."
   ]
 }

@@ -337,8 +337,36 @@
   },
   {
     "complexity": 0,
+    "file_name": "test_bounded_reference_work.py",
+    "function_name": "BoundedReferenceWorkTests::test_coefficient_context_budget",
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_bounded_reference_work.py",
+    "function_name": "BoundedReferenceWorkTests::test_region_refinement_doubles_the_requested_work",
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_bounded_reference_work.py",
+    "function_name": "BoundedReferenceWorkTests::test_constant_jet_has_zero_derivative",
+    "path": "reference/tests/test_bounded_reference_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
     "file_name": "test_coefficient_work_limits.py",
     "function_name": "CoefficientWorkTests::test_default_series_capacity_boundary",
+    "path": "reference/tests/test_coefficient_work_limits.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_coefficient_work_limits.py",
+    "function_name": "CoefficientWorkTests::test_exact_residual_and_series_acceptance_boundaries",
     "path": "reference/tests/test_coefficient_work_limits.py",
     "refactor_plans": []
   },
@@ -494,6 +522,13 @@
     "file_name": "test_dft_steps.py",
     "function_name": "smooth_state",
     "path": "reference/tests/test_dft_steps.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_driver_imports.py",
+    "function_name": "DriverImportTests::test_report_imports_do_not_perform_numerical_work",
+    "path": "reference/tests/test_driver_imports.py",
     "refactor_plans": []
   },
   {
@@ -799,6 +834,13 @@
   },
   {
     "complexity": 0,
+    "file_name": "test_report_execution.py",
+    "function_name": "ReportExecutionTests::test_comparison_precision_and_nonzero_equal_states",
+    "path": "reference/tests/test_report_execution.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
     "file_name": "test_report_values.py",
     "function_name": "ReportValueTests::test_field_decimal_precision_and_conditioning",
     "path": "reference/tests/test_report_values.py",
@@ -1075,6 +1117,27 @@
     "file_name": "test_trajectory_contracts.py",
     "function_name": "TrajectoryContractTests::test_only_final_h1_refinement_controls_order_gate",
     "path": "reference/tests/test_trajectory_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_trajectory_reporting.py",
+    "function_name": "TrajectoryReportingTests::test_exact_arithmetic_boundary_is_refused",
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_trajectory_reporting.py",
+    "function_name": "TrajectoryReportingTests::test_noninteger_orders_and_nonzero_precision_changes",
+    "path": "reference/tests/test_trajectory_reporting.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_trajectory_reporting.py",
+    "function_name": "TrajectoryReportingTests::run_policy",
+    "path": "reference/tests/test_trajectory_reporting.py",
     "refactor_plans": []
   },
   {
