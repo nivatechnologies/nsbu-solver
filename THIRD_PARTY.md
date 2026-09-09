@@ -18,3 +18,10 @@ The CI workflow references the official `actions/checkout` and `actions/setup-py
 ## Standard license source
 
 Apache Software Foundation: [Apache License, Version 2.0, canonical text](https://www.apache.org/licenses/LICENSE-2.0.txt). The root NOTICE applies project attribution separately; the standard license appendix remains unchanged.
+
+## Initial quality-measurement dependencies
+
+These optional development tools are pinned in `requirements-quality.txt` and are
+not runtime dependencies or vendored source: coverage 7.10.6 (Apache-2.0), radon
+6.0.1 (MIT), mando 0.7.1 (MIT), colorama 0.4.6 (BSD-3-Clause), and six 1.17.0 (MIT).
+SymPy and mpmath use BSD licenses. Installed distribution notices remain applicable.

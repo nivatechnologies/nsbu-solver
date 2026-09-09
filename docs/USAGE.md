@@ -47,3 +47,18 @@ At `512^3`, the twelve-cell screen reaches three endpoint indices on that indivi
 Every run must identify the mathematical problem, reference/force artifacts, execution profile, exact start/end times, resource plan, method, and checkpoint lineage. A window report must distinguish diagnostic-only, accepted and rejected intervals and record the limiting channel. Sampled maxima and empirical reconstruction errors cannot be presented as rigorous bounds.
 
 A useful published concentrating result contains the immutable case, from-rest branches, frozen comparison protocol, space/time/input/arithmetic refinements, pressure and balance diagnostics, invalidation records, accepted/rejected endpoints and the last qualified time. It does not claim a singularity proof from finite numerical samples. The [implementation plan](../IMPLEMENTATION_PLAN.md) specifies the required negative controls.
+
+## Independent reference commands now available
+
+P00B is in progress. From the repository root, run:
+
+```sh
+python -m unittest discover -s reference/tests -v
+python -m reference.verify_fields > work/reference-fields.json
+python -m reference.verify_steps > work/reference-steps.json
+```
+
+Create `work/` first if the bootstrap runner has not created it. These commands
+validate pointwise v2 evaluations and N=4 smooth semidiscrete arithmetic fixtures.
+The step fixture starts from rest; its force is a separate smooth case. It does
+not qualify a concentrating PDE window. See [reference scope](../reference/README.md).

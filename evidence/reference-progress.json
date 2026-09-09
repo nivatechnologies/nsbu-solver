@@ -1,0 +1,92 @@
+{
+  "package": "P00B",
+  "status": "in-progress",
+  "unit_tests": {
+    "passed": 16,
+    "command": "python -m unittest discover -s reference/tests -v"
+  },
+  "field_fixture": "fixtures/reference/fields.json",
+  "step_fixture": "fixtures/reference/steps-n4.json",
+  "field_comparisons": [
+    {
+      "sample": "origin",
+      "force_scaled_change": "0.0"
+    },
+    {
+      "sample": "near-axis",
+      "force_scaled_change": "1.88559331506e-80"
+    },
+    {
+      "sample": "interior",
+      "force_scaled_change": "3.4431986847e-80"
+    },
+    {
+      "sample": "inner-edge",
+      "force_scaled_change": "1.13873628499e-80"
+    },
+    {
+      "sample": "collar",
+      "force_scaled_change": "3.70703015236e-80"
+    },
+    {
+      "sample": "outer-edge",
+      "force_scaled_change": "4.28469567747e-411958193388055258362042811008820703558331400870170028144428399224793264156820854"
+    },
+    {
+      "sample": "rest",
+      "force_scaled_change": "0.0"
+    },
+    {
+      "sample": "ramp-end",
+      "force_scaled_change": "5.80621088987e-81"
+    },
+    {
+      "sample": "late",
+      "force_scaled_change": "3.77616830631e-76"
+    }
+  ],
+  "step_comparisons": [
+    {
+      "method": "CM",
+      "path": "full_step",
+      "max_full_band_component_change": "1.05351895157e-82"
+    },
+    {
+      "method": "CM",
+      "path": "two_half_steps",
+      "max_full_band_component_change": "2.04670714617e-82"
+    },
+    {
+      "method": "HO",
+      "path": "full_step",
+      "max_full_band_component_change": "1.1695282847e-82"
+    },
+    {
+      "method": "HO",
+      "path": "two_half_steps",
+      "max_full_band_component_change": "3.28150093783e-82"
+    }
+  ],
+  "source_sha256": {
+    "reference/__init__.py": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+    "reference/dft.py": "f957c55012d93244c809fdae2090c373503715f5769095f73f49029b933b2a8b",
+    "reference/evaluator.py": "4490f0118f9a0e0674d99194e10ad2321b0f7d53fb32f86eb29c5d01d5a0767e",
+    "reference/jets.py": "165b6c47cd99726fbe960d9cd060590b7af339b892b0f82743e57c301e10b6cc",
+    "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+    "reference/steps.py": "cc6c2303f83a5229118cbecfa971f5d32000287a55fdde865bbeb9513dc943d8",
+    "reference/tests/test_dft_steps.py": "fe296b87959ab2cfde0f2b2a69c54b912195069f9d4ca031648c10d77ab34b8d",
+    "reference/tests/test_reference.py": "d00376c4ff90395e6d3ed4ac651d3b331e4841d771583976b03d58c55a55cd61",
+    "reference/verify_fields.py": "e74d8465bf23af5e4288317975ea00c92f4d7b1b8fa7f3bbcc30c8ab8ae0ae79",
+    "reference/verify_steps.py": "fcdbbb3ec9e909220799a7096278fce685cf4d46867910591998bedfc913c99e"
+  },
+  "not_complete": [
+    "N=8/12 arithmetic studies",
+    "Refined short trajectories and temporal-order measurements",
+    "Force-gradient, conditioning, region-coverage and force-sampling evidence",
+    "Complete quality gates",
+    "Production binary64 comparisons in later packages"
+  ],
+  "production_rust_exists": false,
+  "concentrating_trajectory_exists": false,
+  "accepted_pde_windows": 0
+}

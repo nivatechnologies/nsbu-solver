@@ -1,0 +1,95 @@
+{
+  "status": "requirements-unmet",
+  "scope": [
+    "reference/__init__.py",
+    "reference/dft.py",
+    "reference/evaluator.py",
+    "reference/jets.py",
+    "reference/scalar.py",
+    "reference/steps.py",
+    "reference/tests/test_dft_steps.py",
+    "reference/tests/test_reference.py",
+    "reference/verify_fields.py",
+    "reference/verify_steps.py",
+    "tools/check_repository.py",
+    "tools/tests/test_bootstrap_tools.py",
+    "tools/verify_design.py"
+  ],
+  "excluded_scope": "Frozen docs/design artifacts and separately installed dependencies; no maintained source excluded",
+  "source_sha256": {
+    "reference/__init__.py": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+    "reference/dft.py": "f957c55012d93244c809fdae2090c373503715f5769095f73f49029b933b2a8b",
+    "reference/evaluator.py": "4490f0118f9a0e0674d99194e10ad2321b0f7d53fb32f86eb29c5d01d5a0767e",
+    "reference/jets.py": "165b6c47cd99726fbe960d9cd060590b7af339b892b0f82743e57c301e10b6cc",
+    "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+    "reference/steps.py": "cc6c2303f83a5229118cbecfa971f5d32000287a55fdde865bbeb9513dc943d8",
+    "reference/tests/test_dft_steps.py": "fe296b87959ab2cfde0f2b2a69c54b912195069f9d4ca031648c10d77ab34b8d",
+    "reference/tests/test_reference.py": "d00376c4ff90395e6d3ed4ac651d3b331e4841d771583976b03d58c55a55cd61",
+    "reference/verify_fields.py": "e74d8465bf23af5e4288317975ea00c92f4d7b1b8fa7f3bbcc30c8ab8ae0ae79",
+    "reference/verify_steps.py": "fcdbbb3ec9e909220799a7096278fce685cf4d46867910591998bedfc913c99e",
+    "tools/check_repository.py": "b23427fbf6d5e7eabc2d979d870500b6f1e939af2ae31551c04f6945491a7f13",
+    "tools/tests/test_bootstrap_tools.py": "6904388e9a76188836a79da9746659d68417d47519fc07d9f22febd74715cd50",
+    "tools/verify_design.py": "d0a34a3c023f41a823abc2ea24e2fc2de4307750ffa9809dba7ad23cdfc97cd5"
+  },
+  "tool_versions": {
+    "coverage": "7.10.6",
+    "radon": "6.0.1",
+    "mando": "0.7.1",
+    "colorama": "0.4.6",
+    "six": "1.17.0"
+  },
+  "commands": [
+    "python -m coverage run --branch --source=reference,tools -m unittest discover -s reference/tests",
+    "python -m coverage run --append --branch --source=reference,tools -m unittest discover -s tools/tests",
+    "python -m coverage run --append --branch --source=reference,tools -m reference.verify_fields",
+    "python -m coverage run --append --branch --source=reference,tools -m reference.verify_steps",
+    "python -m coverage json -o work/coverage.json",
+    "python -m radon cc reference tools -s -j",
+    "python -m radon hal reference tools -j"
+  ],
+  "metrics": {
+    "cyclomatic_max": [
+      "reference/verify_fields.py",
+      "run",
+      16
+    ],
+    "halstead_file_max": [
+      "reference/scalar.py",
+      9.511363636363637
+    ],
+    "halstead_function_max": 7.804878048780488,
+    "physical_lines_max": [
+      224,
+      "tools/check_repository.py"
+    ],
+    "coverage": {
+      "covered_lines": 805,
+      "num_statements": 917,
+      "percent_covered": 85.95744680851064,
+      "percent_covered_display": "86",
+      "missing_lines": 112,
+      "excluded_lines": 0,
+      "num_branches": 258,
+      "num_partial_branches": 31,
+      "covered_branches": 205,
+      "missing_branches": 53
+    },
+    "cognitive_complexity": "unmeasured",
+    "CRAP": "unmeasured per-function branch coverage",
+    "surviving_mutants": "unmeasured",
+    "dead_code": "unmeasured",
+    "redundant_code": "unmeasured",
+    "any_or_unknown_types": "unmeasured strict type analysis"
+  },
+  "raw_reports": [
+    "evidence/quality/coverage.json",
+    "evidence/quality/cyclomatic.json",
+    "evidence/quality/halstead.json"
+  ],
+  "limitations": [
+    "Coverage does not instrument subprocesses spawned by bootstrap guard tests",
+    "Line/branch coverage target is not met",
+    "No cognitive, mutation, dead-code, duplication or strict-type analyzer configured",
+    "SOLID review is preliminary; no complete quality-gate claim"
+  ]
+}

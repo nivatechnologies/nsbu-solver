@@ -3,14 +3,14 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "design-and-verification-bootstrap",
+  "development_stage": "independent-reference-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
   "rust_workspace_exists": false,
   "runtime_implementation_exists": false,
   "simulation_cli_exists": false,
-  "pde_integration_performed": false,
+  "pde_integration_performed": true,
   "accepted_pde_windows": 0,
   "source_instance_admitted": false,
   "formal_proof_build_performed": false,
@@ -21,22 +21,27 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "not-yet-measured",
+    "status": "partial-measurement-requirements-unmet",
     "requirements": "IMPLEMENTATION_PLAN.md",
-    "review": "docs/QUALITY.md"
+    "review": "docs/QUALITY.md",
+    "evidence": "evidence/quality-baseline.json"
   },
   "packages": {
     "B00": {
-      "status": "verification-passed-publication-pending",
+      "status": "bootstrap-verification-and-publication-passed",
       "evidence": "evidence/bootstrap-verification.json",
-      "quality_review": "pending"
+      "publication": "evidence/bootstrap-publication.json",
+      "quality_gates": "incomplete"
     },
     "P00": {
       "status": "frozen-input-verification-passed",
       "evidence": "evidence/bootstrap-verification.json"
     },
     "P00B": {
-      "status": "not-started"
+      "status": "in-progress",
+      "evidence": "evidence/reference-progress.json"
     }
-  }
+  },
+  "pde_integration_scope": "Python N=4 smooth semidiscrete full-step/two-half-step arithmetic fixtures only",
+  "concentrating_pde_integration_performed": false
 }

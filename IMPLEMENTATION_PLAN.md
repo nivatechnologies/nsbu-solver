@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.1 · 9 September 2026 · Bootstrap verification in progress
+Revision 1.1 · 9 September 2026 · Bootstrap verified; P00B in progress
 
 ## Adopted decisions
 
@@ -14,7 +14,7 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-No Rust solver, numerical CLI, PDE trajectory, admitted source instance, accepted PDE window, or formal proof build exists at this point. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+No Rust solver, numerical CLI, concentrating PDE trajectory, admitted source instance, accepted PDE window, or formal proof build exists at this point. Independent Python pointwise and N=4 smooth from-rest step fixtures are implemented; P00B remains incomplete. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
 ## Planned public organization
 

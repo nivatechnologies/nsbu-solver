@@ -1,0 +1,12 @@
+{
+  "bootstrap_commit": "6cacfeb1b79fb6a7b2676f0c688dc67ebf1f939e",
+  "branch": "main",
+  "remote_head_verified": true,
+  "force_push_used": false,
+  "hosted_ci": {
+    "run_id": 34315397993,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "scope": "bootstrap commit only; later implementation changes require their own CI"
+}

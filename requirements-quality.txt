@@ -1,0 +1,6 @@
+# Initial measurement tools; the complete quality gate is not implemented yet.
+coverage==7.10.6
+radon==6.0.1
+colorama==0.4.6
+mando==0.7.1
+six==1.17.0

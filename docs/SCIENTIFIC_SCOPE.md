@@ -1,6 +1,6 @@
 # Scientific scope
 
-NSBU Solver is a standalone periodic three-dimensional incompressible Navier–Stokes runtime project with fixed positive viscosity and prescribed forcing. Its current artifacts are a reviewed design and selected executable mathematical checks. A solver implementation and independently integrated PDE trajectories are future work.
+NSBU Solver is a standalone periodic three-dimensional incompressible Navier–Stokes runtime project with fixed positive viscosity and prescribed forcing. Its current artifacts are a reviewed design and selected executable mathematical checks. The Python reference now supplies pointwise field checks and N=4 smooth from-rest time-step fixtures. The Rust solver and concentrating trajectory validation remain future work.
 
 The first experiment, `similarity-mms-v2`, uses a manufactured concentrating field and its independently prescribed force. Its purpose is to test independent from-rest integration over progressively closer finite intervals. It does not implement the source construction's pulse cascade or claim a force smoothly extended through the target time. Its concentration is part of the prescribed benchmark, not a newly discovered singularity.
 

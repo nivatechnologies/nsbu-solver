@@ -73,3 +73,17 @@ These commands are not supported by the current bootstrap. Published binary and 
 A missing SymPy module usually means dependencies were installed with a different interpreter. Use the virtual environment's `python -m pip` and rerun with that same `python`. A frozen-hash failure means a reviewed input changed; restore the adopted bytes or create a reviewed amendment instead of simply changing the expected hash. A mathematical assertion failure is evidence to investigate, not a reason to run with `-O`.
 
 No Niva account, checkout, adapter, GPU, or private service is required for these checks.
+
+## Reference implementation and initial quality measurements
+
+The same Python development environment supports the current independent
+[reference commands](../reference/README.md). It still supplies no Rust binary.
+For the initial, incomplete quality baseline, additionally install:
+
+```sh
+python -m pip install -r requirements-quality.txt
+```
+
+These tools measure coverage, cyclomatic complexity and Halstead metrics. The
+remaining required analyzers have not yet been selected or configured. Installing
+these dependencies does not imply that any quality gate passes.
