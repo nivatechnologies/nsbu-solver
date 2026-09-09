@@ -1,0 +1,81 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.51s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_benchmarks-46af72489fcaa569)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/llvm-cov-target/debug/deps/nsbu-fed5dc0c5bd15cfb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/commands.rs (target/llvm-cov-target/debug/deps/commands-1455c57727049be1)
+
+running 3 tests
+test version_identifies_the_development_package ... ok
+test help_explains_the_current_capability ... ok
+test unsupported_and_extra_arguments_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_solver-ecffd55803c8b1c7)
+
+running 1 test
+test domain::state::tests::impossible_reservation_returns_a_typed_error ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/clock.rs (target/llvm-cov-target/debug/deps/clock-cda15f5d20904f62)
+
+running 4 tests
+test clock_refuses_invalid_states_and_intervals ... ok
+test exact_quarter_stages_use_the_committed_counts ... ok
+test finite_clock_capacity_and_extreme_quantum_are_explicit ... ok
+test floating_sum_can_pass_while_elapsed_time_does_not_advance ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/layout.rs (target/llvm-cov-target/debug/deps/layout-88b6c3a442b0eb6e)
+
+running 4 tests
+test domain_preserves_positive_geometry_and_pads_all_axes ... ok
+test invalid_and_unaddressable_layouts_are_refused_before_allocation ... ok
+test strict_band_and_half_spectrum_multiplicities ... ok
+test storage_order_signed_modes_and_negative_last_axis ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/resources.rs (target/llvm-cov-target/debug/deps/resources-a65bfc57a5f6dad6)
+
+running 3 tests
+test class_and_sum_overflows_are_refused ... ok
+test exact_ledger_and_cap_boundary_are_checked_without_grid_allocation ... ok
+test reviewed_cubic_reservations_are_reproduced ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/spectrum.rs (target/llvm-cov-target/debug/deps/spectrum-94542cb386d16307)
+
+running 3 tests
+test arbitrary_positive_slice_and_conjugate_zero_plane_are_valid ... ok
+test invalid_payload_tolerance_and_nonfinite_coefficients_are_refused ... ok
+test nyquist_and_nonhermitian_inputs_are_refused_even_with_large_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/state.rs (target/llvm-cov-target/debug/deps/state-5cd423f13654703f)
+
+running 1 test
+test states_own_separate_buffers_and_preserve_their_exact_initial_metadata ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to work/p02-final-coverage.json

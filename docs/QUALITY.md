@@ -114,3 +114,9 @@ all five current Rust source/test files; no numerical implementation is implied.
 The Rust workflow reruns mutation testing, in addition to coverage and static
 checks. Production builds use stable Rust; instrumented branch coverage uses a
 separately pinned nightly toolchain and explicitly includes integration tests.
+
+P02 extends the measured Rust scope to numerical foundations and their public
+contract tests. [Its evidence](../evidence/p02/README.md) records full line/branch
+coverage, bounded complexity, zero surviving mutants and allocation/clock failure
+tests. This supersedes P01's source-scope measurements while preserving that
+package's historical evidence.

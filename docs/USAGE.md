@@ -24,8 +24,8 @@ cargo run -p nsbu-cli -- --help
 cargo run -p nsbu-cli -- --version
 ```
 
-Help/version and invalid-argument handling are implemented. The library currently
-exports project metadata. No Rust integration or benchmark execution is provided.
+Help/version and invalid-argument handling are implemented. The library provides validated domains, layouts, exact clocks, resource ledgers
+and from-rest state allocation. No Rust integration or benchmark execution is provided.
 
 ## Intended runtime workflow, not yet executable
 

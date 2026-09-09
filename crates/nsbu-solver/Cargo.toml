@@ -11,3 +11,6 @@ include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
 
 [lints]
 workspace = true
+
+[dependencies]
+num-complex.workspace = true

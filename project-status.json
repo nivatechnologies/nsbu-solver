@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "rust-workspace-complete",
+  "development_stage": "numerical-foundations-verification",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -27,7 +27,7 @@
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p01/summary.json"
+    "rust_evidence": "evidence/p02/summary.json"
   },
   "packages": {
     "B00": {
@@ -50,6 +50,10 @@
       "status": "complete",
       "scope": "Public three-crate workspace and help/version CLI; numerical modules not implemented",
       "evidence": "evidence/p01/summary.json"
+    },
+    "P02": {
+      "status": "in-progress",
+      "evidence": "evidence/p02/summary.json"
     }
   },
   "pde_integration_scope": "Python N=4 smooth from-rest full-step/two-half-step fixtures and CM/HO temporal-refinement trajectories to t=1/32; no concentrating trajectory",

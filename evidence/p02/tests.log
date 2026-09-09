@@ -1,0 +1,88 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests src/lib.rs (target/debug/deps/nsbu_benchmarks-7ff035ca3346fdf9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/nsbu-540d093ca0150b90)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/commands.rs (target/debug/deps/commands-6a0144f944c351a9)
+
+running 3 tests
+test version_identifies_the_development_package ... ok
+test help_explains_the_current_capability ... ok
+test unsupported_and_extra_arguments_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/nsbu_solver-10d9e48f32451e41)
+
+running 1 test
+test domain::state::tests::impossible_reservation_returns_a_typed_error ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/clock.rs (target/debug/deps/clock-c13ec275108bcc38)
+
+running 4 tests
+test clock_refuses_invalid_states_and_intervals ... ok
+test exact_quarter_stages_use_the_committed_counts ... ok
+test finite_clock_capacity_and_extreme_quantum_are_explicit ... ok
+test floating_sum_can_pass_while_elapsed_time_does_not_advance ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/layout.rs (target/debug/deps/layout-0fe453e7c174bc21)
+
+running 4 tests
+test domain_preserves_positive_geometry_and_pads_all_axes ... ok
+test invalid_and_unaddressable_layouts_are_refused_before_allocation ... ok
+test storage_order_signed_modes_and_negative_last_axis ... ok
+test strict_band_and_half_spectrum_multiplicities ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/resources.rs (target/debug/deps/resources-0d856fabd44a0aa9)
+
+running 3 tests
+test class_and_sum_overflows_are_refused ... ok
+test exact_ledger_and_cap_boundary_are_checked_without_grid_allocation ... ok
+test reviewed_cubic_reservations_are_reproduced ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/spectrum.rs (target/debug/deps/spectrum-e6ed4552b49fb5ba)
+
+running 3 tests
+test arbitrary_positive_slice_and_conjugate_zero_plane_are_valid ... ok
+test invalid_payload_tolerance_and_nonfinite_coefficients_are_refused ... ok
+test nyquist_and_nonhermitian_inputs_are_refused_even_with_large_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/state.rs (target/debug/deps/state-055379a37be4ee3d)
+
+running 1 test
+test states_own_separate_buffers_and_preserve_their_exact_initial_metadata ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsbu_benchmarks
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsbu_solver
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

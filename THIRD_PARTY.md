@@ -51,3 +51,8 @@ They are pinned in workspace metadata but not linked until spectral implementati
 The licensing and normalization spike is recorded with the P01 evidence.
 Separately installed Rust quality tools and their licenses are declared in
 [quality/rust/README.md](quality/rust/README.md); none is a runtime dependency.
+
+P02 adds num-complex 0.4.6 (default features disabled), num-traits 0.2.19 and
+build dependency autocfg 1.5.1. All declare MIT OR Apache-2.0; exact registry
+checksums are in Cargo.lock and licenses in [the P02 inventory](evidence/p02/dependencies.json).
+These are public Rust dependencies, with no native library requirement.
