@@ -1,4 +1,4 @@
-# Independent numerical reference (P00B in progress)
+# Independent numerical reference (P00B complete)
 
 This Python package evaluates the exact v2 manufactured field and supplies small
 arbitrary-precision operator and time-step fixtures. It is independent of the
@@ -66,8 +66,7 @@ H1 differences grow across these small sampling grids. Spatial resolution remain
 unqualified. [Execution provenance](../evidence/reference-sampling.json) preserves
 the exact executed source hashes.
 
-P00B has passed its local numerical and quality checks; hosted execution of the
-expanded CI gates is pending. See the source-hashed
+P00B numerical and quality gates passed locally and in hosted CI. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
 Rust implementation, current-grid binary64 comparison, concentrating trajectory

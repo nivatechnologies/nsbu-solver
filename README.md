@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: verified bootstrap; independent Python reference implementation in progress. The Rust runtime and simulation CLI are not implemented yet.** This checkout contains the reviewed numerical specification, exact benchmark manifest, executable mathematical checks, and an implementation plan. There are no accepted PDE convergence windows or published solver binaries.
+**Status: verified bootstrap; independent Python reference implementation verified. The Rust runtime and simulation CLI are not implemented yet.** This checkout contains the reviewed numerical specification, exact benchmark manifest, executable mathematical checks, and an implementation plan. There are no accepted PDE convergence windows or published solver binaries.
 
 NSBU Solver is intended to evolve all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
 
@@ -44,7 +44,7 @@ See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md)
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved
-from rest with temporal and 80/120-digit arithmetic refinements. P00B and its quality gates remain incomplete. These fixtures
+from rest with temporal and 80/120-digit arithmetic refinements. P00B and its Python quality gates pass. These fixtures
 do not establish a qualified concentrating PDE trajectory.
 
 ## Implementation path

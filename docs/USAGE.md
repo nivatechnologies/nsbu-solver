@@ -50,7 +50,7 @@ A useful published concentrating result contains the immutable case, from-rest b
 
 ## Independent reference commands now available
 
-P00B is in progress. From the repository root, run:
+P00B is complete. From the repository root, run:
 
 ```sh
 python -m unittest discover -s reference/tests -v

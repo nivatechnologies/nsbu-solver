@@ -1,5 +1,5 @@
 {
-  "status": "local-checks-passed-hosted-ci-pending",
+  "status": "passed",
   "source_inventory": {
     "reference/__init__.py": {
       "sha256": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
@@ -250,5 +250,6 @@
       "current_sha256": "913080eaaa7e631ada22cd31f7f7a0e5dff677d3faec6eaf9e8811646627279a",
       "change": "Removed one trailing blank line; parsed Python AST is identical. Hosted CI reruns coverage on the normalized file."
     }
-  ]
+  ],
+  "hosted_ci": "evidence/quality-reference/hosted-ci.json"
 }

@@ -1,6 +1,6 @@
 {
   "package": "P00B",
-  "status": "in-progress",
+  "status": "complete",
   "unit_tests": {
     "combined_suite_passed": 139,
     "combined_command": "coverage run -m pytest -q",
@@ -106,9 +106,7 @@
     "reference/tests/test_driver_imports.py": "6e675ab72bf8ead2067cf7cc2514f5a888175dce1259f8e869cca3ef114d23ae",
     "reference/tests/test_bounded_reference_work.py": "56f7f80fef2b3008a2c51d40eb2198f222fbdb960c628f62e91ebb7bbc2babe7"
   },
-  "not_complete": [
-    "Hosted execution of the expanded CI quality gates remains pending"
-  ],
+  "not_complete": [],
   "production_rust_exists": false,
   "concentrating_trajectory_exists": false,
   "accepted_pde_windows": 0,
@@ -125,5 +123,10 @@
     "Concentrating from-rest PDE pilot",
     "Rust runtime"
   ],
-  "mutation_evidence": "evidence/quality-reference/mutations/summary.json"
+  "mutation_evidence": "evidence/quality-reference/mutations/summary.json",
+  "hosted_ci": {
+    "commit": "ae4aec0ff705c70913f108d2e1f2fae70a360080",
+    "run_id": 34332918162,
+    "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34332918162"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "status": "retry-pending",
+  "status": "passed",
   "runs": [
     {
       "run_id": 34331863800,
@@ -15,6 +15,13 @@
       ],
       "failure": "Source-file enumeration used rg, which was absent on the hosted runner. Its pipeline did not propagate that failure; the later inventory comparison rejected the empty file list.",
       "repair": "Use Git and awk for tracked source enumeration, require a nonempty inventory, and enable the explicit bash shell with pipefail."
+    },
+    {
+      "run_id": 34332918162,
+      "commit": "ae4aec0ff705c70913f108d2e1f2fae70a360080",
+      "conclusion": "success",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34332918162",
+      "scope": "All bootstrap, reference numerical and Python quality gates, including source-bound mutation evidence"
     }
   ]
 }

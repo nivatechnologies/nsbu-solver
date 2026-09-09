@@ -78,7 +78,7 @@ No Niva account, checkout, adapter, GPU, or private service is required for thes
 
 The same Python development environment supports the current independent
 [reference commands](../reference/README.md). It still supplies no Rust binary.
-For the expanded, incomplete quality gate, additionally install:
+For the verified Python quality gate, additionally install:
 
 ```sh
 python -m pip install -r requirements-quality.txt
@@ -86,6 +86,6 @@ python -m pip install -r requirements-quality.txt
 
 These tools measure coverage, cyclomatic and cognitive complexity, Halstead
 metrics, strict typing, duplication, dead-code candidates, and mutations. The
-repository mutation gate remains unmet. See [quality evidence](QUALITY.md) for
+Python mutation gate passes in its declared execution profile. See [quality evidence](QUALITY.md) for
 per-metric results and limitations. A fresh installation of this pinned
 environment was tested on Linux with Python 3.12.3.

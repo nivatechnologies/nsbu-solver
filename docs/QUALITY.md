@@ -1,8 +1,8 @@
 # Quality evidence
 
-The current Python implementation passes the local numerical and quality checks.
-Hosted verification of the expanded CI gates is pending. P00B remains in progress
-until that execution succeeds; Rust and concentrating-PDE validation remain separate.
+The current Python implementation passes numerical and quality checks locally and
+in [hosted CI](../evidence/quality-reference/hosted-ci.json). P00B is complete. Rust
+and concentrating-PDE validation remain separate.
 
 The [source-hashed measurement report](../evidence/quality-reference/summary.json)
 records 139 passing tests. The scope includes maintained Python implementations,
