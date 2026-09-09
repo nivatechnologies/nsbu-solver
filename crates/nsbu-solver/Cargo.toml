@@ -14,3 +14,10 @@ workspace = true
 
 [dependencies]
 num-complex.workspace = true
+
+[dev-dependencies]
+stats_alloc = "=0.1.10"
+
+[[test]]
+name = "allocation"
+harness = false

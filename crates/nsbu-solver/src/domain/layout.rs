@@ -57,17 +57,26 @@ impl Layout {
         Ok((i * ny + j) * (nz / 2 + 1) + k)
     }
 
+    /// Reverse the contiguous storage index without aliasing or wrapped indices.
+    pub fn position(self, index: usize) -> Result<[usize; 3], SolverError> {
+        if index >= self.half_len {
+            return Err(SolverError::InvalidIndex);
+        }
+        let half = self.dimensions[2] / 2 + 1;
+        Ok([
+            index / (self.dimensions[1] * half),
+            (index / half) % self.dimensions[1],
+            index % half,
+        ])
+    }
+
     /// Signed integer mode associated with a stored index.
     pub fn mode(self, position: [usize; 3]) -> Result<[isize; 3], SolverError> {
         self.index(position)?;
         Ok(std::array::from_fn(|axis| {
             let i = position[axis];
             let n = self.dimensions[axis];
-            if i > n / 2 {
-                i as isize - n as isize
-            } else {
-                i as isize
-            }
+            signed_index(i, n)
         }))
     }
 
@@ -104,5 +113,14 @@ impl Layout {
             m.rem_euclid(self.dimensions[axis] as isize) as usize
         });
         Ok((self.index(position)?, conjugate))
+    }
+}
+
+/// Caller supplies a valid physical-grid index and a positive validated dimension.
+pub(crate) fn signed_index(index: usize, size: usize) -> isize {
+    if index > size / 2 {
+        index as isize - size as isize
+    } else {
+        index as isize
     }
 }

@@ -44,11 +44,10 @@ They are not linked into or shipped as part of the planned Rust library/CLI.
 
 ## Rust workspace and optional quality tools
 
-The current lockfile resolves only the three Apache-2.0 workspace packages.
-The selected future FFT dependencies are rustfft 6.4.1 (MIT OR Apache-2.0) and
-realfft 3.5.0 (MIT), with default features disabled and no native library needed.
-They are pinned in workspace metadata but not linked until spectral implementation.
-The licensing and normalization spike is recorded with the P01 evidence.
+P01 evaluated rustfft 6.4.1 (MIT OR Apache-2.0) and realfft 3.5.0 (MIT).
+P03 instead uses an original bounded radix-2/3 implementation with explicitly owned
+roots and scratch. The unused workspace pins were removed; neither FFT dependency
+is linked or copied. The alternative spike remains historical P01 evidence.
 Separately installed Rust quality tools and their licenses are declared in
 [quality/rust/README.md](quality/rust/README.md); none is a runtime dependency.
 
@@ -56,3 +55,7 @@ P02 adds num-complex 0.4.6 (default features disabled), num-traits 0.2.19 and
 build dependency autocfg 1.5.1. All declare MIT OR Apache-2.0; exact registry
 checksums are in Cargo.lock and licenses in [the P02 inventory](evidence/p02/dependencies.json).
 These are public Rust dependencies, with no native library requirement.
+
+P03 adds stats_alloc 0.1.10 (MIT) as a test-only dependency for the dedicated
+allocation probe. It is not linked into library or CLI release artifacts. No
+dependency source is vendored; Cargo.lock records its registry checksum.

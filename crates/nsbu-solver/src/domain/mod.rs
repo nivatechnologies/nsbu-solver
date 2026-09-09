@@ -14,3 +14,5 @@ mod state;
 pub use resources::{ExtraStorage, ResourcePlan};
 pub use spectrum::validate_spectrum;
 pub use state::SpectralState;
+
+pub(crate) use layout::signed_index;

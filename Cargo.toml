@@ -12,8 +12,6 @@ repository = "https://github.com/nivatechnologies/nsbu-solver"
 [workspace.dependencies]
 num-complex = { version = "=0.4.6", default-features = false }
 nsbu-solver = { path = "crates/nsbu-solver", version = "=0.1.0-alpha.0" }
-rustfft = { version = "=6.4.1", default-features = false }
-realfft = { version = "=3.5.0", default-features = false }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

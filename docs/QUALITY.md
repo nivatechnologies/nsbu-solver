@@ -122,3 +122,8 @@ contract tests. [Its evidence](../evidence/p02/README.md) records full line/bran
 coverage, bounded complexity, zero surviving mutants and allocation/clock failure
 tests. This supersedes P01's source-scope measurements while preserving that
 package's historical evidence.
+
+P03 extends the Rust profile to spectral operators. [Its evidence](../evidence/p03/README.md)
+records direct-sum and convolution checks, allocation instrumentation, full quality
+measurements and the hosted verification status. Earlier package reports remain
+historical snapshots, not measurements of the expanded current source.

@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "concentrating-diagnostic-and-foundations-complete",
+  "development_stage": "spectral-operator-verification",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -60,6 +60,10 @@
       "status": "complete",
       "evidence": "evidence/p00c/summary.json",
       "classification": "diagnostic-only; spatial and force sampling unresolved"
+    },
+    "P03": {
+      "status": "in-progress",
+      "evidence": "evidence/p03/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth-MMS temporal/arithmetic studies and N=4 exact-v2 CM/HO trajectories from rest to t=1/256; no Rust PDE integration or accepted concentrating window",

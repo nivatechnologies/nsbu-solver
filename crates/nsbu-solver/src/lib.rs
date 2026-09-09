@@ -11,3 +11,7 @@ pub use error::SolverError;
 
 /// Binary64 complex Fourier coefficient from the pinned public arithmetic dependency.
 pub type Complex64 = num_complex::Complex<f64>;
+
+pub mod spectral;
+
+mod storage;

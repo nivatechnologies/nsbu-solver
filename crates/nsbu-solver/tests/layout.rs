@@ -13,6 +13,7 @@ fn storage_order_signed_modes_and_negative_last_axis() {
             for k in 0..7 {
                 let position = [i, j, k];
                 assert_eq!(layout.index(position), Ok((i * 8 + j) * 7 + k));
+                assert_eq!(layout.position((i * 8 + j) * 7 + k), Ok(position));
                 let mode = layout.mode(position).unwrap();
                 assert_eq!(
                     mode,
@@ -34,6 +35,8 @@ fn storage_order_signed_modes_and_negative_last_axis() {
         Ok((layout.index([3, 5, 5]).unwrap(), false))
     );
     assert_eq!(layout.locate([0, 0, 0]), Ok((0, false)));
+    assert_eq!(layout.position(224), Err(SolverError::InvalidIndex));
+    assert_eq!(layout.position(usize::MAX), Err(SolverError::InvalidIndex));
 }
 
 #[test]

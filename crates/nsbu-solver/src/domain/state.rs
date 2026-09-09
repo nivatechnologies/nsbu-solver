@@ -1,5 +1,6 @@
 //! Independently owned payloads; numerical mutation is reserved for transactional attempts.
 use super::{Epoch, ResourcePlan, TickClock};
+use crate::storage::filled;
 use crate::{Complex64, SolverError};
 
 /// An independently allocated from-rest physical state.
@@ -27,7 +28,11 @@ impl SpectralState {
             plan,
             clock,
             epoch,
-            components: [zeros(n)?, zeros(n)?, zeros(n)?],
+            components: [
+                filled(n, Complex64::new(0.0, 0.0))?,
+                filled(n, Complex64::new(0.0, 0.0))?,
+                filled(n, Complex64::new(0.0, 0.0))?,
+            ],
         })
     }
 
@@ -52,24 +57,5 @@ impl SpectralState {
             .get(axis)
             .map(Vec::as_slice)
             .ok_or(SolverError::InvalidIndex)
-    }
-}
-
-fn zeros(count: usize) -> Result<Vec<Complex64>, SolverError> {
-    let mut values = Vec::new();
-    values
-        .try_reserve_exact(count)
-        .map_err(|_| SolverError::AllocationFailed)?;
-    values.resize(count, Complex64::new(0.0, 0.0));
-    Ok(values)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn impossible_reservation_returns_a_typed_error() {
-        assert_eq!(zeros(usize::MAX), Err(SolverError::AllocationFailed));
     }
 }

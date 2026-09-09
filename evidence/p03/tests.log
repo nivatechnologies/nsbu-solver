@@ -1,0 +1,142 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (crates/nsbu-solver)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.22s
+     Running unittests src/lib.rs (target/debug/deps/nsbu_benchmarks-7ff035ca3346fdf9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/nsbu-540d093ca0150b90)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/commands.rs (target/debug/deps/commands-6a0144f944c351a9)
+
+running 3 tests
+test version_identifies_the_development_package ... ok
+test help_explains_the_current_capability ... ok
+test unsupported_and_extra_arguments_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/nsbu_solver-6be09dd777457f1e)
+
+running 2 tests
+test spectral::hermitian::tests::finite_components_and_relative_pair_boundaries_are_checked_separately ... ok
+test storage::tests::impossible_reservation_returns_a_typed_error ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/alias_control.rs (target/debug/deps/alias_control-5af498857d1fc373)
+
+running 1 test
+test unpadded_product_aliases_while_three_halves_sampling_removes_the_alias ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/allocation.rs (target/debug/deps/allocation-198f0601a3988f8f)
+     Running tests/clock.rs (target/debug/deps/clock-f08ac3a2f196ae25)
+
+running 4 tests
+test clock_refuses_invalid_states_and_intervals ... ok
+test exact_quarter_stages_use_the_committed_counts ... ok
+test finite_clock_capacity_and_extreme_quantum_are_explicit ... ok
+test floating_sum_can_pass_while_elapsed_time_does_not_advance ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/convolution.rs (target/debug/deps/convolution-66848a46813d827b)
+
+running 1 test
+test full_retained_band_matches_convolution_and_inviscid_energy_identity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/fft.rs (target/debug/deps/fft-12225deb792b37d0)
+
+running 6 tests
+test inverse_checks_both_conjugate_planes_and_declared_roundoff_boundary ... ok
+test plans_refuse_unsupported_lengths_memory_caps_and_payloads ... ok
+test reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit ... ok
+test finite_input_that_overflows_transform_arithmetic_is_refused ... ok
+test constant_and_negative_frequency_modes_keep_normalized_amplitudes ... ok
+test mixed_radix_anisotropic_forward_matches_independent_direct_sums ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/layout.rs (target/debug/deps/layout-d9eb801b895d9625)
+
+running 4 tests
+test domain_preserves_positive_geometry_and_pads_all_axes ... ok
+test invalid_and_unaddressable_layouts_are_refused_before_allocation ... ok
+test strict_band_and_half_spectrum_multiplicities ... ok
+test storage_order_signed_modes_and_negative_last_axis ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/modal.rs (target/debug/deps/modal-195504423112bd22)
+
+running 3 tests
+test gradient_force_changes_pressure_without_accelerating_velocity ... ok
+test invalid_modes_nonfinite_data_and_arithmetic_overflow_are_refused ... ok
+test projection_and_curl_follow_signed_cross_product_identities ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/resources.rs (target/debug/deps/resources-1fe3db59e10c5010)
+
+running 3 tests
+test class_and_sum_overflows_are_refused ... ok
+test exact_ledger_and_cap_boundary_are_checked_without_grid_allocation ... ok
+test reviewed_cubic_reservations_are_reproduced ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/rotational.rs (target/debug/deps/rotational-2ab33fa08a0cd518)
+
+running 4 tests
+test invalid_payload_and_cap_refusals_are_structured ... ok
+test force_conjugacy_is_checked_before_projection_with_relative_tolerance ... ok
+test arithmetic_and_conjugacy_failures_preserve_input_state ... ok
+test gradient_force_pressure_and_mean_acceleration_are_preserved ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/spectrum.rs (target/debug/deps/spectrum-9b0c7835e4ec6eeb)
+
+running 3 tests
+test arbitrary_positive_slice_and_conjugate_zero_plane_are_valid ... ok
+test invalid_payload_tolerance_and_nonfinite_coefficients_are_refused ... ok
+test nyquist_and_nonhermitian_inputs_are_refused_even_with_large_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/state.rs (target/debug/deps/state-a8b0e55df935a58e)
+
+running 1 test
+test states_own_separate_buffers_and_preserve_their_exact_initial_metadata ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transfer.rs (target/debug/deps/transfer-0478f8e7c749868a)
+
+running 2 tests
+test nyquist_is_omitted_and_invalid_buffers_leave_output_unchanged ... ok
+test anisotropic_pad_crop_roundtrip_preserves_upper_band_and_mean ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsbu_benchmarks
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests nsbu_solver
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
