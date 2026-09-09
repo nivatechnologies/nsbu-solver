@@ -50,3 +50,7 @@ workspace versions are pinned for P03; no FFT dependency is linked in P01.
 This verifies package infrastructure only. No Rust numerical integration,
 concentrating trajectory or accepted PDE window follows from these results.
 See [summary.json](summary.json) for current completion state and source hashes.
+
+The fresh public-only checkout build/test/install and hosted Rust quality job
+passed at revision `7640e19b06a2cc0e01dbcbb2c9ab7c9453ad6dd8`. P01 is complete;
+[hosted-ci.json](hosted-ci.json) records every successful workflow step.
