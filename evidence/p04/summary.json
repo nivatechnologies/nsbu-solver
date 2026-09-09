@@ -1,6 +1,6 @@
 {
   "package": "P04",
-  "status": "local-checks-passed-hosted-ci-pending",
+  "status": "complete",
   "tests": 71,
   "source_files": 57,
   "coverage": {
@@ -132,5 +132,9 @@
     "Local raw discrepancies are empirical indicators without a Richardson divisor",
     "External provider declarations require independently verified implementations; no wall-clock guarantee",
     "Accepted allocation-stress steps use permissive local tolerances and are not convergence evidence"
-  ]
+  ],
+  "hosted_ci": {
+    "rust": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34416201486",
+    "python": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34416201348"
+  }
 }

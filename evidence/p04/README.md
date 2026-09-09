@@ -68,7 +68,9 @@ metric, raw reports and mutation outcomes. No non-equivalent survivor or timeout
 is accepted; unviable compiler replacements remain separate from caught mutants.
 LLVM regions and inactive instantiations are reported independently and are not
 claimed as fully covered. No private Niva dependency or new runtime dependency is
-introduced. Hosted verification remains pending until recorded here.
+introduced. [Hosted Rust verification](hosted-ci.json) and
+[hosted Python verification](hosted-python-ci.json) both passed for implementation
+commit `102969311cbfc19c066d3d4e64a93c7c1d0d9acb`; P04 is complete.
 
 No Rust exact-v2 force provider, concentrating Rust trajectory, qualified PDE
 window, numerical CLI, checkpoint or viewer is supplied by this package. Reference
