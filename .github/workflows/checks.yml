@@ -2,6 +2,9 @@ name: Repository and reference checks
 on: [push, pull_request]
 permissions:
   contents: read
+defaults:
+  run:
+    shell: bash
 jobs:
   bootstrap:
     runs-on: ubuntu-latest
@@ -31,7 +34,8 @@ jobs:
           complexipy reference tools --max-complexity-allowed 21
       - name: Source size, duplication and reviewed dead-code findings
         run: |
-          rg --files reference tools typings -g '*.py' -g '*.pyi' | LC_ALL=C sort > work/ci-source-files.txt
+          git ls-files -- reference tools typings | awk '/\.pyi?$/' | LC_ALL=C sort > work/ci-source-files.txt
+          test -s work/ci-source-files.txt
           while IFS= read -r path; do awk 'END { exit !(NR < 500) }' "$path"; done < work/ci-source-files.txt
           pylint --disable=all --enable=duplicate-code --output-format=json reference tools > work/ci-duplicates.json
           jq -e 'length == 0' work/ci-duplicates.json

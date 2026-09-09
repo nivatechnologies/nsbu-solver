@@ -1,0 +1,20 @@
+{
+  "status": "retry-pending",
+  "runs": [
+    {
+      "run_id": 34331863800,
+      "commit": "2f381d83beca2e539cfc450129b48d81af19b4fd",
+      "conclusion": "failure",
+      "passed": [
+        "bootstrap and mathematical checks",
+        "reference numerical studies",
+        "strict typing",
+        "complexity and Halstead",
+        "duplicate/dead-code review",
+        "139 tests and exact line/branch coverage"
+      ],
+      "failure": "Source-file enumeration used rg, which was absent on the hosted runner. Its pipeline did not propagate that failure; the later inventory comparison rejected the empty file list.",
+      "repair": "Use Git and awk for tracked source enumeration, require a nonempty inventory, and enable the explicit bash shell with pipefail."
+    }
+  ]
+}
