@@ -45,10 +45,11 @@ TypedDict schema keys; none is confirmed dead code. These supersede the initial
 baseline for the exact source hashes in the report.
 
 Mutation remains an unmet repository gate. The decorated jet implementation was
-checked separately with Cosmic Ray: 601 generated, 592 killed, nine raw survivors
-individually classified as equivalent in the recorded execution profile, zero
-timeouts and zero abnormal results. The report preserves each surviving diff and
-its justification. mutmut skips decorated classes, so its results alone cannot
+checked separately with Cosmic Ray: 601 generated, 591 explicit test failures,
+one timeout, nine raw survivors individually classified as equivalent in the
+recorded execution profile, and zero abnormal results. The earlier 592-kill count
+incorrectly included a timeout because Cosmic Ray labels timeouts as killed; it
+is corrected here. The report preserves each surviving diff and its justification. mutmut skips decorated classes, so its results alone cannot
 establish the jet mutation gate. A comprehensive implementation mutation run is in
 progress; neither this subset nor equivalent classifications imply repository-wide
 zero survivors.

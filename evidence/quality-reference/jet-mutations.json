@@ -2,7 +2,7 @@
   "tool": "cosmic-ray 8.7.0",
   "scope": "reference/jets.py",
   "generated": 601,
-  "killed": 592,
+  "killed": 591,
   "raw_surviving": 9,
   "equivalent": [
     {
@@ -213,7 +213,7 @@
       "justification": "The extra Taylor powers vanish in the truncated algebra: delta has zero constant coefficient, so powers greater than degree are identically zero. Both shifted bounds include every required term for degrees 0 through 4. Inputs and exponents are required finite."
     }
   ],
-  "timeouts": 0,
+  "timeouts": 1,
   "untested": 0,
   "abnormal": 0,
   "source_hashes": {
@@ -243,5 +243,6 @@
     "tools/tests/test_repository_checks.py": "a22a9afbd6d1a725e6bda66cbe3f4ea1c563587418eae30556fe47405be60398",
     "tools/tests/test_verification_runner.py": "c2b164d7914b31993aeccbe76939c0b3cd124121ee46d5b04ae648ba0de2d887"
   },
-  "overall_repository_gate": "unmet; comprehensive mutation run remains in progress"
+  "overall_repository_gate": "unmet; timeout is not a kill and comprehensive mutation reconciliation remains in progress",
+  "correction": "Cosmic Ray 8.7.0 emits test_outcome=killed with output=timeout. The previous report incorrectly counted that timeout as a kill; this report separates it."
 }
