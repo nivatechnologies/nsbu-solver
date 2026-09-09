@@ -1,0 +1,63 @@
+{
+  "package": "P01",
+  "status": "verification-in-progress",
+  "tests": 3,
+  "coverage": {
+    "branches": {
+      "count": 8,
+      "covered": 8,
+      "notcovered": 0,
+      "percent": 100
+    },
+    "functions": {
+      "count": 6,
+      "covered": 6,
+      "percent": 100
+    },
+    "instantiations": {
+      "count": 8,
+      "covered": 6,
+      "percent": 75
+    },
+    "lines": {
+      "count": 53,
+      "covered": 53,
+      "percent": 100
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 94,
+      "covered": 94,
+      "notcovered": 0,
+      "percent": 100
+    }
+  },
+  "mutation": {
+    "total_mutants": 13,
+    "missed": 0,
+    "caught": 12,
+    "timeout": 0,
+    "unviable": 1,
+    "success": 0,
+    "start_time": "2026-09-09T09:22:22.902447582Z",
+    "end_time": "2026-09-09T09:22:39.094547484Z",
+    "cargo_mutants_version": "27.1.0"
+  },
+  "limitations": [
+    "No Rust PDE integration",
+    "Library metadata and reserved benchmark crate only",
+    "Hosted Rust CI and fresh-checkout installation pending"
+  ],
+  "source_sha256": {
+    "crates/nsbu-benchmarks/src/lib.rs": "d18920b77a41d7fe0f922275751a36683599ae50509c45f325e430e5b9bc9558",
+    "crates/nsbu-cli/src/arguments.rs": "4dd9666b9bb5544e39494fdbabf28ec51399b8f97ad81094968a9198bf40a752",
+    "crates/nsbu-cli/src/main.rs": "d6bc34d3e87d6e91b58f2e83f22213483914539010b7d2cdf1db31c5f41d8039",
+    "crates/nsbu-cli/tests/commands.rs": "ca54cfef35133fe9027970e315239f8d0c909574596e8271b4df9fddb46a2f65",
+    "crates/nsbu-solver/src/lib.rs": "d236a77c4c4d3c190858e68652181c9435029e1ed77cb5e9a407ccbe14adaedf"
+  }
+}

@@ -41,3 +41,13 @@ source is vendored or relicensed by this project.
 Pylint (GPL-2.0-or-later), astroid (LGPL-2.1-or-later) and yattag (LGPL,
 as declared by its installed metadata) are separately installed development tools.
 They are not linked into or shipped as part of the planned Rust library/CLI.
+
+## Rust workspace and optional quality tools
+
+The current lockfile resolves only the three Apache-2.0 workspace packages.
+The selected future FFT dependencies are rustfft 6.4.1 (MIT OR Apache-2.0) and
+realfft 3.5.0 (MIT), with default features disabled and no native library needed.
+They are pinned in workspace metadata but not linked until spectral implementation.
+The licensing and normalization spike is recorded with the P01 evidence.
+Separately installed Rust quality tools and their licenses are declared in
+[quality/rust/README.md](quality/rust/README.md); none is a runtime dependency.

@@ -1,0 +1,22 @@
+[workspace]
+members = ["crates/nsbu-solver", "crates/nsbu-benchmarks", "crates/nsbu-cli"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0-alpha.0"
+edition = "2021"
+rust-version = "1.94"
+license = "Apache-2.0"
+repository = "https://github.com/nivatechnologies/nsbu-solver"
+
+[workspace.dependencies]
+nsbu-solver = { path = "crates/nsbu-solver", version = "=0.1.0-alpha.0" }
+rustfft = { version = "=6.4.1", default-features = false }
+realfft = { version = "=3.5.0", default-features = false }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "deny"
+
+[workspace.lints.clippy]
+all = "deny"

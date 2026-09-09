@@ -1,0 +1,52 @@
+name: Rust package and quality checks
+on: [push, pull_request]
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install pinned toolchains and quality tools
+        run: |
+          rustup toolchain install 1.94.0 --profile minimal --component clippy,rustfmt
+          rustup toolchain install nightly-2026-03-03 --profile minimal --component llvm-tools-preview
+          cargo install cargo-llvm-cov --version 0.9.1 --locked
+          cargo install cargo-mutants --version 27.1.0 --locked
+          cargo install rust-code-analysis-cli --version 0.0.25 --locked
+          npm ci --prefix quality/rust --ignore-scripts
+      - name: Build, lint, test and package public workspace
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets --locked -- -D warnings
+          cargo build --workspace --locked
+          cargo test --workspace --locked
+          cargo package --workspace --locked
+          cargo install --path crates/nsbu-cli --locked --root work/install
+          work/install/bin/nsbu --help
+          work/install/bin/nsbu --version
+      - name: Complete executable line and instrumented branch coverage
+        run: |
+          mkdir -p work
+          cargo +nightly-2026-03-03 llvm-cov --workspace --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/rust-coverage.json
+          jq -e '.data[0].totals | .lines.count > 0 and .lines.percent == 100 and .branches.percent == 100' work/rust-coverage.json
+      - name: Per-function metrics and complete file scope
+        run: |
+          rust-code-analysis-cli -p crates -m -O json > work/rust-metrics.json
+          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cyclomatic.max] | length > 0 and max < 22' work/rust-metrics.json
+          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cognitive.max] | max < 22' work/rust-metrics.json
+          jq -se '[.. | objects | select(has("metrics")) | .metrics.halstead.difficulty | select(. != null)] | max < 80' work/rust-metrics.json
+          git ls-files 'crates/*.rs' > work/rust-source-files.txt
+          test -s work/rust-source-files.txt
+          while IFS= read -r path; do awk 'END { exit !(NR < 500) }' "$path"; done < work/rust-source-files.txt
+          # At complete branch coverage, CRAP equals cyclomatic complexity.
+          quality/rust/node_modules/.bin/jscpd crates --format rust --min-lines 5 --min-tokens 50 --threshold 0 --reporters json --output work/rust-duplicates
+          # Rust has no unresolved implicit types; disallow dynamic Any escapes.
+          if grep -En '\b(Any|unknown)\b' $(cat work/rust-source-files.txt); then exit 1; fi
+      - name: Mutation tests with explicit failure accounting
+        run: |
+          cargo mutants --workspace --output work/rust-mutations --timeout 180 --build-timeout 300 --jobs 2
+          jq -e '.missed == 0 and .timeout == 0 and .total_mutants > 0 and .caught + .unviable == .total_mutants' work/rust-mutations/mutants.out/outcomes.json

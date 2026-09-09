@@ -2,7 +2,7 @@
 
 ## What can be installed now
 
-This is a design-and-verification checkout. It has no Cargo workspace, published crate, compiled solver, or `nsbu` executable yet. The supported current workflow installs Python dependencies and runs the repository and mathematical checks. Do not use `cargo install nsbu-solver`; no such package is provided by this bootstrap.
+The checkout provides Python verification and a Rust workspace with an `nsbu` executable supporting help/version only. No crate or binary release has been published. Install from the checked-out source as shown below; numerical simulation remains planned.
 
 Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the future Rust runtime dependencies.
 
@@ -47,15 +47,15 @@ The unit tests exercise incomplete transfers, changed frozen bytes, missing hidd
 
 A fresh dependency download and hosted CI run require network access. Passing local checks with already-installed pinned dependencies is distinct from validating a fresh online installation.
 
-## Preparing for Rust implementation
+## Building the Rust workspace
 
-Rust is not needed for this checkout's existing commands. Once implementing P01, install Rust using the [official Rust instructions](https://rust-lang.org/tools/install/). On macOS/Linux, the documented installer is:
+Rust is not needed for the Python checks. For the Rust workspace, install Rust using the [official Rust instructions](https://rust-lang.org/tools/install/). On macOS/Linux, the documented installer is:
 
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-P01 must commit an exact tested `rust-toolchain.toml`, workspace manifests and `Cargo.lock`. The following commands are the **planned validation workflow after those files and crates exist**:
+The committed toolchain pins Rust 1.94.0. The workspace and lockfile use public dependencies only. Run:
 
 ```sh
 cargo build --workspace --locked
@@ -66,7 +66,7 @@ cargo install --path crates/nsbu-cli --locked
 nsbu --help
 ```
 
-These commands are not supported by the current bootstrap. Published binary and crates.io instructions must be added only after the corresponding artifacts exist and a clean installation has been tested. Dependency versions and platform claims belong to the tested release, not this plan.
+The executable supports `--help`, `-h`, `--version`, `-V` and no arguments. Unsupported or extra arguments return exit code 2. These build/install checks have been exercised on Linux; other platforms remain unverified. This is package infrastructure, not a working numerical solver.
 
 ## Troubleshooting
 
@@ -77,7 +77,7 @@ No Niva account, checkout, adapter, GPU, or private service is required for thes
 ## Reference implementation and initial quality measurements
 
 The same Python development environment supports the current independent
-[reference commands](../reference/README.md). It still supplies no Rust binary.
+[reference commands](../reference/README.md). Rust build tools are independent of this Python environment.
 For the verified Python quality gate, additionally install:
 
 ```sh

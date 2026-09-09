@@ -1,0 +1,6 @@
+n=4 forward_scratch=0 inverse_scratch=0 complex_scratch=0 roundtrip_error=0e0
+n=6 forward_scratch=0 inverse_scratch=0 complex_scratch=0 roundtrip_error=6.661338147750939e-16
+n=8 forward_scratch=0 inverse_scratch=0 complex_scratch=0 roundtrip_error=2.220446049250313e-16
+n=12 forward_scratch=0 inverse_scratch=0 complex_scratch=0 roundtrip_error=6.661338147750939e-16
+n=128 forward_scratch=0 inverse_scratch=0 complex_scratch=128 roundtrip_error=8.881784197001252e-16
+n=192 forward_scratch=0 inverse_scratch=0 complex_scratch=192 roundtrip_error=1.7763568394002505e-15

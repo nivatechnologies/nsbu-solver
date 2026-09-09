@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: verified bootstrap; independent Python reference implementation verified. The Rust runtime and simulation CLI are not implemented yet.** This checkout contains the reviewed numerical specification, exact benchmark manifest, executable mathematical checks, and an implementation plan. There are no accepted PDE convergence windows or published solver binaries.
+**Status: verified bootstrap; independent Python reference implementation verified. The Rust workspace provides library metadata and CLI help/version; numerical simulation is not implemented yet.** This checkout contains the reviewed numerical specification, exact benchmark manifest, executable mathematical checks, and an implementation plan. There are no accepted PDE convergence windows or published solver binaries.
 
 NSBU Solver is intended to evolve all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
 
@@ -40,7 +40,7 @@ When using the complete source ZIP, extract it with its directory structure inta
 
 The repository check verifies the frozen inputs, mathematical problem identity, local documentation links, and public-package boundaries. The unit tests exercise missing-file, modified-input and unsafe-output failures. The design runner reruns selected algebra, coefficient, clock, geometry, resource, and source-screening checks and compares their report with the preserved evidence before adding execution metadata. Its `status: passed` means those checks passed; it does not mean a PDE simulation passed.
 
-See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. There is currently no working `cargo install` or `nsbu` simulation command.
+See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. The Rust workspace builds with Rust 1.94.0. `cargo run -p nsbu-cli -- --help` and `--version` work; simulation commands remain planned.
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved

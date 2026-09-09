@@ -1,0 +1,13 @@
+[package]
+name = "nsbu-benchmarks"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Independent manufactured benchmarks for NSBU Solver"
+readme = "README.md"
+include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
+
+[lints]
+workspace = true

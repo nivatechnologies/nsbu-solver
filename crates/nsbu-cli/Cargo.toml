@@ -1,0 +1,20 @@
+[package]
+name = "nsbu-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Command-line interface for NSBU Solver"
+readme = "README.md"
+include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "nsbu"
+path = "src/main.rs"
+
+[dependencies]
+nsbu-solver.workspace = true

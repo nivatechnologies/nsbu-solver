@@ -1,0 +1,13 @@
+[package]
+name = "nsbu-solver"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Standalone incompressible Navier-Stokes numerical library"
+readme = "README.md"
+include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
+
+[lints]
+workspace = true

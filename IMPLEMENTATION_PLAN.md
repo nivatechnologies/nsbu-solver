@@ -14,11 +14,11 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-No Rust solver, numerical CLI, concentrating PDE trajectory, admitted source instance, accepted PDE window, or formal proof build exists at this point. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+The Rust workspace and help/version CLI exist. No Rust numerical solver, numerical CLI, concentrating PDE trajectory, admitted source instance, accepted PDE window, or formal proof build exists at this point. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
 ## Planned public organization
 
-Start with three crates rather than a crate for every module. These paths are planned and do not exist in this bootstrap:
+Start with three crates rather than a crate for every module. The three crate roots now exist; numerical module paths below remain planned:
 
 ```text
 Cargo.toml                 public workspace; Apache-2.0 metadata

@@ -104,3 +104,13 @@ library loading; bounded-work tests cover root, coefficient and quadrature limit
 Report doubles verify orchestration and policy only. Mathematical claims rely on
 separately executed high-precision studies, and those studies do not establish a
 qualified concentrating trajectory or a production Rust implementation.
+
+## Rust workspace profile
+
+P01 now has separately measured Rust quality evidence. See the
+[per-metric report](../evidence/p01/README.md) and
+[pinned tool declarations](../quality/rust/README.md). These measurements cover
+all five current Rust source/test files; no numerical implementation is implied.
+The Rust workflow reruns mutation testing, in addition to coverage and static
+checks. Production builds use stable Rust; instrumented branch coverage uses a
+separately pinned nightly toolchain and explicitly includes integration tests.

@@ -1,0 +1,35 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.37s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_benchmarks-46af72489fcaa569)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/llvm-cov-target/debug/deps/nsbu-9529b9bc61728079)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/commands.rs (target/llvm-cov-target/debug/deps/commands-e811c03636330f65)
+
+running 3 tests
+test version_identifies_the_development_package ... ok
+test help_explains_the_current_capability ... ok
+test unsupported_and_extra_arguments_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_solver-dafa948d637a0898)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to work/p01-coverage.json

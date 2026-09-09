@@ -17,6 +17,16 @@ The report contains coefficient identities and floating-point junction checks, s
 
 The commands have no integration timestep, grid or output-image options because they do not run a PDE solver. `--help` is available on each tool. Reports are emitted to stdout; `verify_design.py --output PATH` also writes the selected file. Relative report paths resolve against the checkout root. Reports inside the checkout must be `.json` files under `work/` or `evidence/`; the runner refuses to overwrite the preserved design evidence. A successful rerun matches that preserved scientific report before adding the current execution metadata.
 
+## Working Rust package commands
+
+```sh
+cargo run -p nsbu-cli -- --help
+cargo run -p nsbu-cli -- --version
+```
+
+Help/version and invalid-argument handling are implemented. The library currently
+exports project metadata. No Rust integration or benchmark execution is provided.
+
 ## Intended runtime workflow, not yet executable
 
 The planned binary is `nsbu`. Its interface will cover case export, preflight, integration, restart and experiment comparison. Exact flags and schemas are to be frozen and tested in P11; this table describes behavior, not a working command tutorial.
