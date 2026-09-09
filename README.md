@@ -44,8 +44,9 @@ See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md)
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved
-from rest with temporal and 80/120-digit arithmetic refinements. P00B and its Python quality gates pass. These fixtures
-do not establish a qualified concentrating PDE trajectory.
+from rest with temporal and 80/120-digit arithmetic refinements. P00B and its Python quality gates pass. The [coarse concentrating diagnostic](evidence/p00c/README.md) also reaches the first endpoint
+from rest with both methods, with large tracking errors and unresolved spatial
+sampling. No qualified concentrating PDE trajectory is established.
 
 ## Implementation path
 

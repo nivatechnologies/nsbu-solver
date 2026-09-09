@@ -1,0 +1,1792 @@
+{
+  "status": "diagnostic-completed",
+  "case": "similarity-mms-v2",
+  "grid": 4,
+  "precision": 80,
+  "method": "CM",
+  "divisor": 8192,
+  "target": "1/256",
+  "initial_condition": "exact rest",
+  "accepted_ticks": 4096,
+  "remaining_ticks": 4096,
+  "quantum_exponent": -20,
+  "steps_completed": 32,
+  "rhs_evaluations": 128,
+  "maximum_rhs_evaluations": 128,
+  "reference_assignments": 0,
+  "preflight": {
+    "n": 4,
+    "precision": 80,
+    "allocations": {
+      "retained_vectors": 50331648,
+      "padded_vectors_and_dft_temporaries": 63700992,
+      "metadata_and_interpreter_reservation": 67108864
+    },
+    "reserved_bytes": 181141504,
+    "cap_bytes": 1073741824,
+    "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+  },
+  "force_cache_bytes": 21565440,
+  "total_reserved_bytes": 202706944,
+  "force_sampling": [
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "0.0"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00006103515625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 368,
+      "max_assembly_conditioning": "1.0605026441128839849"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0001220703125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "1.274694503725965971"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00018310546875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "1.7775780028463372089"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.000244140625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "3.1162367248978258428"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00030517578125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "11.03909233723680112"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0003662109375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 368,
+      "max_assembly_conditioning": "8.7969576452934433138"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00042724609375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "3.4718210385135947494"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00048828125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "4.2318290622879422161"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00054931640625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "10.824474384383775888"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0006103515625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "20.436404482107382665"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00067138671875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "8.2074342977274599672"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.000732421875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "66.596738016819790259"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00079345703125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "6.6247830353594064956"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0008544921875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "6.3272829882666885184"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00091552734375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "16.998295877589741629"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0009765625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "25.449598336943008049"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00103759765625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "10.076693552792043949"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0010986328125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 368,
+      "max_assembly_conditioning": "1578.5024923969025862"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00115966796875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "9.3092541691516660788"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.001220703125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "10.760058350460645941"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00128173828125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 368,
+      "max_assembly_conditioning": "24.518340998129524373"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0013427734375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 368,
+      "max_assembly_conditioning": "4.7561759612859823289"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00140380859375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "2.2901408493247162682"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00146484375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 352,
+      "max_assembly_conditioning": "1.3270555953505280811"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00152587890625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.1231523515071314216"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0015869140625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 400,
+      "max_assembly_conditioning": "1.1769007995877248029"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00164794921875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.2828820267614984249"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.001708984375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 400,
+      "max_assembly_conditioning": "1.4433230327253608475"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00177001953125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.5640200063998128801"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0018310546875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.5887368700731458557"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00189208984375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.5935148001508970285"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.001953125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.598128574275077907"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00201416015625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6028012790332611307"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0020751953125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 400,
+      "max_assembly_conditioning": "1.6075340786671555626"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00213623046875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6123281684707552683"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.002197265625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6171847759399807287"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00225830078125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6221051618683462773"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0023193359375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6270906214877360006"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00238037109375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6321424856564710599"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00244140625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6372621220969729973"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00250244140625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6424509366854568714"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0025634765625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.647710374796225566"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00262451171875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6530419227032829185"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.002685546875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6584471090421390471"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00274658203125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6639275063348471046"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0028076171875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 400,
+      "max_assembly_conditioning": "1.6694847325814873808"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00286865234375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6751204529215030173"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0029296875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6808363813684924351"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00299072265625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6866342826222778493"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0030517578125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6925159739622979487"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00311279296875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.6984833272266170523"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.003173828125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7045382708811039874"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00323486328125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7106827921836128542"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0032958984375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7169189394482961346"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00335693359375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7232488244154997684"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00341796875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7296746247330315065"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00347900390625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7361985865549598265"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0035400390625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7428230272644929004"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00360107421875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 400,
+      "max_assembly_conditioning": "1.7495503383279076432"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.003662109375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7563829882869500323"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00372314453125",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7633235258976121792"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.0037841796875",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7703745834237117656"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00384521484375",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7775388800942584208"
+    },
+    {
+      "grid": 4,
+      "precision": 80,
+      "time": "0.00390625",
+      "preflight": {
+        "n": 4,
+        "precision": 80,
+        "allocations": {
+          "retained_vectors": 50331648,
+          "padded_vectors_and_dft_temporaries": 63700992,
+          "metadata_and_interpreter_reservation": 67108864
+        },
+        "reserved_bytes": 181141504,
+        "cap_bytes": 1073741824,
+        "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+      },
+      "field_evaluations": 64,
+      "maximum_field_evaluations": 64,
+      "scalar_root_iterations": 384,
+      "max_assembly_conditioning": "1.7848192257341926379"
+    }
+  ],
+  "failure": "",
+  "state": {
+    "(-1, -1, -1)": [
+      [
+        "-0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "-0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "-0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "-0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(-1, -1, 0)": [
+      [
+        "1.4820100383336408374239497711559588421175359729172087102682188926773566253785131e-84",
+        "-0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "-1.4820100383336408374239497711559588421175359729172087102682188926773566253785131e-84",
+        "0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "0.055696354350976924151585762025008250960503761962063166076723462469145161311836637",
+        "2.309825376861023519688896054374589053868885527819814750526494113086206403730499e-85"
+      ]
+    ],
+    "(-1, -1, 1)": [
+      [
+        "0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "-0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "-0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "-0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(-1, 0, -1)": [
+      [
+        "-0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "-0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "-0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(-1, 0, 0)": [
+      [
+        "0.0",
+        "0.0"
+      ],
+      [
+        "-2.9421917785887136437754079119126500611653691990759209419427701627623157725170204e-85",
+        "0.083344575139786015625429834943682790326038730377124193901647469222566095581669426"
+      ],
+      [
+        "0.026647045318477296034195904929894178439611605767838683187850202963972639148771732",
+        "-2.5421862866458453167303542008104244552962324724271779398414467474205223209695134e-85"
+      ]
+    ],
+    "(-1, 0, 1)": [
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "-0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(-1, 1, -1)": [
+      [
+        "-0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "-0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(-1, 1, 0)": [
+      [
+        "-1.2578163073377265373213909002775648916026127316274853886776250039963446343481451e-84",
+        "0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "-1.2578163073377265373213909002775648916026127316274853886776250039963446343481451e-84",
+        "0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "0.055696354350976924151585762025008250960503761962063166076723462469145161311836637",
+        "-3.4297251847525523758428456209210899528676862754010286149602681105998560096251887e-85"
+      ]
+    ],
+    "(-1, 1, 1)": [
+      [
+        "0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "-0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "-0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "-0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(0, -1, -1)": [
+      [
+        "0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "-0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(0, -1, 0)": [
+      [
+        "1.483828780451754997437829439817386875901555088193056140207952968358145067419252e-84",
+        "-0.083344575139786015625429834943682790326038730377124193901647469222566095581669426"
+      ],
+      [
+        "0.0",
+        "0.0"
+      ],
+      [
+        "0.026647045318477296034195904929894178439611605767838683187850202963972639148771732",
+        "6.2660202619659637954822582737758510685163225801389423723578651440251472445956253e-86"
+      ]
+    ],
+    "(0, -1, 1)": [
+      [
+        "-0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(0, 0, -1)": [
+      [
+        "-1.6698750717190700024406422994704903837271518526835665425968311104364164019949948e-85",
+        "-7.1383337152640366010822917967641971374836358187778310359062299451989144924102786e-86"
+      ],
+      [
+        "-7.1610830991904408192387702797928278327376152096984893876049399859973833613519006e-86",
+        "2.1938831548187562399793263614363305700803334031072837014628223508212095594141172e-85"
+      ],
+      [
+        "0.0",
+        "0.0"
+      ]
+    ],
+    "(0, 0, 0)": [
+      [
+        "-2.3846213226580152519851556952286122354433651784509379470162232260116440320569511e-85",
+        "-2.1093944484149287203441872728063965571864876470089538862338812487305395159009367e-85"
+      ],
+      [
+        "-7.1320253507708631077836261534900704879891360091286629013514796978622619375423514e-86",
+        "-6.8763945529677378075752995931072164040823478488315995301646304277240868116979369e-86"
+      ],
+      [
+        "-0.0075713123412392399323283852379148147379502807183063198231738676303455053905219425",
+        "-4.8563708770284975175479901667108984396043187503601752474909118773476484686751113e-85"
+      ]
+    ],
+    "(0, 0, 1)": [
+      [
+        "-1.9032641765595951171583903436736610140198161098724390989638499269490932756063755e-85",
+        "2.1730732014934919042172464836432137508721128320780965335379282897595360744577668e-86"
+      ],
+      [
+        "-3.7698314863408243479060424190232176936226873227968081674841975346693760316847769e-86",
+        "4.002343595513244829407747450889389939608996879570961070658378228415967013911001e-85"
+      ],
+      [
+        "0.0",
+        "0.0"
+      ]
+    ],
+    "(0, 1, -1)": [
+      [
+        "-0.000035806698384444146908177577519254286425372937226925513465460838781233896394947095",
+        "-0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(0, 1, 0)": [
+      [
+        "-1.4594686352265685025460020639046034186043429802496543638334147287701795232829096e-84",
+        "0.083344575139786015625429834943682790326038730377124193901647469222566095581669426"
+      ],
+      [
+        "0.0",
+        "0.0"
+      ],
+      [
+        "0.026647045318477296034195904929894178439611605767838683187850202963972639148771732",
+        "1.4024355763471654514280632855647349647639576418517569064097620435691307253186337e-85"
+      ]
+    ],
+    "(0, 1, 1)": [
+      [
+        "0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "-0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "-0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(1, -1, -1)": [
+      [
+        "0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "-0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "-0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(1, -1, 0)": [
+      [
+        "1.0514472543186070675382094252771444522580625635466409334218477155684447862757373e-84",
+        "-0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "1.0514472543186070675382094252771444522580625635466409334218477155684447862757373e-84",
+        "-0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "0.055696354350976924151585762025008250960503761962063166076723462469145161311836637",
+        "-1.9520523030969869060592182996512464179561170224977310586393051448737639323536696e-85"
+      ]
+    ],
+    "(1, -1, 1)": [
+      [
+        "-0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "-0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "-0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(1, 0, -1)": [
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(1, 0, 0)": [
+      [
+        "0.0",
+        "0.0"
+      ],
+      [
+        "5.3159360109218278080095466024782393315665385712449199942397248934991707469757529e-85",
+        "-0.083344575139786015625429834943682790326038730377124193901647469222566095581669426"
+      ],
+      [
+        "0.026647045318477296034195904929894178439611605767838683187850202963972639148771732",
+        "-3.0681081278383590224896560207339595017630956420253249460569510662941045375177215e-85"
+      ]
+    ],
+    "(1, 0, 1)": [
+      [
+        "-0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "-0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ],
+      [
+        "-0.000035806698384444146908177577519254286425372937226925513465460838781233896394947096",
+        "0.0099188383544807033386505192770220473112292703742398446429659256731726610989508024"
+      ],
+      [
+        "0.037318644511161328606991843378817884924125974361409652759174346505375443136824761",
+        "0.34557103966492836637866860862897373538263490223819880015421962209948773375133671"
+      ]
+    ],
+    "(1, 1, -1)": [
+      [
+        "0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ],
+    "(1, 1, 0)": [
+      [
+        "-1.5035889532896610417067613303219964424344275059798743507929493510658086410262241e-84",
+        "0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "1.5035889532896610417067613303219964424344275059798743507929493510658086410262241e-84",
+        "-0.076689538393939048523368213489550783252002874848922273432712522570299853064611389"
+      ],
+      [
+        "0.055696354350976924151585762025008250960503761962063166076723462469145161311836637",
+        "1.1458738859403013322018916975725041492974454387429409730391885949013450995063806e-85"
+      ]
+    ],
+    "(1, 1, 1)": [
+      [
+        "-0.022922832177995593727891867540241137371584590244839896665298892664336947357606509",
+        "0.064007010130685938991157042836607682136639959971472783414706174270618270720958832"
+      ],
+      [
+        "-0.023005514219097554959427773905320415325845565235863374237175969264178923800178639",
+        "0.083150958378559777205942129818314256955146186612375378857624578987874619329204392"
+      ],
+      [
+        "0.045928346397093148687319641445561552697430155480703270902474861928515871157785148",
+        "-0.14715796850924571619709917265492193909178614658384816227233075325849289005016322"
+      ]
+    ]
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "Spatial/force sampling unresolved",
+    "No refinement-family qualification",
+    "Retained-band reference tracking only",
+    "Allocating Python diagnostic, not a bounded production allocator",
+    "No rigorous slab-wide error enclosure"
+  ],
+  "tracking_difference": {
+    "full_fine_band_l2": "1.6412562103496123179",
+    "full_fine_band_h1": "14.57545659285460387",
+    "max_component_change": "0.3472712032940135326"
+  }
+}

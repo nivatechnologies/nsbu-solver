@@ -518,6 +518,48 @@
     "crap": 5.0
   },
   {
+    "path": "reference/pilot_force.py",
+    "function": "PilotForce.__call__",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/pilot_force.py",
+    "function": "PilotForce.stage_tick",
+    "cc": 6,
+    "branch_coverage": 1.0,
+    "crap": 6.0
+  },
+  {
+    "path": "reference/pilot.py",
+    "function": "pilot",
+    "cc": 9,
+    "branch_coverage": 1.0,
+    "crap": 9.0
+  },
+  {
+    "path": "reference/pilot.py",
+    "function": "tracking",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/pilot.py",
+    "function": "report",
+    "cc": 5,
+    "branch_coverage": 1,
+    "crap": 5
+  },
+  {
+    "path": "reference/pilot.py",
+    "function": "reservation",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
     "path": "reference/tests/test_reference.py",
     "function": "ReferenceTests.test_scalar_field_agreement_and_divergence",
     "cc": 5,
@@ -1493,6 +1535,195 @@
   {
     "path": "reference/tests/test_bounded_reference_work.py",
     "function": "BoundedReferenceWorkTests.test_region_refinement_doubles_the_requested_work.integrated",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_tracking_signed_grid_and_noninteger_error",
+    "cc": 5,
+    "branch_coverage": 1.0,
+    "crap": 5.0
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_tracking_signed_grid_and_noninteger_error.reference",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.exercise",
+    "cc": 4,
+    "branch_coverage": 1,
+    "crap": 4
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.exercise.step",
+    "cc": 8,
+    "branch_coverage": 1.0,
+    "crap": 8.0
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.exercise.reference",
+    "cc": 3,
+    "branch_coverage": 1,
+    "crap": 3
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_resource_and_method_admission_before_numerical_work",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_fixed_clock_schedule_and_reference_only_after_evolution",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_nonfinite_candidate_does_not_commit_time_or_coefficients",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_rhs_and_reference_failures_preserve_diagnostic_evidence",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_module_entry_point_emits_diagnostic_json",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot.py",
+    "function": "PilotTests.test_module_entry_point_emits_diagnostic_json.step",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_guard_uses_padded_grid_and_sum_of_absolute_components",
+    "cc": 4,
+    "branch_coverage": 1.0,
+    "crap": 4.0
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_guard_uses_padded_grid_and_sum_of_absolute_components.inverse",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_stage_and_work_limits_are_refused",
+    "cc": 3,
+    "branch_coverage": 1.0,
+    "crap": 3.0
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_conversion_failure_is_not_repaired_by_subtracting_rounded_time",
+    "cc": 2,
+    "branch_coverage": 1.0,
+    "crap": 2.0
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_conversion_failure_is_not_repaired_by_subtracting_rounded_time.corrupted",
+    "cc": 2,
+    "branch_coverage": 1,
+    "crap": 2
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_nonmonotone_requests_reuse_only_the_pure_force",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_nonmonotone_requests_reuse_only_the_pure_force.sampled",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_nonmonotone_requests_reuse_only_the_pure_force.nonlinear",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_advective_and_cache_limits_precede_new_force_work",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_exact_advective_boundary_is_accepted",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_force.py",
+    "function": "PilotForceTests.test_overfull_cache_refuses_before_sampling",
+    "cc": 1,
+    "branch_coverage": 1.0,
+    "crap": 1.0
+  },
+  {
+    "path": "reference/tests/test_pilot_imports.py",
+    "function": "PilotImportTests.test_import_is_inert",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_work.py",
+    "function": "BoundedDivisor.__rpow__",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_work.py",
+    "function": "PilotWorkTests.test_class_reservations_are_added_without_exponential_work",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_work.py",
+    "function": "PilotWorkTests.test_divisor_is_a_bounded_scale_not_an_exponent",
+    "cc": 1,
+    "branch_coverage": 1,
+    "crap": 1
+  },
+  {
+    "path": "reference/tests/test_pilot_work.py",
+    "function": "PilotWorkTests.test_divisor_is_a_bounded_scale_not_an_exponent.step",
     "cc": 1,
     "branch_coverage": 1,
     "crap": 1

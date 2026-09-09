@@ -224,6 +224,48 @@
     "refactor_plans": []
   },
   {
+    "complexity": 3,
+    "file_name": "pilot.py",
+    "function_name": "reservation",
+    "path": "reference/pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "pilot.py",
+    "function_name": "report",
+    "path": "reference/pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 5,
+    "file_name": "pilot.py",
+    "function_name": "tracking",
+    "path": "reference/pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "pilot.py",
+    "function_name": "pilot",
+    "path": "reference/pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 4,
+    "file_name": "pilot_force.py",
+    "function_name": "PilotForce::stage_tick",
+    "path": "reference/pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 9,
+    "file_name": "pilot_force.py",
+    "function_name": "PilotForce::__call__",
+    "path": "reference/pilot_force.py",
+    "refactor_plans": []
+  },
+  {
     "complexity": 0,
     "file_name": "regions.py",
     "function_name": "radial_limit",
@@ -725,6 +767,132 @@
     "file_name": "test_numerical_contracts.py",
     "function_name": "NumericalContracts::test_full_profile_and_source_at_nonzero_time",
     "path": "reference/tests/test_numerical_contracts.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_module_entry_point_emits_diagnostic_json",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_nonfinite_candidate_does_not_commit_time_or_coefficients",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_rhs_and_reference_failures_preserve_diagnostic_evidence",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_fixed_clock_schedule_and_reference_only_after_evolution",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 1,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_resource_and_method_admission_before_numerical_work",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::test_tracking_signed_grid_and_noninteger_error",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 17,
+    "file_name": "test_pilot.py",
+    "function_name": "PilotTests::exercise",
+    "path": "reference/tests/test_pilot.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_advective_and_cache_limits_precede_new_force_work",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_exact_advective_boundary_is_accepted",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_nonmonotone_requests_reuse_only_the_pure_force",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_overfull_cache_refuses_before_sampling",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 2,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_stage_and_work_limits_are_refused",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 3,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_conversion_failure_is_not_repaired_by_subtracting_rounded_time",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 7,
+    "file_name": "test_pilot_force.py",
+    "function_name": "PilotForceTests::test_guard_uses_padded_grid_and_sum_of_absolute_components",
+    "path": "reference/tests/test_pilot_force.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_imports.py",
+    "function_name": "PilotImportTests::test_import_is_inert",
+    "path": "reference/tests/test_pilot_imports.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_work.py",
+    "function_name": "BoundedDivisor::__rpow__",
+    "path": "reference/tests/test_pilot_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_work.py",
+    "function_name": "PilotWorkTests::test_class_reservations_are_added_without_exponential_work",
+    "path": "reference/tests/test_pilot_work.py",
+    "refactor_plans": []
+  },
+  {
+    "complexity": 0,
+    "file_name": "test_pilot_work.py",
+    "function_name": "PilotWorkTests::test_divisor_is_a_bounded_scale_not_an_exponent",
+    "path": "reference/tests/test_pilot_work.py",
     "refactor_plans": []
   },
   {

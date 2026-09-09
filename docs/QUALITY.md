@@ -1,11 +1,12 @@
 # Quality evidence
 
-The current Python implementation passes numerical and quality checks locally and
-in [hosted CI](../evidence/quality-reference/hosted-ci.json). P00B is complete. Rust
-and concentrating-PDE validation remain separate.
+The Python implementation, including P00C diagnostic code, passes local numerical
+and quality checks. P00B and Rust foundations have passed hosted CI; the expanded
+Python profile is awaiting its hosted run. Concentrating PDE qualification remains
+separate from these checks.
 
 The [source-hashed measurement report](../evidence/quality-reference/summary.json)
-records 139 passing tests. The scope includes maintained Python implementations,
+records 155 passing tests. The scope includes maintained Python implementations,
 reference oracles, tooling and tests. Typing stubs are inventoried and type checked;
 they have no executable coverage obligations. Frozen review files, generated
 fixtures, archived execution provenance and third-party dependencies are separately
@@ -18,8 +19,8 @@ without being counted as Python functions or executable Python lines.
 | Cognitive complexity, maximum per function | 17 | <22 |
 | Halstead difficulty, maximum per file / function | 9.888 / 7.805 | <80 |
 | Physical lines per source/test file, maximum | 243 | <500 |
-| Executable line coverage | 2,770/2,770 | 100% |
-| Branch coverage | 512/512 | 100% |
+| Executable line coverage | 3,144/3,144 | 100% |
+| Branch coverage | 558/558 | 100% |
 | CRAP, maximum per function | 15 | <25 |
 | Non-equivalent surviving mutants | 0 | 0 |
 | Confirmed dead code / duplicated blocks | 0 / 0 | 0 / 0 |
@@ -35,8 +36,8 @@ CRAP therefore equals its cyclomatic complexity under the adopted formula.
 ## Mutation evidence
 
 The [reconciled mutation report](../evidence/quality-reference/mutations/summary.json)
-contains 7,905 current mutation specifications: 7,829 explicit test failures,
-74 individually documented equivalents, zero non-equivalent survivors, zero
+contains 8,691 current mutation specifications: 8,603 explicit test failures,
+86 individually documented equivalents, zero non-equivalent survivors, zero
 timeouts and zero untested cases. Two Cosmic Ray `ExceptionReplacer` construction
 errors on dotted exception names are invalid; neither is counted as a kill.
 
@@ -50,8 +51,10 @@ silently relabeled as killed mutants.
 The [raw runs](../evidence/quality-reference/mutations/runs.json) preserve complete
 inventories, source hashes, commands and outcomes. The original comprehensive run
 contained 7,909 specifications; removing redundant wrapper defaults required a new
-inventory for those modules. A fresh inventory matches all 7,905 consolidated
-specifications and their current implementation hashes.
+inventory for those modules. P00C adds 786 specifications without changing any
+P00B implementation target. A fresh inventory matches all 8,691 consolidated
+specifications and their current implementation hashes. The new runs and test-source
+snapshots are archived beside the earlier reports.
 
 Cosmic Ray labels process timeouts as `killed`. An earlier supplemental jet report
 incorrectly included one such timeout among its kills. That historical report is

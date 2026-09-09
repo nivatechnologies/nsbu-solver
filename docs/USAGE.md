@@ -80,3 +80,11 @@ The sampling study uses the exact v2 force, but performs no integration and gran
 no spatial qualification. Larger direct-DFT and sampling studies can take many
 minutes. Each numerical study reserves its diagnostic storage before allocation;
 these Python reservations are not hard allocator bounds for the future runtime.
+
+## Executed concentrating diagnostic
+
+`python -m reference.pilot` runs the N=4, 80-digit CM pilot from exact rest to
+1/256. This is an allocating Python diagnostic and can take about twenty minutes.
+The [saved CM/HO reports](../evidence/p00c/README.md) include the final spectra,
+resource reservations, force-sampling records and large reference-tracking errors.
+Neither method qualifies a concentrating window.

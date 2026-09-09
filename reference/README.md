@@ -69,5 +69,17 @@ the exact executed source hashes.
 P00B numerical and quality gates passed locally and in hosted CI. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
-Rust implementation, current-grid binary64 comparison, concentrating trajectory
-or accepted PDE window is supplied by this package.
+Rust integration, current-grid binary64 comparison or accepted PDE window is
+supplied by this package.
+
+## Concentrating diagnostic now available
+
+`python -m reference.pilot` runs the exact-v2 N=4 CM trajectory from rest to
+1/256 at 80 digits. It can take about twenty minutes. `pilot(4,8192,80,"HO",1024**3)`
+from `reference.pilot` runs the independently evolved HO branch. The supported
+divisors are 8192, 16384 and 32768; the existing reference grids/precision policy
+and a complete force-cache reservation are enforced before evolution.
+
+[The executed diagnostic](../evidence/p00c/README.md) reaches the first endpoint
+with both methods, but retained-band tracking errors are large and spatial/force
+sampling remains unresolved. No accepted PDE window follows from this run.

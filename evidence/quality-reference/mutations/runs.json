@@ -351,6 +351,114 @@
           "bytes": 3678
         }
       }
+    },
+    {
+      "run": "cosmic-pilot",
+      "records": 786,
+      "explicit_test_failures": 660,
+      "timeouts": 12,
+      "raw_survivors": 114,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "97d15e7d044043b21c3938ebca169dc4d5793e39e8a16749b2434418788861d3",
+          "bytes": 218855
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-all-results.jsonl.gz",
+          "uncompressed_sha256": "d0bb989317d0a1d2a83a34b0af4c137ff28c328c96737f6ba97d53084209fb09",
+          "bytes": 2435264
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-source-hashes.json.gz",
+          "uncompressed_sha256": "7b1adfe17e32b6b88657f2b4c886e377c23d046a14d323145ddaf9a8065b6e53",
+          "bytes": 5447
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-progress.log.gz",
+          "uncompressed_sha256": "6f20c5f1a8520c93228cc8803b8fe64b614de1bb58a1f1263500f09ff84309f9",
+          "bytes": 536
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-execute_all.py.gz",
+          "uncompressed_sha256": "176f80601a7cdc45733e2fb3b1a7dba287b86ecc9a591a6aba7336830d94bc60",
+          "bytes": 2922
+        }
+      },
+      "test_source_snapshot": "evidence/quality-reference/mutations/cosmic-pilot-test-sources.json.gz"
+    },
+    {
+      "run": "cosmic-pilot-second",
+      "records": 126,
+      "explicit_test_failures": 102,
+      "timeouts": 10,
+      "raw_survivors": 14,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-second-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "3766040e129288f61d93d2d518087bcd56a26cd3a3a8bf471fc5966a9156ce16",
+          "bytes": 34822
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-second-all-results.jsonl.gz",
+          "uncompressed_sha256": "b8e11788b5703dd43871e51bb24480b8e5be660b77daadf5356fe22be37f458a",
+          "bytes": 435562
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-second-source-hashes.json.gz",
+          "uncompressed_sha256": "70e5b16e1cea0a30709ec1b643c79c59158e5ed1038340eb925fb16888d6be0f",
+          "bytes": 5447
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-second-progress.log.gz",
+          "uncompressed_sha256": "0f8c4ba382c7f0662bb71767ae3e9ae0807e902130e30855c6601bffac41c628",
+          "bytes": 178
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-second-execute_all.py.gz",
+          "uncompressed_sha256": "41c83502f57309047a8fb28ffd4b133530958b37b347c4a65b85aa16dfcc8509",
+          "bytes": 2929
+        }
+      },
+      "test_source_snapshot": "evidence/quality-reference/mutations/cosmic-pilot-second-test-sources.json.gz"
+    },
+    {
+      "run": "cosmic-pilot-third",
+      "records": 24,
+      "explicit_test_failures": 12,
+      "timeouts": 0,
+      "raw_survivors": 12,
+      "invalid": 0,
+      "files": {
+        "all-inventory.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-third-all-inventory.jsonl.gz",
+          "uncompressed_sha256": "dadd56cf66aad7b2614c0d399421affe1ef3b0a3332cfe20ba34cb0ab4fcd239",
+          "bytes": 6553
+        },
+        "all-results.jsonl": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-third-all-results.jsonl.gz",
+          "uncompressed_sha256": "05306eeb72fcafe66e4a950dc1940272f6c8abf55290bcfd3a34e223ac87255d",
+          "bytes": 70088
+        },
+        "source-hashes.json": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-third-source-hashes.json.gz",
+          "uncompressed_sha256": "6fb2098e69d544bc7480c8483b8212b83de41489b7e054463fcfd91dce66304e",
+          "bytes": 5555
+        },
+        "progress.log": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-third-progress.log.gz",
+          "uncompressed_sha256": "8daba0e7f1afccbda174864e93dd30a2e8bc421880db60df8916ee3a972152db",
+          "bytes": 124
+        },
+        "execute_all.py": {
+          "artifact": "evidence/quality-reference/mutations/cosmic-pilot-third-execute_all.py.gz",
+          "uncompressed_sha256": "d00391242790d44619be98ca0cbb9b7e4cfe8e1548e558a9c7603238e18fc5d7",
+          "bytes": 3002
+        }
+      },
+      "test_source_snapshot": "evidence/quality-reference/mutations/cosmic-pilot-third-test-sources.json.gz"
     }
   ],
   "summary": "evidence/quality-reference/mutations/summary.json",

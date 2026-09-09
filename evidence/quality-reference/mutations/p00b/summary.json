@@ -1,10 +1,10 @@
 {
   "status": "passed",
   "scope": "Maintained Python implementation; test oracles are not mutation targets",
-  "generated": 8691,
-  "explicit_test_failures": 8603,
-  "raw_survivors": 86,
-  "equivalent": 86,
+  "generated": 7905,
+  "explicit_test_failures": 7829,
+  "raw_survivors": 74,
+  "equivalent": 74,
   "non_equivalent_survivors": 0,
   "timeouts": 0,
   "untested": 0,
@@ -17,24 +17,13 @@
     "dependency_inventory": "evidence/quality-reference/dependencies.json"
   },
   "consolidated_results": "evidence/quality-reference/mutations/consolidated-results.jsonl.gz",
-  "consolidated_uncompressed_sha256": "ef3ba42ee76aec5a11c05857d6ab5775b6053c3bb312d90ac42b8bdeb273c204",
+  "consolidated_uncompressed_sha256": "7a5f8da38f118fff99786e7258b174ae97d261b5e727d280530a83241238d3ad",
   "current_inventory_matched": true,
   "target_source_hashes_verified": true,
-  "fresh_inventory_sha256": "e87e171535c5828f1a05b26844e3ca764ed39c69e660458538f1b27afc41bc35",
+  "fresh_inventory_sha256": "66cde2592123e42f9243263c98f2e0de24500c344dddc604b9977d1358f34699",
   "limitations": [
     "A finite mutation operator set is not a correctness proof.",
     "Equivalence assumptions are scoped to documented entry points, CPython 3.12 and the pinned public-only dependency profile.",
-    "Mutation evidence does not qualify a concentrating PDE window or prove all possible errors absent."
-  ],
-  "extension": {
-    "package": "P00C",
-    "generated": 786,
-    "explicit_test_failures": 774,
-    "equivalent": 12,
-    "timeouts": 0,
-    "invalid": 0,
-    "scope": "pilot.py and pilot_force.py; all previous target source unchanged",
-    "test_strengthening": "Additional budget, initial-state, guard, cache, type and method-selection assertions resolve every non-equivalent survivor and timeout. Earlier timeout outcomes remain archived as timeouts.",
-    "runner_update": "The reproduction configuration adds separate inert-import and bounded-work probes before the complete suite; no old test phase is removed."
-  }
+    "No Rust or concentrating-PDE validation is implied."
+  ]
 }

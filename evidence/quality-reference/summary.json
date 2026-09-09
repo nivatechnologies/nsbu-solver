@@ -1,5 +1,5 @@
 {
-  "status": "passed",
+  "status": "local-checks-passed-hosted-ci-pending",
   "source_inventory": {
     "reference/__init__.py": {
       "sha256": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
@@ -48,6 +48,14 @@
     "reference/verify_sampling.py": {
       "sha256": "713f2a3185cb8d9385bf15ea603c70cdae5abe0918c507e0cbfacb901e79e5ea",
       "physical_lines": 69
+    },
+    "reference/pilot_force.py": {
+      "sha256": "75882df585d1faa6eefbd29afae35bee3b818bd5945e2c304387571fe38380e7",
+      "physical_lines": 47
+    },
+    "reference/pilot.py": {
+      "sha256": "0b75be6b899c9dc1692b7b450bcee02e867fea2d2aeb8af14afc7e795f23c2f1",
+      "physical_lines": 84
     },
     "reference/tests/test_reference.py": {
       "sha256": "939112a88fc8d25487ea17664637d5c9b486dd81437d9ec32979c278d4f0217e",
@@ -145,6 +153,22 @@
       "sha256": "56f7f80fef2b3008a2c51d40eb2198f222fbdb960c628f62e91ebb7bbc2babe7",
       "physical_lines": 36
     },
+    "reference/tests/test_pilot.py": {
+      "sha256": "e1b0d3cd6edf382536c3a903872b657d6f529e506b1a96425ddf9ed1eb3a1ede",
+      "physical_lines": 143
+    },
+    "reference/tests/test_pilot_force.py": {
+      "sha256": "18146e7bc80722f97b9dd09bd100f26d0322b5078f438f383c92a632d3328d90",
+      "physical_lines": 126
+    },
+    "reference/tests/test_pilot_imports.py": {
+      "sha256": "cf2ed4cb864991797f62d0a38b8b46b29927e2de5c1243b6dec1a5e932ccb172",
+      "physical_lines": 17
+    },
+    "reference/tests/test_pilot_work.py": {
+      "sha256": "f6a95f4994407cb95c1c4af9e7a749843ce01ce211e73432595381588d979c42",
+      "physical_lines": 39
+    },
     "tools/verify_design.py": {
       "sha256": "7caa29472275eef008e97d4330a238bcb6a5ad10151e3a08b9fb29ef1b25939f",
       "physical_lines": 135
@@ -191,15 +215,15 @@
     }
   },
   "coverage": {
-    "covered_lines": 2770,
-    "num_statements": 2770,
+    "covered_lines": 3144,
+    "num_statements": 3144,
     "percent_covered": 100.0,
     "percent_covered_display": "100",
     "missing_lines": 0,
     "excluded_lines": 0,
-    "num_branches": 512,
+    "num_branches": 558,
     "num_partial_branches": 0,
-    "covered_branches": 512,
+    "covered_branches": 558,
     "missing_branches": 0
   },
   "maximum_cyclomatic_complexity": 15,
@@ -209,11 +233,11 @@
   "maximum_physical_lines": 243,
   "maximum_crap": 15.0,
   "typing": {
-    "filesAnalyzed": 46,
+    "filesAnalyzed": 52,
     "errorCount": 0,
     "warningCount": 0,
     "informationCount": 0,
-    "timeInSec": 2.784
+    "timeInSec": 2.993
   },
   "duplicate_code_findings": 0,
   "dead_code_review": {
@@ -229,27 +253,11 @@
     "Maintained Python source/tests and local mpmath typing interface inventoried. Typing stubs have no executable coverage obligations.",
     "Mutation targets implementations; test oracles are not mutation targets. Tests remain in coverage, complexity, typing and duplicate/dead-code scope.",
     "Frozen reviewed artifacts remain unchanged and excluded; work contains ignored transient experimental scripts, not shipped commands.",
-    "Zero reported duplication and reviewed static dead-code findings are scoped measurements, not proofs over arbitrary future use.",
-    "Declarative workflow/configuration files are separately reviewed and hashed. Their tool-invocation commands do not enter Python function or coverage denominators; Python maintained sources and tests remain fully included."
+    "Zero reported duplication and reviewed static dead-code findings are scoped measurements, not proofs over arbitrary future use."
   ],
-  "tests": {
-    "passed": 139,
-    "command": "coverage run -m pytest -q",
-    "log": "evidence/quality-reference/tests.log"
-  },
-  "automation": {
-    "workflow": ".github/workflows/checks.yml",
-    "source_manifest": "evidence/quality-reference/source-inventory.sha256",
-    "config_manifest": "evidence/quality-reference/quality-config.sha256",
-    "mutation_policy": "CI validates the complete reconciled report against exact source and configuration hashes; source/test changes require renewed evidence. Mutation execution is isolated and archived, not silently represented as rerun by the artifact gate."
-  },
-  "post_measurement_non_executable_changes": [
-    {
-      "path": "reference/tests/test_coefficient_work_limits.py",
-      "measured_sha256": "1ef47f1ac3e2ca15d2da823a59dc75b8fed3dc80519fb6546f9c6b6053fe0098",
-      "current_sha256": "913080eaaa7e631ada22cd31f7f7a0e5dff677d3faec6eaf9e8811646627279a",
-      "change": "Removed one trailing blank line; parsed Python AST is identical. Hosted CI reruns coverage on the normalized file."
-    }
-  ],
-  "hosted_ci": "evidence/quality-reference/hosted-ci.json"
+  "tests_passed": 155,
+  "execution_batches": [
+    "Complete 155-test suite passed",
+    "Budget-probe test file rerun under coverage after adding operands to its assertion error message; no implementation target changed"
+  ]
 }

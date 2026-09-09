@@ -1,0 +1,89 @@
+{
+  "package": "P00C",
+  "status": "local-verification-passed-hosted-ci-pending",
+  "case": "similarity-mms-v2",
+  "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f",
+  "grid": 4,
+  "nu": "1",
+  "precision_digits": 80,
+  "initial_condition": "exact rest at t=0",
+  "endpoint": "1/256",
+  "tick_quantum": "2^-20",
+  "target_ticks": 8192,
+  "endpoint_ticks": 4096,
+  "branches": {
+    "cm": {
+      "artifact": "evidence/p00c/cm-n4-8192.json",
+      "sha256": "c97d7b4221f086da73a4fa34bc901d7dee650dc4fea29adc23d5ba2f67b81e07",
+      "completed_utc": "2026-09-09T10:03:20.085268+00:00",
+      "steps": 32,
+      "rhs_evaluations": 128,
+      "force_sample_times": 65,
+      "field_evaluations": 4160,
+      "root_iterations": 24320,
+      "tracking_error": {
+        "full_fine_band_l2": "1.6412562103496123179",
+        "full_fine_band_h1": "14.57545659285460387",
+        "max_component_change": "0.3472712032940135326"
+      },
+      "total_reserved_bytes": 202706944
+    },
+    "ho": {
+      "artifact": "evidence/p00c/ho-n4-8192.json",
+      "sha256": "fc335408be37fc2169b1ece34c4f882cba8186d2f223ac375b2ce6c508ffcd24",
+      "completed_utc": "2026-09-09T10:03:35.798591+00:00",
+      "steps": 32,
+      "rhs_evaluations": 160,
+      "force_sample_times": 65,
+      "field_evaluations": 4160,
+      "root_iterations": 24320,
+      "tracking_error": {
+        "full_fine_band_l2": "1.6412562103076636271",
+        "full_fine_band_h1": "14.57545659251969519",
+        "max_component_change": "0.34727120328538422004"
+      },
+      "total_reserved_bytes": 202706944
+    }
+  },
+  "cm_ho_difference": {
+    "full_fine_band_l2": "1.1993813675762951887e-9",
+    "full_fine_band_h1": "1.0394677700024491838e-8",
+    "max_component_change": "3.6745231268414459414e-10"
+  },
+  "accepted_pde_windows": 0,
+  "spatial_qualification": "unresolved",
+  "reference_assignments": 0,
+  "advective_guard": "Every RHS stage tested dt max_x sum_i |u_i| kmax_i <= 0.3 on the padded grid",
+  "allocation_scope": "202706944 declared bytes per branch including pure force cache; 1073741824 byte cap; conservative Python reservation, not measured RSS or hard allocator enforcement",
+  "force_sampling_evidence": "evidence/reference-sampling.json",
+  "quality_evidence": "evidence/quality-reference/summary.json",
+  "implementation_source_sha256": {
+    "reference/__init__.py": "93b8736d3d3a57df38b2debf8a9bec39dac82d73fcd70cb2f087fc61ff361802",
+    "reference/dft.py": "91739e8480e8134d7fc7f959021c33af4b714c5454873867610a0057b358c038",
+    "reference/evaluator.py": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+    "reference/jets.py": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+    "reference/pilot.py": "0b75be6b899c9dc1692b7b450bcee02e867fea2d2aeb8af14afc7e795f23c2f1",
+    "reference/pilot_force.py": "75882df585d1faa6eefbd29afae35bee3b818bd5945e2c304387571fe38380e7",
+    "reference/regions.py": "f33d61f573e85eb1b9690dd3719bee0026743daca0ae8ef660743f8e2397ee3c",
+    "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+    "reference/steps.py": "0bf5071a8382f4236f41cb45f26c1a2faa2bc10a7cea4366ddb843e80ade3735",
+    "reference/tuples.py": "aa77b60f737e641f2e0672e04b4a18dc6aa0ba0efb7066c2f113b0f1279b4e53",
+    "reference/verify_fields.py": "36eabad7b058d993714ad834b3891ab2a87794a3cfa5b617f5532945c48dfcb4",
+    "reference/verify_sampling.py": "713f2a3185cb8d9385bf15ea603c70cdae5abe0918c507e0cbfacb901e79e5ea",
+    "reference/verify_steps.py": "e3164903679b83e90dc49827cdeca64b848a20e531c62c3456814156969fe7e2",
+    "reference/verify_trajectory.py": "66635f9071aef4977ae9c90974f58c63300b0129f9bf13ec26547837995e2dae"
+  },
+  "limitations": [
+    "Large retained-band reference tracking error",
+    "N=4 and the sampled forcing are spatially unresolved",
+    "No spatial or temporal refinement family for these concentrating trajectories",
+    "Both methods share the prescribed-force samples",
+    "No high-precision trajectory refinement yet",
+    "No rigorous slab-wide enclosure",
+    "No Rust PDE trajectory"
+  ],
+  "reproduction": [
+    "python -m reference.pilot",
+    "python -c 'import json; from reference.pilot import pilot; print(json.dumps(pilot(4,8192,80,\"HO\",1024**3),indent=2))'"
+  ]
+}
