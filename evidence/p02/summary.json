@@ -1,6 +1,6 @@
 {
   "package": "P02",
-  "status": "local-verification-passed-hosted-ci-pending",
+  "status": "complete",
   "tests": 19,
   "source_files": 19,
   "coverage": {
@@ -86,5 +86,6 @@
     "No Rust PDE trajectory",
     "Provider arithmetic conversion is a separate P05 obligation",
     "Resource ledger validates declared extra storage; future FFT/force providers must account for their allocations"
-  ]
+  ],
+  "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34335710108"
 }

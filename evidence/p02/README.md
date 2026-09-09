@@ -42,5 +42,5 @@ or dynamic Any escape. Independent oracle logic is retained in tests.
 LLVM's instrumented branch scope and inactive duplicate instantiations are
 reported honestly in the full coverage report; region and instantiation coverage
 are separate measurements, not claimed as 100%. Package dry-run passes. Local
-paths in published raw reports are normalized as in P01. Hosted CI must pass
-before this package is marked complete. No Rust PDE integration is claimed.
+paths in published raw reports are normalized as in P01. Hosted CI passed at revision `19f73ead1a54a9f0b15b7642846835416937da64`;
+[the hosted report](hosted-ci.json) records every gate. P02 is complete. No Rust PDE integration is claimed.
