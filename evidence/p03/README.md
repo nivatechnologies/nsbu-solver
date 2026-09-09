@@ -50,4 +50,6 @@ erasure is used.
 
 This is operator verification, not a Rust PDE trajectory or convergence result.
 No timestep, accepted PDE window or visualization is implemented by P03.
-Hosted verification remains pending until its run is recorded here.
+All hosted Rust build, package, coverage, static-analysis and mutation gates passed
+at revision 8be5427e7e6217ebe2dcc8c73a60487b387b38c1; see [hosted-ci.json](hosted-ci.json).
+The Python repository/reference workflow also passed at that revision. P03 is complete.

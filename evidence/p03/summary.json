@@ -1,6 +1,6 @@
 {
   "package": "P03",
-  "status": "local-checks-passed-hosted-ci-pending",
+  "status": "complete",
   "tests": 38,
   "source_files": 34,
   "coverage": {
@@ -102,5 +102,6 @@
     "Complete caller input/output, provider and allocator-overhead reservations remain required",
     "One rotational evaluation including physical pressure uses ten scalar 3D transforms",
     "No portable bitwise reproducibility or PDE convergence inferred from operator tests"
-  ]
+  ],
+  "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34411443204"
 }
