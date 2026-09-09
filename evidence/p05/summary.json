@@ -155,5 +155,6 @@
   ],
   "bootstrap_tests": 41,
   "design_verification": "passed",
-  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "report_normalization": "Published machine-specific home and checkout path prefixes replaced by <home> and <checkout>; numeric data and source hashes unchanged. Raw tool outputs retained under work/."
 }

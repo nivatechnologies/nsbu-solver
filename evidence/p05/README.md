@@ -84,3 +84,9 @@ in the work log and the successful fresh run in [package.log](package.log).
 
 No Rust concentrating trajectory, accepted PDE window, numerical CLI, checkpoint
 or viewer is supplied by P05. Those remain later packages in the active plan.
+
+Published report paths replace machine-specific home and checkout prefixes with
+`<home>` and `<checkout>`. Numeric outcomes and measured source hashes are unchanged;
+raw tool outputs remain in the ignored work directory. The initial hosted bootstrap
+run caught the unnormalized home path; a fresh extraction check now validates the
+published tree before the repair is committed.

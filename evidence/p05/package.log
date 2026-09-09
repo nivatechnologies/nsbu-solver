@@ -1,32 +1,32 @@
-   Packaging nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-solver)
+   Packaging nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
     Updating crates.io index
     Packaged 64 files, 231.8KiB (63.1KiB compressed)
-   Packaging nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-benchmarks)
+   Packaging nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
     Updating crates.io index
     Packaged 27 files, 108.8KiB (34.8KiB compressed)
-   Packaging nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+   Packaging nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
     Updating crates.io index
     Packaged 10 files, 16.9KiB (6.4KiB compressed)
-   Verifying nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-solver)
+   Verifying nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
    Compiling autocfg v1.5.1
    Compiling num-traits v0.2.19
    Compiling num-complex v0.4.6
-   Compiling nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p05-package-fresh/package/nsbu-solver-0.1.0-alpha.0)
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/work/p05-package-fresh/package/nsbu-solver-0.1.0-alpha.0)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.04s
-   Verifying nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-benchmarks)
+   Verifying nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
     Blocking waiting for file lock on package cache
     Updating crates.io index
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
-   Unpacking nsbu-solver v0.1.0-alpha.0 (registry `/mnt/niva-array/nsbu-solver/work/p05-package-fresh/package/tmp-registry`)
+   Unpacking nsbu-solver v0.1.0-alpha.0 (registry `<checkout>/work/p05-package-fresh/package/tmp-registry`)
     Blocking waiting for file lock on package cache
    Compiling nsbu-solver v0.1.0-alpha.0
-   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p05-package-fresh/package/nsbu-benchmarks-0.1.0-alpha.0)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/work/p05-package-fresh/package/nsbu-benchmarks-0.1.0-alpha.0)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.95s
-   Verifying nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+   Verifying nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
     Updating crates.io index
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
     Blocking waiting for file lock on package cache
-   Compiling nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p05-package-fresh/package/nsbu-cli-0.1.0-alpha.0)
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/work/p05-package-fresh/package/nsbu-cli-0.1.0-alpha.0)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.23s
