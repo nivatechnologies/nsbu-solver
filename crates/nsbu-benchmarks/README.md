@@ -98,3 +98,10 @@ quantity/pair comparisons at each scheduled time. The `smooth_refinement` exampl
 prints these findings after joint admission with its other consumers. See
 `docs/PHYSICAL_REFINEMENTS.md` for resource contracts, negative controls and the
 remaining pressure/all-channel/concentrating qualification work.
+
+`smooth_experiment::pressure` independently reconstructs full doubled-band,
+global mean-zero pressure from every actual family branch and separately
+prescribed force. Its finite consumer reports scalar and gradient refinements
+without replacing numerical pressure by the smooth analytical zero. The public
+example admits this workspace jointly with all other owners. See
+`docs/PRESSURE_REFINEMENTS.md` for equations, gauge, work accounting and limits.

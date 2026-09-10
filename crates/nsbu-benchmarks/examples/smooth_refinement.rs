@@ -1,6 +1,7 @@
 //! Bounded six-trajectory comparison walkthrough; its outputs are diagnostic samples.
 use nsbu_benchmarks::smooth_experiment::{
-    physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace, PhysicalRefinementSample},
+    physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace, QuantityRefinement},
+    pressure::{PressureFamilyPlan, PressureFamilyWorkspace},
     reconstruction::ReconstructionWorkspace,
     residual::{ResidualBounds, ResidualWorkspace},
     FamilyError, FamilyPlan, FamilySettings, SmoothFamily,
@@ -30,7 +31,21 @@ fn settings() -> FamilySettings {
 }
 fn main() -> Result<(), FamilyError> {
     let clocks = [clock(0)?, clock(64)?, clock(128)?];
-    let plan = FamilyPlan::new(settings(), TestedTimes::new(&clocks, 3)?, CAP)?;
+    evolve(admit(&clocks)?)
+}
+
+struct Plan<'a> {
+    family: FamilyPlan<'a>,
+    physical: PhysicalFamilyPlan<'a>,
+    pressure: PressureFamilyPlan<'a>,
+    reconstruction_bytes: usize,
+    residual: ResidualBounds,
+    domain: Domain,
+}
+
+// Aggregate every simultaneous owner before allocating the first one.
+fn admit(clocks: &[TickClock]) -> Result<Plan<'_>, FamilyError> {
+    let plan = FamilyPlan::new(settings(), TestedTimes::new(clocks, 3)?, CAP)?;
     let domain = Domain::new([12; 3], [1.0; 3], 1.0)?;
     let physical_plan = PhysicalFamilyPlan::new(
         plan,
@@ -39,8 +54,13 @@ fn main() -> Result<(), FamilyError> {
         3,
         CAP,
     )?;
-    let (bytes, reconstruction_bytes, residual_bounds) =
-        diagnostic_budget(physical_plan.bounds().joint_storage_bytes, domain, CAP)?;
+    let pressure_plan = PressureFamilyPlan::new(plan, Layout::new([24; 3])?, [1e-8, 1e-7], 3, CAP)?;
+    let base = physical_plan
+        .bounds()
+        .joint_storage_bytes
+        .checked_add(pressure_plan.bounds().storage_bytes)
+        .ok_or(SolverError::SizeOverflow)?;
+    let (bytes, reconstruction_bytes, residual_bounds) = diagnostic_budget(base, domain, CAP)?;
     println!("CyclicSine diagnostic experiment; independently evolved from rest; accepted concentrating windows=0");
     println!(
         "grids=[4,8,12] steps_ticks=[64,32,16] quantum=2^-16 endpoint_ticks=128 methods=CM,HO"
@@ -50,10 +70,23 @@ fn main() -> Result<(), FamilyError> {
         plan.bounds(),
         residual_bounds.work
     );
-    let mut family = SmoothFamily::new(plan)?;
-    let mut physical = PhysicalFamilyWorkspace::new(physical_plan)?;
-    let mut reconstruction = ReconstructionWorkspace::new(plan, 1, reconstruction_bytes)?;
-    let mut residual = ResidualWorkspace::new(domain, 1, residual_bounds.storage_bytes)?;
+    Ok(Plan {
+        family: plan,
+        physical: physical_plan,
+        pressure: pressure_plan,
+        reconstruction_bytes,
+        residual: residual_bounds,
+        domain,
+    })
+}
+
+fn evolve(plan: Plan<'_>) -> Result<(), FamilyError> {
+    let mut family = SmoothFamily::new(plan.family)?;
+    let mut physical = PhysicalFamilyWorkspace::new(plan.physical)?;
+    let mut pressure = PressureFamilyWorkspace::new(plan.pressure)?;
+    let mut reconstruction =
+        ReconstructionWorkspace::new(plan.family, 1, plan.reconstruction_bytes)?;
+    let mut residual = ResidualWorkspace::new(plan.domain, 1, plan.residual.storage_bytes)?;
     while let Some(sample) = family.advance()? {
         println!(
             "tick={} space_H1={:?} time_H1={:?} method_H1={:.12e}",
@@ -62,9 +95,16 @@ fn main() -> Result<(), FamilyError> {
             sample.time().map(|n| n.full.h1),
             sample.method().full.h1
         );
-        print_physical(physical.measure(&family)?);
+        let measured = physical.measure(&family)?;
+        print_quantities(measured.clock(), measured.quantities());
+        let measured = pressure.measure(&family)?;
+        print_quantities(measured.clock(), measured.quantities());
     }
-    println!("physical_work={:?}", physical.charged_work());
+    println!(
+        "physical_work={:?} pressure_work={:?}",
+        physical.charged_work(),
+        pressure.charged_work()
+    );
     let probe = clock(127)?;
     let comparison = reconstruction.measure(&family, probe)?;
     let measured = residual.measure(family.branch(2).ok_or(FamilyError::InvalidFamily)?, probe)?;
@@ -82,11 +122,11 @@ fn main() -> Result<(), FamilyError> {
     Ok(())
 }
 
-fn print_physical(sample: PhysicalRefinementSample) {
-    for item in sample.quantities() {
+fn print_quantities(clock: TickClock, quantities: &[QuantityRefinement]) {
+    for item in quantities {
         println!(
             "tick={} {:?} spatial_RMS={:?} temporal_RMS={:?} method_RMS={:.12e}",
-            sample.clock().elapsed(),
+            clock.elapsed(),
             item.quantity,
             item.space.map(|e| e.rms_error),
             item.time.map(|e| e.rms_error),

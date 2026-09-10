@@ -20,3 +20,10 @@ missing_docs = "deny"
 
 [workspace.lints.clippy]
 all = "deny"
+
+# Numerical integration/FFT tests exercise the same contracts with optimized loops.
+# The test profile retains debug assertions and overflow checks; no tests are omitted.
+[profile.test]
+opt-level = 2
+debug-assertions = true
+overflow-checks = true

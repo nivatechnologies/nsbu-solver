@@ -44,6 +44,12 @@ in [physical refinements](PHYSICAL_REFINEMENTS.md). It reserves 450 scalar inver
 FFTs per physical measurement and measures only after a successful synchronized
 family advance.
 
+The [pressure consumer](PRESSURE_REFINEMENTS.md) independently forms pressure on
+the complete doubled finest band from those same accepted states and a separately
+evaluated prescribed force. The example prints pressure/gradient findings and
+includes its reservation in the joint cap. Each pressure measurement reserves
+130 scalar transforms and retains its own finite work ledger.
+
 ## Branch schedule and ownership
 
 `FamilyPlan::new` validates every run and the aggregate cap without allocating.

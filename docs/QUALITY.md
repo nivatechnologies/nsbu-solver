@@ -359,3 +359,21 @@ admission, exact-policy/state binding and borrowed numerical sampling have
 separate responsibilities. Cap and failed-attempt controls pass with no
 post-construction allocation. A matching clean export runs the documented
 example and focused checks. Hosted checks are pending; P08 remains incomplete.
+
+The test profile now optimizes numerical loops at level 2 while explicitly
+retaining debug assertions and integer overflow checks. All workspace targets,
+negative controls, isolated allocation executables and line/branch instrumentation
+remain in scope. This profile is pinned in the workspace Cargo manifest and
+recorded with the pressure increment's evidence. Earlier unoptimized profiles
+remain historical evidence; optimization does not turn any numerical finding
+into a qualified PDE result.
+
+The [actual pressure family](../evidence/p08/pressure-family/README.md) passes
+350 Rust tests/probes across 254 Rust files: 98.90% executable line coverage and
+90.68% instrumented branch coverage. Maxima CC21, cognitive16, Halstead75.8956,
+physical-file469 and CRAP24.33594 pass all gates. The initial pressure report
+function's CRAP26.125 finding is preserved. Separating prescribed-force assembly
+from complete report publication resolves it, and a complete replay verifies the
+final source. Clean-source tests/example, fresh packaging and frozen bootstrap
+checks pass; unchanged Python retains its 188-test profile. Hosted checks are
+pending. No concentrating PDE window is accepted.

@@ -176,3 +176,9 @@ family. A successful report requires all twenty comparisons at the next accepted
 clock. It borrows every state read-only, checks exact numerical policy words and
 retains charges for failed requests. Alternate source domains reuse the same
 preallocated scalar samplers without changing their physical geometry or capacity.
+
+The [pressure consumer](PRESSURE_REFINEMENTS.md) shares the private exact family
+binding while owning independent prescribed force and conservative-product
+scratch. It pads diagnostic velocity copies, retains full doubled-band physical
+pressure and measures scalar/gradient pairs sequentially. Immutable reservations,
+force assembly, report scheduling and output formatting have separate roles.

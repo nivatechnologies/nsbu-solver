@@ -5,6 +5,7 @@
 //! and reconstruction studies still prevent a complete experiment qualification.
 pub mod physical;
 mod plan;
+pub mod pressure;
 pub mod reconstruction;
 pub mod residual;
 use crate::smooth_run::ReconstructedRun;

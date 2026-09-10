@@ -81,5 +81,6 @@ At the active smooth sample times, temporal RMS differences decrease by roughly
 Very small spatial differences alone do not establish a supported error floor.
 Zero differences at rest do not establish convergence. All quantities still need
 their independent force/reference/arithmetic and physical sampling evidence.
-Pressure, regional concentrating reports, full frozen benchmark semantics,
+The [pressure consumer](PRESSURE_REFINEMENTS.md) supplies separate scalar/gradient
+findings. Regional concentrating reports, full frozen benchmark semantics,
 accepted-state artifact binding and complete window production remain in progress.

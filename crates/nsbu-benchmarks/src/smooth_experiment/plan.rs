@@ -90,6 +90,38 @@ impl<'a> FamilyPlan<'a> {
             settings,
         })
     }
+    // Shared private binding for all actual-state observation consumers.
+    pub(super) fn require_sample(
+        self,
+        family: &SmoothFamily<'_>,
+        next: usize,
+    ) -> Result<TickClock, FamilyError> {
+        let clock = self
+            .times
+            .as_slice()
+            .get(next)
+            .copied()
+            .ok_or(FamilyError::InvalidFamily)?;
+        if family.failed {
+            return Err(FamilyError::Terminated);
+        }
+        if !same_settings(family.plan.settings, self.settings)
+            || family.plan.times.as_slice() != self.times.as_slice()
+            || family
+                .next
+                .checked_sub(1)
+                .and_then(|n| family.plan.times.as_slice().get(n))
+                .copied()
+                != Some(clock)
+            || family
+                .branches
+                .iter()
+                .any(|branch| branch.state().clock() != clock)
+        {
+            return Err(FamilyError::InvalidFamily);
+        }
+        Ok(clock)
+    }
     /// Checked aggregate reservation, including all independent observers.
     pub fn bounds(self) -> FamilyBounds {
         self.bounds
@@ -194,4 +226,16 @@ fn reservations(branches: &[Branch; 6], samples: usize) -> Result<FamilyBounds, 
 }
 fn add(a: usize, b: usize) -> Result<usize, SolverError> {
     a.checked_add(b).ok_or(SolverError::SizeOverflow)
+}
+
+// Exact numeric-policy words are compared; no tolerance or signed-zero normalization
+// is introduced while binding the physical consumer to an actual family.
+fn same_settings(left: FamilySettings, right: FamilySettings) -> bool {
+    left.grids == right.grids
+        && left.steps == right.steps
+        && left.endpoint == right.endpoint
+        && left.viscosity.to_bits() == right.viscosity.to_bits()
+        && left.advective_limit.to_bits() == right.advective_limit.to_bits()
+        && left.tolerances.absolute.map(f64::to_bits) == right.tolerances.absolute.map(f64::to_bits)
+        && left.tolerances.relative.map(f64::to_bits) == right.tolerances.relative.map(f64::to_bits)
 }

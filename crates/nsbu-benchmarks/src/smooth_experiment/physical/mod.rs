@@ -98,7 +98,7 @@ impl<'a> PhysicalFamilyWorkspace<'a> {
     ) -> Result<PhysicalRefinementSample, FamilyError> {
         self.charge()?;
         let clock = self.next_time().ok_or(FamilyError::InvalidFamily)?;
-        self.validate(family, clock)?;
+        self.plan.family.require_sample(family, self.next)?;
         let quantities = [
             self.quantity(family, 0)?,
             self.quantity(family, 1)?,
@@ -120,27 +120,6 @@ impl<'a> PhysicalFamilyWorkspace<'a> {
         self.charged.attempts += 1;
         self.charged.scalar_transforms += self.plan.per_attempt.scalar_transforms;
         self.charged.weighted_visits += self.plan.per_attempt.weighted_visits;
-        Ok(())
-    }
-    fn validate(&self, family: &SmoothFamily<'_>, clock: TickClock) -> Result<(), FamilyError> {
-        if family.failed {
-            return Err(FamilyError::Terminated);
-        }
-        if !same_settings(family.plan.settings, self.plan.family.settings)
-            || family.plan.times.as_slice() != self.plan.family.times.as_slice()
-            || family
-                .next
-                .checked_sub(1)
-                .and_then(|n| family.plan.times.as_slice().get(n))
-                .copied()
-                != Some(clock)
-            || family
-                .branches
-                .iter()
-                .any(|branch| branch.state().clock() != clock)
-        {
-            return Err(FamilyError::InvalidFamily);
-        }
         Ok(())
     }
     fn quantity(
@@ -192,16 +171,4 @@ fn field(state: &nsbu_solver::domain::SpectralState) -> Result<PhysicalField<'_>
         state.component(1)?,
         state.component(2)?,
     ]))
-}
-
-// Exact numeric-policy words are compared; no tolerance or signed-zero normalization
-// is introduced while binding the physical consumer to an actual family.
-fn same_settings(left: super::FamilySettings, right: super::FamilySettings) -> bool {
-    left.grids == right.grids
-        && left.steps == right.steps
-        && left.endpoint == right.endpoint
-        && left.viscosity.to_bits() == right.viscosity.to_bits()
-        && left.advective_limit.to_bits() == right.advective_limit.to_bits()
-        && left.tolerances.absolute.map(f64::to_bits) == right.tolerances.absolute.map(f64::to_bits)
-        && left.tolerances.relative.map(f64::to_bits) == right.tolerances.relative.map(f64::to_bits)
 }

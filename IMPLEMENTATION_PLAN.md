@@ -352,3 +352,19 @@ Python source retains its complete 188-test profile. Hosted verification is pend
 P08/P09 remain incomplete. Complete pressure/reference/force/arithmetic/sampling
 and all-observable evidence, full benchmark protocol/artifact binding and
 concentrating integration remain. No concentrating PDE window is accepted.
+
+## P08 actual pressure refinement-family progress
+
+The [pressure-family increment](evidence/p08/pressure-family/README.md) passes
+350 Rust tests/probes, 98.90% executable line coverage, 90.68% branch coverage and
+all required quality gates. Full doubled-band physical pressure and its gradient
+come from all six actual smooth states and independently prescribed force.
+Analytic gauge/high-band controls, bounded failures and allocation probes pass.
+The updated jointly admitted example, clean source, packaging and frozen bootstrap
+checks pass; the unchanged Python inventory retains its 188-test profile.
+A measured draft CRAP failure and its corrected complete replay remain recorded.
+Hosted verification is pending.
+
+P08/P09 remain incomplete. Full all-observable reference/force/arithmetic/sampling
+studies, benchmark/accepted-artifact binding, concentrating pressure mean/regional
+studies and complete window production remain. No concentrating window is accepted.
