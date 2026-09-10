@@ -37,4 +37,5 @@ P08 and P09 remain incomplete. Reconstruction storage and lineage event codecs
 are components, not complete accepted-state provenance. The smooth CLI does not
 yet save or resume files. Full reconstruction checkpoints, experiment integration
 and concentrating refinement studies remain. **Accepted concentrating PDE
-windows: zero.** Hosted verification of this increment is pending.
+windows: zero.** [Hosted Rust](hosted-rust.json) and [Python](hosted-python.json) verification
+passed for source revision `95590297a36a3ccff71b8a9eac4958040a60c3a5`.

@@ -274,6 +274,6 @@ separate responsibilities. Imported bytes cannot create trusted provenance.
 
 The revised-policy Python checker CLI contract fix also passed
 [source-matched hosted CI](../evidence/quality-policy-v2/cli-contract/hosted-ci.json),
-including all 163 tests and automated coverage/CRAP gates. The current Rust
-increment awaits hosted verification; P08/P09 and concentrating qualification
+including all 163 tests and automated coverage/CRAP gates. The owned-runtime Rust
+increment also passed source-matched hosted verification; P08/P09 and concentrating qualification
 remain incomplete.

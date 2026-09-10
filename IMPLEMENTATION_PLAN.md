@@ -228,4 +228,4 @@ transfer study verifies inherited error against independent direct fine evolutio
 accepted-state provenance and full force/reference/arithmetic/transfer refinement
 families remain. File save/resume commands are the next CLI increment. P08's
 experiment integration and P10 qualification remain gated; no concentrating window
-is accepted. Hosted checks for the owned-runtime increment are pending.
+is accepted. Source-matched hosted Rust and Python checks for the owned-runtime increment pass.

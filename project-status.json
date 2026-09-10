@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Owned smooth runtime local gates passed: 267 tests/probes, 99.20% executable lines, 95.02% branches, all complexity/CRAP limits. Revised-policy Python checks passed locally and hosted; current Rust hosted checks pending.",
+    "status": "Owned smooth runtime gates passed locally and hosted: 267 tests/probes, 99.20% executable lines, 95.02% branches, all complexity/CRAP limits. Revised-policy Python checks also passed locally and hosted.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
@@ -118,7 +118,8 @@
       ],
       "foundation_evidence": "evidence/p09/foundations/summary.json",
       "recorded_step_evidence": "evidence/p09/recorded/summary.json",
-      "runtime_evidence": "evidence/p09/runtime/summary.json"
+      "runtime_evidence": "evidence/p09/runtime/summary.json",
+      "runtime_hosted_ci": "evidence/p09/runtime/hosted-rust.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
