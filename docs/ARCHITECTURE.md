@@ -20,7 +20,7 @@ The workspace has three public crates:
 |---|---|---|
 | [`nsbu-solver`](../crates/nsbu-solver/README.md) | State, spectral operations, bounded integration, diagnostics, empirical review, lineage, and experiment transactions | Does not provide a numerical CLI, complete checkpoint format, or a PDE acceptance decision. |
 | [`nsbu-benchmarks`](../crates/nsbu-benchmarks/README.md) | Independent `similarity-mms-v2` scalar/jet reference and prescribed force | Reference APIs cannot modify state; `smooth_run` owns a separate smooth diagnostic trajectory. |
-| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Exposes smooth preflight/runs; concentrating qualification remains incomplete. |
+| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Exposes smooth preflight, runs and unverified file continuation; concentrating qualification remains incomplete. |
 
 The project has no Niva dependency. A provider implements the solver's bounded
 RHS/force contracts; it is deliberately separate from an analytical reference
@@ -89,11 +89,29 @@ in [`domain`](../crates/nsbu-solver/src/domain/mod.rs),
 [`verification`](../crates/nsbu-solver/src/verification/mod.rs), and
 [`lineage`](../crates/nsbu-solver/src/lineage/mod.rs).
 
+## Owned observation profiles
+
+`SmoothRun` and `ReconstructedRun` are concrete aliases of the same `OwnedRun<O>`
+implementation. The sealed observation extension supplies complete reservations,
+construction and trusted snapshot restoration for the two built-in profiles. It
+preserves a single integrator/controller/transaction path. The public solver's
+observer trait remains the narrow interface for other user-supplied observers.
+
+`ReconstructionObserver` keeps three accepted value/derivative nodes and one private
+proposal. Measurement independently evaluates the conservative RHS on a double grid;
+no integrator-stage derivative is reused. The physical transaction and prepared raw
+history commit before the infallible observer publication callback. Failed proposals
+discard pending data while retaining their charged work. The owner exposes only a
+shared observer reference, so callers cannot publish an unrelated proposal into an
+owned run. Trusted snapshots copy accepted nodes and counters and rebuild scratch;
+the balance-only binary format cannot silently drop active reconstruction.
+
 ## Work that remains
 
 Binary components and a balance-only smooth-owner archive are implemented.
-Complete concentrating checkpoint assembly, file-based CLI restart and the full
-experiment verifier remain in progress.
+Smooth file save/resume and owned reconstruction snapshots are implemented.
+Binary reconstruction serialization, complete concentrating checkpoint assembly
+and the full experiment verifier remain in progress.
 An in-memory physical image and restartable controller/history components do
 not amount to a complete checkpoint. See the implemented-versus-planned
 sections of [usage](USAGE.md) and the active

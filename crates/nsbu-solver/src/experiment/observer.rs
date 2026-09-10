@@ -15,6 +15,24 @@ pub struct ObserverBounds {
 pub trait BalanceObserver {
     /// None means unbounded/undeclared and is refused before an integration attempt.
     fn bounds(&self) -> Option<ObserverBounds>;
-    /// Measure a private proposal without changing physical or committed diagnostic state.
+    /// Measure and privately stage diagnostics for a proposed accepted field.
+    ///
+    /// A successful call opens one pending observer transaction. The runner subsequently calls
+    /// exactly one of [`Self::commit_pending`] or [`Self::discard_pending`]. A failed call may
+    /// also have staged private work and is followed by `discard_pending`. Implementations enter
+    /// each recorded step with no pending transaction.
     fn measure(&mut self, state: &SpectralState) -> Result<BalanceSample, SolverError>;
+
+    /// Publish the diagnostics staged by the preceding successful measurement.
+    ///
+    /// The runner calls this only after its physical payload and `RunHistory` update have both
+    /// committed. This callback must be infallible, allocation-free, and covered by
+    /// [`ObserverBounds::work_units`].
+    fn commit_pending(&mut self) {}
+
+    /// Abandon private diagnostics for a measured proposal.
+    ///
+    /// The runner calls this exactly once after every measured proposal that cannot commit,
+    /// including a failed measurement. This callback must be infallible and allocation-free.
+    fn discard_pending(&mut self) {}
 }

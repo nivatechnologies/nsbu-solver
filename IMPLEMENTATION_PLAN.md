@@ -229,3 +229,18 @@ accepted-state provenance and full force/reference/arithmetic/transfer refinemen
 families remain. File save/resume commands are the next CLI increment. P08's
 experiment integration and P10 qualification remain gated; no concentrating window
 is accepted. Source-matched hosted Rust and Python checks for the owned-runtime increment pass.
+
+## P09 accepted-reconstruction and file-I/O progress
+
+The [owned reconstruction increment](evidence/p09/reconstruction/README.md)
+passes 284 local tests/probes, 99.08% executable line coverage, 91.56% branch
+coverage and all required complexity/CRAP limits. It adds smooth file save/resume,
+transactional accepted-node publication and a shared owner supporting balance-only
+and reconstruction observation profiles. Trusted reconstruction snapshots preserve
+the next accepted/rejected CM/HO attempt and the off-stage interpolant. A fresh
+source install passes 14 CLI scenarios. Hosted checks are pending.
+
+The binary format still supports only the balance-only smooth profile. Binary
+reconstruction persistence, full external accepted-state provenance, independent
+refinement families and the complete P08 experiment integration remain. P09 is
+incomplete, and P10 has no qualified concentrating endpoint.

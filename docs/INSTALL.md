@@ -2,7 +2,7 @@
 
 ## What can be installed now
 
-The checkout provides Python verification and a Rust workspace with an `nsbu` executable supporting help/version, bounded smooth runs and numerical preflight. No crate or binary release has been published. Install from the checked-out source as shown below; the concentrating experiment workflow remains in progress.
+The checkout provides Python verification and a Rust workspace with an `nsbu` executable supporting help/version, bounded smooth runs, numerical preflight and unverified smooth file continuation. No crate or binary release has been published. Install from the checked-out source as shown below; the concentrating experiment workflow remains in progress.
 
 Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the future Rust runtime dependencies.
 

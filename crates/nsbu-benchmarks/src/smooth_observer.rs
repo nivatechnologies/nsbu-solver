@@ -12,6 +12,8 @@ use nsbu_solver::{
     Complex64, SolverError,
 };
 
+pub mod reconstruction;
+
 type Field = [Vec<Complex64>; 3];
 
 /// Complete fixed storage and bounded charged work for a balance observer.
@@ -220,6 +222,7 @@ impl BalanceObserver {
             self.force_limits.scalar_transforms - report.scalar_transforms;
         Ok(())
     }
+
     // Reserve the complete admitted charge before invoking provider code.
     fn charge_sample(&mut self) -> Result<(), SolverError> {
         self.work.samples = self

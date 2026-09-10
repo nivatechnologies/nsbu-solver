@@ -97,11 +97,21 @@ pub(super) fn completed(
     let outcome = Outcome::Committed(result.indicators);
     let update = match sample.and_then(|sample| history.prepare(outcome, Some(sample))) {
         Ok(update) => update,
-        Err(cause) => return refuse(history, cause, Some(result.indicators)),
+        Err(cause) => return discard_and_refuse(observer, history, cause, result.indicators),
     };
     transaction.commit();
     history.apply(update);
+    observer.commit_pending();
     Ok(outcome)
+}
+fn discard_and_refuse(
+    observer: &mut dyn BalanceObserver,
+    history: &mut RunHistory,
+    cause: SolverError,
+    indicators: Indicators,
+) -> Result<Outcome, SolverError> {
+    observer.discard_pending();
+    refuse(history, cause, Some(indicators))
 }
 fn refuse(
     history: &mut RunHistory,

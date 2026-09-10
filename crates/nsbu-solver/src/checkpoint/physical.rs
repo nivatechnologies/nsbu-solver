@@ -49,9 +49,14 @@ impl UnverifiedPhysical {
 pub struct PhysicalArchive;
 
 impl PhysicalArchive {
+    /// Exact physical encoding length for an admitted plan, without live state allocation.
+    pub fn encoded_len_for_plan(plan: ResourcePlan) -> Result<usize, CheckpointError> {
+        coefficient_bytes(plan.domain().layout().half_len())
+    }
+
     /// Exact output length, checked before a caller provides writable output storage.
     pub fn encoded_len(state: &SpectralState) -> Result<usize, CheckpointError> {
-        coefficient_bytes(state.plan().domain().layout().half_len())
+        Self::encoded_len_for_plan(state.plan())
     }
 
     /// Encode all immutable plan identity and live physical bits into caller-owned storage.

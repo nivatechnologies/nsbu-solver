@@ -1,9 +1,10 @@
-use std::ffi::OsString;
+use std::{ffi::OsString, path::PathBuf};
 
 pub(crate) enum Command {
     Help,
     Version,
     Smooth(Args),
+    Resume(Args),
     Invalid,
 }
 
@@ -16,6 +17,8 @@ pub(crate) struct Args {
     pub maximum_attempts: usize,
     pub memory_cap: usize,
     pub dry_run: bool,
+    pub checkpoint: Option<PathBuf>,
+    pub checkpoint_after: Option<usize>,
 }
 
 #[derive(Clone, Copy)]
@@ -29,12 +32,13 @@ pub(crate) fn parse(arguments: &[OsString]) -> Command {
         [] => Command::Help,
         [argument] if argument == "--help" || argument == "-h" => Command::Help,
         [argument] if argument == "--version" || argument == "-V" => Command::Version,
-        [command, rest @ ..] if command == "smooth" => smooth(rest),
+        [command, rest @ ..] if command == "smooth" => smooth(rest, true),
+        [command, rest @ ..] if command == "resume" => resume(rest),
         _ => Command::Invalid,
     }
 }
 
-fn smooth(items: &[OsString]) -> Command {
+fn smooth(items: &[OsString], require_checkpoint_after: bool) -> Command {
     let mut args = Args {
         grid: 8,
         method: MethodName::CoxMatthews,
@@ -44,6 +48,8 @@ fn smooth(items: &[OsString]) -> Command {
         maximum_attempts: 4,
         memory_cap: 64 * 1024 * 1024,
         dry_run: false,
+        checkpoint: None,
+        checkpoint_after: None,
     };
     let mut index = 0;
     while index < items.len() {
@@ -66,7 +72,25 @@ fn smooth(items: &[OsString]) -> Command {
         }
         index += 2;
     }
+    if require_checkpoint_after && args.checkpoint.is_some() != args.checkpoint_after.is_some() {
+        return Command::Invalid;
+    }
     Command::Smooth(args)
+}
+
+fn resume(items: &[OsString]) -> Command {
+    let mut command = smooth(items, false);
+    let Command::Smooth(args) = &mut command else {
+        return Command::Invalid;
+    };
+    if args.dry_run || args.checkpoint.is_none() || args.checkpoint_after.is_some() {
+        return Command::Invalid;
+    }
+    let args = match std::mem::replace(&mut command, Command::Invalid) {
+        Command::Smooth(args) => args,
+        _ => unreachable!(),
+    };
+    Command::Resume(args)
 }
 
 fn set_option(args: &mut Args, name: &str, value: &str) -> bool {
@@ -78,8 +102,31 @@ fn set_option(args: &mut Args, name: &str, value: &str) -> bool {
         "--attempts" | "--attempt-cap" => set(value, &mut args.maximum_attempts),
         "--memory-cap" => set(value, &mut args.memory_cap),
         "--method" => set_method(value, args),
+        "--checkpoint" | "--checkpoint-file" => set_path(value, args),
+        "--checkpoint-after" | "--checkpoint-steps" => set_checkpoint_after(value, args),
         _ => false,
     }
+}
+
+fn set_checkpoint_after(value: &str, args: &mut Args) -> bool {
+    if args.checkpoint_after.is_some() {
+        return false;
+    }
+    match value.parse() {
+        Ok(value) => {
+            args.checkpoint_after = Some(value);
+            true
+        }
+        Err(_) => false,
+    }
+}
+
+fn set_path(value: &str, args: &mut Args) -> bool {
+    if value.is_empty() || value.len() > 4096 || args.checkpoint.is_some() {
+        return false;
+    }
+    args.checkpoint = Some(PathBuf::from(value));
+    true
 }
 
 fn set<T: std::str::FromStr>(value: &str, target: &mut T) -> bool {

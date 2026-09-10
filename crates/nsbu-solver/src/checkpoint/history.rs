@@ -24,6 +24,15 @@ pub fn encoded_len(history: &RunHistory) -> Result<usize, CheckpointError> {
         .and_then(|size| size.checked_add(HEADER))
         .ok_or(CheckpointError::ResourceLimit)
 }
+/// Largest encoding for a configuration's finite recorded-attempt allowance.
+pub fn maximum_encoded_len(config: Configuration) -> Result<usize, CheckpointError> {
+    config
+        .limits
+        .maximum_attempts
+        .checked_mul(record::WIDTH)
+        .and_then(|size| size.checked_add(HEADER))
+        .ok_or(CheckpointError::ResourceLimit)
+}
 /// Preflight the complete output; preserve unused suffix bytes and refuse a short buffer unchanged.
 pub fn write(history: &RunHistory, output: &mut [u8]) -> Result<usize, CheckpointError> {
     let required = encoded_len(history)?;

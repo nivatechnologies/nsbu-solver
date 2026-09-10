@@ -63,6 +63,195 @@ struct TestObserver {
     observed: bool,
     refuses: bool,
 }
+
+#[derive(Clone, Copy)]
+enum TransactionMode {
+    Accept,
+    FailMeasure,
+    InvalidSample,
+}
+
+struct TransactionObserver {
+    mode: TransactionMode,
+    measured: usize,
+    committed: usize,
+    discarded: usize,
+    pending: bool,
+}
+impl TransactionObserver {
+    fn new(mode: TransactionMode) -> Self {
+        Self {
+            mode,
+            measured: 0,
+            committed: 0,
+            discarded: 0,
+            pending: false,
+        }
+    }
+}
+impl BalanceObserver for TransactionObserver {
+    fn bounds(&self) -> Option<ObserverBounds> {
+        Some(ObserverBounds {
+            storage_bytes: std::mem::size_of::<Self>(),
+            work_units: 1,
+        })
+    }
+
+    fn measure(&mut self, _: &SpectralState) -> Result<BalanceSample, SolverError> {
+        assert!(!self.pending);
+        self.measured += 1;
+        self.pending = true;
+        match self.mode {
+            TransactionMode::Accept => Ok(BalanceSample::REST),
+            TransactionMode::FailMeasure => Err(SolverError::ResourceLimit),
+            TransactionMode::InvalidSample => Ok(BalanceSample {
+                forcing_work: f64::NAN,
+                ..BalanceSample::REST
+            }),
+        }
+    }
+
+    fn commit_pending(&mut self) {
+        assert!(self.pending);
+        self.committed += 1;
+        self.pending = false;
+    }
+
+    fn discard_pending(&mut self) {
+        assert!(self.pending);
+        self.discarded += 1;
+        self.pending = false;
+    }
+}
+
+#[test]
+fn observer_pending_state_tracks_the_physical_and_history_transaction() {
+    for case in 0..5 {
+        let (_, mut state, mut candidate) = transaction_setup();
+        let endpoint = state.clock().stages(4).unwrap()[4];
+        candidate.state.clock = endpoint;
+        candidate.state.accepted_steps = 1;
+        candidate.state.epoch = Epoch(1);
+        let accepted = candidate.accept(&state);
+        let (result, mode) = match case {
+            0 => (
+                AttemptResult {
+                    indicators: indicators(),
+                    ticks: 4,
+                    rhs_calls: 12,
+                    accepted: Some(accepted),
+                },
+                TransactionMode::Accept,
+            ),
+            1 => {
+                let mut rejected = indicators();
+                rejected.ratios[0] = 2.0;
+                (
+                    AttemptResult {
+                        indicators: rejected,
+                        ticks: 4,
+                        rhs_calls: 12,
+                        accepted: None,
+                    },
+                    TransactionMode::Accept,
+                )
+            }
+            2 => (
+                AttemptResult {
+                    indicators: indicators(),
+                    ticks: 4,
+                    rhs_calls: 12,
+                    accepted: Some(accepted),
+                },
+                TransactionMode::FailMeasure,
+            ),
+            3 => (
+                AttemptResult {
+                    indicators: indicators(),
+                    ticks: 4,
+                    rhs_calls: 12,
+                    accepted: Some(accepted),
+                },
+                TransactionMode::InvalidSample,
+            ),
+            _ => {
+                candidate.invalidate().unwrap();
+                (
+                    AttemptResult {
+                        indicators: indicators(),
+                        ticks: 4,
+                        rhs_calls: 12,
+                        accepted: Some(accepted),
+                    },
+                    TransactionMode::Accept,
+                )
+            }
+        };
+        let mut observer = TransactionObserver::new(mode);
+        let mut history = history();
+        let outcome = completed(
+            &mut state,
+            &mut candidate,
+            &mut observer,
+            &mut history,
+            result,
+            endpoint,
+        )
+        .unwrap();
+        assert_eq!(state.accepted_steps(), u128::from(case == 0));
+        assert_eq!(history.balance().samples(), 1 + usize::from(case == 0));
+        assert_eq!(
+            observer.measured,
+            usize::from((case == 0) || (2..=3).contains(&case))
+        );
+        assert_eq!(observer.committed, usize::from(case == 0));
+        assert_eq!(observer.discarded, usize::from((2..=3).contains(&case)));
+        assert!(!observer.pending);
+        if case == 1 {
+            assert!(matches!(outcome, Outcome::Rejected(_)));
+        } else if case == 0 {
+            assert_eq!(outcome, Outcome::Committed(indicators()));
+        } else {
+            assert!(matches!(outcome, Outcome::Refused { .. }));
+        }
+    }
+}
+
+#[test]
+fn failed_refusal_recording_still_discards_a_measured_observer_proposal() {
+    let (_, mut state, mut candidate) = transaction_setup();
+    let endpoint = state.clock().stages(4).unwrap()[4];
+    candidate.state.clock = endpoint;
+    candidate.state.accepted_steps = 1;
+    candidate.state.epoch = Epoch(1);
+    let accepted = candidate.accept(&state);
+    let mut malformed = indicators();
+    malformed.errors[0] = f64::NAN;
+    let result = AttemptResult {
+        indicators: malformed,
+        ticks: 4,
+        rhs_calls: 12,
+        accepted: Some(accepted),
+    };
+    let mut observer = TransactionObserver::new(TransactionMode::FailMeasure);
+    let mut history = history();
+    assert_eq!(
+        completed(
+            &mut state,
+            &mut candidate,
+            &mut observer,
+            &mut history,
+            result,
+            endpoint,
+        ),
+        Err(SolverError::InvalidPayload)
+    );
+    assert_eq!(state.accepted_steps(), 0);
+    assert!(history.records().is_empty());
+    assert_eq!(observer.measured, 1);
+    assert_eq!(observer.discarded, 1);
+    assert!(!observer.pending);
+}
 impl BalanceObserver for TestObserver {
     fn bounds(&self) -> Option<ObserverBounds> {
         None

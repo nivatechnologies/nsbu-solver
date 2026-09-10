@@ -277,3 +277,13 @@ The revised-policy Python checker CLI contract fix also passed
 including all 163 tests and automated coverage/CRAP gates. The owned-runtime Rust
 increment also passed source-matched hosted verification; P08/P09 and concentrating qualification
 remain incomplete.
+
+The [accepted-reconstruction/file-I/O increment](../evidence/p09/reconstruction/README.md)
+passes 284 local tests/probes across 209 Rust files. Coverage is 99.08% executable
+lines and 91.56% branches; maxima are CC21, cognitive16, Halstead75.8956,
+physical-file385 and CRAP24.33594. The final combined run covers the library,
+CLI, tests and runnable example. Measured CRAP failures in earlier drafts led to
+separate admission, I/O and snapshot-validation responsibilities and deterministic
+reader regressions. The 27 duplication findings are informational and reviewed;
+no new mutation sweep was requested. Local package, clean-source install and 14
+installed CLI checks pass. Hosted verification remains pending.

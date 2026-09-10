@@ -4,21 +4,38 @@ use crate::{
     smooth_observer::{BalanceObserver, BalanceObserverWork},
 };
 use nsbu_solver::{
-    domain::{Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock},
+    domain::{Domain, Epoch, SpectralState, TickClock},
     experiment::{
-        control::{Configuration, Controller, Outcome},
+        control::{Configuration, Outcome},
         log::RunHistory,
         runner::recorded_step,
     },
-    integrators::{
-        attempt::AttemptWorkspace, forcing::PrescribedForce, rhs::SpectralRhs,
-        transaction::CandidateState,
-    },
+    integrators::{attempt::AttemptWorkspace, rhs::SpectralRhs, transaction::CandidateState},
     lineage::PhysicalImage,
     SolverError,
 };
 
 pub mod archive;
+pub mod observation;
+mod plan;
+use observation::Observation;
+pub use plan::OwnedPlan;
+
+/// Owned balance-only CyclicSine run; version-one archives use this profile.
+pub type SmoothRun = OwnedRun<BalanceObserver>;
+/// Trusted balance-only snapshot.
+pub type SmoothSnapshot = OwnedSnapshot<BalanceObserver>;
+/// Allocation-free balance-only admission plan.
+pub type SmoothPlan = OwnedPlan<BalanceObserver>;
+/// Owned CyclicSine run retaining independent accepted-node reconstruction.
+pub type ReconstructedRun =
+    OwnedRun<crate::smooth_observer::reconstruction::ReconstructionObserver>;
+/// Trusted snapshot including accepted reconstruction and spent observation work.
+pub type ReconstructedSnapshot =
+    OwnedSnapshot<crate::smooth_observer::reconstruction::ReconstructionObserver>;
+/// Allocation-free admission for the reconstruction-enabled smooth profile.
+pub type ReconstructedPlan =
+    OwnedPlan<crate::smooth_observer::reconstruction::ReconstructionObserver>;
 
 /// Diagnostic origin of an owned smooth-run payload; neither value is a PDE qualification.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -57,11 +74,11 @@ impl IntegrationWork {
 /// It is intentionally constructed only by [`SmoothRun::snapshot`] and consumed only by
 /// [`SmoothRun::restore`], so callers cannot combine an unrelated state and history.
 #[derive(Debug)]
-pub struct SmoothSnapshot {
+pub struct OwnedSnapshot<O: Observation> {
     physical: PhysicalImage,
     history: RunHistory,
     work: Vec<IntegrationWork>,
-    observer_work: BalanceObserverWork,
+    observer_snapshot: O::Snapshot,
     configuration: Configuration,
     initial_clock: TickClock,
     observer_samples: usize,
@@ -72,13 +89,14 @@ pub struct SmoothSnapshot {
 /// An owned fixed-step execution with fresh, private numerical and diagnostic scratch.
 ///
 /// This profile supports only `CyclicSine`, whose provider has immutable mathematical state.
-/// Reconstruction is inactive; this object carries no external artifacts or PDE qualification.
-pub struct SmoothRun {
+/// Its observation profile determines the accepted diagnostics retained in snapshots.
+/// This object carries no external artifacts or PDE qualification.
+pub struct OwnedRun<O: Observation> {
     state: SpectralState,
     candidate: CandidateState,
     attempts: AttemptWorkspace,
     rhs: SpectralRhs<CyclicSine>,
-    observer: BalanceObserver,
+    observer: O,
     history: RunHistory,
     work: Vec<IntegrationWork>,
     configuration: Configuration,
@@ -88,90 +106,7 @@ pub struct SmoothRun {
     origin: Origin,
 }
 
-const ALLOCATOR_ALLOWANCE: usize = 4096;
-
-/// Allocation-free admission evidence for a bounded [`SmoothRun`] from rest.
-#[derive(Debug, Clone, Copy)]
-pub struct SmoothPlan {
-    plan: ResourcePlan,
-    configuration: Configuration,
-    observer_samples: usize,
-    integration_calls: usize,
-    integration_work_units: usize,
-    integration_scalar_transforms: usize,
-}
-
-impl SmoothPlan {
-    /// Validate the same complete configuration and resource ledger used by construction.
-    pub fn from_rest(
-        domain: Domain,
-        clock: TickClock,
-        configuration: Configuration,
-        observer_samples: usize,
-        advective_limit: f64,
-        cap: usize,
-    ) -> Result<Self, SolverError> {
-        let rest = TickClock::from_rest(clock.exponent(), clock.target())?;
-        if clock != rest {
-            return Err(SolverError::InvalidClock);
-        }
-        let controller = Controller::new(clock, configuration)?;
-        if !advective_limit.is_finite() || advective_limit <= 0.0 {
-            return Err(SolverError::InvalidStep);
-        }
-        let source = CyclicSine::new(domain)?;
-        let limits = source.limits().ok_or(SolverError::UnknownProviderCost)?;
-        let integration_calls = configuration
-            .method
-            .rhs_calls()
-            .checked_mul(controller.required_commits())
-            .ok_or(SolverError::SizeOverflow)?;
-        let integration_work_units = limits
-            .work_units
-            .checked_mul(integration_calls)
-            .ok_or(SolverError::SizeOverflow)?;
-        let integration_scalar_transforms = limits
-            .scalar_transforms
-            .checked_add(10)
-            .and_then(|value| value.checked_mul(integration_calls))
-            .ok_or(SolverError::SizeOverflow)?;
-        Ok(Self {
-            plan: plan(domain, configuration, observer_samples, cap)?,
-            configuration,
-            observer_samples,
-            integration_calls,
-            integration_work_units,
-            integration_scalar_transforms,
-        })
-    }
-
-    /// Checked resource ledger without numerical-state allocation.
-    pub fn resources(self) -> ResourcePlan {
-        self.plan
-    }
-    /// Frozen run policy admitted by this plan.
-    pub fn configuration(self) -> Configuration {
-        self.configuration
-    }
-    /// Number of independently measured accepted states admitted by the plan.
-    pub fn observer_samples(self) -> usize {
-        self.observer_samples
-    }
-    /// Declared integration RHS calls at the endpoint.
-    pub fn integration_calls(self) -> usize {
-        self.integration_calls
-    }
-    /// Declared integration provider work units at the endpoint.
-    pub fn integration_work_units(self) -> usize {
-        self.integration_work_units
-    }
-    /// Declared integration scalar transforms at the endpoint.
-    pub fn integration_scalar_transforms(self) -> usize {
-        self.integration_scalar_transforms
-    }
-}
-
-impl SmoothRun {
+impl<O: Observation> OwnedRun<O> {
     /// Build a finite from-rest run after preflighting force, diagnostics, history and ledger.
     pub fn from_rest(
         domain: Domain,
@@ -181,7 +116,7 @@ impl SmoothRun {
         advective_limit: f64,
         cap: usize,
     ) -> Result<Self, SolverError> {
-        let admission = SmoothPlan::from_rest(
+        let admission = OwnedPlan::<O>::from_rest(
             domain,
             clock,
             configuration,
@@ -197,7 +132,7 @@ impl SmoothRun {
         let candidate = CandidateState::new(plan, clock, Epoch(0))?;
         let attempts = AttemptWorkspace::new_with_method(plan, configuration.method)?;
         let rhs = SpectralRhs::new(domain, source, advective_limit, force_cap)?;
-        let observer = BalanceObserver::new(plan, observer_samples)?;
+        let observer = O::from_rest(plan, observer_samples, &state)?;
         let history = RunHistory::new(clock, configuration, history_cap)?;
         let work = work_storage(configuration.limits.maximum_attempts)?;
         Ok(Self {
@@ -246,7 +181,7 @@ impl SmoothRun {
     }
 
     /// Capture physical bits, replayed raw history, integration charges and observer charges.
-    pub fn snapshot(&self, cap: usize) -> Result<SmoothSnapshot, SolverError> {
+    pub fn snapshot(&self, cap: usize) -> Result<OwnedSnapshot<O>, SolverError> {
         if self.snapshot_reservation()? > cap {
             return Err(SolverError::ResourceLimit);
         }
@@ -259,11 +194,11 @@ impl SmoothRun {
         )?;
         let mut work = work_storage(self.configuration.limits.maximum_attempts)?;
         work.extend_from_slice(&self.work);
-        Ok(SmoothSnapshot {
+        Ok(OwnedSnapshot {
             physical,
             history,
             work,
-            observer_work: self.observer.consumption(),
+            observer_snapshot: self.observer.capture(cap)?,
             configuration: self.configuration,
             initial_clock: self.initial_clock,
             observer_samples: self.observer_samples,
@@ -275,16 +210,18 @@ impl SmoothRun {
     /// Complete owned snapshot allocation, excluding caller allocator overhead.
     pub fn snapshot_reservation(&self) -> Result<usize, SolverError> {
         let ledger = ledger_bytes(self.configuration.limits.maximum_attempts)?;
+        let observation = O::snapshot_reservation(self.state.plan().domain())?;
         PhysicalImage::reservation(self.state.plan())?
             .checked_add(RunHistory::reservation(self.configuration)?)
+            .and_then(|bytes| bytes.checked_add(observation))
             .and_then(|bytes| bytes.checked_add(ledger))
-            .and_then(|bytes| bytes.checked_add(std::mem::size_of::<SmoothSnapshot>()))
+            .and_then(|bytes| bytes.checked_add(std::mem::size_of::<OwnedSnapshot<O>>()))
             .ok_or(SolverError::SizeOverflow)
     }
 
     /// Rebuild fresh scratch from a trusted snapshot under the same fixed configuration.
     pub fn restore(
-        snapshot: SmoothSnapshot,
+        snapshot: OwnedSnapshot<O>,
         configuration: Configuration,
         cap: usize,
     ) -> Result<Self, SolverError> {
@@ -306,8 +243,12 @@ impl SmoothRun {
         let candidate = CandidateState::new(plan, snapshot.initial_clock, Epoch(0))?;
         let attempts = AttemptWorkspace::new_with_method(plan, configuration.method)?;
         let rhs = SpectralRhs::new(domain, source, snapshot.advective_limit, plan.classes()[5])?;
-        let observer =
-            BalanceObserver::restore(plan, snapshot.observer_samples, snapshot.observer_work)?;
+        let observer = O::restore(
+            plan,
+            snapshot.observer_samples,
+            &state,
+            snapshot.observer_snapshot,
+        )?;
         Ok(Self {
             state,
             candidate,
@@ -340,40 +281,14 @@ impl SmoothRun {
     pub fn observer_work(&self) -> BalanceObserverWork {
         self.observer.consumption()
     }
+    /// Read-only accepted diagnostics. Its type reflects the selected observation profile.
+    pub fn observer(&self) -> &O {
+        &self.observer
+    }
     /// Diagnostic origin retained through snapshots and later external exports.
     pub fn origin(&self) -> Origin {
         self.origin
     }
-}
-
-fn plan(
-    domain: Domain,
-    configuration: Configuration,
-    observer_samples: usize,
-    cap: usize,
-) -> Result<ResourcePlan, SolverError> {
-    let source = CyclicSine::new(domain)?;
-    let limits = source.limits().ok_or(SolverError::UnknownProviderCost)?;
-    let force = SpectralRhs::<CyclicSine>::reservation(domain, limits)?;
-    let diagnostics = AttemptWorkspace::reservation_with_method(domain, configuration.method)?
-        .checked_add(BalanceObserver::limits(domain, observer_samples)?.storage_bytes)
-        .ok_or(SolverError::SizeOverflow)?;
-    let overhead = RunHistory::reservation(configuration)?
-        .checked_add(ledger_bytes(configuration.limits.maximum_attempts)?)
-        .and_then(|bytes| bytes.checked_add(std::mem::size_of::<SmoothRun>()))
-        .and_then(|bytes| bytes.checked_add(ALLOCATOR_ALLOWANCE))
-        .ok_or(SolverError::SizeOverflow)?;
-    ResourcePlan::new(
-        domain,
-        ExtraStorage {
-            fft: 0,
-            force,
-            diagnostics,
-            overhead,
-        },
-        cap,
-        Epoch(0),
-    )
 }
 
 fn ledger_bytes(attempts: usize) -> Result<usize, SolverError> {

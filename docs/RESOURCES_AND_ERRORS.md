@@ -90,7 +90,11 @@ physical provenance, a complete checkpoint, or a qualified PDE window.
 ## Current operational limit
 
 The `smooth` command provides checked preflight and bounded numerical runs.
-There is no public resume or checkpoint-file command yet.
+The `smooth --checkpoint ... --checkpoint-after ...` and `resume --checkpoint ...`
+commands reserve bounded file buffers in addition to numerical storage. Publication
+preserves existing files. A directory-sync failure after publication reports
+`checkpoint_published_durability_unconfirmed`: the output already exists, but its
+durability was not confirmed. Other file errors report `refused`.
 In-memory state, image, controller, and history components should not be
 presented as a durable complete checkpoint. Use the commands and limitations in
 [usage](USAGE.md) when exercising the current checkout, and consult the

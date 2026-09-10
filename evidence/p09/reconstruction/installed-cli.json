@@ -1,0 +1,610 @@
+{
+  "source": "fresh git checkout-index of staged increment",
+  "cases": [
+    {
+      "arguments": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "NSBU Solver\nUsage: nsbu [--help | --version]\n       nsbu smooth [OPTIONS]\n       nsbu resume --checkpoint PATH [OPTIONS]\n\nBuilt-in profile: CyclicSine on [1.0, 1.0, 1.0], viscosity 0.3, advective guard 1.0.\n\nOptions:\n  --grid, --domain N          Four-multiple cubic grid (default: 8)\n  --method cm|ho              Cox-Matthews or Hochbruck-Ostermann (default: cm)\n  --step-ticks, --step N      Exact macro-step ticks (default: 64)\n  --target, --endpoint-ticks N\n                              Requested exact endpoint ticks (default: 256)\n  --tick-exponent, --tick N   Tick quantum exponent for 2^N (default: -16)\n  --attempts, --attempt-cap N Maximum recorded attempts (default: 4)\n  --memory-cap N              Declared byte cap (default: 67108864)\n  --checkpoint PATH           Save after --checkpoint-after accepted steps, or resume this file\n  --checkpoint-after N        Accepted-step count at which smooth saves and exits\n  --dry-run                   Validate and report the allocation-free admission plan\n\nThe built-in CyclicSine profile is a numerical diagnostic only. It is not PDE-qualified.\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "NSBU Solver 0.1.0-alpha.0\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "cm",
+        "--checkpoint",
+        "cm.bin",
+        "--checkpoint-after",
+        "2",
+        "--dry-run"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"dry_run\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"cm\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"0\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"memory\":{\"classes\":[\"184320\",\"124416\",\"48384\",\"15360\",\"0\",\"174784\",\"831520\",\"10248\"],\"total_bytes\":\"1389032\"},\"bounded_integration\":{\"rhs_calls\":\"48\",\"work_units\":\"46080\",\"scalar_transforms\":\"480\"},\"bounded_observer\":{\"sample_cap\":\"5\",\"work_units\":\"34560\",\"scalar_transforms\":\"45\"},\"checkpoint\":{\"maximum_bytes\":\"17059\"} }\n",
+      "stderr": "",
+      "report": {
+        "status": "dry_run",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "cm",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "0",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "memory": {
+          "classes": [
+            "184320",
+            "124416",
+            "48384",
+            "15360",
+            "0",
+            "174784",
+            "831520",
+            "10248"
+          ],
+          "total_bytes": "1389032"
+        },
+        "bounded_integration": {
+          "rhs_calls": "48",
+          "work_units": "46080",
+          "scalar_transforms": "480"
+        },
+        "bounded_observer": {
+          "sample_cap": "5",
+          "work_units": "34560",
+          "scalar_transforms": "45"
+        },
+        "checkpoint": {
+          "maximum_bytes": "17059"
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "cm",
+        "--checkpoint",
+        "cm.bin",
+        "--checkpoint-after",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"checkpoint_saved\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"cm\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"128\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"attempts\":{\"started\":\"2\",\"committed\":\"2\"}}\n",
+      "stderr": "",
+      "report": {
+        "status": "checkpoint_saved",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "cm",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "128",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "attempts": {
+          "started": "2",
+          "committed": "2"
+        }
+      },
+      "checkpoint_sha256": "c48a63c0c0233882a1c0898265a48c52e61f714819e4b9d75186854d6aaa8208"
+    },
+    {
+      "arguments": [
+        "resume",
+        "--method",
+        "cm",
+        "--checkpoint",
+        "cm.bin"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"external_unverified\",\"method\":\"cm\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"48\",\"work_units\":\"46080\",\"scalar_transforms\":\"480\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227376675,\"enstrophy\":0.12315437742020797},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+      "stderr": "",
+      "report": {
+        "status": "completed",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "external_unverified",
+        "method": "cm",
+        "stop_reason": "endpoint_reached",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "256",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "attempts": {
+          "started": "4",
+          "committed": "4"
+        },
+        "integration": {
+          "rhs_calls": "48",
+          "work_units": "46080",
+          "scalar_transforms": "480"
+        },
+        "diagnostics": {
+          "pending_midpoint": false,
+          "last_accepted_sample": {
+            "sampled": true,
+            "energy": 0.0031195368227376675,
+            "enstrophy": 0.12315437742020797
+          },
+          "observer_charges": {
+            "samples": "4",
+            "work_units": "27648",
+            "scalar_transforms": "36"
+          }
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "cm"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"cm\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"48\",\"work_units\":\"46080\",\"scalar_transforms\":\"480\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227376675,\"enstrophy\":0.12315437742020797},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+      "stderr": "",
+      "report": {
+        "status": "completed",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "cm",
+        "stop_reason": "endpoint_reached",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "256",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "attempts": {
+          "started": "4",
+          "committed": "4"
+        },
+        "integration": {
+          "rhs_calls": "48",
+          "work_units": "46080",
+          "scalar_transforms": "480"
+        },
+        "diagnostics": {
+          "pending_midpoint": false,
+          "last_accepted_sample": {
+            "sampled": true,
+            "energy": 0.0031195368227376675,
+            "enstrophy": 0.12315437742020797
+          },
+          "observer_charges": {
+            "samples": "4",
+            "work_units": "27648",
+            "scalar_transforms": "36"
+          }
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "cm",
+        "--checkpoint",
+        "cm.bin",
+        "--checkpoint-after",
+        "2"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"status\":\"refused\",\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"profile\":{\"name\":\"CyclicSine\",\"pde_qualified\":false},\"error\":\"checkpoint_output_exists\"}\n",
+      "stderr": "",
+      "report": {
+        "status": "refused",
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "profile": {
+          "name": "CyclicSine",
+          "pde_qualified": false
+        },
+        "error": "checkpoint_output_exists"
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "ho",
+        "--checkpoint",
+        "ho.bin",
+        "--checkpoint-after",
+        "2",
+        "--dry-run"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"dry_run\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"ho\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"0\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"memory\":{\"classes\":[\"184320\",\"124416\",\"48384\",\"15360\",\"0\",\"174784\",\"980072\",\"10248\"],\"total_bytes\":\"1537584\"},\"bounded_integration\":{\"rhs_calls\":\"60\",\"work_units\":\"57600\",\"scalar_transforms\":\"600\"},\"bounded_observer\":{\"sample_cap\":\"5\",\"work_units\":\"34560\",\"scalar_transforms\":\"45\"},\"checkpoint\":{\"maximum_bytes\":\"17059\"} }\n",
+      "stderr": "",
+      "report": {
+        "status": "dry_run",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "ho",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "0",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "memory": {
+          "classes": [
+            "184320",
+            "124416",
+            "48384",
+            "15360",
+            "0",
+            "174784",
+            "980072",
+            "10248"
+          ],
+          "total_bytes": "1537584"
+        },
+        "bounded_integration": {
+          "rhs_calls": "60",
+          "work_units": "57600",
+          "scalar_transforms": "600"
+        },
+        "bounded_observer": {
+          "sample_cap": "5",
+          "work_units": "34560",
+          "scalar_transforms": "45"
+        },
+        "checkpoint": {
+          "maximum_bytes": "17059"
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "ho",
+        "--checkpoint",
+        "ho.bin",
+        "--checkpoint-after",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"checkpoint_saved\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"ho\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"128\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"attempts\":{\"started\":\"2\",\"committed\":\"2\"}}\n",
+      "stderr": "",
+      "report": {
+        "status": "checkpoint_saved",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "ho",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "128",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "attempts": {
+          "started": "2",
+          "committed": "2"
+        }
+      },
+      "checkpoint_sha256": "44e5d6236bbe3047297264c41946b4b6fe416360ee551c6a9af359c70d26af71"
+    },
+    {
+      "arguments": [
+        "resume",
+        "--method",
+        "ho",
+        "--checkpoint",
+        "ho.bin"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"external_unverified\",\"method\":\"ho\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"60\",\"work_units\":\"57600\",\"scalar_transforms\":\"600\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227385145,\"enstrophy\":0.12315437742024145},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+      "stderr": "",
+      "report": {
+        "status": "completed",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "external_unverified",
+        "method": "ho",
+        "stop_reason": "endpoint_reached",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "256",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "attempts": {
+          "started": "4",
+          "committed": "4"
+        },
+        "integration": {
+          "rhs_calls": "60",
+          "work_units": "57600",
+          "scalar_transforms": "600"
+        },
+        "diagnostics": {
+          "pending_midpoint": false,
+          "last_accepted_sample": {
+            "sampled": true,
+            "energy": 0.0031195368227385145,
+            "enstrophy": 0.12315437742024145
+          },
+          "observer_charges": {
+            "samples": "4",
+            "work_units": "27648",
+            "scalar_transforms": "36"
+          }
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "ho"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"ho\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"60\",\"work_units\":\"57600\",\"scalar_transforms\":\"600\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227385145,\"enstrophy\":0.12315437742024145},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+      "stderr": "",
+      "report": {
+        "status": "completed",
+        "profile": {
+          "name": "CyclicSine",
+          "lengths": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "viscosity": 0.3,
+          "pde_qualified": false
+        },
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "method": "ho",
+        "stop_reason": "endpoint_reached",
+        "clock": {
+          "tick_exponent": -16,
+          "requested_endpoint_ticks": "256",
+          "actual_elapsed_ticks": "256",
+          "step_ticks": "64",
+          "clock_target_ticks": "384"
+        },
+        "tolerances": {
+          "absolute": [
+            0.01,
+            0.01
+          ],
+          "relative": [
+            0.0,
+            0.0
+          ],
+          "advective_guard": 1.0
+        },
+        "attempts": {
+          "started": "4",
+          "committed": "4"
+        },
+        "integration": {
+          "rhs_calls": "60",
+          "work_units": "57600",
+          "scalar_transforms": "600"
+        },
+        "diagnostics": {
+          "pending_midpoint": false,
+          "last_accepted_sample": {
+            "sampled": true,
+            "energy": 0.0031195368227385145,
+            "enstrophy": 0.12315437742024145
+          },
+          "observer_charges": {
+            "samples": "4",
+            "work_units": "27648",
+            "scalar_transforms": "36"
+          }
+        }
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--method",
+        "ho",
+        "--checkpoint",
+        "ho.bin",
+        "--checkpoint-after",
+        "2"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"status\":\"refused\",\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"profile\":{\"name\":\"CyclicSine\",\"pde_qualified\":false},\"error\":\"checkpoint_output_exists\"}\n",
+      "stderr": "",
+      "report": {
+        "status": "refused",
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "profile": {
+          "name": "CyclicSine",
+          "pde_qualified": false
+        },
+        "error": "checkpoint_output_exists"
+      }
+    },
+    {
+      "arguments": [
+        "smooth",
+        "--checkpoint",
+        "missing.bin",
+        "--checkpoint-after",
+        "5"
+      ],
+      "exit_code": 1,
+      "stdout": "{\"status\":\"refused\",\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"profile\":{\"name\":\"CyclicSine\",\"pde_qualified\":false},\"error\":\"checkpoint_step_out_of_range\"}\n",
+      "stderr": "",
+      "report": {
+        "status": "refused",
+        "qualification_status": "unqualified",
+        "origin_status": "internal_from_rest",
+        "profile": {
+          "name": "CyclicSine",
+          "pde_qualified": false
+        },
+        "error": "checkpoint_step_out_of_range"
+      }
+    },
+    {
+      "arguments": [
+        "resume",
+        "--checkpoint",
+        "missing.bin",
+        "--dry-run"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Unsupported arguments. Use nsbu --help for available commands.\n"
+    }
+  ],
+  "all_expected_exit_codes_passed": true,
+  "resumed_final_reports_match_direct_runs_except_origin": true
+}

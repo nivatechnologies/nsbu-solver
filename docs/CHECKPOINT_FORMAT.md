@@ -108,3 +108,19 @@ semantics, restore inactive reconstruction evidence, establish reference agreeme
 PDE window. The separate experimental `NSBULN01` lineage event archive preserves operation
 order and replays declarations through the checked registry; it does not contain
 physical states or the contents of external transfer-error reports.
+
+## Accepted reconstruction snapshots
+
+`ReconstructedRun` uses a separate trusted in-memory `OwnedSnapshot` containing
+its three accepted endpoint values and independently evaluated derivatives. Each
+node retains its exact clock, state epoch and committed-step count. The snapshot
+also retains consumed provider work and modal visits. Capture refuses a pending
+proposal; restoration checks the final node against the physical state before
+allocating fresh diagnostic scratch. Snapshot reservation includes all copied
+fields before any allocation.
+
+These snapshots are not `NSBUSR01` payloads. The current file writer accepts only
+the concrete balance-only `SmoothRun`, so it cannot serialize a reconstruction run
+while silently discarding accepted history. Reconstruction binary encoding remains
+under implementation. None of these containers authenticates a concentrating
+comparison lineage or establishes PDE convergence.

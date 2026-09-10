@@ -42,18 +42,52 @@ own I/O and allocator costs. `--help` lists the actual supported options.
 
 The library example uses viscosity 1 and a separate small four-step configuration.
 Both are smooth verification profiles, distinct from `similarity-mms-v2`.
-Checkpoint files and concentrating experiment commands remain planned CLI work.
+The CLI also saves and resumes balance-only smooth checkpoints. Concentrating
+experiment commands and qualified restart provenance remain under implementation.
+
+### Save and resume the smooth diagnostic
+
+```bash
+mkdir -p work
+cargo run -p nsbu-cli -- smooth --method ho --checkpoint work/smooth-ho.bin --checkpoint-after 2 --dry-run
+cargo run -p nsbu-cli -- smooth --method ho --checkpoint work/smooth-ho.bin --checkpoint-after 2
+cargo run -p nsbu-cli -- resume --method ho --checkpoint work/smooth-ho.bin
+```
+
+Choose a new output path for each saved file: publication preserves existing files.
+The checkpoint retains the original four-step endpoint and all work already spent.
+`--checkpoint-after 0` saves the rest state; values beyond the configured number of
+steps are refused before integration, including in dry-run. The dry-run includes
+`checkpoint.maximum_bytes` in addition to the numerical resource ledger.
+
+Resume uses the same grid, method, tick settings, endpoint and attempt allowance as
+the saved run. Repeat nondefault options explicitly; supplied profile mismatches
+are refused. `resume --dry-run` is not supported. A resumed result reports
+`origin_status: external_unverified` even when this process wrote the source file.
+Successful save reports `checkpoint_saved`; successful continuation reports
+`completed`. Both remain `unqualified`. A SHA-256 match establishes byte integrity,
+not an authenticated from-rest lineage. File checkpoint commands currently select
+the balance-only `SmoothRun` profile; accepted reconstruction has separate trusted
+in-memory snapshots described below.
+
+Files are bounded before input-sized allocation. Writes use a private temporary
+file, synchronize its bytes, publish without replacing the destination, and
+synchronize the parent directory. If publication succeeds but directory syncing
+fails, exit code 1 and `checkpoint_published_durability_unconfirmed` explicitly
+report that the destination already exists. Inspect that file before choosing a
+retry path. These filesystem operations are tested on Linux; other filesystems
+may refuse publication or durability confirmation.
 
 ## Intended runtime workflow, not yet executable
 
-The planned binary is `nsbu`. Its interface will cover case export, preflight, integration, restart and experiment comparison. Exact flags and schemas are to be frozen and tested in P11; this table describes behavior, not a working command tutorial.
+The remaining interface will cover concentrating case export, preflight, integration, qualified restart and experiment comparison. Exact flags and schemas are to be frozen and tested in P11; this table describes behavior, not a working command tutorial.
 
 | Planned command family | Required behavior |
 |---|---|
 | `nsbu case write` | Write an exact, immutable case definition with its mathematical identity |
 | `nsbu run` in dry-run mode | Report complete planned allocations, force coverage, exact interval, numerical method and capability refusals without integration |
 | `nsbu run` | Evolve from the declared initial condition; record provenance, accepted/rejected attempts, diagnostics and checkpoint data |
-| `nsbu resume` | Validate complete checkpoint identity and retain inherited numerical error and lineage |
+| Qualified concentrating restart | Validate complete checkpoint identity and retain inherited numerical error and lineage; the existing `nsbu resume` supports only the smooth diagnostic |
 | `nsbu experiment compare` | Apply the complete independent refinement protocol, full-band diagnostics and negative controls |
 | `nsbu experiment extend` | Extend the same mathematical problem while preserving previous evidence and stopping at the last qualified interval |
 
@@ -248,8 +282,8 @@ cargo test -p nsbu-solver --test allocation
 The public `lineage` module provides bounded ancestry declarations, transitive
 force invalidation and an in-memory `PhysicalImage` of a live state. Image tests
 reproduce the next accepted/rejected CM and HO attempts with fresh scratch. An
-image is not a complete checkpoint; no checkpoint file read/write or numerical
-CLI command is advertised yet. See [foundation evidence](../evidence/p09/foundations/README.md).
+image alone is not a complete checkpoint; the smooth CLI composes additional
+controller, balance and work records. See [foundation evidence](../evidence/p09/foundations/README.md).
 
 
 ## Recorded-step and balance-history development checks
@@ -263,8 +297,8 @@ The library's `experiment::runner::recorded_step` combines a bounded core attemp
 a read-only proposal observer, compensated balance history and a preallocated
 outcome log. Inspect the returned `Outcome`: `Ok` may contain a terminal refusal.
 The separate controller and history components are restartable, but they are not
-a complete coherent checkpoint or a serialized format. No numerical CLI command
-is added by this increment. See [actual evidence](../evidence/p09/recorded/README.md).
+a complete coherent checkpoint or a serialized format by themselves. The smooth
+owner supplies the separately documented container. See [actual evidence](../evidence/p09/recorded/README.md).
 
 
 ## Artifact integrity and raw-history replay checks
@@ -297,6 +331,18 @@ failures and spent allowances. Coarse-to-fine prolongation retains past error: a
 actual forced-shear test compares continuation against independently evolved direct
 fine trajectories and detects the missing inherited high mode.
 
-Reconstruction storage supports bounded staging and publication, but integration
-into the owned smooth profile and its checkpoint is still pending. These capabilities
-do not complete P09 or qualify a concentrating PDE window.
+`ReconstructedPlan` and `ReconstructedRun` select the independent reconstruction
+observer through the same owned integrator and transaction implementation. The
+observer evaluates the actual rest node and each proposed endpoint using its own
+conservative double-grid RHS, then publishes accepted nodes only after the physical
+and raw-history commits. Three equally spaced accepted macro endpoints support
+Hermite value/derivative probes between them. Rejected or refused steps preserve
+the accepted ring and retain all spent work.
+
+`ReconstructedRun::snapshot` includes the accepted values, independent derivatives,
+clock/epoch metadata and diagnostic work counters. Restore creates fresh numerical
+scratch and preserves the next accepted or rejected attempt. Query reconstruction
+through `run.observer().reconstruct(...)` with caller-owned output slices. This API
+does not allocate during interpolation or later attempts. Reconstruction samples
+are empirical diagnostics. Binary serialization of this observation profile and
+complete experiment provenance remain in progress; P09 is incomplete.

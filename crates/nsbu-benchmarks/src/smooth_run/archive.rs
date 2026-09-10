@@ -108,6 +108,26 @@ pub fn encoded_len(run: &SmoothRun) -> Result<usize, CheckpointError> {
         .and_then(|size| size.checked_add(HASH))
         .ok_or(CheckpointError::ResourceLimit)
 }
+/// Largest archive for a finite admitted profile, without allocating a live run.
+pub fn maximum_encoded_len(
+    plan: ResourcePlan,
+    configuration: Configuration,
+) -> Result<usize, CheckpointError> {
+    let physical = PhysicalArchive::encoded_len_for_plan(plan)?;
+    let history = history::maximum_encoded_len(configuration)?;
+    configuration
+        .limits
+        .maximum_attempts
+        .checked_mul(WORK)
+        .and_then(|work| {
+            HEADER
+                .checked_add(physical)?
+                .checked_add(history)?
+                .checked_add(work)
+        })
+        .and_then(|size| size.checked_add(HASH))
+        .ok_or(CheckpointError::ResourceLimit)
+}
 /// Encode a coherent owner state. The tag records diagnostic origin but never qualifies it.
 pub fn write(run: &SmoothRun, output: &mut [u8]) -> Result<usize, CheckpointError> {
     let required = encoded_len(run)?;
