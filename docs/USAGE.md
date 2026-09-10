@@ -235,3 +235,18 @@ force invalidation and an in-memory `PhysicalImage` of a live state. Image tests
 reproduce the next accepted/rejected CM and HO attempts with fresh scratch. An
 image is not a complete checkpoint; no checkpoint file read/write or numerical
 CLI command is advertised yet. See [foundation evidence](../evidence/p09/foundations/README.md).
+
+
+## Recorded-step and balance-history development checks
+
+```bash
+cargo test -p nsbu-solver --test controller --test balance_history --test balanced_commit --test recorded_step
+cargo test -p nsbu-solver --test recorded_allocation
+```
+
+The library's `experiment::runner::recorded_step` combines a bounded core attempt,
+a read-only proposal observer, compensated balance history and a preallocated
+outcome log. Inspect the returned `Outcome`: `Ok` may contain a terminal refusal.
+The separate controller and history components are restartable, but they are not
+a complete coherent checkpoint or a serialized format. No numerical CLI command
+is added by this increment. See [actual evidence](../evidence/p09/recorded/README.md).

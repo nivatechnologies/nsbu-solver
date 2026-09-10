@@ -1,37 +1,18 @@
 //! Bounded trajectory progress, rejection and partial-failure evidence.
+mod mean_source;
 mod source_contract;
+use mean_source::source;
+mod trajectory_plan;
 mod transaction_support;
 use nsbu_solver::{
-    domain::{Domain, Epoch, ExtraStorage, ResourcePlan, TickClock},
+    domain::TickClock,
     integrators::{
-        attempt::AttemptWorkspace,
         indicator::Tolerances,
         trajectory::{FixedRun, RunLimits, StopReason},
     },
-    Complex64, SolverError,
+    SolverError,
 };
 
-fn source(fail_at: usize) -> source_contract::Source {
-    source_contract::Source::new(
-        fail_at,
-        [[Complex64::new(1.0, 0.0), Complex64::new(0.0, 0.0)]; 3],
-    )
-}
-fn plan() -> ResourcePlan {
-    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
-    ResourcePlan::new(
-        domain,
-        ExtraStorage {
-            fft: 0,
-            force: 0,
-            diagnostics: AttemptWorkspace::reservation(domain).unwrap(),
-            overhead: 4096,
-        },
-        1 << 20,
-        Epoch(0),
-    )
-    .unwrap()
-}
 fn limits() -> RunLimits {
     RunLimits {
         endpoint: 12,
@@ -132,8 +113,10 @@ fn complete_run_and_mid_run_refusal_preserve_actual_clock() {
             2,
         ),
     ] {
-        let (mut state, mut candidate, mut workspace) =
-            transaction_support::setup(plan(), TickClock::from_rest(-12, 64).unwrap());
+        let (mut state, mut candidate, mut workspace) = transaction_support::setup(
+            trajectory_plan::plan(),
+            TickClock::from_rest(-12, 64).unwrap(),
+        );
         let mut source = source(fail_at);
         let mut runner = FixedRun::new(&mut state, &mut candidate, &mut workspace, &mut source);
         let report = runner
@@ -158,8 +141,10 @@ fn complete_run_and_mid_run_refusal_preserve_actual_clock() {
 
 #[test]
 fn configuration_and_numerical_rejection_do_not_commit() {
-    let (mut state, mut candidate, mut workspace) =
-        transaction_support::setup(plan(), TickClock::from_rest(-12, 64).unwrap());
+    let (mut state, mut candidate, mut workspace) = transaction_support::setup(
+        trajectory_plan::plan(),
+        TickClock::from_rest(-12, 64).unwrap(),
+    );
     let mut source = source(usize::MAX);
     let mut runner = FixedRun::new(&mut state, &mut candidate, &mut workspace, &mut source);
     assert_eq!(

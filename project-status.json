@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Python and Rust through P07 and P08 reporting verified locally and hosted; P08 window review and P09 lineage/image foundation local gates passed, hosted pending",
+    "status": "Python and Rust through P07 and P08 reporting verified locally and hosted; P08 window and P09 foundation/recorded-step components local gates passed, hosted Rust pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p09/foundations/summary.json"
+    "rust_evidence": "evidence/p09/recorded/summary.json"
   },
   "packages": {
     "B00": {
@@ -99,14 +99,15 @@
       "reporting_evidence": "evidence/p08/reporting/summary.json"
     },
     "P09": {
-      "status": "in-progress; lineage and physical-image foundation local gates passed, hosted pending",
-      "evidence": "evidence/p09/foundations/summary.json",
+      "status": "in-progress; recorded-step/controller/balance components local gates passed, hosted pending",
+      "evidence": "evidence/p09/recorded/summary.json",
       "remaining": [
-        "Complete controller, diagnostic/error/reconstruction history and checkpoint assembly",
+        "Coherent complete checkpoint assembly including raw diagnostic/reconstruction history, provider state/work and artifacts",
         "External identities and accepted-state provenance validation",
         "Separate force/reference/arithmetic/transfer refinement studies",
         "Restart-transfer comparison against direct fine evolution"
-      ]
+      ],
+      "foundation_evidence": "evidence/p09/foundations/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -120,5 +121,8 @@
   "window_measurement_review_exists": true,
   "lineage_registry_exists": true,
   "physical_state_images_exist": true,
-  "complete_checkpoints_exist": false
+  "complete_checkpoints_exist": false,
+  "recorded_steps_exist": true,
+  "restartable_fixed_controller_exists": true,
+  "compensated_balance_history_exists": true
 }

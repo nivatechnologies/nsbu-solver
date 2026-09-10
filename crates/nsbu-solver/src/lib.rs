@@ -23,3 +23,11 @@ pub mod diagnostics;
 pub mod verification;
 
 pub mod lineage;
+
+pub mod experiment;
+
+#[cfg(test)]
+mod test_support;
+
+#[cfg(test)]
+extern crate self as nsbu_solver;

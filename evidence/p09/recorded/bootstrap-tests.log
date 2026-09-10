@@ -1,0 +1,46 @@
+test_changed_baseline_bytes (test_bootstrap_tools.BootstrapTests.test_changed_baseline_bytes) ... ok
+test_changed_benchmark_copy (test_bootstrap_tools.BootstrapTests.test_changed_benchmark_copy) ... ok
+test_changed_original_manifest (test_bootstrap_tools.BootstrapTests.test_changed_original_manifest) ... ok
+test_complete_checkout_and_independent_cwd (test_bootstrap_tools.BootstrapTests.test_complete_checkout_and_independent_cwd) ... ok
+test_missing_documentation_target (test_bootstrap_tools.BootstrapTests.test_missing_documentation_target) ... ok
+test_missing_hidden_workflow (test_bootstrap_tools.BootstrapTests.test_missing_hidden_workflow) ... ok
+test_missing_review_input (test_bootstrap_tools.BootstrapTests.test_missing_review_input) ... ok
+test_optimized_runner_refused_and_stale_success_replaced (test_bootstrap_tools.BootstrapTests.test_optimized_runner_refused_and_stale_success_replaced) ... ok
+test_preserved_evidence_cannot_be_overwritten (test_bootstrap_tools.BootstrapTests.test_preserved_evidence_cannot_be_overwritten) ... ok
+test_private_adapter_is_rejected (test_bootstrap_tools.BootstrapTests.test_private_adapter_is_rejected) ... ok
+test_component_names_cardinality_and_packet_metadata (test_integrity_contracts.IntegrityContracts.test_component_names_cardinality_and_packet_metadata) ... ok
+test_component_size_and_digest_are_separate_guards (test_integrity_contracts.IntegrityContracts.test_component_size_and_digest_are_separate_guards) ... ok
+test_different_self_consistent_problems_are_refused (test_integrity_contracts.IntegrityContracts.test_different_self_consistent_problems_are_refused) ... ok
+test_hash_guards_in_both_directions (test_integrity_contracts.IntegrityContracts.test_hash_guards_in_both_directions) ... ok
+test_identity_both_directions (test_integrity_contracts.IntegrityContracts.test_identity_both_directions) ... ok
+test_longer_closing_fence_and_lazy_json_alias (test_integrity_contracts.IntegrityContracts.test_longer_closing_fence_and_lazy_json_alias) ... ok
+test_metadata_requires_exact_names_and_boolean_false (test_integrity_contracts.IntegrityContracts.test_metadata_requires_exact_names_and_boolean_false) ... ok
+test_nested_packet_name_is_refused_before_reading_identical_bytes (test_integrity_contracts.IntegrityContracts.test_nested_packet_name_is_refused_before_reading_identical_bytes) ... ok
+test_public_report_contract (test_integrity_contracts.IntegrityContracts.test_public_report_contract) ... ok
+test_both_fence_kinds_must_close_with_their_own_kind (test_public_content_contracts.PublicContentTests.test_both_fence_kinds_must_close_with_their_own_kind) ... ok
+test_counts_and_markdown_only_link_scanning (test_public_content_contracts.PublicContentTests.test_counts_and_markdown_only_link_scanning) ... ok
+test_env_example_is_public_but_other_env_files_are_not (test_public_content_contracts.PublicContentTests.test_env_example_is_public_but_other_env_files_are_not) ... ok
+test_external_links_do_not_hide_later_local_links (test_public_content_contracts.PublicContentTests.test_external_links_do_not_hide_later_local_links) ... ok
+test_case_identity_and_false_evidence (test_repository_checks.RepositoryChecks.test_case_identity_and_false_evidence) ... ok
+test_independent_frozen_hash_guard (test_repository_checks.RepositoryChecks.test_independent_frozen_hash_guard) ... ok
+test_json_shapes (test_repository_checks.RepositoryChecks.test_json_shapes) ... ok
+test_link_escape_and_fence_delimiters (test_repository_checks.RepositoryChecks.test_link_escape_and_fence_delimiters) ... ok
+test_manifest_schema_and_traversal (test_repository_checks.RepositoryChecks.test_manifest_schema_and_traversal) ... ok
+test_metadata_and_license_sections (test_repository_checks.RepositoryChecks.test_metadata_and_license_sections) ... ok
+test_symlink_and_private_text_refused (test_repository_checks.RepositoryChecks.test_symlink_and_private_text_refused) ... ok
+test_documented_default_root_from_another_directory (test_verification_contracts.VerificationContracts.test_documented_default_root_from_another_directory) ... ok
+test_failure_tail_is_bounded_and_redacted (test_verification_contracts.VerificationContracts.test_failure_tail_is_bounded_and_redacted) ... ok
+test_nested_report_creation_and_suffix_refusal (test_verification_contracts.VerificationContracts.test_nested_report_creation_and_suffix_refusal) ... ok
+test_scope_mismatch_and_exact_changed_keys (test_verification_contracts.VerificationContracts.test_scope_mismatch_and_exact_changed_keys) ... ok
+test_subprocess_budget_and_success_metadata (test_verification_contracts.VerificationContracts.test_subprocess_budget_and_success_metadata) ... ok
+test_cli_success_and_refusals (test_verification_runner.RunnerTests.test_cli_success_and_refusals) ... ok
+test_dependency_and_process_errors (test_verification_runner.RunnerTests.test_dependency_and_process_errors) ... ok
+test_execution_success_and_repository_refusal (test_verification_runner.RunnerTests.test_execution_success_and_repository_refusal) ... ok
+test_optimized_cli_and_module_entries (test_verification_runner.RunnerTests.test_optimized_cli_and_module_entries) ... ok
+test_report_paths_and_atomic_failure (test_verification_runner.RunnerTests.test_report_paths_and_atomic_failure) ... ok
+test_scientific_drift_refused (test_verification_runner.RunnerTests.test_scientific_drift_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 15.596s
+
+OK

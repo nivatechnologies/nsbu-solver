@@ -2,7 +2,7 @@
 use super::squares::finite;
 use crate::{Complex64, SolverError};
 
-#[derive(Default)]
+#[derive(Debug, Clone, Copy, Default)]
 pub(crate) struct Sum {
     value: f64,
     correction: f64,

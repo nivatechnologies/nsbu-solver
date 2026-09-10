@@ -5,26 +5,7 @@ use crate::{
     Complex64,
 };
 
-fn setup() -> (ResourcePlan, SpectralState, CandidateState) {
-    let plan = ResourcePlan::new(
-        Domain::new([4; 3], [1.0; 3], 1.0).unwrap(),
-        ExtraStorage {
-            fft: 0,
-            force: 0,
-            diagnostics: 0,
-            overhead: 4096,
-        },
-        1024 * 1024,
-        Epoch(0),
-    )
-    .unwrap();
-    let clock = TickClock::from_rest(-10, 1024).unwrap();
-    (
-        plan,
-        SpectralState::from_rest(plan, clock, Epoch(0)).unwrap(),
-        CandidateState::new(plan, clock, Epoch(0)).unwrap(),
-    )
-}
+use crate::test_support::transaction_setup as setup;
 
 #[test]
 fn every_private_acceptance_identity_is_validated_before_any_payload_exchange() {
@@ -57,6 +38,10 @@ fn every_private_acceptance_identity_is_validated_before_any_payload_exchange() 
         }
         let before = stamp(&state);
         let candidate_before = stamp(&candidate.state);
+        assert_eq!(
+            candidate.proposal(&state, &accepted).unwrap_err(),
+            SolverError::StaleAttempt
+        );
         assert_eq!(
             commit_candidate(plan, &mut state, &mut candidate, accepted),
             Err(SolverError::StaleAttempt)

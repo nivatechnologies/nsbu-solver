@@ -24,7 +24,7 @@ impl Tolerances {
 }
 
 /// Empirical local discrepancy, with no Richardson divisor or certified-bound claim.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Indicators {
     /// Raw velocity and vorticity volume-average L2 discrepancies.
     pub errors: [f64; 2],

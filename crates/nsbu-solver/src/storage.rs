@@ -2,11 +2,16 @@
 use crate::SolverError;
 
 pub(crate) fn filled<T: Clone>(count: usize, value: T) -> Result<Vec<T>, SolverError> {
+    let mut values = reserved(count)?;
+    values.resize(count, value);
+    Ok(values)
+}
+
+pub(crate) fn reserved<T>(count: usize) -> Result<Vec<T>, SolverError> {
     let mut values = Vec::new();
     values
         .try_reserve_exact(count)
         .map_err(|_| SolverError::AllocationFailed)?;
-    values.resize(count, value);
     Ok(values)
 }
 

@@ -11,7 +11,7 @@ use crate::{
 };
 
 /// Instantaneous measured quantities. No quadrature or continuous-time claim is implied.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct BalanceSample {
     /// Field norms, including the incompressibility diagnostic.
     pub norms: Norms,
@@ -30,6 +30,25 @@ pub struct BalanceSample {
     pub enstrophy_dissipation: f64,
     /// Volume average of omega dot curl(f).
     pub vorticity_forcing: f64,
+}
+
+impl BalanceSample {
+    /// Exact balance values at zero velocity under a finite prescribed force.
+    pub const REST: Self = Self {
+        norms: Norms {
+            l2: 0.0,
+            h1: 0.0,
+            vorticity_l2: 0.0,
+            divergence_l2: 0.0,
+        },
+        energy: 0.0,
+        enstrophy: 0.0,
+        energy_dissipation: 0.0,
+        forcing_work: 0.0,
+        stretching: 0.0,
+        enstrophy_dissipation: 0.0,
+        vorticity_forcing: 0.0,
+    };
 }
 
 /// Measure complete same-grid spectra. `conservative` is independently formed P(div(u tensor u)-f).

@@ -88,7 +88,16 @@ fn twelve_exact_requests_commit_fine_state_by_swapping_owned_buffers() {
     assert!(result.indicators.errors[0] < 1e-15);
     assert_eq!(result.indicators.errors[1], 0.0);
     assert_eq!(state.clock(), clock);
-    commit_candidate(plan, &mut state, &mut candidate, result.accepted.unwrap()).unwrap();
+    let token = result.accepted.unwrap();
+    let proposed = candidate.proposal(&state, &token).unwrap();
+    assert_eq!(proposed.clock().elapsed(), 8);
+    assert_eq!(proposed.accepted_steps(), 1);
+    assert_eq!(proposed.epoch(), Epoch(1));
+    assert_ne!(proposed.component(0).unwrap().as_ptr(), old);
+    for axis in 0..3 {
+        assert!((proposed.component(axis).unwrap()[0].re - 0.125).abs() < 1e-15);
+    }
+    commit_candidate(plan, &mut state, &mut candidate, token).unwrap();
     assert_ne!(state.component(0).unwrap().as_ptr(), old);
     assert_eq!(
         (

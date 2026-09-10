@@ -3,6 +3,7 @@ pub mod balances;
 pub mod comparison;
 pub mod conservative;
 pub mod hermite;
+pub mod history;
 pub mod integrity;
 pub mod local;
 mod modes;

@@ -192,5 +192,21 @@ images reproduce the next accepted/rejected CM and HO attempts with fresh scratc
 These components do not complete P09. Complete controller, diagnostic, error and
 reconstruction history, coherent checkpoint assembly, external provenance and
 same-problem refinement/transfer studies remain. The recorded-step and balance
-history work is a separate uncompleted increment; hosted foundation checks are
-also pending. No accepted concentrating window is implied.
+history increment now passes its local gates; hosted Rust checks remain pending. No accepted concentrating window is implied.
+
+
+## P09 recorded-step progress
+
+The [recorded-step/controller/balance increment](evidence/p09/recorded/README.md)
+passes all local gates: 221 tests/probes, 11,612 executable lines and 942 branches
+fully covered, and 2,353 mutations with 2,171 caught, 182 unviable and zero
+survivors/timeouts. Diagnostics and history are proposed before an infallible
+physical commit. The fixed controller retains terminal failures; compensated
+balance arithmetic retains pending Simpson samples. Complete recorded attempts
+allocate nothing after preflight. All requested code metric limits pass.
+
+**P09 remains incomplete.** Complete coherent checkpoint assembly still needs raw
+measurements, reconstruction history, authenticated artifacts and provider
+state/work accounting. Those and transfer-vs-direct-fine tests remain separate
+drafts. The generic runtime and concentrating releases remain gated by the active
+plan; no numerical CLI or accepted concentrating window is claimed.

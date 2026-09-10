@@ -221,3 +221,20 @@ and scoped public-API/SOLID review remain clean. Dedicated allocation instrument
 covers image capture/refusal, restoration and registry operations. Identity, ancestry
 and physical payload ownership remain separate; no component can confer PDE
 acceptance. Hosted checks and the full P09 package remain incomplete.
+
+
+The [recorded-step/controller/balance increment](../evidence/p09/recorded/README.md)
+passes 221 tests/probes across 168 Rust files. All 11,612 executable lines, 942
+instrumented branches and 926 functions are covered. The full 2,353-mutant run
+caught 2,171 and found 182 unviable, with zero survivors/timeouts. Maxima are CC21,
+cognitive16, function/file Halstead74.4231, physical-file336 and CRAP21. Strict
+Clippy, clone detection and scoped review have zero dead/redundant-code findings
+or dynamic type escapes. Four allocation executables now include repeated complete
+recorded commits with no allocation/reallocation/free inside the attempt loop.
+
+SOLID review separates controller decisions, read-only observation, compensated
+balance arithmetic, bounded log storage and exclusive transaction ownership.
+Private corruption and actual CM/HO fixtures cover rollback and exact admission
+boundaries. Four long scientific studies run in full coverage and are skipped
+only during mutation reruns. No production or equivalent-mutant exemptions are
+used. Full checkpoints and hosted verification of this increment remain pending.

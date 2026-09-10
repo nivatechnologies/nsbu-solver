@@ -1,4 +1,5 @@
 //! Dedicated-process allocation instrumentation across numerical accept/reject and swap commits.
+mod mean_balance;
 use nsbu_solver::domain::{Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock};
 use nsbu_solver::integrators::{
     attempt::AttemptWorkspace,
@@ -6,8 +7,9 @@ use nsbu_solver::integrators::{
     indicator::Tolerances,
     method::Method,
     rhs::SpectralRhs,
-    transaction::{commit_candidate, CandidateState},
+    transaction::CandidateState,
 };
+use nsbu_solver::{diagnostics::history::BalanceHistory, experiment::commit_balanced};
 use nsbu_solver::{Complex64, SolverError};
 use stats_alloc::{Region, StatsAlloc, INSTRUMENTED_SYSTEM};
 use std::alloc::System;
@@ -72,6 +74,8 @@ fn probe(method: Method, calls: usize) {
     let mut work = AttemptWorkspace::new_with_method(plan, method).unwrap();
     let mut rhs = SpectralRhs::new(domain, OscillatingMean, 0.3, source).unwrap();
     assert!(planning.change().bytes_allocated <= plan.total());
+    assert!(plan.classes()[7] >= std::mem::size_of::<BalanceHistory>());
+    let mut history = BalanceHistory::new(clock, mean_balance::measured(&state), 21).unwrap();
     let original = state.component(0).unwrap().as_ptr();
     let region = Region::new(GLOBAL);
     for count in 1..=20 {
@@ -97,11 +101,14 @@ fn probe(method: Method, calls: usize) {
             .unwrap()
             .accepted
             .unwrap();
+        let sample = mean_balance::measured(candidate.proposal(&state, &accepted).unwrap());
         assert_eq!(
-            commit_candidate(plan, &mut state, &mut candidate, stale),
+            commit_balanced(&mut state, &mut candidate, stale, &mut history, sample),
             Err(SolverError::StaleAttempt)
         );
-        commit_candidate(plan, &mut state, &mut candidate, accepted).unwrap();
+        commit_balanced(&mut state, &mut candidate, accepted, &mut history, sample).unwrap();
+        assert_eq!(history.samples(), count as usize + 1);
+        assert_eq!(history.clock(), state.clock());
         assert_eq!(state.accepted_steps(), count);
         assert_eq!(rhs.consumption(), [calls, calls * 144, calls * 10]);
     }

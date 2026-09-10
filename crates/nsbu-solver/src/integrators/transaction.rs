@@ -54,6 +54,18 @@ impl CandidateState {
         })
     }
 
+    /// Borrow an accepted proposal for precommit diagnostics after validating its entire token.
+    /// No coefficient mutation is exposed. The committed state and diagnostics must remain
+    /// unchanged if measurement fails; retain diagnostic proposals privately until commit.
+    pub fn proposal(
+        &self,
+        committed: &SpectralState,
+        accepted: &AcceptedAttempt,
+    ) -> Result<&SpectralState, SolverError> {
+        validate(committed.plan(), committed, self, accepted)?;
+        Ok(&self.state)
+    }
+
     pub(crate) fn invalidate(&mut self) -> Result<(), SolverError> {
         self.accepted = None;
         self.generation = self.generation.next()?;
@@ -86,6 +98,48 @@ pub fn commit_candidate(
     candidate: &mut CandidateState,
     accepted: AcceptedAttempt,
 ) -> Result<(), SolverError> {
+    prepare_commit(plan, committed, candidate, accepted)?.commit();
+    Ok(())
+}
+
+/// Exclusive validated state pair held while fallible precommit diagnostics run.
+/// Dropping this value leaves physical state unchanged. It is neither cloneable nor reusable.
+pub struct PreparedCommit<'a> {
+    committed: &'a mut SpectralState,
+    candidate: &'a mut CandidateState,
+}
+impl PreparedCommit<'_> {
+    /// Immutable proposed field; exclusive ownership prevents either identity from changing.
+    pub fn proposal(&self) -> &SpectralState {
+        &self.candidate.state
+    }
+    /// Infallible payload exchange after all external diagnostic proposals have succeeded.
+    pub fn commit(self) {
+        std::mem::swap(self.committed, &mut self.candidate.state);
+        self.candidate.accepted = None;
+    }
+}
+
+/// Consume the single-use token and validate every identity before acquiring exclusive access.
+pub fn prepare_commit<'a>(
+    plan: ResourcePlan,
+    committed: &'a mut SpectralState,
+    candidate: &'a mut CandidateState,
+    accepted: AcceptedAttempt,
+) -> Result<PreparedCommit<'a>, SolverError> {
+    validate(plan, committed, candidate, &accepted)?;
+    Ok(PreparedCommit {
+        committed,
+        candidate,
+    })
+}
+
+fn validate(
+    plan: ResourcePlan,
+    committed: &SpectralState,
+    candidate: &CandidateState,
+    accepted: &AcceptedAttempt,
+) -> Result<(), SolverError> {
     if plan != committed.plan
         || plan != candidate.state.plan
         || accepted.base != stamp(committed)
@@ -95,8 +149,6 @@ pub fn commit_candidate(
     {
         return Err(SolverError::StaleAttempt);
     }
-    std::mem::swap(committed, &mut candidate.state);
-    candidate.accepted = None;
     Ok(())
 }
 
