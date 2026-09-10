@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass local and hosted gates. The bounded window measurement review passes local gates; hosted verification and full experiment/provenance integration remain pending. P08 remains incomplete. Lineage, physical-state images and recorded-step/controller/balance components pass local gates; complete checkpoints remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass local and hosted gates. The bounded window measurement review passes local gates; hosted verification and full experiment/provenance integration remain pending. P08 remains incomplete. Lineage, physical-state images, recorded-step/controller/balance components, authenticated artifacts and raw-history replay pass local checks; complete checkpoints remain under implementation.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI currently supports help/version only. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -89,6 +89,9 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Benchmark manifest](benchmarks/similarity-mms-v2.json) | Exact rational inputs and mathematical problem identity |
 | [Scientific scope](docs/SCIENTIFIC_SCOPE.md) | Meaning and limits of results |
 | [Provenance and adopted decisions](docs/PROVENANCE.md) | Historical naming, baseline hashes, licensing overlay |
+| [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
+| [Numerical conventions](docs/NUMERICAL_CONVENTIONS.md) | Fourier, pressure, norms and exact-time contracts |
+| [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 
 The project has no dependency on Niva code, services, schemas, or credentials. An optional Niva adapter belongs in a separate downstream project and consumes the same public API as any other application.

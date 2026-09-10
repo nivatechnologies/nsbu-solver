@@ -1,0 +1,38 @@
+   Packaging nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Updating crates.io index
+    Packaged 151 files, 614.5KiB (160.0KiB compressed)
+   Packaging nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Updating crates.io index
+    Blocking waiting for file lock on package cache
+    Packaged 48 files, 333.5KiB (94.6KiB compressed)
+   Packaging nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Updating crates.io index
+    Packaged 9 files, 19.0KiB (7.0KiB compressed)
+   Verifying nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/work/p09-artifact-package-target/package/nsbu-solver-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.39s
+   Verifying nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Updating crates.io index
+   Unpacking nsbu-solver v0.1.0-alpha.0 (registry `<checkout>/work/p09-artifact-package-target/package/tmp-registry`)
+    Blocking waiting for file lock on package cache
+   Compiling nsbu-solver v0.1.0-alpha.0
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/work/p09-artifact-package-target/package/nsbu-benchmarks-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.63s
+   Verifying nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Updating crates.io index
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/work/p09-artifact-package-target/package/nsbu-cli-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.96s

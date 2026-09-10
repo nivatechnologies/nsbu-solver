@@ -26,6 +26,8 @@ pub mod lineage;
 
 pub mod experiment;
 
+pub mod checkpoint;
+
 #[cfg(test)]
 mod test_support;
 

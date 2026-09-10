@@ -1,5 +1,5 @@
 [tool.basedpyright]
-include = ["reference", "tools"]
+include = ["quality", "reference", "tools"]
 exclude = ["docs/design", "work", ".venv"]
 venvPath = "."
 venv = ".venv"
@@ -10,19 +10,19 @@ reportExplicitAny = "error"
 stubPath = "typings"
 
 [tool.pytest.ini_options]
-testpaths = ["reference/tests", "tools/tests"]
+testpaths = ["quality/tests", "reference/tests", "tools/tests"]
 pythonpath = [".", "tools"]
 
 [tool.mutmut]
-source_paths = ["reference", "tools"]
-do_not_mutate = ["reference/tests/*", "tools/tests/*"]
-pytest_add_cli_args_test_selection = ["reference/tests", "tools/tests"]
+source_paths = ["quality", "reference", "tools"]
+do_not_mutate = ["quality/tests/*", "reference/tests/*", "tools/tests/*"]
+pytest_add_cli_args_test_selection = ["quality/tests", "reference/tests", "tools/tests"]
 pytest_add_cli_args = ["-q", "-x"]
 also_copy = ["docs", "benchmarks", "fixtures", "evidence", ".github", ".gitattributes", ".gitignore", "README.md", "LICENSE", "NOTICE", "THIRD_PARTY.md", "CONTRIBUTING.md", "IMPLEMENTATION_PLAN.md", "requirements-dev.txt", "project-status.json"]
 
 [tool.coverage.run]
 branch = true
-source = ["reference", "tools"]
+source = ["quality", "reference", "tools"]
 patch = ["subprocess"]
 data_file = "work/.coverage"
 

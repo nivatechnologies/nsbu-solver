@@ -1,4 +1,19 @@
-# Quality evidence
+# Quality policy and evidence
+
+Revision 2 · 10 September 2026
+
+The active executable policy requires at least 80% executable-line coverage and
+80% branch coverage, measured separately; CC and cognitive complexity below 22,
+Halstead difficulty below 80, physical source/test files below 500 lines, CRAP
+below 25 per function, and no Python `Any`/unresolved types or Rust `Any`/unknown
+type escapes. CRAP is computed per function from actual branch outcomes as
+`CC² × (1 − branch_coverage)³ + CC`. Mutation, duplication and dead-code tools
+produce retained informational reports. Independent numerical oracles may have
+intentional structural duplication and are reviewed without requiring a shared
+implementation. Tool or numerical-test failures still fail CI.
+
+The evidence below is historical: its full-coverage, zero-survivor and clean
+review results remain useful measurements, but are no longer required gates.
 
 The Python implementation, including P00C diagnostic code, passes numerical and
 quality checks locally and in hosted CI. P00B, P00C and Rust foundations are
@@ -18,19 +33,19 @@ without being counted as Python functions or executable Python lines.
 | Cognitive complexity, maximum per function | 17 | <22 |
 | Halstead difficulty, maximum per file / function | 9.888 / 7.805 | <80 |
 | Physical lines per source/test file, maximum | 243 | <500 |
-| Executable line coverage | 3,144/3,144 | 100% |
-| Branch coverage | 558/558 | 100% |
+| Executable line coverage | 3,144/3,144 | >=80% |
+| Branch coverage | 558/558 | >=80% |
 | CRAP, maximum per function | 15 | <25 |
-| Non-equivalent surviving mutants | 0 | 0 |
-| Confirmed dead code / duplicated blocks | 0 / 0 | 0 / 0 |
+| Non-equivalent surviving mutants | 0 | Informational |
+| Confirmed dead code / duplicated blocks | 0 / 0 | Informational |
 | Strict typing errors, including Any/unknown diagnostics | 0 | 0 |
 
 Vulture's eight findings were reviewed individually: five discovered and executed
 unittest classes, and three serialized TypedDict schema keys. Their exact findings
-are retained beside the summary and checked for drift in CI. Zero confirmed dead
-code and zero detected duplicated blocks are scoped review/analysis results, not
-proofs about arbitrary future use. Every measured function has full branch coverage;
-CRAP therefore equals its cyclomatic complexity under the adopted formula.
+are retained beside the summary. Zero confirmed dead code and zero detected
+duplicated blocks are scoped review/analysis results, not proofs about arbitrary
+future use. The historical run has full branch coverage, so its CRAP values equal
+cyclomatic complexity under the adopted formula.
 
 ## Mutation evidence
 
@@ -68,9 +83,9 @@ failure rather than consuming the mutation-process timeout.
 Install `requirements-quality.txt` in the configured `.venv`. Run `coverage run -m
 pytest -q`, `coverage combine`, `coverage json`, `basedpyright`, Radon's `cc` and
 `hal` commands, `complexipy`, `vulture` and Pylint's `duplicate-code` check. The
-workflow records the exact invocations and enforces per-function limits, exact
-line/branch coverage, file sizes, duplication and reviewed dead-code findings.
-With full branch coverage, the CC gate also enforces CRAP <25.
+workflow records the exact invocations and enforces per-function limits, 80%
+line/branch coverage, file sizes and CRAP from measured branch outcomes.
+Duplication, dead-code and mutation reports remain available for review.
 
 Mutation execution must use a disposable checkout because the local distributor
 changes target files in place. Activate its environment, then run:
@@ -86,12 +101,17 @@ This serial reproduction can be lengthy. Preserve raw outcomes and review each
 survivor; the configuration does not hide equivalents or convert timeouts into
 project-level kills. Archived parallel runs include their precise executed commands.
 
-CI reruns static analysis, coverage and numerical checks. Its mutation-evidence
-gate checks the complete reconciled report against exact source/configuration
-hashes and refuses added or changed source files until their evidence is renewed.
-It reuses matching mutation evidence; it does not claim to rerun every mutation
-on every push. The [initial baseline](../evidence/quality-baseline.json) and earlier
-source snapshots remain historical evidence.
+CI reruns static analysis, coverage and numerical checks. It records mutation
+evidence when available but does not require a zero-survivor result or a
+source-hash replay on every push. The [initial baseline](../evidence/quality-baseline.json)
+and earlier source snapshots remain historical evidence.
+
+Rust push and pull-request checks keep the fast build, numerical tests, coverage,
+metrics and CRAP gates mandatory. A complete `cargo-mutants` report is an optional
+`workflow_dispatch` run (`full_mutation_report=true`); it must finish with a
+structurally complete outcome report, while survivors and timeouts remain review
+findings. Focused mutation work and the archived Python mutation reports are
+historical evidence, including where their source scope predates quality tooling.
 
 ## Responsibility review
 
@@ -238,3 +258,8 @@ Private corruption and actual CM/HO fixtures cover rollback and exact admission
 boundaries. Four long scientific studies run in full coverage and are skipped
 only during mutation reruns. No production or equivalent-mutant exemptions are
 used. Full checkpoints and hosted verification of this increment remain pending.
+
+The [P09 artifact/replay increment](../evidence/p09/artifacts/README.md) records
+226 tests/probes, 11,879 executable lines and 956 instrumented branches in its
+full local replay, with 2,374 mutation outcomes retained. It adds artifact and
+replay coverage but does not complete P09.

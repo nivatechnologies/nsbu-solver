@@ -1,0 +1,8 @@
+reference/tests/test_numerical_contracts.py:15: unused class 'NumericalContracts' (60% confidence)
+reference/tests/test_temporal_contracts.py:9: unused class 'TemporalContracts' (60% confidence)
+tools/check_repository.py:199: unused variable 'schema_version' (60% confidence)
+tools/check_repository.py:202: unused variable 'checks' (60% confidence)
+tools/check_repository.py:204: unused variable 'missing_files' (60% confidence)
+tools/tests/test_integrity_contracts.py:16: unused class 'IntegrityContracts' (60% confidence)
+tools/tests/test_repository_checks.py:11: unused class 'RepositoryChecks' (60% confidence)
+tools/tests/test_verification_contracts.py:12: unused class 'VerificationContracts' (60% confidence)

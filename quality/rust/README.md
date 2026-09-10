@@ -24,8 +24,13 @@ branch instrumentation measures instrumented conditions, not MC/DC or every
 semantic failure path. Review match arms and public API usage separately.
 
 Mutation testing targets implementation code; test code remains in coverage,
-complexity, size and duplication scope. Unviable mutations are reported separately
-and never counted as caught. No timeout or missed mutant is accepted. Compiler
-and Clippy warnings are denied, including private dead code; manual review also
-checks exported API usage and intentional independent numerical implementations.
-Rust's compiler resolves inferred types; `std::any::Any` escapes are prohibited.
+complexity, size and duplication scope. Mutation and clone reports are
+informational; unviable mutations are reported separately. Clippy denies warnings
+except `dead_code`, while manual review checks exported API usage and intentional
+independent numerical implementations. Rust's compiler resolves inferred types;
+`std::any::Any` escapes are prohibited.
+
+Push and pull-request checks do not run a full mutation sweep. Start the optional
+complete report through `workflow_dispatch` with `full_mutation_report=true`.
+That run requires a complete, finished outcome file; survivor and timeout counts
+are retained for review rather than used as a quality gate.

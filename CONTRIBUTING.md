@@ -1,6 +1,6 @@
 # Contributing to NSBU Solver
 
-Start with the [implementation plan](IMPLEMENTATION_PLAN.md), [numerical design](docs/design/COMPLETE_DESIGN.md) and [scientific scope](docs/SCIENTIFIC_SCOPE.md). This is currently a design-and-verification bootstrap; the first numerical work is the independent reference evaluator and high-precision fixtures.
+Start with the [implementation plan](IMPLEMENTATION_PLAN.md), [numerical design](docs/design/COMPLETE_DESIGN.md) and [scientific scope](docs/SCIENTIFIC_SCOPE.md). The independent reference and Rust numerical core are implemented; experiment verification and complete checkpoints remain in progress. Consult the root README and package evidence for demonstrated capabilities. No concentrating PDE convergence window has been accepted.
 
 ## Development checks
 
@@ -12,7 +12,7 @@ python -m unittest discover -s tools/tests -v
 python tools/verify_design.py --output work/design-checks.json
 ```
 
-Keep generated reports, virtual environments and numerical checkpoints in ignored working directories. The design runner accepts in-checkout JSON reports only under `work/` or `evidence/` and preserves the original evidence under `docs/design/`. Commit only deliberate, compact fixtures and reviewed evidence. The CI workflow runs these same checks; it does not claim Rust or PDE coverage. The guard tests mutate temporary copies to verify that incomplete or changed bootstrap inputs fail.
+Keep generated reports, virtual environments and numerical checkpoints in ignored working directories. The design runner accepts in-checkout JSON reports only under `work/` or `evidence/` and preserves the original evidence under `docs/design/`. Commit only deliberate, compact fixtures and reviewed evidence. The Python CI workflow runs these checks and the reference tests. A separate Rust workflow checks the workspace and measures code coverage; code coverage does not establish PDE convergence. The guard tests mutate temporary copies to verify that incomplete or changed bootstrap inputs fail.
 
 ## Numerical contributions
 
@@ -22,7 +22,18 @@ Use independent fixtures rather than tests that merely restate the implementatio
 
 User input errors return structured failures. Bounded attempts must have declared provider work and preallocated scratch. Accepted commits validate all identity/epoch tokens before changing committed state. Reference evaluators remain outside the integrator's state-update path. Carry complete error history through checkpoints and comparison lineages.
 
-Document nontrivial formulas with equation references and derivations. Keep cyclomatic complexity low through clear mathematical decomposition; assess maintainability, numerical stability and test coverage together rather than gaming a single metric. Record complexity regressions and justify unavoidable numerical branches. Future Rust changes must pass format, strict Clippy, unit/integration/doc tests, package checks and the relevant independent numerical fixtures.
+Document nontrivial formulas with equation references and derivations. Keep cyclomatic complexity low through clear mathematical decomposition; assess maintainability, numerical stability and test coverage together rather than gaming a single metric. Record complexity regressions and justify unavoidable numerical branches. Rust changes must pass format, strict Clippy, unit/integration/doc tests, package checks and the relevant independent numerical fixtures.
+
+## Documentation requirements
+
+Treat documentation as part of each implementation change. Explain public API
+contracts, failure behavior, numerical conventions, resource ownership and
+nontrivial formulas where they affect correct use. Keep architecture and module
+guides aligned with the code, and test runnable examples. Installation and CLI
+walkthroughs must work from a clean checkout. Clearly separate implemented
+capabilities, experimental diagnostics and validated numerical results. Review
+generated API documentation as well as prose; missing-documentation lint checks
+do not establish that an explanation is useful.
 
 ## Changes to reviewed inputs
 
@@ -37,7 +48,8 @@ Contributions intentionally submitted for this project are licensed under Apache
 ## Required quality review
 
 Follow the SOLID review and exact quality thresholds in the active
-[implementation plan](IMPLEMENTATION_PLAN.md). Publish actual measurements and
-mutation outcomes with each package; unmeasured gates remain unverified.
+[implementation plan](IMPLEMENTATION_PLAN.md). Publish actual measurements with each package; unmeasured gates remain unverified.
+Coverage must reach 80% for executable lines and branches. Mutation and dead-code
+findings are informational; record their scope and outcomes when those analyses run.
 Never refactor frozen review artifacts or share independent numerical oracles
 merely to improve a metric.

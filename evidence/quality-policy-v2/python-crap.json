@@ -1,0 +1,4032 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "quality/check_crap.py",
+      "function": "rust_coverage",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "rust_report",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 9.158203125
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "main",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "number",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 4.25
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "fraction",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "python_functions",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "python_branch_outcomes",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "score",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "python_coverage",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "python_report",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "rust_functions",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "obj",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "seq",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "read",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "result",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/check_crap.py",
+      "function": "python_row",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_primitives_reject_invalid_measurements",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_python_report_uses_branch_origins_and_body_execution",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_rust_coverage_merges_branch_coordinates_and_uses_segments",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_rust_report_matches_one_source_file",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_python_report_uses_branch_origins_and_body_execution",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "json_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "parse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_primitives_reject_invalid_measurements",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_rust_coverage_merges_branch_coordinates_and_uses_segments",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "quality/tests/test_check_crap.py",
+      "function": "test_rust_report_matches_one_source_file",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/scalar.py",
+      "function": "root",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/scalar.py",
+      "function": "step",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/scalar.py",
+      "function": "step_derivative",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/scalar.py",
+      "function": "fields",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/scalar.py",
+      "function": "rational",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__mul__",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "indices",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__post_init__",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "variable",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__pow__",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "derivative",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__post_init__",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "constant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "variable",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "_coerce",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__add__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__neg__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__sub__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__rsub__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__mul__",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__pow__",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__truediv__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__rtruediv__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "exp",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "derivative",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "partial",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "_coerce",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__add__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__neg__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "exp",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "partial",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "constant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__sub__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__rsub__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__truediv__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/jets.py",
+      "function": "__rtruediv__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/evaluator.py",
+      "function": "evaluate",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/evaluator.py",
+      "function": "smooth_step",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/evaluator.py",
+      "function": "implicit_root",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/evaluator.py",
+      "function": "field_jets",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "scalar_force",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "u",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "p",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "sample_report",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "sample",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "run",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_fields.py",
+      "function": "compare",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "transform",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "convolution",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "forward_vector",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "inverse_vector",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "project",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "curl",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "retained",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "nonlinear",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "preflight",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "grid",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/dft.py",
+      "function": "cross",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "cm_step",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "ho_step",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "ho_phi",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "coefficient_guard_digits",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "combine",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "ho_tableau",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "cm_weights",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/steps.py",
+      "function": "ho_tableau_values",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "force",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "study",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "compare",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "run",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "encode",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "right_hand_side",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "rhs",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/verify_steps.py",
+      "function": "study_report",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tuples.py",
+      "function": "triple",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tuples.py",
+      "function": "quadruple",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "run",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "spatial_profile",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "errors",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "trajectory",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "rhs",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/verify_trajectory.py",
+      "function": "prescribed_force",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/regions.py",
+      "function": "coverage",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/regions.py",
+      "function": "integral",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/regions.py",
+      "function": "radial_limit",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/verify_sampling.py",
+      "function": "sample_force",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/verify_sampling.py",
+      "function": "difference",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/verify_sampling.py",
+      "function": "run",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/pilot_force.py",
+      "function": "__call__",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/pilot_force.py",
+      "function": "stage_tick",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "reference/pilot_force.py",
+      "function": "__call__",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/pilot_force.py",
+      "function": "stage_tick",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "reference/pilot.py",
+      "function": "pilot",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/pilot.py",
+      "function": "tracking",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/pilot.py",
+      "function": "report",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/pilot.py",
+      "function": "reservation",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_scalar_field_agreement_and_divergence",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_admissible_root_and_residual",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_root_refusals",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_axis_closed_form_and_startup",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_scalar_field_agreement_and_divergence",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_implicit_derivatives_against_scalar_differentiation",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "scalar_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_scalar_difference_refinement",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_nonfinite_space_refused",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_cutoff_derivatives_and_flats",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_admissible_root_and_residual",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_axis_closed_form_and_startup",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_implicit_derivatives_against_scalar_differentiation",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "scalar_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_scalar_difference_refinement",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_cutoff_derivatives_and_flats",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_root_refusals",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "test_nonfinite_space_refused",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reference.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "smooth_state",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_product_matches_convolution_and_energy",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_direct_transform_mode_and_roundtrip",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_product_matches_convolution_and_energy",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_gradient_projection_mean_and_curl",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_alias_negative_control",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_preflight_refusals",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_actual_stage_times_and_constant_source",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "rhs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_modal_diffusion",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_nonzero_ho_rows",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_direct_transform_mode_and_roundtrip",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_alias_negative_control",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_actual_stage_times_and_constant_source",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "rhs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_modal_diffusion",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_nonzero_ho_rows",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_preflight_refusals",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_dft_steps.py",
+      "function": "test_gradient_projection_mean_and_curl",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_exp_power_and_reciprocal_derivatives",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "function",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_force_gradient_independent_difference",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_every_supported_degree",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_shape_and_dimension_refusals",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_exp_power_and_reciprocal_derivatives",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "function",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_mixed_polynomial_factorials",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_reference_work_refusals",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_force_gradient_independent_difference",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_every_supported_degree",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_strict_shapes_nonfinite_values_and_freezing",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_integer_substitutability",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_shape_and_dimension_refusals",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_strict_shapes_nonfinite_values_and_freezing",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_mixed_polynomial_factorials",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_reference_work_refusals",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_jet_algebra.py",
+      "function": "test_integer_substitutability",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_field_failure_attribution",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_step_failure_attribution",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_actual_force_and_rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "assert_report",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_field_report_and_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_step_report_and_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_actual_force_and_rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "zero_evaluation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "zero_fields",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "fixed_step",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_field_failure_attribution",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_step_failure_attribution",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "assert_report",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_field_report_and_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_reports.py",
+      "function": "test_step_report_and_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_zero_operator_stability_polynomial",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "rhs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_nonautonomous_uniform_ode_order",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_extreme_weight_conditioning",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_coefficient_refusals",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_zero_operator_stability_polynomial",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "rhs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_nonautonomous_uniform_ode_order",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_coefficient_refusals",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "test_extreme_weight_conditioning",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_temporal_contracts.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_profile_and_exact_error",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "euler_probe",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_profile_and_exact_error",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_from_rest_and_invalid_divisors",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_report_and_failures",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "inaccurate",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_entry_point_rejects_unconverged_double",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "manufactured_result",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_report_and_failures",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "inaccurate",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_from_rest_and_invalid_divisors",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory.py",
+      "function": "test_entry_point_rejects_unconverged_double",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_invalid_inputs",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_first_endpoint_complete_and_initial_partial_annulus",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_empty_region_geometry",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_invalid_inputs",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_declared_quadrature_nodes_and_refinement_order",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_empty_boundary_and_reversed_region",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_first_endpoint_complete_and_initial_partial_annulus",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_declared_quadrature_nodes_and_refinement_order",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_empty_boundary_and_reversed_region",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_regions.py",
+      "function": "test_empty_region_geometry",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_full_profile_and_source_at_nonzero_time",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_actual_step_fixture_discrepancy_and_mean",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_full_profile_and_source_at_nonzero_time",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_derivative_sensitive_error_norm",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_high_mode_diffusion",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "zero_rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_resource_ledger_exact_caps",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_noncentral_region_geometry_and_touching_empty",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_root_exact_work_boundary_and_flat_derivative",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_actual_step_fixture_discrepancy_and_mean",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "assert_spectrum_fixture",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "assert_spectrum_fixture",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_high_mode_diffusion",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "zero_rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_resource_ledger_exact_caps",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_root_exact_work_boundary_and_flat_derivative",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_derivative_sensitive_error_norm",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_numerical_contracts.py",
+      "function": "test_noncentral_region_geometry_and_touching_empty",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_normalization_and_origin",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_normalization_and_origin",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_full_fine_band_high_mode",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_orchestration_and_arithmetic_refusal",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_exact_rest_force_has_zero_conditioning",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_orchestration_and_arithmetic_refusal",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_exact_rest_force_has_zero_conditioning",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "smooth_force",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "fixed_sampling",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_full_fine_band_high_mode",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling.py",
+      "function": "test_entry_point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_result_objects_reject_field_assignment",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_actual_scalar_force_uses_valid_startup_time_domain",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_unresolvable_coordinate_exhausts_with_typed_failure",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_result_objects_reject_field_assignment",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_actual_scalar_force_uses_valid_startup_time_domain",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_immutable_reports.py",
+      "function": "test_unresolvable_coordinate_exhausts_with_typed_failure",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_three_dimensional_collar_during_startup",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_remaining_time_scaled_residual_and_nonfinite_input",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_nonautonomous_stages_with_nonzero_diffusion",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_cutoff_derivatives_close_to_both_flat_regions",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_three_dimensional_collar_during_startup",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_nonautonomous_stages_with_nonzero_diffusion",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "rhs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_cutoff_derivatives_close_to_both_flat_regions",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coupled_limits.py",
+      "function": "test_remaining_time_scaled_residual_and_nonfinite_input",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_preserved_reference_fixtures.py",
+      "function": "test_field_coordinates_and_values_against_verified_artifact",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "reference/tests/test_preserved_reference_fixtures.py",
+      "function": "test_field_coordinates_and_values_against_verified_artifact",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_ho_scaled_extreme_negative_coefficients",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_guard_digit_provisioning_and_extreme_endpoint",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_recurrence_does_not_consume_a_taylor_budget",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_default_series_capacity_boundary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_root_work_cap_at_residual_acceptance_boundary",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_root_reports_actual_work_and_honors_default_cap",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "counted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_axis_root_is_exact_without_iterations",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_ho_scaled_extreme_negative_coefficients",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_taylor_work_cap_requires_relative_term_accuracy",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_exact_residual_and_series_acceptance_boundaries",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_guard_digit_provisioning_and_extreme_endpoint",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_recurrence_does_not_consume_a_taylor_budget",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_root_work_cap_at_residual_acceptance_boundary",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_axis_root_is_exact_without_iterations",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_taylor_work_cap_requires_relative_term_accuracy",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_default_series_capacity_boundary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_root_reports_actual_work_and_honors_default_cap",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "counted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_coefficient_work_limits.py",
+      "function": "test_exact_residual_and_series_acceptance_boundaries",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_actual_quadratic_padding_removes_retained_alias",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_overlapping_wavevector_convolution",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_overlapping_wavevector_convolution",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_actual_quadratic_padding_removes_retained_alias",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_largest_padded_transform_grid",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_overlong_transform_payload_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_largest_padded_transform_grid",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_spectral_interactions.py",
+      "function": "test_overlong_transform_payload_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_out_of_bracket_and_stagnating_proposals_use_bisection",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "degraded_jacobian",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_reviewed_three_sweep_implicit_jet_budget",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "counted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_fixed_coordinate_work_fixtures",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_out_of_bracket_and_stagnating_proposals_use_bisection",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "degraded_jacobian",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_reviewed_three_sweep_implicit_jet_budget",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "counted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_newton_safeguards.py",
+      "function": "test_fixed_coordinate_work_fixtures",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_field_decimal_precision_and_conditioning",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_full_step_report_preserves_complex_values",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_nonzero_arithmetic_differences",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "evaluated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_nonzero_arithmetic_differences",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "evaluated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_field_decimal_precision_and_conditioning",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_values.py",
+      "function": "test_full_step_report_preserves_complex_values",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_cutoff_work.py",
+      "function": "test_exponential_arguments_are_nonpositive",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_cutoff_work.py",
+      "function": "bounded_exp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_cutoff_work.py",
+      "function": "test_exponential_arguments_are_nonpositive",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_cutoff_work.py",
+      "function": "bounded_exp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_distinct_grid_comparisons_and_declared_profiles",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "sampled",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_signed_coordinates_and_nonunit_conditioning",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "field",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_distinct_grid_comparisons_and_declared_profiles",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "sampled",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_noninteger_full_band_norm_rendering",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_signed_coordinates_and_nonunit_conditioning",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "field",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_sampling_contracts.py",
+      "function": "test_noninteger_full_band_norm_rendering",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "test_complete_tick_schedule_and_viscosity",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "advance",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "test_only_final_h1_refinement_controls_order_gate",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "test_only_final_h1_refinement_controls_order_gate",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "test_complete_tick_schedule_and_viscosity",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_contracts.py",
+      "function": "advance",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_derivative_requests_have_four_coordinates_and_one_sided_startup",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "differentiated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_scaled_oracle_error_and_threshold",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_precision_comparison_scaling_and_exact_boundary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_both_precisions_and_distinct_samples_are_compared",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "sampled",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_derivative_requests_have_four_coordinates_and_one_sided_startup",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "differentiated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_both_precisions_and_distinct_samples_are_compared",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "sampled",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_scaled_oracle_error_and_threshold",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "force_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_field_contracts.py",
+      "function": "test_precision_comparison_scaling_and_exact_boundary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_execution.py",
+      "function": "test_comparison_precision_and_nonzero_equal_states",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_execution.py",
+      "function": "rendered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_execution.py",
+      "function": "test_comparison_precision_and_nonzero_equal_states",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_report_execution.py",
+      "function": "rendered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "run_policy",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "simulated",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "measured",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "rendered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "test_noninteger_orders_and_nonzero_precision_changes",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "test_exact_arithmetic_boundary_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "test_noninteger_orders_and_nonzero_precision_changes",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "run_policy",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "simulated",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "measured",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "rendered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_trajectory_reporting.py",
+      "function": "test_exact_arithmetic_boundary_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_driver_imports.py",
+      "function": "test_report_imports_do_not_perform_numerical_work",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_driver_imports.py",
+      "function": "test_report_imports_do_not_perform_numerical_work",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_coefficient_context_budget",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "bounded",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_constant_jet_has_zero_derivative",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_region_refinement_doubles_the_requested_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "integrated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_constant_jet_has_zero_derivative",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_coefficient_context_budget",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "bounded",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "test_region_refinement_doubles_the_requested_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_bounded_reference_work.py",
+      "function": "integrated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_tracking_signed_grid_and_noninteger_error",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "reference",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "exercise",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "step",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "reference",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_resource_and_method_admission_before_numerical_work",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "exercise",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "step",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "reference",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_fixed_clock_schedule_and_reference_only_after_evolution",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_nonfinite_candidate_does_not_commit_time_or_coefficients",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_rhs_and_reference_failures_preserve_diagnostic_evidence",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_tracking_signed_grid_and_noninteger_error",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "reference",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_module_entry_point_emits_diagnostic_json",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "step",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_resource_and_method_admission_before_numerical_work",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_fixed_clock_schedule_and_reference_only_after_evolution",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_nonfinite_candidate_does_not_commit_time_or_coefficients",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_rhs_and_reference_failures_preserve_diagnostic_evidence",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "test_module_entry_point_emits_diagnostic_json",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot.py",
+      "function": "step",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_guard_uses_padded_grid_and_sum_of_absolute_components",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "inverse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_nonmonotone_requests_reuse_only_the_pure_force",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "sampled",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "nonlinear",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_stage_and_work_limits_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_advective_and_cache_limits_precede_new_force_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_conversion_failure_is_not_repaired_by_subtracting_rounded_time",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "corrupted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_guard_uses_padded_grid_and_sum_of_absolute_components",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "inverse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_exact_advective_boundary_is_accepted",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_overfull_cache_refuses_before_sampling",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_stage_and_work_limits_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_conversion_failure_is_not_repaired_by_subtracting_rounded_time",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "corrupted",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_nonmonotone_requests_reuse_only_the_pure_force",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "sampled",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "nonlinear",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_advective_and_cache_limits_precede_new_force_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_exact_advective_boundary_is_accepted",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_force.py",
+      "function": "test_overfull_cache_refuses_before_sampling",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_imports.py",
+      "function": "test_import_is_inert",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_imports.py",
+      "function": "test_import_is_inert",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "__rpow__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "test_class_reservations_are_added_without_exponential_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "test_divisor_is_a_bounded_scale_not_an_exponent",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "step",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "__rpow__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "test_class_reservations_are_added_without_exponential_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "test_divisor_is_a_bounded_scale_not_an_exponent",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/tests/test_pilot_work.py",
+      "function": "step",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/verify_design.py",
+      "function": "execute",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/verify_design.py",
+      "function": "main",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/verify_design.py",
+      "function": "output_path",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/verify_design.py",
+      "function": "write_report",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_review",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_links",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "unfenced_lines",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_public_content",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "public_files",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_case",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_metadata",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "check_repository",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "main",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/check_repository.py",
+      "function": "sha256",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/json_types.py",
+      "function": "array_value",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/json_types.py",
+      "function": "object_value",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/json_types.py",
+      "function": "string_value",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/json_types.py",
+      "function": "decode",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "assert_check_fails",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "invoke_runner",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_complete_checkout_and_independent_cwd",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_review_input",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_hidden_workflow",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_baseline_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_original_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_benchmark_copy",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_documentation_target",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_private_adapter_is_rejected",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_optimized_runner_refused_and_stale_success_replaced",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_preserved_evidence_cannot_be_overwritten",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "invoke_runner",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "assert_check_fails",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_complete_checkout_and_independent_cwd",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_review_input",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_hidden_workflow",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_baseline_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_original_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_changed_benchmark_copy",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_missing_documentation_target",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_private_adapter_is_rejected",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_optimized_runner_refused_and_stale_success_replaced",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_bootstrap_tools.py",
+      "function": "test_preserved_evidence_cannot_be_overwritten",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/support.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/support.py",
+      "function": "setUp",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_case_identity_and_false_evidence",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_json_shapes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "rewrite_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_manifest_schema_and_traversal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "hash_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_independent_frozen_hash_guard",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_case_identity_and_false_evidence",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_symlink_and_private_text_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_link_escape_and_fence_delimiters",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_metadata_and_license_sections",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_json_shapes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_metadata_and_license_sections",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "rewrite_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_manifest_schema_and_traversal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "hash_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_independent_frozen_hash_guard",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_symlink_and_private_text_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_repository_checks.py",
+      "function": "test_link_escape_and_fence_delimiters",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "scientific_output",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "process",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_execution_success_and_repository_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_dependency_and_process_errors",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_scientific_drift_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_report_paths_and_atomic_failure",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "invoke",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_cli_success_and_refusals",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_optimized_cli_and_module_entries",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "process",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_dependency_and_process_errors",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_report_paths_and_atomic_failure",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_optimized_cli_and_module_entries",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "scientific_output",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_execution_success_and_repository_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_scientific_drift_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "invoke",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_runner.py",
+      "function": "test_cli_success_and_refusals",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_component_names_cardinality_and_packet_metadata",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_public_report_contract",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_identity_both_directions",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_component_size_and_digest_are_separate_guards",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_longer_closing_fence_and_lazy_json_alias",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_metadata_requires_exact_names_and_boolean_false",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_hash_guards_in_both_directions",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_component_names_cardinality_and_packet_metadata",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_different_self_consistent_problems_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_nested_packet_name_is_refused_before_reading_identical_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_identity_both_directions",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_component_size_and_digest_are_separate_guards",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_different_self_consistent_problems_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_longer_closing_fence_and_lazy_json_alias",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_metadata_requires_exact_names_and_boolean_false",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_hash_guards_in_both_directions",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_public_report_contract",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "test_nested_packet_name_is_refused_before_reading_identical_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_integrity_contracts.py",
+      "function": "admit_manifest",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_counts_and_markdown_only_link_scanning",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_external_links_do_not_hide_later_local_links",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_both_fence_kinds_must_close_with_their_own_kind",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_env_example_is_public_but_other_env_files_are_not",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_both_fence_kinds_must_close_with_their_own_kind",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_env_example_is_public_but_other_env_files_are_not",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_counts_and_markdown_only_link_scanning",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_public_content_contracts.py",
+      "function": "test_external_links_do_not_hide_later_local_links",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "preserved",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_subprocess_budget_and_success_metadata",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "invoke",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_failure_tail_is_bounded_and_redacted",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_scope_mismatch_and_exact_changed_keys",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_nested_report_creation_and_suffix_refusal",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_documented_default_root_from_another_directory",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_scope_mismatch_and_exact_changed_keys",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_nested_report_creation_and_suffix_refusal",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_documented_default_root_from_another_directory",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "preserved",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_subprocess_budget_and_success_metadata",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "invoke",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_verification_contracts.py",
+      "function": "test_failure_tail_is_bounded_and_redacted",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    }
+  ],
+  "maximum": 15.0
+}

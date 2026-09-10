@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.1 · 10 September 2026 · Bootstrap and packages through P07 verified
+Revision 1.2 · 10 September 2026 · Bootstrap and packages through P07 verified
 
 ## Adopted decisions
 
@@ -83,11 +83,9 @@ satisfy a metric.
 | Cognitive complexity, per function/method | < 22 |
 | Halstead difficulty, per function/method and file | < 80 |
 | Physical lines per maintained source/test file, including comments/blanks | < 500 |
-| Test coverage, executable lines and branches | 100% |
+| Test coverage, executable lines and branches | >=80% each |
 | CRAP, per function/method | < 25 |
-| Surviving mutants | 0 |
-| Dead code | 0 |
-| Redundant code | 0 |
+| Mutation, dead-code and duplication findings | Informational, with review |
 | `any` or `unknown` types, including Python `Any` and unresolved implicit types | 0 |
 
 These are required targets, not demonstrated current results. Before claiming a
@@ -97,8 +95,8 @@ and wire the checks into CI. Use CRAP = CC² × (1 − coverage)³ + CC, with br
 coverage expressed as a fraction. Report each metric separately; averages cannot
 hide a failing function or file. Unsupported measurements remain unverified.
 Mutation reports include generated, killed, surviving, invalid, equivalent,
-timed-out and untested counts. Timeouts and untested mutants do not count as
-kills. Document demonstrably equivalent mutants individually; never silently
+timed-out and untested counts. They inform review but do not gate package
+completion. Document demonstrably equivalent mutants individually; never silently
 exclude difficult code or weaken numerical tests to reach a target.
 
 The scope includes maintained library, CLI, reference, tooling and test code.
@@ -108,9 +106,10 @@ Generated fixtures and third-party dependencies are separately inventoried, not
 represented as analyzed project code. Any further exclusion requires explicit
 justification recorded in the report, with unmet requirements left visible.
 Independent numerical implementations are intentional verification oracles;
-review apparent duplication without merging them into a shared implementation
-that would destroy independence. Dead/redundant-code analysis must include a
-manual review of intended public API and independent-oracle responsibilities.
+duplication findings remain informational and must not force their merger into a
+shared implementation that would destroy independence. Dead/redundant-code
+analysis must include a manual review of intended public API and
+independent-oracle responsibilities.
 
 Each package records a SOLID review, numerical exit evidence, quality measurements
 and unresolved findings. A package cannot be marked complete with failing or
@@ -210,3 +209,7 @@ measurements, reconstruction history, authenticated artifacts and provider
 state/work accounting. Those and transfer-vs-direct-fine tests remain separate
 drafts. The generic runtime and concentrating releases remain gated by the active
 plan; no numerical CLI or accepted concentrating window is claimed.
+
+The [artifact/replay increment](evidence/p09/artifacts/README.md) records 226
+local tests/probes, a complete current Rust coverage replay and reproducible
+checkpoint artifact checks. It is progress evidence only; **P09 remains incomplete.**

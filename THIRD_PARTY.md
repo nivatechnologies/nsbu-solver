@@ -11,7 +11,7 @@ This bootstrap includes no source code copied from `pmocz/euler-blowup-viz`, no 
 | SymPy | 1.14.0 | Symbolic checks in the preserved verification script |
 | mpmath | 1.3.0 | Pinned SymPy dependency and independent arithmetic reference work |
 
-Dependencies are installed separately and are not vendored in this repository. Their own license notices remain applicable. The future Cargo dependency selection must record actual versions, licenses and any native library requirements before a public package is released.
+Dependencies are installed separately and are not vendored in this repository. Their own license notices remain applicable. The Cargo dependency inventories below record actual versions, licenses and native-library requirements.
 
 The CI workflow references the official `actions/checkout` and `actions/setup-python` actions. Their source is not vendored or relicensed. Official project and installation links are given in the corresponding documentation.
 
@@ -59,3 +59,26 @@ These are public Rust dependencies, with no native library requirement.
 P03 adds stats_alloc 0.1.10 (MIT) as a test-only dependency for the dedicated
 allocation probe. It is not linked into library or CLI release artifacts. No
 dependency source is vendored; Cargo.lock records its registry checksum.
+
+
+## Checkpoint artifact integrity dependencies
+
+P09 adds SHA-256 verification using sha2 0.10.9 with default features disabled
+and its `force-soft` feature enabled. The complete resolved public dependency
+graph is in [the artifact dependency inventory](evidence/p09/artifacts/dependencies.json).
+Cargo.lock preserves the exact registry versions and checksums. This does not
+introduce a private or native-library dependency.
+
+The [registry license-file inventory](evidence/p09/artifacts/license-inventory.json)
+preserves declared licenses and the actual notice texts and hashes. Added packages
+are sha2 0.10.9, digest 0.10.7, block-buffer 0.10.4, crypto-common 0.1.7,
+generic-array 0.14.7, typenum 1.20.1, version_check 0.9.5, cfg-if 1.0.4,
+cpufeatures 0.2.17 and target-specific libc 0.2.189. Generic-array declares MIT;
+the others offer MIT/Apache-2.0 licensing alternatives. Dependency source is
+fetched separately, not copied into the project's source package. Binary release
+packaging must retain applicable dependency notices.
+
+The existing test-only stats_alloc registry archive has no separate license file;
+its MIT declaration and that inventory limitation are recorded explicitly. It is
+not linked into solver/CLI release artifacts. Original project LICENSE and NOTICE
+are unchanged by this increment.

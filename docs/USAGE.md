@@ -250,3 +250,16 @@ outcome log. Inspect the returned `Outcome`: `Ok` may contain a terminal refusal
 The separate controller and history components are restartable, but they are not
 a complete coherent checkpoint or a serialized format. No numerical CLI command
 is added by this increment. See [actual evidence](../evidence/p09/recorded/README.md).
+
+
+## Artifact integrity and raw-history replay checks
+
+```bash
+cargo test -p nsbu-solver --test checkpoint_artifacts --test history_replay --test recorded_step
+```
+
+`checkpoint::artifacts` verifies exact content bytes and a bounded canonical
+catalog. `RunHistory::replay` checks a raw measured attempt log and reconstructs
+its controller and compensated balances. These APIs do not authenticate physical
+provenance or provide complete checkpoint file read/write commands. See
+[artifact/replay evidence](../evidence/p09/artifacts/README.md).

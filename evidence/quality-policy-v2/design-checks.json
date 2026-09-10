@@ -1,0 +1,530 @@
+{
+  "status": "passed",
+  "revision": "0.8",
+  "runtime_design_revision": "0.7",
+  "scales": {
+    "h_upper_relaxation_Md_0": "0.0000167017007902456593126355173605808790779380469592871244781247371135239542313",
+    "minus_log10_Q_at_epsilon_quarter": "36047.8252418211897841433395471114161075828546481498598175851440222499803664",
+    "minus_log10_tau_at_normalized_growth_10": "59874.1417151978184553264857922577816142610796957409686527715143799324211158",
+    "first_dyadic_band_at_epsilon_quarter_relaxed_h": 119749,
+    "log10_annulus_radius_ratio_lower_relaxation": "25.2573045744488595874501450096852062437185920416782789914544807970841210072",
+    "ceiling_examples": [
+      {
+        "epsilon": "0.99",
+        "carrier": 2
+      },
+      {
+        "epsilon": "0.5",
+        "carrier": 2
+      },
+      {
+        "epsilon": "0.25",
+        "carrier": 2
+      },
+      {
+        "epsilon": "0.249",
+        "carrier": 3
+      },
+      {
+        "epsilon": "0.01",
+        "carrier": 10
+      }
+    ],
+    "scaled_time_example": {
+      "mantissa": 1,
+      "binary_exponent": -120000,
+      "Q_to_h": "0.249272546315873252378435942885191419201259681991126382489195064908686105291"
+    },
+    "interpretation": "Relaxed parameter bounds, not an admissible source instance."
+  },
+  "coefficients": {
+    "constant_source_identity": "w1 + 2*w2 + w3 = phi1 passed",
+    "large_negative_examples": [
+      {
+        "z": "-50",
+        "corrected_asymptotic_relative_errors": [
+          1.1128048035861386e-20,
+          2.0894790019609108e-22,
+          4.424489880630908e-24
+        ],
+        "rev05_asymptotic_relative_errors": [
+          1.1128048035861386e-20,
+          0.041666666666666664,
+          0.5310110450297366
+        ]
+      },
+      {
+        "z": "-100",
+        "corrected_asymptotic_relative_errors": [
+          3.9928815475956974e-42,
+          3.871915811776788e-44,
+          3.9868909883158174e-46
+        ],
+        "rev05_asymptotic_relative_errors": [
+          3.9928815475956974e-42,
+          0.02040816326530612,
+          0.5152514427040396
+        ]
+      },
+      {
+        "z": "-10000",
+        "corrected_asymptotic_relative_errors": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rev05_asymptotic_relative_errors": [
+          0.0,
+          0.00020004000800160032,
+          0.5001500250014994
+        ]
+      }
+    ]
+  },
+  "symbolic": {
+    "ETD_closed_forms": "passed",
+    "viscosity_and_periodic_scalings": "passed",
+    "streamfunction_and_zero_U_moment": "passed",
+    "radial_pressure_identity": "passed",
+    "localized_Cartesian_divergence": "identically zero symbolically",
+    "HO_zero_operator_order_four_conditions": "all eight conditions passed",
+    "HO_nonzero_operator_rows": "four row sums, row-4/5 first moments, and output sum passed symbolically",
+    "scope": "Identities for the specified manufactured profile, not Theorem 4.6 admissibility."
+  },
+  "source_screening": {
+    "h_is_relaxed_boundary_not_admissible": "0.0000167017007902456593126355173605808790779380469592871244781247371135239542313",
+    "quarter_screen": {
+      "ell": 119749,
+      "epsilon": "0.249997926124172436356372024208497704318130774786992803615380110784457427393",
+      "carrier": 3,
+      "S_star": 14339823001,
+      "S_star_cubed": "2948705313461059605824006469001",
+      "S_star_ninth_power": "25638588803501564852542537344628179198193452325960586168238263776934491496938138724902407001",
+      "chart_mesh_S_star_minus_3": "3.39131887962803689435180465159829424524821724868525252196518455047739120995E-31",
+      "explicit_proof_test": "132802406878881226676.530226842373047728241112094080845082243407242360690214",
+      "smooth_sufficient_envelope": "167073734375825744455.322617130579433716742924436825981886643743308309809186",
+      "minus_log10_Q": "36048.0409507660841456500189043633154624639701152060357133823780425100785574",
+      "auxiliary_traversal_chart_proxy_epsilon_S": "3584926011.23770668495331218565794420003682870561647028090530366998489077064",
+      "auxiliary_gaussian_chart_proxy_epsilon_sqrtS": "29937.0016554435250812391935269433915943918421499676012401381528863279924729"
+    },
+    "sufficient_screen_predecessor": {
+      "ell": 11217669,
+      "epsilon": "3.98823440830123272609054808093137691132915249225028783296444666289951095711E-57",
+      "carrier": 15834693518268427388612454452,
+      "S_star": 125836097793561,
+      "S_star_cubed": "1992579815875443536936199606813296575817481",
+      "S_star_ninth_power": "7911287736751075901466519111662857407846209702648836185994495581847374760943182586941665869146924766688541811245951582529095641",
+      "chart_mesh_S_star_minus_3": "5.01861954052088094594558314456537740463670825371837703729670545550708715247E-43",
+      "explicit_proof_test": "1.00000189391996665960229767034864291075979634480526822276566150210091864944",
+      "smooth_sufficient_envelope": "1.00000189391996665960229767039584860593262207795502192498051952125510296407",
+      "minus_log10_Q": "3376854.85042997627013210717344520896709369381939116965849320150743426659447",
+      "auxiliary_traversal_chart_proxy_epsilon_S": "5.01863855026638811825839182444386021009560025073872548929464570839048420309E-43",
+      "auxiliary_gaussian_chart_proxy_epsilon_sqrtS": "4.47386934867340810132514324004733979055327827085887940649224514325612941787E-50"
+    },
+    "sufficient_screen_first_band_in_monotone_range": {
+      "ell": 11217670,
+      "epsilon": "3.98818823782839023925340124579505695281751449520198453692087409848684616864E-57",
+      "carrier": 15834785175573390502848019699,
+      "S_star": 125836120228900,
+      "S_star_cubed": "1992580881647803167380206290948863569000000",
+      "S_star_ninth_power": "7911300431303497191886727179771076709621565035978804898920650620623884169636757958063098749634517988368449009000000000000000000",
+      "chart_mesh_S_star_minus_3": "5.01861685621027701945479483312211290192633848273357532393670529210182518260E-43",
+      "explicit_proof_test": "0.999996462136328749665188922777446335044707021120921514896279147854225936973",
+      "smooth_sufficient_envelope": "0.999996462136328749665188922787728159216896068075892391140008545476197868801",
+      "minus_log10_Q": "3376855.15145997193411330238718410369158672058758105112060174281786172772157",
+      "auxiliary_traversal_chart_proxy_epsilon_S": "5.01858134590858141192438235339119827284067628619905418377853804063270674042E-43",
+      "auxiliary_gaussian_chart_proxy_epsilon_sqrtS": "4.47381795498403983351657015529178365279124478273924458802811817483729396606E-50"
+    },
+    "auxiliary_map": {
+      "rho_g": "0.562471372415831813385720078553123555629093266027151411003879772992366802725",
+      "d_r": "1.12496153295475994708400068333944451130304807518339561227302272367716322315",
+      "rows": [
+        {
+          "ell": 119749,
+          "covering_index": 49129,
+          "c_i": "1.64735928651914227734536440611190266758366596045783260074417233710323018225E-11",
+          "M_i": "8.60514420621827812506541415511162426834877208752068569080994330831835937388E-7"
+        },
+        {
+          "ell": 11217670,
+          "covering_index": 4603591,
+          "c_i": "2.15766985430665502793388932992475424006880341033958570419637600928912489510E-15",
+          "M_i": "5.64092601800131028100179754040143815424340804075442212592347091480150286608E-9"
+        }
+      ]
+    },
+    "q_star": null,
+    "source_profiles_computed": false,
+    "interpretation": "One displayed sufficient test from Lemma 7.1. Not a necessary condition for every realization; not the complete q_star gate. S powers are mesh scale/count factors, not measured pulse counts or universal work lower bounds."
+  },
+  "source_mesh_review": {
+    "status": "passed",
+    "arithmetic_precision_decimal_digits": 75,
+    "illustrative_core": {
+      "Lambda": "128",
+      "chart_radius": "1/4",
+      "source_admissibility_claimed": false
+    },
+    "rows": [
+      {
+        "ell": 119749,
+        "sqrt_epsilon_pure_asymptotic_factor": "0.499997926119871457568808853287950401416600628944563018721131691979822674458",
+        "chart_mesh_spacing": "3.39131887962803689435180465159829424524821724868525252196518455047739120995E-31",
+        "slow_support_full_extent_upper_bound": "6.78263775925607378870360930319658849049643449737050504393036910095478241990E-31",
+        "carrier_over_ell6": "1.01739566388841106830554139547948827357446517460557575658955536514321736298E-30",
+        "mesh_over_illustrative_core_radius": "1.35652755185121475774072186063931769809928689947410100878607382019095648398E-30",
+        "auxiliary_traversal_chart_proxy": "3584926011.23770668495331218565794420003682870561647028090530366998489077064",
+        "auxiliary_gaussian_chart_proxy": "29937.0016554435250812391935269433915943918421499676012401381528863279924729",
+        "auxiliary_traversal_proxy_over_slow_full_extent_bound": "5285445188850693990753466814108738977102.29096427342422016664864332209468536",
+        "auxiliary_gaussian_proxy_over_slow_full_extent_bound": "44137697925249429980655093688538016.8277170662324814755878266093522459033925",
+        "policy_required_intervals_per_axis": "737176328365264901456001617251",
+        "policy_exceeds_cap": true
+      },
+      {
+        "ell": 11217670,
+        "sqrt_epsilon_pure_asymptotic_factor": "6.31521039857611572137854393727287575481404936883605345946090917287410564370E-29",
+        "chart_mesh_spacing": "5.01861685621027701945479483312211290192633848273357532393670529210182518260E-43",
+        "slow_support_full_extent_upper_bound": "1.00372337124205540389095896662442258038526769654671506478734105842036503652E-42",
+        "carrier_over_ell6": "7.94687197966012284730899303197326463185149803510488014171908767652647492989E-15",
+        "mesh_over_illustrative_core_radius": "2.00744674248411080778191793324884516077053539309343012957468211684073007304E-42",
+        "auxiliary_traversal_chart_proxy": "5.01858134590858141192438235339119827284067628619905418377853804063270674042E-43",
+        "auxiliary_gaussian_chart_proxy": "4.47381795498403983351657015529178365279124478273924458802811817483729396606E-50",
+        "auxiliary_traversal_proxy_over_slow_full_extent_bound": "0.499996462142586989343365371278804553508732791971570236171613693438661501281",
+        "auxiliary_gaussian_proxy_over_slow_full_extent_bound": "4.45722206253693493696431942889035382132593303218556292145885637069606701999E-8",
+        "policy_required_intervals_per_axis": "498145220411950791845051572737215892250000",
+        "policy_exceeds_cap": true
+      }
+    ],
+    "amplitude_scope": "Pure q^(h/2) at q=Q only; omitted constants, logarithms, profiles and support weights prevent an absolute pulse amplitude bound. No pulse omission is authorized.",
+    "time_scope": "The full slow cutoff extent is at most 2 Q ell^-6 in physical time. Q^(1+h)L_s is an auxiliary-rectangle traversal duration. Actual support is their intersection with all other cutoffs; epsilon*S and epsilon*sqrt(S) are proxies with unknown constants.",
+    "heuristic_carrier_mesh_crossing": {
+      "classification": "Scale balance only; neither a necessary admissibility test nor the source q_star",
+      "predecessor": {
+        "ell": 17274000,
+        "carrier": "26567852993651524917548414624612050212392222",
+        "ell6": "26567916127874706387686976000000000000000000",
+        "carrier_over_ell6": "0.999997623666723517297384113243397408860203123461600717189046755472987251133"
+      },
+      "first_passing_in_monotone_range": {
+        "ell": 17274001,
+        "carrier": "26568006778617507675334759249850259116073994",
+        "ell6": "26567925356051147147660466464052346243644001",
+        "carrier_over_ell6": "1.00000306469418553913389452929381473196882091461477101607882193929587791508"
+      }
+    },
+    "explicit_mesh_policy": {
+      "policy_id": "explicit-slow-mesh-v1",
+      "chart_segment_length": "1/4",
+      "required_spacing_at_most": "ell^-6",
+      "maximum_stored_intervals_per_axis": 1024,
+      "cap_origin": "Declared policy for this screen, not measured hardware capacity or a universal resource bound",
+      "minimum_tested_band": 119749,
+      "band_scope": "Both displayed relaxed bands and every larger integer under this same policy; required intervals increase as ell^6",
+      "scope": "Explicit subdivision of every mesh interval across the declared chart segment, conditional on undertaking that mesh-resolving plan; actual localized active support has not been admitted",
+      "status": "FeasibilityExcluded",
+      "reason": "ceil((1/4)*ell^6) exceeds the declared 1024-interval cap in each tested row",
+      "universal_representation_exclusion_claimed": false
+    },
+    "literal_target_status": "FeasibilityUnestablished",
+    "direct_reproduction_in_current_release": false,
+    "compiler_scope": "MathematicsVerificationOnly",
+    "averaged_stress_surrogate": "SeparateDecisionDeferred"
+  },
+  "floating_junctions": {
+    "status": "passed",
+    "rows": [
+      {
+        "z": -50.00000000000001,
+        "weights": [
+          -0.0003679999999999999,
+          0.0007679999999999997,
+          0.018831999999999998
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          8.091931078193404e-21,
+          9.207289879444472e-20,
+          5.614265441986392e-19
+        ]
+      },
+      {
+        "z": -50.0,
+        "weights": [
+          -0.00036800000000000005,
+          0.000768,
+          0.018832
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          5.449397759961018e-20,
+          1.9456498034568516e-20,
+          1.5161206457501072e-18
+        ]
+      },
+      {
+        "z": -49.99999999999999,
+        "weights": [
+          -0.0003680000000000001,
+          0.0007680000000000002,
+          0.018832
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          8.659669028863269e-21,
+          2.2565677615031225e-20,
+          9.986322046520397e-19
+        ]
+      },
+      {
+        "z": -1.0000000000000002,
+        "weights": [
+          0.05696447062846129,
+          0.20727664702865298,
+          0.16060279414278822
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          1.1919086937529357e-16,
+          9.316564212927976e-16,
+          1.7088109467536826e-16
+        ]
+      },
+      {
+        "z": -1.0,
+        "weights": [
+          0.05696447062846133,
+          0.207276647028654,
+          0.16060279414278833
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          9.94300293823069e-17,
+          7.457252203673018e-17,
+          6.214376836394181e-17
+        ]
+      },
+      {
+        "z": -0.9999999999999999,
+        "weights": [
+          0.05696447062846133,
+          0.207276647028654,
+          0.16060279414278833
+        ],
+        "absolute_errors_against_75_digit_reference": [
+          1.0689684414558165e-16,
+          6.420884481235913e-17,
+          6.328625643948642e-17
+        ]
+      }
+    ],
+    "scope": "Executed Python binary64 branch implementations, including half arguments for HO. Not Rust or a global floating-point proof."
+  },
+  "benchmark_geometry": {
+    "cases": [
+      {
+        "case": "similarity-mms-v1",
+        "target": "0.015625",
+        "edges": [
+          {
+            "radius": "0.25",
+            "X_at_t0_z0": "2",
+            "uncut_swirl_amplitude_relative_to_peak": "0.446260320296859657866560941528025042684343258722158657487670637520650333262"
+          },
+          {
+            "radius": "0.375",
+            "X_at_t0_z0": "4.5",
+            "uncut_swirl_amplitude_relative_to_peak": "0.0549469166662025408811540638197237266357362026604267843087997823177512947943"
+          }
+        ],
+        "endpoints": [
+          {
+            "k": 1,
+            "remaining": "0.0078125",
+            "full_nominal_annulus_radius_squared_max": "0.174818148854548371440544195308118176092764202826952027202186505687556372089",
+            "nominal_annulus_inside_uncut_ball": false,
+            "equatorial_peak_radius_cells_at_N512": "45.2548339959390415616540391747103385142295000120623383416537516157034393108"
+          },
+          {
+            "k": 2,
+            "remaining": "0.00390625",
+            "full_nominal_annulus_radius_squared_max": "0.0881802336411567687444855143072043442070375220087377727869477943285362677812",
+            "nominal_annulus_inside_uncut_ball": false,
+            "equatorial_peak_radius_cells_at_N512": "32.0000"
+          },
+          {
+            "k": 3,
+            "remaining": "0.001953125",
+            "full_nominal_annulus_radius_squared_max": "0.0445486508325529208135645580037508636681091619336716392591583859496745793890",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "22.6274169979695207808270195873551692571147500060311691708268758078517196554"
+          },
+          {
+            "k": 4,
+            "remaining": "0.0009765625",
+            "full_nominal_annulus_radius_squared_max": "0.0225469713710318912250250246117148425197396726434971642926196909617133682229",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "16.00000"
+          },
+          {
+            "k": 5,
+            "remaining": "0.00048828125",
+            "full_nominal_annulus_radius_squared_max": "0.0114356019401518797634013577468481053449288586867023367336066465442778798445",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "11.3137084989847603904135097936775846285573750030155845854134379039258598277"
+          },
+          {
+            "k": 6,
+            "remaining": "0.000244140625",
+            "full_nominal_annulus_radius_squared_max": "0.00581419587181126275972735595506720969254635691775888826503514095773370013932",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "8.000000"
+          }
+        ]
+      },
+      {
+        "case": "similarity-mms-v2",
+        "target": "0.0078125",
+        "edges": [
+          {
+            "radius": "0.3",
+            "X_at_t0_z0": "5.76",
+            "uncut_swirl_amplitude_relative_to_peak": "0.0176334489452492971019566481761073936671154814571939422528312454035080583231"
+          },
+          {
+            "radius": "0.42",
+            "X_at_t0_z0": "11.2896",
+            "uncut_swirl_amplitude_relative_to_peak": "0.0000979468634785513077398973922105446121239016755267177061668846147860214115678"
+          }
+        ],
+        "endpoints": [
+          {
+            "k": 1,
+            "remaining": "0.00390625",
+            "full_nominal_annulus_radius_squared_max": "0.0881802336411567687444855143072043442070375220087377727869477943285362677812",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "32.0000"
+          },
+          {
+            "k": 2,
+            "remaining": "0.001953125",
+            "full_nominal_annulus_radius_squared_max": "0.0445486508325529208135645580037508636681091619336716392591583859496745793890",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "22.6274169979695207808270195873551692571147500060311691708268758078517196554"
+          },
+          {
+            "k": 3,
+            "remaining": "0.0009765625",
+            "full_nominal_annulus_radius_squared_max": "0.0225469713710318912250250246117148425197396726434971642926196909617133682229",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "16.00000"
+          },
+          {
+            "k": 4,
+            "remaining": "0.00048828125",
+            "full_nominal_annulus_radius_squared_max": "0.0114356019401518797634013577468481053449288586867023367336066465442778798445",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "11.3137084989847603904135097936775846285573750030155845854134379039258598277"
+          },
+          {
+            "k": 5,
+            "remaining": "0.000244140625",
+            "full_nominal_annulus_radius_squared_max": "0.00581419587181126275972735595506720969254635691775888826503514095773370013932",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "8.000000"
+          },
+          {
+            "k": 6,
+            "remaining": "0.0001220703125",
+            "full_nominal_annulus_radius_squared_max": "0.00296441468740244843502890308380219129184697857504228824072813157704265575695",
+            "nominal_annulus_inside_uncut_ball": true,
+            "equatorial_peak_radius_cells_at_N512": "5.65685424949238019520675489683879231427868750150779229270671895196292991386"
+          }
+        ]
+      }
+    ],
+    "v2_radius_screen": [
+      {
+        "N": 128,
+        "last_endpoint_under_radius_12_cell_screen": 0
+      },
+      {
+        "N": 256,
+        "last_endpoint_under_radius_12_cell_screen": 1
+      },
+      {
+        "N": 512,
+        "last_endpoint_under_radius_12_cell_screen": 3
+      },
+      {
+        "N": 1024,
+        "last_endpoint_under_radius_12_cell_screen": 5
+      }
+    ],
+    "diagnostic_eta_limit": "1/2",
+    "scope": "Analytic geometry and amplitude ratios. At t=0 the ramp makes actual velocity zero. Edge amplitude is not removed energy or an error in the localized solution. Cell counts are screening conventions, not convergence results."
+  },
+  "clock": {
+    "binary64_dyadic_counterexample": {
+      "floating_sum_equals_target": true,
+      "exact_sum_error": "1/18014398509481984"
+    },
+    "u128_tick_invariant": "passed",
+    "scope": "Clock arithmetic fixture; no Rust state transaction was executed."
+  },
+  "memory": [
+    {
+      "N": 128,
+      "retained_vector_GiB": 0.047607421875,
+      "padded_real_vector_GiB": 0.158203125,
+      "reserved_base_GiB": 1.25335693359375,
+      "excluded": "FFT/provider scratch, planner storage, I/O, diagnostic grids, allocator overhead"
+    },
+    {
+      "N": 256,
+      "retained_vector_GiB": 0.3779296875,
+      "padded_real_vector_GiB": 1.265625,
+      "reserved_base_GiB": 9.982177734375,
+      "excluded": "FFT/provider scratch, planner storage, I/O, diagnostic grids, allocator overhead"
+    },
+    {
+      "N": 512,
+      "retained_vector_GiB": 3.01171875,
+      "padded_real_vector_GiB": 10.125,
+      "reserved_base_GiB": 79.6787109375,
+      "excluded": "FFT/provider scratch, planner storage, I/O, diagnostic grids, allocator overhead"
+    },
+    {
+      "N": 1024,
+      "retained_vector_GiB": 24.046875,
+      "padded_real_vector_GiB": 81.0,
+      "reserved_base_GiB": 636.71484375,
+      "excluded": "FFT/provider scratch, planner storage, I/O, diagnostic grids, allocator overhead"
+    }
+  ],
+  "not_performed": [
+    "Rust compilation",
+    "PDE integration",
+    "source instance admissibility",
+    "formal proof build"
+  ],
+  "bootstrap_execution": {
+    "generated_utc": "2026-09-10T09:22:13.167588+00:00",
+    "python_version": "3.12.3",
+    "platform": "Linux",
+    "machine": "x86_64",
+    "dependencies": {
+      "sympy": "1.14.0",
+      "mpmath": "1.3.0"
+    },
+    "command": "python -E docs/design/navier-runtime-verification.py",
+    "source_script_sha256": "5824a71230c5c01766bce352a73bbfe39b9943ea400058495bec845d8209493d",
+    "baseline_sha256": {
+      "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+      "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    },
+    "repository_checks": "passed",
+    "assertions_enabled": true,
+    "matches_preserved_report": true,
+    "not_performed_by_bootstrap": [
+      "Rust compilation",
+      "PDE integration",
+      "source instance admissibility",
+      "formal proof build"
+    ]
+  }
+}

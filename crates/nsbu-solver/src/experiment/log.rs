@@ -14,6 +14,8 @@ pub struct AttemptRecord {
     pub start: TickClock,
     /// All available local indicators and the commit/reject/refusal classification.
     pub outcome: Outcome,
+    /// Actual accepted-state measurement; absent for rejected/refused attempts.
+    pub sample: Option<BalanceSample>,
 }
 
 /// Owned bounded records plus all fixed-controller and accumulated balance state.
@@ -71,6 +73,28 @@ impl RunHistory {
     pub fn records(&self) -> &[AttemptRecord] {
         &self.records
     }
+    /// Reconstruct controller and compensated balances in their original operation order.
+    /// This validates the log's internal consistency, not its provenance or physical truth.
+    /// The recorded execution profile must match for bitwise replay guarantees.
+    pub fn replay(
+        clock: TickClock,
+        configuration: Configuration,
+        records: &[AttemptRecord],
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        if records.len() > configuration.limits.maximum_attempts {
+            return Err(SolverError::ResourceLimit);
+        }
+        let mut history = Self::new(clock, configuration, cap)?;
+        for record in records {
+            if record.start != history.controller.clock() {
+                return Err(SolverError::InvalidClock);
+            }
+            let update = history.prepare(record.outcome, record.sample)?;
+            history.apply(update);
+        }
+        Ok(history)
+    }
     pub(super) fn prepare(
         &self,
         outcome: Outcome,
@@ -95,6 +119,7 @@ impl RunHistory {
             record: AttemptRecord {
                 start: self.controller.clock(),
                 outcome,
+                sample,
             },
         })
     }

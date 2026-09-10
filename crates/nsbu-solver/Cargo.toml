@@ -13,6 +13,7 @@ include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
 workspace = true
 
 [dependencies]
+sha2.workspace = true
 num-complex.workspace = true
 
 [dev-dependencies]

@@ -17,6 +17,7 @@ fn both_methods_retain_exact_attempts_and_complete_balance_history() {
         let mut config = configuration();
         config.method = method;
         let mut fixture = Fixture::new(config);
+        let initial = fixture.state.clock();
         let mut observer = Observer::default();
         let mut source = source(usize::MAX);
         for count in 1..=2 {
@@ -31,6 +32,25 @@ fn both_methods_retain_exact_attempts_and_complete_balance_history() {
             assert_eq!(observer.last_clock, Some(fixture.state.clock()));
             assert_eq!(fixture.history.balance().samples(), count + 1);
             assert_eq!(fixture.history.records().len(), count);
+            assert_eq!(
+                fixture.history.records()[count - 1].sample,
+                Some(mean_balance::measured(&fixture.state))
+            );
+            let replayed = RunHistory::replay(
+                initial,
+                config,
+                fixture.history.records(),
+                RunHistory::reservation(config).unwrap(),
+            )
+            .unwrap();
+            assert_eq!(replayed.controller().clock(), control.clock());
+            assert_eq!(replayed.controller().attempted(), control.attempted());
+            assert_eq!(replayed.controller().stopped(), control.stopped());
+            assert_eq!(
+                replayed.balance().has_pending_midpoint(),
+                fixture.history.balance().has_pending_midpoint()
+            );
+            fixture.history = replayed;
             assert_eq!(
                 fixture.history.records()[count - 1].start.elapsed(),
                 4 * (count - 1) as u128
