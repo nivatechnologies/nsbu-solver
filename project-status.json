@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Canonical numerical protocol passes local Rust gates: 321 tests/probes; prior Python source unchanged and 41 bootstrap tests rerun. Source-matched hosted Rust and Python checks pass.",
+    "status": "Physical derivative/tensor increment passes local gates: 332 Rust tests/probes, 188 Python tests; all required coverage/complexity/CRAP/type limits pass. Source-matched hosted checks pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p09/arithmetic/summary.json",
+    "evidence": "evidence/p08/derivatives/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p08/protocol/summary.json",
+    "rust_evidence": "evidence/p08/derivatives/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -37,7 +37,7 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "passed",
+    "latest_hosted_ci_status": "pending for derivative increment; previous protocol source passed",
     "hosted_ci": "evidence/p08/protocol/hosted-python.json"
   },
   "packages": {
@@ -99,7 +99,7 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34427151855"
     },
     "P08": {
-      "status": "in-progress; generic canonical numerical protocol passes local and hosted gates; full benchmark observable and experiment integration pending",
+      "status": "in-progress; physical derivative/tensor diagnostics pass local gates; complete benchmark observable and experiment integration pending",
       "evidence": "evidence/p08/window/summary.json",
       "core_evidence": "evidence/p08/core/summary.json",
       "remaining": [
@@ -110,7 +110,8 @@
       "reporting_evidence": "evidence/p08/reporting/summary.json",
       "current_hosted_ci": "evidence/p08/protocol/hosted-rust.json",
       "protocol_evidence": "evidence/p08/protocol/summary.json",
-      "protocol_hosted_ci": "evidence/p08/protocol/hosted-rust.json"
+      "protocol_hosted_ci": "evidence/p08/protocol/hosted-rust.json",
+      "derivative_evidence": "evidence/p08/derivatives/summary.json"
     },
     "P09": {
       "status": "in-progress; same-grid smooth velocity arithmetic verified locally and hosted; full artifact semantics and concentrating qualification pending",
@@ -163,5 +164,9 @@
   "independent_smooth_current_grid_arithmetic_exists": true,
   "independent_smooth_current_grid_arithmetic_scope": "N=4 and N=12 velocity trajectories, CM/HO, 80/120-digit direct DFT with separate fixed-force inputs; no larger-grid or concentrating qualification",
   "frozen_numerical_protocol_exists": true,
-  "frozen_numerical_protocol_scope": "Generic canonical rules/time/reconstruction identity and bounded review; benchmark semantics and actual-state binding pending"
+  "frozen_numerical_protocol_scope": "Generic canonical rules/time/reconstruction identity and bounded review; benchmark semantics and actual-state binding pending",
+  "physical_derivative_sampling_exists": true,
+  "regional_tensor_error_measurements_exist": true,
+  "independent_pointwise_derivative_fixtures_exist": true,
+  "physical_derivative_scope": "Full-band first/second scalar derivatives; regional scalar/vector/tensor errors; nine-point 80/120-digit v2 fixtures and actual N4 smooth CM/HO comparisons. Complete concentrating observable integration pending."
 }

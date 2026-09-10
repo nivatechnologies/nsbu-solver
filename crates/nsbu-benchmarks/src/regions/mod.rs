@@ -4,7 +4,7 @@ mod errors;
 mod point;
 use crate::BenchmarkError;
 pub use coverage::{CoveragePlan, CoverageStatus, RegionCoverage};
-pub use errors::{RegionalError, RegionalErrors, RegionalReport};
+pub use errors::{RegionalError, RegionalErrors, RegionalReport, RegionalTensorErrors};
 pub use point::{classify, PointRegion, SpatialRegion, StartupPhase};
 
 const INNER_RADIUS_SQUARED: f64 = 9.0 / 100.0;

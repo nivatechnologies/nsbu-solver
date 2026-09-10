@@ -15,6 +15,7 @@ fn main() {
     rotational();
     conservative();
     sampling();
+    derivatives();
     lineage();
     prolongation();
 }
@@ -112,6 +113,30 @@ fn sampling() {
         let samples = work.sample([&zero; 3]).unwrap();
         assert_eq!(samples.velocity_maximum.value, 0.0);
         assert_eq!(samples.vorticity_maximum.value, 0.0);
+    }
+    no_allocations(region.change());
+}
+
+fn derivatives() {
+    use nsbu_solver::diagnostics::derivatives::{Derivative, DerivativeWorkspace};
+    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+    let layout = Layout::new([6; 3]).unwrap();
+    let reservation = DerivativeWorkspace::reservation(domain, layout).unwrap();
+    let refusal = Region::new(GLOBAL);
+    assert!(DerivativeWorkspace::new(domain, layout, reservation - 1).is_err());
+    no_allocations(refusal.change());
+    let mut work = planned(reservation, || {
+        DerivativeWorkspace::new(domain, layout, reservation).unwrap()
+    });
+    let zero = vec![Complex64::new(0.0, 0.0); domain.layout().half_len()];
+    let region = Region::new(GLOBAL);
+    for _ in 0..20 {
+        for orders in [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 0, 2]] {
+            let derivative = Derivative::new(orders).unwrap();
+            assert!(work.sample(&zero[..1], derivative).is_err());
+            let samples = work.sample(&zero, derivative).unwrap();
+            assert!(samples.values.iter().all(|&value| value == 0.0));
+        }
     }
     no_allocations(region.change());
 }

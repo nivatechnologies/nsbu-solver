@@ -1,0 +1,153 @@
+{
+  "package": "P08",
+  "increment": "physical-derivatives-and-regional-tensor-errors",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T19:14:18.301196+00:00",
+  "base_commit": "cabce7b",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 241,
+  "python_source_and_stub_files": 72,
+  "rust_harness_tests": 327,
+  "rust_allocation_executables": 5,
+  "rust_tests_and_probes": 332,
+  "python_tests": 188,
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "python": "3.12.3",
+    "mpmath": "1.3.0",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06"
+  },
+  "rust_coverage": {
+    "branches": {
+      "count": 1602,
+      "covered": 1459,
+      "notcovered": 143,
+      "percent": 91.07365792759052
+    },
+    "functions": {
+      "count": 1695,
+      "covered": 1685,
+      "percent": 99.41002949852508
+    },
+    "instantiations": {
+      "count": 3097,
+      "covered": 2304,
+      "percent": 74.39457539554407
+    },
+    "lines": {
+      "count": 20550,
+      "covered": 20328,
+      "percent": 98.91970802919708
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 38420,
+      "covered": 37135,
+      "notcovered": 1285,
+      "percent": 96.65538781884435
+    }
+  },
+  "python_coverage": {
+    "covered_lines": 4276,
+    "num_statements": 4285,
+    "percent_covered": 99.66633954857704,
+    "percent_covered_display": "99",
+    "missing_lines": 9,
+    "excluded_lines": 0,
+    "num_branches": 810,
+    "num_partial_branches": 8,
+    "covered_branches": 802,
+    "missing_branches": 8
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 16.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 385
+  },
+  "python_maxima": {
+    "cyclomatic": 16,
+    "cognitive": 19,
+    "halstead_function_and_file": 13.826086956521738,
+    "crap": 16.0,
+    "physical_file_lines": 243
+  },
+  "python_coverage_collection": "The subprocess-patched run produced parallel data. An initial JSON export reported no data; coverage combine then JSON export succeeded, without rerunning tests.",
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 41,
+      "duplicatedLines": 366,
+      "duplicatedTokens": 3329,
+      "lines": 29207,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.2531242510357108,
+      "percentageTokens": 1.4999549427773273,
+      "sources": 240,
+      "tokens": 221940
+    },
+    "python_duplicates": {
+      "clones": 1,
+      "duplicatedLines": 5,
+      "duplicatedTokens": 66,
+      "lines": 5551,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.09007386056566384,
+      "percentageTokens": 0.11051018870451919,
+      "sources": 69,
+      "tokens": 59723
+    },
+    "python_dead_code": 10,
+    "finding_exit_codes": {
+      "rust-duplicates": 1,
+      "python-duplicates": 1,
+      "rust-dead-code": 101,
+      "python-dead-code": 3,
+      "type-escapes": 1
+    },
+    "mutations": "not rerun; informational"
+  },
+  "numerical_measurements": {
+    "point_cases": 9,
+    "entries_per_point": 46,
+    "precision_digits": [
+      80,
+      120
+    ],
+    "maximum_componentwise_scaled_precision_change": 3.2173153898849582e-74,
+    "rust_componentwise_scaled_errors": {
+      "origin": 0.0,
+      "near-axis": 1.078718397914155e-15,
+      "interior": 1.2426766718533106e-14,
+      "inner-edge": 3.1071339824011877e-16,
+      "collar": 1.27713846095498e-15,
+      "outer-edge": 0.0,
+      "rest": 0.0,
+      "ramp-end": 1.1423741303101057e-15,
+      "late": 3.458200267457279e-14
+    },
+    "maximum_rust_componentwise_scaled_error": 3.458200267457279e-14,
+    "physical_smooth_errors": "integrated-tests.log.gz",
+    "reference_fixture": "../../../fixtures/reference/derivatives.json"
+  },
+  "solid_review": "Spectral differentiation, scalar/vector/tensor accumulation, benchmark geometry and analytical reference evaluation remain separate. Existing vector aliases preserve the API. All inputs stay read-only; per-point reference evaluation does not enter the force-provider path.",
+  "limitations": [
+    "No complete concentrating all-observable experiment or accepted PDE window",
+    "Raw analytical pressure still needs independent global mean quadrature",
+    "Pointwise and N4 smooth checks do not establish current-grid concentrating reference/arithmetic accuracy",
+    "Generic protocol still needs benchmark inventory and physical provenance bindings"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

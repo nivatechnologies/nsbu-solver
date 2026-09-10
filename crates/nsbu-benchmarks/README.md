@@ -78,3 +78,10 @@ bounded macro proposals from rest; the second exports all 33 distinct exact stag
 inputs. Both stream output after numerical resource admission. The root
 `docs/ARITHMETIC_STUDY.md` supplies the complete Python 80/120-digit comparison
 workflow, input schema, memory/work limits and scientific interpretation.
+
+`fields::reference` exposes the exact v2 field's velocity gradient, ordered
+Hessian, vorticity and pressure gradient. Independent Python 80/120-digit fixtures
+check these pointwise derivatives. `RegionalTensorErrors` retains complete global
+and core/annulus/collar tensor errors. Raw analytical pressure still needs a
+separate periodic mean quadrature, and concentrating window validation remains
+incomplete. See `docs/DERIVATIVE_DIAGNOSTICS.md` in the repository.

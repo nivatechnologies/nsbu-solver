@@ -1,10 +1,12 @@
-//! Bounded sampled vector errors; missing samples are never represented as zero error.
+//! Bounded sampled scalar/vector/tensor errors; missing samples are never zero error.
 use super::squares::{finite, Squares};
 use crate::{Complex64, SolverError};
 
 /// Measurements on the supplied sample set, not rigorous local suprema or volume enclosures.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct LocalError {
+    /// Ordered entries in each scalar/vector/tensor sample; no per-component averaging.
+    pub components: usize,
     /// Number of actual samples in this measurement.
     pub samples: usize,
     /// Root mean squared Euclidean error on this sample set.
@@ -28,9 +30,15 @@ pub enum SampledError {
     Measured(LocalError),
 }
 
-/// Fixed-storage transactional statistics; cloning copies measurements, never an integrated state.
+/// Three-component vector collector retained as the existing public convenience type.
+pub type ErrorAccumulator = TensorErrors<3>;
+
+/// Fixed-storage transactional statistics for one scalar, vector or flattened Cartesian tensor.
+/// All ordered entries contribute to the Euclidean/Frobenius magnitude. For a Hessian,
+/// include both mixed entries; normalization divides by sample count, never component count.
+/// Cloning copies measurements, never an integrated state.
 #[derive(Debug, Clone, Copy)]
-pub struct ErrorAccumulator {
+pub struct TensorErrors<const COMPONENTS: usize> {
     maximum: usize,
     count: usize,
     squares: Squares,
@@ -39,12 +47,16 @@ pub struct ErrorAccumulator {
     reference_peak: f64,
     floor: f64,
 }
-impl ErrorAccumulator {
+impl<const COMPONENTS: usize> TensorErrors<COMPONENTS> {
     /// Admit finite sample capacity and a positive declared relative denominator floor.
     /// Experiments normally derive the floor from a separately measured reference peak,
     /// retaining an absolute positive floor for an exactly zero reference.
     pub fn new(maximum_samples: usize, relative_floor: f64) -> Result<Self, SolverError> {
-        if maximum_samples == 0 || !relative_floor.is_finite() || relative_floor <= 0.0 {
+        if !(1..=27).contains(&COMPONENTS)
+            || maximum_samples == 0
+            || !relative_floor.is_finite()
+            || relative_floor <= 0.0
+        {
             return Err(SolverError::InvalidPayload);
         }
         Ok(Self {
@@ -58,15 +70,23 @@ impl ErrorAccumulator {
         })
     }
 
-    /// Add one physical vector comparison. Every failure preserves the previous statistics.
-    pub fn push(&mut self, actual: [f64; 3], reference: [f64; 3]) -> Result<(), SolverError> {
+    /// Add one complete physical field comparison. Every failure preserves prior statistics.
+    pub fn push(
+        &mut self,
+        actual: [f64; COMPONENTS],
+        reference: [f64; COMPONENTS],
+    ) -> Result<(), SolverError> {
         let mut pending = *self;
         pending.accumulate(actual, reference)?;
         *self = pending;
         Ok(())
     }
 
-    fn accumulate(&mut self, actual: [f64; 3], reference: [f64; 3]) -> Result<(), SolverError> {
+    fn accumulate(
+        &mut self,
+        actual: [f64; COMPONENTS],
+        reference: [f64; COMPONENTS],
+    ) -> Result<(), SolverError> {
         if self.count == self.maximum {
             return Err(SolverError::ResourceLimit);
         }
@@ -77,9 +97,10 @@ impl ErrorAccumulator {
         {
             return Err(SolverError::InvalidSpectrum);
         }
-        let difference = std::array::from_fn::<_, 3, _>(|axis| actual[axis] - reference[axis]);
-        let error = finite(difference[0].hypot(difference[1]).hypot(difference[2]))?;
-        let scale = finite(reference[0].hypot(reference[1]).hypot(reference[2]))?;
+        let difference =
+            std::array::from_fn::<_, COMPONENTS, _>(|axis| actual[axis] - reference[axis]);
+        let error = finite(difference.into_iter().fold(0.0, f64::hypot))?;
+        let scale = finite(reference.into_iter().fold(0.0, f64::hypot))?;
         let relative = finite(error / scale.max(self.floor))?;
         for value in difference {
             self.squares.complex(Complex64::new(value, 0.0), 1.0)?;
@@ -97,6 +118,7 @@ impl ErrorAccumulator {
             return Ok(SampledError::NoSamples);
         }
         Ok(SampledError::Measured(LocalError {
+            components: COMPONENTS,
             samples: self.count,
             rms_error: self.squares.rms(self.count)?,
             peak_error: self.peak,

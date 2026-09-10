@@ -154,3 +154,11 @@ An in-memory physical image and restartable controller/history components do
 not amount to a complete checkpoint. See the implemented-versus-planned
 sections of [usage](USAGE.md) and the active
 [implementation plan](../IMPLEMENTATION_PLAN.md) for release criteria.
+
+Physical derivative diagnostics reuse a separately reserved scalar FFT workspace;
+velocity, tensor and pressure components are processed sequentially. Generic
+fixed-storage tensor errors and v2 regional geometry have separate responsibilities.
+The analytical derivative evaluator cannot access integrated state. See
+[derivative diagnostics](DERIVATIVE_DIAGNOSTICS.md) for coordinate, normalization,
+pressure-gauge and independent-fixture contracts. Complete all-observable window
+production and qualification remain in progress.

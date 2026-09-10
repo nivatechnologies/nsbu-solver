@@ -1,4 +1,5 @@
 //! Degree-four implicit jets and manufactured force for the exact viscosity-one v2 case.
+pub mod reference;
 use crate::{
     jet::Jet,
     root::{self, RootReport},

@@ -2,7 +2,7 @@
 use super::{classify, SpatialRegion};
 use crate::{time::BenchmarkTime, BenchmarkError};
 use nsbu_solver::{
-    diagnostics::local::{ErrorAccumulator, SampledError},
+    diagnostics::local::{SampledError, TensorErrors},
     domain::{Layout, TickClock},
     SolverError,
 };
@@ -37,6 +37,8 @@ impl From<SolverError> for RegionalError {
 /// Sampled errors retain global measurements and every spatial class separately.
 #[derive(Debug, Clone, Copy)]
 pub struct RegionalReport {
+    /// Complete ordered entries in each scalar/vector/tensor sample.
+    pub components: usize,
     /// Exact physical time shared by all observations.
     pub clock: TickClock,
     /// Uniform unit-periodic sample grid; points are never recentered or aligned.
@@ -51,19 +53,23 @@ pub struct RegionalReport {
     pub root_work_charged: usize,
 }
 
-/// Fixed-storage collector for one declared grid and time; independent of integrated state.
+/// Three-component regional collector, preserving the existing vector API.
+pub type RegionalErrors = RegionalTensorErrors<3>;
+
+/// Fixed-storage collector for complete scalar/vector/tensor samples on one grid and time.
+/// Component count is bounded by the underlying tensor accumulator (1 through 27).
 #[derive(Debug)]
-pub struct RegionalErrors {
+pub struct RegionalTensorErrors<const COMPONENTS: usize> {
     clock: TickClock,
     layout: Layout,
     root_budget: usize,
     attempts_left: usize,
     charged: usize,
     next: usize,
-    global: ErrorAccumulator,
-    regions: [ErrorAccumulator; 5],
+    global: TensorErrors<COMPONENTS>,
+    regions: [TensorErrors<COMPONENTS>; 5],
 }
-impl RegionalErrors {
+impl<const COMPONENTS: usize> RegionalTensorErrors<COMPONENTS> {
     /// Preflight all grid samples and a finite classification-attempt allowance.
     /// Failed classifications consume an attempt; retries cannot escape the work bound.
     pub fn new(
@@ -82,7 +88,7 @@ impl RegionalErrors {
         {
             return Err(BenchmarkError::DiagnosticWorkExceeded.into());
         }
-        let global = ErrorAccumulator::new(layout.real_len(), relative_floor)?;
+        let global = TensorErrors::new(layout.real_len(), relative_floor)?;
         Ok(Self {
             clock,
             layout,
@@ -111,7 +117,11 @@ impl RegionalErrors {
 
     /// Consume the next lexicographic grid point (z fastest), with no skipped points.
     /// Failures preserve observations and position; attempted root work stays charged.
-    pub fn push(&mut self, actual: [f64; 3], reference: [f64; 3]) -> Result<(), RegionalError> {
+    pub fn push(
+        &mut self,
+        actual: [f64; COMPONENTS],
+        reference: [f64; COMPONENTS],
+    ) -> Result<(), RegionalError> {
         if self.attempts_left == 0 {
             return Err(BenchmarkError::DiagnosticWorkExceeded.into());
         }
@@ -143,6 +153,7 @@ impl RegionalErrors {
             entry.1 = samples.finish()?;
         }
         Ok(RegionalReport {
+            components: COMPONENTS,
             clock: self.clock,
             dimensions: self.layout.dimensions(),
             grid_complete: self.next == self.layout.real_len(),

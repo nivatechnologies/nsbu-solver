@@ -30,3 +30,9 @@ sampled velocity/vorticity maxima, directional tails and spectrum-integrity repo
 Local error statistics retain explicit missing samples and declared relative floors.
 These measurements do not accept a PDE convergence window or provide rigorous
 continuous-time enclosures. Diagnostic storage has its own preflight requirements.
+
+The `diagnostics::derivatives` module samples complete scalar Fourier fields and
+first/second physical derivatives in separately admitted scratch. `TensorErrors`
+measures scalar/vector/Frobenius tensor errors; the existing vector alias remains
+available. Input state is read-only, and missing samples retain an explicit status.
+See the repository's `docs/DERIVATIVE_DIAGNOSTICS.md` for numerical conventions.

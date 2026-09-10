@@ -85,3 +85,10 @@ and a complete force-cache reservation are enforced before evolution.
 [The executed diagnostic](../evidence/p00c/README.md) reaches the first endpoint
 with both methods, but retained-band tracking errors are large and spatial/force
 sampling remains unresolved. No accepted PDE window follows from this run.
+
+`python -m reference.verify_derivatives > work/derivatives.json` reproduces the
+nine-point 80/120-digit physical derivative report, including all ordered velocity
+gradient/Hessian entries, vorticity and pressure gradient. The public generator
+and its Rust fixture synchronization are tested. This is pointwise arithmetic
+evidence; raw pressure has no mean quadrature and no PDE window is qualified.
+See [physical derivative diagnostics](../docs/DERIVATIVE_DIAGNOSTICS.md).

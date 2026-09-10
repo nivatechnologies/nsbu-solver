@@ -2,6 +2,7 @@
 pub mod balances;
 pub mod comparison;
 pub mod conservative;
+pub mod derivatives;
 pub mod hermite;
 pub mod history;
 pub mod integrity;

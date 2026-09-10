@@ -328,3 +328,14 @@ The unchanged Python source retains its preceding complete quality evidence;
 Clippy and duplication output is preserved, including nonzero finding exits.
 Borrowed settings, canonical encoding and numerical review remain separate from
 physical provenance. Source-matched hosted Rust and Python checks pass; no concentrating window is accepted.
+
+The [physical derivative increment](../evidence/p08/derivatives/README.md) passes
+332 Rust tests/probes across 241 Rust files and 188 Python tests across the
+72-file Python/stub inventory. Rust coverage is 98.92% lines and 91.07% branches;
+Python coverage is 99.79% lines and 99.01% branches. All required complexity,
+Halstead, file-length, CRAP and typing gates pass. Generic tensor collectors
+preserve vector aliases and full ordered derivative multiplicities; scalar
+sampling, regional geometry and reference evaluation remain separate. Clean-source
+fixture regeneration, public tests and installation pass. Informational findings
+and the coverage-combination recovery are recorded without hiding nonzero tool
+exits. Hosted verification is pending; no concentrating window is accepted.

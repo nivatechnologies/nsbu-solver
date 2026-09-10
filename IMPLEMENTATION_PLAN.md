@@ -305,3 +305,19 @@ P08 remains incomplete. The generic identifier does not establish benchmark
 observable semantics or accepted-state provenance. Complete local derivative,
 pressure, sampling and all-observable experiment production, benchmark-specific
 inventory binding and P09 lineage integration remain. No PDE window is accepted.
+
+## P08 physical derivative progress
+
+The [physical derivative increment](evidence/p08/derivatives/README.md) passes
+332 Rust tests/probes and 188 Python tests. It adds complete-band first/second
+physical derivatives, scalar/vector/Frobenius tensor errors, v2 regional tensor
+reports and 80/120-digit independent analytical derivative fixtures. Actual CM/HO
+rest trajectories retain nonzero derivative errors and unchanged integrated
+states during sampling. All required local quality gates, fresh packaging,
+clean-source installation and frozen mathematical checks pass; hosted checks are
+pending.
+
+P08 remains incomplete. Full benchmark observable/time/policy binding, complete
+all-observable experiment production, pressure mean/reference refinement and
+accepted-state/P09 provenance integration remain. Pointwise derivative agreement
+and small smooth trajectories do not qualify a concentrating window.

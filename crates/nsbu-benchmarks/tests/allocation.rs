@@ -15,6 +15,7 @@ mod reconstruction_observer_support;
 mod smooth_family_support;
 
 fn main() {
+    regional_derivatives();
     reconstruction_accepted_ring();
     owned_reconstruction_restart();
     reconstruction_archive_restart();
@@ -64,6 +65,25 @@ fn main() {
         ),
         (0, 0, 0)
     );
+}
+
+fn regional_derivatives() {
+    use nsbu_benchmarks::{fields::reference, regions::RegionalTensorErrors, time::BenchmarkTime};
+    let clock = TickClock::restore(-20, 8192, 4096, 4096).unwrap();
+    let time = BenchmarkTime::new(clock).unwrap();
+    let layout = Layout::new([4; 3]).unwrap();
+    let region = Region::new(GLOBAL);
+    let mut errors = RegionalTensorErrors::<27>::new(clock, layout, 128, 64, 1.0).unwrap();
+    while let Some(point) = errors.next_point() {
+        let values = reference::evaluate(point, time).unwrap();
+        let tensor = std::array::from_fn(|i| values.hessian[i / 9][(i / 3) % 3][i % 3]);
+        errors.push([0.0; 27], tensor).unwrap();
+    }
+    assert!(errors.report().unwrap().grid_complete);
+    let measured = region.change();
+    assert_eq!(measured.allocations, 0);
+    assert_eq!(measured.reallocations, 0);
+    assert_eq!(measured.deallocations, 0);
 }
 
 fn smooth_admission_and_attempts() {
