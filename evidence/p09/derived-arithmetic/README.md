@@ -77,8 +77,9 @@ The initial complete Rust run passed its tests but exposed CRAP72 in an untested
 argument-processing `main`. The actual argument/export path now has a tested
 `execute` function and a thin I/O wrapper. The complete source-matched replay
 passes every gate; initial coverage, metrics, CRAP and test logs remain archived.
-Source-matched hosted verification of this increment is pending. Both preceding
-physical/pressure-family increments passed their Rust and Python hosted jobs.
+Source-matched [Rust](hosted-rust.json) and [Python](hosted-python.json) hosted
+verification passes at commit `44e53f1`. Both preceding physical/pressure-family
+increments also passed their Rust and Python hosted jobs.
 
 ## Reproduce and review
 

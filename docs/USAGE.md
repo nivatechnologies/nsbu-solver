@@ -381,3 +381,16 @@ and compares their complete same-grid fields. `python -m reference.verify_cyclic
 The full guide documents fixed-input validation, command exit codes, the
 five separate differences and the distinction between input hashes and provenance.
 These diagnostic commands do not produce accepted PDE windows.
+
+## Physical sampling refinement
+
+```sh
+cargo run --release -p nsbu-benchmarks --example smooth_sampling -- --dry-run
+cargo run --release -p nsbu-benchmarks --example smooth_sampling
+```
+
+The [sampling guide](SAMPLING_REFINEMENTS.md) documents complete velocity tensors,
+vorticity, pressure and pressure-gradient comparisons on M=24/32/48 grids at
+unchanged actual accepted clocks. The example preserves all pairwise statistics
+and reports their sampling changes, with a joint memory cap and finite work.
+Sampled peaks and near-zero changes do not establish continuum error bounds.

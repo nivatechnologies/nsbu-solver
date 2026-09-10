@@ -8,6 +8,7 @@ mod plan;
 pub mod pressure;
 pub mod reconstruction;
 pub mod residual;
+pub mod sampling;
 use crate::smooth_run::ReconstructedRun;
 use nsbu_solver::{
     diagnostics::comparison::{BandComparison, ComparisonPlan},

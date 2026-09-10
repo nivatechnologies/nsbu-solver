@@ -377,9 +377,26 @@ clean-source reproduction. Four N=4/N=12 CM/HO studies independently compare all
 ordered velocity tensors, vorticity and full mean-zero pressure/gradient, with
 separate same-state, same-force and target-force effects. Every observed 80/120
 precision ratio is below 1e-40. Source hashes, complete inputs and measurements
-are retained; hosted verification is pending.
+are retained; source-matched Rust and Python hosted checks pass.
 
 P08/P09 remain incomplete. Error norms in this study are reduced in Python;
 production physical-reducer arithmetic, balances/residual/regional/location
 channels, complete artifact binding and concentrating current-grid qualification
 remain. No accepted concentrating PDE window is supplied by these smooth studies.
+
+## P08 actual physical sampling-refinement progress
+
+The [sampling-family increment](evidence/p08/sampling-family/README.md) passes
+362 Rust tests/probes, 98.82% executable line coverage, 90.24% branch coverage
+and every required quality gate. It retains six complete quantities, five actual
+trajectory pairs and three physical sample grids at each accepted clock. Joint
+resources, failed-attempt charges, terminal child failures, unchanged state
+digests and an analytic missed-peak control are verified. The clean source
+reproduces all 270 public-example comparisons byte-for-byte; unchanged Python
+retains its complete 198-test profile. Hosted sampling checks are pending.
+
+P08/P09 remain incomplete. Arbitrary off-stage time manifests require streaming
+reconstruction before bounded histories are overwritten. Complete reference,
+force, production-reduction arithmetic, quadrature, regional/location and
+benchmark/artifact studies and concentrating qualification remain. No window
+is accepted from near-zero smooth sampling differences.

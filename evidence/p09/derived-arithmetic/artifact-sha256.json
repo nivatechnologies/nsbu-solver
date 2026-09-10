@@ -310,5 +310,13 @@
     "sha256": "df94555f12642690fedf89ae133eaf56576adff413135cf2b1c376c44faa2512",
     "uncompressed_bytes": 1017,
     "uncompressed_sha256": "5c538883f36a07d41a415361fef8dee61eb37ad0b20ea5215a11a69957f596c4"
+  },
+  "hosted-rust.json": {
+    "bytes": 1455,
+    "sha256": "7fb5fd79f4318751523da368fbe8852ccf74dbc436088e0f8729fb45b259c43d"
+  },
+  "hosted-python.json": {
+    "bytes": 3001,
+    "sha256": "faf05de8050309790e51be8b84fd855c96a90094f5a593143540c76d799c7354"
   }
 }

@@ -105,3 +105,12 @@ prescribed force. Its finite consumer reports scalar and gradient refinements
 without replacing numerical pressure by the smooth analytical zero. The public
 example admits this workspace jointly with all other owners. See
 `docs/PRESSURE_REFINEMENTS.md` for equations, gauge, work accounting and limits.
+
+`smooth_experiment::sampling` composes three physical and three pressure consumers
+under one joint reservation and complete-report schedule. It measures all six
+quantities and five trajectory pairs on three sample grids, retaining every
+original statistic. `smooth_sampling --dry-run` admits the example profile;
+the argument-free example runs the independently evolved family. A numerical
+child failure terminates its aggregate consumer without changing any trajectory.
+See `docs/SAMPLING_REFINEMENTS.md` for changes in diagnostic statistics, the
+missed-peak control and the distinction from a qualified convergence result.

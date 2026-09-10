@@ -192,3 +192,10 @@ exporter shares the existing smooth trajectory schedule, then borrows its final
 state read-only and independently constructs diagnostic fields. Input bit hashes
 and complete field order bind a reproducible comparison, while acceptance of
 external scientific provenance remains a separate verifier responsibility.
+
+The [sampling consumer](SAMPLING_REFINEMENTS.md) composes three copies of each
+physical/pressure consumer with one immutable family policy and joint reservation.
+The aggregate borrows accepted states, retains all ninety complete comparisons
+per clock and separates original field-error statistics from their changes under
+sampling refinement. It publishes only complete reports; a numerical child
+failure terminates the aggregate before inconsistent child schedules can be reused.

@@ -385,4 +385,13 @@ LOC469/CRAP24.33594; Python CC16/cognitive19/Halstead13.8261/LOC243/CRAP16.
 The initial untested CLI-wrapper CRAP72 finding and the complete corrected replay
 are preserved. Clean-source exports match all four actual artifacts, all four
 N=4/N=12 derived-field studies pass, and bootstrap/frozen-input checks pass.
-Hosted checks for this increment are pending. No concentrating window is accepted.
+Source-matched hosted checks pass. No concentrating window is accepted.
+
+The [sampling-family increment](../evidence/p08/sampling-family/README.md) passes
+362 Rust tests/probes across 265 Rust files, with 98.82% executable line and
+90.24% branch coverage. Maxima CC21, cognitive18, Halstead75.8956, physical-file469
+and CRAP24.33594 pass every gate. The unchanged 82-file Python inventory retains
+the verified 198-test profile. A complete initial 357-test profile is preserved,
+followed by a full replay after integrating the verified derived-field increment.
+The clean source reproduces every example finding; frozen/bootstrap and package
+checks pass. Hosted sampling checks are pending; no concentrating window is accepted.

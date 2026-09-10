@@ -1,0 +1,192 @@
+{
+  "package": "P08",
+  "increment": "actual-smooth-three-grid-physical-sampling-family",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T21:54:12.022747+00:00",
+  "base_commit": "44e53f144f2f007baf68e1c4b7ce3d93f045ee6b",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 265,
+  "rust_harness_tests": 356,
+  "rust_allocation_executables": 6,
+  "rust_tests_and_probes": 362,
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "e3c3d4f66ea535e2567c76d61f5099ee4c64afb94c4d9fb6286671fae24dcac2"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "rust_coverage": {
+    "branches": {
+      "count": 1742,
+      "covered": 1572,
+      "notcovered": 170,
+      "percent": 90.24110218140069
+    },
+    "functions": {
+      "count": 1902,
+      "covered": 1890,
+      "percent": 99.36908517350159
+    },
+    "instantiations": {
+      "count": 3976,
+      "covered": 3161,
+      "percent": 79.5020120724346
+    },
+    "lines": {
+      "count": 23082,
+      "covered": 22809,
+      "percent": 98.81726020275539
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 43446,
+      "covered": 41889,
+      "notcovered": 1557,
+      "percent": 96.41624085071123
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 469
+  },
+  "python_evidence": {
+    "source_files_unchanged": 82,
+    "complete_profile": "../../p09/derived-arithmetic/summary.json",
+    "tests": 198,
+    "bootstrap_tests_rerun": 41
+  },
+  "integration_replay": {
+    "initial_base": "5d5378f",
+    "initial_tests_and_probes": 357,
+    "action": "Preserve complete passing initial profile, integrate the independently verified derived-field increment, and replay all current Rust targets on the combined 362-test source"
+  },
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 65,
+      "duplicatedLines": 614,
+      "duplicatedTokens": 5455,
+      "lines": 32704,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.8774461839530334,
+      "percentageTokens": 2.1861624533111046,
+      "sources": 264,
+      "tokens": 249524
+    },
+    "finding_exit_codes": {
+      "duplicates": 0,
+      "dead-code": 101,
+      "type-escapes": 1
+    },
+    "review": "Shared helpers unused by individual harness/example compilations remain exercised by other targets. Explicit contracts and independent mathematical oracles retain intentional structural duplication; no universal absence is claimed.",
+    "mutations": "Not rerun; prior historical scopes remain informational"
+  },
+  "numerical_measurements": {
+    "case": "CyclicSine",
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "macro_ticks": [
+      64,
+      32,
+      16
+    ],
+    "clock_quantum_exponent": -16,
+    "tested_ticks": [
+      0,
+      64,
+      128
+    ],
+    "physical_sample_grids": [
+      24,
+      32,
+      48
+    ],
+    "quantities": [
+      "velocity",
+      "gradient",
+      "hessian",
+      "vorticity",
+      "pressure",
+      "pressure_gradient"
+    ],
+    "ordered_components": [
+      3,
+      9,
+      27,
+      3,
+      1,
+      3
+    ],
+    "relative_floors": [
+      1e-08,
+      1e-07,
+      1e-06,
+      1e-07,
+      1e-08,
+      1e-07
+    ],
+    "pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "complete_comparisons_per_attempt": 90,
+    "successful_attempts": 3,
+    "joint_reserved_bytes": 53685896,
+    "cap_bytes": 134217728,
+    "charged_scalar_transforms": 5220,
+    "charged_provider_work_units": 202176,
+    "charged_weighted_visits": 1162808640,
+    "actual_findings": "public-example.log.gz",
+    "negative_control": "cos(2*pi*x-pi/8): RMS remains 1/sqrt(2) while peaks on M=4/12/16 are cos(pi/8), cos(pi/24), 1",
+    "state_integrity": "All six complete state digests remain unchanged during every sampling observation"
+  },
+  "solid_review": "Immutable joint admission, existing independent physical/pressure sampling, complete publication and reporting of sampling changes remain separate. The wrapper reuses private family binding, retains every original field statistic, and terminates after a child failure without changing integrated state.",
+  "limitations": [
+    "Only actual synchronized accepted clocks supported by FamilyPlan; arbitrary off-stage time manifests need a separate streaming reconstruction owner",
+    "Near-zero sampled changes and exact rest zeros do not establish supported arithmetic floors or continuum suprema",
+    "Full reference/force/arithmetic/quadrature, regional/location and artifact/benchmark integration remain",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

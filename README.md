@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [derived-field arithmetic increment](evidence/p09/derived-arithmetic/README.md) passes 355 Rust tests/allocation probes, 198 Python tests, all required local quality gates and four independent N=4/N=12 CM/HO studies. A clean source export reproduces every Rust artifact. Hosted verification of this increment is pending; the preceding physical and pressure families pass both hosted workflows.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [sampling-refinement increment](evidence/p08/sampling-family/README.md) passes 362 Rust tests/allocation probes, all required local gates and a matching clean-source walkthrough. Python retains the verified 198-test profile. The preceding [derived-field arithmetic studies](evidence/p09/derived-arithmetic/README.md) also pass both hosted workflows; hosted verification of the sampling increment is pending.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -100,6 +100,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Physical-field comparisons](docs/PHYSICAL_COMPARISONS.md) | Complete scalar/vector/tensor comparisons and v2 regional aggregation |
 | [Physical refinement families](docs/PHYSICAL_REFINEMENTS.md) | Actual six-trajectory comparisons, exact clocks and finite diagnostic budgets |
 | [Pressure refinements](docs/PRESSURE_REFINEMENTS.md) | Independent full-band physical pressure from actual accepted states |
+| [Sampling refinements](docs/SAMPLING_REFINEMENTS.md) | Three physical sample grids, complete tensors/pressure and preserved peak sensitivity |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 
