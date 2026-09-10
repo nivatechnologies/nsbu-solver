@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "independent-rust-force-verification",
+  "development_stage": "rust-trajectory-verification",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "python-and-expanded-rust-profiles-passed-locally; hosted-P05-pending",
+    "status": "Python and Rust through P05 verified locally and hosted; P06 local passed, hosted Rust pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p05/summary.json"
+    "rust_evidence": "evidence/p06/summary.json"
   },
   "packages": {
     "B00": {
@@ -72,8 +72,9 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34416201486"
     },
     "P05": {
-      "status": "local-checks-passed-hosted-ci-pending",
-      "evidence": "evidence/p05/summary.json"
+      "status": "complete",
+      "evidence": "evidence/p05/summary.json",
+      "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34419041250"
     },
     "P06": {
       "status": "local-checks-passed-hosted-ci-pending",

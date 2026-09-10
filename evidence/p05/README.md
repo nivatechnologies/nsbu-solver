@@ -73,7 +73,10 @@ Clippy's denied warnings and review found no dead code or dynamic type escape;
 the duplicate detector finds no cloned source blocks. No private dependency or
 adapter was added. The final full-workspace mutation run tested 1,356 replacements: 1,248 were
 caught and 108 could not compile, with zero survivors or timeouts. All local
-checks pass; package completion still requires hosted verification.
+checks pass. Hosted Rust and repository/reference verification also passed,
+completing P05. The saved [Rust run](hosted-ci.json) and
+[repository/reference run](hosted-python-ci.json) verify commit
+`6fab8913f207d082fb42ad0e3f94aec9e3f421fb`.
 
 A reused Cargo temporary registry initially selected the P01 facade of the same
 development version during package verification. Repeating packaging with a fresh
