@@ -427,8 +427,7 @@ rest, startup and the first two endpoint times, with separate axial/collar
 refinements through 512 panels and an exact Gaussian radial core. The finest
 nonzero relative quadrature changes are about 1.6–1.7e-11; overlapping profiles
 reproduce exactly. Clean-source replay, 41 bootstrap tests and frozen mathematical
-checks pass. Unchanged Rust retains its verified 367-test/probe profile. Hosted
-reference-gauge checks are pending.
+checks pass. Unchanged Rust retains its verified 367-test/probe profile. Source-matched hosted Rust and Python checks pass.
 
 P08/P09 remain incomplete. These empirical means are independent reference
 inputs, not enclosures or window tolerances. Every future claimed probe requires
@@ -444,10 +443,33 @@ pressure comparisons to each exact reconstructed probe, retaining actual node
 origins and a fresh unprojected force at the physical time. Unchanged state and
 interpolant digests, rest/clock controls, terminal child failure and allocation
 contracts pass. Clean-source output, packaging and frozen/bootstrap checks pass;
-unchanged Python retains its complete 209-test profile. Hosted physical-probe
-checks are pending.
+unchanged Python retains its complete 209-test profile. Hosted Python passes; hosted Rust passes numerical checks but fails on a prose-only lexical type match, repaired in the following increment.
 
 P08/P09 remain incomplete. Complete residual/reconstruction, reference/force/
 arithmetic/regional/location refinement, benchmark/artifact binding and
 concentrating current-grid qualification remain. No concentrating window is
 accepted from these smooth physical observations.
+
+
+## P08 streamed residual progress
+
+The [streamed-residual increment](evidence/p08/streamed-residuals/README.md) passes 378 Rust tests/probes
+across 288 Rust files: 98.75% executable line and 90.29% branch coverage. Maxima
+CC21, cognitive18, Halstead75.8956, physical-file475 and CRAP24.33594 meet every
+gate. All 88 Python/stub files match the verified 209-test profile. Clean-source
+replay reproduces thirty branch defects and twenty-five complete coefficient-field
+comparisons; strict linting, Rustdoc, fresh packaging and frozen/bootstrap checks
+pass. Five exact non-stage probes retain original accepted-node histories and
+strict nested temporal geometry. Refusal, stale-origin, terminal later-child and
+allocation controls pass. Hosted verification of this increment is pending.
+
+The preceding hosted failure is preserved: a lexical type scan rejected English
+prose in a full documentation comment after numerical checks passed. CI now
+retains all lexical matches and excludes full comment lines from the refusal
+classification. Actual prohibited code identifiers remain rejected in explicit
+negative controls. Numerical source and measured coverage are unchanged by this
+workflow repair.
+
+P08/P09 remain incomplete: current-grid arithmetic, complete reference/force,
+balance/quadrature, regional/location, benchmark/artifact and concentrating
+qualification remain. No concentrating PDE window is accepted.

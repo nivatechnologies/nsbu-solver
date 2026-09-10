@@ -66,3 +66,8 @@ This increment does not complete reconstruction-error control, reference/force/
 residual/arithmetic/regional/location studies, benchmark semantics, external
 artifact binding or concentrating qualification. **P08/P09 remain incomplete;
 accepted concentrating PDE windows remain zero.**
+
+Hosted Python passed. Hosted Rust passed numerical tests and coverage, then failed
+because its lexical type scan treated English `Any` in a documentation comment
+as a code escape. [The full failed run](hosted-rust.json) and compressed failing
+log are preserved. The streamed-residual increment repairs this CI classifier.

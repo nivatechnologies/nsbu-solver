@@ -30,6 +30,12 @@ except `dead_code`, while manual review checks exported API usage and intentiona
 independent numerical implementations. Rust's compiler resolves inferred types;
 `std::any::Any` escapes are prohibited.
 
+CI retains a broad lexical inventory of `Any`/`unknown` matches. Its refusal scan
+skips full line and documentation comments, so ordinary English prose does not
+masquerade as a type escape. All other matches require review; the scan remains
+conservative for strings, inline comments and block comments. Rust compilation
+provides type resolution independently. This lexical check is not a Rust parser.
+
 Push and pull-request checks do not run a full mutation sweep. Start the optional
 complete report through `workflow_dispatch` with `full_mutation_report=true`.
 That run requires a complete, finished outcome file; survivor and timeout counts

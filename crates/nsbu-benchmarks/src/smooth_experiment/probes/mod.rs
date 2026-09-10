@@ -2,6 +2,7 @@
 pub mod diagnostics;
 mod plan;
 mod report;
+pub mod residuals;
 #[cfg(test)]
 mod tests;
 use super::{FamilyError, SmoothFamily, PAIRS};

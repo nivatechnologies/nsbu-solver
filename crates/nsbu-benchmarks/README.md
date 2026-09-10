@@ -129,3 +129,10 @@ comparisons to actual reconstructed probe times. The
 [public guide](../../docs/RECONSTRUCTED_PHYSICAL_FIELDS.md) covers the fresh
 probe-time prescribed force, full pressure band, joint admission and failure
 contracts. No reference assignment or concentrating qualification is supplied.
+
+
+`smooth_experiment::probes::residuals` binds six independent conservative residual
+paths to an exact non-stage subset of streamed accepted histories. Its
+[public guide](../../docs/STREAMED_RESIDUALS.md) explains strict temporal geometry,
+complete residual-field differences, joint resources and failure semantics.
+It does not establish continuous-time error bounds or concentrating convergence.

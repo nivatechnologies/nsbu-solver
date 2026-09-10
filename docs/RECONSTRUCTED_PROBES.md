@@ -11,8 +11,9 @@ assignment interface and does not import checkpoints. Interpolated fields live
 in separate diagnostic scratch; they never replace an integrated `SpectralState`.
 The owner provides complete Fourier value/time-derivative comparisons. The
 [physical consumer](RECONSTRUCTED_PHYSICAL_FIELDS.md) adds complete tensors and
-pressure with a fresh prescribed force at the probe time. Full reference/force
-refinement, residual integration and window qualification remain.
+pressure with a fresh prescribed force at the probe time. [Streamed residuals](STREAMED_RESIDUALS.md) collect independent conservative
+defects at a strict non-stage subset. Full reference/force refinements and window
+qualification remain.
 
 ## Execute the public workflow
 

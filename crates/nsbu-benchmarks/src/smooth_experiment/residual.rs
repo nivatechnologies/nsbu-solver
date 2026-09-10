@@ -146,6 +146,10 @@ impl ResidualWorkspace {
             norms,
         })
     }
+    // Private aggregate consumers read this only after a complete successful measurement.
+    pub(in crate::smooth_experiment) fn coefficients(&self) -> [&[Complex64]; 3] {
+        self.residual.each_ref().map(Vec::as_slice)
+    }
     fn evaluate_force(&mut self, probe: TickClock) -> Result<(), SolverError> {
         let spent = self.force.evaluate(
             probe,

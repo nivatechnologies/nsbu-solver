@@ -215,3 +215,10 @@ immutable `ProbeFamily` before using the existing physical/pressure numerical
 workspaces. Exact probe scheduling and complete publication remain outside the
 kernels. Pressure receives reconstructed velocity and a fresh prescribed force
 at the probe clock; later lookahead states remain untouched.
+
+
+The [streamed residual consumer](STREAMED_RESIDUALS.md) admits a strict non-stage
+subset of the owner manifest, then uses six separately owned conservative
+residual workspaces. It checks actual accepted-node origins before comparing
+complete doubled-band residual coefficients. The original trajectories and
+interpolants stay borrowed; no reference or stage-RHS assignment path is added.

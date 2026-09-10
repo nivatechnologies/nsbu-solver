@@ -15,10 +15,12 @@ mod probe_allocation_support;
 mod probe_diagnostic_allocation_support;
 mod reconstruction_observer_support;
 mod smooth_family_support;
+mod streamed_residual_allocation_support;
 
 fn main() {
     probe_allocation_support::check();
     probe_diagnostic_allocation_support::check();
+    streamed_residual_allocation_support::check();
     regional_derivatives();
     physical_regions();
     physical_refinement_family();

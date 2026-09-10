@@ -433,3 +433,16 @@ The [reconstructed physical workflow](RECONSTRUCTED_PHYSICAL_FIELDS.md) reports
 all six quantities and all five trajectory pairs at probe ticks 0/7/128, retaining
 physical clocks and actual accepted-node origins. It is a bounded smooth
 diagnostic; the complete concentrating window verifier remains unfinished.
+
+
+## Residuals before early histories are overwritten
+
+```sh
+cargo run --release -p nsbu-benchmarks --example smooth_streamed_residuals -- --dry-run
+cargo run --release -p nsbu-benchmarks --example smooth_streamed_residuals
+```
+
+The [streamed residual workflow](STREAMED_RESIDUALS.md) collects six independent
+defects and five full residual-field comparisons at exact non-stage ticks
+7/31/63/95/127. Actual nested accepted-node histories and spent work are retained.
+These remain smooth sampled diagnostics, not qualified concentrating windows.

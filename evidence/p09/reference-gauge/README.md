@@ -76,3 +76,6 @@ PDE tolerances.** Every future claimed probe time needs its own reference budget
 Complete regional/reference/force/production-arithmetic studies, benchmark and
 external-artifact binding and concentrating window production remain. P08/P09
 are incomplete; no concentrating PDE window is accepted.
+
+Source-matched hosted [Python](hosted-python.json) and [Rust](hosted-rust.json)
+checks passed. These checks do not qualify a concentrating PDE window.

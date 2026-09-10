@@ -415,8 +415,7 @@ and CRAP16 meet all gates; strict typing has zero errors. All 272 Rust files are
 unchanged from the verified 367-test/probe source. A clean export reproduces the
 public study, and all nine numerical studies plus frozen/bootstrap checks pass.
 The less accurate initial pilot and its deliberately interrupted partial test
-run remain recorded. The final complete coverage run passes. Hosted reference
-checks are pending; no concentrating PDE window is accepted.
+run remain recorded. The final complete coverage run passes. Source-matched hosted Rust and Python checks pass; no concentrating PDE window is accepted.
 
 
 The [reconstructed physical-field increment](../evidence/p08/probe-diagnostics/README.md)
@@ -426,5 +425,29 @@ and CRAP24.33594 pass every gate. All 88 Python/stub files match the verified
 209-test reference profile. Complete clean-source output and eleven Python
 regressions pass after integrating the Python-only increment without altering
 measured Rust source, Cargo settings or runtime fixtures. Bootstrap/frozen checks,
-strict linting, Rustdoc and fresh packaging pass. Hosted checks are pending;
+strict linting, Rustdoc and fresh packaging pass. Hosted Python passes; hosted Rust numerical checks pass but the prose-only lexical scan fails, repaired in the following increment;
 accepted concentrating PDE windows remain zero.
+
+
+## P08 streamed residual progress
+
+The [streamed-residual increment](../evidence/p08/streamed-residuals/README.md) passes 378 Rust tests/probes
+across 288 Rust files: 98.75% executable line and 90.29% branch coverage. Maxima
+CC21, cognitive18, Halstead75.8956, physical-file475 and CRAP24.33594 meet every
+gate. All 88 Python/stub files match the verified 209-test profile. Clean-source
+replay reproduces thirty branch defects and twenty-five complete coefficient-field
+comparisons; strict linting, Rustdoc, fresh packaging and frozen/bootstrap checks
+pass. Five exact non-stage probes retain original accepted-node histories and
+strict nested temporal geometry. Refusal, stale-origin, terminal later-child and
+allocation controls pass. Hosted verification of this increment is pending.
+
+The preceding hosted failure is preserved: a lexical type scan rejected English
+prose in a full documentation comment after numerical checks passed. CI now
+retains all lexical matches and excludes full comment lines from the refusal
+classification. Actual prohibited code identifiers remain rejected in explicit
+negative controls. Numerical source and measured coverage are unchanged by this
+workflow repair.
+
+P08/P09 remain incomplete: current-grid arithmetic, complete reference/force,
+balance/quadrature, regional/location, benchmark/artifact and concentrating
+qualification remain. No concentrating PDE window is accepted.

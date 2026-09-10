@@ -99,8 +99,11 @@ jobs:
           set -e
           test -f work/rust-duplicates/jscpd-report.json
           test "$duplicate_status" -le 1
-          # Rust has no unresolved implicit types; disallow dynamic Any escapes.
-          if grep -En '\b(Any|unknown)\b' $(cat work/rust-source-files.txt); then exit 1; fi
+          # Keep the broad lexical inventory, including prose, for review.
+          grep -En '\b(Any|unknown)\b' $(cat work/rust-source-files.txt) > work/rust-type-lexical.log || test "$?" -eq 1
+          # The compiler resolves implicit types. Reject escape identifiers;
+          # full line/documentation comments are prose, not type declarations.
+          awk '!/^[[:space:]]*\/\// && /(^|[^[:alnum:]_])(Any|unknown)([^[:alnum:]_]|$)/ { print FILENAME ":" FNR ":" $0; found=1 } END { exit found }' $(cat work/rust-source-files.txt)
       - name: Informational mutation report with complete accounting
         if: github.event_name == 'workflow_dispatch' && inputs.full_mutation_report == true
         run: |
