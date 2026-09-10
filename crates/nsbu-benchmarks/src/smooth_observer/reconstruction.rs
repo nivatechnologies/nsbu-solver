@@ -4,7 +4,7 @@
 //! product formed for the balance sample.  It therefore neither asks the integrator for a stage
 //! derivative nor evaluates the prescribed force a second time.
 
-use super::{BalanceObserver, BalanceObserverWork};
+use super::{field, BalanceObserver, BalanceObserverWork};
 use nsbu_solver::{
     diagnostics::{balances::BalanceSample, hermite::HermiteWeights},
     domain::{validate_spectrum, Domain, Epoch, ResourcePlan, SpectralState, TickClock},
@@ -13,6 +13,7 @@ use nsbu_solver::{
     Complex64, SolverError,
 };
 
+pub mod archive;
 mod snapshot;
 pub use snapshot::ReconstructionSnapshot;
 
@@ -299,22 +300,6 @@ impl BalanceObserverContract for ReconstructionObserver {
     fn discard_pending(&mut self) {
         self.has_pending = false;
     }
-}
-
-fn field(length: usize, value: Complex64) -> Result<Field, SolverError> {
-    Ok([
-        filled(length, value)?,
-        filled(length, value)?,
-        filled(length, value)?,
-    ])
-}
-fn filled(length: usize, value: Complex64) -> Result<Vec<Complex64>, SolverError> {
-    let mut values = Vec::new();
-    values
-        .try_reserve_exact(length)
-        .map_err(|_| SolverError::AllocationFailed)?;
-    values.resize(length, value);
-    Ok(values)
 }
 
 fn validate_rest(plan: ResourcePlan, state: &SpectralState) -> Result<(), SolverError> {

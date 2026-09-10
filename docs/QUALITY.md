@@ -287,3 +287,11 @@ separate admission, I/O and snapshot-validation responsibilities and determinist
 reader regressions. The 27 duplication findings are informational and reviewed;
 no new mutation sweep was requested. Local package, clean-source install and 14
 installed CLI checks pass. Source-matched hosted Rust and Python verification also passes.
+
+The [reconstruction archive increment](../evidence/p09/reconstruction-archive/README.md)
+passes 292 local tests/probes across 215 Rust files, with 99.08% executable line
+coverage and 91.44% branch coverage. Maxima remain CC21, cognitive16,
+Halstead75.8956, physical-file385 and CRAP24.33594. Additional earlier-node
+metadata regressions cover the externally supplied history contract. Clippy,
+Rustdoc and fresh-target packaging pass. Its 31 duplication findings are
+informational; no mutation sweep was rerun. Hosted checks remain pending.

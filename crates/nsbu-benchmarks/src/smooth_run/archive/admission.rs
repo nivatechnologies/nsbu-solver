@@ -2,7 +2,10 @@ use super::{size, Cursor, Header, ImportedSmoothRun, HASH, HEADER, MAGIC, VERSIO
 use crate::{
     smooth::CyclicSine,
     smooth_observer::{BalanceObserver, BalanceObserverWork},
-    smooth_run::{ledger_bytes, same_configuration, work_storage, IntegrationWork, SmoothPlan},
+    smooth_run::{
+        ledger_bytes, observation::Observation, same_configuration, work_storage, IntegrationWork,
+        OwnedPlan,
+    },
 };
 use nsbu_solver::{
     checkpoint::{
@@ -26,14 +29,24 @@ pub(super) fn read(
     maximum: usize,
     cap: usize,
 ) -> Result<ImportedSmoothRun, CheckpointError> {
+    read_profile::<BalanceObserver>(bytes, expected, maximum, cap, 0)
+}
+
+pub(in crate::smooth_run) fn read_profile<O: Observation>(
+    bytes: &[u8],
+    expected: ResourcePlan,
+    maximum: usize,
+    cap: usize,
+    initial_samples: usize,
+) -> Result<ImportedSmoothRun, CheckpointError> {
     let body = verified_body(bytes, maximum)?;
     let (mut cursor, header) = decode_header(body)?;
-    admit_header(body, expected, cap, &header)?;
+    admit_header::<O>(body, expected, cap, &header)?;
     let physical = read_physical(&mut cursor, expected, cap, &header)?;
     let history = read_history(&mut cursor, cap, &header)?;
     validate_profile(&physical, &history, &header)?;
     let work = read_work(&mut cursor, expected, &history, &header)?;
-    finish_import(cursor, expected, &history, &header)?;
+    finish_import(cursor, expected, &history, &header, initial_samples)?;
     Ok(ImportedSmoothRun {
         physical,
         history,
@@ -109,7 +122,7 @@ fn valid_header(header: &Header) -> Result<(), CheckpointError> {
     }
     Ok(())
 }
-fn admit_header(
+fn admit_header<O: Observation>(
     body: &[u8],
     expected: ResourcePlan,
     cap: usize,
@@ -121,7 +134,7 @@ fn admit_header(
     if header.records > header.configuration.limits.maximum_attempts {
         return Err(CheckpointError::ResourceLimit);
     }
-    let profile = SmoothPlan::from_rest(
+    let profile = OwnedPlan::<O>::from_rest(
         expected.domain(),
         header.initial_clock,
         header.configuration,
@@ -276,8 +289,13 @@ fn finish_import(
     expected: ResourcePlan,
     history: &RunHistory,
     header: &Header,
+    initial_samples: usize,
 ) -> Result<(), CheckpointError> {
-    let committed = history.controller().committed();
+    let committed = history
+        .controller()
+        .committed()
+        .checked_add(initial_samples)
+        .ok_or(CheckpointError::ResourceLimit)?;
     let measured_refusal = matches!(
         history.records().last().map(|record| record.outcome),
         Some(Outcome::Refused {

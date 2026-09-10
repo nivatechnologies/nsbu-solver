@@ -74,8 +74,8 @@ in place.
 
 ## Smooth-run owner archive: `NSBUSR01` and the origin boundary
 
-[`smooth_run/archive.rs`](../crates/nsbu-benchmarks/src/smooth_run/archive.rs) is the only
-implemented owner container. It has `u16` version `1`, a 264-byte header, the embedded physical
+[`smooth_run/archive.rs`](../crates/nsbu-benchmarks/src/smooth_run/archive.rs) stores the balance-only
+owner container. It has `u16` version `1`, a 264-byte header, the embedded physical
 and history archives, one 48-byte integration-work record per history record, and a 32-byte
 SHA-256 trailer over every preceding byte. Its header records an origin tag, initial clock,
 configuration, observer sample limit, advective-limit f64 bits, embedded physical/history byte
@@ -119,8 +119,47 @@ proposal; restoration checks the final node against the physical state before
 allocating fresh diagnostic scratch. Snapshot reservation includes all copied
 fields before any allocation.
 
-These snapshots are not `NSBUSR01` payloads. The current file writer accepts only
-the concrete balance-only `SmoothRun`, so it cannot serialize a reconstruction run
-while silently discarding accepted history. Reconstruction binary encoding remains
-under implementation. None of these containers authenticates a concentrating
-comparison lineage or establishes PDE convergence.
+These snapshots are not standalone `NSBUSR01` payloads. The balance-only writer
+accepts only the concrete `SmoothRun`; the separate reconstruction formats below
+preserve active history. Neither authenticates a concentrating comparison lineage
+or establishes PDE convergence.
+
+## Accepted-node component: `NSBURN01`
+
+The [node codec](../crates/nsbu-benchmarks/src/smooth_observer/reconstruction/archive.rs)
+has a 107-byte header: eight magic bytes, `u16` version 1, `u128` sample capacity,
+one-byte active-node count, three `u128` provider/transform counters, `u128` modal
+visits and `u128` half-spectrum length. One to three nodes follow. Each node has
+an 84-byte exact-clock/epoch/committed-count header, then three velocity and three
+independent derivative arrays of complex binary64 coefficients. A node therefore
+uses `84 + 96 * half_len` bytes. There is no component checksum.
+
+Readers require a separately approved plan and physical state. They check the
+complete length and storage cap, finite strict spectra, consecutive epochs and
+step counts, common clock family, actual zero rest values when that node is
+present, equal spacing and exact final-state coefficient bits. Decoding produces
+`UnverifiedReconstruction`; it cannot create a trusted owned from-rest snapshot.
+The enclosing owner must bind these bytes to its complete execution history.
+
+## Reconstruction owner: `NSBURC01`
+
+The [owner codec](../crates/nsbu-benchmarks/src/smooth_run/reconstructed_archive.rs)
+uses a 42-byte header: eight magic bytes, `u16` version 1, and two `u128` payload
+lengths. The common physical/history/work frame and `NSBURN01` component follow;
+a final 32-byte SHA-256 covers all preceding bytes. The common frame retains the
+version-one field layout and its inner checksum, but uses the reconstruction
+resource profile and includes the initial-rest observation charge. It cannot be
+imported through the public balance-only reader.
+
+The owner checks both frames against one plan, physical state, configuration and
+work ledger. Every retained node time must equal its committed-step count times
+the configured step. This additional check rejects equally spaced, rehashed node
+timestamps that do not match actual recorded step times. Aggregate preflight
+includes decoded node storage and fresh execution scratch before allocation.
+
+`ImportedReconstructedRun::continue_unverified` preserves physical bits, accepted
+nodes, compensated balances, controller state and spent work. Import, continuation,
+snapshot and subsequent export retain `ExternalUnverified`. External problem,
+execution, force, policy and lineage artifacts still need semantic binding before
+any qualification decision. The current CLI file commands use only `NSBUSR01`;
+`NSBURC01` is available through the Rust library.

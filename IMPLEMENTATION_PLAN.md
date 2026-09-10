@@ -244,3 +244,17 @@ The binary format still supports only the balance-only smooth profile. Binary
 reconstruction persistence, full external accepted-state provenance, independent
 refinement families and the complete P08 experiment integration remain. P09 is
 incomplete, and P10 has no qualified concentrating endpoint.
+
+## P09 reconstruction archive progress
+
+The [coherent reconstruction archive](evidence/p09/reconstruction-archive/README.md)
+passes 292 local tests/probes, 99.08% executable line coverage, 91.44% branch
+coverage and all required complexity/CRAP gates. Its outer integrity frame binds
+accepted reconstruction to the same physical state, raw history, controller and
+work ledger. Imported runs preserve the next CM/HO attempt and interpolant with
+fresh scratch and an unverified origin. Hosted checks are pending.
+
+The library format does not establish external artifact semantics or complete
+accepted-state provenance. Those bindings and independent refinement families
+remain; P08/P09 and concentrating qualification are incomplete. CLI file commands
+continue to select the balance-only smooth profile.

@@ -344,5 +344,16 @@ clock/epoch metadata and diagnostic work counters. Restore creates fresh numeric
 scratch and preserves the next accepted or rejected attempt. Query reconstruction
 through `run.observer().reconstruct(...)` with caller-owned output slices. This API
 does not allocate during interpolation or later attempts. Reconstruction samples
-are empirical diagnostics. Binary serialization of this observation profile and
-complete experiment provenance remain in progress; P09 is incomplete.
+are empirical diagnostics. The `smooth_run::reconstructed_archive` library API writes and reads the separate
+`NSBURC01` container, preserving this history through unverified external imports.
+Its `maximum_encoded_len`, `encoded_len`, `write` and `read` functions require
+explicit caller buffers and caps. See the [format guide](CHECKPOINT_FORMAT.md)
+for layout, recovery and origin semantics. The CLI still saves balance-only
+checkpoints. Complete experiment provenance remains in progress; P09 is incomplete.
+
+Exercise the actual next-attempt and corruption checks with:
+
+```bash
+cargo test -p nsbu-benchmarks --test reconstruction_archive --test reconstructed_owner_archive
+cargo test -p nsbu-benchmarks --test allocation
+```

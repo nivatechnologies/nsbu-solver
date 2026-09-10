@@ -1,5 +1,5 @@
 //! Version-one bounded external payloads for the immutable smooth-run profile.
-use super::{IntegrationWork, Origin, SmoothRun};
+use super::{observation::Observation, IntegrationWork, Origin, OwnedRun, SmoothRun};
 use crate::{
     smooth::CyclicSine,
     smooth_observer::{BalanceObserver, BalanceObserverWork},
@@ -12,7 +12,7 @@ use nsbu_solver::{
     SolverError,
 };
 use sha2::{Digest, Sha256};
-mod admission;
+pub(super) mod admission;
 const MAGIC: &[u8; 8] = b"NSBUSR01";
 const VERSION: u16 = 1;
 const HEADER: usize = 264;
@@ -21,14 +21,14 @@ const WORK: usize = 48;
 /// Externally decoded smooth-run data. Its origin is always diagnostic and unverified.
 #[derive(Debug)]
 pub struct ImportedSmoothRun {
-    physical: nsbu_solver::checkpoint::physical::UnverifiedPhysical,
-    history: RunHistory,
-    work: Vec<IntegrationWork>,
-    observer_work: BalanceObserverWork,
-    configuration: Configuration,
-    initial_clock: TickClock,
-    observer_samples: usize,
-    advective_limit: f64,
+    pub(super) physical: nsbu_solver::checkpoint::physical::UnverifiedPhysical,
+    pub(super) history: RunHistory,
+    pub(super) work: Vec<IntegrationWork>,
+    pub(super) observer_work: BalanceObserverWork,
+    pub(super) configuration: Configuration,
+    pub(super) initial_clock: TickClock,
+    pub(super) observer_samples: usize,
+    pub(super) advective_limit: f64,
 }
 impl ImportedSmoothRun {
     /// Always ExternalUnverified, regardless of the encoded tag.
@@ -61,6 +61,14 @@ impl ImportedSmoothRun {
     }
     /// Continue as an externally unverified diagnostic run with fresh private scratch.
     pub fn continue_unverified(self, cap: usize) -> Result<SmoothRun, SolverError> {
+        let work = self.observer_work;
+        self.continue_observed::<BalanceObserver>(work, cap)
+    }
+    pub(super) fn continue_observed<O: Observation>(
+        self,
+        snapshot: O::Snapshot,
+        cap: usize,
+    ) -> Result<OwnedRun<O>, SolverError> {
         let plan = self.physical.state().plan();
         if plan.total() > cap {
             return Err(SolverError::ResourceLimit);
@@ -75,8 +83,8 @@ impl ImportedSmoothRun {
             self.advective_limit,
             plan.classes()[5],
         )?;
-        let observer = BalanceObserver::restore(plan, self.observer_samples, self.observer_work)?;
-        Ok(SmoothRun {
+        let observer = O::restore(plan, self.observer_samples, &state, snapshot)?;
+        Ok(OwnedRun {
             state,
             candidate,
             attempts,
@@ -94,6 +102,9 @@ impl ImportedSmoothRun {
 }
 /// Exact bytes including a SHA-256 trailer, checked before writing caller storage.
 pub fn encoded_len(run: &SmoothRun) -> Result<usize, CheckpointError> {
+    core_len(run)
+}
+pub(super) fn core_len<O: Observation>(run: &OwnedRun<O>) -> Result<usize, CheckpointError> {
     let physical = PhysicalArchive::encoded_len(&run.state)?;
     let history = history::encoded_len(&run.history)?;
     run.work
@@ -130,7 +141,13 @@ pub fn maximum_encoded_len(
 }
 /// Encode a coherent owner state. The tag records diagnostic origin but never qualifies it.
 pub fn write(run: &SmoothRun, output: &mut [u8]) -> Result<usize, CheckpointError> {
-    let required = encoded_len(run)?;
+    write_core(run, output)
+}
+pub(super) fn write_core<O: Observation>(
+    run: &OwnedRun<O>,
+    output: &mut [u8],
+) -> Result<usize, CheckpointError> {
+    let required = core_len(run)?;
     if output.len() < required {
         return Err(CheckpointError::ResourceLimit);
     }
@@ -197,7 +214,7 @@ pub(super) struct Header {
     pub(super) records: usize,
     pub(super) observer_work: BalanceObserverWork,
 }
-fn put(output: &mut [u8], p: &mut usize, bytes: &[u8]) {
+pub(super) fn put(output: &mut [u8], p: &mut usize, bytes: &[u8]) {
     let end = *p + bytes.len();
     output[*p..end].copy_from_slice(bytes);
     *p = end;

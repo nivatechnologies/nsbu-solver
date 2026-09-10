@@ -110,8 +110,9 @@ the balance-only binary format cannot silently drop active reconstruction.
 
 Binary components and a balance-only smooth-owner archive are implemented.
 Smooth file save/resume and owned reconstruction snapshots are implemented.
-Binary reconstruction serialization, complete concentrating checkpoint assembly
-and the full experiment verifier remain in progress.
+Binary reconstruction serialization is available through a separate Rust owner
+codec. Complete artifact/lineage binding, concentrating checkpoint assembly and
+the full experiment verifier remain in progress.
 An in-memory physical image and restartable controller/history components do
 not amount to a complete checkpoint. See the implemented-versus-planned
 sections of [usage](USAGE.md) and the active

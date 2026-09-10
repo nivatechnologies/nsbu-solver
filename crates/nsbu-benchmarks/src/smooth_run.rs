@@ -18,6 +18,7 @@ use nsbu_solver::{
 pub mod archive;
 pub mod observation;
 mod plan;
+pub mod reconstructed_archive;
 use observation::Observation;
 pub use plan::OwnedPlan;
 

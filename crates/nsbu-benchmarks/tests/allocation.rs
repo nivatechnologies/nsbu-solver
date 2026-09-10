@@ -16,6 +16,7 @@ mod reconstruction_observer_support;
 fn main() {
     reconstruction_accepted_ring();
     owned_reconstruction_restart();
+    reconstruction_archive_restart();
     smooth_admission_and_attempts();
     let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
     let sampled = Layout::new([6; 3]).unwrap();
@@ -178,6 +179,47 @@ fn owned_reconstruction_restart() {
         assert!(capture.change().bytes_allocated <= cap);
         let mut restored =
             ReconstructedRun::restore(snapshot, configuration(method, 1e-2), CAP).unwrap();
+        let mut value =
+            vec![Complex64::new(0.0, 0.0); original.state().plan().domain().layout().half_len()];
+        let mut derivative = value.clone();
+        let stepping = Region::new(GLOBAL);
+        assert_eq!(original.step(), restored.step());
+        let probe = TickClock::restore(-20, 1 << 20, 2049, (1 << 20) - 2049).unwrap();
+        restored
+            .observer()
+            .reconstruct(probe, 0, &mut value, &mut derivative)
+            .unwrap();
+        let measured = stepping.change();
+        assert_eq!(
+            (
+                measured.allocations,
+                measured.reallocations,
+                measured.deallocations
+            ),
+            (0, 0, 0)
+        );
+    }
+}
+
+fn reconstruction_archive_restart() {
+    use nsbu_benchmarks::smooth_run::reconstructed_archive as archive;
+    use nsbu_solver::integrators::method::Method;
+    use owned_reconstruction_support::{run, CAP};
+    for method in [Method::CoxMatthews, Method::HochbruckOstermann] {
+        let mut original = run(method, 1e-2, 5);
+        original.step().unwrap();
+        original.step().unwrap();
+        let mut bytes = vec![0; archive::encoded_len(&original).unwrap()];
+        let encoding = Region::new(GLOBAL);
+        archive::write(&original, &mut bytes).unwrap();
+        assert_eq!(encoding.change().allocations, 0);
+        let refused = Region::new(GLOBAL);
+        assert!(archive::read(&bytes, original.state().plan(), bytes.len(), 1).is_err());
+        assert_eq!(refused.change().allocations, 0);
+        let decoding = Region::new(GLOBAL);
+        let imported = archive::read(&bytes, original.state().plan(), bytes.len(), CAP).unwrap();
+        let mut restored = imported.continue_unverified(CAP).unwrap();
+        assert!(decoding.change().bytes_allocated <= CAP);
         let mut value =
             vec![Complex64::new(0.0, 0.0); original.state().plan().domain().layout().half_len()];
         let mut derivative = value.clone();

@@ -10,7 +10,7 @@ use nsbu_solver::{
 use reconstruction_observer_support::Case;
 
 fn probe() -> TickClock {
-    TickClock::restore(-20, 1 << 20, 768, (1 << 20) - 768).unwrap()
+    TickClock::restore(-20, 1 << 20, 769, (1 << 20) - 769).unwrap()
 }
 
 #[test]
@@ -33,7 +33,7 @@ fn both_methods_supply_actual_nodes_and_independent_offstage_derivatives() {
             let mut mode = [0; 3];
             mode[(axis + 1) % 3] = 1;
             let index = layout.locate(mode).unwrap().0;
-            let t = 768.0 / (1 << 20) as f64;
+            let t = 769.0 / (1 << 20) as f64;
             let exact = Complex64::new(0.0, -(frequency * t).sin() / 2.0);
             let exact_derivative = Complex64::new(0.0, -frequency * (frequency * t).cos() / 2.0);
             assert!((value[index] - exact).norm_sqr().sqrt() < 1e-8);

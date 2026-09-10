@@ -55,3 +55,11 @@ regional error collector preserves global measurements, exposes synchronized gri
 coordinates, and bounds repeated root failures. An unsampled region is not an
 empty region or a zero error. All masks and quadrature results remain floating
 measurements requiring their own refinement; no window verifier is implied.
+
+The `smooth_run` module exposes two observation profiles through one ownership
+implementation: balance-only `SmoothRun` and `ReconstructedRun`, which retains
+three accepted values and independently computed derivatives. Their trusted
+snapshots preserve diagnostic work and the next transaction. The separate
+`archive` and `reconstructed_archive` modules encode bounded external containers;
+all imported owners remain `ExternalUnverified`. See the root checkpoint-format
+guide for field layouts and the distinction between byte integrity and provenance.

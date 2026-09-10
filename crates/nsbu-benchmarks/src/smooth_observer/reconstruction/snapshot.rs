@@ -12,12 +12,12 @@ use nsbu_solver::{
 /// a proposal is pending. Moving it into a restored observer cannot replenish spent work.
 #[derive(Debug)]
 pub struct ReconstructionSnapshot {
-    plan: ResourcePlan,
-    samples: usize,
-    accepted: [Node; 3],
-    accepted_count: usize,
-    work: BalanceObserverWork,
-    modal_visits: usize,
+    pub(super) plan: ResourcePlan,
+    pub(super) samples: usize,
+    pub(super) accepted: [Node; 3],
+    pub(super) accepted_count: usize,
+    pub(super) work: BalanceObserverWork,
+    pub(super) modal_visits: usize,
 }
 
 impl ReconstructionObserver {
@@ -82,7 +82,7 @@ impl ReconstructionObserver {
 }
 
 impl ReconstructionSnapshot {
-    fn validate(
+    pub(super) fn validate(
         &self,
         plan: ResourcePlan,
         samples: usize,
