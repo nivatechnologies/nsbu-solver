@@ -1,5 +1,8 @@
 //! Bounded provenance declarations, separate from numerical qualification and checkpoint trust.
+pub mod archive;
 mod image;
+mod prolong;
+pub use prolong::ProlongedState;
 mod record;
 mod registry;
 pub use image::PhysicalImage;

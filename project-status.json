@@ -9,7 +9,7 @@
   "implementation_plan_revision": "1.2",
   "rust_workspace_exists": true,
   "runtime_implementation_exists": true,
-  "simulation_cli_exists": false,
+  "simulation_cli_exists": true,
   "pde_integration_performed": true,
   "accepted_pde_windows": 0,
   "source_instance_admitted": false,
@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Artifact/replay Rust checks passed locally and in hosted CI. Revised-policy Python CLI contract fix passes all 163 tests locally; hosted rerun pending.",
+    "status": "Owned smooth runtime local gates passed: 267 tests/probes, 99.20% executable lines, 95.02% branches, all complexity/CRAP limits. Revised-policy Python checks passed locally and hosted; current Rust hosted checks pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p09/artifacts/summary.json",
+    "rust_evidence": "evidence/p09/runtime/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -108,16 +108,17 @@
       "reporting_evidence": "evidence/p08/reporting/summary.json"
     },
     "P09": {
-      "status": "in-progress; authenticated artifacts and raw-history replay verified locally, complete checkpoint integration pending",
+      "status": "in-progress; owned smooth runtime and bounded binary components verified locally; full checkpoint/provenance integration pending",
       "evidence": "evidence/p09/artifacts/summary.json",
       "remaining": [
-        "Coherent complete checkpoint assembly including raw diagnostic/reconstruction history, provider state/work and artifacts",
-        "External identities and accepted-state provenance validation",
-        "Separate force/reference/arithmetic/transfer refinement studies",
-        "Restart-transfer comparison against direct fine evolution"
+        "Integrate accepted reconstruction history with complete owner snapshots and checkpoint assembly",
+        "Validate external identities and accepted-state provenance",
+        "Complete separate force/reference/arithmetic/transfer refinement families",
+        "Integrate file save/resume CLI and verify clean-checkout workflow"
       ],
       "foundation_evidence": "evidence/p09/foundations/summary.json",
-      "recorded_step_evidence": "evidence/p09/recorded/summary.json"
+      "recorded_step_evidence": "evidence/p09/recorded/summary.json",
+      "runtime_evidence": "evidence/p09/runtime/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -136,5 +137,9 @@
   "restartable_fixed_controller_exists": true,
   "compensated_balance_history_exists": true,
   "authenticated_artifact_catalog_exists": true,
-  "raw_history_replay_exists": true
+  "raw_history_replay_exists": true,
+  "simulation_cli_scope": "Bounded smooth CyclicSine diagnostic, CM/HO, exact-tick resource dry-run and JSON reporting; no concentrating qualification or checkpoint file commands",
+  "owned_smooth_runtime_exists": true,
+  "experimental_binary_checkpoint_components_exist": true,
+  "checkpoint_file_cli_exists": false
 }

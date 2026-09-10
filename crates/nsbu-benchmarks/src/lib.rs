@@ -1,4 +1,16 @@
-//! Independent prescribed-force and scalar-reference implementations for exact similarity-mms-v2.
+//! Independent manufactured-force/reference implementations and bounded smooth diagnostics.
+//!
+//! [`scalar`], [`jet`] and [`fields`] implement the frozen [`CASE_DEFINITION`]. The
+//! separately bounded [`provider`] supplies the prescribed force to the integrator;
+//! a reference field never replaces or resets an integrated state.
+//!
+//! [`smooth::CyclicSine`] is a different, smooth verification problem. Use
+//! [`smooth_run::SmoothPlan`] to preflight it without numerical-grid allocation and
+//! [`smooth_run::SmoothRun`] to evolve it from rest with independently measured balances.
+//! Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` for a bounded example.
+//!
+//! Smooth validation and small concentrating diagnostics do not qualify the frozen
+//! concentrating problem. All reported samples retain their spatial and arithmetic limits.
 mod error;
 pub use error::BenchmarkError;
 pub mod jet;
@@ -17,3 +29,5 @@ pub const CASE_SHA256: &str = "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f
 
 pub mod regions;
 pub mod smooth;
+pub mod smooth_observer;
+pub mod smooth_run;

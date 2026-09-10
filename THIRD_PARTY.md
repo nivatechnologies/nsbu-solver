@@ -63,7 +63,8 @@ dependency source is vendored; Cargo.lock records its registry checksum.
 
 ## Checkpoint artifact integrity dependencies
 
-P09 adds SHA-256 verification using sha2 0.10.9 with default features disabled
+P09 uses SHA-256 verification in the solver artifact catalog and benchmark-owned
+smooth archive, using sha2 0.10.9 with default features disabled
 and its `force-soft` feature enabled. The complete resolved public dependency
 graph is in [the artifact dependency inventory](evidence/p09/artifacts/dependencies.json).
 Cargo.lock preserves the exact registry versions and checksums. This does not

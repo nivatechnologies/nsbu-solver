@@ -1,0 +1,110 @@
+# Experimental checkpoint formats
+
+This document describes the formats implemented at the time of writing. They are experimental
+implementation formats with consolidated local runtime checks. They are useful for bounded recovery of
+the implemented components, but do not establish a qualified restart or a PDE result.
+
+All multibyte integers are little-endian. Integer fields described as `u128` are encoded in 16
+bytes even when the in-memory value is `usize`; a reader refuses values that do not fit its local
+`usize`. Every floating-point field is the little-endian `u64` result of `f64::to_bits`.
+Finite values, including signed zero, retain their bits; physical fields reject nonfinite values. Lengths,
+counts, and complete input byte limits are checked before input-sized allocation. A short output
+buffer is refused before the writer changes it. Readers reject truncation, trailing bytes,
+unknown tags, and unsupported versions.
+
+## Artifact archive: `NSBUAR01`
+
+[`checkpoint/archive.rs`](../crates/nsbu-solver/src/checkpoint/archive.rs) stores a canonical
+catalog of six required artifacts and one optional reference artifact. Its bytes are:
+
+```
+8 bytes magic | 1 byte entry count | entries in canonical order
+entry = 32 byte SHA-256 | u128 content length | exact content bytes
+```
+
+The entry count is six or seven. The required order is problem, execution, force, force
+coverage, policy, lineage, then optional reference. The catalog reader verifies each nonempty
+entry's SHA-256 digest and rejects duplicate, missing, reordered, oversized, or malformed
+entries. A hash match establishes integrity of supplied bytes only. It does not establish that
+the artifact is truthful, adequate, associated with the physical payload, or sufficient for a
+qualified continuation. This format has no separate numeric version field: `AR01` is its schema
+version. A schema change requires a new magic and a reader that explicitly supports it.
+
+## Raw run-history archive: `NSBUHR01`
+
+[`checkpoint/history.rs`](../crates/nsbu-solver/src/checkpoint/history.rs) writes a 157-byte
+header followed by fixed 176-byte attempt records defined in
+[`checkpoint/record.rs`](../crates/nsbu-solver/src/checkpoint/record.rs):
+
+```
+8-byte magic
+initial clock: i32 exponent, u128 target, u128 elapsed, u128 remaining
+method tag
+u128 endpoint, u128 step ticks, u128 maximum attempts
+four f64-bit tolerance values
+u128 record count
+record[count]
+```
+
+Method tag `1` is Cox--Matthews and `2` is Hochbruck--Ostermann. Each record retains its exact
+start clock, outcome/refusal tag and stable failure code, optional indicators, and optional
+balance sample. Absent optional values have canonical all-zero payload bytes. On import, the
+reader preflights byte, record, replay, and storage limits, reconstructs the controller and
+compensated history in original order, and reports replay/clock violations as `InvalidHistory`.
+It does not import physical state, provenance, provider state, or a numerical qualification.
+
+## Physical payload: `NSBUPH01`
+
+[`checkpoint/physical.rs`](../crates/nsbu-solver/src/checkpoint/physical.rs) is versioned with
+`u16` version `1`. Its 350-byte header contains the complete identity checked against an
+independently approved `ResourcePlan`: three `u128` grid dimensions; three f64-bit domain
+lengths; f64-bit viscosity; plan epoch; eight `u128` resource classes; total planned bytes;
+clock exponent/target/elapsed/remaining; state epoch; accepted-step count; and the `u128`
+half-spectrum coefficient count. It is followed by all three Fourier components, in component
+and stored-layout order, each coefficient as real then imaginary f64 bits.
+
+The reader requires matching domain, layout-derived count, plan epoch, all resource classes and
+total before allocating field storage. It restores exact clock counters and returns
+`UnverifiedPhysical`, which exposes read-only state and an ownership transfer only. It checks
+finite coefficients, componentwise Hermitian conjugacy with the same absolute `1e-12` tolerance
+used for accepted attempt fields, and **exactly zero** coefficients on every Nyquist plane. It
+never repairs, projects, rounds, or normalizes an imported spectrum. A malformed physical
+payload should be discarded and recovered from another complete source; it must not be patched
+in place.
+
+## Smooth-run owner archive: `NSBUSR01` and the origin boundary
+
+[`smooth_run/archive.rs`](../crates/nsbu-benchmarks/src/smooth_run/archive.rs) is the only
+implemented owner container. It has `u16` version `1`, a 264-byte header, the embedded physical
+and history archives, one 48-byte integration-work record per history record, and a 32-byte
+SHA-256 trailer over every preceding byte. Its header records an origin tag, initial clock,
+configuration, observer sample limit, advective-limit f64 bits, embedded physical/history byte
+lengths, work count, and three observer-consumption counters.
+
+The reader verifies the trailer and all nested sizes before allocation, requires the expected
+plan, replays history, checks physical/controller clock and committed-count agreement, validates
+the fixed `CyclicSine` provider work accounting, and restores observer state. This owner format
+currently supports **only `CyclicSine`**. Reconstruction history is inactive and is not encoded.
+
+The encoded origin tag records whether the writer's in-memory run began from rest or was already
+external. It crosses an intentional origin boundary on import: every decoded owner becomes
+`ExternalUnverified`, regardless of that tag. It may continue only as an externally unverified
+diagnostic run with fresh private scratch. This prevents a valid byte stream from silently
+becoming a provenance or acceptance claim.
+
+## Errors, recovery, and qualification
+
+`ResourceLimit` means a declared input, record, byte, or storage bound was exceeded; raise an
+explicit caller cap only after deciding that the larger resource use is acceptable. `HashMismatch`
+means discard the artifact or smooth-owner input and obtain an intact copy. `InvalidCatalog` and
+`InvalidEncoding` mean the bytes are malformed, noncanonical, unsupported, or incompatible with
+the expected plan; do not attempt byte-level repair. `InvalidHistory` means decoding succeeded
+far enough to replay but the reconstructed controller/history invariants failed; recover a
+coherent earlier set rather than combining components from different runs.
+
+A same-profile restart only says that the imported bytes match the expected execution profile and
+pass these local structural checks. It does not authenticate external provenance, prove artifact
+semantics, restore inactive reconstruction evidence, establish reference agreement, or qualify a
+PDE window. The separate experimental `NSBULN01` lineage event archive preserves operation
+order and replays declarations through the checked registry; it does not contain
+physical states or the contents of external transfer-error reports.

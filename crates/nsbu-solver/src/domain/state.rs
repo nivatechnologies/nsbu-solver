@@ -1,6 +1,6 @@
 //! Independently owned payloads; numerical mutation is reserved for transactional attempts.
 use super::{Epoch, ResourcePlan, TickClock};
-use crate::storage::filled;
+use crate::storage::field;
 use crate::{Complex64, SolverError};
 
 /// An independently allocated from-rest physical state.
@@ -30,11 +30,7 @@ impl SpectralState {
             clock,
             epoch,
             accepted_steps: 0,
-            components: [
-                filled(n, Complex64::new(0.0, 0.0))?,
-                filled(n, Complex64::new(0.0, 0.0))?,
-                filled(n, Complex64::new(0.0, 0.0))?,
-            ],
+            components: field(n)?,
         })
     }
 

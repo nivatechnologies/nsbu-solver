@@ -3,12 +3,12 @@
 NSBU Solver is a Rust workspace for a periodic, incompressible
 three-dimensional Navier--Stokes discretisation and for evaluating the evidence
 produced by bounded numerical experiments. It is an implementation in progress:
-the public CLI supports help and version only, and no PDE convergence window has
+the public CLI supports bounded smooth diagnostics, and no PDE convergence window has
 been accepted. The current command-level boundary is described in
 [usage](USAGE.md); the scientific claims and their limits are in
 [scientific scope](SCIENTIFIC_SCOPE.md).
 
-This document describes implemented, committed public-library components. The
+This document describes implemented public-library components. The
 reviewed material in [design](design/COMPLETE_DESIGN.md) is a frozen engineering
 baseline, rather than a code-current API manual.
 
@@ -19,8 +19,8 @@ The workspace has three public crates:
 | Crate | Responsibility | Boundary |
 |---|---|---|
 | [`nsbu-solver`](../crates/nsbu-solver/README.md) | State, spectral operations, bounded integration, diagnostics, empirical review, lineage, and experiment transactions | Does not provide a numerical CLI, complete checkpoint format, or a PDE acceptance decision. |
-| [`nsbu-benchmarks`](../crates/nsbu-benchmarks/README.md) | Independent `similarity-mms-v2` scalar/jet reference and prescribed force | Does not own or modify an integrated state. |
-| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Currently exposes only help and version. |
+| [`nsbu-benchmarks`](../crates/nsbu-benchmarks/README.md) | Independent `similarity-mms-v2` scalar/jet reference and prescribed force | Reference APIs cannot modify state; `smooth_run` owns a separate smooth diagnostic trajectory. |
+| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Exposes smooth preflight/runs; concentrating qualification remains incomplete. |
 
 The project has no Niva dependency. A provider implements the solver's bounded
 RHS/force contracts; it is deliberately separate from an analytical reference
@@ -91,8 +91,9 @@ in [`domain`](../crates/nsbu-solver/src/domain/mod.rs),
 
 ## Work that remains
 
-Complete checkpoint serialization/restoration, a coherent checkpoint format,
-the public numerical CLI, and the full experiment verifier remain planned.
+Binary components and a balance-only smooth-owner archive are implemented.
+Complete concentrating checkpoint assembly, file-based CLI restart and the full
+experiment verifier remain in progress.
 An in-memory physical image and restartable controller/history components do
 not amount to a complete checkpoint. See the implemented-versus-planned
 sections of [usage](USAGE.md) and the active

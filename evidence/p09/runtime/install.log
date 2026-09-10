@@ -1,0 +1,21 @@
+  Installing nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+    Updating crates.io index
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-benchmarks)
+   Compiling nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+    Finished `release` profile [optimized] target(s) in 3.25s
+  Installing /mnt/niva-array/nsbu-solver/work/p09-runtime-install/bin/nsbu
+   Installed package `nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)` (executable `nsbu`)
+warning: be sure to add `/mnt/niva-array/nsbu-solver/work/p09-runtime-install/bin` to your PATH to be able to run the installed binaries

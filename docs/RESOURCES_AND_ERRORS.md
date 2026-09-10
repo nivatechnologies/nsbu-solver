@@ -89,7 +89,8 @@ physical provenance, a complete checkpoint, or a qualified PDE window.
 
 ## Current operational limit
 
-There is no public numerical run, resume, or checkpoint-file command yet.
+The `smooth` command provides checked preflight and bounded numerical runs.
+There is no public resume or checkpoint-file command yet.
 In-memory state, image, controller, and history components should not be
 presented as a durable complete checkpoint. Use the commands and limitations in
 [usage](USAGE.md) when exercising the current checkout, and consult the

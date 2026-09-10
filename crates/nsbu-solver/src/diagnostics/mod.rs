@@ -14,3 +14,5 @@ pub mod sampling;
 mod squares;
 mod summation;
 pub mod tails;
+
+pub mod reconstruction_history;

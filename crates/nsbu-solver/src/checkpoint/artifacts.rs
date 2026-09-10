@@ -22,7 +22,7 @@ pub enum Kind {
     /// Independent analytical/reference implementation and definition, when used.
     Reference,
 }
-const ORDER: [Kind; 7] = [
+pub(super) const ORDER: [Kind; 7] = [
     Kind::Problem,
     Kind::Execution,
     Kind::Force,

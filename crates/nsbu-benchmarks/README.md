@@ -29,8 +29,23 @@ an absolute residual of 8 in a nominally zero component. Differentiated momentum
 term magnitudes expose this cancellation; they are not certified error bounds.
 
 Development checks: `cargo test -p nsbu-benchmarks` from the public workspace.
-There is no benchmark simulation CLI or qualified concentrating PDE window yet.
 Pointwise and sampled direct-DFT checks do not establish trajectory convergence.
+
+## Bounded smooth run example
+
+Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` to construct a small owned
+`CyclicSine` trajectory from rest. The example preflights fixed steps, source work, diagnostic
+storage and history, then prints each recorded commit or bounded rejection/refusal. Its energy
+and enstrophy values are measured diagnostics from accepted states. They are not a PDE-window
+validation or a convergence claim.
+
+`smooth_run::SmoothPlan::from_rest` performs allocation-free admission and exposes its frozen
+configuration and resource plan. `SmoothRun::from_rest` creates the private state, RHS,
+transaction scratch, observer and recorded history. The `observer_samples` argument must cover
+the accepted measurements the run will need. `smooth_observer::BalanceObserver::limits` exposes
+the diagnostic storage and total finite work before construction; `consumption` reports actual
+charged calls, provider work and scalar transforms. Its observer trait bound uses per-sample
+provider work; the separate transform count remains in this detailed diagnostic ledger.
 
 Part of NSBU Solver, Apache-2.0. No private Niva dependency or adapter.
 

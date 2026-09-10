@@ -1,7 +1,7 @@
 //! Physical payload copying only. A complete checkpoint must additionally retain all run history.
 use crate::{
     domain::{ResourcePlan, SpectralState},
-    storage::filled,
+    storage::field,
     Complex64, SolverError,
 };
 
@@ -29,11 +29,7 @@ impl PhysicalImage {
             return Err(SolverError::ResourceLimit);
         }
         let n = state.plan.domain().layout().half_len();
-        let mut components = [
-            filled(n, Complex64::new(0.0, 0.0))?,
-            filled(n, Complex64::new(0.0, 0.0))?,
-            filled(n, Complex64::new(0.0, 0.0))?,
-        ];
+        let mut components = field(n)?;
         for (destination, source) in components.iter_mut().zip(&state.components) {
             destination.copy_from_slice(source);
         }

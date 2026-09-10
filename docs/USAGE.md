@@ -22,12 +22,27 @@ The commands have no integration timestep, grid or output-image options because 
 ```sh
 cargo run -p nsbu-cli -- --help
 cargo run -p nsbu-cli -- --version
+cargo run -p nsbu-cli -- smooth --dry-run
+cargo run -p nsbu-cli -- smooth --method cm
+cargo run -p nsbu-cli -- smooth --method ho
+cargo run -p nsbu-benchmarks --example smooth_from_rest
 ```
 
-Help/version and invalid-argument handling are implemented. The library provides validated domains, layouts, exact clocks, resource ledgers
-and from-rest state allocation, spectral operators, transactional CM attempts, and
-independent exact-v2 reference/forcing APIs. `cargo test --workspace` exercises these
-library capabilities. There is still no numerical simulation command in the CLI.
+`smooth` evolves the built-in CyclicSine case independently from rest. The defaults
+use an 8-cubed unit domain, viscosity 0.3, four 64-tick steps at tick exponent -16,
+and a 64 MiB cap. JSON retains exact ticks as decimal strings, the immutable
+profile, local tolerances, resource/work allowances and sampled energy/enstrophy.
+Reports explicitly remain unqualified. Syntax errors exit 2; refusals or incomplete
+runs exit 1; completed diagnostic runs and successful preflight exit 0.
+
+`--dry-run` constructs only the checked admission plan. Allocation instrumentation
+verifies that this admits no numerical-grid allocations, and admitted live and
+imported run advances allocate no heap storage. The caller still budgets its
+own I/O and allocator costs. `--help` lists the actual supported options.
+
+The library example uses viscosity 1 and a separate small four-step configuration.
+Both are smooth verification profiles, distinct from `similarity-mms-v2`.
+Checkpoint files and concentrating experiment commands remain planned CLI work.
 
 ## Intended runtime workflow, not yet executable
 
@@ -105,7 +120,7 @@ cargo test -p nsbu-solver --test attempt_allocation
 
 Force implementations declare their own complete work/storage limits. Undeclared
 callbacks may use the standalone research step kernel, but are refused by the
-bounded attempt API. The numerical CLI and convergence verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
+bounded attempt API. The concentrating CLI and convergence verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
 
 ## Independent Rust exact-v2 evaluation
 
@@ -129,7 +144,7 @@ cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
 ```
 
 P06 passed all local and hosted quality checks. Reaching the diagnostic
-endpoint does not qualify a PDE window. The public numerical CLI remains planned.
+endpoint does not qualify a PDE window. The concentrating CLI remains planned.
 
 
 ## Independent HO development checks
@@ -176,7 +191,7 @@ cargo test -p nsbu-benchmarks --test diagnostic_history -- --nocapture
 These commands work now. The [source-matched evidence](../evidence/p08/core/README.md)
 records analytic negative controls and independently evolved smooth histories.
 Sampled residuals and shrinking-interval maxima are not continuous error bounds.
-The complete P08 window review, numerical CLI, and qualified concentrating
+The complete P08 window review, concentrating CLI, and qualified concentrating
 results remain incomplete. No reference field is assigned to an integrated state.
 
 Sampled reporting is also implemented. `SamplingWorkspace` separately preflights
@@ -219,7 +234,7 @@ These tests exercise separate error-channel rules, conservative budget allocatio
 three nested exact time sets, off-stage probes and bounded streaming observations.
 A numerical pass is `ReadyForLineageReview`; it does not certify input provenance,
 current-grid accuracy, an accepted PDE window or an enclosure. The complete
-experiment verifier and numerical CLI remain under implementation. See
+experiment verifier and concentrating CLI remain under implementation. See
 [window measurement evidence](../evidence/p08/window/README.md).
 
 
@@ -263,3 +278,25 @@ catalog. `RunHistory::replay` checks a raw measured attempt log and reconstructs
 its controller and compensated balances. These APIs do not authenticate physical
 provenance or provide complete checkpoint file read/write commands. See
 [artifact/replay evidence](../evidence/p09/artifacts/README.md).
+
+## Owned smooth runs and binary components
+
+`nsbu_benchmarks::smooth_run::SmoothPlan` preflights the complete supported profile;
+`SmoothRun` owns state, private integrator/provider/observer scratch, raw history and
+per-attempt work. It exposes no mutable reference-assignment path. Trusted in-memory
+snapshots retain the owner origin and restore fresh scratch.
+
+The [experimental binary formats](CHECKPOINT_FORMAT.md) preserve physical bits,
+exact clocks, configuration, controller/balance history and work. Importing the
+smooth-owner format always creates `ExternalUnverified` data. Its explicit diagnostic
+continuation retains that status through later snapshots and exports. A valid
+checksum and consistent history do not authenticate physical provenance.
+
+The lineage event codec preserves interleaved append/invalidation attempts, including
+failures and spent allowances. Coarse-to-fine prolongation retains past error: an
+actual forced-shear test compares continuation against independently evolved direct
+fine trajectories and detects the missing inherited high mode.
+
+Reconstruction storage supports bounded staging and publication, but integration
+into the owned smooth profile and its checkpoint is still pending. These capabilities
+do not complete P09 or qualify a concentrating PDE window.

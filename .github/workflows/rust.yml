@@ -80,7 +80,7 @@ jobs:
       - name: 80 percent executable line and instrumented branch coverage
         run: |
           mkdir -p work
-          cargo +nightly-2026-03-03 llvm-cov --workspace --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/rust-coverage.json
+          cargo +nightly-2026-03-03 llvm-cov --workspace --all-targets --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/rust-coverage.json
           jq -e '.data[0].totals | .lines.count > 0 and .branches.count > 0 and .lines.percent >= 80 and .branches.percent >= 80' work/rust-coverage.json
       - name: Per-function metrics and complete file scope
         run: |

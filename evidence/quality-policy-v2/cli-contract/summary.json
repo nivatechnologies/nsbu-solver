@@ -1,5 +1,5 @@
 {
-  "status": "local checks passed; hosted fix pending",
+  "status": "local and source-matched hosted checks passed",
   "tests": 163,
   "coverage": {
     "covered_lines": 3362,
@@ -72,5 +72,6 @@
     "typings/mpmath/__init__.pyi": "07c5baf4a309f80fd28d6849d426dd6ebb902bb2f773a285da1eb9a5801d1d9f"
   },
   "previous_hosted_failure": "At 3b88195 the checker CLI itself was absent from automated coverage; CRAP rejected this coverage gap. New subprocess contract tests cover output and exit semantics in normal pytest.",
-  "discarded_local_run": "An intermediate run had 9 repository-guard failures caused by a draft checkpoint guide linked to not-yet-integrated code. The guide was moved to ignored work until code integration; a fresh full suite passed."
+  "discarded_local_run": "An intermediate run had 9 repository-guard failures caused by a draft checkpoint guide linked to not-yet-integrated code. The guide was moved to ignored work until code integration; a fresh full suite passed.",
+  "hosted_ci": "hosted-ci.json"
 }

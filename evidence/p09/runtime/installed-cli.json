@@ -1,0 +1,248 @@
+[
+  {
+    "arguments": [
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "NSBU Solver\nUsage: nsbu [--help | --version]\n       nsbu smooth [OPTIONS]\n\nBuilt-in profile: CyclicSine on [1.0, 1.0, 1.0], viscosity 0.3, advective guard 1.0.\n\nOptions:\n  --grid, --domain N          Four-multiple cubic grid (default: 8)\n  --method cm|ho              Cox-Matthews or Hochbruck-Ostermann (default: cm)\n  --step-ticks, --step N      Exact macro-step ticks (default: 64)\n  --target, --endpoint-ticks N\n                              Requested exact endpoint ticks (default: 256)\n  --tick-exponent, --tick N   Tick quantum exponent for 2^N (default: -16)\n  --attempts, --attempt-cap N Maximum recorded attempts (default: 4)\n  --memory-cap N              Declared byte cap (default: 67108864)\n  --dry-run                   Validate and report the allocation-free admission plan\n\nThe built-in CyclicSine profile is a numerical diagnostic only. It is not PDE-qualified.\n",
+    "stderr": ""
+  },
+  {
+    "arguments": [
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "NSBU Solver 0.1.0-alpha.0\n",
+    "stderr": ""
+  },
+  {
+    "arguments": [
+      "smooth",
+      "--dry-run"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\":\"dry_run\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"cm\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"0\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"memory\":{\"classes\":[\"184320\",\"124416\",\"48384\",\"15360\",\"0\",\"174784\",\"831520\",\"10248\"],\"total_bytes\":\"1389032\"},\"bounded_integration\":{\"rhs_calls\":\"48\",\"work_units\":\"46080\",\"scalar_transforms\":\"480\"},\"bounded_observer\":{\"sample_cap\":\"5\",\"work_units\":\"34560\",\"scalar_transforms\":\"45\"}}\n",
+    "stderr": "",
+    "parsed_json": {
+      "status": "dry_run",
+      "profile": {
+        "name": "CyclicSine",
+        "lengths": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "viscosity": 0.3,
+        "pde_qualified": false
+      },
+      "qualification_status": "unqualified",
+      "origin_status": "internal_from_rest",
+      "method": "cm",
+      "clock": {
+        "tick_exponent": -16,
+        "requested_endpoint_ticks": "256",
+        "actual_elapsed_ticks": "0",
+        "step_ticks": "64",
+        "clock_target_ticks": "384"
+      },
+      "tolerances": {
+        "absolute": [
+          0.01,
+          0.01
+        ],
+        "relative": [
+          0.0,
+          0.0
+        ],
+        "advective_guard": 1.0
+      },
+      "memory": {
+        "classes": [
+          "184320",
+          "124416",
+          "48384",
+          "15360",
+          "0",
+          "174784",
+          "831520",
+          "10248"
+        ],
+        "total_bytes": "1389032"
+      },
+      "bounded_integration": {
+        "rhs_calls": "48",
+        "work_units": "46080",
+        "scalar_transforms": "480"
+      },
+      "bounded_observer": {
+        "sample_cap": "5",
+        "work_units": "34560",
+        "scalar_transforms": "45"
+      }
+    }
+  },
+  {
+    "arguments": [
+      "smooth",
+      "--method",
+      "cm"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"cm\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"48\",\"work_units\":\"46080\",\"scalar_transforms\":\"480\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227376675,\"enstrophy\":0.12315437742020797},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+    "stderr": "",
+    "parsed_json": {
+      "status": "completed",
+      "profile": {
+        "name": "CyclicSine",
+        "lengths": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "viscosity": 0.3,
+        "pde_qualified": false
+      },
+      "qualification_status": "unqualified",
+      "origin_status": "internal_from_rest",
+      "method": "cm",
+      "stop_reason": "endpoint_reached",
+      "clock": {
+        "tick_exponent": -16,
+        "requested_endpoint_ticks": "256",
+        "actual_elapsed_ticks": "256",
+        "step_ticks": "64",
+        "clock_target_ticks": "384"
+      },
+      "tolerances": {
+        "absolute": [
+          0.01,
+          0.01
+        ],
+        "relative": [
+          0.0,
+          0.0
+        ],
+        "advective_guard": 1.0
+      },
+      "attempts": {
+        "started": "4",
+        "committed": "4"
+      },
+      "integration": {
+        "rhs_calls": "48",
+        "work_units": "46080",
+        "scalar_transforms": "480"
+      },
+      "diagnostics": {
+        "pending_midpoint": false,
+        "last_accepted_sample": {
+          "sampled": true,
+          "energy": 0.0031195368227376675,
+          "enstrophy": 0.12315437742020797
+        },
+        "observer_charges": {
+          "samples": "4",
+          "work_units": "27648",
+          "scalar_transforms": "36"
+        }
+      }
+    }
+  },
+  {
+    "arguments": [
+      "smooth",
+      "--method",
+      "ho"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\":\"completed\",\"profile\":{\"name\":\"CyclicSine\",\"lengths\":[1.0,1.0,1.0],\"viscosity\":0.3,\"pde_qualified\":false},\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"method\":\"ho\",\"stop_reason\":\"endpoint_reached\",\"clock\":{\"tick_exponent\":-16,\"requested_endpoint_ticks\":\"256\",\"actual_elapsed_ticks\":\"256\",\"step_ticks\":\"64\",\"clock_target_ticks\":\"384\"},\"tolerances\":{\"absolute\":[0.01,0.01],\"relative\":[0.0,0.0],\"advective_guard\":1.0},\"attempts\":{\"started\":\"4\",\"committed\":\"4\"},\"integration\":{\"rhs_calls\":\"60\",\"work_units\":\"57600\",\"scalar_transforms\":\"600\"},\"diagnostics\":{\"pending_midpoint\":false,\"last_accepted_sample\":{\"sampled\":true,\"energy\":0.0031195368227385145,\"enstrophy\":0.12315437742024145},\"observer_charges\":{\"samples\":\"4\",\"work_units\":\"27648\",\"scalar_transforms\":\"36\"}} }\n",
+    "stderr": "",
+    "parsed_json": {
+      "status": "completed",
+      "profile": {
+        "name": "CyclicSine",
+        "lengths": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "viscosity": 0.3,
+        "pde_qualified": false
+      },
+      "qualification_status": "unqualified",
+      "origin_status": "internal_from_rest",
+      "method": "ho",
+      "stop_reason": "endpoint_reached",
+      "clock": {
+        "tick_exponent": -16,
+        "requested_endpoint_ticks": "256",
+        "actual_elapsed_ticks": "256",
+        "step_ticks": "64",
+        "clock_target_ticks": "384"
+      },
+      "tolerances": {
+        "absolute": [
+          0.01,
+          0.01
+        ],
+        "relative": [
+          0.0,
+          0.0
+        ],
+        "advective_guard": 1.0
+      },
+      "attempts": {
+        "started": "4",
+        "committed": "4"
+      },
+      "integration": {
+        "rhs_calls": "60",
+        "work_units": "57600",
+        "scalar_transforms": "600"
+      },
+      "diagnostics": {
+        "pending_midpoint": false,
+        "last_accepted_sample": {
+          "sampled": true,
+          "energy": 0.0031195368227385145,
+          "enstrophy": 0.12315437742024145
+        },
+        "observer_charges": {
+          "samples": "4",
+          "work_units": "27648",
+          "scalar_transforms": "36"
+        }
+      }
+    }
+  },
+  {
+    "arguments": [
+      "smooth",
+      "--memory-cap",
+      "1"
+    ],
+    "exit_code": 1,
+    "stdout": "{\"status\":\"refused\",\"qualification_status\":\"unqualified\",\"origin_status\":\"internal_from_rest\",\"profile\":{\"name\":\"CyclicSine\",\"pde_qualified\":false},\"error\":\"resource_limit\"}\n",
+    "stderr": "",
+    "parsed_json": {
+      "status": "refused",
+      "qualification_status": "unqualified",
+      "origin_status": "internal_from_rest",
+      "profile": {
+        "name": "CyclicSine",
+        "pde_qualified": false
+      },
+      "error": "resource_limit"
+    }
+  },
+  {
+    "arguments": [
+      "smooth",
+      "--method",
+      "invalid"
+    ],
+    "exit_code": 2,
+    "stdout": "",
+    "stderr": "Unsupported arguments. Use nsbu --help for available commands.\n"
+  }
+]

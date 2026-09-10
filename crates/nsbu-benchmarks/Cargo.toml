@@ -7,13 +7,14 @@ license.workspace = true
 repository.workspace = true
 description = "Independent manufactured benchmarks for NSBU Solver"
 readme = "README.md"
-include = ["src/**", "tests/**", "data/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
+include = ["src/**", "examples/**", "tests/**", "data/**", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
 
 [lints]
 workspace = true
 
 [dependencies]
 nsbu-solver.workspace = true
+sha2.workspace = true
 
 [dev-dependencies]
 stats_alloc = "=0.1.10"

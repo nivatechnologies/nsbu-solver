@@ -263,3 +263,17 @@ The [P09 artifact/replay increment](../evidence/p09/artifacts/README.md) records
 226 tests/probes, 11,879 executable lines and 956 instrumented branches in its
 full local replay, with 2,374 mutation outcomes retained. It adds artifact and
 replay coverage but does not complete P09.
+
+The [owned smooth runtime increment](../evidence/p09/runtime/README.md) records
+267 tests/probes across 198 Rust files, 99.20% executable line coverage and 95.02%
+branch coverage. Maxima are CC21, cognitive16, Halstead75.8956, physical-file400
+and CRAP21. Format, strict Clippy, Rustdoc, package/install and installed CLI checks
+pass. Its 17 clone findings are reviewed and informational; mutation sweeps were
+not rerun. Ownership, observation, resource admission and binary I/O remain
+separate responsibilities. Imported bytes cannot create trusted provenance.
+
+The revised-policy Python checker CLI contract fix also passed
+[source-matched hosted CI](../evidence/quality-policy-v2/cli-contract/hosted-ci.json),
+including all 163 tests and automated coverage/CRAP gates. The current Rust
+increment awaits hosted verification; P08/P09 and concentrating qualification
+remain incomplete.

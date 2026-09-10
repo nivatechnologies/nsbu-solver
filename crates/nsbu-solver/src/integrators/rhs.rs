@@ -24,6 +24,7 @@ pub struct SpectralRhs<F: PrescribedForce> {
     calls: usize,
     work_units: usize,
     transforms: usize,
+    consumption_epoch: u128,
 }
 
 impl<F: PrescribedForce> SpectralRhs<F> {
@@ -81,6 +82,7 @@ impl<F: PrescribedForce> SpectralRhs<F> {
             calls: 0,
             work_units: 0,
             transforms: 0,
+            consumption_epoch: 0,
         })
     }
 
@@ -94,6 +96,10 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         self.calls = 0;
         self.work_units = 0;
         self.transforms = 0;
+        self.consumption_epoch = self
+            .consumption_epoch
+            .checked_add(1)
+            .ok_or(SolverError::EpochExhausted)?;
         if ticks > clock.remaining() / self.limits.remaining_divisor {
             return Err(SolverError::InvalidStep);
         }
@@ -113,6 +119,11 @@ impl<F: PrescribedForce> SpectralRhs<F> {
     /// Failed calls retain their full reservation; successful provider reports release unused work.
     pub fn consumption(&self) -> [usize; 3] {
         [self.calls, self.work_units, self.transforms]
+    }
+
+    /// Monotonic attempt-accounting generation, advanced whenever an RHS attempt resets costs.
+    pub fn consumption_epoch(&self) -> u128 {
+        self.consumption_epoch
     }
 }
 

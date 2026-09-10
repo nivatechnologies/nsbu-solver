@@ -1,6 +1,6 @@
 //! One CM step with fixed storage and exactly four externally bounded RHS evaluations.
 use super::coefficients::CmCoefficients;
-use crate::{domain::TickClock, storage::filled, Complex64, SolverError};
+use crate::{domain::TickClock, Complex64, SolverError};
 
 /// Component-major vector payload used only as independently owned working storage.
 pub type Field = [Vec<Complex64>; 3];
@@ -163,10 +163,7 @@ fn stage(
     }
 }
 
-pub(crate) fn field(n: usize) -> Result<Field, SolverError> {
-    let zero = Complex64::new(0.0, 0.0);
-    Ok([filled(n, zero)?, filled(n, zero)?, filled(n, zero)?])
-}
+pub(crate) use crate::storage::field;
 
 pub(crate) fn readonly(field: &Field) -> [&[Complex64]; 3] {
     [&field[0], &field[1], &field[2]]

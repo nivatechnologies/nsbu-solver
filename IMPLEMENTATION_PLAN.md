@@ -14,7 +14,7 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. Reporting and balance gates pass locally and hosted. The bounded sampling/window measurement policy passes all local gates; its hosted verification and full experiment/provenance integration remain pending. No numerical CLI, admitted source instance, accepted PDE window, or formal proof build exists at this point. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. Reporting and balance gates pass locally and hosted. The bounded sampling/window measurement policy passes all local gates; its hosted verification and full experiment/provenance integration remain pending. The bounded `nsbu smooth` CLI now runs the CyclicSine diagnostic with CM or HO. No admitted source instance, accepted concentrating PDE window, or formal proof build exists. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
 ## Planned public organization
 
@@ -208,8 +208,24 @@ allocate nothing after preflight. All requested code metric limits pass.
 measurements, reconstruction history, authenticated artifacts and provider
 state/work accounting. Those and transfer-vs-direct-fine tests remain separate
 drafts. The generic runtime and concentrating releases remain gated by the active
-plan; no numerical CLI or accepted concentrating window is claimed.
+plan; this historical increment did not yet supply a numerical CLI or an accepted concentrating window.
 
 The [artifact/replay increment](evidence/p09/artifacts/README.md) records 226
 local tests/probes, a complete current Rust coverage replay and reproducible
 checkpoint artifact checks. It is progress evidence only; **P09 remains incomplete.**
+
+## P09 owned-runtime progress
+
+The [bounded smooth runtime and binary components](evidence/p09/runtime/README.md)
+pass local verification: 267 tests/probes, 99.20% executable line coverage, 95.02%
+instrumented branch coverage and all required complexity/CRAP limits. The installed
+`nsbu smooth` command and runnable library example evolve actual state from rest.
+Versioned physical, history, artifact, lineage and smooth-owner formats enforce
+bounded decoding and retain import-origin restrictions. A real forced-shear
+transfer study verifies inherited error against independent direct fine evolution.
+
+**P09 remains incomplete.** Complete reconstruction ownership/checkpoints, external
+accepted-state provenance and full force/reference/arithmetic/transfer refinement
+families remain. File save/resume commands are the next CLI increment. P08's
+experiment integration and P10 qualification remain gated; no concentrating window
+is accepted. Hosted checks for the owned-runtime increment are pending.

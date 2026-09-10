@@ -16,6 +16,41 @@ fn main() {
     conservative();
     sampling();
     lineage();
+    prolongation();
+}
+
+fn prolongation() {
+    use nsbu_solver::domain::{Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock};
+    use nsbu_solver::lineage::ProlongedState;
+    let source = SpectralState::from_rest(
+        state_support::plan(Epoch(0)),
+        TickClock::from_rest(-12, 100).unwrap(),
+        Epoch(0),
+    )
+    .unwrap();
+    let target = ResourcePlan::new(
+        Domain::new([8; 3], [1.0; 3], 1.0).unwrap(),
+        ExtraStorage {
+            fft: 0,
+            force: 0,
+            diagnostics: 0,
+            overhead: 4096,
+        },
+        1 << 22,
+        Epoch(1),
+    )
+    .unwrap();
+    let bytes = ProlongedState::reservation(target).unwrap();
+    let refused = Region::new(GLOBAL);
+    assert!(ProlongedState::from_state(&source, target, bytes - 1).is_err());
+    no_allocations(refused.change());
+    let image = planned(bytes, || {
+        ProlongedState::from_state(&source, target, bytes).unwrap()
+    });
+    let moving = Region::new(GLOBAL);
+    let restored = image.into_state();
+    assert_eq!(restored.clock(), source.clock());
+    no_allocations(moving.change());
 }
 
 fn rotational() {

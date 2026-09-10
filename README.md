@@ -2,9 +2,9 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass local and hosted gates. The bounded window measurement review passes local gates; hosted verification and full experiment/provenance integration remain pending. P08 remains incomplete. Lineage, physical-state images, recorded-step/controller/balance components, authenticated artifacts and raw-history replay pass local checks; complete checkpoints remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass local and hosted gates. The bounded window measurement review passes local gates; hosted verification and full experiment/provenance integration remain pending. P08 remains incomplete. The smooth CLI, owned runs, binary archive components and unverified diagnostic continuation pass local checks. Complete concentrating checkpoints and experiment qualification remain under implementation.
 
-The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI currently supports help/version only. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
+The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides a preflight mode. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
 The NSBU Solver library evolves all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
 
@@ -42,7 +42,7 @@ When using the complete source ZIP, extract it with its directory structure inta
 
 The repository check verifies the frozen inputs, mathematical problem identity, local documentation links, and public-package boundaries. The unit tests exercise missing-file, modified-input and unsafe-output failures. The design runner reruns selected algebra, coefficient, clock, geometry, resource, and source-screening checks and compares their report with the preserved evidence before adding execution metadata. Its `status: passed` means those checks passed; it does not mean a PDE simulation passed.
 
-See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. The Rust workspace builds with Rust 1.94.0. `cargo run -p nsbu-cli -- --help` and `--version` work; simulation commands remain planned.
+See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. The Rust workspace builds with Rust 1.94.0. `cargo run -p nsbu-cli -- smooth --dry-run` prints a checked resource plan; `cargo run -p nsbu-cli -- smooth --method ho` evolves the smooth case from rest. These commands do not qualify the concentrating benchmark.
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved
@@ -91,6 +91,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Provenance and adopted decisions](docs/PROVENANCE.md) | Historical naming, baseline hashes, licensing overlay |
 | [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
 | [Numerical conventions](docs/NUMERICAL_CONVENTIONS.md) | Fourier, pressure, norms and exact-time contracts |
+| [Checkpoint formats](docs/CHECKPOINT_FORMAT.md) | Experimental byte formats, caps and import-origin boundaries |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 

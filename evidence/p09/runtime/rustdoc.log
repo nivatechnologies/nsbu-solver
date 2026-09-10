@@ -1,0 +1,6 @@
+ Documenting nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-runtime-verification/crates/nsbu-solver)
+    Checking nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-runtime-verification/crates/nsbu-benchmarks)
+ Documenting nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-runtime-verification/crates/nsbu-benchmarks)
+ Documenting nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-runtime-verification/crates/nsbu-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.81s
+   Generated /mnt/niva-array/nsbu-solver/work/p09-runtime-verification/target/doc/nsbu_benchmarks/index.html and 2 other files

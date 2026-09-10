@@ -73,6 +73,7 @@ name = "nsbu-benchmarks"
 version = "0.1.0-alpha.0"
 dependencies = [
  "nsbu-solver",
+ "sha2",
  "stats_alloc",
 ]
 
@@ -80,6 +81,7 @@ dependencies = [
 name = "nsbu-cli"
 version = "0.1.0-alpha.0"
 dependencies = [
+ "nsbu-benchmarks",
  "nsbu-solver",
 ]
 
