@@ -127,6 +127,15 @@ artifact authentication or PDE qualification.
 
 ## Work that remains
 
+`verification::protocol::FrozenProtocol` borrows validated policies and exact time
+and reconstruction manifests. A single canonical traversal feeds either SHA-256
+or a caller-owned byte buffer. Every channel's effective settings participate in
+identity, and new reviews use the same immutable inputs. The generic component
+cannot infer complete benchmark semantics from observable keys; the benchmark
+adapter must bind the required inventory and actual measurements separately.
+The [format guide](PROTOCOL_FORMAT.md) documents byte layout, work admission and
+the independent cross-language fixture.
+
 The separate [arithmetic workflow](ARITHMETIC_STUDY.md) compares owned smooth
 trajectories against allocating Python direct sums. Its input decoder, immutable
 force fixture, trajectory scheduler, report reader and numerical comparator have

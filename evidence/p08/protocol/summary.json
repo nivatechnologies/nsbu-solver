@@ -1,0 +1,91 @@
+{
+  "package": "P08",
+  "increment": "canonical-numerical-protocol",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T18:50:53.651853+00:00",
+  "base_commit": "1274b69",
+  "source_inventory": "source-sha256.json",
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06"
+  },
+  "rust_source_files": 234,
+  "rust_harness_tests": 316,
+  "rust_allocation_executables": 5,
+  "rust_tests_and_probes": 321,
+  "rust_coverage": {
+    "branches": {
+      "count": 1562,
+      "covered": 1426,
+      "notcovered": 136,
+      "percent": 91.29321382842508
+    },
+    "functions": {
+      "count": 1644,
+      "covered": 1634,
+      "percent": 99.39172749391729
+    },
+    "instantiations": {
+      "count": 2979,
+      "covered": 2201,
+      "percent": 73.8838536421618
+    },
+    "lines": {
+      "count": 19984,
+      "covered": 19770,
+      "percent": 98.92914331465172
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 37160,
+      "covered": 35906,
+      "notcovered": 1254,
+      "percent": 96.6254036598493
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 16.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 385,
+    "crap": 24.3359375
+  },
+  "python_evidence": {
+    "source_files_unchanged": 70,
+    "prior_complete_profile": "../../p09/arithmetic/summary.json",
+    "bootstrap_tests_rerun": 41
+  },
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 34,
+      "duplicatedLines": 309,
+      "duplicatedTokens": 2818,
+      "lines": 28440,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.0864978902953586,
+      "percentageTokens": 1.3113502999167028,
+      "sources": 233,
+      "tokens": 214893
+    },
+    "dead_code": "Clippy report retained; public API and discovered tests reviewed",
+    "mutations": "not rerun; informational"
+  },
+  "solid_review": "Borrowed immutable domain settings, separately bounded review and one canonical encoding traversal; hashing/serialization do not access trajectory mutation or establish physical provenance.",
+  "limitations": [
+    "Generic identity only; benchmark observable semantics remain externally supplied",
+    "No accepted-state or artifact authentication",
+    "No concentrating PDE window is qualified"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

@@ -30,3 +30,7 @@ harness = false
 [[test]]
 name = "recorded_allocation"
 harness = false
+
+[[test]]
+name = "protocol_allocation"
+harness = false

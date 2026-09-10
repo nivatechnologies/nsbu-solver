@@ -290,3 +290,18 @@ observable/time/policy binding, all-observable studies, external artifact
 semantics and concentrating integration remain. Numerical and serialization
 responsibilities are separate; malformed inputs and unmodified high-mode/reality
 defects have explicit regression coverage.
+
+## P08 canonical protocol progress
+
+The [canonical numerical protocol](evidence/p08/protocol/README.md) passes 321
+local Rust tests/probes, 98.93% executable line coverage, 91.29% branch coverage
+and all required complexity/CRAP gates. It binds every channel rule, ordered key,
+exact tested-time manifest and reconstruction geometry; canonical output and
+bounded review share the admitted immutable settings. Short-buffer and zero
+post-admission allocation contracts pass. Fresh-target packaging and bootstrap
+checks pass; hosted verification is pending.
+
+P08 remains incomplete. The generic identifier does not establish benchmark
+observable semantics or accepted-state provenance. Complete local derivative,
+pressure, sampling and all-observable experiment production, benchmark-specific
+inventory binding and P09 lineage integration remain. No PDE window is accepted.

@@ -2,6 +2,7 @@
 pub mod budget;
 pub mod observation;
 pub mod policy;
+pub mod protocol;
 pub mod reconstruction;
 pub mod refinement;
 pub mod review;
@@ -14,6 +15,8 @@ pub enum VerificationError {
     InvalidValue,
     /// A documented floor has no supporting analysis identifier.
     MissingAnalysis,
+    /// The mathematical problem or observable-semantics identifier is absent.
+    MissingProtocolIdentity,
     /// A tested-time manifest is empty, unordered, duplicated or uses inconsistent exact clocks.
     InvalidTimes,
     /// The supplied records exceed the caller's declared finite review allowance.

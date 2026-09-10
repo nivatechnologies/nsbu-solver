@@ -1,0 +1,1325 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 11,
+        "endLoc": {
+          "column": 2,
+          "line": 11,
+          "position": 494
+        },
+        "name": "nsbu-benchmarks/examples/smooth_coefficients.rs",
+        "start": 5,
+        "startLoc": {
+          "column": 49,
+          "line": 5,
+          "position": 289
+        }
+      },
+      "format": "rust",
+      "fragment": "use nsbu_benchmarks::smooth_run::ReconstructedRun;\nuse nsbu_solver::{\n    domain::{Domain, TickClock},\n    experiment::control::{Configuration, Outcome},\n    integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},\n    SolverError,\n};",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 8,
+        "endLoc": {
+          "column": 2,
+          "line": 8,
+          "position": 341
+        },
+        "name": "nsbu-benchmarks/tests/smooth_run.rs",
+        "start": 2,
+        "startLoc": {
+          "column": 42,
+          "line": 2,
+          "position": 136
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 16,
+        "endLoc": {
+          "column": 51,
+          "line": 16,
+          "position": 659
+        },
+        "name": "nsbu-benchmarks/examples/smooth_coefficients.rs",
+        "start": 9,
+        "startLoc": {
+          "column": 79,
+          "line": 9,
+          "position": 473
+        }
+      },
+      "format": "rust",
+      "fragment": "    integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},\n    SolverError,\n};\nuse std::io::{self, Write};\n\nfn main() -> Result<(), ExportError> {\n    let mut args = std::env::args().skip(1);\n    let n = arithmetic_support::grid(args.next())?;",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 14,
+        "endLoc": {
+          "column": 51,
+          "line": 14,
+          "position": 496
+        },
+        "name": "nsbu-benchmarks/examples/smooth_force_coefficients.rs",
+        "start": 8,
+        "startLoc": {
+          "column": 13,
+          "line": 8,
+          "position": 314
+        }
+      },
+      "tokens": 67
+    },
+    {
+      "firstFile": {
+        "end": 9,
+        "endLoc": {
+          "column": 20,
+          "line": 9,
+          "position": 332
+        },
+        "name": "nsbu-benchmarks/examples/smooth_from_rest.rs",
+        "start": 2,
+        "startLoc": {
+          "column": 0,
+          "line": 2,
+          "position": 91
+        }
+      },
+      "format": "rust",
+      "fragment": "use nsbu_benchmarks::smooth_run::SmoothRun;\nuse nsbu_solver::{\n    domain::{Domain, TickClock},\n    experiment::control::{Configuration, Outcome},\n    integrators::{\n        indicator::Tolerances,\n        method::Method,\n        trajectory::{RunLimits, StopReason},",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 6,
+        "endLoc": {
+          "column": 69,
+          "line": 6,
+          "position": 310
+        },
+        "name": "nsbu-benchmarks/tests/smooth_run.rs",
+        "start": 2,
+        "startLoc": {
+          "column": 0,
+          "line": 2,
+          "position": 94
+        }
+      },
+      "tokens": 52
+    },
+    {
+      "firstFile": {
+        "end": 153,
+        "endLoc": {
+          "column": 11,
+          "line": 153,
+          "position": 5814
+        },
+        "name": "nsbu-benchmarks/src/smooth_experiment/reconstruction.rs",
+        "start": 148,
+        "startLoc": {
+          "column": 0,
+          "line": 148,
+          "position": 5642
+        }
+      },
+      "format": "rust",
+      "fragment": "}\nfn field(n: usize) -> Result<Field, SolverError> {\n    Ok([filled(n)?, filled(n)?, filled(n)?])\n}\nfn filled(n: usize) -> Result<Vec<Complex64>, SolverError> {\n    let mut data = Vec::new();",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 182,
+        "endLoc": {
+          "column": 11,
+          "line": 182,
+          "position": 6918
+        },
+        "name": "nsbu-benchmarks/src/smooth_experiment/residual.rs",
+        "start": 177,
+        "startLoc": {
+          "column": 0,
+          "line": 177,
+          "position": 6746
+        }
+      },
+      "tokens": 61
+    },
+    {
+      "firstFile": {
+        "end": 208,
+        "endLoc": {
+          "column": 6,
+          "line": 208,
+          "position": 7310
+        },
+        "name": "nsbu-benchmarks/src/smooth_observer/reconstruction.rs",
+        "start": 194,
+        "startLoc": {
+          "column": 42,
+          "line": 194,
+          "position": 6910
+        }
+      },
+      "format": "rust",
+      "fragment": "        HermiteWeights::at(clocks, probe)?.apply(\n            [\n                &self.accepted[0].value[axis],\n                &self.accepted[1].value[axis],\n                &self.accepted[2].value[axis],\n                &self.accepted[0].derivative[axis],\n                &self.accepted[1].derivative[axis],\n                &self.accepted[2].derivative[axis],\n            ],\n            value,\n            derivative,\n        )\n    }\n\n    fn capture_initial(&mut self, state: &SpectralState) -> Result<(), SolverError> {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 15,
+      "secondFile": {
+        "end": 195,
+        "endLoc": {
+          "column": 6,
+          "line": 195,
+          "position": 6702
+        },
+        "name": "nsbu-solver/src/diagnostics/reconstruction_history.rs",
+        "start": 181,
+        "startLoc": {
+          "column": 15,
+          "line": 181,
+          "position": 6302
+        }
+      },
+      "tokens": 91
+    },
+    {
+      "firstFile": {
+        "end": 13,
+        "endLoc": {
+          "column": 10,
+          "line": 13,
+          "position": 404
+        },
+        "name": "nsbu-benchmarks/src/smooth_observer/reconstruction/archive/codec.rs",
+        "start": 8,
+        "startLoc": {
+          "column": 0,
+          "line": 8,
+          "position": 234
+        }
+      },
+      "format": "rust",
+      "fragment": "pub(super) fn put(output: &mut [u8], p: &mut usize, bytes: &[u8]) {\n    let end = *p + bytes.len();\n    output[*p..end].copy_from_slice(bytes);\n    *p = end;\n}\npub(super) fn write_node(node: &Node, output: &mut [u8], p: &mut usize) {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 229,
+        "endLoc": {
+          "column": 10,
+          "line": 229,
+          "position": 8356
+        },
+        "name": "nsbu-benchmarks/src/smooth_run/archive.rs",
+        "start": 224,
+        "startLoc": {
+          "column": 0,
+          "line": 224,
+          "position": 8186
+        }
+      },
+      "tokens": 65
+    },
+    {
+      "firstFile": {
+        "end": 121,
+        "endLoc": {
+          "column": 1,
+          "line": 121,
+          "position": 4577
+        },
+        "name": "nsbu-benchmarks/src/smooth_run/archive.rs",
+        "start": 112,
+        "startLoc": {
+          "column": 8,
+          "line": 112,
+          "position": 4290
+        }
+      },
+      "format": "rust",
+      "fragment": "        .checked_mul(WORK)\n        .and_then(|work| {\n            HEADER\n                .checked_add(physical)?\n                .checked_add(history)?\n                .checked_add(work)\n        })\n        .and_then(|size| size.checked_add(HASH))\n        .ok_or(CheckpointError::ResourceLimit)\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 141,
+        "endLoc": {
+          "column": 1,
+          "line": 141,
+          "position": 5268
+        },
+        "name": "nsbu-benchmarks/src/smooth_run/archive.rs",
+        "start": 132,
+        "startLoc": {
+          "column": 8,
+          "line": 132,
+          "position": 4981
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 242,
+        "endLoc": {
+          "column": 15,
+          "line": 242,
+          "position": 8821
+        },
+        "name": "nsbu-benchmarks/src/smooth_run/archive.rs",
+        "start": 236,
+        "startLoc": {
+          "column": 31,
+          "line": 236,
+          "position": 8606
+        }
+      },
+      "format": "rust",
+      "fragment": "            .split_at_checked(n)\n            .ok_or(CheckpointError::InvalidEncoding)?;\n        self.remaining = tail;\n        Ok(head)\n    }\n    pub(super) fn array<const N: usize>(&mut self) -> Result<[u8; N], CheckpointError> {\n        let mut value = [0; N];",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 7,
+      "secondFile": {
+        "end": 21,
+        "endLoc": {
+          "column": 15,
+          "line": 21,
+          "position": 786
+        },
+        "name": "nsbu-solver/src/checkpoint/bytes.rs",
+        "start": 15,
+        "startLoc": {
+          "column": 35,
+          "line": 15,
+          "position": 571
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 208,
+        "endLoc": {
+          "column": 2,
+          "line": 208,
+          "position": 7903
+        },
+        "name": "nsbu-benchmarks/tests/allocation.rs",
+        "start": 185,
+        "startLoc": {
+          "column": 89,
+          "line": 185,
+          "position": 7169
+        }
+      },
+      "format": "rust",
+      "fragment": "            ReconstructedRun::restore(snapshot, configuration(method, 1e-2), CAP).unwrap();\n        let mut value =\n            vec![Complex64::new(0.0, 0.0); original.state().plan().domain().layout().half_len()];\n        let mut derivative = value.clone();\n        let stepping = Region::new(GLOBAL);\n        assert_eq!(original.step(), restored.step());\n        let probe = TickClock::restore(-20, 1 << 20, 2049, (1 << 20) - 2049).unwrap();\n        restored\n            .observer()\n            .reconstruct(probe, 0, &mut value, &mut derivative)\n            .unwrap();\n        let measured = stepping.change();\n        assert_eq!(\n            (\n                measured.allocations,\n                measured.reallocations,\n                measured.deallocations\n            ),\n            (0, 0, 0)\n        );\n    }\n}\n\nfn reconstruction_archive_restart() {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 24,
+      "secondFile": {
+        "end": 249,
+        "endLoc": {
+          "column": 2,
+          "line": 249,
+          "position": 9715
+        },
+        "name": "nsbu-benchmarks/tests/allocation.rs",
+        "start": 226,
+        "startLoc": {
+          "column": 56,
+          "line": 226,
+          "position": 8981
+        }
+      },
+      "tokens": 174
+    },
+    {
+      "firstFile": {
+        "end": 20,
+        "endLoc": {
+          "column": 15,
+          "line": 20,
+          "position": 735
+        },
+        "name": "nsbu-benchmarks/tests/owned_reconstruction.rs",
+        "start": 13,
+        "startLoc": {
+          "column": 66,
+          "line": 13,
+          "position": 476
+        }
+      },
+      "format": "rust",
+      "fragment": "fn every_ring_phase_restores_the_next_cm_and_ho_commit_bit_for_bit() {\n    for method in [Method::CoxMatthews, Method::HochbruckOstermann] {\n        for steps in 0..4 {\n            let mut original = run(method, 1e-2, 5);\n            for _ in 0..steps {\n                original.step().unwrap();\n            }\n            let snapshot = original",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 24,
+        "endLoc": {
+          "column": 15,
+          "line": 24,
+          "position": 957
+        },
+        "name": "nsbu-benchmarks/tests/reconstructed_owner_archive.rs",
+        "start": 17,
+        "startLoc": {
+          "column": 78,
+          "line": 17,
+          "position": 698
+        }
+      },
+      "tokens": 57
+    },
+    {
+      "firstFile": {
+        "end": 63,
+        "endLoc": {
+          "column": 19,
+          "line": 63,
+          "position": 1929
+        },
+        "name": "nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs",
+        "start": 51,
+        "startLoc": {
+          "column": 44,
+          "line": 51,
+          "position": 1674
+        }
+      },
+      "format": "rust",
+      "fragment": "        right.history().controller().stopped()\n    );\n    assert_eq!(\n        left.history().records().len(),\n        right.history().records().len()\n    );\n    for (a, b) in left\n        .history()\n        .records()\n        .iter()\n        .zip(right.history().records())\n    {\n        assert_eq!(",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 13,
+      "secondFile": {
+        "end": 62,
+        "endLoc": {
+          "column": 19,
+          "line": 62,
+          "position": 1751
+        },
+        "name": "nsbu-benchmarks/tests/smooth_run.rs",
+        "start": 50,
+        "startLoc": {
+          "column": 46,
+          "line": 50,
+          "position": 1496
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 25,
+        "endLoc": {
+          "column": 98,
+          "line": 25,
+          "position": 1083
+        },
+        "name": "nsbu-benchmarks/tests/reconstructed_owner_archive.rs",
+        "start": 20,
+        "startLoc": {
+          "column": 50,
+          "line": 20,
+          "position": 851
+        }
+      },
+      "format": "rust",
+      "fragment": "            let mut original = run(method, 1e-2, 5);\n            for _ in 0..steps {\n                original.step().unwrap();\n            }\n            let bytes = encode(&original);\n            let imported = full::read(&bytes, original.state().plan(), bytes.len(), CAP).unwrap();",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 57,
+        "endLoc": {
+          "column": 94,
+          "line": 57,
+          "position": 2661
+        },
+        "name": "nsbu-benchmarks/tests/reconstructed_owner_archive.rs",
+        "start": 52,
+        "startLoc": {
+          "column": 70,
+          "line": 52,
+          "position": 2449
+        }
+      },
+      "tokens": 62
+    },
+    {
+      "firstFile": {
+        "end": 95,
+        "endLoc": {
+          "column": 7,
+          "line": 95,
+          "position": 3386
+        },
+        "name": "nsbu-benchmarks/tests/reconstruction_archive.rs",
+        "start": 79,
+        "startLoc": {
+          "column": 55,
+          "line": 79,
+          "position": 2912
+        }
+      },
+      "format": "rust",
+      "fragment": "fn shape_clock_state_and_counter_corruption_are_refused() {\n    let mut owner = run(Method::CoxMatthews, 1e-2, 5);\n    owner.step().unwrap();\n    owner.step().unwrap();\n    let mut bytes = vec![0; archive::encoded_len(owner.observer()).unwrap()];\n    archive::write(owner.observer(), &mut bytes).unwrap();\n    let read = |bytes: &[u8]| {\n        archive::read(\n            bytes,\n            owner.state().plan(),\n            5,\n            owner.state(),\n            bytes.len(),\n            usize::MAX,\n        )\n    };\n    for length in [0, 8, 106, bytes.len() - 1] {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 17,
+      "secondFile": {
+        "end": 187,
+        "endLoc": {
+          "column": 7,
+          "line": 187,
+          "position": 6238
+        },
+        "name": "nsbu-benchmarks/tests/reconstruction_archive.rs",
+        "start": 171,
+        "startLoc": {
+          "column": 59,
+          "line": 171,
+          "position": 5764
+        }
+      },
+      "tokens": 140
+    },
+    {
+      "firstFile": {
+        "end": 91,
+        "endLoc": {
+          "column": 9,
+          "line": 91,
+          "position": 3256
+        },
+        "name": "nsbu-benchmarks/tests/smooth_run_archive.rs",
+        "start": 84,
+        "startLoc": {
+          "column": 36,
+          "line": 84,
+          "position": 3024
+        }
+      },
+      "format": "rust",
+      "fragment": "                .zip(resumed.state().component(axis).unwrap())\n            {\n                assert_eq!(\n                    [left.re.to_bits(), left.im.to_bits()],\n                    [right.re.to_bits(), right.im.to_bits()]\n                );\n            }\n        }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 308,
+        "endLoc": {
+          "column": 13,
+          "line": 308,
+          "position": 11162
+        },
+        "name": "nsbu-solver/tests/history_archive.rs",
+        "start": 301,
+        "startLoc": {
+          "column": 38,
+          "line": 301,
+          "position": 10902
+        }
+      },
+      "tokens": 53
+    },
+    {
+      "firstFile": {
+        "end": 196,
+        "endLoc": {
+          "column": 11,
+          "line": 196,
+          "position": 7384
+        },
+        "name": "nsbu-cli/src/main.rs",
+        "start": 191,
+        "startLoc": {
+          "column": 85,
+          "line": 191,
+          "position": 7193
+        }
+      },
+      "format": "rust",
+      "fragment": "fn execute(args: Args, clock: TickClock, configuration: Configuration, samples: usize) -> ExitCode {\n    let domain = match Domain::new([args.grid; 3], [DOMAIN_LENGTH; 3], VISCOSITY) {\n        Ok(value) => value,\n        Err(error) => return refused(error),\n    };\n    let mut run = match SmoothRun::from_rest(",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 222,
+        "endLoc": {
+          "column": 11,
+          "line": 222,
+          "position": 8008
+        },
+        "name": "nsbu-cli/src/main.rs",
+        "start": 217,
+        "startLoc": {
+          "column": 0,
+          "line": 217,
+          "position": 7817
+        }
+      },
+      "tokens": 55
+    },
+    {
+      "firstFile": {
+        "end": 206,
+        "endLoc": {
+          "column": 6,
+          "line": 206,
+          "position": 7627
+        },
+        "name": "nsbu-cli/src/main.rs",
+        "start": 192,
+        "startLoc": {
+          "column": 80,
+          "line": 192,
+          "position": 7289
+        }
+      },
+      "format": "rust",
+      "fragment": "    let domain = match Domain::new([args.grid; 3], [DOMAIN_LENGTH; 3], VISCOSITY) {\n        Ok(value) => value,\n        Err(error) => return refused(error),\n    };\n    let mut run = match SmoothRun::from_rest(\n        domain,\n        clock,\n        configuration,\n        samples,\n        ADVECTIVE_LIMIT,\n        args.memory_cap,\n    ) {\n        Ok(value) => value,\n        Err(error) => return refused(error),\n    };",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 15,
+      "secondFile": {
+        "end": 236,
+        "endLoc": {
+          "column": 6,
+          "line": 236,
+          "position": 8399
+        },
+        "name": "nsbu-cli/src/main.rs",
+        "start": 222,
+        "startLoc": {
+          "column": 64,
+          "line": 222,
+          "position": 8061
+        }
+      },
+      "tokens": 72
+    },
+    {
+      "firstFile": {
+        "end": 27,
+        "endLoc": {
+          "column": 11,
+          "line": 27,
+          "position": 1046
+        },
+        "name": "nsbu-solver/src/checkpoint/archive.rs",
+        "start": 20,
+        "startLoc": {
+          "column": 8,
+          "line": 20,
+          "position": 776
+        }
+      },
+      "format": "rust",
+      "fragment": "        if bytes.len() > maximum_bytes {\n            return Err(CheckpointError::ResourceLimit);\n        }\n        let mut cursor = Cursor { remaining: bytes };\n        if cursor.take(8)? != MAGIC {\n            return Err(CheckpointError::InvalidEncoding);\n        }\n        let count = usize::from(cursor.take(1)?[0]);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 106,
+        "endLoc": {
+          "column": 7,
+          "line": 106,
+          "position": 3838
+        },
+        "name": "nsbu-solver/src/checkpoint/history.rs",
+        "start": 99,
+        "startLoc": {
+          "column": 4,
+          "line": 99,
+          "position": 3596
+        }
+      },
+      "tokens": 53
+    },
+    {
+      "firstFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 5,
+          "line": 35,
+          "position": 1222
+        },
+        "name": "nsbu-solver/src/checkpoint/physical.rs",
+        "start": 28,
+        "startLoc": {
+          "column": 4,
+          "line": 28,
+          "position": 891
+        }
+      },
+      "format": "rust",
+      "fragment": "    pub fn reservation(plan: ResourcePlan) -> Result<usize, SolverError> {\n        plan.domain()\n            .layout()\n            .half_len()\n            .checked_mul(3 * std::mem::size_of::<Complex64>())\n            .and_then(|bytes| bytes.checked_add(std::mem::size_of::<Self>()))\n            .ok_or(SolverError::SizeOverflow)\n    }",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 25,
+        "endLoc": {
+          "column": 5,
+          "line": 25,
+          "position": 1089
+        },
+        "name": "nsbu-solver/src/lineage/image.rs",
+        "start": 18,
+        "startLoc": {
+          "column": 4,
+          "line": 18,
+          "position": 758
+        }
+      },
+      "tokens": 85
+    },
+    {
+      "firstFile": {
+        "end": 37,
+        "endLoc": {
+          "column": 87,
+          "line": 37,
+          "position": 1311
+        },
+        "name": "nsbu-solver/src/checkpoint/physical.rs",
+        "start": 32,
+        "startLoc": {
+          "column": 27,
+          "line": 32,
+          "position": 1057
+        }
+      },
+      "format": "rust",
+      "fragment": "            .checked_mul(3 * std::mem::size_of::<Complex64>())\n            .and_then(|bytes| bytes.checked_add(std::mem::size_of::<Self>()))\n            .ok_or(SolverError::SizeOverflow)\n    }\n\n    /// Read-only decoded state; this type intentionally grants no continuation status.",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 69,
+        "endLoc": {
+          "column": 79,
+          "line": 69,
+          "position": 2324
+        },
+        "name": "nsbu-solver/src/diagnostics/reconstruction_history.rs",
+        "start": 64,
+        "startLoc": {
+          "column": 28,
+          "line": 64,
+          "position": 2078
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 103,
+        "endLoc": {
+          "column": 28,
+          "line": 103,
+          "position": 2603
+        },
+        "name": "nsbu-solver/src/experiment/tests.rs",
+        "start": 92,
+        "startLoc": {
+          "column": 45,
+          "line": 92,
+          "position": 2248
+        }
+      },
+      "format": "rust",
+      "fragment": "impl BalanceObserver for TransactionObserver {\n    fn bounds(&self) -> Option<ObserverBounds> {\n        Some(ObserverBounds {\n            storage_bytes: std::mem::size_of::<Self>(),\n            work_units: 1,\n        })\n    }\n\n    fn measure(&mut self, _: &SpectralState) -> Result<BalanceSample, SolverError> {\n        assert!(!self.pending);\n        self.measured += 1;\n        self.pending = true;",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 12,
+      "secondFile": {
+        "end": 61,
+        "endLoc": {
+          "column": 28,
+          "line": 61,
+          "position": 1657
+        },
+        "name": "nsbu-solver/tests/newtransactionobserver.rs",
+        "start": 50,
+        "startLoc": {
+          "column": 41,
+          "line": 50,
+          "position": 1302
+        }
+      },
+      "tokens": 85
+    },
+    {
+      "firstFile": {
+        "end": 136,
+        "endLoc": {
+          "column": 11,
+          "line": 136,
+          "position": 3632
+        },
+        "name": "nsbu-solver/src/experiment/tests.rs",
+        "start": 129,
+        "startLoc": {
+          "column": 21,
+          "line": 129,
+          "position": 3317
+        }
+      },
+      "format": "rust",
+      "fragment": "    for case in 0..5 {\n        let (_, mut state, mut candidate) = transaction_setup();\n        let endpoint = state.clock().stages(4).unwrap()[4];\n        candidate.state.clock = endpoint;\n        candidate.state.accepted_steps = 1;\n        candidate.state.epoch = Epoch(1);\n        let accepted = candidate.accept(&state);\n        let (result, mode) = match case {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 228,
+        "endLoc": {
+          "column": 7,
+          "line": 228,
+          "position": 6758
+        },
+        "name": "nsbu-solver/src/experiment/tests.rs",
+        "start": 221,
+        "startLoc": {
+          "column": 74,
+          "line": 221,
+          "position": 6471
+        }
+      },
+      "tokens": 76
+    },
+    {
+      "firstFile": {
+        "end": 134,
+        "endLoc": {
+          "column": 49,
+          "line": 134,
+          "position": 4294
+        },
+        "name": "nsbu-solver/tests/lineage_archive.rs",
+        "start": 127,
+        "startLoc": {
+          "column": 16,
+          "line": 127,
+          "position": 4069
+        }
+      },
+      "format": "rust",
+      "fragment": "    let missing = LineageArchive::from_log(LineageLog::new(\n        digest(7),\n        1,\n        1,\n        vec![Event::Append {\n            profile: profile(3),\n            clock: clock(4),\n            origin: ArchivedOrigin::Continued(id(4)),",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 148,
+        "endLoc": {
+          "column": 49,
+          "line": 148,
+          "position": 4759
+        },
+        "name": "nsbu-solver/tests/lineage_archive.rs",
+        "start": 141,
+        "startLoc": {
+          "column": 18,
+          "line": 141,
+          "position": 4534
+        }
+      },
+      "tokens": 51
+    },
+    {
+      "firstFile": {
+        "end": 193,
+        "endLoc": {
+          "column": 36,
+          "line": 193,
+          "position": 6128
+        },
+        "name": "nsbu-solver/tests/lineage_archive.rs",
+        "start": 185,
+        "startLoc": {
+          "column": 17,
+          "line": 185,
+          "position": 5870
+        }
+      },
+      "format": "rust",
+      "fragment": "    let mismatch = LineageArchive::from_log(LineageLog::new(\n        digest(7),\n        1,\n        1,\n        vec![Event::Append {\n            profile: profile(3),\n            clock: clock(0),\n            origin: ArchivedOrigin::FromRest,\n            outcome: AppendOutcome::Refused(LineageError::InvalidClock),",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 228,
+        "endLoc": {
+          "column": 40,
+          "line": 228,
+          "position": 7170
+        },
+        "name": "nsbu-solver/tests/lineage_archive.rs",
+        "start": 219,
+        "startLoc": {
+          "column": 30,
+          "line": 219,
+          "position": 6883
+        }
+      },
+      "tokens": 54
+    },
+    {
+      "firstFile": {
+        "end": 12,
+        "endLoc": {
+          "column": 34,
+          "line": 12,
+          "position": 448
+        },
+        "name": "nsbu-solver/tests/newtransactionobserver.rs",
+        "start": 2,
+        "startLoc": {
+          "column": 0,
+          "line": 2,
+          "position": 74
+        }
+      },
+      "format": "rust",
+      "fragment": "use nsbu_solver::{\n    diagnostics::balances::BalanceSample,\n    domain::{Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock},\n    experiment::{\n        control::{Configuration, Outcome},\n        log::RunHistory,\n        observer::{BalanceObserver, ObserverBounds},\n        runner::recorded_step,\n    },\n    integrators::{\n        attempt::AttemptWorkspace,",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 11,
+      "secondFile": {
+        "end": 13,
+        "endLoc": {
+          "column": 34,
+          "line": 13,
+          "position": 496
+        },
+        "name": "nsbu-solver/tests/recorded_support/mod.rs",
+        "start": 3,
+        "startLoc": {
+          "column": 0,
+          "line": 3,
+          "position": 122
+        }
+      },
+      "tokens": 73
+    },
+    {
+      "firstFile": {
+        "end": 35,
+        "endLoc": {
+          "column": 21,
+          "line": 35,
+          "position": 975
+        },
+        "name": "nsbu-solver/tests/newtransactionobserver.rs",
+        "start": 23,
+        "startLoc": {
+          "column": 34,
+          "line": 23,
+          "position": 708
+        }
+      },
+      "format": "rust",
+      "fragment": "impl RightHandSide for ZeroSource {\n    fn bounds(&self) -> Option<RhsBounds> {\n        Some(RhsBounds {\n            storage_bytes: 0,\n            work_units: 1,\n            scalar_transforms: 0,\n        })\n    }\n\n    fn evaluate(\n        &mut self,\n        _: [&[Complex64]; 3],\n        _: TickClock,",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 13,
+      "secondFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 21,
+          "line": 26,
+          "position": 806
+        },
+        "name": "nsbu-solver/tests/prolongation.rs",
+        "start": 15,
+        "startLoc": {
+          "column": 29,
+          "line": 15,
+          "position": 540
+        }
+      },
+      "tokens": 55
+    },
+    {
+      "firstFile": {
+        "end": 26,
+        "endLoc": {
+          "column": 21,
+          "line": 26,
+          "position": 837
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 18,
+        "startLoc": {
+          "column": 0,
+          "line": 18,
+          "position": 508
+        }
+      },
+      "format": "rust",
+      "fragment": "fn plan(method: Method) -> ResourcePlan {\n    let domain = Domain::new([4; 3], [1.0, 2.0, 3.0], 0.5).unwrap();\n    ResourcePlan::new(\n        domain,\n        ExtraStorage {\n            fft: 0,\n            force: 0,\n            diagnostics: AttemptWorkspace::reservation_with_method(domain, method).unwrap(),\n            overhead: 64,",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 9,
+      "secondFile": {
+        "end": 32,
+        "endLoc": {
+          "column": 21,
+          "line": 32,
+          "position": 1061
+        },
+        "name": "nsbu-solver/tests/physical_image.rs",
+        "start": 24,
+        "startLoc": {
+          "column": 0,
+          "line": 24,
+          "position": 732
+        }
+      },
+      "tokens": 75
+    },
+    {
+      "firstFile": {
+        "end": 25,
+        "endLoc": {
+          "column": 43,
+          "line": 25,
+          "position": 766
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 18,
+        "startLoc": {
+          "column": 22,
+          "line": 18,
+          "position": 530
+        }
+      },
+      "format": "rust",
+      "fragment": "fn plan(method: Method) -> ResourcePlan {\n    let domain = Domain::new([4; 3], [1.0, 2.0, 3.0], 0.5).unwrap();\n    ResourcePlan::new(\n        domain,\n        ExtraStorage {\n            fft: 0,\n            force: 0,\n            diagnostics: AttemptWorkspace::reservation_with_method(domain, method).unwrap(),",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 31,
+        "endLoc": {
+          "column": 43,
+          "line": 31,
+          "position": 1022
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 24,
+        "startLoc": {
+          "column": 8,
+          "line": 24,
+          "position": 786
+        }
+      },
+      "tokens": 56
+    },
+    {
+      "firstFile": {
+        "end": 46,
+        "endLoc": {
+          "column": 2,
+          "line": 46,
+          "position": 1207
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 29,
+        "startLoc": {
+          "column": 16,
+          "line": 29,
+          "position": 886
+        }
+      },
+      "format": "rust",
+      "fragment": "        Epoch(42),\n    )\n    .unwrap()\n}\n\nfn source() -> source_contract::Source {\n    source_contract::Source::new(\n        usize::MAX,\n        std::array::from_fn(|axis| {\n            [\n                Complex64::new((axis + 1) as f64, 0.0),\n                Complex64::new(1.0, (axis + 2) as f64),\n            ]\n        }),\n    )\n}\n\nfn tolerances(value: f64) -> Tolerances {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 18,
+      "secondFile": {
+        "end": 52,
+        "endLoc": {
+          "column": 2,
+          "line": 52,
+          "position": 1442
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 35,
+        "startLoc": {
+          "column": 15,
+          "line": 35,
+          "position": 1121
+        }
+      },
+      "tokens": 84
+    },
+    {
+      "firstFile": {
+        "end": 82,
+        "endLoc": {
+          "column": 22,
+          "line": 82,
+          "position": 2307
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 77,
+        "startLoc": {
+          "column": 8,
+          "line": 77,
+          "position": 2041
+        }
+      },
+      "format": "rust",
+      "fragment": "fn equal(left: &SpectralState, right: &SpectralState) {\n    assert_eq!(left.plan(), right.plan());\n    assert_eq!(left.clock(), right.clock());\n    assert_eq!(left.epoch(), right.epoch());\n    assert_eq!(left.accepted_steps(), right.accepted_steps());\n    for axis in 0..3 {",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 50,
+        "endLoc": {
+          "column": 22,
+          "line": 50,
+          "position": 1537
+        },
+        "name": "nsbu-solver/tests/physical_image.rs",
+        "start": 45,
+        "startLoc": {
+          "column": 10,
+          "line": 45,
+          "position": 1271
+        }
+      },
+      "tokens": 81
+    },
+    {
+      "firstFile": {
+        "end": 105,
+        "endLoc": {
+          "column": 7,
+          "line": 105,
+          "position": 3021
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 100,
+        "startLoc": {
+          "column": 68,
+          "line": 100,
+          "position": 2818
+        }
+      },
+      "format": "rust",
+      "fragment": "fn exact_payload_requires_matching_plan_caps_and_valid_fourier_input() {\n    let plan = plan(Method::CoxMatthews);\n    let state =\n        SpectralState::from_rest(plan, TickClock::from_rest(-12, 100).unwrap(), Epoch(7)).unwrap();\n    let bytes = encoded(&state);\n    let image = restored(&bytes, plan);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 6,
+      "secondFile": {
+        "end": 166,
+        "endLoc": {
+          "column": 7,
+          "line": 166,
+          "position": 5357
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 161,
+        "startLoc": {
+          "column": 80,
+          "line": 161,
+          "position": 5154
+        }
+      },
+      "tokens": 58
+    },
+    {
+      "firstFile": {
+        "end": 212,
+        "endLoc": {
+          "column": 28,
+          "line": 212,
+          "position": 7709
+        },
+        "name": "nsbu-solver/tests/physical_archive.rs",
+        "start": 192,
+        "startLoc": {
+          "column": 30,
+          "line": 192,
+          "position": 6582
+        }
+      },
+      "format": "rust",
+      "fragment": "        let plan = plan(method);\n        let clock = TickClock::from_rest(-12, 100).unwrap();\n        let mut state = SpectralState::from_rest(plan, clock, Epoch(7)).unwrap();\n        let mut candidate = CandidateState::new(plan, clock, Epoch(7)).unwrap();\n        let mut workspace = AttemptWorkspace::new_with_method(plan, method).unwrap();\n        let accepted = workspace\n            .try_advance(&state, &mut candidate, 4, tolerances(1.0), &mut source())\n            .unwrap()\n            .accepted\n            .unwrap();\n        commit_candidate(plan, &mut state, &mut candidate, accepted).unwrap();\n        let mut resumed = restored(&encoded(&state), plan).into_state();\n        let mut resumed_candidate = CandidateState::new(plan, clock, Epoch(7)).unwrap();\n        let mut resumed_workspace = AttemptWorkspace::new_with_method(plan, method).unwrap();\n        for budget in [1.0, 1e-40] {\n            let original = workspace\n                .try_advance(&state, &mut candidate, 4, tolerances(budget), &mut source())\n                .unwrap();\n            let replayed = resumed_workspace\n                .try_advance(\n                    &resumed,",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 21,
+      "secondFile": {
+        "end": 186,
+        "endLoc": {
+          "column": 18,
+          "line": 186,
+          "position": 6676
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 172,
+        "startLoc": {
+          "column": 4,
+          "line": 172,
+          "position": 5829
+        }
+      },
+      "tokens": 255
+    },
+    {
+      "firstFile": {
+        "end": 123,
+        "endLoc": {
+          "column": 62,
+          "line": 123,
+          "position": 3869
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 114,
+        "startLoc": {
+          "column": 82,
+          "line": 114,
+          "position": 3304
+        }
+      },
+      "format": "rust",
+      "fragment": "fn accepted_states() -> (ResourcePlan, PhysicalImage, PhysicalImage, SpectralState) {\n    let plan = plan();\n    let clock = TickClock::from_rest(-12, 100).unwrap();\n    let mut state = SpectralState::from_rest(plan, clock, Epoch(7)).unwrap();\n    let mut candidate = CandidateState::new(plan, clock, Epoch(7)).unwrap();\n    let mut workspace = AttemptWorkspace::new(plan).unwrap();\n    let start = PhysicalImage::capture(&state, usize::MAX).unwrap();\n    advance(plan, &mut state, &mut candidate, &mut workspace);\n    let middle = PhysicalImage::capture(&state, usize::MAX).unwrap();\n    advance(plan, &mut state, &mut candidate, &mut workspace);",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 137,
+        "endLoc": {
+          "column": 62,
+          "line": 137,
+          "position": 4558
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 128,
+        "startLoc": {
+          "column": 79,
+          "line": 128,
+          "position": 3993
+        }
+      },
+      "tokens": 165
+    },
+    {
+      "firstFile": {
+        "end": 124,
+        "endLoc": {
+          "column": 5,
+          "line": 124,
+          "position": 3875
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 117,
+        "startLoc": {
+          "column": 20,
+          "line": 117,
+          "position": 3408
+        }
+      },
+      "format": "rust",
+      "fragment": "    let mut state = SpectralState::from_rest(plan, clock, Epoch(7)).unwrap();\n    let mut candidate = CandidateState::new(plan, clock, Epoch(7)).unwrap();\n    let mut workspace = AttemptWorkspace::new(plan).unwrap();\n    let start = PhysicalImage::capture(&state, usize::MAX).unwrap();\n    advance(plan, &mut state, &mut candidate, &mut workspace);\n    let middle = PhysicalImage::capture(&state, usize::MAX).unwrap();\n    advance(plan, &mut state, &mut candidate, &mut workspace);\n    (plan, start, middle, state)",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 8,
+      "secondFile": {
+        "end": 138,
+        "endLoc": {
+          "column": 7,
+          "line": 138,
+          "position": 4566
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 131,
+        "startLoc": {
+          "column": 20,
+          "line": 131,
+          "position": 4097
+        }
+      },
+      "tokens": 134
+    },
+    {
+      "firstFile": {
+        "end": 144,
+        "endLoc": {
+          "column": 10,
+          "line": 144,
+          "position": 4875
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 135,
+        "startLoc": {
+          "column": 23,
+          "line": 135,
+          "position": 4386
+        }
+      },
+      "format": "rust",
+      "fragment": "    advance(plan, &mut state, &mut candidate, &mut workspace);\n    let middle = PhysicalImage::capture(&state, usize::MAX).unwrap();\n    advance(plan, &mut state, &mut candidate, &mut workspace);\n    let zeros =\n        std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); plan.domain().layout().half_len()]);\n    let mut history = ReconstructionHistory::new(plan, usize::MAX).unwrap();\n    let staged = history\n        .stage(nodes(start.state(), middle.state(), &state, &zeros))\n        .unwrap();\n    assert!(!history.has_segment());",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 10,
+      "secondFile": {
+        "end": 187,
+        "endLoc": {
+          "column": 7,
+          "line": 187,
+          "position": 6684
+        },
+        "name": "nsbu-solver/tests/reconstruction_history.rs",
+        "start": 178,
+        "startLoc": {
+          "column": 23,
+          "line": 178,
+          "position": 6198
+        }
+      },
+      "tokens": 146
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-09-10T18:49:52.093Z",
+    "formats": {
+      "rust": {
+        "clones": 34,
+        "duplicatedLines": 309,
+        "duplicatedTokens": 2818,
+        "lines": 28440,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 1.0864978902953586,
+        "percentageTokens": 1.3113502999167028,
+        "sources": 233,
+        "tokens": 214893
+      }
+    },
+    "total": {
+      "clones": 34,
+      "duplicatedLines": 309,
+      "duplicatedTokens": 2818,
+      "lines": 28440,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.0864978902953586,
+      "percentageTokens": 1.3113502999167028,
+      "sources": 233,
+      "tokens": 214893
+    }
+  }
+}

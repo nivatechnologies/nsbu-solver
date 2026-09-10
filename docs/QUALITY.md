@@ -318,3 +318,13 @@ The nine Python dead-code findings identify discovered tests or schema fields;
 duplication is reported and no mutation sweep was rerun. Full source/export/input
 identity, cap failures and high-mode/reality negative controls are tested.
 Source-matched hosted Rust and Python verification pass; no PDE window is accepted.
+
+The [canonical protocol increment](../evidence/p08/protocol/README.md) passes
+321 Rust tests/probes across 234 source/test files. Coverage is 98.93% executable
+lines and 91.29% branches; maxima remain CC21, cognitive16, Halstead75.8956,
+file385 and CRAP24.33594. Format, Clippy, Rustdoc and fresh packaging pass.
+The unchanged Python source retains its preceding complete quality evidence;
+41 bootstrap tests and frozen mathematical checks were rerun. Informational
+Clippy and duplication output is preserved, including nonzero finding exits.
+Borrowed settings, canonical encoding and numerical review remain separate from
+physical provenance. Hosted checks are pending; no concentrating window is accepted.

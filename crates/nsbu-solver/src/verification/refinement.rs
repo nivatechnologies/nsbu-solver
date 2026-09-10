@@ -81,6 +81,16 @@ impl Rule {
         self.requirement
     }
 
+    /// Frozen strict reduction threshold; required for complete protocol identity.
+    pub fn maximum_reduction_ratio(self) -> f64 {
+        self.reduction
+    }
+
+    /// Effective absolute subordinate-floor budget after constructor arithmetic.
+    pub fn subordinate_floor_budget(self) -> f64 {
+        self.floor_budget
+    }
+
     /// Require a positive finite budget and fractions strictly between zero and one.
     /// `floor_fraction` defines strict subordination to the channel allocation.
     pub fn new(
