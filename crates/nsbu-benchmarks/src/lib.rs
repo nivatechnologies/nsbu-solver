@@ -15,4 +15,5 @@ pub const CASE_DEFINITION: &str = include_str!("../data/similarity-mms-v2.json")
 /// SHA-256 of the reviewed definition, checked against both copies by repository CI.
 pub const CASE_SHA256: &str = "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e";
 
+pub mod regions;
 pub mod smooth;

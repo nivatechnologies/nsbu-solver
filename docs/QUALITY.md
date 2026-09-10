@@ -171,3 +171,24 @@ allocation during evaluation. Three long scientific studies run in complete
 validation/coverage and are skipped only during focused mutation reruns; no
 production mutation source is excluded. Hosted Rust checks and the remaining P08
 reporting/window work are pending, so this is not package completion.
+
+The later [P08 reporting and balance increment](../evidence/p08/reporting/README.md)
+passes its local gates: 171 tests/probes, 8,779 executable lines, 696 instrumented
+branches and 703 functions fully covered across 128 Rust files. The full mutation
+run accounts for 2,034 mutants: 1,900 caught, 134 unviable, zero survivors/timeouts.
+CC21, cognitive15, Halstead74.4231, physical-file264 and CRAP21 remain below the
+requested limits. Clone detection, strict linting and scoped review remain clean.
+
+Sampling, geometric classification, error accumulation and state integration have
+separate responsibilities. The regional collector depends on narrow immutable
+clock/geometry contracts and preserves global errors alongside every local mask.
+Failed classification attempts remain charged to a finite work allowance. Shared
+mode traversal and diagnostic force assertions remove actual duplication.
+
+The mutation run's production source matches the final snapshot byte-for-byte.
+Its test-source hashes and executed profile are retained; the additive balance
+study and shared history-test helper followed that snapshot. All four long
+scientific studies run in complete coverage; the final mutation profile skips
+only those long reruns and excludes no production source. Hosted verification
+must separately check the final snapshot. P08's complete window verifier is still
+pending, and no concentrating PDE window is qualified.

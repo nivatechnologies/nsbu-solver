@@ -1,7 +1,7 @@
 //! Scaled Euclidean accumulation avoids squaring an otherwise representable large norm.
 use crate::{Complex64, SolverError};
 
-#[derive(Default)]
+#[derive(Default, Debug, Clone, Copy)]
 pub(crate) struct Squares {
     scale: f64,
     sum: f64,
@@ -26,6 +26,10 @@ impl Squares {
     }
     pub(crate) fn norm(self) -> Result<f64, SolverError> {
         finite(self.scale * self.sum.sqrt())
+    }
+    /// Caller supplies a positive sample count; normalize before a potentially large square root.
+    pub(crate) fn rms(self, count: usize) -> Result<f64, SolverError> {
+        finite(self.scale * (self.sum / count as f64).sqrt())
     }
 }
 

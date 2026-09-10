@@ -23,3 +23,7 @@ Published checkout/home prefixes are normalized. Raw execution records remain un
 
 The source-matched [hosted Python/repository run](hosted-python-ci.json) passed.
 Hosted Rust verification is pending. P08 remains incomplete.
+
+The subsequent [reporting and accepted-history balance increment](../reporting/README.md)
+extends these diagnostics. This core report retains the evidence for its own
+earlier source snapshot.

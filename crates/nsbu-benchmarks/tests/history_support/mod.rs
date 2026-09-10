@@ -5,7 +5,7 @@ use nsbu_solver::{
         conservative::ConservativeWorkspace, hermite::HermiteWeights, residual::ResidualPlan,
     },
     domain::{Domain, SpectralState, TickClock},
-    integrators::{forcing::PrescribedForce, method::Method},
+    integrators::method::Method,
     spectral::transfer,
     Complex64,
 };
@@ -13,6 +13,9 @@ use nsbu_solver::{
 #[path = "../smooth_support/mod.rs"]
 mod smooth_support;
 use smooth_support::SmoothRun;
+
+#[path = "../smooth_force_support/mod.rs"]
+mod smooth_force_support;
 
 type Field = [Vec<Complex64>; 3];
 const END: u128 = 1 << 15;
@@ -99,11 +102,7 @@ impl Probe {
     fn nonlinear(&mut self, clock: TickClock, velocity: &Field) {
         assert!(self.calls < 12);
         self.calls += 1;
-        let [a, b, c] = &mut self.force;
-        let limits = self.evaluator.limits().unwrap();
-        let work = self.evaluator.evaluate(clock, limits, [a, b, c]).unwrap();
-        assert_eq!(work.scalar_transforms, 0);
-        assert!(work.work_units <= limits.work_units);
+        smooth_force_support::evaluate(&mut self.evaluator, clock, &mut self.force);
         let [a, b, c] = &mut self.nonlinear;
         self.products
             .evaluate(

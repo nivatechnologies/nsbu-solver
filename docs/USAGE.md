@@ -176,5 +176,32 @@ cargo test -p nsbu-benchmarks --test diagnostic_history -- --nocapture
 These commands work now. The [source-matched evidence](../evidence/p08/core/README.md)
 records analytic negative controls and independently evolved smooth histories.
 Sampled residuals and shrinking-interval maxima are not continuous error bounds.
-P08 reporting and window review, the numerical CLI, and qualified concentrating
+The complete P08 window review, numerical CLI, and qualified concentrating
 results remain incomplete. No reference field is assigned to an integrated state.
+
+Sampled reporting is also implemented. `SamplingWorkspace` separately preflights
+velocity/vorticity transforms and returns sampled maxima with unaligned physical
+positions. `TailPlan` measures overlapping directional Fourier tails; spectrum
+integrity inspection reports defects without repairing the input. `ErrorAccumulator`
+retains absolute errors and a declared positive relative floor. Missing samples
+remain `NoSamples`, never zero error.
+
+The benchmark's `regions` module supplies geometric masks, independently refined
+volume fractions and `RegionalErrors`. A collector exposes each next grid point
+for synchronized independent evaluations and preserves both global and regional
+errors. Failed classifications consume its finite root-work allowance. Sampling
+absence is distinct from the geometric `RegionEmpty` status. The caller must still
+establish sampling and arithmetic resolution.
+
+```sh
+cargo test -p nsbu-solver --test sampling --test tails --test spectrum_integrity --test local_errors
+cargo test -p nsbu-benchmarks --test regions --test regional_errors
+cargo test -p nsbu-benchmarks --test balance_history -- --nocapture
+```
+
+The balance study uses actual accepted smooth histories from rest, independently
+formed physical pressure and separately refined quadrature. It checks both CM and
+HO against smooth reference quantities; it is not a concentrating-window result.
+
+The [reporting evidence](../evidence/p08/reporting/README.md) records measured scope,
+independent fixtures, numerical limits and the current quality results.

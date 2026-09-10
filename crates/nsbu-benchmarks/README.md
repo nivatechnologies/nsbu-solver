@@ -33,3 +33,10 @@ There is no benchmark simulation CLI or qualified concentrating PDE window yet.
 Pointwise and sampled direct-DFT checks do not establish trajectory convergence.
 
 Part of NSBU Solver, Apache-2.0. No private Niva dependency or adapter.
+
+The `regions` module implements the reviewed core/annulus geometry, cutoff collar,
+exact-tick startup classification, and bounded refined volume quadrature. Its
+regional error collector preserves global measurements, exposes synchronized grid
+coordinates, and bounds repeated root failures. An unsampled region is not an
+empty region or a zero error. All masks and quadrature results remain floating
+measurements requiring their own refinement; no window verifier is implied.

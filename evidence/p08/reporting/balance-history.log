@@ -1,0 +1,24 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.39s
+     Running tests/balance_history.rs (target/debug/deps/balance_history-2bc1ea54d1793213)
+
+running 1 test
+method=CoxMatthews step=4096 pressure=3.66040636923984205e-9 balance=[-3.4732928375080796e-7, -1.371201050748283e-5]
+method=CoxMatthews step=2048 pressure=2.28083158271585861e-10 balance=[-2.167035331734901e-8, -8.555112582797619e-7]
+method=CoxMatthews step=1024 pressure=1.42320879229316557e-11 balance=[-1.3538179743921575e-9, -5.344659204098434e-8]
+method=CoxMatthews step=512 pressure=8.88759903253055663e-13 balance=[-8.460493416961867e-11, -3.3400731069832545e-9]
+quadrature method=CoxMatthews stride=8 balance=[-3.458611255446886e-7, -1.3654049947575686e-5]
+quadrature method=CoxMatthews stride=4 balance=[-2.1578361625307352e-8, -8.518795713285954e-7]
+quadrature method=CoxMatthews stride=2 balance=[-1.3483902883137944e-9, -5.323231633269643e-8]
+quadrature method=CoxMatthews stride=1 balance=[-8.460493416961867e-11, -3.3400731069832545e-9]
+method=HochbruckOstermann step=4096 pressure=8.92122759808579557e-10 balance=[-3.470729575405507e-7, -1.370189115768028e-5]
+method=HochbruckOstermann step=2048 pressure=5.48897983902524493e-11 balance=[-2.1653726728354528e-8, -8.54854867782251e-7]
+method=HochbruckOstermann step=1024 pressure=3.40252772555633181e-12 balance=[-1.3527596542939335e-9, -5.340480768722955e-8]
+method=HochbruckOstermann step=512 pressure=2.11766555115885546e-13 balance=[-8.453818201026309e-11, -3.337429888006227e-9]
+quadrature method=HochbruckOstermann stride=8 balance=[-3.4586105882028484e-7, -1.3654047310573958e-5]
+quadrature method=HochbruckOstermann stride=4 balance=[-2.157829484539242e-8, -8.518769343268673e-7]
+quadrature method=HochbruckOstermann stride=2 balance=[-1.3483235361544388e-9, -5.32296775546115e-8]
+quadrature method=HochbruckOstermann stride=1 balance=[-8.453818201026309e-11, -3.337429888006227e-9]
+test accepted_history_pressure_and_balance_refinements_are_recorded_separately ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 13.81s

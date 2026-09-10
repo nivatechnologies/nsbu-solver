@@ -17,7 +17,7 @@ pub enum SolverError {
     ClockCapacityExceeded,
     /// An epoch counter cannot advance without wrapping.
     EpochExhausted,
-    /// The complete declared storage exceeds the caller's cap.
+    /// Declared storage or fixed diagnostic sample capacity exceeds the caller's cap.
     ResourceLimit,
     /// The allocator refused an otherwise approved reservation.
     AllocationFailed,

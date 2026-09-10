@@ -11,4 +11,6 @@ pub enum BenchmarkError {
     ArithmeticResolution,
     /// Safeguarded scalar iteration reached its declared finite work cap.
     RootWorkExhausted,
+    /// Requested diagnostic quadrature exceeds its explicit evaluation allowance or supported size.
+    DiagnosticWorkExceeded,
 }

@@ -1,0 +1,27 @@
+# P08 sampled reporting and accepted-history balances
+
+This increment implements measured reporting; **P08 remains incomplete and no concentrating PDE window is accepted**. The remaining work is the sampling/reconstruction acceptance policy and complete window verifier, followed by P09's refinement and restart lineage. [summary.json](summary.json) identifies the exact tested source and evidence.
+
+## Measurements and controls
+
+The solver provides preflighted, allocation-free velocity/vorticity sampling on a separately chosen grid, maxima with physical positions and exact floating tie counts, overlapping directional Fourier tails, quantitative Hermitian/Nyquist/mean-imaginary defects, and bounded transactional local errors. Primary measurements do not recenter, align, remove means, or filter high modes. A phase-shifted sine has identical underestimated maxima on two sampling grids and reaches its true maximum only on a third: a sampling plateau is not a supremum certificate. Finite spectra with overflowing derivatives are refused; scratch recovers on a subsequent valid call.
+
+Exact-v2 regions use the reviewed spherical boundaries and similarity coordinates. Rounded cutoff values cannot turn collar points into interior/exterior points. Startup membership uses integer ticks, including a case where binary64 rounds a pre-boundary time onto the boundary. Volume fractions use bounded independently refined Simpson quadrature, with common positive scaling canceled before summation to retain late-time resolution. Fifteen fixture rows include independently computed clipping transitions; [region-fixtures.json](region-fixtures.json) retains the 80/120-digit comparison. These are floating geometric measurements, not certified masks or volume enclosures.
+
+The fixed-grid regional collector always retains global errors and all five spatial classes. It exposes the next unaligned sample coordinate, preserves prior observations and position on failure, and charges unsuccessful root attempts against a finite allowance. `NoSamples` is not zero error and does not imply the separately computed geometric `RegionEmpty` status. Global or collar failures cannot disappear through a core/annulus mask. Relative floors and absolute errors remain visible; the collector makes no window-acceptance decision.
+
+## Actual accepted-history balance study
+
+Both CM and HO independently evolve the smooth cyclic-sine case from rest to 1/32, using macro steps 4096, 2048, 1024 and 512 at tick exponent -20. Diagnostics use committed samples, never internal stage values or analytical replacements. All fixed history, double-grid and provider storage is declared before allocation; force calls are bounded by the 65 stored samples. Independent conservative products supply physical pressure and balance terms.
+
+Pressure has exact zero reference for this case. Its largest accepted-node L2 discrepancy refines at fourth order, reaching approximately 8.89e-13 for CM and 2.12e-13 for HO. Composite energy and enstrophy balance defects also refine at fourth order. On the same finest accepted history, independently varying Simpson stride 8, 4, 2 and 1 isolates quadrature refinement. Its defects agree with independently evaluated 80/120-digit exact-solution quadrature to within 5e-13 in energy and 2e-11 in enstrophy. The precision change in those fixtures is approximately 1.11e-80. See [balance-history.log](balance-history.log) and [balance-quadrature-fixtures.json](balance-quadrature-fixtures.json).
+
+These smooth studies do not qualify the concentrating case, the full continuous interval, or current-grid concentrating arithmetic. Sampled maxima, local errors and balance quadrature remain distinct from rigorous enclosures.
+
+## Quality and review scope
+
+All 171 tests/probes pass. The final snapshot covers 8,779/8,779 executable lines, 696/696 instrumented branches and 703/703 functions across 128 Rust source/test files. Maximum cyclomatic complexity is 21, cognitive complexity 15, function/file Halstead difficulty 74.4231, physical file length 264 and CRAP 21. Strict Clippy, clone detection and scoped review have no dead/redundant-code or `Any`/unknown-type findings. Raw LLVM region and instantiation percentages are preserved separately.
+
+The full 2,034-mutant workspace run uses byte-identical production source: 1,900 caught, 134 unviable, zero survivors and zero timeouts. Its exact outcomes, test-source hashes and executed profile are retained. After that snapshot, only the accepted-history balance test and a shared smooth-force assertion helper were added/refactored. The final mutation profile also skips the new long balance study; all four long scientific studies run in complete tests and coverage. No production mutation source is excluded, no equivalent-mutant exemption is used, and unviable mutants are separate from caught mutants. The final hosted run remains a separate pending gate.
+
+SOLID review keeps geometry, sampled-field transforms, statistics and integration separate. Regional reporting depends on narrow scalar/clock and vector-error contracts and cannot access mutable integrated state. Shared geometry traversal and smooth-force test contracts remove actual duplication. Fresh three-crate packaging, the repository guard, all 41 bootstrap tests and the original mathematical verification pass. Frozen reviewed inputs, LICENSE and dependencies remain unchanged. Published path prefixes are normalized; raw execution records remain under `work/`.

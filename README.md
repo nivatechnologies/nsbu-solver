@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. The first P08 diagnostics increment passes all local gates; hosted Rust verification is pending. P08 remains incomplete.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass all local gates; hosted verification and the complete window verifier remain pending. P08 remains incomplete.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI currently supports help/version only. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -51,7 +51,7 @@ from rest with both methods, with large tracking errors and unresolved spatial
 sampling. No qualified concentrating PDE trajectory is established. The Rust
 [benchmark library](crates/nsbu-benchmarks/README.md) now provides independent v2
 scalar/jet evaluations and a bounded sampled force provider; its final package
-verification is in progress. The [first Rust concentrating diagnostic](evidence/p06/README.md)
+verification passed locally and in hosted CI. The [first Rust concentrating diagnostic](evidence/p06/README.md)
 has also reached 1/256 from rest on N=4, with spatial/force resolution unresolved.
 
 ## Implementation path
