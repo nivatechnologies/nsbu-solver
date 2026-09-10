@@ -1,6 +1,6 @@
 {
   "package": "P07",
-  "status": "local-checks-passed-hosted-ci-pending",
+  "status": "complete",
   "accepted_pde_windows": 0,
   "methods": [
     "CoxMatthews",
@@ -25,9 +25,7 @@
     "cap_bytes_per_branch": 2097152,
     "ho_precision_change": "3.8967831331467210675326856024254447000528240027376784792740293776748728849164097e-81"
   },
-  "pending": [
-    "Hosted verification"
-  ],
+  "pending": [],
   "limitations": [
     "No accepted PDE windows",
     "Coarse stiff scalar steps exhibit order reduction",
@@ -208,5 +206,8 @@
     "Cargo.lock": "fc9192161c6f7a68821c427b510acb888843080ad999edd0d9665117fc3c5d72",
     "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
   },
-  "evidence_normalization": "Published machine checkout/home prefixes normalized; raw outputs remain under work. Reviewed inputs and scientific numbers are unchanged."
+  "evidence_normalization": "Published machine checkout/home prefixes normalized; raw outputs remain under work. Reviewed inputs and scientific numbers are unchanged.",
+  "implementation_commit": "fb8a7f4175f51ecffe5b75099431383128ecec79",
+  "hosted_ci": "hosted-ci.json",
+  "hosted_python_ci": "hosted-python-ci.json"
 }

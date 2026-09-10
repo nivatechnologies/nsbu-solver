@@ -20,3 +20,6 @@ The full test/coverage run includes all scientific studies. Three named long tra
 The quality scope includes owned Rust source and tests. Physical file length includes comments and blank lines. Dead/redundant-code findings describe strict linting, clone detection and review, not a formal proof of semantic minimality. Executable-line and instrumented-branch coverage are the coverage gates; raw LLVM region and instantiation statistics are retained without relabelling them as 100%.
 
 Published checkout/home prefixes are normalized. Raw execution records remain under `work/`. Reviewed design files, exact-v2 input bytes, historical results and their hashes are unchanged. The standalone package has no private Niva dependency.
+
+The source-matched [hosted Python/repository run](hosted-python-ci.json) passed.
+Hosted Rust verification is pending. P08 remains incomplete.

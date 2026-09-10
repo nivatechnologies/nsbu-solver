@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P06 are verified locally and in hosted CI. P07's HO method and the first P08 diagnostics increment pass all local gates; hosted verification is pending. P08 remains incomplete.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. The first P08 diagnostics increment passes all local gates; hosted Rust verification is pending. P08 remains incomplete.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI currently supports help/version only. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 

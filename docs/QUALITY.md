@@ -148,8 +148,8 @@ unresolved.
 P07 adds the independently constructed HO method and expanded scalar/PDE
 comparisons. [Its source-matched evidence](../evidence/p07/README.md) records all
 120 tests/probes, complete line/branch coverage and 1,537 accounted-for mutants
-with zero survivors or timeouts. All local gates pass; hosted verification is
-pending. The concentrating diagnostic still does not qualify a PDE window.
+with zero survivors or timeouts. All local and source-matched hosted gates pass,
+completing P07. The concentrating diagnostic still does not qualify a PDE window.
 
 
 The first [P08 diagnostics increment](../evidence/p08/core/README.md) passes all
@@ -169,5 +169,5 @@ smooth test runner removes duplicated resource/transaction setup. Allocation
 instrumentation verifies the new conservative workspace's reservation and zero
 allocation during evaluation. Three long scientific studies run in complete
 validation/coverage and are skipped only during focused mutation reruns; no
-production mutation source is excluded. Hosted checks and the remaining P08
+production mutation source is excluded. Hosted Rust checks and the remaining P08
 reporting/window work are pending, so this is not package completion.

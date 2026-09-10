@@ -1,4 +1,4 @@
-# P07 — independent HO method (hosted verification pending)
+# P07 — independent HO method (complete)
 
 The implementation adds the reviewed five-stage Hochbruck–Ostermann
 method with independent coefficient construction and a separate stage kernel.
@@ -76,12 +76,13 @@ cognitive 14, Halstead difficulty 75.896, physical source lines 264 and CRAP 19.
 Duplication, reviewed dead code and Any/unknown types are zero.
 
 The independent HO concentrating fixture passed its precision comparison and
-Rust full-band comparison. All local quality checks pass. Hosted verification remains pending; P07 is not
-yet complete.
+Rust full-band comparison. All local quality checks and the source-matched
+[hosted Rust](hosted-ci.json) and [Python/repository](hosted-python-ci.json) checks
+pass. P07 is complete; concentrating PDE qualification remains unresolved.
 
 ## Reports and reproduction
 
-The [summary](summary.json) records the source scope and pending gates. The
+The [summary](summary.json) records the verified source scope and completed gates. The
 [fixture recipes](recipes.md), [coefficient report](coefficient-fixture.json),
 [scalar fixture report](scalar-fixtures.json),
 [scalar arithmetic comparisons](scalar-arithmetic-comparison.json) and

@@ -1,7 +1,7 @@
 {
   "package": "P08",
   "increment": "independent-diagnostics-core",
-  "status": "partial-package; diagnostics-core local checks passed, hosted pending",
+  "status": "partial-package; diagnostics-core local and hosted Python checks passed, hosted Rust pending",
   "accepted_pde_windows": 0,
   "source_files": 110,
   "source_sha256": {
@@ -212,5 +212,7 @@
     "guard_tests": 41,
     "mathematical_verification": "passed; original scientific results match",
     "frozen_inputs": "unchanged"
-  }
+  },
+  "implementation_commit": "dc06c85145604cfecc320630e72e2d0d9d022238",
+  "hosted_python_ci": "hosted-python-ci.json"
 }

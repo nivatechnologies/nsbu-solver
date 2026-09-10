@@ -154,7 +154,7 @@ The concentrating test compares both independently evolved methods with their
 80/120-digit direct-DFT fixtures and with each other. It can take several minutes
 in a debug/instrumented build. These remain coarse diagnostics with no accepted
 PDE window. [P07 evidence](../evidence/p07/README.md) records order reduction,
-arithmetic comparisons and the pending hosted verification. The numerical
+arithmetic comparisons and the passed hosted verification. The numerical
 CLI and window verifier remain planned.
 
 
