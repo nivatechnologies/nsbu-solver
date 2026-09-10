@@ -1,4 +1,5 @@
 //! Dedicated process: allocation counters exclude test-harness and concurrent-test activity.
+mod state_support;
 use nsbu_solver::diagnostics::conservative::ConservativeWorkspace;
 use nsbu_solver::diagnostics::sampling::SamplingWorkspace;
 use nsbu_solver::domain::{Domain, Layout};
@@ -14,6 +15,7 @@ fn main() {
     rotational();
     conservative();
     sampling();
+    lineage();
 }
 
 fn rotational() {
@@ -86,4 +88,32 @@ fn planned<T>(reservation: usize, allocate: impl FnOnce() -> T) -> T {
     assert!(stats.bytes_allocated <= reservation);
     assert_eq!(stats.reallocations, 0);
     value
+}
+
+fn lineage() {
+    use nsbu_solver::domain::{Epoch, SpectralState, TickClock};
+    use nsbu_solver::lineage::{Digest, Origin, PhysicalImage, Profile, Registry};
+    let plan = state_support::plan(Epoch(0));
+    let clock = TickClock::from_rest(-12, 100).unwrap();
+    let state = SpectralState::from_rest(plan, clock, Epoch(0)).unwrap();
+    let bytes = PhysicalImage::reservation(plan).unwrap();
+    let refusal = Region::new(GLOBAL);
+    assert!(PhysicalImage::capture(&state, bytes - 1).is_err());
+    no_allocations(refusal.change());
+    let image = planned(bytes, || PhysicalImage::capture(&state, bytes).unwrap());
+    let region = Region::new(GLOBAL);
+    let restored = image.into_state();
+    assert_eq!(restored.clock(), clock);
+    let mut slots = [None; 8];
+    let identity = Digest::new([1; 32]).unwrap();
+    let mut registry = Registry::new(identity, &mut slots, 8).unwrap();
+    let profile = Profile {
+        problem: identity,
+        execution: identity,
+        force: identity,
+    };
+    let id = registry.append(profile, clock, Origin::FromRest).unwrap();
+    assert!(registry.get(id).unwrap().is_direct());
+    assert_eq!(registry.invalidate_force(identity, 1), Ok(1));
+    no_allocations(region.change());
 }

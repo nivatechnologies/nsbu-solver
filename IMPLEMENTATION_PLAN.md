@@ -179,3 +179,18 @@ current-grid/same-problem comparisons and actual accepted-state evidence. P09 mu
 provide complete refinement/restart lineage and checkpoint history before P10 can
 qualify any concentrating endpoint. The separate checkpoint/provenance draft does
 not satisfy those package exits yet.
+
+
+## P09 foundation progress
+
+The [lineage and physical-image foundation](evidence/p09/foundations/README.md)
+passes all local gates: 202 tests/probes, complete line/branch coverage, and 2,240
+accounted-for mutants with zero survivors or timeouts. Its registry preserves
+transfer/local-test ancestry and replays transitive force invalidation. Physical
+images reproduce the next accepted/rejected CM and HO attempts with fresh scratch.
+
+These components do not complete P09. Complete controller, diagnostic, error and
+reconstruction history, coherent checkpoint assembly, external provenance and
+same-problem refinement/transfer studies remain. The recorded-step and balance
+history work is a separate uncompleted increment; hosted foundation checks are
+also pending. No accepted concentrating window is implied.

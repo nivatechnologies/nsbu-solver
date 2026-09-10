@@ -210,3 +210,14 @@ missing-evidence negative controls pass. Four long scientific studies run in ful
 coverage and are skipped only during mutation reruns; no production exclusion or
 equivalent-mutant exemption is used. Raw reports preserve all other LLVM metrics.
 Hosted verification remains pending for this increment.
+
+
+The [P09 lineage/image foundation](../evidence/p09/foundations/README.md) passes
+202 tests/probes across 150 Rust files. All 10,275 executable lines, 850 instrumented
+branches and 836 functions are covered. The complete 2,240-mutant run accounts for
+2,079 caught and 161 unviable, with zero survivors/timeouts. Maxima remain CC21,
+cognitive15, Halstead74.4231, physical-file336 and CRAP21. Strict lint, clone detection
+and scoped public-API/SOLID review remain clean. Dedicated allocation instrumentation
+covers image capture/refusal, restoration and registry operations. Identity, ancestry
+and physical payload ownership remain separate; no component can confer PDE
+acceptance. Hosted checks and the full P09 package remain incomplete.

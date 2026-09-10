@@ -1,0 +1,4 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Checking nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s

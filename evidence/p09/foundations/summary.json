@@ -1,9 +1,9 @@
 {
   "package": "P08",
-  "increment": "bounded-window-measurement-review",
-  "status": "partial-package; local gates passed, hosted pending",
+  "increment": "bounded-lineage-foundation-review",
+  "status": "foundations-only; local gates passed, hosted pending",
   "accepted_pde_windows": 0,
-  "source_files": 142,
+  "source_files": 150,
   "source_sha256": {
     "crates/nsbu-benchmarks/src/error.rs": "9cd63ed56079fcf20e90d3139aeff3ebe45525f9b2acf81ef9bcea522a97137a",
     "crates/nsbu-benchmarks/src/fields.rs": "6a84410e9853ff1553c11078f6e071b2da64e8b9ed1c073da9ddbdbfbe022640",
@@ -80,7 +80,11 @@
     "crates/nsbu-solver/src/integrators/trajectory.rs": "98fcd1f91cbf58a896329e875771ff424f516bf07e99902439c34afa616476e0",
     "crates/nsbu-solver/src/integrators/transaction.rs": "dcd19db830ae1e1bd4068858b99cc524a2cb018ba6a34a3afe0cc2cc81a6d2de",
     "crates/nsbu-solver/src/integrators/transaction_tests.rs": "cd9a28829ca9e9bde01dc5e8cd536816747ede8b245caa57b90cb7e0517eb8fe",
-    "crates/nsbu-solver/src/lib.rs": "966bd66af957ad7fa714f2bfb6011f4d3b030d61104657be824299c8ee986bcc",
+    "crates/nsbu-solver/src/lib.rs": "ac3a89e29118df5981ddf737652bc61299b27286f05904083718ff32aa59416b",
+    "crates/nsbu-solver/src/lineage/image.rs": "409b0d69a27586be6acede92d2538e619b18b2efc555fa1cc59c29224ce891d4",
+    "crates/nsbu-solver/src/lineage/mod.rs": "911757960cc1a240478579e80098f9bf80951b6eacef4f83f4b4c71c37271c19",
+    "crates/nsbu-solver/src/lineage/record.rs": "70987f90f261e0cc4fa04c2ac54d9ac80f67d269db227aaaf427dd39249b2c09",
+    "crates/nsbu-solver/src/lineage/registry.rs": "80f41e2355686c4822bac0dd3ba49cdbea53559a321c8eaec45d059010af2743",
     "crates/nsbu-solver/src/spectral/fft.rs": "bab52ea402d2da286b37816dec951993cbdc34e28b982a9e9305b489aa700cba",
     "crates/nsbu-solver/src/spectral/hermitian.rs": "9e79b935c5ab4c7e83c741776835a228f4d4bc44594da091a757604a87dcf239",
     "crates/nsbu-solver/src/spectral/mod.rs": "0544831bec6eb1067666d2e1973a7cc5a08e02d9d707d39e8bcfa352f22cd0df",
@@ -99,7 +103,7 @@
     "crates/nsbu-solver/src/verification/times.rs": "30d38cda7bc8467473460aef500b65eb3bfe7beebfd5ea362eb13726019a71df",
     "crates/nsbu-solver/tests/advection.rs": "30f92bacfbcba681f4d76396a63a6d758083ab620be3c27d3fd99776295944d7",
     "crates/nsbu-solver/tests/alias_control.rs": "9ff50aa1c60f3bb034756b037d8f4b69c358cbeb17dfcc19fc9e7ea5f0554639",
-    "crates/nsbu-solver/tests/allocation.rs": "fb05ab69eed7e7eb52dbfb2d4f232b7007ef71a6aef6267aa3ba8f41b07ca3ee",
+    "crates/nsbu-solver/tests/allocation.rs": "d7d89c7920dbfa0532b7f364c02bc7941c40b53bd8ba4672f3f8e80dea4145dc",
     "crates/nsbu-solver/tests/attempt_admission.rs": "993d378772b1f00e0d30b7f1c7d7a7713e5f3a869b590a690669b55ce4f42910",
     "crates/nsbu-solver/tests/attempt_allocation.rs": "018312f55ab1a8d1e61c1a297369e778a4a94de604c6436978b373bb5adb0144",
     "crates/nsbu-solver/tests/band_comparison.rs": "14b3cffb441bab7dbee54cfb8b901c8a90a253b0fdc1d411541c133a85a55d61",
@@ -125,9 +129,11 @@
     "crates/nsbu-solver/tests/interval.rs": "ccef14080026dff28cbb7b9c51a5c63549fac34a98b313f3b444cee8aed2ea95",
     "crates/nsbu-solver/tests/kernel_refusals.rs": "fefb17f2bc641db096b5ceda6cd810b3e39a2886a337d8bd3282fe9282633930",
     "crates/nsbu-solver/tests/layout.rs": "19810be8ae44bd3d55eab5d7534bea344ea45b90cf7239fed00e6874859ce42e",
+    "crates/nsbu-solver/tests/lineage_registry.rs": "bf39501946be62cc43297b61f9bca14f1aac2f1f2418f0103b6879f5eac7b8ff",
     "crates/nsbu-solver/tests/local_errors.rs": "ee40e7758e4e016c4a424a5a558d1b45dc313a048ab24164b8b8e5cb61d1f15d",
     "crates/nsbu-solver/tests/measurement_review.rs": "75c9fd88c44ec5283cf22aa9fcf9a7c4b81f0a77f201c6ce72de88fa0a0986ad",
     "crates/nsbu-solver/tests/modal.rs": "fdf9ca639203ec71c3c17017807e19d56ae7a3407402975e84da0ed06a704273",
+    "crates/nsbu-solver/tests/physical_image.rs": "9721eff0efc9f47b3c7e9a1c03c74c989471a723c455d95b7cc0b5a66ea7e535",
     "crates/nsbu-solver/tests/quadrature.rs": "3c2fb3d4afdbbca0afa26d1364540e836bc4d74eba6460d4734f5d6dd64ada6c",
     "crates/nsbu-solver/tests/reconstruction_policy.rs": "49cc49dea92683e44a395728b918992ca83caa29e6dfc302ed81dd3e605d5409",
     "crates/nsbu-solver/tests/reconstruction_samples.rs": "ce83d0f35d4531ee1ba1f8bb531551747495913abe52f78e2c3153eb75860eae",
@@ -136,13 +142,15 @@
     "crates/nsbu-solver/tests/resources.rs": "ff0e092b6afbf346bdf6619341e26dd8e5eea1703ae79252f402c1bce944fb97",
     "crates/nsbu-solver/tests/rotational.rs": "75fddd2069267f72bbbea97664c9cb9f972b6a79bfb8ad613f232f260c46a128",
     "crates/nsbu-solver/tests/sampling.rs": "dcad229b0d5c3c06fd8701dd4ad015528089a4e9a0c54f8e9c2b4c25a0583aa6",
+    "crates/nsbu-solver/tests/source_contract/mod.rs": "7f4fcff7a6d8095a69bf702ce582c5e920f4beab70cf291a85a369e156a95865",
     "crates/nsbu-solver/tests/spectrum.rs": "8c8de05f18d77aa5ccebabb6003103332cdeab1c501257d39e7c6d4f5da304ac",
     "crates/nsbu-solver/tests/spectrum_integrity.rs": "adeb690285c5e623d6d4b6a75c6b8d2461858c6a546e58cba183a7f010feb7e9",
-    "crates/nsbu-solver/tests/state.rs": "5894650adfa9b3a7de62a34792047bfe8155a1251b2b239df9a141796d948e5d",
+    "crates/nsbu-solver/tests/state.rs": "8a474bd590b1c6f5e661f8becfec53445732986d50e09a96fa00c7ff57410519",
+    "crates/nsbu-solver/tests/state_support/mod.rs": "6143f2fb018335b5bc3175a14f0bae8fa10c78e9c7861cc66246a376e8041327",
     "crates/nsbu-solver/tests/support/mod.rs": "a7456fefaa073e8bbd187eb3e66e6557cbe3a5ef0114e6ffb730afec842e76ae",
     "crates/nsbu-solver/tests/tails.rs": "bb7ddb79b18d9bee744b6959a20f0b5c139752555ed887b3f239ad55ea78ba34",
     "crates/nsbu-solver/tests/tested_times.rs": "59b94f1d24f17e76cab0f6c0ad4585784d2ad757d519b9eaa5744c0be2459b4b",
-    "crates/nsbu-solver/tests/trajectory.rs": "55ae0d122e0a9fffb3e764dcc6186c274f5918e219fb8988293c88ecfa1a43fc",
+    "crates/nsbu-solver/tests/trajectory.rs": "adbcc6cd04ffc7ac450a61e179497a3f21694fa507d76282060a3cfe7f508082",
     "crates/nsbu-solver/tests/transaction.rs": "0a0d0641864f6bb556090f79fdd5627ba42bd9b7b05a9163e5ecd84ad632f0ca",
     "crates/nsbu-solver/tests/transaction_support/mod.rs": "676e2a6d437d627ba58f9b57e17675e620aa397950cde66bd3e9fd21d71ecfb7",
     "crates/nsbu-solver/tests/transfer.rs": "0b41915350b5e574d959c8b714360fa90c020238b27be23c161e7fcef1bb5007",
@@ -150,24 +158,24 @@
   },
   "coverage": {
     "branches": {
-      "count": 810,
-      "covered": 810,
+      "count": 850,
+      "covered": 850,
       "notcovered": 0,
       "percent": 100
     },
     "functions": {
-      "count": 792,
-      "covered": 792,
+      "count": 836,
+      "covered": 836,
       "percent": 100
     },
     "instantiations": {
-      "count": 1348,
-      "covered": 1087,
-      "percent": 80.6379821958457
+      "count": 1421,
+      "covered": 1138,
+      "percent": 80.0844475721323
     },
     "lines": {
-      "count": 9733,
-      "covered": 9733,
+      "count": 10275,
+      "covered": 10275,
       "percent": 100
     },
     "mcdc": {
@@ -177,10 +185,10 @@
       "percent": 0
     },
     "regions": {
-      "count": 18617,
-      "covered": 18217,
-      "notcovered": 400,
-      "percent": 97.85142611591556
+      "count": 19636,
+      "covered": 19230,
+      "notcovered": 406,
+      "percent": 97.93236911794662
     }
   },
   "metrics": {
@@ -194,16 +202,16 @@
     "reviewed_redundant_code": 0,
     "any_or_unknown_types": 0
   },
-  "tests": 195,
+  "tests": 202,
   "test_accounting": {
-    "harness_reported": 192,
+    "harness_reported": 199,
     "separate_allocation_probe_executables": 3
   },
   "mutations": {
-    "total_mutants": 2175,
-    "caught": 2023,
+    "total_mutants": 2240,
+    "caught": 2079,
     "missed": 0,
-    "unviable": 152,
+    "unviable": 161,
     "timeout": 0
   },
   "mutation_scope": "Complete source/test snapshot matches main byte-for-byte. Four long scientific studies run in full coverage and are skipped only during mutation reruns. No production exclusions or equivalent-mutant exemptions.",
@@ -240,23 +248,12 @@
     "frozen_inputs": "unchanged"
   },
   "limitations": [
-    "ReadyForLineageReview is only numerical measurement readiness, never PDE acceptance or a rigorous enclosure",
-    "Complete benchmark observable inventory, frozen policy identity, actual-state and same-problem/current-grid provenance require experiment integration",
-    "Supporting floor-analysis identities must be verified externally; zero observed differences do not establish an error floor",
-    "Off-stage probes identify tested points and nested histories, not slab-wide coverage or rigorous maxima",
-    "P09 complete checkpoint/restart lineage and P10 concentrating qualification remain",
-    "No numerical CLI or accepted concentrating PDE window"
+    "P09 foundations only; complete checkpoint controller, balance/error/reconstruction history and experiment integration remain",
+    "Registry records declare ancestry; external identities, report contents and actual-state provenance still require verification",
+    "PhysicalImage is an in-memory payload copy, not a complete checkpoint or file reader",
+    "Transferred error-report identities must resolve to preserved reports; a digest alone is not complete history",
+    "No source/reference/arithmetic/transfer qualification or accepted concentrating PDE window is established by these components",
+    "P08 full experiment/provenance integration, P10 convergence qualification and the numerical CLI remain"
   ],
-  "evidence_normalization": "Only checkout/home prefixes and trailing blank log lines normalized; raw work retained. Reviewed inputs unchanged.",
-  "publication": {
-    "branch": "main",
-    "source_commit": "c090b4db711f4650fe8ad16be3d5f1fa8ce05247",
-    "push": "verified"
-  },
-  "hosted_ci": {
-    "python": "hosted-python-ci.json",
-    "rust": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34450207023",
-    "status": "Python passed; Rust pending",
-    "source_commit": "c090b4db711f4650fe8ad16be3d5f1fa8ce05247"
-  }
+  "evidence_normalization": "Only checkout/home prefixes and trailing blank log lines normalized; raw work retained. Reviewed inputs unchanged."
 }

@@ -1,17 +1,11 @@
 //! Trajectories own disjoint zeroed buffers after an approved storage preflight.
-use nsbu_solver::domain::{Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock};
+mod state_support;
+use nsbu_solver::domain::{Epoch, SpectralState, TickClock};
 use nsbu_solver::{Complex64, SolverError};
 
 #[test]
 fn states_own_separate_buffers_and_preserve_their_exact_initial_metadata() {
-    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
-    let extra = ExtraStorage {
-        fft: 0,
-        force: 0,
-        diagnostics: 0,
-        overhead: 4096,
-    };
-    let plan = ResourcePlan::new(domain, extra, 1024 * 1024, Epoch(7)).unwrap();
+    let plan = state_support::plan(Epoch(7));
     let clock = TickClock::from_rest(-20, 8192).unwrap();
     let first = SpectralState::from_rest(plan, clock, Epoch(2)).unwrap();
     let second = SpectralState::from_rest(plan, clock, Epoch(3)).unwrap();

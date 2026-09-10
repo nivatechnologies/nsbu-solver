@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Python and Rust through P07 and P08 reporting verified locally and hosted; bounded window measurement review local gates passed, hosted pending",
+    "status": "Python and Rust through P07 and P08 reporting verified locally and hosted; P08 window review and P09 lineage/image foundation local gates passed, hosted pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p08/window/summary.json"
+    "rust_evidence": "evidence/p09/foundations/summary.json"
   },
   "packages": {
     "B00": {
@@ -97,6 +97,16 @@
         "Complete window verifier with P09 refinement/restart lineage"
       ],
       "reporting_evidence": "evidence/p08/reporting/summary.json"
+    },
+    "P09": {
+      "status": "in-progress; lineage and physical-image foundation local gates passed, hosted pending",
+      "evidence": "evidence/p09/foundations/summary.json",
+      "remaining": [
+        "Complete controller, diagnostic/error/reconstruction history and checkpoint assembly",
+        "External identities and accepted-state provenance validation",
+        "Separate force/reference/arithmetic/transfer refinement studies",
+        "Restart-transfer comparison against direct fine evolution"
+      ]
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -107,5 +117,8 @@
   "rust_concentrating_pde_integration_performed": true,
   "independent_diagnostics_scope": "Full-band and conservative pressure/residual diagnostics, Hermite reconstruction, sampled maxima and directional/integrity/local/regional reporting; smooth accepted-history residual, pressure and balance refinements. Bounded window measurement review exists; full experiment/provenance integration remains incomplete.",
   "window_verifier_exists": false,
-  "window_measurement_review_exists": true
+  "window_measurement_review_exists": true,
+  "lineage_registry_exists": true,
+  "physical_state_images_exist": true,
+  "complete_checkpoints_exist": false
 }

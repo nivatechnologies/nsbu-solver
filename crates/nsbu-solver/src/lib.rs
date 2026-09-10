@@ -21,3 +21,5 @@ pub mod integrators;
 pub mod diagnostics;
 
 pub mod verification;
+
+pub mod lineage;

@@ -69,3 +69,6 @@ CRAP21 satisfy the requested limits. Clone detection and strict lint/review find
 zero redundant/dead-code findings and no dynamic type escapes. Fresh packaging,
 all 41 bootstrap tests, repository checks and the original mathematical checks
 pass. Frozen inputs remain byte-for-byte unchanged.
+
+The source-matched [hosted Python/repository run](hosted-python-ci.json) passed.
+Hosted Rust verification remains pending.

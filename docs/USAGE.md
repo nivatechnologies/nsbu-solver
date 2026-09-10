@@ -221,3 +221,17 @@ A numerical pass is `ReadyForLineageReview`; it does not certify input provenanc
 current-grid accuracy, an accepted PDE window or an enclosure. The complete
 experiment verifier and numerical CLI remain under implementation. See
 [window measurement evidence](../evidence/p08/window/README.md).
+
+
+## Lineage and physical-image development checks
+
+```bash
+cargo test -p nsbu-solver --test lineage_registry --test physical_image
+cargo test -p nsbu-solver --test allocation
+```
+
+The public `lineage` module provides bounded ancestry declarations, transitive
+force invalidation and an in-memory `PhysicalImage` of a live state. Image tests
+reproduce the next accepted/rejected CM and HO attempts with fresh scratch. An
+image is not a complete checkpoint; no checkpoint file read/write or numerical
+CLI command is advertised yet. See [foundation evidence](../evidence/p09/foundations/README.md).
