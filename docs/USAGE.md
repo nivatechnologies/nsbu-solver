@@ -205,3 +205,19 @@ HO against smooth reference quantities; it is not a concentrating-window result.
 
 The [reporting evidence](../evidence/p08/reporting/README.md) records measured scope,
 independent fixtures, numerical limits and the current quality results.
+
+
+## Bounded measurement review development checks
+
+The library's `verification` module reviews explicitly supplied measurements:
+
+```bash
+cargo test -p nsbu-solver --test refinement_rules --test tested_times --test reconstruction_policy --test reconstruction_samples --test verification_budget --test measurement_review
+```
+
+These tests exercise separate error-channel rules, conservative budget allocation,
+three nested exact time sets, off-stage probes and bounded streaming observations.
+A numerical pass is `ReadyForLineageReview`; it does not certify input provenance,
+current-grid accuracy, an accepted PDE window or an enclosure. The complete
+experiment verifier and numerical CLI remain under implementation. See
+[window measurement evidence](../evidence/p08/window/README.md).

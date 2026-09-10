@@ -169,8 +169,8 @@ smooth test runner removes duplicated resource/transaction setup. Allocation
 instrumentation verifies the new conservative workspace's reservation and zero
 allocation during evaluation. Three long scientific studies run in complete
 validation/coverage and are skipped only during focused mutation reruns; no
-production mutation source is excluded. Hosted Rust checks and the remaining P08
-reporting/window work are pending, so this is not package completion.
+production mutation source is excluded. Source-matched hosted Rust and Python
+checks passed; this diagnostics increment does not complete P08.
 
 The later [P08 reporting and balance increment](../evidence/p08/reporting/README.md)
 passes its local gates: 171 tests/probes, 8,779 executable lines, 696 instrumented
@@ -189,6 +189,24 @@ The mutation run's production source matches the final snapshot byte-for-byte.
 Its test-source hashes and executed profile are retained; the additive balance
 study and shared history-test helper followed that snapshot. All four long
 scientific studies run in complete coverage; the final mutation profile skips
-only those long reruns and excludes no production source. Hosted verification
-must separately check the final snapshot. P08's complete window verifier is still
+only those long reruns and excludes no production source. Source-matched hosted
+Rust and Python verification passed the final snapshot. P08's complete window verifier is still
 pending, and no concentrating PDE window is qualified.
+
+
+The [bounded window measurement increment](../evidence/p08/window/README.md)
+passes 195 tests/probes with 9,733 executable lines, 810 instrumented branches and
+792 functions fully covered across 142 Rust files. All 2,175 mutations are
+accounted for: 2,023 caught, 152 unviable, zero survivors or timeouts. Maximum CC21,
+cognitive15, Halstead74.4231, physical-file336 and CRAP21 satisfy the requested
+limits. Clone detection, strict Clippy and scoped public-API/SOLID review find no
+dead/redundant code or dynamic type escapes. CI now checks per-function CC and
+cognitive totals including nested closures, matching the local measurements.
+
+Exact time geometry, evidence rules, budget accounting and streaming review retain
+separate responsibilities. The numerical reviewer borrows immutable policies and
+cannot modify integrated state or issue a PDE acceptance label. Full-field and
+missing-evidence negative controls pass. Four long scientific studies run in full
+coverage and are skipped only during mutation reruns; no production exclusion or
+equivalent-mutant exemption is used. Raw reports preserve all other LLVM metrics.
+Hosted verification remains pending for this increment.

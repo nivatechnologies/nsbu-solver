@@ -19,3 +19,5 @@ mod storage;
 pub mod integrators;
 
 pub mod diagnostics;
+
+pub mod verification;

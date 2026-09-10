@@ -14,7 +14,7 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. All local reporting and balance gates pass; hosted verification and the complete sampling/window acceptance policy remain pending. No numerical CLI, admitted source instance, accepted PDE window, or formal proof build exists at this point. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. Reporting and balance gates pass locally and hosted. The bounded sampling/window measurement policy passes all local gates; its hosted verification and full experiment/provenance integration remain pending. No numerical CLI, admitted source instance, accepted PDE window, or formal proof build exists at this point. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
 ## Planned public organization
 
@@ -164,13 +164,18 @@ Source extraction, a formal proof build, a source-instance compiler, an averaged
 
 ## P08 implementation progress
 
-The [first diagnostics increment](evidence/p08/core/README.md) passes 145 tests/probes,
-complete coverage of 7,545 executable lines and 594 instrumented branches, and
-1,802 accounted-for mutations with zero survivors or timeouts. Source hashes,
-raw metrics, negative controls, packaging and accepted-history evidence are linked
-from its summary. Hosted Rust verification is pending. **P08 is not complete.**
+The [core diagnostics](evidence/p08/core/README.md) and
+[reporting/balance increment](evidence/p08/reporting/README.md) pass local and
+source-matched hosted gates. The [window measurement review](evidence/p08/window/README.md)
+passes 195 tests/probes, complete coverage of 9,733 executable lines and 810
+instrumented branches, and 2,175 accounted-for mutations with zero survivors or
+timeouts. It requires separate channel evidence, exact sampling refinements,
+explicit off-stage reconstruction probes and a bounded observation schedule.
+Hosted verification of this increment remains pending. **P08 is not complete.**
 
-Remaining P08 work includes local/directional and sampled-maximum reporting,
-accepted-history pressure and balance comparisons, sampling/reconstruction policy,
-and window review that refuses missing channels. P09 must then provide complete
-refinement/restart lineage before P10 can qualify a concentrating endpoint.
+A numerical pass returns `ReadyForLineageReview`, never an accepted PDE window.
+Remaining integration must bind the complete frozen benchmark observable inventory,
+current-grid/same-problem comparisons and actual accepted-state evidence. P09 must
+provide complete refinement/restart lineage and checkpoint history before P10 can
+qualify any concentrating endpoint. The separate checkpoint/provenance draft does
+not satisfy those package exits yet.

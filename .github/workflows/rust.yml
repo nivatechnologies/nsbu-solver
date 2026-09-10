@@ -71,8 +71,8 @@ jobs:
       - name: Per-function metrics and complete file scope
         run: |
           rust-code-analysis-cli -p crates -m -O json > work/rust-metrics.json
-          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cyclomatic.max] | length > 0 and max < 22' work/rust-metrics.json
-          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cognitive.max] | max < 22' work/rust-metrics.json
+          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cyclomatic.sum] | length > 0 and max < 22' work/rust-metrics.json
+          jq -se '[.. | objects | select(.kind? == "function") | .metrics.cognitive.sum] | max < 22' work/rust-metrics.json
           jq -se '[.. | objects | select(has("metrics")) | .metrics.halstead.difficulty | select(. != null)] | max < 80' work/rust-metrics.json
           git ls-files 'crates/*.rs' > work/rust-source-files.txt
           test -s work/rust-source-files.txt

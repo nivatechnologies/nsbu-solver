@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Python and Rust through P07 verified locally and hosted; P08 reporting and accepted-history balance local gates passed, hosted pending",
+    "status": "Python and Rust through P07 and P08 reporting verified locally and hosted; bounded window measurement review local gates passed, hosted pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p08/reporting/summary.json"
+    "rust_evidence": "evidence/p08/window/summary.json"
   },
   "packages": {
     "B00": {
@@ -88,14 +88,15 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34427151855"
     },
     "P08": {
-      "status": "in-progress; reporting and accepted-history balance local gates passed, hosted pending",
-      "evidence": "evidence/p08/reporting/summary.json",
+      "status": "in-progress; bounded window measurement review local gates passed, hosted pending",
+      "evidence": "evidence/p08/window/summary.json",
       "core_evidence": "evidence/p08/core/summary.json",
       "remaining": [
-        "Sampling/reconstruction acceptance policy",
-        "Complete window verifier"
+        "Bind complete frozen observable inventory and policy identity",
+        "Integrate actual accepted-state, same-problem and current-grid provenance",
+        "Complete window verifier with P09 refinement/restart lineage"
       ],
-      "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34436876920"
+      "reporting_evidence": "evidence/p08/reporting/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -104,6 +105,7 @@
   "rust_time_integration_performed": true,
   "rust_pde_integration_scope": "Independent CM/HO smooth studies and N=4 exact-v2 trajectories from rest to t=1/256; concentrating spatial/force resolution unresolved",
   "rust_concentrating_pde_integration_performed": true,
-  "independent_diagnostics_scope": "Full-band and conservative pressure/residual diagnostics, Hermite reconstruction, sampled maxima and directional/integrity/local/regional reporting; smooth accepted-history residual, pressure and balance refinements. P08 window policy/verifier remain incomplete.",
-  "window_verifier_exists": false
+  "independent_diagnostics_scope": "Full-band and conservative pressure/residual diagnostics, Hermite reconstruction, sampled maxima and directional/integrity/local/regional reporting; smooth accepted-history residual, pressure and balance refinements. Bounded window measurement review exists; full experiment/provenance integration remains incomplete.",
+  "window_verifier_exists": false,
+  "window_measurement_review_exists": true
 }
