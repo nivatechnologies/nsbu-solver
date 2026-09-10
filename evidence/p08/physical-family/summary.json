@@ -1,0 +1,173 @@
+{
+  "package": "P08",
+  "increment": "actual-smooth-physical-refinement-family",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T20:11:55.988282+00:00",
+  "base_commit": "ce37b9914a2a22a201ddf515c836be2fa88923ac",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 250,
+  "rust_harness_tests": 340,
+  "rust_allocation_executables": 5,
+  "rust_tests_and_probes": 345,
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06"
+  },
+  "rust_coverage": {
+    "branches": {
+      "count": 1670,
+      "covered": 1515,
+      "notcovered": 155,
+      "percent": 90.71856287425149
+    },
+    "functions": {
+      "count": 1787,
+      "covered": 1777,
+      "percent": 99.44040290990486
+    },
+    "instantiations": {
+      "count": 3284,
+      "covered": 2455,
+      "percent": 74.75639464068209
+    },
+    "lines": {
+      "count": 21657,
+      "covered": 21426,
+      "percent": 98.93337027289098
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 40606,
+      "covered": 39262,
+      "notcovered": 1344,
+      "percent": 96.69014431364825
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 16.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 426
+  },
+  "python_evidence": {
+    "source_files_unchanged": 72,
+    "prior_complete_profile": "../derivatives/summary.json",
+    "prior_tests": 188,
+    "bootstrap_tests_rerun": 41
+  },
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 44,
+      "duplicatedLines": 386,
+      "duplicatedTokens": 3506,
+      "lines": 30750,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.2552845528455285,
+      "percentageTokens": 1.4977977332245371,
+      "sources": 249,
+      "tokens": 234077
+    },
+    "finding_exit_codes": {
+      "duplicates": 1,
+      "dead-code": 101,
+      "type-escapes": 1
+    },
+    "mutations": "not rerun; informational"
+  },
+  "numerical_measurements": {
+    "quantities": [
+      "Vector",
+      "Gradient",
+      "Hessian",
+      "Vorticity"
+    ],
+    "pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "sample_dimensions": [
+      24,
+      24,
+      24
+    ],
+    "ordered_components": [
+      3,
+      9,
+      27,
+      3
+    ],
+    "scalar_transforms_per_complete_attempt": 450,
+    "public_example": {
+      "report": "public-example.log.gz",
+      "joint_storage_bytes": 25407872,
+      "cap_bytes": 134217728,
+      "successful_attempts": 3,
+      "physical_scalar_transforms": 1350,
+      "physical_weighted_visits": 91111872
+    },
+    "endpoint_tick": 128,
+    "clock_quantum_exponent": -16,
+    "endpoint_temporal_rms": [
+      [
+        4.352552892794873e-12,
+        2.719290852715042e-13
+      ],
+      [
+        3.785513324587988e-11,
+        2.3649958518324286e-12
+      ],
+      [
+        3.3266748546675885e-10,
+        2.0783220248032965e-11
+      ],
+      [
+        3.785513361743427e-11,
+        2.3649960576426556e-12
+      ]
+    ],
+    "endpoint_method_rms": [
+      1.6015548607834396e-14,
+      1.423083677688971e-13,
+      1.2645242550535616e-12,
+      1.4230859113700652e-13
+    ]
+  },
+  "solid_review": "Immutable family admission, finite observation scheduling, actual-state comparison and public reporting have separate responsibilities. Reusable physical samplers accept admitted alternate source grids without growth. Read-only family access and complete private result construction preserve trajectories and forbid partial evidence.",
+  "limitations": [
+    "Complete pressure/reference/force/arithmetic/sampling and all-observable evidence remain",
+    "The smooth private family binds actual rest states; external artifact and concentrating provenance remain",
+    "Sampled physical maxima and very small spatial differences are not continuum enclosures or supported floors",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

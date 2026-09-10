@@ -348,4 +348,14 @@ file385 and CRAP24.33594. All 72 Python/stub files match the preceding verified
 source tests, packaging and frozen mathematical checks pass. Independent field
 comparison, tensor reduction and regional geometry remain separate, and actual
 CM/HO state digests are preserved. Informational finding exits remain explicit.
-Hosted checks are pending, and P08/concentrating qualification remain incomplete.
+Source-matched hosted checks pass. P08 and concentrating qualification remain incomplete.
+
+The [actual physical refinement family](../evidence/p08/physical-family/README.md)
+passes 345 Rust tests/probes across 250 Rust files: 98.93% executable lines and
+90.72% instrumented branches. Maxima CC21, cognitive16, Halstead75.8956,
+physical-file426 and CRAP24.33594 meet all gates. All 72 Python/stub files retain
+the verified 188-test profile; 41 bootstrap tests were rerun. Complete schedule
+admission, exact-policy/state binding and borrowed numerical sampling have
+separate responsibilities. Cap and failed-attempt controls pass with no
+post-construction allocation. A matching clean export runs the documented
+example and focused checks. Hosted checks are pending; P08 remains incomplete.

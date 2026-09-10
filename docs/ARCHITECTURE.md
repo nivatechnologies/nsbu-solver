@@ -169,3 +169,10 @@ The v2 adapter reuses the existing geometric partition and preserves all global
 samples. This numerical layer does not own state evolution or authenticate
 problem/time provenance; the complete experiment remains responsible for those
 bindings and its finite observation schedule.
+
+The [physical refinement consumer](PHYSICAL_REFINEMENTS.md) adds immutable
+quantity/floor admission and a finite observation schedule over the actual smooth
+family. A successful report requires all twenty comparisons at the next accepted
+clock. It borrows every state read-only, checks exact numerical policy words and
+retains charges for failed requests. Alternate source domains reuse the same
+preallocated scalar samplers without changing their physical geometry or capacity.

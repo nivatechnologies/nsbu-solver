@@ -330,9 +330,25 @@ Hessian/vorticity differences with sequential scratch, preserves mean and fine-o
 mode errors, and feeds identical samples to v2 regional reports. Actual independent
 CM/HO rest states retain nonzero method differences and unchanged field digests.
 Fresh-source public tests, packaging and frozen bootstrap checks pass. The unchanged
-Python source retains its complete 188-test evidence. Hosted verification is pending.
+Python source retains its complete 188-test evidence. Source-matched hosted Rust
+and Python verification pass.
 
 P08 remains incomplete. The experiment must bind these measurements to the full
 frozen benchmark inventory, exact time/policy and accepted-state provenance.
 Complete pressure/reference, force/arithmetic/transfer refinements and concentrating
 integration remain. No concentrating PDE window is accepted.
+
+## P08 actual physical refinement-family progress
+
+The [six-trajectory physical increment](evidence/p08/physical-family/README.md)
+passes 345 Rust tests/probes, 98.93% executable line coverage, 90.72% branch
+coverage and every required complexity/CRAP gate. It binds complete velocity,
+gradient, Hessian and vorticity refinements to actual synchronized independent
+rest states, exact policy words and a finite observation allowance. Joint
+admission and failed-attempt charges pass allocation/refusal checks. The clean
+public example, fresh packaging and frozen bootstrap checks pass; the unchanged
+Python source retains its complete 188-test profile. Hosted verification is pending.
+
+P08/P09 remain incomplete. Complete pressure/reference/force/arithmetic/sampling
+and all-observable evidence, full benchmark protocol/artifact binding and
+concentrating integration remain. No concentrating PDE window is accepted.

@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current arithmetic increment](evidence/p09/arithmetic/README.md) passes 313 Rust tests/allocation probes, 184 Python tests, all required quality gates, and a clean-source workflow; its source-matched hosted verification also passes. The preceding experiment and replay increment passed hosted checks. Complete concentrating experiments and qualification remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [physical refinement increment](evidence/p08/physical-family/README.md) passes 345 Rust tests/allocation probes, all required quality gates and a clean-source example. Its unchanged Python source retains the verified 188-test profile. Hosted checks passed for the preceding physical comparison increment and are pending for this increment. Complete concentrating experiments and qualification remain under implementation.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -97,6 +97,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Numerical protocol identity](docs/PROTOCOL_FORMAT.md) | Canonical tolerance rules, exact tested times and reconstruction geometry |
 | [Physical derivative diagnostics](docs/DERIVATIVE_DIAGNOSTICS.md) | Full-band scalar derivatives, v2 reference tensors and regional errors |
 | [Physical-field comparisons](docs/PHYSICAL_COMPARISONS.md) | Complete scalar/vector/tensor comparisons and v2 regional aggregation |
+| [Physical refinement families](docs/PHYSICAL_REFINEMENTS.md) | Actual six-trajectory comparisons, exact clocks and finite diagnostic budgets |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 

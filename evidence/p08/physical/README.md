@@ -62,7 +62,8 @@ Actual raw paths use the local `work/p08-physical-` prefix. Informational
 Clippy/duplication exits are preserved separately from passing required checks;
 shared discovered-test helpers and independent analytic fixtures are reviewed
 as intended uses. Mutation sweeps were not rerun under the revised policy.
-No dependency or frozen reviewed input changed. Hosted verification is pending.
+No dependency or frozen reviewed input changed. Source-matched hosted Rust and
+Python verification pass; their complete job records are preserved here.
 
 ## Review and remaining work
 
