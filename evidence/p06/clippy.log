@@ -1,0 +1,4 @@
+    Checking nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Checking nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Checking nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.74s

@@ -1,4 +1,5 @@
 //! Force-provider admission, exact requests and independent DFT coefficients.
+mod fixture_support;
 use nsbu_benchmarks::provider::V2Force;
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
@@ -101,22 +102,12 @@ fn normalized_force_coefficients_match_independent_direct_dft() {
     assert!(work.work_units <= limits.work_units);
     assert!(provider.last_root_iterations() > 0);
     let output = [a, b, c];
-    for line in include_str!("fixtures/force-n4.tsv").lines() {
-        let columns: Vec<_> = line.split('\t').collect();
-        let mode = std::array::from_fn(|i| columns[i].parse::<isize>().unwrap());
-        let (index, conjugate) = layout.locate(mode).unwrap();
-        assert!(!conjugate);
-        for component in 0..3 {
-            let expected = Complex64::new(
-                columns[3 + 2 * component].parse().unwrap(),
-                columns[4 + 2 * component].parse().unwrap(),
-            );
-            assert!(
-                (output[component][index] - expected).l1_norm()
-                    < 2e-10 * (1.0 + expected.l1_norm())
-            );
-        }
-    }
+    fixture_support::compare(
+        layout,
+        &output,
+        include_str!("fixtures/force-n4.tsv"),
+        2e-10,
+    );
     for component in output {
         nsbu_solver::domain::validate_spectrum(layout, &component, 1e-12).unwrap();
     }

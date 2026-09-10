@@ -78,7 +78,7 @@
     "P06": {
       "status": "in-progress",
       "evidence": "evidence/p06/summary.json",
-      "classification": "initial Rust concentrating diagnostic completed; refinements pending"
+      "classification": "independent concentrating trajectory comparison and smooth refinements passed; full mutation and hosted verification pending"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus the first N=4 Rust exact-v2 CM diagnostic from rest to t=1/256; concentrating space/force resolution unresolved",

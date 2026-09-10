@@ -1,0 +1,8 @@
+# Both studies run in the mandatory complete test and coverage jobs.
+# Mutation reruns use the focused operator/provider/transaction tests and retain
+# the smooth temporal-order test. No production source is excluded from mutation.
+additional_cargo_test_args = [
+  "--",
+  "--skip", "smooth_full_band_spatial_family_tracks_the_same_exact_flow",
+  "--skip", "concentrating_transactional_trajectory_matches_independent_dft",
+]

@@ -1,0 +1,19 @@
+{
+  "classification": "independent arithmetic agreement, unresolved coarse PDE diagnostic",
+  "precision_digits": [
+    80,
+    120
+  ],
+  "maximum_scaled_precision_change": "2.0240102184298387314700587584433428403246357333693963983970517828890840354811303e-81",
+  "fixture_sha256": "e797f61c5652e59da58cf03279078cec4e5f3d6da96220d80d717772c8d3fcb3",
+  "fixture_half_spectrum_modes": 18,
+  "steps": 64,
+  "cm_step": "1/16384",
+  "endpoint": "1/256",
+  "reference_assignments": 0,
+  "accepted_pde_windows": 0,
+  "input_sha256": {
+    "p06-python-80.json": "07c76e5b87cb710de5596662219762605b612cacc2f39859ca41aeb671b25aa5",
+    "p06-python-120.json": "5ce25c2610ef1a848a076b4e7247ab1f02696eed0013ceaf3c7c71a3faea5ebd"
+  }
+}

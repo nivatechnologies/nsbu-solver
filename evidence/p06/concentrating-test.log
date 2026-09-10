@@ -1,0 +1,9 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/work/p06-draft/crates/nsbu-benchmarks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.36s
+     Running tests/concentrating.rs (work/p06-draft/target/debug/deps/concentrating-fb85c0ae41c4c8de)
+
+running 1 test
+concentrating diagnostic-only n=4 force_grid=4 endpoint=1/256 macro_steps=32 fine_cm_steps=64 rhs_calls=384 transforms=4992 reference_assignments=0 accepted_pde_windows=0 reserved_bytes=1154784 cap_bytes=2097152 max_local_ratios=[0.7249142752846672, 0.7678012206754569]
+test concentrating_transactional_trajectory_matches_independent_dft ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 51.30s

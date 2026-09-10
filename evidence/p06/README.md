@@ -8,7 +8,12 @@ the integration driver. [The record](summary.json) and [full half-spectrum](init
 retain actual counts and budgets. No PDE window is accepted.
 
 The N=4 retained and force-evaluation grids are intentionally diagnostic. Neither
-spatial nor force-sampling resolution is established. Two independent Python
+spatial nor force-sampling resolution is established. Post-integration reference
+evaluation gives retained-band L2 tracking error 1.6412562181 and H1 error
+14.5754562615. The difference from the earlier Python CM run with twice the step
+size is L2 1.531e-6 and H1 1.618e-5; that is a mixed timestep/implementation
+comparison, not an arithmetic-equivalence check. [The comparison record](initial-probe-comparison.json)
+preserves these results. Two independent Python
 trajectories at 80 and 120 digits are being evaluated for the same committed fine
 step size. Smooth nonlinear temporal and grid studies and the public bounded
 runner are under separate P06 verification.
@@ -77,3 +82,25 @@ fn main() {
 diagnostic-only preflight_bytes=1154784 cap_bytes=2097152 reference_assignments=0
 elapsed_ticks=4096 remaining_ticks=4096 accepted_macro_steps=32 rhs_calls=384 max_local_ratios=[0.7249142752846672, 0.7678012206754569] accepted_pde_windows=0
 ```
+
+## Current implementation verification
+
+The public bounded fixed runner and smooth cyclic-sine source are implemented.
+The source uses independent temporal frequencies 13, 17 and 19. Four temporal
+levels show approximately fourth-order convergence, and the 4/8/12 grid family
+compares the full fine spectrum. This band-limited case approaches a temporal
+error plateau; no general spatial convergence order is claimed.
+
+The [independent oracle comparison](oracle-comparison.json) records agreement
+between completed [80-digit](python-80.json) and [120-digit](python-120.json)
+from-rest direct-DFT trajectories. Its [recipe](oracle-recipe.md) describes the
+64-step fixture export. The Rust transactional trajectory comparison passed.
+The [smooth force fixture](smooth-force-fixture.json) has a separate
+[physical-sampling/direct-DFT recipe](smooth-force-recipe.md).
+
+The [responsibility and measurement review](quality-review.md) explains the
+interfaces and exact mutation test selection. Full package tests and coverage passed: 102 harness-reported tests plus three
+allocation probe executables, 5,319 executable lines and 480 instrumented branches.
+Complexity, duplication, strict lint and fresh packaging checks pass. The complete
+1,444-mutant run and hosted verification are pending; P06 is not yet complete. Accepted concentrating PDE windows
+remain zero.

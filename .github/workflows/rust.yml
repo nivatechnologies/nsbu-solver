@@ -1,5 +1,37 @@
 name: Rust package and quality checks
-on: [push, pull_request]
+"on":
+  push:
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "rust-toolchain.toml"
+      - "crates/**"
+      - ".cargo/**"
+      - "quality/rust/**"
+      - ".github/workflows/rust.yml"
+      - "benchmarks/**"
+      - "docs/design/**"
+      - "reference/**"
+      - "requirements-dev.txt"
+      - "LICENSE"
+      - "NOTICE"
+      - ".gitattributes"
+  pull_request:
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "rust-toolchain.toml"
+      - "crates/**"
+      - ".cargo/**"
+      - "quality/rust/**"
+      - ".github/workflows/rust.yml"
+      - "benchmarks/**"
+      - "docs/design/**"
+      - "reference/**"
+      - "requirements-dev.txt"
+      - "LICENSE"
+      - "NOTICE"
+      - ".gitattributes"
 permissions:
   contents: read
 defaults:

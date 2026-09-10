@@ -1,0 +1,12 @@
+{
+  "precision_digits": [
+    80,
+    120
+  ],
+  "scaled_precision_change": "1.14767513351872006594619278604060080827678502683095874026172642027457644960349942240529624113016600595385136159562607584e-80",
+  "sha256": "6ba6ef96f216b6c4497a3115f8799facef67aadd5f9bc772562eccd90b76b444",
+  "n": 8,
+  "time": "1/64",
+  "nu": "1",
+  "force": "unprojected exact cyclic-sine force; raw pressure zero"
+}

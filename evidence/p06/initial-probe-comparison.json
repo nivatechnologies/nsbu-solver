@@ -1,0 +1,15 @@
+{
+  "classification": "diagnostic-only; retained-band tracking on unresolved N=4",
+  "retained_band_tracking": {
+    "full_fine_band_l2": "1.6412562181338622981",
+    "full_fine_band_h1": "14.575456261502531794",
+    "max_component_change": "0.34727121663987438734"
+  },
+  "different_step_size_comparison": {
+    "python_cm_divisor": 8192,
+    "rust_committed_cm_divisor": 16384,
+    "full_fine_band_l2": "1.5308252508943739771e-6",
+    "full_fine_band_h1": "0.00001617981582380356879",
+    "max_component_change": "4.086868196946512149e-7"
+  }
+}

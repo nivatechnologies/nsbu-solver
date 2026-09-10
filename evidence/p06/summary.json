@@ -35,12 +35,22 @@
     "reserved_bytes": 1154784,
     "cap_bytes": 2097152,
     "reference_assignments": 0,
-    "state_sha256": "df50b958100fa643bc1b00f3eff6cb31779d77c4782af0e011dc8e5a5b34b634"
+    "state_sha256": "df50b958100fa643bc1b00f3eff6cb31779d77c4782af0e011dc8e5a5b34b634",
+    "retained_band_tracking": {
+      "full_fine_band_l2": "1.6412562181338622981",
+      "full_fine_band_h1": "14.575456261502531794",
+      "max_component_change": "0.34727121663987438734"
+    },
+    "different_step_size_comparison": {
+      "python_cm_divisor": 8192,
+      "rust_committed_cm_divisor": 16384,
+      "full_fine_band_l2": "1.5308252508943739771e-6",
+      "full_fine_band_h1": "0.00001617981582380356879",
+      "max_component_change": "4.086868196946512149e-7"
+    }
   },
   "accepted_pde_windows": 0,
   "pending": [
-    "Independent 80/120-digit direct-DFT trajectory comparison",
-    "Public bounded runner and smooth nonlinear time/grid refinements",
     "Complete P06 code-quality and hosted verification"
   ],
   "limitations": [
@@ -48,5 +58,186 @@
     "Local full/two-half acceptance is not convergence evidence",
     "No off-grid or slab-wide qualification",
     "No reference state assignments or resets"
-  ]
+  ],
+  "independent_trajectory": {
+    "classification": "independent arithmetic agreement, unresolved coarse PDE diagnostic",
+    "precision_digits": [
+      80,
+      120
+    ],
+    "maximum_scaled_precision_change": "2.0240102184298387314700587584433428403246357333693963983970517828890840354811303e-81",
+    "fixture_sha256": "e797f61c5652e59da58cf03279078cec4e5f3d6da96220d80d717772c8d3fcb3",
+    "fixture_half_spectrum_modes": 18,
+    "steps": 64,
+    "cm_step": "1/16384",
+    "endpoint": "1/256",
+    "reference_assignments": 0,
+    "accepted_pde_windows": 0,
+    "input_sha256": {
+      "p06-python-80.json": "07c76e5b87cb710de5596662219762605b612cacc2f39859ca41aeb671b25aa5",
+      "p06-python-120.json": "5ce25c2610ef1a848a076b4e7247ab1f02696eed0013ceaf3c7c71a3faea5ebd"
+    }
+  },
+  "smooth_case": {
+    "frequencies": [
+      13,
+      17,
+      19
+    ],
+    "temporal_macro_divisors": [
+      128,
+      256,
+      512,
+      1024
+    ],
+    "spatial_grids": [
+      4,
+      8,
+      12
+    ],
+    "classification": "band-limited smooth diagnostic; fourth-order temporal study and spatial consistency, not concentrating qualification"
+  },
+  "coverage": {
+    "branches": {
+      "count": 480,
+      "covered": 480,
+      "notcovered": 0,
+      "percent": 100
+    },
+    "functions": {
+      "count": 413,
+      "covered": 413,
+      "percent": 100
+    },
+    "instantiations": {
+      "count": 685,
+      "covered": 586,
+      "percent": 85.54744525547446
+    },
+    "lines": {
+      "count": 5319,
+      "covered": 5319,
+      "percent": 100
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 9942,
+      "covered": 9682,
+      "notcovered": 260,
+      "percent": 97.38483202574935
+    }
+  },
+  "files": 79,
+  "physical_lines_max": 264,
+  "source_sha256": {
+    "crates/nsbu-benchmarks/src/error.rs": "c097666dab2bdcb4b2b5a8f77db2788186a4230e167b9088a03dc37f53e1fa08",
+    "crates/nsbu-benchmarks/src/fields.rs": "6a84410e9853ff1553c11078f6e071b2da64e8b9ed1c073da9ddbdbfbe022640",
+    "crates/nsbu-benchmarks/src/jet/index.rs": "4f1332975680f4c55325f5d4bf72d13756f6dc65fe1ac17ac35819da14e500e4",
+    "crates/nsbu-benchmarks/src/jet/mod.rs": "54391dedf649057dcc827f4712af1bfc4aca99291c12e14ef81ef8cc57a0633c",
+    "crates/nsbu-benchmarks/src/jet/transcendental.rs": "07888a3f269eb9d8a51b60e3123f0ac210cd2741181f35ce4160e71e54918d64",
+    "crates/nsbu-benchmarks/src/lib.rs": "dd0a3a76bdd05cebd2a61b55eb8abccb83e6d99b5f1762c280f2177b65fc62e3",
+    "crates/nsbu-benchmarks/src/provider.rs": "7dee212b287d5291003793245bed3b2ebd5f0f6236bee95f5564f19df2222663",
+    "crates/nsbu-benchmarks/src/root.rs": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b",
+    "crates/nsbu-benchmarks/src/scalar.rs": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8",
+    "crates/nsbu-benchmarks/src/smooth.rs": "5e672a84a3a680d8f12b12548645006e54a1197018e99968b7f383edab3cec46",
+    "crates/nsbu-benchmarks/src/time.rs": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06",
+    "crates/nsbu-benchmarks/tests/algebra.rs": "b7df4cf3961129badf46a19381f0e758f1bfbf164fefcc90d558c62e4cb160c7",
+    "crates/nsbu-benchmarks/tests/allocation.rs": "73c46b87c5d2cd1d9103ec1ac0c8a5c7acf7e5daff404f9e1a103418bb4204a3",
+    "crates/nsbu-benchmarks/tests/clock_root.rs": "481011042950e69b85142d372e9b0bc70aeb82c514442c451b2c67c2fde3d40e",
+    "crates/nsbu-benchmarks/tests/concentrating.rs": "f89d2dfdf133eaec410b0864ec5b25da57093bf1fa7f200635c55fad1114acc3",
+    "crates/nsbu-benchmarks/tests/cutoff.rs": "5be50bb50409c643b49a73a6e7dc29b5689876ca1a256b4779a4af22831a81a9",
+    "crates/nsbu-benchmarks/tests/fields.rs": "342d71d294da986d74e20b65f8c22fb087e2d87cc9c76c9d6f6504e796a85567",
+    "crates/nsbu-benchmarks/tests/fixture_support/mod.rs": "dd6a3a6ed37a961962039f9f82beb3881ed535e10b3b797f711daca178f8a0de",
+    "crates/nsbu-benchmarks/tests/provider.rs": "990026882a033f54d976171b8bd5c28b4b797a7da84b8850a462817f0d4ff82e",
+    "crates/nsbu-benchmarks/tests/refinement.rs": "d32fdabc72db7f766e2bc04510ea3a8bb2f733dd2d979793124d9aad4bb3414c",
+    "crates/nsbu-benchmarks/tests/smooth.rs": "6496be125f06e84a7f5486c584811b2409906b84d2d05b17835cb3560c5c6214",
+    "crates/nsbu-cli/src/arguments.rs": "4dd9666b9bb5544e39494fdbabf28ec51399b8f97ad81094968a9198bf40a752",
+    "crates/nsbu-cli/src/main.rs": "d6bc34d3e87d6e91b58f2e83f22213483914539010b7d2cdf1db31c5f41d8039",
+    "crates/nsbu-cli/tests/commands.rs": "ca54cfef35133fe9027970e315239f8d0c909574596e8271b4df9fddb46a2f65",
+    "crates/nsbu-solver/src/domain/clock.rs": "c8d56c25c03aeda44fb69e8896406ee02eb32646de0222ea5782c11fac5cc4ce",
+    "crates/nsbu-solver/src/domain/epoch.rs": "523dcdfb16cfceaa07894c6de7b290fa8ed0bff9ab1716ccc1af37549296f3d3",
+    "crates/nsbu-solver/src/domain/geometry.rs": "258d0b8972698b0cd371d21bdf7c1e9d9f3fc2d9d42f0a63654d00184f2796df",
+    "crates/nsbu-solver/src/domain/layout.rs": "0bd0ed3f90949b034e237f1582da8859200515e28f1bf0459de75ddd9602a163",
+    "crates/nsbu-solver/src/domain/mod.rs": "06a4b001aebe665ee9fd15d51e41f3ffb237d8023c3bbcb642904ba7124049a5",
+    "crates/nsbu-solver/src/domain/resources.rs": "4ecff25c131b6bc56c89bbeee55bfc17b34ecdfabc4bfe6dfa76119085f0dc80",
+    "crates/nsbu-solver/src/domain/spectrum.rs": "8da263a555b827ba25fbdb44978bf95d002abde4d77da6e1d702d46fff591687",
+    "crates/nsbu-solver/src/domain/state.rs": "9efecb037a03371214c84e63d2fc7eb6f1ebdc3863b0768104a308e0b2d3c776",
+    "crates/nsbu-solver/src/error.rs": "cdabc6d47afbb1c27913ae0eb5ba41ea38215be181ea8e4036d2aed465cdd9da",
+    "crates/nsbu-solver/src/integrators/attempt.rs": "aa3efc8986cb70473e494f85e64a56050f9cc56fd62f24737b56614dc4d61734",
+    "crates/nsbu-solver/src/integrators/coefficients.rs": "fa8cdf5396dd35b29678991313f81d48de441909ac18e4efcd2459528f0afc84",
+    "crates/nsbu-solver/src/integrators/forcing.rs": "ce0d93cea72ad2d6f7c8aaffe1d467de21c7c2f958d280f1d2742fe4f0d80835",
+    "crates/nsbu-solver/src/integrators/indicator.rs": "0804fb8a7b445d3be83e40220b69ff89bc3493166e14a607db5be85728ddc5a9",
+    "crates/nsbu-solver/src/integrators/kernel.rs": "4a0b97be06d91126791cad6d5dfd6be7592a966e683d49df8b53987469dae78c",
+    "crates/nsbu-solver/src/integrators/mod.rs": "1c56810c7d186ecf6862b3a1bc73cdad554352e3b996d4d40b35f631d03902e7",
+    "crates/nsbu-solver/src/integrators/rhs.rs": "e692226fe633487f86f92c09975b0926196aa2f3ca437ce48a262b589da94829",
+    "crates/nsbu-solver/src/integrators/scheduler.rs": "14f82b29a58233c432c9abdedc14bc7325ae94d2c1b44d88b4c8ad6aff40cd43",
+    "crates/nsbu-solver/src/integrators/time.rs": "20a9e672f00046261d5c21140c93da219355dde5cb9838a69eae6ace12a1f4ec",
+    "crates/nsbu-solver/src/integrators/trajectory.rs": "e72156975a6c8602be6572a2d5ba7507dcb6bd12e9c8efdc09dfbb9bc3aa51a4",
+    "crates/nsbu-solver/src/integrators/transaction.rs": "dcd19db830ae1e1bd4068858b99cc524a2cb018ba6a34a3afe0cc2cc81a6d2de",
+    "crates/nsbu-solver/src/integrators/transaction_tests.rs": "cd9a28829ca9e9bde01dc5e8cd536816747ede8b245caa57b90cb7e0517eb8fe",
+    "crates/nsbu-solver/src/lib.rs": "965e1405bfa62f48973b25353f83c9bddc0dab7a3348586dfbb3506596c1d474",
+    "crates/nsbu-solver/src/spectral/fft.rs": "bab52ea402d2da286b37816dec951993cbdc34e28b982a9e9305b489aa700cba",
+    "crates/nsbu-solver/src/spectral/hermitian.rs": "9e79b935c5ab4c7e83c741776835a228f4d4bc44594da091a757604a87dcf239",
+    "crates/nsbu-solver/src/spectral/mod.rs": "ed013c74227bd81bfe2cbb71f3723c9dc7b6a29162bbe4bad4535bc80748e15f",
+    "crates/nsbu-solver/src/spectral/modal.rs": "adc5cae05ef688c8ac0783a8da35ee6268802d4d985c85bccd306e8d3510e727",
+    "crates/nsbu-solver/src/spectral/radix.rs": "97801eae5daf437b00c7e30c13cde335be5bf4f675951b36732d1c76f9cdce89",
+    "crates/nsbu-solver/src/spectral/rotational.rs": "189f69541e25ea9c85fd2222c7bd5126c4559e7f12f68f09906ae4353aca15bd",
+    "crates/nsbu-solver/src/spectral/transfer.rs": "dd6be664b4eaf6a6f19b7eff394b9c448fe3685d432279cfb85786c408c43227",
+    "crates/nsbu-solver/src/storage.rs": "37bd87d4296693f76016511a47422c0f7b4fc0e236564a18aa2cc9be19e43a4b",
+    "crates/nsbu-solver/tests/advection.rs": "30f92bacfbcba681f4d76396a63a6d758083ab620be3c27d3fd99776295944d7",
+    "crates/nsbu-solver/tests/alias_control.rs": "9ff50aa1c60f3bb034756b037d8f4b69c358cbeb17dfcc19fc9e7ea5f0554639",
+    "crates/nsbu-solver/tests/allocation.rs": "a8b9c64bfab7abf377c15398f4663771de7209ed9afc7351d4a31a594418275d",
+    "crates/nsbu-solver/tests/attempt_admission.rs": "993d378772b1f00e0d30b7f1c7d7a7713e5f3a869b590a690669b55ce4f42910",
+    "crates/nsbu-solver/tests/attempt_allocation.rs": "aaed1f16b60b7e8be1e3bf7df4c83770f6e4ff5ec19d7d33ef2c2e15490be941",
+    "crates/nsbu-solver/tests/clock.rs": "9c941ffb51d3ea2f4aa90a940a3cb88db70c595da6f5f2810025ae33e0fd12ba",
+    "crates/nsbu-solver/tests/cm_dft.rs": "29ba060ad2d574f18df2946a6dd15e7e0267722391f6c7f8b7c5bf5023fe1d45",
+    "crates/nsbu-solver/tests/cm_kernel.rs": "f7623ca4b2649f7b3583edcabeec59577f20f50f5c65416ea607f022bbd2b3bf",
+    "crates/nsbu-solver/tests/coefficients.rs": "67ae0b7010b13d721de10a56103ab41104e54a06a5d5a6a18814e46e1fbd68e0",
+    "crates/nsbu-solver/tests/convolution.rs": "e7cc51cf5ed35f7d07b81e4b2e158848576b81cab53b226f333b28a383bcd43b",
+    "crates/nsbu-solver/tests/fft.rs": "e968d1f87baf4dd83f7b4b6d466160c238138143de650d7ddce01263329b8154",
+    "crates/nsbu-solver/tests/force_budget.rs": "7b432ca9b6c1addea38136a50bc4c91e0c1c26babacb9845d0deb877add83fd6",
+    "crates/nsbu-solver/tests/interval.rs": "ccef14080026dff28cbb7b9c51a5c63549fac34a98b313f3b444cee8aed2ea95",
+    "crates/nsbu-solver/tests/kernel_refusals.rs": "fefb17f2bc641db096b5ceda6cd810b3e39a2886a337d8bd3282fe9282633930",
+    "crates/nsbu-solver/tests/layout.rs": "19810be8ae44bd3d55eab5d7534bea344ea45b90cf7239fed00e6874859ce42e",
+    "crates/nsbu-solver/tests/modal.rs": "fdf9ca639203ec71c3c17017807e19d56ae7a3407402975e84da0ed06a704273",
+    "crates/nsbu-solver/tests/resources.rs": "ff0e092b6afbf346bdf6619341e26dd8e5eea1703ae79252f402c1bce944fb97",
+    "crates/nsbu-solver/tests/rotational.rs": "75fddd2069267f72bbbea97664c9cb9f972b6a79bfb8ad613f232f260c46a128",
+    "crates/nsbu-solver/tests/spectrum.rs": "8c8de05f18d77aa5ccebabb6003103332cdeab1c501257d39e7c6d4f5da304ac",
+    "crates/nsbu-solver/tests/state.rs": "5894650adfa9b3a7de62a34792047bfe8155a1251b2b239df9a141796d948e5d",
+    "crates/nsbu-solver/tests/support/mod.rs": "a7456fefaa073e8bbd187eb3e66e6557cbe3a5ef0114e6ffb730afec842e76ae",
+    "crates/nsbu-solver/tests/trajectory.rs": "55ae0d122e0a9fffb3e764dcc6186c274f5918e219fb8988293c88ecfa1a43fc",
+    "crates/nsbu-solver/tests/transaction.rs": "0a0d0641864f6bb556090f79fdd5627ba42bd9b7b05a9163e5ecd84ad632f0ca",
+    "crates/nsbu-solver/tests/transaction_support/mod.rs": "676e2a6d437d627ba58f9b57e17675e620aa397950cde66bd3e9fd21d71ecfb7",
+    "crates/nsbu-solver/tests/transfer.rs": "0b41915350b5e574d959c8b714360fa90c020238b27be23c161e7fcef1bb5007"
+  },
+  "metrics": {
+    "cyclomatic_max": 19,
+    "cognitive_max": 14,
+    "halstead_max": 75.8955223880597,
+    "physical_lines_max": 264,
+    "crap_max": 19,
+    "duplicates": 0,
+    "reviewed_dead_code": 0,
+    "reviewed_redundant_code": 0,
+    "any_or_unknown_types": 0
+  },
+  "tests": 105,
+  "mutation_status": "full run in progress; 1444 generated mutants; no completion claim",
+  "evidence_path_normalization": "Published reports replace machine home/checkout prefixes; raw reports remain under work. Reviewed inputs are untouched.",
+  "configuration_sha256": {
+    ".cargo/mutants.toml": "9403463b479ab1a3ede23c7a23d74c0166138346575000cf62b7bf9fd24c58aa",
+    ".github/workflows/rust.yml": "738a302d5e2033d9bd2b2e4feeae4dfc88438d78bbaf8c65eea47506a2ec2265",
+    "Cargo.toml": "faa1e308b612e4346509d877e0ad0f45ea17e54f69189d77c01ce9cece2e7efe",
+    "Cargo.lock": "fc9192161c6f7a68821c427b510acb888843080ad999edd0d9665117fc3c5d72",
+    "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+  },
+  "test_accounting": {
+    "harness_reported": 102,
+    "separate_allocation_probe_executables": 3
+  }
 }

@@ -105,14 +105,28 @@ cargo test -p nsbu-solver --test attempt_allocation
 
 Force implementations declare their own complete work/storage limits. Undeclared
 callbacks may use the standalone research step kernel, but are refused by the
-bounded attempt API. The numerical CLI, Rust exact-v2 provider and convergence
-verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
+bounded attempt API. The numerical CLI and convergence verifier remain later packages. See [P04 evidence](../evidence/p04/README.md).
 
 ## Independent Rust exact-v2 evaluation
 
 `cargo test -p nsbu-benchmarks` exercises scalar and jet evaluations, exact clock
 separation, high-precision field/root/DFT fixtures, bounded provider admission, and
 allocation-free force requests. The crate [API overview](../crates/nsbu-benchmarks/README.md)
-describes its storage and arithmetic contracts. These tests do not integrate a
-concentrating trajectory. Force-sampling convergence and cancellation-sensitive
-arithmetic accuracy still require the later experiment studies.
+describes its storage and arithmetic contracts. P06 extends this suite with smooth
+refinement studies and an N=4 concentrating trajectory compared with independent
+80/120-digit direct-DFT evolution. The concentrating test evolves from rest and
+commits only integrated fine-step states; no reference state is assigned. Its
+coarse spatial and force sampling errors remain unresolved. Force-sampling
+convergence and cancellation-sensitive arithmetic accuracy still require the
+later experiment studies.
+
+The focused development commands are:
+
+```sh
+cargo test -p nsbu-benchmarks --test smooth
+cargo test -p nsbu-benchmarks --test refinement -- --nocapture
+cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
+```
+
+The complete P06 package quality run is in progress. Reaching the diagnostic
+endpoint does not qualify a PDE window. The public numerical CLI remains planned.

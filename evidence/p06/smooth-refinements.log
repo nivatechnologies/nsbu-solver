@@ -1,0 +1,26 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/work/p06-draft/crates/nsbu-benchmarks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.43s
+     Running tests/refinement.rs (work/p06-draft/target/debug/deps/refinement-31b09c1c0747f165)
+
+running 2 tests
+smooth-time macro_divisor=128 l2=1.6063346441526393e-7 h1=1.4050850143058701e-6
+smooth-time macro_divisor=256 l2=9.99417877473481e-9 h1=8.736530966581522e-8
+smooth-space n=4 macro_divisor=512 l2=6.22994620694376e-10 h1=5.44407348583776e-9
+smooth-time macro_divisor=512 l2=6.22994620694376e-10 h1=5.44407348583776e-9
+smooth-time macro_divisor=1024 l2=3.888239060194409e-11 h1=3.3971400248820834e-10
+test cm_smooth_nonlinear_temporal_order_from_rest ... ok
+smooth-space n=8 macro_divisor=512 l2=6.238677321174767e-10 h1=5.463264745890701e-9
+smooth-space full-fine-band-gap n=8 l2=3.2132591499089484e-11
+smooth-space n=12 macro_divisor=512 l2=6.23867731560272e-10 h1=5.463264740967375e-9
+smooth-space full-fine-band-gap n=12 l2=7.351471625811097e-18
+test smooth_full_band_spatial_family_tracks_the_same_exact_flow ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 23.01s
+
+     Running tests/smooth.rs (work/p06-draft/target/debug/deps/smooth-b49464d6612fb809)
+
+running 2 tests
+test source_refuses_invalid_geometry_budget_shape_and_arithmetic ... ok
+test analytical_coefficients_agree_with_high_precision_physical_dft ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

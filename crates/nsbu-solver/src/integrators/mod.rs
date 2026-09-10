@@ -8,3 +8,5 @@ pub mod rhs;
 pub mod scheduler;
 pub mod time;
 pub mod transaction;
+
+pub mod trajectory;
