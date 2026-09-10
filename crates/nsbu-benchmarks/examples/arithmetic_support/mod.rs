@@ -1,4 +1,5 @@
-//! Shared streaming representation for the two independent-arithmetic data producers.
+//! Shared streaming representation for independent-arithmetic data producers.
+pub mod evolution;
 use nsbu_solver::{domain::Domain, integrators::method::Method, Complex64, SolverError};
 use std::io::{self, Write};
 

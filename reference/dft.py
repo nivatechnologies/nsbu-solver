@@ -21,7 +21,7 @@ def retained(n: int) -> tuple[Mode, ...]:
 
 def transform(values: list[mpc], n: int, inverse: bool = False) -> list[mpc]:
     """Forward normalization 1/N³; inverse is the unnormalized Fourier sum."""
-    if n not in (4,6,8,12,18) or len(values) != n**3:
+    if n not in (4,6,8,12,16,18,24) or len(values) != n**3:
         raise ValueError('Invalid direct-DFT grid or payload')
     sign = 1 if inverse else -1
     roots = [mp.exp(sign*2*mp.pi*mp.j*j/n) for j in range(n)]

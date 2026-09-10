@@ -358,7 +358,7 @@ the verified 188-test profile; 41 bootstrap tests were rerun. Complete schedule
 admission, exact-policy/state binding and borrowed numerical sampling have
 separate responsibilities. Cap and failed-attempt controls pass with no
 post-construction allocation. A matching clean export runs the documented
-example and focused checks. Hosted checks are pending; P08 remains incomplete.
+example and focused checks. Source-matched hosted checks pass; P08 remains incomplete.
 
 The test profile now optimizes numerical loops at level 2 while explicitly
 retaining debug assertions and integer overflow checks. All workspace targets,
@@ -375,5 +375,14 @@ physical-file469 and CRAP24.33594 pass all gates. The initial pressure report
 function's CRAP26.125 finding is preserved. Separating prescribed-force assembly
 from complete report publication resolves it, and a complete replay verifies the
 final source. Clean-source tests/example, fresh packaging and frozen bootstrap
-checks pass; unchanged Python retains its 188-test profile. Hosted checks are
-pending. No concentrating PDE window is accepted.
+checks pass; unchanged Python retains its 188-test profile. Source-matched hosted checks pass. No concentrating PDE window is accepted.
+
+The [derived-field arithmetic increment](../evidence/p09/derived-arithmetic/README.md)
+passes 355 Rust tests/probes and 198 Python tests across 258 Rust and 82 Python/stub
+files. Rust line/branch coverage is 98.84%/90.48%; Python is 99.79%/98.96%.
+Maxima remain within every required gate: Rust CC21/cognitive16/Halstead75.8956/
+LOC469/CRAP24.33594; Python CC16/cognitive19/Halstead13.8261/LOC243/CRAP16.
+The initial untested CLI-wrapper CRAP72 finding and the complete corrected replay
+are preserved. Clean-source exports match all four actual artifacts, all four
+N=4/N=12 derived-field studies pass, and bootstrap/frozen-input checks pass.
+Hosted checks for this increment are pending. No concentrating window is accepted.

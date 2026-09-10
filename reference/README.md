@@ -74,6 +74,15 @@ The separate [CyclicSine arithmetic workflow](../docs/ARITHMETIC_STUDY.md) now
 compares actual owned Rust trajectories with independent 80/120-digit direct-DFT
 runs on the same grid, holding raw force bits fixed in a separate study.
 
+The [derived-field workflow](../docs/DERIVED_ARITHMETIC.md) extends these
+comparisons to complete velocity gradients/Hessians, vorticity and mean-zero
+physical pressure and its gradient. It retains all ordered tensor entries and
+full doubled-band pressure, including imaginary and Nyquist-product defects.
+`python -m reference.compare_derived --n 12 --method HO --dry-run` reports the
+bounded input and numerical reservations before reading any artifacts. Actual
+comparisons require the Rust exporter and four independently evolved trajectories;
+the guide documents all six inputs and the seven separately reported effects.
+
 ## Concentrating diagnostic now available
 
 `python -m reference.pilot` runs the exact-v2 N=4 CM trajectory from rest to

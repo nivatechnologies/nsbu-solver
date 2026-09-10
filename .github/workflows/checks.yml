@@ -24,6 +24,7 @@ jobs:
       - run: python -m reference.verify_steps > work/reference-steps.json
       - run: python -m reference.verify_trajectory > work/reference-trajectory.json
       - run: python -m reference.verify_cyclic --n 12 --precision 120 --method HO --dry-run > work/cyclic-preflight.json
+      - run: python -m reference.compare_derived --n 12 --method HO --dry-run > work/derived-preflight.json
       - run: basedpyright
       - name: Per-function complexity and Halstead gates
         run: |

@@ -347,7 +347,7 @@ gradient, Hessian and vorticity refinements to actual synchronized independent
 rest states, exact policy words and a finite observation allowance. Joint
 admission and failed-attempt charges pass allocation/refusal checks. The clean
 public example, fresh packaging and frozen bootstrap checks pass; the unchanged
-Python source retains its complete 188-test profile. Hosted verification is pending.
+Python source retains its complete 188-test profile. Source-matched Rust and Python hosted checks pass.
 
 P08/P09 remain incomplete. Complete pressure/reference/force/arithmetic/sampling
 and all-observable evidence, full benchmark protocol/artifact binding and
@@ -363,8 +363,23 @@ Analytic gauge/high-band controls, bounded failures and allocation probes pass.
 The updated jointly admitted example, clean source, packaging and frozen bootstrap
 checks pass; the unchanged Python inventory retains its 188-test profile.
 A measured draft CRAP failure and its corrected complete replay remain recorded.
-Hosted verification is pending.
+Source-matched Rust and Python hosted checks pass.
 
 P08/P09 remain incomplete. Full all-observable reference/force/arithmetic/sampling
 studies, benchmark/accepted-artifact binding, concentrating pressure mean/regional
 studies and complete window production remain. No concentrating window is accepted.
+
+## P09 complete smooth derived-field arithmetic progress
+
+The [derived-field arithmetic increment](evidence/p09/derived-arithmetic/README.md)
+passes 355 Rust tests/probes, 198 Python tests, every required quality gate and
+clean-source reproduction. Four N=4/N=12 CM/HO studies independently compare all
+ordered velocity tensors, vorticity and full mean-zero pressure/gradient, with
+separate same-state, same-force and target-force effects. Every observed 80/120
+precision ratio is below 1e-40. Source hashes, complete inputs and measurements
+are retained; hosted verification is pending.
+
+P08/P09 remain incomplete. Error norms in this study are reduced in Python;
+production physical-reducer arithmetic, balances/residual/regional/location
+channels, complete artifact binding and concentrating current-grid qualification
+remain. No accepted concentrating PDE window is supplied by these smooth studies.

@@ -42,7 +42,7 @@ construct the prescribed force.
 | Distinct force stage clocks | 0, 4, 8, …, 128 |
 
 The production owner applies its local-error and advective guards and must commit
-all eight proposals before exporting a state. Absolute L2/H1 tolerances are
+all eight proposals before exporting a state. Absolute velocity/vorticity L2 tolerances are
 0.01, relative tolerances zero, and the advective limit is 0.3. The Python
 reference executes the fixed full/two-half schedule and records every proposal
 difference. It is an allocating numerical oracle, not an implementation of the

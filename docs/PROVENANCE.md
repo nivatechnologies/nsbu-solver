@@ -55,3 +55,12 @@ The public `nsbu-benchmarks` package also embeds a byte-identical copy at
 with the canonical benchmark before packaging. Both paths disable line-ending
 conversion. The embedded artifact's historical status text remains unchanged;
 current capability is recorded separately in `project-status.json`.
+
+The generated `fixtures/reference/derived-n4-cm.json.gz` is a deterministic gzip
+copy of the public `smooth_derived` Rust example's actual N=4 CM export. It is a
+regression input, not an independent oracle or a frozen review artifact. The
+independent Python derived-field tests recompute its complete fields with direct
+high-precision sums and separately test analytic Taylor–Green pressure and all
+ordered derivatives. Regeneration uses the exact from-rest schedule and raw force
+inputs documented in [derived-field arithmetic](DERIVED_ARITHMETIC.md); changes
+must retain the original and replacement input hashes in execution evidence.

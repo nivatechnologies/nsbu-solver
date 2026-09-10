@@ -26,8 +26,8 @@ profile explicitly; all 41 bootstrap tests were rerun.
   It runs the updated release example and focused physical/family tests. CLI
   source is unchanged; prior clean installation evidence remains applicable.
 - Repository links/frozen hashes, the original mathematical runner and 41
-  bootstrap tests pass. Source-matched hosted checks are pending for this
-  increment. The preceding physical comparison source passed both hosted jobs.
+  bootstrap tests pass. Source-matched [Rust](hosted-rust.json) and
+  [Python](hosted-python.json) hosted checks pass at commit `28d0baf`.
 
 The example independently evolves N=4/8/12, CM/HO, with steps 64/32/16 at quantum
 2^-16 to tick 128 (time 1/512). Its complete joint reservation is **25,407,872

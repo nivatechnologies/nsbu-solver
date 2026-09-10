@@ -182,3 +182,13 @@ binding while owning independent prescribed force and conservative-product
 scratch. It pads diagnostic velocity copies, retains full doubled-band physical
 pressure and measures scalar/gradient pairs sequentially. Immutable reservations,
 force assembly, report scheduling and output formatting have separate roles.
+
+The [derived-field arithmetic study](DERIVED_ARITHMETIC.md) keeps its direct DFT,
+pressure equation, artifact reader and complete tensor reducers independent of
+the Rust FFT implementation. Six precision profiles stream scalar fields into
+seven explicit comparisons. Each generator advances within its own mpmath
+precision context; failed partial reducers cannot publish a result. The Rust
+exporter shares the existing smooth trajectory schedule, then borrows its final
+state read-only and independently constructs diagnostic fields. Input bit hashes
+and complete field order bind a reproducible comparison, while acceptance of
+external scientific provenance remains a separate verifier responsibility.

@@ -24,7 +24,8 @@ The workspace Cargo manifest hash pins the optimized test profile explicitly.
 - A clean public export matches all 326 maintained source/stub files and the
   Cargo manifest. It runs the documented example, analytic pressure controls and
   actual six-branch pressure tests. The unchanged CLI retains prior clean-install
-  evidence. Hosted verification for this source is pending.
+  evidence. Source-matched [Rust](hosted-rust.json) and
+  [Python](hosted-python.json) hosted checks pass at commit `5d5378f`.
 
 The first complete run passed all 350 tests but failed CRAP at **26.125** in
 `PressureFamilyWorkspace::measure`. Independent force evaluation and cost

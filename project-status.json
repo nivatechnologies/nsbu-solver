@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Actual pressure refinement family passes local gates: 350 Rust tests/probes, including the corrected draft CRAP finding. Unchanged Python retains its 188-test profile; 41 bootstrap tests pass. Hosted checks pending.",
+    "status": "Complete derived-field arithmetic passes all local gates: 355 Rust tests/probes and 198 Python tests; clean-source and four independent studies pass. Hosted checks pending for this increment.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p08/pressure-family/summary.json",
+    "evidence": "evidence/p09/derived-arithmetic/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p08/pressure-family/summary.json",
+    "rust_evidence": "evidence/p09/derived-arithmetic/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "pending for pressure and physical refinement families; earlier physical comparison source passed",
-    "hosted_ci": "evidence/p08/physical/hosted-python.json"
+    "latest_hosted_ci_status": "Physical and pressure families passed source-matched Rust/Python hosted checks; derived-field increment pending.",
+    "hosted_ci": "evidence/p08/pressure-family/hosted-python.json"
   },
   "packages": {
     "B00": {
@@ -99,7 +99,7 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34427151855"
     },
     "P08": {
-      "status": "in-progress; actual smooth pressure and physical refinement families pass local gates; full benchmark and concentrating integration pending",
+      "status": "in-progress; actual smooth pressure and physical refinement families pass local and hosted gates; full benchmark and concentrating integration pending",
       "evidence": "evidence/p08/window/summary.json",
       "core_evidence": "evidence/p08/core/summary.json",
       "remaining": [
@@ -108,7 +108,7 @@
         "Complete window verifier with P09 refinement/restart lineage"
       ],
       "reporting_evidence": "evidence/p08/reporting/summary.json",
-      "current_hosted_ci": "evidence/p08/physical/hosted-rust.json",
+      "current_hosted_ci": "evidence/p08/pressure-family/hosted-rust.json",
       "protocol_evidence": "evidence/p08/protocol/summary.json",
       "protocol_hosted_ci": "evidence/p08/protocol/hosted-rust.json",
       "derivative_evidence": "evidence/p08/derivatives/summary.json",
@@ -116,10 +116,12 @@
       "physical_evidence": "evidence/p08/physical/summary.json",
       "physical_family_evidence": "evidence/p08/physical-family/summary.json",
       "physical_hosted_ci": "evidence/p08/physical/hosted-rust.json",
-      "pressure_family_evidence": "evidence/p08/pressure-family/summary.json"
+      "pressure_family_evidence": "evidence/p08/pressure-family/summary.json",
+      "physical_family_hosted_ci": "evidence/p08/physical-family/hosted-rust.json",
+      "pressure_family_hosted_ci": "evidence/p08/pressure-family/hosted-rust.json"
     },
     "P09": {
-      "status": "in-progress; same-grid smooth velocity arithmetic verified locally and hosted; full artifact semantics and concentrating qualification pending",
+      "status": "in-progress; complete smooth sampled derived-field arithmetic passes local gates; full reduction/artifact semantics and concentrating qualification pending",
       "evidence": "evidence/p09/artifacts/summary.json",
       "remaining": [
         "Bind external mathematical/execution/force/policy/lineage artifacts to accepted-state provenance",
@@ -137,7 +139,8 @@
       "reconstruction_archive_hosted_ci": "evidence/p09/reconstruction-archive/hosted-rust.json",
       "experiment_hosted_ci": "evidence/p09/experiments/hosted-rust.json",
       "arithmetic_evidence": "evidence/p09/arithmetic/summary.json",
-      "arithmetic_hosted_ci": "evidence/p09/arithmetic/hosted-rust.json"
+      "arithmetic_hosted_ci": "evidence/p09/arithmetic/hosted-rust.json",
+      "derived_arithmetic_evidence": "evidence/p09/derived-arithmetic/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -179,5 +182,7 @@
   "actual_smooth_physical_refinement_family_exists": true,
   "actual_smooth_physical_refinement_family_scope": "Complete velocity/gradient/Hessian/vorticity space/time/method sampled differences from six independently evolved smooth rest branches; exact clock/policy binding and finite joint resources. Complete pressure/all-channel/concentrating qualification remains.",
   "actual_smooth_pressure_refinement_family_exists": true,
-  "actual_smooth_pressure_refinement_family_scope": "Independent full doubled-band mean-zero pressure and gradient comparisons from six actual smooth rest trajectories; exact clock/policy binding and finite joint resources. All-observable/current-grid/concentrating qualification remains."
+  "actual_smooth_pressure_refinement_family_scope": "Independent full doubled-band mean-zero pressure and gradient comparisons from six actual smooth rest trajectories; exact clock/policy binding and finite joint resources. All-observable/current-grid/concentrating qualification remains.",
+  "independent_smooth_derived_field_arithmetic_exists": true,
+  "independent_smooth_derived_field_arithmetic_scope": "Actual N=4/N=12 CM/HO at 1/512: all ordered velocity derivatives, vorticity and full mean-zero pressure/gradient. Separate same-state, same-force and target-force 80/120 studies; error norms reduced in Python. Rust physical-reducer arithmetic and concentrating qualification remain."
 }

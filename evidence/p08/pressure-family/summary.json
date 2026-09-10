@@ -1,7 +1,7 @@
 {
   "package": "P08",
   "increment": "actual-smooth-pressure-refinement-family",
-  "status": "local checks passed; hosted verification pending",
+  "status": "local and source-matched hosted checks passed",
   "accepted_pde_windows": 0,
   "generated_utc": "2026-09-10T20:21:35.488033+00:00",
   "base_commit": "28d0bafcdee6bd7d237e7a1d32305125a3313856",
@@ -168,5 +168,19 @@
     "Pressure is independently reconstructed from actual velocities; smooth exact pressure zero is never substituted",
     "No concentrating PDE window is accepted"
   ],
-  "artifact_inventory": "artifact-sha256.json"
+  "artifact_inventory": "artifact-sha256.json",
+  "hosted_ci": {
+    "rust": {
+      "head_sha": "5d5378f10d2a608104c5d9846886eae68abfc761",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34525930609",
+      "record": "hosted-rust.json",
+      "conclusion": "success"
+    },
+    "python": {
+      "head_sha": "5d5378f10d2a608104c5d9846886eae68abfc761",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34525930585",
+      "record": "hosted-python.json",
+      "conclusion": "success"
+    }
+  }
 }

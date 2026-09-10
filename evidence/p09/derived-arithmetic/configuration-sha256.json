@@ -1,0 +1,10 @@
+{
+  "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+  "Cargo.lock": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+  "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+  "pyproject.toml": "72b70d2b1365d4bbb9ab2d803c8b0211fc146303d7e5b6e0698f16c21aed2c52",
+  "requirements-dev.txt": "4e542775d31fc5d19f67381ae7607eb5732bf2aca47624f26a814daff4482992",
+  "requirements-quality.txt": "c00345fc8dd0fc23be103099212516bdfb4d889c7077f8fa9958a3c7ab96bf4f",
+  ".github/workflows/checks.yml": "e2f9ac9a0a9b83a17e75ceca2b13451ac721d20f2deda590790675593840f084",
+  ".github/workflows/rust.yml": "d20508ac0b17c4805f257cdb452e2695e26b50d601e21130cdb44f7068386ce5"
+}

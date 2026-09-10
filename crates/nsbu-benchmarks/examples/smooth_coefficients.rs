@@ -3,12 +3,7 @@
 mod arithmetic_support;
 use arithmetic_support::{ExportError, CAP};
 use nsbu_benchmarks::smooth_run::ReconstructedRun;
-use nsbu_solver::{
-    domain::{Domain, TickClock},
-    experiment::control::{Configuration, Outcome},
-    integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},
-    SolverError,
-};
+use nsbu_solver::{integrators::method::Method, SolverError};
 use std::io::{self, Write};
 
 fn main() -> Result<(), ExportError> {
@@ -22,40 +17,8 @@ fn main() -> Result<(), ExportError> {
 }
 
 fn export(out: &mut impl Write, n: usize, method: Method, cap: usize) -> Result<(), ExportError> {
-    let run = evolve(n, method, cap)?;
+    let run = arithmetic_support::evolution::evolve(n, method, cap)?;
     write_state(out, &run)
-}
-
-// Numerical evolution owns all guards and state; serialization only borrows its completed result.
-fn evolve(n: usize, method: Method, cap: usize) -> Result<ReconstructedRun, SolverError> {
-    let domain = Domain::new([n; 3], [1.0; 3], 1.0)?;
-    let configuration = Configuration {
-        method,
-        limits: RunLimits {
-            endpoint: 128,
-            step_ticks: 16,
-            maximum_attempts: 8,
-        },
-        tolerances: Tolerances {
-            absolute: [1e-2; 2],
-            relative: [0.0; 2],
-        },
-    };
-    // The owner preflights every proposal, observation and reconstruction allocation.
-    let mut run = ReconstructedRun::from_rest(
-        domain,
-        TickClock::from_rest(-16, 512)?,
-        configuration,
-        9,
-        0.3,
-        cap,
-    )?;
-    for _ in 0..8 {
-        if !matches!(run.step()?, Outcome::Committed(_)) {
-            return Err(SolverError::RetryLimit);
-        }
-    }
-    Ok(run)
 }
 
 fn write_state(out: &mut impl Write, run: &ReconstructedRun) -> Result<(), ExportError> {

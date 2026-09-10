@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [pressure refinement increment](evidence/p08/pressure-family/README.md) passes 350 Rust tests/allocation probes, all required quality gates and a clean-source example. Its unchanged Python source retains the verified 188-test profile. Hosted verification of the current increments is pending. Complete concentrating experiments and qualification remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [derived-field arithmetic increment](evidence/p09/derived-arithmetic/README.md) passes 355 Rust tests/allocation probes, 198 Python tests, all required local quality gates and four independent N=4/N=12 CM/HO studies. A clean source export reproduces every Rust artifact. Hosted verification of this increment is pending; the preceding physical and pressure families pass both hosted workflows.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -92,6 +92,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
 | [Smooth experiment walkthrough](docs/EXPERIMENTS.md) | Six independent trajectories, off-stage reconstruction and PDE residual samples |
 | [Arithmetic study](docs/ARITHMETIC_STUDY.md) | Same-grid Rust/direct-DFT comparisons with separate prescribed-force effects |
+| [Derived-field arithmetic](docs/DERIVED_ARITHMETIC.md) | Complete velocity tensors, vorticity and physical pressure compared at 80/120 digits |
 | [Numerical conventions](docs/NUMERICAL_CONVENTIONS.md) | Fourier, pressure, norms and exact-time contracts |
 | [Checkpoint formats](docs/CHECKPOINT_FORMAT.md) | Experimental byte formats, caps and import-origin boundaries |
 | [Numerical protocol identity](docs/PROTOCOL_FORMAT.md) | Canonical tolerance rules, exact tested times and reconstruction geometry |
