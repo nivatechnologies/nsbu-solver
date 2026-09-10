@@ -94,7 +94,8 @@
       "remaining": [
         "Sampling/reconstruction acceptance policy",
         "Complete window verifier"
-      ]
+      ],
+      "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34436876920"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",

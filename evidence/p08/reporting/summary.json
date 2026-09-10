@@ -363,5 +363,11 @@
     "Accepted-history pressure and balance comparisons concern the smooth cyclic-sine case only",
     "No numerical CLI, checkpoint lineage or current-grid concentrating arithmetic qualification"
   ],
-  "evidence_normalization": "Only checkout/home prefixes and trailing blank log lines normalized; raw work records retained. Reviewed inputs are unchanged."
+  "evidence_normalization": "Only checkout/home prefixes and trailing blank log lines normalized; raw work records retained. Reviewed inputs are unchanged.",
+  "implementation_commit": "1e0e8317538943e0e0867e5bac9d5b412f1ad5ee",
+  "hosted_verification": {
+    "status": "pending",
+    "rust": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34436876920",
+    "python": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34436876960"
+  }
 }
