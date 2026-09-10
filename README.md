@@ -49,7 +49,8 @@ from rest with both methods, with large tracking errors and unresolved spatial
 sampling. No qualified concentrating PDE trajectory is established. The Rust
 [benchmark library](crates/nsbu-benchmarks/README.md) now provides independent v2
 scalar/jet evaluations and a bounded sampled force provider; its final package
-verification is in progress.
+verification is in progress. The [first Rust concentrating diagnostic](evidence/p06/README.md)
+has also reached 1/256 from rest on N=4, with spatial/force resolution unresolved.
 
 ## Implementation path
 

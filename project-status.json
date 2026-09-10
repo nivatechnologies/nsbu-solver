@@ -74,11 +74,17 @@
     "P05": {
       "status": "local-checks-passed-hosted-ci-pending",
       "evidence": "evidence/p05/summary.json"
+    },
+    "P06": {
+      "status": "in-progress",
+      "evidence": "evidence/p06/summary.json",
+      "classification": "initial Rust concentrating diagnostic completed; refinements pending"
     }
   },
-  "pde_integration_scope": "Independent Python smooth-MMS temporal/arithmetic studies and N=4 exact-v2 CM/HO trajectories from rest to t=1/256; Rust CM smooth step fixtures also pass; no Rust concentrating trajectory or accepted concentrating window",
+  "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus the first N=4 Rust exact-v2 CM diagnostic from rest to t=1/256; concentrating space/force resolution unresolved",
   "concentrating_pde_integration_performed": true,
   "metadata_cli_exists": true,
   "rust_time_integration_performed": true,
-  "rust_pde_integration_scope": "N=4 smooth full/two-half direct-DFT step comparison and bounded mean-mode transaction tests; no Rust concentrating trajectory or accepted PDE window"
+  "rust_pde_integration_scope": "N=4 smooth step checks and exact-v2 diagnostic from rest to t=1/256 through 32 transactional macro attempts, committing 64 fine CM steps; no accepted PDE window",
+  "rust_concentrating_pde_integration_performed": true
 }

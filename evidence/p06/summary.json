@@ -1,0 +1,52 @@
+{
+  "package": "P06",
+  "status": "in-progress",
+  "initial_probe": {
+    "classification": "diagnostic-completed; no convergence qualification",
+    "implementation_commit": "73ca2b3df4668061d5b38ec9730d1422f7db49c7",
+    "completed_at": "2026-09-09T23:52:30.640025+00:00",
+    "case": "similarity-mms-v2",
+    "grid": 4,
+    "force_evaluation_grid": 4,
+    "nu": "1",
+    "initial_condition": "exact rest",
+    "target": "1/256",
+    "quantum_exponent": -20,
+    "target_ticks": 8192,
+    "elapsed_ticks": 4096,
+    "remaining_ticks": 4096,
+    "macro_step_ticks": 128,
+    "committed_macro_steps": 32,
+    "committed_fine_cm_steps": 64,
+    "rhs_calls": 384,
+    "scalar_transforms": 4992,
+    "maximum_local_ratios": [
+      0.7249142752846672,
+      0.7678012206754569
+    ],
+    "local_absolute_budgets": [
+      1e-05,
+      0.0001
+    ],
+    "local_relative_budgets": [
+      1e-05,
+      1e-05
+    ],
+    "reserved_bytes": 1154784,
+    "cap_bytes": 2097152,
+    "reference_assignments": 0,
+    "state_sha256": "df50b958100fa643bc1b00f3eff6cb31779d77c4782af0e011dc8e5a5b34b634"
+  },
+  "accepted_pde_windows": 0,
+  "pending": [
+    "Independent 80/120-digit direct-DFT trajectory comparison",
+    "Public bounded runner and smooth nonlinear time/grid refinements",
+    "Complete P06 code-quality and hosted verification"
+  ],
+  "limitations": [
+    "N=4 force and spatial resolution remain unresolved",
+    "Local full/two-half acceptance is not convergence evidence",
+    "No off-grid or slab-wide qualification",
+    "No reference state assignments or resets"
+  ]
+}
