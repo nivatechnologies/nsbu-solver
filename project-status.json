@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Actual smooth sampling refinements pass all local gates: 362 Rust tests/probes, complete clean-source reproduction and frozen/bootstrap checks. Unchanged Python retains the verified 198-test profile. Hosted sampling checks pending.",
+    "status": "Streaming actual-history probes pass all local gates: 367 Rust tests/probes, 98.81% executable line and 90.11% branch coverage, complete clean-source replay and frozen/bootstrap checks. Unchanged Python retains its verified 198-test profile. Hosted probe checks pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p08/sampling-family/summary.json",
+    "evidence": "evidence/p08/probe-family/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p08/sampling-family/summary.json",
+    "rust_evidence": "evidence/p08/probe-family/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Derived-field arithmetic passed source-matched Rust/Python hosted checks; sampling increment pending.",
-    "hosted_ci": "evidence/p09/derived-arithmetic/hosted-python.json"
+    "latest_hosted_ci_status": "Actual sampling refinements passed source-matched Rust/Python hosted checks; streaming probe increment pending.",
+    "hosted_ci": "evidence/p08/sampling-family/hosted-python.json"
   },
   "packages": {
     "B00": {
@@ -99,7 +99,7 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34427151855"
     },
     "P08": {
-      "status": "in-progress; complete actual smooth sampling refinements pass local gates; full benchmark, off-stage and concentrating integration pending",
+      "status": "in-progress; streaming smooth accepted-history probes pass local gates; complete physical/reference/all-channel and concentrating integration pending",
       "evidence": "evidence/p08/window/summary.json",
       "core_evidence": "evidence/p08/core/summary.json",
       "remaining": [
@@ -108,7 +108,7 @@
         "Complete window verifier with P09 refinement/restart lineage"
       ],
       "reporting_evidence": "evidence/p08/reporting/summary.json",
-      "current_hosted_ci": "evidence/p09/derived-arithmetic/hosted-rust.json",
+      "current_hosted_ci": "evidence/p08/sampling-family/hosted-rust.json",
       "protocol_evidence": "evidence/p08/protocol/summary.json",
       "protocol_hosted_ci": "evidence/p08/protocol/hosted-rust.json",
       "derivative_evidence": "evidence/p08/derivatives/summary.json",
@@ -119,7 +119,9 @@
       "pressure_family_evidence": "evidence/p08/pressure-family/summary.json",
       "physical_family_hosted_ci": "evidence/p08/physical-family/hosted-rust.json",
       "pressure_family_hosted_ci": "evidence/p08/pressure-family/hosted-rust.json",
-      "sampling_family_evidence": "evidence/p08/sampling-family/summary.json"
+      "sampling_family_evidence": "evidence/p08/sampling-family/summary.json",
+      "sampling_family_hosted_ci": "evidence/p08/sampling-family/hosted-rust.json",
+      "probe_family_evidence": "evidence/p08/probe-family/summary.json"
     },
     "P09": {
       "status": "in-progress; complete smooth sampled derived-field arithmetic passes local and hosted gates; full reduction/artifact semantics and concentrating qualification pending",
@@ -188,5 +190,7 @@
   "independent_smooth_derived_field_arithmetic_exists": true,
   "independent_smooth_derived_field_arithmetic_scope": "Actual N=4/N=12 CM/HO at 1/512: all ordered velocity derivatives, vorticity and full mean-zero pressure/gradient. Separate same-state, same-force and target-force 80/120 studies; error norms reduced in Python. Rust physical-reducer arithmetic and concentrating qualification remain.",
   "actual_smooth_sampling_refinement_family_exists": true,
-  "actual_smooth_sampling_refinement_family_scope": "Six complete physical quantities, five actual trajectory pairs and three physical sample grids at synchronized accepted clocks. Finite joint admission, complete reports and terminal child-failure handling. Sampling changes are empirical; arbitrary off-stage time manifests and concentrating qualification remain."
+  "actual_smooth_sampling_refinement_family_scope": "Six complete physical quantities, five actual trajectory pairs and three physical sample grids at synchronized accepted clocks. Finite joint admission, complete reports and terminal child-failure handling. Sampling changes are empirical; arbitrary off-stage time manifests and concentrating qualification remain.",
+  "streaming_smooth_accepted_history_probes_exist": true,
+  "streaming_smooth_accepted_history_probes_scope": "Six actual from-rest fixed-step trajectories, exact nested physical probe manifests, finite accepted-node lookahead and complete full-band value/time-derivative comparisons. Separate diagnostic scratch never replaces integrated state. Full physical/reference/all-channel and concentrating qualification remain."
 }

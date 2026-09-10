@@ -394,4 +394,15 @@ and CRAP24.33594 pass every gate. The unchanged 82-file Python inventory retains
 the verified 198-test profile. A complete initial 357-test profile is preserved,
 followed by a full replay after integrating the verified derived-field increment.
 The clean source reproduces every example finding; frozen/bootstrap and package
-checks pass. Hosted sampling checks are pending; no concentrating window is accepted.
+checks pass. Source-matched hosted Rust and Python checks pass; no concentrating window is accepted.
+
+
+The [streaming probe increment](../evidence/p08/probe-family/README.md) passes
+367 Rust tests/probes across 272 Rust files: 98.81% executable line and 90.11%
+branch coverage. Maxima CC21, cognitive18, Halstead75.8956, physical-file471 and
+CRAP24.33594 pass all gates. The unchanged 82-file Python/stub inventory retains
+its verified 198-test profile; 41 bootstrap tests were rerun. Clean-source tests
+and complete example reproduction, packaging and frozen mathematical checks
+pass. Admission, scheduling, interpolation and publication remain separate, with
+no reference-assignment interface. Hosted probe checks are pending; no
+concentrating PDE window is accepted.

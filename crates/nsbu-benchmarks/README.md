@@ -114,3 +114,11 @@ the argument-free example runs the independently evolved family. A numerical
 child failure terminates its aggregate consumer without changing any trajectory.
 See `docs/SAMPLING_REFINEMENTS.md` for changes in diagnostic statistics, the
 missed-peak control and the distinction from a qualified convergence result.
+
+`smooth_experiment::probes` streams arbitrary admitted physical probe clocks from
+six independent accepted histories, sampling before those bounded histories are
+overwritten. Its separate value/derivative scratch never replaces integrated
+state. Exact node origins and actual state clocks expose the required initial
+two-macro-step lookahead. The `smooth_probes` example supports `--dry-run` and a
+complete early/late probe walkthrough. See `docs/RECONSTRUCTED_PROBES.md` for
+resource admission, complete reports, failure invalidation and numerical limits.

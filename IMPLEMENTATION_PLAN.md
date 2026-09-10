@@ -393,10 +393,27 @@ trajectory pairs and three physical sample grids at each accepted clock. Joint
 resources, failed-attempt charges, terminal child failures, unchanged state
 digests and an analytic missed-peak control are verified. The clean source
 reproduces all 270 public-example comparisons byte-for-byte; unchanged Python
-retains its complete 198-test profile. Hosted sampling checks are pending.
+retains its complete 198-test profile. Source-matched hosted Rust and Python checks pass.
 
 P08/P09 remain incomplete. Arbitrary off-stage time manifests require streaming
 reconstruction before bounded histories are overwritten. Complete reference,
 force, production-reduction arithmetic, quadrature, regional/location and
 benchmark/artifact studies and concentrating qualification remain. No window
 is accepted from near-zero smooth sampling differences.
+
+## P08 streaming accepted-history probe progress
+
+The [probe-family increment](evidence/p08/probe-family/README.md) passes 367 Rust
+tests/probes, 98.81% executable line coverage, 90.11% branch coverage and every
+required complexity/CRAP gate. It streams early and late exact physical probes
+before bounded accepted histories are overwritten. Six independent rest owners
+retain their original fixed steps; separate full-band value/derivative scratch
+preserves actual node origins. Final state words equal a separately evolved
+family. Admission, rejection, stale-history and allocation controls pass, as do
+clean-source reproduction, packaging and frozen/bootstrap checks. Unchanged
+Python retains the complete 198-test profile. Hosted probe checks are pending.
+
+P08/P09 remain incomplete. Complete physical/reference/force/residual consumers,
+reconstructed-time refinement qualification, benchmark/artifact binding and
+concentrating current-grid studies remain. No interpolant replaces an integrated
+state and no concentrating PDE window is accepted.

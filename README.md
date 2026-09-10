@@ -101,6 +101,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Physical refinement families](docs/PHYSICAL_REFINEMENTS.md) | Actual six-trajectory comparisons, exact clocks and finite diagnostic budgets |
 | [Pressure refinements](docs/PRESSURE_REFINEMENTS.md) | Independent full-band physical pressure from actual accepted states |
 | [Sampling refinements](docs/SAMPLING_REFINEMENTS.md) | Three physical sample grids, complete tensors/pressure and preserved peak sensitivity |
+| [Accepted-history probes](docs/RECONSTRUCTED_PROBES.md) | Stream early and late reconstruction samples with exact node origins and bounded lookahead |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 

@@ -1,0 +1,186 @@
+{
+  "package": "P08",
+  "increment": "streaming-actual-accepted-history-smooth-probes",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T22:11:55.323533+00:00",
+  "base_commit": "e456dd7de727fce21f590fb28ca17cb655ba882a",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 272,
+  "rust_harness_tests": 361,
+  "rust_allocation_executables": 6,
+  "rust_tests_and_probes": 367,
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "e3c3d4f66ea535e2567c76d61f5099ee4c64afb94c4d9fb6286671fae24dcac2"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "rust_coverage": {
+    "branches": {
+      "count": 1790,
+      "covered": 1613,
+      "notcovered": 177,
+      "percent": 90.11173184357541
+    },
+    "functions": {
+      "count": 1957,
+      "covered": 1945,
+      "percent": 99.386816555953
+    },
+    "instantiations": {
+      "count": 4065,
+      "covered": 3259,
+      "percent": 80.17220172201722
+    },
+    "lines": {
+      "count": 23618,
+      "covered": 23336,
+      "percent": 98.80599542721652
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 44568,
+      "covered": 42953,
+      "notcovered": 1615,
+      "percent": 96.376323819781
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 471
+  },
+  "python_evidence": {
+    "source_files_unchanged": 82,
+    "complete_profile": "../../p09/derived-arithmetic/summary.json",
+    "tests": 198,
+    "bootstrap_tests_rerun": 41
+  },
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 73,
+      "duplicatedLines": 688,
+      "duplicatedTokens": 6059,
+      "lines": 33454,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.056555269922879,
+      "percentageTokens": 2.368360362895818,
+      "sources": 271,
+      "tokens": 255831
+    },
+    "finding_exit_codes": {
+      "duplicates": 0,
+      "dead-code": 101,
+      "type-escapes": 1
+    },
+    "review": "Shared helpers unused by individual harness/example compilations remain exercised by other targets. Explicit contracts and independent mathematical oracles retain intentional structural duplication; no universal absence is claimed.",
+    "mutations": "Not rerun; prior historical scopes remain informational"
+  },
+  "numerical_measurements": {
+    "case": "CyclicSine",
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "macro_ticks": [
+      64,
+      32,
+      16
+    ],
+    "clock_quantum_exponent": -16,
+    "accepted_family_ticks": [
+      0,
+      64,
+      128
+    ],
+    "probe_ticks": [
+      0,
+      7,
+      31,
+      63,
+      64,
+      95,
+      127,
+      128
+    ],
+    "middle_probe_ticks": [
+      0,
+      31,
+      64,
+      95,
+      128
+    ],
+    "coarse_probe_ticks": [
+      0,
+      64,
+      128
+    ],
+    "node_rule": "j=max(2,ceil(t/H)); accepted macro endpoints [(j-2)H,(j-1)H,jH]",
+    "pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "complete_comparisons_per_probe": 10,
+    "successful_attempts": 8,
+    "joint_reserved_bytes": 22193768,
+    "cap_bytes": 134217728,
+    "probe_weighted_visits": 9477120,
+    "admission_geometry_checks": 48,
+    "actual_findings": "public-example.log.gz",
+    "state_integrity": "All six final full state words equal a separately run fixed-step family; reconstructed scratch never replaces an integrated state",
+    "negative_controls": [
+      "Insufficient initial lookahead",
+      "changed exact clock/window",
+      "caps/work overflow",
+      "branch rejection",
+      "accepted history advanced past the next probe"
+    ]
+  },
+  "solid_review": "Immutable admission, accepted trajectory scheduling, diagnostic-only interpolation and complete publication have separate modules. Borrowed field views preserve both physical probe time and accepted-node origins; all integrators retain their state mutation boundary.",
+  "limitations": [
+    "Actual smooth accepted histories only; interpolants are diagnostic scratch, not external authenticated states",
+    "Full physical/reference/force/residual consumers and reconstructed-time refinement qualification remain",
+    "Full benchmark and external artifact binding, concentrating current-grid studies and complete window production remain",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

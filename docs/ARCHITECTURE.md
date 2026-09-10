@@ -199,3 +199,12 @@ The aggregate borrows accepted states, retains all ninety complete comparisons
 per clock and separates original field-error statistics from their changes under
 sampling refinement. It publishes only complete reports; a numerical child
 failure terminates the aggregate before inconsistent child schedules can be reused.
+
+The [probe-family owner](RECONSTRUCTED_PROBES.md) advances each private trajectory
+only until its three accepted macro nodes cover the next physical probe. Exact
+geometry is admitted before allocation; separate full-band value/derivative
+scratch prevents reconstruction from changing integrated state. Reports retain
+the probe time, all accepted node clocks and each current state clock, including
+initial lookahead. Streaming preserves early observations before the finite
+history rings are overwritten. A failed later probe clears current views and
+terminates the owner while retaining every earlier legal commit.

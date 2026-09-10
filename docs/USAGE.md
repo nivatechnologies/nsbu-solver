@@ -394,3 +394,17 @@ vorticity, pressure and pressure-gradient comparisons on M=24/32/48 grids at
 unchanged actual accepted clocks. The example preserves all pairwise statistics
 and reports their sampling changes, with a joint memory cap and finite work.
 Sampled peaks and near-zero changes do not establish continuum error bounds.
+
+## Streaming reconstructed probes
+
+```sh
+cargo run --release -p nsbu-benchmarks --example smooth_probes -- --dry-run
+cargo run --release -p nsbu-benchmarks --example smooth_probes
+```
+
+The [accepted-history guide](RECONSTRUCTED_PROBES.md) describes the exact nested
+time manifests, two-step initial lookahead and read-only interpolation fields.
+The example emits early and late probe findings from actual independent histories
+and records both physical probe time and each owner's current state time. Its
+interpolated fields are diagnostic; full all-observable window qualification
+remains in progress.

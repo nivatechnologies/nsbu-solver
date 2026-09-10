@@ -1,0 +1,128 @@
+{
+  "rust-coverage.json.gz": {
+    "bytes": 856695,
+    "sha256": "27a1fa5829793db500baf8593c0f9dc4cada11f7947d8bb4f3c18bee402f8389",
+    "uncompressed_bytes": 5684392,
+    "uncompressed_sha256": "bb82496351eeef0924d6ab1607cd6b8a6eaa8dc3735fe18d5ff764e6fe9267fe"
+  },
+  "rust-metrics.json.gz": {
+    "bytes": 463028,
+    "sha256": "be9f01fd30c97f1a8472d5d33568419063f0e81f35f54f911639b6caa5cd9b4e",
+    "uncompressed_bytes": 4105657,
+    "uncompressed_sha256": "33a48fb604810799aaf8c87d292c19d729810509f7a46f8a2dcb754e19e41216"
+  },
+  "rust-crap.json.gz": {
+    "bytes": 24486,
+    "sha256": "f45aae52f46c73b08ba3b7244ba2921c51121d178ff897a8999596aa7357f4b4",
+    "uncompressed_bytes": 394597,
+    "uncompressed_sha256": "4084cbc7f8ae764b6b47e3ca917587f9d96e522247afbbee957efcabf4829028"
+  },
+  "rust-tests.log.gz": {
+    "bytes": 12712,
+    "sha256": "c47ff6b2a5b757a51df451b330a0e4eb7e748fd3e1221d0ff257bf808db517f9",
+    "uncompressed_bytes": 54073,
+    "uncompressed_sha256": "9ffa14b96e03c20872d9d5b70d764ea472f83d860d5cbec7edbc0511e136050b"
+  },
+  "terminal-history-tests.log.gz": {
+    "bytes": 366,
+    "sha256": "c344dabb49fa05c421d53a4411ae29a8205ced94d689c62c0e48893714a03781",
+    "uncompressed_bytes": 524,
+    "uncompressed_sha256": "a2d64e5aa700dd7df11c391ae7d38bfe16c5b2f853bdc9228818f439e91a3816"
+  },
+  "focused-tests.log.gz": {
+    "bytes": 410,
+    "sha256": "65f718dcc9524d99ead68a91fa8b06bf72f7ce78799b31d69621fc066c077983",
+    "uncompressed_bytes": 639,
+    "uncompressed_sha256": "1c6ebbcd8ada374e9f90343f645cd2eeadabb8c13cb1069fd61120fa1cf3a71b"
+  },
+  "allocation.log.gz": {
+    "bytes": 223,
+    "sha256": "66516dd02cb7ed49ac6cc6c09be9fe739eb85910e05cdadcc5a5fa05cf0eb646",
+    "uncompressed_bytes": 283,
+    "uncompressed_sha256": "8794f8e66ea3453867e3c9aaed146dbca9ad6c64d7ed72b3386a3657fce6a41e"
+  },
+  "example-tests.log.gz": {
+    "bytes": 334,
+    "sha256": "4af599eb7e1fd286fcef66c51caf73169f909d6a31e23120ede729584b2c35ad",
+    "uncompressed_bytes": 490,
+    "uncompressed_sha256": "360546ca999ff688a7cfbc2d53cbf48c398ac477889b09984470da8ee55be2b0"
+  },
+  "public-example.log.gz": {
+    "bytes": 1660,
+    "sha256": "9a2f65f26fa23f6f3387e48100b65e6ed727c8b7ff9b308fd0149dfa0a2a9d8f",
+    "uncompressed_bytes": 4002,
+    "uncompressed_sha256": "0f3acb166c0878f4a99befdbf2f50d4ac80af088a7060f884bfe8d948ad5ed59"
+  },
+  "public-preflight.log.gz": {
+    "bytes": 749,
+    "sha256": "cf0af3049d0b16b089165b6a1d3a3b531af0ab1bca338d6d98d0929a299da65d",
+    "uncompressed_bytes": 1430,
+    "uncompressed_sha256": "db68983927bc92696b077fde9f4d51e03da90b2e6291c8fa7d69b400a7643c66"
+  },
+  "clippy.log.gz": {
+    "bytes": 219,
+    "sha256": "e6f5b374575610c06317a3fae2d8a5387a29103d898961d9fd19e184a052b9a2",
+    "uncompressed_bytes": 374,
+    "uncompressed_sha256": "742d68b5e78cf0aed96b03bf4aeff88f9f72fa768de64bbfa5620a4ffe6d4cb8"
+  },
+  "rustdoc.log.gz": {
+    "bytes": 247,
+    "sha256": "5a9b1ea1e84125761bf51befdef546631d0ee515273c284ee36ef3b2ea351b92",
+    "uncompressed_bytes": 705,
+    "uncompressed_sha256": "e9ff7a56d2d9050cdd9744ded7dee8b979e37f107bb521eae41e6e5991d7716f"
+  },
+  "package.log.gz": {
+    "bytes": 531,
+    "sha256": "d3a704c2ab100918c0cebec0764b73c2cb7f46a66b502f0a3444682f6ef34d4e",
+    "uncompressed_bytes": 2430,
+    "uncompressed_sha256": "ccb160c31322f7ce7c7e1495c716075a93c0aecf620a83012099bffca1385d6c"
+  },
+  "bootstrap-tests.log.gz": {
+    "bytes": 1142,
+    "sha256": "affc9957ee63b2ac4678f45b53ea892e8a79a9c16dd3bade03e503ee07952eab",
+    "uncompressed_bytes": 5477,
+    "uncompressed_sha256": "73ac6840bc27a0c69fc37f26b7b66f4b103da50029eb2219dcbe14107b764b2c"
+  },
+  "repository.json.gz": {
+    "bytes": 586,
+    "sha256": "ca912efb1f922c61d38d890c914aa6db12e45c70a56a25b47050933da63bb633",
+    "uncompressed_bytes": 1003,
+    "uncompressed_sha256": "232609cd885a7ec1cc65b5e8078d527b1d237e8315e2f46eee958b7059bf9e24"
+  },
+  "design.json.gz": {
+    "bytes": 7801,
+    "sha256": "69c6e859264ca6daf32ebc7e58df780e215e10a21c99ddb116734fb0b5aef4b5",
+    "uncompressed_bytes": 23929,
+    "uncompressed_sha256": "428a89b44939f3ce91450c6e54f39549157ab60159a3872291fd132bb5713038"
+  },
+  "clean-source-proof.json.gz": {
+    "bytes": 17183,
+    "sha256": "88f15ff6555a7357e42fcd82f6cc4e31e8cd7a785775d53f4c706414d94fad6e",
+    "uncompressed_bytes": 42671,
+    "uncompressed_sha256": "ea85d01f6c46db04c96c32c004ea9e2187c7e6d02e374f6692582354c71e3c1b"
+  },
+  "clean-rust.log.gz": {
+    "bytes": 2266,
+    "sha256": "60e440eed27b53f2533d1d3243f32c01a4090838bc4cbda28fceb1032b1e3d34",
+    "uncompressed_bytes": 6950,
+    "uncompressed_sha256": "0a6835d340db0208bac836a50dee2ab3316f5919555ee1a7ff99d30e2c08de55"
+  },
+  "rust-duplicates.json.gz": {
+    "bytes": 11993,
+    "sha256": "f5b59871d000875dc515cac837e98e20c427cce7284bea34e981d683942b91d7",
+    "uncompressed_bytes": 89475,
+    "uncompressed_sha256": "8255f74d76d6faa6ae928a5cde0ecbbaf15301b14928aff9e443f29ab94ccd2a"
+  },
+  "rust-dead-code.log.gz": {
+    "bytes": 700,
+    "sha256": "3d114a70bea77e4e3ea3158afde1741075c2f54a75f0523c7e12d15623d4ea7a",
+    "uncompressed_bytes": 2475,
+    "uncompressed_sha256": "b5f27dada3035b987537169f922c370ab995f8417bbf1b97cbe0ffd4ab2132f3"
+  },
+  "type-escapes.log.gz": {
+    "bytes": 20,
+    "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "uncompressed_bytes": 0,
+    "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

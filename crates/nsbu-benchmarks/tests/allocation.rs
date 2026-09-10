@@ -11,10 +11,12 @@ use stats_alloc::Region;
 static GLOBAL: &stats_alloc::StatsAlloc<std::alloc::System> = &stats_alloc::INSTRUMENTED_SYSTEM;
 
 mod owned_reconstruction_support;
+mod probe_allocation_support;
 mod reconstruction_observer_support;
 mod smooth_family_support;
 
 fn main() {
+    probe_allocation_support::check();
     regional_derivatives();
     physical_regions();
     physical_refinement_family();

@@ -6,6 +6,7 @@
 pub mod physical;
 mod plan;
 pub mod pressure;
+pub mod probes;
 pub mod reconstruction;
 pub mod residual;
 pub mod sampling;
