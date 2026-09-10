@@ -16,6 +16,7 @@ mod smooth_family_support;
 
 fn main() {
     regional_derivatives();
+    physical_regions();
     reconstruction_accepted_ring();
     owned_reconstruction_restart();
     reconstruction_archive_restart();
@@ -65,6 +66,32 @@ fn main() {
         ),
         (0, 0, 0)
     );
+}
+
+fn physical_regions() {
+    use nsbu_benchmarks::regions::physical;
+    use nsbu_solver::diagnostics::physical::{
+        PhysicalComparisonWorkspace, PhysicalField, PhysicalQuantity,
+    };
+    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+    let samples = Layout::new([6; 3]).unwrap();
+    let bytes = PhysicalComparisonWorkspace::reservation(domain, domain, samples).unwrap();
+    let mut workspace = PhysicalComparisonWorkspace::new(domain, domain, samples, bytes).unwrap();
+    let zero = vec![Complex64::new(0.0, 0.0); domain.layout().half_len()];
+    let clock = TickClock::restore(-20, 8192, 4096, 4096).unwrap();
+    let region = Region::new(GLOBAL);
+    let fields = PhysicalField::Vector([&zero; 3]);
+    let input = workspace
+        .compare(fields, fields, PhysicalQuantity::Hessian, 1.0)
+        .unwrap();
+    assert!(physical::measure(&input, clock, 128, samples.real_len() - 1).is_err());
+    let report = physical::measure(&input, clock, 128, samples.real_len()).unwrap();
+    assert!(report.grid_complete);
+    assert_eq!(report.components, 27);
+    let measured = region.change();
+    assert_eq!(measured.allocations, 0);
+    assert_eq!(measured.reallocations, 0);
+    assert_eq!(measured.deallocations, 0);
 }
 
 fn regional_derivatives() {

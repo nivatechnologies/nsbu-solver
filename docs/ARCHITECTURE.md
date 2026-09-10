@@ -162,3 +162,10 @@ The analytical derivative evaluator cannot access integrated state. See
 [derivative diagnostics](DERIVATIVE_DIAGNOSTICS.md) for coordinate, normalization,
 pressure-gauge and independent-fixture contracts. Complete all-observable window
 production and qualification remain in progress.
+
+[Complete physical-field comparisons](PHYSICAL_COMPARISONS.md) compose scalar
+sampling and complete tensor reductions without storing every derivative grid.
+The v2 adapter reuses the existing geometric partition and preserves all global
+samples. This numerical layer does not own state evolution or authenticate
+problem/time provenance; the complete experiment remains responsible for those
+bindings and its finite observation schedule.

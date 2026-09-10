@@ -36,3 +36,9 @@ first/second physical derivatives in separately admitted scratch. `TensorErrors`
 measures scalar/vector/Frobenius tensor errors; the existing vector alias remains
 available. Input state is read-only, and missing samples retain an explicit status.
 See the repository's `docs/DERIVATIVE_DIAGNOSTICS.md` for numerical conventions.
+
+`diagnostics::physical::PhysicalComparisonWorkspace` assembles complete scalar,
+velocity, gradient, Hessian and vorticity comparisons from borrowed spectra.
+Sequential sampling keeps physical scratch independent of tensor component count.
+The report retains every sampled field-difference/reference magnitude. See
+`docs/PHYSICAL_COMPARISONS.md` for full-band, gauge and resource contracts.

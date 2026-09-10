@@ -96,6 +96,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Checkpoint formats](docs/CHECKPOINT_FORMAT.md) | Experimental byte formats, caps and import-origin boundaries |
 | [Numerical protocol identity](docs/PROTOCOL_FORMAT.md) | Canonical tolerance rules, exact tested times and reconstruction geometry |
 | [Physical derivative diagnostics](docs/DERIVATIVE_DIAGNOSTICS.md) | Full-band scalar derivatives, v2 reference tensors and regional errors |
+| [Physical-field comparisons](docs/PHYSICAL_COMPARISONS.md) | Complete scalar/vector/tensor comparisons and v2 regional aggregation |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 

@@ -82,6 +82,24 @@ impl<const COMPONENTS: usize> TensorErrors<COMPONENTS> {
         Ok(())
     }
 
+    /// Add already computed complete field-difference and reference magnitudes.
+    /// Both must be finite and nonnegative. This supports sequential tensor-component
+    /// sampling without pretending that magnitude differences equal field differences.
+    /// The caller is responsible for the declared component count and norm provenance.
+    pub fn push_magnitudes(&mut self, error: f64, reference: f64) -> Result<(), SolverError> {
+        if self.count == self.maximum {
+            return Err(SolverError::ResourceLimit);
+        }
+        if !error.is_finite() || !reference.is_finite() || error < 0.0 || reference < 0.0 {
+            return Err(SolverError::InvalidPayload);
+        }
+        let mut pending = *self;
+        pending.squares.complex(Complex64::new(error, 0.0), 1.0)?;
+        pending.record(error, reference)?;
+        *self = pending;
+        Ok(())
+    }
+
     fn accumulate(
         &mut self,
         actual: [f64; COMPONENTS],
@@ -101,10 +119,14 @@ impl<const COMPONENTS: usize> TensorErrors<COMPONENTS> {
             std::array::from_fn::<_, COMPONENTS, _>(|axis| actual[axis] - reference[axis]);
         let error = finite(difference.into_iter().fold(0.0, f64::hypot))?;
         let scale = finite(reference.into_iter().fold(0.0, f64::hypot))?;
-        let relative = finite(error / scale.max(self.floor))?;
         for value in difference {
             self.squares.complex(Complex64::new(value, 0.0), 1.0)?;
         }
+        self.record(error, scale)
+    }
+
+    fn record(&mut self, error: f64, scale: f64) -> Result<(), SolverError> {
+        let relative = finite(error / scale.max(self.floor))?;
         self.count += 1;
         self.peak = self.peak.max(error);
         self.relative_peak = self.relative_peak.max(relative);

@@ -9,6 +9,7 @@ pub mod integrity;
 pub mod local;
 mod modes;
 pub mod norms;
+pub mod physical;
 pub mod quadrature;
 pub mod residual;
 pub mod sampling;

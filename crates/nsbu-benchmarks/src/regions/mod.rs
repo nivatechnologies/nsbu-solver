@@ -1,6 +1,7 @@
 //! Exact-v2 diagnostic geometry; floating masks and quadrature are empirical measurements.
 mod coverage;
 mod errors;
+pub mod physical;
 mod point;
 use crate::BenchmarkError;
 pub use coverage::{CoveragePlan, CoverageStatus, RegionCoverage};

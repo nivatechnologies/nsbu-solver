@@ -85,3 +85,8 @@ check these pointwise derivatives. `RegionalTensorErrors` retains complete globa
 and core/annulus/collar tensor errors. Raw analytical pressure still needs a
 separate periodic mean quadrature, and concentrating window validation remains
 incomplete. See `docs/DERIVATIVE_DIAGNOSTICS.md` in the repository.
+
+`regions::physical::measure` applies v2 masks to every sample in a complete
+physical-field comparison, preserving its global statistics, component inventory
+and relative floor. The experiment must separately bind the supplied clock and
+mathematical/state provenance. See `docs/PHYSICAL_COMPARISONS.md` in the repository.

@@ -2,6 +2,33 @@
 use nsbu_solver::diagnostics::local::{SampledError, TensorErrors};
 
 #[test]
+fn complete_magnitudes_have_the_same_normalization_and_atomic_failure_contract() {
+    let mut errors = TensorErrors::<9>::new(2, 0.5).unwrap();
+    errors.push_magnitudes(3.0, 4.0).unwrap();
+    let before = errors.finish().unwrap();
+    for (error, reference) in [
+        (-1.0, 0.0),
+        (1.0, -1.0),
+        (f64::NAN, 0.0),
+        (0.0, f64::INFINITY),
+    ] {
+        assert!(errors.push_magnitudes(error, reference).is_err());
+        assert_eq!(errors.finish().unwrap(), before);
+    }
+    errors.push_magnitudes(4.0, 0.0).unwrap();
+    let SampledError::Measured(report) = errors.finish().unwrap() else {
+        panic!("missing data")
+    };
+    assert_eq!(report.components, 9);
+    assert_eq!(report.rms_error, 12.5_f64.sqrt());
+    assert_eq!(report.peak_relative_error, 8.0);
+    assert!(errors.push_magnitudes(0.0, 0.0).is_err());
+    let mut tiny = TensorErrors::<1>::new(1, f64::from_bits(1)).unwrap();
+    assert!(tiny.push_magnitudes(1.0, 0.0).is_err());
+    assert_eq!(tiny.finish().unwrap(), SampledError::NoSamples);
+}
+
+#[test]
 fn tensor_magnitude_counts_every_ordered_entry_and_normalizes_only_samples() {
     let mut errors = TensorErrors::<27>::new(2, 0.5).unwrap();
     let mut first = [0.0; 27];

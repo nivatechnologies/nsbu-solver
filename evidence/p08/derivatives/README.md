@@ -74,8 +74,7 @@ reference comparison log additionally uses `work/p08-reference-derivatives-tests
 The clean-source export ran the public focused commands, regenerated identical
 reference JSON, installed the CLI and exercised `--help` and
 `smooth --dry-run --method ho`. All 41 bootstrap tests ran in the complete Python
-suite. No dependency version or preserved reviewed input changed. Hosted
-verification for this source increment is pending.
+suite. No dependency version or preserved reviewed input changed. Source-matched [hosted Rust](hosted-rust.json) and [Python](hosted-python.json) verification pass.
 
 ## Review
 

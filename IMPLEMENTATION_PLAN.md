@@ -314,10 +314,25 @@ physical derivatives, scalar/vector/Frobenius tensor errors, v2 regional tensor
 reports and 80/120-digit independent analytical derivative fixtures. Actual CM/HO
 rest trajectories retain nonzero derivative errors and unchanged integrated
 states during sampling. All required local quality gates, fresh packaging,
-clean-source installation and frozen mathematical checks pass; hosted checks are
-pending.
+clean-source installation and frozen mathematical checks pass; source-matched hosted Rust and Python checks pass.
 
 P08 remains incomplete. Full benchmark observable/time/policy binding, complete
 all-observable experiment production, pressure mean/reference refinement and
 accepted-state/P09 provenance integration remain. Pointwise derivative agreement
 and small smooth trajectories do not qualify a concentrating window.
+
+## P08 complete physical comparison progress
+
+The [physical-field comparison increment](evidence/p08/physical/README.md) passes
+341 Rust tests/probes, 98.93% executable line coverage, 91.05% branch coverage and
+all required complexity/CRAP limits. It measures complete scalar/vector/gradient/
+Hessian/vorticity differences with sequential scratch, preserves mean and fine-only
+mode errors, and feeds identical samples to v2 regional reports. Actual independent
+CM/HO rest states retain nonzero method differences and unchanged field digests.
+Fresh-source public tests, packaging and frozen bootstrap checks pass. The unchanged
+Python source retains its complete 188-test evidence. Hosted verification is pending.
+
+P08 remains incomplete. The experiment must bind these measurements to the full
+frozen benchmark inventory, exact time/policy and accepted-state provenance.
+Complete pressure/reference, force/arithmetic/transfer refinements and concentrating
+integration remain. No concentrating PDE window is accepted.

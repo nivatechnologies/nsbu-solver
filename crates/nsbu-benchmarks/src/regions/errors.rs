@@ -122,12 +122,26 @@ impl<const COMPONENTS: usize> RegionalTensorErrors<COMPONENTS> {
         actual: [f64; COMPONENTS],
         reference: [f64; COMPONENTS],
     ) -> Result<(), RegionalError> {
+        self.push_with(|samples| samples.push(actual, reference))
+    }
+
+    /// Consume complete error/reference magnitudes from a sequential tensor comparison.
+    /// These are norms of the field difference and reference, never a difference of norms.
+    /// The caller must bind the component inventory and exact physical time separately.
+    pub fn push_magnitudes(&mut self, error: f64, reference: f64) -> Result<(), RegionalError> {
+        self.push_with(|samples| samples.push_magnitudes(error, reference))
+    }
+
+    fn push_with(
+        &mut self,
+        mut observe: impl FnMut(&mut TensorErrors<COMPONENTS>) -> Result<(), SolverError>,
+    ) -> Result<(), RegionalError> {
         if self.attempts_left == 0 {
             return Err(BenchmarkError::DiagnosticWorkExceeded.into());
         }
         let point = self.next_point().ok_or(SolverError::ResourceLimit)?;
         let mut global = self.global;
-        global.push(actual, reference)?;
+        observe(&mut global)?;
         self.attempts_left -= 1;
         self.charged += self.root_budget;
         let spatial = classify(point, self.clock, self.root_budget)?.spatial;
@@ -139,7 +153,7 @@ impl<const COMPONENTS: usize> RegionalTensorErrors<COMPONENTS> {
             SpatialRegion::Exterior => 4,
         };
         let mut region = self.regions[index];
-        region.push(actual, reference)?;
+        observe(&mut region)?;
         self.global = global;
         self.regions[index] = region;
         self.next += 1;

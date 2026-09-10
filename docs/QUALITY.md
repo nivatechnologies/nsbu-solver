@@ -338,4 +338,14 @@ preserve vector aliases and full ordered derivative multiplicities; scalar
 sampling, regional geometry and reference evaluation remain separate. Clean-source
 fixture regeneration, public tests and installation pass. Informational findings
 and the coverage-combination recovery are recorded without hiding nonzero tool
-exits. Hosted verification is pending; no concentrating window is accepted.
+exits. Source-matched hosted Rust and Python verification pass; no concentrating window is accepted.
+
+The [complete physical comparison increment](../evidence/p08/physical/README.md)
+passes 341 Rust tests/probes across 247 Rust files. Coverage is 98.93% executable
+lines and 91.05% branches; maxima remain CC21, cognitive16, Halstead75.8956,
+file385 and CRAP24.33594. All 72 Python/stub files match the preceding verified
+188-test source profile. Forty-one bootstrap tests were rerun; fresh public
+source tests, packaging and frozen mathematical checks pass. Independent field
+comparison, tensor reduction and regional geometry remain separate, and actual
+CM/HO state digests are preserved. Informational finding exits remain explicit.
+Hosted checks are pending, and P08/concentrating qualification remain incomplete.

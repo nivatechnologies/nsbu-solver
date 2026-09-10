@@ -16,8 +16,47 @@ fn main() {
     conservative();
     sampling();
     derivatives();
+    physical_comparisons();
     lineage();
     prolongation();
+}
+
+fn physical_comparisons() {
+    use nsbu_solver::diagnostics::physical::{
+        PhysicalComparisonWorkspace, PhysicalField, PhysicalQuantity,
+    };
+    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+    let layout = Layout::new([6; 3]).unwrap();
+    let bytes = PhysicalComparisonWorkspace::reservation(domain, domain, layout).unwrap();
+    let refused = Region::new(GLOBAL);
+    assert!(PhysicalComparisonWorkspace::new(domain, domain, layout, bytes - 1).is_err());
+    no_allocations(refused.change());
+    let mut work = planned(bytes, || {
+        PhysicalComparisonWorkspace::new(domain, domain, layout, bytes).unwrap()
+    });
+    let zero = vec![Complex64::new(0.0, 0.0); domain.layout().half_len()];
+    let region = Region::new(GLOBAL);
+    for quantity in [
+        PhysicalQuantity::Scalar,
+        PhysicalQuantity::ScalarGradient,
+        PhysicalQuantity::Vector,
+        PhysicalQuantity::Gradient,
+        PhysicalQuantity::Hessian,
+        PhysicalQuantity::Vorticity,
+    ] {
+        let field = if matches!(
+            quantity,
+            PhysicalQuantity::Scalar | PhysicalQuantity::ScalarGradient
+        ) {
+            PhysicalField::Scalar(&zero)
+        } else {
+            PhysicalField::Vector([&zero; 3])
+        };
+        assert!(work.compare(field, field, quantity, 0.0).is_err());
+        let result = work.compare(field, field, quantity, 1.0).unwrap();
+        assert_eq!(result.global().rms_error, 0.0);
+    }
+    no_allocations(region.change());
 }
 
 fn prolongation() {
