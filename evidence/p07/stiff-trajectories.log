@@ -1,0 +1,61 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.27s
+     Running tests/ho_kernel.rs (work/p07-draft/target/debug/deps/ho_kernel-6578db83902144fa)
+
+running 5 tests
+test a_provider_that_assumes_increasing_times_fails_the_ho_purity_control ... ok
+test fifth_request_returns_to_half_time_and_all_failures_propagate ... ok
+HO refined decay=0 frequency=13 steps=8 error=2.6519856866080715e-8
+HO scalar actual decay=0 frequency=13 steps=8 value=7.260086817805694e-1
+HO refined decay=0 frequency=13 steps=16 error=1.6559561499818187e-9
+HO refined order=4.001336613276066
+HO scalar actual decay=0 frequency=13 steps=16 value=7.260086569166687e-1
+HO refined decay=0 frequency=13 steps=32 error=1.0345524437127551e-10
+HO refined order=4.000585785004894
+HO scalar actual decay=0 frequency=13 steps=32 value=7.260086553641678e-1
+test coarse_stiff_steps_retain_the_observed_order_reduction ... ok
+HO refined decay=0 frequency=13 steps=64 error=6.4646066277873615e-12
+HO refined order=4.000300385662325
+HO scalar actual decay=0 frequency=13 steps=64 value=7.260086552671772e-1
+HO refined decay=20 frequency=13 steps=8 error=1.371332178923268e-7
+HO scalar actual decay=20 frequency=13 steps=8 value=7.260085181274947e-1
+HO refined decay=20 frequency=13 steps=16 error=8.532409334627289e-9
+HO refined order=4.006481089102841
+HO scalar actual decay=20 frequency=13 steps=16 value=7.260086467283032e-1
+HO refined decay=20 frequency=13 steps=32 error=5.321394436208493e-10
+HO refined order=4.003076930257887
+HO scalar actual decay=20 frequency=13 steps=32 value=7.260086547285731e-1
+HO refined decay=20 frequency=13 steps=64 error=3.322397912342012e-11
+HO refined order=4.001507568500927
+HO scalar actual decay=20 frequency=13 steps=64 value=7.260086552274886e-1
+HO refined decay=1000 frequency=13 steps=32 error=4.040591716769626e-8
+HO scalar actual decay=1000 frequency=13 steps=32 value=7.260086148547954e-1
+HO refined decay=1000 frequency=13 steps=64 error=2.6689092047504914e-9
+HO refined order=3.920244449674754
+HO scalar actual decay=1000 frequency=13 steps=64 value=7.260086525918034e-1
+HO refined decay=1000 frequency=13 steps=128 error=1.683202466296052e-10
+HO refined order=3.9869695976405484
+HO scalar actual decay=1000 frequency=13 steps=128 value=7.260086550923923e-1
+HO refined decay=1000 frequency=13 steps=256 error=1.0509815240311582e-11
+HO refined order=4.001399511189372
+HO scalar actual decay=1000 frequency=13 steps=256 value=7.260086552502028e-1
+HO refined decay=100000 frequency=1300 steps=2048 error=1.9635598341727345e-7
+HO scalar actual decay=100000 frequency=1300 steps=2048 value=-4.181513112452665e-1
+HO refined decay=100000 frequency=1300 steps=4096 error=1.4218740573834765e-8
+HO refined order=3.7876059720096356
+HO scalar actual decay=100000 frequency=1300 steps=4096 value=-4.1815112910802366e-1
+HO refined decay=100000 frequency=1300 steps=8192 error=9.257206667889761e-10
+HO refined order=3.941072942955309
+HO scalar actual decay=100000 frequency=1300 steps=8192 value=-4.1815111581500375e-1
+HO refined decay=100000 frequency=1300 steps=16384 error=5.846984008073264e-11
+HO refined order=3.9848123800397786
+test independently_evolved_stiff_nonautonomous_refinement ... ok
+HO scalar actual decay=100000 frequency=1300 steps=16384 value=-4.181511149477529e-1
+HO scalar actual decay=100000 frequency=13 steps=2048 value=7.260086552604963e-1
+HO scalar actual decay=100000 frequency=13 steps=4096 value=7.26008655260697e-1
+HO scalar actual decay=100000 frequency=13 steps=8192 value=7.260086552607115e-1
+HO scalar actual decay=100000 frequency=13 steps=16384 value=7.260086552607123e-1
+HO scalar trajectories maximum absolute difference versus independent 120-digit states=3.3306690738754696e-16
+test stiff_final_states_match_independent_high_precision_evolution ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.56s

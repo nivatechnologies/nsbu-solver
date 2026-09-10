@@ -84,6 +84,31 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         })
     }
 
+    fn start_budget(
+        &mut self,
+        clock: TickClock,
+        ticks: u128,
+        calls: usize,
+    ) -> Result<(), SolverError> {
+        self.remaining_calls = 0;
+        self.calls = 0;
+        self.work_units = 0;
+        self.transforms = 0;
+        if ticks > clock.remaining() / self.limits.remaining_divisor {
+            return Err(SolverError::InvalidStep);
+        }
+        self.duration = super::time::binary_duration(ticks, clock.exponent())?;
+        self.limits
+            .work_units
+            .checked_mul(calls)
+            .ok_or(SolverError::SizeOverflow)?;
+        (self.limits.scalar_transforms + 10)
+            .checked_mul(calls)
+            .ok_or(SolverError::SizeOverflow)?;
+        self.remaining_calls = calls;
+        Ok(())
+    }
+
     /// Invocations and charged provider work/transform budgets for the current attempt.
     /// Failed calls retain their full reservation; successful provider reports release unused work.
     pub fn consumption(&self) -> [usize; 3] {
@@ -100,16 +125,15 @@ impl<F: PrescribedForce> RightHandSide for SpectralRhs<F> {
         })
     }
     fn begin_attempt(&mut self, clock: TickClock, ticks: u128) -> Result<(), SolverError> {
-        self.remaining_calls = 0;
-        self.calls = 0;
-        self.work_units = 0;
-        self.transforms = 0;
-        if ticks > clock.remaining() / self.limits.remaining_divisor {
-            return Err(SolverError::InvalidStep);
-        }
-        self.duration = super::time::binary_duration(ticks, clock.exponent())?;
-        self.remaining_calls = 12;
-        Ok(())
+        self.start_budget(clock, ticks, 12)
+    }
+    fn begin_attempt_for_method(
+        &mut self,
+        clock: TickClock,
+        ticks: u128,
+        method: super::method::Method,
+    ) -> Result<(), SolverError> {
+        self.start_budget(clock, ticks, method.rhs_calls())
     }
 
     fn evaluate(

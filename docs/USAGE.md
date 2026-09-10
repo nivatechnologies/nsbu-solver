@@ -130,3 +130,29 @@ cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
 
 P06 passed all local and hosted quality checks. Reaching the diagnostic
 endpoint does not qualify a PDE window. The public numerical CLI remains planned.
+
+
+## Independent HO development checks
+
+The library now provides `HoCoefficients`, `HoWorkspace` and
+`Method::HochbruckOstermann`. The existing default attempt constructors select CM.
+For a bounded HO attempt, reserve
+`AttemptWorkspace::reservation_with_method(domain, method)` in the resource plan
+before calling `AttemptWorkspace::new_with_method(plan, method)`. HO requires
+fifteen RHS calls per full/two-half attempt; CM requires twelve. Both use the same
+single-use transactional commit protocol.
+
+```sh
+cargo test -p nsbu-solver --test ho_coefficients
+cargo test -p nsbu-solver --test ho_kernel -- --nocapture
+cargo test -p nsbu-solver --test ho_dft
+cargo test -p nsbu-solver --test attempt_allocation
+cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
+```
+
+The concentrating test compares both independently evolved methods with their
+80/120-digit direct-DFT fixtures and with each other. It can take several minutes
+in a debug/instrumented build. These remain coarse diagnostics with no accepted
+PDE window. [P07 evidence](../evidence/p07/README.md) records order reduction,
+arithmetic comparisons and the pending hosted verification. The numerical
+CLI and window verifier remain planned.

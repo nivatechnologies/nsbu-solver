@@ -1,0 +1,42 @@
+{
+  "initial_state": "rest",
+  "dt": "1/128",
+  "n": 4,
+  "viscosity": 1,
+  "problem": "reference.verify_steps.force: mean (1,-2,3); cyclic sin amplitudes (1,2,3)*(1+sin(7t))",
+  "method": "HO",
+  "precision_digits": [
+    80,
+    120
+  ],
+  "max_absolute_precision_change": "2.33918192958277326390172343121e-83",
+  "preflight": [
+    {
+      "n": 4,
+      "precision": 80,
+      "allocations": {
+        "retained_vectors": 50331648,
+        "padded_vectors_and_dft_temporaries": 63700992,
+        "metadata_and_interpreter_reservation": 67108864
+      },
+      "reserved_bytes": 181141504,
+      "cap_bytes": 1073741824,
+      "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+    },
+    {
+      "n": 4,
+      "precision": 120,
+      "allocations": {
+        "retained_vectors": 50331648,
+        "padded_vectors_and_dft_temporaries": 63700992,
+        "metadata_and_interpreter_reservation": 67108864
+      },
+      "reserved_bytes": 181141504,
+      "cap_bytes": 1073741824,
+      "classification": "conservative diagnostic reservation; no hard allocator guarantee"
+    }
+  ],
+  "reference_assignments": 0,
+  "sha256": "b2bdb4438c83dc7d89f0658fc9b7cc6f96d3f76569f5135e6c9620d84ebd5ab6",
+  "scope": "independent Python direct-DFT full step and two half steps; not a PDE convergence window"
+}

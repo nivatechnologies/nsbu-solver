@@ -24,6 +24,15 @@ pub struct RunLimits {
 impl RunLimits {
     /// Require an integral number of quarter-resolved macro steps and a finite attempt budget.
     pub fn attempts(self, clock: TickClock) -> Result<usize, SolverError> {
+        self.attempts_for_method(clock, super::method::Method::CoxMatthews)
+    }
+
+    /// Admit the exact number of attempts using the selected method's source-call bound.
+    pub fn attempts_for_method(
+        self,
+        clock: TickClock,
+        method: super::method::Method,
+    ) -> Result<usize, SolverError> {
         if self.endpoint <= clock.elapsed() || self.endpoint >= clock.target() {
             return Err(SolverError::InvalidClock);
         }
@@ -36,7 +45,9 @@ impl RunLimits {
         }
         let attempts =
             usize::try_from(distance / self.step_ticks).map_err(|_| SolverError::SizeOverflow)?;
-        if attempts > self.maximum_attempts || self.maximum_attempts > usize::MAX / 12 {
+        if attempts > self.maximum_attempts
+            || self.maximum_attempts > usize::MAX / method.rhs_calls()
+        {
             return Err(SolverError::RetryLimit);
         }
         Ok(attempts)
@@ -103,7 +114,7 @@ impl<'a> FixedRun<'a> {
         tolerances: Tolerances,
     ) -> Result<RunReport, SolverError> {
         tolerances.validate()?;
-        let attempts = limits.attempts(self.state.clock())?;
+        let attempts = limits.attempts_for_method(self.state.clock(), self.workspace.method())?;
         let mut report = RunReport {
             reason: StopReason::EndpointReached,
             clock: self.state.clock(),

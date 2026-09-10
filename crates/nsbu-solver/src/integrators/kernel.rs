@@ -29,6 +29,16 @@ pub trait RightHandSide {
         Ok(())
     }
 
+    /// Start the chosen method's bounded attempt; default callbacks retain their interval hook.
+    fn begin_attempt_for_method(
+        &mut self,
+        clock: TickClock,
+        ticks: u128,
+        _method: super::method::Method,
+    ) -> Result<(), SolverError> {
+        self.begin_attempt(clock, ticks)
+    }
+
     /// Fill output for the exact requested clock; no allocation, I/O or hidden retry.
     fn evaluate(
         &mut self,
@@ -166,7 +176,7 @@ pub(crate) fn mutable(field: &mut Field) -> [&mut [Complex64]; 3] {
     [a, b, c]
 }
 
-fn evaluate_checked(
+pub(crate) fn evaluate_checked(
     rhs: &mut dyn RightHandSide,
     state: [&[Complex64]; 3],
     time: TickClock,
@@ -178,7 +188,7 @@ fn evaluate_checked(
     finite([a, b, c])
 }
 
-fn finite(field: [&[Complex64]; 3]) -> Result<(), SolverError> {
+pub(crate) fn finite(field: [&[Complex64]; 3]) -> Result<(), SolverError> {
     for values in field {
         if values
             .iter()

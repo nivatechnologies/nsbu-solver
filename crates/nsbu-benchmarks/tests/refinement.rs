@@ -6,6 +6,7 @@ use nsbu_solver::{
         attempt::AttemptWorkspace,
         forcing::PrescribedForce,
         indicator::Tolerances,
+        method::Method,
         rhs::SpectralRhs,
         trajectory::{FixedRun, RunLimits, StopReason},
         transaction::CandidateState,
@@ -13,7 +14,7 @@ use nsbu_solver::{
     Complex64,
 };
 
-fn trajectory(n: usize, divisor: usize) -> SpectralState {
+fn trajectory(n: usize, divisor: usize, method: Method) -> SpectralState {
     let domain = Domain::new([n; 3], [1.0; 3], 1.0).unwrap();
     let source = CyclicSine::new(domain).unwrap();
     let reservation =
@@ -23,7 +24,7 @@ fn trajectory(n: usize, divisor: usize) -> SpectralState {
         ExtraStorage {
             fft: 0,
             force: reservation,
-            diagnostics: AttemptWorkspace::reservation(domain).unwrap(),
+            diagnostics: AttemptWorkspace::reservation_with_method(domain, method).unwrap(),
             overhead: 1024 * 1024,
         },
         8 * 1024 * 1024,
@@ -33,7 +34,7 @@ fn trajectory(n: usize, divisor: usize) -> SpectralState {
     let clock = TickClock::from_rest(-20, 1 << 20).unwrap();
     let mut state = SpectralState::from_rest(plan, clock, Epoch(0)).unwrap();
     let mut candidate = CandidateState::new(plan, clock, Epoch(0)).unwrap();
-    let mut workspace = AttemptWorkspace::new(plan).unwrap();
+    let mut workspace = AttemptWorkspace::new_with_method(plan, method).unwrap();
     let mut rhs = SpectralRhs::new(domain, source, 0.3, reservation).unwrap();
     let report = FixedRun::new(&mut state, &mut candidate, &mut workspace, &mut rhs)
         .execute(
@@ -81,11 +82,20 @@ fn errors(state: &SpectralState) -> [f64; 2] {
 
 #[test]
 fn cm_smooth_nonlinear_temporal_order_from_rest() {
+    temporal_order(Method::CoxMatthews);
+}
+
+#[test]
+fn ho_smooth_nonlinear_temporal_order_from_rest() {
+    temporal_order(Method::HochbruckOstermann);
+}
+
+fn temporal_order(method: Method) {
     let mut previous = None;
     for divisor in [128, 256, 512, 1024] {
-        let error = errors(&trajectory(4, divisor));
+        let error = errors(&trajectory(4, divisor, method));
         println!(
-            "smooth-time macro_divisor={divisor} l2={:e} h1={:e}",
+            "smooth-time method={method:?} macro_divisor={divisor} l2={:e} h1={:e}",
             error[0], error[1]
         );
         if let Some(coarse) = previous {
@@ -102,7 +112,7 @@ fn smooth_full_band_spatial_family_tracks_the_same_exact_flow() {
     let mut previous = None;
     let mut previous_gap = None;
     for n in [4, 8, 12] {
-        let state = trajectory(n, 512);
+        let state = trajectory(n, 512, Method::CoxMatthews);
         let error = errors(&state);
         println!(
             "smooth-space n={n} macro_divisor=512 l2={:e} h1={:e}",

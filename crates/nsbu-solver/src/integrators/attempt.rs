@@ -1,15 +1,13 @@
-//! One exact requested interval, three CM steps, and a private fine-result proposal.
+//! One exact requested interval, three independently selected exponential steps, and a private fine-result proposal.
 use super::{
-    coefficients::CmCoefficients,
     indicator::{compare, Indicators, Tolerances},
-    kernel::{field, mutable, readonly, CmWorkspace, Field, RightHandSide},
+    kernel::{field, mutable, readonly, Field, RightHandSide},
+    method::{Method, MethodWorkspace},
     time::binary_duration,
     transaction::{AcceptedAttempt, CandidateState},
 };
 use crate::{
     domain::{validate_spectrum, Domain, ResourcePlan, SpectralState},
-    spectral::modal,
-    storage::filled,
     SolverError,
 };
 
@@ -20,7 +18,7 @@ pub struct AttemptResult {
     pub indicators: Indicators,
     /// Exact requested tick count; the core never adjusts it.
     pub ticks: u128,
-    /// Number of RHS evaluations in this completed attempt, always twelve.
+    /// Number of RHS evaluations in this completed attempt, twelve for CM and fifteen for HO.
     pub rhs_calls: usize,
     /// Present only when both local channels pass.
     pub accepted: Option<AcceptedAttempt>,
@@ -29,21 +27,22 @@ pub struct AttemptResult {
 /// Private, fixed-capacity storage for three steps sharing one committed starting state.
 pub struct AttemptWorkspace {
     plan: ResourcePlan,
-    kernel: CmWorkspace,
+    kernel: MethodWorkspace,
     coarse: Field,
     midpoint: Field,
-    full: Vec<CmCoefficients>,
-    half: Vec<CmCoefficients>,
 }
 
 impl AttemptWorkspace {
     /// Additional kernel, comparison and table storage; caller also reserves state and RHS storage.
     pub fn reservation(domain: Domain) -> Result<usize, SolverError> {
+        Self::reservation_with_method(domain, Method::CoxMatthews)
+    }
+
+    /// Reserve the selected independent method and comparison storage.
+    pub fn reservation_with_method(domain: Domain, method: Method) -> Result<usize, SolverError> {
         let n = domain.layout().half_len();
-        let arrays = n
-            .checked_mul(6 * 16 + 2 * std::mem::size_of::<CmCoefficients>())
-            .ok_or(SolverError::SizeOverflow)?;
-        CmWorkspace::reservation(n)?
+        let arrays = n.checked_mul(6 * 16).ok_or(SolverError::SizeOverflow)?;
+        MethodWorkspace::reservation(domain, method)?
             .checked_add(arrays)
             .and_then(|v| v.checked_add(std::mem::size_of::<Self>()))
             .ok_or(SolverError::SizeOverflow)
@@ -51,24 +50,29 @@ impl AttemptWorkspace {
 
     /// Require this reservation in the plan's diagnostics/scratch class before allocating.
     pub fn new(plan: ResourcePlan) -> Result<Self, SolverError> {
-        if plan.classes()[6] < Self::reservation(plan.domain())? {
+        Self::new_with_method(plan, Method::CoxMatthews)
+    }
+
+    /// Allocate the selected method only after its complete reservation is admitted.
+    pub fn new_with_method(plan: ResourcePlan, method: Method) -> Result<Self, SolverError> {
+        if plan.classes()[6] < Self::reservation_with_method(plan.domain(), method)? {
             return Err(SolverError::ResourceLimit);
         }
         let n = plan.domain().layout().half_len();
-        let zero = CmCoefficients::new(0.0)?;
-        let kernel = CmWorkspace::new(n, plan.total())?;
+        let kernel = MethodWorkspace::new(plan.domain(), method, plan.total())?;
         let coarse = field(n)?;
         let midpoint = field(n)?;
-        let full = filled(n, zero)?;
-        let half = filled(n, zero)?;
         Ok(Self {
             plan,
             kernel,
             coarse,
             midpoint,
-            full,
-            half,
         })
+    }
+
+    /// Method selected at workspace preflight.
+    pub fn method(&self) -> Method {
+        self.kernel.method()
     }
 
     /// Attempt exactly the requested interval. Rejection changes no committed field, clock or count.
@@ -87,28 +91,28 @@ impl AttemptWorkspace {
         let dt = binary_duration(ticks, committed.clock().exponent())?;
         let half_dt = binary_duration(ticks / 2, committed.clock().exponent())?;
         self.coefficients(dt, half_dt)?;
-        rhs.begin_attempt(committed.clock(), ticks)?;
+        rhs.begin_attempt_for_method(committed.clock(), ticks, self.method())?;
         self.kernel.step(
+            true,
             readonly(&committed.components),
             [stages[0], stages[2], stages[4]],
             dt,
-            &self.full,
             rhs,
             mutable(&mut self.coarse),
         )?;
         self.kernel.step(
+            false,
             readonly(&committed.components),
             [stages[0], stages[1], stages[2]],
             half_dt,
-            &self.half,
             rhs,
             mutable(&mut self.midpoint),
         )?;
         self.kernel.step(
+            false,
             readonly(&self.midpoint),
             [stages[2], stages[3], stages[4]],
             half_dt,
-            &self.half,
             rhs,
             mutable(&mut candidate.state.components),
         )?;
@@ -137,7 +141,7 @@ impl AttemptWorkspace {
         Ok(AttemptResult {
             indicators,
             ticks,
-            rhs_calls: 12,
+            rhs_calls: self.method().rhs_calls(),
             accepted,
         })
     }
@@ -159,33 +163,16 @@ impl AttemptWorkspace {
         }
         bounds
             .work_units
-            .checked_mul(12)
+            .checked_mul(self.method().rhs_calls())
             .ok_or(SolverError::SizeOverflow)?;
         bounds
             .scalar_transforms
-            .checked_mul(12)
+            .checked_mul(self.method().rhs_calls())
             .ok_or(SolverError::SizeOverflow)?;
         Ok(())
     }
 
     fn coefficients(&mut self, dt: f64, half_dt: f64) -> Result<(), SolverError> {
-        let domain = self.plan.domain();
-        let layout = domain.layout();
-        for index in 0..layout.half_len() {
-            let position = layout.position(index)?;
-            let decay = if layout.is_nyquist(position)? {
-                0.0
-            } else {
-                let k = modal::wavevector(domain, layout.mode(position)?)?;
-                -domain.viscosity() * k.iter().map(|value| value * value).sum::<f64>()
-            };
-            let full_argument = dt * decay;
-            if !full_argument.is_finite() {
-                return Err(SolverError::ArithmeticResolutionLimited);
-            }
-            self.full[index] = CmCoefficients::new(full_argument)?;
-            self.half[index] = CmCoefficients::new(half_dt * decay)?;
-        }
-        Ok(())
+        self.kernel.coefficients(self.plan.domain(), dt, half_dt)
     }
 }

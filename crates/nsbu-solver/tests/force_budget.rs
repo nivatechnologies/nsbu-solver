@@ -227,3 +227,31 @@ fn declared_storage_transform_reports_and_exact_advective_boundary_are_preserved
     invoke(&mut rhs, &mean, clock).unwrap();
     assert_eq!(rhs.consumption(), [1, 100, 11]);
 }
+
+#[test]
+fn selected_method_checks_its_complete_work_and_transform_counter_range() {
+    use nsbu_solver::integrators::method::Method;
+    let clock = TickClock::from_rest(-10, 1024).unwrap();
+    for (work, transforms, admitted) in [
+        (200, usize::MAX / 100, true),
+        (usize::MAX / 14, 1, false),
+        (200, usize::MAX / 14, false),
+        (usize::MAX / 15, 1, true),
+        (200, usize::MAX / 15 - 10, true),
+        (200, usize::MAX / 15 - 9, false),
+    ] {
+        let mut provider = source();
+        let limits = provider.limits.as_mut().unwrap();
+        limits.work_units = work;
+        limits.scalar_transforms = transforms;
+        let mut rhs = SpectralRhs::new(domain(), provider, 0.3, 1024 * 1024).unwrap();
+        rhs.begin_attempt(clock, 4).unwrap();
+        let result = rhs.begin_attempt_for_method(clock, 4, Method::HochbruckOstermann);
+        if admitted {
+            result.unwrap();
+        } else {
+            assert_eq!(result, Err(SolverError::SizeOverflow));
+        }
+        assert_eq!(rhs.consumption(), [0; 3]);
+    }
+}

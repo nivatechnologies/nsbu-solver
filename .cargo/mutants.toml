@@ -1,4 +1,4 @@
-# Both studies run in the mandatory complete test and coverage jobs.
+# The long trajectory studies run in the mandatory complete test and coverage jobs.
 # Mutation reruns use the focused operator/provider/transaction tests and retain
 # the smooth temporal-order test. No production source is excluded from mutation.
 additional_cargo_test_args = [

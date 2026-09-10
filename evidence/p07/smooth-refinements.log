@@ -1,0 +1,24 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Finished `release` profile [optimized] target(s) in 1.77s
+     Running tests/refinement.rs (work/p07-draft/target/release/deps/refinement-256a23103c3ab65e)
+
+running 3 tests
+smooth-time method=CoxMatthews macro_divisor=128 l2=1.6063346441526393e-7 h1=1.4050850143058701e-6
+smooth-time method=HochbruckOstermann macro_divisor=128 l2=5.591443977551438e-8 h1=4.3602802874796817e-7
+smooth-time method=CoxMatthews macro_divisor=256 l2=9.99417877473481e-9 h1=8.736530966581522e-8
+smooth-space n=4 macro_divisor=512 l2=6.22994620694376e-10 h1=5.44407348583776e-9
+smooth-time method=HochbruckOstermann macro_divisor=256 l2=3.4420477317852606e-9 h1=2.6724223558787943e-8
+smooth-time method=CoxMatthews macro_divisor=512 l2=6.22994620694376e-10 h1=5.44407348583776e-9
+smooth-time method=HochbruckOstermann macro_divisor=512 l2=2.133875289145782e-10 h1=1.6526743610295394e-9
+smooth-time method=CoxMatthews macro_divisor=1024 l2=3.888239060194409e-11 h1=3.3971400248820834e-10
+test cm_smooth_nonlinear_temporal_order_from_rest ... ok
+smooth-time method=HochbruckOstermann macro_divisor=1024 l2=1.3280704813646942e-11 h1=1.0272508269954845e-10
+test ho_smooth_nonlinear_temporal_order_from_rest ... ok
+smooth-space n=8 macro_divisor=512 l2=6.238677321174767e-10 h1=5.463264745890701e-9
+smooth-space full-fine-band-gap n=8 l2=3.2132591499089484e-11
+smooth-space n=12 macro_divisor=512 l2=6.23867731560272e-10 h1=5.463264740967375e-9
+smooth-space full-fine-band-gap n=12 l2=7.351471625811097e-18
+test smooth_full_band_spatial_family_tracks_the_same_exact_flow ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.62s

@@ -1,0 +1,12 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.26s
+     Running tests/ho_coefficients.rs (work/p07-draft/target/debug/deps/ho_coefficients-cc29304d496d0894)
+
+running 4 tests
+test arguments_and_analytic_truncation_are_explicit ... ok
+test dissipative_row_and_weight_identities_hold_away_from_zero ... ok
+test zero_operator_satisfies_all_eight_fourth_order_conditions ... ok
+HO coefficients max_absolute=7.771561172376096e-16 max_conditioning_scaled=1.2212453270876722e-15
+test independent_high_precision_coefficients_cover_junctions_and_extremes ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

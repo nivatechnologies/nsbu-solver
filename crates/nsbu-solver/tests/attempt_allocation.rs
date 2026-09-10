@@ -4,6 +4,7 @@ use nsbu_solver::integrators::{
     attempt::AttemptWorkspace,
     forcing::{ForceLimits, ForceWork, PrescribedForce},
     indicator::Tolerances,
+    method::Method,
     rhs::SpectralRhs,
     transaction::{commit_candidate, CandidateState},
 };
@@ -42,6 +43,12 @@ impl PrescribedForce for OscillatingMean {
 }
 
 fn main() {
+    for (method, calls) in [(Method::CoxMatthews, 12), (Method::HochbruckOstermann, 15)] {
+        probe(method, calls);
+    }
+}
+
+fn probe(method: Method, calls: usize) {
     let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
     let source =
         SpectralRhs::<OscillatingMean>::reservation(domain, OscillatingMean.limits().unwrap())
@@ -51,7 +58,7 @@ fn main() {
         ExtraStorage {
             fft: 0,
             force: source,
-            diagnostics: AttemptWorkspace::reservation(domain).unwrap(),
+            diagnostics: AttemptWorkspace::reservation_with_method(domain, method).unwrap(),
             overhead: 4096,
         },
         2 * 1024 * 1024,
@@ -62,7 +69,7 @@ fn main() {
     let planning = Region::new(GLOBAL);
     let mut state = SpectralState::from_rest(plan, clock, Epoch(0)).unwrap();
     let mut candidate = CandidateState::new(plan, clock, Epoch(0)).unwrap();
-    let mut work = AttemptWorkspace::new(plan).unwrap();
+    let mut work = AttemptWorkspace::new_with_method(plan, method).unwrap();
     let mut rhs = SpectralRhs::new(domain, OscillatingMean, 0.3, source).unwrap();
     assert!(planning.change().bytes_allocated <= plan.total());
     let original = state.component(0).unwrap().as_ptr();
@@ -96,7 +103,7 @@ fn main() {
         );
         commit_candidate(plan, &mut state, &mut candidate, accepted).unwrap();
         assert_eq!(state.accepted_steps(), count);
-        assert_eq!(rhs.consumption(), [12, 12 * 144, 120]);
+        assert_eq!(rhs.consumption(), [calls, calls * 144, calls * 10]);
     }
     assert_eq!(state.component(0).unwrap().as_ptr(), original);
     let stats = region.change();

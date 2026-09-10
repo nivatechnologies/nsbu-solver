@@ -1,0 +1,15 @@
+{
+  "precision_digits": [
+    80,
+    120
+  ],
+  "trajectories_per_precision": 20,
+  "maximum_absolute_precision_change": "5.1865295591102735514785776955625239651990669536333630477216943198773211647718837e-81",
+  "initial_state": "rest",
+  "reference_assignments": 0,
+  "endpoint": "1/16",
+  "equation": "u'= -lambda*u + frequency*cos(frequency*t) + (lambda+2)*sin(frequency*t) - 2*u",
+  "exact_solution": "sin(frequency*t)",
+  "fixture_sha256": "283677c16094cf02b284e1b0b5c1d8f5512cfb989823b8d1db17750c31b5f970",
+  "execution_seconds": 44.545456810999895
+}

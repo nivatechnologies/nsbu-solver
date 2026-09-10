@@ -144,3 +144,9 @@ records 105 tests/probes, 5,319 executable lines and 480 instrumented branches
 covered, with 1,444 mutations accounted for and no survivors or timeouts. The
 package passes locally and in hosted CI; concentrating PDE qualification remains
 unresolved.
+
+P07 adds the independently constructed HO method and expanded scalar/PDE
+comparisons. [Its source-matched evidence](../evidence/p07/README.md) records all
+120 tests/probes, complete line/branch coverage and 1,537 accounted-for mutants
+with zero survivors or timeouts. All local gates pass; hosted verification is
+pending. The concentrating diagnostic still does not qualify a PDE window.

@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "rust-trajectory-verification",
+  "development_stage": "independent-HO-method-verification",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Python and Rust through P06 verified locally and hosted",
+    "status": "Python and Rust through P06 verified locally and hosted; P07 local gates passed, hosted pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p06/summary.json"
+    "rust_evidence": "evidence/p07/summary.json"
   },
   "packages": {
     "B00": {
@@ -81,12 +81,16 @@
       "evidence": "evidence/p06/summary.json",
       "classification": "independent concentrating trajectory and smooth refinements verified locally; concentrating resolution remains unresolved",
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34422176618"
+    },
+    "P07": {
+      "status": "local-checks-passed-hosted-ci-pending",
+      "evidence": "evidence/p07/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus the first N=4 Rust exact-v2 CM diagnostic from rest to t=1/256; concentrating space/force resolution unresolved",
   "concentrating_pde_integration_performed": true,
   "metadata_cli_exists": true,
   "rust_time_integration_performed": true,
-  "rust_pde_integration_scope": "N=4 smooth step checks and exact-v2 diagnostic from rest to t=1/256 through 32 transactional macro attempts, committing 64 fine CM steps; no accepted PDE window",
+  "rust_pde_integration_scope": "Independent CM/HO smooth studies and N=4 exact-v2 trajectories from rest to t=1/256; concentrating spatial/force resolution unresolved",
   "rust_concentrating_pde_integration_performed": true
 }

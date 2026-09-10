@@ -1,0 +1,12 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Finished `release` profile [optimized] target(s) in 1.35s
+     Running tests/concentrating.rs (work/p07-draft/target/release/deps/concentrating-944a5327cef96b40)
+
+running 1 test
+concentrating diagnostic-only method=CoxMatthews n=4 steps=32 fine_steps=64 reference_assignments=0 accepted_pde_windows=0 calls_per_attempt=12 reserved_bytes=1154848 cap_bytes=2097152 maximum_local_ratios=[0.7249142752846672, 0.7678012206754569]
+concentrating diagnostic-only method=HochbruckOstermann n=4 steps=32 fine_steps=64 reference_assignments=0 accepted_pde_windows=0 calls_per_attempt=15 reserved_bytes=1177192 cap_bytes=2097152 maximum_local_ratios=[0.7249142503098496, 0.7678009747490744]
+CM/HO diagnostic comparison n=4 fine_dt=1/16384 full_band_l2=7.53406715734702e-11 accepted_pde_windows=0
+test concentrating_transactional_trajectory_matches_independent_dft ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.04s
