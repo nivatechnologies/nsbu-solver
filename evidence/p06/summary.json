@@ -1,6 +1,6 @@
 {
   "package": "P06",
-  "status": "in-progress",
+  "status": "local-checks-passed-hosted-ci-pending",
   "initial_probe": {
     "classification": "diagnostic-completed; no convergence qualification",
     "implementation_commit": "73ca2b3df4668061d5b38ec9730d1422f7db49c7",
@@ -51,7 +51,7 @@
   },
   "accepted_pde_windows": 0,
   "pending": [
-    "Complete P06 code-quality and hosted verification"
+    "Hosted Rust and repository/reference verification"
   ],
   "limitations": [
     "N=4 force and spatial resolution remain unresolved",
@@ -227,7 +227,7 @@
     "any_or_unknown_types": 0
   },
   "tests": 105,
-  "mutation_status": "full run in progress; 1444 generated mutants; no completion claim",
+  "mutation_status": "passed",
   "evidence_path_normalization": "Published reports replace machine home/checkout prefixes; raw reports remain under work. Reviewed inputs are untouched.",
   "configuration_sha256": {
     ".cargo/mutants.toml": "9403463b479ab1a3ede23c7a23d74c0166138346575000cf62b7bf9fd24c58aa",
@@ -239,5 +239,13 @@
   "test_accounting": {
     "harness_reported": 102,
     "separate_allocation_probe_executables": 3
-  }
+  },
+  "mutations": {
+    "total_mutants": 1444,
+    "caught": 1331,
+    "unviable": 113,
+    "missed": 0,
+    "timeout": 0
+  },
+  "implementation_commit": "7db8c4b5d12070b54aee058072bfefa4a8543c7c"
 }

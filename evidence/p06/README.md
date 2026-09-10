@@ -102,5 +102,6 @@ The [responsibility and measurement review](quality-review.md) explains the
 interfaces and exact mutation test selection. Full package tests and coverage passed: 102 harness-reported tests plus three
 allocation probe executables, 5,319 executable lines and 480 instrumented branches.
 Complexity, duplication, strict lint and fresh packaging checks pass. The complete
-1,444-mutant run and hosted verification are pending; P06 is not yet complete. Accepted concentrating PDE windows
+1,444-mutant run passed: 1,331 caught, 113 unviable, zero survivors and timeouts.
+Hosted verification is pending; P06 is not yet complete. Accepted concentrating PDE windows
 remain zero.

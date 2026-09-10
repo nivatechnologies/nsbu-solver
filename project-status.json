@@ -76,9 +76,9 @@
       "evidence": "evidence/p05/summary.json"
     },
     "P06": {
-      "status": "in-progress",
+      "status": "local-checks-passed-hosted-ci-pending",
       "evidence": "evidence/p06/summary.json",
-      "classification": "independent concentrating trajectory comparison and smooth refinements passed; full mutation and hosted verification pending"
+      "classification": "independent concentrating trajectory and smooth refinements verified locally; concentrating resolution remains unresolved"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus the first N=4 Rust exact-v2 CM diagnostic from rest to t=1/256; concentrating space/force resolution unresolved",
