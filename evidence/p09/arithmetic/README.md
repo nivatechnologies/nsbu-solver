@@ -3,8 +3,7 @@
 The [execution summary](summary.json) and [source inventory](source-sha256.json)
 bind this increment to 229 Rust files and 70 Python source/stub files. All 309
 Rust harness tests and four allocation executables pass. The complete Python
-suite passes 184 tests. Required quality gates pass locally; source-matched
-hosted verification is pending.
+suite passes 184 tests. Required quality gates pass locally and in source-matched hosted verification.
 
 | Measurement | Rust | Python |
 | --- | --- | --- |
@@ -81,3 +80,6 @@ Complete observable/time inventories, frozen tolerances and artifact semantics,
 pressure/regional diagnostics, sampling/quadrature refinements and concentrating
 integration/qualification remain separate obligations. N=12 arithmetic evidence
 does not establish roundoff control on a larger concentrating trajectory.
+
+Source-matched [hosted Rust](hosted-rust.json) and [Python](hosted-python.json)
+checks pass for `5751aa4`.

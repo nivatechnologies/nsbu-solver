@@ -1,7 +1,7 @@
 {
   "package": "P08/P09",
   "increment": "independent-same-grid-smooth-arithmetic",
-  "status": "local checks passed; source-matched hosted verification pending",
+  "status": "local and source-matched hosted checks passed",
   "accepted_pde_windows": 0,
   "generated_utc": "2026-09-10T18:10:40.514538+00:00",
   "execution_profile": {
@@ -270,5 +270,10 @@
     "Python reservations are conservative planning, not hard allocator guarantees",
     "No continuous-time enclosure or large-grid arithmetic claim"
   ],
-  "artifact_inventory": "artifact-sha256.json"
+  "artifact_inventory": "artifact-sha256.json",
+  "hosted_ci": {
+    "head_sha": "5751aa4627337ea4befbb547d9a7c99f68e6b091",
+    "python": "hosted-python.json",
+    "rust": "hosted-rust.json"
+  }
 }

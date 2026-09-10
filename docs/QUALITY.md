@@ -317,4 +317,4 @@ an exporter CRAP34.125 finding. Raw reports retain the finding and final evidenc
 The nine Python dead-code findings identify discovered tests or schema fields;
 duplication is reported and no mutation sweep was rerun. Full source/export/input
 identity, cap failures and high-mode/reality negative controls are tested.
-Hosted verification of this increment remains pending; no PDE window is accepted.
+Source-matched hosted Rust and Python verification pass; no PDE window is accepted.

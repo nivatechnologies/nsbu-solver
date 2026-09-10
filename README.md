@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current arithmetic increment](evidence/p09/arithmetic/README.md) passes 313 Rust tests/allocation probes, 184 Python tests, all required quality gates, and a clean-source workflow; its hosted verification is pending. The preceding experiment and replay increment passed hosted checks. Complete concentrating experiments and qualification remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current arithmetic increment](evidence/p09/arithmetic/README.md) passes 313 Rust tests/allocation probes, 184 Python tests, all required quality gates, and a clean-source workflow; its source-matched hosted verification also passes. The preceding experiment and replay increment passed hosted checks. Complete concentrating experiments and qualification remain under implementation.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
