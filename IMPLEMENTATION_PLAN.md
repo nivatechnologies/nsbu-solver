@@ -238,7 +238,7 @@ coverage and all required complexity/CRAP limits. It adds smooth file save/resum
 transactional accepted-node publication and a shared owner supporting balance-only
 and reconstruction observation profiles. Trusted reconstruction snapshots preserve
 the next accepted/rejected CM/HO attempt and the off-stage interpolant. A fresh
-source install passes 14 CLI scenarios. Hosted checks are pending.
+source install passes 14 CLI scenarios. Source-matched hosted Rust and Python checks pass.
 
 The binary format still supports only the balance-only smooth profile. Binary
 reconstruction persistence, full external accepted-state provenance, independent

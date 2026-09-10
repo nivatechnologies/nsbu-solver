@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Accepted reconstruction and smooth file-I/O increment passes local gates: 284 tests/probes, 99.08% executable lines, 91.56% branches, maximum CRAP 24.33594. Hosted verification pending; previous runtime and Python checks passed hosted.",
+    "status": "Accepted reconstruction and smooth file-I/O increment passes local and hosted gates: 284 tests/probes, 99.08% executable lines, 91.56% branches, maximum CRAP 24.33594.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
@@ -108,7 +108,7 @@
       "reporting_evidence": "evidence/p08/reporting/summary.json"
     },
     "P09": {
-      "status": "in-progress; owned reconstruction snapshots and smooth file save/resume verified locally, hosted pending",
+      "status": "in-progress; owned reconstruction snapshots and smooth file save/resume verified locally and hosted",
       "evidence": "evidence/p09/artifacts/summary.json",
       "remaining": [
         "Binary serialization of accepted reconstruction and complete checkpoint assembly",
@@ -120,7 +120,8 @@
       "recorded_step_evidence": "evidence/p09/recorded/summary.json",
       "runtime_evidence": "evidence/p09/runtime/summary.json",
       "runtime_hosted_ci": "evidence/p09/runtime/hosted-rust.json",
-      "reconstruction_evidence": "evidence/p09/reconstruction/summary.json"
+      "reconstruction_evidence": "evidence/p09/reconstruction/summary.json",
+      "reconstruction_hosted_ci": "evidence/p09/reconstruction/hosted-rust.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",

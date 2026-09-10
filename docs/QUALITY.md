@@ -286,4 +286,4 @@ CLI, tests and runnable example. Measured CRAP failures in earlier drafts led to
 separate admission, I/O and snapshot-validation responsibilities and deterministic
 reader regressions. The 27 duplication findings are informational and reviewed;
 no new mutation sweep was requested. Local package, clean-source install and 14
-installed CLI checks pass. Hosted verification remains pending.
+installed CLI checks pass. Source-matched hosted Rust and Python verification also passes.

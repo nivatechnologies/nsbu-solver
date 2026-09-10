@@ -1,7 +1,7 @@
 {
   "package": "P09",
   "increment": "smooth-file-checkpoints-and-owned-accepted-reconstruction",
-  "status": "local checks passed; hosted verification pending",
+  "status": "local and source-matched hosted checks passed",
   "accepted_pde_windows": 0,
   "source_files": 209,
   "source_sha256": {
@@ -308,5 +308,9 @@
     "Rejected checkpoint-after counts beyond configured endpoint before integration; zero saves actual rest",
     "Preserved preexisting temporary-file collisions and bare-name current-directory output",
     "Split reconstruction snapshot validation by plan/endpoint/work responsibility after measured CRAP violation; final checks pass"
-  ]
+  ],
+  "hosted_ci": {
+    "rust": "hosted-rust.json",
+    "python": "hosted-python.json"
+  }
 }

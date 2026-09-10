@@ -45,4 +45,5 @@ The binary file format still accepts only balance-only `SmoothRun`; it cannot
 silently discard reconstruction by accepting a `ReconstructedRun`. Binary
 reconstruction persistence, complete external provenance and independent
 refinement families remain under implementation. **P08/P09 remain incomplete,
-with zero accepted concentrating PDE windows.** Hosted checks are pending.
+with zero accepted concentrating PDE windows.** [Hosted Rust](hosted-rust.json) and [Python](hosted-python.json) checks passed
+for `2f7a502b054fdb9200ead78ab54cf420f23e095f`.
