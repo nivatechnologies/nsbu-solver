@@ -128,5 +128,5 @@ cargo test -p nsbu-benchmarks --test refinement -- --nocapture
 cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
 ```
 
-The complete P06 local quality run passed; hosted verification is pending. Reaching the diagnostic
+P06 passed all local and hosted quality checks. Reaching the diagnostic
 endpoint does not qualify a PDE window. The public numerical CLI remains planned.

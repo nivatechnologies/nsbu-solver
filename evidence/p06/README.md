@@ -103,5 +103,8 @@ interfaces and exact mutation test selection. Full package tests and coverage pa
 allocation probe executables, 5,319 executable lines and 480 instrumented branches.
 Complexity, duplication, strict lint and fresh packaging checks pass. The complete
 1,444-mutant run passed: 1,331 caught, 113 unviable, zero survivors and timeouts.
-Hosted verification is pending; P06 is not yet complete. Accepted concentrating PDE windows
+Hosted Rust and repository/reference verification passed, completing P06.
+The saved [Rust run](hosted-ci.json) and
+[repository/reference run](hosted-python-ci.json) verify implementation
+commit `7db8c4b5d12070b54aee058072bfefa4a8543c7c`. Accepted concentrating PDE windows
 remain zero.

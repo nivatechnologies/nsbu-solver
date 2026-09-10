@@ -137,3 +137,10 @@ P05 adds the independent exact-v2 benchmark implementation and provider. Its
 [quality and numerical evidence](../evidence/p05/README.md) includes every current
 Rust source/test file, fixed-degree algebra, resource admission and allocation
 instrumentation. Cancellation-limited components remain explicitly unqualified.
+
+P06 extends the Rust profile to bounded trajectory scheduling and independent
+smooth/concentrating comparisons. [Its complete evidence](../evidence/p06/README.md)
+records 105 tests/probes, 5,319 executable lines and 480 instrumented branches
+covered, with 1,444 mutations accounted for and no survivors or timeouts. The
+package passes locally and in hosted CI; concentrating PDE qualification remains
+unresolved.
