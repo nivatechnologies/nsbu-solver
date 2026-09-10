@@ -78,6 +78,11 @@ pub struct DerivativeWorkspace {
     values: Vec<f64>,
 }
 impl DerivativeWorkspace {
+    // Only the complete comparison layer rebinds a source, after validating its
+    // unchanged physical geometry, full sample-grid admission and stored reservation.
+    pub(crate) fn bind_source(&mut self, source: Domain) {
+        self.source = source;
+    }
     /// Element/header reservation, excluding caller storage and allocator overhead.
     /// A sample grid must retain every source mode componentwise, including high modes.
     pub fn reservation(source: Domain, samples: Layout) -> Result<usize, SolverError> {

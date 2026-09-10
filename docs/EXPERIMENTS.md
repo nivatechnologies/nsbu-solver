@@ -26,7 +26,7 @@ zero, and the advective guard is 0.3. These deliberately small smooth test setti
 are fixed before execution; they are not concentrating-case acceptance tolerances.
 
 Before constructing a trajectory, the example adds the complete family,
-reconstruction and residual reservations and checks its 128 MiB cap. It prints
+physical-field comparison, reconstruction and residual reservations and checks its 128 MiB cap. It prints
 that storage allowance and finite provider/transform work. The reservation is
 not measured resident memory: allocator and I/O overhead remain separate.
 All numerical attempts and measurements use preallocated scratch.
@@ -36,6 +36,13 @@ velocity and physical-time derivative differences, and L2/H1/vorticity/divergenc
 residual norms. Norms use volume averages and the documented half-spectrum
 multiplicities. Exact ticks accompany the measurements. Zero differences at rest
 are expected and do not establish convergence.
+
+The example also prints complete velocity/gradient/Hessian/vorticity spatial,
+temporal and method RMS differences on a `24³` diagnostic lattice. Their finite
+schedule, fixed floors, joint preflight and actual-state binding are documented
+in [physical refinements](PHYSICAL_REFINEMENTS.md). It reserves 450 scalar inverse
+FFTs per physical measurement and measures only after a successful synchronized
+family advance.
 
 ## Branch schedule and ownership
 

@@ -3,6 +3,7 @@
 //! The private branches never import data or receive a reference-assignment interface. Reports
 //! cover only the measured comparison channels; missing force, arithmetic, reference, sampling
 //! and reconstruction studies still prevent a complete experiment qualification.
+pub mod physical;
 mod plan;
 pub mod reconstruction;
 pub mod residual;

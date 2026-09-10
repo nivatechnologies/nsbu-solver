@@ -17,8 +17,45 @@ fn main() {
     sampling();
     derivatives();
     physical_comparisons();
+    alternate_physical_domains();
     lineage();
     prolongation();
+}
+
+fn alternate_physical_domains() {
+    use nsbu_solver::diagnostics::physical::{
+        PhysicalComparisonWorkspace, PhysicalField, PhysicalQuantity,
+    };
+    let small = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+    let fine = Domain::new([8; 3], [1.0; 3], 1.0).unwrap();
+    let samples = Layout::new([12; 3]).unwrap();
+    let bytes = PhysicalComparisonWorkspace::reservation(fine, fine, samples).unwrap();
+    let mut workspace = planned(bytes, || {
+        PhysicalComparisonWorkspace::new(fine, fine, samples, bytes).unwrap()
+    });
+    let coarse = vec![Complex64::new(0.0, 0.0); small.layout().half_len()];
+    let value = vec![Complex64::new(0.0, 0.0); fine.layout().half_len()];
+    let left = PhysicalField::Vector([&coarse; 3]);
+    let right = PhysicalField::Vector([&value; 3]);
+    let region = Region::new(GLOBAL);
+    assert!(workspace
+        .compare_domains([fine, small], right, left, PhysicalQuantity::Gradient, 1.0)
+        .is_err());
+    assert_eq!(
+        workspace
+            .compare_domains([small, fine], left, right, PhysicalQuantity::Gradient, 1.0)
+            .unwrap()
+            .domains(),
+        [small, fine]
+    );
+    assert_eq!(
+        workspace
+            .compare(right, right, PhysicalQuantity::Vector, 1.0)
+            .unwrap()
+            .domains(),
+        [fine; 2]
+    );
+    no_allocations(region.change());
 }
 
 fn physical_comparisons() {

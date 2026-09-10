@@ -17,6 +17,7 @@ mod smooth_family_support;
 fn main() {
     regional_derivatives();
     physical_regions();
+    physical_refinement_family();
     reconstruction_accepted_ring();
     owned_reconstruction_restart();
     reconstruction_archive_restart();
@@ -66,6 +67,48 @@ fn main() {
         ),
         (0, 0, 0)
     );
+}
+
+fn physical_refinement_family() {
+    use nsbu_benchmarks::smooth_experiment::{
+        physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace},
+        FamilyPlan, SmoothFamily,
+    };
+    use nsbu_solver::verification::times::TestedTimes;
+    let clocks = smooth_family_support::clocks();
+    let times = TestedTimes::new(&clocks, 3).unwrap();
+    let family_plan = FamilyPlan::new(
+        smooth_family_support::settings(1e-2),
+        times,
+        smooth_family_support::CAP,
+    )
+    .unwrap();
+    let samples = Layout::new([12; 3]).unwrap();
+    let refusal = Region::new(GLOBAL);
+    assert!(PhysicalFamilyPlan::new(family_plan, samples, [1.0; 4], 4, 1).is_err());
+    assert_eq!(refusal.change().allocations, 0);
+    let plan = PhysicalFamilyPlan::new(
+        family_plan,
+        samples,
+        [1.0; 4],
+        4,
+        smooth_family_support::CAP,
+    )
+    .unwrap();
+    let allocation = Region::new(GLOBAL);
+    let mut family = SmoothFamily::new(family_plan).unwrap();
+    let mut physical = PhysicalFamilyWorkspace::new(plan).unwrap();
+    assert!(allocation.change().bytes_allocated <= plan.bounds().joint_storage_bytes);
+    let region = Region::new(GLOBAL);
+    assert!(physical.measure(&family).is_err());
+    family.advance().unwrap();
+    let result = physical.measure(&family).unwrap();
+    assert_eq!(result.clock(), clocks[0]);
+    assert_eq!(physical.charged_work().scalar_transforms, 900);
+    let measured = region.change();
+    assert_eq!(measured.allocations, 0);
+    assert_eq!(measured.reallocations, 0);
+    assert_eq!(measured.deallocations, 0);
 }
 
 fn physical_regions() {

@@ -90,3 +90,11 @@ incomplete. See `docs/DERIVATIVE_DIAGNOSTICS.md` in the repository.
 physical-field comparison, preserving its global statistics, component inventory
 and relative floor. The experiment must separately bind the supplied clock and
 mathematical/state provenance. See `docs/PHYSICAL_COMPARISONS.md` in the repository.
+
+`smooth_experiment::physical` binds complete velocity/gradient/Hessian/vorticity
+comparisons to the actual six-branch family, exact accepted clocks, fixed floors
+and a finite attempt/work allowance. One preallocated workspace serves all twenty
+quantity/pair comparisons at each scheduled time. The `smooth_refinement` example
+prints these findings after joint admission with its other consumers. See
+`docs/PHYSICAL_REFINEMENTS.md` for resource contracts, negative controls and the
+remaining pressure/all-channel/concentrating qualification work.

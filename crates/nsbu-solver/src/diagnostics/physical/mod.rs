@@ -60,6 +60,7 @@ impl PhysicalComparison<'_> {
 #[derive(Debug)]
 pub struct PhysicalComparisonWorkspace {
     domains: [Domain; 2],
+    planned_bytes: usize,
     samples: Layout,
     left: DerivativeWorkspace,
     right: DerivativeWorkspace,
@@ -90,11 +91,13 @@ impl PhysicalComparisonWorkspace {
         samples: Layout,
         cap: usize,
     ) -> Result<Self, SolverError> {
-        if Self::reservation(left, right, samples)? > cap {
+        let planned_bytes = Self::reservation(left, right, samples)?;
+        if planned_bytes > cap {
             return Err(SolverError::ResourceLimit);
         }
         Ok(Self {
             domains: [left, right],
+            planned_bytes,
             samples,
             left: DerivativeWorkspace::new(left, samples, cap)?,
             right: DerivativeWorkspace::new(right, samples, cap)?,
@@ -114,9 +117,34 @@ impl PhysicalComparisonWorkspace {
         quantity: PhysicalQuantity,
         relative_floor: f64,
     ) -> Result<PhysicalComparison<'_>, SolverError> {
+        self.compare_domains(self.domains, left, right, quantity, relative_floor)
+    }
+
+    /// Reuse the same preallocated samplers for another admitted source-grid pair.
+    /// Physical lengths/viscosity stay fixed; the sample grid and complete reservation
+    /// cannot grow. The returned report records these actual domains. `compare` continues
+    /// to use the original constructor domains, including after a refused alternate call.
+    pub fn compare_domains(
+        &mut self,
+        domains: [Domain; 2],
+        left: PhysicalField<'_>,
+        right: PhysicalField<'_>,
+        quantity: PhysicalQuantity,
+        relative_floor: f64,
+    ) -> Result<PhysicalComparison<'_>, SolverError> {
+        if domains[0].lengths() != self.domains[0].lengths()
+            || domains[0].viscosity() != self.domains[0].viscosity()
+        {
+            return Err(SolverError::InvalidDomain);
+        }
+        if Self::reservation(domains[0], domains[1], self.samples)? > self.planned_bytes {
+            return Err(SolverError::ResourceLimit);
+        }
         quantity.admit(left)?;
         quantity.admit(right)?;
         TensorErrors::<1>::new(self.samples.real_len(), relative_floor)?;
+        self.left.bind_source(domains[0]);
+        self.right.bind_source(domains[1]);
         self.error_magnitudes.fill(0.0);
         self.reference_magnitudes.fill(0.0);
         for component in 0..quantity.components() {
@@ -126,7 +154,7 @@ impl PhysicalComparisonWorkspace {
         }
         let global = self.summarize(quantity, relative_floor)?;
         Ok(PhysicalComparison {
-            domains: self.domains,
+            domains,
             samples: self.samples,
             quantity,
             errors: &self.error_magnitudes,

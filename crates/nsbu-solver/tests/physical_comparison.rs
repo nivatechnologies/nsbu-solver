@@ -173,3 +173,44 @@ fn aggregate_preflight_rejects_caps_and_incompatible_domain_or_sample_grids() {
     let other = Domain::new([8; 3], [1.0; 3], 1.0).unwrap();
     assert!(PhysicalComparisonWorkspace::reservation(small, other, samples).is_err());
 }
+
+#[test]
+fn alternate_domain_pairs_reuse_sampling_storage_without_changing_default_domains() {
+    let small = domain(4);
+    let fine = domain(8);
+    let samples = Layout::new([12; 3]).unwrap();
+    let coarse = fields(small);
+    let value = fields(fine);
+    let mut workspace = PhysicalComparisonWorkspace::new(fine, fine, samples, 1 << 20).unwrap();
+    let result = workspace
+        .compare_domains(
+            [small, fine],
+            view(&coarse),
+            view(&value),
+            PhysicalQuantity::Hessian,
+            1.0,
+        )
+        .unwrap();
+    assert_eq!(result.domains(), [small, fine]);
+    assert_eq!(result.global().rms_error, 0.0);
+    for pair in [
+        [fine, small],
+        [domain(16), domain(16)],
+        [Domain::new([4; 3], [1.0; 3], 1.0).unwrap(), fine],
+    ] {
+        assert!(workspace
+            .compare_domains(
+                pair,
+                view(&coarse),
+                view(&value),
+                PhysicalQuantity::Vector,
+                1.0
+            )
+            .is_err());
+    }
+    let ordinary = workspace
+        .compare(view(&value), view(&value), PhysicalQuantity::Vector, 1.0)
+        .unwrap();
+    assert_eq!(ordinary.domains(), [fine; 2]);
+    assert_eq!(ordinary.global().rms_error, 0.0);
+}

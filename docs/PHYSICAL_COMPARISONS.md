@@ -58,6 +58,14 @@ every difference/reference magnitude and the global error report. A failed call
 returns no view; it can change scratch but leaves both inputs untouched. A later
 valid call resets the accumulators and can reuse the workspace.
 
+`compare_domains([left_domain, right_domain], ...)` reuses those samplers for
+another source-grid pair. It checks the full alternate reservation and geometry
+before rebinding diagnostic inputs. Physical lengths, viscosity and the sample
+grid stay fixed, and owned storage cannot grow. The returned view records the
+actual alternate domains. Plain `compare` always uses the constructor domains,
+including after a refused alternate call. This permits sequential spatial and
+temporal pairs without allocating a separate tensor workspace for every pair.
+
 Calls allocate nothing after construction. The stated transform count is for
 one completed call, not a finite allowance on the number of caller requests.
 The owning experiment must budget its complete observation schedule and charge
@@ -114,3 +122,8 @@ from rest, compares actual velocity/gradient/Hessian/vorticity fields and verifi
 that both Fourier-state digests stay unchanged. Its small smooth errors are
 retained as diagnostics. Complete concentrating all-observable production,
 protocol/provenance binding and PDE qualification remain in progress.
+
+The [six-trajectory physical family](PHYSICAL_REFINEMENTS.md) binds this diagnostic
+to actual synchronized smooth states, a fixed quantity/floor inventory and a
+finite measurement allowance. It produces spatial, temporal and method findings;
+complete all-channel and concentrating qualification remain separate.

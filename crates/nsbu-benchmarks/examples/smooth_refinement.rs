@@ -1,11 +1,12 @@
 //! Bounded six-trajectory comparison walkthrough; its outputs are diagnostic samples.
 use nsbu_benchmarks::smooth_experiment::{
+    physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace, PhysicalRefinementSample},
     reconstruction::ReconstructionWorkspace,
     residual::{ResidualBounds, ResidualWorkspace},
     FamilyError, FamilyPlan, FamilySettings, SmoothFamily,
 };
 use nsbu_solver::{
-    domain::{Domain, TickClock},
+    domain::{Domain, Layout, TickClock},
     integrators::indicator::Tolerances,
     verification::times::TestedTimes,
     SolverError,
@@ -31,8 +32,15 @@ fn main() -> Result<(), FamilyError> {
     let clocks = [clock(0)?, clock(64)?, clock(128)?];
     let plan = FamilyPlan::new(settings(), TestedTimes::new(&clocks, 3)?, CAP)?;
     let domain = Domain::new([12; 3], [1.0; 3], 1.0)?;
+    let physical_plan = PhysicalFamilyPlan::new(
+        plan,
+        Layout::new([24; 3])?,
+        [1e-8, 1e-7, 1e-6, 1e-7],
+        3,
+        CAP,
+    )?;
     let (bytes, reconstruction_bytes, residual_bounds) =
-        diagnostic_budget(plan.bounds().storage_bytes, domain, CAP)?;
+        diagnostic_budget(physical_plan.bounds().joint_storage_bytes, domain, CAP)?;
     println!("CyclicSine diagnostic experiment; independently evolved from rest; accepted concentrating windows=0");
     println!(
         "grids=[4,8,12] steps_ticks=[64,32,16] quantum=2^-16 endpoint_ticks=128 methods=CM,HO"
@@ -43,6 +51,7 @@ fn main() -> Result<(), FamilyError> {
         residual_bounds.work
     );
     let mut family = SmoothFamily::new(plan)?;
+    let mut physical = PhysicalFamilyWorkspace::new(physical_plan)?;
     let mut reconstruction = ReconstructionWorkspace::new(plan, 1, reconstruction_bytes)?;
     let mut residual = ResidualWorkspace::new(domain, 1, residual_bounds.storage_bytes)?;
     while let Some(sample) = family.advance()? {
@@ -53,7 +62,9 @@ fn main() -> Result<(), FamilyError> {
             sample.time().map(|n| n.full.h1),
             sample.method().full.h1
         );
+        print_physical(physical.measure(&family)?);
     }
+    println!("physical_work={:?}", physical.charged_work());
     let probe = clock(127)?;
     let comparison = reconstruction.measure(&family, probe)?;
     let measured = residual.measure(family.branch(2).ok_or(FamilyError::InvalidFamily)?, probe)?;
@@ -69,6 +80,19 @@ fn main() -> Result<(), FamilyError> {
     );
     println!("Incomplete qualification: force/reference/arithmetic/sampling/quadrature and full observable studies remain.");
     Ok(())
+}
+
+fn print_physical(sample: PhysicalRefinementSample) {
+    for item in sample.quantities() {
+        println!(
+            "tick={} {:?} spatial_RMS={:?} temporal_RMS={:?} method_RMS={:.12e}",
+            sample.clock().elapsed(),
+            item.quantity,
+            item.space.map(|e| e.rms_error),
+            item.time.map(|e| e.rms_error),
+            item.method.rms_error
+        );
+    }
 }
 #[test]
 fn documented_comparison_walkthrough_runs_within_its_declared_cap() {
