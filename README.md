@@ -2,16 +2,18 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: verified bootstrap; independent Python reference implementation verified. The Rust library provides numerical foundations and verified spectral operators; the CLI supports help/version. Cox–Matthews time integration and transactional commits have passed P04 locally and in hosted CI. Independent Rust exact-v2 forcing passed P05 locally and in hosted CI. P06 trajectory comparisons and all quality gates passed locally and in hosted CI. The independent HO method is implemented and passes all local P07 checks; hosted verification is pending.** This checkout contains the reviewed numerical specification, exact benchmark manifest, executable mathematical checks, and an implementation plan. There are no accepted PDE convergence windows or published solver binaries.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P06 are verified locally and in hosted CI. P07's HO method and the first P08 diagnostics increment pass all local gates; hosted verification is pending. P08 remains incomplete.
 
-NSBU Solver is intended to evolve all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
+The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI currently supports help/version only. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
+
+The NSBU Solver library evolves all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
 
 ```text
 partial_t u + (u dot grad)u = -grad p + nu Laplacian(u) + f(x,t)
 div u = 0,  nu > 0
 ```
 
-The first runtime will use a Fourier pseudospectral discretization, 3/2 padding for quadratic products, incompressibility projection, and exponential Runge–Kutta time integration. The numerical contract includes bounded attempts, an exact integer tick clock, transactional state commits, resource preflight, checkpoints, and independent convergence comparisons.
+The library uses Fourier pseudospectral discretization, 3/2 padding for quadratic products, incompressibility projection, and exponential Runge–Kutta integration. Bounded attempts, the exact integer tick clock, transactional state commits, and resource preflight are implemented. Checkpoints and the complete window-convergence verifier remain planned.
 
 ## What the first experiment means
 

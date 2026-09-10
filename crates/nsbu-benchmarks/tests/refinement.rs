@@ -1,58 +1,17 @@
 //! From-rest nonlinear smooth trajectories with temporal and retained-grid comparisons.
-use nsbu_benchmarks::smooth::CyclicSine;
+mod smooth_support;
 use nsbu_solver::{
-    domain::{Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock},
-    integrators::{
-        attempt::AttemptWorkspace,
-        forcing::PrescribedForce,
-        indicator::Tolerances,
-        method::Method,
-        rhs::SpectralRhs,
-        trajectory::{FixedRun, RunLimits, StopReason},
-        transaction::CandidateState,
-    },
+    domain::{Domain, SpectralState},
+    integrators::method::Method,
     Complex64,
 };
+use smooth_support::SmoothRun;
 
 fn trajectory(n: usize, divisor: usize, method: Method) -> SpectralState {
     let domain = Domain::new([n; 3], [1.0; 3], 1.0).unwrap();
-    let source = CyclicSine::new(domain).unwrap();
-    let reservation =
-        SpectralRhs::<CyclicSine>::reservation(domain, source.limits().unwrap()).unwrap();
-    let plan = ResourcePlan::new(
-        domain,
-        ExtraStorage {
-            fft: 0,
-            force: reservation,
-            diagnostics: AttemptWorkspace::reservation_with_method(domain, method).unwrap(),
-            overhead: 1024 * 1024,
-        },
-        8 * 1024 * 1024,
-        Epoch(0),
-    )
-    .unwrap();
-    let clock = TickClock::from_rest(-20, 1 << 20).unwrap();
-    let mut state = SpectralState::from_rest(plan, clock, Epoch(0)).unwrap();
-    let mut candidate = CandidateState::new(plan, clock, Epoch(0)).unwrap();
-    let mut workspace = AttemptWorkspace::new_with_method(plan, method).unwrap();
-    let mut rhs = SpectralRhs::new(domain, source, 0.3, reservation).unwrap();
-    let report = FixedRun::new(&mut state, &mut candidate, &mut workspace, &mut rhs)
-        .execute(
-            RunLimits {
-                endpoint: 1 << 15,
-                step_ticks: (1 << 20) / divisor as u128,
-                maximum_attempts: divisor / 32,
-            },
-            Tolerances {
-                absolute: [1e-2; 2],
-                relative: [0.0; 2],
-            },
-        )
-        .unwrap();
-    assert_eq!(report.reason, StopReason::EndpointReached);
-    assert_eq!(report.committed, divisor / 32);
-    assert_eq!(report.clock.elapsed(), 1 << 15);
-    state
+    let mut run = SmoothRun::new(domain, method, 0);
+    run.advance(1 << 15, (1 << 20) / divisor as u128);
+    run.state
 }
 
 fn errors(state: &SpectralState) -> [f64; 2] {

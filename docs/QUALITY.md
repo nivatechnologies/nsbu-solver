@@ -150,3 +150,24 @@ comparisons. [Its source-matched evidence](../evidence/p07/README.md) records al
 120 tests/probes, complete line/branch coverage and 1,537 accounted-for mutants
 with zero survivors or timeouts. All local gates pass; hosted verification is
 pending. The concentrating diagnostic still does not qualify a PDE window.
+
+
+The first [P08 diagnostics increment](../evidence/p08/core/README.md) passes all
+local core checks: 145 tests/probes; 7,545 executable lines, 594 instrumented
+branches and 614 functions covered; 1,802 mutations with 1,677 caught, 125 unviable,
+and zero survivors/timeouts. Maximum cyclomatic complexity is 21, cognitive
+complexity 15, Halstead difficulty 74.4231, physical file length 264, and CRAP 21.
+Clone detection and strict lint/review find zero redundant/dead-code findings and
+no `Any`/unknown types. Raw LLVM region/instantiation statistics remain visible;
+they are not the executable-line/instrumented-branch gate.
+
+The SOLID review keeps force evaluation independent of state, diagnostics dependent
+on borrowed field/clock contracts, and reconstruction separate from integration
+and commit. Conservative products independently verify the rotational path;
+shared FFT/geometry primitives retain their earlier independent tests. A common
+smooth test runner removes duplicated resource/transaction setup. Allocation
+instrumentation verifies the new conservative workspace's reservation and zero
+allocation during evaluation. Three long scientific studies run in complete
+validation/coverage and are skipped only during focused mutation reruns; no
+production mutation source is excluded. Hosted checks and the remaining P08
+reporting/window work are pending, so this is not package completion.

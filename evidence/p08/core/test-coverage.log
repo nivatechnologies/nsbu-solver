@@ -1,0 +1,418 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.73s
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_benchmarks-fa523addc2a78b62)
+
+running 6 tests
+test root::tests::signed_bracket_updates_and_newton_safeguards ... ok
+test scalar::tests::centering_preserves_small_values_and_has_one_boundary_convention ... ok
+test jet::transcendental::tests::logarithmic_majorant_and_strict_underflow_admission ... ok
+test jet::index::tests::generated_tables_cover_each_admissible_multi_index_and_product ... ok
+test fields::tests::transport_magnitude_includes_diffusion_gradient ... ok
+test fields::tests::diagnostic_assembly_retains_component_signs_and_term_magnitudes ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/algebra.rs (target/llvm-cov-target/debug/deps/algebra-1dde2572e7b5fac4)
+
+running 4 tests
+test invalid_indices_domains_and_overflow_are_refused ... ok
+test coefficient_view_is_nonzero_and_preserves_degree_order ... ok
+test tail_recovery_and_total_underflow ... ok
+test mixed_polynomial_and_transcendental_derivatives ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/allocation.rs (target/llvm-cov-target/debug/deps/allocation-0a012617ed0b9622)
+     Running tests/clock_root.rs (target/llvm-cov-target/debug/deps/clock_root-5a5aa9db62199b6a)
+
+running 7 tests
+test conversion_error_is_scaled_to_each_coordinate ... ok
+test roots_have_small_residuals_and_bounded_work ... ok
+test trailing_zero_removal_detects_exact_large_odd_significands ... ok
+test remaining_survives_rounded_target_elapsed ... ok
+test safeguarded_newton_meets_small_observed_work_budgets ... ok
+test implicit_axis_mixed_derivatives_obey_equation ... ok
+test full_evaluator_handles_both_extreme_positive_clock_coordinates ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/concentrating.rs (target/llvm-cov-target/debug/deps/concentrating-12efce92b78631f8)
+
+running 1 test
+test concentrating_transactional_trajectory_matches_independent_dft has been running for over 60 seconds
+test concentrating_transactional_trajectory_matches_independent_dft ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 142.86s
+
+     Running tests/cutoff.rs (target/llvm-cov-target/debug/deps/cutoff-25e892529fbc3f65)
+
+running 3 tests
+test logistic_matches_scalar_derivative_and_symmetry ... ok
+test periodic_reference_and_force_and_exact_rest ... ok
+test scalar_collar_derivatives_during_startup_match_jets ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/diagnostic_history.rs (target/llvm-cov-target/debug/deps/diagnostic_history-416a14a769481170)
+
+running 1 test
+test accepted_smooth_histories_have_refining_off_stage_defects ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.99s
+
+     Running tests/fields.rs (target/llvm-cov-target/debug/deps/fields-b2a3129e5ef67dc5)
+
+running 2 tests
+test implicit_coefficients_match_independent_high_precision_jets ... ok
+test independent_high_precision_field_fixtures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/provider.rs (target/llvm-cov-target/debug/deps/provider-1f03c78f1bb62aef)
+
+running 3 tests
+test admission_refuses_mismatched_case_grid_and_cap ... ok
+test request_validation_precedes_output_changes ... ok
+test normalized_force_coefficients_match_independent_direct_dft ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+     Running tests/refinement.rs (target/llvm-cov-target/debug/deps/refinement-3b8172a2732452e8)
+
+running 3 tests
+test cm_smooth_nonlinear_temporal_order_from_rest ... ok
+test ho_smooth_nonlinear_temporal_order_from_rest ... ok
+test smooth_full_band_spatial_family_tracks_the_same_exact_flow ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 31.05s
+
+     Running tests/smooth.rs (target/llvm-cov-target/debug/deps/smooth-8056e9e81854594f)
+
+running 2 tests
+test source_refuses_invalid_geometry_budget_shape_and_arithmetic ... ok
+test analytical_coefficients_agree_with_high_precision_physical_dft ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/llvm-cov-target/debug/deps/nsbu-fed5dc0c5bd15cfb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/commands.rs (target/llvm-cov-target/debug/deps/commands-1455c57727049be1)
+
+running 3 tests
+test version_identifies_the_development_package ... ok
+test help_explains_the_current_capability ... ok
+test unsupported_and_extra_arguments_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/llvm-cov-target/debug/deps/nsbu_solver-e51fc7c35cd752e4)
+
+running 10 tests
+test integrators::kernel::tests::field_allocation_refusal_propagates_without_partial_payload_construction ... ok
+test integrators::indicator::tests::half_storage_weights_apply_to_both_complex_parts_and_both_error_channels ... ok
+test integrators::indicator::tests::overflowing_discrepancy_is_refused_even_with_a_finite_fine_state_budget ... ok
+test integrators::transaction::tests::coefficient_fingerprint_matches_independently_computed_bitstream_fixture ... ok
+test integrators::transaction::tests::exhausted_candidate_generation_invalidates_prior_acceptance ... ok
+test spectral::hermitian::tests::finite_components_and_relative_pair_boundaries_are_checked_separately ... ok
+test storage::tests::impossible_reservation_returns_a_typed_error ... ok
+test integrators::transaction::tests::matching_private_metadata_commits_and_a_wrong_plan_does_not ... ok
+test integrators::transaction::tests::accepted_step_counter_exhaustion_does_not_change_committed_time_or_storage ... ok
+test integrators::transaction::tests::every_private_acceptance_identity_is_validated_before_any_payload_exchange ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/advection.rs (target/llvm-cov-target/debug/deps/advection-0bfad28cf919e537)
+
+running 1 test
+test physical_grid_guard_matches_mean_velocity_and_checks_duration_arithmetic ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/alias_control.rs (target/llvm-cov-target/debug/deps/alias_control-ea45c3b5dee44e8a)
+
+running 1 test
+test unpadded_product_aliases_while_three_halves_sampling_removes_the_alias ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/allocation.rs (target/llvm-cov-target/debug/deps/allocation-f42db98936b44055)
+     Running tests/attempt_admission.rs (target/llvm-cov-target/debug/deps/attempt_admission-bc59d608832d2df9)
+
+running 4 tests
+test workspace_reservations_must_be_complete_and_addressable ... ok
+test invalid_policy_and_unadmitted_rhs_costs_preserve_the_clock ... ok
+test unrepresentable_modal_decay_is_an_arithmetic_failure_not_a_clock_repair ... ok
+test plan_source_spectrum_and_error_budget_refusals_are_structured ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/attempt_allocation.rs (target/llvm-cov-target/debug/deps/attempt_allocation-8fc2c1a3b67d563c)
+     Running tests/band_comparison.rs (target/llvm-cov-target/debug/deps/band_comparison-bd9721464959cfbd)
+
+running 4 tests
+test finite_large_mean_norms_do_not_overflow_when_squares_would ... ok
+test mean_and_transverse_and_longitudinal_errors_have_separate_norms ... ok
+test a_new_divergence_free_mode_cannot_hide_behind_common_band_agreement ... ok
+test oblique_complex_modes_exercise_all_derivative_contractions ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/clock.rs (target/llvm-cov-target/debug/deps/clock-55007ea0a0d4408f)
+
+running 4 tests
+test clock_refuses_invalid_states_and_intervals ... ok
+test exact_quarter_stages_use_the_committed_counts ... ok
+test finite_clock_capacity_and_extreme_quantum_are_explicit ... ok
+test floating_sum_can_pass_while_elapsed_time_does_not_advance ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cm_dft.rs (target/llvm-cov-target/debug/deps/cm_dft-414cadba83149765)
+
+running 1 test
+test full_and_two_half_steps_match_independent_full_band_fixtures ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/cm_kernel.rs (target/llvm-cov-target/debug/deps/cm_kernel-ebfda9528f37fba0)
+
+running 2 tests
+test diffusion_constant_source_rk4_and_actual_stage_clocks ... ok
+test every_rhs_failure_propagates_without_changing_input ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/coefficients.rs (target/llvm-cov-target/debug/deps/coefficients-9eef1284b5426690)
+
+running 2 tests
+test zero_operator_and_constant_source_identities_hold ... ok
+test all_coefficients_match_high_precision_at_junctions_and_weight_zeros ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/conservative.rs (target/llvm-cov-target/debug/deps/conservative-181c5e3802f7f217)
+
+running 9 tests
+test balances::an_overflowing_forcing_contraction_is_not_reported_as_finite_work ... ok
+test balances::large_mean_energy_is_computed_without_squaring_before_the_half_factor ... ok
+test refusals::comparison_requires_matching_geometry_and_valid_complete_spectra ... ok
+test balances::compensated_forcing_work_retains_a_small_term_between_large_cancellations ... ok
+test refusals::conservative_preflight_and_output_shapes_are_enforced_before_evaluation ... ok
+test gradient_force_changes_pressure_without_accelerating_velocity ... ok
+test balances::a_three_dimensional_triad_has_nonzero_stretching_and_known_balances ... ok
+test taylor_green_pressure_contains_modes_outside_the_velocity_band ... ok
+test cyclic_sines_have_transverse_conservative_acceleration ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/convolution.rs (target/llvm-cov-target/debug/deps/convolution-0bb426eb7c8d733b)
+
+running 1 test
+test full_retained_band_matches_convolution_and_inviscid_energy_identity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/fft.rs (target/llvm-cov-target/debug/deps/fft-1bb586b7797b9a87)
+
+running 6 tests
+test plans_refuse_unsupported_lengths_memory_caps_and_payloads ... ok
+test reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit ... ok
+test inverse_checks_both_conjugate_planes_and_declared_roundoff_boundary ... ok
+test finite_input_that_overflows_transform_arithmetic_is_refused ... ok
+test constant_and_negative_frequency_modes_keep_normalized_amplitudes ... ok
+test mixed_radix_anisotropic_forward_matches_independent_direct_sums ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/force_aliasing.rs (target/llvm-cov-target/debug/deps/force_aliasing-89e9314785a13be6)
+
+running 1 test
+test cropped_force_agreement_can_hide_aliasing_and_missing_high_modes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/force_budget.rs (target/llvm-cov-target/debug/deps/force_budget-4caba17e0b36616f)
+
+running 6 tests
+test selected_method_checks_its_complete_work_and_transform_counter_range ... ok
+test undeclared_and_overflowing_costs_are_refused_before_workspace_allocation ... ok
+test declared_storage_transform_reports_and_exact_advective_boundary_are_preserved ... ok
+test failed_or_dishonest_provider_reports_keep_the_complete_charged_budget ... ok
+test advective_refusal_preserves_the_supplied_state ... ok
+test exact_interval_call_cap_and_declared_work_are_enforced ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/hermite.rs (target/llvm-cov-target/debug/deps/hermite-8bee57d808c8741d)
+
+running 4 tests
+test inconsistent_or_degenerate_clocks_are_refused ... ok
+test node_only_residuals_hide_a_defect_revealed_between_nodes ... ok
+test reconstruction_refuses_incomplete_or_nonfinite_payloads ... ok
+test every_quintic_is_reproduced_in_value_and_physical_derivative ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ho_coefficients.rs (target/llvm-cov-target/debug/deps/ho_coefficients-6cf02be4ceca583f)
+
+running 4 tests
+test arguments_and_analytic_truncation_are_explicit ... ok
+test dissipative_row_and_weight_identities_hold_away_from_zero ... ok
+test zero_operator_satisfies_all_eight_fourth_order_conditions ... ok
+test independent_high_precision_coefficients_cover_junctions_and_extremes ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ho_dft.rs (target/llvm-cov-target/debug/deps/ho_dft-b48c627f63c5207d)
+
+running 1 test
+test ho_transaction_matches_independent_fine_step_spectrum ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/ho_kernel.rs (target/llvm-cov-target/debug/deps/ho_kernel-a6c1d1e26834e594)
+
+running 5 tests
+test a_provider_that_assumes_increasing_times_fails_the_ho_purity_control ... ok
+test fifth_request_returns_to_half_time_and_all_failures_propagate ... ok
+test coarse_stiff_steps_retain_the_observed_order_reduction ... ok
+test independently_evolved_stiff_nonautonomous_refinement ... ok
+test stiff_final_states_match_independent_high_precision_evolution ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.92s
+
+     Running tests/ho_refusals.rs (target/llvm-cov-target/debug/deps/ho_refusals-3831f0602a47cac3)
+
+running 3 tests
+test complete_six_vector_reservation_is_required_before_allocation ... ok
+test invalid_shapes_steps_and_nonfinite_states_are_refused ... ok
+test invalid_source_and_finite_stage_or_output_overflows_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/interval.rs (target/llvm-cov-target/debug/deps/interval-c154ec8c1979da20)
+
+running 1 test
+test exact_intervals_preserve_low_bits_and_refuse_arithmetic_loss ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/kernel_refusals.rs (target/llvm-cov-target/debug/deps/kernel_refusals-3e6bc8896def2cc0)
+
+running 3 tests
+test finite_stage_or_final_arithmetic_overflow_is_refused ... ok
+test kernel_preflight_refuses_invalid_sizes_and_insufficient_storage ... ok
+test invalid_buffers_intervals_and_nonfinite_results_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/layout.rs (target/llvm-cov-target/debug/deps/layout-4e6178aa0b2afcb2)
+
+running 4 tests
+test domain_preserves_positive_geometry_and_pads_all_axes ... ok
+test invalid_and_unaddressable_layouts_are_refused_before_allocation ... ok
+test strict_band_and_half_spectrum_multiplicities ... ok
+test storage_order_signed_modes_and_negative_last_axis ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/modal.rs (target/llvm-cov-target/debug/deps/modal-324943d6be7b0514)
+
+running 3 tests
+test gradient_force_changes_pressure_without_accelerating_velocity ... ok
+test invalid_modes_nonfinite_data_and_arithmetic_overflow_are_refused ... ok
+test projection_and_curl_follow_signed_cross_product_identities ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/quadrature.rs (target/llvm-cov-target/debug/deps/quadrature-4c5874f8e27c9376)
+
+running 3 tests
+test nonfinite_enstrophy_rates_and_overflowing_integrals_are_refused ... ok
+test exact_cubic_rates_and_fourth_order_quadrature_refinement_are_distinct ... ok
+test unresolved_weights_and_nonfinite_balance_terms_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/residual.rs (target/llvm-cov-target/debug/deps/residual-1f5b65553af774c9)
+
+running 3 tests
+test residual_refuses_incomplete_output ... ok
+test heat_flow_cancels_viscosity_while_unresolved_convection_remains_visible ... ok
+test constant_acceleration_is_not_removed_as_a_pressure_gauge ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/resources.rs (target/llvm-cov-target/debug/deps/resources-67d933d9a5a468f7)
+
+running 3 tests
+test class_and_sum_overflows_are_refused ... ok
+test exact_ledger_and_cap_boundary_are_checked_without_grid_allocation ... ok
+test reviewed_cubic_reservations_are_reproduced ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/rotational.rs (target/llvm-cov-target/debug/deps/rotational-6847ec21e6e79fd6)
+
+running 4 tests
+test invalid_payload_and_cap_refusals_are_structured ... ok
+test force_conjugacy_is_checked_before_projection_with_relative_tolerance ... ok
+test gradient_force_pressure_and_mean_acceleration_are_preserved ... ok
+test arithmetic_and_conjugacy_failures_preserve_input_state ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/spectrum.rs (target/llvm-cov-target/debug/deps/spectrum-d51afccbac6043d3)
+
+running 3 tests
+test invalid_payload_tolerance_and_nonfinite_coefficients_are_refused ... ok
+test arbitrary_positive_slice_and_conjugate_zero_plane_are_valid ... ok
+test nyquist_and_nonhermitian_inputs_are_refused_even_with_large_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/state.rs (target/llvm-cov-target/debug/deps/state-7d04e5f940e94cee)
+
+running 1 test
+test states_own_separate_buffers_and_preserve_their_exact_initial_metadata ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/trajectory.rs (target/llvm-cov-target/debug/deps/trajectory-336df76d73f15e6c)
+
+running 3 tests
+test finite_work_and_quarter_tick_admission ... ok
+test configuration_and_numerical_rejection_do_not_commit ... ok
+test complete_run_and_mid_run_refusal_preserve_actual_clock ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transaction.rs (target/llvm-cov-target/debug/deps/transaction-21e0f967b0e43994)
+
+running 5 tests
+test rejected_and_failed_attempts_preserve_every_committed_value ... ok
+test finite_scheduler_retries_only_local_error_and_never_silently_changes_a_core_request ... ok
+test twelve_exact_requests_commit_fine_state_by_swapping_owned_buffers ... ok
+test tokens_refuse_reused_candidates_other_states_and_changed_plans ... ok
+test every_full_and_half_step_failure_rolls_back_the_committed_trajectory ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transfer.rs (target/llvm-cov-target/debug/deps/transfer-e490e0839224378e)
+
+running 2 tests
+test nyquist_is_omitted_and_invalid_buffers_leave_output_unchanged ... ok
+test anisotropic_pad_crop_roundtrip_preserves_upper_band_and_mean ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+    Finished report saved to <checkout>/work/p08-full-coverage-initial.json

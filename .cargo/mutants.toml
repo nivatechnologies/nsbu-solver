@@ -5,4 +5,5 @@ additional_cargo_test_args = [
   "--",
   "--skip", "smooth_full_band_spatial_family_tracks_the_same_exact_flow",
   "--skip", "concentrating_transactional_trajectory_matches_independent_dft",
+  "--skip", "accepted_smooth_histories_have_refining_off_stage_defects",
 ]

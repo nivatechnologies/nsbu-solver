@@ -1,0 +1,87 @@
+{
+  "classification": "exact reconstruction negative control, not an evolved PDE trajectory",
+  "target": "uniform divergence-free velocity (t^6,0,0), force (6t^5,0,0)",
+  "interval": [
+    "0",
+    "1"
+  ],
+  "hermite_polynomial": "3*s**5 - 13*s**4/4 + 3*s**3/2 - s**2/4",
+  "rows": [
+    {
+      "s": "0",
+      "reference": "0",
+      "reconstructed": "0",
+      "reference_derivative": "0",
+      "reconstructed_derivative": "0",
+      "defect": "0"
+    },
+    {
+      "s": "1/8",
+      "reference": "1/262144",
+      "reconstructed": "-55/32768",
+      "reference_derivative": "3/16384",
+      "reconstructed_derivative": "-57/4096",
+      "defect": "-231/16384"
+    },
+    {
+      "s": "1/4",
+      "reference": "1/4096",
+      "reconstructed": "-1/512",
+      "reference_derivative": "3/512",
+      "reconstructed_derivative": "3/256",
+      "defect": "3/512"
+    },
+    {
+      "s": "3/8",
+      "reference": "729/262144",
+      "reconstructed": "63/32768",
+      "reference_derivative": "729/16384",
+      "reconstructed_derivative": "231/4096",
+      "defect": "195/16384"
+    },
+    {
+      "s": "1/2",
+      "reference": "1/64",
+      "reconstructed": "1/64",
+      "reference_derivative": "3/16",
+      "reconstructed_derivative": "3/16",
+      "defect": "0"
+    },
+    {
+      "s": "5/8",
+      "reference": "15625/262144",
+      "reconstructed": "1925/32768",
+      "reference_derivative": "9375/16384",
+      "reconstructed_derivative": "2295/4096",
+      "defect": "-195/16384"
+    },
+    {
+      "s": "3/4",
+      "reference": "729/4096",
+      "reconstructed": "45/256",
+      "reference_derivative": "729/512",
+      "reconstructed_derivative": "363/256",
+      "defect": "-3/512"
+    },
+    {
+      "s": "7/8",
+      "reference": "117649/262144",
+      "reconstructed": "14651/32768",
+      "reference_derivative": "50421/16384",
+      "reconstructed_derivative": "12663/4096",
+      "defect": "231/16384"
+    },
+    {
+      "s": "1",
+      "reference": "1",
+      "reconstructed": "1",
+      "reference_derivative": "6",
+      "reconstructed_derivative": "6",
+      "defect": "0"
+    }
+  ],
+  "node_only_defect_max": "0",
+  "quarter_point_defect": "3/512",
+  "halved_interval_quarter_point_defect": "3/16384",
+  "expected_defect_refinement_ratio": "32"
+}

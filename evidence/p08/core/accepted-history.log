@@ -1,0 +1,16 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.27s
+     Running tests/diagnostic_history.rs (target/debug/deps/diagnostic_history-7810433a60e4e6b3)
+
+running 1 test
+accepted-history method=CoxMatthews macro_ticks=4096 common_probe_l2=2.0467281552123696e-7 off_stage_max_l2=1.6105895869900841e-6
+accepted-history method=CoxMatthews macro_ticks=2048 common_probe_l2=2.4283814422215932e-8 off_stage_max_l2=1.0007889310018239e-7
+accepted-history method=CoxMatthews macro_ticks=1024 common_probe_l2=2.779381513207289e-9 off_stage_max_l2=6.224078100392629e-9
+accepted-history method=CoxMatthews macro_ticks=512 common_probe_l2=2.9189237583555493e-10 off_stage_max_l2=3.878540353865043e-10
+accepted-history method=HochbruckOstermann macro_ticks=4096 common_probe_l2=6.907060384997226e-8 off_stage_max_l2=5.252335621491705e-7
+accepted-history method=HochbruckOstermann macro_ticks=2048 common_probe_l2=8.325423004391227e-9 off_stage_max_l2=3.3655729804152556e-8
+accepted-history method=HochbruckOstermann macro_ticks=1024 common_probe_l2=9.610315129847984e-10 off_stage_max_l2=2.130192728500875e-9
+accepted-history method=HochbruckOstermann macro_ticks=512 common_probe_l2=1.0135071607160386e-10 off_stage_max_l2=1.339892342169137e-10
+test accepted_smooth_histories_have_refining_off_stage_defects ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.76s

@@ -17,3 +17,5 @@ pub mod spectral;
 mod storage;
 
 pub mod integrators;
+
+pub mod diagnostics;

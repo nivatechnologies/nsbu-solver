@@ -156,3 +156,25 @@ in a debug/instrumented build. These remain coarse diagnostics with no accepted
 PDE window. [P07 evidence](../evidence/p07/README.md) records order reduction,
 arithmetic comparisons and the pending hosted verification. The numerical
 CLI and window verifier remain planned.
+
+
+## Independent diagnostics development checks (P08 in progress)
+
+The library's `diagnostics` module now provides `ComparisonPlan`,
+`ConservativeWorkspace`, `HermiteWeights`, `ResidualPlan`, balance measurements,
+and Simpson quadrature. Conservative diagnostics require their separate double-grid
+reservation plus caller buffers and allocator overhead. Primary comparisons retain
+all fine modes and preserve mean differences. Hermite inputs are accepted-history
+values and derivatives supplied by the experiment, with exact matching clocks.
+
+```sh
+cargo test -p nsbu-solver --test band_comparison --test force_aliasing
+cargo test -p nsbu-solver --test conservative --test hermite --test residual --test quadrature
+cargo test -p nsbu-benchmarks --test diagnostic_history -- --nocapture
+```
+
+These commands work now. The [source-matched evidence](../evidence/p08/core/README.md)
+records analytic negative controls and independently evolved smooth histories.
+Sampled residuals and shrinking-interval maxima are not continuous error bounds.
+P08 reporting and window review, the numerical CLI, and qualified concentrating
+results remain incomplete. No reference field is assigned to an integrated state.

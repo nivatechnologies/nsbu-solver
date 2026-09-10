@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "independent-HO-method-verification",
+  "development_stage": "independent-diagnostics-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.1",
@@ -21,13 +21,13 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Python and Rust through P06 verified locally and hosted; P07 local gates passed, hosted pending",
+    "status": "Python and Rust through P06 verified locally and hosted; P07 and P08 diagnostics core pass local gates, hosted pending",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
     "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p07/summary.json"
+    "rust_evidence": "evidence/p08/core/summary.json"
   },
   "packages": {
     "B00": {
@@ -85,12 +85,23 @@
     "P07": {
       "status": "local-checks-passed-hosted-ci-pending",
       "evidence": "evidence/p07/summary.json"
+    },
+    "P08": {
+      "status": "in-progress; diagnostics-core local gates passed, hosted pending",
+      "evidence": "evidence/p08/core/summary.json",
+      "remaining": [
+        "Local/directional and sampled-maximum reporting",
+        "Accepted-history pressure and balance comparisons",
+        "Sampling/reconstruction policy and window review"
+      ]
     }
   },
-  "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus the first N=4 Rust exact-v2 CM diagnostic from rest to t=1/256; concentrating space/force resolution unresolved",
+  "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
   "concentrating_pde_integration_performed": true,
   "metadata_cli_exists": true,
   "rust_time_integration_performed": true,
   "rust_pde_integration_scope": "Independent CM/HO smooth studies and N=4 exact-v2 trajectories from rest to t=1/256; concentrating spatial/force resolution unresolved",
-  "rust_concentrating_pde_integration_performed": true
+  "rust_concentrating_pde_integration_performed": true,
+  "independent_diagnostics_scope": "Full-band, conservative pressure/residual, Hermite reconstruction and balance controls; smooth accepted-history off-stage studies. P08 remains incomplete.",
+  "window_verifier_exists": false
 }

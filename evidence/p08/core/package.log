@@ -1,0 +1,27 @@
+   Packaging nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+    Updating crates.io index
+    Packaged 97 files, 413.0KiB (113.3KiB compressed)
+   Packaging nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Updating crates.io index
+    Packaged 38 files, 293.3KiB (84.2KiB compressed)
+   Packaging nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Updating crates.io index
+    Packaged 9 files, 16.8KiB (6.3KiB compressed)
+   Verifying nsbu-solver v0.1.0-alpha.0 (<checkout>/crates/nsbu-solver)
+   Compiling autocfg v1.5.1
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling nsbu-solver v0.1.0-alpha.0 (<checkout>/work/p08-package-initial/package/nsbu-solver-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.27s
+   Verifying nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/crates/nsbu-benchmarks)
+    Updating crates.io index
+   Unpacking nsbu-solver v0.1.0-alpha.0 (registry `<checkout>/work/p08-package-initial/package/tmp-registry`)
+   Compiling nsbu-solver v0.1.0-alpha.0
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (<checkout>/work/p08-package-initial/package/nsbu-benchmarks-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.19s
+   Verifying nsbu-cli v0.1.0-alpha.0 (<checkout>/crates/nsbu-cli)
+    Updating crates.io index
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling nsbu-cli v0.1.0-alpha.0 (<checkout>/work/p08-package-initial/package/nsbu-cli-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.49s

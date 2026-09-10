@@ -1,0 +1,15 @@
+{
+  "u": [
+    "sin(y)",
+    "2*sin(z)+sin(x+z)/3",
+    "3*sin(x)"
+  ],
+  "lengths": "2*pi",
+  "viscosity": "1/4",
+  "volume_average": {
+    "energy": "127/36",
+    "enstrophy": "32/9",
+    "stretching": "-1/2",
+    "enstrophy_dissipation": "65/36"
+  }
+}

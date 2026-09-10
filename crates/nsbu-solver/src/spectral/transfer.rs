@@ -18,7 +18,7 @@ pub fn transfer(
 }
 
 /// Private workspaces have matching lengths established at construction.
-pub(super) fn transfer_validated(
+pub(crate) fn transfer_validated(
     source: Layout,
     target: Layout,
     input: &[Complex64],
