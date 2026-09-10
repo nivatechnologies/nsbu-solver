@@ -299,7 +299,7 @@ and all required complexity/CRAP gates. It binds every channel rule, ordered key
 exact tested-time manifest and reconstruction geometry; canonical output and
 bounded review share the admitted immutable settings. Short-buffer and zero
 post-admission allocation contracts pass. Fresh-target packaging and bootstrap
-checks pass; hosted verification is pending.
+checks pass; source-matched hosted Rust and Python verification pass.
 
 P08 remains incomplete. The generic identifier does not establish benchmark
 observable semantics or accepted-state provenance. Complete local derivative,

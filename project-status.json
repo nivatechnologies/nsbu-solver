@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Canonical numerical protocol passes local Rust gates: 321 tests/probes; prior Python source unchanged and 41 bootstrap tests rerun. Source-matched hosted checks pending.",
+    "status": "Canonical numerical protocol passes local Rust gates: 321 tests/probes; prior Python source unchanged and 41 bootstrap tests rerun. Source-matched hosted Rust and Python checks pass.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/p09/arithmetic/summary.json",
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "pending for new protocol increment; previous arithmetic source passed",
-    "hosted_ci": "evidence/p09/arithmetic/hosted-python.json"
+    "latest_hosted_ci_status": "passed",
+    "hosted_ci": "evidence/p08/protocol/hosted-python.json"
   },
   "packages": {
     "B00": {
@@ -99,7 +99,7 @@
       "hosted_ci": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34427151855"
     },
     "P08": {
-      "status": "in-progress; generic canonical numerical protocol passes local gates; full benchmark observable and experiment integration pending",
+      "status": "in-progress; generic canonical numerical protocol passes local and hosted gates; full benchmark observable and experiment integration pending",
       "evidence": "evidence/p08/window/summary.json",
       "core_evidence": "evidence/p08/core/summary.json",
       "remaining": [
@@ -108,8 +108,9 @@
         "Complete window verifier with P09 refinement/restart lineage"
       ],
       "reporting_evidence": "evidence/p08/reporting/summary.json",
-      "current_hosted_ci": "evidence/p09/arithmetic/hosted-rust.json",
-      "protocol_evidence": "evidence/p08/protocol/summary.json"
+      "current_hosted_ci": "evidence/p08/protocol/hosted-rust.json",
+      "protocol_evidence": "evidence/p08/protocol/summary.json",
+      "protocol_hosted_ci": "evidence/p08/protocol/hosted-rust.json"
     },
     "P09": {
       "status": "in-progress; same-grid smooth velocity arithmetic verified locally and hosted; full artifact semantics and concentrating qualification pending",

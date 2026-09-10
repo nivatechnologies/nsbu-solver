@@ -56,7 +56,7 @@ python tools/verify_design.py --output work/design-checks.json
 The actual local output paths use the `work/p08-protocol-` prefix; raw reports are
 preserved here in gzip form. Packaging used a fresh temporary registry/target to
 avoid stale same-version dependencies. No dependency version or frozen reviewed
-input changed. Hosted verification of this source increment is pending.
+input changed. Source-matched [hosted Rust](hosted-rust.json) and [Python](hosted-python.json) verification pass.
 
 ## Review and limits
 

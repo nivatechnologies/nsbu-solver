@@ -327,4 +327,4 @@ The unchanged Python source retains its preceding complete quality evidence;
 41 bootstrap tests and frozen mathematical checks were rerun. Informational
 Clippy and duplication output is preserved, including nonzero finding exits.
 Borrowed settings, canonical encoding and numerical review remain separate from
-physical provenance. Hosted checks are pending; no concentrating window is accepted.
+physical provenance. Source-matched hosted Rust and Python checks pass; no concentrating window is accepted.
