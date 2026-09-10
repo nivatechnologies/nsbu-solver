@@ -1,0 +1,74 @@
+{
+  "conclusion": "success",
+  "databaseId": 34431840403,
+  "headSha": "dc06c85145604cfecc320630e72e2d0d9d022238",
+  "jobs": [
+    {
+      "completedAt": "2026-09-10T05:16:46Z",
+      "conclusion": "success",
+      "databaseId": 102728801263,
+      "name": "rust",
+      "startedAt": "2026-09-10T03:03:29Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install pinned toolchains and quality tools",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Build, lint, test and package public workspace",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete executable line and instrumented branch coverage",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Per-function metrics and complete file scope",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Mutation tests with explicit failure accounting",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 14,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34431840403/job/102728801263"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34431840403"
+}

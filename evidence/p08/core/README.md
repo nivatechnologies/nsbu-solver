@@ -22,7 +22,7 @@ The quality scope includes owned Rust source and tests. Physical file length inc
 Published checkout/home prefixes are normalized. Raw execution records remain under `work/`. Reviewed design files, exact-v2 input bytes, historical results and their hashes are unchanged. The standalone package has no private Niva dependency.
 
 The source-matched [hosted Python/repository run](hosted-python-ci.json) passed.
-Hosted Rust verification is pending. P08 remains incomplete.
+The source-matched [hosted Rust run](hosted-ci.json) also passed. P08 remains incomplete.
 
 The subsequent [reporting and accepted-history balance increment](../reporting/README.md)
 extends these diagnostics. This core report retains the evidence for its own
