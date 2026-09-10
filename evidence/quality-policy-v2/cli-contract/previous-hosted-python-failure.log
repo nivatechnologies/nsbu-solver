@@ -1,0 +1,92 @@
+bootstrap	80 percent executable line and branch coverage; CRAP	﻿2026-09-10T09:56:49.2487417Z ##[group]Run coverage erase
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2488003Z coverage erase
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2488711Z # Includes the complete reference suite, bootstrap tests and quality-tool tests.
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2489552Z coverage run -m pytest -q
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2490456Z coverage combine
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2490887Z coverage json
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2491337Z coverage report --fail-under=80
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2492666Z jq -e '.totals | .num_statements > 0 and .num_branches > 0 and (.covered_lines / .num_statements) >= 0.8 and (.covered_branches / .num_branches) >= 0.8' work/full-coverage.json
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2494469Z python quality/check_crap.py python work/ci-cyclomatic.json work/full-coverage.json work/python-crap.json
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2550442Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2551067Z env:
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2551499Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2552244Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2552958Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2553600Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2554346Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2554988Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:56:49.2555516Z ##[endgroup]
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:57:32.4161735Z ........................................................................ [ 45%]
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:34.1381648Z ........................................................................ [ 90%]
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.8050771Z ...............                                                          [100%]
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.8051677Z 159 passed in 171.69s (0:02:51)
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9781253Z Combined data file work/.coverage.runnervmejwal.2298.XlmIubSx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9782319Z Combined data file work/.coverage.runnervmejwal.2324.XAcFkmQx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9783368Z Combined data file work/.coverage.runnervmejwal.2346.XVCaAYZx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9784420Z Skipping duplicate data work/.coverage.runnervmejwal.2347.XaMHtfJx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9785422Z Skipping duplicate data work/.coverage.runnervmejwal.2348.XllwCiJx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9786363Z Skipping duplicate data work/.coverage.runnervmejwal.2350.XNsatmNx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9787273Z Skipping duplicate data work/.coverage.runnervmejwal.2351.XPAHTXdx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:41.9788205Z Skipping duplicate data work/.coverage.runnervmejwal.2352.XxHLWujx
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:42.7400095Z Wrote JSON report to work/full-coverage.json
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3796240Z Name                                                   Stmts   Miss Branch BrPart  Cover   Missing
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3797464Z --------------------------------------------------------------------------------------------------
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3798758Z quality/check_crap.py                                    123     24     52      5    81%   30, 36, 123->121, 147, 149, 159-182, 186
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3800917Z quality/tests/test_check_crap.py                          47      1      2      1    96%   80
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3801956Z reference/__init__.py                                      0      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3802853Z reference/dft.py                                          81      0     28      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3803738Z reference/evaluator.py                                    72      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3804615Z reference/jets.py                                        109      0     32      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3805467Z reference/pilot.py                                        56      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3806354Z reference/pilot_force.py                                  42      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3807242Z reference/regions.py                                      36      0      8      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3809536Z reference/scalar.py                                       77      0     22      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3810649Z reference/steps.py                                        70      0     14      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3811599Z reference/tests/test_bounded_reference_work.py            31      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3812651Z reference/tests/test_coefficient_work_limits.py           81      0     18      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3813682Z reference/tests/test_coupled_limits.py                    55      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3814684Z reference/tests/test_cutoff_work.py                       19      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3815671Z reference/tests/test_dft_steps.py                         78      0     10      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3816724Z reference/tests/test_driver_imports.py                    15      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3817752Z reference/tests/test_field_contracts.py                   65      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3818782Z reference/tests/test_immutable_reports.py                 31      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3819954Z reference/tests/test_jet_algebra.py                      124      0     24      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3820950Z reference/tests/test_newton_safeguards.py                 41      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3821960Z reference/tests/test_numerical_contracts.py              113      0     22      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3822933Z reference/tests/test_pilot.py                            127      0      8      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3823875Z reference/tests/test_pilot_force.py                      110      0     14      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3824864Z reference/tests/test_pilot_imports.py                      9      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3825841Z reference/tests/test_pilot_work.py                        30      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3826862Z reference/tests/test_preserved_reference_fixtures.py      28      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3827926Z reference/tests/test_reference.py                         77      0     24      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3828883Z reference/tests/test_regions.py                           60      0      8      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3830038Z reference/tests/test_report_execution.py                  25      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3831069Z reference/tests/test_report_values.py                     37      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3832037Z reference/tests/test_reports.py                           72      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3832979Z reference/tests/test_sampling.py                          69      0      8      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3833988Z reference/tests/test_sampling_contracts.py                44      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3835050Z reference/tests/test_spectral_interactions.py             42      0      4      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3836370Z reference/tests/test_temporal_contracts.py                56      0     16      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3837379Z reference/tests/test_trajectory.py                        76      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3838376Z reference/tests/test_trajectory_contracts.py              36      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3839431Z reference/tests/test_trajectory_reporting.py              33      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3840702Z reference/tuples.py                                        7      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3841607Z reference/verify_fields.py                                61      0     10      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3842535Z reference/verify_sampling.py                              52      0     14      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3843451Z reference/verify_steps.py                                 65      0     10      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3844447Z reference/verify_trajectory.py                            68      0     16      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3845673Z tools/check_repository.py                                167      0     72      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3846550Z tools/json_types.py                                       19      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3847401Z tools/tests/support.py                                    12      0      0      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3848323Z tools/tests/test_bootstrap_tools.py                       61      0      2      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3849295Z tools/tests/test_integrity_contracts.py                  138      0     20      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3850517Z tools/tests/test_public_content_contracts.py              35      0      4      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3851615Z tools/tests/test_repository_checks.py                     83      0     12      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3852684Z tools/tests/test_verification_contracts.py                67      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3853715Z tools/tests/test_verification_runner.py                   96      0      6      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3854732Z tools/verify_design.py                                    86      0     24      0   100%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3855691Z --------------------------------------------------------------------------------------------------
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.3856576Z TOTAL                                                   3314     25    612      6    99%
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.5093191Z true
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.5654505Z per-function CRAP must be <25; see output report
+bootstrap	80 percent executable line and branch coverage; CRAP	2026-09-10T09:59:43.5731916Z ##[error]Process completed with exit code 1.

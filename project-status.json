@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Artifact/replay Rust checks and revised-policy Python integration passed locally; hosted verification of revised policy pending",
+    "status": "Artifact/replay Rust checks passed locally and in hosted CI. Revised-policy Python CLI contract fix passes all 163 tests locally; hosted rerun pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/quality-reference/summary.json",
@@ -36,7 +36,7 @@
     "mutation_findings": "informational; full sweeps optional",
     "dead_code_findings": "informational",
     "duplication_findings": "informational with independent numerical oracles preserved",
-    "policy_evidence": "evidence/quality-policy-v2/summary.json"
+    "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json"
   },
   "packages": {
     "B00": {
