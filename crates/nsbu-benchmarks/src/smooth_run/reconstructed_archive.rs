@@ -72,6 +72,14 @@ fn framed_len(core: usize, nodes: usize) -> Result<usize, CheckpointError> {
 /// Encode the complete reconstruction-enabled owner into caller-owned storage.
 /// Short buffers are rejected before modification; no numerical evaluation is performed.
 pub fn write(run: &ReconstructedRun, output: &mut [u8]) -> Result<usize, CheckpointError> {
+    write_with_origin(run, output, run.origin)
+}
+// Replay presents both encodings with the same diagnostic tag; it never edits either run origin.
+pub(super) fn write_with_origin(
+    run: &ReconstructedRun,
+    output: &mut [u8],
+    origin: Origin,
+) -> Result<usize, CheckpointError> {
     let core = archive::core_len(run)?;
     let nodes = nodes::encoded_len(run.observer())?;
     let required = framed_len(core, nodes)?;
@@ -84,7 +92,7 @@ pub fn write(run: &ReconstructedRun, output: &mut [u8]) -> Result<usize, Checkpo
     for size in [core, nodes] {
         archive::put(output, &mut p, &(size as u128).to_le_bytes());
     }
-    p += archive::write_core(run, &mut output[p..p + core])?;
+    p += archive::write_core_with_origin(run, &mut output[p..p + core], origin)?;
     p += nodes::write(run.observer(), &mut output[p..p + nodes])?;
     let hash = Sha256::digest(&output[..p]);
     archive::put(output, &mut p, &hash);

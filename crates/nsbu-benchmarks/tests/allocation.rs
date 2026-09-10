@@ -12,11 +12,15 @@ static GLOBAL: &stats_alloc::StatsAlloc<std::alloc::System> = &stats_alloc::INST
 
 mod owned_reconstruction_support;
 mod reconstruction_observer_support;
+mod smooth_family_support;
 
 fn main() {
     reconstruction_accepted_ring();
     owned_reconstruction_restart();
     reconstruction_archive_restart();
+    independent_family_comparisons();
+    independent_residual_probes();
+    verified_replay_allocation();
     smooth_admission_and_attempts();
     let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
     let sampled = Layout::new([6; 3]).unwrap();
@@ -239,5 +243,94 @@ fn reconstruction_archive_restart() {
             ),
             (0, 0, 0)
         );
+    }
+}
+
+fn independent_family_comparisons() {
+    use nsbu_benchmarks::smooth_experiment::{
+        reconstruction::ReconstructionWorkspace, FamilyPlan, SmoothFamily,
+    };
+    use nsbu_solver::verification::times::TestedTimes;
+    use smooth_family_support::{clocks, settings, CAP};
+    let clocks = clocks();
+    let times = TestedTimes::new(&clocks, 3).unwrap();
+    let admission = Region::new(GLOBAL);
+    let plan = FamilyPlan::new(settings(1e-2), times, CAP).unwrap();
+    assert!(FamilyPlan::new(settings(1e-2), times, 1).is_err());
+    assert_eq!(admission.change().allocations, 0);
+    let construction = Region::new(GLOBAL);
+    let mut family = SmoothFamily::new(plan).unwrap();
+    assert!(construction.change().bytes_allocated <= plan.bounds().storage_bytes);
+    let mut reconstruction = ReconstructionWorkspace::new(plan, 1, CAP).unwrap();
+    let comparisons = Region::new(GLOBAL);
+    while family.advance().unwrap().is_some() {}
+    let probe = TickClock::restore(-16, 512, 127, 385).unwrap();
+    reconstruction.measure(&family, probe).unwrap();
+    let measured = comparisons.change();
+    assert_eq!(
+        (
+            measured.allocations,
+            measured.reallocations,
+            measured.deallocations
+        ),
+        (0, 0, 0)
+    );
+}
+
+fn independent_residual_probes() {
+    use nsbu_benchmarks::smooth_experiment::residual::ResidualWorkspace;
+    use nsbu_solver::integrators::method::Method;
+    let mut run = owned_reconstruction_support::run(Method::CoxMatthews, 1e-2, 5);
+    run.step().unwrap();
+    run.step().unwrap();
+    let domain = run.state().plan().domain();
+    let admitted = Region::new(GLOBAL);
+    let bounds = ResidualWorkspace::reservation(domain, 2).unwrap();
+    assert!(ResidualWorkspace::new(domain, 2, 1).is_err());
+    let stat = admitted.change();
+    assert_eq!(
+        (stat.allocations, stat.reallocations, stat.deallocations),
+        (0, 0, 0)
+    );
+    let construction = Region::new(GLOBAL);
+    let mut diagnostic = ResidualWorkspace::new(domain, 2, bounds.storage_bytes).unwrap();
+    assert!(construction.change().bytes_allocated <= bounds.storage_bytes);
+    let probe = TickClock::restore(-20, 1 << 20, 769, (1 << 20) - 769).unwrap();
+    let measured = Region::new(GLOBAL);
+    for _ in 0..2 {
+        assert!(diagnostic.measure(&run, probe).unwrap().norms().h1 < 1e-4);
+    }
+    assert!(diagnostic.measure(&run, probe).is_err());
+    let stat = measured.change();
+    assert_eq!(
+        (stat.allocations, stat.reallocations, stat.deallocations),
+        (0, 0, 0)
+    );
+}
+
+fn verified_replay_allocation() {
+    use nsbu_benchmarks::smooth_run::replay::ReplayPlan;
+    use nsbu_solver::integrators::method::Method;
+    for method in [Method::CoxMatthews, Method::HochbruckOstermann] {
+        let mut run = owned_reconstruction_support::run(method, 1e-2, 5);
+        run.step().unwrap();
+        run.step().unwrap();
+        let admission = Region::new(GLOBAL);
+        let plan = ReplayPlan::new(&run, 2, owned_reconstruction_support::CAP).unwrap();
+        assert!(ReplayPlan::new(&run, 1, owned_reconstruction_support::CAP).is_err());
+        assert!(ReplayPlan::new(&run, 2, 1).is_err());
+        let stat = admission.change();
+        assert_eq!(
+            (stat.allocations, stat.reallocations, stat.deallocations),
+            (0, 0, 0)
+        );
+        let bound = plan.bounds();
+        let measured = Region::new(GLOBAL);
+        let replayed = plan.execute().unwrap();
+        let stat = measured.change();
+        assert_eq!(stat.reallocations, 0);
+        assert!(stat.bytes_allocated <= bound.storage_bytes);
+        assert_eq!(replayed.report().attempts, 2);
+        owned_reconstruction_support::compare(replayed.run(), &run);
     }
 }

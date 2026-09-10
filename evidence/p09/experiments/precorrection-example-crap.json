@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "crates/nsbu-benchmarks/examples/smooth_refinement.rs": "0d70d16b7e28724e3d28071bc1668350345cb674819e5279a95d45a8e6951bfe"
+  },
+  "findings": [
+    {
+      "path": "crates/nsbu-benchmarks/examples/smooth_refinement.rs",
+      "function": "main",
+      "cyclomatic": 21.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 27.890625
+    }
+  ],
+  "resolution": "Separated joint diagnostic admission and exercised inadequate-cap/overflow refusals; final full suite and all gates pass."
+}

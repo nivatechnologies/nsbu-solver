@@ -294,4 +294,14 @@ coverage and 91.44% branch coverage. Maxima remain CC21, cognitive16,
 Halstead75.8956, physical-file385 and CRAP24.33594. Additional earlier-node
 metadata regressions cover the externally supplied history contract. Clippy,
 Rustdoc and fresh-target packaging pass. Its 31 duplication findings are
-informational; no mutation sweep was rerun. Hosted checks remain pending.
+informational; no mutation sweep was rerun. Source-matched hosted Rust and Python checks pass.
+
+The [independent experiment and replay increment](../evidence/p09/experiments/README.md)
+passes 305 local tests/probes across 226 Rust files. Coverage is 99.01% executable
+lines and 91.23% instrumented branches; maximum CC21, cognitive16, Halstead75.8956,
+physical-file385 and CRAP24.33594 pass the required limits. Separate joint
+admission tests cover inadequate caps and overflow. Raw reports preserve the
+corrected example CRAP finding and final measurements. Duplication reports 32
+informational matches; no mutation sweep was rerun. Format, Clippy, Rustdoc, fresh
+packaging, clean-source example/install and installed CLI checks pass. Hosted
+verification remains pending.

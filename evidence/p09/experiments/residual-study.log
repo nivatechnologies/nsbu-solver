@@ -1,0 +1,40 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-offstage-residual/crates/nsbu-benchmarks)
+warning: function `compare` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:36:8
+   |
+36 | pub fn compare(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |        ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `assert_bits` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:76:4
+   |
+76 | fn assert_bits(left: &[Complex64], right: &[Complex64]) {
+   |    ^^^^^^^^^^^
+
+warning: function `compare_reconstruction` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:85:4
+   |
+85 | fn compare_reconstruction(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |    ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "offstage_residual") generated 3 warnings (3 duplicates)
+warning: `nsbu-benchmarks` (test "allocation") generated 3 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
+     Running tests/allocation.rs (target/debug/deps/allocation-19df5a3c1c868b52)
+     Running tests/offstage_residual.rs (target/debug/deps/offstage_residual-1c5be75e65faaf46)
+
+running 3 tests
+test admission_and_wrong_domain_fail_with_bounded_charges ... ok
+CoxMatthews step=1024 residual=Norms { l2: 3.772886604904504e-11, h1: 3.3092192268035455e-10, vorticity_l2: 3.2876412757038417e-10, divergence_l2: 1.5375677774663822e-27 }
+test missing_history_stage_probes_and_external_origin_keep_their_restrictions ... ok
+CoxMatthews step=512 residual=Norms { l2: 4.723347996013879e-12, h1: 4.1434213468370577e-11, vorticity_l2: 4.11641109396409e-11, divergence_l2: 1.3278582662543245e-28 }
+CoxMatthews step=256 residual=Norms { l2: 5.888792576867817e-13, h1: 5.165425268023396e-12, vorticity_l2: 5.131748183553162e-12, divergence_l2: 8.084943286686096e-29 }
+HochbruckOstermann step=1024 residual=Norms { l2: 1.0797118990656412e-11, h1: 7.109231694966297e-11, vorticity_l2: 7.026762946601372e-11, divergence_l2: 1.1625015312689124e-28 }
+HochbruckOstermann step=512 residual=Norms { l2: 1.3434557012421108e-12, h1: 8.865980312222741e-12, vorticity_l2: 8.763602779423643e-12, divergence_l2: 6.495367433515799e-30 }
+HochbruckOstermann step=256 residual=Norms { l2: 1.6649306250225486e-13, h1: 1.100261472377869e-12, vorticity_l2: 1.0875915445321058e-12, divergence_l2: 2.8850455374477393e-31 }
+test independent_offstage_residual_refines_without_changing_accepted_states ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.24s
+

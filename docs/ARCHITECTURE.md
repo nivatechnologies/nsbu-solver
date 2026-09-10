@@ -106,6 +106,25 @@ shared observer reference, so callers cannot publish an unrelated proposal into 
 owned run. Trusted snapshots copy accepted nodes and counters and rebuild scratch;
 the balance-only binary format cannot silently drop active reconstruction.
 
+## Independent smooth experiment producers
+
+`smooth_experiment::FamilyPlan` admits six complete runs before any numerical
+allocation. `SmoothFamily` privately owns those independent from-rest trajectories
+and returns full-band spatial, temporal and method differences only after their
+clocks agree. A failed branch terminates the family without erasing prior commits.
+Reconstruction and residual workspaces separately borrow accepted histories;
+neither receives mutable physical state or integrator scratch. The residual force
+and conservative products are evaluated independently at the exact off-stage probe.
+The [experiment guide](EXPERIMENTS.md) gives branch identities, storage/work contracts,
+error behavior, source navigation and a runnable example.
+
+`smooth_run::replay::ReplayPlan` separately admits a complete from-rest numerical
+replay of a reconstruction checkpoint. It compares canonical physical, diagnostic,
+controller and work bytes after independent evolution. The input remains borrowed
+and unverified; successful output owns the newly integrated rest trajectory.
+This is reproducibility evidence under the executing smooth provider, not external
+artifact authentication or PDE qualification.
+
 ## Work that remains
 
 Binary components and a balance-only smooth-owner archive are implemented.

@@ -31,3 +31,5 @@ pub mod regions;
 pub mod smooth;
 pub mod smooth_observer;
 pub mod smooth_run;
+
+pub mod smooth_experiment;

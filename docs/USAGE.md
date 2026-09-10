@@ -26,6 +26,7 @@ cargo run -p nsbu-cli -- smooth --dry-run
 cargo run -p nsbu-cli -- smooth --method cm
 cargo run -p nsbu-cli -- smooth --method ho
 cargo run -p nsbu-benchmarks --example smooth_from_rest
+cargo run --release -p nsbu-benchmarks --example smooth_refinement
 ```
 
 `smooth` evolves the built-in CyclicSine case independently from rest. The defaults
@@ -40,7 +41,10 @@ verifies that this admits no numerical-grid allocations, and admitted live and
 imported run advances allocate no heap storage. The caller still budgets its
 own I/O and allocator costs. `--help` lists the actual supported options.
 
-The library example uses viscosity 1 and a separate small four-step configuration.
+The single-run library example uses viscosity 1 and a separate small four-step configuration.
+The [six-trajectory experiment example](EXPERIMENTS.md) adds independent grid,
+time-step and method comparisons, off-stage reconstruction and full-double-band
+residual measurements under a separately checked aggregate cap.
 Both are smooth verification profiles, distinct from `similarity-mms-v2`.
 The CLI also saves and resumes balance-only smooth checkpoints. Concentrating
 experiment commands and qualified restart provenance remain under implementation.
@@ -68,7 +72,7 @@ Successful save reports `checkpoint_saved`; successful continuation reports
 `completed`. Both remain `unqualified`. A SHA-256 match establishes byte integrity,
 not an authenticated from-rest lineage. File checkpoint commands currently select
 the balance-only `SmoothRun` profile; accepted reconstruction has separate trusted
-in-memory snapshots described below.
+in-memory snapshots and a bounded Rust library codec described below.
 
 Files are bounded before input-sized allocation. Writes use a private temporary
 file, synchronize its bytes, publish without replacing the destination, and
@@ -357,3 +361,13 @@ Exercise the actual next-attempt and corruption checks with:
 cargo test -p nsbu-benchmarks --test reconstruction_archive --test reconstructed_owner_archive
 cargo test -p nsbu-benchmarks --test allocation
 ```
+
+## Library checkpoint replay
+
+After decoding and continuing a reconstruction archive as an unverified owner,
+`smooth_run::replay::ReplayPlan::new(&run, maximum_attempts, cap)` checks simultaneous
+storage and the complete recorded attempt budget. `execute()` independently evolves
+a fresh rest state and requires equality of canonical physical/history/work/node
+bytes. The original remains unchanged. Read [the replay contract](CHECKPOINT_FORMAT.md#reproduce-an-imported-reconstruction-run-from-rest)
+for origin handling, work bounds and its execution-profile limitations. This is a
+Rust library API; the installed file CLI does not invoke numerical replay yet.

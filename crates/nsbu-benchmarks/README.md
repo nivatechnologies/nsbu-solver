@@ -63,3 +63,11 @@ snapshots preserve diagnostic work and the next transaction. The separate
 `archive` and `reconstructed_archive` modules encode bounded external containers;
 all imported owners remain `ExternalUnverified`. See the root checkpoint-format
 guide for field layouts and the distinction between byte integrity and provenance.
+
+The `smooth_experiment` module owns six from-rest spatial/time/method comparison
+branches, with separately admitted reconstruction and full-double-band residual
+workspaces. Run `cargo run --release -p nsbu-benchmarks --example smooth_refinement`
+for the aggregate-preflight walkthrough. The root `docs/EXPERIMENTS.md` documents
+the branch schedule, terminal failures, off-stage geometry and remaining scientific
+qualification channels. Measurements cannot mutate integrated state or upgrade
+external checkpoint origin.

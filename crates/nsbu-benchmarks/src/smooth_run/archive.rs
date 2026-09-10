@@ -147,6 +147,13 @@ pub(super) fn write_core<O: Observation>(
     run: &OwnedRun<O>,
     output: &mut [u8],
 ) -> Result<usize, CheckpointError> {
+    write_core_with_origin(run, output, run.origin)
+}
+pub(super) fn write_core_with_origin<O: Observation>(
+    run: &OwnedRun<O>,
+    output: &mut [u8],
+    origin: Origin,
+) -> Result<usize, CheckpointError> {
     let required = core_len(run)?;
     if output.len() < required {
         return Err(CheckpointError::ResourceLimit);
@@ -159,7 +166,7 @@ pub(super) fn write_core<O: Observation>(
     put(
         output,
         &mut p,
-        &[match run.origin {
+        &[match origin {
             Origin::InternalFromRest => 1,
             Origin::ExternalUnverified => 2,
         }],

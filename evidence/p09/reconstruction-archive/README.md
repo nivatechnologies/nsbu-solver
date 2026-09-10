@@ -45,4 +45,4 @@ fixture construction and related assertions. Mutation sweeps were not rerun.
 This format is exposed through the Rust library; CLI files remain balance-only.
 Mathematical/execution/force/policy/lineage artifact semantics, complete experiment
 integration and independent refinement families remain. **P08/P09 are incomplete
-and accepted concentrating PDE windows remain zero.** Hosted checks are pending.
+and accepted concentrating PDE windows remain zero.** Source-matched [hosted Rust](hosted-rust.json) and [Python](hosted-python.json) checks pass for `d96e2a5`.

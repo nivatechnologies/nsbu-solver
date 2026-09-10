@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Bootstrap, the independent Python reference, and Rust packages through P07 are verified locally and in hosted CI. P08 reporting and accepted-history balance studies pass local and hosted gates. The bounded window measurement review passes local gates; hosted verification and full experiment/provenance integration remain pending. P08 remains incomplete. The balance-only smooth runtime passes local and hosted checks. File save/resume and owned reconstruction snapshots pass local tests and quality gates; source-matched hosted verification also passes. Complete concentrating checkpoints and experiment qualification remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current experiment increment](evidence/p09/experiments/README.md) passes 305 local tests and allocation probes, all required quality gates, and a clean-source example/install walkthrough; hosted verification is pending. Complete concentrating experiments and qualification remain under implementation.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -13,7 +13,7 @@ partial_t u + (u dot grad)u = -grad p + nu Laplacian(u) + f(x,t)
 div u = 0,  nu > 0
 ```
 
-The library uses Fourier pseudospectral discretization, 3/2 padding for quadratic products, incompressibility projection, and exponential Runge–Kutta integration. Bounded attempts, the exact integer tick clock, transactional state commits, and resource preflight are implemented. Checkpoints and the complete window-convergence verifier remain planned.
+The library uses Fourier pseudospectral discretization, 3/2 padding for quadratic products, incompressibility projection, and exponential Runge–Kutta integration. Bounded attempts, the exact integer tick clock, transactional state commits, and resource preflight are implemented. Bounded smooth checkpoint formats are implemented; complete concentrating checkpoint provenance and the window-convergence verifier remain in progress.
 
 ## What the first experiment means
 
@@ -90,6 +90,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Scientific scope](docs/SCIENTIFIC_SCOPE.md) | Meaning and limits of results |
 | [Provenance and adopted decisions](docs/PROVENANCE.md) | Historical naming, baseline hashes, licensing overlay |
 | [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
+| [Smooth experiment walkthrough](docs/EXPERIMENTS.md) | Six independent trajectories, off-stage reconstruction and PDE residual samples |
 | [Numerical conventions](docs/NUMERICAL_CONVENTIONS.md) | Fourier, pressure, norms and exact-time contracts |
 | [Checkpoint formats](docs/CHECKPOINT_FORMAT.md) | Experimental byte formats, caps and import-origin boundaries |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |

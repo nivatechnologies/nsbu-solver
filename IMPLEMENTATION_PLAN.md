@@ -252,9 +252,24 @@ passes 292 local tests/probes, 99.08% executable line coverage, 91.44% branch
 coverage and all required complexity/CRAP gates. Its outer integrity frame binds
 accepted reconstruction to the same physical state, raw history, controller and
 work ledger. Imported runs preserve the next CM/HO attempt and interpolant with
-fresh scratch and an unverified origin. Hosted checks are pending.
+fresh scratch and an unverified origin. Source-matched hosted Rust and Python checks pass.
 
 The library format does not establish external artifact semantics or complete
 accepted-state provenance. Those bindings and independent refinement families
 remain; P08/P09 and concentrating qualification are incomplete. CLI file commands
 continue to select the balance-only smooth profile.
+
+## P08/P09 independent experiment progress
+
+The [smooth experiment and actual-replay increment](evidence/p09/experiments/README.md)
+passes 305 local tests/probes, 99.01% executable line coverage, 91.23% branch
+coverage and all required complexity/CRAP limits. It owns six independent rest
+trajectories, produces complete-band synchronized comparisons, measures genuine
+off-stage reconstruction/defects and reproduces coherent checkpoint bytes through
+a fresh bounded numerical evolution. A clean public source export runs the
+documented example and installs the CLI. Hosted checks are pending.
+
+P08/P09 remain incomplete. Frozen full-observable/time inventory binding, external
+artifact semantics, independent force/reference/current-grid arithmetic studies,
+sampling/quadrature and concentrating integration remain. Matching smooth replay
+does not qualify a PDE window or authenticate an external execution artifact.

@@ -19,6 +19,7 @@ pub mod archive;
 pub mod observation;
 mod plan;
 pub mod reconstructed_archive;
+pub mod replay;
 use observation::Observation;
 pub use plan::OwnedPlan;
 

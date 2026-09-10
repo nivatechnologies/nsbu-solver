@@ -1,0 +1,13 @@
+   Compiling nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-experiment-clean-source/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-experiment-clean-source/crates/nsbu-benchmarks)
+    Finished `release` profile [optimized] target(s) in 4.80s
+     Running `work/p09-experiment-clean-source/target/release/examples/smooth_refinement`
+CyclicSine diagnostic experiment; independently evolved from rest; accepted concentrating windows=0
+grids=[4,8,12] steps_ticks=[64,32,16] quantum=2^-16 endpoint_ticks=128 methods=CM,HO
+preflight storage_bytes=24253584 cap=134217728 family_work=FamilyBounds { storage_bytes: 21718984, integration_calls: 480, provider_work_units: 1631808, scalar_transforms: 5196, reconstruction_modal_visits: 88560, comparison_work_units: 82752 } residual_work=ResidualWork { probes: 1, provider_work_units: 22464, scalar_transforms: 9, coefficient_work_units: 627200 }
+tick=0 space_H1=[0.0, 0.0] time_H1=[0.0, 0.0] method_H1=0.000000000000e0
+tick=64 space_H1=[1.0226614046180406e-16, 2.9274210824268313e-21] time_H1=[1.956840473642751e-11, 1.2225489322467905e-12] method_H1=7.388536539376e-14
+tick=128 space_H1=[4.3154110339368465e-16, 2.0093965185743476e-20] time_H1=[3.8104538567418453e-11, 2.3805775992442443e-12] method_H1=1.432065468176e-13
+offstage_tick=127 reconstruction_H1=[3.811486335156587e-11, 2.379133863735833e-12] derivative_H1=[1.5642562275293377e-9, 3.6059124908717484e-10]
+full_double_band_residual=Norms { l2: 8.095620317273048e-12, h1: 7.102487368007718e-11, vorticity_l2: 7.056198419086048e-11, divergence_l2: 1.4606318254575185e-27 } origin=InternalFromRest
+Incomplete qualification: force/reference/arithmetic/sampling/quadrature and full observable studies remain.

@@ -1,0 +1,36 @@
+   Packaging nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-solver)
+    Updating crates.io index
+    Packaged 170 files, 739.5KiB (185.7KiB compressed)
+   Packaging nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-benchmarks)
+    Updating crates.io index
+    Packaged 83 files, 545.1KiB (138.6KiB compressed)
+   Packaging nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+    Updating crates.io index
+    Packaged 12 files, 56.2KiB (15.5KiB compressed)
+   Verifying nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-solver)
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-experiment-release-package-target/package/nsbu-solver-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.63s
+   Verifying nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-benchmarks)
+    Updating crates.io index
+   Unpacking nsbu-solver v0.1.0-alpha.0 (registry `/mnt/niva-array/nsbu-solver/work/p09-experiment-release-package-target/package/tmp-registry`)
+   Compiling nsbu-solver v0.1.0-alpha.0
+   Compiling nsbu-benchmarks v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-experiment-release-package-target/package/nsbu-benchmarks-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.23s
+   Verifying nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/crates/nsbu-cli)
+    Updating crates.io index
+   Unpacking nsbu-benchmarks v0.1.0-alpha.0 (registry `/mnt/niva-array/nsbu-solver/work/p09-experiment-release-package-target/package/tmp-registry`)
+   Compiling nsbu-benchmarks v0.1.0-alpha.0
+   Compiling nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-experiment-release-package-target/package/nsbu-cli-0.1.0-alpha.0)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.68s
