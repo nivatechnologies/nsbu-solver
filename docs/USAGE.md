@@ -408,3 +408,16 @@ The example emits early and late probe findings from actual independent historie
 and records both physical probe time and each owner's current state time. Its
 interpolated fields are diagnostic; full all-observable window qualification
 remains in progress.
+
+
+## Global reference pressure gauge
+
+```sh
+python -m reference.verify_pressure_mean --time 1/256 --panels 32 --dry-run
+python -m reference.verify_pressure_mean --time 1/256 --panels 32 > work/pressure-mean.json
+```
+
+This [independent reference study](PRESSURE_REFERENCE.md) compares ten bounded
+quadrature/arithmetic profiles for the frozen exact-v2 global pressure mean.
+It reports empirical errors and does not evolve or reset a trajectory. Its exit
+codes are 0 for a complete diagnostic, 1 for refusal and 2 for command syntax.

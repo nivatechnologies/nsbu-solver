@@ -99,5 +99,14 @@ sampling remains unresolved. No accepted PDE window follows from this run.
 nine-point 80/120-digit physical derivative report, including all ordered velocity
 gradient/Hessian entries, vorticity and pressure gradient. The public generator
 and its Rust fixture synchronization are tested. This is pointwise arithmetic
-evidence; raw pressure has no mean quadrature and no PDE window is qualified.
+evidence; those pointwise fixtures retain raw pressure. The separate global-gauge
+study below supplies empirical mean refinements; no PDE window is qualified.
 See [physical derivative diagnostics](../docs/DERIVATIVE_DIAGNOSTICS.md).
+
+
+The [periodic pressure reference](../docs/PRESSURE_REFERENCE.md) adds a separately
+bounded global-mean quadrature study with an exact Gaussian core and independently
+refined axial/collar sampling. `python -m reference.verify_pressure_mean --dry-run`
+prints the complete ten-profile admission; omit `--dry-run` to execute it. Original
+pointwise fixtures retain raw pressure. Global gauge refinements are empirical
+and do not qualify a PDE window.

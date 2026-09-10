@@ -411,9 +411,26 @@ retain their original fixed steps; separate full-band value/derivative scratch
 preserves actual node origins. Final state words equal a separately evolved
 family. Admission, rejection, stale-history and allocation controls pass, as do
 clean-source reproduction, packaging and frozen/bootstrap checks. Unchanged
-Python retains the complete 198-test profile. Hosted probe checks are pending.
+Python retains the complete 198-test profile. Source-matched hosted Rust and Python checks pass.
 
 P08/P09 remain incomplete. Complete physical/reference/force/residual consumers,
 reconstructed-time refinement qualification, benchmark/artifact binding and
 concentrating current-grid studies remain. No interpolant replaces an integrated
 state and no concentrating PDE window is accepted.
+
+## P09 global reference-pressure gauge progress
+
+The [reference-gauge increment](evidence/p09/reference-gauge/README.md) passes
+209 Python tests, 99.80% executable line coverage, 98.89% branch coverage and all
+required typing/complexity/CRAP gates. Nine bounded 80/120-digit studies cover
+rest, startup and the first two endpoint times, with separate axial/collar
+refinements through 512 panels and an exact Gaussian radial core. The finest
+nonzero relative quadrature changes are about 1.6–1.7e-11; overlapping profiles
+reproduce exactly. Clean-source replay, 41 bootstrap tests and frozen mathematical
+checks pass. Unchanged Rust retains its verified 367-test/probe profile. Hosted
+reference-gauge checks are pending.
+
+P08/P09 remain incomplete. These empirical means are independent reference
+inputs, not enclosures or window tolerances. Every future claimed probe requires
+its own reference budget, full regional/all-channel integration and actual
+concentrating trajectory convergence. Accepted concentrating windows remain zero.

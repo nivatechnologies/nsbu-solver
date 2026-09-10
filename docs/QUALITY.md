@@ -404,5 +404,16 @@ CRAP24.33594 pass all gates. The unchanged 82-file Python/stub inventory retains
 its verified 198-test profile; 41 bootstrap tests were rerun. Clean-source tests
 and complete example reproduction, packaging and frozen mathematical checks
 pass. Admission, scheduling, interpolation and publication remain separate, with
-no reference-assignment interface. Hosted probe checks are pending; no
+no reference-assignment interface. Source-matched hosted Rust and Python checks pass; no
 concentrating PDE window is accepted.
+
+
+The [global reference-gauge increment](../evidence/p09/reference-gauge/README.md)
+passes 209 Python tests across 88 Python/stub files: 99.80% executable line and
+98.89% branch coverage. Maxima CC16, cognitive19, Halstead13.8261, physical-file243
+and CRAP16 meet all gates; strict typing has zero errors. All 272 Rust files are
+unchanged from the verified 367-test/probe source. A clean export reproduces the
+public study, and all nine numerical studies plus frozen/bootstrap checks pass.
+The less accurate initial pilot and its deliberately interrupted partial test
+run remain recorded. The final complete coverage run passes. Hosted reference
+checks are pending; no concentrating PDE window is accepted.

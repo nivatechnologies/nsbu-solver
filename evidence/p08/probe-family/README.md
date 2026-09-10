@@ -11,7 +11,7 @@ tests and the frozen mathematical verification were rerun successfully.
 [Summary](summary.json), [artifact hashes](artifact-sha256.json) and compressed
 raw reports retain the actual commands' output, complete source scope and measured
 findings. Formatting, strict linting, Rustdoc, fresh-target packaging and the
-clean-source replay pass. Hosted probe checks are pending. The preceding sampling
+clean-source replay pass. Source-matched hosted Rust and Python checks pass. The preceding sampling
 increment's source-matched Rust and Python hosted success is archived separately.
 
 ## Numerical behavior checked

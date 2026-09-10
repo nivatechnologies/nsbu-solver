@@ -110,3 +110,8 @@ The project has no dependency on Niva code, services, schemas, or credentials. A
 ## License
 
 Original project material is licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) and [third-party provenance](THIRD_PARTY.md). Cited papers and external repositories retain their own terms; this repository does not import or relicense them.
+
+
+The [exact-v2 pressure-reference guide](docs/PRESSURE_REFERENCE.md) documents the
+bounded global gauge quadrature, arithmetic/refinement reports and remaining
+reference-to-window integration. Original raw-pressure fixtures remain unchanged.
