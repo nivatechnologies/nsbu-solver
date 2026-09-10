@@ -208,3 +208,10 @@ the probe time, all accepted node clocks and each current state clock, including
 initial lookahead. Streaming preserves early observations before the finite
 history rings are overwritten. A failed later probe clears current views and
 terminates the owner while retaining every earlier legal commit.
+
+
+The [reconstructed physical consumer](RECONSTRUCTED_PHYSICAL_FIELDS.md) binds an
+immutable `ProbeFamily` before using the existing physical/pressure numerical
+workspaces. Exact probe scheduling and complete publication remain outside the
+kernels. Pressure receives reconstructed velocity and a fresh prescribed force
+at the probe clock; later lookahead states remain untouched.

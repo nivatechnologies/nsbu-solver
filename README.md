@@ -99,9 +99,11 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Physical derivative diagnostics](docs/DERIVATIVE_DIAGNOSTICS.md) | Full-band scalar derivatives, v2 reference tensors and regional errors |
 | [Physical-field comparisons](docs/PHYSICAL_COMPARISONS.md) | Complete scalar/vector/tensor comparisons and v2 regional aggregation |
 | [Physical refinement families](docs/PHYSICAL_REFINEMENTS.md) | Actual six-trajectory comparisons, exact clocks and finite diagnostic budgets |
+| [Reference pressure gauge](docs/PRESSURE_REFERENCE.md) | Exact-v2 global mean with independent bounded quadrature/arithmetic refinements |
 | [Pressure refinements](docs/PRESSURE_REFINEMENTS.md) | Independent full-band physical pressure from actual accepted states |
 | [Sampling refinements](docs/SAMPLING_REFINEMENTS.md) | Three physical sample grids, complete tensors/pressure and preserved peak sensitivity |
 | [Accepted-history probes](docs/RECONSTRUCTED_PROBES.md) | Stream early and late reconstruction samples with exact node origins and bounded lookahead |
+| [Reconstructed physical fields](docs/RECONSTRUCTED_PHYSICAL_FIELDS.md) | Complete tensors/pressure at exact probe times with retained accepted-node origins |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
 
@@ -110,8 +112,3 @@ The project has no dependency on Niva code, services, schemas, or credentials. A
 ## License
 
 Original project material is licensed under the [Apache License, Version 2.0](LICENSE). See [NOTICE](NOTICE) and [third-party provenance](THIRD_PARTY.md). Cited papers and external repositories retain their own terms; this repository does not import or relicense them.
-
-
-The [exact-v2 pressure-reference guide](docs/PRESSURE_REFERENCE.md) documents the
-bounded global gauge quadrature, arithmetic/refinement reports and remaining
-reference-to-window integration. Original raw-pressure fixtures remain unchanged.

@@ -1,4 +1,5 @@
 //! Stream early and late off-stage probes before bounded accepted histories are overwritten.
+pub mod diagnostics;
 mod plan;
 mod report;
 #[cfg(test)]

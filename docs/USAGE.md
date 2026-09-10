@@ -421,3 +421,15 @@ This [independent reference study](PRESSURE_REFERENCE.md) compares ten bounded
 quadrature/arithmetic profiles for the frozen exact-v2 global pressure mean.
 It reports empirical errors and does not evolve or reset a trajectory. Its exit
 codes are 0 for a complete diagnostic, 1 for refusal and 2 for command syntax.
+
+## Physical fields between accepted steps
+
+```sh
+cargo run --release -p nsbu-benchmarks --example smooth_probe_diagnostics -- --dry-run
+cargo run --release -p nsbu-benchmarks --example smooth_probe_diagnostics
+```
+
+The [reconstructed physical workflow](RECONSTRUCTED_PHYSICAL_FIELDS.md) reports
+all six quantities and all five trajectory pairs at probe ticks 0/7/128, retaining
+physical clocks and actual accepted-node origins. It is a bounded smooth
+diagnostic; the complete concentrating window verifier remains unfinished.

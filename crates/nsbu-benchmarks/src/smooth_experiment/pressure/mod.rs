@@ -1,5 +1,6 @@
 //! Independent full-quadratic-band pressure from each actual accepted family branch.
 mod plan;
+mod probes;
 #[cfg(test)]
 mod tests;
 use super::{physical::QuantityRefinement, FamilyError, SmoothFamily, PAIRS};

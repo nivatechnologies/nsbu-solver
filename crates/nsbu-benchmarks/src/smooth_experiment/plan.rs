@@ -105,8 +105,7 @@ impl<'a> FamilyPlan<'a> {
         if family.failed {
             return Err(FamilyError::Terminated);
         }
-        if !same_settings(family.plan.settings, self.settings)
-            || family.plan.times.as_slice() != self.times.as_slice()
+        if !self.same_profile(family.plan)
             || family
                 .next
                 .checked_sub(1)
@@ -121,6 +120,11 @@ impl<'a> FamilyPlan<'a> {
             return Err(FamilyError::InvalidFamily);
         }
         Ok(clock)
+    }
+    // Shared exact binding for accepted-state and reconstructed-field consumers.
+    pub(super) fn same_profile(self, other: FamilyPlan<'_>) -> bool {
+        same_settings(self.settings, other.settings)
+            && self.times.as_slice() == other.times.as_slice()
     }
     /// Checked aggregate reservation, including all independent observers.
     pub fn bounds(self) -> FamilyBounds {

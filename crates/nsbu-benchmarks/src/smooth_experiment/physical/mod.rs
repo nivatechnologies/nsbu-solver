@@ -1,5 +1,6 @@
 //! Complete vector/derivative refinements from the family's six actual rest trajectories.
 mod plan;
+mod probes;
 use super::{FamilyError, SmoothFamily, PAIRS};
 use nsbu_solver::{
     diagnostics::{

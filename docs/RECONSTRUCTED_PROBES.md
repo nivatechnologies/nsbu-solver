@@ -9,9 +9,10 @@ every historical state or resetting any trajectory.
 The owner evolves all branches from rest. It has no analytical-reference
 assignment interface and does not import checkpoints. Interpolated fields live
 in separate diagnostic scratch; they never replace an integrated `SpectralState`.
-The implementation currently provides complete Fourier value/time-derivative
-comparisons. Physical/reference/force/residual consumers and full window
-qualification remain separate integration work.
+The owner provides complete Fourier value/time-derivative comparisons. The
+[physical consumer](RECONSTRUCTED_PHYSICAL_FIELDS.md) adds complete tensors and
+pressure with a fresh prescribed force at the probe time. Full reference/force
+refinement, residual integration and window qualification remain.
 
 ## Execute the public workflow
 
@@ -131,8 +132,9 @@ branches. Isolated allocator instrumentation covers admission, complete owner
 construction, repeated probes and normal exhaustion. Existing independent
 polynomial/Hermite fixtures verify the interpolation mathematics separately.
 
-This schedule addresses the bounded-history timing gap. It does not complete
-physical/regional/pressure tracking, all-channel arithmetic and force studies,
+This schedule addresses the bounded-history timing gap; the physical consumer
+adds complete sampled tensors and pressure. Full regional/reference tracking,
+all-channel arithmetic and force studies,
 reconstruction-error qualification, frozen benchmark semantics, external lineage
-binding or concentrating convergence. Accepted concentrating PDE windows remain
+binding and concentrating convergence remain incomplete. Accepted concentrating PDE windows remain
 zero; sampled interpolation is not a continuous-window enclosure.

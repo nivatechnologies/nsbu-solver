@@ -1,0 +1,184 @@
+{
+  "package": "P08",
+  "increment": "complete-physical-fields-at-accepted-history-probe-times",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T22:52:31.733411+00:00",
+  "base_commit": "37541e8e14767f17934cf52a3330ee11873e899b",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 281,
+  "rust_harness_tests": 366,
+  "rust_allocation_executables": 6,
+  "rust_tests_and_probes": 372,
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "e3c3d4f66ea535e2567c76d61f5099ee4c64afb94c4d9fb6286671fae24dcac2"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "rust_coverage": {
+    "branches": {
+      "count": 1816,
+      "covered": 1639,
+      "notcovered": 177,
+      "percent": 90.25330396475772
+    },
+    "functions": {
+      "count": 2005,
+      "covered": 1992,
+      "percent": 99.35162094763092
+    },
+    "instantiations": {
+      "count": 4143,
+      "covered": 3335,
+      "percent": 80.49722423364712
+    },
+    "lines": {
+      "count": 24154,
+      "covered": 23862,
+      "percent": 98.79109050260826
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 45611,
+      "covered": 43942,
+      "notcovered": 1669,
+      "percent": 96.34079498366623
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 473
+  },
+  "python_evidence": {
+    "source_files_unchanged": 88,
+    "complete_profile": "../../p09/reference-gauge/summary.json",
+    "tests": 209,
+    "bootstrap_tests_rerun": 41,
+    "combined_clean_new_tests_rerun": 11
+  },
+  "integration_replay": "The complete Rust profile ran on bf8d0d0 plus this increment. Integrating the independently verified Python-only reference-gauge increment preserved every Rust source and runtime fixture. The combined source replays the complete public Rust example and new Python tests.",
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 79,
+      "duplicatedLines": 754,
+      "duplicatedTokens": 6556,
+      "lines": 34218,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.2035186159331346,
+      "percentageTokens": 2.5045556476660185,
+      "sources": 280,
+      "tokens": 261763
+    },
+    "finding_exit_codes": {
+      "duplicates": 0,
+      "dead-code": 101,
+      "type-escapes": 1
+    },
+    "review": "Shared helpers unused by individual harness/example compilations remain exercised by other targets. Private probe bridges deliberately reuse independently verified numerical kernels. Broad lexical matches are a README prohibition and an English Any in a Rust documentation comment. Full comment lines are excluded from the type-escape classification; the original scans are retained.",
+    "mutations": "Not rerun; prior historical scopes remain informational"
+  },
+  "numerical_measurements": {
+    "case": "CyclicSine",
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "macro_ticks": [
+      64,
+      32,
+      16
+    ],
+    "clock_quantum_exponent": -16,
+    "accepted_family_ticks": [
+      0,
+      64,
+      128
+    ],
+    "probe_ticks": [
+      0,
+      7,
+      128
+    ],
+    "physical_sample_grid": 24,
+    "quantities": [
+      "velocity",
+      "gradient",
+      "hessian",
+      "vorticity",
+      "pressure",
+      "pressure_gradient"
+    ],
+    "pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "complete_comparisons_per_probe": 30,
+    "successful_attempts": 3,
+    "joint_reserved_bytes": 26586600,
+    "diagnostic_reserved_bytes": 4392832,
+    "cap_bytes": 134217728,
+    "physical_scalar_transforms": 1350,
+    "pressure_scalar_transforms": 390,
+    "pressure_provider_work_units": 67392,
+    "physical_weighted_visits": 91111872,
+    "pressure_weighted_visits": 34977792,
+    "actual_findings": "public-example.log.gz",
+    "state_integrity": "All accepted state and interpolant coefficient digests remain unchanged during every complete measurement",
+    "negative_controls": [
+      "Changed exact settings/manifest",
+      "missing/skipped/rejected probes",
+      "caps/work overflow/invalid floors",
+      "pressure band truncation",
+      "later actual lookahead states substituted for the probe",
+      "pressure child exhaustion after complete physical sampling"
+    ],
+    "rest_control": "All physical and pressure reference scales stay exactly zero at probe tick zero despite every actual lookahead state having positive time"
+  },
+  "solid_review": "Immutable full joint admission, exact probe provenance binding, reused physical/pressure kernels and complete publication remain separate. Fresh unprojected prescribed force is evaluated at the physical probe time; no stage RHS, analytical pressure or state assignment is used.",
+  "limitations": [
+    "Smooth reconstructed physical diagnostics only; reconstruction error and continuous-time control remain separate",
+    "Complete reference/force/residual/arithmetic/regional/location refinements and benchmark/artifact bindings remain",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

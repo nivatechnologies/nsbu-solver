@@ -84,6 +84,24 @@ impl<'a> ProbePlan<'a> {
     pub fn family_plan(self) -> FamilyPlan<'a> {
         self.family
     }
+    // Only complete current fields from the matching privately constructed owner may be consumed.
+    pub(in crate::smooth_experiment) fn require_sample(
+        self,
+        family: &ProbeFamily<'_>,
+        next: usize,
+    ) -> Result<super::ProbeSample, FamilyError> {
+        if family.failed {
+            return Err(FamilyError::Terminated);
+        }
+        let sample = family.current.ok_or(FamilyError::InvalidFamily)?;
+        if !self.family.same_profile(family.plan.family)
+            || self.times.as_slice() != family.plan.times.as_slice()
+            || self.times.as_slice().get(next).copied() != Some(sample.clock())
+        {
+            return Err(FamilyError::InvalidFamily);
+        }
+        Ok(sample)
+    }
 }
 fn geometry(family: FamilyPlan<'_>, times: TestedTimes<'_>) -> Result<usize, FamilyError> {
     let checks = mul(times.as_slice().len(), 6)?;

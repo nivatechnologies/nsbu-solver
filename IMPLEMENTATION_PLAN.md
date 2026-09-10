@@ -434,3 +434,20 @@ P08/P09 remain incomplete. These empirical means are independent reference
 inputs, not enclosures or window tolerances. Every future claimed probe requires
 its own reference budget, full regional/all-channel integration and actual
 concentrating trajectory convergence. Accepted concentrating windows remain zero.
+
+## P08 complete reconstructed physical-field progress
+
+The [physical-probe increment](evidence/p08/probe-diagnostics/README.md) passes
+372 Rust tests/probes, 98.79% executable line coverage, 90.25% branch coverage and
+all required complexity/CRAP gates. It binds thirty complete velocity/tensor/
+pressure comparisons to each exact reconstructed probe, retaining actual node
+origins and a fresh unprojected force at the physical time. Unchanged state and
+interpolant digests, rest/clock controls, terminal child failure and allocation
+contracts pass. Clean-source output, packaging and frozen/bootstrap checks pass;
+unchanged Python retains its complete 209-test profile. Hosted physical-probe
+checks are pending.
+
+P08/P09 remain incomplete. Complete residual/reconstruction, reference/force/
+arithmetic/regional/location refinement, benchmark/artifact binding and
+concentrating current-grid qualification remain. No concentrating window is
+accepted from these smooth physical observations.

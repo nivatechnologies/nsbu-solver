@@ -417,3 +417,14 @@ public study, and all nine numerical studies plus frozen/bootstrap checks pass.
 The less accurate initial pilot and its deliberately interrupted partial test
 run remain recorded. The final complete coverage run passes. Hosted reference
 checks are pending; no concentrating PDE window is accepted.
+
+
+The [reconstructed physical-field increment](../evidence/p08/probe-diagnostics/README.md)
+passes 372 Rust tests/probes across 281 Rust files: 98.79% executable line and
+90.25% branch coverage. Maxima CC21, cognitive18, Halstead75.8956, physical-file473
+and CRAP24.33594 pass every gate. All 88 Python/stub files match the verified
+209-test reference profile. Complete clean-source output and eleven Python
+regressions pass after integrating the Python-only increment without altering
+measured Rust source, Cargo settings or runtime fixtures. Bootstrap/frozen checks,
+strict linting, Rustdoc and fresh packaging pass. Hosted checks are pending;
+accepted concentrating PDE windows remain zero.

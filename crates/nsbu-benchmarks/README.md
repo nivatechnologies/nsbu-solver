@@ -122,3 +122,10 @@ state. Exact node origins and actual state clocks expose the required initial
 two-macro-step lookahead. The `smooth_probes` example supports `--dry-run` and a
 complete early/late probe walkthrough. See `docs/RECONSTRUCTED_PROBES.md` for
 resource admission, complete reports, failure invalidation and numerical limits.
+
+
+`smooth_experiment::probes::diagnostics` binds complete physical and pressure
+comparisons to actual reconstructed probe times. The
+[public guide](../../docs/RECONSTRUCTED_PHYSICAL_FIELDS.md) covers the fresh
+probe-time prescribed force, full pressure band, joint admission and failure
+contracts. No reference assignment or concentrating qualification is supplied.
