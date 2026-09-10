@@ -127,6 +127,15 @@ artifact authentication or PDE qualification.
 
 ## Work that remains
 
+The separate [arithmetic workflow](ARITHMETIC_STUDY.md) compares owned smooth
+trajectories against allocating Python direct sums. Its input decoder, immutable
+force fixture, trajectory scheduler, report reader and numerical comparator have
+separate responsibilities. The reference receives no Rust state during evolution.
+Exact raw force bits cross the implementation boundary only in the explicitly
+labeled fixed-input study. Imported evolved states are read without projection or
+conjugate-pair repair. The workflow reports measured arithmetic and force effects;
+it has no authority to accept a PDE window.
+
 Binary components and a balance-only smooth-owner archive are implemented.
 Smooth file save/resume and owned reconstruction snapshots are implemented.
 Binary reconstruction serialization is available through a separate Rust owner

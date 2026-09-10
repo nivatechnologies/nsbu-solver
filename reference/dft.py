@@ -32,7 +32,9 @@ def transform(values: list[mpc], n: int, inverse: bool = False) -> list[mpc]:
         for point in grid(n):
             index = (point[0]*n+point[1])*n+point[2]
             base = index-point[axis]*stride
-            output[index] = sum((source[base+j*stride]*roots[(j*point[axis])%n] for j in range(n)), mp.mpc(0))
+            # fdot sums the direct products before rounding the result. It retains
+            # every term and avoids repeated context dispatch in Python addition.
+            output[index] = mp.fdot((source[base+j*stride], roots[(j*point[axis])%n]) for j in range(n))
         source = output
     return source if inverse else [v/n**3 for v in source]
 

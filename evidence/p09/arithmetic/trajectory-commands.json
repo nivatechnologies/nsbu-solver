@@ -1,0 +1,277 @@
+{
+  "scope": "All 16 maintained independent trajectory processes; actual observed exit codes",
+  "runs": [
+    {
+      "name": "n4-cm-80",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "CM",
+        "--precision",
+        "80"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-cm-80.json.gz"
+    },
+    {
+      "name": "n4-cm-80-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "CM",
+        "--precision",
+        "80",
+        "--force-bits",
+        "work/p09-cyclic-force-n4-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-cm-80-fixed.json.gz"
+    },
+    {
+      "name": "n4-cm-120",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "CM",
+        "--precision",
+        "120"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-cm-120.json.gz"
+    },
+    {
+      "name": "n4-cm-120-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "CM",
+        "--precision",
+        "120",
+        "--force-bits",
+        "work/p09-cyclic-force-n4-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-cm-120-fixed.json.gz"
+    },
+    {
+      "name": "n4-ho-80",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "HO",
+        "--precision",
+        "80"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-ho-80.json.gz"
+    },
+    {
+      "name": "n4-ho-80-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "HO",
+        "--precision",
+        "80",
+        "--force-bits",
+        "work/p09-cyclic-force-n4-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-ho-80-fixed.json.gz"
+    },
+    {
+      "name": "n4-ho-120",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "HO",
+        "--precision",
+        "120"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-ho-120.json.gz"
+    },
+    {
+      "name": "n4-ho-120-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "4",
+        "--method",
+        "HO",
+        "--precision",
+        "120",
+        "--force-bits",
+        "work/p09-cyclic-force-n4-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n4-ho-120-fixed.json.gz"
+    },
+    {
+      "name": "n12-cm-80",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "CM",
+        "--precision",
+        "80"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-cm-80.json.gz"
+    },
+    {
+      "name": "n12-cm-80-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "CM",
+        "--precision",
+        "80",
+        "--force-bits",
+        "work/p09-cyclic-force-n12-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-cm-80-fixed.json.gz"
+    },
+    {
+      "name": "n12-cm-120",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "CM",
+        "--precision",
+        "120"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-cm-120.json.gz"
+    },
+    {
+      "name": "n12-cm-120-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "CM",
+        "--precision",
+        "120",
+        "--force-bits",
+        "work/p09-cyclic-force-n12-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-cm-120-fixed.json.gz"
+    },
+    {
+      "name": "n12-ho-80",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "HO",
+        "--precision",
+        "80"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-ho-80.json.gz"
+    },
+    {
+      "name": "n12-ho-80-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "HO",
+        "--precision",
+        "80",
+        "--force-bits",
+        "work/p09-cyclic-force-n12-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-ho-80-fixed.json.gz"
+    },
+    {
+      "name": "n12-ho-120",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "HO",
+        "--precision",
+        "120"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-ho-120.json.gz"
+    },
+    {
+      "name": "n12-ho-120-fixed",
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "reference.verify_cyclic",
+        "--n",
+        "12",
+        "--method",
+        "HO",
+        "--precision",
+        "120",
+        "--force-bits",
+        "work/p09-cyclic-force-n12-bits.json"
+      ],
+      "exit_code": 0,
+      "artifact": "trajectories/n12-ho-120-fixed.json.gz"
+    }
+  ]
+}

@@ -303,5 +303,18 @@ physical-file385 and CRAP24.33594 pass the required limits. Separate joint
 admission tests cover inadequate caps and overflow. Raw reports preserve the
 corrected example CRAP finding and final measurements. Duplication reports 32
 informational matches; no mutation sweep was rerun. Format, Clippy, Rustdoc, fresh
-packaging, clean-source example/install and installed CLI checks pass. Hosted
-verification remains pending.
+packaging, clean-source example/install and installed CLI checks pass. Source-matched
+hosted Rust and Python checks also pass.
+
+The [same-grid arithmetic increment](../evidence/p09/arithmetic/README.md) passes
+313 Rust tests/probes and 184 Python tests. Rust coverage is 98.92% of executable
+lines and 91.24% of instrumented branches; Python coverage is 99.79% and 98.99%.
+Rust maxima are CC21, cognitive16, Halstead75.8956, file385 and CRAP24.33594.
+Python maxima are CC16, cognitive19, Halstead13.8261, file243 and CRAP16; strict
+typing reports zero errors/warnings. Source inventories cover 229 Rust and 70
+Python/stub files. Splitting admitted evolution from state serialization resolves
+an exporter CRAP34.125 finding. Raw reports retain the finding and final evidence.
+The nine Python dead-code findings identify discovered tests or schema fields;
+duplication is reported and no mutation sweep was rerun. Full source/export/input
+identity, cap failures and high-mode/reality negative controls are tested.
+Hosted verification of this increment remains pending; no PDE window is accepted.

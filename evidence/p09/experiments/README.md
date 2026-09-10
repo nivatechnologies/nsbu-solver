@@ -54,5 +54,5 @@ branch schedule, resource/work units, source map and failure semantics. The
 execution-profile limits. **P08/P09 remain incomplete; accepted concentrating PDE
 windows remain zero.** Full artifact semantics, frozen observable/time inventories
 and force/reference/current-grid arithmetic/sampling/quadrature studies remain.
-Hosted verification is pending. Exploratory high-precision arithmetic pilots under
+Source-matched [hosted Rust](hosted-rust.json) and [Python](hosted-python.json) verification pass for `56cecbf`. Exploratory high-precision arithmetic pilots under
 `work/` are outside this verified maintained-code increment.

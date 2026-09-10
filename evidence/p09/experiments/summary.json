@@ -1,7 +1,7 @@
 {
   "package": "P08/P09",
   "increment": "independent-smooth-experiment-producers-and-from-rest-replay",
-  "status": "local checks passed; hosted pending",
+  "status": "local and source-matched hosted checks passed",
   "accepted_pde_windows": 0,
   "source_files": 226,
   "source_sha256": {
@@ -302,7 +302,9 @@
     "repository": "passed",
     "bootstrap_tests": "41 passed",
     "original_mathematical_verification": "passed; reproduced preserved scientific results",
-    "mutations": "not rerun; prior source-specific reports retained"
+    "mutations": "not rerun; prior source-specific reports retained",
+    "hosted_rust": "passed: 56cecbf, run 34504989900",
+    "hosted_python": "passed: 56cecbf, run 34504989873"
   },
   "execution_profile": {
     "system": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",

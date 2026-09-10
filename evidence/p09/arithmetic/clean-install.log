@@ -1,0 +1,7 @@
+  Installing nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-arithmetic-clean-source/crates/nsbu-cli)
+    Updating crates.io index
+   Compiling nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-arithmetic-clean-source/crates/nsbu-cli)
+    Finished `release` profile [optimized] target(s) in 0.66s
+  Installing /mnt/niva-array/nsbu-solver/work/p09-cyclic-clean-install/bin/nsbu
+   Installed package `nsbu-cli v0.1.0-alpha.0 (/mnt/niva-array/nsbu-solver/work/p09-arithmetic-clean-source/crates/nsbu-cli)` (executable `nsbu`)
+warning: be sure to add `/mnt/niva-array/nsbu-solver/work/p09-cyclic-clean-install/bin` to your PATH to be able to run the installed binaries

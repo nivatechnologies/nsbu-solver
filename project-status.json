@@ -21,13 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Independent smooth experiments and from-rest checkpoint replay pass local gates: 305 tests/probes, 99.01% executable lines, 91.23% branches, maximum CRAP 24.33594. Hosted verification pending; preceding reconstruction archive passed hosted.",
+    "status": "Independent same-grid smooth arithmetic passes local gates: 313 Rust tests/probes, 184 Python tests; all required coverage/complexity/CRAP/type limits pass. Source-matched hosted verification is pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/quality-reference/summary.json",
+    "evidence": "evidence/p09/arithmetic/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "rust_evidence": "evidence/p09/experiments/summary.json",
+    "rust_evidence": "evidence/p09/arithmetic/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -36,7 +35,9 @@
     "mutation_findings": "informational; full sweeps optional",
     "dead_code_findings": "informational",
     "duplication_findings": "informational with independent numerical oracles preserved",
-    "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json"
+    "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
+    "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
+    "latest_hosted_ci_status": "pending"
   },
   "packages": {
     "B00": {
@@ -108,11 +109,11 @@
       "reporting_evidence": "evidence/p08/reporting/summary.json"
     },
     "P09": {
-      "status": "in-progress; independent smooth experiment producers and bounded from-rest replay verified locally; complete artifact semantics and concentrating qualification pending",
+      "status": "in-progress; same-grid smooth velocity arithmetic verified locally; hosted verification, full artifact semantics and concentrating qualification pending",
       "evidence": "evidence/p09/artifacts/summary.json",
       "remaining": [
         "Bind external mathematical/execution/force/policy/lineage artifacts to accepted-state provenance",
-        "Separate force/reference/arithmetic/transfer refinement families",
+        "Complete force/reference/arithmetic/transfer families for all mandatory observables and concentrating grids",
         "Complete experiment integration and clean-checkout release workflow"
       ],
       "foundation_evidence": "evidence/p09/foundations/summary.json",
@@ -123,7 +124,9 @@
       "reconstruction_hosted_ci": "evidence/p09/reconstruction/hosted-rust.json",
       "reconstruction_archive_evidence": "evidence/p09/reconstruction-archive/summary.json",
       "experiment_evidence": "evidence/p09/experiments/summary.json",
-      "reconstruction_archive_hosted_ci": "evidence/p09/reconstruction-archive/hosted-rust.json"
+      "reconstruction_archive_hosted_ci": "evidence/p09/reconstruction-archive/hosted-rust.json",
+      "experiment_hosted_ci": "evidence/p09/experiments/hosted-rust.json",
+      "arithmetic_evidence": "evidence/p09/arithmetic/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -151,5 +154,7 @@
   "reconstruction_binary_checkpoint_exists": true,
   "independent_smooth_comparison_family_exists": true,
   "accepted_history_offstage_residual_exists": true,
-  "bounded_from_rest_checkpoint_replay_exists": true
+  "bounded_from_rest_checkpoint_replay_exists": true,
+  "independent_smooth_current_grid_arithmetic_exists": true,
+  "independent_smooth_current_grid_arithmetic_scope": "N=4 and N=12 velocity trajectories, CM/HO, 80/120-digit direct DFT with separate fixed-force inputs; no larger-grid or concentrating qualification"
 }

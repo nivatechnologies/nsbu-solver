@@ -1,0 +1,274 @@
+{
+  "package": "P08/P09",
+  "increment": "independent-same-grid-smooth-arithmetic",
+  "status": "local checks passed; source-matched hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-10T18:10:40.514538+00:00",
+  "execution_profile": {
+    "python": "3.12.3",
+    "mpmath": "1.3.0",
+    "rust": "1.94.0",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "rust_numerical_build": "release",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06"
+  },
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 229,
+  "python_source_and_stub_files": 70,
+  "rust_tests_and_probes": 313,
+  "rust_harness_tests": 309,
+  "rust_allocation_executables": 4,
+  "python_tests": 184,
+  "rust_coverage": {
+    "branches": {
+      "count": 1552,
+      "covered": 1416,
+      "notcovered": 136,
+      "percent": 91.23711340206185
+    },
+    "functions": {
+      "count": 1600,
+      "covered": 1590,
+      "percent": 99.375
+    },
+    "instantiations": {
+      "count": 2898,
+      "covered": 2145,
+      "percent": 74.01656314699792
+    },
+    "lines": {
+      "count": 19656,
+      "covered": 19443,
+      "percent": 98.91636141636143
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 36554,
+      "covered": 35304,
+      "notcovered": 1250,
+      "percent": 96.58040159763638
+    }
+  },
+  "python_coverage": {
+    "covered_lines": 4187,
+    "num_statements": 4196,
+    "percent_covered": 99.65945512820512,
+    "percent_covered_display": "99",
+    "missing_lines": 9,
+    "excluded_lines": 0,
+    "num_branches": 796,
+    "num_partial_branches": 8,
+    "covered_branches": 788,
+    "missing_branches": 8
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 16.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 385
+  },
+  "python_maxima": {
+    "cyclomatic": 16,
+    "cognitive": 19,
+    "halstead_function_and_file": 13.826086956521738,
+    "crap": 16.0,
+    "physical_file_lines": 243
+  },
+  "informational_findings": {
+    "python_duplicates": 0,
+    "python_dead_code": 9,
+    "rust_duplicates": {
+      "clones": 34,
+      "duplicatedLines": 309,
+      "duplicatedTokens": 2818,
+      "lines": 27967,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 1.104873601029785,
+      "percentageTokens": 1.3349629545411479,
+      "sources": 228,
+      "tokens": 211092
+    },
+    "mutations": "not rerun; informational under revised policy"
+  },
+  "numerical_measurements": [
+    {
+      "grid": 4,
+      "method": "CM",
+      "differences": {
+        "independent_precision_80_120": {
+          "maximum_coefficient": "4.722672018259741918684080889655424840794e-82",
+          "l2": "7.671779701608440387497600402849334187394e-82",
+          "h1": "4.880989649588878118109343906853778219518e-81"
+        },
+        "fixed_precision_80_120": {
+          "maximum_coefficient": "2.427873998413708333968944777777172924992e-82",
+          "l2": "5.492261959949098999049547681766967887359e-82",
+          "h1": "3.494322676895037047895029100363455449538e-81"
+        },
+        "rust_vs_fixed_120": {
+          "maximum_coefficient": "4.80603744989434596461711741245991177183e-18",
+          "l2": "9.435660546617896675037835290820901060024e-18",
+          "h1": "6.003217723785272751075652992016557297672e-17"
+        },
+        "fixed_vs_independent_120": {
+          "maximum_coefficient": "3.182125281683251227481026058795918603913e-19",
+          "l2": "4.826311039433122837364236228969991309803e-19",
+          "h1": "3.070627062698662885066696772763202030484e-18"
+        },
+        "rust_vs_independent_120": {
+          "maximum_coefficient": "4.843377655533802037714188782679047539797e-18",
+          "l2": "9.810643241431668712130107701311798690823e-18",
+          "h1": "6.241791648309761283579706487900631561175e-17"
+        }
+      },
+      "observed_precision_change_to_binary64_discrepancy_ratios": {
+        "fixed_maximum_coefficient": "5.051716770261708552037808128358631818058e-65",
+        "fixed_l2": "5.820749838142213305018612448548771056501e-65",
+        "fixed_h1": "5.820749534121052314025613887925534632936e-65",
+        "independent_maximum_coefficient": "9.750782107325147625442309901677127280462e-65",
+        "independent_l2": "7.819853920698574264258324294455755896962e-65",
+        "independent_h1": "7.819853536621364217664494842435284249754e-65"
+      },
+      "projected_force_maximum": "1.637986735934033017396640458010523302656e-15",
+      "rust_reality_defect": "9.341215586288244393832366038021153382909e-22"
+    },
+    {
+      "grid": 4,
+      "method": "HO",
+      "differences": {
+        "independent_precision_80_120": {
+          "maximum_coefficient": "3.656926049780263411697819652405852736644e-82",
+          "l2": "6.550564809246288694485234336644447767984e-82",
+          "h1": "4.167643007913032141827783839477140305805e-81"
+        },
+        "fixed_precision_80_120": {
+          "maximum_coefficient": "4.43621109624452682151375791721629229646e-82",
+          "l2": "6.663305222323680360608398191602669123537e-82",
+          "h1": "4.239371447742079936193026760248672227073e-81"
+        },
+        "rust_vs_fixed_120": {
+          "maximum_coefficient": "2.295207716247807337848685215141027305529e-18",
+          "l2": "4.039185942416362223781294011114867876701e-18",
+          "h1": "2.569837660972676370981150454986288978704e-17"
+        },
+        "fixed_vs_independent_120": {
+          "maximum_coefficient": "3.182125281685213679510192016383801198113e-19",
+          "l2": "4.826311039435829958195685575959367392709e-19",
+          "h1": "3.070627062700263703645727788106544633641e-18"
+        },
+        "rust_vs_independent_120": {
+          "maximum_coefficient": "2.332547921887210679747703774342575697292e-18",
+          "l2": "3.920970958697490111099120204023361814212e-18",
+          "h1": "2.4946261723168616480320882648806889141e-17"
+        }
+      },
+      "observed_precision_change_to_binary64_discrepancy_ratios": {
+        "fixed_maximum_coefficient": "1.932814648905424457371231450428963309579e-64",
+        "fixed_l2": "1.649665382410568414850388965846989857623e-64",
+        "fixed_h1": "1.649665078897431090614782352426548936292e-64",
+        "independent_maximum_coefficient": "1.567781744360274047543523186829789981711e-64",
+        "independent_l2": "1.670648642453175698133537277875311704966e-64",
+        "independent_h1": "1.67064831362783752750976837591840332244e-64"
+      },
+      "projected_force_maximum": "1.637986735934033017396640458010523302656e-15",
+      "rust_reality_defect": "9.425895678901882777643934776566258584291e-22"
+    },
+    {
+      "grid": 12,
+      "method": "CM",
+      "differences": {
+        "independent_precision_80_120": {
+          "maximum_coefficient": "4.491168220917004124852548012925442528219e-82",
+          "l2": "7.488811700655953800980218521987256093119e-82",
+          "h1": "4.764580561844623605874046921979423477073e-81"
+        },
+        "fixed_precision_80_120": {
+          "maximum_coefficient": "4.535396343910719696479745634605334811566e-82",
+          "l2": "8.960092557828474150957366472465981840958e-82",
+          "h1": "5.700648450533749199813240456407042358767e-81"
+        },
+        "rust_vs_fixed_120": {
+          "maximum_coefficient": "4.806037415791636344205410346633410397822e-18",
+          "l2": "9.435660794986186892431667246466706466731e-18",
+          "h1": "6.003218352660758137077286087352647069494e-17"
+        },
+        "fixed_vs_independent_120": {
+          "maximum_coefficient": "3.18212528168325122191097360876257149814e-19",
+          "l2": "4.826311039433122833350651595245670866251e-19",
+          "h1": "3.070627062698663083659772651079385108807e-18"
+        },
+        "rust_vs_independent_120": {
+          "maximum_coefficient": "4.843377621430988314727561830053547494479e-18",
+          "l2": "9.810643479438435153791688689592214589355e-18",
+          "h1": "6.241792252805121660653796924321299044965e-17"
+        }
+      },
+      "observed_precision_change_to_binary64_discrepancy_ratios": {
+        "fixed_maximum_coefficient": "9.436872732218757713173582666067192657394e-65",
+        "fixed_l2": "9.495988413010337620873559386214612829248e-65",
+        "fixed_h1": "9.495987178289286586405375017686385847379e-65",
+        "independent_maximum_coefficient": "9.272802106208842289228627830960154579917e-65",
+        "independent_l2": "7.633354240576904687394196866326974293483e-65",
+        "independent_h1": "7.633353320439934750495873136282317069614e-65"
+      },
+      "projected_force_maximum": "1.637986735934033017396640458010523302656e-15",
+      "rust_reality_defect": "1.358762855471800050721357148216647283335e-21"
+    },
+    {
+      "grid": 12,
+      "method": "HO",
+      "differences": {
+        "independent_precision_80_120": {
+          "maximum_coefficient": "4.910186890206872709398292532877220391907e-82",
+          "l2": "7.236565924641852620921038286161553733358e-82",
+          "h1": "4.604095111560412350668800032133198082666e-81"
+        },
+        "fixed_precision_80_120": {
+          "maximum_coefficient": "4.476057343426043447033714129781720443049e-82",
+          "l2": "8.491790403434522219352956940420397931097e-82",
+          "h1": "5.402702203976092435878004557881281155527e-81"
+        },
+        "rust_vs_fixed_120": {
+          "maximum_coefficient": "2.295207641283984869431461547450581987044e-18",
+          "l2": "4.039186493778379098890095263568222122293e-18",
+          "h1": "2.569839082553848221123539232414149514487e-17"
+        },
+        "fixed_vs_independent_120": {
+          "maximum_coefficient": "3.182125281685213673938615307888893482527e-19",
+          "l2": "4.826311039435829954182959357212801923363e-19",
+          "h1": "3.070627062700263902233634031546315385127e-18"
+        },
+        "rust_vs_independent_120": {
+          "maximum_coefficient": "2.332547846923004306477244879951076015385e-18",
+          "l2": "3.920971523279959217686186825203792732456e-18",
+          "h1": "2.494627636592948934969882052964283358067e-17"
+        }
+      },
+      "observed_precision_change_to_binary64_discrepancy_ratios": {
+        "fixed_maximum_coefficient": "1.950175340529124335372101828277113327533e-64",
+        "fixed_l2": "2.102351653362516736327019413801419601774e-64",
+        "fixed_h1": "2.102350392541702893594023093852804621237e-64",
+        "independent_maximum_coefficient": "2.105074456107804067293522678062887463399e-64",
+        "independent_l2": "1.845605325536346262779634735562932353579e-64",
+        "independent_h1": "1.8456041470976726312797239901933102557e-64"
+      },
+      "projected_force_maximum": "1.637986735934033017396640458010523302656e-15",
+      "rust_reality_defect": "1.35426552913520488884052048672583967501e-21"
+    }
+  ],
+  "limitations": [
+    "Smooth velocity arithmetic only; no concentrating qualification",
+    "No full observable/time/policy or external provenance binding",
+    "Python reservations are conservative planning, not hard allocator guarantees",
+    "No continuous-time enclosure or large-grid arithmetic claim"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

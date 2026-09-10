@@ -1,0 +1,13 @@
+{
+  "source_sha256": "a6912652d50eb33e1397974a1316e8171cc68684817ce51d2fa5568a3d1c8e6c",
+  "findings": [
+    {
+      "path": "crates/nsbu-benchmarks/examples/smooth_coefficients.rs",
+      "function": "export",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 34.125
+    }
+  ],
+  "resolution": "Separate admitted numerical evolution from read-only completed-state serialization; final full verification passed."
+}

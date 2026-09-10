@@ -371,3 +371,13 @@ a fresh rest state and requires equality of canonical physical/history/work/node
 bytes. The original remains unchanged. Read [the replay contract](CHECKPOINT_FORMAT.md#reproduce-an-imported-reconstruction-run-from-rest)
 for origin handling, work bounds and its execution-profile limitations. This is a
 Rust library API; the installed file CLI does not invoke numerical replay yet.
+
+## Independent smooth arithmetic
+
+The [arithmetic walkthrough](ARITHMETIC_STUDY.md) exports actual Rust state and
+exact stage-force bits, evolves independent 80/120-digit direct-DFT trajectories,
+and compares their complete same-grid fields. `python -m reference.verify_cyclic
+--n 12 --method HO --precision 120 --dry-run` performs reference resource admission.
+The full guide documents fixed-input validation, command exit codes, the
+five separate differences and the distinction between input hashes and provenance.
+These diagnostic commands do not produce accepted PDE windows.

@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scope": "Fresh public source export; pinned dependencies in the existing Python 3.12 environment; fresh Rust build and installed CLI",
+  "source_files_verified": 299,
+  "byte_identical_repeated_outputs": [
+    "independent-CM-80.json",
+    "fixed-CM-80.json",
+    "independent-CM-120.json",
+    "fixed-CM-120.json",
+    "comparison-CM.json",
+    "independent-HO-80.json",
+    "fixed-HO-80.json",
+    "independent-HO-120.json",
+    "fixed-HO-120.json",
+    "comparison-HO.json"
+  ],
+  "outputs": {
+    "comparison-CM.json": "8e63bd1b6c6795c62a73474ad4c1986e47d82a591b1193e86edb093d95d45f64",
+    "comparison-HO.json": "72c8db3289284daa9862ee8c90d4f990847f85f855bb0c03497b564eb9230b98",
+    "fixed-CM-120.json": "ac8c3316757fbfc1f79c4d9f26353552417e81691154b15257d8e93acb06ff0e",
+    "fixed-CM-80.json": "55850e946ce86305c69eb79ca3db446e5432ee1821a8e1fb522a44235f43a819",
+    "fixed-HO-120.json": "c5c2941ab4459d9b210c8a7fbf448c0be7706940edb54a8c184bfff7ff67d50f",
+    "fixed-HO-80.json": "3c2f7a88d98eb17d5d41893f9ea50a52eed86d3980b9b2d9f9f4df0c8b6a8bb1",
+    "force.json": "dcf00bf0f8a5649c4e3e7fa05798d295ff912435b84e52314a34d8c66bdbc4b8",
+    "independent-CM-120.json": "8a357940406029bf976a2a06175bbcbf33160c414cd83c751e784352a572c47d",
+    "independent-CM-80.json": "2e7bf8e87bf9699b055d662d7c5c079f5cc2c4c448c0118a2386413f0ea68ca8",
+    "independent-HO-120.json": "40cf7646fc069c7084eac217a40d675e4901a6153fc85b3534ac3be849471f45",
+    "independent-HO-80.json": "48d99a8be0886dbaae62e07367cb39bb347bc33b9f7be5305482a72480d95e5b",
+    "preflight.json": "4d11d28d7866a4d0e29251a5319b816d05a4e048b6dbfcd0df62f7e1b36f7f67",
+    "rust-CM.json": "8060b3b39c1f22af6877c4ef754bd7253fa8b908bbb32a7fa2579f9ef7f7e368",
+    "rust-HO.json": "ecbef7e900a98090468b1ae8dc9b49a4d5ad4c1178ccfa20ecedf6b8de5e3232",
+    "rust-n12-CM.json": "4d7b79c5cc939574f5028f96afd52feae80409ebd1d636e6c944a2051f39ebe7",
+    "rust-n12-HO.json": "8502b99688cc7b8950b6f9b9cee0bc1e43ec472746a027b1e76bd2b2bbb02c91"
+  },
+  "installed_cli_commands": [
+    "nsbu smooth --dry-run",
+    "nsbu smooth --method ho"
+  ],
+  "accepted_pde_windows": 0
+}

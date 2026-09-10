@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current experiment increment](evidence/p09/experiments/README.md) passes 305 local tests and allocation probes, all required quality gates, and a clean-source example/install walkthrough; hosted verification is pending. Complete concentrating experiments and qualification remain under implementation.
+**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 and the checkpoint foundation pass local and hosted checks. P08/P09 remain incomplete. The [current arithmetic increment](evidence/p09/arithmetic/README.md) passes 313 Rust tests/allocation probes, 184 Python tests, all required quality gates, and a clean-source workflow; its hosted verification is pending. The preceding experiment and replay increment passed hosted checks. Complete concentrating experiments and qualification remain under implementation.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
@@ -91,6 +91,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Provenance and adopted decisions](docs/PROVENANCE.md) | Historical naming, baseline hashes, licensing overlay |
 | [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
 | [Smooth experiment walkthrough](docs/EXPERIMENTS.md) | Six independent trajectories, off-stage reconstruction and PDE residual samples |
+| [Arithmetic study](docs/ARITHMETIC_STUDY.md) | Same-grid Rust/direct-DFT comparisons with separate prescribed-force effects |
 | [Numerical conventions](docs/NUMERICAL_CONVENTIONS.md) | Fourier, pressure, norms and exact-time contracts |
 | [Checkpoint formats](docs/CHECKPOINT_FORMAT.md) | Experimental byte formats, caps and import-origin boundaries |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |

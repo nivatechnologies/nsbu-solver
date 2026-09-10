@@ -267,9 +267,26 @@ coverage and all required complexity/CRAP limits. It owns six independent rest
 trajectories, produces complete-band synchronized comparisons, measures genuine
 off-stage reconstruction/defects and reproduces coherent checkpoint bytes through
 a fresh bounded numerical evolution. A clean public source export runs the
-documented example and installs the CLI. Hosted checks are pending.
+documented example and installs the CLI. Source-matched hosted Rust and Python checks pass.
 
 P08/P09 remain incomplete. Frozen full-observable/time inventory binding, external
 artifact semantics, independent force/reference/current-grid arithmetic studies,
 sampling/quadrature and concentrating integration remain. Matching smooth replay
 does not qualify a PDE window or authenticate an external execution artifact.
+
+## P09 same-grid smooth arithmetic progress
+
+The [independent arithmetic increment](evidence/p09/arithmetic/README.md) passes
+313 Rust tests/probes and 184 Python tests, all required quality gates, fresh
+packaging and a clean-source workflow. Sixteen independently evolved direct-DFT
+trajectories cover N=4/N=12, CM/HO, 80/120 digits and separate fixed-force inputs.
+Full coefficient discrepancies, exact input identities and observed precision
+separation are retained. The largest same-input Rust/120-digit coefficient
+discrepancy is about 4.807e-18. Source-matched hosted verification is pending.
+
+This closes the smooth velocity arithmetic implementation increment on the
+current N=12 family grid, not P09 or a concentrating window. Complete frozen
+observable/time/policy binding, all-observable studies, external artifact
+semantics and concentrating integration remain. Numerical and serialization
+responsibilities are separate; malformed inputs and unmodified high-mode/reality
+defects have explicit regression coverage.

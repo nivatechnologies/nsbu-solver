@@ -71,3 +71,10 @@ for the aggregate-preflight walkthrough. The root `docs/EXPERIMENTS.md` document
 the branch schedule, terminal failures, off-stage geometry and remaining scientific
 qualification channels. Measurements cannot mutate integrated state or upgrade
 external checkpoint origin.
+
+The `smooth_coefficients` and `smooth_force_coefficients` examples export exact
+binary64 words for independent arithmetic comparisons. The first evolves eight
+bounded macro proposals from rest; the second exports all 33 distinct exact stage
+inputs. Both stream output after numerical resource admission. The root
+`docs/ARITHMETIC_STUDY.md` supplies the complete Python 80/120-digit comparison
+workflow, input schema, memory/work limits and scientific interpretation.

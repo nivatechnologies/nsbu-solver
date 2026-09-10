@@ -2,7 +2,7 @@
 
 This Python package evaluates the exact v2 manufactured field and supplies small
 arbitrary-precision operator and time-step fixtures. It is independent of the
-future Rust runtime. Run from the repository root after installing requirements:
+Rust runtime. Run from the repository root after installing requirements:
 
 ```sh
 python -m unittest discover -s reference/tests -v
@@ -69,8 +69,10 @@ the exact executed source hashes.
 P00B numerical and quality gates passed locally and in hosted CI. See the source-hashed
 [progress report](../evidence/reference-progress.json) and
 [quality measurements](../evidence/quality-reference/summary.json). No production
-Rust integration, current-grid binary64 comparison or accepted PDE window is
-supplied by this package.
+Rust integration or accepted PDE window is supplied by those P00B fixtures.
+The separate [CyclicSine arithmetic workflow](../docs/ARITHMETIC_STUDY.md) now
+compares actual owned Rust trajectories with independent 80/120-digit direct-DFT
+runs on the same grid, holding raw force bits fixed in a separate study.
 
 ## Concentrating diagnostic now available
 
