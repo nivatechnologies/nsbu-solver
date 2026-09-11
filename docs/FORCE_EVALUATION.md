@@ -14,6 +14,31 @@ remove force structure, project the physical force before sampling, initialize
 velocity from a reference, or advance a trajectory. Grid and arithmetic
 qualification remain separate studies.
 
+## Optional reduced arithmetic provider
+
+`provider::reduced::ReducedV2Force` implements the same bounded
+`PrescribedForce` contract using the reduced `(w,z,t)` degree-three evaluator.
+It is explicitly selected and remains separate from `V2Force`: existing `Run`,
+`ForceSettings`, CLI and checkpoint paths retain the original provider. Its
+different binary64 operation order requires separate word comparisons and
+artifact identity. It does not evolve a trajectory.
+
+Call `ReducedV2Force::preflight(domain, sampled)` before construction. The
+returned `ForceLimits` covers FFT plans and scratch, three physical sample
+buffers, one reusable transform spectrum, one axial-root slot per sampled
+z-plane and provider metadata. The caller reserves the three retained output
+spectra separately; the public comparison profile includes both output sets.
+`ReducedV2Force::new` refuses a smaller cap before allocating. Each request has
+the conservative bound `129 * sampled.real_len()` work units and three scalar
+transforms; these units are implementation work, not FLOPs or elapsed time.
+
+For each exact `TickClock`, one checked root cache is built per active axial
+plane and reused across that plane's points. Its key binds the exact z word,
+elapsed and remaining time words, and both conversion-error estimates. The cache
+is rebuilt per request, supports nonmonotone and repeated clocks, and rejects a
+mismatched root rather than falling back to an uncharged solve. Rest and flat
+support retain the exact zero branch.
+
 ## Public bounded profile
 
 ```sh
@@ -119,3 +144,13 @@ remain incomplete.
 The separate [persistent parallel backend](PARALLEL_FORCE.md) retains the serial
 provider for comparison while moving physical sample evaluation to explicitly
 reserved workers. Its concurrency and allocation checks have their own evidence.
+
+The reduced force-only profile is
+`cargo run --release -p nsbu-benchmarks --example reduced_provider_profile`;
+append `-- --dry-run` for admission only. It uses retained N=16, sampled M=24,
+quantum `2^-10`, target `8`, and request clocks `[1,4,2,1]`. It prints hashes
+and arithmetic differences against the original provider. The
+[recorded profile](../evidence/p09/reduced-provider/README.md) measures a median
+6.48 speed ratio for complete provider requests on one shared host, with maximum
+scaled coefficient difference 2.35e-14. This does not measure trajectory speed or
+qualify force-grid resolution.

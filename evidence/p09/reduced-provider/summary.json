@@ -1,0 +1,161 @@
+{
+  "package": "P09",
+  "increment": "optional reduced-coordinate sampled exact-v2 force provider",
+  "status": "focused numerical/new-source quality and whole-workspace static/lint gates passed; complete source-matched hosted gates pending",
+  "generated_utc": "2026-09-11T05:20:37.501739+00:00",
+  "parent_commit": "82c079670287b6db36737ec0f56cc3f3a69ee672",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 357,
+  "added_rust_source_files": [
+    "crates/nsbu-benchmarks/examples/reduced_provider_profile.rs",
+    "crates/nsbu-benchmarks/src/provider/reduced.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/axial.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/axial/tests.rs",
+    "crates/nsbu-benchmarks/tests/reduced_provider.rs",
+    "crates/nsbu-benchmarks/tests/reduced_provider_allocation.rs",
+    "crates/nsbu-benchmarks/tests/reduced_provider_oracle.rs"
+  ],
+  "changed_rust_source_files": [
+    "crates/nsbu-benchmarks/src/provider.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/mod.rs"
+  ],
+  "focused_tests": {
+    "library_unit_tests": 8,
+    "new_cache_unit_tests": 4,
+    "integration_tests": 6,
+    "new_provider_integration_tests": 3,
+    "example_tests": 1,
+    "isolated_allocation_probes": 2,
+    "total_executed": 17
+  },
+  "focused_coverage": {
+    "lines": {
+      "count": 719,
+      "covered": 710,
+      "percent": 98.74826147426982
+    },
+    "branches": {
+      "count": 64,
+      "covered": 58,
+      "percent": 90.625
+    }
+  },
+  "focused_crap_maximum": 19.125,
+  "whole_workspace_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 477
+  },
+  "quality_scope": "Focused coverage/CRAP includes all seven added files and the changed reduced pointwise evaluator. The only other changed Rust file exports the provider module. All current Rust has fresh static/lint/size/typing measurements. Full current-source CI remains required before daily publication.",
+  "initial_quality_failure": {
+    "function": "reduced_provider_profile::profile",
+    "crap": 27.890625,
+    "resolution": "Separate complete resource admission from execution; unchanged numerical threshold and test contract."
+  },
+  "unchanged_python": {
+    "files": 98,
+    "retained_tests": 220
+  },
+  "numerical_checks": [
+    "Every retained unprojected coefficient on (N4,M4), (N4,M6/8/12), (N8,M8/12/12) agrees with independent uncached direct complex DFT and the original Cartesian provider at nonmonotone ticks [1,4,2,1,0].",
+    "The independent 80/120-digit N4 force fixture has all 18 rows checked at 5e-12 scaled L1 tolerance; a longitudinal raw-force mode is preserved.",
+    "Axial cached and uncached reduced outputs including all momentum terms/residuals are bit-identical on tested planes and exact times; missing, stale or wrong-plane roots are refused.",
+    "Different exact remaining times with equal rounded elapsed time do not alias the cache; all four time words are bound.",
+    "Actual charged work equals sample count plus bounded per-plane root iterations; all requests report three transforms.",
+    "Existing pointwise 84 exact-word fixtures and allocation tests remain passing.",
+    "Malformed domains, dimensions, aggregate overflow, caps, output lengths and clocks refuse; tested validation failures preserve caller output and last-success diagnostics."
+  ],
+  "scaled_coefficient_discrepancy_maxima": {
+    "independent_direct_dft": 5.0997450932777024e-14,
+    "original_cartesian_provider": 6.700812744181618e-14,
+    "threshold": 5e-12,
+    "scale": "complex L1 difference / (1 + reference complex L1)"
+  },
+  "resource_checks": {
+    "allocation_test_retained": [
+      4,
+      4,
+      4
+    ],
+    "allocation_test_sampled": [
+      6,
+      8,
+      12
+    ],
+    "construction_heap_bytes": 30560,
+    "declared_bytes": 32088,
+    "admission_allocations": 0,
+    "steady_allocations_reallocations_deallocations": 0,
+    "completed_requests": 5,
+    "refused_requests": 3
+  },
+  "performance": {
+    "scope": "Full serial provider requests, including axial cache, sample construction, FFT and retained transfer; no PDE integration.",
+    "retained": [
+      16,
+      16,
+      16
+    ],
+    "sampled": [
+      24,
+      24,
+      24
+    ],
+    "ticks": [
+      1,
+      4,
+      2,
+      1
+    ],
+    "clock_exponent": -10,
+    "target_ticks": 8,
+    "requests_per_provider": 4,
+    "joint_storage_bytes": 9815792,
+    "stack_allowance_bytes": 8388608,
+    "stack_high_water_measured": false,
+    "profile_metadata_allowance_bytes": 16384,
+    "per_clock_speed_ratios": [
+      6.352716009249782,
+      6.637497124808867,
+      6.60080062684406,
+      6.342056453309347
+    ],
+    "median_speed_ratio": 6.476758318046921,
+    "maximum_scaled_coefficient_difference": 2.3460556573030893e-14,
+    "timing_limit": "One sequential, alternating provider profile on a shared host; not a trajectory benchmark or cross-machine guarantee."
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "c9c9ecfc8b69d0bab351e844ca642e7c644feee1855480678e3a4e1c4d9b132a",
+      "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+    },
+    "test_opt_level": 2,
+    "test_debug_assertions": true,
+    "test_overflow_checks": true
+  },
+  "solid_review": "Public provider implements the existing PrescribedForce contract; resource admission, exact axial root binding, pointwise algebra, sampling and transforms remain separate responsibilities. Direct-DFT and high-precision oracles retain independent arithmetic. Released runtime force selection is unchanged.",
+  "informational_findings": "Mutation/duplication sweeps not rerun; historical results retained. Strict Clippy permits informational dead_code warnings from shared test helpers.",
+  "limitations": [
+    "Reduced arithmetic changes floating-point words; this is an optional explicit provider, not the default runtime implementation.",
+    "Run/ForceSettings/CLI/checkpoint arithmetic identity and integrated-trajectory checks remain before runtime adoption.",
+    "No force gradients or universal force error enclosure are provided.",
+    "Sampling/validation failures preserve outputs, but an exceptional later transform failure can leave partially written scratch outputs; outer numerical transactions still govern state commits.",
+    "P08/P09/P10 remain incomplete; no force-grid or concentrating PDE window is qualified."
+  ],
+  "bootstrap": {
+    "repository_links_and_frozen_inputs": "passed",
+    "guard_tests": 41,
+    "original_mathematical_verification": "passed"
+  },
+  "accepted_pde_windows": 0,
+  "artifact_inventory": "artifact-sha256.json"
+}

@@ -4,6 +4,7 @@
 //! floating arithmetic order and supplies no force-gradient or numerical-accuracy certificate.
 //! It is not used by the default force providers. The degree-four Cartesian evaluator remains
 //! an independent comparison path; same-input high-precision comparisons are still required.
+pub(crate) mod axial;
 mod jet;
 mod potentials;
 mod transport;
@@ -29,21 +30,31 @@ pub struct ForceSample {
 /// Every call has bounded scalar/formal iterations and fixed stack storage.
 pub fn evaluate(point: [f64; 3], time: BenchmarkTime) -> Result<ForceSample, BenchmarkError> {
     let point = scalar::periodic(point)?;
+    let Some(point) = active_point(point, time) else {
+        return Ok(zero());
+    };
+    let z = Jet::variable(point[2], 1)?;
+    let (q, residual, report) = potentials::implicit(z, time)?;
+    rooted(point, time, (q, residual, report))
+}
+
+pub(crate) fn active_point(point: [f64; 3], time: BenchmarkTime) -> Option<[f64; 3]> {
     if point.iter().map(|v| v * v).sum::<f64>() >= 441.0 / 2500.0 || time.elapsed() == 0.0 {
-        return Ok(ForceSample {
-            force: [0.0; 3],
-            momentum_terms: [[0.0; 4]; 3],
-            velocity: [0.0; 3],
-            pressure_raw: 0.0,
-            root: None,
-            root_residual: [0.0; 20],
-        });
+        None
+    } else {
+        Some(point)
     }
+}
+
+fn rooted(
+    point: [f64; 3],
+    time: BenchmarkTime,
+    (q, residual, report): (Jet, Jet, RootReport),
+) -> Result<ForceSample, BenchmarkError> {
     let [x, y, z] = point;
     let w = Jet::variable(x * x + y * y, 0)?;
     let z = Jet::variable(z, 1)?;
     let t = Jet::variable(time.elapsed(), 2)?;
-    let (q, residual, report) = potentials::implicit(z, time)?;
     let [a, b, p] = potentials::evaluate(w, z, t, q)?;
     let (velocity, momentum_terms) = transport::evaluate([x, y], w, a, b, p)?;
     let force = momentum_terms.map(|terms| ((terms[0] + terms[1]) + terms[2]) + terms[3]);
@@ -63,4 +74,15 @@ pub fn evaluate(point: [f64; 3], time: BenchmarkTime) -> Result<ForceSample, Ben
         root: Some(report),
         root_residual: *residual.coefficients(),
     })
+}
+
+fn zero() -> ForceSample {
+    ForceSample {
+        force: [0.0; 3],
+        momentum_terms: [[0.0; 4]; 3],
+        velocity: [0.0; 3],
+        pressure_raw: 0.0,
+        root: None,
+        root_residual: [0.0; 20],
+    }
 }

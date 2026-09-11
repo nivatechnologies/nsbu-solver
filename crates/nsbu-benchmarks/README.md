@@ -50,6 +50,20 @@ its checked cache for the requested elapsed and remaining time. Actual root work
 is counted once per plane. See [force evaluation](../../docs/FORCE_EVALUATION.md)
 for the bounded public profile, bitwise comparisons and storage/work accounting.
 
+`provider::reduced::ReducedV2Force` is an optional serial sampled provider using
+the reduced `(w,z,t)` degree-three evaluator. Use
+`ReducedV2Force::preflight(domain, sampled)` to admit its FFT, physical buffers,
+per-plane root cache and bounded work before `ReducedV2Force::new`. Each
+`PrescribedForce::evaluate` request requires an exact `TickClock`, rebuilds its
+cache for elapsed and remaining time, and performs three transforms. Its
+arithmetic order differs from `V2Force`, so coefficient words need separate
+evidence. Run
+`cargo run --release -p nsbu-benchmarks --example reduced_provider_profile`
+(`-- --dry-run` performs admission only) for the force-only comparison profile.
+Existing `Run`, `ForceSettings`, CLI and checkpoint paths still use the original
+provider. The [provider evidence](../../evidence/p09/reduced-provider/README.md)
+records force-only comparisons and timing; integrated trajectories remain to be checked.
+
 The scalar root reports and jet residuals are floating arithmetic diagnostics,
 not certified enclosures. The exponential coefficient majorant bounds the exact
 formal polynomial, not rounding error. Binary64 force-gradient assembly can lose

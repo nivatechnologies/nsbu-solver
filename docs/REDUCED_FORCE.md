@@ -13,6 +13,13 @@ artifact identity when used in a numerical experiment. It does not evolve a
 trajectory, reduce the dimension of the PDE, approximate the prescribed problem
 by a surrogate, or supply force gradients.
 
+`provider::reduced::ReducedV2Force` is the optional sampled-force adapter for
+this evaluator. It implements the existing `PrescribedForce` interface and
+produces three unprojected force spectra on the same retained layout as `V2Force`, using reduced
+degree-three arithmetic. It is opt-in: `v2_run::Run`, `ForceSettings`,
+checkpoint restore and the CLI runtime continue to use the original provider.
+Integrated trajectories using this provider remain to be checked.
+
 ## Working commands
 
 ```sh
@@ -34,6 +41,23 @@ pointwise comparison outside the timed region. The comparison must satisfy the
 scaled diagnostic threshold of 5e-12 or the example fails. Checksums and timings are
 printed; checksums are not error bounds. These measured differences against the
 Cartesian binary64 path complement independent high-precision fixtures.
+
+The optional provider profile is:
+
+```sh
+cargo run --release -p nsbu-benchmarks --example reduced_provider_profile -- --dry-run
+cargo run --release -p nsbu-benchmarks --example reduced_provider_profile
+```
+
+It preflights both providers and jointly owns FFT scratch, sampled buffers,
+per-plane root cache and output allowance before construction. Exact requests use
+clocks `[1,4,2,1]`, quantum `2^-10` and target `8`; backward and repeated
+requests are intentional. The cache is rebuilt per request and keys elapsed and
+remaining time words plus both conversion-error estimates. `--dry-run` performs
+admission only. The [recorded profile](../evidence/p09/reduced-provider/README.md)
+measures a median speed ratio of 6.48 for full provider requests and maximum
+scaled coefficient difference of 2.35e-14. This is one sequential comparison on
+a shared host, not a trajectory benchmark or force-grid convergence result.
 
 ## Exact force identity
 
@@ -79,6 +103,11 @@ makes no force-gradient claim. The complete degree-four Cartesian evaluator
 remains available for that purpose and for independent comparisons.
 
 ## Arithmetic and ownership
+
+The reduced path preserves the reviewed identities but changes binary64
+operation order: it retains 20 coefficients and 84 products in three variables,
+while the original Cartesian path retains 70 coefficients and 495 products.
+Coefficient words may differ and require separate identity and accuracy evidence.
 
 The implicit scalar equation uses the existing safeguarded root solver, capped
 at 128 iterations. Three fixed formal Newton corrections produce its jet in

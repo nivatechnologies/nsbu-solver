@@ -646,10 +646,17 @@ transport identities, complete monomial/composition checks and allocation probes
 Across its ten new Rust files, focused coverage is 98.35% line and 92.86% branch
 with maximum CRAP16. All current static/lint/documentation limits pass. A fresh
 source export reproduces fixture bytes and numerical profile output, passes the
-focused tests and packages all three crates. Full source-matched CI is pending.
+focused tests and packages all three crates. Full source-matched CI passes at
+`82c0796`, including the original and reduced pointwise evaluators.
 
 The measured pointwise speed ratio is about six; no runtime acceleration or new
-PDE qualification is established. The existing providers remain unchanged. Next
-implement a separately admitted optional force provider and compare its complete
-Fourier outputs, then integrated trajectories and arithmetic identity before
+PDE qualification is established. The original runtime provider remains unchanged.
+The [optional reduced sampled provider](evidence/p09/reduced-provider/README.md)
+now passes complete Fourier/direct-DFT and 80/120-digit fixture comparisons,
+cache/clock/work contracts and allocation checks. Seventeen focused tests/probes
+pass, with 98.75% line and 90.625% branch coverage and maximum CRAP19.125 across
+the added/changed implementation. The N16/M24 complete-provider profile measures
+a median speed ratio of 6.48 with maximum scaled coefficient difference 2.35e-14.
+Full source-matched CI remains required for this provider increment. Next check
+independently evolved trajectories and explicit arithmetic identity before
 changing runtime selection. P08/P09/P10 retain their original incomplete status.
