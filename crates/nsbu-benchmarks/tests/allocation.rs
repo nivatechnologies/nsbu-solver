@@ -38,14 +38,14 @@ fn main() {
     let planning = Region::new(GLOBAL);
     let mut provider = V2Force::new(domain, sampled, limits.storage_bytes).unwrap();
     let allocated = planning.change();
-    assert_eq!(allocated.allocations, 11);
+    assert_eq!(allocated.allocations, 12);
     assert_eq!(allocated.reallocations, 0);
     let object_bytes = std::mem::size_of::<V2Force>()
         + std::mem::size_of::<nsbu_solver::spectral::FftPlan>()
         + std::mem::size_of::<nsbu_solver::spectral::FftWorkspace>();
     assert_eq!(
         limits.storage_bytes,
-        allocated.bytes_allocated + object_bytes + 11 * 64
+        allocated.bytes_allocated + object_bytes + 12 * 64
     );
     let mut buffers: [Vec<Complex64>; 3] =
         std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); domain.layout().half_len()]);

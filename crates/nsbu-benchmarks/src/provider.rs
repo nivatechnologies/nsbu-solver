@@ -18,12 +18,15 @@ pub struct V2Force {
     spectral: Vec<Complex64>,
     limits: ForceLimits,
     last_root_iterations: usize,
+    axial: Vec<Option<fields::axial::AxialRoot>>,
 }
 
 impl V2Force {
     /// Full owned storage and finite work declaration, before allocating any provider buffer.
     /// A work unit is one fixed degree-four field assembly or one safeguarded root iteration.
-    /// Each point uses at most one assembly plus 128 scalar iterations; each call uses three FFTs.
+    /// Each point reserves one complete assembly plus 128 scalar iterations. Reusing the
+    /// identical axial jet lowers actual root work; the conservative maximum stays unchanged.
+    /// Each call rebuilds its checked plane cache and performs three FFTs.
     pub fn preflight(domain: Domain, sampled: Layout) -> Result<ForceLimits, SolverError> {
         if domain.lengths() != [1.0; 3] || domain.viscosity() != 1.0 {
             return Err(SolverError::InvalidDomain);
@@ -46,10 +49,14 @@ impl V2Force {
                     .and_then(|m| n.checked_add(m))
             })
             .ok_or(SolverError::SizeOverflow)?;
-        // Includes allocator header/rounding allowance for eleven owned allocations.
+        let axial_bytes = sampled.dimensions()[2]
+            .checked_mul(std::mem::size_of::<Option<fields::axial::AxialRoot>>())
+            .ok_or(SolverError::SizeOverflow)?;
+        // Includes allocator header/rounding allowance for twelve owned allocations.
         let storage_bytes = FftPlan::reservation(sampled)?
             .checked_add(buffers)
-            .and_then(|n| n.checked_add(std::mem::size_of::<Self>() + 11 * 64))
+            .and_then(|n| n.checked_add(axial_bytes))
+            .and_then(|n| n.checked_add(std::mem::size_of::<Self>() + 12 * 64))
             .ok_or(SolverError::SizeOverflow)?;
         let work_units = sampled
             .real_len()
@@ -83,10 +90,12 @@ impl V2Force {
             spectral: buffer(sampled.half_len(), Complex64::new(0.0, 0.0))?,
             limits,
             last_root_iterations: 0,
+            axial: buffer(sampled.dimensions()[2], None)?,
         })
     }
 
-    /// Root iterations used by the latest successful sampling pass.
+    /// Root iterations actually used once per active axial plane in the latest successful pass.
+    /// Repeated spatial uses of an already computed jet are not counted as new solves.
     pub fn last_root_iterations(&self) -> usize {
         self.last_root_iterations
     }
@@ -94,6 +103,11 @@ impl V2Force {
     fn sample(&mut self, time: BenchmarkTime) -> Result<usize, SolverError> {
         let [nx, ny, nz] = self.sampled.dimensions();
         let mut iterations = 0;
+        for (k, slot) in self.axial.iter_mut().enumerate() {
+            *slot = fields::axial::AxialRoot::new(k as f64 / nz as f64, time)
+                .map_err(|_| SolverError::ArithmeticResolutionLimited)?;
+            iterations += slot.map_or(0, fields::axial::AxialRoot::iterations);
+        }
         for i in 0..nx {
             for j in 0..ny {
                 for k in 0..nz {
@@ -103,7 +117,7 @@ impl V2Force {
                         k as f64 / nz as f64,
                     ];
                     let index = (i * ny + j) * nz + k;
-                    iterations += self.sample_point(point, index, time)?;
+                    self.sample_point(point, index, k, time)?;
                 }
             }
         }
@@ -114,14 +128,15 @@ impl V2Force {
         &mut self,
         point: [f64; 3],
         index: usize,
+        axial_index: usize,
         time: BenchmarkTime,
-    ) -> Result<usize, SolverError> {
-        let sample =
-            fields::evaluate(point, time).map_err(|_| SolverError::ArithmeticResolutionLimited)?;
+    ) -> Result<(), SolverError> {
+        let sample = fields::axial::evaluate(point, time, self.axial[axial_index].as_ref())
+            .map_err(|_| SolverError::ArithmeticResolutionLimited)?;
         for (component, value) in self.physical.iter_mut().zip(sample.force) {
             component[index] = value;
         }
-        Ok(sample.root.map_or(0, |report| report.iterations))
+        Ok(())
     }
 }
 

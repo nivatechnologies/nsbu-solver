@@ -455,3 +455,11 @@ workflow, independent 80/120-digit oracle and exact-word packet format.
 and `python -m reference.verify_reductions --n 4 --dry-run` report separate
 bounded plans. Actual execution requires the complete sample/magnitude files;
 these commands do not qualify a concentrating PDE trajectory.
+
+## Bounded exact-v2 force profile
+
+`cargo run --release -p nsbu-benchmarks --example force_cache_profile -- --dry-run`
+admits the fixed N=8/12/16 force-only profile. Omit `-- --dry-run` to measure the
+twelve nonmonotone force requests and print complete coefficient hashes. The
+[force evaluation guide](FORCE_EVALUATION.md) documents cache identity, storage,
+actual root work and the limits of the measured speed improvement.

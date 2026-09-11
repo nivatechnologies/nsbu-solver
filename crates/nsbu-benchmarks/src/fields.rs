@@ -1,4 +1,5 @@
 //! Degree-four implicit jets and manufactured force for the exact viscosity-one v2 case.
+pub(crate) mod axial;
 pub mod reference;
 use crate::{
     jet::Jet,
@@ -133,8 +134,22 @@ fn pressure(q: Jet, radial: Jet, cutoff: Jet) -> Result<Jet, BenchmarkError> {
 
 /// Evaluate force and its first spatial derivatives without finite differences.
 pub fn evaluate(point: [f64; 3], time: BenchmarkTime) -> Result<Evaluation, BenchmarkError> {
+    let Some(point) = active_point(point, time)? else {
+        return Ok(zero());
+    };
+    let root = implicit_root(Jet::variable(point[2], 2)?, time)?;
+    evaluate_active(point, time, root)
+}
+fn active_point(point: [f64; 3], time: BenchmarkTime) -> Result<Option<[f64; 3]>, BenchmarkError> {
     let point = scalar::periodic(point)?;
-    let mut result = Evaluation {
+    if point.iter().map(|v| v * v).sum::<f64>() >= 441.0 / 2500.0 || time.elapsed() == 0.0 {
+        Ok(None)
+    } else {
+        Ok(Some(point))
+    }
+}
+fn zero() -> Evaluation {
+    Evaluation {
         velocity: [0.0; 3],
         pressure_raw: 0.0,
         force: [0.0; 3],
@@ -144,15 +159,19 @@ pub fn evaluate(point: [f64; 3], time: BenchmarkTime) -> Result<Evaluation, Benc
         divergence: 0.0,
         root: None,
         root_residual: [0.0; 70],
-    };
-    if point.iter().map(|v| v * v).sum::<f64>() >= 441.0 / 2500.0 || time.elapsed() == 0.0 {
-        return Ok(result);
     }
+}
+fn evaluate_active(
+    point: [f64; 3],
+    time: BenchmarkTime,
+    root: (Jet, Jet, RootReport),
+) -> Result<Evaluation, BenchmarkError> {
+    let mut result = zero();
     let x = Jet::variable(point[0], 0)?;
     let y = Jet::variable(point[1], 1)?;
     let z = Jet::variable(point[2], 2)?;
     let t = Jet::variable(time.elapsed(), 3)?;
-    let (q, residual, report) = implicit_root(z, time)?;
+    let (q, residual, report) = root;
     let (velocity, pressure) = velocity_pressure(x, y, z, t, q)?;
     result.velocity = velocity.map(Jet::value);
     result.pressure_raw = pressure.value();

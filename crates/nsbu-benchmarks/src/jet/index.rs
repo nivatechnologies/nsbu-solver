@@ -2,6 +2,8 @@
 pub(super) const COUNT: usize = 70;
 pub(super) const POWERS: [[u8; 4]; COUNT] = powers();
 pub(super) const PRODUCTS: [[u8; 3]; 495] = products();
+/// For each axis: output coefficient, source coefficient, exact positive integer multiplier.
+pub(super) const DERIVATIVES: [[[u8; 3]; 35]; 4] = derivatives();
 
 const fn powers() -> [[u8; 4]; COUNT] {
     let mut result = [[0; 4]; COUNT];
@@ -65,12 +67,32 @@ const fn products() -> [[u8; 3]; 495] {
     result
 }
 
+const fn derivatives() -> [[[u8; 3]; 35]; 4] {
+    let mut result = [[[0; 3]; 35]; 4];
+    let mut axis = 0;
+    while axis < 4 {
+        let mut out = 0;
+        // Exactly the first 35 coefficients have total degree at most three.
+        while out < 35 {
+            let mut power = POWERS[out];
+            power[axis] += 1;
+            let source = find(power);
+            assert!(source < COUNT as u8);
+            result[axis][out] = [out as u8, source, power[axis]];
+            out += 1;
+        }
+        axis += 1;
+    }
+    result
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn generated_tables_cover_each_admissible_multi_index_and_product() {
+        assert_eq!(derivatives(), DERIVATIVES);
         let runtime = powers();
         assert_eq!(runtime, POWERS);
         let mut unique = std::collections::BTreeSet::new();

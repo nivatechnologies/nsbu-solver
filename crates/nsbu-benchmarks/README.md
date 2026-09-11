@@ -20,6 +20,10 @@ study. The provider performs no heap allocation during evaluation and supports
 nonmonotone exact stage-time requests. A work unit is one bounded point assembly
 or scalar root iteration, not a floating-point operation or wall-clock guarantee.
 Fixed-size jets use call-stack storage, distinct from the provider's heap ledger.
+Each call reuses the identical implicit root/jet within an axial plane and rebuilds
+its checked cache for the requested elapsed and remaining time. Actual root work
+is counted once per plane. See [force evaluation](../../docs/FORCE_EVALUATION.md)
+for the bounded public profile, bitwise comparisons and storage/work accounting.
 
 The scalar root reports and jet residuals are floating arithmetic diagnostics,
 not certified enclosures. The exponential coefficient majorant bounds the exact

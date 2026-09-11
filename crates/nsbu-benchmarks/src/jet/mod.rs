@@ -1,8 +1,10 @@
 //! Fixed degree-four Taylor algebra: coefficients are derivative divided by multi-index factorial.
+#[cfg(test)]
+mod derivative_tests;
 mod index;
 mod transcendental;
 use crate::BenchmarkError;
-use index::{COUNT, POWERS, PRODUCTS};
+use index::{COUNT, DERIVATIVES, POWERS, PRODUCTS};
 
 /// A four-variable degree-four Taylor polynomial, with no heap storage.
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -78,12 +80,8 @@ impl Jet {
             return Err(BenchmarkError::InvalidInput);
         }
         let mut result = [0.0; COUNT];
-        for (i, power) in POWERS.into_iter().enumerate() {
-            let mut next = power;
-            next[axis] += 1;
-            if let Ok(source) = Self::position(next) {
-                result[i] = f64::from(next[axis]) * self.coefficients[source];
-            }
+        for [out, source, factor] in DERIVATIVES[axis] {
+            result[out as usize] = f64::from(factor) * self.coefficients[source as usize];
         }
         Self::checked(result)
     }
