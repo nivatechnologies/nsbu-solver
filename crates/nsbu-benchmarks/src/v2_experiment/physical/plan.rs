@@ -58,6 +58,10 @@ impl<'a> PhysicalFamilyPlan<'a> {
         }
         let domain = family.branches[2].resources().domain();
         let storage_bytes = PhysicalComparisonWorkspace::reservation(domain, domain, samples)?
+            // Two FFT/derivative streams and four reduction arrays use fewer than 32
+            // allocations; reserve 64 bytes of allocator metadata for each slot.
+            .checked_add(32 * 64)
+            .ok_or(SolverError::SizeOverflow)?
             .checked_add(std::mem::size_of::<super::PhysicalFamilyWorkspace<'_>>())
             .and_then(|n| n.checked_add(std::mem::size_of::<super::PhysicalRefinementSample>()))
             .ok_or(SolverError::SizeOverflow)?;

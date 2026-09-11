@@ -40,10 +40,9 @@
     "latest_hosted_ci_status": "Source 6170341 passes both hosted workflows: 451 Rust harness tests plus 13 allocation probes and one Rustdoc example; 98.58% line and 88.88% branch coverage; all required quality limits; 220 Python tests.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "evidence": "evidence/p09/reduced-trajectories/summary.json",
-      "status": "Focused independent reduced-provider CM/HO trajectory checks pass; both full source-matched hosted workflows passed at c8a387265159d16bdb33ec32d94ba6df9fa4c5c7. Numerical qualification remains incomplete.",
-      "additional_evidence": "evidence/p09/reduced-provider/summary.json",
-      "hosted_review": "evidence/runtime-alpha/review-20260911/summary.json"
+      "status": "Exact-v2 pressure and separate force-sampling families pass focused numerical, allocation and quality gates. Combined-source hosted workflows pending. No new qualified PDE window.",
+      "evidence": "evidence/p09/v2-pressure/summary.json",
+      "additional_evidence": "evidence/p09/v2-force-family/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
   },
@@ -171,7 +170,8 @@
       "v2_family_hosted_python": "evidence/p09/v2-family/hosted-python.json",
       "reduced_provider_evidence": "evidence/p09/reduced-provider/summary.json",
       "v2_physical_evidence": "evidence/p09/v2-physical/summary.json",
-      "reduced_trajectory_evidence": "evidence/p09/reduced-trajectories/summary.json"
+      "reduced_trajectory_evidence": "evidence/p09/reduced-trajectories/summary.json",
+      "v2_pressure_evidence": "evidence/p09/v2-pressure/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -214,6 +214,8 @@
   "actual_smooth_physical_refinement_family_scope": "Complete velocity/gradient/Hessian/vorticity space/time/method sampled differences from six independently evolved smooth rest branches; exact clock/policy binding and finite joint resources. Complete pressure/all-channel/concentrating qualification remains.",
   "actual_smooth_pressure_refinement_family_exists": true,
   "actual_smooth_pressure_refinement_family_scope": "Independent full doubled-band mean-zero pressure and gradient comparisons from six actual smooth rest trajectories; exact clock/policy binding and finite joint resources. All-observable/current-grid/concentrating qualification remains.",
+  "actual_v2_pressure_refinement_family_exists": true,
+  "actual_v2_pressure_refinement_family_scope": "Bounded global mean-zero pressure and full-gradient differences for five pairs of six actual exact-v2 trajectories, using an independently evaluated unprojected force on the doubled finest grid. Common-force cancellation means pair differences do not qualify force sampling; reference-gauge, regional, arithmetic, artifact and concentrating qualification remain pending.",
   "independent_smooth_derived_field_arithmetic_exists": true,
   "independent_smooth_derived_field_arithmetic_scope": "Actual N=4/N=12 CM/HO at 1/512: all ordered velocity derivatives, vorticity and full mean-zero pressure/gradient. Separate same-state, same-force and target-force 80/120 studies; error norms reduced in Python. Rust physical-reducer arithmetic and concentrating qualification remain.",
   "actual_smooth_sampling_refinement_family_exists": true,

@@ -86,6 +86,40 @@ PDE acceptance. This consumer reports global comparisons only; pressure,
 regional aggregation, reference tracking, force sufficiency and arithmetic
 evidence remain separate studies.
 
+## Actual pressure comparisons
+
+`v2_experiment::pressure::PressureFamilyPlan` adds a bounded pressure consumer
+to the six actual V2 branches. `PressureFamilyWorkspace::measure(&family)` is
+called after each successful `V2Family::advance`; it reports pressure and its
+full three-component physical gradient for all five family pairs. The consumer
+transfers each branch to the finest retained grid, forms conservative products
+on the complete doubled grid, and compares both scalar quantities through reused
+physical scratch. The report retains the accepted clock, family identity,
+source/force/sample layouts and both relative floors.
+
+The pressure force is produced independently by a fresh original `V2Force` on
+the doubled finest grid. It uses the exact accepted clock and remains
+unprojected; no stage RHS, analytical pressure, reduced provider or reference
+field is supplied. Integration force sampling remains the fixed family `M=12`;
+the pressure diagnostic force uses its explicit doubled-grid layout and is a
+separate admitted policy.
+
+Joint admission includes provider, conservative-product, comparison, buffer,
+workspace and report storage. Each attempt charges one force evaluation, ten
+conservative assemblies and ten physical comparisons, for 133 scalar transforms
+with the V2 provider. Charges happen before validation; failures retain their
+full charge, produce no partial report and do not advance the schedule. Borrowed
+family states and histories remain unchanged. These are global sampled pressure
+statistics with a mean-zero gauge, not continuum bounds, refinement
+certification or PDE acceptance.
+
+Because every pair uses the same accepted clock and independently evaluated
+prescribed force, that common force contribution cancels from pair differences.
+The pair oracle therefore checks nonlinear pressure differences, while the
+separate force-only Poisson control checks force sign, full-band retention and
+the mean-zero mode. Neither check establishes force-sampling sufficiency.
+Reference-gauge, regional and accepted-artifact qualification remain separate.
+
 ## Identity and limits
 
 The sample's family SHA-256 binds the immutable case, branch settings and exact

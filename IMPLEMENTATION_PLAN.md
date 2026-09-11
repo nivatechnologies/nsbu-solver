@@ -695,3 +695,14 @@ both complete retained-band velocity and derivative-sensitive comparisons, with
 a deliberate ownership/self-comparison negative control. The post-startup endpoint is 1/2048;
 measured differences are retained without a sufficiency or convergence decision.
 P08/P09/P10 remain incomplete and accepted concentrating windows remain zero.
+
+## P09 exact-v2 pressure consumer
+
+The [pressure consumer](evidence/p09/v2-pressure/README.md) reports global
+mean-zero pressure and gradient differences for all five actual family pairs.
+A separate full-band prescribed-force control checks the contribution that
+cancels in pair differences. Focused numerical/allocation gates pass, with
+96.92% line coverage, 86.11% branch coverage and maximum CRAP15. The earlier
+CRAP30 failure and corrected source replay remain recorded. Combined-source
+hosted checks are pending; regional/reference/arithmetic/artifact integration
+and concentrating qualification remain incomplete. Zero PDE windows are accepted.
