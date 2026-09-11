@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.3 · 11 September 2026 · Runtime alpha prioritized; scientific packages through P07 verified
+Revision 1.4 · 11 September 2026 · First runtime alpha released; scientific packages through P07 verified
 
 ## Adopted decisions
 
@@ -620,3 +620,20 @@ large-grid integration or establish mathematical force accuracy.
 P08/P09 remain incomplete. The concentrating workflow still needs complete
 current-grid arithmetic, force/reference/transfer refinements and all-observable
 provenance binding. No concentrating PDE window is accepted.
+
+## Post-alpha exact-v2 refinement progress
+
+The [independent exact-v2 family](evidence/p09/v2-family/README.md) evolves six
+private rest trajectories with fixed force sampling across retained grids. Its
+full-band space/time/method comparisons pass an independent signed Fourier-sum
+oracle, versioned identity checks, allocation probes and terminal-state controls.
+Eight focused tests/probes pass; all eight new Rust files measure 98.71% line and
+85.42% branch coverage with maximum CRAP19.6133. Whole-workspace static limits,
+strict Clippy and Rustdoc pass. Complete current-source hosted gates are pending.
+
+The documented N=[4,8,12], M=12 example reaches only the short startup time
+1/8192. P08/P09/P10 remain incomplete with zero accepted concentrating windows.
+Next attach the existing complete physical diagnostic kernels to these actual
+exact-v2 states, then complete separate force/reference/arithmetic and accepted
+artifact studies. Evaluate the parked reduced-coordinate force path independently
+before changing runtime providers. Daily releases require passing current CI.

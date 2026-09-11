@@ -37,4 +37,5 @@ pub mod smooth_experiment;
 /// Explicit serial/parallel force settings for the concentrating runtime.
 pub mod runtime_force;
 
+pub mod v2_experiment;
 pub mod v2_run;

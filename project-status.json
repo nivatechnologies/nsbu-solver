@@ -6,7 +6,7 @@
   "development_stage": "runtime-alpha-published; scientific-qualification-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
-  "implementation_plan_revision": "1.3",
+  "implementation_plan_revision": "1.4",
   "rust_workspace_exists": true,
   "runtime_implementation_exists": true,
   "simulation_cli_exists": true,
@@ -38,7 +38,11 @@
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
     "latest_hosted_ci_status": "Runtime alpha passes source-matched Rust and Python hosted workflows, including full coverage and the 220-test Python suite.",
-    "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json"
+    "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json",
+    "latest_increment": {
+      "evidence": "evidence/p09/v2-family/summary.json",
+      "status": "Exact-v2 family focused tests, new-source coverage/CRAP and whole-workspace static/lint checks pass; complete source-matched hosted gates pending."
+    }
   },
   "packages": {
     "B00": {
@@ -157,7 +161,8 @@
       "reduction_arithmetic_evidence": "evidence/p09/reduction-arithmetic/summary.json",
       "reduction_arithmetic_hosted_ci": "evidence/p09/reduction-arithmetic/hosted-rust.json",
       "force_evaluation_evidence": "evidence/p09/force-evaluation/summary.json",
-      "parallel_force_evidence": "evidence/p09/parallel-force/summary.json"
+      "parallel_force_evidence": "evidence/p09/parallel-force/summary.json",
+      "v2_family_evidence": "evidence/p09/v2-family/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -274,5 +279,7 @@
       "status": "complete",
       "evidence": "evidence/runtime-alpha/summary.json"
     }
-  }
+  },
+  "actual_v2_refinement_family_exists": true,
+  "actual_v2_refinement_family_scope": "Six independent exact-v2 rest trajectories with shared fixed M, exact tested clocks, complete Fourier space/time/method comparisons and terminal failures. N=[4,8,12], M=12 startup to 1/8192 passes focused checks; no concentrating qualification."
 }

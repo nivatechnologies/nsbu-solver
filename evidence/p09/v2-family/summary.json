@@ -1,0 +1,143 @@
+{
+  "package": "P09",
+  "increment": "independent exact-v2 refinement family",
+  "status": "focused numerical and new-source quality gates passed; complete source-matched hosted gates pending",
+  "generated_utc": "2026-09-11T04:22:54.423537+00:00",
+  "parent_commit": "6fad3ca",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 340,
+  "new_rust_source_files": [
+    "crates/nsbu-benchmarks/examples/v2_refinement.rs",
+    "crates/nsbu-benchmarks/tests/v2_family_support.rs",
+    "crates/nsbu-benchmarks/tests/v2_family.rs",
+    "crates/nsbu-benchmarks/tests/v2_family_allocation.rs",
+    "crates/nsbu-benchmarks/tests/v2_family_oracle.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/identity.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/plan.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/mod.rs"
+  ],
+  "focused_tests": {
+    "harness": 6,
+    "example": 1,
+    "isolated_allocation_executables": 1,
+    "total": 8
+  },
+  "focused_coverage": {
+    "lines": {
+      "count": 776,
+      "covered": 766,
+      "percent": 98.71134020618557
+    },
+    "branches": {
+      "count": 48,
+      "covered": 41,
+      "percent": 85.41666666666667
+    }
+  },
+  "focused_crap_maximum": 19.613208912037038,
+  "whole_workspace_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 477
+  },
+  "quality_scope": "Focused coverage and CRAP cover all eight added Rust source/test/example files. Complete existing-source coverage and CRAP are retained from the alpha and must rerun in hosted CI before daily publication. Whole current Rust source has fresh complexity/size/typing/lint measurements.",
+  "unchanged_python": {
+    "source_files": 98,
+    "retained_tests": 220,
+    "evidence": "../../runtime-alpha/publication/hosted-python.json"
+  },
+  "profile": {
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "force_grid": [
+      12,
+      12,
+      12
+    ],
+    "workers": 0,
+    "step_ticks": [
+      64,
+      32,
+      16
+    ],
+    "clock_exponent": -20,
+    "target_ticks": 8192,
+    "endpoint_ticks": 128,
+    "sample_ticks": [
+      0,
+      64,
+      128
+    ],
+    "endpoint_rational": "1/8192",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "test_absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "test_relative_tolerances": [
+      0,
+      0
+    ],
+    "example_relative_tolerances": [
+      1e-05,
+      1e-05
+    ],
+    "advective_limit": 0.3
+  },
+  "numerical_checks": [
+    "Six private exact-v2 states evolve independently from rest with fixed force M across spatial refinements.",
+    "All five actual endpoint pairs agree with an explicit signed-mode full-complex sum for L2/H1/curl/divergence common/new/full norms and means; tolerance 5e-14*(1+expected).",
+    "Canonical versioned little-endian identity agrees with an independently assembled fixture and changes with all admitted settings and exact clock representations.",
+    "Invalid profiles, byte caps, attempt-count overflow and time manifests refuse before allocation.",
+    "A failed child retains its committed clock/coefficient words and charged work; repeat advance terminates without changes.",
+    "The documented release example reaches every declared sample time and reports actual differences."
+  ],
+  "resource_checks": {
+    "construction_heap_bytes": 19219520,
+    "declared_storage_bytes": 24190424,
+    "admission_and_refusal_allocations": 0,
+    "steady_allocations_reallocations_deallocations": 0,
+    "identity_bytes": 484,
+    "integration_calls": 480,
+    "provider_work_units": 174763008,
+    "scalar_transforms": 6696,
+    "comparison_work_units": 82752
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "manifests": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "61659c38301f4643bfdd40bd11b04c588afc7ae1eb9074d062d858a61ecdc81f",
+      "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+    },
+    "test_opt_level": 2,
+    "test_debug_assertions": true,
+    "test_overflow_checks": true
+  },
+  "solid_review": "Immutable aggregate admission, canonical identity, branch ownership and comparison sampling have separate responsibilities. Each branch reuses the released Run/PrescribedForce contracts. The independent Fourier-sum test deliberately retains separate indexing and accumulation. No analytical state can be assigned through the family API.",
+  "informational_findings": "Mutation and duplication sweeps not rerun for this increment; historical reports retained. Strict Clippy permits only informational dead_code warnings from shared test helpers.",
+  "limitations": [
+    "This is a short startup test at 1/8192, not the first concentrating endpoint at 1/256.",
+    "A preliminary longer/coarser startup profile stopped on its H1 local indicator; the retained positive test uses smaller steps, not relaxed tolerances.",
+    "Full physical/local/reference/force/arithmetic/reconstruction/quadrature/provenance integration remains incomplete.",
+    "Family hashes identify settings and clocks; they do not authenticate complete external scientific provenance.",
+    "There is no cross-branch rollback; all existing committed progress and charged work remain on terminal failure.",
+    "Caller-owned manifests and retained reports require a separate storage budget."
+  ],
+  "accepted_pde_windows": 0,
+  "artifact_inventory": "artifact-sha256.json",
+  "bootstrap": {
+    "repository_links_and_frozen_inputs": "passed",
+    "guard_tests": 41,
+    "original_mathematical_verification": "passed"
+  }
+}
