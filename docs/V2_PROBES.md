@@ -24,12 +24,13 @@ that binds the underlying exact-v2 family and complete probe manifest.
 The focused startup test streams clocks before, between and on accepted macro
 endpoints.  It checks all value and derivative comparisons with a separate
 full-complex integer-mode reducer and compares every final branch state, history
-and work ledger to a separately evolved reconstruction owner.  For the first
-off-stage probe, interpolation weights come from a separate dense 6-by-6 Hermite
-solve.  The node derivatives are separately assembled from fresh `V2Force` and
-`ConservativeWorkspace` evaluations; that control is independent of stored
-observer nodes but reuses production PDE operators and is not a wholly independent
-PDE-operator oracle.
+and work ledger to a separately evolved reconstruction owner.  At the late
+clock 95, interpolation weights come from a separate dense 6-by-6 Hermite solve
+over independently evolved accepted nodes 64, 80 and 96.  The node derivatives
+are separately assembled with the observer's configured `M=24` force-sampling
+profile and fresh `V2Force` and `ConservativeWorkspace` evaluations.  That
+control is independent of stored observer nodes but reuses production PDE
+operators and is not a wholly independent PDE-operator oracle.
 
 This family does not assemble an off-stage residual, compare an analytical
 reference, import reconstruction history, qualify force sampling or establish a

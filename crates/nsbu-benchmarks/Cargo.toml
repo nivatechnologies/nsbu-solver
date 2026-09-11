@@ -52,6 +52,10 @@ name = "v2_probe_family_allocation"
 harness = false
 
 [[test]]
+name = "v2_residual_family_allocation"
+harness = false
+
+[[test]]
 name = "v2_family_allocation"
 harness = false
 

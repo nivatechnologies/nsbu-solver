@@ -1,6 +1,7 @@
 //! Stream exact-v2 off-stage probes before bounded accepted histories are overwritten.
 mod plan;
 mod report;
+pub mod residuals;
 use super::{FamilyError, PAIRS};
 use crate::v2_run::ReconstructedRun;
 use nsbu_solver::{
