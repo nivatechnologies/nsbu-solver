@@ -40,8 +40,8 @@
     "latest_hosted_ci_status": "Runtime alpha passes source-matched Rust and Python hosted workflows, including full coverage and the 220-test Python suite.",
     "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json",
     "latest_increment": {
-      "evidence": "evidence/p09/reduced-force/summary.json",
-      "status": "Reduced-coordinate pointwise evaluator passes focused numerical/new-source quality and whole-workspace static/lint gates; full source-matched hosted checks pending."
+      "evidence": "evidence/p09/v2-physical/summary.json",
+      "status": "Actual exact-v2 physical consumer passes focused numerical/quality and whole-source static/lint/Rustdoc gates; complete source-matched hosted checks pending."
     }
   },
   "packages": {
@@ -165,7 +165,8 @@
       "v2_family_evidence": "evidence/p09/v2-family/summary.json",
       "reduced_force_evidence": "evidence/p09/reduced-force/summary.json",
       "v2_family_hosted_rust": "evidence/p09/v2-family/hosted-rust.json",
-      "v2_family_hosted_python": "evidence/p09/v2-family/hosted-python.json"
+      "v2_family_hosted_python": "evidence/p09/v2-family/hosted-python.json",
+      "v2_physical_evidence": "evidence/p09/v2-physical/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -286,5 +287,7 @@
   "actual_v2_refinement_family_exists": true,
   "actual_v2_refinement_family_scope": "Six independent exact-v2 rest trajectories with shared fixed M, exact tested clocks, complete Fourier space/time/method comparisons and terminal failures. N=[4,8,12], M=12 startup to 1/8192 passes focused checks; no concentrating qualification.",
   "optional_reduced_coordinate_force_exists": true,
-  "optional_reduced_coordinate_force_scope": "Pointwise exact-v2 force values with degree-three w,z,t algebra; independent 84-case high-precision fixtures, symbolic transport checks, focused quality and clean-source reproduction pass. No runtime provider, force gradients, force-grid or PDE qualification."
+  "optional_reduced_coordinate_force_scope": "Pointwise exact-v2 force values with degree-three w,z,t algebra; independent 84-case high-precision fixtures, symbolic transport checks, focused quality and clean-source reproduction pass. No runtime provider, force gradients, force-grid or PDE qualification.",
+  "actual_v2_physical_refinement_family_exists": true,
+  "actual_v2_physical_refinement_family_scope": "Complete global sampled velocity/gradient/Hessian/vorticity differences for all five actual space/time/method pairs of six independent exact-v2 rest trajectories. Clock/family identity and joint resource bounds enforced; direct signed-Fourier RMS/peak oracle and allocation checks pass. N4/8/12 fixed M12 startup only; coarse Hessian space differences increase. Pressure, regions and all-channel qualification remain incomplete."
 }

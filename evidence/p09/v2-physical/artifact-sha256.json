@@ -1,0 +1,90 @@
+{
+  "files": {
+    "raw/check_v2_physical_focused.sh.gz": "ebc6708428bba2c36c759f8024175b9ed00eea40dec8725de391fc70b61c42d4",
+    "raw/package_v2_physical_evidence.sh.gz": "4ad5eb90ce5119f7a3756f24ffdb37aa2f91aaaa39a358620d9a65bbfebb335a",
+    "raw/repository-check.json.gz": "a1824af05512b59cb9a6de5b76e6944108e9945b152cd80a7ca33e803d2de980",
+    "raw/v2-physical-clippy-final.log.gz": "68a4791498d6cf39dc6b0b8048463406d7e313076ededd622d8f6102d137775c",
+    "raw/v2-physical-example-release.log.gz": "a99133239e91e26fad45ca5328f39b85a8d65e3044f7920d48d1996ed80a075d",
+    "raw/v2-physical-focused-coverage.json.gz": "ce9e9d2557eb1d4f9e4492ee535ee9893a728d8b5032dbb4240bd1936e6230d1",
+    "raw/v2-physical-focused-coverage.log.gz": "9ddd216d1b56d662d4cebcff564c362b72e3d60596ee01fcd07803cfa95ecde7",
+    "raw/v2-physical-focused-crap.json.gz": "69d543b6388560ab43702547a521dd2136990eebbe709ffdb2f4966cddae1889",
+    "raw/v2-physical-focused-metrics.json.gz": "26c7c22852f096855292c6cc42584f9209391a912502b99cf3f4e7e80de55220",
+    "raw/v2-physical-format-final.log.gz": "cc681d7127b91a8e29d3763490db65be6f32e5c3844d416918046a0b29b96004",
+    "raw/v2-physical-metrics.json.gz": "ff4a0b878bc07d5e1ffc258ff4533c951629a945ce416f42c339568eed979a70",
+    "raw/v2-physical-plan-coverage.log.gz": "8b47519527452a8920f9c73e1ebb01a12fee3707a94b145d48d5e360fca8cc79",
+    "raw/v2-physical-root-tests.log.gz": "fde9549ddad59e41876854bd83e6c5d2dad84554303a96a02c05ddd6370b904a",
+    "raw/v2-physical-rustdoc.log.gz": "b89c78ae55a101556905f991b798aaa331e67fd5537e9740c09830a4f83f0984"
+  },
+  "raw": {
+    "raw/check_v2_physical_focused.sh.gz": {
+      "bytes": 1038,
+      "uncompressed_bytes": 2522,
+      "uncompressed_sha256": "dcd2368b8fc5217dc204086f2fa3fc6daa9622e97f54e45e141c1c34120cbe84"
+    },
+    "raw/package_v2_physical_evidence.sh.gz": {
+      "bytes": 318,
+      "uncompressed_bytes": 517,
+      "uncompressed_sha256": "7000ea9e2f07992d70b5ec8433a927ef9a70aec4aa842cdb7cc8f8fc41046b6f"
+    },
+    "raw/repository-check.json.gz": {
+      "bytes": 586,
+      "uncompressed_bytes": 1003,
+      "uncompressed_sha256": "055c4ea1c391209aac4e2c4fc94c3b50663e2b4d9949ece7e430b0c57b6ce9e9"
+    },
+    "raw/v2-physical-clippy-final.log.gz": {
+      "bytes": 204,
+      "uncompressed_bytes": 202,
+      "uncompressed_sha256": "ee6161ac9fa3e36317445d9ae7f9b779c5d2e420f10068764494b40909298fac"
+    },
+    "raw/v2-physical-example-release.log.gz": {
+      "bytes": 1836,
+      "uncompressed_bytes": 4622,
+      "uncompressed_sha256": "3f84c7d395c74f0a7bc982a2cae83cbf19ef9994318bc6c8a269506d06a8a237"
+    },
+    "raw/v2-physical-focused-coverage.json.gz": {
+      "bytes": 222087,
+      "uncompressed_bytes": 1544524,
+      "uncompressed_sha256": "a91a60b0cfc62b34687b7c88e4d7a4122f9b9ea6d1c105f7bda5ee3031789523"
+    },
+    "raw/v2-physical-focused-coverage.log.gz": {
+      "bytes": 806,
+      "uncompressed_bytes": 1692,
+      "uncompressed_sha256": "296220234a7ec80da69662b63d8fb6bdba48afc19046d35996bc4cb2103b1207"
+    },
+    "raw/v2-physical-focused-crap.json.gz": {
+      "bytes": 1015,
+      "uncompressed_bytes": 14339,
+      "uncompressed_sha256": "ed7ffc4ee1fc615ebaa8f11230a2c6fff3600547c5f65ed810d88f851791c431"
+    },
+    "raw/v2-physical-focused-metrics.json.gz": {
+      "bytes": 16141,
+      "uncompressed_bytes": 138450,
+      "uncompressed_sha256": "2ebe3cdaeb3687adf0e230d426d83a34951d781fc02ef6fc0363fdc8bcdb371d"
+    },
+    "raw/v2-physical-format-final.log.gz": {
+      "bytes": 49,
+      "uncompressed_bytes": 0,
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw/v2-physical-metrics.json.gz": {
+      "bytes": 656860,
+      "uncompressed_bytes": 5516548,
+      "uncompressed_sha256": "2beb15f2ce5d526dcb9b5f9f7ba48ee9f9555c56afdd97b050219380d9f592be"
+    },
+    "raw/v2-physical-plan-coverage.log.gz": {
+      "bytes": 784,
+      "uncompressed_bytes": 1600,
+      "uncompressed_sha256": "ded0182175ec77763623bd6fdeb5c506209f363558471cccbcd779d08e7aadd5"
+    },
+    "raw/v2-physical-root-tests.log.gz": {
+      "bytes": 570,
+      "uncompressed_bytes": 987,
+      "uncompressed_sha256": "f91ab18b63c12128f3dc51981feb27f40f4576a5402780f3441b89087a9e8526"
+    },
+    "raw/v2-physical-rustdoc.log.gz": {
+      "bytes": 272,
+      "uncompressed_bytes": 700,
+      "uncompressed_sha256": "e4a89e67004a5442135fc48808a812f30f2653a0db2c509fe09880acfefab336"
+    }
+  }
+}

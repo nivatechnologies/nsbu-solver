@@ -1,7 +1,10 @@
 //! Bounded independently evolved concentrating family; no window qualification is emitted.
 use nsbu_benchmarks::{
     runtime_force::ForceSettings,
-    v2_experiment::{FamilyError, FamilyPlan, FamilySettings, V2Family},
+    v2_experiment::{
+        physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace},
+        FamilyError, FamilyPlan, FamilySettings, V2Family,
+    },
     CASE_SHA256,
 };
 use nsbu_solver::{
@@ -28,6 +31,13 @@ fn main() -> Result<(), FamilyError> {
         advective_limit: 0.3,
     };
     let plan = FamilyPlan::new(settings, TestedTimes::new(&clocks, 3)?, 128 * 1024 * 1024)?;
+    let physical_plan = PhysicalFamilyPlan::new(
+        plan,
+        Layout::new([12; 3])?,
+        [1e-8, 1e-7, 1e-6, 1e-7],
+        clocks.len(),
+        128 * 1024 * 1024,
+    )?;
     println!("case=similarity-mms-v2 sha256={CASE_SHA256}");
     println!(
         "family_identity={:02x?} preflight={:?}",
@@ -35,7 +45,9 @@ fn main() -> Result<(), FamilyError> {
         plan.bounds()
     );
     println!("grids=[4,8,12] fixed_force_grid=12 steps=[64,32,16] quantum=2^-20 endpoint=128");
+    println!("physical_preflight={:?}", physical_plan.bounds());
     let mut family = V2Family::new(plan)?;
+    let mut physical = PhysicalFamilyWorkspace::new(physical_plan)?;
     while let Some(sample) = family.advance()? {
         println!(
             "elapsed={} space_full_H1={:?} space_new_modes_H1={:?} time_full_H1={:?} method_full_H1={:.12e}",
@@ -45,8 +57,20 @@ fn main() -> Result<(), FamilyError> {
             sample.time().map(|c| c.full.h1),
             sample.method().full.h1
         );
+        let physical_sample = physical.measure(&family)?;
+        for item in physical_sample.quantities() {
+            println!(
+                "physical elapsed={} quantity={:?} space_rms={:?} time_rms={:?} method_rms={:.12e} space_peaks={:?}",
+                physical_sample.clock().elapsed(),
+                item.quantity,
+                item.space.map(|error| error.rms_error),
+                item.time.map(|error| error.rms_error),
+                item.method.rms_error,
+                item.space.map(|error| error.peak_error)
+            );
+        }
     }
-    println!("diagnostic-only; accepted_pde_windows=0; force/reference/arithmetic/local and off-stage qualification remain missing");
+    println!("diagnostic-only; accepted_pde_windows=0; force/reference/arithmetic/regional and off-stage qualification remain missing");
     Ok(())
 }
 
