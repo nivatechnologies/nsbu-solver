@@ -1,0 +1,63 @@
+{
+  "scope": "final event spectral RefinementSample comparisons only; full norms only; no convergence or qualification claim",
+  "raw_sha256": "b15a60c9c47598db346488561935eefbcd146bd4a5460d315580d2383d5f7c5c",
+  "event": 5,
+  "elapsed_ticks": 4096,
+  "pairs": [
+    {
+      "name": "space_n8_to_n12",
+      "left": "0=CM N8 step16",
+      "right": "1=CM N12 step16",
+      "full_norms": {
+        "l2": 1.0356506503692346,
+        "h1": 34.19425238632566,
+        "vorticity_l2": 34.17856527108957,
+        "divergence_l2": 1.800115517760696e-14
+      }
+    },
+    {
+      "name": "space_n12_to_n16",
+      "left": "1=CM N12 step16",
+      "right": "2=CM N16 step16",
+      "full_norms": {
+        "l2": 0.7923539601660208,
+        "h1": 39.16868231559534,
+        "vorticity_l2": 39.160667123299035,
+        "divergence_l2": 1.965834527919993e-14
+      }
+    },
+    {
+      "name": "time_step64_to_step32",
+      "left": "3=CM N16 step64",
+      "right": "4=CM N16 step32",
+      "full_norms": {
+        "l2": 5.767067808968162e-10,
+        "h1": 1.1744843930950773e-08,
+        "vorticity_l2": 1.1730676376541793e-08,
+        "divergence_l2": 1.013868578865948e-14
+      }
+    },
+    {
+      "name": "time_step32_to_step16",
+      "left": "4=CM N16 step32",
+      "right": "2=CM N16 step16",
+      "full_norms": {
+        "l2": 3.602769032063461e-11,
+        "h1": 7.361741042832795e-10,
+        "vorticity_l2": 7.352919944301961e-10,
+        "divergence_l2": 1.6562492423575143e-14
+      }
+    },
+    {
+      "name": "method_cm_to_ho",
+      "left": "2=CM N16 step16",
+      "right": "5=HO N16 step16",
+      "full_norms": {
+        "l2": 1.7689007581126143e-12,
+        "h1": 3.4762285281002656e-11,
+        "vorticity_l2": 3.471724474870193e-11,
+        "divergence_l2": 1.962458874323556e-14
+      }
+    }
+  ]
+}

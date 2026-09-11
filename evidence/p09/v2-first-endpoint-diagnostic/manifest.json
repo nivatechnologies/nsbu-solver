@@ -44,6 +44,8 @@
     "source-Cargo.lock": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
     "release_binary": "16d8f9018919b7f9d8f36ecfcd83edaf54868d48e5a7c5494480e6eb6a2ac1d3",
     "full.stdout.gz": "b15a60c9c47598db346488561935eefbcd146bd4a5460d315580d2383d5f7c5c",
-    "full.time.gz": "4ba8329340cd4322e9e19967eba2dbdc3b96824111ce6afc22ece0a3b4104765"
+    "full.time.gz": "4ba8329340cd4322e9e19967eba2dbdc3b96824111ce6afc22ece0a3b4104765",
+    "extract_spectral.py": "4c1e164f92406bde0060b0a08e2737e058ac3e3844f45ed8c5699b87dc8ed537",
+    "spectral-full-norms.json": "659e12cc3aa71602985faa591b8ff14e84ab480f2062097b7c9db5722a659515"
   }
 }
