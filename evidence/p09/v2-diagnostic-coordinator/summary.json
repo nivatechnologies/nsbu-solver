@@ -1,0 +1,70 @@
+{
+  "package": "P09",
+  "increment": "bounded exact-v2 unqualified diagnostic coordinator",
+  "status": "focused numerical, allocation, static, coverage, CRAP, example and exact Rustdoc gates passed; hosted combined CI pending",
+  "parent_commit": "63fa585",
+  "source_commit": "c7f0765",
+  "profile": {
+    "grids": [4, 8, 12],
+    "steps": [64, 32, 16],
+    "velocity_force_grid": 12,
+    "residual_force_grid": 24,
+    "accepted_clocks": [0, 64, 128],
+    "residual_clocks": [7, 63, 95, 127],
+    "complete_probe_manifest": [0, 7, 63, 64, 95, 127, 128],
+    "tick_exponent": -20,
+    "accepted_pde_windows": 0
+  },
+  "resource_observation": {
+    "joint_storage_bytes": 69433968,
+    "coordinator_storage_bytes": 481752,
+    "construction_bytes": 58981808,
+    "steady_execution_allocations": 0,
+    "retained_events": 7,
+    "transient_event_slots_reserved": 2
+  },
+  "coordinator_work": {
+    "attempts": 7,
+    "accepted_events": 3,
+    "residual_events": 4,
+    "manifest_comparisons": 49
+  },
+  "numerical_observation": {
+    "maximum_offstage_residual_l2": 0.051013585659162156,
+    "clock_ticks": 127,
+    "standalone_crosschecks": ["physical", "pressure", "regional_reference"],
+    "all_crosschecks_bitwise_or_structurally_equal": true
+  },
+  "focused_tests": {
+    "integration_tests": 3,
+    "allocation_executables": 1,
+    "release_examples": 1,
+    "dry_runs": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "selected_implementation_files": 3,
+    "lines": {"covered": 365, "count": 390, "percent": 93.58974358974359},
+    "branches": {"covered": 24, "count": 30, "percent": 80.0}
+  },
+  "changed_source_static_maxima": {
+    "json_lines_full_tree_records": 425,
+    "selected_files": 6,
+    "selected_functions": 70,
+    "cyclomatic_function": 15.0,
+    "cognitive_function": 8.0,
+    "halstead_difficulty_function": 40.61538461538461,
+    "maximum_physical_file_lines": 329
+  },
+  "focused_crap_maximum": 16.041666666666664,
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "scientific_status": "UnqualifiedDiagnostic",
+  "missing_channels": ["ForceResolution", "ForcePrecision", "Arithmetic", "ReferencePrecision", "PressureReference", "PressureGauge", "Transfer", "SamplingResolution", "QuadratureResolution", "RegionVolumeCoverage"],
+  "limitations": [
+    "No policy threshold, PDE acceptance, accuracy, completeness or convergence claim is assigned.",
+    "Analytical velocity, gradient, ordered Hessian and vorticity tracking uses binary64 on the configured grid; the offline high-precision study is not attached.",
+    "Pressure has no analytical reference or gauge-equivalence analysis in this report.",
+    "Regional sampled sets can overlap and sample counts are not region-volume enclosures."
+  ]
+}
