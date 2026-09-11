@@ -4,7 +4,7 @@ This P09 increment passes 385 Rust tests/allocation probes and 220 Python tests
 across 294 Rust and 98 Python/stub files. Rust executable line/branch coverage is
 98.69%/90.11%; Python is 99.82%/98.82%. Every required complexity, Halstead, file
 size, CRAP and typing gate passes. Frozen/bootstrap checks, Rustdoc and fresh
-packaging pass. Hosted verification of this increment is pending.
+packaging pass. Source-matched hosted [Rust](hosted-rust.json) and [Python](hosted-python.json) checks pass.
 
 The [public guide](../../../docs/REDUCTION_ARITHMETIC.md) explains the exact-word
 formats, complete commands, resources and numerical interpretation. Actual N=4

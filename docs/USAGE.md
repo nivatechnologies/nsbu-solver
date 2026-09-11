@@ -455,3 +455,11 @@ workflow, independent 80/120-digit oracle and exact-word packet format.
 and `python -m reference.verify_reductions --n 4 --dry-run` report separate
 bounded plans. Actual execution requires the complete sample/magnitude files;
 these commands do not qualify a concentrating PDE trajectory.
+
+## Independent balance quadrature
+
+`cargo run --release -p nsbu-benchmarks --example smooth_balance_quadrature -- --dry-run`
+prints complete admission. Omit `-- --dry-run` to execute sixty conservative
+balance samples and eighteen integrals across three independently refined
+physical-time schedules. The [guide](BALANCE_QUADRATURE.md) distinguishes
+quadrature, trajectory and reconstruction error and documents exact origins.
