@@ -483,7 +483,7 @@ coverage is 98.69%/90.11%; Python is 99.82%/98.82%. Maxima remain Rust
 CC21/cognitive18/Halstead75.8956/LOC475/CRAP24.33594 and Python
 CC16/cognitive19/Halstead13.8261/LOC243/CRAP16. Strict typing, linting, Rustdoc,
 fresh packaging and frozen/bootstrap checks pass. Source-matched hosted checks
-of the preceding streamed-residual increment pass; this increment is pending.
+of this reduction-arithmetic increment and the preceding streamed residuals pass.
 
 Two actual N=4/N=12 smooth CM/HO component datasets independently verify both
 production tensor-reduction entry paths. All 144 per-statistic comparisons meet
@@ -495,3 +495,28 @@ No FFT or trajectory arithmetic is relabeled by these reduction measurements.
 P08/P09 remain incomplete. Residual/balance/regional/location arithmetic, full
 reference/force/transfer refinements, benchmark/artifact binding and concentrating
 current-grid qualification remain. No concentrating PDE window is accepted.
+
+## P08 independently reconstructed balance quadrature progress
+
+The [balance/quadrature increment](evidence/p08/balance-probes/README.md) passes
+391 Rust tests/probes across 302 Rust files. Executable line/branch coverage is
+98.68%/89.93%; maxima CC21, cognitive18,
+Halstead75.8955, physical-file477 and CRAP24.33594
+meet all gates. All 98 Python/stub files match the verified 220-test reference
+profile. Strict linting, Rustdoc, fresh packaging, 41 bootstrap tests and frozen
+mathematical checks pass. Hosted verification of this increment is pending.
+
+The six independent smooth histories supply sixty complete conservative balance
+samples at ten exact physical times and eighteen Simpson integrals on three
+strictly refined schedules. Quadrature changes are measured without altering
+integration steps or reconstructed fields. All six child-failure positions and a
+failure after staged quadrature updates preserve work and prevent partial reports.
+Clean-source replay reproduces the complete resource and numerical output exactly.
+Two original CRAP failures are retained. The final consumer removes a tautological
+clock/origin comparison after proving both views borrow one immutable private
+record; complete owner/manifest binding and all six real failure controls remain.
+Fresh complete coverage and quality gates pass after the simplification.
+
+P08/P09 remain incomplete. Complete residual/balance arithmetic, reference/force,
+regional/location and transfer refinements, benchmark/artifact binding and current
+grid concentrating qualification remain. No concentrating PDE window is accepted.

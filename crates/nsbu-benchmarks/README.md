@@ -152,3 +152,9 @@ persistent workers, then uses the original serial FFT/transfer. All buffers and
 configured stacks are preflighted; workers are constructed before attempts and
 joined on owner drop. See [parallel forcing](../../docs/PARALLEL_FORCE.md) for
 complete word/work comparisons, failure handling and execution-profile limits.
+
+`smooth_experiment::probes::balances` measures fresh conservative balances at
+reconstructed physical times. Its quadrature wrapper freezes three independently
+refined Simpson schedules while all six integrator step settings remain unchanged.
+See [the public guide](../../docs/BALANCE_QUADRATURE.md) for complete reports,
+joint resources, failure transactions and numerical limitations.

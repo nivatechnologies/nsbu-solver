@@ -5,7 +5,7 @@ use nsbu_solver::{
         balances::{measure, BalanceSample},
         conservative::ConservativeWorkspace,
     },
-    domain::{Domain, ResourcePlan, SpectralState},
+    domain::{Domain, ResourcePlan, SpectralState, TickClock},
     experiment::observer::{BalanceObserver as BalanceObserverContract, ObserverBounds},
     integrators::forcing::{ForceLimits, PrescribedForce},
     spectral::transfer,
@@ -167,12 +167,36 @@ impl BalanceObserver {
 
     /// Form a complete double-grid balance sample from an accepted read-only state.
     pub fn sample(&mut self, state: &SpectralState) -> Result<BalanceSample, SolverError> {
-        self.prepare_sample(state)?;
-        let velocity = [
-            state.component(0)?,
-            state.component(1)?,
-            state.component(2)?,
-        ];
+        if state.plan().domain() != self.source {
+            return Err(SolverError::InvalidPayload);
+        }
+        self.sample_fields(
+            state.clock(),
+            [
+                state.component(0)?,
+                state.component(1)?,
+                state.component(2)?,
+            ],
+        )
+    }
+    // Only accepted-state sampling and the privately bound reconstructed-probe bridge call this.
+    pub(crate) fn sample_probe(
+        &mut self,
+        domain: Domain,
+        clock: TickClock,
+        velocity: [&[Complex64]; 3],
+    ) -> Result<BalanceSample, SolverError> {
+        if domain != self.source {
+            return Err(SolverError::InvalidPayload);
+        }
+        self.sample_fields(clock, velocity)
+    }
+    fn sample_fields(
+        &mut self,
+        clock: TickClock,
+        velocity: [&[Complex64]; 3],
+    ) -> Result<BalanceSample, SolverError> {
+        self.prepare_force(clock)?;
         let [x, y, z] = &mut self.conservative;
         self.products.evaluate(
             velocity,
@@ -197,10 +221,7 @@ impl BalanceObserver {
     }
     // Admit and charge the independent provider before forming any diagnostic fields.
     // A failed admitted request retains its declared work; physical state stays borrowed.
-    fn prepare_sample(&mut self, state: &SpectralState) -> Result<(), SolverError> {
-        if state.plan().domain() != self.source {
-            return Err(SolverError::InvalidPayload);
-        }
+    fn prepare_force(&mut self, clock: TickClock) -> Result<(), SolverError> {
         if self.work.samples == self.limits.samples
             || self.force.limits() != Some(self.force_limits)
         {
@@ -208,7 +229,7 @@ impl BalanceObserver {
         }
         self.charge_sample()?;
         let report = self.force.evaluate(
-            state.clock(),
+            clock,
             self.force_limits,
             self.forcing.each_mut().map(Vec::as_mut_slice),
         )?;

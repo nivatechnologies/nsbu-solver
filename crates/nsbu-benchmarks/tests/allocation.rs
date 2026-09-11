@@ -10,6 +10,7 @@ use stats_alloc::Region;
 #[global_allocator]
 static GLOBAL: &stats_alloc::StatsAlloc<std::alloc::System> = &stats_alloc::INSTRUMENTED_SYSTEM;
 
+mod balance_probe_allocation_support;
 mod owned_reconstruction_support;
 mod probe_allocation_support;
 mod probe_diagnostic_allocation_support;
@@ -18,6 +19,7 @@ mod smooth_family_support;
 mod streamed_residual_allocation_support;
 
 fn main() {
+    balance_probe_allocation_support::check();
     probe_allocation_support::check();
     probe_diagnostic_allocation_support::check();
     streamed_residual_allocation_support::check();
