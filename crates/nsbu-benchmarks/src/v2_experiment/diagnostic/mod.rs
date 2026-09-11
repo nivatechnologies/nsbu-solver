@@ -1,4 +1,5 @@
 //! Bounded unqualified diagnostic coordination over independent exact-v2 families.
+pub mod export;
 mod plan;
 mod profile;
 mod report;
