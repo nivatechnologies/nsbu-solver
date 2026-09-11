@@ -1,28 +1,37 @@
 """Fast contracts for the bounded current-grid arithmetic pilot."""
 from contextlib import redirect_stdout
 from dataclasses import replace
+import hashlib
 import io
 import json
 from mpmath import mp, mpf
 from pathlib import Path
+import subprocess
 import unittest
 from unittest.mock import patch
+from reference.evaluator import field_jets
 from reference.reference_arithmetic_full import bits
+from reference.jets import Jet
+from reference.tuples import quadruple
 from reference.reference_arithmetic_pilot import (
     CLOCKS, POINTS, RustRow, category, centered_numerator, full_grid_counts,
-    evaluate_one, parse_row, rational_point, run, tracking_values, validate_rows,
+    evaluate_one, parse_row, rational_point, run, rust_rows, tracking_values, validate_rows,
 )
 
 
-def pilot_row(label: str, index: tuple[int, int, int], elapsed: int) -> RustRow:
-    """Build one correctly bound synthetic pilot row."""
+def pilot_line(label: str, index: tuple[int, int, int], elapsed: int) -> str:
+    """Build one correctly bound synthetic producer line."""
     argument = tuple(bits(value/12.0) for value in index)
     centered = tuple(bits(value/12.0-1.0 if value >= 6 else value/12.0) for value in index)
     time = bits(float(elapsed)*2.0**-20)
-    text = "\t".join(("ARITH_PILOT", label, ",".join(map(str, index)), str(elapsed),
-                       category(index, elapsed), ",".join(argument), ",".join(centered), time,
-                       ",".join(["0000000000000000"]*42)))
-    return parse_row(text)
+    return "\t".join(("ARITH_PILOT", label, ",".join(map(str, index)), str(elapsed),
+                      category(index, elapsed), ",".join(argument), ",".join(centered), time,
+                      ",".join(["0000000000000000"]*42)))
+
+
+def pilot_row(label: str, index: tuple[int, int, int], elapsed: int) -> RustRow:
+    """Parse one correctly bound synthetic pilot row."""
+    return parse_row(pilot_line(label, index, elapsed))
 
 
 def fake_evaluate(row: RustRow, _binding: str, precision: int) -> tuple[tuple[mpf, ...], int, bool]:
@@ -69,6 +78,46 @@ class ReferenceArithmeticPilot(unittest.TestCase):
         self.assertEqual(len(values), 42)
         self.assertTrue(all(value == 0 for value in values))
         self.assertGreater(iterations, 0)
+
+    def test_tracking_values_refuses_a_malformed_evaluator_shape(self) -> None:
+        """Keep the 42-component guard live without changing the evaluator science."""
+        row = pilot_row("axis", (0, 0, 1), 0)
+
+        point = rational_point(row)
+        variables = quadruple(Jet.variable(value, axis) for axis, value in enumerate(point))
+        velocity, _, solution = field_jets(*variables)
+        malformed = (*velocity, velocity[0]), None, solution
+        with patch("reference.reference_arithmetic_pilot.field_jets", return_value=malformed), \
+             self.assertRaisesRegex(ArithmeticError, "42 tracking entries"):
+            tracking_values(point)
+
+    def test_rust_rows_parses_the_complete_producer_stream_and_hashes_it(self) -> None:
+        """Exercise the subprocess boundary with a complete fixed synthetic stream."""
+        lines = [pilot_line(label, index, elapsed)
+                 for label, index in POINTS for elapsed in CLOCKS]
+        output = "diagnostic\n" + "\n".join(lines) + "\n"
+        completed = subprocess.CompletedProcess(["producer"], 0, output, "")
+        with patch("reference.reference_arithmetic_pilot.subprocess.run", return_value=completed) as run_mock:
+            rows, digest = rust_rows(Path("producer"))
+        self.assertEqual(len(rows), 12)
+        self.assertEqual(digest, hashlib.sha256(("\n".join(lines)+"\n").encode()).hexdigest())
+        run_mock.assert_called_once_with(
+            ["producer", "--exact", "emit_fixed_binary64_reference_rows", "--nocapture"],
+            capture_output=True, text=True, check=True)
+
+    def test_rust_rows_refuses_wrong_count_malformed_stream_and_process_failure(self) -> None:
+        """Refuse invalid producer outcomes without requiring Rust in Python CI."""
+        one_line = pilot_line("axis", (0, 0, 1), 0) + "\n"
+        malformed = "ARITH_PILOT\tmalformed\n"
+        for output, error in ((one_line, ValueError), (malformed, ValueError)):
+            completed = subprocess.CompletedProcess(["producer"], 0, output, "")
+            with patch("reference.reference_arithmetic_pilot.subprocess.run", return_value=completed), \
+                 self.assertRaises(error):
+                rust_rows(Path("producer"))
+        failure = subprocess.CalledProcessError(1, ["producer"])
+        with patch("reference.reference_arithmetic_pilot.subprocess.run", side_effect=failure), \
+             self.assertRaises(subprocess.CalledProcessError):
+            rust_rows(Path("producer"))
 
     def test_malformed_producer_shape_is_refused(self) -> None:
         with self.assertRaises(ValueError):
