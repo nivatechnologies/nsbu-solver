@@ -1,0 +1,208 @@
+name: Alpha CLI prerelease
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_kind:
+        description: "Release mode"
+        required: true
+        default: first-alpha
+        type: choice
+        options:
+          - first-alpha
+          - daily
+  schedule:
+    - cron: "17 02 * * *"
+
+# This workflow is deliberately inert until project-status.json records the
+# reviewed alpha-release readiness flag. It never replaces an existing tag.
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: alpha-release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the complete source history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Gate release on tracked readiness and source-matched CI
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          test -f project-status.json
+          if ! jq -e '.alpha_release.ready == true' project-status.json >/dev/null; then
+            echo 'alpha release readiness is false; skipping this run'
+            echo 'release_ready=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          for workflow in checks.yml rust.yml; do
+            runs=$(gh api \
+              -H 'Accept: application/vnd.github+json' \
+              "/repos/$REPOSITORY/actions/workflows/$workflow/runs?branch=main&head_sha=$SOURCE_SHA&status=completed&per_page=20")
+            count=$(jq --arg sha "$SOURCE_SHA" '[.workflow_runs[] | select(.head_sha == $sha and .conclusion == "success")] | length' <<< "$runs")
+            test "$count" -ge 1
+          done
+          echo 'release_ready=true' >> "$GITHUB_OUTPUT"
+
+      - name: Select an immutable dated snapshot tag
+        if: steps.gate.outputs.release_ready == 'true'
+        id: snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          MANUAL_KIND: ${{ inputs.release_kind }}
+        run: |
+          set -euo pipefail
+          kind="${MANUAL_KIND:-daily}"
+          if [[ "$EVENT_NAME" == "schedule" ]]; then kind=daily; fi
+          today=$(date -u +%Y%m%d)
+          previous=$(git for-each-ref refs/tags/alpha-* --sort=-creatordate --format='%(refname:short)' | head -n1 || true)
+          if [[ "$EVENT_NAME" == schedule && -z "$previous" ]]; then
+            echo 'no first alpha exists; scheduled run is a no-op'
+            printf 'release=false\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ "$kind" == first-alpha ]]; then
+            tag="alpha-first-$today"
+            test -z "$(git tag --list 'alpha-*')"
+          else
+            if [[ -z "$previous" ]]; then
+              echo 'daily release requested before first alpha; no-op'
+              printf 'release=false\n' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            tag="alpha-$today"
+          fi
+          if git show-ref --verify --quiet "refs/tags/$tag"; then
+            if [[ "$kind" == daily ]]; then
+              echo "daily snapshot already exists: $tag; scheduled run is a no-op"
+              printf 'release=false\n' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "snapshot tag already exists: $tag" >&2
+            exit 1
+          fi
+          if gh api -H 'Accept: application/vnd.github+json' "/repos/$REPOSITORY/releases/tags/$tag" >/dev/null 2>&1; then
+            if [[ "$kind" == daily ]]; then
+              echo "daily release already exists for $tag; scheduled run is a no-op"
+              printf 'release=false\n' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "release already exists for tag: $tag" >&2
+            exit 1
+          fi
+          if [[ -n "$previous" ]] && git diff --quiet "$previous" "$SOURCE_SHA"; then
+            echo "source is unchanged since $previous; daily run is a no-op"
+            printf 'release=false\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf 'release=true\ntag=%s\nprevious=%s\n' "$tag" "$previous" >> "$GITHUB_OUTPUT"
+
+      - name: Build the public Linux x86_64 CLI
+        if: steps.gate.outputs.release_ready == 'true' && steps.snapshot.outputs.release == 'true'
+        run: |
+          set -euo pipefail
+          rustc --version | grep -E '(^| )1\.94\.0([[:space:]]|$)'
+          rustup target add x86_64-unknown-linux-gnu
+          cargo build --release --locked --package nsbu-cli --target x86_64-unknown-linux-gnu
+          target/x86_64-unknown-linux-gnu/release/nsbu --version
+          target/x86_64-unknown-linux-gnu/release/nsbu --help >/dev/null
+
+      - name: Assemble binary, notices, documentation and provenance
+        id: bundle
+        if: steps.gate.outputs.release_ready == 'true' && steps.snapshot.outputs.release == 'true'
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          SNAPSHOT_TAG: ${{ steps.snapshot.outputs.tag }}
+          PREVIOUS_TAG: ${{ steps.snapshot.outputs.previous }}
+        run: |
+          set -euo pipefail
+          root="nsbu-solver-${SNAPSHOT_TAG}-x86_64-unknown-linux-gnu"
+          mkdir -p "$root"
+          git archive "$SOURCE_SHA" | tar -x -C "$root"
+          mkdir -p "$root/bin"
+          install -m 0755 target/x86_64-unknown-linux-gnu/release/nsbu "$root/bin/nsbu"
+          strip "$root/bin/nsbu"
+          {
+            printf 'repository=%s\n' '${{ github.repository }}'
+            printf 'source_commit=%s\n' "$SOURCE_SHA"
+            printf 'snapshot_tag=%s\n' "$SNAPSHOT_TAG"
+            printf 'checks_workflow=checks.yml\n'
+            printf 'rust_workflow=rust.yml\n'
+            printf 'cargo_workspace_version=%s\n' "$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -n1)"
+            printf 'target=x86_64-unknown-linux-gnu\n'
+            printf 'scientific_status=diagnostic-only; unqualified\n'
+            printf 'previous_snapshot=%s\n' "${PREVIOUS_TAG:-none}"
+          } > "$root/SOURCE-MANIFEST.txt"
+          (cd "$root" && {
+            git_list=$(mktemp)
+            # Source paths are already fixed by the reviewed Git tree; include hidden inputs.
+            git -C "$GITHUB_WORKSPACE" ls-tree -r --name-only -z "$SOURCE_SHA" > "$git_list"
+            printf 'bin/nsbu\0SOURCE-MANIFEST.txt\0' >> "$git_list"
+            xargs -0 sha256sum < "$git_list" > SHA256SUMS
+            rm "$git_list"
+            sha256sum -c SHA256SUMS >/dev/null
+          })
+          tar -czf "$root.tar.gz" "$root"
+          sha256sum "$root.tar.gz" > "$root.tar.gz.sha256"
+          {
+            printf '## Changes since %s\n\n' "${PREVIOUS_TAG:-the initial alpha snapshot}"
+            if [[ -n "${PREVIOUS_TAG:-}" ]]; then
+              git log --format='- %h %s' "$PREVIOUS_TAG..$SOURCE_SHA"
+            else
+              git log --format='- %h %s' -n 50 "$SOURCE_SHA"
+            fi
+            printf '\nThis is an alpha prerelease of a diagnostic-only, unqualified scientific runtime. It does not establish PDE qualification or reproduce the original research target.\n'
+            printf 'Status and active plan: https://github.com/${{ github.repository }}/blob/%s/project-status.json and https://github.com/${{ github.repository }}/blob/%s/IMPLEMENTATION_PLAN.md\n' "$SOURCE_SHA" "$SOURCE_SHA"
+            printf 'Validation evidence: https://github.com/${{ github.repository }}/blob/%s/evidence/runtime-alpha/summary.json\n' "$SOURCE_SHA"
+          } > RELEASE-NOTES.md
+          printf 'root=%s\n' "$root" >> "$GITHUB_OUTPUT"
+
+      - name: Create the immutable snapshot tag
+        if: steps.gate.outputs.release_ready == 'true' && steps.snapshot.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_TAG: ${{ steps.snapshot.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          gh auth setup-git
+          git tag -a "$SNAPSHOT_TAG" "$GITHUB_SHA" -m "Alpha snapshot $SNAPSHOT_TAG"
+          git push origin "refs/tags/$SNAPSHOT_TAG"
+
+      - name: Publish GitHub prerelease
+        if: steps.gate.outputs.release_ready == 'true' && steps.snapshot.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SNAPSHOT_TAG: ${{ steps.snapshot.outputs.tag }}
+          BUNDLE_ROOT: ${{ steps.bundle.outputs.root }}
+        run: |
+          set -euo pipefail
+          gh release create "$SNAPSHOT_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "NSBU Solver $SNAPSHOT_TAG" \
+            --prerelease \
+            --notes-file RELEASE-NOTES.md \
+            "$BUNDLE_ROOT.tar.gz" "$BUNDLE_ROOT.tar.gz.sha256"
