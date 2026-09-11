@@ -65,6 +65,6 @@
     "No policy threshold, PDE acceptance, accuracy, completeness or convergence claim is assigned.",
     "Analytical velocity, gradient, ordered Hessian and vorticity tracking uses binary64 on the configured grid; the offline high-precision study is not attached.",
     "Pressure has no analytical reference or gauge-equivalence analysis in this report.",
-    "Regional sampled sets can overlap and sample counts are not region-volume enclosures."
+    "The five reported SpatialRegion classes are exclusive by classifier; their sampled counts do not establish coverage or volume enclosures for the full nominal-region inventory."
   ]
 }
