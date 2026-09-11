@@ -1,0 +1,12 @@
+{
+  "crates/nsbu-benchmarks/examples/v2_diagnostic_coordinator.rs": "022673fe339fe10044f199baedc21548079b23a455a4a18b0a755693edefa6ef",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/mod.rs": "af30ffb9d344b2668d150f24255bf150dccb3ff78b69423894fbbb26f5df156c",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/plan.rs": "c0e84a6b14b93ffd96107ce21a9590b99128130b55bdfa200a913d213d0071f0",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/profile.rs": "bb139033b036bd9878c7a63773a72ed4d57f8d30d8935d20b2ae00a427856f76",
+  "crates/nsbu-benchmarks/tests/v2_startup_profile.rs": "29a77f53edf7733507d1fbf344583f3c8843d275cfb14b1f27cc8c6a61e4ea17",
+  "crates/nsbu-cli/README.md": "fb289fa0de21bbbb463f96beb8cc0c14a4cb4ad7dac1f29bdd77ecaba7a384bd",
+  "crates/nsbu-cli/src/diagnose_v2.rs": "9c8550e9cf777d32d1283ebd262d5b9d3916f0947f7e6202cfaab876928931f3",
+  "crates/nsbu-cli/src/main.rs": "8da6628dbeded649175dc9b93913c456ee7b21d2b86bab81881014aff06f0a43",
+  "crates/nsbu-cli/tests/diagnose_v2_cli.rs": "9ab3318cd5732188be9d7029ab7b6364e7c872ce25c6732f2bc3ed62b6dec82e",
+  "docs/V2_DIAGNOSTIC_COORDINATOR.md": "1d290b0b8d726b070e8cf82225be2cca77babc8bb90ac0c53318890b1c434eda"
+}

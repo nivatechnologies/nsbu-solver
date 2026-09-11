@@ -1,0 +1,11 @@
+{
+  "README.md": "e40acb4e4716dd8869264345aa99c7d8f41c4ac006aa745520874b2f62d3a167",
+  "raw/actual-cli-pre-worker.jsonl.gz": "c89796bf7379d0bbd528a895e092a61ac53689531792b24e9e1bcdcbad3f9ed1",
+  "raw/all-source-metrics.jsonl.gz": "50852a94d77f7165834e11015c71c1e89781823be2bb92b7b8a91a7481d3ee7f",
+  "raw/check.sh.gz": "15f1732b84399caaca04964e212f36a095239010b2cd2324beaabf7a0e974ec2",
+  "raw/dry-run-final.jsonl.gz": "4bb749c80f873e6e6b3a97be7c118346017302be0025d5bd2c4cc9365a8342f6",
+  "raw/focused-coverage.json.gz": "565cabf82277d6a5eb94b06d249bfd880f2530572dc4b122ff4813b1edfb6072",
+  "raw/focused-crap.json.gz": "ffeff249a493eba6a9975e6504e9b0acd77bae0853cafe0cbfb47de9ddf35fbc",
+  "raw/focused-metrics.jsonl.gz": "a20a092496645643f4f6d84b812132532dd8501105a39061cf5c9af0bc25829b",
+  "summary.json": "c205d739a6657c5c5e6d9ca318a3905174c003ca86fc9496018775d039b82ddd"
+}

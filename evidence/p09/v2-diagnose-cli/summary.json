@@ -1,0 +1,57 @@
+{
+  "package": "P09",
+  "increment": "public fixed-profile diagnose-v2 CLI",
+  "status": "focused parser, dry-run, actual execution, example, coverage, CRAP, static and exact Rustdoc gates passed; root combined post-worker actual run pending",
+  "parent_commit": "7abac25",
+  "source_commit": "f0d4709",
+  "profile": {
+    "grids": [4, 8, 12],
+    "steps": [64, 32, 16],
+    "branch_methods": ["cm", "cm", "cm", "cm", "cm", "ho"],
+    "force_grid": 12,
+    "workers": 0,
+    "accepted_clocks": [0, 64, 128],
+    "probe_manifest": [0, 7, 63, 64, 95, 127, 128],
+    "physical_samples": 12,
+    "reference_samples": 12,
+    "pressure_samples": 24,
+    "scientific_status": "UnqualifiedDiagnostic",
+    "qualified_windows": 0
+  },
+  "final_dry_run": {
+    "joint_storage_bytes": 69490624,
+    "coordinator_storage_bytes": 531080,
+    "driver_allocated": false,
+    "source_base_includes_sampling_and_worker_metadata": true
+  },
+  "actual_process_test": {
+    "events": 7,
+    "accepted_summaries": 3,
+    "residual_summaries": 4,
+    "all_accepted_bitwise_equal_nodes": 6,
+    "maximum_residual_l2": 0.051013585659162156,
+    "result": "passed",
+    "note": "captured after nested physical sampling and before the later serial-default worker metadata merge; root owns the combined post-worker run"
+  },
+  "focused_coverage": {
+    "scope": ["shared startup profile", "diagnose-v2 module", "changed coordinator example"],
+    "lines": {"covered": 235, "count": 280, "percent": 83.92857142857143},
+    "branches": {"covered": 18, "count": 22, "percent": 81.81818181818181}
+  },
+  "focused_crap_maximum": 20.0,
+  "all_changed_rust_static": {
+    "full_tree_json_lines_records": 453,
+    "changed_files": 8,
+    "functions": 102,
+    "cyclomatic_function": 15.0,
+    "cognitive_function": 12.0,
+    "halstead_difficulty_function": 40.61538461538461,
+    "maximum_physical_file_lines": 312
+  },
+  "limitations": [
+    "CLI summaries reduce only within each explicitly named physical quantity, pressure quantity or reference quantity.",
+    "Complete raw reports remain available through the library API.",
+    "No arbitrary grid/window inputs, acceptance policy, convergence claim or PDE qualification is exposed.",
+    "The five sampled region classes are exclusive per point, but nominal-region coverage and volume enclosures remain unproven."
+  ]
+}
