@@ -821,6 +821,33 @@ coordinator applies no acceptance policy; the adapter to the complete numerical
 and lineage review is still pending. Combined hosted validation is pending,
 and P08/P09/P10 remain incomplete with zero accepted PDE windows.
 
+## P08 exact-v2 diagnostic event export
+
+The [full-event JSON exporter](docs/V2_DIAGNOSTIC_EXPORT.md) serializes the seven
+retained fixed-startup `DiagnosticEvent` records with their raw accepted and
+off-stage findings, identities, schedules, layouts, floors, branch settings and
+bounded serialization reservation. It remains a fixed binary64 diagnostic
+artifact: every document is `UnqualifiedDiagnostic`, and it supplies neither
+complete provenance nor a window decision. [Focused evidence](evidence/p08/v2-diagnostic-export/summary.json)
+records 96.83% line coverage, 84% branch coverage and maximum CRAP 21. Combined
+hosted validation remains pending; P08/P09/P10 remain incomplete with zero
+accepted PDE windows.
+
+## P09 partial exact-v2 review extraction
+
+The [partial review adapter](docs/V2_PARTIAL_REVIEW.md) extracts four global
+sampled RMS observables from all seven startup events: velocity, ordered
+gradient, ordered Hessian and vorticity. It binds the exact schedule, case and
+family/probe identities, branch 2 finest-CM tracking, layouts and binary64 floor
+words; accepted rest zeros remain measured while off-stage accepted observables
+remain missing. Its status is permanently `PartialUnqualifiedInventory`; it does
+not construct a generic review, add tolerances, or decide readiness. [Focused
+evidence](evidence/p09/v2-review-adapter/summary.json) records production branch
+coverage of 80% and maximum CRAP 13.125. The all-changed production-and-test
+scope reaches only 75% branch coverage, below the 80% gate, and whole-maintained
+combined hosted CI remains pending. P08/P09/P10 remain incomplete with zero
+accepted PDE windows.
+
 ## P09 nested physical sampling
 
 The [sampling consumer](docs/V2_SAMPLING.md) holds all six integrated states
