@@ -1,0 +1,16 @@
+{
+  "maximum_glibc_symbol": "GLIBC_2.35",
+  "manifest_maximum": "GLIBC_2.35",
+  "needed_libraries": [
+    "libgcc_s.so.1",
+    "libm.so.6",
+    "libc.so.6",
+    "ld-linux-x86-64.so.2"
+  ],
+  "manifest_needed_libraries": [
+    "libgcc_s.so.1",
+    "libm.so.6",
+    "libc.so.6",
+    "ld-linux-x86-64.so.2"
+  ]
+}

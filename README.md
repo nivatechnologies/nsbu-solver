@@ -6,7 +6,7 @@ A standalone Rust project for incompressible, three-dimensional Navier–Stokes 
 
 *Actual coarse N=4/M=4 HO diagnostic measurements. A successful finite run is a runtime check, not evidence of convergence or blow-up.*
 
-**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/daily-20260911/README.md).
+**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/alpha-20260911-2/README.md).
 
 The `main` branch can contain experimental APIs added after the latest binary
 release. Each increment records its own validation scope in
@@ -44,20 +44,22 @@ The explicit slow-mesh strategy is `FeasibilityExcluded` under the documented re
 
 ## Download and run the alpha
 
-The [alpha-20260911 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911)
+The [alpha-20260911-2 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2)
 provides the tested Linux x86_64 GNU/glibc binary. Download the archive and
 its detached checksum, verify both the archive and its extracted contents,
 then run the bounded diagnostic:
 
 ```sh
-curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
-curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
-sha256sum -c nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
-tar -xzf nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
-cd nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911-2/nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911-2/nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz.sha256
+sha256sum -c nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz.sha256
+tar -xzf nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz
+cd nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu
 sha256sum -c SHA256SUMS
 ./bin/nsbu v2 --dry-run
 ./bin/nsbu v2
+./bin/nsbu diagnose-v2 --dry-run
+./bin/nsbu diagnose-v2
 ```
 
 This artifact targets Linux x86_64 with GNU/glibc and requires GLIBC symbols
@@ -66,14 +68,22 @@ Other platforms require a source build. The alpha is diagnostic-only, with
 zero accepted PDE convergence windows; it provides no proof of finite-time
 blow-up.
 
-## Refinement diagnostics from source
+## Refinement diagnostics
 
-Current `main` also provides a fixed, reproducible diagnostic family. This
-command is not present in the earlier `alpha-20260911` binary:
+The current alpha includes a fixed, reproducible diagnostic family:
 
 ```sh
-cargo run --release -p nsbu-cli -- diagnose-v2 --dry-run
-cargo run --release -p nsbu-cli -- diagnose-v2
+./bin/nsbu diagnose-v2 --dry-run
+./bin/nsbu diagnose-v2
+```
+
+To build the CLI from source instead, run these commands from the repository
+root:
+
+```sh
+cargo build --release --locked -p nsbu-cli
+./target/release/nsbu diagnose-v2 --dry-run
+./target/release/nsbu diagnose-v2
 ```
 
 It independently evolves space, time-step, and CM/HO comparison trajectories

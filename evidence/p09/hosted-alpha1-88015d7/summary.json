@@ -1,0 +1,92 @@
+{
+  "status": "both complete maintained-scope hosted quality workflows passed",
+  "source_revision": "88015d7681c6fb267c77d1454a3594f386d1d2ab",
+  "workflow_runs": {
+    "rust": 34613195748,
+    "python": 34613195894
+  },
+  "rust": {
+    "coverage": {
+      "lines": {
+        "covered": 39946,
+        "count": 40766,
+        "percent": 97.98852082617869
+      },
+      "branches": {
+        "covered": 2581,
+        "count": 2928,
+        "percent": 88.14890710382514
+      }
+    },
+    "crap": {
+      "maximum": 24.05859375,
+      "functions": 3595
+    },
+    "static_maxima": {
+      "cyclomatic_per_function": 21.0,
+      "cognitive_per_function": 21.0,
+      "halstead_difficulty_all_nodes": 75.9295154185022,
+      "rca_unit_ploc_maximum": 462.0,
+      "physical_file_lines_from_frozen_git_bytes": 477,
+      "physical_file_path": "crates/nsbu-benchmarks/tests/allocation.rs",
+      "physical_file_method": "len(git show REV:PATH bytes.splitlines()) across all 453 hosted source-list paths"
+    },
+    "tests": {
+      "coverage_run_terminal_groups": 157,
+      "coverage_run_passed": 510,
+      "coverage_run_failed": 0,
+      "separate_precoverage_doctest_passed": 1
+    },
+    "informational": {
+      "duplicate_percent": 5.8,
+      "duplicate_report_threshold_percent": 0.0,
+      "duplicate_command_exit_policy": "status 0 or 1 accepted; report retained",
+      "mutation": "not run"
+    }
+  },
+  "python": {
+    "coverage": {
+      "lines": {
+        "covered": 6054,
+        "count": 6098,
+        "percent": 99.27845195145949
+      },
+      "branches": {
+        "covered": 1173,
+        "count": 1202,
+        "percent": 97.58735440931781
+      },
+      "combined_coverage_py_display_percent": 99
+    },
+    "crap": {
+      "maximum": 19.9814453125,
+      "functions": 956
+    },
+    "static_maxima": {
+      "cyclomatic_report_maximum": 16,
+      "halstead_difficulty_report_maximum": 13.826086956521738
+    },
+    "tests": {
+      "tools_unittest_passed": 41,
+      "coverage_pytest_passed": 236,
+      "failed": 0
+    },
+    "informational": {
+      "mutation": "not run"
+    }
+  },
+  "scope": "complete maintained Rust and Python quality workflow scope at the bound revision; raw source-file inventories retained",
+  "limitations": [
+    "mutation testing was not run in these workflows",
+    "duplicate and dead-code inventories are informational",
+    "coverage percentages are empirical test coverage, not a numerical acceptance claim"
+  ],
+  "repository_check": {
+    "status": "passed after concurrent release evidence target was created",
+    "scope": "bootstrap packaging only",
+    "public_files_scanned": 2273,
+    "markdown_files_checked": 140,
+    "local_file_links_checked": 693,
+    "initial_transient_refusal": "Missing release README target; retained separately"
+  }
+}

@@ -1,0 +1,13 @@
+repository=nivatechnologies/nsbu-solver
+source_commit=88015d7681c6fb267c77d1454a3594f386d1d2ab
+snapshot_tag=alpha-20260911-2
+checks_workflow=checks.yml
+rust_workflow=rust.yml
+cargo_workspace_version=0.1.0-alpha.1
+target=x86_64-unknown-linux-gnu
+runner=ubuntu-24.04
+build_glibc=glibc 2.39
+maximum_required_glibc_symbol=GLIBC_2.35
+needed_libraries=libgcc_s.so.1,libm.so.6,libc.so.6,ld-linux-x86-64.so.2
+scientific_status=diagnostic-only; unqualified
+previous_snapshot=alpha-20260911

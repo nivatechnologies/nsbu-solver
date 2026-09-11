@@ -1,0 +1,42 @@
+{
+  "archive_verification": "passed",
+  "abi_verification": "passed",
+  "cm_32_steps": "passed",
+  "ho_32_steps": "passed",
+  "ho_checkpoint_16_and_resume": "passed_exact_except_origin",
+  "diagnose_v2": {
+    "status": "completed",
+    "events": 7,
+    "clocks": [
+      "0",
+      "7",
+      "63",
+      "64",
+      "95",
+      "127",
+      "128"
+    ],
+    "paths": [
+      "accepted",
+      "residual",
+      "residual",
+      "accepted",
+      "residual",
+      "residual",
+      "accepted"
+    ],
+    "scientific_status": "UnqualifiedDiagnostic",
+    "qualified_windows": 0,
+    "pde_qualified": false
+  },
+  "artifact_hashes": {
+    "cm.json": "b907272c71f10d518546161551557ab7a832207d05ed0ab9740f0aa7267f8de5",
+    "ho.json": "8b6bd89f8fe83bdea20bb3fdeca068194312549030323b7709dfe340d45ce66e",
+    "ho-saved.json": "418dfef65ab87733f70cd0597c0b3252f487e4d6b6d641744b0c67fa98061665",
+    "ho-resumed.json": "e7c07ebc0ef615da32790aad638e387a5afcd936943c5e5dc9631c5e87f83c67",
+    "ho.chk": "8a1e4a6db065f548b4a9dbf47165d2fa3912c0b02680de501bc3fb8a1cded70e",
+    "diagnose-full.jsonl": "04c0d762a3f97505f1f9363b4fa932667ca31fa6de24d2d2ff029521c3d3931a",
+    "abi-summary.json": "6f105ee404e14665869db2f6ad1416804666b670172712dc3d4f9c7b92d136ff",
+    "basic/summary.json": "4365b03cc600f653b2e7213eb91b06c3265e5cc0cd9ed579ea8f990fdd4dd7fa"
+  }
+}
