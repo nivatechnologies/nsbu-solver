@@ -1,0 +1,13 @@
+{
+  "crates/nsbu-benchmarks/src/v2_experiment/pressure/mod.rs": "60054148538ed9b723c4f2086050a561ee68c2dfa686df11f039fc0bff7acda4",
+  "crates/nsbu-benchmarks/src/v2_experiment/pressure/plan.rs": "7df4412dcbd835e397ce4d4c9b27817f812248acc05479694aaaece31fedafd6",
+  "crates/nsbu-benchmarks/src/v2_experiment/pressure/tests.rs": "872394ea88331452fe7ded3357deb06f0e5c2da77e216ad099cbf58c9477a853",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/mod.rs": "3bf0771fe215b488b4d7ef223f45fc0ea345831f6dfdb8f29e51bf290ae56284",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/plan.rs": "2441dc092c03b9f5ad75693930048115b7dd4606d068d45205320f711a716361",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/workspace.rs": "aea83a8fcf2fa27f8477f90bbb542b8cb8f571519765cd241975638673a9e4d9",
+  "crates/nsbu-benchmarks/tests/v2_pressure_allocation.rs": "cc43cb204b98b8272e041f7f989fa2e9839acdf714c8fc973deaef65750e6cee",
+  "crates/nsbu-benchmarks/tests/v2_residual_family.rs": "8d5dcb5e62b0f0d12a96ed2495d35f7b5a09719178b6d36da094f9b97230c287",
+  "crates/nsbu-benchmarks/tests/v2_residual_family_allocation.rs": "f513a9e22fda4a665723184272add407ad87505229015c8b12a7f91237530737",
+  "docs/V2_DIAGNOSTIC_WORKERS.md": "90e18698c1e808c510e90c33a5ecb47ec6fbcc26027bf2cdf168836e48e064ed",
+  "docs/V2_RESIDUALS.md": "e48c6c1fde7453cc30ef4a8ffb5c679847d8b2ace2923e16713caeb4b63560e1"
+}

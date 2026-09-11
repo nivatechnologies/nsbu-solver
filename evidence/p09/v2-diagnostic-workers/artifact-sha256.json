@@ -1,0 +1,7 @@
+{
+  "evidence/p09/v2-diagnostic-workers/raw/check_v2_diagnostic_workers.sh.gz": "1f750620edf8c4920af449d82aba242e610b36e17272fe3dd7b19317e511aa1f",
+  "evidence/p09/v2-diagnostic-workers/raw/v2-diagnostic-workers-focused-coverage.json.gz": "2609f5b4ad18f6ac69ac22cf1d2133b3a659d5dca137ae6179057d8019ded23f",
+  "evidence/p09/v2-diagnostic-workers/raw/v2-diagnostic-workers-focused-crap.json.gz": "3f607732bdeecf642bb9013765ae6b66775d399a84e33e535a80c607bfcf8bf0",
+  "evidence/p09/v2-diagnostic-workers/raw/v2-diagnostic-workers-focused-metrics.json.gz": "e159ca4704aae40388e44e20a5a94d216c89ce76547965ba6e9e92bbc036a09a",
+  "evidence/p09/v2-diagnostic-workers/raw/v2-diagnostic-workers-metrics.json.gz": "12fe545c8a2a104e25ec30f281efc34d348b5c4180b81ff801453a86f7d69743"
+}

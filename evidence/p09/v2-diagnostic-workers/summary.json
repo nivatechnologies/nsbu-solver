@@ -1,0 +1,53 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 diagnostic force workers",
+  "status": "focused numerical, allocation, coverage, CRAP, static and exact Rustdoc gates passed; source-matched hosted CI pending",
+  "parent_commit": "5983c2b41be6c2636c210b0533986e4ce93aa4c0",
+  "source_commit": "5d08541553aa7299d1a473bc074dffb5cbf6c58a",
+  "force_profiles": {
+    "pressure_samples": [24, 24, 24],
+    "residual_samples": [24, 24, 24],
+    "tested_workers": [1, 2]
+  },
+  "resource_observation": {
+    "pressure_construction_bytes": [25890776, 25898000],
+    "pressure_declared_joint_bytes": [59001232, 87124080],
+    "residual_construction_bytes": [39373616, 39383200],
+    "residual_declared_joint_bytes": [83391992, 122331320],
+    "steady_allocations": 0,
+    "one_byte_short_joint_caps_refused": true
+  },
+  "fixed_input_residual_timing_microseconds": {
+    "workers_1": 3115741,
+    "workers_2": 1868053,
+    "acceptance_threshold": false
+  },
+  "focused_production_coverage": {
+    "lines": {"count": 794, "covered": 750, "percent": 94.4584},
+    "branches": {"count": 52, "covered": 42, "percent": 80.7692}
+  },
+  "focused_test_coverage": {
+    "lines": {"count": 628, "covered": 627, "percent": 99.8408},
+    "branches": {"count": 36, "covered": 31, "percent": 86.1111}
+  },
+  "focused_changed_function_count": 143,
+  "focused_crap_maximum": 16.0,
+  "whole_source_static_maxima": {
+    "cyclomatic_function": 21.0,
+    "cognitive_function": 21.0,
+    "halstead_difficulty_all_nodes": 75.9295154185022,
+    "maximum_physical_file_lines": 477
+  },
+  "execution": {
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "0cf0441989ea7556041df1e3596ffc7a0b539cae61830228c334e92224c7dc36"
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "Timing is one modest fixed-input host observation and is not an acceptance threshold.",
+    "The parallel provider preserves original point sampling and serial transforms; it is not an independent force oracle.",
+    "P09 and P10 remain incomplete; source-matched hosted CI is pending."
+  ]
+}
