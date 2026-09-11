@@ -40,9 +40,9 @@
     "latest_hosted_ci_status": "Source 6170341 passes both hosted workflows: 451 Rust harness tests plus 13 allocation probes and one Rustdoc example; 98.58% line and 88.88% branch coverage; all required quality limits; 220 Python tests.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Exact-v2 analytical tracking and reconstructed owner pass focused numerical, allocation and quality gates. Combined-source hosted checks pending. No accepted PDE window.",
-      "evidence": "evidence/p09/v2-reference-tracking/summary.json",
-      "additional_evidence": "evidence/p09/v2-reconstruction/summary.json"
+      "status": "Exact-v2 six-owner off-stage probes and regional analytical tracking pass focused numerical, allocation and quality gates. Combined-source hosted checks pending. Zero accepted PDE windows.",
+      "evidence": "evidence/p09/v2-probes/summary.json",
+      "additional_evidence": "evidence/p09/v2-regional-tracking/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
   },
@@ -173,7 +173,8 @@
       "reduced_trajectory_evidence": "evidence/p09/reduced-trajectories/summary.json",
       "v2_pressure_evidence": "evidence/p09/v2-pressure/summary.json",
       "v2_reconstruction_evidence": "evidence/p09/v2-reconstruction/summary.json",
-      "v2_probe_evidence": "evidence/p09/v2-probes/summary.json"
+      "v2_probe_evidence": "evidence/p09/v2-probes/summary.json",
+      "v2_regional_reference_evidence": "evidence/p09/v2-regional-tracking/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -313,5 +314,8 @@
   "actual_v2_force_sampling_family_evidence": "evidence/p09/v2-force-family/summary.json",
   "actual_v2_reference_tracking_exists": true,
   "actual_v2_reference_tracking_scope": "Read-only global sampled velocity/gradient/ordered-Hessian/vorticity tracking for six actual accepted V2Family states; bounded cached binary64 analytical evaluation and independent spectral oracle checks. No current-grid reference arithmetic, regional, pressure/gauge or PDE qualification.",
-  "actual_v2_reference_tracking_evidence": "evidence/p09/v2-reference-tracking/summary.json"
+  "actual_v2_reference_tracking_evidence": "evidence/p09/v2-reference-tracking/summary.json",
+  "actual_v2_regional_reference_tracking_exists": true,
+  "actual_v2_regional_reference_tracking_scope": "Read-only global plus five exclusive sampled spatial classes for velocity, gradient, ordered Hessian and vorticity across six independently evolved accepted states. Empty classes remain NoSamples; focused global-equality, state-integrity, resource and quality checks pass. No pressure/gauge, current-grid arithmetic, continuum or PDE qualification.",
+  "actual_v2_regional_reference_tracking_evidence": "evidence/p09/v2-regional-tracking/summary.json"
 }

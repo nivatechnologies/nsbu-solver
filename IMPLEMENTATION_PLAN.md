@@ -750,5 +750,11 @@ observer kernel. The default exact-v2 runtime and smooth archive format are
 preserved. Initial-rest work is separately charged; failed admission allocates
 nothing and rejected steps leave the accepted ring unchanged. Focused smooth
 and exact-v2 regressions pass, with 95.43% lines, 84% branches and CRAP19.125.
-Six-branch off-stage probes, residual assembly, external reconstruction import
-and concentrating qualification remain pending.
+
+The subsequent [six-owner probe increment](evidence/p09/v2-probes/README.md)
+now streams early and late exact-v2 off-stage values and physical-time derivatives,
+with actual accepted-node origins and whole-report publication. Its focused
+numerical, resource and quality checks pass: 96.43% line coverage, 84.62% branch
+coverage and maximum CRAP 17. Residual assembly, binding to the independently
+owned accepted-state diagnostic family, and external reconstruction import remain
+open. Combined-source hosted checks are pending; no PDE window is accepted.

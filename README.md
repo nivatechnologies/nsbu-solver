@@ -149,6 +149,8 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Exact-v2 force refinements](docs/V2_FORCE_REFINEMENTS.md) | Independent trajectories varying force sampling at fixed velocity grid and time step |
 | [Exact-v2 analytical tracking](docs/V2_REFERENCE_TRACKING.md) | Sampled velocity, gradient, Hessian and vorticity errors against the analytical reference |
 | [Exact-v2 accepted-node reconstruction](docs/V2_RECONSTRUCTION.md) | Separate bounded owner retaining integrated endpoint values and independently evaluated derivatives |
+| [Exact-v2 off-stage probes](docs/V2_PROBES.md) | Six independent reconstructed trajectories, exact lookahead and complete value/derivative comparisons |
+| [Exact-v2 regional tracking](docs/V2_REGIONAL_TRACKING.md) | Global and regional sampled errors with explicit missing-class results |
 | [Parallel force sampling](docs/PARALLEL_FORCE.md) | Persistent worker ownership, exact coefficient comparisons and resource limits |
 | [Force evaluation](docs/FORCE_EVALUATION.md) | Exact-v2 axial root reuse, bounded resources and coefficient-preservation checks |
 | [Reduced-coordinate force values](docs/REDUCED_FORCE.md) | Optional pointwise evaluator, independent high-precision fixtures and measured limits |
