@@ -1,0 +1,21 @@
+nsbu-cli v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p08-v2-diagnostic-export-development/crates/nsbu-cli)
+├── nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p08-v2-diagnostic-export-development/crates/nsbu-benchmarks)
+│   ├── nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p08-v2-diagnostic-export-development/crates/nsbu-solver)
+│   │   ├── num-complex v0.4.6
+│   │   │   └── num-traits v0.2.19
+│   │   │       [build-dependencies]
+│   │   │       └── autocfg v1.5.1
+│   │   └── sha2 v0.10.9
+│   │       ├── cfg-if v1.0.4
+│   │       ├── cpufeatures v0.2.17
+│   │       └── digest v0.10.7
+│   │           ├── block-buffer v0.10.4
+│   │           │   └── generic-array v0.14.7
+│   │           │       └── typenum v1.20.1
+│   │           │       [build-dependencies]
+│   │           │       └── version_check v0.9.5
+│   │           └── crypto-common v0.1.7
+│   │               ├── generic-array v0.14.7 (*)
+│   │               └── typenum v1.20.1
+│   └── sha2 v0.10.9 (*)
+└── nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p08-v2-diagnostic-export-development/crates/nsbu-solver) (*)

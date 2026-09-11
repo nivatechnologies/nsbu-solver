@@ -1,0 +1,11 @@
+{
+  "base_commit": "88015d7",
+  "production_source_commit": "3223628",
+  "final_tested_source_commit": "ace250bb4c1060d3e30d50987d5083c8e348671a",
+  "superseded_pre_correction_snapshots": ["f4648e4", "7239d64"],
+  "focused_tests": {"passed": 6, "failed": 0, "integration_seconds": 535.14},
+  "coverage": {"lines_covered": 1558, "lines_total": 1609, "line_percent": 96.83032939714109, "branches_covered": 84, "branches_total": 100, "branch_percent": 84.0},
+  "static": {"maximum_cyclomatic": 21.0, "maximum_cognitive": 20.0, "maximum_halstead_difficulty": 32.30952380952381, "maximum_function_ploc": 86.0, "maximum_crap": 21.0, "maximum_production_file_lines": 338, "maximum_changed_test_file_lines": 326},
+  "quality": {"fmt": "pass", "focused_clippy": "pass", "workspace_rustdoc_deny_warnings": "pass"},
+  "scientific_status": "UnqualifiedDiagnostic"
+}
