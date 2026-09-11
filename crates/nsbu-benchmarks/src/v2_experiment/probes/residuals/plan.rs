@@ -1,12 +1,13 @@
 //! Joint admission for exact-v2 residuals over a genuine non-stage probe subset.
 use super::{ResidualFamily, ResidualFamilySample, ResidualWorkspace};
+use crate::runtime_force::ForceSettings;
 use crate::v2_experiment::{
     probes::{plan::nodes, ProbePlan},
     FamilyError, PAIRS,
 };
 use nsbu_solver::{
     diagnostics::{comparison::ComparisonPlan, conservative::ConservativeWorkspace},
-    domain::{Domain, Layout, TickClock},
+    domain::{Domain, TickClock},
     verification::reconstruction::{OffStageProbe, ProbeRefinement},
     SolverError,
 };
@@ -41,7 +42,7 @@ pub struct ResidualFamilyPlan<'a> {
     pub(super) probes: ProbePlan<'a>,
     pub(super) times: &'a [TickClock],
     pub(super) sources: [Domain; 6],
-    pub(super) force_samples: Layout,
+    pub(super) force: ForceSettings,
     pub(super) bounds: ResidualFamilyBounds,
     pub(super) per_attempt: ResidualFamilyWork,
 }
@@ -58,8 +59,8 @@ impl<'a> ResidualFamilyPlan<'a> {
         }
         admit_times(probes, times)?;
         let sources = probes.branches.map(|branch| branch.resources().domain());
-        let force_samples = common_force_samples(probes, sources)?;
-        let (storage_bytes, per_attempt) = reservation(probes, sources, force_samples)?;
+        let force = common_force_settings(probes, sources)?;
+        let (storage_bytes, per_attempt) = reservation(probes, sources, force)?;
         let joint_storage_bytes = add(storage_bytes, probes.bounds().joint_storage_bytes)?;
         if joint_storage_bytes > joint_cap {
             return Err(SolverError::ResourceLimit.into());
@@ -68,7 +69,7 @@ impl<'a> ResidualFamilyPlan<'a> {
             probes,
             times,
             sources,
-            force_samples,
+            force,
             per_attempt,
             bounds: ResidualFamilyBounds {
                 storage_bytes,
@@ -89,6 +90,10 @@ impl<'a> ResidualFamilyPlan<'a> {
     /// Underlying exact-v2 reconstruction probe plan.
     pub fn probe_plan(self) -> ProbePlan<'a> {
         self.probes
+    }
+    /// Common force grid and configured persistent-worker count.
+    pub fn force_settings(self) -> ForceSettings {
+        self.force
     }
 }
 
@@ -120,7 +125,7 @@ pub(super) fn geometry(
 fn reservation(
     probes: ProbePlan<'_>,
     sources: [Domain; 6],
-    force_samples: Layout,
+    force: ForceSettings,
 ) -> Result<(usize, ResidualFamilyWork), SolverError> {
     let mut bytes = add(
         std::mem::size_of::<ResidualFamily<'_>>(),
@@ -131,7 +136,7 @@ fn reservation(
         ..ResidualFamilyWork::default()
     };
     for source in sources {
-        let child = ResidualWorkspace::reservation(source, force_samples, 1)?;
+        let child = ResidualWorkspace::reservation(source, force, 1)?;
         bytes = add(bytes, child.storage_bytes)?;
         work.residual = add_residual(work.residual, child.work)?;
     }
@@ -145,13 +150,13 @@ fn reservation(
     work.binding_clock_comparisons = add(mul(probes.tested_times().as_slice().len(), 2)?, 14)?;
     Ok((bytes, work))
 }
-fn common_force_samples(
+fn common_force_settings(
     probes: ProbePlan<'_>,
     sources: [Domain; 6],
-) -> Result<Layout, SolverError> {
-    let samples = probes.branches[0].settings().force.double_grid()?.samples;
+) -> Result<ForceSettings, SolverError> {
+    let force = probes.branches[0].settings().force.double_grid()?;
     for (branch, source) in probes.branches.iter().zip(sources) {
-        if branch.settings().force.double_grid()?.samples != samples {
+        if branch.settings().force.double_grid()? != force {
             return Err(SolverError::InvalidDomain);
         }
         let diagnostic = ConservativeWorkspace::diagnostic_domain(source)?;
@@ -159,13 +164,13 @@ fn common_force_samples(
             .layout()
             .dimensions()
             .iter()
-            .zip(samples.dimensions())
+            .zip(force.samples.dimensions())
             .any(|(required, available)| *required > available)
         {
             return Err(SolverError::InvalidDomain);
         }
     }
-    Ok(samples)
+    Ok(force)
 }
 fn add_residual(
     a: super::ResidualWork,

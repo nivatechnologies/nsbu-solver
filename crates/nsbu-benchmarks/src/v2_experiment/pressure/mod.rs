@@ -3,7 +3,7 @@ mod plan;
 #[cfg(test)]
 mod tests;
 use super::{FamilyError, V2Family, PAIRS};
-use crate::provider::V2Force;
+use crate::runtime_force::RunForce;
 use nsbu_solver::{
     diagnostics::{
         conservative::ConservativeWorkspace,
@@ -40,6 +40,7 @@ pub struct PressureRefinementSample {
     source: Domain,
     samples: Layout,
     force: Layout,
+    force_workers: usize,
     floors: [f64; 2],
     quantities: [QuantityRefinement; 2],
 }
@@ -64,6 +65,10 @@ impl PressureRefinementSample {
     pub fn force_layout(self) -> Layout {
         self.force
     }
+    /// Effective persistent-worker count; zero denotes serial sampling.
+    pub fn force_workers(self) -> usize {
+        self.force_workers
+    }
     /// Pressure and gradient relative floors.
     pub fn relative_floors(self) -> [f64; 2] {
         self.floors
@@ -78,7 +83,7 @@ pub struct PressureFamilyWorkspace<'a> {
     plan: PressureFamilyPlan<'a>,
     products: ConservativeWorkspace,
     comparison: PhysicalComparisonWorkspace,
-    provider: V2Force,
+    provider: RunForce,
     velocity: Field,
     force: Field,
     conservative: Field,
@@ -99,11 +104,9 @@ impl<'a> PressureFamilyWorkspace<'a> {
                 plan.samples,
                 plan.bounds.storage_bytes,
             )?,
-            provider: V2Force::new(
-                plan.diagnostic,
-                plan.diagnostic.layout(),
-                plan.bounds.storage_bytes,
-            )?,
+            provider: plan
+                .force
+                .build(plan.diagnostic, plan.provider_limits.storage_bytes)?,
             velocity: field(n)?,
             force: field(m)?,
             conservative: field(m)?,
@@ -141,7 +144,8 @@ impl<'a> PressureFamilyWorkspace<'a> {
             identity: self.plan.family.identity(),
             source: self.plan.source,
             samples: self.plan.samples,
-            force: self.plan.diagnostic.layout(),
+            force: self.plan.force.samples,
+            force_workers: self.plan.force.workers,
             floors: self.plan.floors,
             quantities: [
                 refinement(QUANTITIES[0], pairs, 0),

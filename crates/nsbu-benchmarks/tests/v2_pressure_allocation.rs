@@ -12,14 +12,17 @@ static GLOBAL: &StatsAlloc<std::alloc::System> = &INSTRUMENTED_SYSTEM;
 mod v2_family_support;
 
 fn main() {
+    for workers in [1, 2] {
+        audit(workers);
+    }
+}
+
+fn audit(workers: usize) {
     let clocks = v2_family_support::clocks();
     let times = TestedTimes::new(&clocks, 3).unwrap();
-    let family_plan = FamilyPlan::new(
-        v2_family_support::settings(1e-5),
-        times,
-        v2_family_support::CAP,
-    )
-    .unwrap();
+    let mut settings = v2_family_support::settings(1e-5);
+    settings.force.workers = workers;
+    let family_plan = FamilyPlan::new(settings, times, v2_family_support::CAP).unwrap();
     let admission = Region::new(GLOBAL);
     let plan = PressureFamilyPlan::new(
         family_plan,
@@ -63,5 +66,5 @@ fn main() {
         (0, 0, 0)
     );
     assert_eq!(pressure.charged_work(), plan.bounds().work);
-    println!("v2 pressure admission_allocations=0 construction_bytes={} steady_allocations=0 reports=3 refusals=2 declared_joint_bytes={}", built.bytes_allocated, plan.bounds().joint_storage_bytes);
+    println!("v2 pressure workers={workers} force_grid={:?} admission_allocations=0 construction_bytes={} steady_allocations=0 reports=3 refusals=2 declared_joint_bytes={}", plan.force_layout().dimensions(), built.bytes_allocated, plan.bounds().joint_storage_bytes);
 }

@@ -1,6 +1,7 @@
 //! Independent full-force Poisson control; common force cancels in pair-only checks.
 use super::*;
 use crate::{
+    provider::V2Force,
     runtime_force::ForceSettings,
     v2_experiment::{FamilyPlan, FamilySettings},
 };
@@ -74,6 +75,91 @@ fn zero_velocity_uses_independent_full_band_force_and_mean_zero_pressure() {
         .unwrap();
     assert_eq!(workspace.force, force);
     compare_poisson(layout, &force, &workspace.pressure[0]);
+}
+
+#[test]
+fn configured_workers_match_serial_force_and_pressure_on_accepted_states() {
+    for workers in [1, 2] {
+        compare_configured_worker(workers);
+    }
+}
+
+fn compare_configured_worker(workers: usize) {
+    let clocks =
+        [0, 64, 128].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
+    let settings = FamilySettings {
+        grids: [4, 8, 12],
+        steps: [64, 32, 16],
+        force: ForceSettings {
+            samples: Layout::new([12; 3]).unwrap(),
+            workers,
+        },
+        endpoint: 128,
+        tolerances: Tolerances {
+            absolute: [1e-5, 1e-4],
+            relative: [0.0; 2],
+        },
+        advective_limit: 0.3,
+    };
+    let family_plan = FamilyPlan::new(
+        settings,
+        TestedTimes::new(&clocks, clocks.len()).unwrap(),
+        256 * 1024 * 1024,
+    )
+    .unwrap();
+    let diagnostic =
+        ConservativeWorkspace::diagnostic_domain(family_plan.branches[2].resources().domain())
+            .unwrap();
+    let pressure_plan = PressureFamilyPlan::new(
+        family_plan,
+        diagnostic.layout(),
+        [1e-8, 1e-7],
+        clocks.len(),
+        256 * 1024 * 1024,
+    )
+    .unwrap();
+    assert_eq!(pressure_plan.force_workers(), workers);
+    let mut family = V2Family::new(family_plan).unwrap();
+    let mut pressure = PressureFamilyWorkspace::new(pressure_plan).unwrap();
+    let mut final_report = None;
+    for _ in clocks {
+        family.advance().unwrap();
+        final_report = Some(pressure.measure(&family).unwrap());
+    }
+    let report = final_report.unwrap();
+    assert_eq!(report.force_workers(), workers);
+    let parallel_force = pressure.force.clone();
+    let parallel_pressure = pressure.pressure.clone();
+    let limits = V2Force::preflight(diagnostic, diagnostic.layout()).unwrap();
+    let mut serial = V2Force::new(diagnostic, diagnostic.layout(), limits.storage_bytes).unwrap();
+    serial
+        .evaluate(
+            report.clock(),
+            limits,
+            pressure.force.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    assert_field_bits(&parallel_force, &pressure.force);
+    pressure.construct(family.branches[2].state(), 0).unwrap();
+    pressure.construct(family.branches[5].state(), 1).unwrap();
+    for (parallel, serial) in parallel_pressure.iter().zip(&pressure.pressure) {
+        assert_eq!(complex_bits(parallel), complex_bits(serial));
+    }
+    // Keep the fixture visibly fixed at the original pressure sampling profile.
+    assert_eq!(report.force_layout().dimensions(), [24; 3]);
+}
+
+fn assert_field_bits(left: &Field, right: &Field) {
+    for (a, b) in left.iter().zip(right) {
+        assert_eq!(complex_bits(a), complex_bits(b));
+    }
+}
+
+fn complex_bits(values: &[Complex64]) -> Vec<(u64, u64)> {
+    values
+        .iter()
+        .map(|value| (value.re.to_bits(), value.im.to_bits()))
+        .collect()
 }
 
 fn compare_poisson(layout: Layout, force: &Field, pressure: &[Complex64]) {
