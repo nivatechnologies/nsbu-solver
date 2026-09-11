@@ -66,6 +66,25 @@ Other platforms require a source build. The alpha is diagnostic-only, with
 zero accepted PDE convergence windows; it provides no proof of finite-time
 blow-up.
 
+## Refinement diagnostics from source
+
+Current `main` also provides a fixed, reproducible diagnostic family. This
+command is not present in the earlier `alpha-20260911` binary:
+
+```sh
+cargo run --release -p nsbu-cli -- diagnose-v2 --dry-run
+cargo run --release -p nsbu-cli -- diagnose-v2
+```
+
+It independently evolves space, time-step, and CM/HO comparison trajectories
+on grids 4/8/12 through a short startup interval. JSON lines identify the case,
+branch profiles, exact clocks, resource reservations, separate physical
+quantities, pressure, reference tracking, and off-step residual summaries.
+Allow roughly one to two minutes on the measured host; runtime varies. Every
+report remains `UnqualifiedDiagnostic` and lists missing qualification
+channels. See the [diagnostic guide](docs/V2_DIAGNOSTIC_COORDINATOR.md) for
+the complete library reports and interpretation.
+
 ## Python verification checks
 
 Python 3.12 and the development dependencies below are for repository and

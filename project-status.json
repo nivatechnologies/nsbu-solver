@@ -338,5 +338,11 @@
   "exact_v2_diagnostic_coordinator_evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
   "exact_v2_nested_physical_sampling_exists": true,
   "exact_v2_nested_physical_sampling_scope": "One unchanged actual six-branch family measured on three strictly divisible sample lattices for velocity, gradient, ordered Hessian and vorticity. Five raw comparison pairs and first-tie peak witnesses per quantity; pressure excluded. Numerical/resource/CRAP checks pass; focused all-changed branch coverage78.26% is below80%, and full maintained-source hosted coverage remains pending. No continuum supremum or PDE qualification.",
-  "exact_v2_nested_physical_sampling_evidence": "evidence/p09/v2-nested-physical-sampling/summary.json"
+  "exact_v2_nested_physical_sampling_evidence": "evidence/p09/v2-nested-physical-sampling/summary.json",
+  "exact_v2_diagnostic_cli_exists": true,
+  "exact_v2_diagnostic_cli_scope": "Fixed diagnose-v2 startup profile with allocation-free numerical admission, explicit case/family/probe identities, separate per-quantity summaries and ten missing channels. Focused CLI/example coverage and CRAP pass; combined hosted publication gate pending. No arbitrary window selection or qualification.",
+  "exact_v2_diagnostic_cli_evidence": "evidence/p09/v2-diagnose-cli/summary.json",
+  "parallel_exact_v2_diagnostic_force_exists": true,
+  "parallel_exact_v2_diagnostic_force_scope": "Pressure and off-stage residual consumers honor explicitly configured force workers while preserving their previous sampling grids. Workers1/2 match fresh serial original-force calculations bitwise; full changed-function CRAP and resource gates pass. Provider timing is informational; no force-resolution or PDE qualification.",
+  "parallel_exact_v2_diagnostic_force_evidence": "evidence/p09/v2-diagnostic-workers/summary.json"
 }

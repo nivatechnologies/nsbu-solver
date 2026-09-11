@@ -832,3 +832,14 @@ checks pass. [Evidence](evidence/p09/v2-nested-physical-sampling/summary.json)
 reports library coverage separately from the 78.26% focused branch coverage
 including test assertions; the complete maintained-source release gate remains
 pending hosted CI. Pressure sampling and complete window review remain open.
+
+## P09 diagnostic CLI and configured workers
+
+The fixed `nsbu diagnose-v2 [--dry-run]` command exposes the bounded startup
+coordinator, with case/profile identities, separate quantity summaries and
+explicit missing channels. [CLI evidence](evidence/p09/v2-diagnose-cli/summary.json)
+includes its changed example in the focused coverage/CRAP scope. Pressure and
+residual diagnostics now honor the configured original-force worker count
+without changing their sample grids; [worker evidence](evidence/p09/v2-diagnostic-workers/summary.json)
+records bitwise serial controls and complete changed-function CRAP checks.
+Combined hosted validation remains required. P08/P09/P10 remain incomplete.
