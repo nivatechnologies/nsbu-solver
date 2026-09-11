@@ -1,0 +1,70 @@
+{
+  "status": "bounded pilot completed; full grid not executed",
+  "base_commit": "441da25d79cf51439c5b3e99b43c9828de1ba2db",
+  "scope": "analytical reference-evaluator arithmetic only",
+  "profile": {
+    "grid": [12, 12, 12],
+    "tick_exponent": -20,
+    "target_ticks": 8192,
+    "elapsed_ticks": [0, 64, 128],
+    "quantities": {"velocity": 3, "gradient": 9, "ordered_hessian": 27, "curl": 3},
+    "precisions": [80, 120],
+    "bindings": ["exact_centered_grid_rationals", "exact_centered_rust_binary64_words"]
+  },
+  "pilot": {
+    "points": {"axis": [0, 0, 1], "collar": [5, 0, 0], "interior": [1, 1, 1], "exterior": [6, 0, 0]},
+    "rows": 12,
+    "classes": {"startup": 4, "exterior": 2, "active": 6},
+    "input_classes_match": true,
+    "validated_zero_rows": 6,
+    "direct_multiprecision_evaluations": 36,
+    "maximum_observed_root_iterations": 8,
+    "internal_seconds": 8.443747345008887,
+    "wall_seconds": 8.58,
+    "maximum_rss_kib": 26624,
+    "timeout_seconds": 60,
+    "address_space_cap_bytes": 268435456,
+    "terminal": "complete"
+  },
+  "maximum_active_scaled_measurements": {
+    "rational_80_to_120": "1.5539160308539048e-84",
+    "word_80_to_120": "7.297004696562842e-85",
+    "rational_to_word_at_120": "2.0071562141502333e-20",
+    "rust_binary64_to_word_120": "2.7701452907879256e-19",
+    "binary64_acceptance_threshold": null
+  },
+  "full_grid_preflight": {
+    "rows": 5184,
+    "exterior_spatial_points": 1213,
+    "exterior_rows": 3639,
+    "startup_rows": 1728,
+    "startup_exterior_intersection": 1213,
+    "shortcut_union_rows": 4154,
+    "active_rows": 1030,
+    "multiprecision_jet_evaluations": 4120,
+    "rust_evaluations": 5184,
+    "maximum_scalar_root_iterations": 8437760,
+    "fixed_jet_corrections": 12360,
+    "mean_extrapolated_seconds": 1053.7332373231766,
+    "maximum_observed_cost_extrapolated_seconds": 1272.72263527615,
+    "executed": false
+  },
+  "focused_checks": {
+    "rust_tests": "1 passed",
+    "python_tests": "2 passed",
+    "format": "passed",
+    "targeted_strict_clippy": "passed",
+    "strict_python_typing": "passed",
+    "rust_quality_maxima": {"cyclomatic": 7, "cognitive": 6, "halstead_difficulty": 19.23170731707317, "physical_lines": 99},
+    "python_quality_maxima": {"cyclomatic": 12, "halstead_difficulty": 7.183673469387755, "physical_lines": 250}
+  },
+  "limitations": [
+    "single bounded timing pilot",
+    "startup and exterior zeros are structural controls, not accuracy floors",
+    "no new binary64 acceptance threshold",
+    "no full-grid execution",
+    "no integrator arithmetic or continuum bound",
+    "raw pressure and gauge excluded",
+    "no PDE trajectory, convergence, or accepted-window claim"
+  ]
+}
