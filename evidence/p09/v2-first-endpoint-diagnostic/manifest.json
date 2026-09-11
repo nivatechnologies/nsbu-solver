@@ -1,0 +1,49 @@
+{
+  "kind": "diagnostic-only first-endpoint pilot",
+  "qualification": { "accepted_pde_windows": 0 },
+  "execution_source_commit": "961e7182eaedcd86829f3c5c3cf652a4d16f4d1b",
+  "evidence_commit_base": "16803ff164340a3c7a297e74c3690f9ddf03e88f",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "profile": {
+    "exponent": -20,
+    "horizon_ticks": 8192,
+    "endpoint_ticks": 4096,
+    "accepted_ticks": [0, 2048, 4096],
+    "probe_ticks": [0, 2047, 2048, 4095, 4096],
+    "residual_ticks": [2047, 4095],
+    "grids": [8, 12, 16],
+    "force_grid": 16,
+    "trajectory_workers": 8,
+    "steps": [64, 32, 16],
+    "physical_samples": [16, 16, 16],
+    "reference_samples": [16, 16, 16],
+    "pressure_samples": [32, 32, 32],
+    "joint_reservation_bytes": 592520528,
+    "joint_cap_bytes": 1073741824
+  },
+  "branches": [
+    "0=CM N8 step16", "1=CM N12 step16", "2=CM N16 step16",
+    "3=CM N16 step64", "4=CM N16 step32", "5=HO N16 step16"
+  ],
+  "diagnostic_force_baseline": "pressure and residual consumers use the original serial V2Force path; consumer parallel support was absent in the execution source",
+  "terminal": {
+    "status": "complete", "events": 5, "wall_seconds": 2168.763,
+    "event_wall_seconds": { "0": 12.985, "2047": 569.606, "2048": 1114.071, "4095": 1643.153, "4096": 2168.762 },
+    "time_v_elapsed": "36:08.81", "time_v_user_seconds": 8638.71,
+    "time_v_system_seconds": 3.66, "time_v_max_rss_kib": 157696, "swaps": 0
+  },
+  "charged_work": {
+    "attempts": 5, "accepted_events": 3, "residual_events": 2, "manifest_comparisons": 25,
+    "probe_weighted_visits": 14167840, "physical_weighted_visits": 43241472,
+    "pressure_provider_work_units": 12681216, "reference_evaluations": 12288,
+    "regional_root_iterations": 37748736, "residual_provider_work_units": 50724864,
+    "residual_coefficient_work_units": 22126592
+  },
+  "artifacts": {
+    "harness.rs": "bd2e8d8af26555c4ee71c74dacda04b6907b42b209a82d390771d55410b9aca7",
+    "source-Cargo.lock": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "release_binary": "16d8f9018919b7f9d8f36ecfcd83edaf54868d48e5a7c5494480e6eb6a2ac1d3",
+    "full.stdout.gz": "b15a60c9c47598db346488561935eefbcd146bd4a5460d315580d2383d5f7c5c",
+    "full.time.gz": "4ba8329340cd4322e9e19967eba2dbdc3b96824111ce6afc22ece0a3b4104765"
+  }
+}

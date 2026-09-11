@@ -1,0 +1,8 @@
+Execution worktree: /mnt/niva-array/nsbu-solver/work/v2-first-endpoint-preflight
+Execution source: 961e7182eaedcd86829f3c5c3cf652a4d16f4d1b
+
+timeout 180s cargo build --release -p nsbu-benchmarks --example v2_first_endpoint_preflight
+timeout --kill-after=10s 2700s /usr/bin/time -v target/release/examples/v2_first_endpoint_preflight --run-full
+
+The stdout and time output are compressed without transformation in full.stdout.gz
+and full.time.gz. The source harness is retained verbatim as harness.rs.
