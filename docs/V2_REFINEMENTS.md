@@ -52,6 +52,40 @@ all-branch rollback or implicit retry with fresh allowances. Read-only branch
 access permits inspection of this partial progress. No sample is emitted until
 all branches reach the required time and every comparison succeeds.
 
+## Actual physical comparisons
+
+`v2_experiment::physical::PhysicalFamilyPlan` attaches a bounded physical
+consumer to the already admitted `FamilyPlan`. Construct a
+`PhysicalFamilyWorkspace` from that plan and call `measure(&family)` once after
+each successful `V2Family::advance`. The consumer compares the borrowed actual
+states through the reusable `PhysicalComparisonWorkspace`; it does not create a
+second family or pass the smooth `CyclicSine` forcing problem into exact-v2.
+
+Each `PhysicalRefinementSample` contains four complete physical quantities in
+fixed order: velocity, velocity gradient, velocity Hessian and vorticity. Every
+quantity includes the same five pairs as the Fourier sample: N0/N1, N1/N2,
+H0/H1, H1/H2 and CM/HO. The report retains the actual clock, V2 family
+identity, diagnostic sample layout, configured relative floors and sampled RMS,
+peak and relative statistics for each finding. The physical comparisons include
+the complete finer Fourier band, all ordered tensor entries and the physical
+curl orientation.
+
+Admission reserves the comparison scratch, metadata, one report record and the
+joint family-plus-consumer storage. It also reserves a finite allowance and
+charges complete attempts, including calls refused before numerical traversal.
+The workspace reuses its derivative and reduction scratch sequentially, so no
+complete Hessian family is retained. A failed call consumes its charge and emits
+no partial report; the schedule advances only after all twenty findings succeed.
+Identity, manifest, accepted-clock and branch-clock checks reject stale or
+unrelated families. Measurement leaves every integrated state, history and
+family digest unchanged.
+
+These are sampled numerical RMS and peak measurements on the configured physical
+grid. They are not continuous supremum bounds and do not certify refinement or
+PDE acceptance. This consumer reports global comparisons only; pressure,
+regional aggregation, reference tracking, force sufficiency and arithmetic
+evidence remain separate studies.
+
 ## Identity and limits
 
 The sample's family SHA-256 binds the immutable case, branch settings and exact
@@ -77,8 +111,13 @@ cargo run --release -p nsbu-benchmarks --example v2_refinement
 ```
 
 The example preflights N = [4,8,12], fixed M = 12 and steps [64,32,16] with tick
-quantum 2^-20 and endpoint 128. It prints its case/family identity, finite
-resource bounds and measured full-band differences. This is a short startup
-diagnostic, not the first concentrating endpoint t = 1/256 and not an accepted
-window. The default CLI alpha remains the separately documented
+quantum 2^-20 and endpoint 128, corresponding to the exact startup profile's
+physical endpoint t = 1/8192. It prints the case/family identity, finite
+resource bounds, Fourier differences and the physical velocity/gradient/
+Hessian/vorticity RMS and peak findings. This is a short startup diagnostic,
+not the first concentrating endpoint t = 1/256 and not an accepted window. The
+default CLI alpha remains the separately documented
 [single-trajectory profile](RUNTIME_ALPHA.md).
+
+Focused implementation and quality evidence is retained in
+[evidence/p09/v2-physical](../evidence/p09/v2-physical/README.md).

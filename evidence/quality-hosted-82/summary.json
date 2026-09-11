@@ -1,0 +1,116 @@
+{
+  "commit": "82c079670287b6db36737ec0f56cc3f3a69ee672",
+  "hosted_runs": {
+    "rust": {
+      "run_id": 34563652523,
+      "job_id": 103151266200,
+      "conclusion": "success",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34563652523"
+    },
+    "python": {
+      "run_id": 34563652520,
+      "job_id": 103151266237,
+      "conclusion": "success",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34563652520"
+    }
+  },
+  "source_revision": "82c079670287b6db36737ec0f56cc3f3a69ee672",
+  "rust": {
+    "tests_and_build": "hosted rust job succeeded; clippy -D warnings, docs, package, and workspace tests completed",
+    "coverage": {
+      "coverage_files": 346,
+      "maintained_source_files": 350,
+      "maintained_source_lines": 42902,
+      "lines": {
+        "count": 30683,
+        "covered": 30242,
+        "percent": 98.56272202848483
+      },
+      "branches": {
+        "count": 2358,
+        "covered": 2095,
+        "percent": 88.84648006785412
+      },
+      "functions": {
+        "count": 2613,
+        "covered": 2586,
+        "percent": 98.96670493685419
+      },
+      "instantiations": {
+        "count": 5278,
+        "covered": 4293,
+        "percent": 81.33762788935202
+      }
+    },
+    "crap_maximum": 24.3359375,
+    "crap_functions": 2615,
+    "test_cases": 440,
+    "test_harnesses": 126,
+    "doctests": {
+      "nsbu_benchmarks": 1,
+      "nsbu_solver": 0
+    },
+    "reduced_force_allocation": {
+      "allocations": 0,
+      "deallocations": 0,
+      "reallocations": 0
+    },
+    "duplicate_lines": 1510,
+    "duplicate_percent": 3.520962551881733,
+    "type_lexical_lines": 1,
+    "isolated_allocation_executables": 11,
+    "tests_and_probes": 451,
+    "whole_workspace_static_maxima": {
+      "cyclomatic": 21,
+      "cognitive": 18,
+      "halstead_function_and_file": 75.8955223880597,
+      "physical_file_lines": 477
+    },
+    "type_escape_code_findings": 0
+  },
+  "python": {
+    "tests": 220,
+    "coverage": {
+      "statements": {
+        "count": 5522,
+        "covered": 5512,
+        "percent": 99.65256797583082
+      },
+      "branches": {
+        "count": 1098,
+        "covered": 1085,
+        "percent": 98.81602914389799
+      },
+      "partial_branches": 13
+    },
+    "crap_maximum": 16.0,
+    "crap_functions": 855,
+    "dead_code_report_lines": 11,
+    "duplicate_clones": 0
+  },
+  "artifact_sha256": {
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-coverage.json": "878c38f030760dd3859c1a31fbb89b4e8006262a34188ea6bc956157b4c33261",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-metrics.json": "46ed0129d42e453ce9d95d500f764e3ef4440e4913e91e1fea56a1d88cb8072a",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/quality-source-revision.txt": "db120564b221c8c5f9e6920966e1568942d21a545c1950fef6aefa49c6f8026d",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-crap.json": "0d3edaf51c614adff32d1ef6cedff58431386f1276d4e4aba737c7d218cca1a1",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-source-files.txt": "0fc571dec4284dd3ffa746f74dbaccd94f5600d6b13116ca6e4154f1bc3d7fcd",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-type-lexical.log": "13be2537a1873162179184e38487accb91b18b4d54ca21f6017a6f3c9a1ef278",
+    "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-duplicates/jscpd-report.json": "cca63c0e57b55c8fbc8170ca8c8c3df230f1832a7c66cde95783e8b3283ef90c",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/quality-source-revision.txt": "db120564b221c8c5f9e6920966e1568942d21a545c1950fef6aefa49c6f8026d",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-cyclomatic.json": "0daf963deab94aa97f0e6214ab5f2479c1366eca30660d6cfc9dda4a7b1e8ae2",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/full-coverage.json": "1ca03315d3397ddba49ed01340bd27471f48694e3fe316e2b7dced8951954b17",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-halstead.json": "26de3cc35a82a91480a83d0fa6608c89ee1a02747403592c62cd7b32fcee7f0c",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/python-crap.json": "eb5872a2d2950fa48d986d72fadad3da0bebdd3bfee58475aeaecc06d665fea5",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-source-files.txt": "2f41e60e7505165d5eae099dac87f8914c10f25133431abcb0b0993f2431cf3f",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-duplicates.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-dead-code.txt": "abb473eca53815e67c09dc4b18da3a19ea292a1b36a66b2484738be31aa2079f",
+    "rust-run.log": "83099b453f6ffb3d010fe42150856004dfa0ba9ccc0a9ca3738a2611d9667ec5",
+    "python-run.log": "fe7659398c20836a4a76c9b8c98ebb22333ec2afcf4e3ab4cb206d32058ff41b"
+  },
+  "limitations": [
+    "Hosted quality artifacts cover commit-bound quality gates only.",
+    "Coverage and CRAP do not establish numerical accuracy or PDE convergence.",
+    "The yanked crossbeam-channel v0.5.6 warning arises while installing the pinned rust-code-analysis tool, not from the NSBU solver Cargo.lock.",
+    "Python dead-code output is informational and lists 10 reported entries; it is not a failure gate."
+  ]
+}

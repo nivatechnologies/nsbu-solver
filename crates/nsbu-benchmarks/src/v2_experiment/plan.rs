@@ -1,5 +1,5 @@
 //! Allocation-free admission of six independent exact-v2 from-rest branches.
-use super::{identity, FamilyError};
+use super::{identity, FamilyError, V2Family};
 use crate::v2_run;
 use nsbu_solver::{
     diagnostics::comparison::ComparisonPlan,
@@ -109,6 +109,33 @@ impl<'a> FamilyPlan<'a> {
     /// Canonical SHA-256 family identity.
     pub fn identity(self) -> [u8; 32] {
         self.identity
+    }
+
+    pub(super) fn require_sample(
+        self,
+        family: &V2Family<'_>,
+        next: usize,
+    ) -> Result<TickClock, FamilyError> {
+        let clock = self
+            .times
+            .as_slice()
+            .get(next)
+            .copied()
+            .ok_or(FamilyError::InvalidFamily)?;
+        if family.failed {
+            return Err(FamilyError::Terminated);
+        }
+        if self.identity != family.plan.identity
+            || family.next != next + 1
+            || family.plan.times.as_slice().get(next).copied() != Some(clock)
+            || family
+                .branches
+                .iter()
+                .any(|branch| branch.state().clock() != clock)
+        {
+            return Err(FamilyError::InvalidFamily);
+        }
+        Ok(clock)
     }
 }
 

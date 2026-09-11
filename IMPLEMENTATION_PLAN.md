@@ -633,10 +633,18 @@ strict Clippy and Rustdoc pass. Source-matched hosted gates pass for this increm
 
 The documented N=[4,8,12], M=12 example reaches only the short startup time
 1/8192. P08/P09/P10 remain incomplete with zero accepted concentrating windows.
-Next attach the existing complete physical diagnostic kernels to these actual
-exact-v2 states, then complete separate force/reference/arithmetic and accepted
-artifact studies. Evaluate the parked reduced-coordinate force path independently
-before changing runtime providers. Daily releases require passing current CI.
+The [physical consumer](evidence/p09/v2-physical/README.md) now measures complete
+velocity, gradient, Hessian and vorticity differences across all five actual
+pairs. Independent signed Fourier sums check sampled RMS and peaks; clock and
+identity failures spend bounded attempts without changing integrated states.
+Three physical tests, an allocation probe and the example pass, with four
+retained admission/identity tests also exercised. Focused coverage is 97.77%
+line and 84.48% branch with maximum CRAP19.6133; current static/lint/Rustdoc
+checks pass. Source-matched hosted gates remain pending for this increment.
+The coarse-grid Hessian differences increase under spatial refinement; there
+is no accepted convergence claim. Next add independent pressure diagnostics
+and complete separate force/reference/arithmetic and accepted artifact studies.
+Daily releases require passing current CI.
 
 ## Post-alpha reduced-coordinate evaluator progress
 

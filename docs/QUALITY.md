@@ -604,3 +604,16 @@ all 220 Python tests. The downloaded hosted binary also passes both default
 methods, same-build checkpoint/resume and all 1,660 bundled checksums. These
 publication results refer to immutable source `63f9a14`; later code changes need
 their own evidence and exact-source CI before a daily snapshot.
+
+The [complete hosted results at `82c0796`](../evidence/quality-hosted-82/README.md)
+now cover the six-trajectory exact-v2 family and optional reduced pointwise
+evaluator: 451 Rust tests/probes, one compiled Rustdoc example, 98.56% line and
+88.85% branch coverage, and maximum CRAP24.33594. Complexity and file-size maxima
+remain within the required limits. Python passes all 220 tests. The archived
+raw coverage, metrics and source inventories make these measurements inspectable.
+
+The subsequent [physical consumer](../evidence/p09/v2-physical/README.md) and
+[reduced sampled provider](../evidence/p09/reduced-provider/README.md) each pass
+their focused numerical/quality checks and whole-source static/lint checks.
+Their combined source still requires a complete hosted run before daily release.
+These quality results do not accept a concentrating PDE window.

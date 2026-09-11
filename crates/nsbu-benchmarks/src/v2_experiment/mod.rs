@@ -4,6 +4,7 @@
 //! sampling, reference and other missing channels remain open, so no PDE
 //! acceptance or qualification claim follows from these samples.
 mod identity;
+pub mod physical;
 mod plan;
 use crate::v2_run::Run;
 use nsbu_solver::{

@@ -1,0 +1,138 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 physical consumer",
+  "status": "focused numerical/quality and whole-source static/lint gates passed; complete source-matched hosted gates pending",
+  "focused_tests": {
+    "physical_harness": 3,
+    "isolated_allocator_executable": 1,
+    "release_example": 1,
+    "retained_family_admission_identity_tests": 4,
+    "new_tests_and_probes": 4,
+    "physical_and_updated_example_tests_and_probes": 5,
+    "total_executed_instrumented": 9
+  },
+  "focused_coverage": {
+    "lines": {
+      "count": 718,
+      "covered": 702,
+      "percent": 97.7715877437326
+    },
+    "branches": {
+      "count": 58,
+      "covered": 49,
+      "percent": 84.48275862068965
+    }
+  },
+  "focused_crap_maximum": 19.613208912037038,
+  "release_example": {
+    "sample_elapsed_ticks": [
+      0,
+      64,
+      128
+    ],
+    "physical_diagnostic_lines": 12,
+    "accepted_pde_windows": 0
+  },
+  "profile": {
+    "grids": [
+      4,
+      8,
+      12
+    ],
+    "force_grid": 12,
+    "steps": [
+      64,
+      32,
+      16
+    ],
+    "clock_exponent": -20,
+    "target_ticks": 8192,
+    "endpoint_ticks": 128,
+    "sample_ticks": [
+      0,
+      64,
+      128
+    ],
+    "endpoint_rational": "1/8192",
+    "relative_floors": [
+      1e-08,
+      1e-07,
+      1e-06,
+      1e-07
+    ]
+  },
+  "resource_observation": {
+    "admission_allocations": 0,
+    "steady_allocations": 0,
+    "construction_bytes": 19369280,
+    "declared_joint_bytes": 24348552,
+    "attempts": 3,
+    "scalar_transforms": 1350,
+    "weighted_visits": 18535872
+  },
+  "accepted_pde_windows": 0,
+  "raw_artifacts": "artifact-sha256.json",
+  "source_inventory": "source-sha256.json",
+  "parent_commit": "82c079670287b6db36737ec0f56cc3f3a69ee672",
+  "source_scope_counts": {
+    "rust": 355,
+    "python": 97,
+    "stubs": 1,
+    "total": 453
+  },
+  "selected_focus_files": [
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/mod.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/plan.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/plan.rs",
+    "crates/nsbu-benchmarks/tests/v2_physical_family.rs",
+    "crates/nsbu-benchmarks/tests/v2_physical_oracle.rs",
+    "crates/nsbu-benchmarks/tests/v2_physical_allocation.rs",
+    "crates/nsbu-benchmarks/examples/v2_refinement.rs"
+  ],
+  "whole_source_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_difficulty_function_or_file": 75.8955223880597,
+    "maximum_physical_file_lines": 477,
+    "metrics_source": "raw/v2-physical-metrics.json.gz"
+  },
+  "type_identifier_scan": {
+    "rust_files": 355,
+    "lexical_matches": 1,
+    "code_matches": 0,
+    "report": "type-identifier-scan.json"
+  },
+  "execution": {
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "python": "3.12.3",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "benchmark_manifest_sha256": "e55804ca26c5ae84ad08f9373d2fa516208143efa8b8e76ad7529977e1b5e43f",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+  },
+  "reproducer": "raw/check_v2_physical_focused.sh.gz; historical packaging commands in raw/package_v2_physical_evidence.sh.gz",
+  "solid_review": {
+    "single_responsibility": "Family admission, physical admission, workspace measurement, and report types remain separate.",
+    "open_closed": "QUANTITIES and pair schedule are fixed; each measurement consumes admitted bounded work.",
+    "liskov": "Physical workspace consumes the public family contract and rejects stale/foreign/terminated families.",
+    "interface_segregation": "Read-only branch/state access is used; diagnostics cannot mutate integrated state.",
+    "dependency_inversion": "Physical consumer delegates Fourier sampling to solver diagnostic interfaces and retains no analytical/reference state."
+  },
+  "numerical_checks": [
+    "Independent signed-Fourier sum checks RMS and peak for every one of five actual pairs and four quantities using abs(measured-oracle) <2e-11*(quantity_floor+oracle).",
+    "All final actual pair norms are nonzero; exact rest norms are zero.",
+    "Report retains actual clock, family identity, sample layout, relative floors and complete quantity/pair metadata.",
+    "Every integrated coefficient word is unchanged before/after measurement. Borrowed family access has no mutation authority.",
+    "Stale, same-clock wrong-identity, matching terminated family, completed schedule and exhausted allowance are refused; complete work charges persist and only successful full reports advance the schedule."
+  ],
+  "limitations": [
+    "Global sampled RMS/peak are not continuous supremum bounds.",
+    "Pressure, regional/reference/force/arithmetic/off-stage and full external-provenance channels remain incomplete.",
+    "Coarse Hessian space differences increase; no converged PDE window is claimed.",
+    "The family identity and separate reported layout/floors do not establish complete frozen scientific protocol provenance."
+  ],
+  "repository_checks": "passed; local documentation links and frozen inputs verified"
+}

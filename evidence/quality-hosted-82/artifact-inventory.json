@@ -1,0 +1,105 @@
+{
+  "source_revision": "82c079670287b6db36737ec0f56cc3f3a69ee672",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1861,
+      "sha256": "5bd005097d5ac18232851a2f2f366deea868754435c3890847760a58c8976112"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-cyclomatic.json",
+      "bytes": 163897,
+      "sha256": "0daf963deab94aa97f0e6214ab5f2479c1366eca30660d6cfc9dda4a7b1e8ae2"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-dead-code.txt",
+      "bytes": 1010,
+      "sha256": "abb473eca53815e67c09dc4b18da3a19ea292a1b36a66b2484738be31aa2079f"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-duplicates.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-halstead.json",
+      "bytes": 153907,
+      "sha256": "26de3cc35a82a91480a83d0fa6608c89ee1a02747403592c62cd7b32fcee7f0c"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/ci-source-files.txt",
+      "bytes": 3299,
+      "sha256": "2f41e60e7505165d5eae099dac87f8914c10f25133431abcb0b0993f2431cf3f"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/full-coverage.json",
+      "bytes": 459921,
+      "sha256": "1ca03315d3397ddba49ed01340bd27471f48694e3fe316e2b7dced8951954b17"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/python-crap.json",
+      "bytes": 169311,
+      "sha256": "eb5872a2d2950fa48d986d72fadad3da0bebdd3bfee58475aeaecc06d665fea5"
+    },
+    {
+      "path": "python/python-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/quality-source-revision.txt",
+      "bytes": 41,
+      "sha256": "db120564b221c8c5f9e6920966e1568942d21a545c1950fef6aefa49c6f8026d"
+    },
+    {
+      "path": "python-run.log",
+      "bytes": 318424,
+      "sha256": "fe7659398c20836a4a76c9b8c98ebb22333ec2afcf4e3ab4cb206d32058ff41b"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/quality-source-revision.txt",
+      "bytes": 41,
+      "sha256": "db120564b221c8c5f9e6920966e1568942d21a545c1950fef6aefa49c6f8026d"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-coverage.json",
+      "bytes": 7275211,
+      "sha256": "878c38f030760dd3859c1a31fbb89b4e8006262a34188ea6bc956157b4c33261"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-crap.json",
+      "bytes": 526440,
+      "sha256": "0d3edaf51c614adff32d1ef6cedff58431386f1276d4e4aba737c7d218cca1a1"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-duplicates/jscpd-report.json",
+      "bytes": 181577,
+      "sha256": "cca63c0e57b55c8fbc8170ca8c8c3df230f1832a7c66cde95783e8b3283ef90c"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-metrics.json",
+      "bytes": 5413748,
+      "sha256": "46ed0129d42e453ce9d95d500f764e3ef4440e4913e91e1fea56a1d88cb8072a"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-source-files.txt",
+      "bytes": 17036,
+      "sha256": "0fc571dec4284dd3ffa746f74dbaccd94f5600d6b13116ca6e4154f1bc3d7fcd"
+    },
+    {
+      "path": "rust/rust-quality-82c079670287b6db36737ec0f56cc3f3a69ee672-1/rust-type-lexical.log",
+      "bytes": 170,
+      "sha256": "13be2537a1873162179184e38487accb91b18b4d54ca21f6017a6f3c9a1ef278"
+    },
+    {
+      "path": "rust-run.log",
+      "bytes": 284993,
+      "sha256": "83099b453f6ffb3d010fe42150856004dfa0ba9ccc0a9ca3738a2611d9667ec5"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 5419,
+      "sha256": "df63b69db78b5aaea65c718ad88510d47afca3e51c95feb15c3a8ab52eade986"
+    }
+  ],
+  "archive": {
+    "path": "hosted-82-raw.tar.gz",
+    "bytes": 1921934,
+    "sha256": "cd117ac0ea845bf968ed180dde74cd28a125e4c99b9d3fb506d5ba0071ed4dde"
+  }
+}
