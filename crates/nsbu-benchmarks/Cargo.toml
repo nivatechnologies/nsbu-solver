@@ -98,3 +98,7 @@ harness = false
 [[test]]
 name = "v2_diagnostic_coordinator_allocation"
 harness = false
+
+[[test]]
+name = "v2_review_adapter"
+harness = false

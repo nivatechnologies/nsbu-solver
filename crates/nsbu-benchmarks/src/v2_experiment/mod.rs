@@ -13,6 +13,7 @@ pub mod probes;
 pub mod sampling;
 
 pub mod reference;
+pub mod review_adapter;
 use crate::v2_run::Run;
 use nsbu_solver::{
     diagnostics::comparison::{BandComparison, ComparisonPlan},

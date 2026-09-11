@@ -1,0 +1,11 @@
+# Numerical harness measured before the final validation-shape refactor; mapping semantics were unchanged.
+/usr/bin/time -v -o work/v2-review-adapter/final2.time cargo test -p nsbu-benchmarks --test v2_review_adapter --locked -- --nocapture >work/v2-review-adapter/final2.log 2>&1
+
+# Final source-matched focused coverage; terminal success recorded, elapsed was not captured.
+PATH="$HOME/.rustup/toolchains/nightly-2026-03-03-x86_64-unknown-linux-gnu/bin:$PATH" cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_review_adapter --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/mnt/niva-array/nsbu-solver/work/p09-v2-review-adapter/target/)' --json --output-path work/v2-review-adapter/coverage-final2.json -- --test-threads=1
+python3 -m quality.check_crap rust work/v2-review-adapter/metrics-focused.jsonl work/v2-review-adapter/coverage-final2.json work/v2-review-adapter/crap-final.json
+cargo fmt --all -- --check
+cargo clippy -p nsbu-benchmarks --lib --locked -- -D warnings
+cargo clippy -p nsbu-benchmarks --test v2_review_adapter --locked -- -D warnings
+cargo clippy -p nsbu-benchmarks --all-targets --all-features --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked

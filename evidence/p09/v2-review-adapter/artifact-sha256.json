@@ -1,0 +1,13 @@
+{
+  "clippy-ci-package.log.gz": "4ea08722dfa7b901b851d2ede9b2b1bf6cc035119ef725233ce171af57cbb708",
+  "clippy-focused.log.gz": "af4eedd064bc0a22b626534e00c971dbc3d4b8ac9e327239840ba0334394f052",
+  "final-coverage.json.gz": "65cd6e27edf1695ee5abd87788685d8254a674e20eb5fbec6a466fe8fd136dbf",
+  "final-crap.json.gz": "1ae7d06d8962a1f68a7f2a3c2e72087dbe13c27a809d525c6e12c2394dcf6abf",
+  "final-metrics.jsonl.gz": "a5b7c7b9bd1e0faaa81b43293e3f3d5f9fbc917b2acf1a5177723d0270f60100",
+  "fmt.log.gz": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+  "initial-failed-coverage.json.gz": "331d8059c875d2870a10a76efcc7aeee82e0e7503ca201e53ed4c03bf19c9ed3",
+  "initial-failed-crap.json.gz": "2c627d8d00e3675117eb1ce86ad56d51dfc812ecdc5526c50f15c947c6bf4305",
+  "measured-test.log.gz": "6e0fcd4b91c58034d3202342544c6f554fbffaa6d496cf31a6262f0ec1639890",
+  "measured-test.time.gz": "282bb07dc22cebd53a4a98bb5fdd47f93092f02f51928e0ed7e18d7dd517c214",
+  "rustdoc.log.gz": "3258924a91588385527e627f4eccaa5f72e069e6953dd7efd7b4d16d8f504c48"
+}

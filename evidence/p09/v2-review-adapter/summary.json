@@ -1,0 +1,148 @@
+{
+  "status": "partial unqualified extraction; focused source gates passed; all-changed branch coverage below 80%; whole-maintained hosted gate pending",
+  "base_commit": "88015d7681c6fb267c77d1454a3594f386d1d2ab",
+  "inventory": {
+    "status": "PartialUnqualifiedInventory",
+    "events": 7,
+    "accepted_events": 3,
+    "offstage_events": 4,
+    "records": 28,
+    "finest_cm_branch": 2,
+    "generic_channels_per_record": 11,
+    "declared_missing_channels": 10,
+    "observable_groups_explicitly_missing": 5,
+    "quantities": [
+      "velocity",
+      "ordered_gradient",
+      "ordered_hessian",
+      "vorticity"
+    ],
+    "units": [
+      "U",
+      "U/L",
+      "U/L^2",
+      "U/L"
+    ],
+    "normalization": "pointwise Euclidean/Frobenius magnitude; RMS over sample points"
+  },
+  "profile": {
+    "accepted_elapsed_ticks": [
+      0,
+      64,
+      128
+    ],
+    "manifest_elapsed_ticks": [
+      0,
+      7,
+      63,
+      64,
+      95,
+      127,
+      128
+    ],
+    "tick_exponent": -20,
+    "target_elapsed_ticks": 8192,
+    "physical_samples": [
+      12,
+      12,
+      12
+    ],
+    "tracking_samples": [
+      12,
+      12,
+      12
+    ],
+    "relative_floors": [
+      1e-08,
+      1e-07,
+      1e-06,
+      1e-07
+    ]
+  },
+  "resource": {
+    "caller_record_array_bytes": 44352,
+    "transactional_record_array_bytes": 44352,
+    "event_scans": 7,
+    "extraction_allocations": 0,
+    "extraction_deallocations": 0,
+    "extraction_reallocations": 0,
+    "scope": "array sizes exclude report copies, stack frames, process storage and coordinator evolution"
+  },
+  "measured_focused_run": {
+    "source_phase": "before final validation-shape refactor; numerical mapping unchanged",
+    "wall_seconds": 96.51,
+    "user_seconds": 96.67,
+    "system_seconds": 0.98,
+    "process_max_rss_kib": 347008,
+    "includes": "compilation and coordinator evolution"
+  },
+  "final_coverage": {
+    "production": {
+      "lines": {
+        "covered": 228,
+        "count": 229,
+        "percent": 99.5633
+      },
+      "branches": {
+        "covered": 16,
+        "count": 20,
+        "percent": 80.0
+      }
+    },
+    "production_and_test": {
+      "lines": {
+        "covered": 447,
+        "count": 451,
+        "percent": 99.1131
+      },
+      "branches": {
+        "covered": 24,
+        "count": 32,
+        "percent": 75.0
+      }
+    },
+    "whole_maintained_gate": "pending combined hosted CI"
+  },
+  "quality_maxima": {
+    "cyclomatic_per_function": 10,
+    "cognitive_per_function": 7,
+    "halstead_difficulty_all_nodes": 37.98108108108108,
+    "physical_file_lines": 303,
+    "crap_per_function": 13.125
+  },
+  "initial_failed_quality": {
+    "production_lines": [
+      206,
+      208
+    ],
+    "production_branches": [
+      45,
+      72
+    ],
+    "production_and_test_lines": [
+      425,
+      430
+    ],
+    "production_and_test_branches": [
+      53,
+      84
+    ],
+    "maximum_crap": 26.125,
+    "correction": "cohesive equality snapshots retained all identity, clock, schedule and semantic fields"
+  },
+  "gates": {
+    "focused_test": "passed",
+    "focused_clippy": "passed",
+    "ci_matching_package_clippy": "passed",
+    "format": "passed",
+    "workspace_rustdoc_warning_denied": "passed"
+  },
+  "limitations": [
+    "no generic MeasurementReview",
+    "no tolerances or readiness result",
+    "no complete observable inventory",
+    "no reference-precision inference",
+    "no PDE qualification or accepted window",
+    "all-changed focused branch coverage is 75%; whole-maintained gate pending"
+  ]
+}
