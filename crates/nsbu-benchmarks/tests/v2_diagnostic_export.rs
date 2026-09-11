@@ -12,13 +12,92 @@ use nsbu_benchmarks::{
     },
 };
 use nsbu_solver::{
-    domain::Layout, integrators::indicator::Tolerances, verification::times::TestedTimes,
+    domain::{Layout, TickClock},
+    integrators::indicator::Tolerances,
+    verification::times::TestedTimes,
 };
 mod v2_diagnostic_export_oracle;
 use serde_json::Value;
 use std::io::{self, Write};
 
 const CAP: usize = 256 * 1024 * 1024;
+
+#[test]
+fn diagnostic_export_rejects_nonprofile_accepted_and_probe_schedules() {
+    let profile = StartupProfile::new().unwrap();
+    let standard = profile.plan(CAP).unwrap();
+    let accepted = [profile.accepted_times()[0], profile.accepted_times()[2]];
+    let manifest = [
+        profile.manifest()[0],
+        profile.manifest()[1],
+        profile.manifest()[2],
+        profile.manifest()[4],
+        profile.manifest()[5],
+        profile.manifest()[6],
+    ];
+    let family = FamilyPlan::new(
+        standard.family_plan().settings(),
+        TestedTimes::new(&accepted, accepted.len()).unwrap(),
+        CAP,
+    )
+    .unwrap();
+    let probes = ProbePlan::new(
+        family,
+        TestedTimes::new(&manifest, manifest.len()).unwrap(),
+        manifest.len(),
+        CAP,
+    )
+    .unwrap();
+    let foreign_accepted = DiagnosticPlan::new(
+        family,
+        probes,
+        profile.residual_times(),
+        standard.diagnostic_settings(),
+        CAP,
+    )
+    .unwrap();
+    assert!(matches!(
+        DiagnosticExportPlan::new(&profile, foreign_accepted, CAP),
+        Err(DiagnosticExportError::InvalidReport)
+    ));
+
+    let replacement = TickClock::restore(-20, 8192, 94, 8192 - 94).unwrap();
+    let manifest = [
+        profile.manifest()[0],
+        profile.manifest()[1],
+        profile.manifest()[2],
+        profile.manifest()[3],
+        replacement,
+        profile.manifest()[5],
+        profile.manifest()[6],
+    ];
+    let residual = [
+        profile.residual_times()[0],
+        profile.residual_times()[1],
+        replacement,
+        profile.residual_times()[3],
+    ];
+    let family = standard.family_plan();
+    let probes = ProbePlan::new(
+        family,
+        TestedTimes::new(&manifest, manifest.len()).unwrap(),
+        manifest.len(),
+        CAP,
+    )
+    .unwrap();
+    let foreign_manifest = DiagnosticPlan::new(
+        family,
+        probes,
+        &residual,
+        standard.diagnostic_settings(),
+        CAP,
+    )
+    .unwrap();
+    assert!(matches!(
+        DiagnosticExportPlan::new(&profile, foreign_manifest, CAP),
+        Err(DiagnosticExportError::InvalidReport)
+    ));
+}
 
 #[test]
 fn diagnostic_export_keeps_pressure_n_separate_from_residual_force_m() {
