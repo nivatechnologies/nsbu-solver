@@ -28,7 +28,7 @@ fn main() {
     let force_plan = ForceFamilyPlan::new(
         ForceFamilySettings {
             grid: 4,
-            force_grids: [8, 16, 32],
+            force_grids: [6, 12, 24],
             workers: 0,
             step_ticks: 16,
             method: Method::CoxMatthews,
@@ -45,7 +45,7 @@ fn main() {
             grids: [4, 8, 12],
             steps: [64, 32, 16],
             force: ForceSettings {
-                samples: Layout::new([16; 3]).unwrap(),
+                samples: Layout::new([12; 3]).unwrap(),
                 workers: 0,
             },
             endpoint: 128,

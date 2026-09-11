@@ -32,7 +32,7 @@ fn tolerances(scale: f64) -> Tolerances {
 fn force_settings(scale: f64) -> ForceFamilySettings {
     ForceFamilySettings {
         grid: 4,
-        force_grids: [8, 16, 32],
+        force_grids: [6, 12, 24],
         workers: 0,
         step_ticks: 16,
         method: Method::CoxMatthews,
@@ -46,7 +46,7 @@ fn ordinary_settings(scale: f64) -> FamilySettings {
         grids: [4, 8, 12],
         steps: [64, 32, 16],
         force: ForceSettings {
-            samples: Layout::new([16; 3]).unwrap(),
+            samples: Layout::new([12; 3]).unwrap(),
             workers: 0,
         },
         endpoint: 128,
@@ -80,7 +80,7 @@ fn independent_baseline_words_bind_raw_spectral_force_differences() {
         assert_eq!(report.baseline_slots(), (1, 0));
         assert_eq!(report.case_sha256(), CASE_SHA256);
         assert_eq!(report.status(), ForceResolutionStatus::DiagnosticOnly);
-        assert_eq!(report.force_settings().force_grids, [8, 16, 32]);
+        assert_eq!(report.force_settings().force_grids, [6, 12, 24]);
         check_oracle(&force, report.comparisons());
     }
     assert_eq!(binding.current().unwrap().clock().elapsed(), 128);
