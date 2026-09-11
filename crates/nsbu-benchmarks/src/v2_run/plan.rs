@@ -104,7 +104,7 @@ impl Plan {
     }
 }
 
-fn validate_settings(settings: Settings) -> Result<(), SolverError> {
+pub(super) fn validate_settings(settings: Settings) -> Result<(), SolverError> {
     if settings.initial_clock
         != TickClock::from_rest(
             settings.initial_clock.exponent(),
@@ -123,7 +123,7 @@ fn validate_settings(settings: Settings) -> Result<(), SolverError> {
 
 // Remaining time decreases monotonically, so the final attempted interval is the
 // strictest known prescribed-force time-scale bound. Advective/error tests still run.
-fn validate_final_step(settings: Settings, divisor: u128) -> Result<(), SolverError> {
+pub(super) fn validate_final_step(settings: Settings, divisor: u128) -> Result<(), SolverError> {
     let limits = settings.configuration.limits;
     let remaining = settings
         .initial_clock

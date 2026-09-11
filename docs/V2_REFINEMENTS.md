@@ -153,5 +153,9 @@ not the first concentrating endpoint t = 1/256 and not an accepted window. The
 default CLI alpha remains the separately documented
 [single-trajectory profile](RUNTIME_ALPHA.md).
 
+The separate [exact-v2 reconstruction owner](V2_RECONSTRUCTION.md) retains
+transactional accepted endpoint value/RHS nodes for later off-stage diagnostics.
+It does not change this six-branch accepted-state family or add off-stage reports.
+
 Focused implementation and quality evidence is retained in
 [evidence/p09/v2-physical](../evidence/p09/v2-physical/README.md).
