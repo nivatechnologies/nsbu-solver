@@ -1,0 +1,59 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 genuine off-stage residual family",
+  "status": "focused numerical, allocation, coverage, CRAP, static and exact Rustdoc gates passed; source-matched hosted CI pending",
+  "parent_commit": "8e66b2d29ef2a6e98e5933fd0201ee57238d0335",
+  "source_commit": "c049537",
+  "focused_unique_tests_and_probes": 4,
+  "resource_observation": {
+    "construction_bytes": 34695488,
+    "declared_joint_bytes": 39771976,
+    "steady_allocations": 0,
+    "successful_reports": 2,
+    "provider_work_units": 10699776,
+    "scalar_transforms": 72,
+    "coefficient_work_units": 4532224,
+    "force_sample_grid": [24, 24, 24]
+  },
+  "late_mode_oracle": {
+    "clock_ticks": 95,
+    "signal": 0.00004906405901575398,
+    "oracle_error": 7.844980929452914e-21,
+    "omit_force_gap": 0.00004906405901575407,
+    "flip_force_gap": 0.00009812811803150814,
+    "omit_nonlinearity_gap": 5.536419101490921e-19
+  },
+  "changed_source_static_maxima": {
+    "cyclomatic_function": 15.0,
+    "cognitive_function": 16.0,
+    "halstead_difficulty_function": 48.473684210526315,
+    "halstead_difficulty_file": 72.75641025641026,
+    "maximum_physical_file_lines": 414
+  },
+  "whole_source_known_exception": "unchanged tests/v2_regional_tracking.rs function cognitive complexity 22; separate root integration fix pending",
+  "focused_coverage": {
+    "selected_implementation_files": 4,
+    "lines": {"count": 495, "covered": 468, "percent": 94.54545454545455},
+    "branches": {"count": 40, "covered": 32, "percent": 80.0}
+  },
+  "focused_function_count": 66,
+  "focused_crap_maximum": 16.0,
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "reproducer": "raw/check_v2_residuals_focused.sh.gz",
+  "execution": {
+    "rustc": "1.96.0-nightly (ec818fda3 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "ff8a6177a31ce43d20774aebfddc7a4e2e9dbf0488280b980c4e74189a262704"
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "The modal oracle independently assembles the tested mode but reuses the original V2Force evaluation.",
+    "No external reconstruction import, pressure gauge, continuous-time or all-window qualification is provided.",
+    "P09 and P10 remain incomplete; source-matched hosted CI is pending."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "crates/nsbu-benchmarks/Cargo.toml": "ff8a6177a31ce43d20774aebfddc7a4e2e9dbf0488280b980c4e74189a262704",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs": "7e70dc761ca149172344bd102deef3b35f02ae7394fda4a4fdb736aaf069fe30",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/mod.rs": "00b1f557ca696f5df3681877ab5f60f46084c83153f16089a46a95effc45c03e",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/plan.rs": "e2d6259f2c042c45537b849945eb9695aa8905bbd801f761f2f6419aac2e49b0",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/report.rs": "84b0b4c7675e1e0f322f41c45edaee4fbef0dc80fd0cd81cc88ca475aa508c44",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/workspace.rs": "552635eb70cc010b63c86ecb5c309633a43b727a14b5bbce22daeb59eefb568b",
+  "crates/nsbu-benchmarks/tests/v2_residual_family.rs": "9b2a7bb23734286e425a9a6db38e81baf239f72eb5885a2ee7f3f376d02b891b",
+  "crates/nsbu-benchmarks/tests/v2_residual_family_allocation.rs": "9611a3294b1684386205621321aad8f443aed049ed9ef308ac2a3ff64f46d6bc",
+  "crates/nsbu-benchmarks/tests/v2_probe_family.rs": "d243e62c6697588849928ac1f4c4f059adf5697544aec5082da0c3eb8f1b142a",
+  "docs/V2_PROBES.md": "7f983243c09e5d949c11c3ebe8d655e6171422aec67f574bd938f7e34ca3b7d0",
+  "docs/V2_RESIDUALS.md": "1924fee41dcef2f9766cc1112c686b8b491bba7d28c3b288acb0805daf861126"
+}

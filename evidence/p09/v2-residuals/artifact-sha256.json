@@ -1,0 +1,8 @@
+{
+  "evidence/p09/v2-residuals/raw/check_v2_residuals_focused.sh.gz": "8b92c79f8cc4a9571612095850401bf0e7b4c12365245e46996ae508f7838bd3",
+  "evidence/p09/v2-residuals/raw/v2-residuals-changed-metrics.json.gz": "98d2a34393672247a268438cc45f61e8da8d649aeff28ff71de2d58b3853b91f",
+  "evidence/p09/v2-residuals/raw/v2-residuals-focused-coverage.json.gz": "5cbf5190d030bd584a4c0d8c484797aabe9303a3be13850feee4449002002d7d",
+  "evidence/p09/v2-residuals/raw/v2-residuals-focused-crap.json.gz": "be14e6f6c74a935b82b7a0d365ba6d5d4ab9afd4bc364aec593d531d4a7b1dcc",
+  "evidence/p09/v2-residuals/raw/v2-residuals-focused-metrics.json.gz": "29ab8edc6887c7db236d1d856b21aad00d5faaeeba9dca0b19ee515d7a5c8c79",
+  "evidence/p09/v2-residuals/raw/v2-residuals-metrics.json.gz": "034a2aaa4df0b77686a3a9098b5bfa40ec3e749bb9c537256509a0f36efe5942"
+}

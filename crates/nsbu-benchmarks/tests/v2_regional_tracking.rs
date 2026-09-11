@@ -1,12 +1,15 @@
 //! Regional analytical tracking over the six accepted exact-v2 actual states.
 mod v2_family_support;
 
+use nsbu_benchmarks::v2_experiment::reference::regional::{
+    RegionalTrackingQuantity, RegionalTrackingSample,
+};
 use nsbu_benchmarks::{
     regions::SpatialRegion,
     v2_experiment::{
         reference::{
             regional::{RegionalTrackingError, RegionalTrackingPlan, RegionalTrackingWorkspace},
-            ReferenceTrackingPlan, ReferenceTrackingWorkspace, QUANTITIES,
+            ReferenceTrackingPlan, ReferenceTrackingSample, ReferenceTrackingWorkspace, QUANTITIES,
         },
         FamilyError, FamilyPlan, V2Family,
     },
@@ -58,6 +61,80 @@ fn digest(family: &V2Family<'_>) -> Vec<(u64, u64)> {
         .collect()
 }
 
+fn assert_regional_sample(
+    sample: &RegionalTrackingSample,
+    expected: &ReferenceTrackingSample,
+    frame: usize,
+    clock: TickClock,
+    identity: [u8; 32],
+) {
+    assert_eq!(sample.clock(), clock);
+    assert_eq!(sample.identity(), identity);
+    assert_eq!(sample.sample_layout(), Layout::new([12; 3]).unwrap());
+    assert_eq!(sample.relative_floors(), FLOORS);
+    for (branch, findings) in sample.branches().iter().enumerate() {
+        assert_eq!(findings.branch, branch);
+        for (quantity, finding) in findings.quantities.iter().enumerate() {
+            assert_regional_quantity(
+                finding,
+                expected.branches()[branch].quantities[quantity].error,
+                quantity,
+                frame,
+                clock,
+            );
+        }
+    }
+}
+
+fn assert_regional_quantity(
+    finding: &RegionalTrackingQuantity,
+    expected_global: nsbu_solver::diagnostics::local::LocalError,
+    quantity: usize,
+    frame: usize,
+    clock: TickClock,
+) {
+    assert_eq!(finding.quantity, QUANTITIES[quantity]);
+    assert_eq!(finding.global, expected_global);
+    assert_eq!(
+        finding.regional.global,
+        SampledError::Measured(finding.global)
+    );
+    assert_eq!(finding.regional.clock, clock);
+    assert_eq!(finding.regional.dimensions, [12; 3]);
+    assert!(finding.regional.grid_complete);
+    assert_eq!(
+        finding.regional.components,
+        QUANTITIES[quantity].components()
+    );
+    assert_eq!(finding.regional.root_work_charged, 1728 * 128);
+    assert_eq!(
+        finding.regional.regions.map(|entry| entry.0),
+        [
+            SpatialRegion::Core,
+            SpatialRegion::Annulus,
+            SpatialRegion::InteriorOutsideNominal,
+            SpatialRegion::Collar,
+            SpatialRegion::Exterior,
+        ]
+    );
+    let count: usize = finding
+        .regional
+        .regions
+        .iter()
+        .map(|(_, error)| match error {
+            SampledError::Measured(value) => value.samples,
+            SampledError::NoSamples => 0,
+        })
+        .sum();
+    assert_eq!(count, 1728);
+    if frame == 2 {
+        assert!(finding.regional.regions.iter().any(|(_, error)| matches!(
+            error,
+            SampledError::Measured(value) if value.rms_error > 0.0
+        )));
+    }
+}
+
 #[test]
 fn regional_findings_match_the_existing_global_path_on_identical_actual_states() {
     let clocks = v2_family_support::clocks();
@@ -91,58 +168,13 @@ fn regional_findings_match_the_existing_global_path_on_identical_actual_states()
         let before = digest(&family);
         let sample = regional.measure(&family).unwrap();
         assert_eq!(digest(&family), before);
-        assert_eq!(sample.clock(), clock);
-        assert_eq!(sample.identity(), family_plan.identity());
-        assert_eq!(sample.sample_layout(), Layout::new([12; 3]).unwrap());
-        assert_eq!(sample.relative_floors(), FLOORS);
-        for (branch, findings) in sample.branches().iter().enumerate() {
-            assert_eq!(findings.branch, branch);
-            for (quantity, finding) in findings.quantities.iter().enumerate() {
-                assert_eq!(finding.quantity, QUANTITIES[quantity]);
-                assert_eq!(
-                    finding.global,
-                    expected[frame].branches()[branch].quantities[quantity].error
-                );
-                assert_eq!(
-                    finding.regional.global,
-                    SampledError::Measured(finding.global)
-                );
-                assert_eq!(finding.regional.clock, clock);
-                assert_eq!(finding.regional.dimensions, [12; 3]);
-                assert!(finding.regional.grid_complete);
-                assert_eq!(
-                    finding.regional.components,
-                    QUANTITIES[quantity].components()
-                );
-                assert_eq!(finding.regional.root_work_charged, 1728 * 128);
-                assert_eq!(
-                    finding.regional.regions.map(|entry| entry.0),
-                    [
-                        SpatialRegion::Core,
-                        SpatialRegion::Annulus,
-                        SpatialRegion::InteriorOutsideNominal,
-                        SpatialRegion::Collar,
-                        SpatialRegion::Exterior,
-                    ]
-                );
-                let count: usize = finding
-                    .regional
-                    .regions
-                    .iter()
-                    .map(|(_, error)| match error {
-                        SampledError::Measured(value) => value.samples,
-                        SampledError::NoSamples => 0,
-                    })
-                    .sum();
-                assert_eq!(count, 1728);
-                if frame == 2 {
-                    assert!(finding.regional.regions.iter().any(|(_, error)| matches!(
-                        error,
-                        SampledError::Measured(value) if value.rms_error > 0.0
-                    )));
-                }
-            }
-        }
+        assert_regional_sample(
+            &sample,
+            &expected[frame],
+            frame,
+            clock,
+            family_plan.identity(),
+        );
         if frame == 2 {
             let finding = sample.branches()[2].quantities[2];
             let summary: Vec<_> = finding
