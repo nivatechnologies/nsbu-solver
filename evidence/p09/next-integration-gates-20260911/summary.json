@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "tested_head": "99cf7f8cb4969b98fd27dab7c27cf87b0c12363b",
+  "later_docs_only_head": "cc1a137efaf71731c7803221d40c5056207a5557",
+  "binder_included": false,
+  "checks": {
+    "cargo_fmt": "passed",
+    "workspace_all_targets_clippy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_check": "passed",
+    "workspace_package": "passed",
+    "cyclomatic_below_22": "passed",
+    "cognitive_below_22": "passed",
+    "all_node_halstead_below_80": "passed",
+    "tracked_rust_files_below_500_lines": "passed"
+  },
+  "metrics": {
+    "functions": 3751,
+    "maximum_cyclomatic": 21.0,
+    "maximum_cognitive": 21.0,
+    "maximum_all_node_halstead_difficulty": 75.9295154185022,
+    "maximum_tracked_rust_file_lines": 477
+  },
+  "numerical_tests_run": false,
+  "coverage_run": false
+}

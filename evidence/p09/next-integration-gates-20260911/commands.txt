@@ -1,0 +1,11 @@
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json > work/p09-next-integration-gates-20260911/rust-metrics.jsonl
+jq -se '[.. | objects | select(.kind? == "function") | .metrics.cyclomatic.sum] | length > 0 and max < 22' work/p09-next-integration-gates-20260911/rust-metrics.jsonl
+jq -se '[.. | objects | select(.kind? == "function") | .metrics.cognitive.sum] | max < 22' work/p09-next-integration-gates-20260911/rust-metrics.jsonl
+jq -se '[.. | objects | select(has("metrics")) | .metrics.halstead.difficulty | select(. != null)] | max < 80' work/p09-next-integration-gates-20260911/rust-metrics.jsonl
+git ls-files 'crates/*.rs' > work/p09-next-integration-gates-20260911/rust-source-files.txt
+while IFS= read -r path; do awk 'END { exit !(NR < 500) }' "$path"; done < work/p09-next-integration-gates-20260911/rust-source-files.txt
+$ROOT_VENV/bin/python tools/check_repository.py
+package_target_dir=$(mktemp -d); cargo package --workspace --locked --target-dir "$package_target_dir"
