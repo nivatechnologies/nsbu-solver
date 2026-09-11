@@ -107,6 +107,7 @@ has also reached 1/256 from rest on N=4, with spatial/force resolution unresolve
 | Manufactured benchmark | Implemented | Independent exact-v2 force evaluation and from-rest `similarity-mms-v2` trajectories |
 | Runtime safeguards | Implemented | Exact tick clocks, resource preflight, transactional commits, and same-profile checkpoint/resume |
 | Independent checks | Implemented | Python direct-DFT fixtures, high-precision comparisons, restart checks, and full-band diagnostics |
+| Diagnostic families on `main` | Implemented | Independent space/time/method and force-grid families; pressure, regional tracking, off-step residuals, balance quadrature, and nested physical sampling |
 | Concentrating PDE qualification | Pending | Zero accepted windows; space, time, force-sampling, arithmetic, pressure, balance, and residual criteria remain open |
 | Scientific checkpoint provenance | Pending | Imported checkpoint origins remain unverified until lineage requirements are complete |
 | Literal manuscript cascade | Excluded from this alpha | The runtime does not reproduce the annular pulse construction |
@@ -114,7 +115,7 @@ has also reached 1/256 from rest on N=4, with spatial/force resolution unresolve
 ### TODO
 
 - [ ] Establish the first accepted concentrating PDE window with independent space, time, force-sampling, and arithmetic refinements.
-- [ ] Complete pressure, balance, residual, startup, and collar diagnostics required by the qualification protocol.
+- [ ] Connect the implemented diagnostics to the full frozen observable/channel review; complete pressure-reference, gauge, region-coverage, and current-grid arithmetic evidence.
 - [ ] Complete scientific checkpoint provenance and lineage verification.
 - [ ] Optimize the force evaluation and larger-grid runs while retaining independent accuracy checks.
 - [ ] Add the planned visualization tools after solver validation.
@@ -146,6 +147,10 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Architecture](docs/ARCHITECTURE.md) | Module responsibilities, ownership and transaction flow |
 | [Smooth experiment walkthrough](docs/EXPERIMENTS.md) | Six independent trajectories, off-stage reconstruction and PDE residual samples |
 | [Exact-v2 refinement families](docs/V2_REFINEMENTS.md) | Independent space/time/method trajectories with fixed force sampling and complete Fourier comparisons |
+| [Exact-v2 diagnostic coordinator](docs/V2_DIAGNOSTIC_COORDINATOR.md) | Bounded accepted-state and off-step reports from two independent six-branch families |
+| [Exact-v2 nested sampling](docs/V2_SAMPLING.md) | Held-fixed states on three nested sample lattices, with separate RMS/peak measurements and peak locations |
+| [Exact-v2 residuals](docs/V2_RESIDUALS.md) | Fresh-force doubled-band momentum defects at genuine non-stage clocks |
+| [Exact-v2 balance quadrature](docs/V2_BALANCE_QUADRATURE.md) | Six reconstructed balance streams and three nested Simpson schedules |
 | [Exact-v2 force refinements](docs/V2_FORCE_REFINEMENTS.md) | Independent trajectories varying force sampling at fixed velocity grid and time step |
 | [Exact-v2 analytical tracking](docs/V2_REFERENCE_TRACKING.md) | Sampled velocity, gradient, Hessian and vorticity errors against the analytical reference |
 | [Exact-v2 accepted-node reconstruction](docs/V2_RECONSTRUCTION.md) | Separate bounded owner retaining integrated endpoint values and independently evaluated derivatives |

@@ -1,0 +1,23 @@
+{
+  "source_revision": "961e7182eaedcd86829f3c5c3cf652a4d16f4d1b",
+  "maintained_python_unchanged_through": "4989e5f",
+  "scope": "Full maintained Python pytest coverage and CRAP; not full hosted workflow or PDE validation",
+  "tests": 236,
+  "test_wall_seconds": 523.73,
+  "lines": {
+    "covered": 6054,
+    "count": 6098,
+    "percent": 99.2784519514595
+  },
+  "branches": {
+    "covered": 1173,
+    "count": 1202,
+    "percent": 97.5873544093178
+  },
+  "max_crap": 19.9814453125,
+  "status": "passed",
+  "notes": [
+    "Earlier report commands ran before coverage JSON existed; those did not pass. These retained final reports were generated after the complete instrumented test run.",
+    "Full source-matched hosted release checks remain required."
+  ]
+}

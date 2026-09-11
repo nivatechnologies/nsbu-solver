@@ -3,12 +3,11 @@
 The runtime alpha is a public Rust library and command-line diagnostic for the
 reviewed `similarity-mms-v2` manufactured-force problem. It is useful for
 repeatable, bounded experiments from rest; it is not a qualified PDE result.
-There are currently zero accepted concentrating windows. Larger grids,
-convergence studies, independent arithmetic refinement, and further force
-optimization remain open work.
+There are currently zero accepted concentrating windows. Qualification of larger grids, complete convergence studies, independent
+arithmetic refinement, and further force optimization remain open work.
 
-The solver evolves all three velocity components independently from `u = 0`.
-The exact target is `T1 = 1/128`; elapsed and remaining time use the exact tick
+The solver evolves the coupled three-component velocity field from `u = 0`.
+The exact target is `T_star = 1/128`; elapsed and remaining time use the exact tick
 clock. Both Cox–Matthews (`cm`) and Hochbruck–Ostermann (`ho`) are available.
 The default diagnostic profile is `N=4`, force sample grid `M=4`, fixed step
 `128` ticks, tick quantum `2^-20`, endpoint `4096` ticks, at most `32`

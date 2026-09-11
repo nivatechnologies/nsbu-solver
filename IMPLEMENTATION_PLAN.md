@@ -820,3 +820,15 @@ and zero steady allocations. Ten missing channels remain explicit. The
 coordinator applies no acceptance policy; the adapter to the complete numerical
 and lineage review is still pending. Combined hosted validation is pending,
 and P08/P09/P10 remain incomplete with zero accepted PDE windows.
+
+## P09 nested physical sampling
+
+The [sampling consumer](docs/V2_SAMPLING.md) holds all six integrated states
+fixed while measuring four complete physical quantities on nested 12/24/48
+lattices. It retains all five pair comparisons, separate RMS and peak values,
+and the first sample location attaining each maximum. Nondivisible lattices
+are rejected before allocation. Numerical, allocation and per-function CRAP
+checks pass. [Evidence](evidence/p09/v2-nested-physical-sampling/summary.json)
+reports library coverage separately from the 78.26% focused branch coverage
+including test assertions; the complete maintained-source release gate remains
+pending hosted CI. Pressure sampling and complete window review remain open.

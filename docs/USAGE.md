@@ -115,7 +115,7 @@ they describe qualification behavior rather than executable commands.
 | `nsbu case write` | Write an exact, immutable case definition with its mathematical identity |
 | `nsbu run` in dry-run mode | Report complete planned allocations, force coverage, exact interval, numerical method and capability refusals without integration |
 | `nsbu run` | Evolve from the declared initial condition; record provenance, accepted/rejected attempts, diagnostics and checkpoint data |
-| Qualified concentrating restart | Validate complete checkpoint identity and retain inherited numerical error and lineage; the existing `nsbu resume` supports only the smooth diagnostic |
+| Qualified concentrating restart | Validate complete checkpoint identity and retain inherited numerical error and lineage; existing `resume` and `resume-v2` commands provide same-profile diagnostic continuation with unverified external origin |
 | `nsbu experiment compare` | Apply the complete independent refinement protocol, full-band diagnostics and negative controls |
 | `nsbu experiment extend` | Extend the same mathematical problem while preserving previous evidence and stopping at the last qualified interval |
 

@@ -1,0 +1,12 @@
+{
+  "ci-cyclomatic-final.json.gz": "db06df061b34e699464aba93ffce59ff9e91a70f4cb67cd244d798c30de108f5",
+  "ci-halstead-final.json.gz": "3a08b2354dd8cccf3998ed0ea4f1b9f13a3c2702f457d17e3af82d08b711eee5",
+  "coverage-combine-final.log.gz": "2f1c66bd57cbbfa528993aea5a11e42a1b161a253527f85a9c46dba0027f997a",
+  "coverage-json-final.log.gz": "f716aa22cd6aeca786c9034b860eb49610cc4513eaa2547c5739113545530976",
+  "coverage-report-final.log.gz": "3d9c0f0e1895bf5521c1c27ea83bb1e00fc8d640d8816c84e66448d2e35594a5",
+  "full-coverage.json.gz": "c52157683e5a688dea86d76ca891b717e880aa6472c903274ef5d7feb69ebe56",
+  "pytest-coverage-final.log.gz": "197b00eeab86fd3809e49fc3f0cefb79c60f46e9996ff5983da76488121aff02",
+  "python-crap-final.json.gz": "94ffdb700a5eb3e0fe5503d9a31c7e2c489a55ab533605a08e7bcce2ba435fba",
+  "source-sha256.json": "a6fac9cb78152dd1470b992fcb5f385965ea7f860a5f527e96eff7d16bd8d72f",
+  "summary.json": "b3be1a9241d3fe3acc7b3cdadb209ae6d73e154b05a686f78c1064cb5a5e4ee4"
+}

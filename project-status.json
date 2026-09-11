@@ -21,7 +21,7 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Runtime alpha passes all local gates: 434 Rust tests/probes, 98.56% line and 88.79% branch coverage, and required complexity/CRAP/typing/size limits. All 98 maintained Python files match the retained 220-test profile; 41 bootstrap tests and original mathematics rerun successfully. Clean packaging/install and exact-v2 CLI restart pass. Source-matched hosted CI is required before publication.",
+    "status": "The published runtime alpha retains source-bound local and hosted quality evidence. Later increments report their exact scopes separately; publication requires both complete hosted workflows to pass on the candidate source.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
     "evidence": "evidence/runtime-alpha/summary.json",
@@ -37,14 +37,16 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source 6f5c630 remains the last recorded combined hosted pass. Source 109f9cf passes 233 Python tests and coverage but fails CRAP in two legacy pilot functions; boundary corrections pass focused tests locally; the next combined hosted run is pending. Its Rust static/build/lint/docs/package/runtime checks pass and instrumented coverage is running. No new release is qualified by these pending checks.",
+    "latest_hosted_ci_status": "Source 6f5c630 remains the last recorded combined hosted pass. Source109f9cf passed Rust/Python tests and overall coverage but failed per-function CRAP in example output paths and two Python pilot functions. Focused corrections are merged; full236-test local Python coverage/CRAP now passes. A new combined hosted release gate remains pending.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
       "status": "Exact-v2 diagnostic coordinator, balance/quadrature and pilot boundary corrections pass focused gates. Combined hosted validation is pending; zero accepted PDE windows.",
       "evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
       "additional_evidence": "evidence/p09/reference-arithmetic-full/ci-correction/summary.json"
     },
-    "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json"
+    "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
+    "latest_local_python_evidence": "evidence/p09/python-combined-local-20260911/summary.json",
+    "latest_rust_crap_correction_evidence": "evidence/p09/v2-example-crap/ci-correction/summary.json"
   },
   "packages": {
     "B00": {
@@ -333,5 +335,8 @@
   "exact_v2_reconstructed_balance_quadrature_scope": "Six original-force balance observers on actual reconstructed exact-v2 fields, with fixed common doubled force sampling and child-specific doubled output bands; three nested Simpson levels over3/5/9 clocks, transactional pending histories and independent hand-weighted/polynomial controls. No continuous-time or PDE-window qualification.",
   "exact_v2_diagnostic_coordinator_exists": true,
   "exact_v2_diagnostic_coordinator_scope": "Two independent six-branch families publish seven bounded startup events with accepted-state comparisons, pressure, regional reference tracking, retained-node binding and off-stage residuals. Full raw consumer crosschecks, resource and focused quality gates pass. Ten refinement channels remain absent; events are permanently UnqualifiedDiagnostic, and no PDE window is accepted.",
-  "exact_v2_diagnostic_coordinator_evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json"
+  "exact_v2_diagnostic_coordinator_evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
+  "exact_v2_nested_physical_sampling_exists": true,
+  "exact_v2_nested_physical_sampling_scope": "One unchanged actual six-branch family measured on three strictly divisible sample lattices for velocity, gradient, ordered Hessian and vorticity. Five raw comparison pairs and first-tie peak witnesses per quantity; pressure excluded. Numerical/resource/CRAP checks pass; focused all-changed branch coverage78.26% is below80%, and full maintained-source hosted coverage remains pending. No continuum supremum or PDE qualification.",
+  "exact_v2_nested_physical_sampling_evidence": "evidence/p09/v2-nested-physical-sampling/summary.json"
 }
