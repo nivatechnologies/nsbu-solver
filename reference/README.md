@@ -110,3 +110,9 @@ refined axial/collar sampling. `python -m reference.verify_pressure_mean --dry-r
 prints the complete ten-profile admission; omit `--dry-run` to execute it. Original
 pointwise fixtures retain raw pressure. Global gauge refinements are empirical
 and do not qualify a PDE window.
+
+The [production reduction audit](../docs/REDUCTION_ARITHMETIC.md) independently
+checks complete scalar/vector/tensor statistics at 80/120 digits. It separates
+component-to-magnitude effects from accumulation of already-rounded magnitudes.
+`python -m reference.verify_reductions --n 4 --dry-run` admits the complete study
+without input files; the guide supplies actual commands and fixture provenance.

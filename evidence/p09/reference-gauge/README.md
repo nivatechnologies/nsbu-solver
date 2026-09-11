@@ -13,7 +13,7 @@ raw reports retain the exact commands, source identities, measurements and tool
 findings. Forty-one bootstrap tests, repository/frozen-input checks and the
 original mathematical verification pass. A clean source export passes all eleven
 new tests and reproduces the complete public ten-profile study byte-for-byte.
-Hosted pressure-reference checks are pending.
+Source-matched hosted pressure-reference Rust and Python checks pass.
 
 ## Numerical work completed
 

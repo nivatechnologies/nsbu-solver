@@ -1,0 +1,181 @@
+{
+  "package": "P09",
+  "increment": "production-physical-reduction-arithmetic",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-11T00:00:39.958135+00:00",
+  "base_commit": "29fa5fb5c458d00d935812723a3a142bded3bbad",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 294,
+  "rust_harness_tests": 378,
+  "rust_allocation_executables": 7,
+  "rust_tests_and_probes": 385,
+  "python_source_and_stub_files": 98,
+  "python_tests": 220,
+  "bootstrap_tests_rerun": 41,
+  "rust_coverage": {
+    "branches": {
+      "count": 1890,
+      "covered": 1703,
+      "notcovered": 187,
+      "percent": 90.10582010582011
+    },
+    "functions": {
+      "count": 2107,
+      "covered": 2089,
+      "percent": 99.14570479354533
+    },
+    "instantiations": {
+      "count": 4387,
+      "covered": 3578,
+      "percent": 81.55915204011853
+    },
+    "lines": {
+      "count": 25231,
+      "covered": 24900,
+      "percent": 98.68812175498395
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 47875,
+      "covered": 46041,
+      "notcovered": 1834,
+      "percent": 96.16919060052219
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 475
+  },
+  "python_coverage": {
+    "covered_lines": 5512,
+    "num_statements": 5522,
+    "percent_covered": 99.65256797583082,
+    "percent_covered_display": "99",
+    "missing_lines": 10,
+    "excluded_lines": 0,
+    "num_branches": 1098,
+    "num_partial_branches": 13,
+    "covered_branches": 1085,
+    "missing_branches": 13
+  },
+  "python_maxima": {
+    "cyclomatic": 16,
+    "cognitive": 19,
+    "halstead_function_and_file": 13.826086956521738,
+    "crap": 16.0,
+    "physical_file_lines": 243
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "python": "3.12.3",
+    "mpmath": "1.3.0",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "ed141da4a8b3e4589e8b5c068824b968a7f192a923443e2e3867594230355b35"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    },
+    "quality_requirements_sha256": "c00345fc8dd0fc23be103099212516bdfb4d889c7077f8fa9958a3c7ab96bf4f"
+  },
+  "studies": [
+    {
+      "grid": 4,
+      "samples": 8,
+      "comparisons": 72,
+      "all_precision_separated": true,
+      "maximum_precision_to_error_ratio": 4.971511962886929e-64,
+      "same_state_and_force_origin": "../derived-arithmetic/inputs/",
+      "source_json_sha256": [
+        "5a0c30b0c853460253e15ccbaafc5db771c4e9068f6c032072abaa8c93e47cc2",
+        "a89199bfe9e9d71cad015d037918dd6ad3f49bb4c2109685087e0abaaa48f401"
+      ],
+      "input_sha256": "083c7354e94c29648d9a6cf29c86654b36b0fe3a64363944d318ee594f90dc7e",
+      "magnitude_sha256": "a6ef709860cd4678eac8f1593c9602e85810d84b87a9ac16cc722d7bd1547cce"
+    },
+    {
+      "grid": 12,
+      "samples": 24,
+      "comparisons": 72,
+      "all_precision_separated": true,
+      "maximum_precision_to_error_ratio": 2.092468129625667e-64,
+      "same_state_and_force_origin": "../derived-arithmetic/inputs/",
+      "source_json_sha256": [
+        "605c752e576f2a76b7573db31979b4d9a37ee1eacd6c1cedf5d8254fb81bccc2",
+        "f8c29bc3ec46b7f0f50edfa6f890740ca25ac9c0827051f69ebd91a5cf1a8783"
+      ],
+      "input_sha256": "6003fb1b2999c866b14caf67c201ae2d70876b340560d65a17ad0429340a7d89",
+      "magnitude_sha256": "f21aca4432f06927d865f97fe682c45f8ed2bdf90a37f3d3775f9e6c5936d452"
+    }
+  ],
+  "clean_reproduction": "All eleven new Python tests, six Rust tests and one isolated allocation executable pass; both input packets, complete Rust outputs and full independent arithmetic reports reproduce byte-for-byte.",
+  "arithmetic_scope": "Production TensorErrors component and magnitude entry kernels; the audit reproduces the physical workspace sequential hypot order and retains every rounded magnitude. Independent MP sum-of-squares uses exact component/magnitude/floor words. FFT and integrated trajectory errors were measured separately.",
+  "initial_test_correction": "The preserved first oracle test compared two mathematically equivalent MP expressions for exact equality. Their final-bit rounding differs; the closed-form control now requires agreement within 1e-79 at 80 digits. All final focused and complete tests pass.",
+  "informational_findings": {
+    "rust_duplicates": {
+      "clones": 92,
+      "duplicatedLines": 884,
+      "duplicatedTokens": 7571,
+      "lines": 35498,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.4902811425995828,
+      "percentageTokens": 2.771848765646795,
+      "sources": 293,
+      "tokens": 273139
+    },
+    "python_duplicates": {
+      "clones": 3,
+      "duplicatedLines": 18,
+      "duplicatedTokens": 192,
+      "lines": 7217,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 0.24941111265068586,
+      "percentageTokens": 0.24400782858450043,
+      "sources": 93,
+      "tokens": 78686
+    },
+    "vulture_findings": 11,
+    "exit_codes": {
+      "rust-duplicates": 1,
+      "python-duplicates": 1,
+      "rust-dead": 101,
+      "python-dead": 3
+    },
+    "review": "Unused shared harness helpers, discovered test classes and TypedDict keys remain informational. Independent MP formulas are intentionally separate from Rust reduction kernels. Broad lexical matches retain documentation prose; the corrected CI classifier rejects actual opaque identifiers, with strict Python typing and Rust compilation independently enforced.",
+    "mutations": "Not rerun; historical reports remain informational"
+  },
+  "solid_review": "Bounded exact-word decoding, production calculation, output I/O, independent MP arithmetic and report policy each have separate modules. Diagnostic packet types expose no solver-state constructor or continuation capability. Input identities are content binding rather than execution authentication.",
+  "limitations": [
+    "These small smooth grids do not establish current-grid arithmetic floors for a concentrating trajectory",
+    "Residual/balance/regional/location arithmetic and complete force/reference/transfer/benchmark/artifact studies remain",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json",
+  "non_executable_cleanup": {
+    "path": "reference/reduction_audit/oracle.py",
+    "initial_sha256": "c590a0b73ab9c268651694f989a3d04deb63ad70daabc686d3a28bebd6c9baa2",
+    "final_sha256": "584f3e4145de3e1128c89ed1a6b1635891fca3c962b5e55b671297dc81257dc8",
+    "change": "Remove one extra empty EOF line; Python AST including every executable source location is identical",
+    "ast_and_executable_source_locations_equal": true,
+    "measured_initial_source_inventory": "p09-reduction-initial-clean-source-proof.json.gz",
+    "final_checks": "Eleven focused Python tests pass in both development and clean-source directories; strict typing passes. Full coverage/metrics reuse is justified by identical Python AST including all executable source locations. No Rust source changes."
+  }
+}

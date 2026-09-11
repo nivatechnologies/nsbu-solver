@@ -1,7 +1,7 @@
 {
   "package": "P08",
   "increment": "streamed-independent-off-stage-residual-family",
-  "status": "local checks passed; hosted verification pending",
+  "status": "local and source-matched hosted Python/Rust checks passed",
   "accepted_pde_windows": 0,
   "generated_utc": "2026-09-10T23:26:11.632198+00:00",
   "base_commit": "c4c1e1635cf30a460f9b69911d008279eeafbf8f",
@@ -181,5 +181,7 @@
     "Complete reference/force/current-grid arithmetic, balance/quadrature, regional/location and benchmark/artifact bindings remain",
     "No concentrating PDE window is accepted"
   ],
-  "artifact_inventory": "artifact-sha256.json"
+  "artifact_inventory": "artifact-sha256.json",
+  "hosted_python": "hosted-python.json",
+  "hosted_rust": "hosted-rust.json"
 }

@@ -161,3 +161,8 @@ Negative controls include incomplete/reordered fields, nonfinite words, changed
 force, invalid floors/caps, failed partial reductions and invalid CLI arguments.
 Complete concentrating observables, reference/force/current-grid studies,
 accepted-artifact binding and continuous-window qualification remain in progress.
+
+The follow-on [physical-reduction audit](REDUCTION_ARITHMETIC.md) measures the
+production statistic kernels on these same actual N=4/N=12 component words.
+It preserves the original inputs and separates magnitude construction from
+reduction arithmetic; no earlier FFT or trajectory evidence is relabeled.

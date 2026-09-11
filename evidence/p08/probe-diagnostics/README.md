@@ -12,7 +12,7 @@ The [summary](summary.json), [artifact inventory](artifact-sha256.json) and raw
 compressed reports preserve measured scope, actual output, quality findings and
 source hashes. Forty-one bootstrap tests, frozen mathematical checks, formatting,
 strict linting, Rustdoc and fresh-target packaging pass. Hosted checks for this
-physical-probe increment are pending.
+physical-probe increment completed: Python passed; Rust numerical checks passed but a prose-only lexical scan failed, as recorded below.
 
 ## Actual numerical exit evidence
 

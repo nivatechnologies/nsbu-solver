@@ -446,3 +446,12 @@ The [streamed residual workflow](STREAMED_RESIDUALS.md) collects six independent
 defects and five full residual-field comparisons at exact non-stage ticks
 7/31/63/95/127. Actual nested accepted-node histories and spent work are retained.
 These remain smooth sampled diagnostics, not qualified concentrating windows.
+
+## Production tensor-reduction arithmetic
+
+The [reduction audit guide](REDUCTION_ARITHMETIC.md) supplies a complete fixture
+workflow, independent 80/120-digit oracle and exact-word packet format.
+`cargo run --release -p nsbu-benchmarks --example reduction_audit -- --dry-run 4`
+and `python -m reference.verify_reductions --n 4 --dry-run` report separate
+bounded plans. Actual execution requires the complete sample/magnitude files;
+these commands do not qualify a concentrating PDE trajectory.

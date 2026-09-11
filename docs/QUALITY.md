@@ -439,7 +439,7 @@ replay reproduces thirty branch defects and twenty-five complete coefficient-fie
 comparisons; strict linting, Rustdoc, fresh packaging and frozen/bootstrap checks
 pass. Five exact non-stage probes retain original accepted-node histories and
 strict nested temporal geometry. Refusal, stale-origin, terminal later-child and
-allocation controls pass. Hosted verification of this increment is pending.
+allocation controls pass. Source-matched hosted Rust and Python checks pass.
 
 The preceding hosted failure is preserved: a lexical type scan rejected English
 prose in a full documentation comment after numerical checks passed. CI now
@@ -451,3 +451,25 @@ workflow repair.
 P08/P09 remain incomplete: current-grid arithmetic, complete reference/force,
 balance/quadrature, regional/location, benchmark/artifact and concentrating
 qualification remain. No concentrating PDE window is accepted.
+
+
+## P09 production physical-reduction arithmetic progress
+
+The [reduction-arithmetic increment](../evidence/p09/reduction-arithmetic/README.md) passes 385 Rust tests/probes
+and 220 Python tests across 294 Rust and 98 Python/stub files. Rust line/branch
+coverage is 98.69%/90.11%; Python is 99.82%/98.82%. Maxima remain Rust
+CC21/cognitive18/Halstead75.8956/LOC475/CRAP24.33594 and Python
+CC16/cognitive19/Halstead13.8261/LOC243/CRAP16. Strict typing, linting, Rustdoc,
+fresh packaging and frozen/bootstrap checks pass. Source-matched hosted checks
+of the preceding streamed-residual increment pass; this increment is pending.
+
+Two actual N=4/N=12 smooth CM/HO component datasets independently verify both
+production tensor-reduction entry paths. All 144 per-statistic comparisons meet
+the declared 80/120 precision separation. Magnitude construction and accumulation
+of already-rounded magnitudes remain separately measured. The clean source
+reproduces both complete packet pairs and all numerical findings byte-for-byte.
+No FFT or trajectory arithmetic is relabeled by these reduction measurements.
+
+P08/P09 remain incomplete. Residual/balance/regional/location arithmetic, full
+reference/force/transfer refinements, benchmark/artifact binding and concentrating
+current-grid qualification remain. No concentrating PDE window is accepted.

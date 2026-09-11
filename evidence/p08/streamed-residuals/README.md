@@ -16,8 +16,8 @@ See [the workflow guide](../../../docs/STREAMED_RESIDUALS.md).
 [summary.json](summary.json) records measured resources, quality maxima, source
 scope and limitations. Compressed raw reports are indexed in
 [artifact-sha256.json](artifact-sha256.json); [source-sha256.json](source-sha256.json)
-binds every maintained source/test file. Hosted verification of this increment
-is pending. The preceding physical-probe hosted failure is preserved separately:
+binds every maintained source/test file. Source-matched hosted [Rust](hosted-rust.json) and [Python](hosted-python.json)
+checks pass. The preceding physical-probe hosted failure is preserved separately:
 a lexical scan misclassified English prose as a type escape; this increment
 repairs that scan and tests both prose and prohibited code controls.
 

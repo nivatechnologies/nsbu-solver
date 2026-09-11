@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Streamed residuals pass all local gates: 378 Rust tests/probes, 98.75% executable line and 90.29% branch coverage, clean-source reproduction and frozen/bootstrap checks. Unchanged Python retains the verified 209-test profile. Hosted verification pending; previous prose-only CI scan failure preserved and classifier repaired.",
+    "status": "Production physical-reduction arithmetic passes all local gates: 385 Rust tests/probes, 220 Python tests, full line/branch coverage, complexity/CRAP/typing gates, clean-source reproduction and frozen/bootstrap checks. Hosted verification pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p08/streamed-residuals/summary.json",
+    "evidence": "evidence/p09/reduction-arithmetic/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p08/streamed-residuals/summary.json",
+    "rust_evidence": "evidence/p09/reduction-arithmetic/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Reference-gauge source-matched Rust/Python checks pass. Physical probes: Python passes; Rust numerical checks pass but prose-only type scan fails. Repaired classifier and negative controls included with streamed residuals.",
-    "hosted_ci": "evidence/p09/reference-gauge/hosted-rust.json"
+    "latest_hosted_ci_status": "Streamed residuals and the repaired lexical type scan pass source-matched Rust and Python hosted checks.",
+    "hosted_ci": "evidence/p08/streamed-residuals/hosted-rust.json"
   },
   "packages": {
     "B00": {
@@ -125,10 +125,11 @@
       "probe_family_hosted_ci": "evidence/p08/probe-family/hosted-rust.json",
       "probe_diagnostics_evidence": "evidence/p08/probe-diagnostics/summary.json",
       "streamed_residual_evidence": "evidence/p08/streamed-residuals/summary.json",
-      "probe_diagnostics_hosted_rust": "evidence/p08/probe-diagnostics/hosted-rust.json"
+      "probe_diagnostics_hosted_rust": "evidence/p08/probe-diagnostics/hosted-rust.json",
+      "streamed_residual_hosted_ci": "evidence/p08/streamed-residuals/hosted-rust.json"
     },
     "P09": {
-      "status": "in-progress; independent global reference-pressure gauge passes local gates; complete all-observable/artifact and concentrating qualification pending",
+      "status": "in-progress; production physical-reduction arithmetic passes local gates; complete all-observable/artifact and concentrating qualification pending",
       "evidence": "evidence/p09/artifacts/summary.json",
       "remaining": [
         "Bind external mathematical/execution/force/policy/lineage artifacts to accepted-state provenance",
@@ -150,7 +151,8 @@
       "derived_arithmetic_evidence": "evidence/p09/derived-arithmetic/summary.json",
       "derived_arithmetic_hosted_ci": "evidence/p09/derived-arithmetic/hosted-rust.json",
       "reference_gauge_evidence": "evidence/p09/reference-gauge/summary.json",
-      "reference_gauge_hosted_ci": "evidence/p09/reference-gauge/hosted-rust.json"
+      "reference_gauge_hosted_ci": "evidence/p09/reference-gauge/hosted-rust.json",
+      "reduction_arithmetic_evidence": "evidence/p09/reduction-arithmetic/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",

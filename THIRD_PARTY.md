@@ -83,3 +83,8 @@ The existing test-only stats_alloc registry archive has no separate license file
 its MIT declaration and that inventory limitation are recorded explicitly. It is
 not linked into solver/CLI release artifacts. Original project LICENSE and NOTICE
 are unchanged by this increment.
+
+The physical-reduction audit adds generated project binary fixtures and no new
+third-party dependency. It reuses the already declared sha2, mpmath and test-only
+stats_alloc dependencies. Fixture origins and exact layouts are documented in
+[the reduction guide](docs/REDUCTION_ARITHMETIC.md).

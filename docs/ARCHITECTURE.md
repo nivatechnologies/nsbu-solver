@@ -222,3 +222,8 @@ subset of the owner manifest, then uses six separately owned conservative
 residual workspaces. It checks actual accepted-node origins before comparing
 complete doubled-band residual coefficients. The original trajectories and
 interpolants stay borrowed; no reference or stage-RHS assignment path is added.
+
+The [physical reduction audit](REDUCTION_ARITHMETIC.md) separates bounded input
+decoding, production reducer execution, complete output serialization and an
+independent MP oracle. The packets identify imported diagnostic words and never
+create solver state, continuation capabilities or a window-acceptance claim.
