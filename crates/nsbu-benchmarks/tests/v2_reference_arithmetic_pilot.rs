@@ -54,7 +54,7 @@ fn words(values: impl IntoIterator<Item = f64>) -> String {
         .join(",")
 }
 
-fn row(label: &str, index: [usize; 3], elapsed: u128) -> (&'static str, String) {
+fn row(prefix: &str, label: &str, index: [usize; 3], elapsed: u128) -> (&'static str, String) {
     let argument = index.map(|value| value as f64 / 12.0);
     let centered = argument.map(|value| if value >= 0.5 { value - 1.0 } else { value });
     let clock = TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap();
@@ -68,7 +68,7 @@ fn row(label: &str, index: [usize; 3], elapsed: u128) -> (&'static str, String) 
         assert!(values.iter().all(|value| value.to_bits() == 0));
     }
     let line = format!(
-        "ARITH_PILOT\t{label}\t{},{},{}\t{elapsed}\t{category}\t{}\t{}\t{:016x}\t{}",
+        "{prefix}\t{label}\t{},{},{}\t{elapsed}\t{category}\t{}\t{}\t{:016x}\t{}",
         index[0],
         index[1],
         index[2],
@@ -85,7 +85,7 @@ fn emit_fixed_binary64_reference_rows() {
     let mut counts = [0usize; 3];
     for (label, index) in POINTS {
         for elapsed in CLOCKS {
-            let (category, line) = row(label, index, elapsed);
+            let (category, line) = row("ARITH_PILOT", label, index, elapsed);
             counts[match category {
                 "startup" => 0,
                 "exterior" => 1,
@@ -96,4 +96,26 @@ fn emit_fixed_binary64_reference_rows() {
         }
     }
     assert_eq!(counts, [4, 2, 6]);
+}
+
+#[test]
+fn emit_full_binary64_reference_rows() {
+    let mut counts = [0usize; 3];
+    let mut rows = 0usize;
+    for elapsed in CLOCKS {
+        for flat in 0..12usize.pow(3) {
+            let index = [flat / 144, (flat / 12) % 12, flat % 12];
+            let (category, line) = row("ARITH_FULL", "full", index, elapsed);
+            counts[match category {
+                "startup" => 0,
+                "exterior" => 1,
+                "active" => 2,
+                _ => unreachable!(),
+            }] += 1;
+            rows += 1;
+            println!("{line}");
+        }
+    }
+    assert_eq!(rows, 5184);
+    assert_eq!(counts, [1728, 2426, 1030]);
 }
