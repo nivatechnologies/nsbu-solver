@@ -1,0 +1,13 @@
+{
+  "files": 9,
+  "lines": {
+    "count": 1609,
+    "covered": 1558,
+    "percent": 96.83032939714109
+  },
+  "branches": {
+    "count": 100,
+    "covered": 84,
+    "percent": 84
+  }
+}

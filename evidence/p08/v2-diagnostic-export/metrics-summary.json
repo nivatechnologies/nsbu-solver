@@ -1,0 +1,54 @@
+{
+  "scope": "seven export modules, both exporter test modules, and SampleMaximum::measured only",
+  "max_cc": 21.0,
+  "max_cognitive": 20.0,
+  "max_halstead_difficulty": 32.30952380952381,
+  "max_function_ploc": 86.0,
+  "worst_cc": [
+    {
+      "name": "probe",
+      "start_line": 230,
+      "end_line": 256,
+      "cc": 21.0,
+      "cognitive": 8.0,
+      "halstead": 19.25,
+      "ploc": 27.0
+    },
+    {
+      "name": "pressure",
+      "start_line": 98,
+      "end_line": 124,
+      "cc": 20.0,
+      "cognitive": 3.0,
+      "halstead": 18.75,
+      "ploc": 27.0
+    },
+    {
+      "name": "context_reservations",
+      "start_line": 116,
+      "end_line": 138,
+      "cc": 18.0,
+      "cognitive": 0.0,
+      "halstead": 19.5,
+      "ploc": 23.0
+    },
+    {
+      "name": "context_numerical",
+      "start_line": 30,
+      "end_line": 55,
+      "cc": 18.0,
+      "cognitive": 3.0,
+      "halstead": 19.2,
+      "ploc": 26.0
+    },
+    {
+      "name": "event_accepted",
+      "start_line": 185,
+      "end_line": 211,
+      "cc": 18.0,
+      "cognitive": 1.0,
+      "halstead": 13.96551724137931,
+      "ploc": 27.0
+    }
+  ]
+}

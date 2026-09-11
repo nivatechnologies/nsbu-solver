@@ -17,6 +17,7 @@ nsbu-solver.workspace = true
 sha2.workspace = true
 
 [dev-dependencies]
+serde_json = { version = "=1.0.145", features = ["float_roundtrip"] }
 stats_alloc = "=0.1.10"
 
 [[test]]
