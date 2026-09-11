@@ -1,5 +1,6 @@
 //! Read-only analytical velocity/derivative tracking for all six exact-v2 family branches.
 mod plan;
+pub mod regional;
 mod report;
 use super::{FamilyError, V2Family};
 use crate::{
@@ -203,6 +204,18 @@ impl<'a> ReferenceTrackingWorkspace<'a> {
         quantity: PhysicalQuantity,
         floor: f64,
     ) -> Result<TrackingQuantity, ReferenceTrackingError> {
+        self.prepare_quantity(state, branch, quantity)?;
+        Ok(TrackingQuantity {
+            quantity,
+            error: self.reduce(quantity.components(), floor)?,
+        })
+    }
+    fn prepare_quantity(
+        &mut self,
+        state: &SpectralState,
+        branch: usize,
+        quantity: PhysicalQuantity,
+    ) -> Result<(), ReferenceTrackingError> {
         self.error_magnitudes.fill(0.0);
         self.reference_magnitudes.fill(0.0);
         for component in 0..quantity.components() {
@@ -216,10 +229,7 @@ impl<'a> ReferenceTrackingWorkspace<'a> {
                     accumulate_magnitude(self.reference_magnitudes[index], expected)?;
             }
         }
-        Ok(TrackingQuantity {
-            quantity,
-            error: self.reduce(quantity.components(), floor)?,
-        })
+        Ok(())
     }
     fn sample_component(
         &mut self,

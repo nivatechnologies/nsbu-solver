@@ -729,6 +729,19 @@ CM velocity RMS 1.8874e-7 and Hessian RMS 9.3256e-4. This partial global sampled
 study does not qualify pressure, regions, current-grid arithmetic or a PDE window.
 P08/P09/P10 remain incomplete with zero accepted concentrating windows.
 
+## P09 exact-v2 regional analytical tracking
+
+The [regional tracking consumer](docs/V2_REGIONAL_TRACKING.md) reuses completed
+actual-versus-analytical magnitude arrays from all six accepted family states.
+It retains the unchanged global velocity, ordered gradient/Hessian and curl
+findings plus Core, Annulus, InteriorOutsideNominal, Collar and Exterior sampled
+classes. Separate joint storage and complete classification/root/visit work are
+admitted before evaluation; refusal and state-integrity contracts are tested.
+Missing sampled classes remain explicit rather than measured zero. These classes
+do not claim completeness for independently selected, potentially overlapping
+nominal coverage sets. Pressure, gauge, current-grid arithmetic bounds,
+continuum bounds and convergence remain open; zero PDE windows are accepted.
+
 ## P09 exact-v2 accepted-node reconstruction owner
 
 The [reconstructed owner](evidence/p09/v2-reconstruction/README.md) independently

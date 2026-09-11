@@ -637,3 +637,14 @@ included in static analysis without a duplicate LLVM run. Across all seven focus
 files, maxima are CC11, cognitive12, Halstead67.3654, physical-file353 and CRAP11.
 Focused strict Clippy/formatting and whole-workspace Rustdoc pass. Source-matched
 hosted workspace/package gates remain pending, and no PDE window is accepted.
+
+The [regional analytical tracking consumer](../evidence/p09/v2-regional-tracking/README.md)
+passes three focused regional tests, the existing four-test global tracking
+regression, its isolated allocator executable and release example. The three new
+production files cover 209/227 executable lines and 7/8 branches
+(92.07%/87.50%). Across those files and the focused test/example sources, maxima
+are CC8, cognitive13, Halstead57.1429, RCA ploc268 and a maximum actual file length of 281 lines; maximum CRAP is 9.
+Admission and execution allocate nothing. The stored evidence records and fixes
+an initial CRAP26.125 split-function failure and uses the explicit nightly
+toolchain for source-matched branch coverage. Exact strict Rustdoc passes after
+the separately recorded `dad47c4` hosted documentation failure was fixed on main.

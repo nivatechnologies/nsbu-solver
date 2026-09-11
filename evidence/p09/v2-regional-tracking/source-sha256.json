@@ -1,0 +1,10 @@
+{
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/mod.rs": "168118702962b8cbe5c3ee0e97bd2e067fbabb7629772e9ed97c4d71799ac689",
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/mod.rs": "631e10b3a24bf8472177ad5a8bba2a9e922e41780be8970521e1d81018b520a5",
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/plan.rs": "edd969d063793c291f11e3f329f978ba0fc77b3fa49c5043d079b1319e138604",
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/report.rs": "f7882fd511d160528435a86ca46f902aa279e75cbfcbf4890ae934b485eed9c0",
+  "crates/nsbu-benchmarks/tests/v2_regional_tracking.rs": "1dcdb7b8b9509f66c00dc0b2018eeb187d306a4c97ded91264b44550998abe26",
+  "crates/nsbu-benchmarks/tests/v2_regional_tracking_allocation.rs": "7a04261940bfbb6e232661d01daae3f93380ce1117f10290b9023364f04d7cb7",
+  "crates/nsbu-benchmarks/examples/v2_regional_tracking.rs": "fca80bc8c31715dfd221a20e403655a5377b588a05b0afd4ba2b345557394e05",
+  "docs/V2_REGIONAL_TRACKING.md": "be5379c48c0edae7c9f6694cf226c81fb09f6a15d8e52cdc2a29f4684680c0e2"
+}
