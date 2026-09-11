@@ -1,0 +1,11 @@
+{
+  "crates/nsbu-benchmarks/src/v2_force_experiment/identity.rs": "4b81b5b18156fa8072d0d58d31ea857602dc0539c01623b596bdb37c0f2410d1",
+  "crates/nsbu-benchmarks/src/v2_force_experiment/mod.rs": "59ec7c2085163b5646df2fe5c39c129e8722e7059dd1a078b372de6afac7d673",
+  "crates/nsbu-benchmarks/src/v2_force_experiment/plan.rs": "e27bc331487f8f8b8c1b83045f4620a9fa13481c0ab642ed1a63dcaeece89197",
+  "crates/nsbu-benchmarks/tests/v2_force_family.rs": "acf16982cb41379481935255fcab1e71723e1018d0fa3365be5b505b02e6d91b",
+  "crates/nsbu-benchmarks/tests/v2_force_family_allocation.rs": "ff51b4b437a3766207e461e5a40b82f2cca0a3db05c9071ebbf31e1cd9f5b763",
+  "crates/nsbu-benchmarks/tests/v2_force_family_support.rs": "1c31b765d6de9ca9c2f2014c4e2907802d991f9a88d045c4f9cb9788ff932b42",
+  "crates/nsbu-benchmarks/tests/v2_family_oracle.rs": "bbee3e18c224f3e6755cbec979c5d5851c6b6e3e6804ce2188716a33b6826e3b",
+  "crates/nsbu-benchmarks/examples/v2_force_refinement.rs": "80e92918c4e95104985cc474fe842234d3bdd51b501241c25270feef1bd3dabf",
+  "docs/V2_FORCE_REFINEMENTS.md": "ed4c4a685d40fe2f3444b8db0b27a58233b94050a0e78ea7c5349221108aefc2"
+}

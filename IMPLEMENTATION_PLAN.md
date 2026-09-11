@@ -683,3 +683,15 @@ The optional reduced sampled provider remains outside runtime selection. Its
 [hosted release evidence](evidence/runtime-alpha/daily-20260911/summary.json).
 Both hosted workflows also passed at `c8a3872`, including the later independent
 trajectory tests (Rust run 34574045422; repository run 34574045397).
+
+## P09 exact-v2 force-sampling trajectory refinement
+
+The [bounded force-sampling family](docs/V2_FORCE_REFINEMENTS.md) independently
+evolves three N4 CM trajectories from rest while changing only the nested
+prescribed-force grid M=[4,8,16]. Its exact manifest, versioned family identity,
+aggregate storage/work/attempt admission, terminal failure retention and
+allocation-free execution are tested. Independent signed full-complex sums check
+both complete retained-band velocity and derivative-sensitive comparisons, with
+a deliberate ownership/self-comparison negative control. The post-startup endpoint is 1/2048;
+measured differences are retained without a sufficiency or convergence decision.
+P08/P09/P10 remain incomplete and accepted concentrating windows remain zero.

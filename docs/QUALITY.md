@@ -617,3 +617,14 @@ The subsequent [physical consumer](../evidence/p09/v2-physical/README.md) and
 their focused numerical/quality checks and whole-source static/lint checks.
 Their combined source still requires a complete hosted run before daily release.
 These quality results do not accept a concentrating PDE window.
+
+The [exact-v2 force-sampling family](../evidence/p09/v2-force-family/README.md)
+passes four focused harness tests, its isolated allocation executable and the
+separately executed example. Seven instrumented implementation/test files cover
+666/681 executable lines and 35/42 branches (97.80%/83.33%); the example remains
+in static analysis but was not replayed a second time under LLVM. Across all eight
+focused Rust files, maxima are CC13, cognitive10, Halstead53.2895, physical-file338
+and CRAP13.8222. Focused strict Clippy, formatting and whole-workspace Rustdoc pass.
+The original combined validation function's measured CRAP26.3231 failure is
+retained in the evidence narrative; its separated final implementation passes.
+Source-matched hosted workspace coverage and package checks remain pending.

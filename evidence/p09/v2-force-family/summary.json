@@ -1,0 +1,43 @@
+{
+  "status": "focused local numerical and quality gates passed; hosted gates pending",
+  "profile": {
+    "retained_grid": 4,
+    "force_grids": [4, 8, 16],
+    "method": "CoxMatthews",
+    "step_ticks": 64,
+    "endpoint_ticks": 512,
+    "tick_exponent": -20,
+    "accepted_pde_windows": 0
+  },
+  "endpoint": {
+    "physical_time": "1/2048",
+    "pairs": ["M4/M8", "M8/M16"],
+    "full_velocity_l2": [0.024424439651500145, 0.005726571685966544],
+    "full_h1": [0.22572582941869, 0.0511740607059927]
+  },
+  "focused_tests": {
+    "harness": 4,
+    "allocation_executables": 1,
+    "example_tests": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "instrumented_files": 7,
+    "lines": {"covered": 666, "count": 681, "percent": 97.7974},
+    "branches": {"covered": 35, "count": 42, "percent": 83.3333}
+  },
+  "quality_maxima": {
+    "cyclomatic": 13,
+    "cognitive": 10,
+    "halstead_difficulty": 53.2895,
+    "physical_lines": 338,
+    "crap": 13.8222
+  },
+  "allocation": {
+    "admission_allocations": 0,
+    "execution_allocations": 0,
+    "construction_bytes": 2279616,
+    "reserved_bytes": 2498488
+  },
+  "scientific_scope": "partial full-band velocity L2 and derivative-sensitive H1 differences only; no convergence, force-sufficiency, cross-observable completeness or accepted-window claim"
+}

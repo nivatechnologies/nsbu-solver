@@ -41,4 +41,5 @@ pub mod reduced_force;
 pub mod runtime_force;
 
 pub mod v2_experiment;
+pub mod v2_force_experiment;
 pub mod v2_run;

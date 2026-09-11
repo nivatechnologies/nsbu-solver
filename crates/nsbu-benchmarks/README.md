@@ -74,6 +74,14 @@ term magnitudes expose this cancellation; they are not certified error bounds.
 Development checks: `cargo test -p nsbu-benchmarks` from the public workspace.
 Pointwise and sampled direct-DFT checks do not establish trajectory convergence.
 
+`v2_force_experiment` runs three private exact-v2 trajectories with fixed retained
+grid, step, method and endpoint while only the nested force sample grid changes.
+Its two full-band spectral comparisons retain velocity, first-derivative, curl,
+divergence and mean differences. Run `cargo run --release -p nsbu-benchmarks
+--example v2_force_refinement` for the bounded N4, M4/M8/M16 post-startup profile.
+See [the force-refinement guide](../../docs/V2_FORCE_REFINEMENTS.md) for identity,
+resource, failure and scientific limits.
+
 ## Bounded smooth run example
 
 Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` to construct a small owned
