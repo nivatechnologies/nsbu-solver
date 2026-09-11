@@ -185,11 +185,11 @@
       "v2_balance_quadrature_evidence": "evidence/p09/v2-balance-quadrature/summary.json"
     }
   },
-  "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
+  "pde_integration_scope": "Independent Python smooth studies and N4 exact-v2 CM/HO diagnostics; Rust smooth studies, N4 CM/HO runtime, and a six-trajectory N8/12/16 exact-v2 diagnostic pilot from rest to 1/256. Concentrating spatial/force resolution remains unresolved.",
   "concentrating_pde_integration_performed": true,
   "metadata_cli_exists": true,
   "rust_time_integration_performed": true,
-  "rust_pde_integration_scope": "Independent CM/HO smooth studies and N=4 exact-v2 trajectories from rest to t=1/256; concentrating spatial/force resolution unresolved",
+  "rust_pde_integration_scope": "Independent CM/HO smooth studies, N4 exact-v2 CM/HO runtime, and independently evolved N8/12/16 comparison families to 1/256; pilot spatial H1 differences increase, with zero accepted concentrating PDE windows.",
   "rust_concentrating_pde_integration_performed": true,
   "independent_diagnostics_scope": "Full-band and conservative pressure/residual diagnostics, Hermite reconstruction, sampled maxima and directional/integrity/local/regional reporting; smooth accepted-history residual, pressure and balance refinements. Bounded window measurement review exists; full experiment/provenance integration remains incomplete.",
   "window_verifier_exists": false,
@@ -269,7 +269,7 @@
   },
   "alpha_release": {
     "ready": true,
-    "status": "First alpha and first daily prerelease published; downloaded artifacts pass checksums, CM/HO execution and checkpoint/resume.",
+    "status": "Alpha 0.1.0-alpha.1 published from source-matched passing hosted suites; independently downloaded archive, CM/HO, checkpoint/resume and seven-event diagnose-v2 checks passed.",
     "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
     "accepted_concentrating_windows": 0,
     "scientific_qualification_separate": true,
@@ -277,12 +277,13 @@
     "workflow": ".github/workflows/alpha-release.yml",
     "daily_schedule_utc": "02:17; new verified source changes only",
     "last_release": {
-      "tag": "alpha-20260911",
-      "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
-      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911",
-      "verification": "evidence/runtime-alpha/daily-20260911/summary.json"
+      "tag": "alpha-20260911-2",
+      "source_commit": "88015d7681c6fb267c77d1454a3594f386d1d2ab",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2",
+      "verification": "evidence/runtime-alpha/alpha-20260911-2/summary.json"
     },
-    "independent_release_review": "evidence/runtime-alpha/review-20260911/summary.json"
+    "independent_release_review": "evidence/runtime-alpha/alpha-20260911-2/summary.json",
+    "hosted_quality_evidence": "evidence/p09/hosted-alpha1-88015d7/summary.json"
   },
   "exact_v2_cli_exists": true,
   "exact_v2_restart_exists": true,
@@ -338,10 +339,10 @@
   "exact_v2_diagnostic_coordinator_scope": "Two independent six-branch families publish seven bounded startup events with accepted-state comparisons, pressure, regional reference tracking, retained-node binding and off-stage residuals. Full raw consumer crosschecks, resource and focused quality gates pass. Ten refinement channels remain absent; events are permanently UnqualifiedDiagnostic, and no PDE window is accepted.",
   "exact_v2_diagnostic_coordinator_evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
   "exact_v2_nested_physical_sampling_exists": true,
-  "exact_v2_nested_physical_sampling_scope": "One unchanged actual six-branch family measured on three strictly divisible sample lattices for velocity, gradient, ordered Hessian and vorticity. Five raw comparison pairs and first-tie peak witnesses per quantity; pressure excluded. Numerical/resource/CRAP checks pass; focused all-changed branch coverage78.26% is below80%, and full maintained-source hosted coverage remains pending. No continuum supremum or PDE qualification.",
+  "exact_v2_nested_physical_sampling_scope": "One unchanged actual six-branch family measured on three strictly divisible sample lattices for velocity, gradient, ordered Hessian and vorticity. Five raw comparison pairs and first-tie peak witnesses per quantity; pressure excluded. Numerical/resource/CRAP checks pass; focused all-changed branch coverage78.26% is below80%, and full maintained-source hosted coverage passed on alpha.1 source88015d7 (97.99% lines / 88.15% branches); the focused scope remains below80%. No continuum supremum or PDE qualification.",
   "exact_v2_nested_physical_sampling_evidence": "evidence/p09/v2-nested-physical-sampling/summary.json",
   "exact_v2_diagnostic_cli_exists": true,
-  "exact_v2_diagnostic_cli_scope": "Fixed diagnose-v2 startup profile with allocation-free numerical admission, explicit case/family/probe identities, separate per-quantity summaries and ten missing channels. Focused CLI/example coverage and CRAP pass; combined hosted publication gate pending. No arbitrary window selection or qualification.",
+  "exact_v2_diagnostic_cli_scope": "Fixed diagnose-v2 startup profile with allocation-free numerical admission, explicit case/family/probe identities, separate per-quantity summaries and ten missing channels. Focused CLI/example coverage and CRAP pass; combined hosted gates and independently downloaded alpha.1 execution pass. No arbitrary window selection or qualification.",
   "exact_v2_diagnostic_cli_evidence": "evidence/p09/v2-diagnose-cli/summary.json",
   "parallel_exact_v2_diagnostic_force_exists": true,
   "parallel_exact_v2_diagnostic_force_scope": "Pressure and off-stage residual consumers honor explicitly configured force workers while preserving their previous sampling grids. Workers1/2 match fresh serial original-force calculations bitwise; full changed-function CRAP and resource gates pass. Provider timing is informational; no force-resolution or PDE qualification.",

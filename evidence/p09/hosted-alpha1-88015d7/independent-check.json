@@ -1,0 +1,24 @@
+{
+  "status": "matched",
+  "source_revision": "88015d7681c6fb267c77d1454a3594f386d1d2ab",
+  "rust_coverage_test_groups": 157,
+  "rust_coverage_passed": 510,
+  "rust_metrics": {
+    "records": 453,
+    "functions": 3595,
+    "nodes": 4347
+  },
+  "rust_static_maxima": {
+    "cc": 21.0,
+    "cognitive": 21.0,
+    "halstead": 75.9295154185022,
+    "rca_unit_ploc": 462.0
+  },
+  "python_crap_functions": 956,
+  "frozen_source_physical_lines": {
+    "method": "len(git show REV:PATH bytes.splitlines()) for every path in hosted rust-source-files.txt",
+    "files": 453,
+    "maximum": 477,
+    "path": "crates/nsbu-benchmarks/tests/allocation.rs"
+  }
+}
