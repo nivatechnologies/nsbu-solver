@@ -6,6 +6,7 @@
 mod identity;
 pub mod physical;
 mod plan;
+pub mod reference;
 use crate::v2_run::Run;
 use nsbu_solver::{
     diagnostics::comparison::{BandComparison, ComparisonPlan},

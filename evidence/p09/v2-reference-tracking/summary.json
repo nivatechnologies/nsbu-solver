@@ -1,0 +1,51 @@
+{
+  "status": "focused local numerical and quality gates passed; hosted gates pending",
+  "profile": {
+    "retained_grids": [4, 8, 12],
+    "steps": [64, 32, 16],
+    "force_grid": 12,
+    "sample_grid": 12,
+    "endpoint_ticks": 128,
+    "tick_exponent": -20,
+    "accepted_pde_windows": 0
+  },
+  "finest_cm_endpoint_rms": {
+    "velocity": 1.8873998839615518e-7,
+    "gradient": 9.142791231564898e-6,
+    "ordered_hessian": 9.325614204173285e-4,
+    "vorticity": 9.0193622044277e-6
+  },
+  "focused_tests": {
+    "harness": 4,
+    "unit": 1,
+    "allocation_executables": 1,
+    "release_examples": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "instrumented_files": 6,
+    "lines": {"covered": 702, "count": 720, "percent": 97.5},
+    "branches": {"covered": 21, "count": 24, "percent": 87.5}
+  },
+  "quality_maxima": {
+    "cyclomatic": 11,
+    "cognitive": 12,
+    "halstead_difficulty": 67.3654,
+    "physical_lines": 353,
+    "crap": 11
+  },
+  "allocation": {
+    "admission_allocations": 0,
+    "execution_allocations": 0,
+    "construction_bytes": 20135360,
+    "joint_reserved_bytes": 25143560
+  },
+  "work": {
+    "attempts": 3,
+    "reference_evaluations": 5184,
+    "root_iterations": 663552,
+    "scalar_transforms": 810,
+    "weighted_visits": 4920528
+  },
+  "scientific_scope": "global sampled velocity, gradient, ordered Hessian and vorticity tracking only; no pressure, region, arithmetic-sufficiency, convergence or accepted-window claim"
+}

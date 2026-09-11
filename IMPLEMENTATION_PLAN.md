@@ -695,3 +695,18 @@ both complete retained-band velocity and derivative-sensitive comparisons, with
 a deliberate ownership/self-comparison negative control. The post-startup endpoint is 1/2048;
 measured differences are retained without a sufficiency or convergence decision.
 P08/P09/P10 remain incomplete and accepted concentrating windows remain zero.
+
+## P09 exact-v2 analytical trajectory tracking
+
+The [analytical tracking consumer](docs/V2_REFERENCE_TRACKING.md) observes all
+six synchronized exact-v2 family states without mutation. One cached reference
+evaluation per clock/grid point supplies velocity, complete gradient, ordered
+Hessian and curl targets; three reusable derivative workspaces sample every
+actual retained band. Joint storage, reference/root/FFT/traversal work, attempts,
+foreign/stale refusal, terminal publication and allocation contracts pass focused
+checks. Independent signed Fourier reconstruction checks all global RMS/peak/
+relative statistics, and the existing 120-digit reference fixture remains within
+its tolerance. The coarse startup endpoint has nonzero errors, including N12/h16
+CM velocity RMS 1.8874e-7 and Hessian RMS 9.3256e-4. This partial global sampled
+study does not qualify pressure, regions, current-grid arithmetic or a PDE window.
+P08/P09/P10 remain incomplete with zero accepted concentrating windows.
