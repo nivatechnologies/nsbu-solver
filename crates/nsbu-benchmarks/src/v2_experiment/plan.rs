@@ -111,7 +111,7 @@ impl<'a> FamilyPlan<'a> {
         self.identity
     }
 
-    pub(super) fn require_sample(
+    pub(crate) fn require_sample(
         self,
         family: &V2Family<'_>,
         next: usize,

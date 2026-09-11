@@ -3,7 +3,7 @@ use super::{identity, ForceFamily, ForceFamilyError};
 use crate::{runtime_force::ForceSettings, v2_run};
 use nsbu_solver::{
     diagnostics::comparison::ComparisonPlan,
-    domain::{Domain, Layout},
+    domain::{Domain, Layout, TickClock},
     experiment::control::Configuration,
     integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},
     verification::times::TestedTimes,
@@ -102,6 +102,30 @@ impl<'a> ForceFamilyPlan<'a> {
     /// Canonical SHA-256 over every admitted setting and manifest clock.
     pub fn identity(self) -> [u8; 32] {
         self.identity
+    }
+    /// Require a complete synchronized publication from the matching family owner.
+    pub(crate) fn require_sample(
+        self,
+        family: &ForceFamily<'_>,
+        next: usize,
+    ) -> Result<TickClock, ForceFamilyError> {
+        let clock = self
+            .times
+            .as_slice()
+            .get(next)
+            .copied()
+            .ok_or(ForceFamilyError::InvalidFamily)?;
+        if family.failed
+            || family.plan.identity != self.identity
+            || family.next != next + 1
+            || family
+                .branches
+                .iter()
+                .any(|branch| branch.state().clock() != clock)
+        {
+            return Err(ForceFamilyError::InvalidFamily);
+        }
+        Ok(clock)
     }
 }
 

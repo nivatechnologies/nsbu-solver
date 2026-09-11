@@ -81,6 +81,10 @@ name = "v2_force_family_allocation"
 harness = false
 
 [[test]]
+name = "v2_force_binding_allocation"
+harness = false
+
+[[test]]
 name = "v2_pressure_allocation"
 harness = false
 

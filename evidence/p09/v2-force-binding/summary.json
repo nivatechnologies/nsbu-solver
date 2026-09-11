@@ -1,0 +1,42 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 force-resolution binder",
+  "status": "source-matched numerical, allocation, CRAP and static gates pass; focused branch coverage remains below target",
+  "parent_commit": "88015d7681c6fb267c77d1454a3594f386d1d2ab",
+  "source_commit": "e1dc2d3",
+  "resource_observation": {
+    "construction_bytes": 25620608,
+    "declared_joint_bytes": 30816624,
+    "charged_comparison_words": 864,
+    "steady_allocations": 0,
+    "force_grids": [6, 12, 24],
+    "ordinary_grids": [4, 8, 12],
+    "ordinary_force_grid": 12
+  },
+  "focused_coverage": {
+    "lines": {"count": 469, "covered": 462, "percent": 98.50746268656717},
+    "branches": {"count": 46, "covered": 30, "percent": 65.21739130434783}
+  },
+  "focused_function_count": 46,
+  "focused_crap_maximum": 18.77914951989026,
+  "changed_static_maxima": {
+    "cyclomatic_function": 17.0,
+    "cognitive_function": 9.0,
+    "halstead_difficulty_function": 43.35294117647059,
+    "halstead_difficulty_all_nodes": 57.64912280701754
+  },
+  "whole_source_static_maxima": {
+    "cyclomatic_function": 21.0,
+    "cognitive_function": 21.0,
+    "halstead_difficulty_function": 60.0,
+    "halstead_difficulty_all_nodes": 75.9295154185022,
+    "maximum_physical_file_lines": 477
+  },
+  "cancelled_incomplete_coverage_profile": "M8/M16/M32; budget-terminated after 32 minutes",
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "Focused instrumented branch coverage is 65.2174%, below the established 80% target.",
+    "Raw spectral norms are distinct from sampled gradient and Hessian RMS review channels.",
+    "No force-precision qualification or PDE-window acceptance follows from this diagnostic."
+  ]
+}
