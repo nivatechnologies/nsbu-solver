@@ -40,9 +40,9 @@
     "latest_hosted_ci_status": "Source 6f5c630 passes both hosted workflows (retained evidence). Later source 441da25 passed Python but failed the Rust cognitive-complexity gate; current local increments require a new combined hosted run before publication.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Exact-v2 accepted-node binding passes focused numerical, allocation and quality gates; combined hosted validation remains pending. Zero accepted PDE windows.",
-      "evidence": "evidence/p09/v2-node-binding/summary.json",
-      "additional_evidence": "evidence/p09/reference-oracle-speed/summary.json"
+      "status": "Exact-v2 residual and node-binding consumers pass focused gates. Regional cognitive CI correction merged; test-oracle file-level Halstead correction and combined hosted validation pending. Zero accepted PDE windows.",
+      "evidence": "evidence/p09/v2-residuals/summary.json",
+      "additional_evidence": "evidence/p09/v2-node-binding/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json"
   },
@@ -176,7 +176,8 @@
       "v2_probe_evidence": "evidence/p09/v2-probes/summary.json",
       "v2_regional_reference_evidence": "evidence/p09/v2-regional-tracking/summary.json",
       "v2_combined_hosted_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
-      "v2_node_binding_evidence": "evidence/p09/v2-node-binding/summary.json"
+      "v2_node_binding_evidence": "evidence/p09/v2-node-binding/summary.json",
+      "v2_residual_evidence": "evidence/p09/v2-residuals/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -321,5 +322,7 @@
   "actual_v2_regional_reference_tracking_scope": "Read-only global plus five exclusive sampled spatial classes for velocity, gradient, ordered Hessian and vorticity across six independently evolved accepted states. Empty classes remain NoSamples; focused global-equality, state-integrity, resource and quality checks pass. No pressure/gauge, current-grid arithmetic, continuum or PDE qualification.",
   "actual_v2_regional_reference_tracking_evidence": "evidence/p09/v2-regional-tracking/summary.json",
   "exact_v2_accepted_node_binding_exists": true,
-  "exact_v2_accepted_node_binding_scope": "Read-only bitwise comparison of six independent ordinary states with exact retained accepted nodes in a separate probe family. Missing retained nodes remain explicit; no interpolation substitution or qualification."
+  "exact_v2_accepted_node_binding_scope": "Read-only bitwise comparison of six independent ordinary states with exact retained accepted nodes in a separate probe family. Missing retained nodes remain explicit; no interpolation substitution or qualification.",
+  "exact_v2_offstage_residual_family_exists": true,
+  "exact_v2_offstage_residual_family_scope": "Six independently reconstructed exact-v2 trajectories, fresh common-grid original forcing, complete doubled-band momentum defects and five comparisons at genuine non-stage clocks. Actual accepted-node geometry retained; no continuous-time or PDE-window qualification."
 }

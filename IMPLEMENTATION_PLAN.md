@@ -770,3 +770,17 @@ numerical, resource and quality checks pass: 96.43% line coverage, 84.62% branch
 coverage and maximum CRAP 17. Residual assembly, binding to the independently
 owned accepted-state diagnostic family, and external reconstruction import remain
 open. Combined-source hosted checks are pending; no PDE window is accepted.
+
+## P09 exact-v2 off-stage residual family
+
+The [residual consumer](docs/V2_RESIDUALS.md) measures six complete doubled-band
+momentum defects from genuine non-stage reconstructed fields, using fresh
+original exact-v2 forcing on one common doubled force-sampling grid. Independent
+late-mode convolution, force-sign and nonlinear-omission controls pass;
+[focused evidence](evidence/p09/v2-residuals/summary.json) records bounded work,
+zero steady allocations, 94.5455% line / 80% branch coverage and maximum CRAP 16.
+The strengthened [probe oracle](evidence/p09/v2-probe-oracle-correction/README.md)
+uses the correct configured diagnostic force grid and records the withdrawn
+intermediate result. Combined hosted checks remain pending. The diagnostic
+coordinator, complete refinement channels and concentrating qualification remain
+open; P08/P09/P10 are incomplete and accepted PDE windows remain zero.
