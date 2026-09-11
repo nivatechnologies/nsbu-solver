@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Independent reconstructed balance/quadrature passes all local gates: 391 Rust tests/probes, unchanged 220-test Python profile, complete-scope line/branch coverage and every required complexity/CRAP/typing gate. Clean replay, packaging and frozen/bootstrap checks pass; hosted verification pending.",
+    "status": "Exact force-evaluation optimizations pass all local gates: 398 Rust tests/probes, unchanged 220-test Python profile, complete-scope line/branch coverage and every required complexity/CRAP/typing gate. Clean replay, packaging and frozen/bootstrap checks pass; hosted verification pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p08/balance-probes/summary.json",
+    "evidence": "evidence/p09/force-evaluation/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p08/balance-probes/summary.json",
+    "rust_evidence": "evidence/p09/force-evaluation/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -127,7 +127,8 @@
       "streamed_residual_evidence": "evidence/p08/streamed-residuals/summary.json",
       "probe_diagnostics_hosted_rust": "evidence/p08/probe-diagnostics/hosted-rust.json",
       "streamed_residual_hosted_ci": "evidence/p08/streamed-residuals/hosted-rust.json",
-      "balance_probe_evidence": "evidence/p08/balance-probes/summary.json"
+      "balance_probe_evidence": "evidence/p08/balance-probes/summary.json",
+      "balance_probe_hosted_evidence": "evidence/p08/balance-probes/summary.json"
     },
     "P09": {
       "status": "in-progress; production physical-reduction arithmetic passes local gates; complete all-observable/artifact and concentrating qualification pending",
@@ -154,7 +155,8 @@
       "reference_gauge_evidence": "evidence/p09/reference-gauge/summary.json",
       "reference_gauge_hosted_ci": "evidence/p09/reference-gauge/hosted-rust.json",
       "reduction_arithmetic_evidence": "evidence/p09/reduction-arithmetic/summary.json",
-      "reduction_arithmetic_hosted_ci": "evidence/p09/reduction-arithmetic/hosted-rust.json"
+      "reduction_arithmetic_hosted_ci": "evidence/p09/reduction-arithmetic/hosted-rust.json",
+      "force_evaluation_evidence": "evidence/p09/force-evaluation/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -208,5 +210,8 @@
   "complete_smooth_reconstructed_physical_diagnostics_exist": true,
   "complete_smooth_reconstructed_physical_diagnostics_scope": "Six complete physical quantities and five actual trajectory pairs at exact accepted-history probe times, with fresh probe-time unprojected force and full doubled-band pressure. Complete provenance, finite joint resources and terminal child failure. All-channel and concentrating qualification remain.",
   "reconstructed_balance_quadrature_exists": true,
-  "reconstructed_balance_quadrature_scope": "Sixty independently evaluated smooth branch balances at exact physical probes, three strictly refined Simpson schedules and eighteen complete integrals. Whole-report transactions and unchanged integrated/reconstructed field bits verified; no concentrating qualification."
+  "reconstructed_balance_quadrature_scope": "Sixty independently evaluated smooth branch balances at exact physical probes, three strictly refined Simpson schedules and eighteen complete integrals. Whole-report transactions and unchanged integrated/reconstructed field bits verified; no concentrating qualification.",
+  "exact_axial_force_cache_exists": true,
+  "exact_jet_derivative_tables_exist": true,
+  "force_evaluation_optimization_scope": "Original pointwise and full-spectrum words retained on tested cases, allocation-free requests, separate exact-clock input bindings, 3.046 median measured small-grid speed ratio; no new force accuracy or PDE qualification."
 }
