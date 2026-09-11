@@ -1,5 +1,9 @@
 //! Fresh doubled-band exact-v2 force and conservative residual assembly.
-use crate::{provider::V2Force, v2_experiment::probes::ProbeFields, v2_run::Origin};
+use crate::{
+    runtime_force::{ForceSettings, RunForce},
+    v2_experiment::probes::ProbeFields,
+    v2_run::Origin,
+};
 use nsbu_solver::{
     diagnostics::{conservative::ConservativeWorkspace, norms::Norms, residual::ResidualPlan},
     domain::{Domain, Layout},
@@ -58,6 +62,7 @@ pub struct ResidualSample {
     domain: Domain,
     diagnostic: Domain,
     force_samples: Layout,
+    force_workers: usize,
     norms: Norms,
 }
 impl ResidualSample {
@@ -85,15 +90,19 @@ impl ResidualSample {
     pub fn force_sample_layout(self) -> Layout {
         self.force_samples
     }
+    /// Effective persistent-worker count; zero denotes serial sampling.
+    pub fn force_workers(self) -> usize {
+        self.force_workers
+    }
 }
 
 pub(super) struct ResidualWorkspace {
     source: Domain,
     diagnostic: Domain,
-    force_samples: Layout,
+    force_settings: ForceSettings,
     bounds: ResidualBounds,
     force_limit: ForceLimits,
-    force: V2Force,
+    force: RunForce,
     products: ConservativeWorkspace,
     forcing: Field,
     conservative: Field,
@@ -104,25 +113,25 @@ pub(super) struct ResidualWorkspace {
 impl ResidualWorkspace {
     pub(super) fn new(
         source: Domain,
-        force_samples: Layout,
+        force_settings: ForceSettings,
         maximum_probes: usize,
         cap: usize,
     ) -> Result<Self, SolverError> {
-        let bounds = Self::reservation(source, force_samples, maximum_probes)?;
+        let bounds = Self::reservation(source, force_settings, maximum_probes)?;
         if bounds.storage_bytes > cap {
             return Err(SolverError::ResourceLimit);
         }
         let diagnostic = ConservativeWorkspace::diagnostic_domain(source)?;
-        let force_limit = V2Force::preflight(diagnostic, force_samples)?;
+        let force_limit = force_settings.limits(diagnostic)?;
         let m = diagnostic.layout().half_len();
         let scratch = Scratch::new(m)?;
         Ok(Self {
             source,
             diagnostic,
-            force_samples,
+            force_settings,
             bounds,
             force_limit,
-            force: V2Force::new(diagnostic, force_samples, force_limit.storage_bytes)?,
+            force: force_settings.build(diagnostic, force_limit.storage_bytes)?,
             products: ConservativeWorkspace::new(
                 source,
                 ConservativeWorkspace::reservation(source)?,
@@ -136,14 +145,14 @@ impl ResidualWorkspace {
     }
     pub(super) fn reservation(
         source: Domain,
-        force_samples: Layout,
+        force_settings: ForceSettings,
         maximum_probes: usize,
     ) -> Result<ResidualBounds, SolverError> {
         if maximum_probes == 0 {
             return Err(SolverError::ResourceLimit);
         }
         let diagnostic = ConservativeWorkspace::diagnostic_domain(source)?;
-        let force = V2Force::preflight(diagnostic, force_samples)?;
+        let force = force_settings.limits(diagnostic)?;
         let storage_bytes = storage_reservation(source, diagnostic, force.storage_bytes)?;
         let per_probe = per_probe_work(diagnostic, force)?;
         Ok(ResidualBounds {
@@ -183,7 +192,8 @@ impl ResidualWorkspace {
             origin: Origin::InternalFromRest,
             domain: self.source,
             diagnostic: self.diagnostic,
-            force_samples: self.force_samples,
+            force_samples: self.force_settings.samples,
+            force_workers: self.force_settings.workers,
             norms,
         })
     }
@@ -294,12 +304,18 @@ mod tests {
     fn zero_allowance_small_cap_wrong_domain_and_exhaustion_are_refused() {
         let source = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
         let samples = Layout::new([24; 3]).unwrap();
-        assert!(ResidualWorkspace::reservation(source, samples, 0).is_err());
-        let bounds = ResidualWorkspace::reservation(source, samples, 1).unwrap();
-        assert!(ResidualWorkspace::new(source, samples, 1, bounds.storage_bytes - 1).is_err());
-
-        let mut workspace =
-            ResidualWorkspace::new(source, samples, 1, bounds.storage_bytes).unwrap();
+        let force = ForceSettings {
+            samples,
+            workers: 1,
+        };
+        assert!(ResidualWorkspace::reservation(source, force, 0).is_err());
+        for workers in [1, 2] {
+            let force = ForceSettings { samples, workers };
+            let bounds = ResidualWorkspace::reservation(source, force, 1).unwrap();
+            assert!(ResidualWorkspace::new(source, force, 1, bounds.storage_bytes - 1).is_err());
+        }
+        let bounds = ResidualWorkspace::reservation(source, force, 1).unwrap();
+        let mut workspace = ResidualWorkspace::new(source, force, 1, bounds.storage_bytes).unwrap();
         let wrong = Domain::new([8; 3], [1.0; 3], 1.0).unwrap();
         let empty: [&[Complex64]; 3] = [&[], &[], &[]];
         let fields = || ProbeFields {

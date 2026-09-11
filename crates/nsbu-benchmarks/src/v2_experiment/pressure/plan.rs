@@ -1,7 +1,7 @@
 //! Bounded admission for independent full-band V2 pressure diagnostics.
 use super::{PressureFamilyWorkspace, PressureRefinementSample};
 use crate::{
-    provider::V2Force,
+    runtime_force::ForceSettings,
     v2_experiment::{FamilyError, FamilyPlan},
 };
 use nsbu_solver::{
@@ -43,6 +43,7 @@ pub struct PressureFamilyPlan<'a> {
     pub(super) family: FamilyPlan<'a>,
     pub(super) source: Domain,
     pub(super) diagnostic: Domain,
+    pub(super) force: ForceSettings,
     pub(super) samples: Layout,
     pub(super) floors: [f64; 2],
     pub(super) provider_limits: nsbu_solver::integrators::forcing::ForceLimits,
@@ -74,7 +75,13 @@ impl<'a> PressureFamilyPlan<'a> {
         {
             return Err(SolverError::InvalidDomain.into());
         }
-        let provider_limits = V2Force::preflight(diagnostic, diagnostic.layout())?;
+        // Pressure has always sampled force on this finest doubled domain.  Only
+        // the already configured trajectory worker count is inherited here.
+        let force = ForceSettings {
+            samples: diagnostic.layout(),
+            workers: family.settings().force.workers,
+        };
+        let provider_limits = force.limits(diagnostic)?;
         let storage_bytes = storage(source, diagnostic, samples, provider_limits)?;
         let joint_storage_bytes = add(storage_bytes, family.bounds().storage_bytes)?;
         if joint_storage_bytes > joint_cap {
@@ -91,6 +98,7 @@ impl<'a> PressureFamilyPlan<'a> {
             family,
             source,
             diagnostic,
+            force,
             samples,
             floors,
             provider_limits,
@@ -113,7 +121,11 @@ impl<'a> PressureFamilyPlan<'a> {
     }
     /// Full doubled force/pressure domain.
     pub fn force_layout(self) -> Layout {
-        self.diagnostic.layout()
+        self.force.samples
+    }
+    /// Effective persistent-worker count; zero selects the serial provider.
+    pub fn force_workers(self) -> usize {
+        self.force.workers
     }
     /// Physical comparison sample layout.
     pub fn sample_layout(self) -> Layout {

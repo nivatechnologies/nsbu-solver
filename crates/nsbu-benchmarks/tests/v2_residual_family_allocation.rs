@@ -16,13 +16,21 @@ use v2_family_support::{clocks, settings, CAP};
 static GLOBAL: &StatsAlloc<std::alloc::System> = &INSTRUMENTED_SYSTEM;
 
 fn main() {
+    for workers in [1, 2] {
+        audit(workers);
+    }
+}
+
+fn audit(workers: usize) {
     let accepted = clocks();
     let probes =
         [0, 7, 128].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
     let subset = [probes[1]];
     let admission = Region::new(GLOBAL);
+    let mut configured = settings(1e-5);
+    configured.force.workers = workers;
     let family = FamilyPlan::new(
-        settings(1e-5),
+        configured,
         TestedTimes::new(&accepted, accepted.len()).unwrap(),
         CAP,
     )
@@ -53,7 +61,8 @@ fn main() {
         (0, 0, 0)
     );
     println!(
-        "v2 residuals construction_bytes={} declared_bytes={} provider_work={} transforms={} coefficient_work={} steady_allocations=0",
+        "v2 residuals workers={workers} force_grid={:?} construction_bytes={} declared_bytes={} provider_work={} transforms={} coefficient_work={} steady_allocations=0",
+        plan.force_settings().samples.dimensions(),
         built.bytes_allocated,
         plan.bounds().joint_storage_bytes,
         residuals.charged_work().residual.provider_work_units,

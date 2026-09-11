@@ -30,7 +30,7 @@ impl<'a> ResidualFamily<'a> {
         let values = plan.sources.map(|source| {
             ResidualWorkspace::new(
                 source,
-                plan.force_samples,
+                plan.force,
                 plan.bounds.work.attempts,
                 plan.bounds.storage_bytes,
             )

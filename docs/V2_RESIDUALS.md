@@ -17,12 +17,15 @@ publish residual fields.
 
 Each child retains its residual on its own conservative doubled band: `N=4`,
 `N=8` and `N=12` therefore produce `2N=8`, `2N=16` and `2N=24` residual grids.
-All six children evaluate the original serial `V2Force` on one fixed `M=24`
-sampling grid derived from the probe family's configured force grid.  Admission
-requires that grid to cover the finest doubled band.  Spatial, temporal and
-method residual comparisons therefore hold the diagnostic force input profile
-fixed; each branch still performs a fresh force evaluation at the actual probe
-clock.
+All six children evaluate the original `V2Force` arithmetic on one fixed `M=24`
+sampling grid derived from the probe family's configured force grid.  A zero
+worker setting uses the serial provider; a positive setting uses the existing
+persistent-worker sampler followed by the same serial transforms. Admission
+includes the selected provider's buffers, worker metadata and configured stacks,
+and each report records the effective grid and worker count. Spatial, temporal
+and method residual comparisons therefore hold the diagnostic force input
+profile fixed; each branch still performs a fresh force evaluation at the actual
+probe clock.
 
 The focused operator oracle explicitly convolves signed Fourier modes, applies
 the Helmholtz projection, viscosity and reconstructed time derivative, and

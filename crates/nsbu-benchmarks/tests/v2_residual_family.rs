@@ -11,7 +11,7 @@ use nsbu_benchmarks::v2_experiment::{
     FamilyError, FamilyPlan,
 };
 use nsbu_solver::{
-    diagnostics::conservative::ConservativeWorkspace,
+    diagnostics::{conservative::ConservativeWorkspace, residual::ResidualPlan},
     domain::{Domain, Layout, TickClock},
     integrators::forcing::PrescribedForce,
     verification::times::TestedTimes,
@@ -42,6 +42,113 @@ fn probe_plan(tolerance: f64) -> ProbePlan<'static> {
         CAP,
     )
     .unwrap()
+}
+
+#[test]
+fn configured_workers_match_serial_residuals_on_the_same_probe_fields() {
+    for workers in [1, 2] {
+        compare_worker_residuals(workers);
+    }
+}
+
+fn compare_worker_residuals(workers: usize) {
+    let accepted = Box::leak(Box::new(accepted_clocks()));
+    let probe_times = Box::leak(Box::new([clock(0), clock(95), clock(128)]));
+    let mut configured = settings(1e-5);
+    configured.force.workers = workers;
+    let family = FamilyPlan::new(
+        configured,
+        TestedTimes::new(accepted, accepted.len()).unwrap(),
+        CAP,
+    )
+    .unwrap();
+    let probe_plan = ProbePlan::new(
+        family,
+        TestedTimes::new(probe_times, probe_times.len()).unwrap(),
+        probe_times.len(),
+        CAP,
+    )
+    .unwrap();
+    let residual_times = Box::leak(Box::new([clock(95)]));
+    let plan = ResidualFamilyPlan::new(probe_plan, residual_times, 1, CAP).unwrap();
+    assert_eq!(plan.force_settings().workers, workers);
+    assert_eq!(plan.force_settings().samples.dimensions(), [24; 3]);
+    let mut probes = ProbeFamily::new(probe_plan).unwrap();
+    let mut residuals = ResidualFamily::new(plan).unwrap();
+    probes.advance().unwrap();
+    let probe = probes.advance().unwrap().unwrap();
+    assert_eq!(probe.clock(), clock(95));
+    let started = std::time::Instant::now();
+    let report = residuals.measure(&probes).unwrap();
+    let elapsed = started.elapsed();
+    for index in 0..6 {
+        let branch = report.branches()[index];
+        assert_eq!(branch.force_workers(), workers);
+        assert_eq!(branch.force_sample_layout().dimensions(), [24; 3]);
+        let serial = serial_residual(probes.fields(index).unwrap(), plan.force_settings().samples);
+        let parallel = residuals.fields(index).unwrap().coefficients;
+        for (actual, expected) in parallel.iter().zip(&serial) {
+            assert_eq!(coefficient_bits(actual), coefficient_bits(expected));
+        }
+    }
+    eprintln!(
+        "exact-v2 residual fixed M24 workers={workers} six_branch_time_us={}",
+        elapsed.as_micros()
+    );
+}
+
+fn serial_residual(
+    fields: nsbu_benchmarks::v2_experiment::probes::ProbeFields<'_>,
+    samples: Layout,
+) -> [Vec<Complex64>; 3] {
+    let diagnostic = ConservativeWorkspace::diagnostic_domain(fields.domain).unwrap();
+    let n = diagnostic.layout().half_len();
+    let mut forcing = zero_field(n);
+    let limits = V2Force::preflight(diagnostic, samples).unwrap();
+    V2Force::new(diagnostic, samples, limits.storage_bytes)
+        .unwrap()
+        .evaluate(
+            fields.clock,
+            limits,
+            forcing.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    let mut conservative = zero_field(n);
+    let mut pressure = vec![Complex64::new(0.0, 0.0); n];
+    ConservativeWorkspace::new(
+        fields.domain,
+        ConservativeWorkspace::reservation(fields.domain).unwrap(),
+    )
+    .unwrap()
+    .evaluate(
+        fields.value,
+        forcing.each_ref().map(Vec::as_slice),
+        conservative.each_mut().map(Vec::as_mut_slice),
+        &mut pressure,
+    )
+    .unwrap();
+    let mut residual = zero_field(n);
+    ResidualPlan::new(fields.domain)
+        .unwrap()
+        .evaluate(
+            fields.value,
+            fields.derivative,
+            conservative.each_ref().map(Vec::as_slice),
+            residual.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    residual
+}
+
+fn zero_field(n: usize) -> [Vec<Complex64>; 3] {
+    std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); n])
+}
+
+fn coefficient_bits(values: &[Complex64]) -> Vec<(u64, u64)> {
+    values
+        .iter()
+        .map(|value| (value.re.to_bits(), value.im.to_bits()))
+        .collect()
 }
 
 #[test]
