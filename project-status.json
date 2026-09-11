@@ -46,7 +46,8 @@
     },
     "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
     "latest_local_python_evidence": "evidence/p09/python-combined-local-20260911/summary.json",
-    "latest_rust_crap_correction_evidence": "evidence/p09/v2-example-crap/ci-correction/summary.json"
+    "latest_rust_crap_correction_evidence": "evidence/p09/v2-example-crap/ci-correction/summary.json",
+    "latest_local_integration_evidence": "evidence/p09/alpha1-local-integration/summary.json"
   },
   "packages": {
     "B00": {
@@ -344,5 +345,8 @@
   "exact_v2_diagnostic_cli_evidence": "evidence/p09/v2-diagnose-cli/summary.json",
   "parallel_exact_v2_diagnostic_force_exists": true,
   "parallel_exact_v2_diagnostic_force_scope": "Pressure and off-stage residual consumers honor explicitly configured force workers while preserving their previous sampling grids. Workers1/2 match fresh serial original-force calculations bitwise; full changed-function CRAP and resource gates pass. Provider timing is informational; no force-resolution or PDE qualification.",
-  "parallel_exact_v2_diagnostic_force_evidence": "evidence/p09/v2-diagnostic-workers/summary.json"
+  "parallel_exact_v2_diagnostic_force_evidence": "evidence/p09/v2-diagnostic-workers/summary.json",
+  "actual_v2_first_endpoint_family_pilot_exists": true,
+  "actual_v2_first_endpoint_family_pilot_scope": "Frozen source961e718 independently evolved N8/12/16, fixed M16 and three time settings with CM/HO from rest to1/256; five accepted/off-stage reports completed in2168.763s under2700s. Full spectral spatial H1 differences34.19->39.17 remain unresolved despite much smaller temporal/method differences; no force-grid sufficiency, arithmetic or PDE qualification.",
+  "actual_v2_first_endpoint_family_pilot_evidence": "evidence/p09/v2-first-endpoint-diagnostic/manifest.json"
 }

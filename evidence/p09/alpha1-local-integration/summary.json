@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0-alpha.1",
+  "coordinator_test_source": "7abac256",
+  "cli_test_source": "16803ff164340a3c7a297e74c3690f9ddf03e88f",
+  "scope": "Merged numerical/coordinator CLI regression, allocation, static, documentation and fresh workspace packaging; complete hosted release gate still required",
+  "coordinator_tests": 3,
+  "cli_tests": 3,
+  "allocation_probe": {
+    "events": 7,
+    "admission_allocations": 0,
+    "construction_bytes": 59019440,
+    "joint_reservation_bytes": 69490624,
+    "execution_allocations": 0
+  },
+  "whole_rust_static_maxima": {
+    "function_cyclomatic": 21,
+    "function_cognitive": 21,
+    "all_node_halstead_difficulty": 75.9295154185022,
+    "physical_file_lines": 477
+  },
+  "formatting": "passed",
+  "workspace_clippy": "passed",
+  "strict_workspace_rustdoc": "passed",
+  "fresh_workspace_package_verification": "passed",
+  "accepted_pde_windows": 0,
+  "hosted_release_gate": "pending"
+}

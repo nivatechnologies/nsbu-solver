@@ -843,3 +843,14 @@ residual diagnostics now honor the configured original-force worker count
 without changing their sample grids; [worker evidence](evidence/p09/v2-diagnostic-workers/summary.json)
 records bitwise serial controls and complete changed-function CRAP checks.
 Combined hosted validation remains required. P08/P09/P10 remain incomplete.
+
+## P09 first-endpoint family pilot
+
+A [bounded N8/12/16 family pilot](evidence/p09/v2-first-endpoint-diagnostic/manifest.json)
+completed five accepted/off-stage reports from rest through tick4096 (`1/256`)
+in 36 minutes, under a 45-minute timeout. Fixed force sampling was M16, with
+three time settings and independent CM/HO branches. The [full-band extraction](evidence/p09/v2-first-endpoint-diagnostic/spectral-full-norms.json)
+shows spatial H1 differences increasing from34.19 to39.17; temporal and method
+differences are much smaller. This exposes unresolved spatial behavior rather
+than accepting a window. The frozen execution source predates parallel
+pressure/residual consumers; its exact harness and raw output are retained.

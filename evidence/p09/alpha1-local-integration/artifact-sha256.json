@@ -1,0 +1,9 @@
+{
+  "cli.log.gz": "ee5f6d7166e80890bdc04c21cb2143d9aecd0a5a8d2a2f07455ad56765c9e14b",
+  "clippy.log.gz": "f0fd30e06fd83910d614314fc336d44accbd656c3cb76fc3991266b0c47dd750",
+  "coordinator.log.gz": "cf6ce5857b6c4219074073cbd6afc4fabc7b94d79cd5b37918706474fa599526",
+  "package.log.gz": "ca4bbd16bcbd300d3e009f9c18ec8b0c3714961aa7eacb3002b021af606f31a5",
+  "rust-metrics.jsonl.gz": "91134d280a5ab87fda73314e9a4c655dfed9f5849654887887eebbdc9350b66c",
+  "rustdoc.log.gz": "c4317bb476dbedbf76ac3a8c2c414b4ce5f48d2bb4514b6c4990e5ca9781e756",
+  "summary.json": "911dc3a45501761b9e9511b6dd8cd300e31328914c79f3629804adfbb8841f4e"
+}
