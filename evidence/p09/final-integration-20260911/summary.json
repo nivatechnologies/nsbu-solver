@@ -1,0 +1,21 @@
+{
+  "source_commit": "2b4f123ba48655955c208d3d3d6e68b7aba0a66e",
+  "scope": "combined adapter/export/force-binder development source; documentation edits do not change tested Rust files",
+  "checks": {
+    "fmt": "pass",
+    "workspace_all_target_clippy": "pass",
+    "strict_workspace_rustdoc": "pass",
+    "repository": "pass",
+    "function_cyclomatic_below22": "pass",
+    "function_cognitive_below22": "pass",
+    "all_node_halstead_below80": "pass",
+    "physical_Rust_file_lines_below500": "pass"
+  },
+  "maximum_physical_Rust_file_lines": 477,
+  "whole_maintained_hosted_coverage": "pending; no complete source-matched coverage result claimed",
+  "focused_branch_gaps": {
+    "review_adapter_percent": 75.0,
+    "force_binder_percent": 65.21739130434783
+  },
+  "accepted_pde_windows": 0
+}

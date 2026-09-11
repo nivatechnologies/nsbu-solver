@@ -892,3 +892,14 @@ shows spatial H1 differences increasing from34.19 to39.17; temporal and method
 differences are much smaller. This exposes unresolved spatial behavior rather
 than accepting a window. The frozen execution source predates parallel
 pressure/residual consumers; its exact harness and raw output are retained.
+
+## P09 force-resolution baseline binding
+
+The [spectral binder](docs/V2_FORCE_BINDING.md) validates the exact published
+clocks/settings and every baseline coefficient word between independently
+evolved force and ordinary families. It adds no trajectory owner or acceptance
+decision. [Focused evidence](evidence/p09/v2-force-binding/summary.json) records
+passing numerical/allocation/static checks and CRAP18.779; line coverage is
+98.51% and branch coverage65.22%. The focused branch shortfall remains explicit,
+and whole-maintained combined-source CI is pending. Spectral L2/H1 values are
+not relabeled as sampled gradient/Hessian RMS. P09 remains incomplete.

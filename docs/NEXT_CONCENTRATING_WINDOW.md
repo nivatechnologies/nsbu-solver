@@ -18,11 +18,14 @@ ordered gradient, ordered Hessian and vorticity; its status is permanently
 [export evidence](../evidence/p08/v2-diagnostic-export/README.md) and
 [adapter evidence](../evidence/p09/v2-review-adapter/README.md).
 
-The force-resolution baseline binder is under final test and is **pending source merge**. It
-must be treated as pending integration evidence until its source and tests are
-merged. Its first completed focused run passed tests but failed the CRAP gate
-(38.5 in one production function); a validation-helper correction and fresh
-coverage are in progress. It does not complete the partial review inventory.
+The [force-resolution baseline binder](V2_FORCE_BINDING.md) is now integrated
+on the experimental development branch. Numerical, allocation, CRAP and static
+checks pass at source `e1dc2d3`; focused coverage is 98.51% lines and 65.22%
+branches. That focused shortfall remains explicit; the required whole-maintained
+80% line/branch gate is pending on the combined source. The binder remains
+`DiagnosticOnly` and does not complete the partial review inventory. Its
+[evidence](../evidence/p09/v2-force-binding/summary.json) retains the corrected
+CRAP result (18.779) and the earlier failed/incomplete run history.
 
 ## Numerical fact to carry forward
 
@@ -81,7 +84,7 @@ it does not predict the result at another grid or force profile.
 
 ## Next bounded coding increment
 
-After the pending binder merges, implement a frozen exact-v2 review-profile
+After combined source gates pass, implement a frozen exact-v2 review-profile
 admission layer: caller-owned three nested exact time manifests, actual
 reconstruction geometry, complete observable keys/semantics identity, and a
 bounded row schedule. It should admit no measurements by substitution and should
