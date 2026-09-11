@@ -781,8 +781,7 @@ late-mode convolution, force-sign and nonlinear-omission controls pass;
 zero steady allocations, 94.5455% line / 80% branch coverage and maximum CRAP 16.
 The strengthened [probe oracle](evidence/p09/v2-probe-oracle-correction/README.md)
 uses the correct configured diagnostic force grid and records the withdrawn
-intermediate result. Combined hosted checks remain pending. The diagnostic
-coordinator, complete refinement channels and concentrating qualification remain
+intermediate result. Combined hosted checks remain pending. Complete refinement channels and concentrating qualification remain
 open; P08/P09/P10 are incomplete and accepted PDE windows remain zero.
 
 ## P09 exact-v2 current-grid reference arithmetic
@@ -807,3 +806,17 @@ hand-weighted actual-sample and independent polynomial quadrature checks pass.
 97.568% line / 80.769% branch coverage, maximum CRAP 15.568, bounded work and
 zero steady allocations. Combined hosted validation and complete concentrating
 qualification remain pending; P08/P09/P10 are incomplete.
+
+## P09 bounded exact-v2 diagnostic coordination
+
+The [coordinator](docs/V2_DIAGNOSTIC_COORDINATOR.md) owns two independently
+evolved six-branch families and publishes a complete seven-clock startup
+manifest. Accepted-state spectral, physical, pressure, regional-reference and
+node-binding findings remain distinct from off-stage residual findings. Full
+raw results agree with standalone consumers on the identical actual states.
+[Focused evidence](evidence/p09/v2-diagnostic-coordinator/summary.json) records
+93.590% line / 80% branch coverage, maximum CRAP 16.042, bounded storage/work
+and zero steady allocations. Ten missing channels remain explicit. The
+coordinator applies no acceptance policy; the adapter to the complete numerical
+and lineage review is still pending. Combined hosted validation is pending,
+and P08/P09/P10 remain incomplete with zero accepted PDE windows.
