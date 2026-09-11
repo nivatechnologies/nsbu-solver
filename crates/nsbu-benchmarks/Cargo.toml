@@ -48,6 +48,10 @@ name = "v2_reconstructed_run_allocation"
 harness = false
 
 [[test]]
+name = "v2_probe_family_allocation"
+harness = false
+
+[[test]]
 name = "v2_family_allocation"
 harness = false
 
