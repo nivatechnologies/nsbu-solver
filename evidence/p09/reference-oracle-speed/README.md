@@ -14,7 +14,7 @@ coefficients or waves are cached.
 The legacy direct-angle implementation remains compiled only for tests. On the
 existing N=4, N=8, and N=12 branches, it compares every velocity, gradient,
 ordered-Hessian, and curl component at an axis point, the sampled 5/12 cutoff
-collar, and an interior point. Each point check visits every signed mode and
+collar, and the mixed-coordinate collar point (1,2,3)/12. Each point check visits every signed mode and
 explicitly observes negative-z modes. Component comparisons use the chosen
 roundoff allowance
 `128 * f64::EPSILON * modal_terms * sum_abs_term_magnitudes`; an exactly zero

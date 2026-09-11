@@ -4,15 +4,55 @@
   "base_commit": "6f5c6307b7e5f765a6f7e1062c0b2d6e37fa87ce",
   "implementation_commit": "08ac379d96b79fcbea46beb44b1fe5d0c30df850",
   "inputs": {
-    "state_grids": [4, 4, 8, 8, 12, 12],
-    "sample_grid": [12, 12, 12],
-    "clock": {"tick_exponent": -20, "horizon_ticks": 8192, "elapsed_ticks": 128},
-    "quantities": ["velocity", "gradient", "ordered_hessian", "curl"]
+    "state_grids": [
+      4,
+      8,
+      12,
+      12,
+      12,
+      12
+    ],
+    "sample_grid": [
+      12,
+      12,
+      12
+    ],
+    "clock": {
+      "tick_exponent": -20,
+      "horizon_ticks": 8192,
+      "elapsed_ticks": 128
+    },
+    "quantities": [
+      "velocity",
+      "gradient",
+      "ordered_hessian",
+      "curl"
+    ]
   },
   "legacy_control": {
     "phase": "sin_cos(sum(TAU * signed_mode_axis * point_axis))",
-    "selected_points": [[0, 0, 1], [5, 0, 0], [1, 2, 3]],
-    "point_denominator": [12, 12, 12],
+    "selected_points": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        5,
+        0,
+        0
+      ],
+      [
+        1,
+        2,
+        3
+      ]
+    ],
+    "point_denominator": [
+      12,
+      12,
+      12
+    ],
     "mode_scope": "every retained signed mode, explicitly including negative z",
     "component_allowance": "128 * f64::EPSILON * modal_terms * sum_abs_term_magnitudes",
     "zero_magnitude_rule": "bitwise equality",
@@ -22,9 +62,23 @@
   "unchanged_tracking_gate": "abs(measured - oracle) < 2e-10 * (1 + oracle)",
   "release_timing_seconds": {
     "command": "/usr/bin/time -v cargo test --release -p nsbu-benchmarks --test v2_reference_tracking six_private_actual_states_track_all_reference_tensors_without_mutation -- --exact --nocapture",
-    "legacy_oracle_by_branch": [0.059175872, 0.097158686, 0.204653044, 0.204913840, 0.205108965, 0.206041046],
+    "legacy_oracle_by_branch": [
+      0.059175872,
+      0.097158686,
+      0.204653044,
+      0.20491384,
+      0.205108965,
+      0.206041046
+    ],
     "legacy_oracle_total": 0.977051453,
-    "cached_oracle_by_branch": [0.055755793, 0.078041346, 0.146587114, 0.146535233, 0.146228556, 0.146230985],
+    "cached_oracle_by_branch": [
+      0.055755793,
+      0.078041346,
+      0.146587114,
+      0.146535233,
+      0.146228556,
+      0.146230985
+    ],
     "cached_oracle_total": 0.719379027,
     "oracle_speedup_ratio": 1.358187,
     "oracle_reduction_percent": 26.372,
@@ -49,9 +103,21 @@
     "maximum_rss_kib": 166304
   },
   "focused_coverage": {
-    "lines": {"covered": 502, "count": 506, "percent": 99.2094861660079},
-    "branches": {"covered": 10, "count": 12, "percent": 83.33333333333333},
-    "functions": {"covered": 47, "count": 47, "percent": 100.0}
+    "lines": {
+      "covered": 502,
+      "count": 506,
+      "percent": 99.2094861660079
+    },
+    "branches": {
+      "covered": 10,
+      "count": 12,
+      "percent": 83.33333333333333
+    },
+    "functions": {
+      "covered": 47,
+      "count": 47,
+      "percent": 100.0
+    }
   },
   "quality_maxima": {
     "cyclomatic": 10,
@@ -67,5 +133,6 @@
     "nightly_branch_coverage": "passed",
     "workspace_rustdoc_warnings_denied": "passed"
   },
-  "scientific_scope": "no convergence, accepted-window, pressure-oracle, production-performance, or production-behavior claim"
+  "scientific_scope": "no convergence, accepted-window, pressure-oracle, production-performance, or production-behavior claim",
+  "review_note": "Corrected six-branch grid metadata after review; selected point (1,2,3)/12 lies in the cutoff collar, not the cutoff interior. Numerical data, source-bound raw reports and tolerances are unchanged."
 }

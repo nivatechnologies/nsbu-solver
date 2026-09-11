@@ -269,7 +269,7 @@ fn assert_tensors(cached: &Tensor, legacy: &Tensor, magnitudes: &Tensor, terms: 
 /// Compares the cached phase basis with the legacy direct-angle oracle.
 ///
 /// This focused check covers every signed mode at an axis point, a sampled
-/// cutoff-collar point, and an interior point. The scaled allowance is a
+/// cutoff-collar point, and a mixed-coordinate collar point. The scaled allowance is a
 /// chosen floating-point comparison bound, not a rigorous certification of
 /// the platform `libm` implementation.
 pub fn assert_legacy_equivalence(state: &SpectralState, samples: Layout) {
@@ -277,7 +277,7 @@ pub fn assert_legacy_equivalence(state: &SpectralState, samples: Layout) {
     assert!(matches!(dimensions, [4, 4, 4] | [8, 8, 8] | [12, 12, 12]));
     let basis = phase::Basis::new(dimensions, samples);
     let sample_dimensions = samples.dimensions();
-    // Periodic-axis, sampled cutoff-collar, and interior points.
+    // Periodic-axis and two cutoff-collar points, one with mixed coordinates.
     for point_index in [
         [0, 0, 1],
         [5.min(sample_dimensions[0] - 1), 0, 0],
