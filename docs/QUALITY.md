@@ -498,3 +498,26 @@ Fresh complete coverage and quality gates pass after the simplification.
 P08/P09 remain incomplete. Complete residual/balance arithmetic, reference/force,
 regional/location and transfer refinements, benchmark/artifact binding and current
 grid concentrating qualification remain. No concentrating PDE window is accepted.
+
+## P09 exact force-evaluation optimization progress
+
+The [force-evaluation increment](../evidence/p09/force-evaluation/README.md) passes
+398 Rust tests/probes across 306 Rust files. Executable line/branch coverage is
+98.68%/89.99%; maxima CC21, cognitive18,
+Halstead75.8955, physical-file477 and CRAP24.33594
+meet all gates. All 98 Python/stub files match the verified 220-test profile;
+41 bootstrap tests and frozen mathematical checks rerun. Strict linting, Rustdoc,
+fresh packaging and complete clean-source profile reproduction pass. Hosted checks
+for this increment are pending.
+
+Axial root/jet entries are rebuilt at every exact-clock request, and immutable
+jet derivative indices replace repeated searches. The original point evaluator,
+independent derivative oracle and high-precision force fixture remain separate.
+All tested force/derivative words and full force spectra match. Three interleaved
+baseline/combined passes retain all 36 coefficient hashes with median measured
+speed ratio 3.046 on N8/N12/N16 profiles. Allocation-free requests and prior
+failure contracts pass. These small-grid timings are not large-grid estimates.
+
+P08/P09 remain incomplete. This profile evolves no PDE trajectory. Current-grid
+arithmetic, force/reference/transfer refinements and complete all-observable
+provenance integration remain; accepted concentrating windows remain zero.

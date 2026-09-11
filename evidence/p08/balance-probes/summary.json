@@ -1,7 +1,7 @@
 {
   "package": "P08",
   "increment": "independent-reconstructed-balance-quadrature",
-  "status": "local checks passed; hosted verification pending",
+  "status": "all local and source-matched hosted checks passed",
   "accepted_pde_windows": 0,
   "generated_utc": "2026-09-11T01:34:39.258502+00:00",
   "base_commit": "7b57fd109ca1150c5a43c5de8201d63ea81edd1d",
@@ -190,5 +190,21 @@
     "Complete balance/residual arithmetic, force/reference/regional/location studies, benchmark/artifact binding and concentrating current-grid qualification remain",
     "No concentrating PDE window is accepted"
   ],
-  "artifact_inventory": "artifact-sha256.json"
+  "artifact_inventory": "artifact-sha256.json",
+  "hosted_verification": {
+    "python": {
+      "run_id": 34551437049,
+      "commit": "734efb6ade2e7f535bdb133c827274a01b5e665a",
+      "conclusion": "success",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34551437049",
+      "record": "hosted-python.json"
+    },
+    "rust": {
+      "run_id": 34551437057,
+      "commit": "734efb6ade2e7f535bdb133c827274a01b5e665a",
+      "conclusion": "success",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34551437057",
+      "record": "hosted-rust.json"
+    }
+  }
 }

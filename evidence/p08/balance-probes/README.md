@@ -4,7 +4,10 @@ This P08 increment passes 391 Rust tests/allocation probes across 302 Rust files
 98.68% executable line and 89.93% instrumented branch coverage.
 All complexity, Halstead, file-size and CRAP gates pass. The 98 unchanged
 Python/stub files retain their complete 220-test profile; 41 bootstrap tests and
-frozen mathematical checks rerun successfully. Hosted checks are pending.
+frozen mathematical checks rerun successfully. Both source-matched hosted workflows pass at commit `734efb6`: Rust
+[34551437057](https://github.com/nivatechnologies/nsbu-solver/actions/runs/34551437057)
+and Python/repository
+[34551437049](https://github.com/nivatechnologies/nsbu-solver/actions/runs/34551437049).
 
 The [public workflow](../../../docs/BALANCE_QUADRATURE.md) retains sixty complete
 balance samples, every original accepted-node provenance record and eighteen
