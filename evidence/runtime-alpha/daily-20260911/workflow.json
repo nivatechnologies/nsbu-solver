@@ -1,0 +1,80 @@
+{
+  "conclusion": "success",
+  "event": "workflow_dispatch",
+  "headSha": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "jobs": [
+    {
+      "completedAt": "2026-09-11T05:49:06Z",
+      "conclusion": "success",
+      "databaseId": 103162076362,
+      "name": "release",
+      "startedAt": "2026-09-11T05:48:01Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the complete source history",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Gate release on tracked readiness and source-matched CI",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Select an immutable dated snapshot tag",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Build the public Linux x86_64 CLI",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Assemble binary, notices, documentation and provenance",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Create the immutable snapshot tag",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Publish GitHub prerelease",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the complete source history",
+          "number": 16,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34567347315/job/103162076362"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34567347315"
+}

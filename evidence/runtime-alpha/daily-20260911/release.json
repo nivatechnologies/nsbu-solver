@@ -1,0 +1,36 @@
+{
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/nivatechnologies/nsbu-solver/releases/assets/556588241",
+      "contentType": "application/x-gtar",
+      "createdAt": "2026-09-11T05:49:02Z",
+      "downloadCount": 0,
+      "id": "RA_kwDOUTGh0M4hLNzR",
+      "label": "",
+      "name": "nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz",
+      "size": 84106578,
+      "state": "uploaded",
+      "updatedAt": "2026-09-11T05:49:04Z",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/nivatechnologies/nsbu-solver/releases/assets/556588240",
+      "contentType": "application/octet-stream",
+      "createdAt": "2026-09-11T05:49:02Z",
+      "downloadCount": 0,
+      "id": "RA_kwDOUTGh0M4hLNzQ",
+      "label": "",
+      "name": "nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256",
+      "size": 125,
+      "state": "uploaded",
+      "updatedAt": "2026-09-11T05:49:02Z",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256"
+    }
+  ],
+  "body": "## Changes since alpha-first-20260911\n\n- 6170341 Merge physical refinement and reduced-provider increments with hosted quality evidence\n- 5654619 feat: measure complete physical refinements from exact-v2 states\n- 151b798 feat: add bounded reduced-coordinate sampled force provider\n- 82c0796 ci: retain source-bound raw quality reports and record family verification\n- 60c9cc1 feat: add independently checked reduced-coordinate force evaluator\n- b42c0ca feat: compare six independent exact-v2 refinement trajectories\n- 6fad3ca docs: record first public alpha and verify downloaded release\n\nThis is an alpha prerelease of a diagnostic-only, unqualified scientific runtime. It does not establish PDE qualification or reproduce the original research target.\nStatus and active plan: https://github.com/nivatechnologies/nsbu-solver/blob/6170341c42a64348c7d99bdfd4fc3653454f22a8/project-status.json and https://github.com/nivatechnologies/nsbu-solver/blob/6170341c42a64348c7d99bdfd4fc3653454f22a8/IMPLEMENTATION_PLAN.md\nValidation evidence: https://github.com/nivatechnologies/nsbu-solver/blob/6170341c42a64348c7d99bdfd4fc3653454f22a8/evidence/runtime-alpha/summary.json\n",
+  "isPrerelease": true,
+  "publishedAt": "2026-09-11T05:49:04Z",
+  "tagName": "alpha-20260911",
+  "targetCommitish": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911"
+}

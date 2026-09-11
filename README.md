@@ -2,7 +2,7 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: [first runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-first-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Daily prereleases add verified changes while scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [release evidence](evidence/runtime-alpha/publication/README.md).
+**Status: [daily runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Daily prereleases add verified changes while scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/daily-20260911/README.md).
 
 The `main` branch can contain experimental APIs added after the latest binary
 release. Each increment records its own validation scope in

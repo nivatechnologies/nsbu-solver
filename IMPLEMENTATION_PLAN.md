@@ -48,7 +48,9 @@ The runtime checklist R01–R04 is now complete, with
 checkout package/install/CM/HO/restart walkthrough. The `alpha_release.ready`
 flag is true. Both hosted workflows passed on the exact release commit, and
 [the first alpha](evidence/runtime-alpha/publication/README.md) is published with
-a verified downloaded binary. P08/P09/P10 scientific exits remain open.
+a verified downloaded binary. The [first daily prerelease](evidence/runtime-alpha/daily-20260911/README.md)
+now passes exact-source hosted gates and downloaded-binary checks, including
+464 Rust tests/probes. P08/P09/P10 scientific exits remain open.
 
 ## Repository bootstrap and current evidence
 
@@ -665,6 +667,7 @@ cache/clock/work contracts and allocation checks. Seventeen focused tests/probes
 pass, with 98.75% line and 90.625% branch coverage and maximum CRAP19.125 across
 the added/changed implementation. The N16/M24 complete-provider profile measures
 a median speed ratio of 6.48 with maximum scaled coefficient difference 2.35e-14.
-Full source-matched CI remains required for this provider increment. Next check
+Full source-matched CI passes on the combined source `6170341`; see the
+[daily release evidence](evidence/runtime-alpha/daily-20260911/README.md). Next check
 independently evolved trajectories and explicit arithmetic identity before
 changing runtime selection. P08/P09/P10 retain their original incomplete status.

@@ -1,0 +1,154 @@
+{
+  "status": "published; exact-source hosted gates and downloaded artifact verified",
+  "recorded_utc": "2026-09-11T06:01:13.698698+00:00",
+  "tag": "alpha-20260911",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911",
+  "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "prerelease": true,
+  "changes": [
+    "Six independent exact-v2 refinement trajectories",
+    "Global velocity, gradient, Hessian and vorticity comparisons for all five pairs",
+    "Optional independently checked reduced-coordinate pointwise and sampled force evaluator",
+    "Raw source-bound hosted quality reports retained"
+  ],
+  "rust": {
+    "harness_tests": 451,
+    "allocation_probes": 13,
+    "tests_and_probes": 464,
+    "compiled_doc_examples": 1,
+    "line_coverage": {
+      "count": 31914,
+      "covered": 31461,
+      "percent": 98.58056025568717
+    },
+    "branch_coverage": {
+      "count": 2446,
+      "covered": 2174,
+      "notcovered": 272,
+      "percent": 88.87980376124285
+    },
+    "static_and_crap_maxima": {
+      "cyclomatic_function": {
+        "value": 21,
+        "name": "parse"
+      },
+      "cognitive_function": {
+        "value": 18,
+        "name": "complete_sampling_refinements_retain_all_pairs_states_and_original_statistics",
+        "file": "crates/nsbu-benchmarks/tests/sampling_family.rs"
+      },
+      "halstead_difficulty_function": {
+        "value": 75.8955223880597,
+        "name": "FftPlan"
+      },
+      "halstead_difficulty_file": {
+        "value": 75.2603305785124,
+        "file": "crates/nsbu-benchmarks/tests/allocation.rs"
+      },
+      "loc_sloc_file": {
+        "value": 477,
+        "file": "crates/nsbu-benchmarks/tests/allocation.rs"
+      },
+      "crap_function": {
+        "value": 24.3359375
+      },
+      "raw": [
+        "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-metrics.json",
+        "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-crap.json"
+      ]
+    }
+  },
+  "python": {
+    "tests": {
+      "unittest_tools_passed": 41,
+      "pytest_passed": 220,
+      "raw": [
+        "python.log"
+      ]
+    },
+    "coverage": {
+      "lines": {
+        "covered": 5512,
+        "count": 5522,
+        "missing": 10,
+        "percent": 99.81890619340818
+      },
+      "branches": {
+        "covered": 1085,
+        "count": 1098,
+        "missing": 13,
+        "partial": 13,
+        "percent": 98.81602914389799
+      },
+      "raw": "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/full-coverage.json",
+      "percentage_note": "Line and branch percentages are computed separately from raw numerators. coverage.py combined percent_covered is not the executable-line percentage."
+    },
+    "maxima": {
+      "cyclomatic_function": {
+        "value": 16,
+        "name": "rust_state",
+        "file": "reference/cyclic/results.py"
+      },
+      "halstead_difficulty_function": {
+        "value": 9.272727272727273,
+        "name": "binary64",
+        "file": "reference/cyclic/bits.py"
+      },
+      "halstead_difficulty_file": {
+        "value": 13.826086956521738,
+        "file": "reference/cyclic/bits.py"
+      },
+      "loc_file": {
+        "value": 243,
+        "file": "tools/check_repository.py"
+      },
+      "crap_function": {
+        "value": 16.0
+      },
+      "raw": [
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-cyclomatic.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-halstead.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/python-crap.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-source-files.txt"
+      ],
+      "cognitive_function": {
+        "value": 19,
+        "raw": "python.log: complexipy per-function output"
+      }
+    }
+  },
+  "downloaded_archive": {
+    "status": "passed",
+    "release_tag": "alpha-20260911",
+    "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+    "archive_bytes": 84106578,
+    "archive_sha256": "ecb07b6b9e7828d0fc125c3a20c9d61be2db8e83defb6074bbb6bb2752abd857",
+    "verified_files": 1829,
+    "repository_checks": "passed",
+    "installed_methods": [
+      "CM",
+      "HO"
+    ],
+    "committed_steps_each": 32,
+    "checkpoint_steps": 16,
+    "resumed_equals_uninterrupted_except_origin": true,
+    "accepted_pde_windows": 0,
+    "manifest": "repository=nivatechnologies/nsbu-solver\nsource_commit=6170341c42a64348c7d99bdfd4fc3653454f22a8\nsnapshot_tag=alpha-20260911\nchecks_workflow=checks.yml\nrust_workflow=rust.yml\ncargo_workspace_version=0.1.0-alpha.0\ntarget=x86_64-unknown-linux-gnu\nrunner=ubuntu-24.04\nbuild_glibc=glibc 2.39\nmaximum_required_glibc_symbol=GLIBC_2.35\nneeded_libraries=libgcc_s.so.1,libm.so.6,libc.so.6,ld-linux-x86-64.so.2\nscientific_status=diagnostic-only; unqualified\nprevious_snapshot=alpha-first-20260911\n"
+  },
+  "quality_report": "hosted-quality.json",
+  "raw_artifacts": {
+    "path": "raw-artifacts.tar.gz",
+    "bytes": 2011580,
+    "sha256": "43c21ebab4dc9643fcfcfd090be06cbdeebcc1ed447e1fb57ed2bf8c24c95523",
+    "members": 23,
+    "inventory": "raw-sha256.json"
+  },
+  "daily_schedule_utc": "02:17, new verified source only; existing tags are immutable",
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "P08/P09/P10 scientific exits remain incomplete.",
+    "Coarse exact-v2 force/space resolution remains unresolved; increasing Hessian space differences remain visible.",
+    "Reduced provider is an optional library API; the Run/CLI/checkpoint path retains the original provider.",
+    "This release does not include the later reduced trajectory tests or exact-v2 pressure consumer."
+  ]
+}

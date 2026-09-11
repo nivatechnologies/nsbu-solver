@@ -1,0 +1,163 @@
+{
+  "conclusion": "success",
+  "headSha": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "jobs": [
+    {
+      "completedAt": "2026-09-11T05:38:20Z",
+      "conclusion": "success",
+      "databaseId": 103158382348,
+      "name": "bootstrap",
+      "startedAt": "2026-09-11T05:28:22Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m venv .venv",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m pip install -r requirements-quality.txt",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python tools/check_repository.py",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m unittest discover -s tools/tests -v",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python tools/verify_design.py --output work/design-checks.json",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.verify_fields > work/reference-fields.json",
+          "number": 9,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.verify_steps > work/reference-steps.json",
+          "number": 10,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.verify_trajectory > work/reference-trajectory.json",
+          "number": 11,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.verify_cyclic --n 12 --precision 120 --method HO --dry-run > work/cyclic-preflight.json",
+          "number": 12,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.compare_derived --n 12 --method HO --dry-run > work/derived-preflight.json",
+          "number": 13,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run python -m reference.verify_pressure_mean --dry-run > work/pressure-mean-preflight.json",
+          "number": 14,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run basedpyright",
+          "number": 15,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Per-function complexity and Halstead gates",
+          "number": 16,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Source size and informational duplication/dead-code reports",
+          "number": 17,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "80 percent executable line and branch coverage; CRAP",
+          "number": 18,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Historical mutation evidence",
+          "number": 19,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve source-bound raw quality reports",
+          "number": 20,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 21,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 41,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 42,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 43,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34566083303/job/103158382348"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34566083303"
+}

@@ -1,0 +1,94 @@
+{
+  "publication/downloaded-checks.log": {
+    "bytes": 96299,
+    "sha256": "eb1a3e62b72f0cf156fe962d326d4269f878e52085d9e088b6ee090268517c24"
+  },
+  "publication/release-archive.sha256": {
+    "bytes": 125,
+    "sha256": "ba20cd74c73fc1a42fb7581701a3ccf8b74a656cb43ca7ae09d36e02110c112a"
+  },
+  "publication/verify_downloaded_daily_alpha.py": {
+    "bytes": 2964,
+    "sha256": "3ee972a6c1fc647c9a9ba2b549b10c209cbe7d9e15a427fb63dcf75742f48ed3"
+  },
+  "publication/workflow.log": {
+    "bytes": 44324,
+    "sha256": "d17ca2bc52fbebeb6db2b23ee67c21167c958ac072138d44bde57a2d7fbdee94"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-cyclomatic.json": {
+    "bytes": 163897,
+    "sha256": "a940c189c442ca53b3a0731301325bb9dabbf161a3e8f5d953933fab4811bbd4"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-dead-code.txt": {
+    "bytes": 1010,
+    "sha256": "abb473eca53815e67c09dc4b18da3a19ea292a1b36a66b2484738be31aa2079f"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-duplicates.json": {
+    "bytes": 3,
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-halstead.json": {
+    "bytes": 153907,
+    "sha256": "26de3cc35a82a91480a83d0fa6608c89ee1a02747403592c62cd7b32fcee7f0c"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-source-files.txt": {
+    "bytes": 3299,
+    "sha256": "2f41e60e7505165d5eae099dac87f8914c10f25133431abcb0b0993f2431cf3f"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/full-coverage.json": {
+    "bytes": 459921,
+    "sha256": "14edc1d0bcce27bef8672c66737a6c4e45dc783502a5c56d9f8229eae159c0ff"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/python-crap.json": {
+    "bytes": 169311,
+    "sha256": "eb5872a2d2950fa48d986d72fadad3da0bebdd3bfee58475aeaecc06d665fea5"
+  },
+  "quality/python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/quality-source-revision.txt": {
+    "bytes": 41,
+    "sha256": "2240054d2abaa63fad2cfd895f73cef43b2f41b8b05c21ac738991872796fe96"
+  },
+  "quality/python.json": {
+    "bytes": 3404,
+    "sha256": "a126222a76ae6db51aec0c363d39e2ec3f1c69e06297188ad9ab041388a684f9"
+  },
+  "quality/python.log": {
+    "bytes": 318414,
+    "sha256": "a4d375a70964754c3390dc915b4c9c468307d4a6daa84f17ea84ce79ccc09adf"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/quality-source-revision.txt": {
+    "bytes": 41,
+    "sha256": "2240054d2abaa63fad2cfd895f73cef43b2f41b8b05c21ac738991872796fe96"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-coverage.json": {
+    "bytes": 7553595,
+    "sha256": "561be29bf008a511d7e090d1dab60372ef875e1d2518124186fd991700f6dfb3"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-crap.json": {
+    "bytes": 549789,
+    "sha256": "f7c9d34bb32ec22b26840490779c0972d380cce1874958591357caccfbd2652b"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-duplicates/jscpd-report.json": {
+    "bytes": 213528,
+    "sha256": "bbb8bc817693e2475ceed69c6babb42b1794ef9d60b3daac246f9d3723e24ead"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-metrics.json": {
+    "bytes": 5640170,
+    "sha256": "2cce929c2d9047d9bd06032573fa8bf4820c264e411b5bb1b0e777531b435a89"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-source-files.txt": {
+    "bytes": 17686,
+    "sha256": "aeb3e35975be4f46204baabdcd4182b068e61f77957a3d3aef1e885d1c0c1cf9"
+  },
+  "quality/rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-type-lexical.log": {
+    "bytes": 170,
+    "sha256": "13be2537a1873162179184e38487accb91b18b4d54ca21f6017a6f3c9a1ef278"
+  },
+  "quality/rust.json": {
+    "bytes": 1702,
+    "sha256": "7861c6cd38659b3bec5b2005574df81ead1a8cbb335cba34eeff4144c6ef1682"
+  },
+  "quality/rust.log": {
+    "bytes": 291705,
+    "sha256": "6403666e04a610c16b34aee3cb9c02d425327eb3c3a3c5b0f1faefeca5bbd61d"
+  }
+}

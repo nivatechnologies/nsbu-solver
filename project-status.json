@@ -37,14 +37,14 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source82c0796 passes complete hosted Rust and Python workflows:451 Rust tests/probes and one Rustdoc example,98.56% line and88.85% branch coverage, all required quality limits,220 Python tests. Later physical/provider increments retain focused evidence until their own hosted run passes.",
-    "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json",
+    "latest_hosted_ci_status": "Source 6170341 passes both hosted workflows: 451 Rust harness tests plus 13 allocation probes and one Rustdoc example; 98.58% line and 88.88% branch coverage; all required quality limits; 220 Python tests.",
+    "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
       "evidence": "evidence/p09/v2-physical/summary.json",
-      "status": "Actual exact-v2 physical consumer and optional reduced sampled provider pass focused numerical/quality and whole-source static/lint gates on their independently recorded source trees. Complete combined-source hosted gates pending.",
+      "status": "Actual exact-v2 physical consumer and optional reduced sampled provider pass focused gates and complete combined-source hosted Rust/Python gates at 6170341; published in alpha-20260911.",
       "additional_evidence": "evidence/p09/reduced-provider/summary.json"
     },
-    "latest_hosted_quality_evidence": "evidence/quality-hosted-82/summary.json"
+    "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
   },
   "packages": {
     "B00": {
@@ -250,7 +250,7 @@
   },
   "alpha_release": {
     "ready": true,
-    "status": "first runtime alpha published; downloaded artifact passes checksums, CM/HO execution and checkpoint/resume",
+    "status": "First alpha and first daily prerelease published; downloaded artifacts pass checksums, CM/HO execution and checkpoint/resume.",
     "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
     "accepted_concentrating_windows": 0,
     "scientific_qualification_separate": true,
@@ -258,10 +258,10 @@
     "workflow": ".github/workflows/alpha-release.yml",
     "daily_schedule_utc": "02:17; new verified source changes only",
     "last_release": {
-      "tag": "alpha-first-20260911",
-      "source_commit": "63f9a145c8e3b0168e7f8896f0f92f3217cdf57f",
-      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-first-20260911",
-      "verification": "evidence/runtime-alpha/publication/summary.json"
+      "tag": "alpha-20260911",
+      "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911",
+      "verification": "evidence/runtime-alpha/daily-20260911/summary.json"
     }
   },
   "exact_v2_cli_exists": true,

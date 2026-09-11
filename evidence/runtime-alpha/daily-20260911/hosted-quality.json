@@ -1,0 +1,146 @@
+{
+  "source_revision": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "revision_binding": {
+    "rust_job": "rust.json",
+    "python_job": "python.json",
+    "rust_artifact_revision": "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/quality-source-revision.txt",
+    "python_artifact_revision": "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/quality-source-revision.txt",
+    "both_jobs_success": true
+  },
+  "rust": {
+    "harness": {
+      "workspace_doc_tests_passed": 1,
+      "all_targets_coverage_run_passed": 451,
+      "all_targets_coverage_run_failed": 0,
+      "raw": [
+        "rust.log"
+      ],
+      "isolated_allocation_executables": 13,
+      "tests_and_probes": 464
+    },
+    "coverage": {
+      "lines": {
+        "covered": 31461,
+        "count": 31914,
+        "percent": 98.58056025568717
+      },
+      "branches": {
+        "covered": 2174,
+        "count": 2446,
+        "notcovered": 272,
+        "percent": 88.87980376124285
+      },
+      "functions": {
+        "covered": 2697,
+        "count": 2725,
+        "percent": 98.97247706422019
+      },
+      "raw": "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-coverage.json"
+    },
+    "maxima": {
+      "cyclomatic_function": {
+        "value": 21,
+        "name": "parse"
+      },
+      "cognitive_function": {
+        "value": 18,
+        "name": "complete_sampling_refinements_retain_all_pairs_states_and_original_statistics",
+        "file": "crates/nsbu-benchmarks/tests/sampling_family.rs"
+      },
+      "halstead_difficulty_function": {
+        "value": 75.8955223880597,
+        "name": "FftPlan"
+      },
+      "halstead_difficulty_file": {
+        "value": 75.2603305785124,
+        "file": "crates/nsbu-benchmarks/tests/allocation.rs"
+      },
+      "loc_sloc_file": {
+        "value": 477,
+        "file": "crates/nsbu-benchmarks/tests/allocation.rs"
+      },
+      "crap_function": {
+        "value": 24.3359375
+      },
+      "raw": [
+        "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-metrics.json",
+        "rust-artifacts/rust-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/rust-crap.json"
+      ]
+    },
+    "allocation_probe_outputs": [
+      "parallel provider: allocations=37 bytes=69992; repeated/refused requests allocate nothing",
+      "reduced force: allocations=0 deallocations=0 reallocations=0",
+      "reduced provider: admission_allocations=0 constructor_heap_bytes=30560 declared_bytes=32088; steady_allocations=0",
+      "exact-v2 family: admission=0 construction_bytes=19219520 declared_bytes=24190424; steady_allocations=0",
+      "v2 physical: admission_allocations=0 construction_bytes=19369280; steady_allocations=0",
+      "exact-v2 run: admission=0 construction_bytes=193600 declared_bytes=260120; steady_steps=2",
+      "protocol: zero bytes after caller fixture construction"
+    ],
+    "allocation_probe_raw": "rust.log"
+  },
+  "python": {
+    "tests": {
+      "unittest_tools_passed": 41,
+      "pytest_passed": 220,
+      "raw": [
+        "python.log"
+      ]
+    },
+    "coverage": {
+      "lines": {
+        "covered": 5512,
+        "count": 5522,
+        "missing": 10,
+        "percent": 99.81890619340818
+      },
+      "branches": {
+        "covered": 1085,
+        "count": 1098,
+        "missing": 13,
+        "partial": 13,
+        "percent": 98.81602914389799
+      },
+      "raw": "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/full-coverage.json",
+      "percentage_note": "Line and branch percentages are computed separately from raw numerators. coverage.py combined percent_covered is not the executable-line percentage."
+    },
+    "maxima": {
+      "cyclomatic_function": {
+        "value": 16,
+        "name": "rust_state",
+        "file": "reference/cyclic/results.py"
+      },
+      "halstead_difficulty_function": {
+        "value": 9.272727272727273,
+        "name": "binary64",
+        "file": "reference/cyclic/bits.py"
+      },
+      "halstead_difficulty_file": {
+        "value": 13.826086956521738,
+        "file": "reference/cyclic/bits.py"
+      },
+      "loc_file": {
+        "value": 243,
+        "file": "tools/check_repository.py"
+      },
+      "crap_function": {
+        "value": 16.0
+      },
+      "raw": [
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-cyclomatic.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-halstead.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/python-crap.json",
+        "python-artifacts/python-quality-6170341c42a64348c7d99bdfd4fc3653454f22a8-1/ci-source-files.txt"
+      ],
+      "cognitive_function": {
+        "value": 19,
+        "raw": "python.log: complexipy per-function output"
+      }
+    }
+  },
+  "limitations": [
+    "Allocation probe values are log assertions and printed measurements; they are not additional harness-test counts.",
+    "The raw hosted packet contains no PDE acceptance result or scientific-window qualification.",
+    "Python LOC was counted from the exact revision paths listed by ci-source-files.txt; the artifact has no separate LOC JSON.",
+    "Rust metrics contain 362 file records and nested spaces; maxima were reduced over the emitted function and file records."
+  ]
+}

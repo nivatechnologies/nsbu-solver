@@ -1,0 +1,85 @@
+{
+  "conclusion": "success",
+  "headSha": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "jobs": [
+    {
+      "completedAt": "2026-09-11T05:45:25Z",
+      "conclusion": "success",
+      "databaseId": 103158382177,
+      "name": "rust",
+      "startedAt": "2026-09-11T05:28:22Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Install pinned toolchains and quality tools",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Build, lint, document and package public workspace",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "80 percent executable line and instrumented branch coverage",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Per-function metrics and complete file scope",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Preserve source-bound raw quality reports",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Informational mutation report with complete accounting",
+          "number": 9,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 18,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34566083320/job/103158382177"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34566083320"
+}
