@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Exact force-evaluation optimizations pass all local gates: 398 Rust tests/probes, unchanged 220-test Python profile, complete-scope line/branch coverage and every required complexity/CRAP/typing gate. Clean replay, packaging and frozen/bootstrap checks pass; hosted verification pending.",
+    "status": "Persistent parallel exact-v2 force sampling passes all local gates: 405 Rust tests/probes, unchanged 220-test Python profile, complete-scope line/branch coverage and every required complexity/CRAP/typing gate. Clean replay, packaging and frozen/bootstrap checks pass; hosted verification pending.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p09/force-evaluation/summary.json",
+    "evidence": "evidence/p09/parallel-force/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p09/force-evaluation/summary.json",
+    "rust_evidence": "evidence/p09/parallel-force/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -156,7 +156,8 @@
       "reference_gauge_hosted_ci": "evidence/p09/reference-gauge/hosted-rust.json",
       "reduction_arithmetic_evidence": "evidence/p09/reduction-arithmetic/summary.json",
       "reduction_arithmetic_hosted_ci": "evidence/p09/reduction-arithmetic/hosted-rust.json",
-      "force_evaluation_evidence": "evidence/p09/force-evaluation/summary.json"
+      "force_evaluation_evidence": "evidence/p09/force-evaluation/summary.json",
+      "parallel_force_evidence": "evidence/p09/parallel-force/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -213,5 +214,7 @@
   "reconstructed_balance_quadrature_scope": "Sixty independently evaluated smooth branch balances at exact physical probes, three strictly refined Simpson schedules and eighteen complete integrals. Whole-report transactions and unchanged integrated/reconstructed field bits verified; no concentrating qualification.",
   "exact_axial_force_cache_exists": true,
   "exact_jet_derivative_tables_exist": true,
-  "force_evaluation_optimization_scope": "Original pointwise and full-spectrum words retained on tested cases, allocation-free requests, separate exact-clock input bindings, 3.046 median measured small-grid speed ratio; no new force accuracy or PDE qualification."
+  "force_evaluation_optimization_scope": "Original pointwise and full-spectrum words retained on tested cases, allocation-free requests, separate exact-clock input bindings, 3.046 median measured small-grid speed ratio; no new force accuracy or PDE qualification.",
+  "persistent_parallel_force_exists": true,
+  "parallel_force_scope": "Optional preflighted persistent workers preserve tested original force words and reported work; no allocations after construction for normal requests; complete failure collection and shutdown verified. Force-only N16/N32 profiles and clean reproduction pass; no new mathematical accuracy or PDE qualification."
 }

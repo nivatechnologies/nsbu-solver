@@ -1,0 +1,601 @@
+{
+  "package": "P09",
+  "increment": "bounded-persistent-parallel-exact-v2-force",
+  "status": "all local checks passed; hosted checks pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-11T02:12:24.683751+00:00",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 315,
+  "rust_harness_tests": 397,
+  "rust_allocation_executables": 8,
+  "rust_tests_and_probes": 405,
+  "rust_coverage": {
+    "branches": {
+      "count": 2042,
+      "covered": 1835,
+      "notcovered": 207,
+      "percent": 89.86287952987267
+    },
+    "functions": {
+      "count": 2277,
+      "covered": 2256,
+      "percent": 99.07773386034255
+    },
+    "instantiations": {
+      "count": 4646,
+      "covered": 3860,
+      "percent": 83.08222126560482
+    },
+    "lines": {
+      "count": 26978,
+      "covered": 26619,
+      "percent": 98.66928608495812
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 51373,
+      "covered": 49383,
+      "notcovered": 1990,
+      "percent": 96.12636988301249
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 477
+  },
+  "python_evidence": {
+    "source_files_unchanged": 98,
+    "complete_profile": "../reduction-arithmetic/summary.json",
+    "tests": 220,
+    "bootstrap_tests_rerun": 41
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "0c3f0aaa1196a34bd0b15b7a55ff12bb775d5844f1393110c960ad96352a977c"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "force_verification": {
+    "preserved_case_bytes": true,
+    "parallel_partition": "Disjoint axial planes retain all x/y samples, exact pointwise arithmetic and original global storage order; original serial FFT/transfer follows whole-pool success",
+    "coefficient_oracle": "Every retained word and root-work count matches the serial evaluator for anisotropic M6/8/12 and worker counts1/2/5/12, with rest/repeated/nonmonotone requests",
+    "budget_refusals": "Worker/domain/storage/work/clock/output validation precedes dispatch or spectral output mutation",
+    "worker_failure": "Every submitted completion is drained even after one error or programming panic; failed pools terminate and preserve previously returned coefficients and last successful work",
+    "shutdown": "Idle/submitted workers join and release all shared storage; partial construction cleanup is reviewed through the same RAII path, not tested by inducing an OS resource failure",
+    "allocation": {
+      "sample_grid": [
+        6,
+        8,
+        12
+      ],
+      "workers": 3,
+      "constructor_allocations": 37,
+      "rust_heap_bytes": 69992,
+      "configured_stack_bytes": 6291456,
+      "reservation_bytes": 6560680,
+      "first_repeated_nonmonotone_refused_evaluation_allocations": 0,
+      "evaluation_reallocations_and_deallocations": 0,
+      "native_allowance": "2 MiB configured stack plus64KiB thread/TLS allowance per worker; profile planning allowance, not universal OS resident-memory or stack-cache bound"
+    },
+    "numerical_result": "Force-only profiles evolve no PDE state; no new accuracy/aliasing or convergence claim"
+  },
+  "performance": {
+    "scope": "One development and one clean-source profile, serial baseline followed by fixed worker alternatives; shared-host timings are not interleaved large-grid/PDE estimates",
+    "joint_cap_bytes": 268435456,
+    "comparisons": 88,
+    "all_complete_coefficient_hashes_and_reported_work_preserved": true,
+    "profiles": [
+      {
+        "source": "development",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 1,
+        "calls": 4,
+        "serial_seconds": [
+          0.838600603,
+          0.68070059,
+          0.687690882,
+          0.850291313
+        ],
+        "parallel_seconds": [
+          0.861593135,
+          0.706233272,
+          0.714895293,
+          0.874996555
+        ],
+        "median_speed_ratio": 0.9678060000731581,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 2,
+        "calls": 4,
+        "serial_seconds": [
+          0.838600603,
+          0.68070059,
+          0.687690882,
+          0.850291313
+        ],
+        "parallel_seconds": [
+          0.445350094,
+          0.362873887,
+          0.357815349,
+          0.436029717
+        ],
+        "median_speed_ratio": 1.9024649316338322,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 4,
+        "calls": 4,
+        "serial_seconds": [
+          0.838600603,
+          0.68070059,
+          0.687690882,
+          0.850291313
+        ],
+        "parallel_seconds": [
+          0.231151724,
+          0.188866701,
+          0.193581331,
+          0.235132706
+        ],
+        "median_speed_ratio": 3.610175585446306,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 8,
+        "calls": 4,
+        "serial_seconds": [
+          0.838600603,
+          0.68070059,
+          0.687690882,
+          0.850291313
+        ],
+        "parallel_seconds": [
+          0.126014699,
+          0.10452646,
+          0.104347756,
+          0.124947675
+        ],
+        "median_speed_ratio": 6.622579690827038,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 16,
+        "calls": 4,
+        "serial_seconds": [
+          0.838600603,
+          0.68070059,
+          0.687690882,
+          0.850291313
+        ],
+        "parallel_seconds": [
+          0.120645315,
+          0.097855325,
+          0.097397224,
+          0.119758264
+        ],
+        "median_speed_ratio": 7.008438108741875,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 1,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          6.94939694,
+          5.608973254,
+          5.579072698,
+          6.883941333
+        ],
+        "median_speed_ratio": 0.9877665496726495,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 2,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          3.547676161,
+          2.873655708,
+          2.935002683,
+          3.617835544
+        ],
+        "median_speed_ratio": 1.9027289884916438,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 4,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          1.828759762,
+          1.489159108,
+          1.480984836,
+          1.825103359
+        ],
+        "median_speed_ratio": 3.7312507685277065,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 8,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          1.007177911,
+          0.808110977,
+          0.810496712,
+          0.991522816
+        ],
+        "median_speed_ratio": 6.828809913403633,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 16,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          0.601174691,
+          0.460761756,
+          0.444401647,
+          0.529689723
+        ],
+        "median_speed_ratio": 12.230928574187168,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "development",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 32,
+        "calls": 4,
+        "serial_seconds": [
+          6.782127956,
+          5.600702348,
+          5.469049467,
+          6.851268781
+        ],
+        "parallel_seconds": [
+          0.615285556,
+          0.429273386,
+          0.462076446,
+          0.514136982
+        ],
+        "median_speed_ratio": 12.441373430161988,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 1,
+        "calls": 4,
+        "serial_seconds": [
+          0.847603401,
+          0.697119125,
+          0.701839195,
+          0.867211013
+        ],
+        "parallel_seconds": [
+          0.866543477,
+          0.711912966,
+          0.704448623,
+          0.878916782
+        ],
+        "median_speed_ratio": 0.982950594505587,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 2,
+        "calls": 4,
+        "serial_seconds": [
+          0.847603401,
+          0.697119125,
+          0.701839195,
+          0.867211013
+        ],
+        "parallel_seconds": [
+          0.447958062,
+          0.361988202,
+          0.359389972,
+          0.448282849
+        ],
+        "median_speed_ratio": 1.9301618480168006,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 4,
+        "calls": 4,
+        "serial_seconds": [
+          0.847603401,
+          0.697119125,
+          0.701839195,
+          0.867211013
+        ],
+        "parallel_seconds": [
+          0.238994633,
+          0.191444803,
+          0.189555129,
+          0.235033372
+        ],
+        "median_speed_ratio": 3.665546984762182,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 8,
+        "calls": 4,
+        "serial_seconds": [
+          0.847603401,
+          0.697119125,
+          0.701839195,
+          0.867211013
+        ],
+        "parallel_seconds": [
+          0.137058274,
+          0.106018604,
+          0.106524306,
+          0.12911654
+        ],
+        "median_speed_ratio": 6.58198859282253,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 16,
+        "sampling_grid": 24,
+        "workers": 16,
+        "calls": 4,
+        "serial_seconds": [
+          0.847603401,
+          0.697119125,
+          0.701839195,
+          0.867211013
+        ],
+        "parallel_seconds": [
+          0.148845876,
+          0.096401942,
+          0.097918017,
+          0.121454561
+        ],
+        "median_speed_ratio": 7.153915057354006,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 1,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          4.13193474,
+          3.350973189,
+          3.329594685,
+          4.120976687
+        ],
+        "median_speed_ratio": 1.0085647165212053,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 2,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          3.506958225,
+          2.867622463,
+          2.83493228,
+          3.478400797
+        ],
+        "median_speed_ratio": 1.1881012983976955,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 4,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          1.833759635,
+          1.497389228,
+          1.515943325,
+          1.809932017
+        ],
+        "median_speed_ratio": 2.276103725312371,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 8,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          0.991991954,
+          0.814523182,
+          0.808722868,
+          0.980363203
+        ],
+        "median_speed_ratio": 4.193271671139138,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 16,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          0.617235701,
+          0.463607222,
+          0.465598288,
+          0.555474234
+        ],
+        "median_speed_ratio": 7.251250396755745,
+        "all_coefficient_words_hashes_and_work_equal": true
+      },
+      {
+        "source": "clean",
+        "retained_grid": 32,
+        "sampling_grid": 48,
+        "workers": 32,
+        "calls": 4,
+        "serial_seconds": [
+          4.268457236,
+          3.383394914,
+          3.354413873,
+          4.149591493
+        ],
+        "parallel_seconds": [
+          0.637309755,
+          0.44368106,
+          0.443153098,
+          0.56007731
+        ],
+        "median_speed_ratio": 7.48919318770497,
+        "all_coefficient_words_hashes_and_work_equal": true
+      }
+    ]
+  },
+  "clean_reproduction": "All413 maintained source hashes match; six focused tests and isolated allocation probe pass; N16/N32 preflight and every numerical/work/storage output reproduce, excluding measured elapsed seconds only.",
+  "informational_findings": {
+    "duplicates": {
+      "clones": 99,
+      "duplicatedLines": 988,
+      "duplicatedTokens": 8294,
+      "lines": 37865,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.609269774197808,
+      "percentageTokens": 2.829374460580134,
+      "sources": 314,
+      "tokens": 293139
+    },
+    "exit_codes": {
+      "duplicates": 1,
+      "dead-code": 101
+    },
+    "review": "Shared test helpers and independent oracle duplication remain informational. Strict Clippy permits only dead_code findings; prohibited code type identifiers are absent.",
+    "mutations": "Not rerun; historical evidence remains informational"
+  },
+  "solid_review": "Admission, worker lifecycle, physical sample ownership and complete dispatch/collection are separate modules. ParallelV2Force implements the existing prescribed-force contract and reuses the original FFT owner; workers cannot access evolving state, references or checkpoint authority. Serial/uncached/high-precision paths remain independent verification choices.",
+  "limitations": [
+    "Native synchronization is bounded in job count, not a hard wall-clock deadline",
+    "A programming panic is an emergency error path outside the normal allocation-free numerical contract",
+    "Current-grid arithmetic, force/reference/transfer and complete all-observable provenance studies remain",
+    "P08/P09 incomplete; zero accepted concentrating PDE windows"
+  ],
+  "artifact_inventory": "artifact-sha256.json",
+  "final_repository_validation": "Fresh complete repository/link/frozen-input check, 41 bootstrap tests and original mathematical verification passed after evidence/documentation assembly."
+}

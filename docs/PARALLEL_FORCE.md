@@ -127,8 +127,9 @@ Tests compare every retained coefficient word and actual root-work count for
 Capacity, worker-count, domain, exact-clock, output-shape and declared-limit
 refusals precede output changes. Separate controls fail each of three workers,
 exercise an unexpected panic, verify all completions were collected, and check
-idle/submitted shutdown. Full workspace quality and hosted checks remain required
-before this increment is reported as verified.
+idle/submitted shutdown. All local workspace quality, packaging and clean-source checks now pass;
+[execution evidence](../evidence/p09/parallel-force/README.md) records their full
+scope. Hosted checks for this increment remain pending.
 
 P08/P09 and concentrating validation remain incomplete. No concentrating PDE
 window is accepted by this backend or its timing profile.

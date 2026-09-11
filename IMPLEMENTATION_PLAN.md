@@ -543,3 +543,31 @@ failure contracts pass. These small-grid timings are not large-grid estimates.
 P08/P09 remain incomplete. This profile evolves no PDE trajectory. Current-grid
 arithmetic, force/reference/transfer refinements and complete all-observable
 provenance integration remain; accepted concentrating windows remain zero.
+
+## P09 persistent parallel force-sampling progress
+
+The [parallel-force increment](evidence/p09/parallel-force/README.md) passes
+405 Rust tests/probes across 315 Rust files. Executable line/branch coverage is
+98.67%/89.86%; maxima CC21, cognitive18,
+Halstead75.8955, physical-file477 and CRAP24.33594
+meet all gates. The unchanged 98 Python/stub files retain their complete 220-test
+profile. Strict linting, Rustdoc, fresh packaging, 41 bootstrap tests and frozen
+mathematical checks pass. Hosted checks for this increment are pending.
+
+Persistent workers own disjoint axial planes with preflighted buffers and
+configured stack allowances. Original pointwise arithmetic and serial FFTs
+preserve all tested coefficient words and reported work. Every submitted worker
+is collected before returning, including structured error and panic controls;
+failed pools terminate without publishing incomplete force spectra. The first,
+repeated, nonmonotone and refused requests allocate nothing after construction.
+
+A clean source export reproduces all 413 maintained source hashes, six focused
+tests and the isolated allocation executable. N16/N32 preflight and complete
+serial/parallel numerical reports reproduce after excluding elapsed seconds only.
+The measured N32 profile is about 12.44 times faster at 32 workers than the already
+optimized serial baseline; these shared-host force-only timings do not estimate
+large-grid integration or establish mathematical force accuracy.
+
+P08/P09 remain incomplete. The concentrating workflow still needs complete
+current-grid arithmetic, force/reference/transfer refinements and all-observable
+provenance binding. No concentrating PDE window is accepted.
