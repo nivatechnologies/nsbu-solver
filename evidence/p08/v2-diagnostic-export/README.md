@@ -32,3 +32,14 @@ does not establish complete artifact provenance, a pressure gauge/reference,
 continuum bounds, convergence, nominal-region volume coverage, or a qualified
 PDE window. The five sampled spatial classes are exclusive under the current
 classifier; the exporter does not add coverage or volume enclosures.
+
+`coverage.json.gz` and `metrics-focused.jsonl.gz` preserve the final raw
+`ace250b` counters for independent CRAP recomputation. The original source hash
+inventory continues to describe that commit. A subsequent documentation-only
+comment in the test oracle is recorded in `post-export-comment-source.txt`;
+combined workspace checks are separate from the numerical run.
+
+`dependency-license-inventory.json` is a path-free projection of the original
+Cargo metadata (package, version, license, registry source and dependency
+declarations). It replaces the public machine-specific metadata dump; it is
+explicitly a derived inventory, not raw execution output.

@@ -19,6 +19,7 @@ use nsbu_solver::{
 };
 use serde_json::Value;
 
+/// Compare every decoded event field with its retained library report.
 pub fn document(json: &Value, reports: &[DiagnosticEvent]) {
     assert_eq!(json["events"].as_array().unwrap().len(), reports.len());
     for (event, value) in reports

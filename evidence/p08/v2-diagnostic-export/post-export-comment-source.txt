@@ -1,0 +1,4 @@
+Export numerical evidence remains bound to source commit ace250bb4c1060d3e30d50987d5083c8e348671a.
+Integration base 0e2d1f2809231ac8a01a23a074eba6af39b7abb2 adds only this documentation comment to that tested exporter oracle source:
+adaeb2c7eca6e434b564a64cbc415a8c072ed7e34acdd12b43d2fd202c3ea49f  crates/nsbu-benchmarks/tests/v2_diagnostic_export_oracle.rs
+No numerical or exporter production source changed.
