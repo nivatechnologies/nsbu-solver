@@ -34,6 +34,9 @@ pub mod smooth_run;
 
 pub mod smooth_experiment;
 
+/// Experimental force-value arithmetic; numerical qualification is tracked separately.
+pub mod reduced_force;
+
 /// Explicit serial/parallel force settings for the concentrating runtime.
 pub mod runtime_force;
 

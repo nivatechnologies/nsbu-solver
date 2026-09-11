@@ -4,6 +4,11 @@ A standalone Rust project for incompressible, three-dimensional Navier–Stokes 
 
 **Status: [first runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-first-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Daily prereleases add verified changes while scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [release evidence](evidence/runtime-alpha/publication/README.md).
 
+The `main` branch can contain experimental APIs added after the latest binary
+release. Each increment records its own validation scope in
+[project status](project-status.json). Daily binaries require both hosted
+workflows to pass on their exact source revision.
+
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI provides bounded smooth and v2/resume-v2 commands; all external resumes retain an unverified origin. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
 The NSBU Solver library evolves all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
@@ -94,6 +99,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Exact-v2 refinement families](docs/V2_REFINEMENTS.md) | Independent space/time/method trajectories with fixed force sampling and complete Fourier comparisons |
 | [Parallel force sampling](docs/PARALLEL_FORCE.md) | Persistent worker ownership, exact coefficient comparisons and resource limits |
 | [Force evaluation](docs/FORCE_EVALUATION.md) | Exact-v2 axial root reuse, bounded resources and coefficient-preservation checks |
+| [Reduced-coordinate force values](docs/REDUCED_FORCE.md) | Optional pointwise evaluator, independent high-precision fixtures and measured limits |
 | [Arithmetic study](docs/ARITHMETIC_STUDY.md) | Same-grid Rust/direct-DFT comparisons with separate prescribed-force effects |
 | [Derived-field arithmetic](docs/DERIVED_ARITHMETIC.md) | Complete velocity tensors, vorticity and physical pressure compared at 80/120 digits |
 | [Physical-reduction arithmetic](docs/REDUCTION_ARITHMETIC.md) | Production tensor statistics compared with independent 80/120-digit exact-word reductions |

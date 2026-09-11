@@ -1,0 +1,153 @@
+{
+  "package": "P09",
+  "increment": "optional reduced-coordinate pointwise exact-v2 evaluator",
+  "status": "focused numerical/new-source quality and clean-source reproduction pass; full source-matched hosted gates pending",
+  "generated_utc": "2026-09-11T04:40:09.815395+00:00",
+  "parent_commit": "b42c0caeb7f5d4b38c4737d62e9c04f2bb8be19e",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 350,
+  "new_rust_source_files": [
+    "crates/nsbu-benchmarks/examples/reduced_force_profile.rs",
+    "crates/nsbu-benchmarks/tests/reduced_force.rs",
+    "crates/nsbu-benchmarks/tests/reduced_force_allocation.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/mod.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/potentials.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/transport.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/jet/index.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/jet/mod.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/jet/tests.rs",
+    "crates/nsbu-benchmarks/src/reduced_force/jet/transcendental.rs"
+  ],
+  "focused_tests": {
+    "library_unit_tests": 27,
+    "new_library_unit_tests": 4,
+    "integration_tests": 3,
+    "example_tests": 1,
+    "isolated_allocation_probes": 1,
+    "total_executed": 32
+  },
+  "focused_coverage": {
+    "lines": {
+      "count": 665,
+      "covered": 654,
+      "percent": 98.34586466165413
+    },
+    "branches": {
+      "count": 70,
+      "covered": 65,
+      "percent": 92.85714285714286
+    }
+  },
+  "focused_crap_maximum": 16.0,
+  "whole_workspace_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 477
+  },
+  "quality_scope": "Focused LLVM/CRAP totals cover all ten added Rust source/test/example files. Full current-source CI gates remain required for a daily release; alpha and family evidence retain earlier whole-source results.",
+  "unchanged_python": {
+    "source_files": 98,
+    "retained_tests": 220,
+    "reference_evidence": "../../runtime-alpha/publication/hosted-python.json"
+  },
+  "pointwise_verification": {
+    "prior_fixtures": 9,
+    "new_exact_word_fixtures": 84,
+    "outputs_per_fixture": 19,
+    "precision_digits": [
+      80,
+      120
+    ],
+    "precision_scaled_change_max": "4.4201600213092150557e-79",
+    "binary64_scaled_discrepancy_max": 3.59940493163946e-14,
+    "regression_threshold": 5e-12,
+    "scale": "abs(value-reference)/(1+abs(reference))",
+    "minimum_positive_remaining_time": "2^-70",
+    "scalar_iterations_maximum": 128,
+    "formal_newton_steps": 3,
+    "allocation_reallocation_deallocation_counts": 0,
+    "fixture_sha256": "8e25b8518e96ab6cf3e28024cb9371e022ba95669cf1ea8484c798d11a44d051",
+    "python_fixture_evaluations": 168,
+    "python_scalar_iterations_per_evaluation_maximum": 2048,
+    "python_address_space_cap_bytes": 268435456
+  },
+  "symbolic_verification": {
+    "script_sha256": "e43a11327119e2f04b737adf4f7594015a518a547a7295566dd75b3e939a14a3",
+    "transport_component_identities": 12,
+    "potential_divergence_identity": 1,
+    "all_residuals_exactly_zero": true,
+    "scope": "Exact symbolic Cartesian momentum identities for arbitrary regular c(w,z,t), b(w,z,t), d(w,z,t), p(w,z,t), w=x*x+y*y; viscosity one. Divergence identity for c=-a_z and d=2a+2w a_w."
+  },
+  "performance": {
+    "scope": "N16 pointwise Cartesian versus reduced evaluator, each solving independent scalar roots; excludes axial caches, workers, Fourier transforms and integration",
+    "ticks": [
+      1,
+      4,
+      2,
+      1
+    ],
+    "clock_exponent": -10,
+    "target_ticks": 8,
+    "force_calls": 65536,
+    "reported_stack_allowance_bytes": 8388608,
+    "stack_high_water_measured": false,
+    "per_clock_speed_ratios": [
+      5.871039115318538,
+      6.020968734454979,
+      6.006619776397014,
+      6.161907841324155
+    ],
+    "median_speed_ratio": 6.013794255425997,
+    "maximum_scaled_force_difference": 2.0047716245867108e-13,
+    "threshold": 5e-12,
+    "timing_limit": "One sequential profile on a shared host; not an interleaved runtime benchmark."
+  },
+  "clean_reproduction": {
+    "source_files": 448,
+    "all_source_hashes_equal": true,
+    "all_84_fixture_studies_identical": true,
+    "fixture_bytes_identical": true,
+    "focused_tests_and_allocation": "passed",
+    "public_n16_profile": "passed; all numerical/preflight output lines reproduce exactly",
+    "cargo_package_workspace": "passed",
+    "record": "clean-checks.json"
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "python": "3.12.3",
+    "mpmath": "1.3.0",
+    "sympy": "1.14.0",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "92db1aa2ad6b1250669af894f44b331e549988ced254c6c7e331a1127d5df5b6",
+      "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+    },
+    "test_opt_level": 2,
+    "test_debug_assertions": true,
+    "test_overflow_checks": true
+  },
+  "solid_review": "Degree-three Taylor algebra, implicit potentials and Cartesian momentum assembly have separate modules. Public pointwise evaluation carries no state or checkpoint mutation authority. Existing degree-four Cartesian and Python implementations remain independent oracles. The default serial/parallel runtime providers are unchanged.",
+  "informational_findings": "No mutation or duplication sweep rerun; historical reports retained. Strict Clippy allows only informational shared-helper dead_code warnings. No code type escape identifiers found.",
+  "limitations": [
+    "Pointwise regression fixtures are not an error enclosure over arbitrary inputs.",
+    "The runtime still uses its original provider; this optional evaluator has no sampling/FFT provider adapter.",
+    "No force gradients are provided.",
+    "Provider/full-Fourier/trajectory accuracy and arithmetic-identity binding remain before runtime use.",
+    "This changes floating arithmetic order and therefore requires separate experiment evidence.",
+    "P08/P09/P10 and all-observable/accepted-state qualification remain incomplete."
+  ],
+  "accepted_pde_windows": 0,
+  "artifact_inventory": "artifact-sha256.json",
+  "bootstrap": {
+    "guard_tests": 41,
+    "repository_links_and_frozen_inputs": "passed",
+    "original_mathematical_verification": "passed"
+  }
+}

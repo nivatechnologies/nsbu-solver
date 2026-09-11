@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "clean_directory": "/mnt/niva-array/nsbu-solver/work/reduced-alpha-clean-b3yx3uew/nsbu-solver",
+  "commands": [
+    [
+      "tests",
+      [
+        "cargo",
+        "test",
+        "-p",
+        "nsbu-benchmarks",
+        "--test",
+        "reduced_force",
+        "--test",
+        "reduced_force_allocation",
+        "--",
+        "--nocapture"
+      ]
+    ],
+    [
+      "unit-tests",
+      [
+        "cargo",
+        "test",
+        "-p",
+        "nsbu-benchmarks",
+        "--lib",
+        "reduced_force"
+      ]
+    ],
+    [
+      "preflight",
+      [
+        "cargo",
+        "run",
+        "--release",
+        "-p",
+        "nsbu-benchmarks",
+        "--example",
+        "reduced_force_profile",
+        "--",
+        "--dry-run"
+      ]
+    ],
+    [
+      "profile",
+      [
+        "cargo",
+        "run",
+        "--release",
+        "-p",
+        "nsbu-benchmarks",
+        "--example",
+        "reduced_force_profile"
+      ]
+    ],
+    [
+      "package",
+      [
+        "cargo",
+        "package",
+        "--workspace",
+        "--locked"
+      ]
+    ]
+  ],
+  "preflight_and_comparison_lines_equal": true,
+  "note": "Elapsed timing and build paths are not compared; all four maximum force differences and preflight values reproduce exactly."
+}

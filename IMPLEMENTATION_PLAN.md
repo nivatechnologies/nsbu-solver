@@ -637,3 +637,19 @@ Next attach the existing complete physical diagnostic kernels to these actual
 exact-v2 states, then complete separate force/reference/arithmetic and accepted
 artifact studies. Evaluate the parked reduced-coordinate force path independently
 before changing runtime providers. Daily releases require passing current CI.
+
+## Post-alpha reduced-coordinate evaluator progress
+
+The [optional pointwise evaluator](evidence/p09/reduced-force/README.md) passes
+nine earlier fixtures plus 84 exact-word 80/120-digit cases, independent symbolic
+transport identities, complete monomial/composition checks and allocation probes.
+Across its ten new Rust files, focused coverage is 98.35% line and 92.86% branch
+with maximum CRAP16. All current static/lint/documentation limits pass. A fresh
+source export reproduces fixture bytes and numerical profile output, passes the
+focused tests and packages all three crates. Full source-matched CI is pending.
+
+The measured pointwise speed ratio is about six; no runtime acceleration or new
+PDE qualification is established. The existing providers remain unchanged. Next
+implement a separately admitted optional force provider and compare its complete
+Fourier outputs, then integrated trajectories and arithmetic identity before
+changing runtime selection. P08/P09/P10 retain their original incomplete status.
