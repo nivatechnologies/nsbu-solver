@@ -3,7 +3,7 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "runtime-alpha-ready; scientific-qualification-in-progress",
+  "development_stage": "runtime-alpha-published; scientific-qualification-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
   "implementation_plan_revision": "1.3",
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Pre-alpha parallel-force base passes both hosted workflows; final runtime-alpha source must pass before publication.",
-    "hosted_ci": "evidence/runtime-alpha/base-hosted-rust.json"
+    "latest_hosted_ci_status": "Runtime alpha passes source-matched Rust and Python hosted workflows, including full coverage and the 220-test Python suite.",
+    "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json"
   },
   "packages": {
     "B00": {
@@ -219,8 +219,8 @@
   "parallel_force_scope": "Optional preflighted persistent workers preserve tested original force words and reported work; no allocations after construction for normal requests; complete failure collection and shutdown verified. Force-only N16/N32 profiles and clean reproduction pass; no new mathematical accuracy or PDE qualification.",
   "execution_priority": {
     "updated": "2026-09-11",
-    "next_delivery": "runtime-alpha",
-    "status": "R01-R04 complete for runtime alpha: independent fixtures, bounded CM/HO trajectories, complete same-profile runtime restart, public CLI, all local quality gates and fresh installation pass. Publish after exact-source hosted CI, then continue scientific correctness and optimization.",
+    "next_delivery": "daily verified correctness and optimization increments",
+    "status": "R01-R04 runtime alpha released and downloaded binary verified. Continue P08/P09 scientific integration and optimization; P10 has zero accepted concentrating windows.",
     "ordered_work": [
       "R01 exact-v2 owned from-rest runtime",
       "R02 same-profile checkpoint/resume",
@@ -238,13 +238,19 @@
   },
   "alpha_release": {
     "ready": true,
-    "status": "runtime-complete; local release gates passed; exact-source hosted CI required before publication",
+    "status": "first runtime alpha published; downloaded artifact passes checksums, CM/HO execution and checkpoint/resume",
     "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
     "accepted_concentrating_windows": 0,
     "scientific_qualification_separate": true,
     "evidence": "evidence/runtime-alpha/summary.json",
     "workflow": ".github/workflows/alpha-release.yml",
-    "daily_schedule_utc": "02:17; new verified source changes only"
+    "daily_schedule_utc": "02:17; new verified source changes only",
+    "last_release": {
+      "tag": "alpha-first-20260911",
+      "source_commit": "63f9a145c8e3b0168e7f8896f0f92f3217cdf57f",
+      "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-first-20260911",
+      "verification": "evidence/runtime-alpha/publication/summary.json"
+    }
   },
   "exact_v2_cli_exists": true,
   "exact_v2_restart_exists": true,

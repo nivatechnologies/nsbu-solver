@@ -596,3 +596,11 @@ CM/HO checkpoint/resume checks. This removes redundant executions of the same
 long examples while retaining their coverage and numerical assertions.
 No concentrating PDE window is accepted; coarse-grid agreement and a passing
 quality gate do not establish spatial/force convergence.
+
+
+The [first alpha publication](../evidence/runtime-alpha/publication/README.md)
+now records successful source-matched hosted Rust and Python checks, including
+all 220 Python tests. The downloaded hosted binary also passes both default
+methods, same-build checkpoint/resume and all 1,660 bundled checksums. These
+publication results refer to immutable source `63f9a14`; later code changes need
+their own evidence and exact-source CI before a daily snapshot.

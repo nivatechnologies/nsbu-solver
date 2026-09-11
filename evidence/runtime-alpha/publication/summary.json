@@ -1,0 +1,36 @@
+{
+  "status": "published and downloaded artifact verified",
+  "recorded_utc": "2026-09-11T04:04:08.981575+00:00",
+  "tag": "alpha-first-20260911",
+  "source_commit": "63f9a145c8e3b0168e7f8896f0f92f3217cdf57f",
+  "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-first-20260911",
+  "prerelease": true,
+  "repository_visibility": "public",
+  "hosted_rust": "all quality/package gates passed; 425 harness tests, 9 allocation executables and 1 compiled doc example",
+  "hosted_python": "220 tests passed; bootstrap/frozen mathematical checks and required quality gates passed",
+  "downloaded_archive": {
+    "status": "passed",
+    "release_tag": "alpha-first-20260911",
+    "source_commit": "63f9a145c8e3b0168e7f8896f0f92f3217cdf57f",
+    "archive_bytes": 77974864,
+    "archive_sha256": "9dc067b6591eba79effe76e4e28a8c269a33b91736d9edc1c05a426ea5700b11",
+    "verified_files": 1660,
+    "repository_checks": "passed",
+    "installed_methods": [
+      "CM",
+      "HO"
+    ],
+    "committed_steps_each": 32,
+    "checkpoint_steps": 16,
+    "resumed_equals_uninterrupted_except_origin": true,
+    "accepted_pde_windows": 0,
+    "manifest": "repository=nivatechnologies/nsbu-solver\nsource_commit=63f9a145c8e3b0168e7f8896f0f92f3217cdf57f\nsnapshot_tag=alpha-first-20260911\nchecks_workflow=checks.yml\nrust_workflow=rust.yml\ncargo_workspace_version=0.1.0-alpha.0\ntarget=x86_64-unknown-linux-gnu\nrunner=ubuntu-24.04\nbuild_glibc=glibc 2.39\nmaximum_required_glibc_symbol=GLIBC_2.35\nneeded_libraries=libgcc_s.so.1,libm.so.6,libc.so.6,ld-linux-x86-64.so.2\nscientific_status=diagnostic-only; unqualified\nprevious_snapshot=none\n"
+  },
+  "daily_schedule_utc": "02:17; new source must pass exact-commit Rust and Python CI before publication",
+  "accepted_pde_windows": 0,
+  "scientific_packages_incomplete": [
+    "P08",
+    "P09",
+    "P10"
+  ]
+}

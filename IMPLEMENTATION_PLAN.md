@@ -46,8 +46,9 @@ The runtime checklist R01–R04 is now complete, with
 [actual exit evidence](evidence/runtime-alpha/README.md): 434 Rust tests/probes,
 98.56% line and 88.79% branch coverage, all required metric limits, and a fresh
 checkout package/install/CM/HO/restart walkthrough. The `alpha_release.ready`
-flag is true. Publication waits for both hosted workflows to pass on the exact
-release commit; P08/P09/P10 scientific exits remain open.
+flag is true. Both hosted workflows passed on the exact release commit, and
+[the first alpha](evidence/runtime-alpha/publication/README.md) is published with
+a verified downloaded binary. P08/P09/P10 scientific exits remain open.
 
 ## Repository bootstrap and current evidence
 

@@ -1,0 +1,37 @@
+{
+  "hosted-rust.log.gz": {
+    "sha256": "da4df34d0a4160aa39b9072f50ba3e1d6c76dec7a696f045c2204e13da849a2c",
+    "bytes": 37085,
+    "uncompressed_sha256": "9c4d4d18ef6c713fef6dab4e6bbe245cbe532e597a80bd81ad73260fc70e36f4"
+  },
+  "hosted-python.log.gz": {
+    "sha256": "3b605b4e8b114d3d8bef6e96a4caa4457bc4ac41f9e9914ac0a0a554ae86ff21",
+    "bytes": 39256,
+    "uncompressed_sha256": "246c671aed8aecc061503d2fab215f37065ca6e3a6259543d52bffda5dbd00b9"
+  },
+  "release-workflow.log.gz": {
+    "sha256": "f70a87c7c770bb5b3cb79665e47bfa473eeaeb0831ef62857f7ceb7980902a2b",
+    "bytes": 7850,
+    "uncompressed_sha256": "b2f23aba2537faaeffae251acfdce3741b427945f41dfc8fef392de7bca7a6fd"
+  },
+  "downloaded-checks.log.gz": {
+    "sha256": "2779de58c0ca43bbfb518ef768269337ca86a357365abaaa0832f9ea95b425be",
+    "bytes": 10831,
+    "uncompressed_sha256": "e2682c0a03f11f9741ad9fd73830f44554cd974f9cab64a6f65da8e448ffb026"
+  },
+  "anonymous-clone.log.gz": {
+    "sha256": "df353bb969b675c6a488eec697a5fd4e8371ec37a87cc1b024ea5a0fc7d71dbc",
+    "bytes": 650,
+    "uncompressed_sha256": "cdb42d78d8d2fe9706ced993e72b7aa7c83669c3e02f4b48e550c49aa1e22913"
+  },
+  "first-release-notes.md.gz": {
+    "sha256": "d51d79cd0b3c71ccbcd28a1016db23e1dda4decd164a40d434beed8fce71d07f",
+    "bytes": 1766,
+    "uncompressed_sha256": "8e410471dc6551dc20e24f9a41f57898486da6405aca89896ab29f80800c44cf"
+  },
+  "verify_downloaded_alpha.py.gz": {
+    "sha256": "220a160bb6db2212cb84524591319a46db8b5285c76ea376ec5f45f4aa6df3e8",
+    "bytes": 1197,
+    "uncompressed_sha256": "647db782339c251838b37e238c63d25ecc1ea07991737791ef3e8d8162131d0c"
+  }
+}
