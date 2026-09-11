@@ -6,7 +6,7 @@ the two spatial, two temporal and one CM/HO pair at each accepted family clock.
 The diagnostic evaluates a fresh original `V2Force` on the complete doubled
 finest grid and never receives an analytical pressure or integrator stage RHS.
 
-The focused non-instrumented checks passed seven unique tests/probes: one private
+The focused checks passed seven unique pressure tests/probes: one private
 full-force Poisson control, two independent convolution/DFT oracle tests, three
 family admission/transaction tests and one allocator executable. The actual
 family test compares RMS and peak values for pressure and gradient across all five
@@ -16,12 +16,21 @@ progression only after a complete report. Construction allocated 23,020,352 byte
 within the 28,007,168-byte joint reservation; planning and steady measurement
 allocated nothing.
 
-Strict formatting, Clippy and Rustdoc pass. Fresh whole-source maxima are CC 21,
-cognitive complexity 21, Halstead difficulty 75.8955 and 477 physical lines,
-within the active limits. A focused LLVM coverage run was stopped during the
-instrumented allocator executable after all 32 benchmark library tests passed;
-it did not emit a final coverage report. Current-source line/branch coverage and
-CRAP therefore remain pending rather than inferred from earlier evidence.
+The instrumented gate also retains the existing physical-plan admission test
+because this increment corrects its allocator-metadata reservation. Across the
+ten selected implementation/test files, focused coverage is 914/943 executable
+lines (96.9247%) and 62/72 instrumented branches (86.1111%). Maximum per-function
+CRAP is 15 across 93 functions. Strict formatting, Clippy and Rustdoc pass. Fresh
+whole-source maxima are CC 21, cognitive complexity 21, Halstead difficulty
+75.8955 and 477 physical lines, within the active limits.
+
+The initial focused coverage result exposed CRAP 30 in `measure`: the transaction
+coordinator contained defensive provider-budget branches that cannot be forced
+through the admitted concrete provider. Force evaluation and its budget validation
+now have the same private responsibility boundary as the smooth pressure consumer.
+The failed report is retained alongside the passing coverage, metrics and CRAP
+reports under `raw/`. `source-sha256.json` binds the ten selected files and
+`artifact-sha256.json` binds every compressed raw report and the exact reproducer.
 
 At elapsed tick 128, the two spatial pressure RMS differences are approximately
 `2.9033e-13` and `1.1764e-13`; the corresponding gradient RMS differences are

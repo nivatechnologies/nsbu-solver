@@ -1,14 +1,15 @@
 {
   "package": "P09",
   "increment": "exact-v2 pressure consumer",
-  "status": "focused numerical, allocation and static gates passed; focused coverage/CRAP and broader source-matched hosted gates pending",
-  "parent_commit": "617034102a08c74d6fa5ce52624a67d917b48187",
-  "focused_unique_tests_and_probes": 7,
+  "status": "focused numerical, allocation, coverage, CRAP and static gates passed; broader source-matched hosted gates pending",
+  "parent_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "focused_unique_tests_and_probes": 8,
   "focused_execution": {
     "library_pressure_tests": 1,
     "independent_oracle_tests": 2,
     "family_harness_tests": 3,
-    "isolated_allocator_executables": 1
+    "isolated_allocator_executables": 1,
+    "retained_physical_plan_admission_tests": 1
   },
   "resource_observation": {
     "admission_allocations": 0,
@@ -24,11 +25,54 @@
     "halstead_difficulty_function_or_file": 75.8955223880597,
     "maximum_physical_file_lines": 477
   },
-  "coverage": {
-    "status": "pending",
-    "reason": "instrumented run was stopped during the allocator executable before a final report was emitted; all 32 benchmark library tests had passed"
+  "focused_coverage": {
+    "selected_files": 10,
+    "lines": {
+      "count": 943,
+      "covered": 914,
+      "percent": 96.92470837751856
+    },
+    "branches": {
+      "count": 72,
+      "covered": 62,
+      "percent": 86.11111111111111
+    }
+  },
+  "focused_function_count": 93,
+  "focused_crap_maximum": 15.0,
+  "precorrection_crap_maximum": 30.0,
+  "selected_focus_files": [
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/plan.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/pressure/mod.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/pressure/plan.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/pressure/tests.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_allocation.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_family.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_oracle.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_oracle/convolution.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_oracle/dft.rs",
+    "crates/nsbu-benchmarks/tests/v2_pressure_oracle/modes.rs"
+  ],
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "reproducer": "raw/check_v2_pressure_focused.sh.gz",
+  "execution": {
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
   },
   "accepted_pde_windows": 0,
+  "solid_review": {
+    "single_responsibility": "Family admission, force evaluation, pressure construction, comparison and report publication remain separate private steps.",
+    "open_closed": "The fixed two-quantity and five-pair inventories consume existing provider, conservative-product and physical-comparison interfaces.",
+    "liskov": "The consumer accepts the public immutable V2 family contract and refuses foreign, stale and terminated families.",
+    "interface_segregation": "Only borrowed branch states and public family identity/time access are used; the diagnostic cannot mutate trajectories or histories.",
+    "dependency_inversion": "Pressure construction depends on the prescribed-force and solver diagnostic contracts and receives no analytical pressure or integrator stage RHS."
+  },
   "limitations": [
     "Same-clock pressure-pair differences cancel the common prescribed force and do not qualify force-sampling sufficiency.",
     "Global sampled RMS and peak values are not continuum bounds.",

@@ -132,16 +132,7 @@ impl<'a> PressureFamilyWorkspace<'a> {
     ) -> Result<PressureRefinementSample, FamilyError> {
         self.charge()?;
         let clock = self.plan.family.require_sample(family, self.next)?;
-        let work = self.provider.evaluate(
-            clock,
-            self.plan.provider_limits,
-            self.force.each_mut().map(Vec::as_mut_slice),
-        )?;
-        if work.work_units > self.plan.provider_limits.work_units
-            || work.scalar_transforms > self.plan.provider_limits.scalar_transforms
-        {
-            return Err(SolverError::ProviderBudgetExceeded.into());
-        }
+        self.evaluate_force(clock)?;
         let pairs = PAIRS.map(|pair| self.pair(family, pair));
         let pairs = [pairs[0]?, pairs[1]?, pairs[2]?, pairs[3]?, pairs[4]?];
         self.next += 1;
@@ -157,6 +148,19 @@ impl<'a> PressureFamilyWorkspace<'a> {
                 refinement(QUANTITIES[1], pairs, 1),
             ],
         })
+    }
+    fn evaluate_force(&mut self, clock: TickClock) -> Result<(), SolverError> {
+        let work = self.provider.evaluate(
+            clock,
+            self.plan.provider_limits,
+            self.force.each_mut().map(Vec::as_mut_slice),
+        )?;
+        if work.work_units > self.plan.provider_limits.work_units
+            || work.scalar_transforms > self.plan.provider_limits.scalar_transforms
+        {
+            return Err(SolverError::ProviderBudgetExceeded);
+        }
+        Ok(())
     }
     fn charge(&mut self) -> Result<(), SolverError> {
         if self.remaining() == 0 {
