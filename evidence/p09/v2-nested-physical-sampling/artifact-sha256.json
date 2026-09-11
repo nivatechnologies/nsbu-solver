@@ -1,0 +1,19 @@
+{
+  "files": {
+    "README.md": "fcff8586b33364bd5d43f958bf911f169061971f89715632037dedc21a2ddff8",
+    "commands.txt": "14710d312cd8155faf36e449406f9c41e81197322bec3685d3053fd05a9c9b70",
+    "raw/allocation.log.gz": "5456a8035a3fd12e3c5f770e6595399597106a4fc12ff2574f46ed8d86b4d5ca",
+    "raw/allocation.time.gz": "7ed5d1f62b84418563dff3b3749aa8242fbf851009c594f81b5d19d8a04438a6",
+    "raw/clippy.log.gz": "7a6cc278680d76b3a7ee2d5766e7a9e484c4aead6ab6d95220bbf595620472f9",
+    "raw/coverage-final.json.gz": "c09bc82c7ce9f449adc47a222be893017b9da5f9e1bdf5a826c1965e0734a23a",
+    "raw/coverage.json.gz": "edfcb5be4b2b04dec6f00b382765ae153df30edfa4b66661879f2aab79037e5a",
+    "raw/crap-final.json.gz": "2901fe409a4ef3fd00b079b3fc807e74fb4226535985ed757b167316f3a9ec41",
+    "raw/fmt.log.gz": "e233cccfe31e9dd424d9cf3503898d8ac55c85c207222e456a98dd52d9b7d177",
+    "raw/metrics-focused.jsonl.gz": "4ab95ab8f4b49e63d2189d09d183a42bc79ff530cabb17da2afffebd3217a23c",
+    "raw/numerical.log.gz": "495404e9e6bf580399e9a54e9250586f637aea09eaef192aa32c522fffd0164d",
+    "raw/numerical.time.gz": "9440c2d0e4d6ad2b04dabddae27df4052ba5d208cf03b59896442312269792b4",
+    "raw/rustdoc.log.gz": "dcb183078e2fb870abd4e383ae4b455d809040f6a6ca8093e50e95940a707fb2",
+    "source-sha256.json": "bc2b43f569c5cee2b39d32440d9c21308cabe6a9499f17e9ef3ac596590329cc",
+    "summary.json": "310ae20a012f49af4492d4eb288bdd9185c27af49a36d8a24f1f38458646b691"
+  }
+}

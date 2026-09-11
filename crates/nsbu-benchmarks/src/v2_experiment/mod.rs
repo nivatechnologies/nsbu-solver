@@ -10,6 +10,7 @@ pub mod physical;
 mod plan;
 pub mod pressure;
 pub mod probes;
+pub mod sampling;
 
 pub mod reference;
 use crate::v2_run::Run;

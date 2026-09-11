@@ -72,6 +72,10 @@ name = "v2_physical_allocation"
 harness = false
 
 [[test]]
+name = "v2_sampling_allocation"
+harness = false
+
+[[test]]
 name = "v2_force_family_allocation"
 harness = false
 
