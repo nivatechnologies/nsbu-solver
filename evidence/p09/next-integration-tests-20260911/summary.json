@@ -1,0 +1,37 @@
+{
+  "starting_head": "e666994a22cd8fd5c6e1985c1858c773060653de",
+  "ending_head": "e666994a22cd8fd5c6e1985c1858c773060653de",
+  "source_files_hashed": 15,
+  "source_hash_verification": "all OK",
+  "runs": {
+    "v2_review_adapter": {
+      "elapsed": "1:40.35",
+      "user_seconds": 134.63,
+      "system_seconds": 6.47,
+      "process_max_rss_kib": 766504,
+      "exit_status": 0,
+      "tests": "harness terminal success; 28 records"
+    },
+    "v2_diagnostic_export": {
+      "elapsed": "1:34.39",
+      "user_seconds": 99.09,
+      "system_seconds": 1.09,
+      "process_max_rss_kib": 292344,
+      "exit_status": 0,
+      "tests": "3 passed, 0 failed"
+    },
+    "diagnostic_export_unit_filter": {
+      "elapsed": "0:04.21",
+      "user_seconds": 22.38,
+      "system_seconds": 3.54,
+      "process_max_rss_kib": 819408,
+      "exit_status": 0,
+      "tests": "3 passed, 0 failed, 40 filtered out"
+    }
+  },
+  "scope": "normal locked focused tests only; no full coverage, source changes, commit or push",
+  "evidence_source_commit": "e666994a22cd8fd5c6e1985c1858c773060653de",
+  "coverage": "not run; this evidence is a bounded normal locked regression only",
+  "memory_interpretation": "maximum RSS is an observed whole test-process figure including compilation where applicable; it is not an adapter/export allocation reservation or aggregate cap",
+  "terminal_result": "all three commands completed with exit status 0; no run was aborted"
+}

@@ -1,0 +1,3 @@
+/usr/bin/time -v -o work/p09-integration-tests/v2_review_adapter.time cargo test -p nsbu-benchmarks --test v2_review_adapter --locked -- --nocapture
+/usr/bin/time -v -o work/p09-integration-tests/v2_diagnostic_export.time cargo test -p nsbu-benchmarks --test v2_diagnostic_export --locked -- --nocapture
+/usr/bin/time -v -o work/p09-integration-tests/diagnostic_export_unit.time cargo test -p nsbu-benchmarks --lib --locked diagnostic_export -- --nocapture
