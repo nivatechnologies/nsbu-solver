@@ -48,3 +48,6 @@ Rejection and advective refusal leave the accepted ring and rest state unchanged
 These checks do not qualify reconstruction error, force sampling, spatial or
 temporal refinement, artifact provenance or a concentrating PDE window. P09 and
 P10 remain incomplete and accepted concentrating windows remain zero.
+
+The follow-on [exact-v2 probe family](V2_PROBES.md) consumes six of these owners
+at prevalidated non-stage clocks without changing the owner or default runtime.

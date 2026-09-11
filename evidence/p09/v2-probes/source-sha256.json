@@ -1,0 +1,8 @@
+{
+  "crates/nsbu-benchmarks/src/v2_experiment/mod.rs": "3193562d94547da5c1108e9488679b0c008ce4f29081f4d0f5a62324482426e7",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs": "ceb16d27649c9b9d0b6b6992ac7a6cf2c5f5849531dd9e4c33365a84f990ddd1",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/plan.rs": "e7ee5bee246a8830baa0a02974f8579d60c51088501d646816dc0de1c0727bef",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/report.rs": "6826ddaf19c255ff4e2f389e0d880887f8307094104988af27060fd6cfa331d6",
+  "crates/nsbu-benchmarks/tests/v2_probe_family.rs": "fd503f96fc522224f29947d26fdea6412332228808b9df7572ffdd9dc7dae00b",
+  "crates/nsbu-benchmarks/tests/v2_probe_family_allocation.rs": "773dc6a46a76dae3dc0d5896e9d603a1328bf2cc9daa636b6b03b4258ca41f59"
+}

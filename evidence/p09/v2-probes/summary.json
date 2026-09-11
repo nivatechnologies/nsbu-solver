@@ -1,0 +1,59 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 off-stage reconstruction probe family",
+  "status": "focused numerical, allocation, coverage, CRAP and static gates passed; source-matched hosted gates pending",
+  "parent_commit": "6f5c6307b7e5f765a6f7e1062c0b2d6e37fa87ce",
+  "focused_unique_tests_and_probes": 6,
+  "resource_observation": {
+    "planning_allocations": 0,
+    "construction_bytes": 21331520,
+    "declared_joint_bytes": 26347560,
+    "steady_allocations": 0,
+    "successful_reports": 3,
+    "weighted_visits": 3553920
+  },
+  "whole_source_static_maxima": {
+    "cyclomatic_function": 21.0,
+    "cognitive_function": 21.0,
+    "halstead_difficulty_function_or_file": 75.8955223880597,
+    "maximum_physical_file_lines": 477
+  },
+  "focused_coverage": {
+    "selected_implementation_files": 3,
+    "lines": {"count": 280, "covered": 270, "percent": 96.42857142857143},
+    "branches": {"count": 26, "covered": 22, "percent": 84.61538461538461}
+  },
+  "focused_function_count": 34,
+  "focused_crap_maximum": 17.0,
+  "selected_focus_files": [
+    "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/probes/plan.rs",
+    "crates/nsbu-benchmarks/src/v2_experiment/probes/report.rs"
+  ],
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "reproducer": "raw/check_v2_probes_focused.sh.gz",
+  "execution": {
+    "rustc": "1.96.0-nightly (ec818fda3 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "118fe016d90be5c150c14c8df8b5550bf23099e8decd716d467c67b622f95123"
+  },
+  "accepted_pde_windows": 0,
+  "solid_review": {
+    "single_responsibility": "Reconstructed owners retain accepted nodes; the probe coordinator schedules lookahead, comparison and complete report publication.",
+    "open_closed": "The new family consumes the existing reconstructed-owner and comparison contracts without changing the default V2 family.",
+    "liskov": "Each branch uses the same admitted V2 settings and trajectory behavior as its standalone reconstruction-capable owner.",
+    "interface_segregation": "Consumers receive immutable samples, origins and borrowed reconstructed fields without state mutation or import interfaces.",
+    "dependency_inversion": "The coordinator depends on reconstruction, exact-clock and comparison contracts; the test-only independent weight solve remains outside production."
+  },
+  "limitations": [
+    "The separate RHS control reuses production V2Force and ConservativeWorkspace operators.",
+    "No exact-v2 off-stage residual consumer or external reconstruction import is provided.",
+    "No analytical-reference, force-sampling, continuous-time or concentrating qualification is claimed.",
+    "P09 and P10 remain incomplete; source-matched hosted CI is pending."
+  ]
+}
