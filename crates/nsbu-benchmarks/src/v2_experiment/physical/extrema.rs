@@ -19,6 +19,20 @@ pub enum SampleMaximum {
         value: f64,
     },
 }
+impl SampleMaximum {
+    /// Complete measured witness, or `None` for the explicit no-sample state.
+    pub fn measured(self) -> Option<(Layout, usize, [usize; 3], f64)> {
+        match self {
+            Self::NoSamples => None,
+            Self::Measured {
+                layout,
+                linear,
+                index,
+                value,
+            } => Some((layout, linear, index, value)),
+        }
+    }
+}
 
 /// Absolute-error, relative-error and reference-magnitude maxima for one pair.
 #[derive(Debug, Clone, Copy, PartialEq)]

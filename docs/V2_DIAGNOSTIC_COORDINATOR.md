@@ -63,4 +63,6 @@ nsbu diagnose-v2
 ```
 
 The CLI prints concise diagnostic summaries. Complete raw event reports remain
-available through the library API.
+available through the library API. The versioned full JSON writer in
+[`V2_DIAGNOSTIC_EXPORT.md`](V2_DIAGNOSTIC_EXPORT.md) retains those detailed
+pair, branch, region, provenance and residual fields.
