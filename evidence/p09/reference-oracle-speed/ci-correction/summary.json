@@ -1,0 +1,14 @@
+{
+  "implementation_commit": "ee3195adfb7a6647e51f5304ad5455c307ad3e87",
+  "source_sha256": {
+    "crates/nsbu-benchmarks/tests/v2_reference_oracle.rs": "43bb7475837d953a05cb85e7d83cb893d753ff01aeb5fc4b4c574d14e1e324fb",
+    "crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs": "76aa0c29eb19bc17ff013e18e2a147a4ccb8fb876831a9cea3b8b7f5fe045018",
+    "crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs": "7bc33438965f0253f9bbac425e924780a0dee8ed5aa32e3f68025588efda3f61",
+    "crates/nsbu-benchmarks/tests/v2_reference_oracle/phase.rs": "be01f2df668327b535b940aa33dbacbf1435366e7bd5027102819f2dfdcc693d",
+    "crates/nsbu-benchmarks/tests/v2_reference_oracle/tracking.rs": "cdeaa586b9e1e0bb75dd84360efca7a36d99e103489306d22f252408b13280b9"
+  },
+  "artifact_sha256": {
+    "metrics.json.gz": "b63ae2281f51374705654f3bcbf338bb85c8ce76d84de4cf8e9ffeefe0be2e24"
+  },
+  "scope": "All oracle RCA units and nested functions; numerical test4/4 and workspace all-target Clippy/Rustdoc passed on correction branch; combined hosted checks pending"
+}
