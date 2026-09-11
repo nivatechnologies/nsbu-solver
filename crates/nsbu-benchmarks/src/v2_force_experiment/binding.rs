@@ -236,6 +236,24 @@ impl<'a> ForceBindingWorkspace<'a> {
         ordinary: &V2Family<'_>,
         sample: ForceRefinementSample,
     ) -> Result<SpectralForceResolutionSample, ForceBindingError> {
+        let expected = self.require_publications(force, ordinary)?;
+        self.require_report(sample, expected)?;
+        let (left, right) = self.require_baseline(force, ordinary, expected)?;
+        same_coefficients(left.state(), right.state())?;
+        Ok(SpectralForceResolutionSample {
+            clock: expected,
+            comparisons: sample.comparisons(),
+            force_identity: self.plan.force.identity(),
+            ordinary_identity: self.plan.ordinary.identity(),
+            settings: self.plan.force.settings(),
+            slots: self.plan.baseline_slots(),
+        })
+    }
+    fn require_publications(
+        &self,
+        force: &ForceFamily<'_>,
+        ordinary: &V2Family<'_>,
+    ) -> Result<TickClock, ForceBindingError> {
         let expected = self
             .plan
             .force
@@ -246,12 +264,27 @@ impl<'a> ForceBindingWorkspace<'a> {
             .ordinary
             .require_sample(ordinary, self.next)
             .map_err(|_| ForceBindingError::InvalidBinding)?;
-        if ordinary_clock != expected
-            || sample.identity() != self.plan.force.identity()
-            || sample.clock() != expected
-        {
+        if ordinary_clock != expected {
             return Err(ForceBindingError::InvalidBinding);
         }
+        Ok(expected)
+    }
+    fn require_report(
+        &self,
+        sample: ForceRefinementSample,
+        expected: TickClock,
+    ) -> Result<(), ForceBindingError> {
+        if sample.identity() != self.plan.force.identity() || sample.clock() != expected {
+            return Err(ForceBindingError::InvalidBinding);
+        }
+        Ok(())
+    }
+    fn require_baseline<'b>(
+        &self,
+        force: &'b ForceFamily<'_>,
+        ordinary: &'b V2Family<'_>,
+        expected: TickClock,
+    ) -> Result<(&'b v2_run::Run, &'b v2_run::Run), ForceBindingError> {
         let left = force
             .branch(self.plan.force_branch)
             .ok_or(ForceBindingError::InvalidBinding)?;
@@ -264,15 +297,7 @@ impl<'a> ForceBindingWorkspace<'a> {
         {
             return Err(ForceBindingError::InvalidBinding);
         }
-        same_coefficients(left.state(), right.state())?;
-        Ok(SpectralForceResolutionSample {
-            clock: expected,
-            comparisons: sample.comparisons(),
-            force_identity: self.plan.force.identity(),
-            ordinary_identity: self.plan.ordinary.identity(),
-            settings: self.plan.force.settings(),
-            slots: self.plan.baseline_slots(),
-        })
+        Ok((left, right))
     }
 }
 

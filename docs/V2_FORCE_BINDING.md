@@ -32,8 +32,8 @@ not mapped to the separate partial review adapter's observable keys. Status is
 permanently `DiagnosticOnly`; no budget decision or PDE-window acceptance occurs.
 
 The focused profile evolves N4 CM trajectories from rest to tick 128 with
-M8/M16/M32 force grids. Its M16 branch is bitwise bound to the ordinary family's
-N4/M16 finest-step CM branch. Independent signed-Fourier sums check both raw
+M6/M12/M24 force grids. Its M12 branch is bitwise bound to the ordinary family's
+N4/M12 finest-step CM branch. Independent signed-Fourier sums check both raw
 force-resolution comparisons. Negative controls cover mismatched plan slots,
 foreign identity, an unadvanced ordinary owner, a partially advanced force owner,
 a terminal force owner, one corrupted coefficient word, attempt exhaustion and a
