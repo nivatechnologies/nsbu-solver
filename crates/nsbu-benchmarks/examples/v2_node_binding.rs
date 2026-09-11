@@ -13,6 +13,7 @@ use nsbu_solver::{
     verification::times::TestedTimes,
 };
 
+#[cfg_attr(test, allow(dead_code))]
 fn main() {
     let accepted =
         [0, 64, 128].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
@@ -64,14 +65,42 @@ fn main() {
     println!("diagnostic provenance/equality only; missing is not zero, false is not a bound; no reconstructed-state substitution, tolerance, convergence or PDE-window claim; accepted_pde_windows=0");
 }
 
-fn print(sample: nsbu_benchmarks::v2_experiment::binding::NodeBindingSample) {
-    let labels = sample.branches().map(|status| match status {
+fn label(status: NodeBindingStatus) -> &'static str {
+    match status {
         NodeBindingStatus::MissingRetainedNode => "missing",
         NodeBindingStatus::Compared(node) if node.coefficients_equal => "bitwise-equal",
         NodeBindingStatus::Compared(_) => "different",
-    });
+    }
+}
+
+fn print(sample: nsbu_benchmarks::v2_experiment::binding::NodeBindingSample) {
+    let labels = sample.branches().map(label);
     println!(
         "elapsed={} branch_bindings={labels:?}",
         sample.clock().elapsed()
     );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use nsbu_benchmarks::v2_experiment::binding::AcceptedNodeProvenance;
+    use nsbu_solver::domain::Epoch;
+
+    fn compared(coefficients_equal: bool) -> NodeBindingStatus {
+        NodeBindingStatus::Compared(AcceptedNodeProvenance {
+            clock: TickClock::restore(-20, 8192, 0, 8192).unwrap(),
+            epoch: Epoch(0),
+            accepted_steps: 0,
+            origin: nsbu_benchmarks::v2_run::Origin::InternalFromRest,
+            coefficients_equal,
+        })
+    }
+
+    #[test]
+    fn labels_keep_missing_equal_and_different_distinct() {
+        assert_eq!(label(NodeBindingStatus::MissingRetainedNode), "missing");
+        assert_eq!(label(compared(true)), "bitwise-equal");
+        assert_eq!(label(compared(false)), "different");
+    }
 }

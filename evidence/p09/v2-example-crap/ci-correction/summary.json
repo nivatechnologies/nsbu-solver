@@ -1,0 +1,28 @@
+{
+  "hosted_failure": {
+    "run": 34603432256,
+    "source_revision": "109f9cfa8dd054c0814506850c19b5eeeb90a58c",
+    "offenders": [
+      {"path": "crates/nsbu-benchmarks/examples/v2_node_binding.rs", "function": "print", "cyclomatic": 6, "branch_coverage": 0.0, "crap": 42.0},
+      {"path": "crates/nsbu-benchmarks/examples/v2_node_binding.rs", "function": "<anonymous>", "cyclomatic": 5, "branch_coverage": 0.0, "crap": 30.0},
+      {"path": "crates/nsbu-benchmarks/examples/v2_regional_tracking.rs", "function": "main", "cyclomatic": 8, "branch_coverage": 0.0, "crap": 72.0}
+    ]
+  },
+  "correction_base_revision": "aba8c58",
+  "source_sha256": {
+    "crates/nsbu-benchmarks/examples/v2_node_binding.rs": "fa68d92558b8d14cd69c5ca9f07a0e90a672f56e0e3ef034d409626c98cd3d7c",
+    "crates/nsbu-benchmarks/examples/v2_regional_tracking.rs": "bf9754c946ab95ac2f2b7423318e88f4f27bf4599793cd7899262cde4d5f04f3"
+  },
+  "focused_checks": {
+    "example_unit_tests": "2 passed",
+    "example_clippy": "passed with -D warnings -A dead_code",
+    "maximum_crap": 12.0,
+    "previously_failing_contracts": {"node_label": 5.0, "regional_values": 4.0}
+  },
+  "artifact_sha256": {
+    "coverage.json.gz": "d60e70c888f1ffaabb8935874e6ee06d1785b519113dd8615b77781f092ba5ef",
+    "metrics.json.gz": "ef2f9f2a7f0831be2389764c652b86cb16b11fa42a3e7f2b40651a391aca3b91",
+    "crap.json.gz": "a7193bfe043dbe260cf558b0e8e7aa1b42814d6fd9ba245b4ec99612dce9d93e"
+  },
+  "historical_raw_evidence_changed": false
+}
