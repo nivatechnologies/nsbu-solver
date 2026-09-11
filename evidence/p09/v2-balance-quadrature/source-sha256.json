@@ -1,0 +1,13 @@
+{
+  "crates/nsbu-benchmarks/Cargo.toml": "0cf0441989ea7556041df1e3596ffc7a0b539cae61830228c334e92224c7dc36",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs": "4124e4f804b5cf2ae66ef871003948dd065cc7a6c6406114128c6722a029aee2",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/mod.rs": "bfa5f83d93cb2739d3cd3ed9c6ccce240477e7cb80a60cc4020bf27a4c170c9a",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/plan.rs": "cf3032354e17a4135710769833ee3c94cd8fe47d24ab09c6e017e4f93ffcd554",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/quadrature.rs": "4188ba79af1377766830e94644c80024728dfab1bad7c4afa445198d30f45d1c",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/tests.rs": "659ad58ebfe7582944073895a7360545df5501d6a26e15aaf3ebfbe22b380301",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/quadrature/plan.rs": "54eddcc31d16188f4979713cec7ddebd2663300a4fa2a63ab6551e347e6dec14",
+  "crates/nsbu-benchmarks/tests/v2_balance_quadrature.rs": "61f5524ecc4a1880638941eda494b08bf4644c44c296bd544b4e4023e4d407d6",
+  "crates/nsbu-benchmarks/tests/v2_balance_quadrature_allocation.rs": "66382776627fcb2aba45400f664b29c1c0226c80289a5649fd4de63449622bcb",
+  "crates/nsbu-benchmarks/tests/v2_balance_support.rs": "8df996fbca0ef23214b4163b9010a801a510f8160afcd49b9ea730e7e62fc891",
+  "docs/V2_BALANCE_QUADRATURE.md": "02064fee67eb30542d9d94da133c33a1d38d7085de1b0af3fa86ce8a0908c4e5"
+}

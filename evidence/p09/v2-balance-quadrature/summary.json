@@ -1,0 +1,70 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 reconstructed balance and three-level Simpson consumer",
+  "status": "focused numerical, allocation, coverage, CRAP, static and exact Rustdoc gates passed; source-matched hosted CI pending",
+  "parent_commit": "63fa585",
+  "source_commit": "51d468f",
+  "focused_unique_tests_and_probes": 5,
+  "resource_observation": {
+    "construction_bytes": 34695488,
+    "declared_joint_bytes": 39798520,
+    "steady_allocations": 0,
+    "successful_balance_reports": 9,
+    "provider_work_units_per_report": 10699776,
+    "scalar_transforms_per_report": 72,
+    "force_sample_grid": [24, 24, 24],
+    "quadrature_counts": [3, 5, 9]
+  },
+  "force_omission_maximum_channel_gaps": [
+    2.373374379343601e-11,
+    3.3501708745181166e-10,
+    5.672205870612095e-10,
+    2.3538176829970427e-8,
+    5.811468979926393e-10,
+    5.672205870612094e-10
+  ],
+  "simpson_controls": {
+    "actual_reduction_tolerance": 2e-18,
+    "polynomial_energy_error": 0.0,
+    "polynomial_enstrophy_error": 8.470329472543003e-22
+  },
+  "changed_source_static_maxima": {
+    "cyclomatic_function": 14.0,
+    "cognitive_function": 13.0,
+    "halstead_difficulty_function": 52.95652173913044,
+    "halstead_difficulty_file": 59.03179190751445,
+    "maximum_physical_file_lines": 268
+  },
+  "whole_source_static_maxima": {
+    "cyclomatic_function": 21.0,
+    "cognitive_function": 21.0,
+    "halstead_difficulty_function": 60.0,
+    "halstead_difficulty_file": 75.2603305785124,
+    "maximum_physical_file_lines": 477
+  },
+  "focused_coverage": {
+    "selected_implementation_files": 4,
+    "lines": {"count": 370, "covered": 361, "percent": 97.56756756756756},
+    "branches": {"count": 52, "covered": 42, "percent": 80.76923076923077}
+  },
+  "focused_function_count": 50,
+  "focused_crap_maximum": 15.568,
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "reproducer": "raw/check_v2_balance_quadrature_focused.sh.gz",
+  "execution": {
+    "rustc": "1.96.0-nightly (ec818fda3 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "0cf0441989ea7556041df1e3596ffc7a0b539cae61830228c334e92224c7dc36"
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "The fresh balance control reuses production conservative, transfer and balance-reduction operators.",
+    "The Simpson results are sampled diagnostics and do not bound continuous-time balance or qualify force coverage.",
+    "P09 and P10 remain incomplete; source-matched hosted CI is pending."
+  ]
+}

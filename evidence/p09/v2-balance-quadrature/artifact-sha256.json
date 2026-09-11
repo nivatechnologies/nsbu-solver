@@ -1,0 +1,8 @@
+{
+  "evidence/p09/v2-balance-quadrature/raw/check_v2_balance_quadrature_focused.sh.gz": "62e4e86d9e5dae6b48eeab9514ae55c20fb57a1e00f2d202cfd31a9c58123566",
+  "evidence/p09/v2-balance-quadrature/raw/v2-balances-changed-metrics.json.gz": "638b39b011b964eb674422f449cc726da996850245fcf4a39a3dd031cd5d191c",
+  "evidence/p09/v2-balance-quadrature/raw/v2-balances-focused-coverage.json.gz": "899152f8e8688f9104ce8cd7aaa92435f85312611e2df84770e9ec2bc67f5279",
+  "evidence/p09/v2-balance-quadrature/raw/v2-balances-focused-crap.json.gz": "f60f1993b1af2d6a23e1417fda6240d78e7b820bc3f7daacc8b4aacbfd199055",
+  "evidence/p09/v2-balance-quadrature/raw/v2-balances-focused-metrics.json.gz": "32518f583bb0c33975bdabe75aeb9acccaa61fbfe46a466e5b0ace2b830cb17b",
+  "evidence/p09/v2-balance-quadrature/raw/v2-balances-metrics.json.gz": "001be7b7bca1f7064816cacbdb0a6dc355849e03908a7cadcdb53284ab1e2eef"
+}
