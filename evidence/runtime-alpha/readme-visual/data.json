@@ -1,0 +1,16 @@
+{
+  "normalization": "t/(1/128)",
+  "tick_exponent": -20,
+  "step_ticks": 128,
+  "points": [
+    {"label": "rest0", "accepted_steps": 0, "actual_elapsed_ticks": "0", "t_normalized": 0.0, "energy": 0.0, "enstrophy": 0.0},
+    {"label": "after4", "accepted_steps": 4, "actual_elapsed_ticks": "512", "t_normalized": 0.0625, "energy": 0.0007178982011336191, "enstrophy": 0.08032913492605627},
+    {"label": "after8", "accepted_steps": 8, "actual_elapsed_ticks": "1024", "t_normalized": 0.125, "energy": 0.04502099116870585, "enstrophy": 4.952048023836737},
+    {"label": "after12", "accepted_steps": 12, "actual_elapsed_ticks": "1536", "t_normalized": 0.1875, "energy": 0.1821203303994082, "enstrophy": 19.199509734498015},
+    {"label": "after16", "accepted_steps": 16, "actual_elapsed_ticks": "2048", "t_normalized": 0.25, "energy": 0.2955513689962804, "enstrophy": 28.649290809185768},
+    {"label": "after20", "accepted_steps": 20, "actual_elapsed_ticks": "2560", "t_normalized": 0.3125, "energy": 0.4430309978003001, "enstrophy": 40.1330482781257},
+    {"label": "after24", "accepted_steps": 24, "actual_elapsed_ticks": "3072", "t_normalized": 0.375, "energy": 0.63915326167349, "enstrophy": 55.524694982856715},
+    {"label": "after28", "accepted_steps": 28, "actual_elapsed_ticks": "3584", "t_normalized": 0.4375, "energy": 0.8781597519804315, "enstrophy": 74.36385200905815},
+    {"label": "after32", "accepted_steps": 32, "actual_elapsed_ticks": "4096", "t_normalized": 0.5, "energy": 1.1552837307560313, "enstrophy": 96.26892369497894}
+  ]
+}

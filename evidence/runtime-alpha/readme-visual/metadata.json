@@ -1,0 +1,11 @@
+{
+  "profile": "v2",
+  "method": "ho",
+  "grid": "N=4, force grid M=4",
+  "runs": "independent CLI invocations from rest0; checkpoint-after 4,8,12,16,20,24,28,32",
+  "binary": "/mnt/niva-array/nsbu-solver/work/alpha-review-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu/bin/nsbu",
+  "binary_sha256": "deaf3de7f7fc42a90efd8deb50136372b804486a16601d6679005c56528d232c",
+  "raw_reports": "reports/*.json",
+  "rest_report": "reports/rest0.json",
+  "normalization": "actual_elapsed_ticks * 2^-20 / (1/128) = actual_elapsed_ticks / 8192"
+}

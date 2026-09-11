@@ -2,11 +2,15 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: [daily runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Daily prereleases add verified changes while scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/daily-20260911/README.md).
+![Energy and enstrophy measured in coarse HO runs from rest](docs/images/alpha-diagnostics.png)
+
+*Actual coarse N=4/M=4 HO diagnostic measurements. A successful finite run is a runtime check, not evidence of convergence or blow-up.*
+
+**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/daily-20260911/README.md).
 
 The `main` branch can contain experimental APIs added after the latest binary
 release. Each increment records its own validation scope in
-[project status](project-status.json). Daily binaries require both hosted
+[project status](project-status.json). Release binaries require both hosted
 workflows to pass on their exact source revision.
 
 The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI provides bounded smooth and v2/resume-v2 commands; all external resumes retain an unverified origin. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
@@ -22,9 +26,19 @@ The library uses Fourier pseudospectral discretization, 3/2 padding for quadrati
 
 ## What the first experiment means
 
-The first concentrating case is **`similarity-mms-v2`**, a manufactured prescribed-force problem. Each comparison trajectory starts from rest and evolves independently. The analytical field is available to the verifier, never as a replacement for the evolving state.
+The first concentrating case is **`similarity-mms-v2`**, a manufactured prescribed-force problem for a viscous fluid in a periodic three-dimensional box. Each CM or HO comparison trajectory starts from rest and advances its own velocity state. The known analytical field is used afterward to measure error; it is never injected into the numerical state and never resets the trajectory.
 
-This case tests the solver's ability to track a separately specified concentrating field over successively closer finite intervals. It does not reproduce the source paper's annular pulse construction, establish a smooth forcing extension through the target time, or prove finite-time blow-up. Literal reproduction of the source construction is outside the initial release.
+This lets computational physicists inspect how a Fourier pseudospectral solver responds to a prescribed, increasingly concentrated target while varying the velocity grid, force sampling, time step, arithmetic, and integrator independently. The current N=4/M=4 measurements are deliberately coarse. They show that a bounded run completes and expose large errors; they do not establish convergence, resolve a singular limit, or prove finite-time blow-up. No concentrating PDE window has been accepted. Literal reproduction of the manuscript's pulse cascade is excluded from this alpha.
+
+## Research context and limits
+
+Navier–Stokes describes how a fluid accelerates under pressure, viscosity and external forces. It treats the fluid as a continuous medium. A mathematical blow-up means a quantity becomes unbounded in finite time; it is a question about the equations, not a prediction that a cup of water becomes a physical singularity. A finite computer grid cannot follow arbitrarily small scales.
+
+[OpenAI reports](https://openai.com/index/navier-stokes-solution/) an analytical proof and Lean formalization of forced Navier–Stokes breakdown from rest with finite energy and a smooth force, corresponding to Clay statements C and D; it separately reports an unforced Euler result. The supplied [Navier–Stokes manuscript](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf) describes an annular background and oscillatory pulses. NSBU does not independently audit that proof, and this project does not assert that the prize is settled.
+
+The [official Clay problem statement](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf) permits either global existence and smoothness or breakdown. Its existence formulations A and B are unforced. Its breakdown formulations C and D permit forcing only when the stated smoothness and decay conditions hold globally; an arbitrary force is not enough. NSBU has not proved that `similarity-mms-v2` extends with those properties through its target time.
+
+The separate [Euler blow-up visualization repository](https://github.com/pmocz/euler-blowup-viz) presents an Euler construction through WKB and reduced-dynamics visualizations and says the full cascade is beyond direct simulation. NSBU instead integrates viscous PDE trajectories for a different manufactured case and reports numerical diagnostics. It neither resolves that cascade nor supplies a stronger proof.
 
 The explicit slow-mesh strategy is `FeasibilityExcluded` under the documented resource policy. Feasibility across unspecified representations remains `FeasibilityUnestablished`. The optional construction compiler is limited to mathematics verification; an averaged-stress surrogate remains a separate, deferred model. See the [scientific scope](docs/SCIENTIFIC_SCOPE.md).
 
@@ -85,18 +99,27 @@ scalar/jet evaluations and a bounded sampled force provider; its final package
 verification passed locally and in hosted CI. The [first Rust concentrating diagnostic](evidence/p06/README.md)
 has also reached 1/256 from rest on N=4, with spatial/force resolution unresolved.
 
-## Implementation path
+## Implementation status
 
-| Milestone | Result |
-|---|---|
-| Bootstrap | Public specification, Apache-2.0 license, checks, and contributor documentation |
-| Independent reference | Scalar/jet evaluators and high-precision direct-DFT fixtures |
-| Rust numerical core | Domains, layouts, FFT operators, projection, pressure, and bounded ETDRK4 steps |
-| Independent verification | Benchmark force evaluator, second time integrator, full-band diagnostics, restart and lineage tests |
-| Qualified experiments | From-rest refinement families over successively closer finite intervals |
-| Public runtime release | Tested library and CLI installation, examples, evidence artifacts, then a read-only viewer |
+| Area | Status | Evidence or remaining work |
+|---|---|---|
+| Rust numerical core | Implemented | Periodic domains, FFT operators, 3/2-padded products, projection, pressure, and bounded CM/HO integration |
+| Manufactured benchmark | Implemented | Independent exact-v2 force evaluation and from-rest `similarity-mms-v2` trajectories |
+| Runtime safeguards | Implemented | Exact tick clocks, resource preflight, transactional commits, and same-profile checkpoint/resume |
+| Independent checks | Implemented | Python direct-DFT fixtures, high-precision comparisons, restart checks, and full-band diagnostics |
+| Concentrating PDE qualification | Pending | Zero accepted windows; space, time, force-sampling, arithmetic, pressure, balance, and residual criteria remain open |
+| Scientific checkpoint provenance | Pending | Imported checkpoint origins remain unverified until lineage requirements are complete |
+| Literal manuscript cascade | Excluded from this alpha | The runtime does not reproduce the annular pulse construction |
 
-The [implementation plan](IMPLEMENTATION_PLAN.md) supplies dependencies, concrete work packages, stop conditions, and release gates. A generic runtime release and a qualified concentrating-results release have separate evidence requirements.
+### TODO
+
+- [ ] Establish the first accepted concentrating PDE window with independent space, time, force-sampling, and arithmetic refinements.
+- [ ] Complete pressure, balance, residual, startup, and collar diagnostics required by the qualification protocol.
+- [ ] Complete scientific checkpoint provenance and lineage verification.
+- [ ] Optimize the force evaluation and larger-grid runs while retaining independent accuracy checks.
+- [ ] Add the planned visualization tools after solver validation.
+
+The [implementation plan](IMPLEMENTATION_PLAN.md) supplies dependencies, concrete work packages, stop conditions, and release gates. We are actively looking for contributors in numerical methods, Rust, independent verification, performance, documentation and scientific visualization. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started. A generic runtime release and a qualified concentrating-results release have separate evidence requirements.
 
 ## Resources
 
@@ -144,8 +167,6 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Streamed residuals](docs/STREAMED_RESIDUALS.md) | Full independent defects and actual nested histories at early and late non-stage times |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |
-
-The project has no dependency on Niva code, services, schemas, or credentials. An optional Niva adapter belongs in a separate downstream project and consumes the same public API as any other application.
 
 ## License
 

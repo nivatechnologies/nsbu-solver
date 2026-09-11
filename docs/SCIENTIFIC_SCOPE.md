@@ -57,6 +57,19 @@ Determinism claims are scoped to a recorded compiler, dependency, transform, ari
 
 ## Research provenance
 
+[OpenAI’s September 8 announcement](https://openai.com/index/navier-stokes-solution/)
+reports an analytical proof and Lean formalization for forced Navier–Stokes
+breakdown from rest with finite energy, and separately describes an unforced
+Euler result. NSBU Solver studies a different manufactured benchmark. It does
+not independently certify either proof or simulate the complete construction.
+
+[Philip Mocz’s Euler visualization project](https://github.com/pmocz/euler-blowup-viz)
+explores the Euler construction’s mechanism and reduced dynamics; its README
+explicitly places the full cascade beyond direct simulation. NSBU contributes
+independently evolved viscous PDE trajectories and numerical error diagnostics
+for its own prescribed-force case. This difference in purpose is not evidence
+that NSBU resolves the original cascade.
+
 The adopted documents reference the supplied [Navier–Stokes manuscript](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf), with precise equation and lemma references where used. The repository preserves those assessments; it does not claim a new full-paper proof audit. Source PDF byte provenance and a Lean proof build remain unverified in the adopted evidence.
 
 The [Euler visualization repository](https://github.com/pmocz/euler-blowup-viz) is a separate referenced project. No code from it is included in this bootstrap. The public NSBU project must remain independent of all optional downstream adapters.
