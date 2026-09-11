@@ -15,8 +15,9 @@ workflows, target triple, Cargo version and scientific status. `SHA256SUMS` cove
 every bundled source file, binary and manifest; a detached `.sha256` verifies the
 complete compressed archive.
 The snapshot tag identifies the source and is independent of the Cargo crate
-version; the current workspace version remains `0.1.0-alpha.0` until a
-deliberate package-version change.
+version. The workspace now targets `0.1.0-alpha.1`; the existing
+`alpha-20260911` binary remains version `0.1.0-alpha.0`. A workspace version
+change does not itself publish a release.
 
 The first snapshot is started manually from the `main` branch and receives an
 `alpha-first-YYYYMMDD` tag. Daily scheduled runs receive `alpha-YYYYMMDD`.

@@ -70,7 +70,7 @@ checksum = "3eaf3ede3fee6db1a4c2ee091bf8a8b4dccdc6d17f656fb07896ee72867612f2"
 
 [[package]]
 name = "nsbu-benchmarks"
-version = "0.1.0-alpha.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "nsbu-solver",
  "sha2",
@@ -79,7 +79,7 @@ dependencies = [
 
 [[package]]
 name = "nsbu-cli"
-version = "0.1.0-alpha.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "nsbu-benchmarks",
  "nsbu-solver",
@@ -87,7 +87,7 @@ dependencies = [
 
 [[package]]
 name = "nsbu-solver"
-version = "0.1.0-alpha.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "num-complex",
  "sha2",

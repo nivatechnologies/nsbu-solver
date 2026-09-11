@@ -17,5 +17,5 @@ name = "nsbu"
 path = "src/main.rs"
 
 [dependencies]
-nsbu-benchmarks = { path = "../nsbu-benchmarks", version = "0.1.0-alpha.0" }
+nsbu-benchmarks = { path = "../nsbu-benchmarks", version = "0.1.0-alpha.1" }
 nsbu-solver.workspace = true

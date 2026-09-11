@@ -49,7 +49,10 @@ fn help_and_version_describe_the_available_command() {
     for flag in ["--version", "-V"] {
         let result = invoke(&[flag]);
         assert!(result.status.success());
-        assert_eq!(result.stdout, b"NSBU Solver 0.1.0-alpha.0\n");
+        assert_eq!(
+            result.stdout,
+            format!("NSBU Solver {}\n", env!("CARGO_PKG_VERSION")).as_bytes()
+        );
     }
 }
 
