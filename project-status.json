@@ -37,14 +37,14 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source 6170341 passes both hosted workflows: 451 Rust harness tests plus 13 allocation probes and one Rustdoc example; 98.58% line and 88.88% branch coverage; all required quality limits; 220 Python tests.",
+    "latest_hosted_ci_status": "Source 6f5c630 passes both hosted workflows, including build, strict lint/docs, packaging, installation, runtime checkpoint checks and required metrics: Rust 98.3831% lines, 89.0046% branches, max CRAP 24.0586; Python 99.6526% lines, 98.8160% branches, max CRAP 16. Later increments retain separate focused/pending evidence.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
       "status": "Exact-v2 six-owner off-stage probes and regional analytical tracking pass focused numerical, allocation and quality gates. Combined-source hosted checks pending. Zero accepted PDE windows.",
       "evidence": "evidence/p09/v2-probes/summary.json",
       "additional_evidence": "evidence/p09/v2-regional-tracking/summary.json"
     },
-    "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
+    "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json"
   },
   "packages": {
     "B00": {
@@ -174,7 +174,8 @@
       "v2_pressure_evidence": "evidence/p09/v2-pressure/summary.json",
       "v2_reconstruction_evidence": "evidence/p09/v2-reconstruction/summary.json",
       "v2_probe_evidence": "evidence/p09/v2-probes/summary.json",
-      "v2_regional_reference_evidence": "evidence/p09/v2-regional-tracking/summary.json"
+      "v2_regional_reference_evidence": "evidence/p09/v2-regional-tracking/summary.json",
+      "v2_combined_hosted_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",

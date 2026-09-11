@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source_revision": "6f5c6307b7e5f765a6f7e1062c0b2d6e37fa87ce",
+  "runs": {
+    "python": 34594620658,
+    "rust": 34594620686
+  },
+  "artifacts": {
+    "python": {
+      "coverage": {
+        "count": 5522,
+        "covered": 5512,
+        "percent": 99.65256797583082
+      },
+      "branches": {
+        "count": 1098,
+        "covered": 1085,
+        "percent": 98.81602914389799
+      },
+      "max_crap": 16.0
+    },
+    "rust": {
+      "lines": {
+        "count": 35068,
+        "covered": 34501,
+        "percent": 98.3831413254249
+      },
+      "branches": {
+        "count": 2592,
+        "covered": 2307,
+        "notcovered": 285,
+        "percent": 89.00462962962963
+      },
+      "max_crap": 24.05859375
+    }
+  },
+  "scientific_status": "diagnostic-only; zero accepted PDE windows; no proof of blow-up"
+}
