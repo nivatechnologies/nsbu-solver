@@ -1,0 +1,194 @@
+{
+  "package": "P08",
+  "increment": "independent-reconstructed-balance-quadrature",
+  "status": "local checks passed; hosted verification pending",
+  "accepted_pde_windows": 0,
+  "generated_utc": "2026-09-11T01:34:39.258502+00:00",
+  "base_commit": "7b57fd109ca1150c5a43c5de8201d63ea81edd1d",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 302,
+  "rust_harness_tests": 384,
+  "rust_allocation_executables": 7,
+  "rust_tests_and_probes": 391,
+  "rust_coverage": {
+    "branches": {
+      "count": 1946,
+      "covered": 1750,
+      "notcovered": 196,
+      "percent": 89.92805755395683
+    },
+    "functions": {
+      "count": 2181,
+      "covered": 2162,
+      "percent": 99.1288399816598
+    },
+    "instantiations": {
+      "count": 4523,
+      "covered": 3703,
+      "percent": 81.87043997346893
+    },
+    "lines": {
+      "count": 25960,
+      "covered": 25618,
+      "percent": 98.68258859784284
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 49388,
+      "covered": 47483,
+      "notcovered": 1905,
+      "percent": 96.14278772171377
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "crap": 24.3359375,
+    "physical_file_lines": 477
+  },
+  "python_evidence": {
+    "source_files_unchanged": 98,
+    "complete_profile": "../../p09/reduction-arithmetic/summary.json",
+    "tests": 220,
+    "bootstrap_tests_rerun": 41
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "ed141da4a8b3e4589e8b5c068824b968a7f192a923443e2e3867594230355b35"
+    },
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "numerical_measurements": {
+    "case": "CyclicSine",
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "macro_ticks": [
+      64,
+      32,
+      16
+    ],
+    "clock_quantum_exponent": -16,
+    "endpoint_ticks": 128,
+    "physical_probe_ticks": [
+      0,
+      7,
+      16,
+      32,
+      48,
+      64,
+      80,
+      96,
+      112,
+      128
+    ],
+    "quadrature_ticks": [
+      [
+        0,
+        64,
+        128
+      ],
+      [
+        0,
+        32,
+        64,
+        96,
+        128
+      ],
+      [
+        0,
+        16,
+        32,
+        48,
+        64,
+        80,
+        96,
+        112,
+        128
+      ]
+    ],
+    "maximum_half_spans": [
+      64,
+      32,
+      16
+    ],
+    "complete_branch_balances": 60,
+    "complete_integrals": 18,
+    "joint_reserved_bytes": 32010712,
+    "owner_reserved_bytes": 22193768,
+    "balance_reserved_bytes": 9779056,
+    "quadrature_allowance_bytes": 37888,
+    "cap_bytes": 134217728,
+    "scalar_transforms": 540,
+    "provider_work_units": 977280,
+    "binding_clock_comparisons": 140,
+    "quadrature_admission_comparisons": 159,
+    "conservative_history_update_charges": 180,
+    "conservative_integral_read_charges": 180,
+    "energy_integral_changes_approximate": [
+      5.4926e-12,
+      3.4325e-13
+    ],
+    "actual_findings": "example.log.gz",
+    "state_integrity": "Complete accepted-state and owner-interpolant digests remain unchanged by every measurement",
+    "negative_controls": [
+      "Changed viscosity",
+      "missing/skipped owner probes",
+      "inadequate sample/work/storage bounds",
+      "missing/uneven/even/nonnested Simpson meshes",
+      "nested mesh with unchanged maximum half-span",
+      "exhaustion at each of all six children, preserving earlier child success",
+      "failure after staged earlier quadrature updates"
+    ],
+    "rest_control": "All six balance samples are exactly REST at physical time zero despite positive-time accepted lookahead states"
+  },
+  "clean_reproduction": "Three integration tests, two private transaction tests and the public example test pass; complete public preflight and all sixty balance/eighteen integral reports reproduce byte-for-byte.",
+  "informational_findings": {
+    "duplicates": {
+      "clones": 99,
+      "duplicatedLines": 986,
+      "duplicatedTokens": 8311,
+      "lines": 36523,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.6996687019138625,
+      "percentageTokens": 2.9496420750772816,
+      "sources": 301,
+      "tokens": 281763
+    },
+    "exit_codes": {
+      "duplicates": 1,
+      "dead-code": 101
+    },
+    "review": "Unused shared harness helpers and repeated independent numerical controls remain informational. Strict Clippy permits only dead_code findings; prose-only lexical matches are retained separately from prohibited code identifiers. Python source matches the verified complete profile.",
+    "mutations": "Not rerun; historical reports remain informational"
+  },
+  "initial_quality_failure": "Two complete Rust suites passed, but compute retained CRAP 30 because a redundant clock/origin check compared two views of the same immutable private record. Expanded tests still verify each of all six real child failures. The tautological comparison was removed after tracing require_sample and fields ownership; original owner/manifest binding remains. Fresh complete coverage and all gates are required after this simplification.",
+  "solid_review": "Original trajectory ownership, immutable admission, fresh conservative balance measurements and transactional quadrature publication are separate. The shared observer depends on primitive domain/clock/read-only spectra, not on the experiment wrapper. A private test-only fault injection checks rollback after earlier staged history updates.",
+  "limitations": [
+    "Quadrature sensitivity is measured independently on unchanged reconstructed trajectories; reconstruction accuracy needs its own budget",
+    "The final integral report alone is not complete earlier-probe or accepted-window provenance",
+    "Complete balance/residual arithmetic, force/reference/regional/location studies, benchmark/artifact binding and concentrating current-grid qualification remain",
+    "No concentrating PDE window is accepted"
+  ],
+  "artifact_inventory": "artifact-sha256.json"
+}

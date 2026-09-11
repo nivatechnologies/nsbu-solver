@@ -139,3 +139,7 @@ all-channel arithmetic and force studies,
 reconstruction-error qualification, frozen benchmark semantics, external lineage
 binding and concentrating convergence remain incomplete. Accepted concentrating PDE windows remain
 zero; sampled interpolation is not a continuous-window enclosure.
+
+The [independent balance consumer](BALANCE_QUADRATURE.md) retains full conservative
+energy/enstrophy terms at every probe and integrates a declared subset on three
+strictly nested Simpson schedules without changing the owner trajectories.

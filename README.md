@@ -106,6 +106,7 @@ Here `t_k = T_star * (1 - 2^(-k))`, with `T_star = 1/128`. The screen is a heuri
 | [Sampling refinements](docs/SAMPLING_REFINEMENTS.md) | Three physical sample grids, complete tensors/pressure and preserved peak sensitivity |
 | [Accepted-history probes](docs/RECONSTRUCTED_PROBES.md) | Stream early and late reconstruction samples with exact node origins and bounded lookahead |
 | [Reconstructed physical fields](docs/RECONSTRUCTED_PHYSICAL_FIELDS.md) | Complete tensors/pressure at exact probe times with retained accepted-node origins |
+| [Balance quadrature](docs/BALANCE_QUADRATURE.md) | Independently refined physical-time balance integration over unchanged reconstructed trajectories |
 | [Streamed residuals](docs/STREAMED_RESIDUALS.md) | Full independent defects and actual nested histories at early and late non-stage times |
 | [Resources and errors](docs/RESOURCES_AND_ERRORS.md) | Complete reservations, bounded work and failure handling |
 | [Contributing](CONTRIBUTING.md) | Development and evidence requirements |

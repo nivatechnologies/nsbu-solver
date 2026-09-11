@@ -146,3 +146,9 @@ paths from complete exact-word CM/HO diagnostics. It retains original rounded
 magnitudes for an independent Python audit, with strict format and memory caps.
 See [the guide](../../docs/REDUCTION_ARITHMETIC.md) for commands, separate
 arithmetic effects, fixture provenance and the boundary from PDE qualification.
+
+`smooth_experiment::probes::balances` measures fresh conservative balances at
+reconstructed physical times. Its quadrature wrapper freezes three independently
+refined Simpson schedules while all six integrator step settings remain unchanged.
+See [the public guide](../../docs/BALANCE_QUADRATURE.md) for complete reports,
+joint resources, failure transactions and numerical limitations.

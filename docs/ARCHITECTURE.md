@@ -228,6 +228,12 @@ decoding, production reducer execution, complete output serialization and an
 independent MP oracle. The packets identify imported diagnostic words and never
 create solver state, continuation capabilities or a window-acceptance claim.
 
+The [balance/quadrature consumer](BALANCE_QUADRATURE.md) separates original
+accepted-history ownership, fresh conservative measurements and compensated
+physical-time integration. All affected quadrature histories are prepared before
+publication; neither a partial report nor an analytical reference can modify an
+integrated state. Three physical-time refinements share the same owner fields.
+
 The [v2 force evaluator](FORCE_EVALUATION.md) owns a fixed plane-root cache beside
 its existing sampled fields and FFT buffers. The private cache binds only the
 primitive axial/time inputs and is rebuilt per request. Pointwise field assembly
