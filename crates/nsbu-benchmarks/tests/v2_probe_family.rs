@@ -53,7 +53,7 @@ fn early_and_late_probes_publish_exact_origins_and_independent_comparisons() {
     let mut family = ProbeFamily::new(plan).unwrap();
     assert!(family.fields(0).is_none());
     let pairs = [(0, 1), (1, 2), (3, 4), (4, 2), (2, 5)];
-    let mut early = None;
+    let mut late = None;
 
     for expected_clock in probes() {
         assert_eq!(family.next_time(), Some(expected_clock));
@@ -83,8 +83,11 @@ fn early_and_late_probes_publish_exact_origins_and_independent_comparisons() {
                     assert_eq!(fields.value[axis], branch.state().component(axis).unwrap());
                 }
             }
-            if index == 0 && expected_clock.elapsed() == 7 {
-                early = Some(fields.value.map(<[Complex64]>::to_vec));
+            if index == 0 && expected_clock.elapsed() == 95 {
+                late = Some((
+                    fields.value.map(<[Complex64]>::to_vec),
+                    fields.derivative.map(<[Complex64]>::to_vec),
+                ));
             }
         }
         for (slot, &(left, right)) in pairs.iter().enumerate() {
@@ -104,46 +107,97 @@ fn early_and_late_probes_publish_exact_origins_and_independent_comparisons() {
     assert!(family.advance().unwrap().is_none());
     assert!(family.branch(6).is_none());
     assert!(family.fields(6).is_none());
-    assert_independent_first_probe(plan, early.unwrap());
+    let (value, derivative) = late.unwrap();
+    assert_independent_late_probe(plan, value, derivative);
     compare_with_standalone_owners(&family, plan);
 }
 
-fn assert_independent_first_probe(plan: ProbePlan<'_>, actual: [Vec<Complex64>; 3]) {
+fn assert_independent_late_probe(
+    plan: ProbePlan<'_>,
+    actual: [Vec<Complex64>; 3],
+    actual_derivative: [Vec<Complex64>; 3],
+) {
     let settings = plan.family_plan().branch_plan(0).unwrap().settings();
     let mut run =
         ReconstructedRun::from_rest(ReconstructedPlan::from_rest(settings, CAP).unwrap()).unwrap();
-    let mut values = [
-        std::array::from_fn(|axis| run.state().component(axis).unwrap().to_vec()),
-        std::array::from_fn(|_| Vec::new()),
-        std::array::from_fn(|_| Vec::new()),
-    ];
-    for value in values.iter_mut().skip(1) {
+    let mut retained = std::array::from_fn::<_, 3, _>(|_| None);
+    while run.state().clock().elapsed() < 96 {
         run.step().unwrap();
-        *value = std::array::from_fn(|axis| run.state().component(axis).unwrap().to_vec());
+        let elapsed = run.state().clock().elapsed();
+        if [64, 80, 96].contains(&elapsed) {
+            retained[((elapsed - 64) / 16) as usize] = Some(std::array::from_fn(|axis| {
+                run.state().component(axis).unwrap().to_vec()
+            }));
+        }
     }
+    let values = retained.map(Option::unwrap);
     let clocks =
-        [0, 16, 32].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
-    let derivatives = clocks.map(|clock| {
-        direct_rhs(
-            settings.domain,
-            clock,
-            &values[usize::from(clock.elapsed() > 0) + usize::from(clock.elapsed() > 16)],
-        )
-    });
-    let weights = independent_weights(7.0 / 16.0);
+        [64, 80, 96].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
+    let derivatives: [[Vec<Complex64>; 3]; 3] =
+        std::array::from_fn(|index| direct_rhs(settings.domain, clocks[index], &values[index]));
+    let weights = independent_weights(31.0 / 16.0, false);
+    let derivative_weights = independent_weights(31.0 / 16.0, true);
+    let wrong_weights = independent_weights(7.0 / 16.0, false);
+    let wrong_derivative_weights = independent_weights(7.0 / 16.0, true);
     let dt = 16.0 * 2.0_f64.powi(-20);
+    let mut signal = 0.0_f64;
+    let mut derivative_signal = 0.0_f64;
+    let mut value_error = 0.0_f64;
+    let mut derivative_error = 0.0_f64;
+    let mut wrong_weight_gap = 0.0_f64;
+    let mut omitted_rhs_gap = 0.0_f64;
+    let mut wrong_derivative_gap = 0.0_f64;
+    let mut omitted_rhs_derivative_gap = 0.0_f64;
     for axis in 0..3 {
         for index in 0..actual[axis].len() {
             let expected = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
                 sum + weights[node] * values[node][axis][index]
                     + dt * weights[node + 3] * derivatives[node][axis][index]
             });
-            assert!((actual[axis][index] - expected).l1_norm() < 2e-12);
+            value_error = value_error.max((actual[axis][index] - expected).l1_norm());
+            let expected_derivative = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
+                sum + derivative_weights[node] / dt * values[node][axis][index]
+                    + derivative_weights[node + 3] * derivatives[node][axis][index]
+            });
+            derivative_error = derivative_error
+                .max((actual_derivative[axis][index] - expected_derivative).l1_norm());
+            let wrong = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
+                sum + wrong_weights[node] * values[node][axis][index]
+                    + dt * wrong_weights[node + 3] * derivatives[node][axis][index]
+            });
+            let omitted_rhs = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
+                sum + weights[node] * values[node][axis][index]
+            });
+            let wrong_derivative = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
+                sum + wrong_derivative_weights[node] / dt * values[node][axis][index]
+                    + wrong_derivative_weights[node + 3] * derivatives[node][axis][index]
+            });
+            let omitted_rhs_derivative = (0..3).fold(Complex64::new(0.0, 0.0), |sum, node| {
+                sum + derivative_weights[node] / dt * values[node][axis][index]
+            });
+            signal = signal.max(expected.l1_norm());
+            derivative_signal = derivative_signal.max(expected_derivative.l1_norm());
+            wrong_weight_gap = wrong_weight_gap.max((expected - wrong).l1_norm());
+            omitted_rhs_gap = omitted_rhs_gap.max((expected - omitted_rhs).l1_norm());
+            wrong_derivative_gap =
+                wrong_derivative_gap.max((expected_derivative - wrong_derivative).l1_norm());
+            omitted_rhs_derivative_gap = omitted_rhs_derivative_gap
+                .max((expected_derivative - omitted_rhs_derivative).l1_norm());
         }
     }
+    eprintln!(
+        "late Hermite signal={signal:e} derivative_signal={derivative_signal:e} value_error={value_error:e} derivative_error={derivative_error:e} wrong_weight_gap={wrong_weight_gap:e} omitted_rhs_gap={omitted_rhs_gap:e} wrong_derivative_gap={wrong_derivative_gap:e} omitted_rhs_derivative_gap={omitted_rhs_derivative_gap:e}"
+    );
+    assert!(value_error < 5e-12);
+    assert!(derivative_error < 5e-6);
+    assert!(derivative_signal > 1e-5);
+    assert!(wrong_weight_gap > 1e-10);
+    assert!(omitted_rhs_gap > 2e-11);
+    assert!(wrong_derivative_gap > 1e-5);
+    assert!(omitted_rhs_derivative_gap > 1e-5);
 }
 
-fn independent_weights(x: f64) -> [f64; 6] {
+fn independent_weights(x: f64, derivative: bool) -> [f64; 6] {
     let mut matrix = [[0.0; 6]; 6];
     for (slot, node) in [0.0_f64, 1.0, 2.0].into_iter().enumerate() {
         matrix[slot] = std::array::from_fn(|power| node.powi(power as i32));
@@ -163,8 +217,15 @@ fn independent_weights(x: f64) -> [f64; 6] {
             values
         });
         eliminate(&mut augmented);
-        (0..6)
-            .map(|power| augmented[power][6] * x.powi(power as i32))
+        (usize::from(derivative)..6)
+            .map(|power| {
+                let basis = if derivative {
+                    power as f64 * x.powi(power as i32 - 1)
+                } else {
+                    x.powi(power as i32)
+                };
+                augmented[power][6] * basis
+            })
             .sum()
     })
 }
