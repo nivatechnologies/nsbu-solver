@@ -3,7 +3,7 @@ mod v2_family_oracle;
 mod v2_family_support;
 
 use nsbu_benchmarks::{
-    provider::V2Force,
+    runtime_force::ForceSettings,
     v2_experiment::{
         probes::{ProbeFamily, ProbePlan},
         FamilyError, FamilyPlan,
@@ -133,8 +133,14 @@ fn assert_independent_late_probe(
     let values = retained.map(Option::unwrap);
     let clocks =
         [64, 80, 96].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap());
-    let derivatives: [[Vec<Complex64>; 3]; 3] =
-        std::array::from_fn(|index| direct_rhs(settings.domain, clocks[index], &values[index]));
+    let derivatives: [[Vec<Complex64>; 3]; 3] = std::array::from_fn(|index| {
+        direct_rhs(
+            settings.domain,
+            settings.force,
+            clocks[index],
+            &values[index],
+        )
+    });
     let weights = independent_weights(31.0 / 16.0, false);
     let derivative_weights = independent_weights(31.0 / 16.0, true);
     let wrong_weights = independent_weights(7.0 / 16.0, false);
@@ -188,8 +194,8 @@ fn assert_independent_late_probe(
     eprintln!(
         "late Hermite signal={signal:e} derivative_signal={derivative_signal:e} value_error={value_error:e} derivative_error={derivative_error:e} wrong_weight_gap={wrong_weight_gap:e} omitted_rhs_gap={omitted_rhs_gap:e} wrong_derivative_gap={wrong_derivative_gap:e} omitted_rhs_derivative_gap={omitted_rhs_derivative_gap:e}"
     );
-    assert!(value_error < 5e-12);
-    assert!(derivative_error < 5e-6);
+    assert!(value_error < 1e-24);
+    assert!(derivative_error < 1e-18);
     assert!(derivative_signal > 1e-5);
     assert!(wrong_weight_gap > 1e-10);
     assert!(omitted_rhs_gap > 2e-11);
@@ -250,12 +256,14 @@ fn eliminate(augmented: &mut [[f64; 7]; 6]) {
 
 fn direct_rhs(
     domain: Domain,
+    settings: ForceSettings,
     clock: TickClock,
     velocity: &[Vec<Complex64>; 3],
 ) -> [Vec<Complex64>; 3] {
     let diagnostic = ConservativeWorkspace::diagnostic_domain(domain).unwrap();
-    let limits = V2Force::preflight(diagnostic, diagnostic.layout()).unwrap();
-    let mut provider = V2Force::new(diagnostic, diagnostic.layout(), limits.storage_bytes).unwrap();
+    let settings = settings.double_grid().unwrap();
+    let limits = settings.limits(diagnostic).unwrap();
+    let mut provider = settings.build(diagnostic, limits.storage_bytes).unwrap();
     let mut force: [Vec<Complex64>; 3] =
         std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); diagnostic.layout().half_len()]);
     provider
