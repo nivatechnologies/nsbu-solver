@@ -1,14 +1,16 @@
-//! Transactional accepted-node Hermite reconstruction for the smooth benchmark.
+//! Transactional accepted-node Hermite reconstruction for smooth and exact-v2 owners.
 //!
 //! The endpoint derivative is evaluated from the observer-owned, double-grid conservative
 //! product formed for the balance sample.  It therefore neither asks the integrator for a stage
 //! derivative nor evaluates the prescribed force a second time.
 
-use super::{field, BalanceObserver, BalanceObserverWork};
+use super::{field, BalanceObserver, BalanceObserverLimits, BalanceObserverWork, ForceBalance};
+use crate::smooth::CyclicSine;
 use nsbu_solver::{
     diagnostics::{balances::BalanceSample, hermite::HermiteWeights},
     domain::{validate_spectrum, Domain, Epoch, ResourcePlan, SpectralState, TickClock},
     experiment::observer::{BalanceObserver as BalanceObserverContract, ObserverBounds},
+    integrators::forcing::PrescribedForce,
     spectral::{modal, transfer},
     Complex64, SolverError,
 };
@@ -73,11 +75,11 @@ pub struct ReconstructionObserverLimits {
 /// changes the accepted ring.  Failed or rejected proposals retain their charged work but leave
 /// that ring bit-for-bit unchanged.
 #[derive(Debug)]
-pub struct ReconstructionObserver {
+pub struct ReconstructionObserver<F: PrescribedForce = CyclicSine> {
     plan: ResourcePlan,
     source: Domain,
     limits: ReconstructionObserverLimits,
-    balance: BalanceObserver,
+    balance: ForceBalance<F>,
     accepted: [Node; 3],
     accepted_count: usize,
     pending: Node,
@@ -85,7 +87,7 @@ pub struct ReconstructionObserver {
     modal_visits: usize,
 }
 
-impl ReconstructionObserver {
+impl ReconstructionObserver<CyclicSine> {
     /// Declare storage and all work before allocation. `samples` includes the rest node.
     pub fn limits(
         source: Domain,
@@ -95,6 +97,44 @@ impl ReconstructionObserver {
             return Err(SolverError::ResourceLimit);
         }
         let balance = BalanceObserver::limits(source, samples)?;
+        Self::limits_for(source, samples, balance)
+    }
+
+    /// Allocate fixed storage and evaluate the first accepted endpoint from the actual rest
+    /// state. The initial evaluation consumes one independent provider budget slot.
+    pub fn new(
+        plan: ResourcePlan,
+        samples: usize,
+        from_rest: &SpectralState,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::limits(plan.domain(), samples)?;
+        Self::admit(plan, from_rest, limits)?;
+        let balance = BalanceObserver::new(plan, samples)?;
+        Self::new_owned(plan, from_rest, limits, balance)
+    }
+}
+
+impl<F: PrescribedForce> ReconstructionObserver<F> {
+    pub(super) fn admit(
+        plan: ResourcePlan,
+        from_rest: &SpectralState,
+        limits: ReconstructionObserverLimits,
+    ) -> Result<(), SolverError> {
+        validate_rest(plan, from_rest)?;
+        if plan.classes()[6] < limits.storage_bytes {
+            return Err(SolverError::ResourceLimit);
+        }
+        Ok(())
+    }
+
+    pub(super) fn limits_for(
+        source: Domain,
+        samples: usize,
+        balance: BalanceObserverLimits,
+    ) -> Result<ReconstructionObserverLimits, SolverError> {
+        if samples == 0 || balance.samples != samples {
+            return Err(SolverError::ResourceLimit);
+        }
         let fields = source
             .layout()
             .half_len()
@@ -120,24 +160,19 @@ impl ReconstructionObserver {
         })
     }
 
-    /// Allocate fixed storage and evaluate the first accepted endpoint from the actual rest
-    /// state. The initial evaluation consumes one independent provider budget slot.
-    pub fn new(
+    pub(super) fn new_owned(
         plan: ResourcePlan,
-        samples: usize,
         from_rest: &SpectralState,
+        limits: ReconstructionObserverLimits,
+        balance: ForceBalance<F>,
     ) -> Result<Self, SolverError> {
-        let limits = Self::limits(plan.domain(), samples)?;
-        validate_rest(plan, from_rest)?;
-        if plan.classes()[6] < limits.storage_bytes {
-            return Err(SolverError::ResourceLimit);
-        }
+        Self::admit(plan, from_rest, limits)?;
         let source = plan.domain();
         let mut result = Self {
             plan,
             source,
             limits,
-            balance: BalanceObserver::new(plan, samples)?,
+            balance,
             accepted: [Node::new(source)?, Node::new(source)?, Node::new(source)?],
             accepted_count: 0,
             pending: Node::new(source)?,
@@ -264,7 +299,7 @@ impl ReconstructionObserver {
     }
 }
 
-impl BalanceObserverContract for ReconstructionObserver {
+impl<F: PrescribedForce> BalanceObserverContract for ReconstructionObserver<F> {
     fn bounds(&self) -> Option<ObserverBounds> {
         Some(ObserverBounds {
             storage_bytes: self.limits.storage_bytes,
@@ -319,7 +354,7 @@ fn validate_rest(plan: ResourcePlan, state: &SpectralState) -> Result<(), Solver
 }
 
 fn rhs_from_last_balance(
-    balance: &BalanceObserver,
+    balance: &ForceBalance<impl PrescribedForce>,
     state: &SpectralState,
     output: &mut Field,
 ) -> Result<(), SolverError> {
@@ -360,3 +395,6 @@ fn add_viscosity(
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests;

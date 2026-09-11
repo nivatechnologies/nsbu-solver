@@ -16,6 +16,7 @@ pub type BalanceObserver = ForceBalance<CyclicSine>;
 
 pub mod reconstruction;
 pub mod v2;
+pub mod v2_reconstruction;
 
 impl BalanceObserver {
     /// Declares storage and work for cyclic sine samples.

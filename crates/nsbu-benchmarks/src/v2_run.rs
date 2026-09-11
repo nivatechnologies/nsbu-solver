@@ -18,10 +18,12 @@ use nsbu_solver::{
 };
 
 pub mod archive;
+mod reconstructed;
 
 mod plan;
 mod work;
 pub use plan::Plan;
+pub use reconstructed::{ReconstructedPlan, ReconstructedRun};
 pub use work::AttemptWork;
 
 /// Exact configuration bound to one independently evolved trajectory.

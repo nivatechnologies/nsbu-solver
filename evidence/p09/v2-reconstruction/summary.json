@@ -1,0 +1,61 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 accepted-node reconstruction owner",
+  "status": "focused numerical, allocation, coverage, CRAP and static gates passed; broader source-matched hosted gates pending",
+  "parent_commit": "44d076bc76989710094ce5e5ddad17fb596d82b3",
+  "focused_unique_tests_and_probes": 32,
+  "resource_observation": {
+    "admission_allocations": 0,
+    "construction_bytes": 204608,
+    "declared_bytes": 275416,
+    "steady_allocations": 0,
+    "initial_and_endpoint_samples": 3,
+    "observer_work_units": 1596,
+    "observer_scalar_transforms": 36,
+    "observer_modal_visits": 432
+  },
+  "whole_source_static_maxima": {
+    "cyclomatic_function": 21.0,
+    "cognitive_function": 21.0,
+    "halstead_difficulty_function_or_file": 75.8955223880597,
+    "maximum_physical_file_lines": 477
+  },
+  "focused_coverage": {
+    "selected_implementation_files": 3,
+    "lines": {"count": 460, "covered": 439, "percent": 95.43478260869566},
+    "branches": {"count": 50, "covered": 42, "percent": 84.0}
+  },
+  "focused_function_count": 49,
+  "focused_crap_maximum": 19.125,
+  "selected_focus_files": [
+    "crates/nsbu-benchmarks/src/smooth_observer/reconstruction.rs",
+    "crates/nsbu-benchmarks/src/smooth_observer/v2_reconstruction.rs",
+    "crates/nsbu-benchmarks/src/v2_run/reconstructed.rs"
+  ],
+  "source_inventory": "source-sha256.json",
+  "raw_artifacts": "artifact-sha256.json",
+  "reproducer": "raw/check_v2_reconstruction_focused.sh.gz",
+  "execution": {
+    "rustc": "1.96.0-nightly (ec818fda3 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "workspace_manifest_sha256": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "benchmark_manifest_sha256": "4620417205180a5f0a3d6eb1ef39a530972bb58b32cfc31442056aa22d0378de"
+  },
+  "accepted_pde_windows": 0,
+  "solid_review": {
+    "single_responsibility": "The V2 run owns trajectory transactions while the generic observer owns independently evaluated accepted-node history and Hermite reconstruction.",
+    "open_closed": "The proven reconstruction kernel accepts another prescribed-force implementation without changing its interpolation or transaction rules.",
+    "liskov": "Both smooth and exact-v2 providers satisfy the same finite prescribed-force contract; existing smooth behavior and archive specialization remain intact.",
+    "interface_segregation": "The new public owner exposes only planning, stepping, immutable state/history/work and reconstruction-observer access needed by later diagnostics.",
+    "dependency_inversion": "Endpoint RHS construction depends on prescribed-force, balance-observer and solver transaction contracts rather than integrator stages or analytical states."
+  },
+  "limitations": [
+    "No six-branch reconstruction probe family or exact-v2 off-stage residual is assembled.",
+    "No external reconstruction import or provenance qualification is provided.",
+    "No continuous-time, force-sampling, spatial-refinement or concentrating-window qualification is claimed.",
+    "P09 and P10 remain incomplete; broader source-matched hosted gates are pending."
+  ]
+}
