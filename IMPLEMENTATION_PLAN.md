@@ -686,6 +686,13 @@ trajectory tests (Rust run 34574045422; repository run 34574045397).
 
 ## P09 exact-v2 force-sampling trajectory refinement
 
+A [bounded first-endpoint feasibility study](evidence/p09/first-endpoint-pilot/README.md)
+using the published alpha binary reaches `t=1/256` from rest for N8/N16 and
+M16/M32 with 64-tick CM steps. Endpoint norms and balance defects change materially
+under grid refinement. This is diagnostic timing/resource evidence, not a
+full-field refinement study or an accepted window; use fixed worker counts in
+the next controlled family comparison.
+
 The [bounded force-sampling family](docs/V2_FORCE_REFINEMENTS.md) independently
 evolves three N4 CM trajectories from rest while changing only the nested
 prescribed-force grid M=[4,8,16]. Its exact manifest, versioned family identity,

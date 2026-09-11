@@ -1,0 +1,28 @@
+# BIN=work/alpha-review-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu/bin/nsbu
+# Every execution used: timeout --signal=TERM --kill-after=5s 120s /usr/bin/time -v
+
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 16 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 0 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 8 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 16 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 8 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 4 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 6 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 4 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 6 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 8 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 32 --memory-cap 268435456 --dry-run
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 32 --memory-cap 268435456 --dry-run
+
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456 --checkpoint work/concentrating-pilot-feasibility/n8-m16-step1.chk --checkpoint-after 1
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 0 --memory-cap 268435456
+$BIN v2 --grid 8 --force-grid 16 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 8 --memory-cap 268435456
+$BIN v2 --grid 16 --force-grid 16 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 8 --memory-cap 268435456
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 8 --memory-cap 268435456 --checkpoint work/concentrating-pilot-feasibility/n8-m32-step1.chk --checkpoint-after 1
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 128 --tick-exponent -20 --target 4096 --attempt-cap 32 --workers 8 --memory-cap 268435456
+$BIN v2 --grid 8 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 32 --memory-cap 268435456
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 32 --memory-cap 268435456 --checkpoint work/concentrating-pilot-feasibility/n16-m32-step1.chk --checkpoint-after 1
+$BIN v2 --grid 16 --force-grid 32 --method cm --step-ticks 64 --tick-exponent -20 --target 4096 --attempt-cap 64 --workers 32 --memory-cap 268435456
+

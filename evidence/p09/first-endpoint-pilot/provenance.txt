@@ -1,0 +1,12 @@
+study_started_utc=2026-09-11T11:17:00Z
+study_finished_utc=2026-09-11T11:25:45Z
+binary_path=work/alpha-review-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu/bin/nsbu
+binary_version=NSBU Solver 0.1.0-alpha.0
+binary_sha256=deaf3de7f7fc42a90efd8deb50136372b804486a16601d6679005c56528d232c
+binary_source_commit=6170341c42a64348c7d99bdfd4fc3653454f22a8
+binary_snapshot_tag=alpha-20260911
+initial_checkout_commit=44d076bc76989710094ce5e5ddad17fb596d82b3
+case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e
+cargo_lock_sha256=e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06
+scope=bounded feasibility only; diagnostic-only; zero accepted PDE windows
+

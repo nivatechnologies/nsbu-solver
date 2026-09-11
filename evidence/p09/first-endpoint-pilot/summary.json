@@ -1,0 +1,44 @@
+{
+  "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "binary_sha256": "deaf3de7f7fc42a90efd8deb50136372b804486a16601d6679005c56528d232c",
+  "status": "bounded first-endpoint diagnostics; unresolved spatial/force/balance errors",
+  "accepted_pde_windows": 0,
+  "successful_profiles": [
+    {
+      "N": 8,
+      "M": 16,
+      "workers": 8,
+      "wall_seconds": 34.69
+    },
+    {
+      "N": 16,
+      "M": 16,
+      "workers": 8,
+      "wall_seconds": 69.01
+    },
+    {
+      "N": 8,
+      "M": 32,
+      "workers": 32,
+      "wall_seconds": 89.4
+    },
+    {
+      "N": 16,
+      "M": 32,
+      "workers": 32,
+      "wall_seconds": 112.83
+    }
+  ],
+  "method": "CM",
+  "step_ticks": 64,
+  "endpoint": "1/256",
+  "artifact_sha256": {
+    "README.md": "1257db841f5d6a4d37da0fcf27371839719ed519fb15f6c6fa87120a21e86b49",
+    "checkpoint-runs.ndjson": "7b33bc761d8f934b23b2c69304dac839deb8160e677d1fe7186a86e84c982ea3",
+    "checkpoints.sha256": "e3d0a0eba59129a08cf4f3f93010661fbba251b964ca402dc656ce711cdbc6c0",
+    "commands.txt": "2badfd3976a115d48cdcb2de5c6027bca31cb5da659b60476e5116986b1fe69b",
+    "preflight.ndjson": "24006b5d14e050f2661c344560f0c3604d35bb2b056a1078b9e7b3881a4ae78c",
+    "provenance.txt": "26fb724948df640aeb80cc62d4b07071f9830911da000b05e829df8835a50677",
+    "runs.ndjson": "654c7c18cf45c4f7eea7f2c27ce6f93c536e83c8331c2948a26a2f933c5819cc"
+  }
+}
