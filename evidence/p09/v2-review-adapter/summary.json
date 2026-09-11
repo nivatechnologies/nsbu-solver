@@ -144,5 +144,7 @@
     "no reference-precision inference",
     "no PDE qualification or accepted window",
     "all-changed focused branch coverage is 75%; whole-maintained gate pending"
-  ]
+  ],
+  "validated_source_commit": "17f3bd043b34a35460ebb50e43bf4b42162300f9",
+  "source_binding": "Recorded source-file hashes independently match this retained commit; raw execution reports are unchanged."
 }

@@ -42,8 +42,8 @@ resource-cap refusals. One evolved schedule is shared across those assertions.
 Extraction made zero allocations or reallocations and transactionally preserved
 caller output on every tested refusal.
 
-The two caller-owned record arrays are 44,352 bytes each: one output array and
-one transactional pending array. These figures are exact array sizes, not a
+The two record arrays are 44,352 bytes each: one caller-owned output array and
+one internal transactional pending array. These figures are exact array sizes, not a
 total stack, process, or report-copy reservation. Validation scans seven events
 and publishes 28 records. An earlier `/usr/bin/time` focused run measured
 1:36.51 wall seconds, 96.67 user seconds, 0.98 system seconds and 347,008 KiB
