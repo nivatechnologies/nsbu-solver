@@ -1,5 +1,26 @@
 # Usage and evidence
 
+The runtime alpha's public execution path is `v2` for a new exact-v2 trajectory
+and `resume-v2` for a same-profile external checkpoint:
+
+```sh
+nsbu v2 --help
+nsbu resume-v2 --help
+```
+
+The default profile is `N=4`, `M=4`, target `T1=1/128`, fixed step `128` ticks,
+quantum `2^-20`, endpoint `4096` ticks, maximum `32` attempts, absolute
+tolerances `[1e-5, 1e-4]`, relative tolerances `[1e-5, 1e-5]`, and advective guard `0.3`. CM and HO are separate
+method selections. A finite resource cap and worker allowance are admitted
+before construction. A run starts from rest; resume preserves the checkpoint's
+same profile and marks its external origin unverified.
+
+Successful reports are bounded numerical diagnostics. A refusal, rejected
+terminal attempt, incomplete endpoint, resource failure, or invalid checkpoint
+returns nonzero and must remain visible to callers. Zero accepted concentrating
+windows exist. These reports do not establish convergence, arithmetic
+qualification, a concentrating PDE window, or a singularity.
+
 ## Working commands in this checkout
 
 From the repository root, with the [development environment](INSTALL.md) installed:
@@ -46,8 +67,9 @@ The [six-trajectory experiment example](EXPERIMENTS.md) adds independent grid,
 time-step and method comparisons, off-stage reconstruction and full-double-band
 residual measurements under a separately checked aggregate cap.
 Both are smooth verification profiles, distinct from `similarity-mms-v2`.
-The CLI also saves and resumes balance-only smooth checkpoints. Concentrating
-experiment commands and qualified restart provenance remain under implementation.
+The v2 CLI saves and resumes bounded exact-v2 checkpoints; all concentrating
+reports remain diagnostic-only and qualified restart provenance is still a
+separate scientific gate.
 
 ### Save and resume the smooth diagnostic
 
@@ -82,9 +104,11 @@ report that the destination already exists. Inspect that file before choosing a
 retry path. These filesystem operations are tested on Linux; other filesystems
 may refuse publication or durability confirmation.
 
-## Intended runtime workflow, not yet executable
+## Future qualification workflow
 
-The remaining interface will cover concentrating case export, preflight, integration, qualified restart and experiment comparison. Exact flags and schemas are to be frozen and tested in P11; this table describes behavior, not a working command tutorial.
+The v2 CLI now covers bounded concentrating-profile preflight, integration, and
+same-profile resume. The following higher-level families remain future work;
+they describe qualification behavior rather than executable commands.
 
 | Planned command family | Required behavior |
 |---|---|
@@ -107,7 +131,7 @@ First run a resource preflight, then diagnostic pilots, then freeze tolerances a
 
 At `512^3`, the twelve-cell screen reaches three endpoint indices on that individual grid. This does not establish three converged intervals. Coarser comparison grids and measured errors may shorten the qualified frontier. The base memory reservation alone is about 79.68 GiB, with additional costs explicitly required.
 
-## Reports required from the future runtime
+## Reports required from a qualification run
 
 Every run must identify the mathematical problem, reference/force artifacts, execution profile, exact start/end times, resource plan, method, and checkpoint lineage. A window report must distinguish diagnostic-only, accepted and rejected intervals and record the limiting channel. Sampled maxima and empirical reconstruction errors cannot be presented as rigorous bounds.
 
@@ -134,7 +158,7 @@ The trajectory study reports measured temporal orders for a separate smooth MMS.
 The sampling study uses the exact v2 force, but performs no integration and grants
 no spatial qualification. Larger direct-DFT and sampling studies can take many
 minutes. Each numerical study reserves its diagnostic storage before allocation;
-these Python reservations are not hard allocator bounds for the future runtime.
+these Python reservations are not hard allocator bounds for the Rust alpha runtime.
 
 ## Executed concentrating diagnostic
 
@@ -182,7 +206,8 @@ cargo test -p nsbu-benchmarks --test concentrating -- --nocapture
 ```
 
 P06 passed all local and hosted quality checks. Reaching the diagnostic
-endpoint does not qualify a PDE window. The concentrating CLI remains planned.
+endpoint does not qualify a PDE window. The `v2` CLI now supplies the bounded
+concentrating-profile diagnostic; qualification remains separate.
 
 
 ## Independent HO development checks
@@ -207,8 +232,9 @@ The concentrating test compares both independently evolved methods with their
 80/120-digit direct-DFT fixtures and with each other. It can take several minutes
 in a debug/instrumented build. These remain coarse diagnostics with no accepted
 PDE window. [P07 evidence](../evidence/p07/README.md) records order reduction,
-arithmetic comparisons and the passed hosted verification. The numerical
-CLI and window verifier remain planned.
+arithmetic comparisons and the passed hosted verification. The `v2`/`resume-v2`
+CLI supplies bounded execution and same-profile diagnostic resume. The window
+verifier remains a separate scientific gate.
 
 
 ## Independent diagnostics development checks (P08 in progress)
@@ -229,8 +255,8 @@ cargo test -p nsbu-benchmarks --test diagnostic_history -- --nocapture
 These commands work now. The [source-matched evidence](../evidence/p08/core/README.md)
 records analytic negative controls and independently evolved smooth histories.
 Sampled residuals and shrinking-interval maxima are not continuous error bounds.
-The complete P08 window review, concentrating CLI, and qualified concentrating
-results remain incomplete. No reference field is assigned to an integrated state.
+The complete P08 window review and qualified concentrating results remain
+incomplete. No reference field is assigned to an integrated state.
 
 Sampled reporting is also implemented. `SamplingWorkspace` separately preflights
 velocity/vorticity transforms and returns sampled maxima with unaligned physical

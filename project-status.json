@@ -216,5 +216,33 @@
   "exact_jet_derivative_tables_exist": true,
   "force_evaluation_optimization_scope": "Original pointwise and full-spectrum words retained on tested cases, allocation-free requests, separate exact-clock input bindings, 3.046 median measured small-grid speed ratio; no new force accuracy or PDE qualification.",
   "persistent_parallel_force_exists": true,
-  "parallel_force_scope": "Optional preflighted persistent workers preserve tested original force words and reported work; no allocations after construction for normal requests; complete failure collection and shutdown verified. Force-only N16/N32 profiles and clean reproduction pass; no new mathematical accuracy or PDE qualification."
+  "parallel_force_scope": "Optional preflighted persistent workers preserve tested original force words and reported work; no allocations after construction for normal requests; complete failure collection and shutdown verified. Force-only N16/N32 profiles and clean reproduction pass; no new mathematical accuracy or PDE qualification.",
+  "execution_priority": {
+    "updated": "2026-09-11",
+    "next_delivery": "runtime-alpha",
+    "status": "R01-R03 runtime functionality demonstrated for exact-v2 CM/HO, independent fixtures, restart equivalence, and release-binary CLI smoke; R04 full quality/install gates pending.",
+    "ordered_work": [
+      "R01 exact-v2 owned from-rest runtime",
+      "R02 same-profile checkpoint/resume",
+      "R03 public CLI workflow",
+      "R04 documentation and milestone quality/package gates"
+    ],
+    "deferred_until_runtime_usable": [
+      "experimental reduced-variable evaluator",
+      "additional performance backends",
+      "extended concentrating refinement and arithmetic studies",
+      "visualization"
+    ],
+    "scientific_acceptance_criteria_unchanged": true
+  },
+  "alpha_release": {
+    "ready": false,
+    "status": "Runtime implementation is usable and focused checks pass; full alpha quality, clean installation, and hosted CI remain required before publication.",
+    "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
+    "accepted_concentrating_windows": 0,
+    "scientific_qualification_separate": true
+  },
+  "exact_v2_cli_exists": true,
+  "exact_v2_restart_exists": true,
+  "runtime_alpha_functionality_evidence": "evidence/runtime-alpha/runtime-checks.json"
 }

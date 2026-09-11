@@ -1,0 +1,20 @@
+{
+  "release_binary": "target/release/nsbu",
+  "cm_completed": true,
+  "ho_completed": true,
+  "checkpoint_ho_after_16": true,
+  "resume_completed": true,
+  "resume_equals_uninterrupted_after_origin_status_normalization": true,
+  "checkpoint_origin": "internal_from_rest",
+  "resume_origin": "external_unverified",
+  "all_reports_unqualified": true,
+  "accepted_pde_windows": 0,
+  "default_profile": {
+    "grid": 4,
+    "force_grid": 4,
+    "step_ticks": 128,
+    "tick_exponent": -20,
+    "endpoint_ticks": 4096,
+    "attempts": 32
+  }
+}

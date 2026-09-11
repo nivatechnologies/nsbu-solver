@@ -12,6 +12,60 @@ counts, and complete input byte limits are checked before input-sized allocation
 buffer is refused before the writer changes it. Readers reject truncation, trailing bytes,
 unknown tags, and unsupported versions.
 
+## Exact-v2 owner archive: `NSBUV2A1`
+
+The exact-v2 runtime archive is encoded by
+[`v2_run/archive.rs`](../crates/nsbu-benchmarks/src/v2_run/archive.rs). It is
+a version-one, little-endian container for one bounded owner. The decoder
+validates the complete input and its SHA-256 trailer before allocating decoded
+state, then rebuilds the caller's expected plan and checks the full frame and
+ledger against that plan. This codec is separate from the existing
+`NSBUAR01`, `NSBUHR01`, `NSBUSR01`, and reconstruction codecs; their formats and
+version scopes are unchanged.
+
+The fixed 384-byte header is laid out as follows:
+
+| Offset | Size | Field |
+|---:|---:|---|
+| 0 | 8 | ASCII magic `NSBUV2A1` |
+| 8 | 2 | little-endian `u16` version (`1`) |
+| 10 | 64 | ASCII hexadecimal `CASE_SHA256` for `similarity-mms-v2` |
+| 74 | 1 | backend tag: `0` serial, `1` persistent workers |
+| 75 | 48 | three force-sample dimensions, each little-endian `u128` |
+| 123 | 16 | worker count, little-endian `u128` |
+| 139 | 52 | initial rest clock: `i32` exponent, then `u128` target, elapsed, remaining |
+| 191 | 8 | domain length bits (`f64::to_bits`, unit cube) |
+| 199 | 8 | advective guard bits (`f64::to_bits`) |
+| 207 | 81 | configuration: method byte (`1` CM/`2` HO), endpoint/step/max-attempts `u128`, then four tolerance `f64` bit patterns (two absolute, two relative) |
+| 288 | 48 | physical archive length, history archive length, and attempt-record count, each `u128` |
+| 336 | 48 | aggregate observer work: samples, work units, scalar transforms, each `u128` |
+
+The header is followed by the canonical physical-state archive, canonical
+run-history archive, and one 96-byte charged-work record per attempt. Each
+record contains six little-endian `u128` values: three integration charges
+(RHS calls, provider work units, scalar transforms), followed by three
+observation charges (samples, provider work units, scalar transforms). A final
+32-byte SHA-256 digest covers every preceding byte, including the header and
+all payloads.
+
+The physical state and history retain terminal controller state and the full
+attempt ledger. A terminal refusal or rejected attempt is therefore preserved;
+decoding cannot silently turn an incomplete run into an endpoint. Resume is
+same-profile only: method, exact clock/endpoint/step, tolerances, domain,
+advective guard, force grid, worker count, and all finite allowances must match
+the caller's freshly admitted plan. Continuation allocates fresh numerical
+scratch, marks the origin `ExternalUnverified`, and does not serialize worker
+queues or FFT caches because those are rebuilt for the exact requested profile.
+
+The CLI bounds both complete input bytes and maximum decoded/read reservation,
+including physical state, history, full ledger, imported-owner storage, and the
+caller cap, before accepting a file. A matching SHA-256 proves byte integrity
+only; it does not prove physical truth, numerical accuracy, from-rest
+provenance, or PDE qualification. The archive records diagnostics and
+execution accounting, not a scientific acceptance decision. See the [runtime
+alpha guide](RUNTIME_ALPHA.md) for the public workflow and its limits. The
+literal source compiler is outside this codec and release scope.
+
 ## Artifact archive: `NSBUAR01`
 
 [`checkpoint/archive.rs`](../crates/nsbu-solver/src/checkpoint/archive.rs) stores a canonical
@@ -161,7 +215,7 @@ includes decoded node storage and fresh execution scratch before allocation.
 nodes, compensated balances, controller state and spent work. Import, continuation,
 snapshot and subsequent export retain `ExternalUnverified`. External problem,
 execution, force, policy and lineage artifacts still need semantic binding before
-any qualification decision. The current CLI file commands use only `NSBUSR01`;
+any qualification decision. The smooth CLI file commands use `NSBUSR01`; exact-v2 commands use `NSBUV2A1`.
 `NSBURC01` is available through the Rust library.
 
 ## Reproduce an imported reconstruction run from rest

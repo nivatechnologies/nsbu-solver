@@ -2,6 +2,8 @@
 mod arguments;
 mod checkpoint_io;
 mod report;
+mod v2;
+mod v2_report;
 use report::{
     checkpoint_refused, io_refused, origin_name, print_checkpoint, print_plan, print_run, refused,
     refused_with_origin,
@@ -32,6 +34,8 @@ fn main() -> ExitCode {
         Command::Version => println!("{} {}", nsbu_solver::NAME, nsbu_solver::VERSION),
         Command::Smooth(args) => return smooth(args),
         Command::Resume(args) => return resume(args),
+        Command::V2(args) => return v2::execute(args, false),
+        Command::ResumeV2(args) => return v2::execute(args, true),
         Command::Invalid => {
             eprintln!("Unsupported arguments. Use nsbu --help for available commands.");
             return ExitCode::from(2);
@@ -42,7 +46,36 @@ fn main() -> ExitCode {
 
 fn print_help() {
     println!(
-        "{}\nUsage: nsbu [--help | --version]\n       nsbu smooth [OPTIONS]\n       nsbu resume --checkpoint PATH [OPTIONS]\n\nBuilt-in profile: CyclicSine on [1.0, 1.0, 1.0], viscosity 0.3, advective guard 1.0.\n\nOptions:\n  --grid, --domain N          Four-multiple cubic grid (default: 8)\n  --method cm|ho              Cox-Matthews or Hochbruck-Ostermann (default: cm)\n  --step-ticks, --step N      Exact macro-step ticks (default: 64)\n  --target, --endpoint-ticks N\n                              Requested exact endpoint ticks (default: 256)\n  --tick-exponent, --tick N   Tick quantum exponent for 2^N (default: -16)\n  --attempts, --attempt-cap N Maximum recorded attempts (default: 4)\n  --memory-cap N              Declared byte cap (default: 67108864)\n  --checkpoint PATH           Save after --checkpoint-after accepted steps, or resume this file\n  --checkpoint-after N        Accepted-step count at which smooth saves and exits\n  --dry-run                   Validate and report the allocation-free admission plan\n\nThe built-in CyclicSine profile is a numerical diagnostic only. It is not PDE-qualified.",
+        r#"{}
+Usage: nsbu [--help | --version]
+       nsbu smooth [OPTIONS]
+       nsbu resume --checkpoint PATH [OPTIONS]
+       nsbu v2 [OPTIONS]
+       nsbu resume-v2 --checkpoint PATH [OPTIONS]
+
+Profiles: smooth uses CyclicSine, unit cube, viscosity 0.3, advective guard 1.0.
+          v2 uses similarity-mms-v2, unit cube, viscosity 1.0, advective guard 0.3.
+          v2 has exact target time T*=1/128; every endpoint must be earlier.
+
+Options:                                  smooth default / v2 default
+  --grid, --domain N          Four-multiple cubic grid: 8 / 4
+  --method cm|ho              Cox-Matthews or Hochbruck-Ostermann: cm
+  --step-ticks, --step N      Exact macro-step ticks: 64 / 128
+  --target, --endpoint-ticks N
+                              Requested endpoint ticks, not T*: 256 / 4096
+  --tick-exponent, --tick N   Tick quantum 2^N: -16 / -20
+  --attempts, --attempt-cap N Maximum recorded attempts: 4 / 32
+  --memory-cap N              Declared byte cap: 67108864
+  --force-grid N              v2 force sampling grid, at least --grid (default: grid)
+  --workers N                 v2 persistent force workers (0 selects serial)
+  --checkpoint PATH           Save a checkpoint or resume the specified file
+  --checkpoint-after N        Save after N accepted steps and exit (zero permits rest)
+  --dry-run                   Report the allocation-free numerical admission plan
+
+Saving requires both checkpoint options. Resume requires the same profile options.
+Both profiles are diagnostic and not PDE-qualified. An alpha release
+and a completed integration do not establish PDE convergence.
+"#,
         nsbu_solver::NAME
     );
 }

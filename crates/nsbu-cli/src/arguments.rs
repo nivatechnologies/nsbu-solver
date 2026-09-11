@@ -5,6 +5,8 @@ pub(crate) enum Command {
     Version,
     Smooth(Args),
     Resume(Args),
+    V2(Args),
+    ResumeV2(Args),
     Invalid,
 }
 
@@ -19,6 +21,8 @@ pub(crate) struct Args {
     pub dry_run: bool,
     pub checkpoint: Option<PathBuf>,
     pub checkpoint_after: Option<usize>,
+    pub force_grid: Option<usize>,
+    pub workers: usize,
 }
 
 #[derive(Clone, Copy)]
@@ -32,65 +36,100 @@ pub(crate) fn parse(arguments: &[OsString]) -> Command {
         [] => Command::Help,
         [argument] if argument == "--help" || argument == "-h" => Command::Help,
         [argument] if argument == "--version" || argument == "-V" => Command::Version,
-        [command, rest @ ..] if command == "smooth" => smooth(rest, true),
-        [command, rest @ ..] if command == "resume" => resume(rest),
+        [command, argument]
+            if is_command(command) && (argument == "--help" || argument == "-h") =>
+        {
+            Command::Help
+        }
+        [command, rest @ ..] if command == "smooth" => profile(rest, false, false),
+        [command, rest @ ..] if command == "resume" => profile(rest, false, true),
+        [command, rest @ ..] if command == "v2" => profile(rest, true, false),
+        [command, rest @ ..] if command == "resume-v2" => profile(rest, true, true),
         _ => Command::Invalid,
     }
 }
 
-fn smooth(items: &[OsString], require_checkpoint_after: bool) -> Command {
-    let mut args = Args {
-        grid: 8,
+fn is_command(command: &OsString) -> bool {
+    ["smooth", "resume", "v2", "resume-v2"]
+        .iter()
+        .any(|name| command == name)
+}
+
+fn defaults(concentrating: bool) -> Args {
+    let [grid, step, endpoint, attempts] = if concentrating {
+        [4, 128, 4096, 32]
+    } else {
+        [8, 64, 256, 4]
+    };
+    Args {
+        grid,
+        step_ticks: step as u128,
+        endpoint_ticks: endpoint as u128,
+        maximum_attempts: attempts,
+        tick_exponent: if concentrating { -20 } else { -16 },
         method: MethodName::CoxMatthews,
-        step_ticks: 64,
-        endpoint_ticks: 256,
-        tick_exponent: -16,
-        maximum_attempts: 4,
         memory_cap: 64 * 1024 * 1024,
         dry_run: false,
         checkpoint: None,
         checkpoint_after: None,
+        force_grid: None,
+        workers: 0,
+    }
+}
+
+fn profile(items: &[OsString], concentrating: bool, resume: bool) -> Command {
+    let Some(args) = parse_options(items, concentrating) else {
+        return Command::Invalid;
     };
+    if resume {
+        if args.dry_run || args.checkpoint.is_none() || args.checkpoint_after.is_some() {
+            return Command::Invalid;
+        }
+        if concentrating {
+            Command::ResumeV2(args)
+        } else {
+            Command::Resume(args)
+        }
+    } else {
+        if args.checkpoint.is_some() != args.checkpoint_after.is_some() {
+            return Command::Invalid;
+        }
+        if concentrating {
+            Command::V2(args)
+        } else {
+            Command::Smooth(args)
+        }
+    }
+}
+
+fn parse_options(items: &[OsString], concentrating: bool) -> Option<Args> {
+    let mut args = defaults(concentrating);
     let mut index = 0;
     while index < items.len() {
-        let Some(name) = items[index].to_str() else {
-            return Command::Invalid;
-        };
+        let name = items[index].to_str()?;
         if name == "--dry-run" {
             if args.dry_run {
-                return Command::Invalid;
+                return None;
             }
             args.dry_run = true;
             index += 1;
-            continue;
+        } else {
+            let value = items.get(index + 1)?.to_str()?;
+            if !set_profile_option(&mut args, name, value, concentrating) {
+                return None;
+            }
+            index += 2;
         }
-        let Some(value) = items.get(index + 1).and_then(|item| item.to_str()) else {
-            return Command::Invalid;
-        };
-        if !set_option(&mut args, name, value) {
-            return Command::Invalid;
-        }
-        index += 2;
     }
-    if require_checkpoint_after && args.checkpoint.is_some() != args.checkpoint_after.is_some() {
-        return Command::Invalid;
-    }
-    Command::Smooth(args)
+    Some(args)
 }
 
-fn resume(items: &[OsString]) -> Command {
-    let mut command = smooth(items, false);
-    let Command::Smooth(args) = &mut command else {
-        return Command::Invalid;
-    };
-    if args.dry_run || args.checkpoint.is_none() || args.checkpoint_after.is_some() {
-        return Command::Invalid;
+fn set_profile_option(args: &mut Args, name: &str, value: &str, concentrating: bool) -> bool {
+    match name {
+        "--force-grid" => concentrating && set_optional_grid(value, args),
+        "--workers" => concentrating && set(value, &mut args.workers),
+        _ => set_option(args, name, value),
     }
-    let args = match std::mem::replace(&mut command, Command::Invalid) {
-        Command::Smooth(args) => args,
-        _ => unreachable!(),
-    };
-    Command::Resume(args)
 }
 
 fn set_option(args: &mut Args, name: &str, value: &str) -> bool {
@@ -105,6 +144,19 @@ fn set_option(args: &mut Args, name: &str, value: &str) -> bool {
         "--checkpoint" | "--checkpoint-file" => set_path(value, args),
         "--checkpoint-after" | "--checkpoint-steps" => set_checkpoint_after(value, args),
         _ => false,
+    }
+}
+
+fn set_optional_grid(value: &str, args: &mut Args) -> bool {
+    if args.force_grid.is_some() {
+        return false;
+    }
+    match value.parse() {
+        Ok(value) => {
+            args.force_grid = Some(value);
+            true
+        }
+        Err(_) => false,
     }
 }
 

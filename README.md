@@ -2,9 +2,9 @@
 
 A standalone Rust project for incompressible, three-dimensional Navier–Stokes simulation and carefully qualified concentrating-flow experiments.
 
-**Status: implementation in progress; no accepted PDE convergence windows or published solver binaries.** Packages through P07 pass local and hosted checks; P08/P09 remain incomplete. The [sampling-refinement increment](evidence/p08/sampling-family/README.md) passes 362 Rust tests/allocation probes, all required local gates and a matching clean-source walkthrough. Python retains the verified 198-test profile. The preceding [derived-field arithmetic studies](evidence/p09/derived-arithmetic/README.md) also pass both hosted workflows; hosted verification of the sampling increment is pending.
+**Status: runtime alpha preparation; zero accepted PDE convergence windows and no scientific qualification.** The public library and v2 runtime are bounded diagnostic infrastructure. P08/P09 evidence and the clean-checkout release walkthrough remain part of the readiness gate; larger-grid convergence and arithmetic refinement remain pending. See the [runtime alpha guide](docs/RUNTIME_ALPHA.md).
 
-The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI runs a bounded smooth diagnostic with both methods and provides preflight and unverified smooth checkpoint continuation. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
+The library implements spectral operators, CM/HO integration, exact-v2 forcing, bounded transactional attempts, and independent diagnostics. The CLI provides bounded smooth and v2/resume-v2 commands; all external resumes retain an unverified origin. This checkout also preserves the reviewed specification, benchmark manifest, mathematical checks, and active implementation plan.
 
 The NSBU Solver library evolves all three velocity components on a periodic three-dimensional domain, with fixed positive viscosity and a prescribed force:
 
@@ -42,7 +42,7 @@ When using the complete source ZIP, extract it with its directory structure inta
 
 The repository check verifies the frozen inputs, mathematical problem identity, local documentation links, and public-package boundaries. The unit tests exercise missing-file, modified-input and unsafe-output failures. The design runner reruns selected algebra, coefficient, clock, geometry, resource, and source-screening checks and compares their report with the preserved evidence before adding execution metadata. Its `status: passed` means those checks passed; it does not mean a PDE simulation passed.
 
-See [installation](docs/INSTALL.md) for Windows setup and [usage](docs/USAGE.md) for report interpretation and the proposed future runtime workflow. The Rust workspace builds with Rust 1.94.0. `cargo run -p nsbu-cli -- smooth --dry-run` prints a checked resource plan; `cargo run -p nsbu-cli -- smooth --method ho` evolves the smooth case from rest. These commands do not qualify the concentrating benchmark.
+See [installation](docs/INSTALL.md) for setup, [runtime alpha](docs/RUNTIME_ALPHA.md) for the v2 profile, and [usage](docs/USAGE.md) for report interpretation. The Rust workspace builds with Rust 1.94.0. Every command performs bounded admission and reports diagnostic status; none qualifies the concentrating benchmark.
 
 The [independent Python reference](reference/README.md) now provides pointwise v2
 scalar/jet evaluations, direct-DFT fixtures, and N=4 smooth trajectories evolved

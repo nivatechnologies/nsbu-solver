@@ -10,6 +10,41 @@ This document is the active repository plan. It supersedes the historical roadma
 
 The initial release implements periodic 3D incompressible Navier–Stokes at fixed positive viscosity and the separately defined `similarity-mms-v2` manufactured case. Literal source reproduction is excluded from this release. The mathematics compiler and a possible averaged-stress surrogate do not block the runtime. Visualization follows numerical validation. An optional Niva adapter is maintained outside this public workspace.
 
+## Runtime-first execution priority · 11 September 2026
+
+The user has prioritized a complete usable solver before extended numerical
+qualification and visualization. The next delivery is the **runtime alpha** below.
+It does not complete P10 or change any scientific acceptance criterion. All existing
+implemented and verified work is retained; additional evaluator optimizations and
+concentrating refinement infrastructure are parked until this workflow is usable.
+
+| Order | Runtime-alpha work | Concrete exit evidence |
+|---|---|---|
+| R01 | Connect the existing exact-v2 force and CM/HO integrators to an owned from-rest run with explicit plan, clock, tolerances, work and diagnostics | Existing independent N4 trajectory fixtures still agree; both methods run without reference assignments; actual refusals preserve committed state |
+| R02 | Bind complete same-profile checkpoint/resume to that owned run | Interrupted/resumed execution reproduces the uninterrupted next attempt and endpoint; exact input/configuration and all retained ledgers survive; corrupt/foreign payloads are refused and external origin remains explicit |
+| R03 | Expose dry-run, execution, checkpoint/resume and readable machine output through the public CLI | Bounded end-to-end walkthrough for both methods, meaningful failure exits, immutable case identity and diagnostic status |
+| R04 | Finish public installation/API/usage documentation and the runtime release evidence | Fresh public checkout installs and runs the documented workflow; current required quality gates pass; advertised features match executed commands |
+
+Run focused numerical and transactional checks while integrating. Run the complete
+workspace/coverage/quality and packaging gates at the runtime milestone and after
+changes that invalidate their results. Do not repeat full suites merely to produce
+another incremental evidence package. Preserve the existing metric thresholds;
+mutation/dead/duplication findings remain informational.
+
+Defer the new reduced-variable evaluator, additional performance backends,
+large concentrating refinement families, extended arithmetic qualification and
+visualization. P08/P09 scientific integration and P10 remain open until their
+original exits pass. A functional runtime and a qualified concentrating result
+are reported as separate deliverables. The existing smooth runtime remains usable.
+
+Publish the first solver alpha as soon as R01-R04 pass. Thereafter publish daily
+prereleases containing new changes that pass the runtime/CI gates, with source
+revision, checksums, changes, test results and known limitations. Continue
+correctness studies and optimization after that first release; completion of
+scientific qualification and eventual stability remain separately demonstrated.
+The `alpha_release.ready` flag in project-status.json remains false until the
+runtime checklist is actually complete.
+
 ## Repository bootstrap and current evidence
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.

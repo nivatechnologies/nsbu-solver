@@ -1,16 +1,29 @@
 # nsbu-cli
 
-Public command-line entry point for NSBU Solver. `nsbu smooth` runs the bounded built-in
-`CyclicSine` numerical diagnostic with either Cox--Matthews (`cm`) or
-Hochbruck--Ostermann (`ho`). `--dry-run` validates the exact configuration and resource ledger
-through `SmoothPlan` before numerical state is allocated. `nsbu smooth --checkpoint PATH
---checkpoint-after N` saves after exactly `N` accepted steps without changing the profile's
-original endpoint or configuration. `nsbu resume --checkpoint PATH` requires matching supplied
-profile options and continues only as an `external_unverified` diagnostic run.
+The public `nsbu` executable provides bounded smooth and exact-v2 diagnostic
+runs. `nsbu v2` starts the reviewed `similarity-mms-v2` trajectory from exact
+rest; `nsbu resume-v2 --checkpoint PATH` continues a same-profile checkpoint
+after bounded input and decoded-size preflight. Both CM and HO are supported.
 
-The command reports JSON. Exact tick counts are decimal strings, and the report always marks the
-profile as not PDE-qualified. Checkpoints are atomically published without replacing an existing
-path, and bounded file reads reject oversized or changing files. Invalid command syntax uses exit
-code 2; resource, checkpoint, or numerical refusals and incomplete runs use exit code 1.
+The v2 defaults are grid `N=4`, force grid `M=4`, step `128` ticks, quantum
+`2^-20`, endpoint `4096` ticks (`T1=1/128`), maximum `32` attempts, absolute
+tolerances `[1e-5, 1e-4]`, relative tolerances `[1e-5, 1e-5]`, and advective
+guard `0.3`. `--workers N` selects a finite persistent-worker allowance;
+`--workers 0` uses the serial provider. Resource preflight includes the maximum
+decoded checkpoint reservation and input buffer before construction.
 
-Part of NSBU Solver, licensed under Apache-2.0. No private Niva dependency.
+Try the installed binary with:
+
+```sh
+nsbu v2 --help
+nsbu resume-v2 --help
+nsbu v2 --dry-run
+```
+
+JSON reports retain exact times, all charged work, the last accepted balance
+terms, pending Simpson/integral state, and `origin_status`. A new run reports
+`internal_from_rest`; a restored checkpoint reports `external_unverified`.
+Terminal refusals and incomplete trajectories exit nonzero. Successful output
+is diagnostic-only and does not establish PDE qualification, convergence, or a
+concentrating window. The crate is part of NSBU Solver under Apache-2.0 and has
+no private Niva dependency.

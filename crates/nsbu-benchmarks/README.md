@@ -1,5 +1,30 @@
 # NSBU Solver benchmarks
 
+## Exact-v2 runtime
+
+The `v2_run` module is the public bounded owner for the exact
+`similarity-mms-v2` diagnostic. `Plan`, `Settings`, and `Run` separate
+allocation-free admission, configuration, and private evolving state:
+
+```rust
+use nsbu_benchmarks::v2_run::{Plan, Run, Settings};
+```
+
+Construct a `Settings` value from the unit-cube domain, exact `1/128` clock,
+CM or HO configuration, v2 force settings, and finite advective/resource
+limits; then call `Plan::from_rest(settings, byte_cap)` and
+`Run::from_rest(plan)`. Each `Run::step()` records one bounded attempt. The
+reference field is never assigned into the state. `Run::origin()` distinguishes
+an internal rest run from an externally restored, unverified checkpoint.
+
+The default CLI profile is `N=4`, `M=4`, step `128`, quantum `2^-20`, endpoint
+`4096`, at most `32` attempts, absolute tolerances `[1e-5, 1e-4]`, relative
+tolerances `[1e-5, 1e-5]`, and advective guard `0.3`; worker threads are an
+explicit finite allowance.
+`v2` and `resume-v2` expose this profile; consult their `--help` output for
+exact flags. Both methods and checkpoint
+continuation are diagnostic only. No accepted concentrating window exists.
+
 Independent Rust scalar reference and degree-four Taylor-jet implementations of
 the exact `similarity-mms-v2` manufactured problem. `CASE_DEFINITION` preserves the
 reviewed input bytes; its historical status text is not current project status.

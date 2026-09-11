@@ -193,7 +193,7 @@ pub(crate) fn origin_name(run: &SmoothRun) -> &'static str {
     }
 }
 
-fn error_name(error: SolverError) -> &'static str {
+pub(crate) fn error_name(error: SolverError) -> &'static str {
     match error {
         SolverError::InvalidDomain => "invalid_domain",
         SolverError::InvalidIndex => "invalid_index",

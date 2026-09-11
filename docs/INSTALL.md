@@ -2,9 +2,14 @@
 
 ## What can be installed now
 
-The checkout provides Python verification and a Rust workspace with an `nsbu` executable supporting help/version, bounded smooth runs, numerical preflight and unverified smooth file continuation. No crate or binary release has been published. Install from the checked-out source as shown below; the concentrating experiment workflow remains in progress.
+The checkout provides Python verification and a Rust workspace containing the
+installable `nsbu-solver` library, benchmark library, and `nsbu` CLI. The runtime alpha supports bounded CM/HO
+diagnostics from rest, resource preflight, and same-profile external checkpoint
+continuation. Alpha output is diagnostic-only and unqualified; no crate or
+binary release is promised by this source checkout until the tracked readiness
+gate is enabled. The concentrating experiment workflow remains in progress.
 
-Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the future Rust runtime dependencies.
+Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the Rust runtime dependencies.
 
 ## macOS and Linux
 
@@ -61,12 +66,23 @@ The committed toolchain pins Rust 1.94.0. The workspace and lockfile use public 
 cargo build --workspace --locked
 cargo test --workspace --locked
 cargo fmt --all -- --check
-cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
 cargo install --path crates/nsbu-cli --locked
 nsbu --help
+nsbu --version
 ```
 
-The executable supports `--help`, `-h`, `--version`, `-V` and no arguments. Unsupported or extra arguments return exit code 2. These build/install checks have been exercised on Linux; other platforms remain unverified. This is package infrastructure, not a working numerical solver.
+The v2 runtime commands are `nsbu v2` and `nsbu resume-v2`; their exact
+options are shown by `nsbu v2 --help` and `nsbu resume-v2 --help`. The
+default profile is documented in [Runtime alpha](RUNTIME_ALPHA.md). Unsupported
+arguments return exit code 2. Resource, provider, checkpoint, or terminal
+trajectory failures return nonzero. These build/install checks have been
+exercised on Linux; other platforms remain unverified. This is bounded
+diagnostic infrastructure, not evidence of a qualified PDE window.
+
+For numerical smoke runs, prefer the optimized binary installed above or
+`cargo run --release -q -p nsbu-cli -- v2 --dry-run`; debug builds can be much
+slower at the default 32-attempt profile.
 
 ## Troubleshooting
 

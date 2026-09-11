@@ -1,0 +1,38 @@
+{
+  "stage": "runtime-functionality-demonstrated; full alpha quality/install/publication gates pending",
+  "base_commit": "6c23cfbbd2d702dba03713203ef4b4cb00b741f7",
+  "independent_full_band_fixtures": {
+    "profile": "N4 M4, target8192, exponent-20, endpoint4096, step128, attempts32",
+    "methods": [
+      "CM",
+      "HO"
+    ],
+    "absolute_coefficient_tolerance": 5e-13,
+    "passed": true
+  },
+  "restart": {
+    "methods": [
+      "CM",
+      "HO"
+    ],
+    "next_committed_step_equivalence": true,
+    "physical_coefficients": "exact binary64 words",
+    "case": "similarity-mms-v2",
+    "external_origin_retained": true
+  },
+  "allocation": {
+    "serial_profile": "N4 M4 CM",
+    "planning_allocations": 0,
+    "measured_construction_heap_bytes": 193600,
+    "reserved_owner_bytes": 260120,
+    "first_and_repeated_committed_step_allocations": 0
+  },
+  "release_binary_smoke": "runtime-summary.json",
+  "accepted_pde_windows": 0,
+  "pending": [
+    "complete workspace coverage/CRAP gate",
+    "fresh source installation and packaging",
+    "source-matched hosted CI",
+    "first alpha publication"
+  ]
+}
