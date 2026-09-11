@@ -706,3 +706,29 @@ cancels in pair differences. Focused numerical/allocation gates pass, with
 CRAP30 failure and corrected source replay remain recorded. Combined-source
 hosted checks are pending; regional/reference/arithmetic/artifact integration
 and concentrating qualification remain incomplete. Zero PDE windows are accepted.
+
+## P09 exact-v2 analytical trajectory tracking
+
+The [analytical tracking consumer](docs/V2_REFERENCE_TRACKING.md) observes all
+six synchronized exact-v2 family states without mutation. One cached reference
+evaluation per clock/grid point supplies velocity, complete gradient, ordered
+Hessian and curl targets; three reusable derivative workspaces sample every
+actual retained band. Joint storage, reference/root/FFT/traversal work, attempts,
+foreign/stale refusal, terminal publication and allocation contracts pass focused
+checks. Independent signed Fourier reconstruction checks all global RMS/peak/
+relative statistics, and the existing 120-digit reference fixture remains within
+its tolerance. The coarse startup endpoint has nonzero errors, including N12/h16
+CM velocity RMS 1.8874e-7 and Hessian RMS 9.3256e-4. This partial global sampled
+study does not qualify pressure, regions, current-grid arithmetic or a PDE window.
+P08/P09/P10 remain incomplete with zero accepted concentrating windows.
+
+## P09 exact-v2 accepted-node reconstruction owner
+
+The [reconstructed owner](evidence/p09/v2-reconstruction/README.md) independently
+retains three accepted endpoint value/RHS nodes using the shared transactional
+observer kernel. The default exact-v2 runtime and smooth archive format are
+preserved. Initial-rest work is separately charged; failed admission allocates
+nothing and rejected steps leave the accepted ring unchanged. Focused smooth
+and exact-v2 regressions pass, with 95.43% lines, 84% branches and CRAP19.125.
+Six-branch off-stage probes, residual assembly, external reconstruction import
+and concentrating qualification remain pending.

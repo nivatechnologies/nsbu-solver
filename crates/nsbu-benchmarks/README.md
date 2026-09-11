@@ -82,6 +82,12 @@ divergence and mean differences. Run `cargo run --release -p nsbu-benchmarks
 See [the force-refinement guide](../../docs/V2_FORCE_REFINEMENTS.md) for identity,
 resource, failure and scientific limits.
 
+`v2_experiment::reference` compares all six actual family states with one cached
+analytical exact-v2 evaluation per physical point and clock. It retains complete
+velocity, ordered gradient/Hessian and curl statistics without mutating any run.
+The [tracking guide](../../docs/V2_REFERENCE_TRACKING.md) documents the bounded
+example, work ledger, independent Fourier oracle and binary64 reference limits.
+
 ## Bounded smooth run example
 
 Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` to construct a small owned

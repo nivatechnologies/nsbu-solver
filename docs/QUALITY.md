@@ -628,3 +628,12 @@ and CRAP13.8222. Focused strict Clippy, formatting and whole-workspace Rustdoc p
 The original combined validation function's measured CRAP26.3231 failure is
 retained in the evidence narrative; its separated final implementation passes.
 Source-matched hosted workspace coverage and package checks remain pending.
+
+The [exact-v2 analytical tracking consumer](../evidence/p09/v2-reference-tracking/README.md)
+passes four focused harness tests, an extreme-magnitude unit control, its isolated
+allocation executable and the release example. Six instrumented implementation/
+test files cover 702/720 lines and 21/24 branches (97.50%/87.50%); the example is
+included in static analysis without a duplicate LLVM run. Across all seven focused
+files, maxima are CC11, cognitive12, Halstead67.3654, physical-file353 and CRAP11.
+Focused strict Clippy/formatting and whole-workspace Rustdoc pass. Source-matched
+hosted workspace/package gates remain pending, and no PDE window is accepted.

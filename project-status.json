@@ -40,9 +40,9 @@
     "latest_hosted_ci_status": "Source 6170341 passes both hosted workflows: 451 Rust harness tests plus 13 allocation probes and one Rustdoc example; 98.58% line and 88.88% branch coverage; all required quality limits; 220 Python tests.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Exact-v2 pressure and separate force-sampling families pass focused numerical, allocation and quality gates. Combined-source hosted workflows pending. No new qualified PDE window.",
-      "evidence": "evidence/p09/v2-pressure/summary.json",
-      "additional_evidence": "evidence/p09/v2-force-family/summary.json"
+      "status": "Exact-v2 analytical tracking and reconstructed owner pass focused numerical, allocation and quality gates. Combined-source hosted checks pending. No accepted PDE window.",
+      "evidence": "evidence/p09/v2-reference-tracking/summary.json",
+      "additional_evidence": "evidence/p09/v2-reconstruction/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
   },
@@ -307,5 +307,8 @@
   "optional_reduced_provider_trajectory_scope": "N4/M4 CM and HO each evolve separate original/reduced provider states from rest to 1/256; every retained coefficient is compared original-vs-reduced after every commit within 5e-12, and all three components at the 18 explicitly listed strict-band endpoint modes (excluding Nyquist slots) match independent 80/120-digit direct-DFT fixtures at 5e-13. Full joint admission, exact clocks/work and actual reduced rejection pass. No trajectory timing, spatial/force convergence or default runtime adoption.",
   "actual_v2_force_sampling_family_exists": true,
   "actual_v2_force_sampling_family_scope": "Three independently owned from-rest trajectories at fixed N/method/step with nested force grids; full retained-band L2/H1 comparisons. N4 CM M4/8/16 to 1/2048 passes independent signed-Fourier, resource, terminal and focused quality checks. Force sufficiency, other observables and accepted windows remain unqualified.",
-  "actual_v2_force_sampling_family_evidence": "evidence/p09/v2-force-family/summary.json"
+  "actual_v2_force_sampling_family_evidence": "evidence/p09/v2-force-family/summary.json",
+  "actual_v2_reference_tracking_exists": true,
+  "actual_v2_reference_tracking_scope": "Read-only global sampled velocity/gradient/ordered-Hessian/vorticity tracking for six actual accepted V2Family states; bounded cached binary64 analytical evaluation and independent spectral oracle checks. No current-grid reference arithmetic, regional, pressure/gauge or PDE qualification.",
+  "actual_v2_reference_tracking_evidence": "evidence/p09/v2-reference-tracking/summary.json"
 }
