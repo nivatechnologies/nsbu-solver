@@ -3,6 +3,7 @@
 //! Retained velocity resolution, integrator, step and endpoint are identical in every
 //! branch. Only the nested prescribed-force sampling grid changes. Reported values are
 //! measured full-band trajectory differences; they do not establish force sufficiency.
+pub mod binding;
 mod identity;
 mod plan;
 use crate::v2_run::Run;
