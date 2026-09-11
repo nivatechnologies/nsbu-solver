@@ -667,7 +667,18 @@ cache/clock/work contracts and allocation checks. Seventeen focused tests/probes
 pass, with 98.75% line and 90.625% branch coverage and maximum CRAP19.125 across
 the added/changed implementation. The N16/M24 complete-provider profile measures
 a median speed ratio of 6.48 with maximum scaled coefficient difference 2.35e-14.
-Full source-matched CI passes on the combined source `6170341`; see the
-[daily release evidence](evidence/runtime-alpha/daily-20260911/README.md). Next check
-independently evolved trajectories and explicit arithmetic identity before
-changing runtime selection. P08/P09/P10 retain their original incomplete status.
+Full source-matched CI remains required for this provider increment. The
+[independent trajectory checks](evidence/p09/reduced-trajectories/README.md)
+now pass for CM and HO on N4/M4 to 1/256: every committed coefficient agrees
+between providers, all three components at the 18 explicitly listed strict-band
+endpoint modes (excluding Nyquist slots) match the independent direct-DFT
+fixtures, and exact clocks/work/transactions remain correct. Both new tests pass
+with 271/271 covered executable lines and CRAP6; LLVM emits no branch records for
+these test files, and the full workspace branch gate remains a hosted release
+requirement. No trajectory timing or spatial convergence is established. Next
+bind explicit arithmetic identity before changing runtime selection.
+P08/P09/P10 retain their original incomplete status.
+The optional reduced sampled provider still carries focused checks only and remains
+unblended into runtime selection; its focused evidence is in
+[evidence/p09/reduced-provider/summary.json](evidence/p09/reduced-provider/summary.json),
+and full source-matched hosted checks for that increment remain pending.

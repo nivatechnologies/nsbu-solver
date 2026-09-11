@@ -23,6 +23,11 @@ It is explicitly selected and remains separate from `V2Force`: existing `Run`,
 different binary64 operation order requires separate word comparisons and
 artifact identity. It does not evolve a trajectory.
 
+The provider is exercised separately by a bounded N=4 trajectory check, which
+owns independent CM and HO runs from rest and compares reduced and original
+provider paths with 80/120-digit fixtures. This does not change default provider
+selection.
+
 Call `ReducedV2Force::preflight(domain, sampled)` before construction. The
 returned `ForceLimits` covers FFT plans and scratch, three physical sample
 buffers, one reusable transform spectrum, one axial-root slot per sampled
@@ -154,3 +159,25 @@ and arithmetic differences against the original provider. The
 6.48 speed ratio for complete provider requests on one shared host, with maximum
 scaled coefficient difference 2.35e-14. This does not measure trajectory speed or
 qualify force-grid resolution.
+
+## Verified trajectory profile
+
+```sh
+cargo test -p nsbu-benchmarks --test reduced_trajectory -- --nocapture
+```
+
+The profile uses N=4/M=4, exponent `-20`, target `8192`, step 128, 32 commits,
+and endpoint 4096 (`t = 1/256`). CM and HO are evolved independently from rest
+with both providers after full joint preflight. The reduced trajectory is
+checked against the original-provider trajectory at a `5e-12` scaled component
+threshold after every commit; all three components at the 18 explicitly listed
+strict-band endpoint modes (excluding Nyquist slots) pass independent
+80/120-digit trajectory fixtures at `5e-13`. Maximum CM and HO pair differences are
+`2.915242e-16` and `4.5380187e-16`; endpoint maxima are `4.8169699e-16`
+(original provider) and `2.9661178e-16` (reduced provider).
+
+The [retained evidence](../evidence/p09/reduced-trajectories/README.md) records
+arithmetic and bounded from-rest trajectory checks for this N=4 profile.
+They provide no trajectory timing, provider speed, force-grid convergence or PDE
+qualification result. Broader arithmetic identity and runtime-integration work
+remains open.

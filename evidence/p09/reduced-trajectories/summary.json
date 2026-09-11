@@ -1,0 +1,153 @@
+{
+  "package": "P09",
+  "increment": "independent reduced-provider CM/HO trajectories",
+  "status": "focused numerical/new-test quality and whole-workspace static/lint gates passed; complete source-matched hosted checks pending",
+  "generated_utc": "2026-09-11T05:45:22.485622+00:00",
+  "parent_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 364,
+  "added_source_files": [
+    "crates/nsbu-benchmarks/tests/reduced_trajectory.rs",
+    "crates/nsbu-benchmarks/tests/reduced_trajectory_support.rs"
+  ],
+  "production_source_changes": 0,
+  "focused_tests": 2,
+  "focused_coverage": {
+    "lines": {
+      "count": 271,
+      "covered": 271,
+      "percent": 100.0
+    },
+    "branches": {
+      "count": 0,
+      "covered": 0,
+      "percent": null
+    }
+  },
+  "focused_crap_maximum": 6.0,
+  "whole_workspace_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 477
+  },
+  "quality_scope": "Coverage and CRAP cover both added numerical test/helper files. LLVM reports no instrumented branches in these files; branch percentage is not applicable, not 100%. The whole-workspace branch gate remains required in hosted CI. Whole-source static/lint/size/type checks are fresh. Production source is unchanged from 6170341.",
+  "profile": {
+    "retained": [
+      4,
+      4,
+      4
+    ],
+    "force_samples": [
+      4,
+      4,
+      4
+    ],
+    "clock_exponent": -20,
+    "target_ticks": 8192,
+    "step_ticks": 128,
+    "endpoint_ticks": 4096,
+    "endpoint_rational": "1/256",
+    "attempts_per_branch": 32,
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ],
+    "advective_limit": 0.3,
+    "joint_storage_cap_bytes": 8388608
+  },
+  "measured": {
+    "CoxMatthews": {
+      "maximum_each_commit_scaled_pair_difference": 2.915242096247197e-16,
+      "endpoint_scaled_fixture_difference_original": 4.0643183445269604e-16,
+      "endpoint_scaled_fixture_difference_reduced": 2.675321960761161e-16,
+      "last_attempt_consumption": [
+        12,
+        888,
+        156
+      ],
+      "cumulative_provider_work_per_branch": 28396,
+      "total_rhs_calls_per_branch": 384,
+      "total_scalar_transforms_per_branch": 4992
+    },
+    "HochbruckOstermann": {
+      "maximum_each_commit_scaled_pair_difference": 4.538018733374102e-16,
+      "endpoint_scaled_fixture_difference_original": 4.816969889792763e-16,
+      "endpoint_scaled_fixture_difference_reduced": 2.9661178260623883e-16,
+      "last_attempt_consumption": [
+        15,
+        1110,
+        195
+      ],
+      "cumulative_provider_work_per_branch": 35500,
+      "total_rhs_calls_per_branch": 480,
+      "total_scalar_transforms_per_branch": 6240
+    }
+  },
+  "numerical_checks": [
+    "Original and reduced providers each own separately allocated states beginning at exact rest; both CM and HO reach all 32 independent commits.",
+    "Every retained coefficient is compared original-vs-reduced after each commit at scaled component tolerance 5e-12; all three components at the 18 explicitly listed strict-band endpoint modes (excluding Nyquist slots) match preserved independent 80/120-digit DFT fixtures at 5e-13.",
+    "Committed coefficient words remain unchanged through each attempt; only accepted tokens commit candidates. Exact elapsed and remaining clocks and accepted counts agree at every step.",
+    "Both complete resource plans, provider limits, checked joint storage and32-attempt work bounds are admitted before constructing either provider/state; cap-minus-one provider refusals remain explicit.",
+    "Actual RHS calls and scalar transforms match method declarations at every attempt; cumulative provider work remains within the admitted finite bound.",
+    "An actual reduced-provider rejection keeps committed state/clock/count unchanged while consuming positive bounded work."
+  ],
+  "fixture_sha256": {
+    "concentrating-n4.tsv": "e797f61c5652e59da58cf03279078cec4e5f3d6da96220d80d717772c8d3fcb3",
+    "concentrating-ho-n4.tsv": "402cb6e85b0bb43fa56d54d3c2d76663bf8b0031b4be8b60590e23db3805c750"
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "a07e1fe11ae92c033dd9cce9d0379a2b35a77474e398f82d54b09dda8bab132c",
+      "rust-toolchain.toml": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+    },
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "test_opt_level": 2,
+    "test_debug_assertions": true,
+    "test_overflow_checks": true
+  },
+  "solid_review": "Test admission and typed numerical ownership are separate from paired evolution and independent fixture comparison. Existing PrescribedForce/attempt/commit interfaces are exercised without production changes or analytical state assignment.",
+  "unchanged_python": {
+    "source_files": 98,
+    "retained_tests": 220
+  },
+  "informational_findings": "Mutation/duplication sweeps were not rerun. Strict Clippy permits only informational shared-helper dead_code warnings. No type-escape code identifiers found.",
+  "limitations": [
+    "N4/M4 is spatially and force-sampling unresolved. Agreement with a same-grid high-precision trajectory is not PDE convergence.",
+    "No trajectory performance timing is measured.",
+    "The default Run/ForceSettings/CLI/checkpoint paths still use the original provider; explicit arithmetic identity and runtime integration remain separate work.",
+    "P08/P09/P10 remain incomplete."
+  ],
+  "accepted_pde_windows": 0,
+  "artifact_inventory": "artifact-sha256.json",
+  "repository_check": {
+    "path": "repository.json.gz",
+    "logical_source": "work/reduced-trajectory-repository.json",
+    "status": "passed",
+    "scope": "bootstrap packaging only",
+    "uncompressed_sha256": "d436a24b8d0d248381c023b76f1a641e1ccc94ba72598067f74bf7fc359fd932",
+    "archive_sha256": "10a1565476fd154be35332c9ad0dc26a1ba59f698eaccca0eb276068412c24fd",
+    "source_inventory_counts": {
+      "maintained_current": 462,
+      "rust": 364,
+      "python_or_stubs": 98,
+      "baseline_commit_6170341": 460,
+      "added_test_files": 2
+    },
+    "baseline_source_delta": [
+      "crates/nsbu-benchmarks/tests/reduced_trajectory.rs",
+      "crates/nsbu-benchmarks/tests/reduced_trajectory_support.rs"
+    ]
+  }
+}
