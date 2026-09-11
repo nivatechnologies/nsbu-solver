@@ -742,6 +742,18 @@ do not claim completeness for independently selected, potentially overlapping
 nominal coverage sets. Pressure, gauge, current-grid arithmetic bounds,
 continuum bounds and convergence remain open; zero PDE windows are accepted.
 
+## P09 exact-v2 accepted-node binding
+
+The [accepted-node bridge](docs/V2_NODE_BINDING.md) compares ordinary-family
+accepted states bit-for-bit with exact nodes still retained by the separate
+lookahead probe family. Stored clock, epoch and accepted-step provenance must
+match before a complete six-branch record is published. Evicted or not-yet-made
+nodes remain explicit missing evidence, and neither later current state nor an
+interpolant is substituted. Joint two-family storage, ring lookup and two-sided
+coefficient visits are separately admitted and charged before validation. This
+bridge adds provenance for later diagnostic composition; it supplies no bound,
+tolerance, convergence or PDE-window decision.
+
 ## P09 exact-v2 accepted-node reconstruction owner
 
 The [reconstructed owner](evidence/p09/v2-reconstruction/README.md) independently

@@ -1,0 +1,48 @@
+{
+  "status": "focused local provenance, numerical and quality gates passed; hosted combined gates pending",
+  "profile": {
+    "retained_grids": [4, 8, 12],
+    "steps": [64, 32, 16],
+    "force_grid": 12,
+    "ordinary_clocks": [0, 64, 128],
+    "lookahead_probe_clocks": [0, 63, 128],
+    "tick_exponent": -20,
+    "accepted_pde_windows": 0
+  },
+  "bindings": {
+    "clock_0": ["missing", "missing", "missing", "bitwise_equal", "bitwise_equal", "missing"],
+    "clock_64": ["missing", "missing", "missing", "bitwise_equal", "bitwise_equal", "missing"],
+    "clock_128": ["bitwise_equal", "bitwise_equal", "bitwise_equal", "bitwise_equal", "bitwise_equal", "bitwise_equal"]
+  },
+  "focused_tests": {
+    "actual_family_harness": 3,
+    "signed_word_unit": 1,
+    "allocation_executables": 1,
+    "release_examples": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "instrumented_new_production_files": 3,
+    "lines": {"covered": 235, "count": 248, "percent": 94.7581},
+    "branches": {"covered": 21, "count": 26, "percent": 80.7692}
+  },
+  "quality_maxima": {
+    "cyclomatic": 14,
+    "cognitive": 8,
+    "halstead_difficulty": 66.9778,
+    "actual_file_lines": 423,
+    "crap_new_production": 13
+  },
+  "allocation": {
+    "admission_allocations": 0,
+    "execution_allocations": 0,
+    "construction_bytes": 40551040,
+    "joint_reserved_bytes": 50555344
+  },
+  "binding_work": {
+    "attempts": 3,
+    "node_lookups": 54,
+    "coefficient_visits": 79200
+  },
+  "scientific_scope": "accepted-node provenance and bitwise velocity coefficient equality or explicit missing evidence only; no interpolated-state substitution, error bound, tolerance, convergence or accepted-window claim"
+}

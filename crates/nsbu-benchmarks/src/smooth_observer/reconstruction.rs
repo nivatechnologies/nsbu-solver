@@ -30,6 +30,15 @@ struct Node {
     derivative: Field,
 }
 
+/// Crate-private borrowed provenance for one retained, un-interpolated accepted node.
+pub(crate) struct AcceptedNodeView<'a> {
+    pub(crate) domain: Domain,
+    pub(crate) clock: TickClock,
+    pub(crate) epoch: Epoch,
+    pub(crate) steps: u128,
+    pub(crate) value: [&'a [Complex64]; 3],
+}
+
 impl Node {
     fn new(domain: Domain) -> Result<Self, SolverError> {
         let zero = Complex64::new(0.0, 0.0);
@@ -210,6 +219,20 @@ impl<F: PrescribedForce> ReconstructionObserver<F> {
                 .each_ref()
                 .map(|node| node.clock.expect("accepted node clock")),
         )
+    }
+
+    /// Find an exact retained node without reconstructing or exposing mutable storage.
+    pub(crate) fn accepted_node(&self, clock: TickClock) -> Option<AcceptedNodeView<'_>> {
+        let node = self.accepted[..self.accepted_count]
+            .iter()
+            .find(|node| node.clock == Some(clock))?;
+        Some(AcceptedNodeView {
+            domain: self.source,
+            clock,
+            epoch: node.epoch,
+            steps: node.steps,
+            value: node.value.each_ref().map(Vec::as_slice),
+        })
     }
 
     /// Reconstruct one component into caller-owned scratch. This allocates no storage.

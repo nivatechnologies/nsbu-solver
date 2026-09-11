@@ -78,3 +78,7 @@ harness = false
 [[test]]
 name = "v2_regional_tracking_allocation"
 harness = false
+
+[[test]]
+name = "v2_node_binding_allocation"
+harness = false
