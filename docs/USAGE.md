@@ -463,3 +463,11 @@ admits the fixed N=8/12/16 force-only profile. Omit `-- --dry-run` to measure th
 twelve nonmonotone force requests and print complete coefficient hashes. The
 [force evaluation guide](FORCE_EVALUATION.md) documents cache identity, storage,
 actual root work and the limits of the measured speed improvement.
+
+## Parallel exact-v2 force profile
+
+`cargo run --release -p nsbu-benchmarks --example parallel_force_profile -- --dry-run`
+reports the default N=16/M=24 alternatives under a 256 MiB joint cap. Omit
+`-- --dry-run` to compare complete serial/parallel force hashes and timings. See
+the [parallel force guide](PARALLEL_FORCE.md) for larger admitted profiles and
+constructor/attempt/shutdown contracts. This command does not evolve a PDE state.

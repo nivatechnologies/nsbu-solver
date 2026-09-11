@@ -146,3 +146,9 @@ paths from complete exact-word CM/HO diagnostics. It retains original rounded
 magnitudes for an independent Python audit, with strict format and memory caps.
 See [the guide](../../docs/REDUCTION_ARITHMETIC.md) for commands, separate
 arithmetic effects, fixture provenance and the boundary from PDE qualification.
+
+`provider::parallel::ParallelV2Force` optionally samples disjoint axial planes on
+persistent workers, then uses the original serial FFT/transfer. All buffers and
+configured stacks are preflighted; workers are constructed before attempts and
+joined on owner drop. See [parallel forcing](../../docs/PARALLEL_FORCE.md) for
+complete word/work comparisons, failure handling and execution-profile limits.

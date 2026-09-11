@@ -1,4 +1,5 @@
 //! Bounded sampled v2 forcing. Sampling is a numerical approximation, never a qualification claim.
+pub mod parallel;
 use crate::{fields, time::BenchmarkTime};
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
@@ -140,6 +141,18 @@ impl V2Force {
     }
 }
 
+impl V2Force {
+    // Both sampling backends write the original global array order before the same FFT path.
+    fn transform(&mut self, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
+        for (physical, coefficients) in self.physical.iter().zip(output) {
+            self.plan
+                .forward(physical, &mut self.spectral, &mut self.workspace)?;
+            transfer(self.sampled, self.retained, &self.spectral, coefficients)?;
+        }
+        Ok(())
+    }
+}
+
 impl PrescribedForce for V2Force {
     fn limits(&self) -> Option<ForceLimits> {
         Some(self.limits)
@@ -162,11 +175,7 @@ impl PrescribedForce for V2Force {
         }
         let time = BenchmarkTime::new(time).map_err(|_| SolverError::InvalidClock)?;
         let work_units = self.sample(time)?;
-        for (physical, coefficients) in self.physical.iter().zip(output) {
-            self.plan
-                .forward(physical, &mut self.spectral, &mut self.workspace)?;
-            transfer(self.sampled, self.retained, &self.spectral, coefficients)?;
-        }
+        self.transform(output)?;
         Ok(ForceWork {
             work_units,
             scalar_transforms: 3,

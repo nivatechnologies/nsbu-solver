@@ -115,3 +115,7 @@ sampling. A smaller force-only algebra or parallel backend would need its own
 bounded resource design, independent numerical comparisons and transaction tests.
 Neither is supplied by the axial cache. P08/P09 and concentrating PDE validation
 remain incomplete.
+
+The separate [persistent parallel backend](PARALLEL_FORCE.md) retains the serial
+provider for comparison while moving physical sample evaluation to explicitly
+reserved workers. Its concurrency and allocation checks have their own evidence.

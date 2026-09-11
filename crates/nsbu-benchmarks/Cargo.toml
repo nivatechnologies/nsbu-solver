@@ -30,3 +30,7 @@ harness = false
 [[test]]
 name = "reduction_allocation"
 harness = false
+
+[[test]]
+name = "parallel_force_allocation"
+harness = false

@@ -233,3 +233,9 @@ its existing sampled fields and FFT buffers. The private cache binds only the
 primitive axial/time inputs and is rebuilt per request. Pointwise field assembly
 and the uncached public diagnostic path retain their original roles; no integrated
 state or checkpoint authority enters this scratch optimization.
+
+The [parallel force backend](PARALLEL_FORCE.md) separates immutable worker
+partitions, constructor admission, persistent worker lifetime and whole-job
+collection. Local samples are copied into the original global layout before
+shared FFT/transfer execution. Its threads own force scratch and never access
+mutable integrated state or accepted-history records.
