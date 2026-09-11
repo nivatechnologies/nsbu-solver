@@ -796,3 +796,14 @@ The largest Rust/120-digit component discrepancy was 1.052e-17; the retained
 pass, with raw source-bound evidence and the invalid earlier partial retained.
 This is empirical reference-evaluator arithmetic, excluding pressure/gauge,
 integrator arithmetic and continuum bounds. P08/P09/P10 remain incomplete.
+
+## P09 exact-v2 reconstructed balance quadrature
+
+The [balance/quadrature consumer](docs/V2_BALANCE_QUADRATURE.md) measures six
+original-force reconstructed balance streams and three nested Simpson levels
+over 3/5/9 clocks. All six late-clock fresh force-profile controls agree;
+hand-weighted actual-sample and independent polynomial quadrature checks pass.
+[Focused evidence](evidence/p09/v2-balance-quadrature/summary.json) records
+97.568% line / 80.769% branch coverage, maximum CRAP 15.568, bounded work and
+zero steady allocations. Combined hosted validation and complete concentrating
+qualification remain pending; P08/P09/P10 are incomplete.

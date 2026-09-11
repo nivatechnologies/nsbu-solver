@@ -37,12 +37,12 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source 6f5c630 passes both hosted workflows (retained evidence). Later source 441da25 passed Python but failed the Rust cognitive-complexity gate; current local increments require a new combined hosted run before publication.",
+    "latest_hosted_ci_status": "Source 6f5c630 remains the last recorded combined hosted pass. Source 109f9cf passes 233 Python tests and coverage but fails CRAP in two legacy pilot functions; boundary tests are being added. Its Rust static/build/lint/docs/package/runtime checks pass and instrumented coverage is running. No new release is qualified by these pending checks.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Residual and accepted-node consumers plus guarded current-grid reference arithmetic pass focused gates. Combined static/lint checks pass after test quality corrections; combined hosted validation pending. Zero accepted PDE windows.",
-      "evidence": "evidence/p09/reference-arithmetic-full/summary.json",
-      "additional_evidence": "evidence/p09/v2-residuals/summary.json"
+      "status": "Exact-v2 balance/quadrature and pilot boundary-test corrections pass focused gates. Combined hosted validation is pending; zero accepted PDE windows.",
+      "evidence": "evidence/p09/v2-balance-quadrature/summary.json",
+      "additional_evidence": "evidence/p09/reference-arithmetic-full/ci-correction/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json"
   },
@@ -178,7 +178,8 @@
       "v2_combined_hosted_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
       "v2_node_binding_evidence": "evidence/p09/v2-node-binding/summary.json",
       "v2_residual_evidence": "evidence/p09/v2-residuals/summary.json",
-      "v2_reference_arithmetic_evidence": "evidence/p09/reference-arithmetic-full/summary.json"
+      "v2_reference_arithmetic_evidence": "evidence/p09/reference-arithmetic-full/summary.json",
+      "v2_balance_quadrature_evidence": "evidence/p09/v2-balance-quadrature/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -327,5 +328,7 @@
   "exact_v2_offstage_residual_family_exists": true,
   "exact_v2_offstage_residual_family_scope": "Six independently reconstructed exact-v2 trajectories, fresh common-grid original forcing, complete doubled-band momentum defects and five comparisons at genuine non-stage clocks. Actual accepted-node geometry retained; no continuous-time or PDE-window qualification.",
   "independent_v2_current_grid_reference_arithmetic_exists": true,
-  "independent_v2_current_grid_reference_arithmetic_scope": "Guarded independent 80/120-digit velocity, gradient, ordered-Hessian and curl evaluation on all 12^3 sample points at ticks0/64/128. Rational coordinates, exact binary64 inputs and Rust output arithmetic compared separately. Empirical reference-evaluator evidence only; pressure/gauge and integrator arithmetic excluded."
+  "independent_v2_current_grid_reference_arithmetic_scope": "Guarded independent 80/120-digit velocity, gradient, ordered-Hessian and curl evaluation on all 12^3 sample points at ticks0/64/128. Rational coordinates, exact binary64 inputs and Rust output arithmetic compared separately. Empirical reference-evaluator evidence only; pressure/gauge and integrator arithmetic excluded.",
+  "exact_v2_reconstructed_balance_quadrature_exists": true,
+  "exact_v2_reconstructed_balance_quadrature_scope": "Six original-force balance observers on actual reconstructed exact-v2 fields, with fixed common doubled force sampling and child-specific doubled output bands; three nested Simpson levels over3/5/9 clocks, transactional pending histories and independent hand-weighted/polynomial controls. No continuous-time or PDE-window qualification."
 }

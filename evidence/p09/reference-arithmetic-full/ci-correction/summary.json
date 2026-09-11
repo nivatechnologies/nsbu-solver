@@ -4,8 +4,16 @@
     "source_revision": "109f9cfa8dd054c0814506850c19b5eeeb90a58c",
     "artifact": "python-quality-109f9cfa8dd054c0814506850c19b5eeeb90a58c-1",
     "offenders": [
-      {"path": "reference/reference_arithmetic_pilot.py", "function": "rust_rows", "crap": 30.0},
-      {"path": "reference/reference_arithmetic_pilot.py", "function": "tracking_values", "crap": 26.125}
+      {
+        "path": "reference/reference_arithmetic_pilot.py",
+        "function": "rust_rows",
+        "crap": 30.0
+      },
+      {
+        "path": "reference/reference_arithmetic_pilot.py",
+        "function": "tracking_values",
+        "crap": 26.125
+      }
     ]
   },
   "correction_base_revision": "109f9cfa8dd054c0814506850c19b5eeeb90a58c",
@@ -15,10 +23,16 @@
     "reference/tests/test_reference_arithmetic_pilot.py": "ba78f9b42d3e534ec06483e15ae1ebaa59cdfb868ae073c98cdcea20c8e7402c"
   },
   "focused_validation": {
-    "tests": "18 passed",
+    "tests": "16 passed in9.60s, independently rerun on correction source by root",
     "coverage": {
-      "reference/reference_arithmetic_pilot.py": {"lines": "149/155", "branches": "33/38"},
-      "reference/reference_arithmetic_full.py": {"lines": "177/202", "branches": "49/58"}
+      "reference/reference_arithmetic_pilot.py": {
+        "lines": "149/155",
+        "branches": "33/38"
+      },
+      "reference/reference_arithmetic_full.py": {
+        "lines": "177/202",
+        "branches": "49/58"
+      }
     },
     "maximum_crap": 19.9814453125,
     "basedpyright": "0 errors, 0 warnings",
@@ -30,5 +44,6 @@
     "python-crap.json.gz": "745da51394a0b3d530a17bdea6a51c7effb63f6031b3341e1cf624c0e099073e",
     "python-cyclomatic.json.gz": "a0c0be39dcbd7feb3066ae28ffaea4cbc69999a8a8c1803e1c3b111ab123f2f7"
   },
-  "historical_raw_evidence_changed": false
+  "historical_raw_evidence_changed": false,
+  "review_note": "Corrected the narrative test count from18 to16; the two test files contain9 and7 tests. Source and raw coverage/CRAP data unchanged."
 }
