@@ -1,0 +1,51 @@
+{
+  "status": "focused local numerical and quality gates passed; hosted combined gates pending",
+  "profile": {
+    "retained_grids": [4, 8, 12],
+    "steps": [64, 32, 16],
+    "force_grid": 12,
+    "sample_grid": 12,
+    "endpoint_ticks": 128,
+    "tick_exponent": -20,
+    "accepted_pde_windows": 0
+  },
+  "finest_cm_endpoint_hessian_regions": {
+    "Core": {"samples": 15, "rms": 1.723373873675785e-4},
+    "Annulus": {"samples": 96, "rms": 3.008181608432012e-4},
+    "InteriorOutsideNominal": {"samples": 68, "rms": 4.940621458484716e-4},
+    "Collar": {"samples": 336, "rms": 2.071234674533215e-3},
+    "Exterior": {"samples": 1213, "rms": 1.713518266755864e-4}
+  },
+  "focused_tests": {
+    "regional_harness": 3,
+    "existing_global_regression": 4,
+    "allocation_executables": 1,
+    "release_examples": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "instrumented_increment_source_files": 3,
+    "lines": {"covered": 209, "count": 227, "percent": 92.0705},
+    "branches": {"covered": 7, "count": 8, "percent": 87.5}
+  },
+  "quality_maxima": {
+    "cyclomatic": 8,
+    "cognitive": 13,
+    "halstead_difficulty": 57.1429,
+    "physical_lines": 281,
+    "crap": 9
+  },
+  "allocation": {
+    "admission_allocations": 0,
+    "execution_allocations": 0,
+    "construction_bytes": 20135360,
+    "joint_reserved_bytes": 25185960
+  },
+  "regional_work": {
+    "attempts": 3,
+    "classifications": 124416,
+    "root_iterations": 15925248,
+    "magnitude_visits": 124416
+  },
+  "scientific_scope": "global plus five exclusive sampled SpatialRegion classes for velocity, ordered gradient/Hessian and vorticity; no arbitrary nominal-set completeness, pressure/gauge, current-grid arithmetic bound, continuum bound, convergence or accepted-window claim"
+}

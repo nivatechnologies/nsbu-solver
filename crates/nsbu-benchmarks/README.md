@@ -88,6 +88,12 @@ velocity, ordered gradient/Hessian and curl statistics without mutating any run.
 The [tracking guide](../../docs/V2_REFERENCE_TRACKING.md) documents the bounded
 example, work ledger, independent Fourier oracle and binary64 reference limits.
 
+`v2_experiment::reference::regional` reuses each completed tracking magnitude
+array to report global and five sampled geometric classes for the same four
+quantities. The [regional tracking guide](../../docs/V2_REGIONAL_TRACKING.md)
+defines its separate admission, exact global equivalence, class counts and
+`NoSamples` semantics.
+
 ## Bounded smooth run example
 
 Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` to construct a small owned
