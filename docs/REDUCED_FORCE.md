@@ -18,7 +18,10 @@ this evaluator. It implements the existing `PrescribedForce` interface and
 produces three unprojected force spectra on the same retained layout as `V2Force`, using reduced
 degree-three arithmetic. It is opt-in: `v2_run::Run`, `ForceSettings`,
 checkpoint restore and the CLI runtime continue to use the original provider.
-Integrated trajectories using this provider remain to be checked.
+The focused reduced-trajectory check now evolves independent CM and HO runs from
+rest with this provider and compares them with runs using the original provider.
+It covers N=4, M=4, exponent `-20`, target `8192`, step 128, 32 committed
+steps, and endpoint 4096 (`t = 1/256`).
 
 ## Working commands
 
@@ -58,6 +61,28 @@ admission only. The [recorded profile](../evidence/p09/reduced-provider/README.m
 measures a median speed ratio of 6.48 for full provider requests and maximum
 scaled coefficient difference of 2.35e-14. This is one sequential comparison on
 a shared host, not a trajectory benchmark or force-grid convergence result.
+
+## Verified optional trajectories
+
+```sh
+cargo test -p nsbu-benchmarks --test reduced_trajectory -- --nocapture
+```
+
+This check jointly preflights the original and reduced providers, then evolves
+separate CM and HO trajectories from exact rest. Each reduced result is checked
+against the corresponding original-provider run at a `5e-12` scaled component
+threshold. All three components at the 18 explicitly listed strict-band
+endpoint modes (excluding Nyquist slots) pass independent 80/120-digit
+direct-DFT trajectory fixtures at `5e-13`. Maximum CM and HO pair
+differences are `2.915242e-16` and `4.5380187e-16`. At the endpoint, maximum
+scaled complex L1 fixture differences are `4.8169699e-16` for the original
+provider and `2.9661178e-16` for the reduced provider. See the
+[trajectory evidence](../evidence/p09/reduced-trajectories/README.md).
+
+This verifies the bounded N=4 from-rest trajectory profile and tested arithmetic
+agreement. It does not measure trajectory or provider timing, establish
+force-grid convergence, or qualify a PDE window. Wider arithmetic identity and
+runtime-integration work remains separate.
 
 ## Exact force identity
 

@@ -40,9 +40,8 @@
     "latest_hosted_ci_status": "Source82c0796 passes complete hosted Rust and Python workflows:451 Rust tests/probes and one Rustdoc example,98.56% line and88.85% branch coverage, all required quality limits,220 Python tests. Later physical/provider increments retain focused evidence until their own hosted run passes.",
     "hosted_ci": "evidence/runtime-alpha/publication/hosted-rust.json",
     "latest_increment": {
-      "evidence": "evidence/p09/v2-physical/summary.json",
-      "status": "Actual exact-v2 physical consumer and optional reduced sampled provider pass focused numerical/quality and whole-source static/lint gates on their independently recorded source trees. Complete combined-source hosted gates pending.",
-      "additional_evidence": "evidence/p09/reduced-provider/summary.json"
+      "evidence": "evidence/p09/reduced-trajectories/summary.json",
+      "status": "Two independent provider trajectory tests pass with full covered executable lines and CRAP6; LLVM emits no branches for these new test files. Whole-workspace static/lint gates pass; full source-matched hosted coverage and quality gates pending."
     },
     "latest_hosted_quality_evidence": "evidence/quality-hosted-82/summary.json"
   },
@@ -169,7 +168,8 @@
       "v2_family_hosted_rust": "evidence/p09/v2-family/hosted-rust.json",
       "v2_family_hosted_python": "evidence/p09/v2-family/hosted-python.json",
       "reduced_provider_evidence": "evidence/p09/reduced-provider/summary.json",
-      "v2_physical_evidence": "evidence/p09/v2-physical/summary.json"
+      "v2_physical_evidence": "evidence/p09/v2-physical/summary.json",
+      "reduced_trajectory_evidence": "evidence/p09/reduced-trajectories/summary.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",
@@ -292,7 +292,9 @@
   "optional_reduced_coordinate_force_exists": true,
   "optional_reduced_coordinate_force_scope": "Pointwise exact-v2 force values with degree-three w,z,t algebra; independent 84-case high-precision fixtures, symbolic transport checks, focused quality and clean-source reproduction pass. Full hosted quality passes at 82c0796. Optional reduced sampled provider has separate focused evidence; no force gradients, force-grid or PDE qualification.",
   "optional_reduced_sampled_force_provider_exists": true,
-  "optional_reduced_sampled_force_provider_scope": "Optional serial reduced-arithmetic provider passes full-spectrum direct-DFT/independent N4 fixtures, cache/work/refusal/allocation contracts and focused quality gates. N16/M24 complete-provider median speed ratio 6.48 on one shared-host profile; original Run/ForceSettings/CLI/checkpoints unchanged. No integrated-trajectory, force-grid or PDE qualification.",
+  "optional_reduced_sampled_force_provider_scope": "Optional serial reduced-arithmetic provider passes full-spectrum direct-DFT/independent N4 fixtures, cache/work/refusal/allocation contracts and focused quality gates. N16/M24 complete-provider median speed ratio 6.48 on one shared-host profile; original Run/ForceSettings/CLI/checkpoints unchanged. Separate N4/M4 independent trajectory checks now pass; no force-grid or PDE qualification.",
   "actual_v2_physical_refinement_family_exists": true,
-  "actual_v2_physical_refinement_family_scope": "Complete global sampled velocity/gradient/Hessian/vorticity differences for all five actual space/time/method pairs of six independent exact-v2 rest trajectories. Clock/family identity and joint resource bounds enforced; direct signed-Fourier RMS/peak oracle and allocation checks pass. N4/8/12 fixed M12 startup only; coarse Hessian space differences increase. Pressure, regions and all-channel qualification remain incomplete."
+  "actual_v2_physical_refinement_family_scope": "Complete global sampled velocity/gradient/Hessian/vorticity differences for all five actual space/time/method pairs of six independent exact-v2 rest trajectories. Clock/family identity and joint resource bounds enforced; direct signed-Fourier RMS/peak oracle and allocation checks pass. N4/8/12 fixed M12 startup only; coarse Hessian space differences increase. Pressure, regions and all-channel qualification remain incomplete.",
+  "optional_reduced_provider_trajectories_verified": true,
+  "optional_reduced_provider_trajectory_scope": "N4/M4 CM and HO each evolve separate original/reduced provider states from rest to 1/256; every retained coefficient is compared original-vs-reduced after every commit within 5e-12, and all three components at the 18 explicitly listed strict-band endpoint modes (excluding Nyquist slots) match independent 80/120-digit direct-DFT fixtures at 5e-13. Full joint admission, exact clocks/work and actual reduced rejection pass. No trajectory timing, spatial/force convergence or default runtime adoption."
 }
