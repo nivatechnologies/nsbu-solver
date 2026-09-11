@@ -11,6 +11,11 @@ on:
         options:
           - first-alpha
           - daily
+      snapshot_revision:
+        description: "Positive decimal suffix for a same-day manual daily snapshot"
+        required: false
+        default: ""
+        type: string
   schedule:
     - cron: "17 02 * * *"
 
@@ -71,10 +76,24 @@ jobs:
           SOURCE_SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_KIND: ${{ inputs.release_kind }}
+          SNAPSHOT_REVISION: ${{ inputs.snapshot_revision }}
         run: |
           set -euo pipefail
           kind="${MANUAL_KIND:-daily}"
           if [[ "$EVENT_NAME" == "schedule" ]]; then kind=daily; fi
+          revision="${SNAPSHOT_REVISION:-}"
+          if [[ "$kind" == first-alpha && -n "$revision" ]]; then
+            echo 'snapshot_revision is valid only for a manual daily release' >&2
+            exit 1
+          fi
+          if [[ -n "$revision" && "$EVENT_NAME" != workflow_dispatch ]]; then
+            echo 'snapshot_revision is valid only for workflow_dispatch' >&2
+            exit 1
+          fi
+          if [[ -n "$revision" && ! "$revision" =~ ^[1-9][0-9]*$ ]]; then
+            echo 'snapshot_revision must be a positive decimal integer' >&2
+            exit 1
+          fi
           today=$(date -u +%Y%m%d)
           previous=$(git for-each-ref refs/tags/alpha-* --sort=-creatordate --format='%(refname:short)' | head -n1 || true)
           if [[ "$EVENT_NAME" == schedule && -z "$previous" ]]; then
@@ -92,6 +111,9 @@ jobs:
               exit 0
             fi
             tag="alpha-$today"
+            if [[ "$EVENT_NAME" == workflow_dispatch && -n "$revision" ]]; then
+              tag+="-$revision"
+            fi
           fi
           if git show-ref --verify --quiet "refs/tags/$tag"; then
             if [[ "$kind" == daily ]]; then

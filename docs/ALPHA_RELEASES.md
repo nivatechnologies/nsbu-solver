@@ -20,10 +20,16 @@ deliberate package-version change.
 
 The first snapshot is started manually from the `main` branch and receives an
 `alpha-first-YYYYMMDD` tag. Daily scheduled runs receive `alpha-YYYYMMDD`.
+When a same-day daily snapshot is needed after additional manual validation,
+dispatch the workflow with `release_kind=daily` and a positive decimal
+`snapshot_revision` such as `2`; it selects `alpha-YYYYMMDD-2`. The revision
+input is manual-only. It is rejected for `first-alpha`, schedules, non-decimal
+values, and non-positive values. An empty revision keeps the standard
+`alpha-YYYYMMDD` tag.
 The workflow refuses an existing tag or release, refuses a source commit that
 is unchanged since the prior alpha, and refuses a duplicate first snapshot.
-It does not overwrite releases or force-push tags. A daily run that falls on a
-date whose tag already exists is a no-op rather than replacing it.
+It does not overwrite releases or force-push tags. A daily run whose selected
+tag already exists is a no-op rather than replacing it.
 
 ## Binary compatibility
 
