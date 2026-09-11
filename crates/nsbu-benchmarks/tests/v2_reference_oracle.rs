@@ -6,10 +6,15 @@ use nsbu_solver::{
 };
 
 #[derive(Debug, Clone, Copy, Default)]
+/// Error summary for one reconstructed field quantity.
 pub struct Expected {
+    /// Root-mean-square error over the sampled grid.
     pub rms: f64,
+    /// Largest absolute error over the sampled grid.
     pub peak: f64,
+    /// Largest error relative to the reference magnitude and configured floor.
     pub relative_peak: f64,
+    /// Largest reference magnitude over the sampled grid.
     pub reference_peak: f64,
 }
 
@@ -103,6 +108,7 @@ fn fields(tensor: &Tensor, reference: ReferenceEvaluation) -> [(Vec<f64>, Vec<f6
     ]
 }
 
+/// Compare reconstructed velocity derivatives with the manufactured reference.
 pub fn tracking(
     state: &SpectralState,
     samples: Layout,
