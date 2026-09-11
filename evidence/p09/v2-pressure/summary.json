@@ -1,0 +1,38 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 pressure consumer",
+  "status": "focused numerical, allocation and static gates passed; focused coverage/CRAP and broader source-matched hosted gates pending",
+  "parent_commit": "617034102a08c74d6fa5ce52624a67d917b48187",
+  "focused_unique_tests_and_probes": 7,
+  "focused_execution": {
+    "library_pressure_tests": 1,
+    "independent_oracle_tests": 2,
+    "family_harness_tests": 3,
+    "isolated_allocator_executables": 1
+  },
+  "resource_observation": {
+    "admission_allocations": 0,
+    "construction_bytes": 23020352,
+    "declared_joint_bytes": 28007168,
+    "steady_allocations": 0,
+    "successful_reports": 3,
+    "refused_calls": 2
+  },
+  "whole_source_static_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 21.0,
+    "halstead_difficulty_function_or_file": 75.8955223880597,
+    "maximum_physical_file_lines": 477
+  },
+  "coverage": {
+    "status": "pending",
+    "reason": "instrumented run was stopped during the allocator executable before a final report was emitted; all 32 benchmark library tests had passed"
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "Same-clock pressure-pair differences cancel the common prescribed force and do not qualify force-sampling sufficiency.",
+    "Global sampled RMS and peak values are not continuum bounds.",
+    "Reference-gauge, regional, arithmetic, accepted-artifact and concentrating qualification remain pending.",
+    "P09 and P10 remain incomplete; broader source-matched hosted gates are pending."
+  ]
+}

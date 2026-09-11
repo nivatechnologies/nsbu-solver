@@ -7,6 +7,48 @@ consumer](PHYSICAL_REFINEMENTS.md). Both consumers require exact synchronized
 accepted clocks, immutable numerical settings and a finite observation allowance.
 These are smooth diagnostics; concentrating qualification remains incomplete.
 
+## Exact-v2 pressure consumer
+
+`v2_experiment::pressure` applies the same pressure construction to the six
+actual exact-v2 branches. Its fixed inventory is pressure and full physical
+pressure gradient across `(0,1)`, `(1,2)`, `(3,4)`, `(4,2)` and `(2,5)`. The
+source is the finest retained V2 domain; each velocity is transferred without
+discarding modes, while `ConservativeWorkspace` forms the complete quadratic
+band on the doubled finest grid. A fresh original `V2Force` evaluates the
+unprojected prescribed force at the exact accepted clock on that doubled grid.
+The integration provider's fixed M=12 policy and this diagnostic force layout
+are separate choices.
+
+The report retains the actual clock, V2 family identity, source/force/sample
+layouts and pressure/gradient floors. `PressureFamilyPlan` jointly preflights
+the family plus provider, product scratch, comparison scratch and all temporary
+buffers. One attempt charges the independent provider, ten conservative
+assemblies and ten scalar/gradient comparisons: 133 scalar transforms in total
+for V2. `measure` charges before its family checks, emits no partial report on
+failure, advances only after all ten findings succeed, and leaves the borrowed
+family states and histories unchanged. The pressure gauge is global mean-zero.
+
+Focused commands are:
+
+```sh
+cargo test -p nsbu-benchmarks --lib v2_experiment::pressure
+cargo test -p nsbu-benchmarks --test v2_pressure_family -- --nocapture
+cargo test -p nsbu-benchmarks --test v2_pressure_allocation
+```
+
+The current integration log records pair (0,1) pressure RMS near
+`2.9033e-13` and `1.1764e-13` for the two relevant observations, with gradient
+RMS near `4.9015e-12` and `3.5812e-12`. Pair (4,2) includes an observed pressure
+zero and gradient near `1.4044e-28`, while a stable independent oracle gives
+`7.7445e-26` and `2.1294e-24`; common prescribed-force cancellation swamps this
+tiny nonlinear difference. This is not qualified agreement or an arithmetic
+floor. A separate private direct signed-mode force-only Poisson test validates
+force sign, full-band use and the zero mode. Focused evidence is recorded under
+`evidence/p09/v2-pressure`. Same-clock pair differences cancel the common
+prescribed-force contribution, so they cannot qualify force sampling
+independently. Complete reference-gauge, regional, arithmetic and
+accepted-artifact qualification also remains pending.
+
 ## Public example
 
 ```sh
