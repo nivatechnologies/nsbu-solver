@@ -51,7 +51,7 @@ result or completion claim. Its raw stream and a separate invalidity record are
 retained so the restart is auditable.
 
 Focused validation passes 13 Python tests and two Rust producer tests. Python
-coverage is 318/357 executable lines and 79/96 branches (87.64% and 82.29%);
+coverage is 318/357 executable lines and 79/96 branches (89.08% and 82.29%);
 the Rust producer test file covers 93/95 lines and 10/10 branches (97.89% and
 100%). Maximum CRAP is 19.9815 for the new Python driver and 7 for the Rust
 producer. Maximum Python CC is 15; Rust CC/cognitive complexity is 7/6.

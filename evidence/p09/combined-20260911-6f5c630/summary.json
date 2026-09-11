@@ -10,14 +10,15 @@
       "coverage": {
         "count": 5522,
         "covered": 5512,
-        "percent": 99.65256797583082
+        "percent": 99.81890619340818
       },
       "branches": {
         "count": 1098,
         "covered": 1085,
         "percent": 98.81602914389799
       },
-      "max_crap": 16.0
+      "max_crap": 16.0,
+      "combined_line_branch_percent": 99.65256797583082
     },
     "rust": {
       "lines": {
@@ -34,5 +35,6 @@
       "max_crap": 24.05859375
     }
   },
-  "scientific_status": "diagnostic-only; zero accepted PDE windows; no proof of blow-up"
+  "scientific_status": "diagnostic-only; zero accepted PDE windows; no proof of blow-up",
+  "review_note": "Python executable-line percentage corrected from counts; the previous figure combined line and branch coverage. Raw hosted reports unchanged."
 }

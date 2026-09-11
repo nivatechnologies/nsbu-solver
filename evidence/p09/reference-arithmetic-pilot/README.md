@@ -34,7 +34,8 @@ Exact current-grid classification gives 1,213 exterior spatial points. Across
 three clocks this is 3,639 exterior rows; startup contains 1,728 rows and
 overlaps 1,213 exterior rows. Their union is 4,154 legitimate shortcut rows,
 leaving 1,030 active spacetime points. A full two-binding, two-precision study
-would therefore execute 4,120 multiprecision jets and 5,184 Rust evaluations.
+would therefore execute 4,120 multiprecision jets. The eventual full producer performs 10,368 Rust
+reference evaluations for 5,184 rows, evaluating original and centered inputs.
 Its admitted scalar-root ceiling is 8,437,760 iterations, plus exactly 12,360
 three-step jet corrections.
 
@@ -55,3 +56,12 @@ rows; this run reached a complete terminal record.
 The results concern only analytical reference-evaluator arithmetic. They are
 not an integrator-arithmetic study or a continuum error bound, and they exclude
 raw pressure, gauge, PDE evolution, convergence, and accepted-window claims.
+
+Review clarification: this historical timing pilot validates fixed identities and
+aggregate classes but does not independently check every active row's coordinate
+words and finite outputs. Its input-word arithmetic comparisons are therefore
+conditional on the producer's emitted bindings. The subsequent
+[guarded full study](../reference-arithmetic-full/README.md) independently checks
+those bindings, validates all rows and vectors, and supersedes the pilot's timing
+projection with a measured 28-minute full execution. The pilot's raw results are
+unchanged.

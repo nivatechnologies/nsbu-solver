@@ -784,3 +784,15 @@ uses the correct configured diagnostic force grid and records the withdrawn
 intermediate result. Combined hosted checks remain pending. The diagnostic
 coordinator, complete refinement channels and concentrating qualification remain
 open; P08/P09/P10 are incomplete and accepted PDE windows remain zero.
+
+## P09 exact-v2 current-grid reference arithmetic
+
+The [guarded reference study](evidence/p09/reference-arithmetic-full/README.md)
+completed all 5,184 rows on the 12-cubed sample grid at ticks 0/64/128, comparing
+independent 80/120-digit evaluations, rational versus exact binary64 inputs, and
+Rust output words. Velocity, gradient, ordered Hessian and curl are covered.
+The largest Rust/120-digit component discrepancy was 1.052e-17; the retained
+80/120-digit diagnostic passed at 6.262e-83. Focused numerical and quality gates
+pass, with raw source-bound evidence and the invalid earlier partial retained.
+This is empirical reference-evaluator arithmetic, excluding pressure/gauge,
+integrator arithmetic and continuum bounds. P08/P09/P10 remain incomplete.

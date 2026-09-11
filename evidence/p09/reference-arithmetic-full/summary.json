@@ -144,9 +144,10 @@
     "workspace_rustdoc": "passed",
     "python_coverage": {
       "lines": "318/357",
-      "line_percent": 87.63796909492274,
+      "line_percent": 89.07563025210084,
       "branches": "79/96",
-      "branch_percent": 82.29166666666667
+      "branch_percent": 82.29166666666667,
+      "combined_line_branch_percent": 87.63796909492274
     },
     "rust_producer_coverage": {
       "lines": "93/95",
@@ -183,5 +184,6 @@
     "no PDE trajectory, convergence, or accepted-window claim",
     "RLIMIT_AS was 256 MiB per process, not an aggregate cap",
     "time maximum RSS is not summed parent and child RSS"
-  ]
+  ],
+  "review_note": "Line coverage calculated from executable-line counts; coverage.py percent_covered is retained separately as combined line/branch coverage. Raw execution evidence unchanged."
 }

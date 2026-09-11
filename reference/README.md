@@ -116,3 +116,35 @@ checks complete scalar/vector/tensor statistics at 80/120 digits. It separates
 component-to-magnitude effects from accumulation of already-rounded magnitudes.
 `python -m reference.verify_reductions --n 4 --dry-run` admits the complete study
 without input files; the guide supplies actual commands and fixture provenance.
+
+## Exact-v2 current-grid reference arithmetic
+
+The [guarded 12-cubed study](../evidence/p09/reference-arithmetic-full/README.md)
+compares velocity, gradient, ordered Hessian and curl at ticks 0, 64 and 128.
+It separates 80/120-digit refinement, rational versus binary64 coordinates,
+and Rust reference-evaluator arithmetic. The recorded full run took 28 minutes;
+it is an optional numerical study, separate from the fast guard tests and PDE
+integration.
+
+From the repository root with the Python development environment active:
+
+```sh
+mkdir -p work
+cargo test -p nsbu-benchmarks --locked --test v2_reference_arithmetic_pilot --no-run
+```
+
+Set `producer_binary` to the executable path printed by Cargo. On Linux, run
+with the same 45-minute time limit and 256 MiB address-space limit per process:
+
+```sh
+producer_binary=/absolute/path/to/the/printed/test/executable
+timeout --kill-after=5s 2700s prlimit --as=268435456 \
+  python -m reference.reference_arithmetic_full "$producer_binary" \
+  > work/reference-arithmetic-full.jsonl
+```
+
+Other platforms need equivalent process limits. A complete run must end with
+an `event: complete` record for all 5,184 rows; a progress record alone is not
+completion. The retained precision diagnostic has its own pass/fail field.
+The report provides empirical reference-evaluator differences, excluding
+pressure/gauge, integrator arithmetic, continuum bounds and PDE qualification.
