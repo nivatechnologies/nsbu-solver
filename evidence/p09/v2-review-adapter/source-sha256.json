@@ -1,0 +1,20 @@
+{
+  "crates/nsbu-benchmarks/Cargo.toml": "0f1d29e253a06fca1127abe977c7847b2a6f903f0254ef40d33e6cb7de27cde3",
+  "crates/nsbu-benchmarks/src/lib.rs": "398dd1e167349fa99e79ada2815e34cedd458d7989855a19973135688986ef2b",
+  "crates/nsbu-benchmarks/data/similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "crates/nsbu-benchmarks/src/v2_experiment/mod.rs": "196855243ed31bdda5ff37f27d25317bd29f7f5f22075d7f459cc80e5b02c379",
+  "crates/nsbu-benchmarks/src/v2_experiment/plan.rs": "85c9d3b46e4cfa5827c7e7bf159123781a2206396e4a74c533de2847366fe0c7",
+  "crates/nsbu-benchmarks/src/v2_experiment/identity.rs": "45331e508615a2632f16a320ab63ae484031fba7a52091513fcfd414ea039d0d",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/mod.rs": "af30ffb9d344b2668d150f24255bf150dccb3ff78b69423894fbbb26f5df156c",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/plan.rs": "c0e84a6b14b93ffd96107ce21a9590b99128130b55bdfa200a913d213d0071f0",
+  "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/report.rs": "9a8103e780a6216f46184f032a538bf38c6fbd0781900167192c43c0cf5d5e62",
+  "crates/nsbu-benchmarks/src/v2_experiment/physical/report.rs": "897e774379413e40b494841f42eb479b1236e2b2a0e561cdcfeb690e5e2abd84",
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/report.rs": "b20a5ca8358f29b8332a44d4918c0d5b37c83d5816b84a76555f9a1ae70cda51",
+  "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/report.rs": "f7882fd511d160528435a86ca46f902aa279e75cbfcbf4890ae934b485eed9c0",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/plan.rs": "e7ee5bee246a8830baa0a02974f8579d60c51088501d646816dc0de1c0727bef",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/report.rs": "84b0b4c7675e1e0f322f41c45edaee4fbef0dc80fd0cd81cc88ca475aa508c44",
+  "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/mod.rs": "a4ddd669985e22dd5f3365305c49b0bdbdbe72e53c685e0b20adb4fb5df30109",
+  "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/validate.rs": "2abb83ee4c8c2ebfa7b3390053ff5cb0aaca7a2c7cb9a565abf20c8636b289a2",
+  "crates/nsbu-benchmarks/tests/v2_review_adapter.rs": "4c2b18e7c012fd6bfc20d36e57874ee5af9322436957a0843e3efd2e9a7f5a2b",
+  "crates/nsbu-benchmarks/tests/v2_family_support.rs": "bf92967a6916008c1019a39607a402e29eff0d737c8010bdbd433e2e2605251c"
+}
