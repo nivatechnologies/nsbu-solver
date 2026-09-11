@@ -40,6 +40,9 @@ fn setup<'a>(
         v2_family_support::CAP,
     )
     .unwrap();
+    // Retain the existing test-only headroom, including the independently allocated
+    // direct oracle and its phase::ALLOWANCE_BYTES basis scratch.
+    assert!(tracking.bounds().joint_storage_bytes + 16 * 1024 * 1024 <= v2_family_support::CAP);
     (family, tracking)
 }
 
@@ -125,6 +128,10 @@ fn compare_independent_oracle(
 ) {
     let time = BenchmarkTime::new(sample.clock()).unwrap();
     for branch in 0..6 {
+        v2_reference_oracle::assert_legacy_equivalence(
+            family.branch(branch).unwrap().state(),
+            sample.sample_layout(),
+        );
         let expected = v2_reference_oracle::tracking(
             family.branch(branch).unwrap().state(),
             sample.sample_layout(),
