@@ -1,8 +1,8 @@
 # Regional tracking CI correction
 
 The hosted Rust quality run `34596983665` for source revision
-`441da25d79cf51439c5b3e99b43c9828de1ba2db` failed its build, lint, document and
-package step because the focused regional test's cognitive complexity was 22.
+`441da25d79cf51439c5b3e99b43c9828de1ba2db` failed its per-function metrics and complete file scope
+step because the focused regional test's cognitive complexity was 22.
 The earlier regional summary's cognitive maximum of 13 excluded this test and
 does not cover that failure.
 

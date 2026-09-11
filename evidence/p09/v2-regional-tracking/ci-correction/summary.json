@@ -1,0 +1,10 @@
+{
+  "implementation_commit": "05d27fbee010e901f1d37fc0654c3dc92afbf543",
+  "source_sha256": {
+    "crates/nsbu-benchmarks/tests/v2_regional_tracking.rs": "2a314ed830caf571a94e67c874862f6248cb41c81efba27efc838978abfd69a5"
+  },
+  "artifact_sha256": {
+    "metrics.json.gz": "9a12852e90b30f20ce914cc05a00959b6eafd6508ed35d86de85d29a220eb289"
+  },
+  "scope": "test refactor; production and numerical assertions unchanged; focused test passes; combined hosted checks pending"
+}
