@@ -1,0 +1,101 @@
+{
+  "base_commit": "47b5def80cb40c7e7932923b9568a6fb4450a896",
+  "coverage": {
+    "final_library_source": {
+      "branch_percent": 81.25,
+      "branches_covered": 26,
+      "branches_total": 32,
+      "line_percent": 93.5065,
+      "lines_covered": 432,
+      "lines_total": 462,
+      "status": "passed"
+    },
+    "final_source_plus_tests": {
+      "branch_percent": 78.2609,
+      "branches_covered": 36,
+      "branches_total": 46,
+      "line_percent": 96.3855,
+      "lines_covered": 800,
+      "lines_total": 830,
+      "status": "below_80_complete_gate_pending_combined_hosted_ci"
+    },
+    "initial_source_plus_tests": {
+      "branch_percent": 72.0,
+      "branches_covered": 36,
+      "branches_total": 50,
+      "lines_covered": 780,
+      "lines_total": 814,
+      "status": "failed"
+    }
+  },
+  "limitations": [
+    "diagnostic only",
+    "no qualification claim",
+    "no convergence claim",
+    "no channel budget claim",
+    "no acceptance-threshold change",
+    "reference_peak is the finer comparison state, not an analytical reference",
+    "pressure excluded"
+  ],
+  "nesting": {
+    "integer_multiple_per_axis": true,
+    "negative_increasing_nondivisible": [
+      12,
+      20,
+      48
+    ],
+    "strict_per_axis_increase": true
+  },
+  "quality": {
+    "clippy": "passed",
+    "fmt": "passed",
+    "maximum_crap": 13.125,
+    "maximum_file_lines_lt": 500,
+    "maximum_function_cognitive": 19.0,
+    "maximum_function_cyclomatic": 13.0,
+    "maximum_halstead_difficulty_all_nodes": 45.55084745762712,
+    "rustdoc": "passed"
+  },
+  "release_numerical": {
+    "max_rss_kib": 49000,
+    "raw_full_records": true,
+    "source_relation": "predates only coverage-control tests and equivalent private extrema counter cleanup",
+    "tests_passed": 3,
+    "wall_seconds": 165.72
+  },
+  "resources": {
+    "admission_allocations": 0,
+    "allocation_process_max_rss_kib": 144612,
+    "constructed_bytes": 29520704,
+    "joint_reservation_bytes": 34644696,
+    "rss_is_not_reservation": true,
+    "steady_allocations": 0
+  },
+  "scope": {
+    "clocks": [
+      0,
+      64,
+      128
+    ],
+    "level_records": 180,
+    "pairs": 5,
+    "pressure": false,
+    "quantities": [
+      "velocity",
+      "gradient",
+      "ordered_hessian",
+      "vorticity"
+    ],
+    "sample_layouts": [
+      12,
+      24,
+      48
+    ],
+    "state_grids": [
+      4,
+      8,
+      12
+    ]
+  },
+  "status": "focused_complete_release_gate_pending_combined_hosted_coverage"
+}

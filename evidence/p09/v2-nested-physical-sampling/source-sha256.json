@@ -1,0 +1,26 @@
+{
+  "base_commit": "47b5def80cb40c7e7932923b9568a6fb4450a896",
+  "files": {
+    "Cargo.lock": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "crates/nsbu-benchmarks/Cargo.toml": "a53f53edea7e4d503a9df987ea110781c435e66ba74c18ad5f338523e47ee0fd",
+    "crates/nsbu-benchmarks/src/v2_experiment/mod.rs": "d904674542a6c5123c388ee5a15407152fdab7eb04511c1b10a9c72135cab1b1",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/extrema.rs": "16ddea7a66970ecfdf3323c9f86171524e0b0f11e5686d8f27da60309659f0b9",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/mod.rs": "11557379eb9705a6a4c395b8ab6cbdd7f17dcc8b91795d092936f5ba35d37a82",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/plan.rs": "9d1fa9b83f081b90235a7d156c4a1c218200ab5d7a6a071c80fd8fdbfe70d1b6",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/plan/work.rs": "bfd14723e79d7d5531ce7da983c54e72711e82e2a6c2c181ddfb9bbe77661725",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/report.rs": "897e774379413e40b494841f42eb479b1236e2b2a0e561cdcfeb690e5e2abd84",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/workspace.rs": "474b63828b1f91c20d9810a14a88da9604946d0d320671f678c35656bea56f59",
+    "crates/nsbu-benchmarks/src/v2_experiment/physical/workspace/compute.rs": "f950d4f33a41b12b8ee42d4bf7c3135c9c91e3bbedbd44dcbbd8b70a1c63a2ad",
+    "crates/nsbu-benchmarks/src/v2_experiment/sampling/compute.rs": "046a2e03232750aceaf5aaa64abd32bda7c54516383ffc38459770d42dde693a",
+    "crates/nsbu-benchmarks/src/v2_experiment/sampling/mod.rs": "d74077b58de7a2718844ffce6da30ea6941b0fdef6f38e2d3fb1cb7d379ea832",
+    "crates/nsbu-benchmarks/src/v2_experiment/sampling/plan.rs": "d6a60e9f1b8e0fcab595015a8608a555f3bf9db79dd8cda364fd1034f7bf2a79",
+    "crates/nsbu-benchmarks/src/v2_experiment/sampling/plan/reservation.rs": "a9d34e0587febeb12db5285bd79ba564af0b0b7f80739668c79daae6af7d9ba5",
+    "crates/nsbu-benchmarks/src/v2_experiment/sampling/report.rs": "074df6c37c9daf8d1dd96d9c31db6498ad7bbd07354c9eec9a678a4e1e3f8cc5",
+    "crates/nsbu-benchmarks/tests/v2_family_support.rs": "bf92967a6916008c1019a39607a402e29eff0d737c8010bdbd433e2e2605251c",
+    "crates/nsbu-benchmarks/tests/v2_sampling.rs": "c485a9802b5d37433980c772b42d933aeef0af94ab7d4dab4d89ff8527f6bd30",
+    "crates/nsbu-benchmarks/tests/v2_sampling/actual.rs": "b98983c71cf2a3e918a32bbac3eda517ce71c118db5459bc637c88a95a96edbe",
+    "crates/nsbu-benchmarks/tests/v2_sampling_allocation.rs": "ed967660be5aecc5ac5531192e6346cf050edd3ff7c30bb1482d856a2fbfb019",
+    "crates/nsbu-benchmarks/tests/v2_sampling_oracle.rs": "47f56760409cda4b6ee3c566016996a8b9959d329d4f3c89721162deaa5a6c7d",
+    "crates/nsbu-benchmarks/tests/v2_sampling_oracle/modes.rs": "2d0c718439944ad9eae3d574e5f9e0d94a4ebd293d252b4355df0aab1517d8ab"
+  }
+}
