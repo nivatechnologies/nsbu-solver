@@ -3,28 +3,47 @@
 ## What can be installed now
 
 The checkout provides Python verification and a Rust workspace containing the
-installable `nsbu-solver` library, benchmark library, and `nsbu` CLI. The runtime alpha supports bounded CM/HO
-diagnostics from rest, resource preflight, and same-profile external checkpoint
-continuation. Alpha output is diagnostic-only and unqualified; no crate or
-binary release is promised by this source checkout until the tracked readiness
-gate is enabled. The concentrating experiment workflow remains in progress.
+`nsbu-solver` library, benchmark library, and `nsbu` CLI. The
+[alpha-20260911 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911)
+provides the tested Linux x86_64 GNU/glibc runtime binary. It supports bounded
+CM/HO diagnostics from rest, resource preflight, and same-profile external
+checkpoint continuation. Alpha output is diagnostic-only and unqualified;
+the concentrating experiment workflow remains in progress.
 
 Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the Rust runtime dependencies.
 
 ## Downloaded alpha binary
 
 Dated prereleases are published through the [alpha release workflow](ALPHA_RELEASES.md)
-after its readiness and exact-source CI gates pass. The downloadable binary
-supports Linux x86_64 with GNU/glibc and is tested on Ubuntu 24.04. Its source
-manifest records actual dynamic-library and GLIBC symbol requirements. This
-artifact does not support Alpine/musl, macOS or Windows. Use a source build for
-other environments; those platforms remain unverified.
+after readiness and exact-source CI gates pass. The current archive is
+`nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz`; its detached
+checksum is `nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256`.
+The binary is tested on Ubuntu 24.04, and `SOURCE-MANIFEST.txt` records its
+actual dynamic-library and GLIBC symbol requirements. It does not support
+Alpine/musl, macOS or Windows; use a source build for other environments.
 
-Extract the complete tar archive, verify its detached checksum and then run
-`sha256sum -c SHA256SUMS` inside the extracted directory. The executable is
-`bin/nsbu`; the rest of the directory is the matching complete source tree.
+Run this quick start from an empty download directory:
 
-## macOS and Linux
+```sh
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
+sha256sum -c nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
+tar -xzf nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
+cd nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu
+sha256sum -c SHA256SUMS
+./bin/nsbu v2 --dry-run
+./bin/nsbu v2
+```
+
+The executable is `bin/nsbu`; the rest of the directory is the matching
+complete source tree. The release has zero accepted PDE convergence windows
+and makes no claim to prove finite-time blow-up.
+
+## Python verification on macOS and Linux
+
+Python is used for repository and mathematical design checks; it is not the
+runtime for the downloaded Rust binary. These checks are useful on any
+platform with Python 3.12.
 
 Obtain a checkout or extract the source archive, then enter its root directory:
 

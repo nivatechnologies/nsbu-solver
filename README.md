@@ -28,9 +28,35 @@ This case tests the solver's ability to track a separately specified concentrati
 
 The explicit slow-mesh strategy is `FeasibilityExcluded` under the documented resource policy. Feasibility across unspecified representations remains `FeasibilityUnestablished`. The optional construction compiler is limited to mathematics verification; an averaged-stress surrogate remains a separate, deferred model. See the [scientific scope](docs/SCIENTIFIC_SCOPE.md).
 
-## Get started today
+## Download and run the alpha
 
-Requirements: Python 3.12 and the development dependencies below. Git is needed only when obtaining a checkout by cloning. Rust is not required to run the existing design checks.
+The [alpha-20260911 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911)
+provides the tested Linux x86_64 GNU/glibc binary. Download the archive and
+its detached checksum, verify both the archive and its extracted contents,
+then run the bounded diagnostic:
+
+```sh
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911/nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
+sha256sum -c nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz.sha256
+tar -xzf nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu.tar.gz
+cd nsbu-solver-alpha-20260911-x86_64-unknown-linux-gnu
+sha256sum -c SHA256SUMS
+./bin/nsbu v2 --dry-run
+./bin/nsbu v2
+```
+
+This artifact targets Linux x86_64 with GNU/glibc and requires GLIBC symbols
+up to 2.35; inspect `SOURCE-MANIFEST.txt` for the recorded requirements.
+Other platforms require a source build. The alpha is diagnostic-only, with
+zero accepted PDE convergence windows; it provides no proof of finite-time
+blow-up.
+
+## Python verification checks
+
+Python 3.12 and the development dependencies below are for repository and
+mathematical design verification. Python is not the runtime for the alpha
+binary, and Rust is not required to run these checks.
 
 ```sh
 git clone https://github.com/nivatechnologies/nsbu-solver.git
