@@ -648,3 +648,14 @@ Admission and execution allocate nothing. The stored evidence records and fixes
 an initial CRAP26.125 split-function failure and uses the explicit nightly
 toolchain for source-matched branch coverage. Exact strict Rustdoc passes after
 the separately recorded `dad47c4` hosted documentation failure was fixed on main.
+
+The [accepted-node binding bridge](../evidence/p09/v2-node-binding/README.md)
+passes three actual two-family tests, one signed-word unit control, its allocator
+executable and release example. The three new production files cover 235/248
+executable lines and 21/26 branches (94.76%/80.77%), with maximum CRAP13. Across
+the new files, two minimally extended owner files and focused test/example files,
+maxima are CC14, cognitive8, Halstead66.9778 and 423 actual lines. Admission and
+execution allocate nothing, and exact strict workspace Rustdoc passes. An initial
+64.71% binder branch result was corrected by removing repeated result exits and
+representing provenance as one checked record; the final source-matched report is
+retained.

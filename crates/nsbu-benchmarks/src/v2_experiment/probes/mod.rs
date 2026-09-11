@@ -11,6 +11,14 @@ pub use plan::{ProbeBounds, ProbePlan, ProbeWork};
 pub use report::{ProbeFields, ProbeOrigin, ProbeSample};
 use sha2::{Digest, Sha256};
 
+pub(super) struct ProbeAcceptedNode<'a> {
+    pub(super) branch: usize,
+    pub(super) family_identity: [u8; 32],
+    pub(super) probe_identity: [u8; 32],
+    pub(super) origin: crate::v2_run::Origin,
+    pub(super) node: crate::smooth_observer::reconstruction::AcceptedNodeView<'a>,
+}
+
 type Field = [Vec<Complex64>; 3];
 struct Interpolant {
     value: Field,
@@ -80,6 +88,20 @@ impl<'a> ProbeFamily<'a> {
             origin: sample.origins[index],
             value: scratch.value.each_ref().map(Vec::as_slice),
             derivative: scratch.derivative.each_ref().map(Vec::as_slice),
+        })
+    }
+    pub(super) fn accepted_node(
+        &self,
+        branch: usize,
+        clock: TickClock,
+    ) -> Option<ProbeAcceptedNode<'_>> {
+        let run = self.branches.get(branch)?;
+        Some(ProbeAcceptedNode {
+            branch,
+            family_identity: self.plan.family.identity(),
+            probe_identity: self.plan.identity,
+            origin: run.origin(),
+            node: run.observer().accepted_node(clock)?,
         })
     }
     /// Stream the next complete probe; failures expose no partial reconstructed fields.

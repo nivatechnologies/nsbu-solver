@@ -94,6 +94,11 @@ quantities. The [regional tracking guide](../../docs/V2_REGIONAL_TRACKING.md)
 defines its separate admission, exact global equivalence, class counts and
 `NoSamples` semantics.
 
+`v2_experiment::binding` records bitwise equality between ordinary-family
+accepted states and exact nodes still retained by the independent probe family.
+The [accepted-node binding guide](../../docs/V2_NODE_BINDING.md) defines its
+private read-only view, lookahead eviction and explicit missing-evidence rules.
+
 ## Bounded smooth run example
 
 Run `cargo run -p nsbu-benchmarks --example smooth_from_rest` to construct a small owned

@@ -1,0 +1,11 @@
+{
+  "crates/nsbu-benchmarks/src/v2_experiment/binding/mod.rs": "e8122d8567350fce1eaa32b207d18932e471a0c1958b960717f9ed1aa7b68550",
+  "crates/nsbu-benchmarks/src/v2_experiment/binding/plan.rs": "604b3980438690418f4b456477f0ca51b55c15f465cb61b65ed9cde4970dd62b",
+  "crates/nsbu-benchmarks/src/v2_experiment/binding/report.rs": "bc505dfdfe4e7b1c778fa160aaefca1d5243c992e18bce5224a1a0829729ffca",
+  "crates/nsbu-benchmarks/src/smooth_observer/reconstruction.rs": "4bffb741da0e90430c3a6098988610a6437cb4fdf83a2fb468f66fe7a160c934",
+  "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs": "f1c1c5779e3bf9435f28322c769aebb495f492b683a6c76afad7328dc39cad83",
+  "crates/nsbu-benchmarks/tests/v2_node_binding.rs": "e91dc9a5e013dd0c7ab3717635a5090704a9aeddf1ba5169ba9d5cb165259536",
+  "crates/nsbu-benchmarks/tests/v2_node_binding_allocation.rs": "93afee8b4adb14cc2567df073cdd2b9450b85509068b47b347ea9c807d2e37c3",
+  "crates/nsbu-benchmarks/examples/v2_node_binding.rs": "f93d08fc2b6c6588d77410aac082f4dbb9dd3140be297dedee5580a2352e5288",
+  "docs/V2_NODE_BINDING.md": "60343e6cc7dcc1920c1291afbdc651ce649b04082b9f1e8a801e6273d3cc40a3"
+}
