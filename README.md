@@ -128,7 +128,7 @@ has also reached 1/256 from rest on N=4, with spatial/force resolution unresolve
 | Independent checks | Implemented | Python direct-DFT fixtures, high-precision comparisons, restart checks, and full-band diagnostics |
 | Diagnostic families on `main` | Implemented | Independent space/time/method and force-grid families; pressure, regional tracking, off-step residuals, balance quadrature, and nested physical sampling |
 | Fixed diagnostic artifacts | Implemented, unqualified | [Full seven-event JSON export](docs/V2_DIAGNOSTIC_EXPORT.md) and [four-observable partial review extraction](docs/V2_PARTIAL_REVIEW.md); neither supplies complete provenance, a full review, or a PDE window |
-| Concentrating PDE qualification | Pending | Zero accepted windows; space, time, force-sampling, arithmetic, pressure, balance, and residual criteria remain open |
+| [Concentrating PDE qualification](docs/NEXT_CONCENTRATING_WINDOW.md) | Pending | Zero accepted windows; space, time, force-sampling, arithmetic, pressure, balance, and residual criteria remain open |
 | Scientific checkpoint provenance | Pending | Imported checkpoint origins remain unverified until lineage requirements are complete |
 | Literal manuscript cascade | Excluded from this alpha | The runtime does not reproduce the annular pulse construction |
 

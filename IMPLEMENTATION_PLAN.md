@@ -821,6 +821,10 @@ coordinator applies no acceptance policy; the adapter to the complete numerical
 and lineage review is still pending. Combined hosted validation is pending,
 and P08/P09/P10 remain incomplete with zero accepted PDE windows.
 
+The [next concentrating-window roadmap](docs/NEXT_CONCENTRATING_WINDOW.md)
+orders the remaining profile, measurement, provenance and spatial-resolution
+work without promoting partial diagnostics to an accepted window.
+
 ## P08 exact-v2 diagnostic event export
 
 The [full-event JSON exporter](docs/V2_DIAGNOSTIC_EXPORT.md) serializes the seven
