@@ -38,3 +38,10 @@ Decompress the focused-check script to inspect its exact commands; its scratch
 paths assume the recorded worktree layout. LLVM coverage includes exercised
 dependencies, while the focused totals select exactly the eight new files listed
 in the report. P08/P09/P10 remain incomplete, with zero accepted PDE windows.
+
+Both [hosted Rust](hosted-rust.json) and [hosted Python](hosted-python.json)
+workflows pass on implementation commit b42c0ca, including complete workspace
+tests and all required quality gates. Raw hosted logs are retained. Their
+coverage thresholds pass; the numerical percentages above remain explicitly
+scoped to the focused local report. Later CI changes preserve raw hosted
+coverage and complexity files as downloadable artifacts.

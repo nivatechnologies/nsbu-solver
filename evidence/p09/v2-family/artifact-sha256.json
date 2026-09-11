@@ -88,5 +88,17 @@
     "sha256": "6f5ec51f3da6f8d2b3cedd1ac9d4c4793c4bc5fb9c30e88f7d5cfe165d4623eb",
     "uncompressed_bytes": 23929,
     "uncompressed_sha256": "38bcdf94fb5aa100c6c81c831384a7a37f8eab8c09dd383d305445adb4844bc1"
+  },
+  "hosted-rust.log.gz": {
+    "bytes": 37642,
+    "sha256": "f040e624764ed9f7dd056a74b4f71c8f169198abea4d66a236b3a208a4d867d2",
+    "uncompressed_bytes": 272960,
+    "uncompressed_sha256": "369392ccad1fc26b7c033d22808c08d1c18fc8b20ece53b13a56ab8e86f52e53"
+  },
+  "hosted-python.log.gz": {
+    "bytes": 39247,
+    "sha256": "2ebb49bf185588594931d366ca4c1ed23424a330adb7885530d5b5a8642905ad",
+    "uncompressed_bytes": 309735,
+    "uncompressed_sha256": "c62e37aaee1637e4183164f64e2c8b9d52e288e2193b50a0557f82150f6d582c"
   }
 }

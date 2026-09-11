@@ -163,7 +163,9 @@
       "force_evaluation_evidence": "evidence/p09/force-evaluation/summary.json",
       "parallel_force_evidence": "evidence/p09/parallel-force/summary.json",
       "v2_family_evidence": "evidence/p09/v2-family/summary.json",
-      "reduced_force_evidence": "evidence/p09/reduced-force/summary.json"
+      "reduced_force_evidence": "evidence/p09/reduced-force/summary.json",
+      "v2_family_hosted_rust": "evidence/p09/v2-family/hosted-rust.json",
+      "v2_family_hosted_python": "evidence/p09/v2-family/hosted-python.json"
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N=4 exact-v2 CM/HO diagnostics, plus Rust CM/HO smooth and N=4 exact-v2 trajectories from rest; concentrating space/force resolution unresolved",

@@ -13,7 +13,11 @@ This bootstrap includes no source code copied from `pmocz/euler-blowup-viz`, no 
 
 Dependencies are installed separately and are not vendored in this repository. Their own license notices remain applicable. The Cargo dependency inventories below record actual versions, licenses and native-library requirements.
 
-The CI workflow references the official `actions/checkout` and `actions/setup-python` actions. Their source is not vendored or relicensed. Official project and installation links are given in the corresponding documentation.
+The CI workflows reference the official `actions/checkout`, `actions/setup-python`
+and `actions/upload-artifact` actions, pinned to exact commits. Their source is
+not vendored or relicensed. The [artifact action](https://github.com/actions/upload-artifact)
+preserves source-bound raw quality reports for 14 days. Official project and
+installation links are given in the corresponding documentation.
 
 ## Standard license source
 

@@ -629,7 +629,7 @@ full-band space/time/method comparisons pass an independent signed Fourier-sum
 oracle, versioned identity checks, allocation probes and terminal-state controls.
 Eight focused tests/probes pass; all eight new Rust files measure 98.71% line and
 85.42% branch coverage with maximum CRAP19.6133. Whole-workspace static limits,
-strict Clippy and Rustdoc pass. Complete current-source hosted gates are pending.
+strict Clippy and Rustdoc pass. Source-matched hosted gates pass for this increment.
 
 The documented N=[4,8,12], M=12 example reaches only the short startup time
 1/8192. P08/P09/P10 remain incomplete with zero accepted concentrating windows.

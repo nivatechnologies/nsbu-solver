@@ -1,7 +1,7 @@
 {
   "package": "P09",
   "increment": "independent exact-v2 refinement family",
-  "status": "focused numerical and new-source quality gates passed; complete source-matched hosted gates pending",
+  "status": "focused local numerical/new-source quality and complete source-matched hosted gates passed",
   "generated_utc": "2026-09-11T04:22:54.423537+00:00",
   "parent_commit": "6fad3ca",
   "source_inventory": "source-sha256.json",
@@ -139,5 +139,14 @@
     "repository_links_and_frozen_inputs": "passed",
     "guard_tests": 41,
     "original_mathematical_verification": "passed"
+  },
+  "hosted_verification": {
+    "status": "passed",
+    "source_commit": "b42c0caeb7f5d4b38c4737d62e9c04f2bb8be19e",
+    "rust": "hosted-rust.json",
+    "python": "hosted-python.json",
+    "rust_tests_and_probes": 442,
+    "compiled_doc_examples": 1,
+    "python_tests": 220
   }
 }

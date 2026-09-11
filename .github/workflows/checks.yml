@@ -63,3 +63,23 @@ jobs:
       - name: Historical mutation evidence
         run: |
           jq -e 'type == "object"' evidence/quality-reference/mutations/summary.json
+      - name: Preserve source-bound raw quality reports
+        if: always()
+        run: |
+          mkdir -p work
+          git rev-parse HEAD > work/quality-source-revision.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: python-quality-${{ github.sha }}-${{ github.run_attempt }}
+          retention-days: 14
+          compression-level: 9
+          path: |
+            work/quality-source-revision.txt
+            work/full-coverage.json
+            work/ci-cyclomatic.json
+            work/ci-halstead.json
+            work/python-crap.json
+            work/ci-source-files.txt
+            work/ci-duplicates.json
+            work/ci-dead-code.txt
