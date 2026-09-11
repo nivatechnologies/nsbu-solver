@@ -41,10 +41,10 @@ arithmetic, reference-precision, pressure-reference, pressure-gauge, transfer,
 sampling-resolution, quadrature-resolution and region-volume-coverage
 channels. Analytical velocity/gradient/Hessian/vorticity tracking is available,
 but its reference is evaluated in binary64 on the configured sample grid. The
-offline high-precision reference study is not attached. Regional sample counts
-follow the existing geometric classifiers; overlapping nominal regions are not
-treated as a disjoint volume partition, and `NoSamples` remains distinct from a
-zero error.
+offline high-precision reference study is not attached. The five named
+classifier outputs are exclusive for each sampled point. Their counts do not
+prove nominal-region coverage or volume enclosures, and `NoSamples` remains
+distinct from a zero error.
 
 Run the exact fixed profile with:
 
@@ -54,3 +54,13 @@ cargo run -p nsbu-benchmarks --example v2_diagnostic_coordinator --release
 
 To inspect admission bytes, work ledgers and missing channels without allocating
 the driver or evolving either family, append `-- --dry-run`.
+
+The installed public command uses the same owned fixed-array profile:
+
+```text
+nsbu diagnose-v2 --dry-run
+nsbu diagnose-v2
+```
+
+The CLI prints concise diagnostic summaries. Complete raw event reports remain
+available through the library API.

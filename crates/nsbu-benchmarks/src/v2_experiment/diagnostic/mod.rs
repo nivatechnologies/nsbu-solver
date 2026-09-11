@@ -1,5 +1,6 @@
 //! Bounded unqualified diagnostic coordination over independent exact-v2 families.
 mod plan;
+mod profile;
 mod report;
 use crate::v2_experiment::{
     binding::{NodeBindingError, NodeBindingWorkspace},
@@ -11,6 +12,7 @@ use crate::v2_experiment::{
 };
 use nsbu_solver::{domain::TickClock, SolverError};
 pub use plan::{DiagnosticBounds, DiagnosticPlan, DiagnosticSettings, DiagnosticWork};
+pub use profile::StartupProfile;
 pub use report::{
     AcceptedDiagnostic, AcceptedEvidence, AcceptedSchedule, DiagnosticEvent, DiagnosticStatus,
     MissingChannel, ResidualEvidence, ResidualSchedule, MISSING_CHANNELS,

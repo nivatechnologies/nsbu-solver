@@ -1,6 +1,7 @@
 //! NSBU Solver command-line entry point.
 mod arguments;
 mod checkpoint_io;
+mod diagnose_v2;
 mod report;
 mod v2;
 mod v2_report;
@@ -29,6 +30,9 @@ const ADVECTIVE_LIMIT: f64 = 1.0;
 
 fn main() -> ExitCode {
     let arguments = std::env::args_os().skip(1).collect::<Vec<_>>();
+    if let Some(result) = diagnose_v2::dispatch(&arguments) {
+        return result;
+    }
     match parse(&arguments) {
         Command::Help => print_help(),
         Command::Version => println!("{} {}", nsbu_solver::NAME, nsbu_solver::VERSION),
@@ -52,10 +56,12 @@ Usage: nsbu [--help | --version]
        nsbu resume --checkpoint PATH [OPTIONS]
        nsbu v2 [OPTIONS]
        nsbu resume-v2 --checkpoint PATH [OPTIONS]
+       nsbu diagnose-v2 [--dry-run]
 
 Profiles: smooth uses CyclicSine, unit cube, viscosity 0.3, advective guard 1.0.
           v2 uses similarity-mms-v2, unit cube, viscosity 1.0, advective guard 0.3.
           v2 has exact target time T*=1/128; every endpoint must be earlier.
+          diagnose-v2 uses the fixed N=4/8/12 seven-clock startup diagnostic.
 
 Options:                                  smooth default / v2 default
   --grid, --domain N          Four-multiple cubic grid: 8 / 4

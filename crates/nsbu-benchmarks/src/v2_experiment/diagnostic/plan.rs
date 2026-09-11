@@ -198,6 +198,18 @@ impl<'a> DiagnosticPlan<'a> {
     pub fn residual_times(self) -> &'a [TickClock] {
         self.residual.tested_times()
     }
+    /// Fixed physical and analytical sampling policy bound to this plan.
+    pub fn diagnostic_settings(self) -> DiagnosticSettings {
+        DiagnosticSettings {
+            physical_samples: self.physical.sample_layout(),
+            pressure_samples: self.pressure.sample_layout(),
+            reference_samples: self.regional.tracking_plan().sample_layout(),
+            physical_floors: self.physical.relative_floors(),
+            pressure_floors: self.pressure.relative_floors(),
+            reference_floors: self.regional.tracking_plan().relative_floors(),
+            regional_root_budget: self.regional.root_budget(),
+        }
+    }
 }
 
 fn admit_manifest(

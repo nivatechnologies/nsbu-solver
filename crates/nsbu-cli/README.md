@@ -18,7 +18,17 @@ Try the installed binary with:
 nsbu v2 --help
 nsbu resume-v2 --help
 nsbu v2 --dry-run
+nsbu diagnose-v2 --dry-run
+nsbu diagnose-v2
 ```
+
+`diagnose-v2` has no numerical profile options. It admits the fixed N=4/8/12
+startup profile and complete clocks `[0,7,63,64,95,127,128]`. Its dry run stops
+before diagnostic-driver allocation. The actual command emits concise raw
+accepted/residual summaries labeled `UnqualifiedDiagnostic`, lists every
+missing evidence channel and reports zero qualified windows. Applications can
+use the benchmark library API when they need the complete retained report
+structures rather than CLI summaries.
 
 JSON reports retain exact times, all charged work, the last accepted balance
 terms, pending Simpson/integral state, and `origin_status`. A new run reports
