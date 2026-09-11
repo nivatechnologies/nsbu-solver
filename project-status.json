@@ -41,8 +41,9 @@
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
       "evidence": "evidence/p09/reduced-trajectories/summary.json",
-      "status": "Independent reduced-provider CM/HO trajectory checks on N4/M4 to 1/256 pass in this increment; all committed-vs-reduced coefficient checks agree at strict-band modes and clocks, and focused evidence is complete. Whole-workspace static/lint gates are current; full source-matched hosted coverage and quality gates remain pending for this increment.",
-      "additional_evidence": "evidence/p09/reduced-provider/summary.json"
+      "status": "Focused independent reduced-provider CM/HO trajectory checks pass; both full source-matched hosted workflows passed at c8a387265159d16bdb33ec32d94ba6df9fa4c5c7. Numerical qualification remains incomplete.",
+      "additional_evidence": "evidence/p09/reduced-provider/summary.json",
+      "hosted_review": "evidence/runtime-alpha/review-20260911/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/runtime-alpha/daily-20260911/hosted-quality.json"
   },
@@ -263,7 +264,8 @@
       "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
       "url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911",
       "verification": "evidence/runtime-alpha/daily-20260911/summary.json"
-    }
+    },
+    "independent_release_review": "evidence/runtime-alpha/review-20260911/summary.json"
   },
   "exact_v2_cli_exists": true,
   "exact_v2_restart_exists": true,

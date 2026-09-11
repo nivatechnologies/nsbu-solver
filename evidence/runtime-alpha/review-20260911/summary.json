@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "release_tag": "alpha-20260911",
+  "source_commit": "6170341c42a64348c7d99bdfd4fc3653454f22a8",
+  "fresh_download_sha256": "ecb07b6b9e7828d0fc125c3a20c9d61be2db8e83defb6074bbb6bb2752abd857",
+  "verified_manifest_files": 1829,
+  "cm_ho_committed_steps_each": 32,
+  "resumed_report_equals_uninterrupted_except_origin": true,
+  "accepted_pde_windows": 0,
+  "main_ci_review": {
+    "source_commit": "c8a387265159d16bdb33ec32d94ba6df9fa4c5c7",
+    "rust": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34574045422",
+    "repository": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34574045397",
+    "conclusion": "both success"
+  },
+  "scope": "Fresh published-binary runtime smoke/restart and checksum verification; source-matched hosted gates inspected; not a new PDE qualification or full code audit.",
+  "repository_checks": "passed",
+  "bootstrap_guard_tests": 41,
+  "mathematical_verification": "passed; matches preserved report"
+}
