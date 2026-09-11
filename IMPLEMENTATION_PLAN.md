@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.2 · 10 September 2026 · Bootstrap and packages through P07 verified
+Revision 1.3 · 11 September 2026 · Runtime alpha prioritized; scientific packages through P07 verified
 
 ## Adopted decisions
 
@@ -42,18 +42,23 @@ prereleases containing new changes that pass the runtime/CI gates, with source
 revision, checksums, changes, test results and known limitations. Continue
 correctness studies and optimization after that first release; completion of
 scientific qualification and eventual stability remain separately demonstrated.
-The `alpha_release.ready` flag in project-status.json remains false until the
-runtime checklist is actually complete.
+The runtime checklist R01–R04 is now complete, with
+[actual exit evidence](evidence/runtime-alpha/README.md): 434 Rust tests/probes,
+98.56% line and 88.79% branch coverage, all required metric limits, and a fresh
+checkout package/install/CM/HO/restart walkthrough. The `alpha_release.ready`
+flag is true. Publication waits for both hosted workflows to pass on the exact
+release commit; P08/P09/P10 scientific exits remain open.
 
 ## Repository bootstrap and current evidence
 
 The bootstrap supplies README, license and attribution files, installation/use documentation, contribution guidance, the public reviewed baseline, exact case inputs, executable design checks, and CI configuration. A passing bootstrap check is not completion of a Rust numerical milestone.
 
-The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. Reporting and balance gates pass locally and hosted. The current diagnostics/window-review code passes local and hosted gates; full experiment/provenance integration remains pending. The bounded `nsbu smooth` CLI now runs the CyclicSine diagnostic with CM or HO. No admitted source instance, accepted concentrating PDE window, or formal proof build exists. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
+The Rust workspace and help/version CLI exist. P03 spectral operators passed independent direct-sum/convolution checks, allocation instrumentation and all quality gates locally and in hosted CI. P04 provides CM steps, bounded attempts and transactional commits, with all package checks passed locally and in hosted CI. P05 independent Rust scalar/jet fields and the bounded force provider passed all local and hosted gates, completing P05. The P06 Rust N=4 exact-v2 diagnostic reaches 1/256 from rest and passes its independent 80/120-digit direct-DFT trajectory comparison. Smooth temporal and grid studies and all local and hosted quality gates pass, completing P06. P07 adds the independent HO method, nonautonomous order studies and CM/HO concentrating comparisons; all local and hosted checks pass, completing P07. P08 implements independent full-band comparisons, conservative double-grid pressure/residual diagnostics, sampled/local/regional reporting, reconstruction and accepted-history balance studies. Reporting and balance gates pass locally and hosted. The current diagnostics/window-review code passes local and hosted gates; full experiment/provenance integration remains pending. The bounded CLI runs both CyclicSine (`smooth`) and exact-v2 (`v2`) diagnostics with CM or HO, with complete same-profile runtime checkpoint continuation. R01–R04 alpha exits pass locally; see the runtime evidence above. No admitted source instance, accepted concentrating PDE window, or formal proof build exists. Coarse Python CM/HO exact-v2 trajectories now reach the first endpoint from rest with large tracking errors; P00C diagnostic and quality checks passed locally and in hosted CI. Independent Python pointwise, region and N=4 smooth from-rest step/trajectory fixtures are implemented, with temporal refinements. P00B numerical and quality gates passed locally and in hosted CI. P01 packaging, fresh-checkout installation and all Rust quality gates also passed locally and in hosted CI. P02 exact clocks, layouts, resource ledger and owned-state checks passed with full line/branch coverage and zero surviving mutants, locally and in hosted CI. N=8/12 arithmetic studies passed; exact-v2 force sampling completed with unresolved spatial differences. The current machine-readable state is [project-status.json](project-status.json). Future changes update that file only with linked execution evidence.
 
-## Planned public organization
+## Implemented public organization
 
-Start with three crates rather than a crate for every module. The three crate roots now exist; numerical module paths below remain planned:
+The workspace has three crates. The following map describes current components;
+see [architecture](docs/ARCHITECTURE.md) for their ownership and extension rules:
 
 ```text
 Cargo.toml                 public workspace; Apache-2.0 metadata
@@ -64,10 +69,14 @@ crates/nsbu-solver/         public library facade
   src/spectral/            FFT, padding, projection, curl, pressure
   src/integrators/         ETD coefficients, stages, attempt/commit
   src/diagnostics/         physical quantities and sampled residuals
-crates/nsbu-benchmarks/     force providers and separate reference evaluators
+  src/experiment/          bounded control and recorded transactions
+  src/checkpoint/          physical/history encoding and integrity
+  src/verification/        finite empirical policies and review
+  src/lineage/             ancestry, transfers and invalidation
+crates/nsbu-benchmarks/     force/reference evaluators and owned diagnostic runs
 crates/nsbu-cli/            binary name nsbu; I/O and experiment orchestration
 reference/                 independent Python scalar/jet and direct-DFT path
-fixtures/                  small, versioned, reproducible numerical fixtures
+crates/*/tests/fixtures/   small, versioned, independent numerical fixtures
 benchmarks/                immutable case definitions
 tools/                     current design and repository checks
 docs/                      installation, usage, reviewed design, evidence policy
@@ -75,7 +84,11 @@ docs/                      installation, usage, reviewed design, evidence policy
 
 The library does not depend on the CLI, reference evaluator, viewer, source compiler, or any adapter. A prescribed-force trait can evaluate only its declared mathematical input. The integrator never receives an interface that can assign the reference field into its state. Comparison code owns reference access separately. Keep pure operators independent of filesystem and scheduling code.
 
-Choose an FFT implementation after a small licensing, normalization, scratch-planning, and deterministic-execution spike. Do not silently add a native dependency or incompatible license. Pin the actual tested dependency versions in P01; this plan does not invent a future Rust toolchain version.
+The implemented FFT uses caller-owned radix workspaces and explicit normalization,
+with independent direct-DFT and convolution fixtures. Rust 1.94.0 and the public
+`num-complex` and `sha2` dependencies are pinned in the toolchain and lockfile.
+Changes to the arithmetic backend or native dependencies require explicit
+licensing, resource, determinism and numerical verification evidence.
 
 ## Ordered implementation packages
 

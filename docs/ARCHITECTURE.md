@@ -3,8 +3,8 @@
 NSBU Solver is a Rust workspace for a periodic, incompressible
 three-dimensional Navier--Stokes discretisation and for evaluating the evidence
 produced by bounded numerical experiments. It is an implementation in progress:
-the public CLI supports bounded smooth diagnostics, and no PDE convergence window has
-been accepted. The current command-level boundary is described in
+the public CLI supports bounded smooth and exact-v2 diagnostics with checkpoint
+continuation, and no PDE convergence window has been accepted. The current command-level boundary is described in
 [usage](USAGE.md); the scientific claims and their limits are in
 [scientific scope](SCIENTIFIC_SCOPE.md).
 
@@ -19,8 +19,8 @@ The workspace has three public crates:
 | Crate | Responsibility | Boundary |
 |---|---|---|
 | [`nsbu-solver`](../crates/nsbu-solver/README.md) | State, spectral operations, bounded integration, diagnostics, empirical review, lineage, and experiment transactions | Does not provide a numerical CLI, complete checkpoint format, or a PDE acceptance decision. |
-| [`nsbu-benchmarks`](../crates/nsbu-benchmarks/README.md) | Independent `similarity-mms-v2` scalar/jet reference and prescribed force | Reference APIs cannot modify state; `smooth_run` owns a separate smooth diagnostic trajectory. |
-| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Exposes smooth preflight, runs and unverified file continuation; concentrating qualification remains incomplete. |
+| [`nsbu-benchmarks`](../crates/nsbu-benchmarks/README.md) | Independent `similarity-mms-v2` scalar/jet reference and prescribed force | Reference APIs cannot modify state; `smooth_run` and `v2_run` own independent diagnostic trajectories and profile-specific checkpoint formats. |
+| [`nsbu-cli`](../crates/nsbu-cli/README.md) | Installed `nsbu` command entry point | Exposes smooth and v2 preflight, runs and unverified file continuation; concentrating qualification remains incomplete. |
 
 The project has no Niva dependency. A provider implements the solver's bounded
 RHS/force contracts; it is deliberately separate from an analytical reference
@@ -245,3 +245,38 @@ partitions, constructor admission, persistent worker lifetime and whole-job
 collection. Local samples are copied into the original global layout before
 shared FFT/transfer execution. Its threads own force scratch and never access
 mutable integrated state or accepted-history records.
+
+## Exact-v2 runtime and checkpoint path
+
+The benchmark crate's [`v2_run`](../crates/nsbu-benchmarks/src/v2_run.rs) is the
+public owner for the concentrating diagnostic. `Settings` contains the domain,
+force sampling and worker choice, initial exact clock, method, tolerances,
+endpoint, step and attempt limit. `Plan::from_rest` validates that complete
+configuration and admits its finite storage and work before constructing a run.
+`Run::from_rest` allocates an exact zero state, fresh providers and scratch, the
+controller, accepted balance history and a preallocated attempt-work ledger.
+
+[`runtime_force`](../crates/nsbu-benchmarks/src/runtime_force.rs) adapts the
+existing serial and persistent-worker providers to the same `PrescribedForce`
+contract. A separately owned observer uses a doubled diagnostic grid and
+doubled force sample grid. The shared
+[balance kernel](../crates/nsbu-benchmarks/src/smooth_observer/kernel.rs) contains
+measurement arithmetic; profile admission and provider construction remain in
+the smooth and v2 observers. Measurement code borrows the proposed field and
+cannot assign an analytical field into the committed state.
+
+`Run::step` coordinates a bounded attempt, measured balance proposal and
+transactional physical/history commit. Its public accessors are read-only.
+Rejected or refused work remains charged even when no physical step commits.
+The [v2 archive](../crates/nsbu-benchmarks/src/v2_run/archive.rs) encodes physical
+state, controller/history and both work ledgers under a versioned profile and
+integrity frame. Decode validates bounds and compatibility before allocation;
+continuation rebuilds scratch and retains `ExternalUnverified` origin. It does
+not authenticate the execution that produced an external file.
+
+In the CLI, parsing, v2 execution, JSON reporting and transactional file
+publication have separate modules. File publication refuses replacement of an
+existing checkpoint. The [runtime guide](RUNTIME_ALPHA.md) provides executable
+usage, and [checkpoint formats](CHECKPOINT_FORMAT.md) specifies the byte layout
+and same-build restart limits. Scientific verification and larger-grid
+refinement do not run implicitly when a user requests an ordinary v2 trajectory.

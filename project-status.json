@@ -3,10 +3,10 @@
   "project": "NSBU Solver",
   "repository": "nivatechnologies/nsbu-solver",
   "license": "Apache-2.0",
-  "development_stage": "independent-diagnostics-in-progress",
+  "development_stage": "runtime-alpha-ready; scientific-qualification-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
-  "implementation_plan_revision": "1.2",
+  "implementation_plan_revision": "1.3",
   "rust_workspace_exists": true,
   "runtime_implementation_exists": true,
   "simulation_cli_exists": true,
@@ -21,12 +21,12 @@
   "surrogate_status": "SeparateDecisionDeferred",
   "niva_dependency": false,
   "quality_gates": {
-    "status": "Persistent parallel exact-v2 force sampling passes all local gates: 405 Rust tests/probes, unchanged 220-test Python profile, complete-scope line/branch coverage and every required complexity/CRAP/typing gate. Clean replay, packaging and frozen/bootstrap checks pass; hosted verification pending.",
+    "status": "Runtime alpha passes all local gates: 434 Rust tests/probes, 98.56% line and 88.79% branch coverage, and required complexity/CRAP/typing/size limits. All 98 maintained Python files match the retained 220-test profile; 41 bootstrap tests and original mathematics rerun successfully. Clean packaging/install and exact-v2 CLI restart pass. Source-matched hosted CI is required before publication.",
     "requirements": "IMPLEMENTATION_PLAN.md",
     "review": "docs/QUALITY.md",
-    "evidence": "evidence/p09/parallel-force/summary.json",
+    "evidence": "evidence/runtime-alpha/summary.json",
     "mutation_runs": "evidence/quality-reference/mutations/summary.json",
-    "rust_evidence": "evidence/p09/parallel-force/summary.json",
+    "rust_evidence": "evidence/runtime-alpha/summary.json",
     "policy_revision": 2,
     "coverage_minimum_percent": {
       "executable_lines": 80,
@@ -37,8 +37,8 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Production physical-reduction arithmetic passes source-matched Rust and Python hosted checks.",
-    "hosted_ci": "evidence/p09/reduction-arithmetic/hosted-rust.json"
+    "latest_hosted_ci_status": "Pre-alpha parallel-force base passes both hosted workflows; final runtime-alpha source must pass before publication.",
+    "hosted_ci": "evidence/runtime-alpha/base-hosted-rust.json"
   },
   "packages": {
     "B00": {
@@ -136,7 +136,7 @@
       "remaining": [
         "Bind external mathematical/execution/force/policy/lineage artifacts to accepted-state provenance",
         "Complete force/reference/arithmetic/transfer families for all mandatory observables and concentrating grids",
-        "Complete experiment integration and clean-checkout release workflow"
+        "Complete scientific experiment integration; runtime clean-checkout release checks now pass separately"
       ],
       "foundation_evidence": "evidence/p09/foundations/summary.json",
       "recorded_step_evidence": "evidence/p09/recorded/summary.json",
@@ -177,7 +177,7 @@
   "compensated_balance_history_exists": true,
   "authenticated_artifact_catalog_exists": true,
   "raw_history_replay_exists": true,
-  "simulation_cli_scope": "Bounded smooth CyclicSine diagnostic, CM/HO, exact-tick resource dry-run, JSON reports and unverified balance-only file save/resume; no concentrating qualification",
+  "simulation_cli_scope": "Bounded smooth CyclicSine and exact similarity-mms-v2 CM/HO from-rest diagnostics, exact-tick resource dry-run, JSON balances/work, and same-profile checkpoint/resume with external-unverified origin; no concentrating qualification.",
   "owned_smooth_runtime_exists": true,
   "experimental_binary_checkpoint_components_exist": true,
   "checkpoint_file_cli_exists": true,
@@ -220,29 +220,53 @@
   "execution_priority": {
     "updated": "2026-09-11",
     "next_delivery": "runtime-alpha",
-    "status": "R01-R03 runtime functionality demonstrated for exact-v2 CM/HO, independent fixtures, restart equivalence, and release-binary CLI smoke; R04 full quality/install gates pending.",
+    "status": "R01-R04 complete for runtime alpha: independent fixtures, bounded CM/HO trajectories, complete same-profile runtime restart, public CLI, all local quality gates and fresh installation pass. Publish after exact-source hosted CI, then continue scientific correctness and optimization.",
     "ordered_work": [
       "R01 exact-v2 owned from-rest runtime",
       "R02 same-profile checkpoint/resume",
       "R03 public CLI workflow",
       "R04 documentation and milestone quality/package gates"
     ],
-    "deferred_until_runtime_usable": [
-      "experimental reduced-variable evaluator",
-      "additional performance backends",
-      "extended concentrating refinement and arithmetic studies",
-      "visualization"
-    ],
-    "scientific_acceptance_criteria_unchanged": true
+    "deferred_until_runtime_usable": [],
+    "scientific_acceptance_criteria_unchanged": true,
+    "post_alpha_work": [
+      "Complete P08/P09 all-observable and actual-state provenance integration",
+      "Concentrating space/time/force/arithmetic refinement and P10 accepted-window verifier",
+      "Evaluate parked reduced-variable force optimization against independent fixtures",
+      "Visualization after numerical validation"
+    ]
   },
   "alpha_release": {
-    "ready": false,
-    "status": "Runtime implementation is usable and focused checks pass; full alpha quality, clean installation, and hosted CI remain required before publication.",
+    "ready": true,
+    "status": "runtime-complete; local release gates passed; exact-source hosted CI required before publication",
     "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
     "accepted_concentrating_windows": 0,
-    "scientific_qualification_separate": true
+    "scientific_qualification_separate": true,
+    "evidence": "evidence/runtime-alpha/summary.json",
+    "workflow": ".github/workflows/alpha-release.yml",
+    "daily_schedule_utc": "02:17; new verified source changes only"
   },
   "exact_v2_cli_exists": true,
   "exact_v2_restart_exists": true,
-  "runtime_alpha_functionality_evidence": "evidence/runtime-alpha/runtime-checks.json"
+  "runtime_alpha_functionality_evidence": "evidence/runtime-alpha/summary.json",
+  "runtime_complete_checkpoints_exist": true,
+  "complete_checkpoints_scope": "Complete v2 physical/controller/balance/work continuation is implemented; complete scientific-verifier provenance remains incomplete, so complete_checkpoints_exist remains false in that broader scope.",
+  "runtime_alpha_milestones": {
+    "R01": {
+      "status": "complete",
+      "evidence": "evidence/runtime-alpha/summary.json"
+    },
+    "R02": {
+      "status": "complete",
+      "evidence": "evidence/runtime-alpha/summary.json"
+    },
+    "R03": {
+      "status": "complete",
+      "evidence": "evidence/runtime-alpha/summary.json"
+    },
+    "R04": {
+      "status": "complete",
+      "evidence": "evidence/runtime-alpha/summary.json"
+    }
+  }
 }

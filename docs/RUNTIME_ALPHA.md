@@ -107,7 +107,11 @@ with an unverified external origin, not a reset from the reference field.
 The encoded container carries a versioned header, canonical profile identity,
 bounded payload length, and integrity hashes; the CLI preflights both the
 maximum decoded reservation and the input buffer before reading checkpoint
-bytes. A valid hash proves byte integrity only, not execution provenance.
+bytes. A valid hash proves byte integrity only, not execution provenance. Restart word
+equality is demonstrated within the tested build and execution environment. This
+alpha format binds the numerical configuration and resource schema, not the
+compiler binary or processor identity; cross-release and cross-platform bitwise
+restart guarantees remain unsupported.
 
 Reports include exact remaining time, all charged integration/observation work,
 the last accepted balance terms, pending Simpson state, and any integrated

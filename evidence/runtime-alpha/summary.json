@@ -1,0 +1,154 @@
+{
+  "increment": "usable exact-v2 runtime alpha",
+  "generated_utc": "2026-09-11T03:35:55.490561+00:00",
+  "status": "all local runtime, quality and clean-install gates passed; source-matched hosted CI required before publication",
+  "source_implementation_commit": "672a0dd",
+  "clean_checkout_commit": "fc839781614c288c7e9845ccdadedb04a83d2e9f",
+  "source_inventory": "source-sha256.json",
+  "rust_source_files": 332,
+  "python_source_files": 98,
+  "rust_harness_tests": 425,
+  "rust_allocation_executables": 9,
+  "rust_tests_and_probes": 434,
+  "rust_coverage": {
+    "branches": {
+      "count": 2240,
+      "covered": 1989,
+      "notcovered": 251,
+      "percent": 88.79464285714286
+    },
+    "functions": {
+      "count": 2462,
+      "covered": 2438,
+      "percent": 99.02518277822908
+    },
+    "instantiations": {
+      "count": 5032,
+      "covered": 4124,
+      "percent": 81.95548489666137
+    },
+    "lines": {
+      "count": 29242,
+      "covered": 28822,
+      "percent": 98.56370973257643
+    },
+    "mcdc": {
+      "count": 0,
+      "covered": 0,
+      "notcovered": 0,
+      "percent": 0
+    },
+    "regions": {
+      "count": 55347,
+      "covered": 53128,
+      "notcovered": 2219,
+      "percent": 95.99074927276999
+    }
+  },
+  "rust_maxima": {
+    "cyclomatic": 21.0,
+    "cognitive": 18.0,
+    "halstead_function_and_file": 75.8955223880597,
+    "physical_file_lines": 477,
+    "crap": 24.3359375
+  },
+  "python": {
+    "maintained_sources_identical": 98,
+    "retained_full_test_profile": 220,
+    "bootstrap_tests_rerun": 41,
+    "reference": "python-source-reuse.json",
+    "frozen_math_rerun": true,
+    "hosted_full_suite_required": true
+  },
+  "runtime": {
+    "case": "similarity-mms-v2",
+    "methods": [
+      "CM",
+      "HO"
+    ],
+    "initial_state": "independently evolved from exact zero",
+    "reference_assignments": 0,
+    "independent_dft_fixtures": "N4 M4 full-band, 32 committed attempts, absolute coefficient tolerance 5e-13",
+    "serial_parallel": "all tested coefficient words, history and charged work identical",
+    "checkpoint": "CM and HO next committed step and full canonical archive match uninterrupted execution",
+    "cli": "default 32-step CM/HO, HO save after 16/resume to 32, exact remaining time and independently measured balances",
+    "allocation": "allocation-free admission and first/repeated committed steps; measured serial heap 193600 B under 260120 B plan",
+    "resource_preflight": "complete owner/provider/diagnostics/work history, final remaining-time restriction and checkpoint decode/input budgets",
+    "transactional_refusals": "rejected/refused attempts retain spent work and last committed physical state; terminal status survives import"
+  },
+  "clean_install": {
+    "checkout": "runtime-alpha-clean-EPb5",
+    "source_commit": "fc839781614c288c7e9845ccdadedb04a83d2e9f",
+    "rust_source_hash_count": 332,
+    "python_reuse_hash_count": 98,
+    "repository_checks": "passed",
+    "design_checks": "passed",
+    "cargo_package": "passed",
+    "cargo_install": "passed",
+    "installed_help_version": "passed",
+    "cm_completed": true,
+    "ho_completed": true,
+    "ho_checkpoint_after_16": true,
+    "ho_resume_completed": true,
+    "resume_matches_uninterrupted_after_origin_status_normalization": true,
+    "all_reports_unqualified": true,
+    "accepted_pde_windows": 0
+  },
+  "execution_profile": {
+    "rust": "1.94.0",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_llvm_cov": "0.9.1",
+    "rust_code_analysis": "0.0.25",
+    "host": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "cargo_lock_sha256": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+    "cargo_manifest_sha256": {
+      "Cargo.toml": "150932975971dcae82d989db3dc67c403f54e68668b7c6598569db518b65a703",
+      "crates/nsbu-benchmarks/Cargo.toml": "8471261e0fd06e867ff93e65c3eeaeb8a2edc05ea73219733f410ef5f338edd6",
+      "crates/nsbu-cli/Cargo.toml": "783cc05410e7639e75f6ede37ceb95f00d0512bad9c7fbad1edb456d710a231d",
+      "crates/nsbu-solver/Cargo.toml": "a461e1c8d81c64a34bc24d39a0a3e492cc8fda0d4e1086515218095a30f3a475"
+    },
+    "rust_toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096",
+    "test_profile": {
+      "opt_level": 2,
+      "debug_assertions": true,
+      "overflow_checks": true
+    }
+  },
+  "informational_findings": {
+    "duplicates": {
+      "clones": 116,
+      "duplicatedLines": 1151,
+      "duplicatedTokens": 9682,
+      "lines": 40958,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 2.810195810342302,
+      "percentageTokens": 3.0702296805781493,
+      "sources": 331,
+      "tokens": 315351
+    },
+    "distinct_unused_helper_warning_labels": [
+      "fields `candidate`, `attempts`, and `rhs` are never read",
+      "function `assert_bits` is never used",
+      "function `compare_reconstruction` is never used",
+      "function `compare` is never used",
+      "function `evolve` is never used",
+      "function `fixture` is never used",
+      "function `method` is never used",
+      "function `plan` is never used",
+      "method `advance` is never used"
+    ],
+    "type_escape_identifiers": 0,
+    "mutations": "Not rerun for alpha; earlier mutation reports retained as informational evidence."
+  },
+  "solid_review": "Admission, runtime ownership, force selection, diagnostics, checkpoint encoding/admission, CLI parsing/execution/reporting and release distribution have separate modules. The force adapter implements the existing PrescribedForce contract. Generic balance arithmetic is shared, while independent reference/DFT oracles are preserved.",
+  "limitations": [
+    "Coarse N4 force and spatial sampling do not establish PDE convergence.",
+    "P08/P09 scientific qualification and P10 accepted concentrating windows remain incomplete.",
+    "Checkpoint word equivalence is scoped to the tested build/environment; compiler and processor identity are not authenticated by the v2 container.",
+    "Worker stack/native reservations are execution-profile planning allowances, not universal OS RSS bounds.",
+    "Literal source reproduction, mathematics compiler, averaged-stress surrogate, Niva adapter and visualization are outside this alpha."
+  ],
+  "accepted_pde_windows": 0,
+  "artifact_inventory": "artifact-sha256.json"
+}

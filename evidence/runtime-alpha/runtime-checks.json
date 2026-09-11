@@ -1,5 +1,5 @@
 {
-  "stage": "runtime-functionality-demonstrated; full alpha quality/install/publication gates pending",
+  "stage": "runtime-functionality and all local alpha gates passed; exact-source hosted CI required before publication",
   "base_commit": "6c23cfbbd2d702dba03713203ef4b4cb00b741f7",
   "independent_full_band_fixtures": {
     "profile": "N4 M4, target8192, exponent-20, endpoint4096, step128, attempts32",
@@ -30,9 +30,8 @@
   "release_binary_smoke": "runtime-summary.json",
   "accepted_pde_windows": 0,
   "pending": [
-    "complete workspace coverage/CRAP gate",
-    "fresh source installation and packaging",
     "source-matched hosted CI",
     "first alpha publication"
-  ]
+  ],
+  "complete_evidence": "summary.json"
 }

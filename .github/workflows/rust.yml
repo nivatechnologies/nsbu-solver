@@ -70,14 +70,13 @@ jobs:
           cargo install cargo-llvm-cov --version 0.9.1 --locked
           cargo install rust-code-analysis-cli --version 0.0.25 --locked
           npm ci --prefix quality/rust --ignore-scripts
-      - name: Build, lint, test and package public workspace
+      - name: Build, lint, document and package public workspace
         run: |
           cargo fmt --all -- --check
           cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
           cargo build --workspace --locked
-          cargo test --workspace --locked
           RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps --locked
-          cargo test --workspace --examples --locked
+          cargo test --workspace --doc --locked
           cmp benchmarks/similarity-mms-v2.json crates/nsbu-benchmarks/data/similarity-mms-v2.json
           # A fresh temporary registry avoids stale same-version package cache entries.
           package_target=$(mktemp -d)
@@ -85,9 +84,28 @@ jobs:
           cargo install --path crates/nsbu-cli --locked --root work/install
           work/install/bin/nsbu --help
           work/install/bin/nsbu --version
+          work/install/bin/nsbu v2 --dry-run > work/v2-preflight.json
+          work/install/bin/nsbu v2 > work/v2-cm.json
+          work/install/bin/nsbu v2 --method ho > work/v2-ho.json
+          work/install/bin/nsbu v2 --method ho --checkpoint work/v2.chk --checkpoint-after 16 > work/v2-saved.json
+          work/install/bin/nsbu resume-v2 --method ho --checkpoint work/v2.chk > work/v2-resumed.json
+          python - <<'PYTHON'
+          import json
+          from pathlib import Path
+          reports = {name: json.loads(Path(f"work/v2-{name}.json").read_text())
+                     for name in ("cm", "ho", "resumed")}
+          for report in reports.values():
+              assert report["status"] == "completed" and report["accepted_pde_windows"] == 0
+          expected = reports["ho"]
+          resumed = reports["resumed"]
+          assert expected.pop("origin_status") == "internal_from_rest"
+          assert resumed.pop("origin_status") == "external_unverified"
+          assert expected == resumed
+          PYTHON
       - name: 80 percent executable line and instrumented branch coverage
         run: |
           mkdir -p work
+          # This executes every workspace test and example once with coverage.
           cargo +nightly-2026-03-03 llvm-cov --workspace --all-targets --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/rust-coverage.json
           jq -e '.data[0].totals | .lines.count > 0 and .branches.count > 0 and .lines.percent >= 80 and .branches.percent >= 80' work/rust-coverage.json
       - name: Per-function metrics and complete file scope

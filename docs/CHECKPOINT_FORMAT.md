@@ -66,6 +66,11 @@ execution accounting, not a scientific acceptance decision. See the [runtime
 alpha guide](RUNTIME_ALPHA.md) for the public workflow and its limits. The
 literal source compiler is outside this codec and release scope.
 
+The v2 container does not authenticate compiler or processor identity. Its exact
+restart comparisons cover the tested execution profile. Cross-release/platform
+bitwise equivalence requires separate evidence and is not guaranteed by version
+one or by matching the numerical settings.
+
 ## Artifact archive: `NSBUAR01`
 
 [`checkpoint/archive.rs`](../crates/nsbu-solver/src/checkpoint/archive.rs) stores a canonical

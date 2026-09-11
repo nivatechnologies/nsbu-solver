@@ -11,6 +11,19 @@ gate is enabled. The concentrating experiment workflow remains in progress.
 
 Use Python 3.12. The original package recorded Python 3.12.8; this Linux checkout uses Python 3.12.3, SymPy 1.14.0 and mpmath 1.3.0. The pinned development dependencies are separate from the Rust runtime dependencies.
 
+## Downloaded alpha binary
+
+Dated prereleases are published through the [alpha release workflow](ALPHA_RELEASES.md)
+after its readiness and exact-source CI gates pass. The downloadable binary
+supports Linux x86_64 with GNU/glibc and is tested on Ubuntu 24.04. Its source
+manifest records actual dynamic-library and GLIBC symbol requirements. This
+artifact does not support Alpine/musl, macOS or Windows. Use a source build for
+other environments; those platforms remain unverified.
+
+Extract the complete tar archive, verify its detached checksum and then run
+`sha256sum -c SHA256SUMS` inside the extracted directory. The executable is
+`bin/nsbu`; the rest of the directory is the matching complete source tree.
+
 ## macOS and Linux
 
 Obtain a checkout or extract the source archive, then enter its root directory:

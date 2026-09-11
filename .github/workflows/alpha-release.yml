@@ -31,7 +31,7 @@ defaults:
 jobs:
   release:
     if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out the complete source history
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -143,14 +143,20 @@ jobs:
           mkdir -p "$root/bin"
           install -m 0755 target/x86_64-unknown-linux-gnu/release/nsbu "$root/bin/nsbu"
           strip "$root/bin/nsbu"
+          cargo_version=$(sed -n 's/^version = "\(.*\)"/\1/p' "$root/Cargo.toml" | head -n1)
+          test -n "$cargo_version"
           {
             printf 'repository=%s\n' '${{ github.repository }}'
             printf 'source_commit=%s\n' "$SOURCE_SHA"
             printf 'snapshot_tag=%s\n' "$SNAPSHOT_TAG"
             printf 'checks_workflow=checks.yml\n'
             printf 'rust_workflow=rust.yml\n'
-            printf 'cargo_workspace_version=%s\n' "$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -n1)"
+            printf 'cargo_workspace_version=%s\n' "$cargo_version"
             printf 'target=x86_64-unknown-linux-gnu\n'
+            printf 'runner=ubuntu-24.04\n'
+            printf 'build_glibc=%s\n' "$(getconf GNU_LIBC_VERSION)"
+            printf 'maximum_required_glibc_symbol=%s\n' "$(readelf --version-info "$root/bin/nsbu" | grep -oE 'GLIBC_[0-9.]+' | sort -Vu | tail -n1)"
+            printf 'needed_libraries=%s\n' "$(readelf -d "$root/bin/nsbu" | sed -n 's/.*Shared library: \[\(.*\)\].*/\1/p' | paste -sd, -)"
             printf 'scientific_status=diagnostic-only; unqualified\n'
             printf 'previous_snapshot=%s\n' "${PREVIOUS_TAG:-none}"
           } > "$root/SOURCE-MANIFEST.txt"

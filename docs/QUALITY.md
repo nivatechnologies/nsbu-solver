@@ -549,3 +549,50 @@ large-grid integration or establish mathematical force accuracy.
 P08/P09 remain incomplete. The concentrating workflow still needs complete
 current-grid arithmetic, force/reference/transfer refinements and all-observable
 provenance binding. No concentrating PDE window is accepted.
+
+
+## Runtime alpha · 11 September 2026
+
+[Runtime alpha evidence](../evidence/runtime-alpha/README.md) records all local
+R01–R04 exits on the complete 332-file Rust inventory: 425 harness tests plus
+nine isolated allocation executables (434 tests/probes), and one compiled public
+Rustdoc example. Coverage includes maintained tests and numerical examples;
+only toolchain, registry and build-output paths are excluded.
+
+| Metric | Measured | Required |
+|---|---:|---:|
+| Executable lines | 28,822/29,242 (98.56%) | ≥80% |
+| Instrumented branches | 1,989/2,240 (88.79%) | ≥80% |
+| Maximum cyclomatic complexity | 21 | <22 |
+| Maximum cognitive complexity | 18 | <22 |
+| Maximum function/file Halstead difficulty | 75.8956 | <80 |
+| Maximum physical lines per maintained Rust file | 477 | <500 |
+| Maximum per-function CRAP | 24.33594 | <25 |
+| Type escape identifiers in the declared Rust scan | 0 | 0 |
+
+All 98 maintained Python/stub files match the retained 220-test profile by
+SHA-256; 41 bootstrap tests and the original mathematical verification were
+rerun. This is explicit source-bound reuse, not a claim that the complete Python
+suite was rerun locally for this increment. Hosted CI reruns that suite for the
+release commit. Strict Clippy, formatting, Rustdoc, clean workspace packaging,
+fresh CLI installation, default CM/HO runs and checkpoint/resume all pass.
+
+The SOLID review separates admission, runtime ownership, force selection,
+measurement arithmetic, checkpoint encoding/admission, and CLI parsing,
+execution, reporting and file publication. Serial/parallel force selection
+implements the existing provider contract; independent numerical oracles remain
+independent. Full-band N4 exact-v2 CM/HO trajectories match the independent DFT
+fixtures within 5e-13, and same-build resumed state/ledger words match uninterrupted
+execution. Actual rejection/refusal and corrupt-checkpoint controls also pass.
+
+Informational scans record 116 duplicate blocks and 2.81% duplicate lines within
+jscpd's 331 processed Rust files, and nine distinct unused-helper warning labels.
+These findings are not a universal claim of absence. Mutation sweeps were not
+rerun for the alpha. All original evidence remains available.
+
+Daily CI runs the complete instrumented workspace/all-target suite once,
+including numerical examples, plus stable build/install, Rustdoc and installed
+CM/HO checkpoint/resume checks. This removes redundant executions of the same
+long examples while retaining their coverage and numerical assertions.
+No concentrating PDE window is accepted; coarse-grid agreement and a passing
+quality gate do not establish spatial/force convergence.
