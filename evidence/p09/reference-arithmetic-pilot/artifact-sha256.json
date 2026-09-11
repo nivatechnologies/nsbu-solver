@@ -1,0 +1,10 @@
+{
+  "raw/clippy.log.gz": "9bfa304abcc75d2f46ee7847744ecb8f6fbaac5d585f16502d984d505540a27e",
+  "raw/final-pilot.jsonl.gz": "67fbddcedff893dffa11a2a50472d856f3c1cca6e1b9ab1ebbd53f49f41267b0",
+  "raw/python-cc.json.gz": "e92abaef311c6d9f8b73b0e68f5c75ecfcb26fe10c345d074b96632ff92d7c3c",
+  "raw/python-halstead.json.gz": "e299561f967bbbdf2a68eeed60989dd9ff63c5388d0cc1d8ebfc5906fbbba233",
+  "raw/python-test.log.gz": "259365136f72d7800a4b9059e73cad61a0c74e3858bb45f6df4f92f92b283e72",
+  "raw/rust-metrics.jsonl.gz": "ddd3da428fc8d53c7a5eb7fbc7ce25b503813ed1f05ebb95ed02eebcda76b9f1",
+  "raw/rust-test.log.gz": "cf8c8db20f3d83d5c07bbd3924666e6980cfd073e3b3e45682de08f06ff6c49e",
+  "raw/typecheck.log.gz": "05e5b6d8c1039eb4aa5c4a7e085d494b697cf3a557d1f017073d53ff49873adc"
+}

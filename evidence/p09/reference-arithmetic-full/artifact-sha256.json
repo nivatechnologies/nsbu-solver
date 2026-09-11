@@ -1,0 +1,20 @@
+{
+  "raw/clippy.log.gz": "d0244c1526bbe682f2990009f64739be60c77070a84c93564da6e5386d51078b",
+  "raw/commands.json.gz": "2ac56ccd3f073dec3db8e70fe1adec8d44178a6ec58637f60dd68d085d64071d",
+  "raw/fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+  "raw/full-guarded.jsonl.gz": "a17f80870bc443bec0943f7fa45706588e23ea5319ca01c87d5aa714931cb43c",
+  "raw/full-guarded.time.gz": "880865d2f97e9d3ce8fe02ab06ff4ff7caf20a99fcff1633a61e0630163311f5",
+  "raw/invalid-default-context-partial.jsonl.gz": "81aea277f2079502c7f69dc6bfc0c6cd22e22cf0a01a56f0f3def66cc2bcd2fa",
+  "raw/invalid-default-context-partial.metadata.json.gz": "43c39162434c2110e442db917188d10b8638544072af561529ea1855bfd1ed29",
+  "raw/python-cc.json.gz": "973db0f87d5b26006b3fa48818d45cb409bbeaae8a7ce0b6261008ed77e3eda6",
+  "raw/python-coverage.json.gz": "8cc7a98dca0b866260ac52da75045f824b079a64e69981e999bd6aa77a64305b",
+  "raw/python-crap.json.gz": "26832024421499cd58db251f8bce4b26d7ccee5fa31a126574b6c2cf3f67ef14",
+  "raw/python-halstead.json.gz": "6c6d50ac2dae3cdd2e27c57b50614db95a025e60e2b3045e25361f8137db1ccc",
+  "raw/python-test.log.gz": "0ee790537210502795b3b8133df7c81980e37fc63fce49873d1df393a613abd5",
+  "raw/rust-coverage.json.gz": "35ea25fb13721b39d24d94359c5ab022a437b016752b578e9004c05c388960af",
+  "raw/rust-crap.json.gz": "65e27f216d5471dfb0352bfe889b0e5c4da3f7065c8568970d5ead643ed549b2",
+  "raw/rust-metrics.jsonl.gz": "e671412c9341b67c7b0d214d0a1146a7c6d7327bf2b93ca1805626b5c1341f4e",
+  "raw/rust-test.log.gz": "5b6dc32b412c4005e6ee1644016c84f0d4ad86018a70ff47e12d5613a820ebc3",
+  "raw/rustdoc.log.gz": "1ad043beba04c8dd17866b8cee67d82527fb1c2c952f602d9993f218e6b6dbc9",
+  "raw/typecheck.log.gz": "7673cf47ecf297a30b151ff80feb3b30f71e205edc1c51791328c093824e4bab"
+}

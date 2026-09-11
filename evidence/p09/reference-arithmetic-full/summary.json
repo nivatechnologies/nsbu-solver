@@ -1,0 +1,187 @@
+{
+  "status": "completed guarded empirical reference-arithmetic study",
+  "base_commit": "441da25d79cf51439c5b3e99b43c9828de1ba2db",
+  "scope": "analytical reference-evaluator arithmetic only",
+  "profile": {
+    "grid": [
+      12,
+      12,
+      12
+    ],
+    "tick_exponent": -20,
+    "target_ticks": 8192,
+    "elapsed_ticks": [
+      0,
+      64,
+      128
+    ],
+    "quantities": {
+      "velocity": 3,
+      "gradient": 9,
+      "ordered_hessian": 27,
+      "curl": 3
+    },
+    "precisions": [
+      80,
+      120
+    ],
+    "bindings": [
+      "exact_centered_grid_rationals",
+      "exact_centered_rust_binary64_words"
+    ]
+  },
+  "execution": {
+    "rows": 5184,
+    "active_rows": 1030,
+    "shortcut_rows": 4154,
+    "multiprecision_jet_evaluations": 4120,
+    "rust_reference_evaluator_calls": 10368,
+    "maximum_observed_root_iterations": 8,
+    "internal_seconds": 1684.9314061669866,
+    "wall_seconds": 1685.07,
+    "timeout_seconds": 2700,
+    "rlimit_as_bytes_per_process": 268435456,
+    "time_maximum_rss_kib_nonaggregate": 27648,
+    "output_bytes": 93290,
+    "terminal": "verified"
+  },
+  "hashes": {
+    "rust_rows_sha256": "e937289abe8b155b52e9f334183722c7e6eb487656a087751ed722da0b41ef6a",
+    "value_stream_sha256": {
+      "rational80": "3586a0b6d9a3760c642bb9e6e11dde0a825a4e48b8207aebb86c3dfb1e804904",
+      "word80": "9d0e748234b17444482b6530ef0b5eb05d04b557666a3ed4e45a9da37dc8cf27",
+      "rational120": "e699b7a32a017829f5a85e39f3f8d21c0910491018654ed8a97c7b1e89dc120e",
+      "word120": "f65e91b2782268483ac52cad70b990e5e2624ac025250a572bdcb4347b49d7e7"
+    }
+  },
+  "precision_diagnostic": {
+    "comparison": "80_to_120_digits",
+    "maximum_absolute": "6.26145635811771475714544603742e-83",
+    "criterion": "1e-60",
+    "passed": true,
+    "role": "retained diagnostic, not a binary64 acceptance gate"
+  },
+  "maximum_absolute_measurements": {
+    "rational_80_to_120": {
+      "quantity": "ordered_hessian",
+      "value": "5.81321521570005083321766254723e-83",
+      "witness": {
+        "index": [
+          2,
+          2,
+          8
+        ],
+        "elapsed_ticks": 128,
+        "class": "active",
+        "component": 26,
+        "left": "0.003690402577014175068830977577557436809462",
+        "right": "0.003690402577014175068830977577557436809462"
+      }
+    },
+    "word_80_to_120": {
+      "quantity": "ordered_hessian",
+      "value": "6.26145635811771475714544603742e-83",
+      "witness": {
+        "index": [
+          2,
+          2,
+          4
+        ],
+        "elapsed_ticks": 128,
+        "class": "active",
+        "component": 17,
+        "left": "0.003986930334565001106002031694940141521093",
+        "right": "0.003986930334565001106002031694940141521093"
+      }
+    },
+    "rational_to_word_at_120": {
+      "quantity": "ordered_hessian",
+      "value": "2.84483867746364703261604765007e-17",
+      "witness": {
+        "index": [
+          10,
+          10,
+          4
+        ],
+        "elapsed_ticks": 128,
+        "class": "active",
+        "component": 17,
+        "left": "-0.003986930334564987179933383155841062397846",
+        "right": "-0.003986930334565015628320157792311388558322"
+      }
+    },
+    "rust_binary64_to_word_120": {
+      "quantity": "ordered_hessian",
+      "value": "1.05196815305015347551483874511e-17",
+      "witness": {
+        "index": [
+          10,
+          2,
+          4
+        ],
+        "elapsed_ticks": 128,
+        "class": "active",
+        "component": 8,
+        "left": "-0.003986930334565018559100924022686740499921",
+        "right": "-0.003986930334565008039419393521151985351534"
+      }
+    }
+  },
+  "rms_semantics": "rms_scaled is componentwise RMS of scaled component errors over points times quantity components; it is not the production per-point Frobenius/vector RMS",
+  "invalid_partial": {
+    "retained": true,
+    "last_progress_row": 2176,
+    "active_rows": 232,
+    "terminal": false,
+    "reason": "reductions executed at default mpmath precision; no result or completion claim"
+  },
+  "focused_checks": {
+    "python_tests": "13 passed",
+    "rust_tests": "2 passed",
+    "format": "passed",
+    "targeted_strict_clippy": "passed",
+    "strict_python_typing": "passed",
+    "workspace_rustdoc": "passed",
+    "python_coverage": {
+      "lines": "318/357",
+      "line_percent": 87.63796909492274,
+      "branches": "79/96",
+      "branch_percent": 82.29166666666667
+    },
+    "rust_producer_coverage": {
+      "lines": "93/95",
+      "line_percent": 97.89473684210527,
+      "branches": "10/10",
+      "branch_percent": 100.0
+    },
+    "maximum_crap": {
+      "python_full_driver": 19.9814453125,
+      "rust_producer": 7.0
+    },
+    "maximum_complexity": {
+      "python_cc": 15,
+      "rust_cc": 7,
+      "rust_cognitive": 6
+    },
+    "maximum_halstead_difficulty": {
+      "python_file": 12.5,
+      "python_function": 5.714285714285714,
+      "rust_all_nodes": 44.73863636363637
+    },
+    "physical_lines": {
+      "reference/reference_arithmetic_full.py": 327,
+      "reference/reference_arithmetic_pilot.py": 250,
+      "crates/nsbu-benchmarks/tests/v2_reference_arithmetic_pilot.rs": 121
+    }
+  },
+  "limitations": [
+    "empirical reference-evaluator arithmetic, not an enclosure",
+    "no binary64 acceptance threshold",
+    "no integrator arithmetic",
+    "no continuum bound",
+    "raw pressure and gauge excluded",
+    "no PDE trajectory, convergence, or accepted-window claim",
+    "RLIMIT_AS was 256 MiB per process, not an aggregate cap",
+    "time maximum RSS is not summed parent and child RSS"
+  ]
+}

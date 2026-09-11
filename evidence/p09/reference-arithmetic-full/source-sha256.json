@@ -1,0 +1,18 @@
+{
+  "Cargo.lock": "e56c42bfc7d2fcd041eb88b6f195140ac4846060af1858c7f30cc87ca5322d06",
+  "benchmarks/similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "crates/nsbu-benchmarks/src/fields.rs": "1ab93ec32f70ab4fc5adc37d3bb8c0bf4bfe9b07a457f59fff07e903eb6b45b5",
+  "crates/nsbu-benchmarks/src/fields/reference.rs": "4bd80016cf483604ec7cc9e02e2def1c04acb34a22afe638032dff310434c6f5",
+  "crates/nsbu-benchmarks/src/root.rs": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b",
+  "crates/nsbu-benchmarks/src/scalar.rs": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8",
+  "crates/nsbu-benchmarks/src/time.rs": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06",
+  "crates/nsbu-benchmarks/tests/v2_reference_arithmetic_pilot.rs": "703cf7f5c6b2412c68cc20d8147130bc098b4fc94128581713b8f384baec0b67",
+  "reference/evaluator.py": "fe3cacf02da716114d68a5f5568e12591e111bc7a3eae237c142a80f7f65f6c5",
+  "reference/jets.py": "0f5700dd0428846f7de997d3729731213431cf8211959865f4d28d8a1f2c4e5a",
+  "reference/reference_arithmetic_pilot.py": "5efcab5ae500ea42077152bc0f7719f9b056cd11687b3306649cd10f4da02328",
+  "reference/reference_arithmetic_full.py": "a932af2a88495a82509b40a9e9a461ca1ebff8c15d5dac517ace360e328842bb",
+  "reference/scalar.py": "bce945e1df4a41c3f79842d390702e5abf3d3b8e0d1cf79bb97474b56957f061",
+  "reference/tests/test_reference_arithmetic_pilot.py": "d3044a616215d3e5051d1a9457293c7f7ca199e8e9bd0a423301801a0271f778",
+  "reference/tests/test_reference_arithmetic_full.py": "25cc3f8c1e05b16d96b47d065c1a3f6c1d132248a016d0b242505c72fbb8ef48",
+  "requirements-dev.txt": "4e542775d31fc5d19f67381ae7607eb5732bf2aca47624f26a814daff4482992"
+}
