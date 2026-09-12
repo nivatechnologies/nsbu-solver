@@ -10,6 +10,10 @@ DEADLINE_EPOCH=1789262400
 
 test "$(sha256sum "$BIN" | awk '{print $1}')" = e08b00e6ee420a20a6541b1f4b386fe19e7db0dbace3fdeaf5c9e0ff1689324b
 test "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = 4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b
+# The parser always requires mode plus path; preflight does not consume the
+# placeholder but refuses when it is absent.
+"$BIN" preflight unused >"$LOG_DIR/preflight.stdout"
+test "$(sha256sum "$LOG_DIR/preflight.stdout" | awk '{print $1}')" = 4d024a73177330b60f8001001d4870c99eba986dfd9110c2844b5667f6d0349f
 test ! -e "$OUTPUT_PARENT/state"
 setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" "$BIN" run "$OUTPUT_PARENT/state" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
 TIME_PID=$!

@@ -14,7 +14,7 @@
     "preflight": "n192-preflight.stdout",
     "preflight_sha256": "4d024a73177330b60f8001001d4870c99eba986dfd9110c2844b5667f6d0349f",
     "launch_recipe": "launch-n192.txt",
-    "launch_recipe_sha256": "736c745d1f7c57b2e541bc2b5cee0aa140aecb4bba2d175191ef7b92fecb5f47"
+    "launch_recipe_sha256": "3825ca7db96628704420191cb689532793c39eceae092a2d157486579f479982"
   },
   "n256": {
     "feature": "n256-piecewise-cadv33",
