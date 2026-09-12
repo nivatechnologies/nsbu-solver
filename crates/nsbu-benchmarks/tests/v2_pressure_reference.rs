@@ -5,7 +5,8 @@ use nsbu_benchmarks::{
     v2_experiment::{
         diagnostic::StartupProfile,
         pressure_reference::{
-            GaugeError, ImportedGauge, PressureReferencePlan, PressureReferenceWorkspace,
+            GaugeError, ImportedGauge, PressureReferencePlan, PressureReferenceSample,
+            PressureReferenceWorkspace,
         },
         FamilyError, V2Family,
     },
@@ -125,6 +126,35 @@ fn gauge_is_one_global_constant_and_gradient_is_invariant() {
     assert_ne!(mean.to_bits(), 0.0f64.to_bits());
 }
 
+fn assert_actual_sample(
+    sample: PressureReferenceSample<'_>,
+    expected: u128,
+    family_identity: [u8; 32],
+) {
+    assert_eq!(sample.clock().elapsed(), expected);
+    assert_eq!(sample.family_identity(), family_identity);
+    assert_eq!(sample.sample_layout().dimensions(), [24; 3]);
+    assert_eq!(sample.force_layout().dimensions(), [24; 3]);
+    assert_eq!(sample.gauge().clock(), sample.clock());
+    eprintln!(
+        "clock={expected} branch2_pressure_rms={} branch2_gradient_rms={}",
+        sample.branches()[2].pressure.rms_error,
+        sample.branches()[2].pressure_gradient.rms_error
+    );
+    for (index, branch) in sample.branches().iter().enumerate() {
+        assert_eq!(branch.branch, index);
+        for error in [branch.pressure, branch.pressure_gradient] {
+            assert!(error.rms_error.is_finite());
+            assert!(error.peak_error.is_finite());
+            assert!(error.peak_relative_error.is_finite());
+        }
+    }
+    if expected >= 64 {
+        assert!(sample.branches()[2].pressure.rms_error > 1e-12);
+        assert!(sample.branches()[2].pressure_gradient.rms_error > 1e-10);
+    }
+}
+
 #[test]
 fn actual_accepted_states_publish_all_six_only_after_complete_measurement() {
     let startup = StartupProfile::new().unwrap();
@@ -148,28 +178,7 @@ fn actual_accepted_states_publish_all_six_only_after_complete_measurement() {
     for expected in [0, 64, 128] {
         family.advance().unwrap();
         let sample = workspace.measure(&family).unwrap();
-        assert_eq!(sample.clock().elapsed(), expected);
-        assert_eq!(sample.family_identity(), family_plan.identity());
-        assert_eq!(sample.sample_layout().dimensions(), [24; 3]);
-        assert_eq!(sample.force_layout().dimensions(), [24; 3]);
-        assert_eq!(sample.gauge().clock(), sample.clock());
-        eprintln!(
-            "clock={expected} branch2_pressure_rms={} branch2_gradient_rms={}",
-            sample.branches()[2].pressure.rms_error,
-            sample.branches()[2].pressure_gradient.rms_error
-        );
-        for (index, branch) in sample.branches().iter().enumerate() {
-            assert_eq!(branch.branch, index);
-            for error in [branch.pressure, branch.pressure_gradient] {
-                assert!(error.rms_error.is_finite());
-                assert!(error.peak_error.is_finite());
-                assert!(error.peak_relative_error.is_finite());
-            }
-        }
-        if expected >= 64 {
-            assert!(sample.branches()[2].pressure.rms_error > 1e-12);
-            assert!(sample.branches()[2].pressure_gradient.rms_error > 1e-10);
-        }
+        assert_actual_sample(sample, expected, family_plan.identity());
     }
     assert_eq!(workspace.remaining(), 0);
     assert!(matches!(
