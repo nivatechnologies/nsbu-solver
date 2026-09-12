@@ -1,0 +1,72 @@
+{
+  "scope": "partial bounded diagnostic pilot; no PDE qualification or convergence claim",
+  "source": {
+    "commit": "487c3307037be09e19d151324a2bf96dbc92e83b",
+    "tree": "c0ee53b6a8e6b5666f41a2346b30f99e3b64816a",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "harness_sha256": "278176c7b79493799ca04acaa7d5cd09650290b44ea190ae33a0781ff4a03bd3",
+    "binary_sha256": "cef15b13ca9a1ce9bcd2bcdee288d2fe877722f019e109f00bb14c1c316c42eb"
+  },
+  "profile": {
+    "exponent": -20,
+    "target_ticks": 8192,
+    "endpoint_ticks": 4096,
+    "accepted_ticks": [0, 2048, 4096],
+    "probe_ticks": [0, 2047, 2048, 4095, 4096],
+    "residual_ticks": [2047, 4095],
+    "grids": [12, 16, 24],
+    "steps": [64, 32, 16],
+    "force_samples": 24,
+    "workers": 12,
+    "physical_samples": 24,
+    "reference_samples": 24,
+    "pressure_samples": 48,
+    "high_force_control": "single N12 CM step16 M24-to-M48 pair"
+  },
+  "resources": {
+    "cap_bytes": 4294967296,
+    "combined_admitted_bytes": 1514546011,
+    "diagnostic_joint_bytes": 1393212608,
+    "high_force_run_bytes": 120898776,
+    "archive_buffer_bytes": 429979,
+    "comparison_hash_scratch_bytes": 552,
+    "io_allowance_bytes": 4096
+  },
+  "execution": {
+    "start_utc": "2026-09-12T02:07:22Z",
+    "end_utc": "2026-09-12T03:47:22Z",
+    "timeout_seconds": 6000,
+    "status": 124,
+    "terminal": "partial_timeout",
+    "published_events": [0, 2047, 2048, 4095],
+    "accepted_4096_consumers_returned": true,
+    "accepted_4096_report_printed": false,
+    "endpoint_high_force_control_completed": false,
+    "full_run_max_rss": null
+  },
+  "endpoint_archive_recovery": {
+    "terminal": "complete",
+    "pairs": 5,
+    "wall_seconds": 0.03,
+    "max_rss_kib": 3076,
+    "maximum_pair_reservation_bytes": 194348014,
+    "space_n12_n16": {"l2": 0.46210490660004033, "h1": 22.213794282100803, "vorticity_l2": 22.208987267833496},
+    "space_n16_n24": {"l2": 0.39051181863199025, "h1": 26.79566622262152, "vorticity_l2": 26.79282047179189},
+    "time_64_32": {"l2": 6.561621651540645e-10, "h1": 1.517996590705549e-8},
+    "time_32_16": {"l2": 4.1177065185446655e-11, "h1": 9.603999231301006e-10},
+    "method_cm_ho": {"l2": 2.1407145059886384e-12, "h1": 5.936119038255797e-11}
+  },
+  "clock_2048_force_control": {
+    "m24_hash": "ae1245a87c7e7a81ada6bb37fc0be8c620b5b358bb6a802e2e35633375ffb1ea",
+    "m48_hash": "42b06216f27cc12121b3fb8e1203b98e4a877f5a0aa3fd9e8269a48bb089f015",
+    "l2": 0.3332248325130536,
+    "h1": 9.868231645532276,
+    "vorticity_l2": 9.862603967557515
+  },
+  "limitations": [
+    "No event-5 accepted diagnostic report was serialized.",
+    "No endpoint M24-to-M48 control completed.",
+    "The endpoint spectral comparisons were recovered from validated archives only.",
+    "The observed norms do not establish convergence, force sufficiency, or an accepted PDE window."
+  ]
+}
