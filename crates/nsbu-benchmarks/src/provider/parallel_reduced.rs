@@ -10,6 +10,7 @@ use crate::time::BenchmarkTime;
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
+    spectral::{FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 
@@ -32,6 +33,7 @@ pub struct ParallelReducedV2Force {
     pool: Pool,
     limits: ForceLimits,
     identity: ParallelReducedIdentity,
+    fft_backend: FftBackend,
 }
 
 impl ParallelReducedV2Force {
@@ -66,7 +68,56 @@ impl ParallelReducedV2Force {
                 workers,
                 cap_bytes: cap,
             },
+            fft_backend: FftBackend::OwnedRadix,
         })
+    }
+
+    /// Declare all mutable storage when immutable FFT plans are execution-owned.
+    pub fn preflight_with_fft_backend(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        admission::reduced_limits_with_fft_backend(domain, samples, workers, backend)
+    }
+
+    /// Construct the composite parallel-reduced sampler with an explicit shared FFT catalog.
+    pub fn new_with_catalog(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_fft_backend(domain, samples, workers, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let serial =
+            ReducedV2Force::preflight_with_fft_backend(domain, samples, catalog.backend())?;
+        Ok(Self {
+            inner: ReducedV2Force::new_with_catalog(
+                domain,
+                samples,
+                catalog,
+                serial.storage_bytes,
+            )?,
+            pool: Pool::new(samples, workers, Arithmetic::Reduced)?,
+            limits,
+            identity: ParallelReducedIdentity {
+                retained: domain.layout(),
+                sampled: samples,
+                workers,
+                cap_bytes: cap,
+            },
+            fft_backend: catalog.backend(),
+        })
+    }
+
+    /// Immutable scalar-transform backend used after physical sampling.
+    pub fn fft_backend(&self) -> FftBackend {
+        self.fft_backend
     }
 
     /// Exact retained/sample layouts, persistent worker count and supplied construction cap.

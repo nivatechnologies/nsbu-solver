@@ -10,12 +10,20 @@ use std::alloc::System;
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
+#[cfg(target_arch = "x86_64")]
+fn has_required_avx() -> bool {
+    std::is_x86_feature_detected!("avx")
+        && std::is_x86_feature_detected!("avx2")
+        && std::is_x86_feature_detected!("fma")
+}
+
+#[cfg(not(target_arch = "x86_64"))]
+fn has_required_avx() -> bool {
+    false
+}
+
 fn main() {
-    if !cfg!(target_arch = "x86_64")
-        || !std::is_x86_feature_detected!("avx")
-        || !std::is_x86_feature_detected!("avx2")
-        || !std::is_x86_feature_detected!("fma")
-    {
+    if !has_required_avx() {
         return;
     }
     let layout = Layout::new([96; 3]).unwrap();

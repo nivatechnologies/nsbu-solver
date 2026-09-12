@@ -3,6 +3,18 @@ use nsbu_solver::domain::Layout;
 use nsbu_solver::spectral::{FftBackend, FftCatalog, FftPlan};
 use nsbu_solver::{Complex64, SolverError};
 
+#[cfg(target_arch = "x86_64")]
+fn has_required_avx() -> bool {
+    std::is_x86_feature_detected!("avx")
+        && std::is_x86_feature_detected!("avx2")
+        && std::is_x86_feature_detected!("fma")
+}
+
+#[cfg(not(target_arch = "x86_64"))]
+fn has_required_avx() -> bool {
+    false
+}
+
 fn direct(values: &[f64], dimensions: [usize; 3], mode: [usize; 3]) -> Complex64 {
     let [nx, ny, nz] = dimensions;
     let mut sum = Complex64::new(0.0, 0.0);
@@ -121,11 +133,7 @@ fn mixed_radix_anisotropic_forward_matches_independent_direct_sums() {
 
 #[test]
 fn explicit_avx_backend_matches_direct_dft_and_repeats_bits() {
-    if !cfg!(target_arch = "x86_64")
-        || !std::is_x86_feature_detected!("avx")
-        || !std::is_x86_feature_detected!("avx2")
-        || !std::is_x86_feature_detected!("fma")
-    {
+    if !has_required_avx() {
         return;
     }
     let layout = Layout::new([6; 3]).unwrap();
@@ -173,11 +181,7 @@ fn explicit_avx_backend_has_closed_lengths_caps_and_workspace_identity() {
                 .is_ok()
         );
     }
-    if cfg!(target_arch = "x86_64")
-        && std::is_x86_feature_detected!("avx")
-        && std::is_x86_feature_detected!("avx2")
-        && std::is_x86_feature_detected!("fma")
-    {
+    if has_required_avx() {
         let small = Layout::new([6; 3]).unwrap();
         let small_reservation = FftPlan::reservation_with_backend(small, backend).unwrap();
         let (plan, _) = FftPlan::new_with_backend(layout, backend, reservation).unwrap();
@@ -192,12 +196,58 @@ fn explicit_avx_backend_has_closed_lengths_caps_and_workspace_identity() {
 }
 
 #[test]
+fn same_layout_cross_backend_workspaces_are_checked_before_transform() {
+    if !has_required_avx() {
+        return;
+    }
+    let layout = Layout::new([6; 3]).unwrap();
+    let owned_bytes = FftPlan::reservation(layout).unwrap();
+    let avx_bytes =
+        FftPlan::reservation_with_backend(layout, FftBackend::RustFft6_4_1AvxFma).unwrap();
+    let (owned, mut owned_work) = FftPlan::new(layout, owned_bytes).unwrap();
+    let (avx, mut avx_work) =
+        FftPlan::new_with_backend(layout, FftBackend::RustFft6_4_1AvxFma, avx_bytes).unwrap();
+    let input = (0..layout.real_len())
+        .map(|index| index as f64 / layout.real_len() as f64)
+        .collect::<Vec<_>>();
+    let mut owned_with_avx_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+    let mut avx_with_owned_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+    owned
+        .forward(&input, &mut owned_with_avx_work, &mut avx_work)
+        .unwrap();
+    avx.forward(&input, &mut avx_with_owned_work, &mut owned_work)
+        .unwrap();
+    assert!(owned_with_avx_work.iter().all(|value| value.is_finite()));
+    assert!(avx_with_owned_work.iter().all(|value| value.is_finite()));
+}
+
+#[test]
+fn largest_admitted_avx_lengths_execute_forward_and_inverse() {
+    if !has_required_avx() {
+        return;
+    }
+    for length in [1024, 1152, 1536] {
+        let layout = Layout::new([length, 6, 6]).unwrap();
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        let reservation = FftPlan::reservation_with_backend(layout, backend).unwrap();
+        let (plan, mut work) = FftPlan::new_with_backend(layout, backend, reservation).unwrap();
+        let input = (0..layout.real_len())
+            .map(|index| ((index * 17 + 5) % 251) as f64 / 251.0 - 0.25)
+            .collect::<Vec<_>>();
+        let mut spectrum = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+        let mut restored = vec![0.0; layout.real_len()];
+        plan.forward(&input, &mut spectrum, &mut work).unwrap();
+        plan.inverse(&spectrum, &mut restored, &mut work).unwrap();
+        assert!(input
+            .iter()
+            .zip(restored)
+            .all(|(left, right)| (left - right).abs() < 2e-12));
+    }
+}
+
+#[test]
 fn execution_catalog_is_eager_shared_and_separately_reserved() {
-    if !cfg!(target_arch = "x86_64")
-        || !std::is_x86_feature_detected!("avx")
-        || !std::is_x86_feature_detected!("avx2")
-        || !std::is_x86_feature_detected!("fma")
-    {
+    if !has_required_avx() {
         return;
     }
     let backend = FftBackend::RustFft6_4_1AvxFma;

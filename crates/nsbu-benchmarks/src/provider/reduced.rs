@@ -6,7 +6,7 @@ use crate::{
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
-    spectral::{transfer, FftPlan, FftWorkspace},
+    spectral::{transfer, FftBackend, FftCatalog, FftPlan, FftWorkspace},
     Complex64, SolverError,
 };
 
@@ -27,6 +27,24 @@ pub struct ReducedV2Force {
 impl ReducedV2Force {
     /// Declare complete provider storage and bounded per-request work.
     pub fn preflight(domain: Domain, sampled: Layout) -> Result<ForceLimits, SolverError> {
+        let fft = FftPlan::reservation(sampled)?;
+        Self::preflight_parts(domain, sampled, fft)
+    }
+
+    pub(crate) fn preflight_with_fft_backend(
+        domain: Domain,
+        sampled: Layout,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        let fft = FftPlan::reservation_with_shared_backend(sampled, backend)?;
+        Self::preflight_parts(domain, sampled, fft)
+    }
+
+    fn preflight_parts(
+        domain: Domain,
+        sampled: Layout,
+        fft: usize,
+    ) -> Result<ForceLimits, SolverError> {
         validate(domain, sampled)?;
         let buffers = sampled
             .real_len()
@@ -41,7 +59,7 @@ impl ReducedV2Force {
         let roots = sampled.dimensions()[2]
             .checked_mul(std::mem::size_of::<Option<AxialRoot>>())
             .ok_or(SolverError::SizeOverflow)?;
-        let storage_bytes = FftPlan::reservation(sampled)?
+        let storage_bytes = fft
             .checked_add(buffers)
             .and_then(|n| n.checked_add(roots))
             .and_then(|n| n.checked_add(std::mem::size_of::<Self>() + 12 * 64))
@@ -65,6 +83,30 @@ impl ReducedV2Force {
             return Err(SolverError::ResourceLimit);
         }
         let (plan, workspace) = FftPlan::new(sampled, cap)?;
+        Self::allocate(domain, sampled, limits, plan, workspace)
+    }
+
+    pub(crate) fn new_with_catalog(
+        domain: Domain,
+        sampled: Layout,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_fft_backend(domain, sampled, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let (plan, workspace) = FftPlan::new_from_catalog(sampled, catalog, cap)?;
+        Self::allocate(domain, sampled, limits, plan, workspace)
+    }
+
+    fn allocate(
+        domain: Domain,
+        sampled: Layout,
+        limits: ForceLimits,
+        plan: FftPlan,
+        workspace: FftWorkspace,
+    ) -> Result<Self, SolverError> {
         Ok(Self {
             retained: domain.layout(),
             sampled,

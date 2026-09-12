@@ -1,16 +1,9 @@
 //! Bounded small CPU FFT backend with explicit normalization and owned scratch.
+mod avx;
 use super::radix::transform;
 use crate::storage::filled;
 use crate::{domain::Layout, Complex64, SolverError};
-use rustfft::{Fft, FftDirection};
-use std::sync::Arc;
-
-const AVX_LENGTHS: [usize; 14] = [
-    6, 96, 128, 144, 192, 256, 288, 384, 512, 576, 768, 1024, 1152, 1536,
-];
-const AVX_PLAN_BYTES: usize = 1024 * 1024;
-const AVX_PLAN_COUNT: usize = 6;
-const ALLOCATION_ALLOWANCE: usize = 64;
+pub use avx::FftCatalog;
 
 /// Immutable arithmetic/backend identity for every scalar transform owner.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -21,29 +14,19 @@ pub enum FftBackend {
     RustFft6_4_1AvxFma,
 }
 
+impl FftBackend {
+    /// Refuse an unavailable execution backend without planning or allocating storage.
+    pub fn ensure_available(self) -> Result<(), SolverError> {
+        match self {
+            Self::OwnedRadix => Ok(()),
+            Self::RustFft6_4_1AvxFma => avx::ensure_available(),
+        }
+    }
+}
+
 enum BackendPlan {
     Owned(Vec<Complex64>),
-    Avx(Box<[AvxAxes]>),
-}
-
-struct AvxAxes {
-    forward: [Arc<dyn Fft<f64>>; 3],
-    inverse: [Arc<dyn Fft<f64>>; 3],
-}
-
-struct CatalogEntry {
-    length: usize,
-    forward: Arc<dyn Fft<f64>>,
-    inverse: Arc<dyn Fft<f64>>,
-}
-
-/// Execution-owned immutable one-dimensional plan catalog.
-///
-/// The AVX profile eagerly constructs the complete closed length set. Downstream scalar plans
-/// clone only `Arc` headers and allocate only their declared mutable workspace.
-pub struct FftCatalog {
-    backend: FftBackend,
-    avx: Vec<CatalogEntry>,
+    Avx(Box<[avx::Axes]>),
 }
 
 /// Immutable plan for one explicitly selected scalar-transform backend.
@@ -77,7 +60,7 @@ impl FftPlan {
     ) -> Result<usize, SolverError> {
         match backend {
             FftBackend::OwnedRadix => owned_reservation(layout),
-            FftBackend::RustFft6_4_1AvxFma => avx_reservation(layout),
+            FftBackend::RustFft6_4_1AvxFma => avx::reservation(layout),
         }
     }
 
@@ -98,7 +81,7 @@ impl FftPlan {
         }
         match backend {
             FftBackend::OwnedRadix => owned_new(layout),
-            FftBackend::RustFft6_4_1AvxFma => avx_new(layout),
+            FftBackend::RustFft6_4_1AvxFma => avx::new(layout),
         }
     }
 
@@ -107,7 +90,7 @@ impl FftPlan {
         layout: Layout,
         catalog: &FftCatalog,
     ) -> Result<usize, SolverError> {
-        Self::reservation_with_shared_backend(layout, catalog.backend)
+        Self::reservation_with_shared_backend(layout, catalog.backend())
     }
 
     /// Workspace-only reservation when the enclosing execution owns immutable plans.
@@ -117,7 +100,7 @@ impl FftPlan {
     ) -> Result<usize, SolverError> {
         match backend {
             FftBackend::OwnedRadix => owned_reservation(layout),
-            FftBackend::RustFft6_4_1AvxFma => avx_workspace_reservation(layout),
+            FftBackend::RustFft6_4_1AvxFma => avx::workspace_reservation(layout),
         }
     }
 
@@ -131,9 +114,9 @@ impl FftPlan {
         if reservation > cap {
             return Err(SolverError::ResourceLimit);
         }
-        match catalog.backend {
+        match catalog.backend() {
             FftBackend::OwnedRadix => owned_new(layout),
-            FftBackend::RustFft6_4_1AvxFma => avx_from_catalog(layout, catalog),
+            FftBackend::RustFft6_4_1AvxFma => avx::from_catalog(layout, catalog),
         }
     }
 
@@ -242,9 +225,29 @@ impl FftPlan {
     }
 
     fn validate(&self, real: usize, half: usize, work: &FftWorkspace) -> Result<(), SolverError> {
+        let maximum = self
+            .layout
+            .dimensions()
+            .into_iter()
+            .max()
+            .ok_or(SolverError::InvalidDomain)?;
+        let required_scratch = match &self.backend {
+            BackendPlan::Owned(_) => maximum,
+            BackendPlan::Avx(axes) => axes[0]
+                .forward
+                .iter()
+                .chain(&axes[0].inverse)
+                .map(|plan| plan.get_inplace_scratch_len())
+                .max()
+                .ok_or(SolverError::InvalidDomain)?,
+        };
         if real != self.layout.real_len()
             || half != self.layout.half_len()
             || work.layout != self.layout
+            || work.grid.len() != self.layout.half_len()
+            || work.input.len() != maximum
+            || work.output.len() != maximum
+            || work.scratch.len() < required_scratch
         {
             return Err(SolverError::InvalidPayload);
         }
@@ -288,69 +291,6 @@ impl FftPlan {
                 }
             }
         }
-    }
-}
-
-impl FftCatalog {
-    /// Conservative catalog reservation: one MiB for each direction and admitted length,
-    /// allocator allowance for every catalog slot, and fixed vector/object headers.
-    pub fn reservation(backend: FftBackend) -> Result<usize, SolverError> {
-        match backend {
-            FftBackend::OwnedRadix => Ok(0),
-            FftBackend::RustFft6_4_1AvxFma => AVX_LENGTHS
-                .len()
-                .checked_mul(2)
-                .and_then(|n| n.checked_mul(AVX_PLAN_BYTES + ALLOCATION_ALLOWANCE))
-                .and_then(|n| {
-                    n.checked_add(AVX_LENGTHS.len() * std::mem::size_of::<CatalogEntry>())
-                })
-                .ok_or(SolverError::SizeOverflow),
-        }
-    }
-
-    /// Eagerly construct every admitted plan before numerical workspace allocation.
-    pub fn new(backend: FftBackend, cap: usize) -> Result<Self, SolverError> {
-        if Self::reservation(backend)? > cap {
-            return Err(SolverError::ResourceLimit);
-        }
-        match backend {
-            FftBackend::OwnedRadix => Ok(Self {
-                backend,
-                avx: Vec::new(),
-            }),
-            FftBackend::RustFft6_4_1AvxFma => avx_catalog(),
-        }
-    }
-
-    /// Immutable arithmetic/backend identity of all plans in this catalog.
-    pub fn backend(&self) -> FftBackend {
-        self.backend
-    }
-
-    fn avx_plan(
-        &self,
-        length: usize,
-        direction: FftDirection,
-    ) -> Result<Arc<dyn Fft<f64>>, SolverError> {
-        let entry = self
-            .avx
-            .iter()
-            .find(|entry| entry.length == length)
-            .ok_or(SolverError::InvalidDomain)?;
-        Ok(match direction {
-            FftDirection::Forward => Arc::clone(&entry.forward),
-            FftDirection::Inverse => Arc::clone(&entry.inverse),
-        })
-    }
-}
-
-impl std::fmt::Debug for FftCatalog {
-    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        formatter
-            .debug_struct("FftCatalog")
-            .field("backend", &self.backend)
-            .field("planned_lengths", &self.avx.len())
-            .finish()
     }
 }
 
@@ -417,183 +357,6 @@ fn owned_new(layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError> {
         },
         workspace,
     ))
-}
-
-fn avx_reservation(layout: Layout) -> Result<usize, SolverError> {
-    avx_workspace_reservation(layout)?
-        .checked_add(AVX_PLAN_COUNT * (AVX_PLAN_BYTES + ALLOCATION_ALLOWANCE))
-        .ok_or(SolverError::SizeOverflow)
-}
-
-fn avx_workspace_reservation(layout: Layout) -> Result<usize, SolverError> {
-    let dimensions = layout.dimensions();
-    if dimensions.iter().any(|n| !AVX_LENGTHS.contains(n)) {
-        return Err(SolverError::InvalidDomain);
-    }
-    let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
-    let workspace_elements = layout
-        .half_len()
-        .checked_add(6 * maximum)
-        .ok_or(SolverError::SizeOverflow)?;
-    workspace_elements
-        .checked_mul(std::mem::size_of::<Complex64>())
-        .and_then(|n| n.checked_add(std::mem::size_of::<AvxAxes>() + ALLOCATION_ALLOWANCE))
-        .and_then(|n| {
-            n.checked_add(std::mem::size_of::<FftPlan>() + std::mem::size_of::<FftWorkspace>())
-        })
-        .ok_or(SolverError::SizeOverflow)
-}
-
-#[cfg(target_arch = "x86_64")]
-fn avx_catalog() -> Result<FftCatalog, SolverError> {
-    require_avx()?;
-    let mut planner =
-        rustfft::FftPlannerAvx::<f64>::new().map_err(|_| SolverError::InvalidDomain)?;
-    let mut avx = Vec::new();
-    avx.try_reserve_exact(AVX_LENGTHS.len())
-        .map_err(|_| SolverError::AllocationFailed)?;
-    for length in AVX_LENGTHS {
-        avx.push(CatalogEntry {
-            length,
-            forward: planner.plan_fft(length, FftDirection::Forward),
-            inverse: planner.plan_fft(length, FftDirection::Inverse),
-        });
-    }
-    Ok(FftCatalog {
-        backend: FftBackend::RustFft6_4_1AvxFma,
-        avx,
-    })
-}
-
-#[cfg(not(target_arch = "x86_64"))]
-fn avx_catalog() -> Result<FftCatalog, SolverError> {
-    Err(SolverError::InvalidDomain)
-}
-
-#[cfg(target_arch = "x86_64")]
-fn avx_new(layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError> {
-    require_avx()?;
-    let dimensions = layout.dimensions();
-    let mut planner =
-        rustfft::FftPlannerAvx::<f64>::new().map_err(|_| SolverError::InvalidDomain)?;
-    let forward = dimensions.map(|n| planner.plan_fft(n, FftDirection::Forward));
-    let inverse = dimensions.map(|n| planner.plan_fft(n, FftDirection::Inverse));
-    let required = forward
-        .iter()
-        .chain(&inverse)
-        .map(|plan| plan.get_inplace_scratch_len())
-        .max()
-        .ok_or(SolverError::InvalidDomain)?;
-    let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
-    if required > 4 * maximum {
-        return Err(SolverError::ResourceLimit);
-    }
-    let workspace = FftWorkspace {
-        layout,
-        grid: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
-        input: filled(maximum, Complex64::new(0.0, 0.0))?,
-        output: filled(maximum, Complex64::new(0.0, 0.0))?,
-        scratch: filled(4 * maximum, Complex64::new(0.0, 0.0))?,
-    };
-    Ok((
-        FftPlan {
-            layout,
-            backend: BackendPlan::Avx(boxed_axes(forward, inverse)?),
-            _layout_compatibility: [0; 48],
-        },
-        workspace,
-    ))
-}
-
-fn avx_from_catalog(
-    layout: Layout,
-    catalog: &FftCatalog,
-) -> Result<(FftPlan, FftWorkspace), SolverError> {
-    if catalog.backend != FftBackend::RustFft6_4_1AvxFma {
-        return Err(SolverError::InvalidPayload);
-    }
-    let dimensions = layout.dimensions();
-    if dimensions.iter().any(|n| !AVX_LENGTHS.contains(n)) {
-        return Err(SolverError::InvalidDomain);
-    }
-    let forward = [
-        catalog.avx_plan(dimensions[0], FftDirection::Forward)?,
-        catalog.avx_plan(dimensions[1], FftDirection::Forward)?,
-        catalog.avx_plan(dimensions[2], FftDirection::Forward)?,
-    ];
-    let inverse = [
-        catalog.avx_plan(dimensions[0], FftDirection::Inverse)?,
-        catalog.avx_plan(dimensions[1], FftDirection::Inverse)?,
-        catalog.avx_plan(dimensions[2], FftDirection::Inverse)?,
-    ];
-    avx_parts(layout, forward, inverse)
-}
-
-fn avx_parts(
-    layout: Layout,
-    forward: [Arc<dyn Fft<f64>>; 3],
-    inverse: [Arc<dyn Fft<f64>>; 3],
-) -> Result<(FftPlan, FftWorkspace), SolverError> {
-    let dimensions = layout.dimensions();
-    let required = forward
-        .iter()
-        .chain(&inverse)
-        .map(|plan| plan.get_inplace_scratch_len())
-        .max()
-        .ok_or(SolverError::InvalidDomain)?;
-    let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
-    if required > 4 * maximum {
-        return Err(SolverError::ResourceLimit);
-    }
-    let workspace = FftWorkspace {
-        layout,
-        grid: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
-        input: filled(maximum, Complex64::new(0.0, 0.0))?,
-        output: filled(maximum, Complex64::new(0.0, 0.0))?,
-        scratch: filled(4 * maximum, Complex64::new(0.0, 0.0))?,
-    };
-    Ok((
-        FftPlan {
-            layout,
-            backend: BackendPlan::Avx(boxed_axes(forward, inverse)?),
-            _layout_compatibility: [0; 48],
-        },
-        workspace,
-    ))
-}
-
-#[cfg(target_arch = "x86_64")]
-fn require_avx() -> Result<(), SolverError> {
-    if std::is_x86_feature_detected!("avx")
-        && std::is_x86_feature_detected!("avx2")
-        && std::is_x86_feature_detected!("fma")
-    {
-        Ok(())
-    } else {
-        Err(SolverError::InvalidDomain)
-    }
-}
-
-fn boxed_axes(
-    forward: [Arc<dyn Fft<f64>>; 3],
-    inverse: [Arc<dyn Fft<f64>>; 3],
-) -> Result<Box<[AvxAxes]>, SolverError> {
-    let mut owner = Vec::new();
-    owner
-        .try_reserve_exact(1)
-        .map_err(|_| SolverError::AllocationFailed)?;
-    owner.push(AvxAxes { forward, inverse });
-    Ok(owner.into_boxed_slice())
-}
-
-#[cfg(not(target_arch = "x86_64"))]
-fn require_avx() -> Result<(), SolverError> {
-    Err(SolverError::InvalidDomain)
-}
-
-#[cfg(not(target_arch = "x86_64"))]
-fn avx_new(_layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError> {
-    Err(SolverError::InvalidDomain)
 }
 
 fn roots_for_length(n: usize) -> Result<Vec<Complex64>, SolverError> {

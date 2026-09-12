@@ -83,7 +83,7 @@ impl ParallelV2Force {
         let serial = V2Force::preflight_with_catalog(domain, samples, catalog)?;
         Ok(Self {
             inner: V2Force::new_with_catalog(domain, samples, catalog, serial.storage_bytes)?,
-            pool: pool::Pool::new(samples, workers)?,
+            pool: pool::Pool::new(samples, workers, sampling::Arithmetic::Cartesian)?,
             limits,
         })
     }
