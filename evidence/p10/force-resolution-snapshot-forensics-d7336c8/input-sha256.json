@@ -1,0 +1,14 @@
+{
+  "encoding": "axis-major components 0..2; each complex re then im IEEE-754 binary64 bits, little endian; no metadata",
+  "snapshots": {
+    "m24-n12-clock2048": "ae1245a87c7e7a81ada6bb37fc0be8c620b5b358bb6a802e2e35633375ffb1ea",
+    "m24-n12-clock4096": "b70d219d54b3a58d0e53fd955e54b424176d306470d0ede24471c754a5c33c51",
+    "m48-n12-clock2048": "42b06216f27cc12121b3fb8e1203b98e4a877f5a0aa3fd9e8269a48bb089f015",
+    "m48-n12-clock4096": "1afa69189063eca579f2e234096b11ece162b7c45e2f4768dc22a2c55ecd6b8d",
+    "m48-n16-clock2048": "34ee0dec2b18bb4b78da71a8496a27c740a926109099a92ef2fe99b2d55f65eb",
+    "m48-n16-clock4096": "59cc36292d8eab40244f5dd84db89c382668bce2cdbc5056ab1c7d89f2faa099",
+    "m48-n24-clock2048": "754888cd5b51b8b5705c25e850a68372124719ef32000c8c97ecbe51b913d972",
+    "m48-n24-clock4096": "67196daebf9c3d8dbedd1e48594ade181d34681fe4cb53806337560077e37567",
+    "m96-n12-clock2048": "22d3e26aeacf7089236c2dd1db490b91aeec336a0eb13dd328ec7b35aeb5d38e"
+  }
+}
