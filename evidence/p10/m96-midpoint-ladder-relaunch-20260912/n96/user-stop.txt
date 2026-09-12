@@ -1,0 +1,4 @@
+interrupt_utc=2026-09-12T07:56:10Z
+reason=timeboxed_feasibility_partial_root_directed
+target_timeout_pgid=27794
+post_stop_utc=2026-09-12T07:56:11Z
