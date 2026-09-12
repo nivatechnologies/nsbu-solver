@@ -1,0 +1,9 @@
+{
+  "source_commit": "ddd886474e716d27b472ea8dd4639ea78bb8aff2",
+  "source_hashes": "source-bound in parent commits",
+  "focused_test_count": 1,
+  "records": 28,
+  "steady_allocations": 0,
+  "production_crap_max": 24.05859375,
+  "test_crap_max": 13.125
+}
