@@ -49,9 +49,19 @@ They are not linked into or shipped as part of the planned Rust library/CLI.
 ## Rust workspace and optional quality tools
 
 P01 evaluated rustfft 6.4.1 (MIT OR Apache-2.0) and realfft 3.5.0 (MIT).
-P03 instead uses an original bounded radix-2/3 implementation with explicitly owned
-roots and scratch. The unused workspace pins were removed; neither FFT dependency
-is linked or copied. The alternative spike remains historical P01 evidence.
+The workspace now directly pins rustfft 6.4.1 (MIT OR Apache-2.0) with default
+features disabled and its `avx` feature enabled for the opt-in
+`RustFft6_4_1AvxFma` runtime backend. `FftBackend::OwnedRadix` remains the default
+and comparison backend; the accelerated backend is selected explicitly as documented
+in [FFT backend selection](docs/FFT_BACKENDS.md). The realfft dependency remains
+historical P01 evidence and is not in the workspace dependency graph.
+
+Additional Cargo.lock packages in rustfft's resolved transitive graph are num-integer 0.1.47,
+num-traits 0.2.19, primal-check 0.3.4, strength_reduce 0.2.4 and transpose 0.2.3;
+each declares MIT OR Apache-2.0. num-traits also uses its build dependency autocfg
+1.5.1 (Apache-2.0 OR MIT). The lockfile checksums and the registry package license
+files are authoritative for these separately fetched dependencies; no dependency
+source is vendored or relicensed.
 Separately installed Rust quality tools and their licenses are declared in
 [quality/rust/README.md](quality/rust/README.md); none is a runtime dependency.
 
