@@ -135,6 +135,18 @@ impl<'a> PressureFamilyPlan<'a> {
     pub fn relative_floors(self) -> [f64; 2] {
         self.floors
     }
+    pub(crate) fn family_plan(self) -> FamilyPlan<'a> {
+        self.family
+    }
+    pub(crate) fn diagnostic_domain(self) -> Domain {
+        self.diagnostic
+    }
+    pub(crate) fn force_settings(self) -> ForceSettings {
+        self.force
+    }
+    pub(crate) fn provider_limits(self) -> nsbu_solver::integrators::forcing::ForceLimits {
+        self.provider_limits
+    }
 }
 fn storage(
     source: Domain,
