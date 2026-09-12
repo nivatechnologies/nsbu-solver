@@ -45,7 +45,9 @@ zero but its terminal status was `Failed`, so it supplies no endpoint result.
 The completed [M48 N12/N16/N24 family](evidence/p10/cached-m48-feasibility/README.md)
 and [M96 controls](evidence/p10/m96-spatial-controls/README.md) still show unresolved
 spatial differences; the M96 N16/N24 controls reached only the midpoint before
-timeout. New N24/N32/N48 M96 runs are in progress with explicit deadlines. The
+timeout. The new [N24/N32/N48 M96 runs](evidence/p10/m96-spatial-midpoint-user-pause-def4730/README.md)
+saved clock-2048 snapshots and were stopped for a user-requested hardware pause.
+The adjacent H1 differences increase; no endpoint or accepted window is claimed. The
 force-grid and worker reports remain prescribed-force diagnostics. The historical
 derivative-symmetry correction is archived at source
 `5b583d9678af631ba6a175a0175ccf3da132cc71` with a smaller N12 checkpoint and

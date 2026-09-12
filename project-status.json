@@ -404,12 +404,25 @@
   "exact_v2_partial_review_adapter_evidence": "evidence/p09/v2-review-offstage-reference/README.md",
   "exact_v2_shared_force_table_evidence": "evidence/p10/v2-shared-force-table/README.md",
   "exact_v2_shared_force_table_scope": "Bounded standalone original-force slab table for identical configured force evaluation; trajectory integration through this table has not yet been merged or qualified. It does not change the prescribed source or acceptance criteria.",
-  "reference_spectrum_assessments": ["evidence/p10/reference-spectrum-first-endpoint-d511dbf/README.md", "evidence/p10/reference-spectrum-high-band-9c90c0a/README.md"],
+  "reference_spectrum_assessments": [
+    "evidence/p10/reference-spectrum-first-endpoint-d511dbf/README.md",
+    "evidence/p10/reference-spectrum-high-band-9c90c0a/README.md"
+  ],
   "reference_spectrum_assessments_scope": "Reference-only spectral assessments are diagnostic evidence, not physical sampled RMS, a nominal-volume gate, or a concentrating-window qualification.",
   "exact_v2_force_baseline_binding_exists": true,
   "exact_v2_force_baseline_binding_scope": "Experimental read-only spectral force-family to ordinary-family baseline binding; exact clocks, settings and all coefficient words. Source e1dc2d3 numerical/allocation/static/CRAP gates pass; focused lines98.51%/branches65.22%, maximumCRAP18.779. Focused branch shortfall explicit; required whole-maintained80% line/branch gate passed on31e99a1 (97.98%/87.48%). DiagnosticOnly; no sampled-RMS channel substitution or PDE acceptance.",
   "exact_v2_force_baseline_binding_evidence": "evidence/p09/v2-force-binding/summary.json",
   "experimental_combined_integration_evidence": "evidence/p09/final-integration-20260911/summary.json",
   "combined_diagnostic_hosted_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
-  "combined_diagnostic_hosted_source": "31e99a17f97aec2ee18b26c67f8be88a0e931088"
+  "combined_diagnostic_hosted_source": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "execution_pause": {
+    "status": "paused_for_user_hardware_change",
+    "date_utc": "2026-09-12",
+    "resume_requires_user_instruction": true,
+    "handoff": "evidence/p09/hardware-pause-20260912/README.md",
+    "numerical_evidence": "evidence/p10/m96-user-interruption/summary.json",
+    "midpoint_comparisons": "evidence/p10/m96-spatial-midpoint-user-pause-def4730/summary.json",
+    "accepted_concentrating_windows": 0,
+    "pending_nominal_coverage_gates": "Final export, coverage JSON and CRAP incomplete; interrupted at user request."
+  }
 }
