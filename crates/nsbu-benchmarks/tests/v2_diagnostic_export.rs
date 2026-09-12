@@ -150,6 +150,18 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     let diagnostic = profile.plan(CAP).unwrap();
     let export = DiagnosticExportPlan::new(&profile, diagnostic, CAP).unwrap();
     let export_v2 = DiagnosticExportPlan::new_v2(&profile, diagnostic, CAP).unwrap();
+    let mut mismatched_settings = diagnostic.diagnostic_settings();
+    mismatched_settings.physical_floors[0] *= 2.0;
+    let mismatched_diagnostic = DiagnosticPlan::new(
+        diagnostic.family_plan(),
+        diagnostic.probe_plan(),
+        diagnostic.residual_times(),
+        mismatched_settings,
+        CAP,
+    )
+    .unwrap();
+    let mismatched_export =
+        DiagnosticExportPlan::new_v2(&profile, mismatched_diagnostic, CAP).unwrap();
     assert_eq!(
         (export.schema_version(), export_v2.schema_version()),
         (1, 2)
@@ -169,6 +181,11 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     let mut untouched = Vec::new();
     assert!(matches!(
         write_json(export, &driver.reports()[..6], &mut untouched),
+        Err(DiagnosticExportError::InvalidReport)
+    ));
+    assert!(untouched.is_empty());
+    assert!(matches!(
+        write_json(mismatched_export, driver.reports(), &mut untouched),
         Err(DiagnosticExportError::InvalidReport)
     ));
     assert!(untouched.is_empty());
