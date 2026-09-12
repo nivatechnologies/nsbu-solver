@@ -286,6 +286,19 @@ fn main() {
         ),
         Err(AdapterError::InvalidInput)
     );
+    let mut wrong_tracking_layout = profile();
+    wrong_tracking_layout.tracking_samples = Layout::new([16; 3]).unwrap();
+    assert_eq!(
+        extract(
+            admitted,
+            wrong_tracking_layout,
+            &events,
+            bounds.records,
+            bounds.transactional_bytes,
+            &mut output
+        ),
+        Err(AdapterError::InvalidInput)
+    );
     assert_eq!(
         extract(
             admitted,

@@ -45,6 +45,40 @@ fn validate_probe_reference(
     profile: ReviewProfile,
 ) -> Result<(), AdapterError> {
     let sample = event.reconstructed_reference();
+    validate_reference_identity(event, sample)?;
+    validate_reference_profile(sample, profile)?;
+    validate_reference_branches(plan, sample)
+}
+
+fn validate_reference_identity(
+    event: DiagnosticEvent,
+    sample: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+) -> Result<(), AdapterError> {
+    require(
+        sample.clock() == event.clock()
+            && sample.identity() == event.probe_identity()
+            && sample.reconstruction().clock() == event.probe().clock()
+            && sample.reconstruction().identity() == event.probe().identity()
+            && sample.origins() == event.probe().origins()
+            && sample.case_sha256() == crate::CASE_SHA256,
+    )
+}
+
+fn validate_reference_profile(
+    sample: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+    profile: ReviewProfile,
+) -> Result<(), AdapterError> {
+    require(
+        sample.sample_layout() == profile.tracking_samples
+            && sample.relative_floors().map(f64::to_bits)
+                == profile.relative_floors.map(f64::to_bits),
+    )
+}
+
+fn validate_reference_branches(
+    plan: DiagnosticPlan<'_>,
+    sample: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+) -> Result<(), AdapterError> {
     let domains = std::array::from_fn(|index| {
         plan.family_plan()
             .branch_plan(index)
@@ -54,16 +88,7 @@ fn validate_probe_reference(
     });
     let quantities = OBSERVABLES.map(|item| item.quantity);
     require(
-        sample.clock() == event.clock()
-            && sample.identity() == event.probe_identity()
-            && sample.reconstruction().clock() == event.probe().clock()
-            && sample.reconstruction().identity() == event.probe().identity()
-            && sample.origins() == event.probe().origins()
-            && sample.case_sha256() == crate::CASE_SHA256
-            && sample.source_domains() == domains
-            && sample.sample_layout() == profile.tracking_samples
-            && sample.relative_floors().map(f64::to_bits)
-                == profile.relative_floors.map(f64::to_bits)
+        sample.source_domains() == domains
             && sample.branches().map(|branch| branch.branch) == std::array::from_fn(|index| index)
             && sample
                 .branches()
