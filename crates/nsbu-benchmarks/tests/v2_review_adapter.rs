@@ -126,7 +126,8 @@ fn assert_offstage(record: AdapterRecord, event: DiagnosticEvent, quantity: usiz
         record.availability,
         RecordAvailability::OffstagePhysicalMeasured
     );
-    assert!(record.tracking_error.is_none());
+    let tracking = event.reconstructed_reference().branches()[2].quantities[quantity];
+    assert_bits(record.tracking_error.unwrap(), tracking.error.rms_error);
     let physical = event.reconstructed_physical().quantities()[quantity];
     let Evidence::Sequence(space) = record.channels[Channel::Space as usize] else {
         panic!("space missing")

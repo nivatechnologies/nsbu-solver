@@ -93,7 +93,7 @@ pub struct AdapterRecord {
     pub observable: GlobalRmsObservable,
     /// Accepted or off-stage schedule classification.
     pub availability: RecordAvailability,
-    /// Finest-CM analytical discrepancy; absent at off-stage clocks.
+    /// Finest-CM sampled analytical discrepancy at this actual event clock.
     pub tracking_error: Option<f64>,
     /// Every generic channel in public `CHANNELS` order; eight remain missing when accepted.
     pub channels: [Evidence; 11],
@@ -246,6 +246,8 @@ fn map(event: DiagnosticEvent, quantity: usize) -> Mapped {
     let Some(accepted) = event.accepted().sample() else {
         let residual: ResidualFamilySample = event.residual().sample().expect("validated residual");
         let physical = event.reconstructed_physical().quantities()[quantity];
+        let tracking =
+            event.reconstructed_reference().branches()[FINEST_CM_BRANCH].quantities[quantity];
         let mut channels = [Evidence::Missing; 11];
         channels[Channel::Space as usize] =
             Evidence::Sequence([physical.pairs[0].rms_error, physical.pairs[1].rms_error]);
@@ -254,7 +256,7 @@ fn map(event: DiagnosticEvent, quantity: usize) -> Mapped {
         channels[Channel::Method as usize] = Evidence::Pair(physical.pairs[4].rms_error);
         return (
             RecordAvailability::OffstagePhysicalMeasured,
-            None,
+            Some(tracking.error.rms_error),
             channels,
             Some(residual.temporal_geometry()),
         );

@@ -24,6 +24,7 @@ pub(super) fn validate(
     for &event in events {
         validate_identity(event, family.identity(), plan.probe_plan().identity())?;
         validate_probe_physical(event, plan, profile)?;
+        validate_probe_reference(event, plan, profile)?;
         if accepted_times.contains(&event.clock()) {
             validate_accepted(
                 event,
@@ -36,6 +37,39 @@ pub(super) fn validate(
         }
     }
     Ok(())
+}
+
+fn validate_probe_reference(
+    event: DiagnosticEvent,
+    plan: DiagnosticPlan<'_>,
+    profile: ReviewProfile,
+) -> Result<(), AdapterError> {
+    let sample = event.reconstructed_reference();
+    let domains = std::array::from_fn(|index| {
+        plan.family_plan()
+            .branch_plan(index)
+            .unwrap()
+            .resources()
+            .domain()
+    });
+    let quantities = OBSERVABLES.map(|item| item.quantity);
+    require(
+        sample.clock() == event.clock()
+            && sample.identity() == event.probe_identity()
+            && sample.reconstruction().clock() == event.probe().clock()
+            && sample.reconstruction().identity() == event.probe().identity()
+            && sample.origins() == event.probe().origins()
+            && sample.case_sha256() == crate::CASE_SHA256
+            && sample.source_domains() == domains
+            && sample.sample_layout() == profile.tracking_samples
+            && sample.relative_floors().map(f64::to_bits)
+                == profile.relative_floors.map(f64::to_bits)
+            && sample.branches().map(|branch| branch.branch) == std::array::from_fn(|index| index)
+            && sample
+                .branches()
+                .iter()
+                .all(|branch| branch.quantities.map(|item| item.quantity) == quantities),
+    )
 }
 
 fn validate_probe_physical(
