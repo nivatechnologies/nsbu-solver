@@ -1,6 +1,6 @@
 {
   "schema": "p10-force-grid-n384-rank-v1",
-  "scope": {"purpose": "rank M384 versus M512 at retained N384", "force_sufficiency": false, "trajectory_qualification": false, "nonlinear_error_bound": false, "accepted_pde_windows": 0},
+  "scope": {"purpose": "use M384 as the cheap feasibility baseline and M512 as its refinement partner at retained N384", "force_sufficiency": false, "trajectory_qualification": false, "nonlinear_error_bound": false, "accepted_pde_windows": 0},
   "identity": {
     "base_source": "baf54face1194447496f58d60d314e58a1329146",
     "source_bound_harness": "ca33892df5c5dfd7d15a5aeeb82382791dbfddfd",
@@ -34,7 +34,8 @@
     "fine_m512_norms": {"l2": 3441.4613597929915, "h1": 556561.979029213, "vorticity_l2": 556543.5701020226, "divergence_l2": 2940.6759100543},
     "raw_full_over_fine": [6.39884996519828422e-4, 5.18324487874087005e-3, 2.94852335330155662e-3, 8.06821119906583784e-1],
     "leray_projected_difference": {"l2": 1.3175466287891247, "h1": 1640.9822421544059, "vorticity_l2": 1640.981713575636, "divergence_l2": 2.377852353868065e-13},
-    "stokes_response": {"time_ticks": 4096, "time": 0.00390625, "zero_mode_factor": 0.00390625, "l2": 9.108013397637507e-7, "h1": 0.0010809685444601123, "vorticity_l2": 0.0010809681610382674, "divergence_l2": 1.3772153330178926e-19}
+    "stokes_response": {"time_ticks": 4096, "time": 0.00390625, "zero_mode_factor": 0.00390625, "l2": 9.108013397637507e-7, "h1": 0.0010809685444601123, "vorticity_l2": 0.0010809681610382674, "divergence_l2": 1.3772153330178926e-19, "h1_fraction_of_allocated_absolute_force_budget": 0.142},
+    "ranking_role": {"feasibility_baseline_m": 384, "refinement_partner_m": 512, "m512_mandatory_baseline": false}
   },
   "commands": {
     "build": "RUN_SOURCE=ca33892df5c5dfd7d15a5aeeb82382791dbfddfd ANALYZER_SOURCE=ca33892df5c5dfd7d15a5aeeb82382791dbfddfd cargo build --release --manifest-path evidence/p10/force-grid-n384-baf54fa/harness/Cargo.toml",
