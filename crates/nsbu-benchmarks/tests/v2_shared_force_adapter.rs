@@ -359,7 +359,20 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     );
     assert_eq!(wrong_clock.charged_work().attempts, 1);
     assert!(wrong_clock.is_terminated());
-    let _last = owner.adapter(2).unwrap();
+    let mut wrong_limit = owner.adapter(2).unwrap();
+    let limits = wrong_limit.limits().unwrap();
+    let altered = nsbu_solver::integrators::forcing::ForceLimits {
+        work_units: limits.work_units + 1,
+        ..limits
+    };
+    assert_eq!(
+        wrong_limit.begin_attempt(clock(0), STEP, altered),
+        Err(nsbu_solver::SolverError::ProviderBudgetExceeded)
+    );
+    assert_eq!(
+        wrong_limit.begin_attempt(clock(0), STEP, limits),
+        Err(nsbu_solver::SolverError::ProviderBudgetExceeded)
+    );
     assert!(matches!(
         owner.adapter(2),
         Err(nsbu_solver::SolverError::InvalidIndex)
@@ -393,4 +406,68 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     assert_eq!(incomplete.charged_work().schedule_visits, 24);
     assert!(incomplete.is_terminated());
     assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
+
+    let owner = SharedForceAdapterSet::new(set).unwrap();
+    let mut unopened = owner.adapter(0).unwrap();
+    let limits = unopened.limits().unwrap();
+    let mut coarse = std::array::from_fn(|_| {
+        vec![nsbu_solver::Complex64::new(0.0, 0.0); retained[0].layout().half_len()]
+    });
+    assert_eq!(
+        unopened
+            .evaluate(clock(0), limits, coarse.each_mut().map(Vec::as_mut_slice))
+            .unwrap_err(),
+        nsbu_solver::SolverError::InvalidPayload
+    );
+    let mut wrong_stage = owner.adapter(1).unwrap();
+    let limits = wrong_stage.limits().unwrap();
+    wrong_stage.begin_attempt(clock(0), STEP, limits).unwrap();
+    let mut middle = std::array::from_fn(|_| {
+        vec![nsbu_solver::Complex64::new(0.0, 0.0); retained[1].layout().half_len()]
+    });
+    assert_eq!(
+        wrong_stage
+            .evaluate(
+                clock(STEP / 4),
+                limits,
+                middle.each_mut().map(Vec::as_mut_slice)
+            )
+            .unwrap_err(),
+        nsbu_solver::SolverError::InvalidPayload
+    );
+    let mut malformed = owner.adapter(2).unwrap();
+    let limits = malformed.limits().unwrap();
+    malformed.begin_attempt(clock(0), STEP, limits).unwrap();
+    let mut short = std::array::from_fn(|_| vec![nsbu_solver::Complex64::new(0.0, 0.0); 1]);
+    assert_eq!(
+        malformed
+            .evaluate(clock(0), limits, short.each_mut().map(Vec::as_mut_slice))
+            .unwrap_err(),
+        nsbu_solver::SolverError::InvalidPayload
+    );
+    assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
+
+    let owner = SharedForceAdapterSet::new(set).unwrap();
+    let mut exhausted = owner.adapter(0).unwrap();
+    let limits = exhausted.limits().unwrap();
+    exhausted.begin_attempt(clock(0), STEP, limits).unwrap();
+    let mut output = std::array::from_fn(|_| {
+        vec![nsbu_solver::Complex64::new(0.0, 0.0); retained[0].layout().half_len()]
+    });
+    for requested in requested(attempts[0]) {
+        exhausted
+            .evaluate(requested, limits, output.each_mut().map(Vec::as_mut_slice))
+            .unwrap();
+    }
+    assert_eq!(
+        exhausted
+            .evaluate(
+                clock(STEP),
+                limits,
+                output.each_mut().map(Vec::as_mut_slice)
+            )
+            .unwrap_err(),
+        nsbu_solver::SolverError::ProviderBudgetExceeded
+    );
+    assert_eq!(exhausted.charged_work().calls, 12);
 }

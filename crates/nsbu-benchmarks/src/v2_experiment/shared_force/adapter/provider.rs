@@ -1,6 +1,6 @@
 //! Allocation-free prescribed-force handle over a fallibly borrowed table.
 use super::{call_schedule, SharedForceAdapterWork, SharedForceStream, MAXIMUM_CALLS};
-use crate::v2_experiment::shared_force::{SharedForceBinding, SharedForceError, SharedForceTable};
+use crate::v2_experiment::shared_force::{SharedForceBinding, SharedForceTable};
 use nsbu_solver::{
     domain::TickClock,
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
@@ -82,6 +82,13 @@ impl SharedForceAdapter<'_, '_, '_> {
         limit: ForceLimits,
         output: [&mut [Complex64]; 3],
     ) -> Result<ForceWork, SolverError> {
+        self.charge_call()?;
+        self.validate_request(clock, limit, &output)?;
+        self.copy(clock, output)?;
+        self.complete_call()
+    }
+
+    fn charge_call(&mut self) -> Result<(), SolverError> {
         if self.charged.calls == self.stream.maximum_calls {
             return Err(SolverError::ProviderBudgetExceeded);
         }
@@ -100,6 +107,15 @@ impl SharedForceAdapter<'_, '_, '_> {
             .binding_checks
             .checked_add(4)
             .ok_or(SolverError::SizeOverflow)?;
+        Ok(())
+    }
+
+    fn validate_request(
+        &self,
+        clock: TickClock,
+        limit: ForceLimits,
+        output: &[&mut [Complex64]; 3],
+    ) -> Result<(), SolverError> {
         if limit != self.limits
             || self.next_call >= self.expected_calls
             || self.expected[self.next_call] != Some(clock)
@@ -109,20 +125,27 @@ impl SharedForceAdapter<'_, '_, '_> {
         {
             return Err(SolverError::InvalidPayload);
         }
+        Ok(())
+    }
+
+    fn copy(&self, clock: TickClock, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
         let mut table = self
             .table
             .try_borrow_mut()
             .map_err(|_| SolverError::ProviderBudgetExceeded)?;
-        let report = table
+        table
             .copy(self.binding, clock, output)
-            .map_err(map_table_error)?;
+            .map_err(|_| SolverError::ProviderBudgetExceeded)?;
+        Ok(())
+    }
+
+    fn complete_call(&mut self) -> Result<ForceWork, SolverError> {
         self.next_call += 1;
         self.charged.table_work_units = self
             .charged
             .table_work_units
             .checked_add(self.limits.work_units)
             .ok_or(SolverError::SizeOverflow)?;
-        let _ = report;
         Ok(ForceWork {
             work_units: self.limits.work_units,
             scalar_transforms: 0,
@@ -175,14 +198,5 @@ impl PrescribedForce for SharedForceAdapter<'_, '_, '_> {
                 Err(error)
             }
         }
-    }
-}
-
-fn map_table_error(error: SharedForceError) -> SolverError {
-    match error {
-        SharedForceError::Numerical(error) => error,
-        SharedForceError::ForeignBinding => SolverError::InvalidPayload,
-        SharedForceError::UnexpectedRequest => SolverError::InvalidClock,
-        SharedForceError::Terminated => SolverError::ProviderBudgetExceeded,
     }
 }
