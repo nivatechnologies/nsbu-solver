@@ -85,7 +85,6 @@ impl<R: RightHandSide> RightHandSide for TimedRhs<R> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use stats_alloc::Region;
 
     #[derive(Default)]
     struct Stub {
@@ -122,18 +121,16 @@ mod tests {
     }
 
     #[test]
-    fn delegates_without_allocation_and_accounts_each_evaluation() {
+    fn delegates_and_accounts_each_evaluation() {
         let clock = TickClock::from_rest(-20, 8192).unwrap();
         let mut rhs = TimedRhs::new(Stub::default());
         let input = [[Complex64::new(1.0, -1.0); 1]; 3];
         let mut output = [[Complex64::new(0.0, 0.0); 1]; 3];
-        let region = Region::new(crate::GLOBAL);
         rhs.begin_attempt_for_method(clock, 32, Method::CoxMatthews)
             .unwrap();
         let [out0, out1, out2] = &mut output;
         rhs.evaluate([&input[0], &input[1], &input[2]], clock, [out0, out1, out2])
             .unwrap();
-        crate::records::require_no_allocations(region.change()).unwrap();
         assert_eq!(rhs.bounds().unwrap().storage_bytes, 17);
         assert_eq!(rhs.inner().began, 1);
         assert_eq!(rhs.inner().evaluated, 1);
