@@ -254,20 +254,23 @@ fn verify_arithmetic_control(manifest_path: &Path, manifest: &Manifest) -> Resul
     let Some(control) = &manifest.arithmetic_control else {
         return Ok(());
     };
-    if control.schema != "p10-time-arithmetic-control-v1"
-        || control.outcome != "successful-exact-bit"
-        || !is_hex(&control.evidence_sha256, 64)
-        || !valid_arithmetic_side(&control.left)
-        || !valid_arithmetic_side(&control.right)
-    {
+    if !is_hex(&control.evidence_sha256, 64) || !valid_arithmetic_review(&control.review) {
         return Err("invalid arithmetic-control binding".into());
     }
-    verify_bounded_hash(
+    let bytes = read_bounded(
         &beside(manifest_path, &control.evidence),
-        &control.evidence_sha256,
+        MAX_PLAN_BYTES,
         "arithmetic control exceeds 1 MiB bound",
-        "arithmetic-control SHA-256 mismatch",
-    )
+    )?;
+    if format!("{:x}", Sha256::digest(&bytes)) != control.evidence_sha256 {
+        return Err("arithmetic-control SHA-256 mismatch".into());
+    }
+    let reviewed: crate::model::ArithmeticReview =
+        serde_json::from_slice(&bytes).map_err(|_| "invalid arithmetic-control evidence schema")?;
+    if reviewed != control.review {
+        return Err("arithmetic-control evidence content mismatch".into());
+    }
+    Ok(())
 }
 
 fn valid_arithmetic_side(side: &crate::model::ArithmeticSide) -> bool {
@@ -275,6 +278,30 @@ fn valid_arithmetic_side(side: &crate::model::ArithmeticSide) -> bool {
         && !side.backend.is_empty()
         && !side.execution.is_empty()
         && !side.profile.is_empty()
+}
+
+fn valid_arithmetic_review(review: &crate::model::ArithmeticReview) -> bool {
+    review.schema == "p10-time-arithmetic-review-v1"
+        && review.conclusion == "reviewed-equivalence-supported-by-controls"
+        && is_hex(&review.case_sha256, 64)
+        && review.method == "cox-matthews"
+        && review.integration_force_dimensions == [384; 3]
+        && valid_measured_control(&review.measured_control)
+        && valid_reviewed_lineage(&review.reviewed_lineage)
+}
+
+fn valid_measured_control(control: &crate::model::MeasuredControl) -> bool {
+    control.outcome == "successful-exact-bit"
+        && valid_arithmetic_side(&control.serial)
+        && valid_arithmetic_side(&control.w3)
+}
+
+fn valid_reviewed_lineage(lineage: &crate::model::ReviewedLineage) -> bool {
+    lineage.status == "reviewed-unchanged-kernel-lineage"
+        && lineage.left_control_role == "serial"
+        && lineage.right_control_role == "w3"
+        && valid_arithmetic_side(&lineage.left)
+        && valid_arithmetic_side(&lineage.right)
 }
 
 fn verify_bounded_hash(

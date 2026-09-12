@@ -61,10 +61,37 @@ pub(crate) struct AdmissionGuard {
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct ArithmeticControl {
-    pub schema: String,
     pub evidence: PathBuf,
     pub evidence_sha256: String,
+    pub review: ArithmeticReview,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct ArithmeticReview {
+    pub schema: String,
+    pub conclusion: String,
+    pub case_sha256: String,
+    pub method: String,
+    pub integration_force_dimensions: [usize; 3],
+    pub measured_control: MeasuredControl,
+    pub reviewed_lineage: ReviewedLineage,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct MeasuredControl {
     pub outcome: String,
+    pub serial: ArithmeticSide,
+    pub w3: ArithmeticSide,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct ReviewedLineage {
+    pub status: String,
+    pub left_control_role: String,
+    pub right_control_role: String,
     pub left: ArithmeticSide,
     pub right: ArithmeticSide,
 }
@@ -169,11 +196,15 @@ pub(crate) struct Output<'a> {
     pub left_execution: &'a str,
     pub left_source_commit: &'a str,
     pub left_plan_sha256: &'a str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub left_admission_guard: Option<&'a AdmissionGuard>,
     pub right_identity: &'a str,
     pub right_backend: &'a str,
     pub right_execution: &'a str,
     pub right_source_commit: &'a str,
     pub right_plan_sha256: &'a str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub right_admission_guard: Option<&'a AdmissionGuard>,
     pub left_hashes: Hashes<'a>,
     pub right_hashes: Hashes<'a>,
     pub clock: ClockOutput,

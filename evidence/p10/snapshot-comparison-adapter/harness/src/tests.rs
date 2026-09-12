@@ -1,7 +1,7 @@
 use super::{compare, decode};
 use crate::model::{
-    AdmissionGuard, ArithmeticControl, ArithmeticSide, ClockHeader, ComparisonKind, Evolution,
-    Manifest, ScheduleSegment,
+    AdmissionGuard, ArithmeticControl, ArithmeticReview, ArithmeticSide, ClockHeader,
+    ComparisonKind, Evolution, Manifest, MeasuredControl, ReviewedLineage, ScheduleSegment,
 };
 use nsbu_solver::{diagnostics::comparison::ComparisonPlan, domain::Layout, Complex64};
 use sha2::{Digest, Sha256};
@@ -90,28 +90,53 @@ fn enable_time(left: &mut Manifest, right: &mut Manifest, root: &std::path::Path
         advective_limit: 3.3,
         maximum_attempts: 3,
     });
-    let evidence = root.join("serial-w3-exact-bit-control.json");
-    fs::write(&evidence, b"{\"outcome\":\"successful-exact-bit\"}\n").unwrap();
+    let review = ArithmeticReview {
+        schema: "p10-time-arithmetic-review-v1".into(),
+        conclusion: "reviewed-equivalence-supported-by-controls".into(),
+        case_sha256: left.evolution.case_sha256.clone(),
+        method: left.evolution.method.clone(),
+        integration_force_dimensions: left.evolution.integration_force_dimensions,
+        measured_control: MeasuredControl {
+            outcome: "successful-exact-bit".into(),
+            serial: ArithmeticSide {
+                source_commit: "8".repeat(40),
+                backend: "measured-serial-backend".into(),
+                execution: "measured-serial-execution".into(),
+                profile: "measured-n4-m384-serial-81bd".into(),
+            },
+            w3: ArithmeticSide {
+                source_commit: "f".repeat(40),
+                backend: "measured-w3-backend".into(),
+                execution: "measured-w3-execution".into(),
+                profile: "measured-n4-m384-w3-f13".into(),
+            },
+        },
+        reviewed_lineage: ReviewedLineage {
+            status: "reviewed-unchanged-kernel-lineage".into(),
+            left_control_role: "serial".into(),
+            right_control_role: "w3".into(),
+            left: ArithmeticSide {
+                source_commit: left.source_commit.clone(),
+                backend: left.backend.clone(),
+                execution: left.execution.clone(),
+                profile: left.profile.clone().unwrap(),
+            },
+            right: ArithmeticSide {
+                source_commit: right.source_commit.clone(),
+                backend: right.backend.clone(),
+                execution: right.execution.clone(),
+                profile: right.profile.clone().unwrap(),
+            },
+        },
+    };
+    let evidence = root.join("serial-w3-arithmetic-review.json");
+    let mut evidence_bytes = serde_json::to_vec_pretty(&review).unwrap();
+    evidence_bytes.push(b'\n');
+    fs::write(&evidence, &evidence_bytes).unwrap();
     let control = ArithmeticControl {
-        schema: "p10-time-arithmetic-control-v1".into(),
-        evidence: PathBuf::from("serial-w3-exact-bit-control.json"),
-        evidence_sha256: format!(
-            "{:x}",
-            Sha256::digest(b"{\"outcome\":\"successful-exact-bit\"}\n")
-        ),
-        outcome: "successful-exact-bit".into(),
-        left: ArithmeticSide {
-            source_commit: left.source_commit.clone(),
-            backend: left.backend.clone(),
-            execution: left.execution.clone(),
-            profile: left.profile.clone().unwrap(),
-        },
-        right: ArithmeticSide {
-            source_commit: right.source_commit.clone(),
-            backend: right.backend.clone(),
-            execution: right.execution.clone(),
-            profile: right.profile.clone().unwrap(),
-        },
+        evidence: PathBuf::from("serial-w3-arithmetic-review.json"),
+        evidence_sha256: format!("{:x}", Sha256::digest(&evidence_bytes)),
+        review,
     };
     left.arithmetic_control = Some(control.clone());
     right.arithmetic_control = Some(control);
@@ -324,21 +349,6 @@ fn rejects_profile_clock_domain_direction_and_cap() {
         .unwrap_err()
         .contains("semantics mismatch"));
     right.evolution = left.evolution.clone();
-    left.admission_guard = Some(AdmissionGuard {
-        advective_limit: 0.45,
-        maximum_attempts: 2,
-    });
-    right.admission_guard = left.admission_guard.clone();
-    assert!(compare::compare(&left, &ls, &right, &rs, 0).is_ok());
-    right.admission_guard.as_mut().unwrap().advective_limit = 0.5;
-    assert!(compare::compare(&left, &ls, &right, &rs, 0)
-        .unwrap_err()
-        .contains("guard mismatch"));
-    right.admission_guard = None;
-    assert!(compare::compare(&left, &ls, &right, &rs, 0)
-        .unwrap_err()
-        .contains("guard mismatch"));
-    left.admission_guard = None;
     let mut bad_clock = ClockHeader::from_manifest(&right);
     bad_clock.elapsed += 1;
     let bad = crate::model::Snapshot {
@@ -353,19 +363,45 @@ fn rejects_profile_clock_domain_direction_and_cap() {
 }
 
 #[test]
+fn matched_spatial_reports_different_guards_without_gating() {
+    let root = root("spatial-guards");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 8, "right");
+    left.admission_guard = Some(AdmissionGuard {
+        advective_limit: 0.45,
+        maximum_attempts: 128,
+    });
+    right.admission_guard = Some(AdmissionGuard {
+        advective_limit: 3.3,
+        maximum_attempts: 48,
+    });
+    let lf = fields(left.domain().unwrap().layout(), 1.0);
+    let rf = fields(right.domain().unwrap().layout(), 1.0);
+    write(&mut left, &lf);
+    write(&mut right, &rf);
+    let ls = decode::load(&left).unwrap();
+    let rs = decode::load(&right).unwrap();
+    let output = compare::compare(&left, &ls, &right, &rs, 0).unwrap();
+    assert_eq!(output.left_admission_guard.unwrap().advective_limit, 0.45);
+    assert_eq!(output.right_admission_guard.unwrap().advective_limit, 3.3);
+    let json = serde_json::to_string(&output).unwrap();
+    assert!(json.contains("left_admission_guard"));
+    assert!(json.contains("right_admission_guard"));
+
+    right.admission_guard = None;
+    let output = compare::compare(&left, &ls, &right, &rs, 0).unwrap();
+    assert!(output.right_admission_guard.is_none());
+}
+
+#[test]
 fn time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope() {
     let root = root("time-positive");
     let mut left = manifest(root.join("left.bin"), 4, "left-h32");
     let mut right = manifest(root.join("right.bin"), 4, "right-piecewise");
-    enable_time(&mut left, &mut right, &root);
     right.source_commit = "b".repeat(40);
     right.backend = "fixture-w3-backend".into();
     right.execution = "fixture-w3-execution".into();
-    let control = left.arithmetic_control.as_mut().unwrap();
-    control.right.source_commit = right.source_commit.clone();
-    control.right.backend = right.backend.clone();
-    control.right.execution = right.execution.clone();
-    right.arithmetic_control = Some(control.clone());
+    enable_time(&mut left, &mut right, &root);
     let lf = fields(left.domain().unwrap().layout(), 1.0);
     let rf = fields(right.domain().unwrap().layout(), 1.25);
     write(&mut left, &lf);
@@ -393,6 +429,9 @@ fn time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope() {
     assert!(output.contains("\"right_epoch\": 3"));
     assert!(output.contains("n4-m384-h32-cadv045-serial"));
     assert!(output.contains("n4-m384-piecewise-cadv33-w3"));
+    assert!(output.contains("measured-n4-m384-serial-81bd"));
+    assert!(output.contains("measured-n4-m384-w3-f13"));
+    assert!(output.contains("reviewed-equivalence-supported-by-controls"));
     let mut under_cap = args.clone();
     under_cap[2] = "1".into();
     assert!(super::run(&under_cap).unwrap_err().contains("exceeds cap"));
@@ -493,6 +532,8 @@ fn time_diagnostic_rejects_mode_headers_guards_and_provenance() {
         .arithmetic_control
         .as_mut()
         .unwrap()
+        .review
+        .reviewed_lineage
         .right
         .source_commit = "e".repeat(40);
     assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
@@ -533,4 +574,30 @@ fn time_diagnostic_rejects_mode_headers_guards_and_provenance() {
     assert!(decode::read_manifest(&manifest_path)
         .unwrap_err()
         .contains("arithmetic-control SHA-256 mismatch"));
+
+    let evidence_path = root.join("serial-w3-arithmetic-review.json");
+    let arbitrary = b"{\"arbitrary\":true}\n";
+    fs::write(&evidence_path, arbitrary).unwrap();
+    left.arithmetic_control.as_mut().unwrap().evidence_sha256 =
+        format!("{:x}", Sha256::digest(arbitrary));
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    assert!(decode::read_manifest(&manifest_path)
+        .unwrap_err()
+        .contains("evidence schema"));
+
+    let control = left.arithmetic_control.as_mut().unwrap();
+    control.review.case_sha256 = "d".repeat(64);
+    let mut semantic = serde_json::to_vec_pretty(&control.review).unwrap();
+    semantic.push(b'\n');
+    fs::write(&evidence_path, &semantic).unwrap();
+    control.evidence_sha256 = format!("{:x}", Sha256::digest(&semantic));
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    let reviewed_left = decode::read_manifest(&manifest_path).unwrap();
+    let mut semantic_right = right.clone();
+    semantic_right.arithmetic_control = reviewed_left.arithmetic_control.clone();
+    assert!(
+        compare::validate_manifest_pair(&reviewed_left, &semantic_right)
+            .unwrap_err()
+            .contains("physical contract mismatch")
+    );
 }
