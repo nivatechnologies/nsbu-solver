@@ -9,6 +9,7 @@ use nsbu_solver::{
     domain::{Epoch, ExtraStorage, ResourcePlan, TickClock},
     experiment::{control::Controller, log::RunHistory},
     integrators::{attempt::AttemptWorkspace, rhs::SpectralRhs},
+    spectral::{FftBackend, FftCatalog},
     SolverError,
 };
 
@@ -19,23 +20,61 @@ pub struct Plan {
     resources: ResourcePlan,
     observer: BalanceObserverLimits,
     integration: [usize; 3],
+    fft_backend: FftBackend,
 }
 
 impl Plan {
     /// Validate settings and total reservation before allocating grid storage or worker threads.
     pub fn from_rest(settings: Settings, cap: usize) -> Result<Self, SolverError> {
-        Self::admit(settings, IntegrationMode::Direct, cap)
+        Self::admit(
+            settings,
+            IntegrationMode::Direct,
+            FftBackend::OwnedRadix,
+            cap,
+        )
     }
 
     /// Admit the opt-in attempt-local original-force cache profile from exact rest.
     pub fn from_rest_cached(settings: Settings, cap: usize) -> Result<Self, SolverError> {
-        Self::admit(settings, IntegrationMode::AttemptCached, cap)
+        Self::admit(
+            settings,
+            IntegrationMode::AttemptCached,
+            FftBackend::OwnedRadix,
+            cap,
+        )
     }
 
-    fn admit(settings: Settings, mode: IntegrationMode, cap: usize) -> Result<Self, SolverError> {
+    /// Admit a from-rest run with an explicit immutable FFT arithmetic backend.
+    pub fn from_rest_with_fft(
+        settings: Settings,
+        backend: FftBackend,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        Self::admit(settings, IntegrationMode::Direct, backend, cap)
+    }
+
+    /// Admit the attempt-local force cache with an explicit immutable FFT backend.
+    pub fn from_rest_cached_with_fft(
+        settings: Settings,
+        backend: FftBackend,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        Self::admit(settings, IntegrationMode::AttemptCached, backend, cap)
+    }
+
+    fn admit(
+        settings: Settings,
+        mode: IntegrationMode,
+        fft_backend: FftBackend,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
         validate_layout()?;
         validate_settings(settings)?;
-        let force_limits = settings.force.integration_limits(settings.domain, mode)?;
+        let force_limits = settings.force.integration_limits_with_fft_backend(
+            settings.domain,
+            mode,
+            fft_backend,
+        )?;
         validate_final_step(settings, force_limits.remaining_divisor)?;
         let calls = settings
             .configuration
@@ -55,12 +94,17 @@ impl Plan {
                 .and_then(|n| n.checked_mul(calls))
                 .ok_or(SolverError::SizeOverflow)?,
         ];
-        let observer = V2Observer::limits(
+        let observer = V2Observer::limits_with_fft_backend(
             settings.domain,
             settings.force,
             settings.configuration.limits.maximum_attempts,
+            fft_backend,
         )?;
-        let force = SpectralRhs::<RunForce>::reservation(settings.domain, force_limits)?;
+        let force = SpectralRhs::<RunForce>::reservation_with_fft_backend(
+            settings.domain,
+            force_limits,
+            fft_backend,
+        )?;
         let diagnostics = AttemptWorkspace::reservation_with_method(
             settings.domain,
             settings.configuration.method,
@@ -77,7 +121,7 @@ impl Plan {
         let resources = ResourcePlan::new(
             settings.domain,
             ExtraStorage {
-                fft: 0,
+                fft: FftCatalog::reservation(fft_backend)?,
                 force,
                 diagnostics,
                 overhead,
@@ -90,6 +134,7 @@ impl Plan {
             resources,
             observer,
             integration,
+            fft_backend,
         })
     }
     /// Immutable settings bound to this admission.
@@ -113,9 +158,14 @@ impl Plan {
         self.integration
     }
 
+    /// Immutable transform arithmetic identity for this run and its artifacts.
+    pub fn fft_backend(self) -> FftBackend {
+        self.fft_backend
+    }
+
     /// Integration-only force policy; diagnostic providers remain explicit and uncached.
     pub fn integration_mode(self) -> IntegrationMode {
-        direct_or_cached(self.settings, self.resources)
+        direct_or_cached_with_fft(self.settings, self.resources, self.fft_backend)
     }
 }
 
@@ -130,10 +180,20 @@ fn validate_layout() -> Result<(), SolverError> {
 }
 
 pub(super) fn direct_or_cached(settings: Settings, resources: ResourcePlan) -> IntegrationMode {
+    direct_or_cached_with_fft(settings, resources, FftBackend::OwnedRadix)
+}
+
+pub(super) fn direct_or_cached_with_fft(
+    settings: Settings,
+    resources: ResourcePlan,
+    backend: FftBackend,
+) -> IntegrationMode {
     let direct = settings
         .force
-        .limits(settings.domain)
-        .and_then(|limits| SpectralRhs::<RunForce>::reservation(settings.domain, limits));
+        .limits_with_fft_backend(settings.domain, backend)
+        .and_then(|limits| {
+            SpectralRhs::<RunForce>::reservation_with_fft_backend(settings.domain, limits, backend)
+        });
     if direct == Ok(resources.classes()[5]) {
         IntegrationMode::Direct
     } else {

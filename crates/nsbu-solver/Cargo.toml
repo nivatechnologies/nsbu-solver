@@ -15,6 +15,7 @@ workspace = true
 [dependencies]
 sha2.workspace = true
 num-complex.workspace = true
+rustfft.workspace = true
 
 [dev-dependencies]
 stats_alloc = "=0.1.10"
@@ -25,6 +26,10 @@ harness = false
 
 [[test]]
 name = "fft_allocation"
+harness = false
+
+[[test]]
+name = "fft_avx_allocation"
 harness = false
 
 [[test]]

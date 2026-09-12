@@ -5,7 +5,7 @@ use super::{
 };
 use crate::{
     domain::{Domain, TickClock},
-    spectral::RotationalWorkspace,
+    spectral::{FftBackend, FftCatalog, RotationalWorkspace},
     storage::filled,
     Complex64, SolverError,
 };
@@ -30,6 +30,43 @@ pub struct SpectralRhs<F: PrescribedForce> {
 impl<F: PrescribedForce> SpectralRhs<F> {
     /// Complete declaration for owned operator, force, output and provider storage.
     pub fn reservation(domain: Domain, limits: ForceLimits) -> Result<usize, SolverError> {
+        Self::reservation_inner(domain, limits, None)
+    }
+
+    /// Reservation with immutable FFT plans owned by the enclosing execution.
+    pub fn reservation_with_catalog(
+        domain: Domain,
+        limits: ForceLimits,
+        catalog: &FftCatalog,
+    ) -> Result<usize, SolverError> {
+        Self::reservation_inner(domain, limits, Some(catalog))
+    }
+
+    /// Workspace-only reservation for an enclosing execution-owned backend catalog.
+    pub fn reservation_with_fft_backend(
+        domain: Domain,
+        limits: ForceLimits,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
+        Self::validate_limits(limits)?;
+        let operator = RotationalWorkspace::reservation_with_fft_backend(domain, backend)?;
+        Self::reservation_parts(domain, limits, operator)
+    }
+
+    fn reservation_inner(
+        domain: Domain,
+        limits: ForceLimits,
+        catalog: Option<&FftCatalog>,
+    ) -> Result<usize, SolverError> {
+        Self::validate_limits(limits)?;
+        let operator = match catalog {
+            Some(catalog) => RotationalWorkspace::reservation_with_catalog(domain, catalog)?,
+            None => RotationalWorkspace::reservation(domain)?,
+        };
+        Self::reservation_parts(domain, limits, operator)
+    }
+
+    fn validate_limits(limits: ForceLimits) -> Result<(), SolverError> {
         if limits.work_units == 0 || limits.remaining_divisor == 0 {
             return Err(SolverError::UnknownProviderCost);
         }
@@ -42,12 +79,20 @@ impl<F: PrescribedForce> SpectralRhs<F> {
             .checked_add(10)
             .and_then(|v| v.checked_mul(12))
             .ok_or(SolverError::SizeOverflow)?;
+        Ok(())
+    }
+
+    fn reservation_parts(
+        domain: Domain,
+        limits: ForceLimits,
+        operator: usize,
+    ) -> Result<usize, SolverError> {
         let buffers = domain
             .layout()
             .half_len()
             .checked_mul(4 * 16)
             .ok_or(SolverError::SizeOverflow)?;
-        RotationalWorkspace::reservation(domain)?
+        operator
             .checked_add(buffers)
             .and_then(|v| v.checked_add(limits.storage_bytes))
             .and_then(|v| v.checked_add(std::mem::size_of::<Self>()))
@@ -62,18 +107,65 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         cap: usize,
     ) -> Result<Self, SolverError> {
         let limits = force.limits().ok_or(SolverError::UnknownProviderCost)?;
-        if Self::reservation(domain, limits)? > cap {
+        let storage_bytes = Self::reservation(domain, limits)?;
+        if storage_bytes > cap {
             return Err(SolverError::ResourceLimit);
         }
         if !advective_limit.is_finite() || advective_limit <= 0.0 {
             return Err(SolverError::InvalidStep);
         }
+        let operator = RotationalWorkspace::new(domain, cap)?;
+        Self::allocate(
+            domain,
+            force,
+            limits,
+            advective_limit,
+            storage_bytes,
+            operator,
+        )
+    }
+
+    /// Construct using immutable plans from the enclosing execution catalog.
+    pub fn new_with_catalog(
+        domain: Domain,
+        force: F,
+        advective_limit: f64,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = force.limits().ok_or(SolverError::UnknownProviderCost)?;
+        let storage_bytes = Self::reservation_with_catalog(domain, limits, catalog)?;
+        if storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        if !advective_limit.is_finite() || advective_limit <= 0.0 {
+            return Err(SolverError::InvalidStep);
+        }
+        let operator = RotationalWorkspace::new_with_catalog(domain, catalog, cap)?;
+        Self::allocate(
+            domain,
+            force,
+            limits,
+            advective_limit,
+            storage_bytes,
+            operator,
+        )
+    }
+
+    fn allocate(
+        domain: Domain,
+        force: F,
+        limits: ForceLimits,
+        advective_limit: f64,
+        storage_bytes: usize,
+        operator: RotationalWorkspace,
+    ) -> Result<Self, SolverError> {
         let n = domain.layout().half_len();
         Ok(Self {
             force,
-            storage_bytes: Self::reservation(domain, limits)?,
+            storage_bytes,
             limits,
-            operator: RotationalWorkspace::new(domain, cap)?,
+            operator,
             source: field(n)?,
             pressure: filled(n, Complex64::new(0.0, 0.0))?,
             remaining_calls: 0,
