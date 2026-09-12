@@ -1,0 +1,64 @@
+{
+  "coverage": {
+    "branches": {
+      "count": 3330,
+      "covered": 2900,
+      "percent": 87.08708708708708
+    },
+    "functions": {
+      "count": 4123,
+      "covered": 4039,
+      "percent": 97.96264855687606
+    },
+    "lines": {
+      "count": 46995,
+      "covered": 45832,
+      "percent": 97.52526864560059
+    },
+    "regions": {
+      "count": 88579,
+      "covered": 84104,
+      "percent": 94.94801250860813
+    }
+  },
+  "crap": {
+    "maximum": 24.05859375,
+    "maximum_function": {
+      "branch_coverage_fraction": 0.5625,
+      "crap": 24.05859375,
+      "cyclomatic": 12.0,
+      "function": "validate_outcome",
+      "path": "crates/nsbu-benchmarks/src/v2_run/work.rs"
+    }
+  },
+  "limitations": [
+    "No PDE qualification claim.",
+    "No package completion claim; reports are quality evidence only."
+  ],
+  "quality_scope": "Hosted Rust quality artifact; aggregate LLVM file summaries and complete recorded CRAP inventory.",
+  "steps": {
+    "80 percent executable line and instrumented branch coverage": "success",
+    "Build, lint, document and package public workspace": "success",
+    "Complete job": "success",
+    "Coverage-dependent CRAP and informational inventories": "success",
+    "Informational mutation report with complete accounting": "skipped",
+    "Install pinned toolchains and quality tools": "success",
+    "Per-function metrics and complete file scope": "success",
+    "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262": "success",
+    "Preserve source-bound raw quality reports": "success",
+    "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262": "success",
+    "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02": "success",
+    "Set up job": "success"
+  },
+  "workflow": {
+    "branch": "codex/p09-window-measurements-20260912",
+    "completed_at": "2026-09-12T07:00:30Z",
+    "conclusion": "success",
+    "created_at": "2026-09-12T02:04:32Z",
+    "run_id": 34666644377,
+    "source_revision": "56755bd0da070ceaa91e6980e2285c5a3d812b1f",
+    "started_at": "2026-09-12T02:04:32Z",
+    "status": "completed",
+    "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34666644377"
+  }
+}
