@@ -88,10 +88,14 @@ mod modes {
     }
 }
 #[derive(Clone, Copy)]
+/// Independently reduced RMS and peak pressure magnitude.
 pub struct Norms {
+    /// Root-mean-square magnitude.
     pub rms: f64,
+    /// Maximum pointwise magnitude.
     pub peak: f64,
 }
+/// Independently compare nonlinear pressure and gradient differences.
 pub fn pair(
     ld: Domain,
     lv: [&[Complex64]; 3],
@@ -141,5 +145,6 @@ fn signed(i: usize, n: usize) -> isize {
     }
 }
 
+#[path = "v2_probe_pressure_oracle/absolute.rs"]
 mod absolute;
 pub use absolute::{absolute, AbsolutePressure};

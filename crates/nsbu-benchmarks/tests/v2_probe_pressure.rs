@@ -83,6 +83,7 @@ fn actual_offstage_pressure_matches_independent_full_complex_differences() {
         }
         if clock.elapsed() == 0 {
             first = Some(sample);
+            assert_eq!(stale.measure(&owner, sample).unwrap().clock(), clock);
         }
         if clock.elapsed() == 95 {
             let old = first.unwrap();
@@ -90,12 +91,14 @@ fn actual_offstage_pressure_matches_independent_full_complex_differences() {
                 stale.measure(&owner, old),
                 Err(FamilyError::InvalidFamily)
             ));
-            assert_eq!(stale.charged_work().attempts, 1);
-            assert!(stale.current().is_none());
+            assert_eq!(stale.charged_work().attempts, 2);
+            assert_eq!(stale.current().unwrap().clock().elapsed(), 0);
+            let charged = stale.charged_work();
             assert!(matches!(
                 stale.measure(&owner, old),
                 Err(FamilyError::Terminated)
             ));
+            assert_eq!(stale.charged_work(), charged);
         }
         let report = pressure.measure(&owner, sample).unwrap();
         assert_eq!(report.clock(), clock);
@@ -178,18 +181,14 @@ fn check_absolute_force_control(
         report.sample_layout(),
     );
     for (index, floor) in FLOORS.into_iter().enumerate() {
-        let magnitude = |p: &v2_probe_pressure_oracle::AbsolutePressure, q: usize| {
-            if index == 0 {
-                p.scalar[q].abs()
-            } else {
-                (0..3).fold(0.0_f64, |v, a| v.hypot(p.gradient[a][q]))
-            }
-        };
         let reference = (0..r.scalar.len())
-            .map(|q| magnitude(&r, q))
+            .map(|q| point_error_reference(&r, &r, index, q).1)
             .fold(0.0, f64::max);
         let relative = (0..r.scalar.len())
-            .map(|q| (magnitude(&l, q) - magnitude(&r, q)).abs() / magnitude(&r, q).max(floor))
+            .map(|q| {
+                let (error, reference) = point_error_reference(&l, &r, index, q);
+                error / reference.max(floor)
+            })
             .fold(0.0, f64::max);
         let finding = report.quantities()[index].pairs[1];
         assert!((finding.reference_peak - reference).abs() < 2e-11 * (reference + floor));
@@ -205,8 +204,43 @@ fn check_absolute_force_control(
             report.sample_layout(),
         );
         let omitted_reference = (0..omitted.scalar.len())
-            .map(|q| magnitude(&omitted, q))
+            .map(|q| point_error_reference(&omitted, &omitted, index, q).1)
             .fold(0.0, f64::max);
         assert!((reference - omitted_reference).abs() > 1e-12 * (reference + floor));
     }
+}
+
+fn point_error_reference(
+    left: &v2_probe_pressure_oracle::AbsolutePressure,
+    right: &v2_probe_pressure_oracle::AbsolutePressure,
+    quantity: usize,
+    point: usize,
+) -> (f64, f64) {
+    if quantity == 0 {
+        (
+            (left.scalar[point] - right.scalar[point]).abs(),
+            right.scalar[point].abs(),
+        )
+    } else {
+        let error = (0..3).fold(0.0_f64, |v, a| {
+            v.hypot(left.gradient[a][point] - right.gradient[a][point])
+        });
+        let reference = (0..3).fold(0.0_f64, |v, a| v.hypot(right.gradient[a][point]));
+        (error, reference)
+    }
+}
+
+#[test]
+fn absolute_reducer_preserves_opposed_scalar_and_gradient_signs() {
+    use v2_probe_pressure_oracle::AbsolutePressure;
+    let left = AbsolutePressure {
+        scalar: vec![2.0],
+        gradient: [vec![3.0], vec![4.0], vec![0.0]],
+    };
+    let right = AbsolutePressure {
+        scalar: vec![-2.0],
+        gradient: [vec![-3.0], vec![-4.0], vec![0.0]],
+    };
+    assert_eq!(point_error_reference(&left, &right, 0, 0), (4.0, 2.0));
+    assert_eq!(point_error_reference(&left, &right, 1, 0), (10.0, 5.0));
 }

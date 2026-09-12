@@ -7,7 +7,9 @@ use nsbu_solver::{
 
 /// Independently sampled scalar pressure and its three ordered derivatives.
 pub struct AbsolutePressure {
+    /// Sampled scalar pressure.
     pub scalar: Vec<f64>,
+    /// Three ordered sampled pressure derivatives.
     pub gradient: [Vec<f64>; 3],
 }
 /// Assemble absolute pressure from velocity and validated force coefficients.
