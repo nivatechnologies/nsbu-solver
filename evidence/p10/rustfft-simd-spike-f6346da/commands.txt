@@ -1,0 +1,5 @@
+CARGO_TARGET_DIR=/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/target/rustfft-spike cargo build --release --manifest-path evidence/p10/rustfft-simd-spike-f6346da/harness/Cargo.toml
+CARGO_TARGET_DIR=/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/target/rustfft-spike cargo test --release --manifest-path evidence/p10/rustfft-simd-spike-f6346da/harness/Cargo.toml
+/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/target/rustfft-spike/release/p10-rustfft-simd-spike --validate
+/usr/bin/time -v /mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/target/rustfft-spike/release/p10-rustfft-simd-spike
+cargo fmt --manifest-path evidence/p10/rustfft-simd-spike-f6346da/harness/Cargo.toml -- --check

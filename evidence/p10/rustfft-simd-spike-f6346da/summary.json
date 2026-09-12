@@ -1,0 +1,39 @@
+{
+  "status": "complete_isolated_rustfft_avx_feasibility",
+  "source": "f6346da8085365fad84874db08aa1213c75df331",
+  "production_changed": false,
+  "backend": {
+    "crate": "rustfft",
+    "version": "6.4.1",
+    "planner": "FftPlannerAvx",
+    "runtime_features": {"avx": true, "fma": true, "avx2": true},
+    "axis_order": ["z", "x", "y"],
+    "normalization": "forward_divide_complete_real_len"
+  },
+  "direct_dft_n6_maximum_scaled": {
+    "owned": 1.687878415925942e-16,
+    "rustfft": 1.3184513337203707e-16
+  },
+  "four_scalar_transform_medians": {
+    "n192": {"owned_seconds": 2.334142583, "rustfft_seconds": 0.293117567, "speedup": 7.963162, "maximum_scaled_spectral_difference": 2.0562107117415125e-16},
+    "n288": {"owned_seconds": 9.234093402, "rustfft_seconds": 1.131474783, "speedup": 8.161113, "maximum_scaled_spectral_difference": 2.918406590991335e-16},
+    "n384": {"owned_seconds": 23.863649562, "rustfft_seconds": 3.185359792, "speedup": 7.491665, "maximum_scaled_spectral_difference": 1.2876748778702764e-16}
+  },
+  "steady_allocations": 0,
+  "peak_joint_rss_kib": 2664764,
+  "planner_accounting": {
+    "allocations_per_size": 11,
+    "deallocations_per_size": 5,
+    "measured_retained_bytes": {"n192": 6528, "n288": 9792, "n384": 12608},
+    "production_preflight": false,
+    "gap": "planner-owned twiddle, algorithm and cache storage has no exposed pre-allocation bound"
+  },
+  "higher_reference_projection": {
+    "basis": "measured scalar FFT medians plus M192 parallel-force physical sampling scaled cubically; excludes nonlinear/modal/reduction overhead",
+    "n192_m384_h16": {"current_seconds_per_step_lower_bound": 1331, "rustfft_seconds_per_step_lower_bound": 825, "reduction": 0.380, "rustfft_endpoint_hours_lower_bound": 58.7},
+    "n256_m384_h16": {"current_seconds_per_step_lower_bound": 1850, "rustfft_seconds_per_step_lower_bound": 898, "reduction": 0.515, "rustfft_endpoint_hours_lower_bound": 63.8},
+    "n384_m768_h8": {"current_seconds_per_step_lower_bound": 11280, "rustfft_seconds_per_step_lower_bound": 6712, "reduction": 0.405, "rustfft_endpoint_hours_lower_bound": 955, "currently_admissible": false, "blocker": "observer M1536 exceeds current per-axis maximum 1024 and likely the 34 GiB cap"}
+  },
+  "decision": "RustFFT dominates W3 scalar batching; pause W3 and review bounded explicit-backend integration after planner storage audit",
+  "qualification": {"improved_arithmetic": false, "accepted_windows": 0}
+}
