@@ -182,6 +182,15 @@ pub fn probe_pressure<W: Write>(
     j: &mut Json<W>,
     s: crate::v2_experiment::probes::pressure::ProbePressureSample,
 ) -> Result<(), DiagnosticExportError> {
+    probe_pressure_header(j, s)?;
+    probe_pressure_quantities(j, s)?;
+    j.raw("}")
+}
+
+fn probe_pressure_header<W: Write>(
+    j: &mut Json<W>,
+    s: crate::v2_experiment::probes::pressure::ProbePressureSample,
+) -> Result<(), DiagnosticExportError> {
     j.raw("{\"clock\":")?;
     v::clock(j, s.clock())?;
     j.raw(",\"identity\":")?;
@@ -195,7 +204,13 @@ pub fn probe_pressure<W: Write>(
     j.raw(",\"sample_grid\":")?;
     v::layout(j, s.sample_layout())?;
     j.raw(",\"relative_floors\":")?;
-    v::f64_array(j, s.relative_floors())?;
+    v::f64_array(j, s.relative_floors())
+}
+
+fn probe_pressure_quantities<W: Write>(
+    j: &mut Json<W>,
+    s: crate::v2_experiment::probes::pressure::ProbePressureSample,
+) -> Result<(), DiagnosticExportError> {
     j.raw(",\"quantities\":[")?;
     for (i, q) in s.quantities().iter().enumerate() {
         if i > 0 {
@@ -212,7 +227,7 @@ pub fn probe_pressure<W: Write>(
         )?;
         j.raw("}")?;
     }
-    j.raw("]}")
+    j.raw("]")
 }
 fn pressure_quantity<W: Write>(
     j: &mut Json<W>,
