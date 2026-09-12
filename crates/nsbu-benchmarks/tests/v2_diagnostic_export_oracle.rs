@@ -39,13 +39,21 @@ fn event_value(j: &Value, e: DiagnosticEvent) {
         j["missing_channels"].as_array().unwrap().len(),
         e.missing_channels().len()
     );
+    reconstructed(j, e);
     probe(&j["probe"], e.probe());
+    accepted(j, e);
+    residual(j, e)
+}
+
+fn reconstructed(j: &Value, e: DiagnosticEvent) {
     if !j["reconstructed_physical"].is_null() {
         probe_physical(&j["reconstructed_physical"], e.reconstructed_physical());
     }
     if !j["reconstructed_pressure"].is_null() {
         probe_pressure(&j["reconstructed_pressure"], e.reconstructed_pressure());
     }
+}
+fn accepted(j: &Value, e: DiagnosticEvent) {
     match (e.accepted().schedule(), e.accepted().sample()) {
         (AcceptedSchedule::NotScheduledAtResidualClock, None) => {
             assert_eq!(j["accepted"]["schedule"], "NotScheduledAtResidualClock");
@@ -87,6 +95,8 @@ fn event_value(j: &Value, e: DiagnosticEvent) {
         }
         _ => panic!("invalid accepted variant"),
     }
+}
+fn residual(j: &Value, e: DiagnosticEvent) {
     match (e.residual().schedule(), e.residual().sample()) {
         (ResidualSchedule::NotScheduledAtAcceptedClock, None) => {
             assert_eq!(j["residual"]["schedule"], "NotScheduledAtAcceptedClock");
