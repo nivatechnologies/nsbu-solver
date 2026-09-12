@@ -8,4 +8,3 @@ test admission_refuses_bad_roots_caps_attempts_and_overflow ... ok
 test all_probe_clocks_match_independent_global_producer_and_exhaust_exact_allowance ... ok
 
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 43.65s
-

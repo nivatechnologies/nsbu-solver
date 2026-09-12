@@ -46,10 +46,18 @@ zero but its terminal status was `Failed`, so it supplies no endpoint result.
 The completed [M48 N12/N16/N24 family](evidence/p10/cached-m48-feasibility/README.md)
 and [M96 controls](evidence/p10/m96-spatial-controls/README.md) still show unresolved
 spatial differences; the M96 N16/N24 controls reached only the midpoint before
-timeout. The new [N24/N32/N48 M96 runs](evidence/p10/m96-spatial-midpoint-user-pause-def4730/README.md)
-saved clock-2048 snapshots and were stopped for a user-requested hardware pause.
-The adjacent H1 differences increase; no endpoint or accepted window is claimed. The
-force-grid and worker reports remain prescribed-force diagnostics. The historical
+timeout. The [N24/N32/N48 M96 runs](evidence/p10/m96-spatial-midpoint-user-pause-def4730/README.md)
+saved clock-2048 snapshots before a user-requested hardware pause, with increasing
+adjacent H1 differences. The bounded [relaunch ladder](evidence/p10/m96-midpoint-ladder-relaunch-20260912/SUMMARY.json)
+then reproduced N48 byte-for-byte and completed N64 at clock 2048; N96 was stopped
+at clock 16 as an explicitly timeboxed throughput control. The
+[N48-to-N64 comparison](evidence/p10/m96-spatial-high-grid-midpoint-def4730/README.md)
+has finer-normalized H1 difference `0.11997701785596195`, down from the prior
+N32-to-N48 value `0.2752570355883181`, but its newly resolved shell still supplies
+`5.716159942507781` of the `5.716213563272909` full H1 difference. One decreasing
+adjacent ratio does not establish convergence. No converged endpoint family or
+accepted window is claimed. The force-grid and worker reports remain prescribed-force
+diagnostics. The historical
 derivative-symmetry correction is archived at source
 `5b583d9678af631ba6a175a0175ccf3da132cc71` with a smaller N12 checkpoint and
 physical-test scope. Historical hosted run 489 failed on test-file Halstead
@@ -984,6 +992,16 @@ the focused coverage profile, and the required whole-maintained 80% line and
 branch gate remains pending on the combined source. This is still an
 `UnqualifiedDiagnostic`, not a completed region-volume channel or an accepted
 window.
+
+The standalone [reconstructed-probe regional consumer](evidence/p09/v2-probe-regional/README.md)
+binds seven actual probe and analytical-reference publications, recomputes their
+global values, and transactionally retains five-class regional reductions for all
+six branches and four physical quantities. Exact-source functional, allocation,
+static and changed-function CRAP gates pass. Its global recomputation uses the
+shared tracking kernel, so this validates lifecycle and publication binding rather
+than independent arithmetic. Coordinator/export wiring, regional qualification
+and the whole-maintained source-matched hosted gate remain open. Its status is
+`DiagnosticOnly`, with zero accepted concentrating PDE windows.
 
 ## P09 runtime diagnostic integration and cache profile
 

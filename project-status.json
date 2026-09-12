@@ -421,15 +421,25 @@
   "experimental_combined_integration_evidence": "evidence/p09/final-integration-20260911/summary.json",
   "combined_diagnostic_hosted_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
   "combined_diagnostic_hosted_source": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "exact_v2_probe_regional_consumer_exists": true,
+  "exact_v2_probe_regional_consumer_evidence": "evidence/p09/v2-probe-regional/summary.json",
+  "exact_v2_probe_regional_consumer_scope": "Standalone seven-clock consumer binds actual probe/reference publications and transactionally retains five-class regional analytical errors for six branches and four quantities. Global values are recomputed with the shared tracking kernel, so this is lifecycle/binding validation rather than independent arithmetic. Coordinator/export wiring, regional qualification and source-matched whole-maintained hosted gates remain pending; DiagnosticOnly with zero accepted PDE windows.",
+  "actual_v2_m96_midpoint_ladder_evidence": "evidence/p10/m96-midpoint-ladder-relaunch-20260912/SUMMARY.json",
+  "actual_v2_m96_midpoint_ladder_scope": "Frozen def4730/M96/32-worker/CM-step16 from-rest runs: N48 and N64 completed clock2048 with 128 attempts and 128 commits; N48 reproduces the paused snapshot byte-for-byte. N96 was root-directed timeboxed at clock16 with no snapshot. This is feasibility evidence, not a converged endpoint family or accepted window.",
+  "actual_v2_m96_n48_n64_comparison_evidence": "evidence/p10/m96-spatial-high-grid-midpoint-def4730/summary.json",
+  "actual_v2_m96_n48_n64_comparison_scope": "At clock2048, N48-to-N64 full H1 difference is 5.716213563272909 and finer-normalized H1 is 0.11997701785596195; newly resolved modes contribute H1 5.716159942507781. The adjacent ratio improves over N32-to-N48 but one pair does not establish spatial convergence, force sufficiency or PDE qualification.",
   "execution_window": {
-    "status": "active_two_hour_window",
+    "status": "completed_bounded_two_hour_window",
     "started_utc": "2026-09-12T07:49:34Z",
     "hard_stop_utc": "2026-09-12T09:49:34Z",
     "resumed_after_hardware_change": true,
     "handoff": "evidence/p09/hardware-pause-20260912/README.md",
-    "numerical_evidence": "evidence/p10/m96-user-interruption/summary.json",
-    "midpoint_comparisons": "evidence/p10/m96-spatial-midpoint-user-pause-def4730/summary.json",
+    "numerical_evidence": "evidence/p10/m96-midpoint-ladder-relaunch-20260912/SUMMARY.json",
+    "midpoint_comparisons": "evidence/p10/m96-spatial-high-grid-midpoint-def4730/summary.json",
     "accepted_concentrating_windows": 0,
-    "nominal_coverage_local_gates": "Passed at exact source e595d9b and rerun on the combined continuation branch; whole-maintained source-matched hosted validation remains pending."
+    "nominal_coverage_local_gates": "Passed at exact source e595d9b and rerun on the combined continuation branch; whole-maintained source-matched hosted validation remains pending.",
+    "regional_lifecycle_evidence": "evidence/p09/v2-probe-regional/summary.json",
+    "completed_utc": "2026-09-12T09:25:51Z",
+    "outcome": "Integrated shared-force and accepted nominal-coverage increments, completed N48/N64 fixed-M96 midpoint runs and their comparison, and added the standalone probe-regional lifecycle consumer. Scientific qualification remains open with zero accepted concentrating PDE windows."
   }
 }
