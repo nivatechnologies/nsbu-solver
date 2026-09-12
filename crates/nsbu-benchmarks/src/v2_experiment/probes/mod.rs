@@ -9,6 +9,7 @@ use nsbu_solver::{
     diagnostics::comparison::ComparisonPlan, domain::TickClock, experiment::control::Outcome,
     Complex64, SolverError,
 };
+pub(crate) use plan::nodes;
 pub use plan::{ProbeBounds, ProbePlan, ProbeWork};
 pub use report::{ProbeFields, ProbeOrigin, ProbeSample};
 use sha2::{Digest, Sha256};

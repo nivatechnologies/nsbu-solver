@@ -151,7 +151,7 @@ fn reservation(branches: &[ReconstructedPlan; 6]) -> Result<(usize, usize, usize
     Ok((owners, scratch, visits))
 }
 
-pub(super) fn nodes(probe: TickClock, step: u128) -> Result<[TickClock; 3], SolverError> {
+pub(crate) fn nodes(probe: TickClock, step: u128) -> Result<[TickClock; 3], SolverError> {
     let count = probe.elapsed().div_ceil(step).max(2);
     let mut result = [probe; 3];
     for (index, clock) in result.iter_mut().enumerate() {
