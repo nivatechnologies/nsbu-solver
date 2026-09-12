@@ -8,4 +8,6 @@ This extends the clock-2048 fixed-M96 spatial diagnostic. The finer-normalized H
 
 The comparator checked file lengths and supplied SHA-256 identities before reading finite f64 coefficient words. Its declared reservation was 18,509,824 bytes for the pair comparison and 25,956,352 bytes for the finer-state norm, each under a 256 MiB cap. Measured process maximum RSS was 19,456 KiB and 26,624 KiB respectively; RSS is not an allocation reservation.
 
+`raw/n48/run-preflight.stdout` and `raw/n64/run-preflight.stdout` are the authoritative admissions for the executed runs. The run directories also preserve preliminary `preflight`, `deadline-preflight`, and `snapshot-checked-preflight` artifacts; some N64 preliminary files describe the earlier N48 draft and did not admit the N64 execution. They remain unchanged for provenance and must not be substituted for `run-preflight.stdout`.
+
 These results compare fixed-force spatial states only. They establish no spatial convergence, force sufficiency, clock-4096 behavior, mandatory P10 channel completeness, concentrating window, or PDE qualification. Accepted windows remain zero.
