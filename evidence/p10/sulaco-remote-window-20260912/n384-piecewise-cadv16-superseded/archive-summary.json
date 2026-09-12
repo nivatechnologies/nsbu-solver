@@ -1,0 +1,52 @@
+{
+  "schema": "p10-sulaco-n384-piecewise-superseded-archive-v1",
+  "classification": "manual_supersession_guard_prediction_not_actual_refusal",
+  "source_commit": "7afe0d5bcfb0c2595acfdec6b17990559967c87d",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "binary_sha256": "8c5698a984a8c6020e5eb8e3933b666769cc29697c12e542ce3cc5e32d962917",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv16-w3-f13c29c",
+  "started_utc": "2026-09-12T19:18:22Z",
+  "stopped_utc": "2026-09-12T19:39:37Z",
+  "published_attempts": 3,
+  "published_clock": 192,
+  "actual_refusals": 0,
+  "steady_allocations": 0,
+  "integration_seconds": [317.462799755, 378.405332981, 370.278047232],
+  "rhs_evaluate_seconds": [280.944359131, 343.677645211, 336.822565411],
+  "outside_rhs_evaluate_seconds": [36.518440624, 34.727687770, 33.455481821],
+  "observer_seconds": [],
+  "maximum_rss_kib_observed": 148652256,
+  "maximum_hwm_kib_observed": 148652256,
+  "minimum_memavailable_kib_observed": 86832448,
+  "maximum_swap_kib_observed": 0,
+  "encoded_state_bytes_each": 1366033529,
+  "encoded_state_sha256": [
+    "2fcff89dbaa7ebed361e15d11f0b622d4696959a2475b068c9a02cec4c8ee6f2",
+    "46c3436b59bcc825e0fd21b2ebc7a6993babb35fc1c605b59c27b435386ed0e2",
+    "972b9df7e6490deef2a14dd237d1a3c3a59b9f1ba43ed6f939cfab5208f317a1"
+  ],
+  "logical_state_sha256": [
+    "039eece49a69052786d4925b38f6c57540f120ccb9d21af8e86b12a6866a313a",
+    "549d2993cc491106de72268c90fa3ead4d616adfa39d86957b43fb5d95ce2c4d",
+    "b126605dd19d8449a67c38cc527c343adfff3454e68f191e71abb36d4d62cf13"
+  ],
+  "solver_identity": {
+    "pid": 180856,
+    "pgid": 180856,
+    "starttime": 31675681,
+    "cmdline_sha256": "f8fa36e754ab4af300cb4dbae68b60b2b931665d14597f6b3d887a6eb79a7e5b"
+  },
+  "watchdog": {
+    "version": 2,
+    "sha256": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
+    "deadline_utc": "2026-09-13T01:25:00Z",
+    "terminal_record": "solver_exited_or_identity_changed_before_deadline"
+  },
+  "operator_stop": {
+    "signal": "TERM",
+    "kill_escalation": false,
+    "identity_verified": true,
+    "reason": "Three-step conservative timing projection reached the watchdog boundary; root authorized a corrected Cadv3.3 best-effort supersession."
+  },
+  "large_archive": "/mnt/niva-array/nsbu-solver/work/p10-sulaco-remote-20260912/n384-piecewise-cadv16-superseded"
+}

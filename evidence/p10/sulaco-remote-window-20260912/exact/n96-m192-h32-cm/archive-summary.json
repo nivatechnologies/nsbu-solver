@@ -1,0 +1,22 @@
+{
+  "schema": "p10-sulaco-exact-endpoint-archive-v1",
+  "status": 0,
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "binary_sha256": "d5e467604d0a8c0ef01d35b099407d23c4abd471dbe23b6dbadd374a719c700a",
+  "profile": "n96-m192-h32-cm-cadv03-endpoint4096",
+  "started_utc": "2026-09-12T14:34:10Z",
+  "ended_utc": "2026-09-12T19:18:46Z",
+  "wall_seconds_reported": 17073.966954878,
+  "time_elapsed": "4:44:36",
+  "maximum_rss_kib": 5683200,
+  "swaps": 0,
+  "endpoint_clock": 4096,
+  "attempts": 128,
+  "committed": 128,
+  "refusals": 0,
+  "terminal_coeff_bytes": 21676032,
+  "terminal_coeff_sha256": "4d250ccd8e9d386c99d0402b8c1ca2ffc75e54a265cf0924aa3b98087ea6d1a8",
+  "terminal_velocity_ratio": 0.000013974259711886759,
+  "terminal_h1_ratio": 0.00016244172420185434,
+  "large_archive": "/mnt/niva-array/nsbu-solver/work/p10-sulaco-remote-20260912/exact-endpoints/n96-m192-h32-cm-endpoint4096"
+}

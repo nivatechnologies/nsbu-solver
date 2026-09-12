@@ -1,0 +1,72 @@
+{
+  "schema": "p10-same-profile-endpoint-comparison-v1",
+  "status": 0,
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "case": "similarity-mms-v2",
+  "clock": 4096,
+  "retained_grid": 96,
+  "force_grid": 192,
+  "workers": 32,
+  "method": "cox-matthews",
+  "from_rest": true,
+  "advective_limit": 0.3,
+  "absolute_tolerances": [0.00001, 0.0001],
+  "relative_tolerances": [0.00001, 0.00001],
+  "left": {
+    "step_ticks": 64,
+    "sha256": "a34e1ea9c9dd475baaaefceea3cb156a5f9dc81ce97b7a98c3d88ec549fe22e2",
+    "norms": {
+      "l2": 1.8389006025787074,
+      "h1": 50.859283199225004,
+      "vorticity_l2": 50.82602809712748,
+      "unprojected_divergence_l2": 6.708177945096992e-15
+    },
+    "means": [5.0891603567585304e-18, 3.1464023401101403e-18, -1.4856859568721363e-7]
+  },
+  "right": {
+    "step_ticks": 32,
+    "sha256": "4d250ccd8e9d386c99d0402b8c1ca2ffc75e54a265cf0924aa3b98087ea6d1a8",
+    "norms": {
+      "l2": 1.8389006025917638,
+      "h1": 50.85928319700273,
+      "vorticity_l2": 50.82602809490063,
+      "unprojected_divergence_l2": 9.247567642890887e-15
+    },
+    "means": [5.106709898863467e-18, 3.1974155889515113e-18, -1.485685956870621e-7]
+  },
+  "left_minus_right": {
+    "norms": {
+      "l2": 9.018521337154418e-10,
+      "h1": 1.2125912739538688e-7,
+      "vorticity_l2": 1.2125577363343584e-7,
+      "unprojected_divergence_l2": 9.840765199076487e-15
+    },
+    "means": [1.7549542104936794e-20, 5.1013248841370985e-20, 1.5153948821971467e-19]
+  },
+  "relative_to_h32_state": {
+    "l2": 4.904300604634981e-10,
+    "h1": 2.384208344535477e-9,
+    "vorticity_l2": 2.385702329661314e-9,
+    "unprojected_divergence_l2": 1.0641463332946393
+  },
+  "time_allocation": {
+    "rule": "max(floor, relative_allocation * h32_state_norm)",
+    "velocity_relative": 0.00002,
+    "h1_relative": 0.0002,
+    "vorticity_relative": 0.0002,
+    "floor": 1e-8,
+    "denominators": {
+      "l2": 0.00003677801205183528,
+      "h1": 0.010171856639400546,
+      "vorticity_l2": 0.010165205618980126
+    },
+    "fractions_used": {
+      "l2": 0.000024521503023174903,
+      "h1": 0.000011921041722677384,
+      "vorticity_l2": 0.000011928511648306571
+    }
+  },
+  "comparator_sha256": "64055c4963c580614ce26124372e2802df90b770ea2f401fd298f77b38e75170",
+  "metadata_binding": "externally_declared_and_hash_bound",
+  "interpretation": "Two-setting matched refined-force time comparison; it does not fulfill the required three-setting time study or establish acceptance."
+}

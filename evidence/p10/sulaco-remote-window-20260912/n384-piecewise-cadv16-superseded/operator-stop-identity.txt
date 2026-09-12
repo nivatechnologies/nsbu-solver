@@ -1,0 +1,2 @@
+utc=2026-09-12T19:39:24Z pid=180856 actual_pgid=180856 expected_pgid=180856 actual_start=31675681 expected_start=31675681 actual_cmd=f8fa36e754ab4af300cb4dbae68b60b2b931665d14597f6b3d887a6eb79a7e5b expected_cmd=f8fa36e754ab4af300cb4dbae68b60b2b931665d14597f6b3d887a6eb79a7e5b reason=manual_supersession_guard_prediction_not_actual_refusal published_attempt=3 published_clock=192
+utc=2026-09-12T19:39:37Z outcome=exited
