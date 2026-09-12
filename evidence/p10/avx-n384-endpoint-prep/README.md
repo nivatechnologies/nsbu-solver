@@ -70,7 +70,13 @@ that bundle provisional unless normal process output independently establishes c
 not silently claim a confirmed durable frontier. The deadline watchdog validates group-leader
 starttime, process group, and command-line hash on every poll, sends TERM to the group at the fixed
 deadline, and sends KILL after 60 seconds if the same identity survives. Its frozen SHA-256 is
-`2e5afc6cadad3549bb947aface8e2a2ae2aa6594ebe1e1f289441834e0f113ab`.
+`4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b`.
+The retained v1 SHA-256 is
+`2e5afc6cadad3549bb947aface8e2a2ae2aa6594ebe1e1f289441834e0f113ab`;
+it is prohibited for new launches because its unbraced positional expansion
+does not read the intended starttime. The first h32 pilot's v1 failure and the
+live v2 attachment are preserved in the
+[watchdog amendment](watchdog-v2-amendment.md).
 
 No endpoint timeout is frozen. After the pilot, use the measured whole attempt, RHS split, snapshot
 write, peak RSS, steady allocations, outcome, and any observer component measurement to decide

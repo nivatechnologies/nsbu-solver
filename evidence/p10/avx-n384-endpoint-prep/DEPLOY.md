@@ -25,10 +25,16 @@ seconds after launch. Start the watchdog in its own session and record its PID, 
 hash, exact arguments, and log path:
 
 ```sh
-setsid ./pgid-watchdog-v1.sh "$leader_pid" "$process_group" "$starttime" \
+setsid ./pgid-watchdog-v2.sh "$leader_pid" "$process_group" "$starttime" \
   "$cmdline_sha256" "$deadline_epoch" "$RUN/watchdog.log" &
 watchdog_pid=$!
 ```
+
+Use `pgid-watchdog-v2.sh` for every launch. The frozen v1 script is retained
+only to reproduce the first h32 pilot's operational failure: its unbraced
+`$20` expanded as `${2}0` in POSIX shell and did not compare `/proc` field 22.
+The [watchdog amendment](watchdog-v2-amendment.md) records the repair and its
+focused controls.
 
 For h32, observe `step-001-clock-0032`; for h64, observe `step-001-clock-0064`. After retaining the
 complete final bundle, stop the whole process group and record the operator stop time. Classify the
