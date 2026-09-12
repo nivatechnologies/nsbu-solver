@@ -20,10 +20,14 @@ retains the process-group, command-line hash, deadline, TERM, and KILL behavior.
 - V2 mismatch control: an incorrect starttime refused before monitoring with
   status 65 and left the target process alive.
 
-At `2026-09-12T19:03:59Z`, v2 was attached without restarting the live h32
-pilot. It matched leader PID/PGID `175221`, true starttime `31557951`, and
-command-line SHA-256
-`2465ed18b23a638842f4420873fa0d5fc45edb1d9c869585d08a95fad9582901`.
-The original deadline epoch `1789241327` remained unchanged. This attachment
-restored identity-bound deadline protection for the pilot. New pilot or
-endpoint launches must use v2; the h32 numerical profile itself is unchanged.
+The v1 watchdog exited at `2026-09-12T18:59:17Z` while the pilot remained live.
+There was no independent GNU `timeout` process, so the pilot had a disclosed
+deadline-protection gap until v2 was attached at `2026-09-12T19:03:59Z`.
+That first v2 attachment matched the `/usr/bin/time` wrapper. It was replaced
+at `2026-09-12T19:05:26Z` by a direct solver attachment so protection does not
+depend on wrapper lifetime. The final attachment matched solver PID `175223`,
+process group `175221`, true starttime `31557951`, and command-line SHA-256
+`e78e13ed4af29892749369b7114badd02f6cbfc93292add78f2aff3ca2575d83`.
+The original deadline epoch `1789241327` remained unchanged. New pilot or
+endpoint launches must use v2 bound directly to the solver PID; the h32
+numerical profile itself is unchanged.
