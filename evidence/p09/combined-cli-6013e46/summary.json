@@ -1,0 +1,39 @@
+{
+  "source_commit": "6013e469f41075856b8ac73e13641dade0ee4216",
+  "source_tree": "d433369e4748d7abf9e159dc0a0d394e7301622f",
+  "scope": "Focused combined seven-event CLI integration and all-target Clippy; not a whole-workspace coverage run.",
+  "cli": {
+    "exit_code": 0,
+    "tests_passed": 1,
+    "test_name": "actual_command_reports_all_raw_summaries_without_qualifying_a_window",
+    "elapsed_test_seconds": 131.03,
+    "events": 7
+  },
+  "clippy": {
+    "command": [
+      "cargo",
+      "clippy",
+      "--workspace",
+      "--all-targets",
+      "--locked",
+      "--",
+      "-D",
+      "warnings",
+      "-A",
+      "dead_code"
+    ],
+    "exit_code": 0
+  },
+  "static_metrics": {
+    "cyclomatic": 21.0,
+    "cognitive": 21.0,
+    "halstead": 75.9295154185022,
+    "physical_file_lines": 496
+  },
+  "limitations": [
+    "The first tee capture failed because the work directory was absent. Corrected direct capture and exit status are retained; the first shell wrapper is not claimed to pass.",
+    "Subsequent changes require their own source-bound checks.",
+    "This CLI test does not exercise the standalone review adapter or shared-force table."
+  ],
+  "accepted_concentrating_windows": 0
+}

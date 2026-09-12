@@ -1,0 +1,8 @@
+1752185abd38895bcc76ad3881a83adb5762b7009e0edbdaf75f59681c925606  evidence/p09/combined-cli-6013e46/README.md
+4c29cd2f300ef4852b217b89ab2df26ab0083b80fc56ce0912648adf5e5dca50  evidence/p09/combined-cli-6013e46/raw/combined-6013-capture-erratum.txt.gz
+b8ff0b6883f8e6b82f70bdb13c86c059386a08fafce76aec4370aace010c0e9c  evidence/p09/combined-cli-6013e46/raw/combined-6013-cli-status.json.gz
+088553492ab41ad3b822b77891b6b2637b5e9b51238d65a1c8907ae57943e36d  evidence/p09/combined-cli-6013e46/raw/combined-6013-cli.log.gz
+c93d078fe280ee81d86391b6002f60bcec9265b50f1cb34d9157289e9b1d40c8  evidence/p09/combined-cli-6013e46/raw/combined-6013-clippy.log.gz
+6b79dfc49beee777480f274d513555847682d9914b78b7637f0c8c060956033c  evidence/p09/combined-cli-6013e46/raw/combined-6013-metrics-summary.json.gz
+b75d7c4b8914275591e6dd65df8b21c144e8b721f49e79b611444848b13283d2  evidence/p09/combined-cli-6013e46/raw/combined-6013-metrics.json.gz
+80b3e416ca9fd7108d5d6514109ef0f2d3a4a025de3f284e4754f7b060dd3ffa  evidence/p09/combined-cli-6013e46/summary.json
