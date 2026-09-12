@@ -1,19 +1,5 @@
 use super::*;
-use std::time::{SystemTime, UNIX_EPOCH};
-
 #[test]
-fn pending_profile_refuses_before_creating_output() {
-    let nonce = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap()
-        .as_nanos();
-    let output = std::env::temp_dir().join(format!(
-        "p10-n384-prep-refusal-{}-{nonce}",
-        std::process::id()
-    ));
-    assert!(matches!(
-        start(&output),
-        Err(HarnessError::Numerical(SolverError::InvalidPayload))
-    ));
-    assert!(!output.exists());
+fn selected_profile_is_ready_before_any_output_path_is_supplied() {
+    assert_eq!(config::require_execution_ready(), Ok(()));
 }

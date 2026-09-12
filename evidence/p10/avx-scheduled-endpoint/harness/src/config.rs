@@ -15,6 +15,13 @@ use nsbu_solver::{
 
 #[cfg(all(feature = "n256", feature = "n384-prep"))]
 compile_error!("n256 and n384-prep are mutually exclusive profiles");
+#[cfg(all(feature = "n384-h32", feature = "n384-h64"))]
+compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
+#[cfg(all(
+    feature = "n384-prep",
+    not(any(feature = "n384-h32", feature = "n384-h64"))
+))]
+compile_error!("select exact top-level feature n384-h32 or n384-h64");
 
 #[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 pub const N: usize = 192;
@@ -40,8 +47,10 @@ const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + TIMER_OVERHEAD 
 const PROFILE: &str = "n192-m384";
 #[cfg(all(feature = "n256", not(feature = "n384-prep")))]
 const PROFILE: &str = "n256-m384";
-#[cfg(all(feature = "n384-prep", not(feature = "n256")))]
-const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c-prep";
+#[cfg(all(feature = "n384-h32", not(feature = "n256")))]
+const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c";
+#[cfg(all(feature = "n384-h64", not(feature = "n256")))]
+const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -76,14 +85,8 @@ pub fn preflight() -> Result<ResourcePlan, SolverError> {
     Ok(admission.resources)
 }
 
-#[cfg(not(feature = "n384-prep"))]
 pub fn require_execution_ready() -> Result<(), SolverError> {
     Ok(())
-}
-
-#[cfg(feature = "n384-prep")]
-pub fn require_execution_ready() -> Result<(), SolverError> {
-    Err(SolverError::InvalidPayload)
 }
 
 fn admit() -> Result<Admission, SolverError> {
@@ -302,20 +305,25 @@ pub fn identity() -> String {
 mod n384_tests {
     use super::*;
 
+    #[cfg(feature = "n384-h32")]
+    const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
+    #[cfg(feature = "n384-h64")]
+    const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
+
     #[test]
-    fn closed_profile_is_exact_and_cannot_enter_execution() {
+    fn selected_profile_is_exact_and_execution_ready() {
         assert_eq!(N, 384);
         assert_eq!(M, 384);
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
         assert_eq!(CAP, 206_158_430_208);
-        assert_eq!(require_execution_ready(), Err(SolverError::InvalidPayload));
+        assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();
         assert!(identity.contains("provider=parallel-reduced-v2-force-w3"));
         assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200779136"));
         assert!(identity.contains("force_w3=layout384-width3-forward-add1827942144"));
         assert!(identity.contains("observer_force_samples=768"));
         assert!(identity.contains("observer_conservative=768"));
-        assert!(identity.contains("artifact_cap=274877906944"));
+        assert!(identity.contains(&format!("artifact_cap={}", artifact::DISK_CAP_BYTES)));
     }
 
     #[test]
@@ -334,7 +342,7 @@ mod n384_tests {
             OVERHEAD,
             admission.disk,
         );
-        assert_eq!(total, 185_783_161_608);
+        assert_eq!(total, EXPECTED_N384_TOTAL);
         assert!(matches!(
             admit_geometry(geometry, total - 1),
             Err(SolverError::ResourceLimit)

@@ -2,8 +2,14 @@
 use nsbu_solver::SolverError;
 
 pub const ENDPOINT: u128 = 4096;
+#[cfg(not(feature = "n384-h64"))]
 pub const STEP: u128 = 32;
+#[cfg(feature = "n384-h64")]
+pub const STEP: u128 = 64;
+#[cfg(not(feature = "n384-h64"))]
 pub const MAXIMUM_ATTEMPTS: usize = 128;
+#[cfg(feature = "n384-h64")]
+pub const MAXIMUM_ATTEMPTS: usize = 64;
 pub const FINE: [u128; 9] = [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096];
 pub const MIDDLE: [u128; 5] = [0, 1024, 2048, 3072, 4096];
 pub const COARSE: [u128; 3] = [0, 2048, 4096];
@@ -61,7 +67,7 @@ mod tests {
 
     #[test]
     fn unscheduled_and_rest_clocks_do_not_trigger_positive_observation() {
-        for clock in [0, 32, 511, 513, 4095] {
+        for clock in [0, STEP, 511, 513, 4095] {
             assert!(!positive_node(clock));
         }
     }
