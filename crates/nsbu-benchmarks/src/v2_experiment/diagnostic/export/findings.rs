@@ -197,7 +197,27 @@ pub fn probe_reference<W: Write>(
     j.raw(",\"case_sha256\":")?;
     j.string(s.case_sha256())?;
     j.raw(",\"origins\":[")?;
-    for (i, origin) in s.origins().iter().enumerate() {
+    probe_origins(j, s.origins())?;
+    j.raw("],\"source_domains\":[")?;
+    for (i, domain) in s.source_domains().into_iter().enumerate() {
+        if i > 0 {
+            j.raw(",")?
+        }
+        v::domain(j, domain)?;
+    }
+    j.raw("],\"sample_grid\":")?;
+    v::layout(j, s.sample_layout())?;
+    j.raw(",\"relative_floors\":")?;
+    v::f64_array(j, s.relative_floors())?;
+    j.raw(",\"status\":\"DiagnosticOnly\",\"branches\":[")?;
+    probe_reference_branches(j, s.branches())?;
+    j.raw("]}")
+}
+fn probe_origins<W: Write>(
+    j: &mut Json<W>,
+    origins: &[crate::v2_experiment::probes::ProbeOrigin; 6],
+) -> Result<(), DiagnosticExportError> {
+    for (i, origin) in origins.iter().enumerate() {
         if i > 0 {
             j.raw(",")?
         }
@@ -212,19 +232,13 @@ pub fn probe_reference<W: Write>(
         v::clock(j, origin.state_clock)?;
         j.raw("}")?;
     }
-    j.raw("],\"source_domains\":[")?;
-    for (i, domain) in s.source_domains().into_iter().enumerate() {
-        if i > 0 {
-            j.raw(",")?
-        }
-        v::domain(j, domain)?;
-    }
-    j.raw("],\"sample_grid\":")?;
-    v::layout(j, s.sample_layout())?;
-    j.raw(",\"relative_floors\":")?;
-    v::f64_array(j, s.relative_floors())?;
-    j.raw(",\"status\":\"DiagnosticOnly\",\"branches\":[")?;
-    for (i, branch) in s.branches().iter().enumerate() {
+    Ok(())
+}
+fn probe_reference_branches<W: Write>(
+    j: &mut Json<W>,
+    branches: &[crate::v2_experiment::reference::BranchTracking; 6],
+) -> Result<(), DiagnosticExportError> {
+    for (i, branch) in branches.iter().enumerate() {
         if i > 0 {
             j.raw(",")?
         }
@@ -243,7 +257,7 @@ pub fn probe_reference<W: Write>(
         }
         j.raw("]}")?;
     }
-    j.raw("]}")
+    Ok(())
 }
 
 fn probe_pressure_header<W: Write>(
