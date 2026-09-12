@@ -30,8 +30,7 @@ pub struct ReducedV2Force {
 impl ReducedV2Force {
     /// Declare complete provider storage and bounded per-request work.
     pub fn preflight(domain: Domain, sampled: Layout) -> Result<ForceLimits, SolverError> {
-        let fft = FftPlan::reservation(sampled)?;
-        Self::preflight_parts(domain, sampled, fft)
+        Self::preflight_parts(domain, sampled, || FftPlan::reservation(sampled))
     }
 
     pub(crate) fn preflight_with_fft_backend(
@@ -39,14 +38,15 @@ impl ReducedV2Force {
         sampled: Layout,
         backend: FftBackend,
     ) -> Result<ForceLimits, SolverError> {
-        let fft = FftPlan::reservation_with_shared_backend(sampled, backend)?;
-        Self::preflight_parts(domain, sampled, fft)
+        Self::preflight_parts(domain, sampled, || {
+            FftPlan::reservation_with_shared_backend(sampled, backend)
+        })
     }
 
     fn preflight_parts(
         domain: Domain,
         sampled: Layout,
-        fft: usize,
+        fft: impl FnOnce() -> Result<usize, SolverError>,
     ) -> Result<ForceLimits, SolverError> {
         validate(domain, sampled)?;
         let buffers = sampled
@@ -62,7 +62,8 @@ impl ReducedV2Force {
         let roots = sampled.dimensions()[2]
             .checked_mul(std::mem::size_of::<Option<AxialRoot>>())
             .ok_or(SolverError::SizeOverflow)?;
-        let storage_bytes = fft
+        // Backend-specific FFT admission follows generic provider overflow checks.
+        let storage_bytes = fft()?
             .checked_add(buffers)
             .and_then(|n| n.checked_add(roots))
             .and_then(|n| n.checked_add(std::mem::size_of::<Self>() + 12 * 64))
