@@ -1,0 +1,91 @@
+{
+  "schema": "p10-snapshot-comparison-output-v1",
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 512,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 512,
+        "step_ticks": 64
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "left_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=192;force_samples=384;observer_force_samples=768;observer_conservative=384;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;observer_conservative=384;host=local",
+  "left_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "left_plan_sha256": "d03ffea53ed6f41ab7e38e4962b15ca8f5213b304641ce41816ed1d7840bd4f1",
+  "right_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=512;host=local",
+  "right_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "right_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "left_hashes": {
+    "coefficient_sha256": "d7ae01f1c5d2a8bcacf50284263db266e1ed1d6d7cf39d4fecb33aff88a056ec",
+    "file_sha256": "353cdc773630eebcfb0c69920970b0cd6b33d2dde014b419cc47bd48a692b9ac"
+  },
+  "right_hashes": {
+    "coefficient_sha256": "a98b82093364ee94877a66106a09a528ada045cc71b3d2c2b5621ec8e6a7fd20",
+    "file_sha256": "d6ff2831a4a3de57d8d1ce210de326a64568a309da137989bcbff522bc65d5f4"
+  },
+  "clock": {
+    "elapsed": 512,
+    "target": 8192,
+    "epoch": 8,
+    "left_accepted_steps": 8,
+    "right_accepted_steps": 8
+  },
+  "full": {
+    "l2": 6.5958758267507075e-6,
+    "h1": 0.004933147217475805,
+    "vorticity_l2": 0.004933142808138362,
+    "divergence_l2": 2.1334408005249742e-16
+  },
+  "common": {
+    "l2": 3.1475440357981805e-10,
+    "h1": 2.003248657006892e-7,
+    "vorticity_l2": 2.0032461843324704e-7,
+    "divergence_l2": 2.1334383862080705e-16
+  },
+  "newly_resolved": {
+    "l2": 6.595875819240686e-6,
+    "h1": 0.0049331472134084165,
+    "vorticity_l2": 0.0049331428040709805,
+    "divergence_l2": 3.2096103419502183e-19
+  },
+  "fine_absolute": {
+    "l2": 0.10957221397724037,
+    "h1": 3.0112665869698247,
+    "vorticity_l2": 3.0092724021020048,
+    "divergence_l2": 1.8537961725762297e-16
+  },
+  "mean_error": [
+    4.503714558395953e-24,
+    1.081774247439393e-23,
+    -5.785442770018483e-24
+  ],
+  "admitted_bytes": 578486272
+}
