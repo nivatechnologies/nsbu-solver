@@ -1,0 +1,11 @@
+{
+  "status": "completed_reference_only_binary64_sampling_assessment",
+  "source": {"commit":"d511dbfb8f5ae7681cdeaef6131ae7d198315bc7","tree":"1cf4d18d4e73da163455013ce8fb45c624741449","case_sha256":"e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e","harness_sha256":"121233af071f1e9a1f9e60014c7eb1770171ebe9a1b8c41d36f8307013c1183d","binary_sha256":"5d254bc52a75c36100a165fffc93e327d80e94e10fde939ce852e27d82443bce"},
+  "clock":{"exponent":-20,"target":8192,"elapsed":4096,"remaining":4096},
+  "resources":{"owner_cap_bytes":402653184,"rlimit_as_bytes_per_process":536870912,"m96_reservation":57435384,"m192_reservation":306055416,"m96_max_rss_kib":57488,"m192_max_rss_kib":300188},
+  "work":{"m96":{"evaluations":884736,"root_iteration_bound":113246208,"actual_root_iterations":1297134,"transforms":3,"wall_seconds":1.13},"m192":{"evaluations":7077888,"root_iteration_bound":905969664,"actual_root_iterations":10481484,"transforms":3,"wall_seconds":8.38}},
+  "retained_n96_sha256":{"m96":"90f5d917a12de43efe51ee51e84729c025d55b6809c1a6c1857b556eb1c52143","m192":"f9573bcd5de01f5378110c07103d2526a2b4c3307566ed8d9287babcc607bb3b"},
+  "m192_shells":{"inside_n24":{"l2":1.8343013315667385,"h1":47.86040948086453},"n24_to_n32":{"l2":0.08657171607553467,"h1":8.819989453738565},"n32_to_n48":{"l2":0.09160398925686246,"h1":13.128332600820636},"n48_to_n96":{"l2":0.031577121567072784,"h1":6.77535387172707},"inside_n96":{"l2":1.838897616091109,"h1":50.85931130683043}},
+  "m96_to_m192_on_strict_n96":{"l2":0.0026628396382346953,"h1":0.8860060857813408,"vorticity_l2":0.45095997080978134,"divergence_l2":0.7626498528523925},
+  "claims":{"independent_high_precision_reference":false,"true_error_bound":false,"tail_beyond_m192_bound":false,"trajectory_error":false,"pde_qualification":false,"accepted_windows":0}
+}
