@@ -20,6 +20,72 @@ fn direct(values: &[f64], dimensions: [usize; 3], mode: [usize; 3]) -> Complex64
     sum / values.len() as f64
 }
 
+fn direct_inverse(coefficients: &[Complex64], layout: Layout, point: [usize; 3]) -> f64 {
+    let [nx, ny, nz] = layout.dimensions();
+    let mut sum = Complex64::new(0.0, 0.0);
+    for i in 0..nx {
+        for j in 0..ny {
+            for k in 0..=nz / 2 {
+                let phase = std::f64::consts::TAU
+                    * (i as f64 * point[0] as f64 / nx as f64
+                        + j as f64 * point[1] as f64 / ny as f64
+                        + k as f64 * point[2] as f64 / nz as f64);
+                let exponential = Complex64::new(phase.cos(), phase.sin());
+                let value = coefficients[layout.index([i, j, k]).unwrap()];
+                sum += value * exponential;
+                if k != 0 && k != nz / 2 {
+                    sum += value.conj() * exponential.conj();
+                }
+            }
+        }
+    }
+    sum.re
+}
+
+fn hermitian_fixture(layout: Layout) -> Vec<Complex64> {
+    let [nx, ny, nz] = layout.dimensions();
+    let mut values = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+    for k in 1..nz / 2 {
+        for i in 0..nx {
+            for j in 0..ny {
+                values[layout.index([i, j, k]).unwrap()] = Complex64::new(
+                    (11 * i + 7 * j + 5 * k) as f64 / 97.0,
+                    (3 * i + 13 * j + 2 * k) as f64 / 89.0 - 0.5,
+                );
+            }
+        }
+    }
+    for k in [0, nz / 2] {
+        for i in 0..nx {
+            for j in 0..ny {
+                let partner = [(nx - i) % nx, (ny - j) % ny, k];
+                let position = [i, j, k];
+                if layout.index(position).unwrap() > layout.index(partner).unwrap() {
+                    continue;
+                }
+                let value = Complex64::new(
+                    (17 * i + 5 * j + 3 * k) as f64 / 101.0,
+                    (7 * i + 11 * j + k) as f64 / 103.0 - 0.25,
+                );
+                let owned = if position == partner {
+                    Complex64::new(value.re, 0.0)
+                } else {
+                    value
+                };
+                values[layout.index(position).unwrap()] = owned;
+                values[layout.index(partner).unwrap()] = owned.conj();
+            }
+        }
+    }
+    values
+}
+
+fn same_bits(left: &[Complex64], right: &[Complex64]) -> bool {
+    left.iter()
+        .zip(right)
+        .all(|(a, b)| a.re.to_bits() == b.re.to_bits() && a.im.to_bits() == b.im.to_bits())
+}
+
 #[test]
 fn mixed_radix_anisotropic_forward_matches_independent_direct_sums() {
     for dimensions in [[4, 4, 4], [4, 6, 8], [6, 12, 18], [8, 8, 8], [12, 12, 12]] {
@@ -77,6 +143,57 @@ fn constant_and_negative_frequency_modes_keep_normalized_amplitudes() {
         .iter()
         .zip(roundtrip)
         .all(|(a, b)| (*a - b).norm_sqr() < 1e-27));
+}
+
+#[test]
+fn full_anisotropic_oracle_covers_rows_hermitian_planes_and_nyquist() {
+    let layout = Layout::new([4, 6, 8]).unwrap();
+    let (plan, mut work) = FftPlan::new(layout, 1024 * 1024).unwrap();
+    let coefficients = hermitian_fixture(layout);
+    let mut physical = vec![0.0; layout.real_len()];
+    plan.inverse(&coefficients, &mut physical, &mut work)
+        .unwrap();
+    for i in 0..4 {
+        for j in 0..6 {
+            for k in 0..8 {
+                let expected = direct_inverse(&coefficients, layout, [i, j, k]);
+                let actual = physical[(i * 6 + j) * 8 + k];
+                assert!((actual - expected).abs() < 5e-13, "{i}, {j}, {k}");
+            }
+        }
+    }
+    let mut restored = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+    plan.forward(&physical, &mut restored, &mut work).unwrap();
+    assert!(coefficients
+        .iter()
+        .zip(restored)
+        .all(|(a, b)| (*a - b).norm_sqr() < 3e-26));
+}
+
+#[test]
+fn repeated_transform_output_is_bitwise_deterministic() {
+    let layout = Layout::new([4, 6, 8]).unwrap();
+    let (plan, mut work) = FftPlan::new(layout, 1024 * 1024).unwrap();
+    let values = (0..layout.real_len())
+        .map(|index| ((29 * index + 17) % 113) as f64 / 113.0 - 0.5)
+        .collect::<Vec<_>>();
+    let mut coefficients = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+    let mut physical = vec![0.0; layout.real_len()];
+    plan.forward(&values, &mut coefficients, &mut work).unwrap();
+    plan.inverse(&coefficients, &mut physical, &mut work)
+        .unwrap();
+    let expected_coefficients = coefficients.clone();
+    let expected_physical = physical.clone();
+    for _ in 0..16 {
+        plan.forward(&values, &mut coefficients, &mut work).unwrap();
+        plan.inverse(&coefficients, &mut physical, &mut work)
+            .unwrap();
+        assert!(same_bits(&coefficients, &expected_coefficients));
+        assert!(physical
+            .iter()
+            .zip(&expected_physical)
+            .all(|(a, b)| a.to_bits() == b.to_bits()));
+    }
 }
 
 #[test]
