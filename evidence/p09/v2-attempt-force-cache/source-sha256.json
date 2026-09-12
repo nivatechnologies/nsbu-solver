@@ -1,0 +1,38 @@
+{
+  "parent_commit": "a5bf7644f8542f5a8124bf3c117de4e9dfe0ba5e",
+  "source_commit": "9836cfc9f3b13a6f3df39865bd016d17e6bc1e85",
+  "files": [
+    {
+      "path": "crates/nsbu-benchmarks/Cargo.toml",
+      "sha256": "47b7469d8ab64d1ab85c2045a22514b5fe125b273250695289f58266e335e1f7"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/runtime_force.rs",
+      "sha256": "1e8c13829a8fa7debbee9b5981267c6a48657d5be8973f1cc91b22ecb3750c79"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/runtime_force/attempt_cache.rs",
+      "sha256": "3b7d65643009ef018ad98f219acb20fdb93adc0707ce830d1514d02aae4969f3"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_attempt_force_cache.rs",
+      "sha256": "8cc2280be8413547341be58a6c4d22eaaee6d9aa4c00d005c2a38a9275baebbd"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_attempt_force_cache_allocation.rs",
+      "sha256": "6328678c645962f47516f193d1c12a97b8ed61f67c36746aae00781e9248da7e"
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/forcing.rs",
+      "sha256": "c90fc8960dab7d44a763f38e358d5a5da16c5aa28b6b63bff614cd40d36897b2"
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs.rs",
+      "sha256": "321a7ee889fa1d0325e9df286a7d027fdcd39bcaace128299f56d6ffd7332abd"
+    },
+    {
+      "path": "docs/V2_ATTEMPT_FORCE_CACHE.md",
+      "sha256": "dfcb24f16dd23f0e4b008f7fd4bcf48e04e7d28085acb026becf2340d510bc64"
+    }
+  ]
+}

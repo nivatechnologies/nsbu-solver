@@ -1,0 +1,51 @@
+{
+  "parent_commit": "a5bf7644f8542f5a8124bf3c117de4e9dfe0ba5e",
+  "source_commit": "9836cfc9f3b13a6f3df39865bd016d17e6bc1e85",
+  "status": "phase-a-provider-complete",
+  "tests": {
+    "cache_integration": 4,
+    "bounds_unit": 1,
+    "force_budget_regressions": 6,
+    "archive_v1_regressions": 4,
+    "allocation_harness": "passed"
+  },
+  "actual_macro": {
+    "domain": [4, 4, 4],
+    "methods": {
+      "CoxMatthews": {"rhs_calls": 12, "provider_evaluations": 5, "state_words": "bitwise equal"},
+      "HochbruckOstermann": {"rhs_calls": 15, "provider_evaluations": 5, "state_words": "bitwise equal"}
+    }
+  },
+  "small_profile_limits": {
+    "original_storage_bytes": 9928,
+    "cached_storage_bytes": 23576,
+    "original_max_work_units_per_call": 8256,
+    "cached_max_work_units_per_call": 8405,
+    "scalar_transforms_per_miss": 3,
+    "maximum_direct_calls": 15,
+    "slots": 5
+  },
+  "focused_changed_production_coverage": {
+    "lines": {"covered": 416, "count": 428, "percent": 97.19626168224299},
+    "branches": {"covered": 47, "count": 52, "percent": 90.38461538461539}
+  },
+  "quality": {
+    "production_crap_maximum": 19.125,
+    "changed_test_zero_coverage_crap_maximum": 12.0,
+    "whole_crates_cc_maximum": 21.0,
+    "whole_crates_cognitive_maximum": 21.0,
+    "whole_crates_function_halstead_difficulty_maximum": 60.0,
+    "whole_crates_all_node_halstead_difficulty_maximum": 75.9295154185022,
+    "tracked_rust_file_lines_maximum": 477,
+    "changed_rust_file_lines_maximum": 337,
+    "fmt": "passed",
+    "clippy_workspace_all_targets": "passed",
+    "rustdoc_workspace": "passed"
+  },
+  "limitations": [
+    "No cached Run owner or archive format is introduced.",
+    "No observer or cross-attempt cache exists.",
+    "No timing speedup or scientific qualification is claimed.",
+    "Whole-workspace coverage is left to hosted integration; this artifact covers changed maintained production above 80 percent."
+  ]
+}

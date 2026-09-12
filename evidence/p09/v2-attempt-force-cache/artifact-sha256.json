@@ -1,0 +1,61 @@
+{
+  "source_commit": "9836cfc9f3b13a6f3df39865bd016d17e6bc1e85",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c553d4e4d9dfae7e42fe2f3b495eecf7d425f6a34e8c230ac7c09bf59cab01f8"
+    },
+    {
+      "path": "raw/archive-regression.log.gz",
+      "sha256": "7d75bf88eacc6b0c0eeb8992674eb25231c070a9f3e3df99b562d90cca0188c4"
+    },
+    {
+      "path": "raw/clippy.log.gz",
+      "sha256": "f206532b9861276b69bfd7bb5de0c44b3719c54fb3d1edac132a3b2a2ce5fa56"
+    },
+    {
+      "path": "raw/coverage.json.gz",
+      "sha256": "387e34aad5f8beb8f40b0235dfee2fd4d8f542771acb0b61316181913e99489b"
+    },
+    {
+      "path": "raw/crap.json.gz",
+      "sha256": "e8aef22fd74f9d8826006d47e63311614ebce09cee4976b7c8492b615167f4c6"
+    },
+    {
+      "path": "raw/fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "raw/force-budget-regression.log.gz",
+      "sha256": "0a2bf55d82db07c6c2ac0be46179923e0bc343d6f2293a72e987d3e923dfeef4"
+    },
+    {
+      "path": "raw/integration-tests.log.gz",
+      "sha256": "2d8689440e29fc9603451fcb028ffca96f8f1fe7c406a83e319a9635919c0454"
+    },
+    {
+      "path": "raw/metrics.jsonl.gz",
+      "sha256": "08aa959136ada72051120b822e7b86eb4fddd5b6d4587f2187fc3c8f865dc4a7"
+    },
+    {
+      "path": "raw/reproduce.sh",
+      "sha256": "67f9fc913355180c05e13395590c916b8f7b1c74b131a4fead15d8ec1e2b3b64"
+    },
+    {
+      "path": "raw/rustdoc.log.gz",
+      "sha256": "e122bc8d4d59be3c140dc5f22350f2ac1afcaad8f28eb465a46c20f1b42ebb03"
+    },
+    {
+      "path": "raw/unit-tests.log.gz",
+      "sha256": "6147cecc20849147e39d04bc5296c498ad7c05da8a4b3e2deeb8a4ff396e665f"
+    },
+    {
+      "path": "source-sha256.json",
+      "sha256": "4c01fe979b729c19fb17bf1405024166807fefc77a9d7ee3f878b7e48c194ae5"
+    },
+    {
+      "path": "summary.json",
+      "sha256": "4fe636581f05c7ad85775a1ceb3422cb65945858c91ea63e837f4d613bef2f4a"
+    }
+  ]
+}
