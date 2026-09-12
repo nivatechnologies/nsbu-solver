@@ -41,7 +41,9 @@ The source includes an ignored, explicit environment-gated M512 force-only
 control. It constructs serial and W3 providers sequentially, compares every
 coefficient bit word and the complete `ForceWork`, validates the W3 identity,
 and requires three repeated W3 evaluations to allocate, deallocate, and
-reallocate zero times.
+reallocate zero times. This original libtest control is
+`crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512.rs`; it is the preserved
+failed control and is not the source of the passing resource claim.
 
 The first admitted execution failed the unchanged steady-allocation assertion
 with `(2 allocations, 2 deallocations, 1 reallocation)`. Its stdout also shows
@@ -66,6 +68,8 @@ counts with exit status zero. It completed in 124.32 seconds with peak RSS
 15,278,380 KiB under a 32 GiB virtual-memory limit and 600-second timeout. The
 closure record is preserved under `review-standalone-20260912T2237Z`; the
 original libtest failure and attribution trace remain preserved separately.
+The passing resource control is
+`crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512_standalone.rs`.
 
 The original invocation was:
 
