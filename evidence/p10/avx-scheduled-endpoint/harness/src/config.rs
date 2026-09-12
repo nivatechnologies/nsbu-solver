@@ -62,8 +62,7 @@ pub const N: usize = 256;
 #[cfg(all(
     feature = "n384-prep",
     not(feature = "n256"),
-    not(feature = "n192-piecewise-cadv33"),
-    not(feature = "n256-piecewise-cadv33")
+    not(feature = "n384-matched-piecewise")
 ))]
 pub const N: usize = 384;
 pub const M: usize = 384;
@@ -78,11 +77,7 @@ pub const ADVECTIVE_LIMIT: f64 = 0.45;
 pub const ADVECTIVE_LIMIT: f64 = 0.8;
 #[cfg(feature = "n384-piecewise")]
 pub const ADVECTIVE_LIMIT: f64 = 1.6;
-#[cfg(any(
-    feature = "n384-piecewise-cadv33",
-    feature = "n192-piecewise-cadv33",
-    feature = "n256-piecewise-cadv33"
-))]
+#[cfg(feature = "n384-cadv33-profile")]
 pub const ADVECTIVE_LIMIT: f64 = 3.3;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
@@ -106,14 +101,10 @@ const PROFILE: &str = "n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29
 const PROFILE: &str = "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(all(
     feature = "n384-prep",
-    not(feature = "n192-piecewise-cadv33"),
-    not(feature = "n256-piecewise-cadv33")
+    not(feature = "n384-matched-piecewise")
 ))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
-#[cfg(any(
-    feature = "n192-piecewise-cadv33",
-    feature = "n256-piecewise-cadv33"
-))]
+#[cfg(feature = "n384-matched-piecewise")]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-matched-piecewise-preflight-v1";
 #[cfg(not(feature = "n384-prep"))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-scheduled-endpoint-v2";
@@ -441,8 +432,7 @@ mod n384_tests {
     #[test]
     fn selected_profile_is_exact_and_execution_ready() {
         #[cfg(not(any(
-            feature = "n192-piecewise-cadv33",
-            feature = "n256-piecewise-cadv33"
+            feature = "n384-matched-piecewise"
         )))]
         assert_eq!(N, 384);
         #[cfg(feature = "n192-piecewise-cadv33")]
@@ -454,11 +444,7 @@ mod n384_tests {
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
         #[cfg(feature = "n384-piecewise")]
         assert_eq!(ADVECTIVE_LIMIT, 1.6);
-        #[cfg(any(
-            feature = "n384-piecewise-cadv33",
-            feature = "n192-piecewise-cadv33",
-            feature = "n256-piecewise-cadv33"
-        ))]
+        #[cfg(feature = "n384-cadv33-profile")]
         assert_eq!(ADVECTIVE_LIMIT, 3.3);
         assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Ok(()));
@@ -490,10 +476,7 @@ mod n384_tests {
             admission.disk,
         );
         assert_eq!(total, EXPECTED_N384_TOTAL);
-        #[cfg(any(
-            feature = "n192-piecewise-cadv33",
-            feature = "n256-piecewise-cadv33"
-        ))]
+        #[cfg(feature = "n384-matched-piecewise")]
         {
             assert_eq!(admission.disk, EXPECTED_MATCHED_DISK);
             assert_eq!(admission.integration_work, EXPECTED_MATCHED_WORK);
