@@ -1,6 +1,6 @@
 //! Complete physical refinements from actual exact-v2 accepted states.
 mod extrema;
-mod plan;
+pub(crate) mod plan;
 mod report;
 mod workspace;
 pub use extrema::{PhysicalExtrema, SampleMaximum};
