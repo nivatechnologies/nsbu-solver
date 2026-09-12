@@ -1,0 +1,33 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "snapshot": "state.bin",
+  "plan": "frozen-plan.json",
+  "identity": "COPY_THE_EXACT_REVIEWED_P10AVXSNAP_IDENTITY",
+  "source_commit": "0000000000000000000000000000000000000000",
+  "plan_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "coefficient_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "file_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "side-specific-owner-and-worker-description",
+  "dimensions": [384, 384, 384],
+  "evolution": {
+    "case_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [1.0, 1.0, 1.0],
+    "viscosity": 0.01,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [384, 384, 384],
+    "schedule": [
+      {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 64},
+      {"from_inclusive": 2048, "until_exclusive": 4096, "step_ticks": 128}
+    ],
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001]
+  },
+  "elapsed": 4096,
+  "target": 4096,
+  "epoch": 48,
+  "accepted_steps": 48
+}
