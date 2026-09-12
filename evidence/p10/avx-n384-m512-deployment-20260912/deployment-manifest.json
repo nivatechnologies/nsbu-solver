@@ -1,0 +1,29 @@
+{
+  "schema": "p10-avx-n384-m512-deployment-manifest-v1",
+  "status": "assembled_not_transferred_not_launched",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "branch": "codex/p10-m512-force-profile-20260912",
+  "bundle_directory": "deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "transfer_archive": "deployment/p10-n384-m512-326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72.tar.gz",
+  "transfer_archive_sha256": "225600dc96d2afb1188802631e14ceee7a76bf0f40380fdf2345c1b8cc6ec642",
+  "intended_sulaco_directory": "/tmp/nsbu-p10-sulaco-m512-20260913",
+  "files": {
+    "p10-avx-n384-m512-piecewise-cadv33": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
+    "pgid-watchdog-v2.sh": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
+    "frozen-plan.json": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "forecast.json": "fd92ca1d5d75ff4b0e7c3b5423b699509415d338fba348436ec7b96b08bc1973",
+    "preflight.stdout": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
+    "launch-reviewed.sh": "a8091549adf7d168f1787f94d170b9880ef3fe3ff5c8bd85a50fd2b04f1f9f63"
+  },
+  "supporting_evidence": {
+    "build.json": "dc0d27f1ea82c76755ddab5e1fcba5081cc17b4b35edc30923a9b5b32c63e54a",
+    "quality-summary.json": "37337b50f211195174adee175f9977cde3085809236ec2094d41d2fd62fe21b9",
+    "forecast_force_source": "evidence/p10/force-grid-n384-baf54fa/summary.json",
+    "forecast_force_source_sha256": "892853212e5002199af93a0ab1c9e3fdea08b38028b5be04b1943ce2b985b6db",
+    "m512_control_archive": "evidence/p10/avx-m512-force-profile-20260912",
+    "current_n384_snapshot_sha256": "d307a86c889f8b3e88a8d721991180707022e15f51e9411f439fdb4168cb1b83"
+  },
+  "transfer_authorized": false,
+  "launch_authorized": false,
+  "trajectory_launched": false
+}
