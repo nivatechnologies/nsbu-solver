@@ -1,0 +1,35 @@
+{
+  "status": "bounded_diagnostic_increment_review_ready",
+  "base_commit": "d33422ea8e9590af63f45157dfacada31f255bbe",
+  "measurement_source_commit": "d687b585d324699a484e15a91581e41977392007",
+  "final_documentation_commit": "5ec1975e056ec84fce402b60f7cd6b2cee1eccb7",
+  "source_equivalence": "5ec1975 changes only oracle-scope prose after d687 measurements",
+  "tests": {
+    "actual_offstage_and_independent_oracles": {"passed": 2, "failed": 0, "normal_seconds": 66.73, "instrumented_seconds": 341.01},
+    "allocation": {"passed": true, "construction_bytes": 25132352, "declared_joint_bytes": 30174400, "steady_allocations": 0},
+    "negative_controls": ["invalid comparison grid", "insufficient attempts", "cap minus one", "foreign identity", "same-plan stale publication with prior report retention", "terminal retry", "omitted force", "opposed scalar and gradient signs"]
+  },
+  "coverage": {
+    "changed_production_lines": {"covered": 491, "count": 566, "percent": 86.7491},
+    "changed_production_branches": {"covered": 36, "count": 52, "percent": 69.2308},
+    "changed_test_lines": {"covered": 388, "count": 388, "percent": 100.0},
+    "all_changed_lines": {"covered": 879, "count": 954, "percent": 92.1384},
+    "all_changed_branches": {"covered": 56, "count": 72, "percent": 77.7778},
+    "whole_changed_branch_80_passed": false,
+    "whole_source_gate": "pending combined hosted CI"
+  },
+  "quality": {
+    "changed_function_crap_max": 16.0,
+    "function_cc_max": 16.0,
+    "function_cognitive_max": 20.0,
+    "all_node_halstead_difficulty_max": 73.47857142857143,
+    "whole_crates_rust_file_lines_max": 477,
+    "workspace_all_target_clippy": "passed after explicit oracle submodule path correction",
+    "strict_rustdoc": "passed"
+  },
+  "review_history": {
+    "discarded_oracle": "An earlier magnitude-difference relative numerator was rejected and never accepted as evidence; d687 uses the componentwise field-difference norm and an opposed-sign control.",
+    "discarded_build": "A root combined all-target Clippy run failed before d687 because the helper module path was ambiguous when compiled standalone; d687 fixed the path and the local workspace all-target gate passed."
+  },
+  "claims": {"diagnostic_only": true, "pressure_gauge_qualified": false, "force_sampling_qualified": false, "pde_window_qualified": false}
+}
