@@ -69,6 +69,10 @@ fn main() {
     );
     assert_eq!(driver.reports().len(), manifest.len());
     assert_eq!(driver.charged_work(), plan.bounds().work);
+    assert_eq!(
+        driver.consumer_work().probe_pressure,
+        plan.bounds().probe_pressure
+    );
     println!(
         "v2 diagnostic admission=0 construction_bytes={} joint_bytes={} events={} execution_allocations=0",
         built.bytes_allocated,
