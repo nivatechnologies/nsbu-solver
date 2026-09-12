@@ -13,7 +13,11 @@ pub const BUFFER_BYTES: usize = 1024 * 1024;
 pub const DISK_CAP_BYTES: usize = 4 * 1024 * 1024 * 1024;
 #[cfg(feature = "n384-h32")]
 pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
-#[cfg(any(feature = "n384-h64", feature = "n384-piecewise"))]
+#[cfg(any(
+    feature = "n384-h64",
+    feature = "n384-piecewise",
+    feature = "n384-piecewise-cadv33"
+))]
 pub const DISK_CAP_BYTES: usize = 128 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 const HEADER_ALLOWANCE: usize = 4096;

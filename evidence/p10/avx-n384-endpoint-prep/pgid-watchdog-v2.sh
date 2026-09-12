@@ -27,11 +27,13 @@ esac
 identity_matches() {
     [ -r "/proc/$leader_pid/stat" ] && [ -r "/proc/$leader_pid/cmdline" ] || return 1
     stat=$(cat "/proc/$leader_pid/stat" 2>/dev/null) || return 1
+    # Strip PID and the parenthesized comm field. The remaining words are
+    # proc_pid_stat(5) fields 3 onward, even when comm contains spaces.
     rest=${stat##*) }
     set -- $rest
     [ "$1" != "Z" ] || return 1
     [ "$3" = "$process_group" ] || return 1
-    [ "$20" = "$expected_starttime" ] || return 1
+    [ "${20}" = "$expected_starttime" ] || return 1
     actual_sha256=$(sha256sum "/proc/$leader_pid/cmdline" 2>/dev/null | awk '{print $1}') || return 1
     [ "$actual_sha256" = "$expected_cmdline_sha256" ]
 }

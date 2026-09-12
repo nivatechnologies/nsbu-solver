@@ -2,21 +2,21 @@
 use nsbu_solver::SolverError;
 
 pub const ENDPOINT: u128 = 4096;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise")))]
+#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
 pub const STEP: u128 = 32;
 #[cfg(feature = "n384-h64")]
 pub const STEP: u128 = 64;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise")))]
+#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
 pub const MAXIMUM_ATTEMPTS: usize = 128;
 #[cfg(feature = "n384-h64")]
 pub const MAXIMUM_ATTEMPTS: usize = 64;
-#[cfg(feature = "n384-piecewise")]
+#[cfg(feature = "n384-piecewise-common")]
 pub const MAXIMUM_ATTEMPTS: usize = 48;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise")))]
+#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
 pub const IDENTITY: &str = "constant-h32";
 #[cfg(feature = "n384-h64")]
 pub const IDENTITY: &str = "constant-h64";
-#[cfg(feature = "n384-piecewise")]
+#[cfg(feature = "n384-piecewise-common")]
 pub const IDENTITY: &str = "h64-clocks0-through2048-then-h128-through4096";
 pub const FINE: [u128; 9] = [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096];
 pub const MIDDLE: [u128; 5] = [0, 1024, 2048, 3072, 4096];
@@ -33,7 +33,7 @@ fn accepted_clock(clock: u128) -> bool {
     step(clock).is_ok()
 }
 
-#[cfg(not(feature = "n384-piecewise"))]
+#[cfg(not(feature = "n384-piecewise-common"))]
 pub fn step(clock: u128) -> Result<u128, SolverError> {
     if clock < ENDPOINT && clock.is_multiple_of(STEP) {
         Ok(STEP)
@@ -42,7 +42,7 @@ pub fn step(clock: u128) -> Result<u128, SolverError> {
     }
 }
 
-#[cfg(feature = "n384-piecewise")]
+#[cfg(feature = "n384-piecewise-common")]
 pub fn step(clock: u128) -> Result<u128, SolverError> {
     match clock {
         0..2048 if clock.is_multiple_of(64) => Ok(64),
@@ -114,7 +114,7 @@ mod tests {
         }
     }
 
-    #[cfg(feature = "n384-piecewise")]
+    #[cfg(feature = "n384-piecewise-common")]
     #[test]
     fn piecewise_transition_and_invalid_clocks_are_exact() {
         assert_eq!(step(0), Ok(64));

@@ -19,7 +19,10 @@ compile_error!("n256 and n384-prep are mutually exclusive profiles");
 compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
 #[cfg(any(
     all(feature = "n384-h32", feature = "n384-piecewise"),
-    all(feature = "n384-h64", feature = "n384-piecewise")
+    all(feature = "n384-h64", feature = "n384-piecewise"),
+    all(feature = "n384-h32", feature = "n384-piecewise-cadv33"),
+    all(feature = "n384-h64", feature = "n384-piecewise-cadv33"),
+    all(feature = "n384-piecewise", feature = "n384-piecewise-cadv33")
 ))]
 compile_error!("select only one exact n384 profile");
 #[cfg(all(
@@ -27,7 +30,8 @@ compile_error!("select only one exact n384 profile");
     not(any(
         feature = "n384-h32",
         feature = "n384-h64",
-        feature = "n384-piecewise"
+        feature = "n384-piecewise",
+        feature = "n384-piecewise-cadv33"
     ))
 ))]
 compile_error!("select an exact top-level n384 feature");
@@ -46,10 +50,12 @@ pub const CAP: usize = 103_079_215_104;
 pub const CAP: usize = 192 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
-#[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise")))]
+#[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise-common")))]
 pub const ADVECTIVE_LIMIT: f64 = 0.8;
 #[cfg(feature = "n384-piecewise")]
 pub const ADVECTIVE_LIMIT: f64 = 1.6;
+#[cfg(feature = "n384-piecewise-cadv33")]
+pub const ADVECTIVE_LIMIT: f64 = 3.3;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
 const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + TIMER_OVERHEAD + 64 * 1024;
@@ -64,6 +70,8 @@ const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c";
 const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
 #[cfg(all(feature = "n384-piecewise", not(feature = "n256")))]
 const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv16-w3-f13c29c";
+#[cfg(all(feature = "n384-piecewise-cadv33", not(feature = "n256")))]
+const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n384-prep")]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 #[cfg(not(feature = "n384-prep"))]
@@ -76,9 +84,9 @@ const EXECUTION: &str = "serial-component-fft";
 const PROVIDER: &str = "parallel-reduced-v2-force-w3-attempt-cache";
 #[cfg(not(feature = "n384-prep"))]
 const PROVIDER: &str = "parallel-reduced-attempt-cache";
-#[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise")))]
+#[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise-common")))]
 const EXTERNAL_STOP: &str = "pgid-watchdog-v1-starttime-cmdline-deadline";
-#[cfg(feature = "n384-piecewise")]
+#[cfg(feature = "n384-piecewise-common")]
 const EXTERNAL_STOP: &str = "pgid-watchdog-v2-starttime-cmdline-deadline";
 
 #[derive(Clone, Copy)]
@@ -339,17 +347,19 @@ mod n384_tests {
     const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
     #[cfg(feature = "n384-h64")]
     const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
-    #[cfg(feature = "n384-piecewise")]
+    #[cfg(feature = "n384-piecewise-common")]
     const EXPECTED_N384_TOTAL: usize = 185_782_833_928;
 
     #[test]
     fn selected_profile_is_exact_and_execution_ready() {
         assert_eq!(N, 384);
         assert_eq!(M, 384);
-        #[cfg(not(feature = "n384-piecewise"))]
+        #[cfg(not(feature = "n384-piecewise-common"))]
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
         #[cfg(feature = "n384-piecewise")]
         assert_eq!(ADVECTIVE_LIMIT, 1.6);
+        #[cfg(feature = "n384-piecewise-cadv33")]
+        assert_eq!(ADVECTIVE_LIMIT, 3.3);
         assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();
