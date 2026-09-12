@@ -218,3 +218,13 @@ fn cached_profile_refuses_every_version_one_archive_operation() {
         Err(CheckpointError::InvalidEncoding)
     ));
 }
+
+#[test]
+fn direct_read_reservation_refuses_excess_records() {
+    let plan = Plan::from_rest(settings(Method::CoxMatthews), 1 << 26).unwrap();
+    let records = plan.settings().configuration.limits.maximum_attempts + 1;
+    assert_eq!(
+        archive::read_reservation(plan, records),
+        Err(CheckpointError::ResourceLimit)
+    );
+}
