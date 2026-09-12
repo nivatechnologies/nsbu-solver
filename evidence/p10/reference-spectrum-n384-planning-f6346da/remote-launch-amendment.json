@@ -1,0 +1,11 @@
+{
+  "recorded_utc": "2026-09-12T14:27:00Z",
+  "numerical_profile_unchanged": true,
+  "plan_commit": "20db846",
+  "execution_host": "sulaco",
+  "execution_numa_node": 1,
+  "change": "Run the frozen M384 and M768 screens on Sulaco NUMA node 1 while endpoint trajectories use separate CPU resources.",
+  "reason": "The original launch rule prevented contention with four local endpoint jobs. Sulaco supplies a separate idle 64-core NUMA node with more than the frozen 20 GiB cap available, so this preserves the rule's resource-separation purpose and obtains the resolution decision earlier.",
+  "requirements": "Transfer and verify the already checked binaries and plan inputs; preserve the frozen caps, timeouts, arithmetic, output hashes, and sequential M384 then M768 execution. No PDE trajectory shares node 1 during generation.",
+  "qualification": "Operational host scheduling only; this remains a binary64 analytical reference screen and cannot qualify a PDE window."
+}
