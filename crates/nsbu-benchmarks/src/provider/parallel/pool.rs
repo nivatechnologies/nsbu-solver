@@ -1,13 +1,20 @@
 //! Complete dispatch/collection boundary: every submitted worker is drained before returning.
-use super::{sampling::Partition, worker::Worker};
+use super::{
+    sampling::{Arithmetic, Partition},
+    worker::Worker,
+};
 use crate::time::BenchmarkTime;
 use nsbu_solver::{domain::Layout, SolverError};
-pub(super) struct Pool {
+pub(in crate::provider) struct Pool {
     workers: Vec<Worker>,
     failed: bool,
 }
 impl Pool {
-    pub fn new(layout: Layout, workers: usize) -> Result<Self, SolverError> {
+    pub fn new(
+        layout: Layout,
+        workers: usize,
+        arithmetic: Arithmetic,
+    ) -> Result<Self, SolverError> {
         let mut result = Self {
             workers: Vec::new(),
             failed: false,
@@ -17,9 +24,10 @@ impl Pool {
             .try_reserve_exact(workers)
             .map_err(|_| SolverError::AllocationFailed)?;
         for worker in 0..workers {
-            result
-                .workers
-                .push(Worker::new(Partition::new(layout, worker, workers))?);
+            result.workers.push(Worker::new(
+                Partition::new(layout, worker, workers),
+                arithmetic,
+            )?);
         }
         Ok(result)
     }

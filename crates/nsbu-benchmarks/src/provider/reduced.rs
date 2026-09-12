@@ -17,11 +17,11 @@ pub struct ReducedV2Force {
     sampled: Layout,
     plan: FftPlan,
     workspace: FftWorkspace,
-    physical: [Vec<f64>; 3],
+    pub(super) physical: [Vec<f64>; 3],
     spectral: Vec<Complex64>,
     roots: Vec<Option<AxialRoot>>,
     limits: ForceLimits,
-    last_root_iterations: usize,
+    pub(super) last_root_iterations: usize,
 }
 
 impl ReducedV2Force {
@@ -115,7 +115,7 @@ impl ReducedV2Force {
         Ok(iterations)
     }
 
-    fn transform(&mut self, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
+    pub(super) fn transform(&mut self, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
         for (physical, coefficients) in self.physical.iter().zip(output) {
             self.plan
                 .forward(physical, &mut self.spectral, &mut self.workspace)?;
