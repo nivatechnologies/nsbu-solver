@@ -1,0 +1,16 @@
+{
+  "denominator": "full L2 or H1 norm of the finer numerical state, computed by the same comparator against an exact zero spectrum; not an analytical-reference norm",
+  "rows": [
+    {"force_m":48,"clock":64,"pair":"n12_n16","relative_l2":0.25615400815209793,"relative_h1":0.5492056827599565,"pair_h1":7.707922056572308e-13,"finer_h1":1.4034672798426305e-12},
+    {"force_m":48,"clock":64,"pair":"n16_n24","relative_l2":0.18048961703658137,"relative_h1":0.4719620411097605,"pair_h1":7.513261168123993e-13,"finer_h1":1.5919206448165802e-12},
+    {"force_m":48,"clock":128,"pair":"n12_n16","relative_l2":0.25583985442146806,"relative_h1":0.5484464950808311,"pair_h1":6.76933915091781e-6,"finer_h1":1.2342752140152033e-5},
+    {"force_m":48,"clock":128,"pair":"n16_n24","relative_l2":0.1801043847555494,"relative_h1":0.47112686777472884,"pair_h1":6.5924836918977645e-6,"finer_h1":1.3993011527947896e-5},
+    {"force_m":48,"clock":2048,"pair":"n12_n16","relative_l2":0.2507627130300519,"relative_h1":0.5283166507354211,"pair_h1":20.908857435687306,"finer_h1":39.57637414338921},
+    {"force_m":48,"clock":2048,"pair":"n16_n24","relative_l2":0.1758098105113324,"relative_h1":0.45872905312650974,"pair_h1":20.426346293484904,"finer_h1":44.528128650817465},
+    {"force_m":48,"clock":4096,"pair":"n12_n16","relative_l2":0.24710862336707343,"relative_h1":0.5005091946785314,"pair_h1":21.510148642289924,"finer_h1":42.97653044337283},
+    {"force_m":48,"clock":4096,"pair":"n16_n24","relative_l2":0.172833807888775,"relative_h1":0.44061391503235875,"pair_h1":21.08261830913625,"finer_h1":47.84828075070652},
+    {"force_m":96,"clock":2048,"pair":"n12_n16","relative_l2":0.2520782930139084,"relative_h1":0.530840765097508,"pair_h1":21.023313706952496,"finer_h1":39.6038041710885},
+    {"force_m":96,"clock":2048,"pair":"n16_n24","relative_l2":0.1774406573944646,"relative_h1":0.4609773342899859,"pair_h1":20.568202615924786,"finer_h1":44.618685314766466}
+  ],
+  "interpretation": "Moving to clocks 64 or 128 makes absolute errors small with the field amplitude, but does not materially reduce relative spatial differences. The earlier interval cannot be relabelled as a normative concentrating endpoint."
+}

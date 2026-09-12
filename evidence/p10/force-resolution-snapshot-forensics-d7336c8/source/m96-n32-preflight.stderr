@@ -1,0 +1,17 @@
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/crates/nsbu-benchmarks)
+   Compiling p10-m96-n24-forensics v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-spatial-preflight/n32)
+    Finished `release` profile [optimized] target(s) in 6.01s
+     Running `target/release/p10-m96-n24-forensics --dry-run`
