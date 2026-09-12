@@ -4,7 +4,7 @@
   13995   13983   13983   52201 1181368 4.0 Sl+ /usr/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex --dangerously-bypass-approvals-and-sandbox
    2889    2838    2889   53251 185792 0.1 Ssl  /mnt/niva-array/paperqa2/.venv/bin/python /mnt/niva-array/paperqa2/mcp_paperqa_server.py --transport streamable-http --host 127.0.0.1 --port 8765
    2879    2838    2879   53251 166104 0.2 Ssl  /mnt/niva-array/agent-system/vendor/hermes-agent/.venv/bin/python3 /mnt/niva-array/agent-system/vendor/hermes-agent/.venv/bin/hermes dashboard --host 127.0.0.1 --port 9119 --no-open --isolated --skip-build
-   3762    2838    3762   53230 76932  0.7 Ssl  /usr/bin/python3 /home/todd/.local/bin/symphony WORKFLOW.papers.md --log-level INFO
+   3762    2838    3762   53230 76932  0.7 Ssl  /usr/bin/python3 [REDACTED_HOME]/.local/bin/symphony WORKFLOW.papers.md --log-level INFO
   67371       1   67371   49953 69232  0.0 Ssl  /usr/libexec/fwupd/fwupd
   13983    4573   13983   52201 49456  0.0 Sl+  node /usr/bin/codex --dangerously-bypass-approvals-and-sandbox
    2506       1    2506   53256 46300  0.1 Ssl  /usr/lib/snapd/snapd

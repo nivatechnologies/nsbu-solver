@@ -2,16 +2,28 @@
   "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "release_build": "passed",
   "source_bound_preflight": "passed_exact",
-  "harness_feature_tests": {"passed": 19, "failed": 0},
-  "w3_focused_tests": {"passed": 7, "failed": 0},
+  "harness_feature_tests": {
+    "passed": 19,
+    "failed": 0
+  },
+  "w3_focused_tests": {
+    "passed": 7,
+    "failed": 0
+  },
   "harness_all_target_clippy_warnings_denied": "passed",
   "cargo_fmt_check": "passed",
   "launch_recipe_shell_syntax": "passed",
+  "launcher_capture_failure_cleanup": "passed_dummy_exit80_trap",
+  "launcher_watchdog_attachment_failure_cleanup": "passed_dummy_exit96_trap",
+  "watchdog_started_record_confirmation": "exact_record_and_live_non_zombie_pid_required_through_first_step",
   "m512_standalone_resource_control": "passed_global_0_0_0_exit_0_at_source_1417be336a426b61e10a0112befb5bf71bc42594",
   "forecast_margin_fraction": 0.15,
   "same_host_preflight_required": true,
   "first_step_gate_required": true,
   "trajectory_launched": false,
   "accepted_pde_windows": 0,
-  "review_status": "root_review_required_before_launch"
+  "architecture_profile_forecast_review": "root_approved",
+  "review_status": "launcher_amendment_review_required_before_conditional_launch",
+  "launcher_child_group_validation_failure_cleanup": "passed_dummy_exit81_trap",
+  "predecessor_eight_node_screen": "required_exact_identity_artifacts_counters_finite_balances_accepted_ratios"
 }
