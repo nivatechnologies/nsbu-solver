@@ -6,7 +6,7 @@ use crate::{
 };
 use nsbu_solver::{
     diagnostics::{
-        conservative::ConservativeWorkspace, local::TensorErrors,
+        conservative::ConservativeWorkspace, derivatives::DerivativeWorkspace, local::TensorErrors,
         physical::PhysicalComparisonWorkspace,
     },
     domain::{Domain, Layout},
@@ -198,7 +198,10 @@ fn work(
     let visits = add(
         add(
             mul(assembly, 10)?,
-            mul(diagnostic.layout().half_len(), 6 * 40)?,
+            mul(
+                DerivativeWorkspace::coefficient_visits(diagnostic.layout())?,
+                40,
+            )?,
         )?,
         add(mul(samples.real_len(), 4 * 40 + 10 * 5 * 2)?, 1024)?,
     )?;

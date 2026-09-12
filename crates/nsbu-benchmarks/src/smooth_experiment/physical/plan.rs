@@ -2,7 +2,10 @@
 use super::{PhysicalFamilyWorkspace, QUANTITIES};
 use crate::smooth_experiment::{FamilyError, FamilyPlan};
 use nsbu_solver::{
-    diagnostics::{local::TensorErrors, physical::PhysicalComparisonWorkspace},
+    diagnostics::{
+        derivatives::DerivativeWorkspace, local::TensorErrors,
+        physical::PhysicalComparisonWorkspace,
+    },
     domain::Layout,
     SolverError,
 };
@@ -105,7 +108,7 @@ fn work(source: Layout, samples: Layout) -> Result<PhysicalFamilyWork, SolverErr
         .sum::<usize>();
     // Each scalar sample has validation/differentiation and real output visits. Additional
     // complete component/difference reductions and fixed policy checks are reserved explicitly.
-    let weighted_visits = mul(source.half_len(), mul(transforms, 6)?)?
+    let weighted_visits = mul(DerivativeWorkspace::coefficient_visits(source)?, transforms)?
         .checked_add(mul(
             samples.real_len(),
             4 * transforms + 10 * 5 * QUANTITIES.len(),

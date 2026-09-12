@@ -126,13 +126,11 @@ fn work(sources: [Layout; 3], samples: Layout) -> Result<ReferenceTrackingWork, 
         .map(|quantity| quantity.scalar_transforms() / 2)
         .sum::<usize>();
     let points = samples.real_len();
-    let four_fine = sources[2]
-        .half_len()
-        .checked_mul(4)
-        .ok_or(SolverError::SizeOverflow)?;
-    let modal_visits = sources[0]
-        .half_len()
-        .checked_add(sources[1].half_len())
+    let visits = sources.map(DerivativeWorkspace::coefficient_visits);
+    let visits = [visits[0]?, visits[1]?, visits[2]?];
+    let four_fine = visits[2].checked_mul(4).ok_or(SolverError::SizeOverflow)?;
+    let modal_visits = visits[0]
+        .checked_add(visits[1])
         .and_then(|n| n.checked_add(four_fine))
         .and_then(|n| n.checked_mul(transforms / 6))
         .ok_or(SolverError::SizeOverflow)?;

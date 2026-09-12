@@ -1,6 +1,6 @@
 //! Checked per-attempt physical sampling and extrema-scan work.
 use super::{PhysicalFamilyWork, QUANTITIES};
-use nsbu_solver::{domain::Layout, SolverError};
+use nsbu_solver::{diagnostics::derivatives::DerivativeWorkspace, domain::Layout, SolverError};
 
 pub(super) fn work(source: Layout, samples: Layout) -> Result<PhysicalFamilyWork, SolverError> {
     work_for_pairs(source, samples, 5)
@@ -24,14 +24,17 @@ pub(crate) fn work_for_pairs(
         .checked_add(reductions)
         .and_then(|n| n.checked_add(extrema))
         .ok_or(SolverError::SizeOverflow)?;
-    let weighted_visits = mul(source.half_len(), mul(scalar_transforms, 6)?)?
-        .checked_add(mul(
-            samples.real_len(),
-            // Sampling plus three explicit extrema scans for every pair/quantity.
-            per_sample,
-        )?)
-        .and_then(|n| n.checked_add(1024))
-        .ok_or(SolverError::SizeOverflow)?;
+    let weighted_visits = mul(
+        DerivativeWorkspace::coefficient_visits(source)?,
+        scalar_transforms,
+    )?
+    .checked_add(mul(
+        samples.real_len(),
+        // Sampling plus three explicit extrema scans for every pair/quantity.
+        per_sample,
+    )?)
+    .and_then(|n| n.checked_add(1024))
+    .ok_or(SolverError::SizeOverflow)?;
     Ok(PhysicalFamilyWork {
         attempts: 1,
         scalar_transforms,
