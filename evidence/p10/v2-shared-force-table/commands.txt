@@ -1,0 +1,10 @@
+cargo test -p nsbu-benchmarks --test v2_shared_force_table --locked --no-fail-fast -- --nocapture
+cargo test -p nsbu-benchmarks --test v2_shared_force_table_allocation --locked -- --nocapture
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov clean --workspace
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_shared_force_table --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-shared-force-table/final/coverage-final.json -- --test-threads=1 --nocapture
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json
+python3 -m quality.check_crap rust work/v2-shared-force-table/final/metrics-focused.jsonl work/v2-shared-force-table/final/coverage-focused.json work/v2-shared-force-table/final/crap-final.json
+/mnt/niva-array/nsbu-solver/.venv/bin/python tools/check_repository.py

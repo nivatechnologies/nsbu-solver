@@ -1,0 +1,4 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-shared-force-table-development/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.18s
+     Running tests/v2_shared_force_table_allocation.rs (target/debug/deps/v2_shared_force_table_allocation-4e7e05c0d31b2873)
+shared force construction_bytes=241568 declared_peak=244312 steady_allocations=0
