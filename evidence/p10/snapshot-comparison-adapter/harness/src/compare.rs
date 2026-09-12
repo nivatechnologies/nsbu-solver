@@ -1,6 +1,6 @@
 use crate::model::{
-    AcceptanceOutput, AdmissionGuard, ClockOutput, ComparisonKind, Evolution, Hashes, Manifest,
-    Output, Snapshot, TimeClockOutput, TimeDiagnosticOutput,
+    AcceptanceOutput, ClockOutput, ComparisonKind, Evolution, Hashes, Manifest, Output, Snapshot,
+    TimeClockOutput, TimeDiagnosticOutput,
 };
 use nsbu_solver::diagnostics::comparison::ComparisonPlan;
 
@@ -28,11 +28,13 @@ pub(crate) fn compare<'a>(
         left_execution: &left_manifest.execution,
         left_source_commit: &left_manifest.source_commit,
         left_plan_sha256: &left_manifest.plan_sha256,
+        left_admission_guard: left_manifest.admission_guard.as_ref(),
         right_identity: &right_manifest.identity,
         right_backend: &right_manifest.backend,
         right_execution: &right_manifest.execution,
         right_source_commit: &right_manifest.source_commit,
         right_plan_sha256: &right_manifest.plan_sha256,
+        right_admission_guard: right_manifest.admission_guard.as_ref(),
         left_hashes: hashes(left),
         right_hashes: hashes(right),
         clock: ClockOutput {
@@ -155,12 +157,6 @@ pub(crate) fn validate_manifest_pair(
             if left_manifest.evolution != right_manifest.evolution {
                 return Err("evolution semantics mismatch".into());
             }
-            if !same_guard(
-                left_manifest.admission_guard.as_ref(),
-                right_manifest.admission_guard.as_ref(),
-            ) {
-                return Err("admission guard mismatch".into());
-            }
             Ok(())
         }
         (ComparisonKind::TimeDiagnostic, ComparisonKind::TimeDiagnostic) => {
@@ -197,6 +193,14 @@ fn validate_time_manifests(
     if left_control != right_control {
         return Err("arithmetic-control binding mismatch".into());
     }
+    let review = &left_control.review;
+    if review.case_sha256 != left_manifest.evolution.case_sha256
+        || review.method != left_manifest.evolution.method
+        || review.integration_force_dimensions
+            != left_manifest.evolution.integration_force_dimensions
+    {
+        return Err("arithmetic-control physical contract mismatch".into());
+    }
     Ok(())
 }
 
@@ -222,7 +226,11 @@ fn validate_time_side(manifest: &Manifest, left: bool) -> Result<(), String> {
         .arithmetic_control
         .as_ref()
         .ok_or("missing arithmetic-control binding")?;
-    let side = if left { &control.left } else { &control.right };
+    let side = if left {
+        &control.review.reviewed_lineage.left
+    } else {
+        &control.review.reviewed_lineage.right
+    };
     if side.source_commit != manifest.source_commit
         || side.backend != manifest.backend
         || side.execution != manifest.execution
@@ -282,17 +290,6 @@ fn same_f64_array<const N: usize>(left: [f64; N], right: [f64; N]) -> bool {
     left.into_iter()
         .zip(right)
         .all(|(left, right)| left.to_bits() == right.to_bits())
-}
-
-fn same_guard(left: Option<&AdmissionGuard>, right: Option<&AdmissionGuard>) -> bool {
-    match (left, right) {
-        (None, None) => true,
-        (Some(left), Some(right)) => {
-            left.advective_limit.to_bits() == right.advective_limit.to_bits()
-                && left.maximum_attempts == right.maximum_attempts
-        }
-        _ => false,
-    }
 }
 
 fn hashes(snapshot: &Snapshot) -> Hashes<'_> {

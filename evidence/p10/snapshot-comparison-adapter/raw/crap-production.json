@@ -17,34 +17,6 @@
       "crap": 18.6328125
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "domain",
-      "cyclomatic": 1.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 1.0
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "from_manifest",
-      "cyclomatic": 1.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 1.0
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "from",
-      "cyclomatic": 1.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 1.0
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "debug",
-      "cyclomatic": 1.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 1.0
-    },
-    {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
       "function": "measure",
       "cyclomatic": 10.0,
@@ -94,6 +66,34 @@
       "crap": 2.5
     },
     {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "domain",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "debug",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "compare",
       "cyclomatic": 7.0,
@@ -138,16 +138,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "validate_manifest_pair",
-      "cyclomatic": 6.0,
+      "cyclomatic": 5.0,
       "branch_coverage_fraction": 1.0,
-      "crap": 6.0
+      "crap": 5.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "validate_time_manifests",
-      "cyclomatic": 10.0,
-      "branch_coverage_fraction": 0.8,
-      "crap": 10.799999999999999
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 15.640625
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
@@ -204,13 +204,6 @@
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "same_guard",
-      "cyclomatic": 5.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 5.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
@@ -425,9 +418,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "verify_arithmetic_control",
-      "cyclomatic": 6.0,
-      "branch_coverage_fraction": 0.5833333333333334,
-      "crap": 8.604166666666666
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.7,
+      "crap": 9.728000000000002
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -435,6 +435,27 @@
       "cyclomatic": 4.0,
       "branch_coverage_fraction": 0.5,
       "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_review",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_control",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_reviewed_lineage",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",

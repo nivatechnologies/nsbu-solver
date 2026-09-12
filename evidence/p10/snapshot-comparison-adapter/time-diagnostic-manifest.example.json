@@ -36,21 +36,46 @@
     "maximum_attempts": 128
   },
   "arithmetic_control": {
-    "schema": "p10-time-arithmetic-control-v1",
-    "evidence": "reviewed-serial-w3-exact-bit-control.json",
+    "evidence": "reviewed-serial-w3-arithmetic-lineage.json",
     "evidence_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-    "outcome": "successful-exact-bit",
-    "left": {
-      "source_commit": "0000000000000000000000000000000000000000",
-      "backend": "COPY_LEFT_BACKEND",
-      "execution": "COPY_LEFT_EXECUTION",
-      "profile": "COPY_LEFT_PROFILE"
-    },
-    "right": {
-      "source_commit": "0000000000000000000000000000000000000000",
-      "backend": "COPY_RIGHT_BACKEND",
-      "execution": "COPY_RIGHT_EXECUTION",
-      "profile": "COPY_RIGHT_PROFILE"
+    "review": {
+      "schema": "p10-time-arithmetic-review-v1",
+      "conclusion": "reviewed-equivalence-supported-by-controls",
+      "case_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "method": "cox-matthews",
+      "integration_force_dimensions": [384, 384, 384],
+      "measured_control": {
+        "outcome": "successful-exact-bit",
+        "serial": {
+          "source_commit": "COPY_THE_ACTUALLY_MEASURED_SERIAL_SOURCE",
+          "backend": "COPY_THE_ACTUALLY_MEASURED_SERIAL_BACKEND",
+          "execution": "COPY_THE_ACTUALLY_MEASURED_SERIAL_EXECUTION",
+          "profile": "COPY_THE_ACTUALLY_MEASURED_SERIAL_PROFILE"
+        },
+        "w3": {
+          "source_commit": "COPY_THE_ACTUALLY_MEASURED_W3_SOURCE",
+          "backend": "COPY_THE_ACTUALLY_MEASURED_W3_BACKEND",
+          "execution": "COPY_THE_ACTUALLY_MEASURED_W3_EXECUTION",
+          "profile": "COPY_THE_ACTUALLY_MEASURED_W3_PROFILE"
+        }
+      },
+      "reviewed_lineage": {
+        "status": "reviewed-unchanged-kernel-lineage",
+        "left_control_role": "serial",
+        "right_control_role": "w3",
+        "left": {
+          "source_commit": "COPY_THE_CURRENT_LEFT_SOURCE",
+          "backend": "COPY_THE_CURRENT_LEFT_BACKEND",
+          "execution": "COPY_THE_CURRENT_LEFT_EXECUTION",
+          "profile": "COPY_THE_CURRENT_LEFT_UNRELABELLED_PROFILE"
+        },
+        "right": {
+          "source_commit": "COPY_THE_CURRENT_RIGHT_SOURCE",
+          "backend": "COPY_THE_CURRENT_RIGHT_BACKEND",
+          "execution": "COPY_THE_CURRENT_RIGHT_EXECUTION",
+          "profile": "COPY_THE_CURRENT_RIGHT_UNRELABELLED_PROFILE"
+        }
+      }
     }
   }
 }
