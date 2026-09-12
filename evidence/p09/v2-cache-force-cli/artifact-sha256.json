@@ -1,0 +1,20 @@
+{
+  "README.md": "a3342a995289846ae6b298385f3f864bd54c10b2fdc0585603f2242d1678d755",
+  "commands.txt": "3f9a9ac17ec55fa854060a552c10381027315efb13e79c4d618a971b95427c86",
+  "raw/clippy.log.gz": "fff764f1d7d4ef9a659116e163512289e2983621885e244cfe46e414c3409204",
+  "raw/coverage-changed-tests-conservative.json.gz": "9670e3548c7d7c2499fabe362d2414369139397f5d88072673c5ad7755e06535",
+  "raw/coverage-test.log.gz": "41be669ffe8480df8fa99927183f7b8916d43bcb120e92974a2b63b353eb2e2f",
+  "raw/coverage.json.gz": "274e4152382cee080dc6b7b616c77030b63ef42b600c9070044c02b407794bab",
+  "raw/crap-changed-source.json.gz": "11778325263428997f13f417f7a92b9f6e01500e56158b91459d2d04a339e5d8",
+  "raw/crap-changed-tests-conservative.json.gz": "3307202accd04f941469d8e5a080f0ea912b68bbc711739b925bb06f417c3640",
+  "raw/direct-base.json.gz": "68070148f6d37fc5282a40c62053613d859eadce5b8555bc701cbb6e1200633c",
+  "raw/direct-byte-identity.log.gz": "5a3080a30b525c308259853a538134e023b462fe1f04ed4852c93d34ac280f21",
+  "raw/direct-current.json.gz": "68070148f6d37fc5282a40c62053613d859eadce5b8555bc701cbb6e1200633c",
+  "raw/fmt.log.gz": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+  "raw/metrics-changed-source.jsonl.gz": "a009ccdb8f9e250727b6d1a80e94a64a3bffeb66271829d225a72c28651272c5",
+  "raw/metrics-changed-tests.jsonl.gz": "ebeb0c05311a1f0db0798f9343c4458b657345385aefd33b7c1b8b7a780fde2b",
+  "raw/metrics.jsonl.gz": "118f03a099449309a5cd04638e53e62381f46d8e71c4debcfea02612b3579b7d",
+  "raw/tests.log.gz": "011cc4372fd9c0abda8335e6714d235632d4062e1ff3ca1e79fd43b8f93b30be",
+  "source-sha256.txt": "07d5aabb9e5f7418266035df1e9ad7cc16c3717c61867e7467d4246b8f46367d",
+  "summary.json": "7a68aaa02703efd4c95b139a553cc2c47bb54e38b45571ce895977cac9e480af"
+}

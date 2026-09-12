@@ -1,0 +1,8 @@
+# Source-bound focused commands at 4fd1761deb25c37c3e46a66a1e8682810e27fa6d
+cargo fmt --all -- --check
+cargo clippy -p nsbu-cli --tests -- -D warnings
+cargo test -p nsbu-cli --test v2_cli
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-cli --test v2_cli --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path evidence/p09/v2-cache-force-cli/raw/coverage.json
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH rust-code-analysis-cli -p crates/nsbu-cli -m -O json > evidence/p09/v2-cache-force-cli/raw/metrics.jsonl
+python3 quality/check_crap.py rust evidence/p09/v2-cache-force-cli/raw/metrics-changed-source.jsonl evidence/p09/v2-cache-force-cli/raw/coverage.json evidence/p09/v2-cache-force-cli/raw/crap-changed-source.json
+python3 quality/check_crap.py rust evidence/p09/v2-cache-force-cli/raw/metrics-changed-tests.jsonl evidence/p09/v2-cache-force-cli/raw/coverage-changed-tests-conservative.json evidence/p09/v2-cache-force-cli/raw/crap-changed-tests-conservative.json

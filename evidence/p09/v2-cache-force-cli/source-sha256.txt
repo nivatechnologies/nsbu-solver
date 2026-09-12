@@ -1,0 +1,6 @@
+c6cbd6e4efb254ec28c12bb03b6b17f65f059c515153dc3c7f4833c46e0a1c26  crates/nsbu-cli/README.md
+12595680027a687b9649b1a2b1724d969e408f57b6f06c66446a2a8a6f2540e3  crates/nsbu-cli/src/arguments.rs
+7a62ed83359c88f2a0fe5320f58cad0fae14a82de5fbb03132ecb57e54a332b3  crates/nsbu-cli/src/main.rs
+0ecc169e94f6d3f1bf9630a88b4de31f405aef0a38bb6e019cfce5ecd06cd150  crates/nsbu-cli/src/v2.rs
+c85d61e56c913657e51689a0f6b80c50e7c4ccaad0521935c231080b9114cb66  crates/nsbu-cli/src/v2_report.rs
+5721c9ead81f22eec7e91e88992bf300d5af6c8fa4edf9c72f11acd738646af7  crates/nsbu-cli/tests/v2_cli.rs

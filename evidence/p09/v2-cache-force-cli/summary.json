@@ -1,0 +1,32 @@
+{
+  "base_commit": "5fa65efbad0cc340efdf126278feaf579e0017fa",
+  "source_commit": "4fd1761deb25c37c3e46a66a1e8682810e27fa6d",
+  "status": "focused-cli-increment-passed",
+  "command": "nsbu v2 --cache-force",
+  "policy": {
+    "kind": "attempt_local_original_force_cache",
+    "archive_support": "unsupported",
+    "cache_ledger_scope": "current_attempt_only"
+  },
+  "controls": {
+    "direct_json_byte_identity_against_runtime_base": "passed",
+    "cached_cm_ho_cli_runs": "passed",
+    "cached_cm_ho_terminal_state_bits_against_direct": "passed",
+    "cache_cap_refusal": "passed",
+    "checkpoint_write_checkpoint_after_and_resume_refusals_before_io": "passed"
+  },
+  "focused_tests": {"passed": 10, "failed": 0},
+  "changed_source_crap_maximum": 16.0,
+  "changed_tests_conservative_zero_coverage_crap_maximum": 12.0,
+  "focused_dependency_closure_coverage": {
+    "v2_rs": {"lines_percent": 93.75, "branches_percent": 90.9090909090909},
+    "v2_report_rs": {"lines_percent": 92.42424242424242, "branches_percent": 50.0},
+    "scope": "v2_cli test plus dependency closure only; not a whole-maintained-scope gate"
+  },
+  "limitations": [
+    "No numerical runtime or cache implementation changed.",
+    "No cached archive is introduced.",
+    "No speed, PDE qualification, convergence, or concentrating-window claim is made.",
+    "The package-wide coverage run was terminated during diagnose-v2 and is not a pass."
+  ]
+}
