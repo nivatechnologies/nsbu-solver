@@ -1,0 +1,4 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-v2-probe-physical-development/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.34s
+     Running tests/v2_probe_physical_allocation.rs (target/debug/deps/v2_probe_physical_allocation-a555dac4a9082507)
+v2 probe physical construction_bytes=21481280 declared_bytes=26529464 transforms=1350 visits=18846912 steady_allocations=0

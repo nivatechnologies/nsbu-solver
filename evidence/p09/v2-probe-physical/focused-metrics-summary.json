@@ -1,0 +1,9 @@
+{
+  "scope": "probe physical production modules, both new tests, state wrapper, and borrowed-view oracle core",
+  "functions": 79,
+  "max_cyclomatic": 13.0,
+  "max_cognitive": 16.0,
+  "max_all_node_halstead_difficulty": 75.10119047619048,
+  "max_function_ploc": 83.0,
+  "maximum_crap": 13.0
+}

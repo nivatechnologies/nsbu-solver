@@ -1,0 +1,11 @@
+cargo test -p nsbu-benchmarks --test v2_probe_physical --locked --no-fail-fast
+cargo test -p nsbu-benchmarks --test v2_probe_physical_allocation --locked
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_probe_physical --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-probe-physical/coverage.json -- --test-threads=1 --nocapture
+cargo test -p nsbu-benchmarks --test v2_probe_physical_allocation --locked
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates/nsbu-benchmarks -m -O json > work/v2-probe-physical/metrics.jsonl
+python3 -m quality.check_crap rust work/v2-probe-physical/metrics-focused.jsonl work/v2-probe-physical/coverage-focused.json work/v2-probe-physical/crap.json
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json > work/v2-probe-physical/all-rust-metrics.jsonl
+/mnt/niva-array/nsbu-solver/.venv/bin/python tools/check_repository.py
