@@ -1,0 +1,22 @@
+{
+  "schema": "p10-avx-n384-m512-launcher-amendment-v1",
+  "status": "review_blocker_fixed_dummy_cleanup_tests_passed_not_launched",
+  "preserved_binary_sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
+  "preserved_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "prior_launch_recipe_sha256": "a8091549adf7d168f1787f94d170b9880ef3fe3ff5c8bd85a50fd2b04f1f9f63",
+  "amended_launch_recipe_sha256": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
+  "owned_cleanup_source": "launcher-owned-cleanup.sh",
+  "owned_cleanup_sha256": "d1317f52922bcd20525d26bb5cf817c3cc7fe8715c5d372fe4b09a1913a549f7",
+  "cleanup_test_source": "test-launcher-cleanup.sh",
+  "cleanup_test_sha256": "27999f11078d3ad115e5558a8fbc87f910929a4629772529221f28f108d12fbf",
+  "blocker": "capture exits 80/81 and watchdog spawn failure could return after setsid without terminating the owned solver process group",
+  "fix": "install EXIT/HUP/INT/TERM cleanup after binding the setsid leader PID, process group, starttime and cmdline hash and before any group-validation or child-capture exit; retain solver identity when captured; TERM then KILL after 60 seconds only while an exact owned identity remains; require the watchdog exact started record and live non-zombie PID through the first-step gate",
+  "tests": {
+    "capture_failure_cleanup": "passed_exit80_trap_terminated_dummy_group",
+    "child_group_validation_failure_cleanup": "passed_exit81_trap_terminated_dummy_wrapper_and_child_group",
+    "watchdog_attachment_failure_cleanup": "passed_exit96_trap_terminated_dummy_wrapper_and_child_group"
+  },
+  "kernel_rebuilt": false,
+  "trajectory_launched": false,
+  "predecessor_screen": "launch admission validates all eight non-rest observer nodes for exact predecessor identity, committed complete artifacts, expected state size, exact counters, finite nonnegative measurements and accepted error ratios"
+}

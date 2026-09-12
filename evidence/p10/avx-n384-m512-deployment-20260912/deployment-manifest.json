@@ -1,11 +1,11 @@
 {
   "schema": "p10-avx-n384-m512-deployment-manifest-v1",
-  "status": "assembled_not_transferred_not_launched",
+  "status": "staged_hash_verified_not_launched_predecessor_running",
   "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "branch": "codex/p10-m512-force-profile-20260912",
   "bundle_directory": "deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "transfer_archive": "deployment/p10-n384-m512-326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72.tar.gz",
-  "transfer_archive_sha256": "225600dc96d2afb1188802631e14ceee7a76bf0f40380fdf2345c1b8cc6ec642",
+  "transfer_archive_sha256": "536d63ceddc7fb5165d7319885d905637e0c419ede2857acf4465e9aaf89cdef",
   "intended_sulaco_directory": "/tmp/nsbu-p10-sulaco-m512-20260913",
   "files": {
     "p10-avx-n384-m512-piecewise-cadv33": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
@@ -13,17 +13,24 @@
     "frozen-plan.json": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
     "forecast.json": "fd92ca1d5d75ff4b0e7c3b5423b699509415d338fba348436ec7b96b08bc1973",
     "preflight.stdout": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
-    "launch-reviewed.sh": "a8091549adf7d168f1787f94d170b9880ef3fe3ff5c8bd85a50fd2b04f1f9f63"
+    "launch-reviewed.sh": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
+    "launcher-owned-cleanup.sh": "d1317f52922bcd20525d26bb5cf817c3cc7fe8715c5d372fe4b09a1913a549f7",
+    "BUNDLE-SHA256SUMS": "24044e94a07e06a30a03ec26e3d37944c2c93441cff66016a5b94eaeace4b3a6"
   },
   "supporting_evidence": {
     "build.json": "dc0d27f1ea82c76755ddab5e1fcba5081cc17b4b35edc30923a9b5b32c63e54a",
-    "quality-summary.json": "37337b50f211195174adee175f9977cde3085809236ec2094d41d2fd62fe21b9",
+    "quality-summary.json": "a2adc8da1ab50de70115aed978be5afec86fcd5dd98ed61a77ecfc36654ceef1",
     "forecast_force_source": "evidence/p10/force-grid-n384-baf54fa/summary.json",
     "forecast_force_source_sha256": "892853212e5002199af93a0ab1c9e3fdea08b38028b5be04b1943ce2b985b6db",
     "m512_control_archive": "evidence/p10/avx-m512-force-profile-20260912",
-    "current_n384_snapshot_sha256": "d307a86c889f8b3e88a8d721991180707022e15f51e9411f439fdb4168cb1b83"
+    "current_n384_snapshot_sha256": "d307a86c889f8b3e88a8d721991180707022e15f51e9411f439fdb4168cb1b83",
+    "launcher-amendment.json": "0f56b414c5e1092c47718c952e3d9d386b6f832c051f2142d6a218bbecc176b4",
+    "test-launcher-cleanup.sh": "27999f11078d3ad115e5558a8fbc87f910929a4629772529221f28f108d12fbf",
+    "sulaco-stage.json": "7be91f30348faa21234457e030534bcd8c65e3c5ea1466eca874220ff4e833e1"
   },
-  "transfer_authorized": false,
+  "transfer_authorized": true,
   "launch_authorized": false,
-  "trajectory_launched": false
+  "trajectory_launched": false,
+  "transferred": true,
+  "remote_hash_verification": "all_7_files_ok"
 }
