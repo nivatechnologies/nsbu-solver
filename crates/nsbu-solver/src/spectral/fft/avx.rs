@@ -177,7 +177,6 @@ fn from_parts(
         FftPlan {
             layout,
             backend: BackendPlan::Avx(boxed_axes(forward, inverse)?),
-            _layout_compatibility: [0; 48],
         },
         workspace,
     ))

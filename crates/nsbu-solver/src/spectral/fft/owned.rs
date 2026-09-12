@@ -21,12 +21,11 @@ pub(super) fn reservation(layout: Layout) -> Result<usize, SolverError> {
 
 pub(super) fn new(layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError> {
     let dimensions = layout.dimensions();
-    let mut roots = filled(dimensions.iter().sum(), Complex64::new(0.0, 0.0))?;
-    let mut offset = 0;
-    for length in dimensions {
-        roots[offset..offset + length].copy_from_slice(&roots_for_length(length)?);
-        offset += length;
-    }
+    let roots = [
+        roots_for_length(dimensions[0])?,
+        roots_for_length(dimensions[1])?,
+        roots_for_length(dimensions[2])?,
+    ];
     let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
     let workspace = FftWorkspace {
         layout,
@@ -39,15 +38,13 @@ pub(super) fn new(layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError
         FftPlan {
             layout,
             backend: BackendPlan::Owned(roots),
-            _layout_compatibility: [0; 48],
         },
         workspace,
     ))
 }
 
-pub(super) fn roots(dimensions: [usize; 3], values: &[Complex64], axis: usize) -> &[Complex64] {
-    let start = dimensions[..axis].iter().sum::<usize>();
-    &values[start..start + dimensions[axis]]
+pub(super) fn roots(values: &[Vec<Complex64>; 3], axis: usize) -> &[Complex64] {
+    &values[axis]
 }
 
 fn validate_dimensions(dimensions: [usize; 3]) -> Result<(), SolverError> {
