@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.4 · 11 September 2026 · First runtime alpha released; scientific packages through P07 verified
+Revision 1.5 · 12 September 2026 · First runtime alpha released; scientific packages through P07 verified
 
 ## Adopted decisions
 
@@ -9,6 +9,29 @@ Build a standalone Rust library and CLI named **NSBU Solver**, hosted in `nivate
 This document is the active repository plan. It supersedes the historical roadmap's project naming and proposed `MIT OR Apache-2.0` license. It does not alter the frozen equations, benchmark parameters, arithmetic contracts, or acceptance criteria. The [historical detailed fixtures](docs/design/IMPLEMENTATION_PLAN.md) remain normative where consistent with these explicit naming, licensing, and release-scope decisions.
 
 The initial release implements periodic 3D incompressible Navier–Stokes at fixed positive viscosity and the separately defined `similarity-mms-v2` manufactured case. Literal source reproduction is excluded from this release. The mathematics compiler and a possible averaged-stress surrogate do not block the runtime. Visualization follows numerical validation. An optional Niva adapter is maintained outside this public workspace.
+
+## Current execution priority · 12 September 2026
+
+The runtime alpha is published and verified. The former runtime-first deferrals
+below have served their purpose; the current priority is the scientific path to
+concentrating windows. In this bounded work block:
+
+1. Measure spatial versus force-resolution effects at the first endpoint with
+   one admitted, source-frozen larger pilot; preserve negative or partial results.
+2. Connect independent force-family measurements and nominal-region volume
+   coverage to the actual-clock physical observables, without substituting
+   spectral norms for sampled RMS or node counts for geometric volume.
+3. Admit a genuine nested exact-time review profile with explicit observable
+   semantics, unavailable evidence and bounded required rows.
+
+The combined exporter, partial review adapter and force-baseline binder from
+`31e99a1` passed both [source-matched hosted suites](evidence/p09/hosted-integration-31e99a1/summary.json).
+Whole-maintained Rust coverage is 97.98% lines / 87.48% branches. The recorded
+focused branch percentages remain useful test-scope information; they are not
+separate per-module gates. P08/P09/P10 remain incomplete and accepted
+concentrating PDE windows remain zero. Release and documentation updates follow
+verified results; no source hash, reference state or acceptance policy is changed
+to make a failed numerical study pass.
 
 ## Runtime-first execution priority · 11 September 2026
 
