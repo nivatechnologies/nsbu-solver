@@ -1,0 +1,20 @@
+{
+  "source_commit": "b0295ee03632763abc2dfee2cf27ee373a265239",
+  "evidence_worktree_base": "8bec567f9befffd085343850ddc53140251d9eb6",
+  "hosted_runs": {
+    "rust": {"id": 34662814858, "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34662814858", "conclusion": "success"},
+    "python": {"id": 34662814808, "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34662814808", "conclusion": "success"}
+  },
+  "whole_maintained_scope_recomputed_coverage": {
+    "rust": {"lines": {"count": 45070, "covered": 43929, "percent": 97.4683825160861}, "branches": {"count": 3232, "covered": 2818, "percent": 87.19059405940594}},
+    "python": {"lines": {"count": 6098, "covered": 6054, "percent": 99.2784519514595}, "branches": {"count": 1202, "covered": 1173, "percent": 97.5873544093178}}
+  },
+  "static_limits": {
+    "rust": {"cyclomatic_max": 21.0, "cognitive_max": 21.0, "crap_max": 24.05859375, "physical_file_lines_max": 477, "halstead_difficulty_all_node_max": 75.9295154185022, "halstead_difficulty_function_max": 60.0},
+    "python": {"cyclomatic_max": 16, "halstead_difficulty_max": 13.826086956521738, "crap_max": 19.9814453125, "physical_file_lines_max": 327, "physical_file_lines_scope": "102 hosted maintained Python files"}
+  },
+  "gates": {"coverage_line_and_branch_minimum": 80, "crap_exclusive_maximum": 25, "cyclomatic_exclusive_maximum": 22, "cognitive_exclusive_maximum": 22, "halstead_difficulty_exclusive_maximum": 80, "physical_file_lines_exclusive_maximum": 500, "result": "passed"},
+  "mutation_step": {"rust": "skipped", "meaning": "informational only; no mutation result or waiver inferred"},
+  "scope_note": "This audit applies only to b0295ee. It does not show that later derivative, cache, CLI, or other post-b0295ee sources passed this hosted gate.",
+  "raw_inventory_sha256_file": "artifact-sha256.txt"
+}

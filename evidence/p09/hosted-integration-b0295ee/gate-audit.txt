@@ -1,0 +1,4 @@
+.github/workflows/rust.yml: mandatory source-size/static, build/lint/doc/package, 80% line+branch coverage and CRAP steps all completed successfully in hosted Rust run 34662814858.
+.github/workflows/checks.yml: mandatory Python static, source-size, 80% line+branch coverage and CRAP steps all completed successfully in hosted Python run 34662814808.
+The Rust workflow's "Informational mutation report with complete accounting" step was skipped. That step is informational; it neither waives nor changes the mandatory coverage, static, or CRAP gates.
+No mutation result is inferred from the skip.

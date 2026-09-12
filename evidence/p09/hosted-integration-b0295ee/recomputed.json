@@ -1,0 +1,110 @@
+{
+  "source_commit": "b0295ee03632763abc2dfee2cf27ee373a265239",
+  "coverage_recomputed_from_per_file_summaries": {
+    "rust": {
+      "lines": {
+        "count": 45070,
+        "covered": 43929,
+        "notcovered": 1141,
+        "percent": 97.4683825160861
+      },
+      "branches": {
+        "count": 3232,
+        "covered": 2818,
+        "notcovered": 414,
+        "percent": 87.19059405940594
+      }
+    },
+    "python": {
+      "lines": {
+        "count": 6098,
+        "covered": 6054,
+        "percent": 99.2784519514595,
+        "notcovered": 44
+      },
+      "branches": {
+        "count": 1202,
+        "covered": 1173,
+        "percent": 97.5873544093178,
+        "notcovered": 29
+      }
+    }
+  },
+  "raw_totals": {
+    "rust": {
+      "branches": {
+        "count": 3232,
+        "covered": 2818,
+        "notcovered": 414,
+        "percent": 87.19059405940595
+      },
+      "functions": {
+        "count": 3936,
+        "covered": 3854,
+        "percent": 97.91666666666666
+      },
+      "instantiations": {
+        "count": 8218,
+        "covered": 6326,
+        "percent": 76.97736675590167
+      },
+      "lines": {
+        "count": 45070,
+        "covered": 43929,
+        "percent": 97.46838251608608
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0
+      },
+      "regions": {
+        "count": 85104,
+        "covered": 80786,
+        "notcovered": 4318,
+        "percent": 94.92620793382216
+      }
+    },
+    "python": {
+      "covered_lines": 6054,
+      "num_statements": 6098,
+      "percent_covered": 99.0,
+      "percent_covered_display": "99",
+      "missing_lines": 44,
+      "excluded_lines": 5,
+      "num_branches": 1202,
+      "num_partial_branches": 25,
+      "covered_branches": 1173,
+      "missing_branches": 29
+    }
+  },
+  "static_metrics_from_hosted_raw": {
+    "rust": {
+      "cyclomatic_max": 21.0,
+      "cognitive_max": 21.0,
+      "halstead_difficulty_all_node_max": 75.9295154185022,
+      "halstead_difficulty_function_max": 60.0
+    },
+    "python": {
+      "cyclomatic_max": 16,
+      "halstead_difficulty_max": 13.826086956521738
+    }
+  },
+  "crap_max": {
+    "rust": 24.05859375,
+    "python": 19.9814453125
+  },
+  "physical_file_lines_from_git_show": {
+    "rust": {
+      "files": 485,
+      "maximum": 477,
+      "over_or_equal_500": []
+    },
+    "python": {
+      "files": 102,
+      "maximum": 327,
+      "over_or_equal_500": []
+    }
+  }
+}

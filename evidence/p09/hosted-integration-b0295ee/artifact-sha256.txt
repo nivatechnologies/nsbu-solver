@@ -1,0 +1,7 @@
+807815525fd1967981b4679931c6f7d8c2ee46d0b897c14ba74e4e4ea37849d5  evidence/p09/hosted-integration-b0295ee/gate-audit.txt
+ed237183a3fe103d19e320380b15dbabc55b60f1dba2a8b93d0420d24902ed57  evidence/p09/hosted-integration-b0295ee/raw/hosted-artifacts.tar.gz
+b14316ffab86958b8701a8e1c7af18921d62d3214043f332d5ee7de85db16b51  evidence/p09/hosted-integration-b0295ee/raw/python-quality-source-revision.txt
+b14316ffab86958b8701a8e1c7af18921d62d3214043f332d5ee7de85db16b51  evidence/p09/hosted-integration-b0295ee/raw/rust-quality-source-revision.txt
+acbd92d107874be0ebe1ff60e6696f4c5270a34348f1925db2e925ad7431b4b9  evidence/p09/hosted-integration-b0295ee/recomputed.json
+7c116c4b9908a65957d7b57294d42065f0b13404a433730fb147e2f6903370a8  evidence/p09/hosted-integration-b0295ee/source-tree.txt
+8aec46dda59c8ce9c3c7e63f89b493abdfd7146e47bd0e4ad71f0cc8c08316bc  evidence/p09/hosted-integration-b0295ee/summary.json
