@@ -11,6 +11,7 @@ use nsbu_benchmarks::v2_experiment::{
     pressure::{PressureFamilyPlan, PressureFamilyWorkspace, PressureRefinementSample},
     probes::{
         physical::{ProbePhysicalPlan, ProbePhysicalSample, ProbePhysicalWorkspace},
+        pressure::{ProbePressurePlan, ProbePressureSample, ProbePressureWorkspace},
         ProbePlan,
     },
     reference::{
@@ -135,6 +136,21 @@ fn assert_probe_physical(left: ProbePhysicalSample, right: ProbePhysicalSample) 
     }
 }
 
+fn assert_probe_pressure(left: ProbePressureSample, right: ProbePressureSample) {
+    assert_eq!(left.clock(), right.clock());
+    assert_eq!(left.identity(), right.identity());
+    assert_eq!(left.origins(), right.origins());
+    assert_eq!(left.source_domain(), right.source_domain());
+    assert_eq!(left.force_layout(), right.force_layout());
+    assert_eq!(left.force_workers(), right.force_workers());
+    assert_eq!(left.sample_layout(), right.sample_layout());
+    assert_eq!(left.relative_floors(), right.relative_floors());
+    for (a, b) in left.quantities().iter().zip(right.quantities()) {
+        assert_eq!(a.quantity, b.quantity);
+        assert_eq!(a.pairs, b.pairs);
+    }
+}
+
 #[test]
 fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     let accepted = clocks();
@@ -166,6 +182,14 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         CAP,
     )
     .unwrap();
+    let standalone_probe_pressure_plan = ProbePressurePlan::new(
+        plan.probe_plan(),
+        standalone_policy.pressure_samples,
+        standalone_policy.pressure_floors,
+        manifest.len(),
+        CAP,
+    )
+    .unwrap();
     let standalone_pressure_plan = PressureFamilyPlan::new(
         plan.family_plan(),
         standalone_policy.pressure_samples,
@@ -187,6 +211,7 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         .bounds()
         .storage_bytes
         .checked_add(standalone_probe_physical_plan.bounds().storage_bytes)
+        .and_then(|n| n.checked_add(standalone_probe_pressure_plan.bounds().storage_bytes))
         .and_then(|n| n.checked_add(standalone_pressure_plan.bounds().storage_bytes))
         .and_then(|n| {
             n.checked_add(
@@ -200,6 +225,8 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     let mut standalone_physical = PhysicalFamilyWorkspace::new(standalone_physical_plan).unwrap();
     let mut standalone_probe_physical =
         ProbePhysicalWorkspace::new(standalone_probe_physical_plan).unwrap();
+    let mut standalone_probe_pressure =
+        ProbePressureWorkspace::new(standalone_probe_pressure_plan).unwrap();
     let mut standalone_pressure = PressureFamilyWorkspace::new(standalone_pressure_plan).unwrap();
     let mut standalone_regional = RegionalTrackingWorkspace::new(standalone_regional_plan).unwrap();
     let mut maximum_residual_l2 = 0.0_f64;
@@ -215,6 +242,12 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         assert_probe_physical(
             event.reconstructed_physical(),
             standalone_probe_physical
+                .measure(driver.probes(), event.probe())
+                .unwrap(),
+        );
+        assert_probe_pressure(
+            event.reconstructed_pressure(),
+            standalone_probe_pressure
                 .measure(driver.probes(), event.probe())
                 .unwrap(),
         );
