@@ -1,0 +1,8 @@
+{
+  "scope": "new force physical modules, both new tests, shared signed Fourier oracle, and only changed shared physical functions",
+  "functions": 70,
+  "max_cyclomatic": 15.0,
+  "max_cognitive": 16.0,
+  "max_halstead_difficulty": 51.526315789473685,
+  "max_function_ploc": 78.0
+}

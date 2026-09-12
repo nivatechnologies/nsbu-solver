@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "base_commit": "31e99a1",
+  "source_commit": "50222d71b7a31030af00dac52557d605ba71cf2f",
+  "status": "DiagnosticOnly",
+  "tests": {
+    "force_physical_functional": {"passed": 3, "failed": 0},
+    "force_physical_allocation": {"passed": 1, "failed": 0, "steady_allocations": 0, "construction_bytes": 2433984, "joint_storage_bytes": 2666184},
+    "ordinary_physical_regression": {"passed": 3, "failed": 0}
+  },
+  "focused_coverage": {"lines_covered": 663, "lines_total": 677, "line_percent": 97.93205317577548, "branches_covered": 40, "branches_total": 46, "branch_percent": 86.95652173913044},
+  "focused_static": {"maximum_cyclomatic": 15.0, "maximum_cognitive": 16.0, "maximum_halstead_difficulty": 51.526315789473685, "maximum_function_ploc": 78.0, "maximum_crap": 15.0},
+  "whole_rust_static": {"maximum_cyclomatic": 21.0, "maximum_cognitive": 21.0, "maximum_all_node_halstead_difficulty": 75.9295154185022, "maximum_tracked_file_lines": 477},
+  "quality": {"format": "passed", "focused_clippy": "passed", "strict_workspace_rustdoc": "passed"},
+  "claims_force_sufficiency": false,
+  "claims_convergence": false,
+  "accepted_windows": 0
+}
