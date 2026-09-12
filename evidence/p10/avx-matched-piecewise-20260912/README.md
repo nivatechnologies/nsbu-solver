@@ -59,13 +59,17 @@ PGID/starttime/cmdline-validating watchdog and a deadline no later than
 `2026-09-13T01:20:00Z`, followed by KILL after 60 seconds if the exact identity
 survives.
 
-The matched N256 profile should wait for the protected old N256 and matched N192
-to finish. Do not overlap both new profiles: each has an immutable 192 GiB
-execution cap even though its exact reservation is lower. Its fresh admission
-floor is 79,485,917,960 bytes plus the same 32 GiB OS cushion, or
-113,845,656,328 bytes available, and 128 GiB of free artifact space. Within the
-current experiment window, refuse a launch whose measured projection cannot
-finish before the hard stop with margin.
+The matched N256 profile must wait for matched N192 to finish. The protected old
+N256 may remain active and must not be stopped or modified; its allocation is
+already reflected by the fresh `MemAvailable` reading. Do not overlap both new
+profiles: each has an immutable 192 GiB execution cap even though its exact
+reservation is lower. Its fresh admission floor is 79,485,917,960 bytes plus the
+same 32 GiB OS cushion, or 113,845,656,328 bytes available, and 128 GiB of free
+artifact space. Refuse unless a live, contention-aware forecast including
+snapshot cost finishes with explicit margin before its 01:35 UTC watchdog
+deadline, five minutes before the numerical hard stop. The separate conditional
+launch amendment and recipe preserve this authorization without changing the
+frozen plan hash.
 
 ## Verification and identity
 

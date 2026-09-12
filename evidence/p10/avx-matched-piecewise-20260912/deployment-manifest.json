@@ -23,6 +23,10 @@
     "binary": "deployment/569fd0ced7a755b1f6c066a7c00016f537fbc4bf/p10-avx-matched-n256",
     "binary_sha256": "cebb88ed242881f016edf3488d74c31d1f2f3f57c9a08845468d9b8ddaa5f7d1",
     "preflight": "n256-preflight.stdout",
-    "preflight_sha256": "9e2e5de4343bf90b9370ff8c0b6effd619072a26766fc360e293626402e9b438"
+    "preflight_sha256": "9e2e5de4343bf90b9370ff8c0b6effd619072a26766fc360e293626402e9b438",
+    "conditional_launch": "conditional-launch-n256.json",
+    "conditional_launch_sha256": "2ef515d44abe43af591160469215d4584f454194228be407f21e7bcfdd814c41",
+    "launch_recipe": "launch-n256.txt",
+    "launch_recipe_sha256": "6de8bb68fcffc53fc9b8c2ce92e061d58576df11bc9202d2522564f564535583"
   }
 }
