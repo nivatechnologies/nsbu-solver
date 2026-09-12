@@ -27,7 +27,7 @@ pub const WORKERS: usize = 32;
 #[cfg(not(feature = "n384-prep"))]
 pub const CAP: usize = 103_079_215_104;
 #[cfg(feature = "n384-prep")]
-pub const CAP: usize = 0;
+pub const CAP: usize = 192 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
 #[cfg(feature = "n384-prep")]
@@ -41,7 +41,7 @@ const PROFILE: &str = "n192-m384";
 #[cfg(all(feature = "n256", not(feature = "n384-prep")))]
 const PROFILE: &str = "n256-m384";
 #[cfg(all(feature = "n384-prep", not(feature = "n256")))]
-const PROFILE: &str = "n384-m384-h32-cadv08-w3-pending";
+const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c-prep";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -88,7 +88,7 @@ pub fn require_execution_ready() -> Result<(), SolverError> {
 
 fn admit() -> Result<Admission, SolverError> {
     let geometry = geometry()?;
-    admit_geometry(geometry)
+    admit_geometry(geometry, CAP)
 }
 
 fn geometry() -> Result<Geometry, SolverError> {
@@ -109,9 +109,9 @@ fn geometry_for(domain: Domain) -> Result<Geometry, SolverError> {
     })
 }
 
-fn admit_geometry(geometry: Geometry) -> Result<Admission, SolverError> {
+fn admit_geometry(geometry: Geometry, cap: usize) -> Result<Admission, SolverError> {
     let reservations = reservations(geometry)?;
-    let resources = resources(geometry.domain, reservations)?;
+    let resources = resources(geometry.domain, reservations, cap)?;
     work_admission(geometry, reservations, resources)
 }
 
@@ -127,6 +127,7 @@ fn reservations(geometry: Geometry) -> Result<Reservations, SolverError> {
     })
 }
 
+#[cfg(not(feature = "n384-prep"))]
 fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
     let catalog = FftCatalog::reservation(geometry.backend)?;
     let force = CachedReducedForce::preflight(
@@ -136,6 +137,24 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
         geometry.backend,
     )?;
     let rhs = SpectralRhs::<CachedReducedForce>::reservation_with_fft_backend(
+        geometry.domain,
+        force,
+        geometry.backend,
+    )?;
+    Ok((catalog, force, rhs))
+}
+
+#[cfg(feature = "n384-prep")]
+fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
+    let catalog = FftCatalog::reservation(geometry.backend)?;
+    let force = CachedReducedForce::preflight(
+        geometry.domain,
+        geometry.samples,
+        WORKERS,
+        geometry.backend,
+        true,
+    )?;
+    let rhs = SpectralRhs::<CachedReducedForce>::reservation_with_w3_fft_backend(
         geometry.domain,
         force,
         geometry.backend,
@@ -154,7 +173,7 @@ fn diagnostic_reservations(geometry: Geometry) -> Result<(usize, usize), SolverE
     Ok((attempt, observer))
 }
 
-fn resources(domain: Domain, sizes: Reservations) -> Result<ResourcePlan, SolverError> {
+fn resources(domain: Domain, sizes: Reservations, cap: usize) -> Result<ResourcePlan, SolverError> {
     let diagnostics = sizes
         .attempt
         .checked_add(sizes.observer)
@@ -167,7 +186,7 @@ fn resources(domain: Domain, sizes: Reservations) -> Result<ResourcePlan, Solver
             diagnostics,
             overhead: OVERHEAD,
         },
-        CAP,
+        cap,
         Epoch(0),
     )
 }
@@ -260,7 +279,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-w3-pending;rhs_w3=pending;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap=pending;artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
         env!("RUN_SOURCE"),
         crate::timed_rhs::IDENTITY,
         2 * M,
@@ -284,16 +303,41 @@ mod n384_tests {
     use super::*;
 
     #[test]
-    fn pending_profile_is_exact_and_cannot_enter_execution() {
+    fn closed_profile_is_exact_and_cannot_enter_execution() {
         assert_eq!(N, 384);
         assert_eq!(M, 384);
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
-        assert_eq!(CAP, 0);
+        assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Err(SolverError::InvalidPayload));
         let identity = identity();
-        assert!(identity.contains("rhs_w3=pending"));
+        assert!(identity.contains("provider=parallel-reduced-v2-force-w3"));
+        assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200779136"));
+        assert!(identity.contains("force_w3=layout384-width3-forward-add1827942144"));
         assert!(identity.contains("observer_force_samples=768"));
         assert!(identity.contains("observer_conservative=768"));
         assert!(identity.contains("artifact_cap=274877906944"));
+    }
+
+    #[test]
+    fn complete_w3_reservation_is_available_without_execution_admission() {
+        let geometry = geometry().unwrap();
+        let admission = admit_geometry(geometry, CAP).unwrap();
+        let total = admission.resources.total();
+        println!(
+            "n384_complete_reservation={total} classes={:?} catalog={} force_storage={} rhs={} attempt={} observer={} overhead={} disk={}",
+            admission.resources.classes(),
+            admission.reservations.catalog,
+            admission.reservations.force.storage_bytes,
+            admission.reservations.rhs,
+            admission.reservations.attempt,
+            admission.reservations.observer,
+            OVERHEAD,
+            admission.disk,
+        );
+        assert_eq!(total, 185_783_161_608);
+        assert!(matches!(
+            admit_geometry(geometry, total - 1),
+            Err(SolverError::ResourceLimit)
+        ));
     }
 }
