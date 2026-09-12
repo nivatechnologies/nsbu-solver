@@ -1,0 +1,18 @@
+{
+  "schema": "p10-avx-n384-m512-build-v1",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "source_tree_clean_before_build": true,
+  "manifest": "evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml",
+  "feature": "n384-m512-piecewise-cadv33",
+  "command": "RUN_SOURCE=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72 CARGO_TARGET_DIR=target/n384-m512-deployment-326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72 cargo build --release --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33",
+  "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+  "rustc_commit": "4a4ef493e3a1488c6e321570238084b38948f6db",
+  "llvm": "21.1.8",
+  "target": "x86_64-unknown-linux-gnu",
+  "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)",
+  "binary_name": "p10-avx-n384-m512-piecewise-cadv33",
+  "binary_sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
+  "elf": "ELF 64-bit LSB PIE executable, x86-64, dynamically linked, not stripped",
+  "build_id_sha1": "e873ee004007141d38b879ccde5957e54d1380c2",
+  "runtime_libraries": ["libgcc_s.so.1", "libm.so.6", "libc.so.6"]
+}

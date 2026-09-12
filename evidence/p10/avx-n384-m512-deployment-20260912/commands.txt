@@ -1,0 +1,8 @@
+SOURCE=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72
+RUN_SOURCE=$SOURCE CARGO_TARGET_DIR=target/n384-m512-deployment-$SOURCE cargo build --release --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33
+target/n384-m512-deployment-$SOURCE/release/p10-avx-scheduled-endpoint preflight unused
+RUN_SOURCE=$SOURCE cargo test --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33
+cargo test -p nsbu-solver spectral::w3::tests --no-fail-fast
+RUN_SOURCE=$SOURCE cargo clippy --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33 --all-targets -- -D warnings
+cargo fmt --all -- --check
+sh -n evidence/p10/avx-n384-m512-deployment-20260912/launch-reviewed.sh
