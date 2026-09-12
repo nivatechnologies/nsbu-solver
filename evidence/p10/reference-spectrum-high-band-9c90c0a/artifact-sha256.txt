@@ -23,6 +23,8 @@ bf1befca25006d4ed60405bbafb6748d594c4d2b16467853db66f15d1c3b3a65  evidence/p10/r
 4cf4687f7275949bcf8820dec668030876c583329aba76814657987b580e97f8  evidence/p10/reference-spectrum-high-band-9c90c0a/source/comparator-Cargo.toml
 1f6cd4a6022601aa899c886e83911b1749ddab1cbe8201123d2eeac134c2d90d  evidence/p10/reference-spectrum-high-band-9c90c0a/source/comparator-hi.rs
 364889a41cfc4ded4417228222029cfd7af10dcccd1e802a8fea22401dd73d81  evidence/p10/reference-spectrum-high-band-9c90c0a/source/executed-commands.sh
+5386aeb43812c46cbb18a3e9619fdeb12e26c280d248b6180484abca8b0d1aad  evidence/p10/reference-spectrum-high-band-9c90c0a/source/reference-Cargo.lock
+f5e15461eb8312498948bbc0e08e12661617a4d4644b012baff5ae7327388669  evidence/p10/reference-spectrum-high-band-9c90c0a/source/reference-Cargo.toml
 6ccef5ea23d97f491a6e370a98b716edef4c5053d8d9b46c30093bb8d0a0fb5e  evidence/p10/reference-spectrum-high-band-9c90c0a/source/reference-spectrum-hi.rs
 133ec7ea6100204b1dcfcea5bdd5641ac66a8f98488943a9314a6b5c67ad4bbf  evidence/p10/reference-spectrum-high-band-9c90c0a/source/source-sha256.txt
 1e686e72570da724719a2512735e16ed1d81c3b6d1903e735390cd5af1b82eb0  evidence/p10/reference-spectrum-high-band-9c90c0a/summary.json
