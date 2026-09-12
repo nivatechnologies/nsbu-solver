@@ -1,0 +1,7 @@
+source_commit=606e7e4a1445007447bbb43393c32324a50d1681
+cargo +nightly-2026-03-03 llvm-cov clean --workspace
+cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_diagnostic_export --test v2_diagnostic_coordinator --test v2_diagnostic_coordinator_allocation --branch --json -- --test-threads=1 --nocapture
+cargo +nightly-2026-03-03 llvm-cov --branch --no-report -p nsbu-benchmarks --lib -- diagnostic_export_fixed_width_numbers_and_interrupts_are_bounded --test-threads=1
+cargo +nightly-2026-03-03 llvm-cov report --branch --json --output-path coverage-606e7e4-combined.json
+python3 -m quality.check_crap rust metrics-production-606e7e4.jsonl coverage-606e7e4-combined.json crap-production-606e7e4-combined.json
+cargo clippy --workspace --all-targets -- -D warnings -A dead_code
