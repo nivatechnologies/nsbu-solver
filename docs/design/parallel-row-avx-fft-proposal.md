@@ -1,6 +1,6 @@
 # Bounded row-parallel AVX FFT proposal
 
-Status: design only. No implementation or benchmark is authorized by this note.
+Status: production design only. A standalone evidence prototype was approved and is recorded in `evidence/p10/avx-row-parallel-spike-20260912`; no solver implementation is authorized by this note.
 
 ## Decision target
 
@@ -91,8 +91,8 @@ aliased `&mut` slices, a shared grid mutex in the compute loop, and a transpose.
 Packing and scattering preserve the scalar loop's `j = 0..L` order.
 
 With component width `C`, the number of dispatched blocks is
-`ceil(C*L*L/256) + 2*ceil(C*L*H/256)` per 3D transform batch. For W3 this is
-3,466 blocks at L384 and 7,790 at L576. A measurement must report packing,
+`C * (ceil(L*L/256) + 2*ceil(L*H/256))` per 3D transform batch because each component has a separate owner. For W3 this is
+3,468 blocks at L384 and 7,794 at L576. A measurement must report packing,
 RustFFT work, completion waiting, and scattering separately; a transform total
 without these costs is not admissible evidence.
 
@@ -163,13 +163,11 @@ term.
 
 | Cubic length | W3 row addition, 12 active participants |
 |---:|---:|
-| 384 | 57,458,160 B |
-| 576 | 76,443,120 B |
+| 384 | 57,458,160 B before concrete shared-owner audit |
+| 576 | 76,443,120 B before concrete shared-owner audit |
 | 768 | 95,428,080 B |
 
-For the N384 RHS576 plus force384 owners, the exact addition is 133,901,280 B.
-Applied to the measured W3 N384 reservation of 185,783,161,608 B, the new total
-would be 185,917,062,888 B.
+The 133,901,280 B sum for N384 RHS576 plus force384 is a design candidate pending a concrete audit of separately allocated shared owner state, `Arc` control blocks, vectors, and thread startup allocations. It must not be used as an admission reservation until that audit is complete.
 
 A future scalar length-768 owner would use 12 participants, with the caller as
 coordinator, 11 helpers, and the existing scalar scratch for its first

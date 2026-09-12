@@ -1,0 +1,7 @@
+cargo build --release --manifest-path evidence/p10/avx-row-parallel-spike-20260912/harness/Cargo.toml
+cargo run --release --manifest-path evidence/p10/avx-row-parallel-spike-20260912/harness/Cargo.toml -- validate
+(ulimit -v 25165824; exec timeout 1500s nice -n 19 taskset -c 52-63 evidence/p10/avx-row-parallel-spike-20260912/harness/target/release/p10-avx-row-parallel-spike profile-384)
+(ulimit -v 25165824; exec timeout 1500s nice -n 19 taskset -c 52-63 evidence/p10/avx-row-parallel-spike-20260912/harness/target/release/p10-avx-row-parallel-spike profile-576)
+cargo fmt --manifest-path evidence/p10/avx-row-parallel-spike-20260912/harness/Cargo.toml -- --check
+cargo clippy --manifest-path evidence/p10/avx-row-parallel-spike-20260912/harness/Cargo.toml --all-targets --locked -- -D warnings
+cargo test --manifest-path evidence/p10/avx-row-parallel-spike-20260912/harness/Cargo.toml --locked
