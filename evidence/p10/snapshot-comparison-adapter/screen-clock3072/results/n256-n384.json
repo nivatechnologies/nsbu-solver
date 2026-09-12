@@ -1,0 +1,96 @@
+{
+  "schema": "p10-snapshot-comparison-output-v1",
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 3072,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 3072,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "left_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=512;host=local",
+  "left_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "left_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "right_identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=768;host=sulaco",
+  "right_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "right_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "left_hashes": {
+    "coefficient_sha256": "a521f40049d6a7122bc069b9a5924d9cdd48d564b67f241430cba27d035c4fb4",
+    "file_sha256": "d8515d155c0285b7c5fc3caa592138e4bc797d5c5b18d6ce88bceddc6ea23078"
+  },
+  "right_hashes": {
+    "coefficient_sha256": "1b811dceea2d21d64d10589c6ce0846531a5e849303c805d3a9c45c906da95ee",
+    "file_sha256": "637bbc8e57ff5bdcd32a5cb40b7dc27e15fbc98e262d072e81e175431425b64b"
+  },
+  "clock": {
+    "elapsed": 3072,
+    "target": 8192,
+    "epoch": 40,
+    "left_accepted_steps": 40,
+    "right_accepted_steps": 40
+  },
+  "full": {
+    "l2": 0.00001906338611754727,
+    "h1": 0.01872780664606547,
+    "vorticity_l2": 0.018727796947544218,
+    "divergence_l2": 6.24968170713048e-15
+  },
+  "common": {
+    "l2": 1.0528677531993565e-8,
+    "h1": 8.935926218553004e-6,
+    "vorticity_l2": 8.935920016733354e-6,
+    "divergence_l2": 6.2496816051219775e-15
+  },
+  "newly_resolved": {
+    "l2": 0.000019063383210061204,
+    "h1": 0.018727804514187898,
+    "vorticity_l2": 0.0187277948156685,
+    "divergence_l2": 1.1291772791796693e-18
+  },
+  "fine_absolute": {
+    "l2": 1.7861396086467043,
+    "h1": 49.090204351453615,
+    "vorticity_l2": 49.05769939608381,
+    "divergence_l2": 4.761658844746308e-15
+  },
+  "mean_error": [
+    1.3689165817952964e-18,
+    1.1275738858612481e-18,
+    8.30417284986947e-18
+  ],
+  "admitted_bytes": 1772879872
+}
