@@ -13,9 +13,22 @@ pub struct Norms {
     pub peak: f64,
 }
 
+/// Complete independently reduced pointwise statistics and first peak locations.
+#[derive(Debug, Clone, Copy, Default)]
+pub struct Errors {
+    pub rms: f64,
+    pub peak: f64,
+    pub relative_peak: f64,
+    pub reference_peak: f64,
+    pub peak_linear: usize,
+    pub relative_linear: usize,
+    pub reference_linear: usize,
+}
+
 struct Mode {
     wave: [f64; 3],
     difference: [Complex64; 3],
+    reference: [Complex64; 3],
 }
 
 #[derive(Default)]
@@ -55,12 +68,15 @@ fn modes(left: &SpectralState, right: &SpectralState) -> Vec<Mode> {
         for y in -ny + 1..ny {
             for z in -nz + 1..nz {
                 let mode = [x, y, z];
+                let reference = std::array::from_fn(|axis| {
+                    coefficient(fine, right.component(axis).unwrap(), mode)
+                });
                 result.push(Mode {
                     wave: mode.map(|k| std::f64::consts::TAU * k as f64),
                     difference: std::array::from_fn(|axis| {
-                        coefficient(fine, right.component(axis).unwrap(), mode)
-                            - coefficient(coarse, left.component(axis).unwrap(), mode)
+                        reference[axis] - coefficient(coarse, left.component(axis).unwrap(), mode)
                     }),
+                    reference,
                 });
             }
         }
@@ -68,7 +84,7 @@ fn modes(left: &SpectralState, right: &SpectralState) -> Vec<Mode> {
     result
 }
 
-fn add_mode(tensor: &mut Tensor, mode: &Mode, point: [f64; 3]) {
+fn add_mode(tensor: &mut Tensor, values: [Complex64; 3], mode: &Mode, point: [f64; 3]) {
     let phase = mode
         .wave
         .into_iter()
@@ -76,8 +92,8 @@ fn add_mode(tensor: &mut Tensor, mode: &Mode, point: [f64; 3]) {
         .map(|(k, x)| k * x)
         .sum::<f64>();
     let (sin, cos) = phase.sin_cos();
-    for component in 0..3 {
-        let phased = mode.difference[component] * Complex64::new(cos, sin);
+    for (component, coefficient) in values.into_iter().enumerate() {
+        let phased = coefficient * Complex64::new(cos, sin);
         tensor.velocity[component] += phased.re;
         for a in 0..3 {
             tensor.gradient[component][a] -= mode.wave[a] * phased.im;
@@ -108,30 +124,76 @@ fn squared(tensor: &Tensor) -> [f64; 4] {
     ]
 }
 
+fn at_point(modes: &[Mode], samples: Layout, linear: usize) -> ([f64; 4], [f64; 4]) {
+    let [nx, ny, nz] = samples.dimensions();
+    let point = [
+        (linear / (ny * nz)) as f64 / nx as f64,
+        ((linear / nz) % ny) as f64 / ny as f64,
+        (linear % nz) as f64 / nz as f64,
+    ];
+    let mut difference = Tensor::default();
+    let mut reference = Tensor::default();
+    for mode in modes {
+        add_mode(&mut difference, mode.difference, mode, point);
+        add_mode(&mut reference, mode.reference, mode, point);
+    }
+    (
+        squared(&difference).map(f64::sqrt),
+        squared(&reference).map(f64::sqrt),
+    )
+}
+
 /// All four complete tensor norms, with independently indexed modes and physical derivatives.
 /// Input domains are the unit-cube family; every fine mode and the mean are retained.
 pub fn pair_norms(left: &SpectralState, right: &SpectralState, samples: Layout) -> [Norms; 4] {
+    pair_errors(left, right, samples, [1.0; 4]).map(|error| Norms {
+        rms: error.rms,
+        peak: error.peak,
+    })
+}
+
+/// All pointwise reductions with explicit relative floors and independent signed sums.
+pub fn pair_errors(
+    left: &SpectralState,
+    right: &SpectralState,
+    samples: Layout,
+    floors: [f64; 4],
+) -> [Errors; 4] {
     let modes = modes(left, right);
-    let [nx, ny, nz] = samples.dimensions();
     let mut sum = [0.0; 4];
-    let mut peak = [0.0_f64; 4];
+    let mut result = [Errors::default(); 4];
     for linear in 0..samples.real_len() {
-        let point = [
-            (linear / (ny * nz)) as f64 / nx as f64,
-            ((linear / nz) % ny) as f64 / ny as f64,
-            (linear % nz) as f64 / nz as f64,
-        ];
-        let mut tensor = Tensor::default();
-        for mode in &modes {
-            add_mode(&mut tensor, mode, point);
-        }
-        for (index, value) in squared(&tensor).into_iter().enumerate() {
-            sum[index] += value;
-            peak[index] = peak[index].max(value);
+        let (errors, references) = at_point(&modes, samples, linear);
+        for index in 0..4 {
+            sum[index] += errors[index] * errors[index];
+            let relative = errors[index] / references[index].max(floors[index]);
+            if linear == 0 || errors[index] > result[index].peak {
+                result[index].peak = errors[index];
+                result[index].peak_linear = linear;
+            }
+            if linear == 0 || relative > result[index].relative_peak {
+                result[index].relative_peak = relative;
+                result[index].relative_linear = linear;
+            }
+            if linear == 0 || references[index] > result[index].reference_peak {
+                result[index].reference_peak = references[index];
+                result[index].reference_linear = linear;
+            }
         }
     }
-    std::array::from_fn(|index| Norms {
-        rms: (sum[index] / samples.real_len() as f64).sqrt(),
-        peak: peak[index].sqrt(),
-    })
+    for index in 0..4 {
+        result[index].rms = (sum[index] / samples.real_len() as f64).sqrt();
+    }
+    result
+}
+
+/// Difference and finer-state magnitudes reconstructed at one reported sample witness.
+pub fn point_magnitudes(
+    left: &SpectralState,
+    right: &SpectralState,
+    samples: Layout,
+    linear: usize,
+) -> ([f64; 4], [f64; 4]) {
+    assert!(linear < samples.real_len());
+    at_point(&modes(left, right), samples, linear)
 }

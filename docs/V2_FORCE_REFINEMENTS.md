@@ -11,6 +11,10 @@ resolution. It reports no force-sufficiency, convergence or accepted-window stat
 It does not replace the current force arithmetic, reference, physical-observable,
 transfer or provenance studies.
 
+The separate [sampled physical consumer](V2_FORCE_PHYSICAL.md) evaluates
+velocity, ordered gradient, ordered Hessian and vorticity RMS and peaks directly
+from these same immutable states. It does not reinterpret the spectral H1 value.
+
 ## Admission and identity
 
 `ForceFamilyPlan::new` validates the complete exact-clock manifest and every

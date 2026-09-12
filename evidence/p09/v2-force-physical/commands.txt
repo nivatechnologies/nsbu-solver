@@ -1,0 +1,10 @@
+cargo test -p nsbu-benchmarks --test v2_force_physical --locked -- --test-threads=1 --nocapture
+cargo test -p nsbu-benchmarks --test v2_force_physical_allocation --locked -- --test-threads=1
+cargo test -p nsbu-benchmarks --test v2_physical_family --locked -- --test-threads=1
+cargo fmt --all -- --check
+cargo clippy -p nsbu-benchmarks --lib --test v2_force_physical --test v2_force_physical_allocation --test v2_physical_family --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_force_physical --test v2_force_physical_allocation --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-force-physical/coverage.json -- --test-threads=1
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates/nsbu-benchmarks -m -O json > work/v2-force-physical/metrics.jsonl
+python3 -m quality.check_crap rust work/v2-force-physical/metrics-focused.jsonl work/v2-force-physical/coverage.json work/v2-force-physical/crap.json
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json > work/v2-force-physical/all-rust-metrics.jsonl

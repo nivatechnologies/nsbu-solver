@@ -46,7 +46,7 @@ pub struct PhysicalExtrema {
 }
 
 impl PhysicalExtrema {
-    pub(super) fn from_comparison(
+    pub(crate) fn from_comparison(
         comparison: &PhysicalComparison<'_>,
         floor: f64,
     ) -> Result<Self, SolverError> {

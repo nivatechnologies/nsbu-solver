@@ -1,0 +1,24 @@
+
+running 3 tests
+test actual_force_states_report_complete_physical_pairs_without_mutation ... pair=0 quantity=Vector rms=3.78377877572819317e-4 peak=8.78675959927433100e-4
+pair=0 quantity=Gradient rms=3.47723904900840196e-3 peak=6.60398603031892798e-3
+pair=0 quantity=Hessian rms=3.25394579289080277e-2 peak=5.75498672458573043e-2
+pair=0 quantity=Vorticity rms=3.47723904900840847e-3 peak=6.82558326111390098e-3
+pair=1 quantity=Vector rms=7.07633542321405278e-5 peak=1.56060517674304648e-4
+pair=1 quantity=Gradient rms=6.28820143827369163e-4 peak=1.15568439087082976e-3
+pair=1 quantity=Hessian rms=5.59418965951280142e-3 peak=9.53040181743578657e-3
+pair=1 quantity=Vorticity rms=6.28820143827370139e-4 peak=1.27047215255901829e-3
+pair=0 quantity=Vector rms=2.44244396515001898e-2 peak=5.70127838585194197e-2
+pair=0 quantity=Gradient rms=2.24400527660844923e-1 peak=4.28460788682572313e-1
+pair=0 quantity=Hessian rms=2.09803564273203991e0 peak=3.73267829691995034e0
+pair=0 quantity=Vorticity rms=2.24400527660845311e-1 peak=4.41805410075867322e-1
+pair=1 quantity=Vector rms=5.72657168596654807e-3 peak=1.23304188544334781e-2
+pair=1 quantity=Gradient rms=5.08526387306117711e-2 peak=9.06889216438033358e-2
+pair=1 quantity=Hessian rms=4.52035450124482707e-1 peak=7.44132690125248186e-1
+pair=1 quantity=Vorticity rms=5.08526387306117711e-2 peak=1.03051914493317839e-1
+ok
+test failed_family_is_rejected_without_replacing_rest_report ... ok
+test refusals_charge_once_terminate_and_retain_prior_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 32.19s
+

@@ -1,5 +1,5 @@
 //! Bounded admission for complete physical comparisons of an exact-v2 family.
-mod work;
+pub(crate) mod work;
 use super::QUANTITIES;
 use crate::v2_experiment::{FamilyError, FamilyPlan};
 use nsbu_solver::{

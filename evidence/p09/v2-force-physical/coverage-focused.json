@@ -1,0 +1,268 @@
+[
+  {
+    "filename": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/mod.rs",
+    "summary": {
+      "branches": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 1,
+        "covered": 1,
+        "percent": 100.0
+      },
+      "instantiations": {
+        "count": 1,
+        "covered": 1,
+        "percent": 100.0
+      },
+      "lines": {
+        "count": 3,
+        "covered": 3,
+        "percent": 100.0
+      },
+      "regions": {
+        "count": 3,
+        "covered": 3,
+        "notcovered": 0,
+        "percent": 100.0
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/plan.rs",
+    "summary": {
+      "branches": {
+        "count": 4,
+        "covered": 4,
+        "notcovered": 0,
+        "percent": 100.0
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 7,
+        "covered": 7,
+        "percent": 100.0
+      },
+      "instantiations": {
+        "count": 7,
+        "covered": 7,
+        "percent": 100.0
+      },
+      "lines": {
+        "count": 67,
+        "covered": 67,
+        "percent": 100.0
+      },
+      "regions": {
+        "count": 87,
+        "covered": 80,
+        "notcovered": 7,
+        "percent": 91.95402298850574
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/report.rs",
+    "summary": {
+      "branches": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 10,
+        "covered": 9,
+        "percent": 90.0
+      },
+      "instantiations": {
+        "count": 10,
+        "covered": 9,
+        "percent": 90.0
+      },
+      "lines": {
+        "count": 41,
+        "covered": 38,
+        "percent": 92.68292682926831
+      },
+      "regions": {
+        "count": 36,
+        "covered": 33,
+        "notcovered": 3,
+        "percent": 91.66666666666666
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/workspace.rs",
+    "summary": {
+      "branches": {
+        "count": 10,
+        "covered": 9,
+        "notcovered": 1,
+        "percent": 90.0
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 11,
+        "covered": 10,
+        "percent": 90.9090909090909
+      },
+      "instantiations": {
+        "count": 11,
+        "covered": 10,
+        "percent": 90.9090909090909
+      },
+      "lines": {
+        "count": 132,
+        "covered": 128,
+        "percent": 96.96969696969698
+      },
+      "regions": {
+        "count": 183,
+        "covered": 157,
+        "notcovered": 26,
+        "percent": 85.79234972677595
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/tests/v2_force_physical.rs",
+    "summary": {
+      "branches": {
+        "count": 14,
+        "covered": 10,
+        "notcovered": 4,
+        "percent": 71.42857142857143
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 10,
+        "covered": 10,
+        "percent": 100.0
+      },
+      "instantiations": {
+        "count": 10,
+        "covered": 10,
+        "percent": 100.0
+      },
+      "lines": {
+        "count": 243,
+        "covered": 243,
+        "percent": 100.0
+      },
+      "regions": {
+        "count": 562,
+        "covered": 554,
+        "notcovered": 8,
+        "percent": 98.57651245551604
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/tests/v2_force_physical_allocation.rs",
+    "summary": {
+      "branches": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 1,
+        "covered": 1,
+        "percent": 100.0
+      },
+      "instantiations": {
+        "count": 1,
+        "covered": 1,
+        "percent": 100.0
+      },
+      "lines": {
+        "count": 44,
+        "covered": 44,
+        "percent": 100.0
+      },
+      "regions": {
+        "count": 92,
+        "covered": 92,
+        "notcovered": 0,
+        "percent": 100.0
+      }
+    }
+  },
+  {
+    "filename": "crates/nsbu-benchmarks/tests/v2_physical_oracle.rs",
+    "summary": {
+      "branches": {
+        "count": 18,
+        "covered": 17,
+        "notcovered": 1,
+        "percent": 94.44444444444444
+      },
+      "mcdc": {
+        "count": 0,
+        "covered": 0,
+        "notcovered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 21,
+        "covered": 19,
+        "percent": 90.47619047619048
+      },
+      "instantiations": {
+        "count": 21,
+        "covered": 19,
+        "percent": 90.47619047619048
+      },
+      "lines": {
+        "count": 147,
+        "covered": 140,
+        "percent": 95.23809523809523
+      },
+      "regions": {
+        "count": 257,
+        "covered": 245,
+        "notcovered": 12,
+        "percent": 95.3307392996109
+      }
+    }
+  }
+]

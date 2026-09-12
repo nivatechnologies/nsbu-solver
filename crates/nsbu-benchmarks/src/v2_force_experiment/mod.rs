@@ -5,6 +5,7 @@
 //! measured full-band trajectory differences; they do not establish force sufficiency.
 pub mod binding;
 mod identity;
+pub mod physical;
 mod plan;
 use crate::v2_run::Run;
 use nsbu_solver::{
