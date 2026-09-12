@@ -1,0 +1,117 @@
+{
+  "source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "snapshot_tag": "alpha-20260912",
+  "source_files_compared": 2749,
+  "sha256sums_entries": 2751,
+  "checkpoint_resume_equal_except_origin_status": true,
+  "cached_checkpoint_refused": true,
+  "accepted_pde_windows": 0,
+  "release_url": "https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260912",
+  "release_workflow": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34677705286",
+  "archive_sha256": "06e2e446beee1dc4504f3a65d3ba2a274987e2ad17740e7e1a7c3cbf907ce2d4",
+  "binary_sha256": "0055e4835100503d2735980648575d7feb3e2f0034e5e60b0bdfee215d806c9a",
+  "version": "0.1.0-alpha.1",
+  "target": "x86_64-unknown-linux-gnu",
+  "maximum_required_glibc_symbol": "GLIBC_2.35",
+  "executed_checks": [
+    {
+      "label": "version",
+      "exit_status": 0
+    },
+    {
+      "label": "help",
+      "exit_status": 0
+    },
+    {
+      "label": "cm",
+      "exit_status": 0
+    },
+    {
+      "label": "ho",
+      "exit_status": 0
+    },
+    {
+      "label": "ho-checkpoint",
+      "exit_status": 0
+    },
+    {
+      "label": "ho-resume",
+      "exit_status": 0
+    },
+    {
+      "label": "cached-cm",
+      "exit_status": 0
+    },
+    {
+      "label": "cached-ho",
+      "exit_status": 0
+    },
+    {
+      "label": "cached-checkpoint-refusal",
+      "exit_status": 1
+    }
+  ],
+  "quality": {
+    "source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+    "branch": "main",
+    "hosted_runs": {
+      "rust": {
+        "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34670177242",
+        "conclusion": "success",
+        "completed_at": "2026-09-12T06:04:47Z"
+      },
+      "python": {
+        "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34670177275",
+        "conclusion": "success",
+        "completed_at": "2026-09-12T03:32:25Z"
+      }
+    },
+    "coverage": {
+      "rust": {
+        "lines": {
+          "covered": 46856,
+          "count": 48020,
+          "percent": 97.57600999583507
+        },
+        "branches": {
+          "covered": 2979,
+          "count": 3432,
+          "percent": 86.8006993006993
+        }
+      },
+      "python": {
+        "lines": {
+          "covered": 6151,
+          "count": 6203,
+          "percent": 99.16169595357086
+        },
+        "branches": {
+          "covered": 1182,
+          "count": 1212,
+          "percent": 97.52475247524752
+        }
+      }
+    },
+    "static_and_crap": {
+      "rust": {
+        "cyclomatic_max": 21.0,
+        "cognitive_max": 21.0,
+        "halstead_all_node_max": 75.9295154185022,
+        "physical_file_lines_max": 477,
+        "crap_max": 24.05859375
+      },
+      "python": {
+        "cyclomatic_max": 16,
+        "halstead_all_node_max": 13.826086956521738,
+        "cognitive_bound": "<=21, enforced by successful hosted command; exact maximum not retained",
+        "physical_file_lines_max": 327,
+        "crap_max": 20.0
+      }
+    },
+    "quality_gates": "passed for this exact source only",
+    "scientific_status": "UnqualifiedDiagnostic; zero accepted concentrating PDE windows",
+    "later_development": "Not validated by these runs.",
+    "python_coverage_note": "Line and branch percentages are recomputed separately. coverage.py percent_covered combines both."
+  },
+  "scope": "Downloaded runtime diagnostic verification; zero accepted concentrating PDE windows."
+}

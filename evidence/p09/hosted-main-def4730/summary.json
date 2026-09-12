@@ -1,0 +1,62 @@
+{
+  "source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "branch": "main",
+  "hosted_runs": {
+    "rust": {
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34670177242",
+      "conclusion": "success",
+      "completed_at": "2026-09-12T06:04:47Z"
+    },
+    "python": {
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34670177275",
+      "conclusion": "success",
+      "completed_at": "2026-09-12T03:32:25Z"
+    }
+  },
+  "coverage": {
+    "rust": {
+      "lines": {
+        "covered": 46856,
+        "count": 48020,
+        "percent": 97.57600999583507
+      },
+      "branches": {
+        "covered": 2979,
+        "count": 3432,
+        "percent": 86.8006993006993
+      }
+    },
+    "python": {
+      "lines": {
+        "covered": 6151,
+        "count": 6203,
+        "percent": 99.16169595357086
+      },
+      "branches": {
+        "covered": 1182,
+        "count": 1212,
+        "percent": 97.52475247524752
+      }
+    }
+  },
+  "static_and_crap": {
+    "rust": {
+      "cyclomatic_max": 21.0,
+      "cognitive_max": 21.0,
+      "halstead_all_node_max": 75.9295154185022,
+      "physical_file_lines_max": 477,
+      "crap_max": 24.05859375
+    },
+    "python": {
+      "cyclomatic_max": 16,
+      "halstead_all_node_max": 13.826086956521738,
+      "cognitive_bound": "<=21, enforced by successful hosted command; exact maximum not retained",
+      "physical_file_lines_max": 327,
+      "crap_max": 20.0
+    }
+  },
+  "quality_gates": "passed for this exact source only",
+  "scientific_status": "UnqualifiedDiagnostic; zero accepted concentrating PDE windows",
+  "later_development": "Not validated by these runs.",
+  "python_coverage_note": "Line and branch percentages are recomputed separately. coverage.py percent_covered combines both."
+}
