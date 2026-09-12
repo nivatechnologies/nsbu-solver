@@ -4,6 +4,7 @@ use nsbu_benchmarks::{
     v2_run::{archive, Plan, Run, Settings},
 };
 use nsbu_solver::{
+    checkpoint::CheckpointError,
     domain::{Domain, Layout, TickClock},
     experiment::control::Configuration,
     integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},
@@ -32,6 +33,17 @@ fn settings(method: Method) -> Settings {
         },
         advective_limit: 0.3,
     }
+}
+
+fn pre_cache_settings() -> Settings {
+    let mut result = settings(Method::CoxMatthews);
+    result.configuration.limits.endpoint = 128;
+    result.configuration.limits.maximum_attempts = 1;
+    result.configuration.tolerances = Tolerances {
+        absolute: [1e-5, 1e-4],
+        relative: [1e-5; 2],
+    };
+    result
 }
 
 fn round_trip(method: Method) {
@@ -155,4 +167,54 @@ fn hochbruck_round_trip_keeps_full_work_ledger() {
         resumed.history().controller().committed(),
         run.history().controller().committed()
     );
+}
+
+#[test]
+fn direct_layout_resources_and_pre_cache_archive_remain_compatible() {
+    let plan = Plan::from_rest(pre_cache_settings(), 1 << 26).unwrap();
+    assert_eq!(
+        std::mem::size_of::<nsbu_benchmarks::runtime_force::RunForce>(),
+        592
+    );
+    assert_eq!(std::mem::size_of::<Plan>(), 512);
+    assert_eq!(std::mem::size_of::<Run>(), 5840);
+    assert_eq!(
+        std::mem::size_of::<nsbu_benchmarks::v2_run::ReconstructedPlan>(),
+        480
+    );
+    assert_eq!(
+        std::mem::size_of::<nsbu_benchmarks::v2_run::ReconstructedRun>(),
+        7136
+    );
+    assert_eq!(plan.resources().total(), 252_184);
+    let bytes = include_bytes!("fixtures/v2-archive-pre-cache.bin");
+    let imported = archive::read(bytes, plan, bytes.len(), 1 << 26).unwrap();
+    assert_eq!(imported.state().clock().elapsed(), 128);
+    assert_eq!(imported.work().len(), 1);
+}
+
+#[test]
+fn cached_profile_refuses_every_version_one_archive_operation() {
+    let plan = Plan::from_rest_cached(pre_cache_settings(), 1 << 26).unwrap();
+    let run = Run::from_rest(plan).unwrap();
+    assert_eq!(
+        archive::encoded_len(&run),
+        Err(CheckpointError::InvalidEncoding)
+    );
+    assert_eq!(
+        archive::maximum_encoded_len(plan),
+        Err(CheckpointError::InvalidEncoding)
+    );
+    assert_eq!(
+        archive::read_reservation(plan, 0),
+        Err(CheckpointError::InvalidEncoding)
+    );
+    assert_eq!(
+        archive::write(&run, &mut []),
+        Err(CheckpointError::InvalidEncoding)
+    );
+    assert!(matches!(
+        archive::read(&[], plan, 0, 0),
+        Err(CheckpointError::InvalidEncoding)
+    ));
 }

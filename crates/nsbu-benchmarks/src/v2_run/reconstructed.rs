@@ -2,7 +2,7 @@
 
 use super::{plan, work, AttemptWork, Origin, Settings};
 use crate::{
-    runtime_force::RunForce,
+    runtime_force::{AttemptCacheWork, IntegrationMode, RunForce},
     smooth_observer::{v2_reconstruction::V2ReconstructionObserver, BalanceObserverWork},
 };
 use nsbu_solver::{
@@ -24,8 +24,21 @@ pub struct ReconstructedPlan {
 impl ReconstructedPlan {
     /// Admit integration plus independently evaluated accepted-node RHS history.
     pub fn from_rest(settings: Settings, cap: usize) -> Result<Self, SolverError> {
+        Self::admit(settings, IntegrationMode::Direct, cap)
+    }
+
+    pub(crate) fn from_run_plan(plan: super::Plan, cap: usize) -> Result<Self, SolverError> {
+        Self::admit(plan.settings(), plan.integration_mode(), cap)
+    }
+
+    fn admit(settings: Settings, mode: IntegrationMode, cap: usize) -> Result<Self, SolverError> {
+        if std::mem::size_of::<ReconstructedPlan>() != 480
+            || std::mem::size_of::<ReconstructedRun>() != 7136
+        {
+            return Err(SolverError::ResourceLimit);
+        }
         plan::validate_settings(settings)?;
-        let force_limits = settings.force.limits(settings.domain)?;
+        let force_limits = settings.force.integration_limits(settings.domain, mode)?;
         plan::validate_final_step(settings, force_limits.remaining_divisor)?;
         let attempts = settings.configuration.limits.maximum_attempts;
         let observer_samples = attempts.checked_add(1).ok_or(SolverError::SizeOverflow)?;
@@ -96,6 +109,11 @@ impl ReconstructedPlan {
     pub fn integration_limits(self) -> [usize; 3] {
         self.integration
     }
+
+    /// Integration-only force policy inherited from the ordinary branch plan.
+    pub fn integration_mode(self) -> IntegrationMode {
+        plan::direct_or_cached(self.settings, self.resources)
+    }
 }
 
 /// From-rest exact-v2 owner retaining three committed endpoint value/RHS nodes.
@@ -118,10 +136,14 @@ impl ReconstructedRun {
         let state = SpectralState::from_rest(resources, settings.initial_clock, Epoch(0))?;
         let candidate = CandidateState::new(resources, settings.initial_clock, Epoch(0))?;
         let attempts = AttemptWorkspace::new_with_method(resources, settings.configuration.method)?;
-        let force_limits = settings.force.limits(settings.domain)?;
-        let force = settings
+        let force_limits = settings
             .force
-            .build(settings.domain, force_limits.storage_bytes)?;
+            .integration_limits(settings.domain, plan.integration_mode())?;
+        let force = settings.force.build_integration(
+            settings.domain,
+            plan.integration_mode(),
+            force_limits.storage_bytes,
+        )?;
         let rhs = SpectralRhs::new(
             settings.domain,
             force,
@@ -198,6 +220,10 @@ impl ReconstructedRun {
     /// Includes the separately evaluated initial rest node.
     pub fn observer_work(&self) -> BalanceObserverWork {
         self.observer.consumption()
+    }
+    /// Detailed current-attempt cache work for the opt-in cached profile.
+    pub fn cache_work(&self) -> Option<AttemptCacheWork> {
+        self.rhs.provider().cache_work()
     }
     /// Accepted-node reconstruction access; scratch remains observer-owned.
     pub fn observer(&self) -> &V2ReconstructionObserver {

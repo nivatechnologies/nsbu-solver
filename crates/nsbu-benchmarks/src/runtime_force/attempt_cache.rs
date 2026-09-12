@@ -103,7 +103,7 @@ impl AttemptForceCache {
         self.epoch
     }
 
-    fn invalidate(&mut self) {
+    pub(crate) fn invalidate(&mut self) {
         self.active = false;
         self.remaining_calls = 0;
         self.expected = [None; SLOTS];

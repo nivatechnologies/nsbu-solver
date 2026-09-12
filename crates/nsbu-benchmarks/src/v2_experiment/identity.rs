@@ -10,17 +10,27 @@
 //! every branch setting, and the complete exact tested-time manifest.  Hashing
 //! is streaming and performs no allocation.
 use super::FamilySettings;
+use crate::runtime_force::IntegrationMode;
 use nsbu_solver::{verification::times::TestedTimes, SolverError};
 use sha2::{Digest, Sha256};
 const MAGIC: &[u8; 16] = b"NSBUV2FAMILY0001";
+const CACHED_MAGIC: &[u8; 16] = b"NSBUV2FAMILYC001";
+const CACHE_PROFILE: &[u8; 16] = b"ATTEMPTCACHE0001";
 
 pub(super) fn compute(
     settings: FamilySettings,
     times: TestedTimes<'_>,
+    mode: IntegrationMode,
 ) -> Result<[u8; 32], SolverError> {
-    encoded_len(times.as_slice().len())?;
+    encoded_len(times.as_slice().len(), mode)?;
     let mut hash = Sha256::new();
-    hash.update(MAGIC);
+    match mode {
+        IntegrationMode::Direct => hash.update(MAGIC),
+        IntegrationMode::AttemptCached => {
+            hash.update(CACHED_MAGIC);
+            hash.update(CACHE_PROFILE);
+        }
+    }
     hash.update(crate::CASE_SHA256.as_bytes());
     for value in settings.grids {
         put_usize(&mut hash, value);
@@ -51,12 +61,18 @@ pub(super) fn compute(
     Ok(hash.finalize().into())
 }
 
-pub(super) fn encoded_len(time_count: usize) -> Result<usize, SolverError> {
+pub(super) fn encoded_len(time_count: usize, mode: IntegrationMode) -> Result<usize, SolverError> {
     let fixed = MAGIC
         .len()
         .checked_add(crate::CASE_SHA256.len())
         .and_then(|n| n.checked_add(3 * 16 + 3 * 16 + 16 + 3 * 16 + 16 + 16 + 4 * 8 + 8 + 16))
         .ok_or(SolverError::SizeOverflow)?;
+    let fixed = match mode {
+        IntegrationMode::Direct => fixed,
+        IntegrationMode::AttemptCached => fixed
+            .checked_add(CACHE_PROFILE.len())
+            .ok_or(SolverError::SizeOverflow)?,
+    };
     fixed
         .checked_add(
             time_count

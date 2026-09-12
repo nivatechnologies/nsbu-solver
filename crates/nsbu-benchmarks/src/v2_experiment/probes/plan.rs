@@ -63,7 +63,7 @@ impl<'a> ProbePlan<'a> {
         }
         let plans = family
             .branches
-            .map(|branch| ReconstructedPlan::from_rest(branch.settings(), joint_cap));
+            .map(|branch| ReconstructedPlan::from_run_plan(branch, joint_cap));
         let [a, b, c, d, e, f] = plans;
         let branches = [a?, b?, c?, d?, e?, f?];
         let admission_geometry_checks = geometry(&branches, times, family.settings.endpoint)?;

@@ -3,6 +3,7 @@
 //! The payload is self describing but never self authorizing: admission always rebuilds a
 //! [`Plan`] from the caller supplied plan and imported runs are marked unverified.
 use super::{AttemptWork, Origin, Plan, Run};
+use crate::runtime_force::IntegrationMode;
 use crate::smooth_observer::BalanceObserverWork;
 use nsbu_solver::{
     checkpoint::{
@@ -76,6 +77,7 @@ pub fn encoded_len(run: &Run) -> Result<usize, CheckpointError> {
 }
 /// Maximum encoded size admitted by a finite plan.
 pub fn maximum_encoded_len(plan: Plan) -> Result<usize, CheckpointError> {
+    require_direct(plan)?;
     let p = PhysicalArchive::encoded_len_for_plan(plan.resources())?;
     let h = history::maximum_encoded_len(plan.settings().configuration)?;
     let n = plan.settings().configuration.limits.maximum_attempts;
@@ -89,6 +91,7 @@ pub fn maximum_encoded_len(plan: Plan) -> Result<usize, CheckpointError> {
 
 /// Peak storage required while decoding and preparing continuation.
 pub fn read_reservation(plan: Plan, records: usize) -> Result<usize, CheckpointError> {
+    require_direct(plan)?;
     if records > plan.settings().configuration.limits.maximum_attempts {
         return Err(CheckpointError::ResourceLimit);
     }
@@ -106,6 +109,7 @@ pub fn read_reservation(plan: Plan, records: usize) -> Result<usize, CheckpointE
         .ok_or(CheckpointError::ResourceLimit)
 }
 fn core_len(run: &Run) -> Result<usize, CheckpointError> {
+    require_direct(run.plan())?;
     let p = PhysicalArchive::encoded_len(run.state())?;
     let h = history::encoded_len(run.history())?;
     HEADER
@@ -184,7 +188,16 @@ pub fn read(
     maximum_bytes: usize,
     storage_cap: usize,
 ) -> Result<ImportedV2Run, CheckpointError> {
+    require_direct(expected)?;
     admission::read(bytes, expected, maximum_bytes, storage_cap)
+}
+
+fn require_direct(plan: Plan) -> Result<(), CheckpointError> {
+    if plan.integration_mode() == IntegrationMode::Direct {
+        Ok(())
+    } else {
+        Err(CheckpointError::InvalidEncoding)
+    }
 }
 
 pub(super) struct Cursor<'a> {
