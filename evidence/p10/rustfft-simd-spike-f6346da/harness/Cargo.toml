@@ -1,0 +1,13 @@
+[package]
+name = "p10-rustfft-simd-spike"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+rustfft = "=6.4.1"
+sha2 = "=0.10.9"
+stats_alloc = "=0.1.10"

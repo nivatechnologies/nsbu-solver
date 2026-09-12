@@ -1,0 +1,3 @@
+validation n=6 direct_owned_max_scaled=1.68787841592594202e-16 direct_rustfft_max_scaled=1.31845133372037069e-16 owned_rustfft_spectral_max_scaled=7.47945524102211428e-17 owned_rustfft_spectral_equal_words=25/288 roundtrip_cross_max_scaled=6.11049489132524503e-16
+terminal=validation-complete
+
