@@ -1,6 +1,7 @@
 {
   "parent_commit": "78aaf2a0af908a5c79a38b1d52cb61bdda17e576",
-  "source_commit": "d963f88674b63b7cc01fc22c065a3f8924fb4961",
+  "source_commit": "2534671b55be528e0620b16454c83b88f0189725",
+  "rust_measurement_source_commit": "d963f88674b63b7cc01fc22c065a3f8924fb4961",
   "files": [
     {
       "path": "crates/nsbu-benchmarks/Cargo.toml",
@@ -63,8 +64,60 @@
       "sha256": "fb0ecb93a20927c4db839bbc70cd515a00e31cce7ac995e74410341af8b1d9de"
     },
     {
+      "path": "evidence/p09/v2-pressure-reference/raw/clippy.log.gz",
+      "sha256": "9bfa304abcc75d2f46ee7847744ecb8f6fbaac5d585f16502d984d505540a27e"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/clock0.time",
+      "sha256": "b78060131cef88d37a69839888288dcbd85cf86102b22521821e183b494086fa"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/clock128.time",
+      "sha256": "46147e3ca69d9962ae69662ad1f96b2156427a80f54558e11a6fab72a5a69c5f"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/clock64.time",
+      "sha256": "6f1ef5437a25fcc753b505657d6a74f3acbb723e90168737e890553d99d0a0d4"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/focused-coverage.json.gz",
+      "sha256": "428dcb1c5567161c0d616d3747e214828d8dc46e801ef18f0f762af6a9fa9a2b"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/focused-production-crap.json.gz",
+      "sha256": "7e0d4bf3d42888c7762e338e42c0bd8c8250a2bfa744d1975dc88a70eee51a32"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/focused-production-metrics.jsonl.gz",
+      "sha256": "790d69405dc505289cdc374823ddb58e577e0d4a9ed0b87e154f20a8e0d8663b"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/generator-check.log.gz",
+      "sha256": "561fd0003dde5c65f8f06e59e41a9164d548fca9a8f25344f255ede8bb662480"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/reproduce.sh",
+      "sha256": "55f67beb96b83a41e3161f61a07050ea4a43f64cb1d7dd4cccb0408f2b7707a4"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/rustdoc.log.gz",
+      "sha256": "534d7eb84dc78e238fcb7d862746bff46424c20fa2dd291d9a439ed527ca7555"
+    },
+    {
+      "path": "evidence/p09/v2-pressure-reference/raw/whole-metrics.jsonl.gz",
+      "sha256": "85dac8f9379a6cfeb1cdc58859a4e7dc119211a14c213d2fd47d306ece619e07"
+    },
+    {
       "path": "reference/generate_pressure_gauge_rust.py",
-      "sha256": "7d1f2c6f3544b287051e1473cb2a228c9e232dd544c139b816c666228a4cf2ac"
+      "sha256": "a128c297c51a174ff2654fe9426358e41153e9f7a33c85fe4bfcdacf379469e0"
+    },
+    {
+      "path": "reference/tests/test_generate_pressure_gauge_rust.py",
+      "sha256": "78825a2c5668d9fcfb9ace791b6404418b33bb358ffdb597db20b197cebf3497"
     }
   ]
 }
