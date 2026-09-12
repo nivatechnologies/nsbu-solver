@@ -1,9 +1,9 @@
 use nsbu_benchmarks::{provider::parallel_reduced::ParallelReducedV2Force, CASE_SHA256};
 use nsbu_solver::{
-    diagnostics::comparison::ComparisonPlan,
+    diagnostics::{comparison::ComparisonPlan, norms::Norms},
     domain::{validate_spectrum, Domain, Layout, TickClock},
     integrators::forcing::PrescribedForce,
-    spectral::{FftBackend, FftCatalog},
+    spectral::{modal, FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 use sha2::{Digest, Sha256};
@@ -115,15 +115,98 @@ fn compare(left_path: &str, right_path: &str) -> Result<(), SolverError> {
         left.values.each_ref().map(Vec::as_slice),
         right.values.each_ref().map(Vec::as_slice),
     )?;
+    let fine = field_norms(domain, &right.values)?;
+    let normalized = ratios(report.full, fine)?;
+    let mut projected = projected_difference(domain, &left.values, &right.values)?;
+    let projected_norms = field_norms(domain, &projected)?;
+    apply_stokes_response(domain, &mut projected)?;
+    let stokes_response_norms = field_norms(domain, &projected)?;
     println!(
-        "terminal=complete source={} retained={N} left_sampled={} right_sampled={} left_coefficient_sha256={} right_coefficient_sha256={} report={report:?} note=same-retained-layout-so-common-equals-full-and-newly-resolved-is-zero force_error_qualification=false accepted_pde_windows=0",
+        "terminal=complete analyzer_source={} artifact_source={} retained={N} left_sampled={} right_sampled={} left_coefficient_sha256={} right_coefficient_sha256={} raw_difference={report:?} fine_force_norms={fine:?} raw_full_over_fine=[{:.17e},{:.17e},{:.17e},{:.17e}] leray_projected_difference={projected_norms:?} stokes_response_time=0.00390625 stokes_response_norms={stokes_response_norms:?} stokes_formula=(1-exp(-|k|^2*T))/|k|^2_with_zero_mode_T note=same-retained-layout-so-common-equals-full-and-newly-resolved-is-zero;divergence-is-a-comparison-channel-not-a-validity-zero-target force_error_qualification=false nonlinear_error_bound=false accepted_pde_windows=0",
+        analyzer_source(),
         env!("RUN_SOURCE"),
         left.sampled,
         right.sampled,
         fingerprint(&left.values),
         fingerprint(&right.values),
+        normalized[0],
+        normalized[1],
+        normalized[2],
+        normalized[3],
     );
     Ok(())
+}
+
+fn analyzer_source() -> &'static str {
+    option_env!("ANALYZER_SOURCE").unwrap_or(env!("RUN_SOURCE"))
+}
+
+fn field_norms(domain: Domain, values: &[Vec<Complex64>; 3]) -> Result<Norms, SolverError> {
+    let zero = output(domain)?;
+    Ok(ComparisonPlan::new(domain, domain)?
+        .compare(
+            zero.each_ref().map(Vec::as_slice),
+            values.each_ref().map(Vec::as_slice),
+        )?
+        .full)
+}
+
+fn ratios(difference: Norms, fine: Norms) -> Result<[f64; 4], SolverError> {
+    let values = [
+        difference.l2 / fine.l2,
+        difference.h1 / fine.h1,
+        difference.vorticity_l2 / fine.vorticity_l2,
+        difference.divergence_l2 / fine.divergence_l2,
+    ];
+    if values.iter().any(|value| !value.is_finite()) {
+        return Err(SolverError::InvalidSpectrum);
+    }
+    Ok(values)
+}
+
+fn projected_difference(
+    domain: Domain,
+    left: &[Vec<Complex64>; 3],
+    right: &[Vec<Complex64>; 3],
+) -> Result<[Vec<Complex64>; 3], SolverError> {
+    let mut result = output(domain)?;
+    let layout = domain.layout();
+    for index in 0..layout.half_len() {
+        let position = layout.position(index)?;
+        let k = modal::wavevector(domain, layout.mode(position)?)?;
+        let raw = std::array::from_fn(|axis| right[axis][index] - left[axis][index]);
+        let projected = modal::project(k, raw)?;
+        for axis in 0..3 {
+            result[axis][index] = projected[axis];
+        }
+    }
+    validate(domain, &result)?;
+    Ok(result)
+}
+
+fn apply_stokes_response(
+    domain: Domain,
+    projected: &mut [Vec<Complex64>; 3],
+) -> Result<(), SolverError> {
+    const TIME: f64 = 4096.0 / 1_048_576.0;
+    let layout = domain.layout();
+    for index in 0..layout.half_len() {
+        let position = layout.position(index)?;
+        let k = modal::wavevector(domain, layout.mode(position)?)?;
+        let squared = k.iter().map(|value| value * value).sum::<f64>();
+        let factor = if squared == 0.0 {
+            TIME
+        } else {
+            -(-squared * TIME).exp_m1() / squared
+        };
+        if !factor.is_finite() {
+            return Err(SolverError::InvalidSpectrum);
+        }
+        for component in projected.iter_mut() {
+            component[index] *= factor;
+        }
+    }
+    validate(domain, projected)
 }
 
 fn output(domain: Domain) -> Result<[Vec<Complex64>; 3], SolverError> {
