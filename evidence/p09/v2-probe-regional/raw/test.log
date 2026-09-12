@@ -1,0 +1,11 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.55s
+     Running tests/v2_probe_regional.rs (target/debug/deps/v2_probe_regional-35231ddc69168e5f)
+
+running 3 tests
+test stale_publication_is_terminal_and_retains_last_complete_report ... ok
+test admission_refuses_bad_roots_caps_attempts_and_overflow ... ok
+test all_probe_clocks_match_independent_global_producer_and_exhaust_exact_allowance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 43.65s
+
