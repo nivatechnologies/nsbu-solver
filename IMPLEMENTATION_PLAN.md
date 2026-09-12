@@ -30,7 +30,8 @@ concentrating windows. In this bounded work block:
 The combined exporter, partial review adapter and force-baseline binder from
 `31e99a1` remain the prior [source-matched hosted baseline](evidence/p09/hosted-integration-31e99a1/summary.json).
 The later b029 integration audit also passed for its exact source; latest main
-`def4730` still awaits its source-matched hosted result. The b029 source recorded
+`def4730` passed both complete hosted suites and was released as `alpha-20260912`;
+see the [exact-source audit](evidence/p09/hosted-main-def4730/summary.json). The b029 source recorded
 97.47% whole-maintained Rust line coverage and 87.19% branch coverage. The recorded
 focused branch percentages remain useful test-scope information; they are not
 separate per-module gates. P08/P09/P10 remain incomplete and accepted
@@ -52,8 +53,7 @@ latest verified evidence.
 The owned runtime now exposes the opt-in attempt-force cache; default direct
 execution remains unchanged and cached checkpoint/resume forms remain unsupported.
 Focused cache evidence records small-grid CM/HO bit equality and force evaluations
-reduced from 12/15 to 5. The latest main source `def4730` still awaits its
-source-matched hosted CI result. See the [attempt-cache evidence](evidence/p09/v2-attempt-force-cache/summary.json).
+reduced from 12/15 to 5. Main source `def4730` passed both hosted suites and is released as `alpha-20260912`. See the [attempt-cache evidence](evidence/p09/v2-attempt-force-cache/summary.json).
 
 ## Runtime-first execution priority · 11 September 2026
 
@@ -976,8 +976,8 @@ version-2 diagnostic path; [integration evidence](evidence/p09/v2-probe-physical
 records the measured off-stage quantities. Development-source producer/reference
 coordination is separately recorded below and does not make the latest main
 source hosted-validated. The [hosted b029 audit](evidence/p09/hosted-integration-b0295ee/summary.json)
-passed for its exact source; full combined hosted validation of main `def4730`
-remains pending.
+passed for its exact source; main `def4730` passed both complete hosted suites. Later development requires
+its own combined validation.
 
 `v2 --cache-force` is an explicit opt-in attempt-force cache. It preserves the
 default direct path, and cached checkpoints are unsupported, including resume

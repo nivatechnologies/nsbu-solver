@@ -6,7 +6,7 @@ A standalone Rust project for incompressible, three-dimensional Navier–Stokes 
 
 *Actual coarse N=4/M=4 HO diagnostic measurements. A successful finite run is a runtime check, not evidence of convergence or blow-up.*
 
-**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/alpha-20260911-2/README.md).
+**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260912); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/alpha-20260912/README.md).
 
 The `main` branch can contain experimental APIs added after the latest binary
 release. Each increment records its own validation scope in
@@ -44,7 +44,7 @@ The explicit slow-mesh strategy is `FeasibilityExcluded` under the documented re
 
 ## Download and run the alpha
 
-The [alpha-20260911-2 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2)
+The [alpha-20260911-2 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260912)
 provides the tested Linux x86_64 GNU/glibc binary. Download the archive and
 its detached checksum, verify both the archive and its extracted contents,
 then run the bounded diagnostic:
