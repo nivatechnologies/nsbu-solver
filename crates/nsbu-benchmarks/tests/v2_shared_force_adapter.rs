@@ -3,8 +3,8 @@ use nsbu_benchmarks::{
     runtime_force::ForceSettings,
     smooth_observer::v2::V2Observer,
     v2_experiment::shared_force::{
-        SharedForceAdapter, SharedForceAdapterSetPlan, SharedForceAttempt, SharedForceClock,
-        SharedForceStream, SharedForceTable, SharedForceTablePlan,
+        SharedForceAdapter, SharedForceAdapterSet, SharedForceAdapterSetPlan, SharedForceAttempt,
+        SharedForceClock, SharedForceStream, SharedForceTablePlan,
     },
     v2_run::{Plan, Run, Settings},
 };
@@ -20,7 +20,6 @@ use nsbu_solver::{
         rhs::SpectralRhs, trajectory::RunLimits, transaction::CandidateState,
     },
 };
-use std::cell::RefCell;
 
 const CAP: usize = 64 * 1024 * 1024;
 const TARGET: u128 = 8192;
@@ -203,12 +202,18 @@ fn six_independent_recorded_trajectories_match_direct_force_at_every_commit() {
     let set = SharedForceAdapterSetPlan::new(table_plan, &streams, CAP).unwrap();
     assert_eq!(set.bounds().work.calls, total_calls);
     assert_eq!(set.bounds().work.attempts, 12);
+    assert_eq!(set.bounds().work.schedule_visits, total_calls);
+    assert_eq!(
+        set.bounds().admission_schedule_visits,
+        2 * total_calls * (table_manifest.len() + 1) + table_manifest.len() * 3 * streams.len()
+    );
+    assert_eq!(streams[0].maximum_calls(), 24);
     assert_eq!(
         set.bounds().storage_bytes - table_plan.bounds().storage_bytes,
-        set.streams().len() * set.bounds().handle_storage_bytes
+        set.streams().len() * set.bounds().handle_storage_bytes + set.bounds().set_storage_bytes
     );
 
-    let table = RefCell::new(SharedForceTable::new(table_plan).unwrap());
+    let owner = SharedForceAdapterSet::new(set).unwrap();
     let direct_plans: Vec<_> = domain_indices
         .iter()
         .zip(methods)
@@ -223,7 +228,7 @@ fn six_independent_recorded_trajectories_match_direct_force_at_every_commit() {
         .iter()
         .copied()
         .enumerate()
-        .map(|(index, plan)| Recorded::new(plan, set.adapter(index, &table).unwrap()))
+        .map(|(index, plan)| Recorded::new(plan, owner.adapter(index).unwrap()))
         .collect();
 
     for step in 0..2 {
@@ -252,10 +257,9 @@ fn six_independent_recorded_trajectories_match_direct_force_at_every_commit() {
             );
         }
     }
-    let owner = table.borrow();
-    assert_eq!(owner.charged_work().copy_attempts, total_calls);
-    assert_eq!(owner.charged_work(), table_plan.bounds().work);
-    assert!(!owner.is_terminated());
+    assert_eq!(owner.table_work().unwrap().copy_attempts, total_calls);
+    assert_eq!(owner.table_work().unwrap(), table_plan.bounds().work);
+    assert!(!owner.is_terminated().unwrap());
     let charged = shared.iter().fold(
         nsbu_benchmarks::v2_experiment::shared_force::SharedForceAdapterWork::default(),
         |mut total, run| {
@@ -265,6 +269,7 @@ fn six_independent_recorded_trajectories_match_direct_force_at_every_commit() {
             total.clock_comparisons += work.clock_comparisons;
             total.binding_checks += work.binding_checks;
             total.table_work_units += work.table_work_units;
+            total.schedule_visits += work.schedule_visits;
             total
         },
     );
@@ -322,15 +327,15 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     ];
     let table_plan = SharedForceTablePlan::new(force(), retained, &manifest, 36, CAP).unwrap();
     let set = SharedForceAdapterSetPlan::new(table_plan, &streams, CAP).unwrap();
-    let owner = RefCell::new(SharedForceTable::new(table_plan).unwrap());
-    let mut conflicting = set.adapter(0, &owner).unwrap();
+    let owner = SharedForceAdapterSet::new(set).unwrap();
+    let mut conflicting = owner.adapter(0).unwrap();
     let limits = conflicting.limits().unwrap();
     conflicting.begin_attempt(clock(0), STEP, limits).unwrap();
     let mut output = std::array::from_fn(|_| {
         vec![nsbu_solver::Complex64::new(3.0, -7.0); retained[0].layout().half_len()]
     });
     let before = output.clone();
-    let guard = owner.borrow_mut();
+    let guard = owner.table().unwrap();
     assert_eq!(
         conflicting
             .evaluate(clock(0), limits, output.each_mut().map(Vec::as_mut_slice))
@@ -342,11 +347,11 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     assert!(conflicting.is_terminated());
     assert_eq!(conflicting.charged_work().attempts, 1);
     assert_eq!(conflicting.charged_work().calls, 1);
-    assert_eq!(owner.borrow().charged_work().copy_attempts, 0);
-    assert!(owner.borrow().current().is_none());
-    assert!(!owner.borrow().is_terminated());
+    assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
+    assert!(owner.current().unwrap().is_none());
+    assert!(!owner.is_terminated().unwrap());
 
-    let mut incomplete = set.adapter(1, &owner).unwrap();
+    let mut incomplete = owner.adapter(1).unwrap();
     let limits = incomplete.limits().unwrap();
     incomplete.begin_attempt(clock(0), STEP, limits).unwrap();
     assert_eq!(
@@ -355,5 +360,5 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     );
     assert_eq!(incomplete.charged_work().attempts, 1);
     assert!(incomplete.is_terminated());
-    assert_eq!(owner.borrow().charged_work().copy_attempts, 0);
+    assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
 }
