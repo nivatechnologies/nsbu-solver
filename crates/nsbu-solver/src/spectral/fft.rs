@@ -28,7 +28,7 @@ impl FftBackend {
 }
 
 enum BackendPlan {
-    Owned(Vec<Complex64>),
+    Owned([Vec<Complex64>; 3]),
     Avx(Box<[avx::Axes]>),
 }
 
@@ -36,7 +36,6 @@ enum BackendPlan {
 pub struct FftPlan {
     layout: Layout,
     backend: BackendPlan,
-    _layout_compatibility: [u8; 48],
 }
 
 /// Mutable storage belonging to one scalar transform stream, never shared.

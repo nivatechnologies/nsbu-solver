@@ -85,7 +85,7 @@ impl FftPlan {
                 1,
                 &mut output[..length],
                 &mut scratch[..length],
-                owned::roots(self.layout.dimensions(), roots, axis),
+                owned::roots(roots, axis),
                 inverse,
             ),
             BackendPlan::Avx(axes) => {
