@@ -14,6 +14,7 @@ use nsbu_solver::{
         runner::recorded_step,
     },
     integrators::{attempt::AttemptWorkspace, rhs::SpectralRhs, transaction::CandidateState},
+    spectral::FftCatalog,
     SolverError,
 };
 
@@ -158,27 +159,33 @@ impl Run {
         work::validate(plan, &state, &history, &work, observer_work)?;
         let settings = plan.settings();
         let resources = plan.resources();
+        let fft = FftCatalog::new(plan.fft_backend(), resources.classes()[4])?;
         let candidate = CandidateState::new(resources, settings.initial_clock, Epoch(0))?;
         let attempts = AttemptWorkspace::new_with_method(resources, settings.configuration.method)?;
-        let force_limits = settings
-            .force
-            .integration_limits(settings.domain, plan.integration_mode())?;
-        let force = settings.force.build_integration(
+        let force_limits = settings.force.integration_limits_with_fft_backend(
             settings.domain,
             plan.integration_mode(),
+            plan.fft_backend(),
+        )?;
+        let force = settings.force.build_integration_with_catalog(
+            settings.domain,
+            plan.integration_mode(),
+            &fft,
             force_limits.storage_bytes,
         )?;
-        let rhs = SpectralRhs::new(
+        let rhs = SpectralRhs::new_with_catalog(
             settings.domain,
             force,
             settings.advective_limit,
+            &fft,
             resources.classes()[5],
         )?;
-        let observer = V2Observer::restore(
+        let observer = V2Observer::restore_with_catalog(
             settings.domain,
             settings.force,
             plan.observer_samples(),
             observer_work,
+            &fft,
             plan.observer_limits().storage_bytes,
         )?;
         Ok(Self {

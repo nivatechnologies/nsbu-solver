@@ -1,6 +1,6 @@
 //! Three-halves padded rotational nonlinearity and physical-pressure reconstruction.
 use super::transfer::transfer_validated;
-use super::{modal, FftPlan, FftWorkspace};
+use super::{modal, FftBackend, FftCatalog, FftPlan, FftWorkspace};
 use crate::{
     domain::{validate_spectrum, Domain, Layout},
     storage::filled,
@@ -26,8 +26,40 @@ pub struct RotationalWorkspace {
 impl RotationalWorkspace {
     /// Exact element storage and object-header reservation; caller adds allocator overhead.
     pub fn reservation(domain: Domain) -> Result<usize, SolverError> {
+        Self::reservation_inner(domain, None)
+    }
+
+    /// Reservation when immutable FFT plans are shared by an execution-owned catalog.
+    pub fn reservation_with_catalog(
+        domain: Domain,
+        catalog: &FftCatalog,
+    ) -> Result<usize, SolverError> {
+        Self::reservation_inner(domain, Some(catalog))
+    }
+
+    /// Workspace-only reservation for an enclosing execution-owned backend catalog.
+    pub fn reservation_with_fft_backend(
+        domain: Domain,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
         let padded = domain.padded_layout()?;
-        let fft = FftPlan::reservation(padded)?;
+        let fft = FftPlan::reservation_with_shared_backend(padded, backend)?;
+        Self::reservation_parts(domain, padded, fft)
+    }
+
+    fn reservation_inner(
+        domain: Domain,
+        catalog: Option<&FftCatalog>,
+    ) -> Result<usize, SolverError> {
+        let padded = domain.padded_layout()?;
+        let fft = match catalog {
+            Some(catalog) => FftPlan::reservation_from_catalog(padded, catalog)?,
+            None => FftPlan::reservation(padded)?,
+        };
+        Self::reservation_parts(domain, padded, fft)
+    }
+
+    fn reservation_parts(domain: Domain, padded: Layout, fft: usize) -> Result<usize, SolverError> {
         // Six real arrays, seven retained complex arrays and one padded complex staging array.
         let real = padded
             .real_len()
@@ -57,6 +89,30 @@ impl RotationalWorkspace {
         }
         let padded = domain.padded_layout()?;
         let (fft, transform) = FftPlan::new(padded, cap)?;
+        Self::allocate(domain, padded, fft, transform)
+    }
+
+    /// Allocate mutable operator storage while sharing an admitted immutable FFT catalog.
+    pub fn new_with_catalog(
+        domain: Domain,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let bytes = Self::reservation_with_catalog(domain, catalog)?;
+        if bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let padded = domain.padded_layout()?;
+        let (fft, transform) = FftPlan::new_from_catalog(padded, catalog, cap)?;
+        Self::allocate(domain, padded, fft, transform)
+    }
+
+    fn allocate(
+        domain: Domain,
+        padded: Layout,
+        fft: FftPlan,
+        transform: FftWorkspace,
+    ) -> Result<Self, SolverError> {
         let real = padded.real_len();
         let h = domain.layout().half_len();
         let zero = Complex64::new(0.0, 0.0);

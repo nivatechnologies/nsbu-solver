@@ -13,6 +13,7 @@ use nsbu_solver::{
     },
     domain::TickClock,
     experiment::log::RunHistory,
+    spectral::FftBackend,
     SolverError,
 };
 use sha2::{Digest, Sha256};
@@ -193,7 +194,9 @@ pub fn read(
 }
 
 fn require_direct(plan: Plan) -> Result<(), CheckpointError> {
-    if plan.integration_mode() == IntegrationMode::Direct {
+    if plan.integration_mode() == IntegrationMode::Direct
+        && plan.fft_backend() == FftBackend::OwnedRadix
+    {
         Ok(())
     } else {
         Err(CheckpointError::InvalidEncoding)

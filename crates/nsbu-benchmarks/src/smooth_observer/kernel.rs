@@ -7,7 +7,7 @@ use nsbu_solver::{
     domain::{Domain, ResourcePlan, SpectralState, TickClock},
     experiment::observer::{BalanceObserver as BalanceObserverContract, ObserverBounds},
     integrators::forcing::{ForceLimits, PrescribedForce},
-    spectral::transfer,
+    spectral::{transfer, FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 
@@ -63,6 +63,24 @@ impl<F: PrescribedForce> ForceBalance<F> {
         samples: usize,
         force_limits: ForceLimits,
     ) -> Result<BalanceObserverLimits, SolverError> {
+        Self::limits_inner(source, samples, force_limits, None)
+    }
+
+    pub(super) fn limits_for_fft_backend(
+        source: Domain,
+        samples: usize,
+        force_limits: ForceLimits,
+        backend: FftBackend,
+    ) -> Result<BalanceObserverLimits, SolverError> {
+        Self::limits_inner(source, samples, force_limits, Some(backend))
+    }
+
+    fn limits_inner(
+        source: Domain,
+        samples: usize,
+        force_limits: ForceLimits,
+        backend: Option<FftBackend>,
+    ) -> Result<BalanceObserverLimits, SolverError> {
         if samples == 0 {
             return Err(SolverError::ResourceLimit);
         }
@@ -73,9 +91,12 @@ impl<F: PrescribedForce> ForceBalance<F> {
             .checked_mul(10)
             .and_then(|count| count.checked_mul(std::mem::size_of::<Complex64>()))
             .ok_or(SolverError::SizeOverflow)?;
-        let workspace = ConservativeWorkspace::reservation(source)?
-            .checked_sub(std::mem::size_of::<ConservativeWorkspace>())
-            .ok_or(SolverError::SizeOverflow)?;
+        let workspace = match backend {
+            Some(backend) => ConservativeWorkspace::reservation_with_fft_backend(source, backend)?,
+            None => ConservativeWorkspace::reservation(source)?,
+        }
+        .checked_sub(std::mem::size_of::<ConservativeWorkspace>())
+        .ok_or(SolverError::SizeOverflow)?;
         let force_external = force_limits
             .storage_bytes
             .saturating_sub(std::mem::size_of::<F>());
@@ -154,20 +175,47 @@ impl<F: PrescribedForce> ForceBalance<F> {
         work: BalanceObserverWork,
         force: F,
     ) -> Result<Self, SolverError> {
+        Self::allocate_inner(source, limits, work, force, None)
+    }
+
+    pub(crate) fn allocate_with_catalog(
+        source: Domain,
+        limits: BalanceObserverLimits,
+        work: BalanceObserverWork,
+        force: F,
+        catalog: &FftCatalog,
+    ) -> Result<Self, SolverError> {
+        Self::allocate_inner(source, limits, work, force, Some(catalog))
+    }
+
+    fn allocate_inner(
+        source: Domain,
+        limits: BalanceObserverLimits,
+        work: BalanceObserverWork,
+        force: F,
+        catalog: Option<&FftCatalog>,
+    ) -> Result<Self, SolverError> {
         let diagnostic = ConservativeWorkspace::diagnostic_domain(source)?;
         let force_limits = force.limits().ok_or(SolverError::UnknownProviderCost)?;
         let half = diagnostic.layout().half_len();
         let zero = Complex64::new(0.0, 0.0);
+        let products = match catalog {
+            Some(catalog) => ConservativeWorkspace::new_with_catalog(
+                source,
+                catalog,
+                ConservativeWorkspace::reservation_with_catalog(source, catalog)?,
+            )?,
+            None => {
+                ConservativeWorkspace::new(source, ConservativeWorkspace::reservation(source)?)?
+            }
+        };
         Ok(Self {
             source,
             diagnostic,
             limits,
             force_limits,
             force,
-            products: ConservativeWorkspace::new(
-                source,
-                ConservativeWorkspace::reservation(source)?,
-            )?,
+            products,
             forcing: field(half, zero)?,
             conservative: field(half, zero)?,
             padded: field(half, zero)?,

@@ -9,6 +9,7 @@ use nsbu_solver::{
     domain::{Epoch, ExtraStorage, ResourcePlan, SpectralState},
     experiment::{control::Outcome, log::RunHistory, runner::recorded_step},
     integrators::{attempt::AttemptWorkspace, rhs::SpectralRhs, transaction::CandidateState},
+    spectral::FftBackend,
     SolverError,
 };
 
@@ -28,6 +29,9 @@ impl ReconstructedPlan {
     }
 
     pub(crate) fn from_run_plan(plan: super::Plan, cap: usize) -> Result<Self, SolverError> {
+        if plan.fft_backend() != FftBackend::OwnedRadix {
+            return Err(SolverError::InvalidPayload);
+        }
         Self::admit(plan.settings(), plan.integration_mode(), cap)
     }
 

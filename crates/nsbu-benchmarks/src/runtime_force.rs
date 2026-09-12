@@ -6,6 +6,7 @@ use crate::provider::{parallel::ParallelV2Force, V2Force};
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
+    spectral::{FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 
@@ -72,6 +73,30 @@ impl ForceSettings {
         adjust_limits(limits, concrete_size)
     }
 
+    pub(crate) fn limits_with_fft_backend(
+        self,
+        domain: Domain,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        let (limits, concrete_size) = if self.workers == 0 {
+            (
+                V2Force::preflight_with_fft_backend(domain, self.samples, backend)?,
+                std::mem::size_of::<V2Force>(),
+            )
+        } else {
+            (
+                ParallelV2Force::preflight_with_fft_backend(
+                    domain,
+                    self.samples,
+                    self.workers,
+                    backend,
+                )?,
+                std::mem::size_of::<ParallelV2Force>(),
+            )
+        };
+        adjust_limits(limits, concrete_size)
+    }
+
     /// Construct the selected provider after checking its complete wrapper reservation.
     pub fn build(self, domain: Domain, cap: usize) -> Result<RunForce, SolverError> {
         let limits = self.limits(domain)?;
@@ -90,9 +115,44 @@ impl ForceSettings {
         }
     }
 
+    pub(crate) fn build_with_catalog(
+        self,
+        domain: Domain,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<RunForce, SolverError> {
+        let limits = self.limits_with_fft_backend(domain, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        if self.workers == 0 {
+            Ok(RunForce::Serial(V2Force::new_with_catalog(
+                domain,
+                self.samples,
+                catalog,
+                cap,
+            )?))
+        } else {
+            Ok(RunForce::Parallel(ParallelV2Force::new_with_catalog(
+                domain,
+                self.samples,
+                self.workers,
+                catalog,
+                cap,
+            )?))
+        }
+    }
+
     /// Declare the opt-in, attempt-local five-clock cache around this exact-v2 provider.
     pub fn attempt_cache_limits(self, domain: Domain) -> Result<ForceLimits, SolverError> {
         AttemptForceCache::preflight(domain, self)
+    }
+    pub(crate) fn attempt_cache_limits_with_fft_backend(
+        self,
+        domain: Domain,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        AttemptForceCache::preflight_with_fft_backend(domain, self, backend)
     }
 
     /// Build the opt-in attempt-local cache after checking its complete reservation.
@@ -104,6 +164,15 @@ impl ForceSettings {
         AttemptForceCache::new(domain, self, cap)
     }
 
+    pub(crate) fn build_attempt_cache_with_catalog(
+        self,
+        domain: Domain,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<AttemptForceCache, SolverError> {
+        AttemptForceCache::new_with_catalog(domain, self, catalog, cap)
+    }
+
     pub(crate) fn integration_limits(
         self,
         domain: Domain,
@@ -112,6 +181,20 @@ impl ForceSettings {
         match mode {
             IntegrationMode::Direct => self.limits(domain),
             IntegrationMode::AttemptCached => boxed_cache_limits(self, domain),
+        }
+    }
+
+    pub(crate) fn integration_limits_with_fft_backend(
+        self,
+        domain: Domain,
+        mode: IntegrationMode,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        match mode {
+            IntegrationMode::Direct => self.limits_with_fft_backend(domain, backend),
+            IntegrationMode::AttemptCached => {
+                boxed(self.attempt_cache_limits_with_fft_backend(domain, backend)?)
+            }
         }
     }
 
@@ -130,6 +213,40 @@ impl ForceSettings {
                 }
                 let cache_limits = self.attempt_cache_limits(domain)?;
                 let cache = self.build_attempt_cache(domain, cache_limits.storage_bytes)?;
+                let mut owner = Vec::new();
+                owner
+                    .try_reserve_exact(1)
+                    .map_err(|_| SolverError::AllocationFailed)?;
+                owner.push(cache);
+                Ok(RunForce::AttemptCached(AttemptCacheOwner(
+                    owner.into_boxed_slice(),
+                )))
+            }
+        }
+    }
+
+    pub(crate) fn build_integration_with_catalog(
+        self,
+        domain: Domain,
+        mode: IntegrationMode,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<RunForce, SolverError> {
+        match mode {
+            IntegrationMode::Direct => self.build_with_catalog(domain, catalog, cap),
+            IntegrationMode::AttemptCached => {
+                let limits =
+                    boxed(self.attempt_cache_limits_with_fft_backend(domain, catalog.backend())?)?;
+                if limits.storage_bytes > cap {
+                    return Err(SolverError::ResourceLimit);
+                }
+                let cache_limits =
+                    self.attempt_cache_limits_with_fft_backend(domain, catalog.backend())?;
+                let cache = self.build_attempt_cache_with_catalog(
+                    domain,
+                    catalog,
+                    cache_limits.storage_bytes,
+                )?;
                 let mut owner = Vec::new();
                 owner
                     .try_reserve_exact(1)

@@ -1,7 +1,7 @@
 //! Independent conservative products on a separately reserved double grid.
 use crate::{
     domain::{validate_spectrum, Domain},
-    spectral::{modal, transfer_validated, FftPlan, FftWorkspace},
+    spectral::{modal, transfer_validated, FftBackend, FftCatalog, FftPlan, FftWorkspace},
     storage::filled,
     Complex64, SolverError,
 };
@@ -32,7 +32,40 @@ impl ConservativeWorkspace {
 
     /// Element storage and headers, excluding allocator overhead and caller input/output buffers.
     pub fn reservation(source: Domain) -> Result<usize, SolverError> {
+        Self::reservation_inner(source, None)
+    }
+
+    /// Reservation when immutable FFT plans are shared by an execution-owned catalog.
+    pub fn reservation_with_catalog(
+        source: Domain,
+        catalog: &FftCatalog,
+    ) -> Result<usize, SolverError> {
+        Self::reservation_inner(source, Some(catalog))
+    }
+
+    /// Workspace-only reservation for an enclosing execution-owned backend catalog.
+    pub fn reservation_with_fft_backend(
+        source: Domain,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
         let layout = Self::diagnostic_domain(source)?.layout();
+        let fft = FftPlan::reservation_with_shared_backend(layout, backend)?;
+        Self::reservation_parts(layout, fft)
+    }
+
+    fn reservation_inner(
+        source: Domain,
+        catalog: Option<&FftCatalog>,
+    ) -> Result<usize, SolverError> {
+        let layout = Self::diagnostic_domain(source)?.layout();
+        let fft = match catalog {
+            Some(catalog) => FftPlan::reservation_from_catalog(layout, catalog)?,
+            None => FftPlan::reservation(layout)?,
+        };
+        Self::reservation_parts(layout, fft)
+    }
+
+    fn reservation_parts(layout: crate::domain::Layout, fft: usize) -> Result<usize, SolverError> {
         let real = layout
             .real_len()
             .checked_mul(4 * 8)
@@ -43,7 +76,7 @@ impl ConservativeWorkspace {
             .ok_or(SolverError::SizeOverflow)?;
         [real, complex, std::mem::size_of::<Self>()]
             .into_iter()
-            .try_fold(FftPlan::reservation(layout)?, |total, bytes| {
+            .try_fold(fft, |total, bytes| {
                 total.checked_add(bytes).ok_or(SolverError::SizeOverflow)
             })
     }
@@ -56,6 +89,31 @@ impl ConservativeWorkspace {
         let diagnostic = Self::diagnostic_domain(source)?;
         let layout = diagnostic.layout();
         let (fft, transform) = FftPlan::new(layout, cap)?;
+        Self::allocate(source, diagnostic, fft, transform)
+    }
+
+    /// Allocate mutable diagnostic storage while sharing an admitted immutable FFT catalog.
+    pub fn new_with_catalog(
+        source: Domain,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        if Self::reservation_with_catalog(source, catalog)? > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let diagnostic = Self::diagnostic_domain(source)?;
+        let layout = diagnostic.layout();
+        let (fft, transform) = FftPlan::new_from_catalog(layout, catalog, cap)?;
+        Self::allocate(source, diagnostic, fft, transform)
+    }
+
+    fn allocate(
+        source: Domain,
+        diagnostic: Domain,
+        fft: FftPlan,
+        transform: FftWorkspace,
+    ) -> Result<Self, SolverError> {
+        let layout = diagnostic.layout();
         let real = layout.real_len();
         let half = layout.half_len();
         let zero = Complex64::new(0.0, 0.0);

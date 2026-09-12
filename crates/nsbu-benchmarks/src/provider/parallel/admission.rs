@@ -8,6 +8,7 @@ use crate::{fields::axial::AxialRoot, provider::V2Force};
 use nsbu_solver::{
     domain::{Domain, Layout},
     integrators::forcing::ForceLimits,
+    spectral::{FftBackend, FftCatalog},
     SolverError,
 };
 pub(super) fn limits(
@@ -15,10 +16,52 @@ pub(super) fn limits(
     samples: Layout,
     workers: usize,
 ) -> Result<ForceLimits, SolverError> {
+    limits_inner(domain, samples, workers, None)
+}
+
+pub(super) fn limits_with_catalog(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+    catalog: &FftCatalog,
+) -> Result<ForceLimits, SolverError> {
+    limits_inner(domain, samples, workers, Some(catalog))
+}
+
+pub(super) fn limits_with_fft_backend(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+    backend: FftBackend,
+) -> Result<ForceLimits, SolverError> {
     if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
         return Err(SolverError::InvalidPayload);
     }
-    let original = V2Force::preflight(domain, samples)?;
+    let original = V2Force::preflight_with_fft_backend(domain, samples, backend)?;
+    limits_parts(samples, workers, original)
+}
+
+fn limits_inner(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+    catalog: Option<&FftCatalog>,
+) -> Result<ForceLimits, SolverError> {
+    if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
+        return Err(SolverError::InvalidPayload);
+    }
+    let original = match catalog {
+        Some(catalog) => V2Force::preflight_with_catalog(domain, samples, catalog)?,
+        None => V2Force::preflight(domain, samples)?,
+    };
+    limits_parts(samples, workers, original)
+}
+
+fn limits_parts(
+    samples: Layout,
+    workers: usize,
+    original: ForceLimits,
+) -> Result<ForceLimits, SolverError> {
     let physical = samples
         .real_len()
         .checked_mul(24)

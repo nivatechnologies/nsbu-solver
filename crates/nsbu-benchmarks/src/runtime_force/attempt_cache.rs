@@ -3,6 +3,7 @@ use super::{ForceSettings, RunForce};
 use nsbu_solver::{
     domain::{Domain, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
+    spectral::{FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 
@@ -64,6 +65,15 @@ impl AttemptForceCache {
         limits(inner, length)
     }
 
+    pub(crate) fn preflight_with_fft_backend(
+        domain: Domain,
+        settings: ForceSettings,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        let inner = settings.limits_with_fft_backend(domain, backend)?;
+        limits(inner, domain.layout().half_len())
+    }
+
     /// Allocate all five slots after complete preflight and cap admission.
     pub fn new(domain: Domain, settings: ForceSettings, cap: usize) -> Result<Self, SolverError> {
         let limits = Self::preflight(domain, settings)?;
@@ -72,6 +82,15 @@ impl AttemptForceCache {
         }
         let inner_limits = settings.limits(domain)?;
         let inner = settings.build(domain, inner_limits.storage_bytes)?;
+        Self::allocate(domain, inner, inner_limits, limits)
+    }
+
+    fn allocate(
+        domain: Domain,
+        inner: RunForce,
+        inner_limits: ForceLimits,
+        limits: ForceLimits,
+    ) -> Result<Self, SolverError> {
         let length = domain.layout().half_len();
         Ok(Self {
             inner,
@@ -91,6 +110,21 @@ impl AttemptForceCache {
             remaining_calls: 0,
             work: AttemptCacheWork::default(),
         })
+    }
+
+    pub(crate) fn new_with_catalog(
+        domain: Domain,
+        settings: ForceSettings,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_fft_backend(domain, settings, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let inner_limits = settings.limits_with_fft_backend(domain, catalog.backend())?;
+        let inner = settings.build_with_catalog(domain, catalog, inner_limits.storage_bytes)?;
+        Self::allocate(domain, inner, inner_limits, limits)
     }
 
     /// Detailed consumption for the current attempt.

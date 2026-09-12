@@ -8,6 +8,7 @@ use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     experiment::control::Configuration,
     integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},
+    spectral::FftBackend,
 };
 use sha2::{Digest, Sha256};
 
@@ -217,6 +218,25 @@ fn cached_profile_refuses_every_version_one_archive_operation() {
         archive::read(&[], plan, 0, 0),
         Err(CheckpointError::InvalidEncoding)
     ));
+}
+
+#[test]
+fn accelerated_arithmetic_plan_is_not_relabelled_as_version_one_archive() {
+    let mut accelerated = pre_cache_settings();
+    accelerated.domain = Domain::new([64; 3], [1.0; 3], 1.0).unwrap();
+    accelerated.force.samples = Layout::new([96; 3]).unwrap();
+    let plan =
+        Plan::from_rest_with_fft(accelerated, FftBackend::RustFft6_4_1AvxFma, 34_359_738_368)
+            .unwrap();
+    assert_eq!(plan.fft_backend(), FftBackend::RustFft6_4_1AvxFma);
+    assert_eq!(
+        archive::maximum_encoded_len(plan),
+        Err(CheckpointError::InvalidEncoding)
+    );
+    assert_eq!(
+        archive::read_reservation(plan, 0),
+        Err(CheckpointError::InvalidEncoding)
+    );
 }
 
 #[test]

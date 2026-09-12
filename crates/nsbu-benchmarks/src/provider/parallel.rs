@@ -11,6 +11,7 @@ use crate::time::BenchmarkTime;
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
+    spectral::{FftBackend, FftCatalog},
     Complex64, SolverError,
 };
 /// Explicit parallel force provider with constructor-owned workers, buffers and configured stacks.
@@ -45,6 +46,43 @@ impl ParallelV2Force {
         let serial = V2Force::preflight(domain, samples)?;
         Ok(Self {
             inner: V2Force::new(domain, samples, serial.storage_bytes)?,
+            pool: pool::Pool::new(samples, workers)?,
+            limits,
+        })
+    }
+    /// Declare storage with immutable FFT plans owned by an enclosing execution catalog.
+    pub fn preflight_with_catalog(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        catalog: &FftCatalog,
+    ) -> Result<ForceLimits, SolverError> {
+        admission::limits_with_catalog(domain, samples, workers, catalog)
+    }
+    /// Workspace-only declaration for an enclosing execution-owned backend catalog.
+    pub fn preflight_with_fft_backend(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        admission::limits_with_fft_backend(domain, samples, workers, backend)
+    }
+    /// Construct persistent samplers while sharing the enclosing immutable FFT catalog.
+    pub fn new_with_catalog(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_catalog(domain, samples, workers, catalog)?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let serial = V2Force::preflight_with_catalog(domain, samples, catalog)?;
+        Ok(Self {
+            inner: V2Force::new_with_catalog(domain, samples, catalog, serial.storage_bytes)?,
             pool: pool::Pool::new(samples, workers)?,
             limits,
         })
