@@ -10,3 +10,5 @@ pub(crate) use transfer::transfer_validated;
 mod hermitian;
 mod rotational;
 pub use rotational::RotationalWorkspace;
+mod w3;
+pub use w3::{W3FftIdentity, W3FftMode, W3FftPool};
