@@ -245,6 +245,11 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert!(decoded_v2["events"][0]
         .get("reconstructed_physical")
         .is_some());
+    let v2_events = decoded_v2["events"].as_array().unwrap();
+    assert_eq!(v2_events.len(), 7);
+    assert!(v2_events
+        .iter()
+        .all(|event| event.get("reconstructed_pressure").is_some()));
     assert_eq!(
         decoded_v2["context"]["coordinator_reservation"]["reconstructed_physical_work"]["attempts"],
         diagnostic.bounds().probe_physical.attempts.to_string()
