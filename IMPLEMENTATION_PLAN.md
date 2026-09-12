@@ -974,6 +974,16 @@ coverage is 95.40% lines / 78.57% branches. The current combined hosted gate is
 still pending for the later runtime source. P08/P09/P10 remain incomplete, with
 zero accepted concentrating PDE windows.
 
+The [accepted nominal-coverage integration](evidence/p09/v2-accepted-coverage-integration/summary.json)
+now attaches the independently evaluated core/annulus geometry to the three
+accepted coordinator events and exports it without filling the off-stage or
+collar channels. Exact-source functional, allocation, static and changed-path
+CRAP gates pass. Two integration test targets were compiled but not executed by
+the focused coverage profile, and the required whole-maintained 80% line and
+branch gate remains pending on the combined source. This is still an
+`UnqualifiedDiagnostic`, not a completed region-volume channel or an accepted
+window.
+
 ## P09 runtime diagnostic integration and cache profile
 
 The runtime exports reconstructed physical probe reports through the fixed
@@ -1016,3 +1026,18 @@ complete endpoint report or a convergence result. The M48 cached-force feasibili
 M96 N12 completed clock 4096, while N16/N24 timed out at 05:49:24 (exit 124) with
 midpoint data only and no endpoint. P08/P09/P10 remain incomplete and accepted
 concentrating PDE windows remain zero.
+
+## P10 shared integration-force adapter
+
+The [shared-force adapter evidence](evidence/p10/v2-shared-force-adapter/summary.json)
+drives six independently owned N4/N8/N12 CM/HO trajectories through the generic
+recorded-step path using one admitted original-force table. Across two committed
+steps per trajectory, every state coefficient matches a separate direct-force
+run bit-for-bit; outcomes, histories and fresh observer reports compare equal.
+Admission binds the exact CM/HO call schedules and complete resource ledgers,
+and the steady recorded step allocates nothing. Focused line coverage is 94.82%
+and focused branch coverage is 69.12%; the latter is below 80% and is not the
+whole-maintained gate. Maximum focused CRAP is 22.5 and all static limits pass.
+Source-matched combined hosted validation remains pending. Owned `Run`/family
+slab scheduling, retry coordination, archive and CLI wiring remain open, so this
+increment changes no released execution mode and qualifies no PDE window.

@@ -75,8 +75,10 @@ as fabricated zero rows: analytical pressure reference, pressure gauge,
 concentration peak-height discrepancy, a defined periodic peak-location error
 and tie rule, nominal Core coverage, nominal Annulus coverage, collar-volume
 coverage, complete global/interior qualification, and mean-momentum balance.
-The two nominal coverage quantities are future `CoveragePlan` results, independent
-of the five exclusive sampled classes and their point counts.
+The two nominal coverage quantities are separate `CoveragePlan` results,
+independent of the five exclusive sampled classes and their point counts. They
+are now attached at accepted coordinator clocks only; off-stage coverage and
+the collar-volume channel remain unavailable.
 
 ## Bounds and schedule
 

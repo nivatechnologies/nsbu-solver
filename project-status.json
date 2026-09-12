@@ -403,7 +403,12 @@
   "exact_v2_partial_review_adapter_scope": "Four global sampled RMS observables over seven fixed events retain reconstructed physical pairwise RMS and same-clock reconstructed-reference RMS separately at off-stage clocks. Status remains PartialUnqualifiedInventory; no generic review, tolerance, readiness or PDE qualification.",
   "exact_v2_partial_review_adapter_evidence": "evidence/p09/v2-review-offstage-reference/README.md",
   "exact_v2_shared_force_table_evidence": "evidence/p10/v2-shared-force-table/README.md",
-  "exact_v2_shared_force_table_scope": "Bounded standalone original-force slab table for identical configured force evaluation; trajectory integration through this table has not yet been merged or qualified. It does not change the prescribed source or acceptance criteria.",
+  "exact_v2_shared_force_table_scope": "Bounded standalone original-force slab table for identical configured force evaluation. A separately gated adapter now exercises the generic recorded-step path, but owned Run/family scheduling, archive and CLI integration remain open. It does not change the prescribed source or acceptance criteria.",
+  "exact_v2_shared_force_adapter_evidence": "evidence/p10/v2-shared-force-adapter/summary.json",
+  "exact_v2_shared_force_adapter_scope": "Standalone shared-table adapter drives six independently owned N4/N8/N12 CM/HO trajectories for two committed steps and matches separate direct-force state coefficients bit-for-bit; outcomes, histories and fresh observer reports compare equal. Exact call/resource/refusal and zero-steady-allocation checks pass. Focused lines94.82%/branches69.12%, CRAP22.5; the focused branch result is below80% and is not the whole-maintained gate. Source-matched combined hosted validation and owned family/slab/CLI wiring remain pending; no PDE qualification.",
+  "actual_v2_accepted_nominal_coverage_evidence": "evidence/p09/v2-accepted-coverage-integration/summary.json",
+  "actual_v2_accepted_nominal_coverage_scope": "Independently evaluated nominal core/annulus geometry is attached to the three actual accepted diagnostic events with exact family/regional-policy binding and bounded transactional publication. Exact-source functional/allocation/static and changed-path CRAP gates pass. Off-stage and collar coverage remain missing; two focused integration targets and the whole-maintained80% gate remain pending hosted validation. UnqualifiedDiagnostic only; zero accepted PDE windows.",
+  "additional_hosted_rust_quality_evidence": "evidence/p10/hosted-rust-34666644377/summary.json",
   "reference_spectrum_assessments": [
     "evidence/p10/reference-spectrum-first-endpoint-d511dbf/README.md",
     "evidence/p10/reference-spectrum-high-band-9c90c0a/README.md"
@@ -424,6 +429,6 @@
     "numerical_evidence": "evidence/p10/m96-user-interruption/summary.json",
     "midpoint_comparisons": "evidence/p10/m96-spatial-midpoint-user-pause-def4730/summary.json",
     "accepted_concentrating_windows": 0,
-    "pending_nominal_coverage_gates": "Final export, coverage JSON and CRAP incomplete; interrupted at user request."
+    "nominal_coverage_local_gates": "Passed at exact source e595d9b and rerun on the combined continuation branch; whole-maintained source-matched hosted validation remains pending."
   }
 }
