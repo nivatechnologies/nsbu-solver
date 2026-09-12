@@ -1,4 +1,5 @@
-68e3c80b50809c55352ab4aa68844c7d0fce5cf1f0ed41cc2ef143f4d3f26d19  ./README.md
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./MANIFEST.sha256
+6e902322ceeab24f3c81a1c28a4188404f66bf607ae5f34939f7ef0fadd380a7  ./README.md
 c91a0743fb643fb644a520b49e9f9f8ffaa1f371b33b6526ae4587c7d29e03ad  ./forensics/event-ordinary-branch0-clock0.coeff.bin
 42b06216f27cc12121b3fb8e1203b98e4a877f5a0aa3fd9e8269a48bb089f015  ./forensics/event-ordinary-branch0-clock2048.coeff.bin
 1afa69189063eca579f2e234096b11ece162b7c45e2f4768dc22a2c55ecd6b8d  ./forensics/event-ordinary-branch0-clock4096.coeff.bin
@@ -37,7 +38,6 @@ c0b2d2d554d7cd161841af188effed1c6e4823de523aa423375018b8bdca3038  ./harness/Carg
 ed163d69a09ddc0ffcbdf126a42d5745a93449fa7a39354788e948b7ac795c04  ./harness/full.status
 d72d8a14bd2e06ab2844a48a05763d55ffbf9a038737623b73711c5193ce8d36  ./harness/metadata.json
 d7291991b0c4dbe8614bf9d28b4e7e05f2e6c44a28c7e5b4ea56747f03d17038  ./harness/src/main.rs
-d390b547e59fbd0404823423393e498d34f09850f23dddedfe0fc7fc4990e138  ./raw/MANIFEST-before-correction.sha256
 047fb2acf055c64fef90826822741c184c56c1f06da1f4903726753307db1621  ./raw/full.stdout.gz
 e36dbaa2d49d609eb19d8d1245159fe853d3c983d4b52a90924962417d709487  ./raw/full.time.gz
 2dc10d2a727272911ee5382d087493c4c0d7294b7be1f74c034a0d11d662ee63  ./summary.json
