@@ -1,0 +1,2 @@
+launch_utc=2026-09-12T02:21:34Z
+timeout_seconds=10800 kill_after_seconds=10 deadline_utc=2026-09-12T05:21:34Z

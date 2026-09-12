@@ -1,0 +1,87 @@
+{
+  "admission": {
+    "cap_bytes": 4294967296,
+    "checkpoint_v1": "unsupported",
+    "combined_bytes": 3725781392
+  },
+  "events": [
+    {
+      "elapsed_ticks": 0,
+      "event": 1,
+      "wall_seconds": 47.647013
+    },
+    {
+      "elapsed_ticks": 2047,
+      "event": 2,
+      "wall_seconds": 1969.238346
+    },
+    {
+      "elapsed_ticks": 2048,
+      "event": 3,
+      "wall_seconds": 3891.817761
+    },
+    {
+      "elapsed_ticks": 4095,
+      "event": 4,
+      "wall_seconds": 5658.444677
+    },
+    {
+      "elapsed_ticks": 4096,
+      "event": 5,
+      "wall_seconds": 7652.918684
+    }
+  ],
+  "forensics": {
+    "declared_current_run_files": 30,
+    "encoding": "axis-major components 0..2; f64 re then im bit words little-endian; no metadata",
+    "excluded_walkthrough_clocks": [
+      64,
+      128
+    ]
+  },
+  "harness_mode": "AttemptCached",
+  "kind": "unqualified_cached_m48_feasibility",
+  "numerical_source_commit": "5fa65efbad0cc340efdf126278feaf579e0017fa",
+  "profile": {
+    "advective_limit": 0.3,
+    "clock_target_ticks": 8192,
+    "endpoint_ticks": 4096,
+    "grids": [
+      12,
+      16,
+      24
+    ],
+    "integration_force_grid": 48,
+    "integration_workers": 32,
+    "observer_force_grid": 96,
+    "physical_reference_grid": 24,
+    "pressure_grid": 48,
+    "steps": [
+      64,
+      32,
+      16
+    ],
+    "tick_exponent": -20,
+    "tolerances": {
+      "absolute": [
+        1e-05,
+        0.0001
+      ],
+      "relative": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "qualification": "No PDE window or convergence qualification is claimed.",
+  "resource_observation": {
+    "max_rss_kib": 1501184,
+    "time_elapsed": "2:07:33"
+  },
+  "terminal": {
+    "events": 5,
+    "exit_status": 0,
+    "status": "complete",
+    "wall_seconds": 7652.919993
+  }
+}
