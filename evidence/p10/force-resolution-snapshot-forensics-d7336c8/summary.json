@@ -116,7 +116,23 @@
       "attempts": 128,
       "committed": 128,
       "rescheduled": false,
-      "terminal_study_status": "ongoing_at_evidence_freeze"
+      "terminal_study_status": "external_timeout",
+      "timeout_seconds": 5100,
+      "launch_utc": "2026-09-12T04:24:24Z",
+      "end_utc": "2026-09-12T05:49:24Z",
+      "last_committed": {
+        "n16": {
+          "clock": 4064,
+          "attempts": 254,
+          "committed": 254
+        },
+        "n24": {
+          "clock": 4000,
+          "attempts": 250,
+          "committed": 250
+        }
+      },
+      "endpoint_snapshots": false
     },
     "m96": {
       "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
@@ -366,5 +382,48 @@
         "h1": 20.566868445307282
       }
     }
-  ]
+  ],
+  "early_m48_spatial": [
+    {
+      "clock": 64,
+      "left_n": 12,
+      "right_n": 16,
+      "full": {
+        "l2": 1.5638033298513137e-14,
+        "h1": 7.707922056572308e-13
+      }
+    },
+    {
+      "clock": 64,
+      "left_n": 16,
+      "right_n": 24,
+      "full": {
+        "l2": 1.120275621125576e-14,
+        "h1": 7.513261168123993e-13
+      }
+    },
+    {
+      "clock": 128,
+      "left_n": 12,
+      "right_n": 16,
+      "full": {
+        "l2": 1.373877097053396e-07,
+        "h1": 6.76933915091781e-06
+      }
+    },
+    {
+      "clock": 128,
+      "left_n": 16,
+      "right_n": 24,
+      "full": {
+        "l2": 9.832511809300396e-08,
+        "h1": 6.5924836918977645e-06
+      }
+    }
+  ],
+  "next_candidate_assessment": {
+    "earlier_interval": "not a spatial-resolution remedy; finer-state-relative L2/H1 differences are stable from clocks64 through4096",
+    "higher_grid": "preflight N24/N32/N48 at M96 before a diagnostic-only run; no qualification possible because N48 fails the twelve-cell first-endpoint screen",
+    "details": "relative-resolution.json"
+  }
 }

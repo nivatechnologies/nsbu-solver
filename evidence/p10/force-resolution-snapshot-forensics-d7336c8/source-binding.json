@@ -23,5 +23,10 @@
     "n16_sha256": "cc7c9c222423d335840d470a34a25a6ca7e196845e6ebc0964f0bdd4c4043f1c",
     "n24_sha256": "01ed0637b6fa82c7061840b185cd74a0a60d9492d1fe6d004a9f842d7b596be4",
     "commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c"
+  },
+  "next_candidate_preflight": {
+    "n32_harness_sha256": "185dad148929a8ad475a21136bdec61a59a335fb94aeabee851a67e293206e9b",
+    "n48_harness_sha256": "249fac2dddc268ff71b07001c0d8ce2fee94f2a0be34bf06fab01650b5638757",
+    "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c"
   }
 }
