@@ -1,0 +1,11 @@
+[package]
+name = "nsbu-avx-storage-audit"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+rustfft = { version = "=6.4.1", default-features = false, features = ["avx"] }

@@ -1,0 +1,10 @@
+0fe2f85e9de622c04be73b84e9bbc5a03b73f250cc46cc4c7629d9dfedd81d1a  evidence/p10/avx-fft-storage-audit-7467e26/source/Cargo.toml
+4da6f1ea90ef38b059d0b375dedbd4d385e622fbcb91291a72c7c4ac96a3a5a3  evidence/p10/avx-fft-storage-audit-7467e26/source/Cargo.lock
+7d05bc81c98db39c5172d57f6318cb7258fb031bc9e065798cf31a895b7c481b  evidence/p10/avx-fft-storage-audit-7467e26/source/src/main.rs
+6ca58c1c8489864fbdf89ed5746e3319f95b75addff91e567d0d16144cb41b41  evidence/p10/avx-fft-storage-audit-7467e26/raw-stdout.txt
+b75985398e5509a90a7d5d68f8ec6690675f703c5cfa11893b04fc9c3fceca69  evidence/p10/avx-fft-storage-audit-7467e26/rustc-version.txt
+a30d14185e0fd446bbb0b54db4e9201e0248af73a8c2e417385aef1fa36d7504  evidence/p10/avx-fft-storage-audit-7467e26/platform.txt
+e78219876cbb3a4271b8644a89d469ccdd95b82433f72784c61a9dd2f88b1192  evidence/p10/avx-fft-storage-audit-7467e26/allocator.txt
+25382d63cc36510522cd0e1eb4cdf71286c2bf138837f9c11879bad1202594a3  crates/nsbu-solver/src/spectral/fft.rs
+f52a23b4af126f461ae624e4917ff5532ce156ed3fc2d371c426187137bb0d42  /home/todd/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustfft-6.4.1/src/avx/avx_planner.rs
+ab1624bfa0ed41c0dfe9a90288b030ad8975498deb68938f4d31287cbbdee260  /home/todd/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustfft-6.4.1/src/fft_cache.rs
