@@ -1,0 +1,19 @@
+{
+  "schema": "p10-snapshot-comparison-addition-review-v1",
+  "scope": "actual matched trajectory clock 1024 spatial diagnostic; no PDE acceptance",
+  "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "snapshot_file_sha256": "4c1cc60b3050cf1ac72873fc445aaf2893c6b5bd35e2362669220a749a28ffca",
+  "coefficient_sha256": "0836aa487bdf77991bb5c427b94a59cdfa36d6bf261458e1581df709ed3d2c9b",
+  "clock": {
+    "elapsed": 1024,
+    "target": 8192,
+    "epoch": 16,
+    "accepted_steps": 16
+  },
+  "evolution_semantics": "Cox-Matthews, M384, q=-20, target8192, h64 prefix through1024, unchanged 1e-5/1e-4 absolute and 1e-5/1e-5 relative tolerances, exact-v2 case",
+  "execution_distinction": "N256 uses W3 RHS layout384 and W3 force layout384; retained and reported, not required equal to N192 or N384 execution metadata",
+  "observer_distinction": "conservative observer grid512 is read-only and irrelevant to spectral state pair comparison",
+  "staged_snapshot_bytes": 405800057
+}
