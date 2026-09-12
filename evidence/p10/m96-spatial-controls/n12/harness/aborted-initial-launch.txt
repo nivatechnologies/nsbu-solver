@@ -1,0 +1,7 @@
+status=aborted_before_authorization
+reason=the first preflight command invoked the initial harness without an explicit mode, so its implicit execution was terminated immediately after detection
+launched_command=RUN_SOURCE=def4730b08025fdd06e7a8a0d78116aea24b6e2c target/release/p10-m96-full-forensics
+process_pid=2799879
+termination=SIGTERM sent; follow-up pgrep found no p10-m96-full-forensics process
+observed_forensics=none at accepted clocks 2048 or 4096; no artifact from that aborted process is used
+initial_source_identity=not hashed before the aborted command; it differed from the corrected harness by lacking explicit --run gating and by the two subsequently recorded error/allocation fixes

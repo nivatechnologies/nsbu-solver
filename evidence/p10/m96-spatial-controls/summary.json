@@ -1,0 +1,118 @@
+{
+  "continuation": "N16/N24 were terminated in-process. Cached archive/resume is unsupported, so there is no valid retained owner state for continuation.",
+  "kind": "unqualified_cached_m96_spatial_controls",
+  "numerical_source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "qualification": "No PDE-window, spatial-convergence, or force-resolution qualification is claimed.",
+  "runs": [
+    {
+      "grid": 12,
+      "last_recorded_state": {
+        "attempts": 256,
+        "clock_ticks": 4096,
+        "committed": 256
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T03:54:11Z",
+        "timeout_seconds=6000 kill_after_seconds=10 deadline_utc=2026-09-12T05:34:11Z"
+      ],
+      "max_rss_kib": 505856,
+      "run_status": "exit_status=0",
+      "snapshots": [
+        {
+          "attempts": 128,
+          "bytes": 48384,
+          "clock_ticks": 2048,
+          "committed": 128,
+          "path": "accepted-n12-m96-cm16-clock2048.coeff.bin",
+          "sha256": "22d3e26aeacf7089236c2dd1db490b91aeec336a0eb13dd328ec7b35aeb5d38e",
+          "tag": "accepted"
+        },
+        {
+          "attempts": 256,
+          "bytes": 48384,
+          "clock_ticks": 4096,
+          "committed": 256,
+          "path": "accepted-n12-m96-cm16-clock4096.coeff.bin",
+          "sha256": "aeeaa86eca750d47a46fd787dbd32229c4f7ae2761ddb5fdd05c782190f33758",
+          "tag": "accepted"
+        }
+      ],
+      "time_elapsed": "1:24:34"
+    },
+    {
+      "grid": 16,
+      "last_recorded_state": {
+        "attempts": 254,
+        "clock_ticks": 4064,
+        "committed": 254
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T04:24:24Z",
+        "timeout_seconds=5100 kill_after_seconds=10 absolute_cutoff_utc=2026-09-12T05:55:00Z",
+        "end_utc=2026-09-12T05:49:24Z"
+      ],
+      "run_status": "exit_status=124",
+      "snapshots": [
+        {
+          "attempts": 128,
+          "bytes": 110592,
+          "clock_ticks": 2048,
+          "committed": 128,
+          "path": "accepted-n16-m96-cm16-clock2048.coeff.bin",
+          "sha256": "6416422305be6b222b189761dc366684009ad879fff3ff8b6ab6227b51ac9632",
+          "tag": "accepted"
+        }
+      ],
+      "time_note": "external timeout ended /usr/bin/time before it emitted a timing record"
+    },
+    {
+      "grid": 24,
+      "last_recorded_state": {
+        "attempts": 250,
+        "clock_ticks": 4000,
+        "committed": 250
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T04:24:24Z",
+        "timeout_seconds=5100 kill_after_seconds=10 absolute_cutoff_utc=2026-09-12T05:55:00Z",
+        "end_utc=2026-09-12T05:49:24Z"
+      ],
+      "run_status": "exit_status=124",
+      "snapshots": [
+        {
+          "attempts": 128,
+          "bytes": 359424,
+          "clock_ticks": 2048,
+          "committed": 128,
+          "path": "accepted-n24-m96-cm16-clock2048.coeff.bin",
+          "sha256": "eef26edc20f0d98ffb649a0e0b65831b2ec188dcc8b50629658ac0b0d4ccb19e",
+          "tag": "accepted"
+        }
+      ],
+      "time_note": "external timeout ended /usr/bin/time before it emitted a timing record"
+    }
+  ],
+  "shared_settings": {
+    "advective_limit": 0.3,
+    "archive_support": "unsupported",
+    "clock_target_ticks": 8192,
+    "endpoint_ticks": 4096,
+    "force_grid": 96,
+    "force_policy": "attempt_local_original_force_cache",
+    "maximum_attempts": 256,
+    "method": "CoxMatthews",
+    "step_ticks": 16,
+    "tick_exponent": -20,
+    "tolerances": {
+      "absolute": [
+        1e-05,
+        0.0001
+      ],
+      "relative": [
+        1e-05,
+        1e-05
+      ]
+    },
+    "workers": 32
+  }
+}

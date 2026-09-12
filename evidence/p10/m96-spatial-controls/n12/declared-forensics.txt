@@ -1,0 +1,2 @@
+forensics/accepted-n12-m96-cm16-clock2048.coeff.bin
+forensics/accepted-n12-m96-cm16-clock4096.coeff.bin
