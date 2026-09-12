@@ -1,0 +1,658 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/main.rs",
+      "function": "main",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "fill_input",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "filled",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "hash_real",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "hash_complex",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "debug",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/util.rs",
+      "function": "worker_debug",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/records.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/records.rs",
+      "function": "record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/records.rs",
+      "function": "emit_pair",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/records.rs",
+      "function": "medians",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/records.rs",
+      "function": "emit_summary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "validate",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "compare",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "direct_reference",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "failure_controls",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "injected_error_control",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "injected_panic_control",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "exact_batch",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "direct_dft",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "direct_mode",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "maximum_scaled",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/controls.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "new",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "reset",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "run",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "publish",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "new",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "reset",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/model.rs",
+      "function": "execute",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "new",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "wait_started",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 10.37037037037037
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "submit",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "collect",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "publish",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "reset",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "inject_failure",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "quiescent",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "copy_to",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "hashes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "published_equals",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "drop",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "worker_loop",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "evaluate_pending",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "new",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "reset",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "execute",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "submit_all",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "copy_published",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "hashes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "quiescent",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "inject_failure",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "equals",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "reservation",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "reservation_parts",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/pool.rs",
+      "function": "worker_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "execute",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 20.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "emit_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "catalog",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "profile_all",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "profile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "profile_owners",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "measure_profile",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "copy_repeats",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "emit_reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "require_cap_refusal",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "warm_and_check_allocations",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "interleaved_timings",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "validate_outputs",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "validate_pair",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "validate_repeat",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "timed_serial_cycle",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "timed_parallel_cycle",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "timed_dispatch",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "timed_copy",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/avx-w3-batching-spike-20260912/harness/src/benchmark.rs",
+      "function": "small_profile_covers_timing_and_publication_paths",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    }
+  ],
+  "maximum": 20.0
+}
