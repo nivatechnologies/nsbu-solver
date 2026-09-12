@@ -23,9 +23,11 @@ complete report. A failed probe producer cannot supply a complete `ProbeSample` 
 
 Focused tests exercise rest, late off-stage tick 95, and endpoint tick 128 of the bounded
 startup profile on a 12-cubed physical sample lattice. The late off-stage report is compared
-against an independent signed-Fourier reconstruction and direct analytical evaluator for all
-six branches and all four quantities. The existing high-precision analytical tensor fixture
-and accepted/regional tracking tests remain separate crosschecks.
+against independent signed-Fourier reconstruction and error reduction for all six branches
+and all four quantities. That oracle calls the same binary64 analytical provider as production.
+The separately retained high-precision tensor fixture crosschecks that provider at its fixture
+point; it is not an independent high-precision grid oracle over all six branches and quantities.
+Accepted and regional tracking tests remain separate regression crosschecks.
 
 These are global sampled binary64 errors on the current grid. They are not continuum bounds,
 regional coverage, pressure or gauge measurements, force-resolution evidence, a convergence
