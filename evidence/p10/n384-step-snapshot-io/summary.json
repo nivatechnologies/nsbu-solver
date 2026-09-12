@@ -42,10 +42,11 @@
     "contention": "active local N192 and N256 endpoints"
   },
   "comparison": {
-    "n384_projected_step_seconds": 6712,
-    "durable_write_fraction": 0.0004893965,
-    "complete_process_fraction": 0.0007076877,
-    "decision": "useful_for_opt_in_every_step_offline_diagnostic_artifacts"
+    "neutral_illustration_step_seconds": 180,
+    "durable_write_fraction": 0.0182560368,
+    "complete_process_fraction": 0.0263888889,
+    "is_n384_forecast": false,
+    "decision": "implement_opt_in_capture_then_measure_first_integrated_step"
   },
   "quality": {
     "tests_passed": 5,
@@ -60,8 +61,10 @@
   },
   "limitations": [
     "prepared field is not an integrated trajectory state",
+    "prepared zero field excludes full nonzero-state page residency and memory-walk representativeness",
     "cached validation is not a cold-read benchmark",
     "real finite-value endian encoding cost is not measured",
-    "artifact schema is nonresumable"
+    "artifact schema is nonresumable",
+    "rename success followed by parent-sync failure may leave an unconfirmed bundle at its final path"
   ]
 }

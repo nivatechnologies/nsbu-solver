@@ -42,17 +42,18 @@ read benchmark. The coefficient digest was
 `65db2aea053eb94f3d5b9c5c2dd8bd4be8dae247064a40cc13316441afa54460`.
 
 This measures the storage, hashing, sync, and publication path for already encoded
-zero coefficients. A real-state implementation must encode finite `f64` words in
-fixed little-endian order into the same bounded buffer; that conversion cost and
-memory-bandwidth interaction are not measured here. No whole-state copy is needed.
+zero coefficients. It excludes the physical page residency and memory walk of a
+full nonzero state. A real-state implementation must visit those resident pages
+and encode finite `f64` words in fixed little-endian order into the same bounded
+buffer; that conversion and memory-bandwidth interaction are not represented by
+this timing. No whole-state copy is needed.
 
-The available N384 AVX projection is 6,712 seconds per step before the later
-composite improvements. Snapshot write and durable publication are 0.049% of that
-projection; the full measured process including cached readback is 0.071%. Even
-against a future three-minute step, the write path is about 1.83%. The I/O cost is
-small enough to make every-step snapshots useful for offline diagnostics and
-failure-localized review. The artifact reservation, rather than runtime, is the
-material cost.
+As a neutral illustration, a 180-second step would spend about 1.83% on measured
+write/publication or 2.64% on the complete process including cached readback. This
+is not an N384 step forecast. The result makes every-step snapshots plausible for
+offline diagnostics and failure-localized review, with artifact reservation the
+obvious cost, but the first integrated N384 prototype step must measure nonzero
+state capture before any endpoint forecast or final usefulness decision.
 
 ## Transaction design
 
@@ -74,11 +75,14 @@ For each accepted proposal, the owner uses this order:
    encoding, hashing, or write failure removes the partial bundle and leaves both
    in-memory and durable frontiers at the prior committed clock.
 4. The infallible prepared commit advances the in-memory state.
-5. One rename publishes the complete bundle, followed by parent-directory sync.
-   Only then does the durable frontier advance. A post-commit rename or sync failure
-   retains the partial bundle, reports in-memory, durable, and provisional clocks
-   separately, and stops qualification; it never claims crash-atomicity across
-   memory and filesystem.
+5. One rename moves the complete bundle to its final path, followed by
+   parent-directory sync. Only successful parent sync advances the confirmed
+   durable frontier. If rename fails, the provisional bundle can remain at the
+   partial path. If rename succeeds but parent sync fails, the bundle can be at
+   its final path while still unconfirmed. Failure reporting probes and records
+   both possible locations, reports in-memory, confirmed-durable, and provisional
+   clocks separately, and stops qualification; it never claims crash-atomicity
+   across memory and filesystem.
 
 Rejected or numerical-error attempts retain their attempted interval and indicators
 as separate attempt records and have no state snapshot. Scheduled bundles contain
@@ -96,8 +100,10 @@ maximum cyclomatic complexity 9, cognitive complexity 2, Halstead difficulty
 19.25, 89.76% executable-line coverage, 80% branch coverage, and maximum CRAP
 20 with no violation.
 
-The decision is positive for a separately identified N384 experiment harness.
-It does not justify a production checkpoint API or resume promise. A trajectory
-launch should choose 128 GiB for at most 64 committed steps or 256 GiB for at most
-128, refuse one byte short before numerical allocation, and retain only small
-manifests in Git while storing bulk state files in the admitted artifact location.
+The decision is positive for implementing this capture policy in a separately
+identified N384 experiment harness and measuring its first integrated step. It
+does not justify a production checkpoint API, resume promise, or endpoint timing
+forecast. A trajectory launch should choose 128 GiB for at most 64 committed steps
+or 256 GiB for at most 128, refuse one byte short before numerical allocation, and
+retain only small manifests in Git while storing bulk state files in the admitted
+artifact location.
