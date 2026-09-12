@@ -1,14 +1,49 @@
 {
   "package": "P09",
   "increment": "caller-supplied fixed-cardinality exact-v2 review geometry admission",
-  "source_commit": "22e928992effdb64b4ed71723b68df6395b40278",
-  "parent_commit": "b1efef8872a21a0d51ec888b9ce3ab5e20a8af74",
+  "source_commit": "b66fc14aedd0d3544196a4817785a6c73409e780",
+  "parent_commit": "0c7dbecc653542ca872063f5ca09b79caa590397",
   "status": "focused geometry admission and static checks passed; no measurement or readiness decision",
-  "geometry": {"cardinality": [3, 5, 7], "reconstruction_refinements": 4, "coarse_binding": "FamilyPlan accepted manifest", "fine_binding": "ProbePlan tested manifest"},
-  "controls": ["strict nesting", "duplicate clock", "missing accepted clock", "wrong reconstruction mapping", "foreign plan identity at profile admission"],
-  "focused_tests": {"command": "cargo test -p nsbu-benchmarks --test v2_review_profile --locked", "passed": 8},
-  "focused_coverage": {"scope": "selected integration test dependency closure; not whole-maintained CI", "lines_percent": 31.780235462004995, "branches_percent": 23.1016731016731},
-  "quality": {"review_profile_crap_maximum": 18.11807580174927, "geometry_from_manifests": {"cc": 10, "cognitive": 4, "branch_coverage_fraction": 0.75, "crap": 11.5625}},
-  "limitations": ["Profile status remains PartialUnpopulatedDiagnostic.", "No observation, measurement, owner publication, provenance decision, or concentrating PDE window is created.", "Focused coverage is not a whole-maintained coverage result."],
+  "geometry": {
+    "cardinality": [
+      3,
+      5,
+      7
+    ],
+    "reconstruction_refinements": 4,
+    "coarse_binding": "FamilyPlan accepted manifest",
+    "fine_binding": "ProbePlan tested manifest"
+  },
+  "controls": [
+    "strict nesting",
+    "duplicate clock",
+    "missing accepted clock",
+    "wrong reconstruction mapping",
+    "foreign plan identity at profile admission",
+    "independent 4096-tick first-window plan-only geometry"
+  ],
+  "focused_tests": {
+    "command": "cargo test -p nsbu-benchmarks --test v2_review_profile --locked",
+    "passed": 9
+  },
+  "focused_coverage": {
+    "scope": "selected integration test dependency closure; not whole-maintained CI",
+    "lines_percent": 31.780235462004995,
+    "branches_percent": 23.1016731016731
+  },
+  "quality": {
+    "review_profile_crap_maximum": 18.11807580174927,
+    "geometry_from_manifests": {
+      "cc": 10,
+      "cognitive": 4,
+      "branch_coverage_fraction": 0.75,
+      "crap": 11.5625
+    }
+  },
+  "limitations": [
+    "Profile status remains PartialUnpopulatedDiagnostic.",
+    "No observation, measurement, owner publication, provenance decision, or concentrating PDE window is created.",
+    "Focused coverage is not a whole-maintained coverage result."
+  ],
   "accepted_pde_windows": 0
 }
