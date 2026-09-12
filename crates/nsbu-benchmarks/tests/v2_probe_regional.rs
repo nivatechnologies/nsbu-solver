@@ -2,7 +2,7 @@
 mod v2_family_support;
 
 use nsbu_benchmarks::{
-    regions::{SampledError, SpatialRegion},
+    regions::SpatialRegion,
     v2_experiment::{
         probes::{
             reference::{ProbeReferencePlan, ProbeReferenceWorkspace},
@@ -16,9 +16,9 @@ use nsbu_benchmarks::{
     },
 };
 use nsbu_solver::{
+    diagnostics::local::SampledError,
     domain::{Layout, TickClock},
     verification::times::TestedTimes,
-    SolverError,
 };
 use v2_family_support::{clocks as accepted_clocks, settings, CAP};
 
@@ -56,7 +56,7 @@ fn digest(family: &ProbeFamily<'_>) -> Vec<(u64, u64)> {
 }
 
 #[test]
-fn all_probe_clocks_match_independent_global_producer_and_preserve_fields() {
+fn all_probe_clocks_match_independent_global_producer_and_exhaust_exact_allowance() {
     let accepted = accepted_clocks();
     let times = clocks();
     let (probe_plan, reference_plan, regional_plan) = plans(&accepted, &times, 7);
@@ -71,20 +71,22 @@ fn all_probe_clocks_match_independent_global_producer_and_preserve_fields() {
     let mut family = ProbeFamily::new(probe_plan).unwrap();
     let mut reference = ProbeReferenceWorkspace::new(reference_plan).unwrap();
     let mut regional = ProbeRegionalWorkspace::new(regional_plan).unwrap();
+    let mut latest = None;
     for (frame, clock) in times.into_iter().enumerate() {
         let raw = family.advance().unwrap().unwrap();
         let before = digest(&family);
         let expected = reference.measure(&family, raw).unwrap();
         let report = regional.measure(&family, raw, expected).unwrap();
+        latest = Some((raw, expected));
         assert_eq!(digest(&family), before);
         assert_eq!(report.clock(), clock);
         assert_eq!(report.identity(), probe_plan.identity());
         assert_eq!(report.origins(), raw.origins());
         assert_eq!(report.status(), ProbeRegionalStatus::DiagnosticOnly);
         for branch in 0..6 {
-            for quantity in 0..4 {
+            for (quantity, expected_quantity) in QUANTITIES.into_iter().enumerate() {
                 let finding = report.branches()[branch].quantities[quantity];
-                assert_eq!(finding.quantity, QUANTITIES[quantity]);
+                assert_eq!(finding.quantity, expected_quantity);
                 assert_eq!(
                     finding.global,
                     expected.branches()[branch].quantities[quantity].error
@@ -130,6 +132,20 @@ fn all_probe_clocks_match_independent_global_producer_and_preserve_fields() {
         regional.regional_work(),
         regional_plan.bounds().regional_work
     );
+    let charged_tracking = regional.tracking_work();
+    let charged_regional = regional.regional_work();
+    let (raw, expected) = latest.unwrap();
+    assert!(matches!(
+        regional.measure(&family, raw, expected),
+        Err(ProbeRegionalError::Tracking(
+            nsbu_benchmarks::v2_experiment::reference::ReferenceTrackingError::Numerical(
+                nsbu_solver::SolverError::ProviderBudgetExceeded
+            )
+        ))
+    ));
+    assert_eq!(regional.current().unwrap().clock(), times[6]);
+    assert_eq!(regional.tracking_work(), charged_tracking);
+    assert_eq!(regional.regional_work(), charged_regional);
 }
 
 #[test]
@@ -203,5 +219,4 @@ fn admission_refuses_bad_roots_caps_attempts_and_overflow() {
         ))
     ));
     assert!(regional.current().is_none());
-    let _ = SolverError::InvalidPayload;
 }
