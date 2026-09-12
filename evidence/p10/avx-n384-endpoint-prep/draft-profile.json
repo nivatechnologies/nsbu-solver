@@ -45,6 +45,6 @@
   "accepted_step_state_payload": true,
   "resume": "unsupported",
   "host": "sulaco",
-  "numa_policy": "whole-host-pending-exact-command",
-  "external_stop": "required-pending-script-identity"
+  "numa_policy": "whole-host-unbound-all-visible-cpus-memory",
+  "external_stop": "pgid-watchdog-v1-starttime-cmdline-deadline"
 }
