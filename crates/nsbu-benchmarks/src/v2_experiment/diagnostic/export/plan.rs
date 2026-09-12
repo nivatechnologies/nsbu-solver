@@ -47,9 +47,10 @@ pub struct DiagnosticExportWork {
     pub events: usize,
 }
 
-/// Owned identity and fixed-profile context for schema version 1.
+/// Owned identity and fixed-profile context for stable version 1 or explicit version 2.
 #[derive(Debug, Clone, Copy)]
 pub struct DiagnosticExportPlan {
+    pub(super) version: usize,
     pub(super) accepted: [TickClock; 3],
     pub(super) manifest: [TickClock; 7],
     pub(super) residual: [TickClock; 4],
@@ -59,6 +60,7 @@ pub struct DiagnosticExportPlan {
     pub(super) probe_identity: [u8; 32],
     pub(super) coordinator: DiagnosticBounds,
     pub(super) branches: [BranchContext; 6],
+    pub(super) probe_domains: [nsbu_solver::domain::Domain; 6],
     pub(super) pressure_source: nsbu_solver::domain::Domain,
     pub(super) pressure_layout: nsbu_solver::domain::Layout,
     pub(super) residual_force: nsbu_solver::domain::Layout,
@@ -78,6 +80,22 @@ impl DiagnosticExportPlan {
         profile: &StartupProfile,
         diagnostic: DiagnosticPlan<'_>,
         output_cap: usize,
+    ) -> Result<Self, DiagnosticExportError> {
+        Self::build(profile, diagnostic, output_cap, 1)
+    }
+    /// Admit explicit schema version 2 with reconstructed physical findings.
+    pub fn new_v2(
+        profile: &StartupProfile,
+        diagnostic: DiagnosticPlan<'_>,
+        output_cap: usize,
+    ) -> Result<Self, DiagnosticExportError> {
+        Self::build(profile, diagnostic, output_cap, 2)
+    }
+    fn build(
+        profile: &StartupProfile,
+        diagnostic: DiagnosticPlan<'_>,
+        output_cap: usize,
+        version: usize,
     ) -> Result<Self, DiagnosticExportError> {
         let accepted = *profile.accepted_times();
         let manifest = *profile.manifest();
@@ -109,6 +127,7 @@ impl DiagnosticExportPlan {
             .map_err(|_| DiagnosticExportError::SizeOverflow)?
             .samples;
         Ok(Self {
+            version,
             accepted,
             manifest,
             residual,
@@ -125,11 +144,23 @@ impl DiagnosticExportPlan {
                 branch(diagnostic, 4)?,
                 branch(diagnostic, 5)?,
             ],
+            probe_domains: [
+                domain(diagnostic, 0)?,
+                domain(diagnostic, 1)?,
+                domain(diagnostic, 2)?,
+                domain(diagnostic, 3)?,
+                domain(diagnostic, 4)?,
+                domain(diagnostic, 5)?,
+            ],
             pressure_source,
             pressure_layout,
             residual_force,
             bounds,
         })
+    }
+    /// Selected JSON schema version, either 1 or 2.
+    pub fn schema_version(self) -> usize {
+        self.version
     }
     /// Complete output and work reservation.
     pub fn bounds(self) -> DiagnosticExportBounds {
@@ -147,6 +178,17 @@ impl DiagnosticExportPlan {
     pub fn residual_force_layout(self) -> nsbu_solver::domain::Layout {
         self.residual_force
     }
+}
+
+fn domain(
+    diagnostic: DiagnosticPlan<'_>,
+    index: usize,
+) -> Result<nsbu_solver::domain::Domain, DiagnosticExportError> {
+    diagnostic
+        .family_plan()
+        .branch_plan(index)
+        .ok_or(DiagnosticExportError::InvalidReport)
+        .map(|plan| plan.resources().domain())
 }
 
 fn branch(

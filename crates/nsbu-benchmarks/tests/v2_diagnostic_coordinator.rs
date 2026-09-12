@@ -9,7 +9,10 @@ use nsbu_benchmarks::v2_experiment::{
     },
     physical::{PhysicalFamilyPlan, PhysicalFamilyWorkspace, PhysicalRefinementSample},
     pressure::{PressureFamilyPlan, PressureFamilyWorkspace, PressureRefinementSample},
-    probes::ProbePlan,
+    probes::{
+        physical::{ProbePhysicalPlan, ProbePhysicalSample, ProbePhysicalWorkspace},
+        ProbePlan,
+    },
     reference::{
         regional::{RegionalTrackingPlan, RegionalTrackingSample, RegionalTrackingWorkspace},
         ReferenceTrackingPlan,
@@ -111,6 +114,27 @@ fn assert_regional(left: RegionalTrackingSample, right: RegionalTrackingSample) 
     }
 }
 
+fn assert_probe_physical(left: ProbePhysicalSample, right: ProbePhysicalSample) {
+    assert_eq!(
+        (left.clock(), left.identity()),
+        (right.clock(), right.identity())
+    );
+    assert_eq!(left.origins(), right.origins());
+    assert_eq!(left.source_domains(), right.source_domains());
+    assert_eq!(left.sample_layout(), right.sample_layout());
+    assert_eq!(left.relative_floors(), right.relative_floors());
+    for (a, b) in left.quantities().iter().zip(right.quantities()) {
+        assert_eq!((a.quantity, a.pairs), (b.quantity, b.pairs));
+        for pair in 0..5 {
+            let x = a.extrema(pair).unwrap();
+            let y = b.extrema(pair).unwrap();
+            assert_eq!(x.error.measured(), y.error.measured());
+            assert_eq!(x.relative_error.measured(), y.relative_error.measured());
+            assert_eq!(x.reference.measured(), y.reference.measured());
+        }
+    }
+}
+
 #[test]
 fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     let accepted = clocks();
@@ -134,6 +158,14 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         CAP,
     )
     .unwrap();
+    let standalone_probe_physical_plan = ProbePhysicalPlan::new(
+        plan.probe_plan(),
+        standalone_policy.physical_samples,
+        standalone_policy.physical_floors,
+        manifest.len(),
+        CAP,
+    )
+    .unwrap();
     let standalone_pressure_plan = PressureFamilyPlan::new(
         plan.family_plan(),
         standalone_policy.pressure_samples,
@@ -154,7 +186,8 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     let standalone_bytes = standalone_physical_plan
         .bounds()
         .storage_bytes
-        .checked_add(standalone_pressure_plan.bounds().storage_bytes)
+        .checked_add(standalone_probe_physical_plan.bounds().storage_bytes)
+        .and_then(|n| n.checked_add(standalone_pressure_plan.bounds().storage_bytes))
         .and_then(|n| {
             n.checked_add(
                 standalone_regional_plan.bounds().joint_storage_bytes
@@ -165,6 +198,8 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     assert!(plan.bounds().joint_storage_bytes + standalone_bytes <= CAP);
     let mut driver = DiagnosticDriver::new(plan).unwrap();
     let mut standalone_physical = PhysicalFamilyWorkspace::new(standalone_physical_plan).unwrap();
+    let mut standalone_probe_physical =
+        ProbePhysicalWorkspace::new(standalone_probe_physical_plan).unwrap();
     let mut standalone_pressure = PressureFamilyWorkspace::new(standalone_pressure_plan).unwrap();
     let mut standalone_regional = RegionalTrackingWorkspace::new(standalone_regional_plan).unwrap();
     let mut maximum_residual_l2 = 0.0_f64;
@@ -177,6 +212,12 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         assert_eq!(event.probe().clock(), clock);
         assert_eq!(event.probe().identity(), probe_identity);
         assert_eq!(event.status(), DiagnosticStatus::UnqualifiedDiagnostic);
+        assert_probe_physical(
+            event.reconstructed_physical(),
+            standalone_probe_physical
+                .measure(driver.probes(), event.probe())
+                .unwrap(),
+        );
         assert!(event
             .missing_channels()
             .contains(&MissingChannel::ForceResolution));
@@ -237,6 +278,10 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     assert_eq!(driver.charged_work(), plan.bounds().work);
     assert_eq!(driver.consumer_work().probes, plan.bounds().probes);
     assert_eq!(driver.consumer_work().physical, plan.bounds().physical);
+    assert_eq!(
+        driver.consumer_work().probe_physical,
+        plan.bounds().probe_physical
+    );
     assert_eq!(driver.consumer_work().pressure, plan.bounds().pressure);
     assert_eq!(driver.consumer_work().reference, plan.bounds().reference);
     assert_eq!(driver.consumer_work().regional, plan.bounds().regional);
@@ -244,7 +289,10 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     assert_eq!(driver.consumer_work().binding, plan.bounds().binding);
     assert_eq!(driver.ordinary().plan().identity(), family_identity);
     assert_eq!(driver.probes().plan().identity(), probe_identity);
-    println!("maximum off-stage residual L2={maximum_residual_l2:.17e}");
+    println!(
+        "maximum off-stage residual L2={maximum_residual_l2:.17e} reconstructed_physical_work={:?}",
+        plan.bounds().probe_physical
+    );
 }
 
 #[test]

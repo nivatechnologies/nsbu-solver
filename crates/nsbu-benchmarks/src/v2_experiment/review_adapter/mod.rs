@@ -80,8 +80,8 @@ pub struct ReviewProfile {
 pub enum RecordAvailability {
     /// Actual accepted-state physical and tracking reports supplied the record.
     AcceptedMeasured,
-    /// The clock was reserved for an off-stage residual, so accepted evidence is missing.
-    OffstageUnavailable,
+    /// Physical differences came from actual reconstructed values at an off-stage clock.
+    OffstagePhysicalMeasured,
 }
 
 /// Raw typed evidence retained without applying a numerical policy.
@@ -245,10 +245,17 @@ fn map(event: DiagnosticEvent, quantity: usize) -> Mapped {
     use nsbu_solver::verification::budget::Channel;
     let Some(accepted) = event.accepted().sample() else {
         let residual: ResidualFamilySample = event.residual().sample().expect("validated residual");
+        let physical = event.reconstructed_physical().quantities()[quantity];
+        let mut channels = [Evidence::Missing; 11];
+        channels[Channel::Space as usize] =
+            Evidence::Sequence([physical.pairs[0].rms_error, physical.pairs[1].rms_error]);
+        channels[Channel::Time as usize] =
+            Evidence::Sequence([physical.pairs[2].rms_error, physical.pairs[3].rms_error]);
+        channels[Channel::Method as usize] = Evidence::Pair(physical.pairs[4].rms_error);
         return (
-            RecordAvailability::OffstageUnavailable,
+            RecordAvailability::OffstagePhysicalMeasured,
             None,
-            [Evidence::Missing; 11],
+            channels,
             Some(residual.temporal_geometry()),
         );
     };

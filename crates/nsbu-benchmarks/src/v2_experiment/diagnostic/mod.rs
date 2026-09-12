@@ -7,7 +7,7 @@ use crate::v2_experiment::{
     binding::{NodeBindingError, NodeBindingWorkspace},
     physical::PhysicalFamilyWorkspace,
     pressure::PressureFamilyWorkspace,
-    probes::{residuals::ResidualFamily, ProbeFamily},
+    probes::{physical::ProbePhysicalWorkspace, residuals::ResidualFamily, ProbeFamily},
     reference::regional::{RegionalTrackingError, RegionalTrackingWorkspace},
     FamilyError, V2Family,
 };
@@ -26,6 +26,8 @@ pub struct DiagnosticConsumerWork {
     pub probes: crate::v2_experiment::probes::ProbeWork,
     /// Accepted-state physical comparison work.
     pub physical: crate::v2_experiment::physical::PhysicalFamilyWork,
+    /// Reconstructed-value physical comparison work at every manifest clock.
+    pub probe_physical: crate::v2_experiment::probes::physical::ProbePhysicalWork,
     /// Accepted-state pressure construction and comparison work.
     pub pressure: crate::v2_experiment::pressure::PressureFamilyWork,
     /// Analytical reference evaluation and reduction work.
@@ -79,6 +81,7 @@ pub struct DiagnosticDriver<'a> {
     ordinary: V2Family<'a>,
     probes: ProbeFamily<'a>,
     physical: PhysicalFamilyWorkspace<'a>,
+    probe_physical: ProbePhysicalWorkspace<'a>,
     pressure: PressureFamilyWorkspace<'a>,
     regional: RegionalTrackingWorkspace<'a>,
     residual: ResidualFamily<'a>,
@@ -99,6 +102,7 @@ impl<'a> DiagnosticDriver<'a> {
             ordinary: V2Family::new(plan.family)?,
             probes: ProbeFamily::new(plan.probes)?,
             physical: PhysicalFamilyWorkspace::new(plan.physical)?,
+            probe_physical: ProbePhysicalWorkspace::new(plan.probe_physical)?,
             pressure: PressureFamilyWorkspace::new(plan.pressure)?,
             regional: RegionalTrackingWorkspace::new(plan.regional)?,
             residual: ResidualFamily::new(plan.residual)?,
@@ -135,6 +139,7 @@ impl<'a> DiagnosticDriver<'a> {
         DiagnosticConsumerWork {
             probes: self.probes.charged_work(),
             physical: self.physical.charged_work(),
+            probe_physical: self.probe_physical.charged_work(),
             pressure: self.pressure.charged_work(),
             reference: self.regional.tracking_work(),
             regional: self.regional.regional_work(),
@@ -185,6 +190,7 @@ impl<'a> DiagnosticDriver<'a> {
         };
         let probe = self.probes.advance()?.ok_or(FamilyError::InvalidFamily)?;
         self.require_probe(probe, clock)?;
+        let probe_physical = self.probe_physical.measure(&self.probes, probe)?;
         let (accepted, residual) = if let Some(spectral) = spectral {
             let physical = self.physical.measure(&self.ordinary)?;
             let pressure = self.pressure.measure(&self.ordinary)?;
@@ -225,6 +231,7 @@ impl<'a> DiagnosticDriver<'a> {
             family_identity: self.plan.family.identity(),
             probe_identity: self.plan.probes.identity(),
             probe,
+            probe_physical,
             accepted,
             residual,
         })

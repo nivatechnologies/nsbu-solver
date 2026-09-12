@@ -45,9 +45,12 @@ separate reservations. Extraction itself performs no heap allocation.
 
 Accepted clocks provide space and time sequences, a CM/HO pair, and analytical
 tracking from the independently evolved finest CM branch. At rest, a measured
-zero remains a measurement. Off-stage clocks provide no accepted-state physical
-observable: their tracking value is absent and every channel is `Missing`.
-Their actual reconstruction geometry is retained separately.
+zero remains a measurement. Off-stage clocks populate space, time and method
+from actual reconstructed-value physical comparisons and are marked
+`OffstagePhysicalMeasured`. Their analytical tracking value remains absent and
+every other channel remains `Missing`. Their actual reconstruction geometry is
+retained separately. Accepted records continue to use ordinary integrated-state
+physical findings, so the two sources remain explicit.
 
 The result preserves explicit missing observable groups and channels. Pressure,
 regional, residual, balance and peak observables are not silently represented

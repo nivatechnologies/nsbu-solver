@@ -10,6 +10,17 @@ decimal strings. Small array indices, dimensions, component counts, and the
 schema version remain JSON numbers.
 No cross-quantity maximum or other numerical reduction is introduced.
 
+`DiagnosticExportPlan::new` retains schema version 1 and its existing object
+shape. `DiagnosticExportPlan::new_v2` explicitly selects version 2, which adds
+`reconstructed_physical` to every event: six source domains, common layout and
+floors, all four quantities, all five raw `LocalError` records per quantity and
+all sixty peak witnesses. Version 2 context also records the complete admitted
+reconstructed-physical work ledger. Version 1 intentionally omits this newer
+field; the library `DiagnosticEvent` still retains it.
+The version 1 event keys and value definitions remain stable. Its context's
+coordinator reservation numbers can increase because the driver now admits the
+additional consumer; byte-for-byte document identity is therefore not claimed.
+
 `DiagnosticExportPlan::new` binds the owned `StartupProfile` arrays to the
 admitted diagnostic family and probe identities. Its checked reservation uses
 an auditable per-event ceiling of 4,096 binary64 fields at 32 bytes, 1,024
@@ -29,7 +40,9 @@ has 20 physical and 10 pressure `LocalError` records, 60 physical extrema, and
 24 regional quantities with one global plus at most six measured regional
 `LocalError` records. This remains below 1,500 binary64 fields. A residual event
 adds six norm/domain records and fixed reconstruction geometry and remains below
-512. Both are below 128 complete clocks and 16 hashes. The published ceilings
+512. Version 2 adds 20 physical errors and 60 extrema to either variant, leaving
+accepted events below 1,700 binary64 fields and residual events below 700. Both
+are below 128 complete clocks and 16 hashes. The published ceilings
 retain more than twofold cardinality margin. Fewer than 4,096 keyed values with
 keys no longer than 32 bytes fit below half the fixed-text allowance; punctuation
 and fixed variant labels use the remaining half.

@@ -13,7 +13,9 @@ pub fn document<W: Write>(
     p: DiagnosticExportPlan,
     reports: &[DiagnosticEvent],
 ) -> Result<(), DiagnosticExportError> {
-    j.raw("{\"schema\":\"nsbu.diagnostic-event\",\"schema_version\":1,\"scientific_status\":\"UnqualifiedDiagnostic\",\"context\":")?;
+    j.raw("{\"schema\":\"nsbu.diagnostic-event\",\"schema_version\":")?;
+    j.usize(p.schema_version())?;
+    j.raw(",\"scientific_status\":\"UnqualifiedDiagnostic\",\"context\":")?;
     context::write(j, p)?;
     j.raw(",\"events\":[")?;
     for (i, e) in reports.iter().copied().enumerate() {
@@ -32,6 +34,10 @@ fn event<W: Write>(
 ) -> Result<(), DiagnosticExportError> {
     validate_event(p, index, e)?;
     event_header(j, e)?;
+    if p.schema_version() == 2 {
+        j.raw(",\"reconstructed_physical\":")?;
+        findings::probe_physical(j, e.reconstructed_physical())?;
+    }
     event_accepted(j, e)?;
     event_residual(j, e)?;
     j.raw("}")
@@ -42,11 +48,35 @@ fn validate_event(
     e: DiagnosticEvent,
 ) -> Result<(), DiagnosticExportError> {
     validate_top(p, index, e)?;
+    if p.schema_version() == 2 {
+        validate_probe_physical(p, e)?;
+    }
     if let Some(a) = e.accepted().sample() {
         validate_accepted(p, e, a)?
     }
     if let Some(r) = e.residual().sample() {
         validate_residual(p, e, r)?
+    }
+    Ok(())
+}
+fn validate_probe_physical(
+    p: DiagnosticExportPlan,
+    e: DiagnosticEvent,
+) -> Result<(), DiagnosticExportError> {
+    let sample = e.reconstructed_physical();
+    let quantities = crate::v2_experiment::probes::physical::PROBE_PHYSICAL_QUANTITIES;
+    if sample.clock() != e.clock()
+        || sample.identity() != p.probe_identity
+        || sample.reconstruction().clock() != e.probe().clock()
+        || sample.reconstruction().identity() != e.probe().identity()
+        || sample.origins() != e.probe().origins()
+        || sample.source_domains() != p.probe_domains
+        || sample.sample_layout() != p.settings.physical_samples
+        || sample.relative_floors().map(f64::to_bits)
+            != p.settings.physical_floors.map(f64::to_bits)
+        || sample.quantities().map(|item| item.quantity) != quantities
+    {
+        return Err(DiagnosticExportError::InvalidReport);
     }
     Ok(())
 }

@@ -50,6 +50,55 @@ pub fn physical<W: Write>(
     }
     j.raw("]}")
 }
+pub fn probe_physical<W: Write>(
+    j: &mut Json<W>,
+    s: crate::v2_experiment::probes::physical::ProbePhysicalSample,
+) -> Result<(), DiagnosticExportError> {
+    j.raw("{\"clock\":")?;
+    v::clock(j, s.clock())?;
+    j.raw(",\"identity\":")?;
+    j.hex(s.identity())?;
+    j.raw(",\"source_domains\":[")?;
+    for (index, domain) in s.source_domains().into_iter().enumerate() {
+        if index > 0 {
+            j.raw(",")?
+        }
+        v::domain(j, domain)?
+    }
+    j.raw("],\"sample_grid\":")?;
+    v::layout(j, s.sample_layout())?;
+    j.raw(",\"relative_floors\":")?;
+    v::f64_array(j, s.relative_floors())?;
+    j.raw(",\"quantities\":[")?;
+    for (index, quantity) in s.quantities().iter().enumerate() {
+        if index > 0 {
+            j.raw(",")?
+        }
+        j.raw("{\"quantity\":")?;
+        j.string(v::quantity(quantity.quantity))?;
+        j.raw(",\"comparisons\":")?;
+        local5(
+            j,
+            [quantity.pairs[0], quantity.pairs[1]],
+            [quantity.pairs[2], quantity.pairs[3]],
+            quantity.pairs[4],
+        )?;
+        j.raw(",\"extrema\":[")?;
+        for pair in 0..5 {
+            if pair > 0 {
+                j.raw(",")?
+            }
+            extrema(
+                j,
+                quantity
+                    .extrema(pair)
+                    .map_err(|_| DiagnosticExportError::InvalidReport)?,
+            )?
+        }
+        j.raw("]}")?
+    }
+    j.raw("]}")
+}
 fn physical_quantity<W: Write>(
     j: &mut Json<W>,
     q: crate::v2_experiment::physical::QuantityRefinement,
