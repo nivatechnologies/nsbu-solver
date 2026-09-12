@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "base_commit": "b1efef8872a21a0d51ec888b9ce3ab5e20a8af74",
+  "production_commit": "a5e03db5eb5505c3e1a040be576bbb641182158f",
+  "tested_tip": "0236d8e2d95e8bd91ba0e83ad901df16efcd36bb",
+  "status": "DiagnosticOnly",
+  "gauges": {
+    "clock2048_sha256": "f20eb0e9b15d3316640e039ce8afcd432ed562c895f6434fe9a19fa448d39a44",
+    "clock4096_sha256": "dff3b5075ca84c7c6698875e0613be4149bea7eafc000624231fda04cb25f84d",
+    "clock4096_preserved_bytes_identical": true,
+    "old_generated_prefix_bytes": 11921,
+    "old_generated_prefix_identical": true
+  },
+  "clock2048_python_study": {
+    "seconds": 12.63,
+    "maximum_rss_kib": 27648,
+    "profiles": 10,
+    "pressure_evaluations": 77450,
+    "maximum_root_iterations": 1724416,
+    "peak_reserved_bytes": 41418752
+  },
+  "reviewed_plan": {
+    "accepted_clocks": [0, 2048, 4096],
+    "grids": [12, 16, 24],
+    "steps": [64, 32, 16],
+    "force_samples": 24,
+    "force_workers": 12,
+    "pressure_samples": 48,
+    "endpoint": 4096,
+    "admitted": true,
+    "actual_measurement_clock": 0
+  },
+  "tiny_runtime": {
+    "grids": [4, 8, 12],
+    "steps": [128, 64, 32],
+    "force_samples": 12,
+    "pressure_samples": 24,
+    "actual_measurement_clocks": [0, 2048],
+    "seconds": 319.60,
+    "clock2048_branch2_pressure_rms": 32.92509043404963,
+    "clock2048_branch2_pressure_gradient_rms": 1463.2236641115041,
+    "state_hashes_unchanged": true,
+    "clock4096_runtime_measured": false
+  },
+  "tests": {
+    "final_python_generator": {"passed": 3, "failed": 0},
+    "final_rust_selected": {"passed": 3, "failed": 0},
+    "final_rust_tiny_midpoint": {"passed": 1, "failed": 0}
+  },
+  "python_coverage": {
+    "statements_covered": 99,
+    "statements_total": 107,
+    "branches_covered": 27,
+    "branches_total": 28,
+    "maximum_crap": 12.0,
+    "maximum_cognitive": 11,
+    "maximum_halstead_difficulty": 7.185483870967742
+  },
+  "rust_static": {
+    "changed_test_maximum_cyclomatic": 4.0,
+    "changed_test_maximum_cognitive": 4.0,
+    "changed_maximum_all_node_halstead_difficulty": 50.47846889952153,
+    "conservative_zero_coverage_maximum_crap": 20.0,
+    "whole_maximum_cyclomatic": 21.0,
+    "whole_maximum_cognitive": 21.0,
+    "whole_maximum_all_node_halstead_difficulty": 75.9295154185022,
+    "whole_maximum_file_lines": 477
+  },
+  "accepted_pde_windows": 0,
+  "claims_quadrature_enclosure": false,
+  "claims_pde_qualification": false
+}

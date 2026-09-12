@@ -1,0 +1,13 @@
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m reference.verify_pressure_mean --time 1/512 --panels 32
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m reference.generate_pressure_gauge_rust <clock0 clock64 clock128 clock2048 clock4096> --output <temporary>
+rustfmt --edition 2021 <temporary>; cmp <temporary> crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/gauge_data.rs
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m pytest reference/tests/test_generate_pressure_gauge_rust.py reference/tests/test_pressure_gauge.py reference/tests/test_pressure_study.py -q
+/home/todd/.local/bin/black --check reference/generate_pressure_gauge_rust.py reference/tests/test_generate_pressure_gauge_rust.py
+/mnt/niva-array/nsbu-solver/.venv/bin/basedpyright reference/generate_pressure_gauge_rust.py reference/tests/test_generate_pressure_gauge_rust.py
+/mnt/niva-array/nsbu-solver/.venv/bin/complexipy reference/generate_pressure_gauge_rust.py reference/tests/test_generate_pressure_gauge_rust.py
+cargo test -p nsbu-benchmarks --test v2_pressure_reference midpoint_gauge_measures_tiny_nonzero_states_without_mutation --locked -- --exact --nocapture
+cargo test -p nsbu-benchmarks --test v2_pressure_reference <selected endpoint/import test> --locked -- --exact --nocapture
+cargo clippy -p nsbu-benchmarks --test v2_pressure_reference --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json
+/mnt/niva-array/nsbu-solver/.venv/bin/python tools/check_repository.py

@@ -1,0 +1,25 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.08s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 1 test
+test exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.02s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 1 test
+clock=0 branch2_pressure_rms=0 branch2_gradient_rms=0
+test reviewed_endpoint_schedule_admits_and_measures_only_the_rest_state ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 2.28s
+
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.02s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 1 test
+test reordered_gauges_and_short_joint_cap_are_refused ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+

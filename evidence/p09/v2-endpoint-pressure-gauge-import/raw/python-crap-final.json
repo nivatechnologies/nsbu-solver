@@ -1,0 +1,105 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "validate_profile",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "validate_report",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "validate_summary",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "integer",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "read_report",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "expected_profiles",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "emit",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "optional_string",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "option",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "emit_estimates",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "emit_changes",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "emit_one",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "rust_string",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "reference/generate_pressure_gauge_rust.py",
+      "function": "main",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    }
+  ],
+  "maximum": 12.0
+}
