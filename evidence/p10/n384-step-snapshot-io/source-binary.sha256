@@ -1,0 +1,3 @@
+8e0847905d149c237a7ee279ee78e375a1c8cb415c10f326e4eca6ce70b7b1d0  target/n384-snapshot-profile/release/p10-n384-step-snapshot-io
+a19c7d68d6ba654eaedcb074cb137a2b31322ca22a343c5faf6bc78f35509415  evidence/p10/n384-step-snapshot-io/harness/src/main.rs
+f97cf2ad09ad1c4b6e3562b16ac84aa360cbb7d48c4fe7594a3ccb40e5a7e9de  evidence/p10/n384-step-snapshot-io/harness/Cargo.lock

@@ -1,0 +1,13 @@
+{
+  "tests": "5 passed",
+  "fmt": "pass",
+  "clippy_D_warnings": "pass",
+  "file_lines": 434,
+  "maximum_cyclomatic": 9,
+  "maximum_cognitive": 2,
+  "maximum_halstead_difficulty": 19.25,
+  "line_coverage_percent": 89.76109215,
+  "branch_coverage_percent": 80.0,
+  "maximum_crap": 20.0,
+  "crap_violations": 0
+}

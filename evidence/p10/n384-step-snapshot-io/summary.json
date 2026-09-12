@@ -1,0 +1,67 @@
+{
+  "schema": "p10-n384-step-snapshot-io-v1",
+  "status": "complete_positive_harness_feasibility",
+  "field": "prepared_zero_not_integrated",
+  "layout": [384, 384, 384],
+  "half_values_per_component": 28459008,
+  "coefficient_bytes": 1366032384,
+  "snapshot_file_bytes": 1366032589,
+  "per_step_bound_bytes": 1366106317,
+  "profiles": {
+    "64_steps": {
+      "bound_bytes": 87430804288,
+      "cap_bytes": 137438953472,
+      "admitted": true
+    },
+    "128_steps_under_128_gib": {
+      "bound_bytes": 174861608576,
+      "cap_bytes": 137438953472,
+      "admitted": false
+    },
+    "128_steps_under_256_gib": {
+      "bound_bytes": 174861608576,
+      "cap_bytes": 274877906944,
+      "admitted": true
+    }
+  },
+  "filesystem_available_before_bytes": 7300024086528,
+  "measurement": {
+    "write_file_sync_seconds": 3.284829158,
+    "rename_directory_sync_seconds": 0.001257468,
+    "cached_hash_validation_seconds": 1.436919749,
+    "process_wall_seconds": 4.75,
+    "user_seconds": 2.40,
+    "system_seconds": 0.86,
+    "maximum_rss_kib": 16380,
+    "proc_write_bytes": 1366044672,
+    "proc_read_bytes": 0,
+    "sha256": "65db2aea053eb94f3d5b9c5c2dd8bd4be8dae247064a40cc13316441afa54460",
+    "hash_validated": true,
+    "atomic_directory_publish": true,
+    "bulk_removed": true,
+    "contention": "active local N192 and N256 endpoints"
+  },
+  "comparison": {
+    "n384_projected_step_seconds": 6712,
+    "durable_write_fraction": 0.0004893965,
+    "complete_process_fraction": 0.0007076877,
+    "decision": "useful_for_opt_in_every_step_offline_diagnostic_artifacts"
+  },
+  "quality": {
+    "tests_passed": 5,
+    "file_lines": 434,
+    "maximum_cyclomatic": 9,
+    "maximum_cognitive": 2,
+    "maximum_halstead_difficulty": 19.25,
+    "line_coverage_percent": 89.76109215,
+    "branch_coverage_percent": 80.0,
+    "maximum_crap": 20.0,
+    "crap_violations": 0
+  },
+  "limitations": [
+    "prepared field is not an integrated trajectory state",
+    "cached validation is not a cold-read benchmark",
+    "real finite-value endian encoding cost is not measured",
+    "artifact schema is nonresumable"
+  ]
+}
