@@ -1,5 +1,6 @@
 use super::{
-    context, findings, json::Json, values as v, DiagnosticExportError, DiagnosticExportPlan,
+    context, coverage, findings, json::Json, values as v, DiagnosticExportError,
+    DiagnosticExportPlan,
 };
 use crate::v2_experiment::{
     diagnostic::{AcceptedSchedule, DiagnosticEvent, ResidualSchedule},
@@ -42,7 +43,7 @@ fn event<W: Write>(
         j.raw(",\"reconstructed_reference\":")?;
         findings::probe_reference(j, e.reconstructed_reference())?;
     }
-    event_accepted(j, e)?;
+    event_accepted(j, p, e)?;
     event_residual(j, e)?;
     j.raw("}")
 }
@@ -211,6 +212,7 @@ fn validate_accepted(
     {
         return Err(DiagnosticExportError::InvalidReport);
     }
+    coverage::validate(p, e, a.nominal_coverage)?;
     validate_diagnostic_settings(p, e, a)
 }
 fn validate_diagnostic_settings(
@@ -293,6 +295,7 @@ fn event_header<W: Write>(
 }
 fn event_accepted<W: Write>(
     j: &mut Json<W>,
+    p: DiagnosticExportPlan,
     e: DiagnosticEvent,
 ) -> Result<(), DiagnosticExportError> {
     j.raw(",\"accepted\":")?;
@@ -310,6 +313,10 @@ fn event_accepted<W: Write>(
             findings::pressure(j, a.pressure)?;
             j.raw(",\"regional_reference\":")?;
             findings::regional(j, a.regional_reference)?;
+            if p.schema_version() == 2 {
+                j.raw(",\"nominal_coverage\":")?;
+                coverage::write(j, a.nominal_coverage)?;
+            }
             j.raw(",\"node_binding\":")?;
             findings::binding(j, a.node_binding)?;
             j.raw("}}")?

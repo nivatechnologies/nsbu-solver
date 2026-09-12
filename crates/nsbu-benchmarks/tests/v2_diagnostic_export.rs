@@ -136,6 +136,7 @@ fn diagnostic_export_keeps_pressure_n_separate_from_residual_force_m() {
         pressure_floors: [1e-8, 1e-7],
         reference_floors: [1e-8, 1e-7, 1e-6, 1e-7],
         regional_root_budget: 128,
+        coverage_panels: [256, 512, 1024],
     };
     let plan =
         DiagnosticPlan::new(family, probes, profile.residual_times(), settings, CAP).unwrap();
@@ -174,6 +175,18 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     .unwrap();
     let mismatched_pressure_export =
         DiagnosticExportPlan::new_v2(&profile, mismatched_pressure_diagnostic, CAP).unwrap();
+    let mut mismatched_coverage_settings = diagnostic.diagnostic_settings();
+    mismatched_coverage_settings.coverage_panels = [128, 256, 512];
+    let mismatched_coverage_diagnostic = DiagnosticPlan::new(
+        diagnostic.family_plan(),
+        diagnostic.probe_plan(),
+        diagnostic.residual_times(),
+        mismatched_coverage_settings,
+        CAP,
+    )
+    .unwrap();
+    let mismatched_coverage_export =
+        DiagnosticExportPlan::new_v2(&profile, mismatched_coverage_diagnostic, CAP).unwrap();
     assert_eq!(
         (export.schema_version(), export_v2.schema_version()),
         (1, 2)
@@ -203,6 +216,11 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert!(untouched.is_empty());
     assert!(matches!(
         write_json(mismatched_pressure_export, driver.reports(), &mut untouched),
+        Err(DiagnosticExportError::InvalidReport)
+    ));
+    assert!(untouched.is_empty());
+    assert!(matches!(
+        write_json(mismatched_coverage_export, driver.reports(), &mut untouched),
         Err(DiagnosticExportError::InvalidReport)
     ));
     assert!(untouched.is_empty());
@@ -236,6 +254,13 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
         .is_none());
     assert!(decoded["context"]["coordinator_reservation"]
         .get("reconstructed_reference_work")
+        .is_none());
+    assert!(decoded["context"].get("coverage_panels").is_none());
+    assert!(decoded["context"]["coordinator_reservation"]
+        .get("nominal_coverage_work")
+        .is_none());
+    assert!(decoded["events"][0]["accepted"]["sample"]
+        .get("nominal_coverage")
         .is_none());
     assert_eq!(decoded["scientific_status"], "UnqualifiedDiagnostic");
     assert_eq!(
@@ -280,6 +305,19 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert!(v2_events
         .iter()
         .all(|event| event.get("reconstructed_reference").is_some()));
+    assert_eq!(
+        decoded_v2["context"]["coverage_panels"],
+        serde_json::json!([256, 512, 1024])
+    );
+    assert_eq!(
+        v2_events
+            .iter()
+            .filter(|event| event["accepted"]["sample"]
+                .get("nominal_coverage")
+                .is_some())
+            .count(),
+        3
+    );
     assert_eq!(
         decoded_v2["context"]["coordinator_reservation"]["reconstructed_physical_work"]["attempts"],
         diagnostic.bounds().probe_physical.attempts.to_string()
@@ -333,6 +371,21 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert_eq!(
         reference_reservation["binding_checks"],
         reference_work.binding_checks.to_string()
+    );
+    let coverage_work = diagnostic.bounds().coverage;
+    let coverage_reservation =
+        &decoded_v2["context"]["coordinator_reservation"]["nominal_coverage_work"];
+    assert_eq!(
+        coverage_reservation["attempts"],
+        coverage_work.attempts.to_string()
+    );
+    assert_eq!(
+        coverage_reservation["geometry_evaluations"],
+        coverage_work.geometry_evaluations.to_string()
+    );
+    assert_eq!(
+        coverage_reservation["metadata_visits"],
+        coverage_work.metadata_visits.to_string()
     );
     v2_diagnostic_export_oracle::document(&decoded_v2, driver.reports());
 

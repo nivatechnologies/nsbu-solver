@@ -106,7 +106,7 @@ impl<'a> CoverageFamilyWorkspace<'a> {
     ) -> Result<CoverageFamilySample, CoverageFamilyError> {
         let clock = self.validate_accepted_state(family, regional)?;
         self.validate_regional_policy(regional)?;
-        let sampling = metadata(regional, clock, self.plan.regional_floors)?;
+        let sampling = sampling_metadata(regional, clock, self.plan.regional_floors)?;
         let core = self
             .plan
             .coverage
@@ -158,7 +158,7 @@ impl<'a> CoverageFamilyWorkspace<'a> {
         Ok(())
     }
 }
-fn metadata(
+pub(crate) fn sampling_metadata(
     regional: RegionalTrackingSample,
     clock: TickClock,
     floors: [f64; 4],

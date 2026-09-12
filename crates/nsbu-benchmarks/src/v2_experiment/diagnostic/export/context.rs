@@ -111,7 +111,12 @@ fn context_diagnostics<W: Write>(
     j.raw(",\"reference_floors\":")?;
     v::f64_array(j, d.reference_floors)?;
     j.raw(",\"regional_root_budget\":")?;
-    j.counter(d.regional_root_budget)
+    j.counter(d.regional_root_budget)?;
+    if p.schema_version() == 2 {
+        j.raw(",\"coverage_panels\":")?;
+        v::usize_array(j, d.coverage_panels)?;
+    }
+    Ok(())
 }
 fn context_reservations<W: Write>(
     j: &mut Json<W>,
@@ -131,9 +136,22 @@ fn context_reservations<W: Write>(
         reconstructed_physical_work(j, p.coordinator.probe_physical)?;
         reconstructed_pressure_work(j, p.coordinator.probe_pressure)?;
         reconstructed_reference_work(j, p.coordinator.probe_reference)?;
+        nominal_coverage_work(j, p.coordinator.coverage)?;
     }
     j.raw("}")?;
     export_reservation(j, p)
+}
+fn nominal_coverage_work<W: Write>(
+    j: &mut Json<W>,
+    work: crate::v2_experiment::coverage::CoverageFamilyWork,
+) -> Result<(), DiagnosticExportError> {
+    j.raw(",\"nominal_coverage_work\":{\"attempts\":")?;
+    j.counter(work.attempts)?;
+    j.raw(",\"geometry_evaluations\":")?;
+    j.counter(work.geometry_evaluations)?;
+    j.raw(",\"metadata_visits\":")?;
+    j.counter(work.metadata_visits)?;
+    j.raw("}")
 }
 fn reconstructed_reference_work<W: Write>(
     j: &mut Json<W>,

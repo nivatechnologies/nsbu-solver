@@ -31,6 +31,7 @@ pub struct CoverageFamilyBounds {
 pub struct CoverageFamilyPlan<'a> {
     pub(super) family: FamilyPlan<'a>,
     pub(super) coverage: [CoveragePlan; 3],
+    pub(super) panels: [usize; 3],
     pub(super) regional_samples: nsbu_solver::domain::Layout,
     pub(super) regional_floors: [f64; 4],
     pub(super) bounds: CoverageFamilyBounds,
@@ -78,6 +79,7 @@ impl<'a> CoverageFamilyPlan<'a> {
         Ok(Self {
             family,
             coverage,
+            panels,
             regional_samples: regional.tracking_plan().sample_layout(),
             regional_floors: regional.tracking_plan().relative_floors(),
             bounds: CoverageFamilyBounds {
@@ -95,6 +97,10 @@ impl<'a> CoverageFamilyPlan<'a> {
     /// Immutable accepted-family policy bound to this coverage schedule.
     pub fn family_plan(self) -> FamilyPlan<'a> {
         self.family
+    }
+    /// Nested coarse Simpson panel counts; each measurement also evaluates its doubled grid.
+    pub fn panels(self) -> [usize; 3] {
+        self.panels
     }
 }
 fn work(panels: [usize; 3]) -> Result<CoverageFamilyWork, SolverError> {

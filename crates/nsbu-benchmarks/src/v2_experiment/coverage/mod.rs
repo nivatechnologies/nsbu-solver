@@ -5,4 +5,5 @@ mod workspace;
 
 pub use plan::{CoverageFamilyBounds, CoverageFamilyPlan, CoverageFamilyWork};
 pub use report::{CoverageFamilySample, CoverageSamplingMetadata};
+pub(crate) use workspace::sampling_metadata;
 pub use workspace::{CoverageFamilyError, CoverageFamilyWorkspace};

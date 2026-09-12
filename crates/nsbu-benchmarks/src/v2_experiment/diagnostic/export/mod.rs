@@ -1,5 +1,6 @@
 //! Versioned, bounded JSON export of complete unqualified diagnostic events.
 mod context;
+mod coverage;
 mod event;
 mod findings;
 mod json;

@@ -122,9 +122,44 @@ fn accepted(j: &Value, e: DiagnosticEvent) {
             physical(&x["physical"], a.physical);
             pressure(&x["pressure"], a.pressure);
             regional(&x["regional_reference"], a.regional_reference);
+            if !x["nominal_coverage"].is_null() {
+                nominal_coverage(&x["nominal_coverage"], a.nominal_coverage);
+            }
             binding(&x["node_binding"], a.node_binding)
         }
         _ => panic!("invalid accepted variant"),
+    }
+}
+fn nominal_coverage(
+    j: &Value,
+    sample: nsbu_benchmarks::v2_experiment::coverage::CoverageFamilySample,
+) {
+    clock(&j["clock"], sample.clock());
+    assert_eq!(j["family_identity"], hex(sample.family_identity()));
+    assert_eq!(j["tracking_identity"], hex(sample.tracking_identity()));
+    for (name, values) in [("core", sample.core()), ("annulus", sample.annulus())] {
+        for (index, value) in values.into_iter().enumerate() {
+            assert_eq!(j[name][index]["status"], format!("{:?}", value.status));
+            assert_eq!(j[name][index]["fraction"], value.fraction);
+            assert_eq!(j[name][index]["refinement_change"], value.refinement_change);
+            assert_eq!(j[name][index]["panels"], value.panels.to_string());
+            assert_eq!(j[name][index]["evaluations"], value.evaluations.to_string());
+        }
+    }
+    let metadata = sample.sampling();
+    layout(&j["sampling"]["layout"], metadata.layout);
+    assert_eq!(j["sampling"]["points"], metadata.points.to_string());
+    words(&j["sampling"]["relative_floors"], &metadata.relative_floors);
+    for (key, values) in [
+        ("sampled_core", metadata.sampled_core),
+        ("sampled_annulus", metadata.sampled_annulus),
+    ] {
+        for (index, value) in values.into_iter().enumerate() {
+            match value {
+                Some(count) => assert_eq!(j["sampling"][key][index], count.to_string()),
+                None => assert!(j["sampling"][key][index].is_null()),
+            }
+        }
     }
 }
 fn residual(j: &Value, e: DiagnosticEvent) {
