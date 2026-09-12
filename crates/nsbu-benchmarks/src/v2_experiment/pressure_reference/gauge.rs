@@ -18,9 +18,9 @@ pub struct GaugeEstimate {
 /// Empirical changes retained separately; none is promoted to a certified bound.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct GaugeChanges {
-    /// Joint 8-to-16 panel change.
+    /// Joint coarse-to-middle panel change; actual counts are in the estimates.
     pub coarse_to_middle: &'static str,
-    /// Joint 16-to-32 panel change.
+    /// Joint middle-to-fine panel change; actual counts are in the estimates.
     pub middle_to_fine: &'static str,
     /// Axial-only comparison against the finest joint result.
     pub axial_only_to_fine: &'static str,

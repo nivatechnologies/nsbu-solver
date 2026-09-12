@@ -78,6 +78,8 @@ def expected_profiles(
 ) -> list[tuple[int, int, int]]:
     """Derive the fixed five geometries at both admitted precisions."""
     base = integer(profiles[0].get("axial_panels"))
+    if base < 2 or base > 256 or base % 2:
+        raise ValueError("base panel count must be even and within [2,256]")
     geometry = (
         (base, base),
         (2 * base, 2 * base),
