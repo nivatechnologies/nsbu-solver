@@ -72,3 +72,45 @@ def test_malformed_shape_time_and_scalar_types_refuse() -> None:
         optional_string(3)
     assert integer(8) == 8
     assert optional_string(None) is None
+
+
+def test_changed_profile_identity_work_and_summary_refuse() -> None:
+    """Hash-bound metadata generation refuses every changed profile layer."""
+    with TemporaryDirectory() as raw:
+        directory = Path(raw)
+        original = dict(object_value(decode(ARTIFACTS[1].read_text())))
+        for key, value, message in (
+            ("time", "1/8192", "mixed case or clock"),
+            ("precision", 120, "profile geometry or precision mismatch"),
+            ("domain", "different domain", "profile convention mismatch"),
+            ("collar_pressure_evaluations", 0, "profile work or storage mismatch"),
+            ("cap_bytes", 1, "profile cap below reservation"),
+        ):
+            report = dict(original)
+            profiles = [
+                dict(object_value(item)) for item in array_value(report["profiles"])
+            ]
+            profiles[0][key] = value
+            report["profiles"] = profiles
+            changed = directory / f"changed-{key}.json"
+            changed.write_text(json.dumps(report))
+            with pytest.raises(ValueError, match=message):
+                emit_one(0, changed)
+
+        for key, value, message in (
+            ("case_sha256", "0" * 64, "case hash mismatch"),
+            ("pressure_evaluations", 0, "summary profile mismatch"),
+        ):
+            report = dict(original)
+            report[key] = value
+            changed = directory / f"changed-{key}.json"
+            changed.write_text(json.dumps(report))
+            with pytest.raises(ValueError, match=message):
+                emit_one(0, changed)
+
+        report = dict(original)
+        report["profiles"] = array_value(report["profiles"])[:-1]
+        changed = directory / "short-profiles.json"
+        changed.write_text(json.dumps(report))
+        with pytest.raises(ValueError, match="ten declared profiles"):
+            emit_one(0, changed)
