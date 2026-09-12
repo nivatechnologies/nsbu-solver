@@ -1,0 +1,12 @@
+[package]
+name = "p10-avx-row-parallel-spike"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+rustfft = "=6.4.1"
+sha2 = "=0.10.9"
+stats_alloc = "=0.1.10"

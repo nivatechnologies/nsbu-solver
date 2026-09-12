@@ -1,0 +1,13 @@
+date_utc=2026-09-12
+architecture=x86_64
+numa_nodes=1
+logical_cpus=128
+physical_cores=64
+benchmark_cpu_set=52-63
+benchmark_transform_workers=12
+scheduler_priority=nice_19
+virtual_memory_limit_kib=25165824
+command_timeout_seconds=1500
+concurrent_endpoint_processes_preserved=2
+concurrent_endpoint_rss_approx_gib=106
+contention_qualification=both preserved endpoint processes were unbound and CPU-active during actual-size profiles
