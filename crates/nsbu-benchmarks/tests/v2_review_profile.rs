@@ -15,6 +15,7 @@ use nsbu_solver::{
     verification::{
         budget::{Budget, CHANNELS},
         policy::ObservablePolicy,
+        reconstruction::{OffStageProbe, ProbeRefinement},
         refinement::{Requirement, Rule},
         review::ReviewStatus,
         times::TestedTimes,
@@ -63,6 +64,11 @@ fn geometry_from(plan: ProbePlan<'_>) -> ReviewGeometry {
 }
 fn tick(elapsed: u128) -> TickClock {
     TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap()
+}
+fn refinement(probe: u128, nodes: [[u128; 3]; 3]) -> ProbeRefinement {
+    let probe = tick(probe);
+    let levels = nodes.map(|history| OffStageProbe::new(history.map(tick), probe).unwrap());
+    ProbeRefinement::new(levels).unwrap()
 }
 fn caps(bytes: usize) -> ProfileCaps {
     ProfileCaps {
@@ -187,10 +193,70 @@ fn caller_manifests_must_be_strictly_nested_complete_and_node_bound() {
         ProfileError::InvalidGeometry
     );
     let mut wrong_nodes = *geometry.probes();
-    wrong_nodes.swap(0, 1);
+    wrong_nodes[0] = refinement(7, [[0, 64, 128], [0, 32, 64], [0, 8, 16]]);
     assert_eq!(
         ReviewGeometry::from_manifests(plan, coarse, middle, fine, wrong_nodes).unwrap_err(),
         ProfileError::InvalidGeometry
+    );
+}
+
+#[test]
+fn independent_first_window_manifests_bind_without_allocating_a_trajectory() {
+    let startup = StartupProfile::new().unwrap();
+    let original = startup.plan(CAP).unwrap();
+    let accepted = [0, 2048, 4096].map(tick);
+    let middle = [0, 2047, 2048, 4095, 4096].map(tick);
+    let fine = [0, 7, 2047, 2048, 3071, 4095, 4096].map(tick);
+    let mut settings = original.family_plan().settings();
+    settings.endpoint = 4096;
+    let family = FamilyPlan::new(
+        settings,
+        TestedTimes::new(&accepted, accepted.len()).unwrap(),
+        CAP,
+    )
+    .unwrap();
+    let plan = ProbePlan::new(
+        family,
+        TestedTimes::new(&fine, fine.len()).unwrap(),
+        fine.len(),
+        CAP,
+    )
+    .unwrap();
+    let probes = [
+        refinement(7, [[0, 64, 128], [0, 32, 64], [0, 16, 32]]),
+        refinement(
+            2047,
+            [[1920, 1984, 2048], [1984, 2016, 2048], [2016, 2032, 2048]],
+        ),
+        refinement(
+            3071,
+            [[2944, 3008, 3072], [3008, 3040, 3072], [3040, 3056, 3072]],
+        ),
+        refinement(
+            4095,
+            [[3968, 4032, 4096], [4032, 4064, 4096], [4064, 4080, 4096]],
+        ),
+    ];
+    let first_window =
+        ReviewGeometry::from_manifests(plan, accepted, middle, fine, probes).unwrap();
+    let policies = policies();
+    let admitted = AdmittedProfile::new(
+        &first_window,
+        input(&first_window, &policies),
+        caps(usize::MAX),
+    )
+    .unwrap();
+    let startup_geometry = geometry();
+    let startup_profile = AdmittedProfile::new(
+        &startup_geometry,
+        input(&startup_geometry, &policies),
+        caps(usize::MAX),
+    )
+    .unwrap();
+    assert_ne!(admitted.identity(), startup_profile.identity());
+    assert_eq!(
+        admitted.status(),
+        ProfileStatus::PartialUnpopulatedDiagnostic
     );
 }
 
