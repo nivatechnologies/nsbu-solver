@@ -191,7 +191,7 @@ fn node_json(
     format!(
         concat!(
             "{{\n  \"schema\": \"p10-avx-scheduled-node-v1\",\n",
-            "  \"identity\": \"{}\",\n  \"resumable\": false,\n",
+            "  \"identity\": {},\n  \"resumable\": false,\n",
             "  \"clock\": {},\n  \"epoch\": {},\n  \"accepted_steps\": {},\n",
             "  \"coefficient_bytes\": {},\n  \"state_sha256\": \"{}\",\n",
             "  \"timing\": {{\"observer\": {:.9}, \"force\": {:.9}, ",
@@ -203,7 +203,7 @@ fn node_json(
             "\"stretching\": {:.17e}, \"enstrophy_dissipation\": {:.17e}, ",
             "\"vorticity_forcing\": {:.17e}}}\n}}\n"
         ),
-        record.identity,
+        json_string(record.identity),
         state.clock().elapsed(),
         state.epoch().0,
         state.accepted_steps(),
@@ -419,7 +419,7 @@ mod tests {
             &root,
             &state,
             NodeRecord {
-                identity: "test",
+                identity: "test \"identity\"\nline",
                 balance: BalanceSample::REST,
                 observer_seconds: 0.0,
                 force_seconds: 0.0,
@@ -439,6 +439,8 @@ mod tests {
         assert!(published.join("state.bin").exists());
         assert!(published.join("record.json").exists());
         assert!(published.join("attempt.json").exists());
+        let record = fs::read_to_string(published.join("record.json")).unwrap();
+        assert!(record.contains("\"identity\": \"test \\\"identity\\\"\\nline\""));
         assert!(!partial.exists());
         fs::remove_dir_all(root).unwrap();
     }
