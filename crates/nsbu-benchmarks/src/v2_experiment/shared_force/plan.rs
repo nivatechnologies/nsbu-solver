@@ -48,8 +48,12 @@ pub struct SharedForceWork {
     pub scalar_transforms: usize,
     /// Maximum exact-clock lookup comparisons.
     pub clock_comparisons: usize,
-    /// Conservatively charged copied coefficient words.
+    /// Conservative whole identity/settings/domain/output checks.
+    pub binding_checks: usize,
+    /// Maximum complex words present in completed caller outputs.
     pub coefficient_words_copied: usize,
+    /// Zero-fill, source-read and destination-write visits in strict-band transfer.
+    pub transfer_visits: usize,
 }
 
 /// Persistent, construction-peak and caller-owned reservations.
@@ -261,7 +265,9 @@ fn work_bounds(
         provider_work_units: multiply(plan.provider.work_units, clocks)?,
         scalar_transforms: multiply(plan.provider.scalar_transforms, clocks)?,
         clock_comparisons: multiply(clocks, plan.maximum_attempts)?,
+        binding_checks: multiply(16, plan.maximum_attempts)?,
         coefficient_words_copied: multiply(words, plan.maximum_attempts)?,
+        transfer_visits: multiply(multiply(words, 3)?, plan.maximum_attempts)?,
     })
 }
 

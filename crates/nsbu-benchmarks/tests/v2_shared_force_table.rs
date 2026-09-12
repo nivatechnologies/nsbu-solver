@@ -187,6 +187,11 @@ fn admission_binds_positive_ordered_manifest_resources_and_full_provider_identit
     assert!(plan.bounds().caller_manifest_bytes >= std::mem::size_of::<SharedForceClock>());
     assert!(plan.bounds().construction_peak_bytes > plan.bounds().storage_bytes);
     assert!(plan.bounds().joint_peak_bytes >= plan.bounds().construction_peak_bytes);
+    assert_eq!(plan.bounds().work.binding_checks, 4 * 16);
+    assert_eq!(
+        plan.bounds().work.transfer_visits,
+        4 * 9 * domains()[2].layout().half_len()
+    );
 
     let altered = SharedForceTablePlan::new(settings(24), domains(), &manifest, 4, CAP).unwrap();
     assert_ne!(plan.identity(), altered.identity());
