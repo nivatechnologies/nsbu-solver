@@ -1,0 +1,44 @@
+Run only after repeating the plan's memory/disk admission checks. OUTPUT_PARENT must
+already exist, while OUTPUT_PARENT/state must not exist. LOG_DIR must already
+exist and must be outside OUTPUT_PARENT/state.
+
+BIN=/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/deployment/569fd0ced7a755b1f6c066a7c00016f537fbc4bf/p10-avx-matched-n192
+WATCHDOG=/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-n384-endpoint-prep/pgid-watchdog-v2.sh
+OUTPUT_PARENT=<absolute-existing-run-parent>
+LOG_DIR=<absolute-existing-log-directory>
+DEADLINE_EPOCH=1789262400
+
+test "$(sha256sum "$BIN" | awk '{print $1}')" = e08b00e6ee420a20a6541b1f4b386fe19e7db0dbace3fdeaf5c9e0ff1689324b
+test "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = 4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b
+test ! -e "$OUTPUT_PARENT/state"
+setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" "$BIN" run "$OUTPUT_PARENT/state" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
+TIME_PID=$!
+
+# Bind the watchdog to the full solver process identity, not the time parent.
+# Poll briefly until exactly one direct child appears; refuse ambiguity.
+SOLVER_PID=
+for _ in $(seq 1 100); do
+    CHILDREN=$(pgrep -P "$TIME_PID" || true)
+    if test "$(printf '%s\n' "$CHILDREN" | sed '/^$/d' | wc -l)" -eq 1; then
+        SOLVER_PID=$CHILDREN
+        break
+    fi
+    sleep 0.05
+done
+test -n "$SOLVER_PID"
+PROC_STAT=$(cat "/proc/$SOLVER_PID/stat")
+PROC_REST=${PROC_STAT##*) }
+set -- $PROC_REST
+test "$3" = "$TIME_PID"
+PROCESS_GROUP=$3
+STARTTIME=${20}
+CMDLINE_SHA256=$(sha256sum "/proc/$SOLVER_PID/cmdline" | awk '{print $1}')
+setsid "$WATCHDOG" "$SOLVER_PID" "$PROCESS_GROUP" "$STARTTIME" "$CMDLINE_SHA256" "$DEADLINE_EPOCH" "$LOG_DIR/watchdog.log" >"$LOG_DIR/watchdog.stdout" 2>"$LOG_DIR/watchdog.stderr" &
+WATCHDOG_PID=$!
+
+Record TIME_PID, SOLVER_PID, PROCESS_GROUP, STARTTIME, CMDLINE_SHA256,
+WATCHDOG_PID, UTC start, DEADLINE_EPOCH, source/plan/binary/watchdog hashes, and
+the launch-time memory/disk admission snapshot before considering the launch
+provenanced. The deadline is 2026-09-13T01:20:00Z. The watchdog sends TERM to
+the whole solver process group and KILL 60 seconds later if the exact solver
+identity remains.

@@ -1,0 +1,13 @@
+{
+  "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "n192_focused_tests": {"passed": 19, "failed": 0},
+  "n256_focused_tests": {"passed": 19, "failed": 0},
+  "cargo_fmt_check": "passed",
+  "strict_all_target_clippy_n192": "passed",
+  "strict_all_target_clippy_n256": "passed",
+  "max_function_cyclomatic": 16,
+  "max_function_cognitive": 7,
+  "max_function_halstead_difficulty": 26.833333333333332,
+  "max_source_file_lines": 499,
+  "coverage": "not rerun for this schedule/profile-only feature freeze; no coverage percentage claim"
+}
