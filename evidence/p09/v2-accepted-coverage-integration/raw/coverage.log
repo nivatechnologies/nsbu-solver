@@ -1,0 +1,44 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling cfg-if v1.0.4
+   Compiling serde_core v1.0.229
+   Compiling cpufeatures v0.2.17
+   Compiling serde_json v1.0.145
+   Compiling ryu v1.0.23
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling stats_alloc v0.1.10
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 8.88s
+     Running tests/v2_diagnostic_export.rs (target/llvm-cov-final-v3/llvm-cov-target/debug/deps/v2_diagnostic_export-d37d1c60b77c0f37)
+
+running 3 tests
+test diagnostic_export_keeps_pressure_n_separate_from_residual_force_m ... ok
+test diagnostic_export_rejects_nonprofile_accepted_and_probe_schedules ... ok
+test diagnostic_export_complete_profile_preserves_every_raw_finding has been running for over 60 seconds
+test diagnostic_export_complete_profile_preserves_every_raw_finding ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 616.23s
+
+     Running tests/v2_region_coverage.rs (target/llvm-cov-final-v3/llvm-cov-target/debug/deps/v2_region_coverage-bd2683ffde43648c)
+
+running 3 tests
+test admission_requires_nested_panels_and_joint_cap ... ok
+test actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state ... ok
+test fresh_unpublished_family_rejects_a_legitimate_same_plan_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.57s
+
+
+    Finished report saved to work/p09-accepted-coverage-integration/final-v3/coverage.json

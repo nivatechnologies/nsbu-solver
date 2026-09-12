@@ -1,0 +1,4 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.30s
+     Running tests/v2_diagnostic_coordinator_allocation.rs (target/debug/deps/v2_diagnostic_coordinator_allocation-a85bc3c7334e481a)
+v2 diagnostic admission=0 construction_bytes=64022624 joint_bytes=74750488 events=7 execution_allocations=0

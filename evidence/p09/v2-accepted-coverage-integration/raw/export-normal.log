@@ -1,0 +1,12 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.35s
+     Running tests/v2_diagnostic_export.rs (target/debug/deps/v2_diagnostic_export-d37d1c60b77c0f37)
+
+running 3 tests
+test diagnostic_export_keeps_pressure_n_separate_from_residual_force_m ... ok
+test diagnostic_export_rejects_nonprofile_accepted_and_probe_schedules ... ok
+test diagnostic_export_complete_profile_preserves_every_raw_finding has been running for over 60 seconds
+test diagnostic_export_complete_profile_preserves_every_raw_finding ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 105.30s
+
