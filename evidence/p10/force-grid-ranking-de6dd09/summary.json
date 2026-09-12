@@ -1,0 +1,159 @@
+{
+  "schema": "p10-force-grid-ranking-v1",
+  "scope": {
+    "purpose": "rank physical force sampling grids at fixed retained N256",
+    "force_error_qualification": false,
+    "pde_trajectory_qualification": false,
+    "nonlinear_error_bound": false,
+    "accepted_pde_windows": 0
+  },
+  "identity": {
+    "base_source": "de6dd09f10ce9a0bd6c788c03da4eebd964210c7",
+    "artifact_harness_source": "a7959f079e4e11c5188bdcb2f22e9ce23be14021",
+    "analyzer_source": "c8aae6a79d6f15b54d71631382a9cd6c27fec2d3",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "artifact_harness_sha256": "bee81ca524bbce83da5dc2359744669b7070af845e9ed8627db261e4c449981e",
+    "analyzer_harness_sha256": "e6de780ef2f84da5a81dd202706997bf3df0bea3bf015ecdf58432c3c9b6b5f6",
+    "sampling_binary_sha256": "30e0b3433eae057cb4d8868ec0d1022532a7b0fe348755bf48d4e03176c3cb96",
+    "analyzer_binary_sha256": "71437ded6189320cc219f9b3ca00dda2659dbb1b5368da1883dd692d8c4b3410",
+    "provider": "parallel-reduced-v2-force",
+    "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
+    "workers": 32,
+    "retained_layout": [256, 256, 256],
+    "clock": {"quantum_exponent": -20, "target": 8192, "elapsed": 4096, "remaining": 4096}
+  },
+  "resource_contract": {
+    "cap_bytes": 103079215104,
+    "catalog_bytes": 29362480,
+    "retained_output_bytes": 405798912,
+    "artifact_bytes": 405799160,
+    "artifact_buffer_bytes": 1048576,
+    "metadata_bytes": 65536,
+    "preflight": [
+      {"m": 384, "provider_storage_bytes": 3698181816, "peak_with_previous_spectrum_bytes": 4540256232, "timeout_seconds": 600},
+      {"m": 512, "provider_storage_bytes": 8668026552, "peak_with_previous_spectrum_bytes": 9510100968, "timeout_seconds": 900},
+      {"m": 576, "provider_storage_bytes": 12310970040, "peak_with_previous_spectrum_bytes": 13153044456, "timeout_seconds": 900},
+      {"m": 768, "provider_storage_bytes": 29079844536, "peak_with_previous_spectrum_bytes": 29921918952, "timeout_seconds": 1800}
+    ]
+  },
+  "runs": [
+    {
+      "m": 384,
+      "catalog_seconds": 0.000422848,
+      "construction_seconds": 1.914897344,
+      "force_seconds": 9.290477717,
+      "work": 56624672,
+      "root_iterations": 1568,
+      "coefficient_sha256": "8ae626e40923f632e5e4a5912707e6e77ea94ad7731a2af50310e6fa4da72a99",
+      "artifact_sha256": "125e6fad532e8f8a5bb5f9103c5cebd9c38577672b5a31ea5d5f3c7121feafef",
+      "artifact_path": "/mnt/niva-array/nsbu-solver/work/p10-force-grid-ranking-20260912/evidence/p10/force-grid-ranking-de6dd09/work/m384.nsbuforce",
+      "repeat": {"catalog_seconds": 0.000947690, "construction_seconds": 1.940917724, "force_seconds": 9.324537040, "wall": "0:16.38", "max_rss_kib": 3943424, "user_seconds": 186.69, "system_seconds": 2.57, "cpu_percent": 1155, "artifact_sha256_equal": true}
+    },
+    {
+      "m": 512,
+      "catalog_seconds": 0.000935569,
+      "construction_seconds": 4.503479551,
+      "force_seconds": 24.273537816,
+      "work": 134219822,
+      "root_iterations": 2094,
+      "coefficient_sha256": "e05c722e6108a96bf72187a8ebba10566b54226d1175208e043a647a1ac5db7c",
+      "artifact_sha256": "1faf5a29f85802a3ed8737ea27354b042ff66db2683c53d603f5d90a278603b6",
+      "artifact_path": "/mnt/niva-array/nsbu-solver/work/p10-force-grid-ranking-20260912/evidence/p10/force-grid-ranking-de6dd09/work/m512.nsbuforce",
+      "repeat": {"catalog_seconds": 0.000918129, "construction_seconds": 4.510485333, "force_seconds": 24.158231007, "wall": "0:34.23", "max_rss_kib": 8796160, "user_seconds": 438.08, "system_seconds": 5.34, "cpu_percent": 1295, "artifact_sha256_equal": true}
+    },
+    {
+      "m": 576,
+      "catalog_seconds": 0.000884339,
+      "construction_seconds": 6.405278497,
+      "force_seconds": 30.240206401,
+      "work": 191105324,
+      "root_iterations": 2348,
+      "coefficient_sha256": "76b21be045c9a6a03f2f21b2c731ec9c8201a8a09c3c9560b84907da00ffed53",
+      "artifact_sha256": "913977c2bc2e929b6dbeca132d93725c17958183ccf98a5c6bcbfba06920508d",
+      "artifact_path": "/mnt/niva-array/nsbu-solver/work/p10-force-grid-ranking-20260912/evidence/p10/force-grid-ranking-de6dd09/work/m576.nsbuforce",
+      "repeat": {"catalog_seconds": 0.000900219, "construction_seconds": 6.397511361, "force_seconds": 30.241831701, "wall": "0:42.53", "max_rss_kib": 12354560, "user_seconds": 618.22, "system_seconds": 7.44, "cpu_percent": 1471, "artifact_sha256_equal": true}
+    },
+    {
+      "m": 768,
+      "catalog_seconds": 0.000904668,
+      "construction_seconds": 15.084024597,
+      "force_seconds": 81.507092782,
+      "work": 452987964,
+      "root_iterations": 3132,
+      "coefficient_sha256": "d43672a7f2707a1baae8eb929f0f7b99cdd427b70a9375beb36cba25d38bda89",
+      "artifact_sha256": "ffcb6e29d37dc3451332321d6212df069b92911ca3d481116eb2d1be009deb21",
+      "artifact_path": "/mnt/niva-array/nsbu-solver/work/p10-force-grid-ranking-20260912/evidence/p10/force-grid-ranking-de6dd09/work/m768.nsbuforce",
+      "repeat": {"catalog_seconds": 0.000903799, "construction_seconds": 15.048628035, "force_seconds": 81.088092306, "wall": "1:43.65", "max_rss_kib": 28730368, "user_seconds": 1469.17, "system_seconds": 16.89, "cpu_percent": 1433, "artifact_sha256_equal": true}
+    }
+  ],
+  "comparisons": [
+    {
+      "left_m": 384, "right_m": 512,
+      "raw_full": {"l2": 0.26573533083354905, "h1": 254.8492163435638, "vorticity_l2": 122.04134261023593, "divergence_l2": 223.72743049915204, "mean": [-5.313875625531547e-16, -9.519134451878657e-16, -3.86499109280379e-8]},
+      "common_equals_full": true, "newly_resolved": {"l2": 0.0, "h1": 0.0, "vorticity_l2": 0.0, "divergence_l2": 0.0},
+      "fine_force_norms": {"l2": 3441.409087691699, "h1": 556216.9809399458, "vorticity_l2": 556198.5646402416, "divergence_l2": 2939.9525085887853},
+      "raw_full_over_fine": [7.72170131659032663e-5, 4.58183092348055500e-4, 2.19420455874736543e-4, 7.60989947441511744e-2],
+      "leray_projected_difference": {"l2": 0.1373642655365512, "h1": 122.041419908147, "vorticity_l2": 122.04134261023594, "divergence_l2": 2.2908999838938765e-14},
+      "stokes_response_norms": {"l2": 2.0226427643052632e-7, "h1": 0.00016099503324584343, "vorticity_l2": 0.00016099490619853488, "divergence_l2": 2.5178349811637042e-20}
+    },
+    {
+      "left_m": 512, "right_m": 576,
+      "raw_full": {"l2": 0.007429956886732749, "h1": 7.35419169721482, "vorticity_l2": 3.6573347402514322, "divergence_l2": 6.38028078692291, "mean": [-8.590331616291185e-18, -5.383972493561159e-16, 1.6276675952341107e-9]},
+      "common_equals_full": true, "newly_resolved": {"l2": 0.0, "h1": 0.0, "vorticity_l2": 0.0, "divergence_l2": 0.0},
+      "fine_force_norms": {"l2": 3441.409087733932, "h1": 556216.9812879642, "vorticity_l2": 556198.5650215802, "divergence_l2": 2939.9461730228672},
+      "raw_full_over_fine": [2.15898682699915780e-6, 1.32218036209279536e-5, 6.57559183042755555e-6, 2.17020326612397604e-3],
+      "leray_projected_difference": {"l2": 0.003949974434528694, "h1": 3.6573368730636404, "vorticity_l2": 3.6573347402514327, "divergence_l2": 6.651861591091293e-16},
+      "stokes_response_norms": {"l2": 5.784911901887924e-9, "h1": 4.515701605124716e-6, "vorticity_l2": 4.515697899928246e-6, "divergence_l2": 6.947107969317206e-22}
+    },
+    {
+      "left_m": 576, "right_m": 768,
+      "raw_full": {"l2": 0.0014353731956535851, "h1": 1.4219347758497258, "vorticity_l2": 0.7284901765681117, "divergence_l2": 1.221146391456288, "mean": [-2.5343724009184445e-16, 2.1622055045664554e-16, 4.290513346411633e-11]},
+      "common_equals_full": true, "newly_resolved": {"l2": 0.0, "h1": 0.0, "vorticity_l2": 0.0, "divergence_l2": 0.0},
+      "fine_force_norms": {"l2": 3441.40908773239, "h1": 556216.9812668622, "vorticity_l2": 556198.5650019187, "divergence_l2": 2939.9459193585985},
+      "raw_full_over_fine": [4.17088802598408852e-7, 2.55643898647443286e-6, 1.30976637195315053e-6, 4.15363555980887821e-4],
+      "leray_projected_difference": {"l2": 0.0007759035493206544, "h1": 0.728490589721808, "vorticity_l2": 0.7284901765681118, "divergence_l2": 1.2694457732454635e-16},
+      "stokes_response_norms": {"l2": 1.0608487243400595e-9, "h1": 8.6937503472728e-7, "vorticity_l2": 8.693743875324436e-7, "divergence_l2": 1.340449093356682e-22}
+    }
+  ],
+  "stokes_response": {"time_ticks": 4096, "time": 0.00390625, "formula": "(1-exp(-|k|^2*T))/|k|^2", "zero_mode_factor": 0.00390625},
+  "validation": {
+    "all_sample_runs_exit_zero": true,
+    "all_repeat_runs_exit_zero": true,
+    "all_full_spectra_finite_hermitian_nyquist_valid": true,
+    "repeat_artifacts_byte_equal": true,
+    "force_field_expected_divergence_free": false,
+    "projected_divergence_roundoff_scale": true,
+    "failed_attempt": {"analyzer_source": "c507e0ce28be38a216fe834f526847fc2e8a8628", "error": "InvalidIndex", "cause": "projected Nyquist-only storage slots", "used_in_results": false}
+  },
+  "compression": {
+    "command": "zstd -19 --long=31 -T1 work/m768.nsbuforce -o work/m768.nsbuforce.zst",
+    "raw_bytes": 405799160,
+    "compressed_bytes": 314758182,
+    "compressed_sha256": "c08c61a25dfda2b8b062fd5369529508cd9860c3d436741fc19ded258a075ae1",
+    "test_passed": true,
+    "decoded_raw_sha256": "ffcb6e29d37dc3451332321d6212df069b92911ca3d481116eb2d1be009deb21",
+    "tracked_in_git": false
+  },
+  "small_evidence_sha256_before_commit": {
+    "README.md": "d837d9a9a0757e5fc89d85eeaa937827c78347e2e5a86599c7d78a16c6edd93d",
+    "console-summary.txt": "f02630598cb1458daf859e60dd079c97fae6be10e05440a4b60ef503b43dd83d",
+    "raw-artifacts.sha256": "c38fc98195a4af999204cd6762474fa6bb9d1dbadb0f1e0626ac5f6b861cc73c"
+  },
+  "commands": {
+    "build_sampling": "RUN_SOURCE=a7959f079e4e11c5188bdcb2f22e9ce23be14021 cargo build --release --manifest-path evidence/p10/force-grid-ranking-de6dd09/harness/Cargo.toml",
+    "sample": "RUN_SOURCE=a7959f079e4e11c5188bdcb2f22e9ce23be14021 timeout TIMEOUT harness/target/release/p10-force-grid-ranking sample M work/mM.nsbuforce",
+    "repeat": "/usr/bin/time -v timeout TIMEOUT harness/target/release/p10-force-grid-ranking sample M work/repeat-mM.nsbuforce",
+    "build_analyzer": "RUN_SOURCE=a7959f079e4e11c5188bdcb2f22e9ce23be14021 ANALYZER_SOURCE=c8aae6a79d6f15b54d71631382a9cd6c27fec2d3 cargo build --release --manifest-path evidence/p10/force-grid-ranking-de6dd09/harness/Cargo.toml",
+    "compare": "harness/target/release/p10-force-grid-ranking compare work/mLEFT.nsbuforce work/mRIGHT.nsbuforce"
+  },
+  "platform": {
+    "host": "baccus",
+    "kernel": "Linux 6.8.0-139-generic x86_64",
+    "cpu": "AMD EPYC 7702P 64-Core Processor",
+    "online_cpus": 128,
+    "cores": 64,
+    "threads_per_core": 2,
+    "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+    "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)"
+  }
+}
