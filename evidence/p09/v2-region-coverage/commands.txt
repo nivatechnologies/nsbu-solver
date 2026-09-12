@@ -7,3 +7,6 @@ cargo clippy -p nsbu-benchmarks --lib --test v2_region_coverage -- -D warnings
 PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_region_coverage --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-region-coverage/coverage-final.json
 PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH rust-code-analysis-cli -p crates/nsbu-benchmarks/src/v2_experiment/coverage -m -O json > work/v2-region-coverage/metrics-final.jsonl
 python3 -m quality.check_crap rust work/v2-region-coverage/metrics-final.jsonl work/v2-region-coverage/coverage-final.json work/v2-region-coverage/crap-final.json
+# Changed-test static and CRAP scope, using the same focused LLVM JSON (which maps its lines).
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH rust-code-analysis-cli -p crates/nsbu-benchmarks/tests/v2_region_coverage.rs -m -O json > work/v2-region-coverage/test-metrics-final.jsonl
+python3 -m quality.check_crap rust work/v2-region-coverage/test-metrics-final.jsonl work/v2-region-coverage/coverage-final.json work/v2-region-coverage/test-crap-final.json

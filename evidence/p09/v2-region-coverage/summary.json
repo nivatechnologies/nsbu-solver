@@ -4,17 +4,20 @@
   "focused_test": "cargo test -p nsbu-benchmarks --test v2_region_coverage: 3 passed",
   "library_control": "cargo test -p nsbu-benchmarks --lib no_samples_is_metadata_absence_not_a_zero_count: 1 passed, 44 filtered",
   "clippy": "passed with -D warnings",
-  "crap": {"maximum": 23.93586005830904, "threshold": "<25", "status": "passed"},
+  "crap": {"production_maximum": 23.93586005830904, "changed_test_maximum": 1.0, "threshold": "<25", "status": "passed"},
   "static_scope": {
-    "files": "all three production files in crates/nsbu-benchmarks/src/v2_experiment/coverage",
-    "physical_lines": 478,
-    "all_node_maximums": {"cognitive": 21, "halstead_difficulty": 54.95454545454545},
-    "function_maximums": {"cognitive": 6, "halstead_difficulty": 32.333333333333336}
+    "production_files": 4,
+    "production_physical_lines_total": 478,
+    "production_physical_lines_largest_file": 269,
+    "production_all_node_maximums": {"cognitive": 21, "halstead_difficulty": 54.95454545454545},
+    "production_function_maximums": {"cognitive": 6, "halstead_difficulty": 32.333333333333336, "cyclomatic": 20},
+    "changed_test_functions": {"mapped_functions": 4, "maximum_cyclomatic": 1, "maximum_crap": 1.0}
   },
   "focused_coverage": {
     "plan": {"lines": 95.40229885057471, "branches": 78.57142857142857},
     "report": {"lines": 100.0, "branches": null},
-    "workspace": {"lines": 91.70731707317074, "branches": 52.77777777777778}
+    "workspace": {"lines": 91.70731707317074, "branches": 52.77777777777778},
+    "changed_test": {"lines": 100.0, "branches": null}
   },
   "scope": "focused only; no whole-maintained coverage gate or PDE-window run"
 }
