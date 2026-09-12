@@ -31,11 +31,22 @@ impl StartupProfile {
     }
     /// Admit the complete fixed profile while borrowing this owner's clock arrays.
     pub fn plan(&self, joint_cap: usize) -> Result<DiagnosticPlan<'_>, FamilyError> {
-        let family = FamilyPlan::new(
-            settings()?,
-            TestedTimes::new(&self.accepted, self.accepted.len())?,
-            joint_cap,
-        )?;
+        self.admit(joint_cap, false)
+    }
+
+    /// Admit the same diagnostic profile with caches on trajectory RHS providers only.
+    pub fn plan_cached(&self, joint_cap: usize) -> Result<DiagnosticPlan<'_>, FamilyError> {
+        self.admit(joint_cap, true)
+    }
+
+    fn admit(&self, joint_cap: usize, cached: bool) -> Result<DiagnosticPlan<'_>, FamilyError> {
+        let settings = settings()?;
+        let times = TestedTimes::new(&self.accepted, self.accepted.len())?;
+        let family = if cached {
+            FamilyPlan::new_cached(settings, times, joint_cap)?
+        } else {
+            FamilyPlan::new(settings, times, joint_cap)?
+        };
         let probes = ProbePlan::new(
             family,
             TestedTimes::new(&self.manifest, self.manifest.len())?,

@@ -1,6 +1,6 @@
 //! Allocation-free admission of six independent exact-v2 from-rest branches.
 use super::{identity, FamilyError, V2Family};
-use crate::v2_run;
+use crate::{runtime_force::IntegrationMode, v2_run};
 use nsbu_solver::{
     diagnostics::comparison::ComparisonPlan,
     domain::{Domain, TickClock},
@@ -61,6 +61,24 @@ impl<'a> FamilyPlan<'a> {
         times: TestedTimes<'a>,
         cap: usize,
     ) -> Result<Self, FamilyError> {
+        Self::admit(settings, times, IntegrationMode::Direct, cap)
+    }
+
+    /// Admit the same six branches with attempt-local integration-force caches.
+    pub fn new_cached(
+        settings: FamilySettings,
+        times: TestedTimes<'a>,
+        cap: usize,
+    ) -> Result<Self, FamilyError> {
+        Self::admit(settings, times, IntegrationMode::AttemptCached, cap)
+    }
+
+    fn admit(
+        settings: FamilySettings,
+        times: TestedTimes<'a>,
+        mode: IntegrationMode,
+        cap: usize,
+    ) -> Result<Self, FamilyError> {
         validate(settings, times)?;
         let initial = times.as_slice()[0];
         let [n0, n1, n2] = settings.grids;
@@ -74,7 +92,7 @@ impl<'a> FamilyPlan<'a> {
             (n2, h2, Method::HochbruckOstermann),
         ];
         let branches = shapes
-            .map(|shape| branch(settings, initial, shape, cap))
+            .map(|shape| branch(settings, initial, shape, mode, cap))
             .map(|result| result.map_err(FamilyError::from));
         let [b0, b1, b2, b3, b4, b5] = branches;
         let branches = [b0?, b1?, b2?, b3?, b4?, b5?];
@@ -87,7 +105,7 @@ impl<'a> FamilyPlan<'a> {
             times,
             settings,
             bounds,
-            identity: identity::compute(settings, times)?,
+            identity: identity::compute(settings, times, mode)?,
         })
     }
     /// Settings bound to this admission.
@@ -109,6 +127,10 @@ impl<'a> FamilyPlan<'a> {
     /// Canonical SHA-256 family identity.
     pub fn identity(self) -> [u8; 32] {
         self.identity
+    }
+    /// Common integration-only force policy of all six branches.
+    pub fn integration_mode(self) -> IntegrationMode {
+        self.branches[0].integration_mode()
     }
 
     pub(crate) fn require_sample(
@@ -175,6 +197,7 @@ fn branch(
     settings: FamilySettings,
     initial: TickClock,
     (grid, step, method): (usize, u128, Method),
+    mode: IntegrationMode,
     cap: usize,
 ) -> Result<v2_run::Plan, SolverError> {
     let count = usize::try_from(settings.endpoint / step).map_err(|_| SolverError::SizeOverflow)?;
@@ -187,22 +210,23 @@ fn branch(
         },
         tolerances: settings.tolerances,
     };
-    v2_run::Plan::from_rest(
-        v2_run::Settings {
-            domain: Domain::new([grid; 3], [1.0; 3], 1.0)?,
-            force: settings.force,
-            initial_clock: initial,
-            configuration: config,
-            advective_limit: settings.advective_limit,
-        },
-        cap,
-    )
+    let settings = v2_run::Settings {
+        domain: Domain::new([grid; 3], [1.0; 3], 1.0)?,
+        force: settings.force,
+        initial_clock: initial,
+        configuration: config,
+        advective_limit: settings.advective_limit,
+    };
+    match mode {
+        IntegrationMode::Direct => v2_run::Plan::from_rest(settings, cap),
+        IntegrationMode::AttemptCached => v2_run::Plan::from_rest_cached(settings, cap),
+    }
 }
 
 fn reservations(branches: &[v2_run::Plan; 6], samples: usize) -> Result<FamilyBounds, FamilyError> {
     let mut total = FamilyBounds {
         storage_bytes: std::mem::size_of::<super::V2Family<'_>>(),
-        identity_bytes: identity::encoded_len(samples)?,
+        identity_bytes: identity::encoded_len(samples, branches[0].integration_mode())?,
         ..FamilyBounds::default()
     };
     for plan in branches {

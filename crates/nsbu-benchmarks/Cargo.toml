@@ -127,3 +127,7 @@ harness = false
 [[test]]
 name = "v2_attempt_force_cache_allocation"
 harness = false
+
+[[test]]
+name = "v2_cached_run_allocation"
+harness = false

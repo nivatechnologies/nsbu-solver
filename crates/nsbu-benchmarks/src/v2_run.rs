@@ -3,7 +3,7 @@
 //! The analytical reference is never assigned to the evolving state. This runtime exposes
 //! the reviewed prescribed force and both integrators; it does not qualify a PDE window.
 use crate::{
-    runtime_force::{ForceSettings, RunForce},
+    runtime_force::{AttemptCacheWork, ForceSettings, RunForce},
     smooth_observer::{v2::V2Observer, BalanceObserverWork},
 };
 use nsbu_solver::{
@@ -22,6 +22,7 @@ mod reconstructed;
 
 mod plan;
 mod work;
+pub use crate::runtime_force::IntegrationMode;
 pub use plan::Plan;
 pub use reconstructed::{ReconstructedPlan, ReconstructedRun};
 pub use work::AttemptWork;
@@ -159,10 +160,14 @@ impl Run {
         let resources = plan.resources();
         let candidate = CandidateState::new(resources, settings.initial_clock, Epoch(0))?;
         let attempts = AttemptWorkspace::new_with_method(resources, settings.configuration.method)?;
-        let force_limits = settings.force.limits(settings.domain)?;
-        let force = settings
+        let force_limits = settings
             .force
-            .build(settings.domain, force_limits.storage_bytes)?;
+            .integration_limits(settings.domain, plan.integration_mode())?;
+        let force = settings.force.build_integration(
+            settings.domain,
+            plan.integration_mode(),
+            force_limits.storage_bytes,
+        )?;
         let rhs = SpectralRhs::new(
             settings.domain,
             force,
@@ -208,6 +213,10 @@ impl Run {
     /// Accumulated independent observation charge, including failed admitted samples.
     pub fn observer_work(&self) -> BalanceObserverWork {
         self.observer.consumption()
+    }
+    /// Detailed current-attempt cache work for the opt-in cached profile.
+    pub fn cache_work(&self) -> Option<AttemptCacheWork> {
+        self.rhs.provider().cache_work()
     }
     /// Diagnostic lineage retained for the lifetime of this owner.
     pub fn origin(&self) -> Origin {

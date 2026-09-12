@@ -1,7 +1,7 @@
 //! Allocation-free admission of the full integration, observation and history owner.
 use super::{work, Run, Settings};
 use crate::{
-    runtime_force::RunForce,
+    runtime_force::{IntegrationMode, RunForce},
     smooth_observer::{v2::V2Observer, BalanceObserverLimits},
     time::BenchmarkTime,
 };
@@ -24,8 +24,18 @@ pub struct Plan {
 impl Plan {
     /// Validate settings and total reservation before allocating grid storage or worker threads.
     pub fn from_rest(settings: Settings, cap: usize) -> Result<Self, SolverError> {
+        Self::admit(settings, IntegrationMode::Direct, cap)
+    }
+
+    /// Admit the opt-in attempt-local original-force cache profile from exact rest.
+    pub fn from_rest_cached(settings: Settings, cap: usize) -> Result<Self, SolverError> {
+        Self::admit(settings, IntegrationMode::AttemptCached, cap)
+    }
+
+    fn admit(settings: Settings, mode: IntegrationMode, cap: usize) -> Result<Self, SolverError> {
+        validate_layout()?;
         validate_settings(settings)?;
-        let force_limits = settings.force.limits(settings.domain)?;
+        let force_limits = settings.force.integration_limits(settings.domain, mode)?;
         validate_final_step(settings, force_limits.remaining_divisor)?;
         let calls = settings
             .configuration
@@ -101,6 +111,33 @@ impl Plan {
     /// Maximum integration RHS calls, provider work units, and scalar transforms.
     pub fn integration_limits(self) -> [usize; 3] {
         self.integration
+    }
+
+    /// Integration-only force policy; diagnostic providers remain explicit and uncached.
+    pub fn integration_mode(self) -> IntegrationMode {
+        direct_or_cached(self.settings, self.resources)
+    }
+}
+
+fn validate_layout() -> Result<(), SolverError> {
+    if std::mem::size_of::<RunForce>() != 592
+        || std::mem::size_of::<Plan>() != 512
+        || std::mem::size_of::<Run>() != 5840
+    {
+        return Err(SolverError::ResourceLimit);
+    }
+    Ok(())
+}
+
+pub(super) fn direct_or_cached(settings: Settings, resources: ResourcePlan) -> IntegrationMode {
+    let direct = settings
+        .force
+        .limits(settings.domain)
+        .and_then(|limits| SpectralRhs::<RunForce>::reservation(settings.domain, limits));
+    if direct == Ok(resources.classes()[5]) {
+        IntegrationMode::Direct
+    } else {
+        IntegrationMode::AttemptCached
     }
 }
 
