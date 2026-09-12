@@ -83,6 +83,28 @@ write, peak RSS, steady allocations, outcome, and any observer component measure
 whether the endpoint can finish before the experimental cutoff with margin. Do not infer N384
 cost by multiplying isolated AVX, reduced-force, or W3 speedups.
 
+## Piecewise feasibility launch
+
+The h32 pilot measured 352.878228511 seconds for one attempt and therefore did
+not fit the campaign window. The separately frozen piecewise profile uses h64
+through clock 2048 and h128 thereafter: 32 plus 16 attempts, the same nine
+observer nodes, full snapshots after every commit, unchanged error tolerances,
+and an explicitly tuned advective limit of 1.6. It is experimental feasibility
+evidence and cannot be compared as an identical time profile for spatial
+acceptance.
+
+The immutable `frozen-plan-piecewise.json` mistakenly bound a file named
+`pgid-watchdog-v2.sh` whose content and SHA-256 were actually v1. The original
+plan and rejected deployment archive remain unchanged. The authoritative
+`piecewise-launch-amendment.json` supersedes only that external launcher field,
+binds the tested v2 SHA-256
+`4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b`,
+and records a direct `setsid` solver launch with a solver-bound watchdog. It does
+not alter source `7afe0d5bcfb0c2595acfdec6b17990559967c87d`, binary SHA-256
+`8c5698a984a8c6020e5eb8e3933b666769cc29697c12e542ce3cc5e32d962917`,
+or the numerical plan. The resource sidecar is separately bound and does not
+mutate solver state.
+
 ## Verification
 
 Each exact feature passes 18 focused tests, formatting, and strict all-target Clippy. The W3 controls
