@@ -1,0 +1,52 @@
+{
+  "status": "planned_reference_only_binary64_resolution_screen_not_started",
+  "implementation_base": "f6346da8085365fad84874db08aa1213c75df331",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": {"exponent": -20, "target": 8192, "elapsed": 4096, "remaining": 4096},
+  "purpose": "Estimate analytical-reference N192-to-N256/N384 shell magnitudes and the M384-to-M768 sampling discrepancy over strict N384.",
+  "claims_excluded": ["PDE validation", "trajectory error", "continuum tail bound", "independent high-precision reference", "accepted window"],
+  "generation": {
+    "retained_grid": 384,
+    "sample_grids": [384, 768],
+    "outputs": ["inside_n192", "n192_to_n256", "n256_to_n384", "inside_n384"],
+    "owner_cap_bytes": 21474836480,
+    "rlimit_as_bytes": 21474836480,
+    "m384_owner_reservation_bytes": 3635777784,
+    "m768_owner_reservation_bytes": 19504439544,
+    "m384_evaluations": 56623104,
+    "m768_evaluations": 452984832,
+    "m384_root_iteration_bound": 7247757312,
+    "m768_root_iteration_bound": 57982058496,
+    "main_scalar_transforms_per_run": 3,
+    "normalization_control_transforms_per_run": 1,
+    "scalar_jet_control_points": 3
+  },
+  "sampled_timestep_screen": {
+    "clock": 4096,
+    "quantity": "max over the completed exact-reference sample grid of sum_i abs(u_i)",
+    "guard": "dt * sampled_max_sum_abs * 2*pi*(N/2-1) <= 0.3",
+    "reported_grids": [192, 256, 384],
+    "candidate": "largest dyadic tick count over 2^20 below the sampled guard limit",
+    "scope": "non-rigorous stage-bound planning sample only; every PDE trajectory must enforce its actual step guard independently",
+    "earlier_clocks": "not sampled by this clock4096 screen"
+  },
+  "comparison": {
+    "strict_grid": 384,
+    "owner_cap_bytes": 6442450944,
+    "rlimit_as_bytes": 7516192768,
+    "reservation_bytes": 5464133632,
+    "coefficient_visits": 199213056,
+    "reported_norms": ["l2", "h1", "vorticity_l2", "divergence_l2"],
+    "metadata_caveat": "The reusable comparator receives grid/sample labels externally; direct-reference files have no workers, so the command supplies workers=0 and binds both files by printed SHA-256."
+  },
+  "disk_cap_bytes": 3221225472,
+  "expected_wall_seconds": {"m384": 90, "m768": 600, "comparison": 90, "total": 780},
+  "hard_timeout_seconds": {"m384": 180, "m768": 720, "comparison": 180},
+  "commands_after_cpu_release": {
+    "prepare_and_preflight": "sh evidence/p10/reference-spectrum-n384-planning-f6346da/source/setup-and-preflight.sh",
+    "m384": "(ulimit -v 20971520; timeout 180s work/p10-reference-n384-target/release/p10-reference-spectrum-n384 384 --run)",
+    "m768": "(ulimit -v 20971520; timeout 720s work/p10-reference-n384-target/release/p10-reference-spectrum-n384 768 --run)",
+    "compare_template": "(ulimit -v 7340032; timeout 180s work/p10-reference-n384-target/release/p10-force-snapshot-tool-n384 compare LEFT_M384 RIGHT_M768 4096 384 384 384 768 0 0 LEFT_SHA256 RIGHT_SHA256)"
+  },
+  "launch_rule": "Do not start while the four endpoint PDE jobs own the CPU. Run M384 and M768 independently, then compare their retained strict-N384 files only after both exit zero and hashes are recorded."
+}

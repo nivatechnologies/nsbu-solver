@@ -1,0 +1,5 @@
+--- src/main.rs
++++ src/main.rs
+@@ -15 +15 @@
+-const CAP: usize = 1024 * 1024 * 1024;
++const CAP: usize = 6 * 1024 * 1024 * 1024;
