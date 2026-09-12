@@ -225,11 +225,17 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     let decoded: Value = serde_json::from_slice(&bytes).unwrap();
     assert_eq!(decoded["schema_version"], 1);
     assert!(decoded["events"][0].get("reconstructed_physical").is_none());
+    assert!(decoded["events"][0]
+        .get("reconstructed_reference")
+        .is_none());
     assert!(decoded["context"]["coordinator_reservation"]
         .get("reconstructed_physical_work")
         .is_none());
     assert!(decoded["context"]["coordinator_reservation"]
         .get("reconstructed_pressure_work")
+        .is_none());
+    assert!(decoded["context"]["coordinator_reservation"]
+        .get("reconstructed_reference_work")
         .is_none());
     assert_eq!(decoded["scientific_status"], "UnqualifiedDiagnostic");
     assert_eq!(
@@ -271,6 +277,9 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert!(v2_events
         .iter()
         .all(|event| event.get("reconstructed_pressure").is_some()));
+    assert!(v2_events
+        .iter()
+        .all(|event| event.get("reconstructed_reference").is_some()));
     assert_eq!(
         decoded_v2["context"]["coordinator_reservation"]["reconstructed_physical_work"]["attempts"],
         diagnostic.bounds().probe_physical.attempts.to_string()
@@ -297,6 +306,33 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert_eq!(
         pressure_reservation["binding_checks"],
         pressure_work.binding_checks.to_string()
+    );
+    let reference_work = diagnostic.bounds().probe_reference;
+    let reference_reservation =
+        &decoded_v2["context"]["coordinator_reservation"]["reconstructed_reference_work"];
+    assert_eq!(
+        reference_reservation["attempts"],
+        reference_work.attempts.to_string()
+    );
+    assert_eq!(
+        reference_reservation["reference_evaluations"],
+        reference_work.reference_evaluations.to_string()
+    );
+    assert_eq!(
+        reference_reservation["root_iterations"],
+        reference_work.root_iterations.to_string()
+    );
+    assert_eq!(
+        reference_reservation["scalar_transforms"],
+        reference_work.scalar_transforms.to_string()
+    );
+    assert_eq!(
+        reference_reservation["weighted_visits"],
+        reference_work.weighted_visits.to_string()
+    );
+    assert_eq!(
+        reference_reservation["binding_checks"],
+        reference_work.binding_checks.to_string()
     );
     v2_diagnostic_export_oracle::document(&decoded_v2, driver.reports());
 

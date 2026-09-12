@@ -9,9 +9,12 @@ use crate::v2_experiment::{
     pressure::PressureFamilyWorkspace,
     probes::{
         physical::ProbePhysicalWorkspace, pressure::ProbePressureWorkspace,
-        residuals::ResidualFamily, ProbeFamily,
+        reference::ProbeReferenceWorkspace, residuals::ResidualFamily, ProbeFamily,
     },
-    reference::regional::{RegionalTrackingError, RegionalTrackingWorkspace},
+    reference::{
+        regional::{RegionalTrackingError, RegionalTrackingWorkspace},
+        ReferenceTrackingError,
+    },
     FamilyError, V2Family,
 };
 use nsbu_solver::{domain::TickClock, SolverError};
@@ -33,6 +36,8 @@ pub struct DiagnosticConsumerWork {
     pub probe_physical: crate::v2_experiment::probes::physical::ProbePhysicalWork,
     /// Reconstructed pressure construction and comparison work at every manifest clock.
     pub probe_pressure: crate::v2_experiment::probes::pressure::ProbePressureWork,
+    /// Reconstructed analytical-reference work at every manifest clock.
+    pub probe_reference: crate::v2_experiment::probes::reference::ProbeReferenceWork,
     /// Accepted-state pressure construction and comparison work.
     pub pressure: crate::v2_experiment::pressure::PressureFamilyWork,
     /// Analytical reference evaluation and reduction work.
@@ -52,6 +57,8 @@ pub enum DiagnosticError {
     Family(FamilyError),
     /// Regional analytical tracking failure.
     Regional(RegionalTrackingError),
+    /// Reconstructed analytical tracking failure.
+    ProbeReference(ReferenceTrackingError),
     /// Accepted-node provenance or comparison failure.
     Binding(NodeBindingError),
     /// Allocation or coordinator resource failure.
@@ -67,6 +74,11 @@ impl From<FamilyError> for DiagnosticError {
 impl From<RegionalTrackingError> for DiagnosticError {
     fn from(value: RegionalTrackingError) -> Self {
         Self::Regional(value)
+    }
+}
+impl From<ReferenceTrackingError> for DiagnosticError {
+    fn from(value: ReferenceTrackingError) -> Self {
+        Self::ProbeReference(value)
     }
 }
 impl From<NodeBindingError> for DiagnosticError {
@@ -88,6 +100,7 @@ pub struct DiagnosticDriver<'a> {
     physical: PhysicalFamilyWorkspace<'a>,
     probe_physical: ProbePhysicalWorkspace<'a>,
     probe_pressure: ProbePressureWorkspace<'a>,
+    probe_reference: ProbeReferenceWorkspace<'a>,
     pressure: PressureFamilyWorkspace<'a>,
     regional: RegionalTrackingWorkspace<'a>,
     residual: ResidualFamily<'a>,
@@ -110,6 +123,7 @@ impl<'a> DiagnosticDriver<'a> {
             physical: PhysicalFamilyWorkspace::new(plan.physical)?,
             probe_physical: ProbePhysicalWorkspace::new(plan.probe_physical)?,
             probe_pressure: ProbePressureWorkspace::new(plan.probe_pressure)?,
+            probe_reference: ProbeReferenceWorkspace::new(plan.probe_reference)?,
             pressure: PressureFamilyWorkspace::new(plan.pressure)?,
             regional: RegionalTrackingWorkspace::new(plan.regional)?,
             residual: ResidualFamily::new(plan.residual)?,
@@ -148,6 +162,7 @@ impl<'a> DiagnosticDriver<'a> {
             physical: self.physical.charged_work(),
             probe_physical: self.probe_physical.charged_work(),
             probe_pressure: self.probe_pressure.charged_work(),
+            probe_reference: self.probe_reference.charged_work(),
             pressure: self.pressure.charged_work(),
             reference: self.regional.tracking_work(),
             regional: self.regional.regional_work(),
@@ -200,6 +215,7 @@ impl<'a> DiagnosticDriver<'a> {
         self.require_probe(probe, clock)?;
         let probe_physical = self.probe_physical.measure(&self.probes, probe)?;
         let probe_pressure = self.probe_pressure.measure(&self.probes, probe)?;
+        let probe_reference = self.probe_reference.measure(&self.probes, probe)?;
         let (accepted, residual) = if let Some(spectral) = spectral {
             let physical = self.physical.measure(&self.ordinary)?;
             let pressure = self.pressure.measure(&self.ordinary)?;
@@ -242,6 +258,7 @@ impl<'a> DiagnosticDriver<'a> {
             probe,
             probe_physical,
             probe_pressure,
+            probe_reference,
             accepted,
             residual,
         })

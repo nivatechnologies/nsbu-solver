@@ -52,6 +52,37 @@ fn reconstructed(j: &Value, e: DiagnosticEvent) {
     if !j["reconstructed_pressure"].is_null() {
         probe_pressure(&j["reconstructed_pressure"], e.reconstructed_pressure());
     }
+    if !j["reconstructed_reference"].is_null() {
+        probe_reference(&j["reconstructed_reference"], e.reconstructed_reference());
+    }
+}
+fn probe_reference(
+    j: &Value,
+    s: nsbu_benchmarks::v2_experiment::probes::reference::ProbeReferenceSample,
+) {
+    clock(&j["clock"], s.clock());
+    assert_eq!(j["identity"], hex(s.identity()));
+    assert_eq!(j["case_sha256"], s.case_sha256());
+    layout(&j["sample_grid"], s.sample_layout());
+    words(&j["relative_floors"], &s.relative_floors());
+    for (index, domain_value) in s.source_domains().into_iter().enumerate() {
+        domain(&j["source_domains"][index], domain_value)
+    }
+    for (index, origin) in s.origins().iter().enumerate() {
+        for (node, expected) in origin.accepted_nodes.into_iter().enumerate() {
+            clock(&j["origins"][index]["accepted_nodes"][node], expected)
+        }
+        clock(&j["origins"][index]["state_clock"], origin.state_clock)
+    }
+    assert_eq!(j["status"], "DiagnosticOnly");
+    for (index, branch) in s.branches().iter().enumerate() {
+        assert_eq!(j["branches"][index]["branch"], branch.branch);
+        for (slot, quantity_value) in branch.quantities.iter().enumerate() {
+            let q = &j["branches"][index]["quantities"][slot];
+            assert_eq!(q["quantity"], quantity(quantity_value.quantity));
+            local(&q["error"], quantity_value.error)
+        }
+    }
 }
 fn accepted(j: &Value, e: DiagnosticEvent) {
     match (e.accepted().schedule(), e.accepted().sample()) {

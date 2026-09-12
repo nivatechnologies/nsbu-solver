@@ -186,6 +186,65 @@ pub fn probe_pressure<W: Write>(
     probe_pressure_quantities(j, s)?;
     j.raw("}")
 }
+pub fn probe_reference<W: Write>(
+    j: &mut Json<W>,
+    s: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+) -> Result<(), DiagnosticExportError> {
+    j.raw("{\"clock\":")?;
+    v::clock(j, s.clock())?;
+    j.raw(",\"identity\":")?;
+    j.hex(s.identity())?;
+    j.raw(",\"case_sha256\":")?;
+    j.string(s.case_sha256())?;
+    j.raw(",\"origins\":[")?;
+    for (i, origin) in s.origins().iter().enumerate() {
+        if i > 0 {
+            j.raw(",")?
+        }
+        j.raw("{\"accepted_nodes\":[")?;
+        for (k, clock) in origin.accepted_nodes.into_iter().enumerate() {
+            if k > 0 {
+                j.raw(",")?
+            }
+            v::clock(j, clock)?;
+        }
+        j.raw("],\"state_clock\":")?;
+        v::clock(j, origin.state_clock)?;
+        j.raw("}")?;
+    }
+    j.raw("],\"source_domains\":[")?;
+    for (i, domain) in s.source_domains().into_iter().enumerate() {
+        if i > 0 {
+            j.raw(",")?
+        }
+        v::domain(j, domain)?;
+    }
+    j.raw("],\"sample_grid\":")?;
+    v::layout(j, s.sample_layout())?;
+    j.raw(",\"relative_floors\":")?;
+    v::f64_array(j, s.relative_floors())?;
+    j.raw(",\"status\":\"DiagnosticOnly\",\"branches\":[")?;
+    for (i, branch) in s.branches().iter().enumerate() {
+        if i > 0 {
+            j.raw(",")?
+        }
+        j.raw("{\"branch\":")?;
+        j.usize(branch.branch)?;
+        j.raw(",\"quantities\":[")?;
+        for (k, quantity) in branch.quantities.iter().enumerate() {
+            if k > 0 {
+                j.raw(",")?
+            }
+            j.raw("{\"quantity\":")?;
+            j.string(v::quantity(quantity.quantity))?;
+            j.raw(",\"error\":")?;
+            v::local(j, quantity.error)?;
+            j.raw("}")?;
+        }
+        j.raw("]}")?;
+    }
+    j.raw("]}")
+}
 
 fn probe_pressure_header<W: Write>(
     j: &mut Json<W>,

@@ -73,6 +73,10 @@ fn main() {
         driver.consumer_work().probe_pressure,
         plan.bounds().probe_pressure
     );
+    assert_eq!(
+        driver.consumer_work().probe_reference,
+        plan.bounds().probe_reference
+    );
     println!(
         "v2 diagnostic admission=0 construction_bytes={} joint_bytes={} events={} execution_allocations=0",
         built.bytes_allocated,
