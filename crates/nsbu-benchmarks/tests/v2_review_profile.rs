@@ -20,6 +20,7 @@ use nsbu_solver::{
         times::TestedTimes,
     },
 };
+use sha2::{Digest, Sha256};
 
 const CAP: usize = 256 * 1024 * 1024;
 const ROWS: usize = OBSERVABLE_COUNT * 7;
@@ -105,6 +106,17 @@ fn actual_probe_plan_geometry_admits_the_unpopulated_generic_protocol() {
     let written = admitted.write_canonical(&mut canonical).unwrap();
     assert_eq!(written, admitted.bounds().protocol_bytes);
     assert_eq!(canonical[written], 0xa5);
+    let prefix = b"NSBUV2REVIEWPROFILE0001".len() + 64;
+    let generic: [u8; 32] = Sha256::digest(&canonical[prefix..written]).into();
+    let mut independent = Sha256::new();
+    independent.update(b"NSBUV2REVIEWPROFILE0001");
+    independent.update(admitted.family_identity());
+    independent.update(admitted.probe_identity());
+    independent.update(generic);
+    assert_eq!(
+        admitted.identity(),
+        <[u8; 32]>::from(independent.finalize())
+    );
     assert_eq!(
         admitted.identity(),
         [

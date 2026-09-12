@@ -183,7 +183,7 @@ impl<'a> AdmittedProfile<'a> {
             probe_identity: geometry.probe_identity(),
         })
     }
-    /// Profile identity binding source plans and generic protocol, including budgets.
+    /// SHA-256 of tag, family digest, probe digest and generic-protocol digest.
     pub fn identity(self) -> [u8; 32] {
         let mut hash = Sha256::new();
         hash.update(PROFILE_TAG);

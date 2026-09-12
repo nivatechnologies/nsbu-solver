@@ -13,7 +13,10 @@ typed scalar descriptors and all explicit mandatory gaps. The generic protocol
 then binds those identities, caller budgets, three exact time manifests and
 reconstruction geometry. The profile canonical form and identity additionally
 bind the source family and probe-plan identities, so equal manifests from a
-different numerical family cannot collide.
+different numerical family cannot collide. Its reproducible identity formula is
+`SHA256(tag || family_digest || probe_digest || SHA256(generic_canonical))`;
+the emitted canonical bytes are `tag || family_digest || probe_digest ||
+generic_canonical`.
 
 ## Time and reconstruction profile
 
