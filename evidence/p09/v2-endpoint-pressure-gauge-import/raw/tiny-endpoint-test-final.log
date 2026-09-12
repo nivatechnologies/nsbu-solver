@@ -1,0 +1,8 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-v2-endpoint-pressure-gauge-development/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.70s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 1 test
+clock=0 branch2_pressure_rms=0 branch2_gradient_rms=0
+test endpoint_gauges_measure_tiny_nonzero_states_without_mutation has been running for over 60 seconds
+clock=2048 branch2_pressure_rms=32.92509043404963 branch2_gradient_rms=1463.2236641115041

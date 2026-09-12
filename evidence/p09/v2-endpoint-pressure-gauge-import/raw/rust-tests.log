@@ -1,0 +1,28 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.02s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 5 tests
+test actual_accepted_states_publish_all_six_only_after_complete_measurement ... clock=0 branch2_pressure_rms=0 branch2_gradient_rms=0
+clock=64 branch2_pressure_rms=0.00000000002339681520967441 branch2_gradient_rms=0.0000000015156023160597217
+clock=128 branch2_pressure_rms=0.00006083804293434028 branch2_gradient_rms=0.0038093010562817026
+ok
+test exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes ... 
+thread 'exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes' (2752377) panicked at crates/nsbu-benchmarks/tests/v2_pressure_reference.rs:133:9:
+assertion `left == right` failed
+  left: 8
+ right: 32
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+test gauge_is_one_global_constant_and_gradient_is_invariant ... ok
+test reordered_gauges_and_short_joint_cap_are_refused ... ok
+test reviewed_endpoint_schedule_admits_and_measures_only_the_rest_state ... clock=0 branch2_pressure_rms=0 branch2_gradient_rms=0
+ok
+
+failures:
+
+failures:
+    exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes
+
+test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 44.62s
+
+error: test failed, to rerun pass `-p nsbu-benchmarks --test v2_pressure_reference`

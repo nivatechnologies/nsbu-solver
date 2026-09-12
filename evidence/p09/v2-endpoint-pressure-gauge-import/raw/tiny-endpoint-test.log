@@ -1,0 +1,43 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-v2-endpoint-pressure-gauge-development/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.90s
+     Running tests/v2_pressure_reference.rs (target/debug/deps/v2_pressure_reference-be9610a44acdfb2d)
+
+running 1 test
+
+thread 'endpoint_gauges_measure_tiny_nonzero_states_without_mutation' (2757179) panicked at crates/nsbu-benchmarks/tests/v2_pressure_reference.rs:336:6:
+called `Result::unwrap()` on an `Err` value: Numerical(InvalidStep)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test endpoint_gauges_measure_tiny_nonzero_states_without_mutation ... FAILED
+
+failures:
+
+failures:
+    endpoint_gauges_measure_tiny_nonzero_states_without_mutation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p nsbu-benchmarks --test v2_pressure_reference`
+Command exited with non-zero status 101
+	Command being timed: "cargo test -p nsbu-benchmarks --test v2_pressure_reference endpoint_gauges_measure_tiny_nonzero_states_without_mutation --locked -- --exact --nocapture"
+	User time (seconds): 1.95
+	System time (seconds): 0.52
+	Percent of CPU this job got: 254%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 197856
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 9
+	Minor (reclaiming a frame) page faults: 76273
+	Voluntary context switches: 4188
+	Involuntary context switches: 17
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 57000
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 101
