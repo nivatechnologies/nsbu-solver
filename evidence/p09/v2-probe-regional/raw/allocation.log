@@ -1,0 +1,4 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.25s
+     Running tests/v2_probe_regional_allocation.rs (target/debug/deps/v2_probe_regional_allocation-8dada1bca841086e)
+probe regional construction_bytes=23163200 joint_bytes=28311160 transforms=1890 classifications=290304 steady_allocations=0

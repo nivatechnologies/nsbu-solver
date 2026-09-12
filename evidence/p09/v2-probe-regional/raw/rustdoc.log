@@ -1,0 +1,6 @@
+    Blocking waiting for file lock on artifact directory
+    Checking nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/crates/nsbu-benchmarks)
+ Documenting nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/crates/nsbu-benchmarks)
+ Documenting nsbu-cli v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/crates/nsbu-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.60s
+   Generated /mnt/niva-array/nsbu-solver/work/p09-probe-regional-tracking/target/doc/nsbu_benchmarks/index.html and 2 other files

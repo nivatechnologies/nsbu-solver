@@ -1,0 +1,5 @@
+# Reconstructed probe regional tracking
+
+Source `590e6bfca998dcfbe4a4c1b64eef3f9726cd5002` adds a standalone seven-clock, six-branch, four-quantity regional analytical consumer. It binds the actual probe and reference publications, recomputes global values with the shared tracking kernel, and transactionally retains five sampled-region reductions. This is lifecycle/binding evidence, not independent arithmetic or regional qualification; accepted PDE windows remain zero.
+
+Normal tests passed 3/3 in 43.65 s. The exact-source instrumented tests passed 3/3 in 407.06 s. Exact-source allocation printed `construction_bytes=23163200 joint_bytes=28311160 transforms=1890 classifications=290304 steady_allocations=0`. Format, all-target Clippy, strict Rustdoc, and repository validation passed. Static maxima are CC/cognitive 21/21, Halstead 75.9295154185022, and 477 lines. Observed changed-function CRAP is 18.77914951989026; the separately executed allocator main has CC 3 and conservative zero-coverage CRAP 12.
