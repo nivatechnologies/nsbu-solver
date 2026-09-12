@@ -1,0 +1,8 @@
+2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8  crates/nsbu-benchmarks/src/scalar.rs
+8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b  crates/nsbu-benchmarks/src/root.rs
+c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06  crates/nsbu-benchmarks/src/time.rs
+bab52ea402d2da286b37816dec951993cbdc34e28b982a9e9305b489aa700cba  crates/nsbu-solver/src/spectral/fft.rs
+851cf11c39678e2da55ab024c2e481a3de36b376af8b77ec3eea96a9a726cb79  crates/nsbu-solver/src/spectral/transfer.rs
+0bd0ed3f90949b034e237f1582da8859200515e28f1bf0459de75ddd9602a163  crates/nsbu-solver/src/domain/layout.rs
+8da263a555b827ba25fbdb44978bf95d002abde4d77da6e1d702d46fff591687  crates/nsbu-solver/src/domain/spectrum.rs
+e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e  crates/nsbu-benchmarks/data/similarity-mms-v2.json
