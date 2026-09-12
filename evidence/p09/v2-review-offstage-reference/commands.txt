@@ -1,0 +1,3 @@
+source_commit=ddd886474e716d27b472ea8dd4639ea78bb8aff2
+cargo +nightly-2026-03-03 llvm-cov --test v2_review_adapter --branch --json --output-path work/review-adapter-ddd-coverage.json -- --test-threads=1
+python3 -m quality.check_crap rust work/review-adapter-ddd-metrics.jsonl work/review-adapter-ddd-coverage.json work/review-adapter-ddd-crap.json
