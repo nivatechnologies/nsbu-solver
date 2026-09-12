@@ -12,41 +12,34 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
       "function": "run",
-      "cyclomatic": 11.0,
-      "branch_coverage_fraction": 1.0,
-      "crap": 11.0
+      "cyclomatic": 18.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 18.6328125
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "compare",
-      "cyclomatic": 15.0,
-      "branch_coverage_fraction": 0.7,
-      "crap": 21.075000000000003
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "<anonymous>",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "domain",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "<anonymous>",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from_manifest",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "<anonymous>",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "hashes",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "debug",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
@@ -101,29 +94,127 @@
       "crap": 2.5
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "domain",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "compare",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 9.583984375
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "time_diagnostic",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "calculate",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "from_manifest",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "from",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
     },
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
-      "function": "debug",
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_manifest_pair",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_time_manifests",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 10.799999999999999
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_time_side",
+      "cyclomatic": 17.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 18.337962962962962
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "identity_profile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "schedule_steps",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.6,
+      "crap": 14.184000000000001
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_schedule",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_f64_array",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_guard",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "hashes",
       "cyclomatic": 1.0,
       "branch_coverage_fraction": 1.0,
       "crap": 1.0
@@ -131,16 +222,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "read_manifest",
-      "cyclomatic": 9.0,
+      "cyclomatic": 10.0,
       "branch_coverage_fraction": 0.5,
-      "crap": 19.125
+      "crap": 22.5
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "validate_envelope",
-      "cyclomatic": 5.0,
-      "branch_coverage_fraction": 0.625,
-      "crap": 6.318359375
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.6875,
+      "crap": 11.471923828125
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -279,8 +370,8 @@
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "read_prefix",
       "cyclomatic": 14.0,
-      "branch_coverage_fraction": 0.7,
-      "crap": 19.292
+      "branch_coverage_fraction": 0.8,
+      "crap": 15.568
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -327,6 +418,27 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "verify_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_arithmetic_control",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5833333333333334,
+      "crap": 8.604166666666666
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_bounded_hash",
       "cyclomatic": 7.0,
       "branch_coverage_fraction": 0.8333333333333334,
       "crap": 7.226851851851852
@@ -388,5 +500,5 @@
       "crap": 4.125
     }
   ],
-  "maximum": 21.075000000000003
+  "maximum": 22.5
 }

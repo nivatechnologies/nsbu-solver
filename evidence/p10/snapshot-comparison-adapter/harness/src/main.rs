@@ -22,6 +22,11 @@ fn run(args: &[OsString]) -> Result<String, String> {
         .map_err(model::debug)?;
     let left_manifest = decode::read_manifest(&PathBuf::from(&args[0]))?;
     let right_manifest = decode::read_manifest(&PathBuf::from(&args[1]))?;
+    if left_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
+        || right_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
+    {
+        compare::validate_manifest_pair(&left_manifest, &right_manifest)?;
+    }
     let admitted = decode::preflight(&left_manifest, &right_manifest)?;
     if admitted > cap {
         return Err(format!(
@@ -30,8 +35,22 @@ fn run(args: &[OsString]) -> Result<String, String> {
     }
     let left = decode::load(&left_manifest)?;
     let right = decode::load(&right_manifest)?;
-    let output = compare::compare(&left_manifest, &left, &right_manifest, &right, admitted)?;
-    serde_json::to_string_pretty(&output).map_err(model::debug)
+    match (
+        left_manifest.comparison_kind,
+        right_manifest.comparison_kind,
+    ) {
+        (model::ComparisonKind::MatchedSpatial, model::ComparisonKind::MatchedSpatial) => {
+            let output =
+                compare::compare(&left_manifest, &left, &right_manifest, &right, admitted)?;
+            serde_json::to_string_pretty(&output).map_err(model::debug)
+        }
+        (model::ComparisonKind::TimeDiagnostic, model::ComparisonKind::TimeDiagnostic) => {
+            let output =
+                compare::time_diagnostic(&left_manifest, &left, &right_manifest, &right, admitted)?;
+            serde_json::to_string_pretty(&output).map_err(model::debug)
+        }
+        _ => Err("comparison kind mismatch".into()),
+    }
 }
 
 #[cfg(test)]

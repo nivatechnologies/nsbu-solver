@@ -6,6 +6,8 @@ use std::path::PathBuf;
 #[serde(deny_unknown_fields)]
 pub(crate) struct Manifest {
     pub schema: String,
+    #[serde(default)]
+    pub comparison_kind: ComparisonKind,
     pub snapshot: PathBuf,
     pub plan: PathBuf,
     pub identity: String,
@@ -21,6 +23,12 @@ pub(crate) struct Manifest {
     pub target: u128,
     pub epoch: u128,
     pub accepted_steps: u128,
+    #[serde(default)]
+    pub profile: Option<String>,
+    #[serde(default)]
+    pub admission_guard: Option<AdmissionGuard>,
+    #[serde(default)]
+    pub arithmetic_control: Option<ArithmeticControl>,
 }
 
 impl Manifest {
@@ -32,6 +40,42 @@ impl Manifest {
         )
         .map_err(debug)
     }
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
+pub(crate) enum ComparisonKind {
+    #[default]
+    #[serde(rename = "MATCHED_SPATIAL")]
+    MatchedSpatial,
+    #[serde(rename = "TIME_DIAGNOSTIC")]
+    TimeDiagnostic,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct AdmissionGuard {
+    pub advective_limit: f64,
+    pub maximum_attempts: u128,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct ArithmeticControl {
+    pub schema: String,
+    pub evidence: PathBuf,
+    pub evidence_sha256: String,
+    pub outcome: String,
+    pub left: ArithmeticSide,
+    pub right: ArithmeticSide,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct ArithmeticSide {
+    pub source_commit: String,
+    pub backend: String,
+    pub execution: String,
+    pub profile: String,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -101,6 +145,22 @@ pub(crate) struct ClockOutput {
 }
 
 #[derive(Debug, Serialize)]
+pub(crate) struct TimeClockOutput {
+    pub elapsed: u128,
+    pub target: u128,
+    pub left_epoch: u128,
+    pub right_epoch: u128,
+    pub left_accepted_steps: u128,
+    pub right_accepted_steps: u128,
+}
+
+#[derive(Debug, Serialize)]
+pub(crate) struct AcceptanceOutput {
+    pub status: &'static str,
+    pub accepted_windows: u8,
+}
+
+#[derive(Debug, Serialize)]
 pub(crate) struct Output<'a> {
     pub schema: &'static str,
     pub evolution: &'a Evolution,
@@ -117,6 +177,39 @@ pub(crate) struct Output<'a> {
     pub left_hashes: Hashes<'a>,
     pub right_hashes: Hashes<'a>,
     pub clock: ClockOutput,
+    pub full: NormOutput,
+    pub common: NormOutput,
+    pub newly_resolved: NormOutput,
+    pub fine_absolute: NormOutput,
+    pub mean_error: [f64; 3],
+    pub admitted_bytes: usize,
+}
+
+#[derive(Debug, Serialize)]
+pub(crate) struct TimeDiagnosticOutput<'a> {
+    pub schema: &'static str,
+    pub comparison_kind: &'static str,
+    pub acceptance: AcceptanceOutput,
+    pub left_evolution: &'a Evolution,
+    pub right_evolution: &'a Evolution,
+    pub left_identity: &'a str,
+    pub left_profile: &'a str,
+    pub left_admission_guard: &'a AdmissionGuard,
+    pub left_backend: &'a str,
+    pub left_execution: &'a str,
+    pub left_source_commit: &'a str,
+    pub left_plan_sha256: &'a str,
+    pub right_identity: &'a str,
+    pub right_profile: &'a str,
+    pub right_admission_guard: &'a AdmissionGuard,
+    pub right_backend: &'a str,
+    pub right_execution: &'a str,
+    pub right_source_commit: &'a str,
+    pub right_plan_sha256: &'a str,
+    pub arithmetic_control: &'a ArithmeticControl,
+    pub left_hashes: Hashes<'a>,
+    pub right_hashes: Hashes<'a>,
+    pub clock: TimeClockOutput,
     pub full: NormOutput,
     pub common: NormOutput,
     pub newly_resolved: NormOutput,

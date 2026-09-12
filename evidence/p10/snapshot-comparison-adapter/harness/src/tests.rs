@@ -1,5 +1,8 @@
 use super::{compare, decode};
-use crate::model::{ClockHeader, Evolution, Manifest, ScheduleSegment};
+use crate::model::{
+    AdmissionGuard, ArithmeticControl, ArithmeticSide, ClockHeader, ComparisonKind, Evolution,
+    Manifest, ScheduleSegment,
+};
 use nsbu_solver::{diagnostics::comparison::ComparisonPlan, domain::Layout, Complex64};
 use sha2::{Digest, Sha256};
 use std::{fs, path::PathBuf};
@@ -19,6 +22,7 @@ fn manifest(path: PathBuf, n: usize, identity: &str) -> Manifest {
     fs::write(&plan, b"{\"reviewed\":true}\n").unwrap();
     Manifest {
         schema: "p10-snapshot-comparison-input-v1".into(),
+        comparison_kind: ComparisonKind::MatchedSpatial,
         snapshot: path,
         plan,
         identity: identity.into(),
@@ -50,7 +54,67 @@ fn manifest(path: PathBuf, n: usize, identity: &str) -> Manifest {
         target: 64,
         epoch: 1,
         accepted_steps: 2,
+        profile: None,
+        admission_guard: None,
+        arithmetic_control: None,
     }
+}
+
+fn enable_time(left: &mut Manifest, right: &mut Manifest, root: &std::path::Path) {
+    left.comparison_kind = ComparisonKind::TimeDiagnostic;
+    right.comparison_kind = ComparisonKind::TimeDiagnostic;
+    left.epoch = 2;
+    left.profile = Some("n4-m384-h32-cadv045-serial".into());
+    right.profile = Some("n4-m384-piecewise-cadv33-w3".into());
+    left.identity = format!("fixture;profile={}", left.profile.as_deref().unwrap());
+    right.identity = format!("fixture;profile={}", right.profile.as_deref().unwrap());
+    left.admission_guard = Some(AdmissionGuard {
+        advective_limit: 0.45,
+        maximum_attempts: 2,
+    });
+    right.evolution.schedule = vec![
+        ScheduleSegment {
+            from_inclusive: 0,
+            until_exclusive: 32,
+            step_ticks: 16,
+        },
+        ScheduleSegment {
+            from_inclusive: 32,
+            until_exclusive: 64,
+            step_ticks: 32,
+        },
+    ];
+    right.epoch = 3;
+    right.accepted_steps = 3;
+    right.admission_guard = Some(AdmissionGuard {
+        advective_limit: 3.3,
+        maximum_attempts: 3,
+    });
+    let evidence = root.join("serial-w3-exact-bit-control.json");
+    fs::write(&evidence, b"{\"outcome\":\"successful-exact-bit\"}\n").unwrap();
+    let control = ArithmeticControl {
+        schema: "p10-time-arithmetic-control-v1".into(),
+        evidence: PathBuf::from("serial-w3-exact-bit-control.json"),
+        evidence_sha256: format!(
+            "{:x}",
+            Sha256::digest(b"{\"outcome\":\"successful-exact-bit\"}\n")
+        ),
+        outcome: "successful-exact-bit".into(),
+        left: ArithmeticSide {
+            source_commit: left.source_commit.clone(),
+            backend: left.backend.clone(),
+            execution: left.execution.clone(),
+            profile: left.profile.clone().unwrap(),
+        },
+        right: ArithmeticSide {
+            source_commit: right.source_commit.clone(),
+            backend: right.backend.clone(),
+            execution: right.execution.clone(),
+            profile: right.profile.clone().unwrap(),
+        },
+    };
+    left.arithmetic_control = Some(control.clone());
+    right.arithmetic_control = Some(control);
 }
 
 fn fields(layout: Layout, scale: f64) -> [Vec<Complex64>; 3] {
@@ -260,6 +324,21 @@ fn rejects_profile_clock_domain_direction_and_cap() {
         .unwrap_err()
         .contains("semantics mismatch"));
     right.evolution = left.evolution.clone();
+    left.admission_guard = Some(AdmissionGuard {
+        advective_limit: 0.45,
+        maximum_attempts: 2,
+    });
+    right.admission_guard = left.admission_guard.clone();
+    assert!(compare::compare(&left, &ls, &right, &rs, 0).is_ok());
+    right.admission_guard.as_mut().unwrap().advective_limit = 0.5;
+    assert!(compare::compare(&left, &ls, &right, &rs, 0)
+        .unwrap_err()
+        .contains("guard mismatch"));
+    right.admission_guard = None;
+    assert!(compare::compare(&left, &ls, &right, &rs, 0)
+        .unwrap_err()
+        .contains("guard mismatch"));
+    left.admission_guard = None;
     let mut bad_clock = ClockHeader::from_manifest(&right);
     bad_clock.elapsed += 1;
     let bad = crate::model::Snapshot {
@@ -271,4 +350,187 @@ fn rejects_profile_clock_domain_direction_and_cap() {
         .contains("clock mismatch"));
     assert!(ComparisonPlan::new(right.domain().unwrap(), left.domain().unwrap()).is_err());
     assert!(decode::admitted_bytes(&left, &right).unwrap() > 1);
+}
+
+#[test]
+fn time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope() {
+    let root = root("time-positive");
+    let mut left = manifest(root.join("left.bin"), 4, "left-h32");
+    let mut right = manifest(root.join("right.bin"), 4, "right-piecewise");
+    enable_time(&mut left, &mut right, &root);
+    right.source_commit = "b".repeat(40);
+    right.backend = "fixture-w3-backend".into();
+    right.execution = "fixture-w3-execution".into();
+    let control = left.arithmetic_control.as_mut().unwrap();
+    control.right.source_commit = right.source_commit.clone();
+    control.right.backend = right.backend.clone();
+    control.right.execution = right.execution.clone();
+    right.arithmetic_control = Some(control.clone());
+    let lf = fields(left.domain().unwrap().layout(), 1.0);
+    let rf = fields(right.domain().unwrap().layout(), 1.25);
+    write(&mut left, &lf);
+    write(&mut right, &rf);
+    left.snapshot = PathBuf::from("left.bin");
+    right.snapshot = PathBuf::from("right.bin");
+    left.plan = PathBuf::from("plan-left-h32.json");
+    right.plan = PathBuf::from("plan-right-piecewise.json");
+    let left_path = root.join("left.json");
+    let right_path = root.join("right.json");
+    fs::write(&left_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    let cap = decode::admitted_bytes(&left, &right).unwrap();
+    let args = [
+        left_path.into_os_string(),
+        right_path.into_os_string(),
+        cap.to_string().into(),
+    ];
+    let output = super::run(&args).unwrap();
+    assert!(output.contains("p10-snapshot-time-diagnostic-output-v1"));
+    assert!(output.contains("\"comparison_kind\": \"TIME_DIAGNOSTIC\""));
+    assert!(output.contains("\"status\": \"not_assessed\""));
+    assert!(output.contains("\"accepted_windows\": 0"));
+    assert!(output.contains("\"left_epoch\": 2"));
+    assert!(output.contains("\"right_epoch\": 3"));
+    assert!(output.contains("n4-m384-h32-cadv045-serial"));
+    assert!(output.contains("n4-m384-piecewise-cadv33-w3"));
+    let mut under_cap = args.clone();
+    under_cap[2] = "1".into();
+    assert!(super::run(&under_cap).unwrap_err().contains("exceeds cap"));
+    let mut corrupted = fs::read(root.join("left.bin")).unwrap();
+    corrupted[100] ^= 1;
+    fs::write(root.join("left.bin"), corrupted).unwrap();
+    assert!(super::run(&args).is_err());
+}
+
+#[test]
+fn time_diagnostic_rejects_every_immutable_semantic_change() {
+    let root = root("time-immutable");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    enable_time(&mut left, &mut right, &root);
+    let values = fields(left.domain().unwrap().layout(), 1.0);
+    write(&mut left, &values);
+    write(&mut right, &values);
+    let ls = decode::load(&left).unwrap();
+    let rs = decode::load(&right).unwrap();
+    let rejects =
+        |candidate: &Manifest| compare::time_diagnostic(&left, &ls, candidate, &rs, 0).is_err();
+
+    let mut changed = right.clone();
+    changed.evolution.case_sha256 = "d".repeat(64);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.quantum_exponent += 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.clock_target += 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.comparison_endpoint -= 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.lengths[0] = f64::from_bits(1.0_f64.to_bits() + 1);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.viscosity = f64::from_bits(0.01_f64.to_bits() + 1);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.method = "other".into();
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.integration_force_dimensions = [383; 3];
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.absolute_tolerances[0] = 2e-5;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.relative_tolerances[1] = 2e-5;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.dimensions = [6; 3];
+    assert!(rejects(&changed));
+}
+
+#[test]
+fn time_diagnostic_rejects_mode_headers_guards_and_provenance() {
+    let root = root("time-policy");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    enable_time(&mut left, &mut right, &root);
+    let values = fields(left.domain().unwrap().layout(), 1.0);
+    write(&mut left, &values);
+    write(&mut right, &values);
+    let ls = decode::load(&left).unwrap();
+    let rs = decode::load(&right).unwrap();
+
+    let mut changed = right.clone();
+    changed.comparison_kind = ComparisonKind::MatchedSpatial;
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("kind mismatch"));
+    changed = right.clone();
+    changed.accepted_steps -= 1;
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("derivation mismatch"));
+    changed = right.clone();
+    changed.epoch -= 1;
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("derivation mismatch"));
+    changed = right.clone();
+    changed.evolution.schedule[1].from_inclusive -= 1;
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("invalid time-diagnostic schedule"));
+    changed = right.clone();
+    changed.admission_guard.as_mut().unwrap().maximum_attempts -= 1;
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("derivation mismatch"));
+    changed = right.clone();
+    changed
+        .arithmetic_control
+        .as_mut()
+        .unwrap()
+        .right
+        .source_commit = "e".repeat(40);
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("binding mismatch"));
+    changed = right.clone();
+    changed.backend.push_str("-changed");
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("side binding mismatch"));
+    changed = right.clone();
+    changed.execution.push_str("-changed");
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("side binding mismatch"));
+    changed = right.clone();
+    changed.profile.as_mut().unwrap().push_str("-changed");
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("profile does not match"));
+    changed = right.clone();
+    changed.arithmetic_control.as_mut().unwrap().evidence_sha256 = "f".repeat(64);
+    assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
+        .unwrap_err()
+        .contains("binding mismatch"));
+
+    left.snapshot = PathBuf::from("left.bin");
+    left.plan = PathBuf::from("plan-left.json");
+    let manifest_path = root.join("left.json");
+    left.admission_guard.as_mut().unwrap().advective_limit = 0.0;
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    assert!(decode::read_manifest(&manifest_path)
+        .unwrap_err()
+        .contains("admission guard"));
+    left.admission_guard.as_mut().unwrap().advective_limit = 0.45;
+    left.arithmetic_control.as_mut().unwrap().evidence_sha256 = "0".repeat(64);
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    assert!(decode::read_manifest(&manifest_path)
+        .unwrap_err()
+        .contains("arithmetic-control SHA-256 mismatch"));
 }
