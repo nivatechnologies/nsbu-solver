@@ -165,6 +165,20 @@ fn malformed_calls_and_caps_never_publish_a_slot() {
         assert_eq!(cached.work().misses, expected_misses);
         assert_eq!(cached.work().hits, 0);
     }
+    cached.begin_attempt(clock, 128, limits).unwrap();
+    for _ in 0..15 {
+        cached
+            .evaluate(stages[0], limits, actual.each_mut().map(Vec::as_mut_slice))
+            .unwrap();
+    }
+    assert!(matches!(
+        cached.evaluate(stages[0], limits, actual.each_mut().map(Vec::as_mut_slice)),
+        Err(SolverError::ProviderBudgetExceeded)
+    ));
+    assert_eq!(
+        (cached.work().provider_evaluations, cached.work().hits),
+        (1, 14)
+    );
 }
 
 fn plan(method: Method, force: usize) -> ResourcePlan {

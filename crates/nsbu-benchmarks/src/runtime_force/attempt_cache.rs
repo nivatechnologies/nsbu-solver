@@ -61,29 +61,7 @@ impl AttemptForceCache {
     pub fn preflight(domain: Domain, settings: ForceSettings) -> Result<ForceLimits, SolverError> {
         let inner = settings.limits(domain)?;
         let length = domain.layout().half_len();
-        let words = length.checked_mul(3).ok_or(SolverError::SizeOverflow)?;
-        let payload = words
-            .checked_mul(SLOTS)
-            .and_then(|n| n.checked_mul(std::mem::size_of::<Complex64>()))
-            .ok_or(SolverError::SizeOverflow)?;
-        let wrapper = std::mem::size_of::<Self>()
-            .checked_sub(std::mem::size_of::<RunForce>())
-            .ok_or(SolverError::SizeOverflow)?;
-        Ok(ForceLimits {
-            storage_bytes: inner
-                .storage_bytes
-                .checked_add(payload)
-                .and_then(|n| n.checked_add(ALLOCATION_ALLOWANCE))
-                .and_then(|n| n.checked_add(wrapper))
-                .ok_or(SolverError::SizeOverflow)?,
-            work_units: inner
-                .work_units
-                .checked_add(words)
-                .and_then(|n| n.checked_add(SLOTS))
-                .ok_or(SolverError::SizeOverflow)?,
-            scalar_transforms: inner.scalar_transforms,
-            remaining_divisor: inner.remaining_divisor,
-        })
+        limits(inner, length)
     }
 
     /// Allocate all five slots after complete preflight and cap admission.
@@ -178,12 +156,45 @@ impl AttemptForceCache {
             target.copy_from_slice(source);
         }
         let words = 3 * self.length;
+        // `limits` proves all per-attempt counter products before construction.
         self.work.coefficient_words_copied += words;
         ForceWork {
             work_units: words + index + 1,
             scalar_transforms: 0,
         }
     }
+}
+
+fn limits(inner: ForceLimits, length: usize) -> Result<ForceLimits, SolverError> {
+    let words = length.checked_mul(3).ok_or(SolverError::SizeOverflow)?;
+    let payload = words
+        .checked_mul(SLOTS)
+        .and_then(|n| n.checked_mul(std::mem::size_of::<Complex64>()))
+        .ok_or(SolverError::SizeOverflow)?;
+    let wrapper = std::mem::size_of::<AttemptForceCache>()
+        .checked_sub(std::mem::size_of::<RunForce>())
+        .ok_or(SolverError::SizeOverflow)?;
+    let work_units = inner
+        .work_units
+        .checked_add(words)
+        .and_then(|n| n.checked_add(SLOTS))
+        .ok_or(SolverError::SizeOverflow)?;
+    for per_call in [work_units, inner.scalar_transforms, words, SLOTS] {
+        per_call
+            .checked_mul(MAXIMUM_CALLS)
+            .ok_or(SolverError::SizeOverflow)?;
+    }
+    Ok(ForceLimits {
+        storage_bytes: inner
+            .storage_bytes
+            .checked_add(payload)
+            .and_then(|n| n.checked_add(ALLOCATION_ALLOWANCE))
+            .and_then(|n| n.checked_add(wrapper))
+            .ok_or(SolverError::SizeOverflow)?,
+        work_units,
+        scalar_transforms: inner.scalar_transforms,
+        remaining_divisor: inner.remaining_divisor,
+    })
 }
 
 impl PrescribedForce for AttemptForceCache {
@@ -261,4 +272,35 @@ fn values(length: usize) -> Result<Vec<Complex64>, SolverError> {
         .map_err(|_| SolverError::AllocationFailed)?;
     values.resize(length, Complex64::new(0.0, 0.0));
     Ok(values)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn inner(work_units: usize, transforms: usize) -> ForceLimits {
+        ForceLimits {
+            storage_bytes: 0,
+            work_units,
+            scalar_transforms: transforms,
+            remaining_divisor: 1,
+        }
+    }
+
+    #[test]
+    fn complete_direct_attempt_counter_products_are_checked() {
+        let overflow = usize::MAX / MAXIMUM_CALLS + 1;
+        assert_eq!(
+            limits(inner(overflow, 1), 1),
+            Err(SolverError::SizeOverflow)
+        );
+        assert_eq!(
+            limits(inner(1, overflow), 1),
+            Err(SolverError::SizeOverflow)
+        );
+        assert_eq!(
+            limits(inner(1, 1), usize::MAX / 3),
+            Err(SolverError::SizeOverflow)
+        );
+    }
 }
