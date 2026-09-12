@@ -42,6 +42,7 @@ fn settings_policy() -> DiagnosticSettings {
         pressure_floors: [1e-8, 1e-7],
         reference_floors: [1e-8, 1e-7, 1e-6, 1e-7],
         regional_root_budget: 128,
+        coverage_panels: [256, 512, 1024],
     }
 }
 

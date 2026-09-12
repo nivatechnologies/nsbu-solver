@@ -29,6 +29,7 @@ fn main() {
         pressure_floors: [1e-8, 1e-7],
         reference_floors: [1e-8, 1e-7, 1e-6, 1e-7],
         regional_root_budget: 128,
+        coverage_panels: [256, 512, 1024],
     };
     let admission = Region::new(GLOBAL);
     let family = FamilyPlan::new(
@@ -77,6 +78,7 @@ fn main() {
         driver.consumer_work().probe_reference,
         plan.bounds().probe_reference
     );
+    assert_eq!(driver.consumer_work().coverage, plan.bounds().coverage);
     println!(
         "v2 diagnostic admission=0 construction_bytes={} joint_bytes={} events={} execution_allocations=0",
         built.bytes_allocated,

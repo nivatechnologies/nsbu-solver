@@ -69,6 +69,8 @@ pub struct AcceptedDiagnostic {
     pub pressure: PressureRefinementSample,
     /// Global and geometric regional analytical-reference errors.
     pub regional_reference: RegionalTrackingSample,
+    /// Independently refined nominal core/annulus coverage bound to regional metadata.
+    pub nominal_coverage: crate::v2_experiment::coverage::CoverageFamilySample,
     /// Exact retained-node provenance and bitwise comparisons.
     pub node_binding: NodeBindingSample,
 }

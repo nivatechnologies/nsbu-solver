@@ -5,6 +5,7 @@ mod profile;
 mod report;
 use crate::v2_experiment::{
     binding::{NodeBindingError, NodeBindingWorkspace},
+    coverage::{CoverageFamilyError, CoverageFamilyWorkspace},
     physical::PhysicalFamilyWorkspace,
     pressure::PressureFamilyWorkspace,
     probes::{
@@ -44,6 +45,8 @@ pub struct DiagnosticConsumerWork {
     pub reference: crate::v2_experiment::reference::ReferenceTrackingWork,
     /// Added regional classification and reduction work.
     pub regional: crate::v2_experiment::reference::regional::RegionalTrackingWork,
+    /// Accepted-clock nominal core/annulus geometry work.
+    pub coverage: crate::v2_experiment::coverage::CoverageFamilyWork,
     /// Off-stage doubled-band residual work.
     pub residual: crate::v2_experiment::probes::residuals::ResidualFamilyWork,
     /// Accepted-node provenance and bitwise comparison work.
@@ -61,6 +64,8 @@ pub enum DiagnosticError {
     ProbeReference(ReferenceTrackingError),
     /// Accepted-node provenance or comparison failure.
     Binding(NodeBindingError),
+    /// Accepted nominal-coverage binding or numerical failure.
+    Coverage(CoverageFamilyError),
     /// Allocation or coordinator resource failure.
     Numerical(SolverError),
     /// A previous event attempt failed.
@@ -86,6 +91,11 @@ impl From<NodeBindingError> for DiagnosticError {
         Self::Binding(value)
     }
 }
+impl From<CoverageFamilyError> for DiagnosticError {
+    fn from(value: CoverageFamilyError) -> Self {
+        Self::Coverage(value)
+    }
+}
 impl From<SolverError> for DiagnosticError {
     fn from(value: SolverError) -> Self {
         Self::Numerical(value)
@@ -103,6 +113,7 @@ pub struct DiagnosticDriver<'a> {
     probe_reference: ProbeReferenceWorkspace<'a>,
     pressure: PressureFamilyWorkspace<'a>,
     regional: RegionalTrackingWorkspace<'a>,
+    coverage: CoverageFamilyWorkspace<'a>,
     residual: ResidualFamily<'a>,
     binding: NodeBindingWorkspace<'a>,
     reports: Vec<DiagnosticEvent>,
@@ -126,6 +137,7 @@ impl<'a> DiagnosticDriver<'a> {
             probe_reference: ProbeReferenceWorkspace::new(plan.probe_reference)?,
             pressure: PressureFamilyWorkspace::new(plan.pressure)?,
             regional: RegionalTrackingWorkspace::new(plan.regional)?,
+            coverage: CoverageFamilyWorkspace::new(plan.coverage),
             residual: ResidualFamily::new(plan.residual)?,
             binding: NodeBindingWorkspace::new(plan.binding),
             reports,
@@ -166,6 +178,7 @@ impl<'a> DiagnosticDriver<'a> {
             pressure: self.pressure.charged_work(),
             reference: self.regional.tracking_work(),
             regional: self.regional.regional_work(),
+            coverage: self.coverage.charged_work(),
             residual: self.residual.charged_work(),
             binding: self.binding.charged_work(),
         }
@@ -220,23 +233,19 @@ impl<'a> DiagnosticDriver<'a> {
             let physical = self.physical.measure(&self.ordinary)?;
             let pressure = self.pressure.measure(&self.ordinary)?;
             let regional_reference = self.regional.measure(&self.ordinary)?;
+            let nominal_coverage = self.coverage.measure(&self.ordinary, regional_reference)?;
             let node_binding = self.binding.measure(&self.ordinary, &self.probes)?;
-            self.require_accepted(
-                clock,
+            let diagnostic = AcceptedDiagnostic {
                 spectral,
                 physical,
                 pressure,
                 regional_reference,
+                nominal_coverage,
                 node_binding,
-            )?;
+            };
+            self.require_accepted(clock, diagnostic)?;
             (
-                AcceptedEvidence::measured(AcceptedDiagnostic {
-                    spectral,
-                    physical,
-                    pressure,
-                    regional_reference,
-                    node_binding,
-                }),
+                AcceptedEvidence::measured(diagnostic),
                 ResidualEvidence::not_scheduled(),
             )
         } else {
@@ -276,12 +285,16 @@ impl<'a> DiagnosticDriver<'a> {
     fn require_accepted(
         &self,
         clock: TickClock,
-        spectral: crate::v2_experiment::RefinementSample,
-        physical: crate::v2_experiment::physical::PhysicalRefinementSample,
-        pressure: crate::v2_experiment::pressure::PressureRefinementSample,
-        regional: crate::v2_experiment::reference::regional::RegionalTrackingSample,
-        binding: crate::v2_experiment::binding::NodeBindingSample,
+        diagnostic: AcceptedDiagnostic,
     ) -> Result<(), FamilyError> {
+        let AcceptedDiagnostic {
+            spectral,
+            physical,
+            pressure,
+            regional_reference: regional,
+            nominal_coverage: coverage,
+            node_binding: binding,
+        } = diagnostic;
         let identity = self.plan.family.identity();
         let observed = AcceptedIdentity {
             clocks: [
@@ -290,6 +303,7 @@ impl<'a> DiagnosticDriver<'a> {
                 pressure.clock(),
                 regional.clock(),
                 binding.clock(),
+                coverage.clock(),
             ],
             families: [
                 spectral.identity(),
@@ -297,13 +311,16 @@ impl<'a> DiagnosticDriver<'a> {
                 pressure.identity(),
                 regional.identity(),
                 binding.family_identity(),
+                coverage.family_identity(),
             ],
             probes: binding.probe_identity(),
+            coverage_tracking: coverage.tracking_identity(),
         };
         let expected = AcceptedIdentity {
-            clocks: [clock; 5],
-            families: [identity; 5],
+            clocks: [clock; 6],
+            families: [identity; 6],
             probes: self.plan.probes.identity(),
+            coverage_tracking: identity,
         };
         if observed != expected {
             return Err(FamilyError::InvalidFamily);
@@ -323,7 +340,8 @@ impl<'a> DiagnosticDriver<'a> {
 
 #[derive(PartialEq, Eq)]
 struct AcceptedIdentity {
-    clocks: [TickClock; 5],
-    families: [[u8; 32]; 5],
+    clocks: [TickClock; 6],
+    families: [[u8; 32]; 6],
     probes: [u8; 32],
+    coverage_tracking: [u8; 32],
 }

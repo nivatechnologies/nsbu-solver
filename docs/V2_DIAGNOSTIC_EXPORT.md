@@ -25,6 +25,12 @@ velocity/gradient/Hessian/vorticity order. It remains diagnostic-only and does
 not relabel accepted-state, regional, pressure-reference, gauge, or readiness
 evidence. Version 1 intentionally
 omits these newer fields; the library `DiagnosticEvent` still retains them.
+At each accepted v2 event, `accepted.sample.nominal_coverage` records raw
+three-setting core/annulus fractions, changes, geometry statuses, panels and
+evaluation counts. Sampled-class counts from the bound regional report remain
+separate metadata. The v2 context records the panel policy and complete coverage
+work allowance. Version 1 omits these keys. Coverage is unavailable at the four
+off-stage events and does not close collar or global coverage gaps.
 The version 1 event keys and value definitions remain stable. Its context's
 coordinator reservation numbers can increase because the driver now admits the
 additional consumer; byte-for-byte document identity is therefore not claimed.

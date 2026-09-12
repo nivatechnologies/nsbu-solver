@@ -3,6 +3,7 @@ mod v2_family_support;
 
 use nsbu_benchmarks::v2_experiment::{
     binding::NodeBindingStatus,
+    coverage::{CoverageFamilyPlan, CoverageFamilySample, CoverageFamilyWorkspace},
     diagnostic::{
         AcceptedSchedule, DiagnosticDriver, DiagnosticError, DiagnosticPlan, DiagnosticSettings,
         DiagnosticStatus, MissingChannel, ResidualSchedule,
@@ -43,6 +44,7 @@ fn policy() -> DiagnosticSettings {
         pressure_floors: [1e-8, 1e-7],
         reference_floors: [1e-8, 1e-7, 1e-6, 1e-7],
         regional_root_budget: 128,
+        coverage_panels: [256, 512, 1024],
     }
 }
 
@@ -114,6 +116,29 @@ fn assert_regional(left: RegionalTrackingSample, right: RegionalTrackingSample) 
             assert_eq!(x.regional.root_work_charged, y.regional.root_work_charged);
         }
     }
+}
+
+fn assert_coverage(left: CoverageFamilySample, right: CoverageFamilySample) {
+    assert_eq!(left.clock(), right.clock());
+    assert_eq!(left.family_identity(), right.family_identity());
+    assert_eq!(left.tracking_identity(), right.tracking_identity());
+    for (a, b) in left.core().into_iter().zip(right.core()) {
+        assert_eq!(
+            (a.status, a.panels, a.evaluations),
+            (b.status, b.panels, b.evaluations)
+        );
+        assert_eq!(a.fraction.to_bits(), b.fraction.to_bits());
+        assert_eq!(a.refinement_change.to_bits(), b.refinement_change.to_bits());
+    }
+    for (a, b) in left.annulus().into_iter().zip(right.annulus()) {
+        assert_eq!(
+            (a.status, a.panels, a.evaluations),
+            (b.status, b.panels, b.evaluations)
+        );
+        assert_eq!(a.fraction.to_bits(), b.fraction.to_bits());
+        assert_eq!(a.refinement_change.to_bits(), b.refinement_change.to_bits());
+    }
+    assert_eq!(left.sampling(), right.sampling());
 }
 
 fn assert_probe_physical(left: ProbePhysicalSample, right: ProbePhysicalSample) {
@@ -234,6 +259,14 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     )
     .unwrap();
     let standalone_regional_plan = RegionalTrackingPlan::new(tracking, 128, CAP).unwrap();
+    let standalone_coverage_plan = CoverageFamilyPlan::new(
+        plan.family_plan(),
+        standalone_regional_plan,
+        standalone_policy.coverage_panels,
+        accepted.len(),
+        CAP,
+    )
+    .unwrap();
     let standalone_bytes = standalone_physical_plan
         .bounds()
         .storage_bytes
@@ -247,6 +280,7 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
                     - plan.family_plan().bounds().storage_bytes,
             )
         })
+        .and_then(|n| n.checked_add(standalone_coverage_plan.bounds().storage_bytes))
         .unwrap();
     assert!(plan.bounds().joint_storage_bytes + standalone_bytes <= CAP);
     let mut driver = DiagnosticDriver::new(plan).unwrap();
@@ -259,6 +293,7 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         ProbeReferenceWorkspace::new(standalone_probe_reference_plan).unwrap();
     let mut standalone_pressure = PressureFamilyWorkspace::new(standalone_pressure_plan).unwrap();
     let mut standalone_regional = RegionalTrackingWorkspace::new(standalone_regional_plan).unwrap();
+    let mut standalone_coverage = CoverageFamilyWorkspace::new(standalone_coverage_plan);
     let mut maximum_residual_l2 = 0.0_f64;
     for (index, &clock) in manifest.iter().enumerate() {
         assert_eq!(driver.next_time(), Some(clock));
@@ -318,6 +353,12 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
                 measured.regional_reference,
                 standalone_regional.measure(driver.ordinary()).unwrap(),
             );
+            assert_coverage(
+                measured.nominal_coverage,
+                standalone_coverage
+                    .measure(driver.ordinary(), measured.regional_reference)
+                    .unwrap(),
+            );
             for branch in measured.node_binding.branches() {
                 let NodeBindingStatus::Compared(node) = branch else {
                     panic!("common endpoint was not retained")
@@ -362,6 +403,7 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
     assert_eq!(driver.consumer_work().pressure, plan.bounds().pressure);
     assert_eq!(driver.consumer_work().reference, plan.bounds().reference);
     assert_eq!(driver.consumer_work().regional, plan.bounds().regional);
+    assert_eq!(driver.consumer_work().coverage, plan.bounds().coverage);
     assert_eq!(driver.consumer_work().residual, plan.bounds().residual);
     assert_eq!(driver.consumer_work().binding, plan.bounds().binding);
     assert_eq!(driver.ordinary().plan().identity(), family_identity);

@@ -2,6 +2,7 @@
 use super::{DiagnosticDriver, DiagnosticEvent};
 use crate::v2_experiment::{
     binding::{NodeBindingPlan, NodeBindingWork},
+    coverage::{CoverageFamilyPlan, CoverageFamilyWork},
     physical::{PhysicalFamilyPlan, PhysicalFamilyWork},
     pressure::{PressureFamilyPlan, PressureFamilyWork},
     probes::{
@@ -39,6 +40,8 @@ pub struct DiagnosticSettings {
     pub reference_floors: [f64; 4],
     /// Regional implicit-root iteration policy; currently exactly 128.
     pub regional_root_budget: usize,
+    /// Three strictly nested coarse Simpson panel counts for nominal core/annulus coverage.
+    pub coverage_panels: [usize; 3],
 }
 
 /// Coordinator scheduling work, separate from every numerical owner.
@@ -79,6 +82,8 @@ pub struct DiagnosticBounds {
     pub reference: ReferenceTrackingWork,
     /// Added regional classification work allowance.
     pub regional: RegionalTrackingWork,
+    /// Accepted-clock nominal core/annulus geometry work.
+    pub coverage: CoverageFamilyWork,
     /// Off-stage residual work allowance.
     pub residual: ResidualFamilyWork,
     /// Accepted-node binding work allowance.
@@ -96,6 +101,7 @@ pub struct DiagnosticPlan<'a> {
     pub(super) probe_reference: ProbeReferencePlan<'a>,
     pub(super) pressure: PressureFamilyPlan<'a>,
     pub(super) regional: RegionalTrackingPlan<'a>,
+    pub(super) coverage: CoverageFamilyPlan<'a>,
     pub(super) residual: ResidualFamilyPlan<'a>,
     pub(super) binding: NodeBindingPlan<'a>,
     pub(super) bounds: DiagnosticBounds,
@@ -155,6 +161,13 @@ impl<'a> DiagnosticPlan<'a> {
         )?;
         let regional =
             RegionalTrackingPlan::new(tracking, settings.regional_root_budget, joint_cap)?;
+        let coverage = CoverageFamilyPlan::new(
+            family,
+            regional,
+            settings.coverage_panels,
+            accepted,
+            joint_cap,
+        )?;
         let residual = ResidualFamilyPlan::new(probes, residual_times, residual_count, joint_cap)?;
         let binding = NodeBindingPlan::new(family, probes, accepted, joint_cap)?;
         let storage_bytes = report_storage(events)?;
@@ -172,6 +185,7 @@ impl<'a> DiagnosticPlan<'a> {
             probe_reference.bounds().storage_bytes,
             pressure.bounds().storage_bytes,
             regional_increment,
+            coverage.bounds().storage_bytes,
             residual.bounds().storage_bytes,
             binding.bounds().storage_bytes,
             storage_bytes,
@@ -204,6 +218,7 @@ impl<'a> DiagnosticPlan<'a> {
             probe_reference,
             pressure,
             regional,
+            coverage,
             residual,
             binding,
             bounds: DiagnosticBounds {
@@ -218,6 +233,7 @@ impl<'a> DiagnosticPlan<'a> {
                 pressure: pressure.bounds().work,
                 reference: regional.bounds().tracking_work,
                 regional: regional.bounds().regional_work,
+                coverage: coverage.bounds().work,
                 residual: residual.bounds().work,
                 binding: binding.bounds().work,
             },
@@ -250,6 +266,7 @@ impl<'a> DiagnosticPlan<'a> {
             pressure_floors: self.pressure.relative_floors(),
             reference_floors: self.regional.tracking_plan().relative_floors(),
             regional_root_budget: self.regional.root_budget(),
+            coverage_panels: self.coverage.panels(),
         }
     }
 }

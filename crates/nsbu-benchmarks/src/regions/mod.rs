@@ -4,6 +4,7 @@ mod errors;
 pub mod physical;
 mod point;
 use crate::BenchmarkError;
+pub(crate) use coverage::status_at as coverage_status_at;
 pub use coverage::{CoveragePlan, CoverageStatus, RegionCoverage};
 pub use errors::{RegionalError, RegionalErrors, RegionalReport, RegionalTensorErrors};
 pub use point::{classify, PointRegion, SpatialRegion, StartupPhase};

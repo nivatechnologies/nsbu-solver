@@ -56,11 +56,7 @@ impl CoveragePlan {
         let tau = BenchmarkTime::new(clock)?.remaining();
         let (coarse, coarse_work) = integral(tau, region, self.panels);
         let (fine, fine_work) = integral(tau, region, 2 * self.panels);
-        let status = if INNER_RADIUS_SQUARED / (2.0 * tau) <= region.bounds()[0] {
-            CoverageStatus::RegionEmpty
-        } else {
-            CoverageStatus::Nonempty
-        };
+        let status = status(tau, region);
         Ok(RegionCoverage {
             status,
             fraction: fine,
@@ -68,6 +64,21 @@ impl CoveragePlan {
             panels: 2 * self.panels,
             evaluations: coarse_work + fine_work,
         })
+    }
+}
+
+pub(crate) fn status_at(
+    clock: TickClock,
+    region: NominalRegion,
+) -> Result<CoverageStatus, BenchmarkError> {
+    Ok(status(BenchmarkTime::new(clock)?.remaining(), region))
+}
+
+fn status(tau: f64, region: NominalRegion) -> CoverageStatus {
+    if INNER_RADIUS_SQUARED / (2.0 * tau) <= region.bounds()[0] {
+        CoverageStatus::RegionEmpty
+    } else {
+        CoverageStatus::Nonempty
     }
 }
 

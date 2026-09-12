@@ -27,7 +27,11 @@ At an accepted clock, the driver advances the ordinary family first and the
 probe family to that same requested clock. It then retains full-band family
 comparisons, physical velocity/gradient/Hessian/vorticity comparisons,
 pressure/pressure-gradient comparisons, global and regional binary64
-analytical tracking, and an exact retained-node provenance/bitwise finding.
+analytical tracking, independently refined nominal core/annulus coverage, and
+an exact retained-node provenance/bitwise finding. The startup coverage policy
+uses coarse Simpson panel counts `[256,512,1024]`; every setting also evaluates
+its doubled grid, for 10,764 geometry evaluations per accepted event and 32,292
+across the three accepted startup clocks.
 At a residual clock, it advances only the probe family and immediately measures
 the physical velocity/ordered-gradient/ordered-Hessian/vorticity differences
 and fresh-force doubled-band residual while the reconstructed fields remain
@@ -40,9 +44,15 @@ capacity and two transient event copies at the driver call boundary. Copies
 retained by a caller are outside the owner storage contract. Separate finite
 ledgers expose probe, accepted physical, reconstructed physical, reconstructed
 pressure, reconstructed analytical-reference, accepted pressure, accepted
-analytical-reference, regional, residual and binding work. A failed event attempt terminates the driver and
+analytical-reference, regional, nominal coverage, residual and binding work. A failed event attempt terminates the driver and
 publishes no partial event. Numerical owners, published events and consumer
 charges remain inspectable read-only.
+
+Nominal coverage is present only at the three accepted clocks because it binds
+their regional tracking reports. It records empirical core and annulus fractions
+and panel-refinement changes. It does not supply off-stage regional errors,
+cutoff-collar coverage, an enclosure, or complete interior/global qualification.
+`RegionVolumeCoverage` therefore remains an explicit missing channel.
 
 Every event has status `UnqualifiedDiagnostic`. The coordinator applies no
 threshold and makes no PDE acceptance, accuracy, completeness or convergence
