@@ -1,0 +1,4 @@
+/mnt/niva-array/nsbu-solver/work/cli-cache-timing-20260912/target/release/nsbu v2 --grid 12 --force-grid 48 --workers 32 --step-ticks 16 --endpoint-ticks 128 --attempt-cap 8 --memory-cap 268435456 --method cm
+/mnt/niva-array/nsbu-solver/work/cli-cache-timing-20260912/target/release/nsbu v2 --grid 12 --force-grid 48 --workers 32 --step-ticks 16 --endpoint-ticks 128 --attempt-cap 8 --memory-cap 268435456 --method cm --cache-force
+/mnt/niva-array/nsbu-solver/work/cli-cache-timing-20260912/target/release/nsbu v2 --grid 12 --force-grid 48 --workers 32 --step-ticks 16 --endpoint-ticks 128 --attempt-cap 8 --memory-cap 268435456 --method ho
+/mnt/niva-array/nsbu-solver/work/cli-cache-timing-20260912/target/release/nsbu v2 --grid 12 --force-grid 48 --workers 32 --step-ticks 16 --endpoint-ticks 128 --attempt-cap 8 --memory-cap 268435456 --method ho --cache-force

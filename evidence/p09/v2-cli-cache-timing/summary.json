@@ -1,0 +1,184 @@
+{
+  "source_sha": "8bec567f9befffd085343850ddc53140251d9eb6",
+  "profile": {
+    "grid": 12,
+    "force_grid": 48,
+    "workers": 32,
+    "method": "CM and HO",
+    "step_ticks": 16,
+    "endpoint_ticks": 128,
+    "attempt_cap": 8,
+    "memory_cap_bytes": 268435456
+  },
+  "runs": [
+    {
+      "run": "cm-direct-1",
+      "method": "cm",
+      "cache": "direct",
+      "rep": 1,
+      "wall_seconds": 2374.2,
+      "user_seconds": 584.58,
+      "system_seconds": 0.11,
+      "max_rss_kib": 68608,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "cm-direct-2",
+      "method": "cm",
+      "cache": "direct",
+      "rep": 2,
+      "wall_seconds": 2463.6000000000004,
+      "user_seconds": 588.87,
+      "system_seconds": 0.11,
+      "max_rss_kib": 69632,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "cm-cached-1",
+      "method": "cm",
+      "cache": "cached",
+      "rep": 1,
+      "wall_seconds": 1465.2,
+      "user_seconds": 384.52,
+      "system_seconds": 0.09,
+      "max_rss_kib": 70656,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "cm-cached-2",
+      "method": "cm",
+      "cache": "cached",
+      "rep": 2,
+      "wall_seconds": 1525.2,
+      "user_seconds": 395.19,
+      "system_seconds": 0.09,
+      "max_rss_kib": 69632,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "ho-direct-1",
+      "method": "ho",
+      "cache": "direct",
+      "rep": 1,
+      "wall_seconds": 2796.6,
+      "user_seconds": 671.11,
+      "system_seconds": 0.15,
+      "max_rss_kib": 69632,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "ho-direct-2",
+      "method": "ho",
+      "cache": "direct",
+      "rep": 2,
+      "wall_seconds": 2882.4,
+      "user_seconds": 671.46,
+      "system_seconds": 0.13,
+      "max_rss_kib": 69632,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "ho-cached-1",
+      "method": "ho",
+      "cache": "cached",
+      "rep": 1,
+      "wall_seconds": 1503.0,
+      "user_seconds": 390.58,
+      "system_seconds": 0.09,
+      "max_rss_kib": 70656,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    },
+    {
+      "run": "ho-cached-2",
+      "method": "ho",
+      "cache": "cached",
+      "rep": 2,
+      "wall_seconds": 1497.6000000000001,
+      "user_seconds": 390.33,
+      "system_seconds": 0.09,
+      "max_rss_kib": 69632,
+      "exit": 0,
+      "clock": "128",
+      "attempts": {
+        "started": "8",
+        "committed": "8",
+        "rejected": "0",
+        "refused": "0"
+      }
+    }
+  ],
+  "median_speed": {
+    "cm": {
+      "direct_wall_median_seconds": 2418.9,
+      "cached_wall_median_seconds": 1495.2,
+      "direct_to_cached_ratio": 1.617776886035313
+    },
+    "ho": {
+      "direct_wall_median_seconds": 2839.5,
+      "cached_wall_median_seconds": 1500.3000000000002,
+      "direct_to_cached_ratio": 1.8926214757048587
+    }
+  },
+  "paired_comparison": {
+    "terminal_clock_equal": true,
+    "attempts_equal": true,
+    "observation_ledger_equal": true,
+    "core_diagnostic_json_equal": true,
+    "excluded_fields": [
+      "actual_charged_work",
+      "current_attempt_cache_work",
+      "integration_force_policy"
+    ],
+    "integration_ledger_difference_expected": true
+  },
+  "scope": "Profile-specific timing under shared host load; no state-bit or PDE-convergence claim."
+}
