@@ -1,0 +1,98 @@
+{
+  "status": "complete_n256_actual_interleaved_gate_pass_pre_split_source",
+  "source_commit": "8f57937dbb4ecda97a0667e959f13ecfdd67b20a",
+  "base_commit": "bd9f6b6eaf51ecff60ed0c68483c55e8b55186a8",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "profile": {
+    "retained": 256,
+    "force_samples": 384,
+    "observer_samples": 768,
+    "workers": 32,
+    "ticks": 32,
+    "attempts_per_run": 1,
+    "scheduled_observer_frequency": 0.0625
+  },
+  "reservation_bytes": {
+    "serial_total": 74922818680,
+    "w3_total": 79484672760,
+    "additional_total": 4561854080,
+    "rhs_owner_additional": 2733911936,
+    "force_owner_additional": 1827942144,
+    "cap": 103079215104
+  },
+  "execution": {
+    "separate_owners": true,
+    "w3_workers_per_owner": 3,
+    "rhs_triplets_per_attempt": 36,
+    "force_triplets_per_attempt": 5,
+    "scalar_pressure_ffts_per_attempt": 12
+  },
+  "samples": [
+    {
+      "order": 1,
+      "mode": "serial",
+      "integration_seconds": 193.169668759,
+      "observer_seconds": 170.935100844,
+      "total_seconds": 364.249633892
+    },
+    {
+      "order": 2,
+      "mode": "w3",
+      "integration_seconds": 142.445959745,
+      "observer_seconds": 174.613378309,
+      "total_seconds": 317.184714487
+    },
+    {
+      "order": 3,
+      "mode": "serial",
+      "integration_seconds": 203.538240017,
+      "observer_seconds": 167.351406839,
+      "total_seconds": 371.03348728
+    },
+    {
+      "order": 4,
+      "mode": "w3",
+      "integration_seconds": 136.926767288,
+      "observer_seconds": 176.56492985,
+      "total_seconds": 313.634564667
+    }
+  ],
+  "pair_reductions": [
+    0.26258630218641255,
+    0.32726760692947154
+  ],
+  "medians": {
+    "serial_integration_seconds": 198.353954388,
+    "w3_integration_seconds": 139.6863635165,
+    "integration_speedup": 1.4199951190265614,
+    "integration_reduction": 0.29577222724151164,
+    "serial_observer_seconds": 169.1432538415,
+    "w3_observer_seconds": 175.5891540795,
+    "scheduled_serial_seconds": 208.92540775309376,
+    "scheduled_w3_seconds_with_measured_observer": 150.66068564646875,
+    "scheduled_reduction": 0.27887810646506794
+  },
+  "gate": {
+    "minimum_scheduled_reduction": 0.25,
+    "passed": true,
+    "margin": 0.02887810646506794
+  },
+  "controls": {
+    "state_sha256": "a36034adc5665a950b33252691a5acc2c6c22ea61ad3304ba19b542b61dcf054",
+    "all_four_state_hashes_equal": true,
+    "indicators_equal": true,
+    "balance_equal": true,
+    "work_equal": true,
+    "cache_hit_miss_equal": true,
+    "steady_allocations_all_runs": 0
+  },
+  "scope": {
+    "startup_state_only": true,
+    "later_state_representative": false,
+    "arithmetic_qualification": "missing",
+    "accepted_windows": 0,
+    "observer_unchanged_serial": true,
+    "host_contended_by_two_endpoint_processes": true,
+    "final_integrated_source_confirmation_pending": true
+  }
+}
