@@ -1,0 +1,553 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "new",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "maximum_copies",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "new",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "settings",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "domains",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "maximum_attempts",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "bounds",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "binding",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "provider",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "validate_domains",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "validate_manifest",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 10.1953125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "bounds",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "storage_bounds",
+      "cyclomatic": 14.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 14.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "work_bounds",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "multiply",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "add",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "sum",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/identity.rs",
+      "function": "compute",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/identity.rs",
+      "function": "put_clock",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/identity.rs",
+      "function": "put_layout",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/identity.rs",
+      "function": "put_usize",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "from",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "domain",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "settings",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "charged_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "stored_clock_size",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "new",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "current",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "charged_work",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "is_terminated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "remaining",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "copy",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "charge_attempt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "copy_checked",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "validate",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "domain_index",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "stored",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "values",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "domain",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "domains",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "settings",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "field",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "bits",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "direct",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "streams",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "slab_manifest",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "six_branch_stage_streams_equal_fresh_same_m_force_at_every_word",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "assert_nyquist_zero",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "one_clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "admission_binds_positive_ordered_manifest_resources_and_full_provider_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "charged_refusal_preserves_output_table_and_last_complete_report",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "foreign_unexpected_and_overconsumed_requests_fail_closed",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+      "function": "total_attempt_cap_is_terminal_without_an_extra_charge_or_output_write",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    }
+  ],
+  "maximum": 19.125
+}

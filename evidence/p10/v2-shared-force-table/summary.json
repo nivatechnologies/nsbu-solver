@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "base_commit": "dc129141503c7b92b67c5c44a2fe3435703daa8c",
+  "source_commit": "cb25421130539e68a9827cbeedbb4dc6c136a2a1",
+  "status": "DiagnosticOnly",
+  "profile": {
+    "retained_grids": [4, 8, 12],
+    "force_grid": [16, 16, 16],
+    "workers": 0,
+    "slab_ticks": [0, 64],
+    "unique_clocks": 17,
+    "bounded_copies": 95,
+    "provider_evaluations": 17,
+    "production_family_integrated": false
+  },
+  "tests": {
+    "functional_normal": {"passed": 5, "failed": 0, "seconds": 15.27},
+    "functional_instrumented": {"passed": 5, "failed": 0, "seconds": 93.51},
+    "allocation": {
+      "passed": true,
+      "construction_bytes": 241568,
+      "declared_construction_peak_bytes": 244312,
+      "steady_allocations": 0
+    }
+  },
+  "focused_coverage": {
+    "lines_covered": 657,
+    "lines_total": 666,
+    "line_percent": 98.64864864864865,
+    "branches_covered": 40,
+    "branches_total": 44,
+    "branch_percent": 90.9090909090909
+  },
+  "quality": {
+    "maximum_crap": 19.125,
+    "changed_maximum_function_cyclomatic": 14.0,
+    "changed_maximum_function_cognitive": 14.0,
+    "changed_maximum_function_halstead_difficulty": 27.083333333333332,
+    "changed_maximum_all_node_halstead_difficulty": 77.46107784431138,
+    "whole_maximum_cyclomatic": 21.0,
+    "whole_maximum_cognitive": 21.0,
+    "whole_maximum_all_node_halstead_difficulty": 77.46107784431138,
+    "whole_maximum_file_lines": 477,
+    "format": "passed",
+    "workspace_all_targets_clippy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_check": "passed"
+  },
+  "claims_force_accuracy": false,
+  "claims_trajectory_equivalence": false,
+  "claims_pde_qualification": false,
+  "accepted_windows": 0
+}
