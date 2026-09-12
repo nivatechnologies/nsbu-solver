@@ -1,0 +1,11 @@
+{
+  "status":"completed_reference_only_binary64_high_band_assessment",
+  "source":{"commit":"9c90c0a796f9583c2d165bdca44f93406f179d48","tree":"5fed645d0046485324518303d846135b29d4f36a","case_sha256":"e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e","harness_sha256":"6ccef5ea23d97f491a6e370a98b716edef4c5053d8d9b46c30093bb8d0a0fb5e","comparator_sha256":"1f6cd4a6022601aa899c886e83911b1749ddab1cbe8201123d2eeac134c2d90d"},
+  "clock":{"exponent":-20,"target":8192,"elapsed":4096,"remaining":4096},
+  "resources":{"generation_owner_cap_bytes":3221225472,"generation_rlimit_as_bytes_per_process":4294967296,"m192_reservation":456018168,"m384_reservation":2441384184,"comparison_reservation":686559232,"comparison_visits":25030656,"comparison_rlimit_as_bytes_per_process":2147483648,"m192_max_rss_kib":445852,"m384_max_rss_kib":2383528,"comparison_max_rss_kib":671744},
+  "work":{"m192":{"evaluations":7077888,"root_iteration_bound":905969664,"actual_root_iterations":10481484,"transforms":3,"wall_seconds":10.93},"m384":{"evaluations":56623104,"root_iteration_bound":7247757312,"actual_root_iterations":84096984,"transforms":3,"wall_seconds":69.54},"comparison":{"wall_seconds":6.56},"total_measured_wall_seconds":87.03},
+  "retained_n192_sha256":{"m192":"3300a791a3b95ca40ca32698d1217d63064183dc937e927693d4226d29445886","m384":"519bf90eafacf4ae4f88779f22d6780516d81edc831a5bb546a89fde31842aa6"},
+  "m384_shells":{"inside_n48":{"l2":1.8386264787418385,"h1":50.405992978350525},"n48_to_n64":{"l2":0.028505100374458435,"h1":5.749098972197867},"n64_to_n96":{"l2":0.013585766197077196,"h1":3.5851393808232976},"n96_to_n128":{"l2":0.0027709603286900472,"h1":1.0731409876138864},"n128_to_n192":{"l2":0.0008251737355144728,"h1":0.42403608358427264},"inside_n192":{"l2":1.8388998888592623,"h1":50.872398505292736}},
+  "m192_to_m384_on_strict_n192":{"l2":0.00010044657913972197,"h1":0.06600747155632526,"vorticity_l2":0.03652778891069911,"divergence_l2":0.05497905827907794},
+  "claims":{"independent_high_precision_reference":false,"true_error_bound":false,"tail_beyond_m384_bound":false,"trajectory_error":false,"pde_qualification":false,"accepted_windows":0}
+}

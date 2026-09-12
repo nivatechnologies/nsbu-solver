@@ -1,0 +1,4 @@
+6ccef5ea23d97f491a6e370a98b716edef4c5053d8d9b46c30093bb8d0a0fb5e  reference-spectrum-hi.rs
+b8a9e56396bcea750b49e5084c65e444b50ad1e626fa75611b9c097e5a3d86d5  p10-reference-spectrum-hi binary
+1f6cd4a6022601aa899c886e83911b1749ddab1cbe8201123d2eeac134c2d90d  comparator-hi.rs
+f773be338c52c7cecf7daed876e9d08a9bc5e5e00fe8f77d77b1468effe5dcbc  p10-force-snapshot-tool-hi binary
