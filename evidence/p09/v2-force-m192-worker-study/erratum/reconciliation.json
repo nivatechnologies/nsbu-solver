@@ -1,0 +1,19 @@
+{
+  "actual_archived_m192_4096_hash": "61b0a99c9fc87d0b682a50074b36a9c3938d7f860458fc1dcb111ead69054d5f",
+  "all_observed_match_actual": true,
+  "control_matches_actual": false,
+  "executed_control_constant": "61b0a9c99fc87d0b682a50074b36a9c3938d7f860458fc1dcb111ead69054d5f",
+  "executed_harness": "evidence/p09/v2-force-m192-worker-study/executed-harness/src/main.rs",
+  "observed_hashes": {
+    "serial_endpoint": "61b0a99c9fc87d0b682a50074b36a9c3938d7f860458fc1dcb111ead69054d5f",
+    "workers12_endpoint": "61b0a99c9fc87d0b682a50074b36a9c3938d7f860458fc1dcb111ead69054d5f",
+    "workers32_4096": "61b0a99c9fc87d0b682a50074b36a9c3938d7f860458fc1dcb111ead69054d5f"
+  },
+  "sha256": {
+    "evidence/p09/v2-force-grid-refinement/raw/force-grid.stdout.gz": "a39018b5631ebc642a2e036945e0e7104f4bd53e67b5096def8fdaab3c50decb",
+    "evidence/p09/v2-force-m192-worker-study/executed-harness/src/main.rs": "a6568cd30514aa126c995f97de902d069555f655c6028448a6a6a80dd9b5b7bf",
+    "evidence/p09/v2-force-m192-worker-study/raw/worker-study.stdout.gz": "40a34debd4426ccd75df4c87985bc11c1d6d8701a57e8992083ff10d0ce56971"
+  },
+  "source_four_grid_raw": "evidence/p09/v2-force-grid-refinement/raw/force-grid.stdout.gz",
+  "worker_raw": "evidence/p09/v2-force-m192-worker-study/raw/worker-study.stdout.gz"
+}

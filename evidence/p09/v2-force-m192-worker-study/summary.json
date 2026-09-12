@@ -1,0 +1,9 @@
+{
+  "source_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "scope": "M192 prescribed-force provider worker correctness and timing only; no state, nonlinear term, trajectory, full RHS, or PDE qualification",
+  "profile": {"retained_grid": "N24", "force_grid": "M192", "endpoint": 4096, "workers": [0, 12, 32], "nonmonotone_32": [2047, 4096, 2047]},
+  "resources": {"serial_bytes": 284548680, "workers12_bytes": 480611624, "workers32_bytes": 523877544, "retained_fields_bytes": 1078272, "sequential_peak_bytes": 524959912, "cap_bytes": 1073741824, "declared_evaluations": 5, "declared_work": 4565237760, "declared_transforms": 15},
+  "results": {"serial_4096_seconds": 150.024862, "workers12_4096_seconds": 15.498093, "workers32_2047_seconds": 9.702286, "workers32_4096_seconds": 8.755700, "workers32_2047_repeat_seconds": 9.876809, "actual_work_2047": 7078665, "actual_work_4096": 7078668, "all_actual_transforms": 3, "serial_12_exact_words": true, "serial_32_exact_words": true, "workers32_repeat_exact_words": true, "workers32_2047_archived12_hash": true, "workers32_4096_archived12_hash_printed": false},
+  "runtime": {"timeout_seconds": 900, "wall_seconds": 194.77, "user_seconds": 838.76, "system_seconds": 0.80, "maximum_rss_kib": 446948, "exit_status": 0},
+  "erratum": "The executed harness transcribed the archived M192/4096 hash byte as c9 instead of the source raw's 9c. It correctly printed false for that control. The separate reconciliation reads both raw artifacts and proves actual archived, serial, workers12 and workers32 hashes match."
+}
