@@ -4,7 +4,7 @@ use nsbu_solver::{domain::TickClock, integrators::method::Method, SolverError};
 mod plan;
 mod provider;
 
-pub use plan::SharedForceAdapterSetPlan;
+pub use plan::{SharedForceAdapterSet, SharedForceAdapterSetPlan};
 pub use provider::SharedForceAdapter;
 
 const MAXIMUM_CALLS: usize = 15;
@@ -45,6 +45,7 @@ impl SharedForceAttempt {
 pub struct SharedForceStream<'a> {
     domain_index: usize,
     attempts: &'a [SharedForceAttempt],
+    maximum_calls: usize,
 }
 impl<'a> SharedForceStream<'a> {
     /// Bind a nonempty exact attempt manifest to one of the table's three domains.
@@ -55,9 +56,14 @@ impl<'a> SharedForceStream<'a> {
         if domain_index >= 3 || attempts.is_empty() {
             return Err(SolverError::InvalidPayload);
         }
+        let maximum_calls = attempts.iter().try_fold(0usize, |sum, attempt| {
+            sum.checked_add(attempt.method.rhs_calls())
+                .ok_or(SolverError::SizeOverflow)
+        })?;
         Ok(Self {
             domain_index,
             attempts,
+            maximum_calls,
         })
     }
     /// Index in the table plan's ordered retained domains.
@@ -67,6 +73,10 @@ impl<'a> SharedForceStream<'a> {
     /// Complete exact attempt sequence for this handle.
     pub fn attempts(self) -> &'a [SharedForceAttempt] {
         self.attempts
+    }
+    /// Total force calls derived once from every admitted method.
+    pub fn maximum_calls(self) -> usize {
+        self.maximum_calls
     }
 }
 
@@ -83,6 +93,8 @@ pub struct SharedForceAdapterWork {
     pub binding_checks: usize,
     /// Abstract shared-table lookup, binding and strict-transfer work exposed to the RHS.
     pub table_work_units: usize,
+    /// Fixed schedule slots charged before each attempt is validated or constructed.
+    pub schedule_visits: usize,
 }
 
 /// Shared owner, caller manifests, handles and bounded work admitted as one set.
@@ -92,12 +104,16 @@ pub struct SharedForceAdapterBounds {
     pub storage_bytes: usize,
     /// Storage reserved inside each generic RHS for one borrowed adapter header.
     pub handle_storage_bytes: usize,
+    /// Set header and allocator-metadata allowance outside the table owner.
+    pub set_storage_bytes: usize,
     /// Borrowed table, stream and attempt manifest storage retained by the caller.
     pub caller_manifest_bytes: usize,
     /// Construction peak including the one original provider and every adapter header.
     pub construction_peak_bytes: usize,
     /// Maximum simultaneous owner, caller manifests, handles and one caller output.
     pub joint_peak_bytes: usize,
+    /// Conservative schedule writes/comparisons and stream filters during admission.
+    pub admission_schedule_visits: usize,
     /// Complete runtime handle allowance; table work remains separately queryable.
     pub work: SharedForceAdapterWork,
 }

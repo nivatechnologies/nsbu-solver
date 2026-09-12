@@ -45,6 +45,12 @@ impl SharedForceAdapter<'_, '_, '_> {
             .binding_checks
             .checked_add(8)
             .ok_or(SolverError::SizeOverflow)?;
+        let calls = self.stream.attempts[self.next_attempt].method.rhs_calls();
+        self.charged.schedule_visits = self
+            .charged
+            .schedule_visits
+            .checked_add(calls)
+            .ok_or(SolverError::SizeOverflow)?;
         Ok(())
     }
 
@@ -76,15 +82,7 @@ impl SharedForceAdapter<'_, '_, '_> {
         limit: ForceLimits,
         output: [&mut [Complex64]; 3],
     ) -> Result<ForceWork, SolverError> {
-        let maximum_calls = self
-            .stream
-            .attempts
-            .iter()
-            .try_fold(0usize, |sum, attempt| {
-                sum.checked_add(attempt.method.rhs_calls())
-                    .ok_or(SolverError::SizeOverflow)
-            })?;
-        if self.charged.calls == maximum_calls {
+        if self.charged.calls == self.stream.maximum_calls {
             return Err(SolverError::ProviderBudgetExceeded);
         }
         self.charged.calls = self

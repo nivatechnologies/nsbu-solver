@@ -9,7 +9,7 @@ mod plan;
 mod table;
 
 pub use adapter::{
-    SharedForceAdapter, SharedForceAdapterBounds, SharedForceAdapterSetPlan,
+    SharedForceAdapter, SharedForceAdapterBounds, SharedForceAdapterSet, SharedForceAdapterSetPlan,
     SharedForceAdapterWork, SharedForceAttempt, SharedForceStream,
 };
 pub use plan::{
