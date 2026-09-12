@@ -1,0 +1,18 @@
+{
+  "status": "complete_unqualified_spatial_midpoint_diagnostic",
+  "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "profile": {"clock": 2048, "attempts": 128, "committed": 128, "from_rest": true, "n": [48, 64], "m": 96, "workers": 32, "method": "CoxMatthews", "step_ticks": 16, "absolute": [0.00001, 0.0001], "relative": [0.00001, 0.00001]},
+  "snapshots": {
+    "n48": {"bytes": 2764800, "sha256": "383c02753fa73b13bef107d4635e5083c6b8b7bf9b02e724988bd0c009e6adb3", "terminal_exit": 0, "end_utc": "2026-09-12T08:49:08Z"},
+    "n64": {"bytes": 6488064, "sha256": "22db0441ba7561aa350804d3d25e08203119d228cebd3160a5356003ca5fe2d4", "terminal_exit": 0, "end_utc": "2026-09-12T09:14:50Z"}
+  },
+  "comparison": {
+    "full": {"l2": 0.028232131916258566, "h1": 5.716213563272909, "vorticity_l2": 5.716143844208321, "divergence_l2": 1.2628970066332461e-14},
+    "common": {"l2": 0.0001666472628066453, "h1": 0.02475909155452701},
+    "newly_resolved": {"l2": 0.028231640073272835, "h1": 5.716159942507781},
+    "finer_state": {"l2": 1.741785215511511, "h1": 47.6442377500622},
+    "relative_to_finer": {"l2": 0.01620873323808046, "h1": 0.11997701785596195}
+  },
+  "resources": {"pair_declared_bytes": 18509824, "pair_visits": 713472, "pair_wall_seconds": 0.15, "pair_max_rss_kib": 19456, "norm_declared_bytes": 25956352, "norm_visits": 946176, "norm_wall_seconds": 0.16, "norm_max_rss_kib": 26624, "cap_bytes_each": 268435456},
+  "qualification": {"accepted_windows": 0, "claims_convergence": false, "claims_spatial_sufficiency": false, "claims_force_sufficiency": false, "claims_endpoint4096": false}
+}
