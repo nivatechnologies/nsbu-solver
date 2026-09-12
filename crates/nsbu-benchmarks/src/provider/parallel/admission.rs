@@ -91,3 +91,46 @@ fn limits_parts(
         ..original
     })
 }
+
+pub(in crate::provider) fn reduced_limits(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+) -> Result<ForceLimits, SolverError> {
+    use crate::{
+        provider::{parallel_reduced::ParallelReducedV2Force, reduced::ReducedV2Force},
+        reduced_force::axial::AxialRoot as ReducedAxialRoot,
+    };
+
+    if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
+        return Err(SolverError::InvalidPayload);
+    }
+    let serial = ReducedV2Force::preflight(domain, samples)?;
+    let physical = samples
+        .real_len()
+        .checked_mul(24)
+        .ok_or(SolverError::SizeOverflow)?;
+    let roots = samples.dimensions()[2]
+        .checked_mul(std::mem::size_of::<Option<ReducedAxialRoot>>())
+        .ok_or(SolverError::SizeOverflow)?;
+    let worker_storage = Worker::metadata_bytes() + 5 * 64 + STACK_BYTES + THREAD_ALLOWANCE;
+    let threads = workers
+        .checked_mul(worker_storage)
+        .ok_or(SolverError::SizeOverflow)?;
+    let storage_bytes = [
+        physical,
+        roots,
+        threads,
+        64,
+        std::mem::size_of::<Pool>(),
+        std::mem::size_of::<ParallelReducedV2Force>(),
+    ]
+    .into_iter()
+    .try_fold(serial.storage_bytes, |total, bytes| {
+        total.checked_add(bytes).ok_or(SolverError::SizeOverflow)
+    })?;
+    Ok(ForceLimits {
+        storage_bytes,
+        ..serial
+    })
+}

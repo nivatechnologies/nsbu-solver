@@ -37,6 +37,10 @@ name = "parallel_force_allocation"
 harness = false
 
 [[test]]
+name = "parallel_reduced_force_allocation"
+harness = false
+
+[[test]]
 name = "reduced_force_allocation"
 harness = false
 

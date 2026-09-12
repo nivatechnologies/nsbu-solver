@@ -1,5 +1,5 @@
 //! Persistent workers own fixed sample buffers; no threads are created during a force request.
-use super::sampling::{Partition, Samples};
+use super::sampling::{Arithmetic, Partition, Samples};
 use crate::time::BenchmarkTime;
 use nsbu_solver::SolverError;
 use std::sync::{Arc, Condvar, Mutex};
@@ -33,14 +33,14 @@ impl Worker {
             + std::mem::size_of::<Shared>()
             + 2 * std::mem::size_of::<usize>()
     }
-    pub fn new(partition: Partition) -> Result<Self, SolverError> {
+    pub fn new(partition: Partition, arithmetic: Arithmetic) -> Result<Self, SolverError> {
         let shared = Arc::new(Shared {
             state: Mutex::new(State {
                 started: false,
                 pending: None,
                 complete: None,
                 stop: false,
-                samples: Samples::new(partition)?,
+                samples: Samples::new(partition, arithmetic)?,
                 #[cfg(test)]
                 fail_next: false,
                 #[cfg(test)]
@@ -212,16 +212,24 @@ mod tests {
     use nsbu_solver::domain::{Layout, TickClock};
     #[test]
     fn dropping_idle_and_submitted_workers_joins_and_releases_all_shared_storage() {
-        for pending in [false, true] {
-            let worker = Worker::new(Partition::new(Layout::new([4; 3]).unwrap(), 0, 1)).unwrap();
-            let weak = Arc::downgrade(&worker.shared);
-            if pending {
-                worker
-                    .submit(BenchmarkTime::new(TickClock::restore(-10, 8, 1, 7).unwrap()).unwrap())
-                    .unwrap();
+        for arithmetic in [Arithmetic::Cartesian, Arithmetic::Reduced] {
+            for pending in [false, true] {
+                let worker = Worker::new(
+                    Partition::new(Layout::new([4; 3]).unwrap(), 0, 1),
+                    arithmetic,
+                )
+                .unwrap();
+                let weak = Arc::downgrade(&worker.shared);
+                if pending {
+                    worker
+                        .submit(
+                            BenchmarkTime::new(TickClock::restore(-10, 8, 1, 7).unwrap()).unwrap(),
+                        )
+                        .unwrap();
+                }
+                drop(worker);
+                assert!(weak.upgrade().is_none());
             }
-            drop(worker);
-            assert!(weak.upgrade().is_none());
         }
     }
 }
