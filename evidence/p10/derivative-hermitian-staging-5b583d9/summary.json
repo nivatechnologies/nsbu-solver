@@ -1,0 +1,91 @@
+{
+  "change": {
+    "allocation_change_bytes": 0,
+    "global_fft_guard_changed": false,
+    "input_or_state_modified": false,
+    "method": "After unchanged source validation, project only k_z=0 partner orbits in staging scratch using component f64::midpoint, apply ik once, and write the partner as exact conjugate. Positive z derivatives skip this plane as exact zero.",
+    "source_validation_tolerance": 1e-12,
+    "work_accounting": "DerivativeWorkspace::coefficient_visits adds four conservative weighted visits per source-plane coefficient; v2/smooth physical, v2 pressure, and v2 reference reservations use it."
+  },
+  "claim": "Numerical infrastructure correction only. The cached state self-comparison and force isolator are diagnostics; they do not establish PDE qualification or an accepted window.",
+  "coverage": {
+    "consumer_source": {
+      "execution_commit": "5dc435d63cb265632b60895330a3d70f5d9ad263",
+      "final_commit_difference": "Only test relocation for file-level Halstead; all covered production source bytes are identical to final commit.",
+      "smooth_physical_plan": {
+        "branch_percent": 100.0,
+        "line_percent": 98.64864864864865
+      },
+      "v2_physical_work": {
+        "branches": "none instrumented",
+        "line_percent": 92.3076923076923
+      },
+      "v2_pressure_plan": {
+        "branch_percent": 100.0,
+        "line_percent": 85.71428571428571
+      },
+      "v2_reference_plan": {
+        "branch_percent": 100.0,
+        "line_percent": 97.19626168224299
+      }
+    },
+    "solver_final": {
+      "derivative_plane_projection_rs": {
+        "branch_percent": 100.0,
+        "line_percent": 100.0
+      },
+      "derivatives_rs": {
+        "branch_percent": 100.0,
+        "line_percent": 92.3076923076923
+      }
+    },
+    "whole_workspace": "not run in this focused increment"
+  },
+  "proof": {
+    "force_isolator": {
+      "after": "all 60 scalar samples across three axes, ten derivative orders and M24/M48 completed",
+      "before": "x/y derivatives refused InvalidSpectrum",
+      "max_rss_kib": 10240,
+      "wall_seconds": 0.47
+    },
+    "solver_tests": {
+      "failed": 0,
+      "passed": 8
+    },
+    "state_reproducer": {
+      "all_self_errors_zero": true,
+      "cap_bytes": 268435456,
+      "checkpoint_before_consumers_bytes": 84123,
+      "checkpoint_sha256": "784b374ae5505124cee3eb2f6606a35896305fadc9ebd68075428a07222cb57c",
+      "configuration": "N12/M24, 12 workers, CM, h=16 ticks, clock2048",
+      "declared_combined_bytes": 65971683,
+      "from_rest": true,
+      "max_rss_kib": 14336,
+      "physical_quantities": [
+        "Vector",
+        "Gradient",
+        "Hessian",
+        "Vorticity"
+      ],
+      "source": "5b583d9678af631ba6a175a0175ccf3da132cc71",
+      "terminal": "complete",
+      "wall_seconds": 155.3
+    }
+  },
+  "quality": {
+    "clippy": "pass with -D warnings -A dead_code",
+    "correction": "Moved cohesive plane-projection proofs to derivative_plane_projection.rs; final old/new test file maxima are 59.09 and39.23.",
+    "initial_test_file_halstead_failure": 84.3740157480315,
+    "max_changed_function_cognitive": 18.0,
+    "max_changed_function_cyclomatic": 17.0,
+    "max_changed_node_halstead_difficulty": 59.140776699029125,
+    "max_focused_crap": 20.0,
+    "rustdoc": "pass with -D warnings"
+  },
+  "schema": "p10_derivative_hermitian_staging_v1",
+  "source": {
+    "base": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+    "commit": "5b583d9678af631ba6a175a0175ccf3da132cc71",
+    "parent_failure_evidence_commit": "90a3571"
+  }
+}

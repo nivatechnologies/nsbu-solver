@@ -1,0 +1,11 @@
+# Hermitian derivative staging correction
+
+Source `5b583d9678af631ba6a175a0175ccf3da132cc71` fixes the `InvalidSpectrum` mechanism preserved in the sibling baseline-failure evidence. Strict source admission remains unchanged at absolute `1e-12`, and the global inverse-FFT Hermitian guard is unchanged. After admission, `DerivativeWorkspace` projects only stored `k_z=0` partner orbits in private staging scratch with component `f64::midpoint`, applies `ik` once, and writes the partner as an exact conjugate. Inputs and integrated states are never modified. Positive z derivatives skip that plane because its derivative is identically zero.
+
+The proof covers an independent signed Fourier pair on a padded grid, order zero, first and mixed derivatives, exact DC handling, admitted small asymmetry, exact subnormal and large conjugate pairs, huge finite coefficients with a z derivative, malformed/nonfinite/Nyquist refusal, input immutability, and reusable scratch. Existing tests retain complete derivative-order and allocation controls. Work bounds now charge four extra conservative weighted visits per source-plane coefficient without adding storage.
+
+The before-fix force isolator refused x/y derivatives. Rebuilt with the correction, all 60 samples across M24/M48, three components, and ten derivative orders completed in 0.47 seconds. An exact N12/M24 trajectory then evolved from rest to clock 2048, saved its 84,123-byte checkpoint before consumers, and completed all four physical self-comparisons plus every derivative order in 155.30 seconds.
+
+Focused coverage exceeds 80% executable line and branch coverage for every changed file with instrumented branches. The selected consumer coverage ran at the immediately preceding implementation commit; the final commit only relocated tests to satisfy the all-node Halstead gate, and hashes bind the unchanged production bytes. Whole-workspace coverage was not run. Final changed-node static maxima are cyclomatic 17, cognitive 18, Halstead difficulty 59.14, and focused CRAP 20. Clippy and Rustdoc pass with the repository flags.
+
+This is a numerical infrastructure correction and diagnostic reproduction. It makes no PDE qualification or accepted-window claim.

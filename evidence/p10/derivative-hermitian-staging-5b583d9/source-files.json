@@ -1,0 +1,40 @@
+{
+  "commit": "5b583d9678af631ba6a175a0175ccf3da132cc71",
+  "files": [
+    {
+      "bytes": 9460,
+      "path": "crates/nsbu-solver/src/diagnostics/derivatives.rs",
+      "sha256": "ed47cd13b2233dbce87ed45cad0093fabfd42c2f2934e69a21a07d150f98da72"
+    },
+    {
+      "bytes": 3014,
+      "path": "crates/nsbu-solver/tests/derivative_plane_projection.rs",
+      "sha256": "5e2c42955b689cdcc83fe4b490496c450decd0578cfc241162dd376d0f4eeb6f"
+    },
+    {
+      "bytes": 5251,
+      "path": "crates/nsbu-benchmarks/src/smooth_experiment/physical/plan.rs",
+      "sha256": "f7e009bc4e362c9a6861395a082caa9c08d2ef4eec79f06fe779cfe31476c049"
+    },
+    {
+      "bytes": 1122,
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/physical/plan/work.rs",
+      "sha256": "d18d3297fd9d4487606040526da82dc726a8aa7167fac3da81ba5f5ac2dfb6b3"
+    },
+    {
+      "bytes": 7107,
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/pressure/plan.rs",
+      "sha256": "cc78841bb99319269f353e8f2b3b18136123a0bdf66eee91567a3b60b9f4312c"
+    },
+    {
+      "bytes": 6301,
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/reference/plan.rs",
+      "sha256": "12ea062394f625a2ef07a3c53abf214ac1b0a81f645030ac2116d48390e0bf95"
+    },
+    {
+      "bytes": 8067,
+      "path": "docs/DERIVATIVE_DIAGNOSTICS.md",
+      "sha256": "debdc67280d0ec7b8c6c1463ea81cb4d6fc0b979029dc4854a2f3f9561888cc3"
+    }
+  ]
+}
