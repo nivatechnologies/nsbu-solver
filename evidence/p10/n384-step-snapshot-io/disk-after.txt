@@ -1,0 +1,2 @@
+     1B-blocks          Used         Avail Use% Mounted on
+12287869976576 4988203479040 7299666497536  41% /mnt/niva-array

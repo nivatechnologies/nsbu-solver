@@ -1,0 +1,8 @@
+cargo test --manifest-path evidence/p10/n384-step-snapshot-io/harness/Cargo.toml --target-dir target/n384-snapshot-check
+cargo clippy --manifest-path evidence/p10/n384-step-snapshot-io/harness/Cargo.toml --target-dir target/n384-snapshot-check --all-targets -- -D warnings
+cargo build --release --manifest-path evidence/p10/n384-step-snapshot-io/harness/Cargo.toml --target-dir target/n384-snapshot-profile
+target/n384-snapshot-profile/release/p10-n384-step-snapshot-io preflight
+/usr/bin/time -v -o evidence/p10/n384-step-snapshot-io/benchmark.time target/n384-snapshot-profile/release/p10-n384-step-snapshot-io benchmark /mnt/niva-array/nsbu-solver/work/p10-n384-snapshot-bulk-20260912
+/mnt/niva-array/nsbu-solver/work/rust-tools/bin/rust-code-analysis-cli -p evidence/p10/n384-step-snapshot-io/harness/src -m -O json
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH CARGO_TARGET_DIR=target/n384-snapshot-coverage3 cargo +nightly-2026-03-03 llvm-cov --manifest-path evidence/p10/n384-step-snapshot-io/harness/Cargo.toml --all-targets --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json
+python3 quality/check_crap.py rust metrics.jsonl coverage.json crap.json

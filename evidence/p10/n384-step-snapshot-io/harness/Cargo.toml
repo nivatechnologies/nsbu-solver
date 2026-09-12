@@ -1,0 +1,10 @@
+[package]
+name = "p10-n384-step-snapshot-io"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+sha2 = "=0.10.9"
