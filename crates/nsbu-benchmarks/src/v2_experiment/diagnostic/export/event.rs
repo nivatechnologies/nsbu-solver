@@ -64,13 +64,31 @@ fn validate_probe_physical(
     e: DiagnosticEvent,
 ) -> Result<(), DiagnosticExportError> {
     let sample = e.reconstructed_physical();
-    let quantities = crate::v2_experiment::probes::physical::PROBE_PHYSICAL_QUANTITIES;
-    if sample.clock() != e.clock()
-        || sample.identity() != p.probe_identity
+    validate_probe_physical_identity(p, e, sample)?;
+    validate_probe_physical_settings(p, sample)
+}
+
+fn validate_probe_physical_identity(
+    p: DiagnosticExportPlan,
+    e: DiagnosticEvent,
+    sample: crate::v2_experiment::probes::physical::ProbePhysicalSample,
+) -> Result<(), DiagnosticExportError> {
+    if (sample.clock(), sample.identity()) != (e.clock(), p.probe_identity)
         || sample.reconstruction().clock() != e.probe().clock()
         || sample.reconstruction().identity() != e.probe().identity()
         || sample.origins() != e.probe().origins()
-        || sample.source_domains() != p.probe_domains
+    {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
+fn validate_probe_physical_settings(
+    p: DiagnosticExportPlan,
+    sample: crate::v2_experiment::probes::physical::ProbePhysicalSample,
+) -> Result<(), DiagnosticExportError> {
+    let quantities = crate::v2_experiment::probes::physical::PROBE_PHYSICAL_QUANTITIES;
+    if sample.source_domains() != p.probe_domains
         || sample.sample_layout() != p.settings.physical_samples
         || sample.relative_floors().map(f64::to_bits)
             != p.settings.physical_floors.map(f64::to_bits)
