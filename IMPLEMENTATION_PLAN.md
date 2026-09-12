@@ -896,15 +896,16 @@ accepted PDE windows.
 The [partial review adapter](docs/V2_PARTIAL_REVIEW.md) extracts four global
 sampled RMS observables from all seven startup events: velocity, ordered
 gradient, ordered Hessian and vorticity. It binds the exact schedule, case and
-family/probe identities, branch 2 finest-CM tracking, layouts and binary64 floor
-words; accepted rest zeros remain measured while off-stage accepted observables
-remain missing. Its status is permanently `PartialUnqualifiedInventory`; it does
+family/probe identities, branch-2 finest-CM tracking, layouts and binary64 floor
+words. At off-stage clocks it retains reconstructed physical pairwise RMS values
+and same-clock reconstructed-reference RMS separately; it does not substitute
+analytical errors for physical differences. Its status is permanently
+`PartialUnqualifiedInventory`; it does
 not construct a generic review, add tolerances, or decide readiness. [Focused
-evidence](evidence/p09/v2-review-adapter/summary.json) records production branch
-coverage of 80% and maximum CRAP 13.125. The all-changed production-and-test
-scope reaches only 75% branch coverage, below the 80% gate, and whole-maintained
-combined hosted CI remains pending. P08/P09/P10 remain incomplete with zero
-accepted PDE windows.
+evidence](evidence/p09/v2-review-offstage-reference/README.md) records the
+source-bound off-stage extension and its focused CRAP checks. It is still not a
+complete 88-observable review or an acceptance decision. P08/P09/P10 remain
+incomplete with zero accepted PDE windows.
 
 ## P09 nested physical sampling
 
