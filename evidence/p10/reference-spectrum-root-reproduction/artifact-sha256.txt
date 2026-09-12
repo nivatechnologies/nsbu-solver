@@ -1,0 +1,12 @@
+e81d3e1d58e9b4b51c0c7cca0d6d1671447c18fcf3b9b8213948c92ed1a00cd7  evidence/p10/reference-spectrum-root-reproduction/README.md
+7fab0fe5701997101c35abe3dd65ca76b02fcef2288467f72bf0d9fc7c8274e8  evidence/p10/reference-spectrum-root-reproduction/raw/compare-m192-m384.stdout.gz
+c177615953806627a0b42b1e6a57a666379ddb4af220ebe56ac9e20b5495b6b2  evidence/p10/reference-spectrum-root-reproduction/raw/compare-m192-m384.time.gz
+527f79172fb58d7c695ae97361d6e7783a3926ece54f604b1903f425832dfce0  evidence/p10/reference-spectrum-root-reproduction/raw/m192-run.stdout.gz
+c6c6a2151c7178bcd324defa7e7a2bc7f6df15dc99d68be06d9cbe4889d914a4  evidence/p10/reference-spectrum-root-reproduction/raw/m192-run.time.gz
+585f55a0b382d9bd4f5f5cc6353c654db6100f88dc9be35a949f0001409d0452  evidence/p10/reference-spectrum-root-reproduction/raw/m384-preflight.stdout.gz
+e11384e65589c130a213c6805e2bf31b2c3fc77f798788f8f716df84b94a5fad  evidence/p10/reference-spectrum-root-reproduction/raw/m384-preflight.time.gz
+be5d3ebe854279ecd58a90279ff2430ad01d646500811424ffbb398d6fff3975  evidence/p10/reference-spectrum-root-reproduction/raw/m384-run.stdout.gz
+bf73b83d04ea31bd93acd59803824b03d68f9b8f536507bda3ad0fbde8a126a9  evidence/p10/reference-spectrum-root-reproduction/raw/m384-run.time.gz
+056b4f8b4a13b267efc4c5dbf0074a989620e75ac1420f479a1e4b14ffab6a10  evidence/p10/reference-spectrum-root-reproduction/raw/reproduction.log.gz
+582db03b9b5191d27d01b61becd6c174407fed3a0d3f7e6a73c06dd461e655f9  evidence/p10/reference-spectrum-root-reproduction/raw/status.json.gz
+7a4195a88527318431e9848d6cb202177a633c5f70af8e59ce85efadb0d56e1b  evidence/p10/reference-spectrum-root-reproduction/summary.json

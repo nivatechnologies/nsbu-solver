@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "executed_source_commit": "32fd2e820b2d0ad2d1141f9b0e9b2da85b8ff0fc",
+  "method": "Executed preserved high-band reproduction script with bash -e in a checkout with no preexisting reference/comparator harness packages. Maintained numerical-source SHA-256 inventory matched the archived original before compilation.",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-e",
+    "evidence/p10/reference-spectrum-high-band-9c90c0a/source/executed-commands.sh"
+  ],
+  "exit_code": 0,
+  "coefficient_sha256_exactly_reproduced": {
+    "m192": "3300a791a3b95ca40ca32698d1217d63064183dc937e927693d4226d29445886",
+    "m384": "519bf90eafacf4ae4f88779f22d6780516d81edc831a5bb546a89fde31842aa6"
+  },
+  "reference_only": true,
+  "accepted_concentrating_windows": 0,
+  "limits": {
+    "outer_seconds": 600,
+    "generation_address_space_bytes": 4294967296,
+    "comparison_address_space_bytes": 2147483648
+  },
+  "original_evidence": "evidence/p10/reference-spectrum-high-band-9c90c0a/summary.json"
+}
