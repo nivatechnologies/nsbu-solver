@@ -14,6 +14,7 @@ const MAX_MANIFEST_BYTES: u64 = 64 * 1024;
 const MAX_IDENTITY_BYTES: usize = 16 * 1024;
 const FIXED_OVERHEAD_BYTES: usize = 1024 * 1024;
 const MAX_PLAN_BYTES: u64 = 1024 * 1024;
+const MAX_ARITHMETIC_REVIEW_BYTES: u64 = 64 * 1024;
 
 pub(crate) fn read_manifest(path: &Path) -> Result<Manifest, String> {
     let bytes = read_bounded(path, MAX_MANIFEST_BYTES, "manifest exceeds 64 KiB bound")?;
@@ -259,8 +260,8 @@ fn verify_arithmetic_control(manifest_path: &Path, manifest: &Manifest) -> Resul
     }
     let bytes = read_bounded(
         &beside(manifest_path, &control.evidence),
-        MAX_PLAN_BYTES,
-        "arithmetic control exceeds 1 MiB bound",
+        MAX_ARITHMETIC_REVIEW_BYTES,
+        "arithmetic control exceeds 64 KiB bound",
     )?;
     if format!("{:x}", Sha256::digest(&bytes)) != control.evidence_sha256 {
         return Err("arithmetic-control SHA-256 mismatch".into());
@@ -277,7 +278,14 @@ fn valid_arithmetic_side(side: &crate::model::ArithmeticSide) -> bool {
     is_hex(&side.source_commit, 40)
         && !side.backend.is_empty()
         && !side.execution.is_empty()
-        && !side.profile.is_empty()
+        && !side.profile.value.is_empty()
+}
+
+fn valid_measured_side(side: &crate::model::MeasuredSide) -> bool {
+    is_hex(&side.source_commit, 40)
+        && !side.backend.is_empty()
+        && !side.execution.is_empty()
+        && !side.configuration.is_empty()
 }
 
 fn valid_arithmetic_review(review: &crate::model::ArithmeticReview) -> bool {
@@ -292,8 +300,8 @@ fn valid_arithmetic_review(review: &crate::model::ArithmeticReview) -> bool {
 
 fn valid_measured_control(control: &crate::model::MeasuredControl) -> bool {
     control.outcome == "successful-exact-bit"
-        && valid_arithmetic_side(&control.serial)
-        && valid_arithmetic_side(&control.w3)
+        && valid_measured_side(&control.serial)
+        && valid_measured_side(&control.w3)
 }
 
 fn valid_reviewed_lineage(lineage: &crate::model::ReviewedLineage) -> bool {

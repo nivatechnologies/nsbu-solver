@@ -23,10 +23,20 @@ adapter validates each schedule independently from zero through the endpoint
 and derives both the epoch and accepted-step count from it. Only the schedule,
 those derived counters, and the reported admission guards may differ.
 
+Profile provenance has two closed forms. `identity-profile-field` requires the
+binding value to equal the snapshot identity's exact `profile=` field.
+`legacy-full-identity` exists only for the legacy h32 writer that published no
+profile field; its value must equal the complete published identity byte for
+byte. It does not append or infer a profile name. The output and reviewed
+lineage preserve both the binding kind/value and the exact full identity.
+
 Every time manifest must also carry the same `arithmetic_control` binding with
 a nested `p10-time-arithmetic-review-v1` review. That object binds both sides' exact
 source commit, backend, execution, and profile to a bounded, hash-verified
-JSON review artifact. The adapter parses that artifact rather than trusting an
+JSON review artifact. The review artifact has its own 64 KiB cap because its
+complete parsed content is already embedded in a manifest with the same cap;
+the independent frozen-plan stream retains its 1 MiB cap. The adapter parses
+the review artifact rather than trusting an
 outcome string in the snapshot manifest. Its `measured_control` records the
 source, backend, execution, and profile that actually produced the successful
 exact-bit serial/W3 control. Its separate `reviewed_lineage` binds those control

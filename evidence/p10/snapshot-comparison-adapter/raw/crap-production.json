@@ -152,9 +152,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "validate_time_side",
-      "cyclomatic": 17.0,
-      "branch_coverage_fraction": 0.8333333333333334,
-      "crap": 18.337962962962962
+      "cyclomatic": 16.0,
+      "branch_coverage_fraction": 0.8636363636363636,
+      "crap": 16.649135987978962
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "valid_profile_binding",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
@@ -405,8 +412,8 @@
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "read_bounded",
       "cyclomatic": 4.0,
-      "branch_coverage_fraction": 0.5,
-      "crap": 6.0
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -432,6 +439,13 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "valid_arithmetic_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_side",
       "cyclomatic": 4.0,
       "branch_coverage_fraction": 0.5,
       "crap": 6.0
