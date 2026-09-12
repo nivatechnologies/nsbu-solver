@@ -1,0 +1,22 @@
+{
+  "source_base": "ba2ad3904769dad0f8611daed307d352d8ec5d6a",
+  "status": "pass_readiness_only_no_endpoint_state_compared",
+  "focused_tests": {"passed": 5, "failed": 0},
+  "format": "pass",
+  "strict_all_target_clippy": "pass",
+  "maximum_function_cyclomatic": 15.0,
+  "maximum_function_cognitive": 5.0,
+  "maximum_function_halstead_difficulty": 36.69230769230769,
+  "maximum_file_lines": 317,
+  "line_coverage": {"covered": 423, "count": 446, "percent": 94.84304932735425},
+  "branch_coverage": {"covered": 63, "count": 98, "percent": 64.28571428571429},
+  "maximum_production_function_crap": 21.075000000000003,
+  "crap_violations": 0,
+  "raw_sha256": {
+    "metrics": "5209308448acfc1b34baf0a46d2e5f3fb04c9ba51c710cff5d23c96ef156fa26",
+    "production_metrics": "d82b17fd3315bc860b23967a4411d8ec1c0e98183eac4ece73d63465bdda322f",
+    "coverage": "3a71d784619ec0c66a988682b286b0956362e9400986b22c7b0a554be66a02a1",
+    "production_crap": "a07f30e5891cc3d299e3c1bcf7267d592b4283c192311534bc6c0d9bcc783e11"
+  },
+  "coverage_scope": "standalone adapter production plus unit controls; test helper source is not a production CRAP input"
+}
