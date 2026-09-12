@@ -962,7 +962,24 @@ The [regional coverage increment](evidence/p09/v2-region-coverage/summary.json)
 separates nominal region volume from observed sample counts and checks actual
 accepted publisher binding before classifying three empirical panels. Its
 focused checks pass; production maximum CRAP is 23.9359 and focused plan
-coverage is 95.40% lines / 78.57% branches. Combined hosted validation remains
-pending. Off-stage physical integration and the global pressure-gauge path are
-underway; the first-endpoint pilot is running and has no results claim yet.
-P08/P09/P10 remain incomplete, with zero accepted concentrating PDE windows.
+coverage is 95.40% lines / 78.57% branches. The current combined hosted gate is
+still pending for the later runtime source. P08/P09/P10 remain incomplete, with
+zero accepted concentrating PDE windows.
+
+## P09 runtime diagnostic integration and cache profile
+
+The runtime now exports the reconstructed physical probe consumer through the
+fixed version-2 diagnostic path; [integration evidence](evidence/p09/v2-probe-physical-integration/README.md)
+records measured off-stage physical reports. Those reports cover the physical
+quantities at their probe clocks, while analytical reference tracking remains
+unavailable off-stage. The [hosted b029 audit](evidence/p09/hosted-integration-b0295ee/summary.json)
+passed for its exact source; full combined hosted validation of the later
+runtime source remains pending.
+
+`v2 --cache-force` is an explicit opt-in attempt-force cache. It preserves the
+default direct path, and cached checkpoints are unsupported, including resume
+forms; see the [cache CLI evidence](evidence/p09/v2-cache-force-cli/README.md).
+The [paired timing study](evidence/p09/v2-cli-cache-timing/README.md) measured
+about 1.618x CM and 1.893x HO direct-to-cached wall time on a tiny profile under
+shared host load. These are profile-specific diagnostic timings, not a general
+performance promise, convergence result, or PDE qualification.
