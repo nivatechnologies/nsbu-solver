@@ -4,13 +4,13 @@
 //! serial reduced provider's FFT/transfer order. Worker scheduling changes neither order.
 use super::{
     parallel::{admission, pool::Pool, sampling::Arithmetic},
-    reduced::ReducedV2Force,
+    reduced::{ReducedV2Force, ReducedV2ForceW3},
 };
 use crate::time::BenchmarkTime;
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
-    spectral::{FftBackend, FftCatalog},
+    spectral::{FftBackend, FftCatalog, W3FftIdentity},
     Complex64, SolverError,
 };
 
@@ -167,6 +167,111 @@ impl PrescribedForce for ParallelReducedV2Force {
     }
 }
 
+/// Opt-in parallel sampler with an independently owned forward-only W3 FFT pool.
+pub struct ParallelReducedV2ForceW3 {
+    inner: ReducedV2ForceW3,
+    pool: Pool,
+    limits: ForceLimits,
+    identity: ParallelReducedIdentity,
+    fft_backend: FftBackend,
+}
+
+impl ParallelReducedV2ForceW3 {
+    /// Complete provider reservation including its separate W3 FFT owner.
+    pub fn preflight_with_fft_backend(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        admission::reduced_w3_limits_with_fft_backend(domain, samples, workers, backend)
+    }
+
+    /// Construct only after the complete sampling and W3 reservation fits.
+    pub fn new_with_catalog(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_fft_backend(domain, samples, workers, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let transform_limits =
+            ReducedV2ForceW3::preflight_with_fft_backend(domain, samples, catalog.backend())?;
+        Ok(Self {
+            inner: ReducedV2ForceW3::new_with_catalog(
+                domain,
+                samples,
+                catalog,
+                transform_limits.storage_bytes,
+            )?,
+            pool: Pool::new(samples, workers, Arithmetic::Reduced)?,
+            limits,
+            identity: ParallelReducedIdentity {
+                retained: domain.layout(),
+                sampled: samples,
+                workers,
+                cap_bytes: cap,
+            },
+            fft_backend: catalog.backend(),
+        })
+    }
+
+    /// Existing sampling identity remains separate from the W3 execution identity.
+    pub fn identity(&self) -> ParallelReducedIdentity {
+        self.identity
+    }
+
+    /// Explicit transform-owner identity for artifact binding.
+    pub fn w3_fft_identity(&self) -> W3FftIdentity {
+        self.inner.fft_identity()
+    }
+
+    /// Immutable scalar-transform backend used after sampling.
+    pub fn fft_backend(&self) -> FftBackend {
+        self.fft_backend
+    }
+
+    /// A sampling-worker or W3 transform failure permanently terminates this provider.
+    pub fn is_terminated(&self) -> bool {
+        self.pool.failed() || self.inner.is_terminated()
+    }
+}
+
+impl PrescribedForce for ParallelReducedV2ForceW3 {
+    fn limits(&self) -> Option<ForceLimits> {
+        Some(self.limits)
+    }
+
+    fn evaluate(
+        &mut self,
+        clock: TickClock,
+        limits: ForceLimits,
+        output: [&mut [Complex64]; 3],
+    ) -> Result<ForceWork, SolverError> {
+        if limits != self.limits || self.is_terminated() {
+            return Err(SolverError::ProviderBudgetExceeded);
+        }
+        if output
+            .iter()
+            .any(|values| values.len() != self.identity.retained.half_len())
+        {
+            return Err(SolverError::InvalidPayload);
+        }
+        let time = BenchmarkTime::new(clock).map_err(|_| SolverError::InvalidClock)?;
+        let iterations = self.pool.execute(time, &mut self.inner.physical)?;
+        self.inner.transform(output)?;
+        self.inner.last_root_iterations = iterations;
+        Ok(ForceWork {
+            work_units: self.identity.sampled.real_len() + iterations,
+            scalar_transforms: 3,
+        })
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -223,5 +328,106 @@ mod tests {
         assert_eq!(output, prior);
         assert!(provider.is_terminated());
         assert!(provider.pool.all_collected());
+    }
+
+    #[test]
+    fn opt_in_w3_force_charges_exact_experiment_addition() {
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        let domain = Domain::new([256; 3], [1.0; 3], 1.0).unwrap();
+        let samples = Layout::new([384; 3]).unwrap();
+        let workers = 12;
+        let serial_limits =
+            ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, workers, backend)
+                .unwrap();
+        let w3_limits =
+            ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, workers, backend)
+                .unwrap();
+        let addition = nsbu_solver::spectral::W3FftPool::additional_reservation_with_backend(
+            samples,
+            backend,
+            nsbu_solver::spectral::W3FftMode::Forward,
+        )
+        .unwrap();
+        assert_eq!(
+            w3_limits.storage_bytes - serial_limits.storage_bytes,
+            addition
+        );
+    }
+
+    #[test]
+    fn fixture_w3_force_matches_serial_and_refuses_after_fft_failure() {
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        if backend.ensure_available().is_err() {
+            return;
+        }
+        let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+        let samples = Layout::new([6; 3]).unwrap();
+        let catalog_bytes = FftCatalog::reservation(backend).unwrap();
+        let catalog = FftCatalog::new(backend, catalog_bytes).unwrap();
+        let serial_limits =
+            ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 3, backend)
+                .unwrap();
+        let w3_limits =
+            ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, 3, backend)
+                .unwrap();
+        let mut serial = ParallelReducedV2Force::new_with_catalog(
+            domain,
+            samples,
+            3,
+            &catalog,
+            serial_limits.storage_bytes,
+        )
+        .unwrap();
+        let mut w3 = ParallelReducedV2ForceW3::new_with_catalog(
+            domain,
+            samples,
+            3,
+            &catalog,
+            w3_limits.storage_bytes,
+        )
+        .unwrap();
+        let mut serial_output =
+            std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); domain.layout().half_len()]);
+        let mut w3_output = serial_output.clone();
+        let serial_work = serial
+            .evaluate(
+                clock(1),
+                serial_limits,
+                serial_output.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap();
+        let w3_work = w3
+            .evaluate(
+                clock(1),
+                w3_limits,
+                w3_output.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap();
+        assert_eq!(w3_output, serial_output);
+        assert_eq!(w3_work.work_units, serial_work.work_units);
+        assert_eq!(w3_work.scalar_transforms, serial_work.scalar_transforms);
+
+        let prior_iterations = w3.inner.last_root_iterations;
+        w3.inner.physical[0][0] = f64::NAN;
+        let sentinel = Complex64::new(17.0, -19.0);
+        let mut unpublished = std::array::from_fn(|_| vec![sentinel; domain.layout().half_len()]);
+        assert_eq!(
+            w3.inner
+                .transform(unpublished.each_mut().map(Vec::as_mut_slice)),
+            Err(SolverError::ArithmeticResolutionLimited)
+        );
+        assert!(unpublished.iter().flatten().all(|value| *value == sentinel));
+        assert!(w3.is_terminated());
+        assert_eq!(
+            w3.evaluate(
+                clock(4),
+                w3_limits,
+                unpublished.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap_err(),
+            SolverError::ProviderBudgetExceeded
+        );
+        assert_eq!(w3.inner.last_root_iterations, prior_iterations);
+        assert!(unpublished.iter().flatten().all(|value| *value == sentinel));
     }
 }

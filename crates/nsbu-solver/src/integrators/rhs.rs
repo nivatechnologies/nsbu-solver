@@ -9,6 +9,7 @@ use crate::{
     storage::filled,
     Complex64, SolverError,
 };
+mod w3;
 
 /// One trajectory's source and spatial operator, with no reference-field interface.
 pub struct SpectralRhs<F: PrescribedForce> {

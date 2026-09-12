@@ -120,6 +120,20 @@ pub(in crate::provider) fn reduced_limits_with_fft_backend(
     reduced_limits_parts(samples, workers, serial)
 }
 
+pub(in crate::provider) fn reduced_w3_limits_with_fft_backend(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+    backend: FftBackend,
+) -> Result<ForceLimits, SolverError> {
+    use crate::provider::reduced::ReducedV2ForceW3;
+    if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
+        return Err(SolverError::InvalidPayload);
+    }
+    let w3 = ReducedV2ForceW3::preflight_with_fft_backend(domain, samples, backend)?;
+    reduced_limits_parts(samples, workers, w3)
+}
+
 fn reduced_limits_parts(
     samples: Layout,
     workers: usize,

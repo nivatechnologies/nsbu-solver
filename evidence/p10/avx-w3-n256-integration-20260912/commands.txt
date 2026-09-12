@@ -1,0 +1,8 @@
+RUN_SOURCE=8f57937dbb4ecda97a0667e959f13ecfdd67b20a cargo build --release --locked
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 serial-preflight96
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-preflight96
+# Sequential interleaved order; stdout and GNU time redirected under runs/.
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 serial-run96
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 serial-run96
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96

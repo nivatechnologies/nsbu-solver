@@ -1,0 +1,15 @@
+    PID ELAPSED %CPU   RSS CMD
+ 430766    4041  786 63335844 target/avx-scheduled-endpoint-n256-81bd07e/release/p10-avx-scheduled-endpoint run evidence/p10/avx-n256-profile/endpoint-run-81bd07e-b
+ 418511    4775 1216 45169540 target/avx-scheduled-endpoint-v4/release/p10-avx-scheduled-endpoint run evidence/p10/avx-scheduled-endpoint/run-92effa6
+  13995   35893  3.5 817492 /usr/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex --dangerously-bypass-approvals-and-sandbox
+   2889   36943  0.1 185792 /mnt/niva-array/paperqa2/.venv/bin/python /mnt/niva-array/paperqa2/mcp_paperqa_server.py --transport streamable-http --host 127.0.0.1 --port 8765
+   2879   36943  0.2 166096 /mnt/niva-array/agent-system/vendor/hermes-agent/.venv/bin/python3 /mnt/niva-array/agent-system/vendor/hermes-agent/.venv/bin/hermes dashboard --host 127.0.0.1 --port 9119 --no-open --isolated --skip-build
+   3762   36922  0.7 77540 /usr/bin/python3 /home/todd/.local/bin/symphony WORKFLOW.papers.md --log-level INFO
+  67371   33645  0.0 69232 /usr/libexec/fwupd/fwupd
+  13983   35893  0.0 49456 node /usr/bin/codex --dangerously-bypass-approvals-and-sandbox
+   2506   36948  0.1 46452 /usr/lib/snapd/snapd
+   1722   36953  0.1 36124 /usr/lib/systemd/systemd-journald
+  16170   35850  0.0 29016 /usr/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex-code-mode-host
+   1760   36953  0.0 27428 /sbin/multipathd -d -s
+   2878   36943  0.0 25952 /mnt/niva-array/agent-system/vendor/hermes-agent/.venv/bin/python /mnt/niva-array/agent-system/deployment/controller.py
+   2577   36948  0.0 23268 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
