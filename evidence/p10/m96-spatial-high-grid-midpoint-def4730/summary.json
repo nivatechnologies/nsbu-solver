@@ -14,5 +14,6 @@
     "relative_to_finer": {"l2": 0.01620873323808046, "h1": 0.11997701785596195}
   },
   "resources": {"pair_declared_bytes": 18509824, "pair_visits": 713472, "pair_wall_seconds": 0.15, "pair_max_rss_kib": 19456, "norm_declared_bytes": 25956352, "norm_visits": 946176, "norm_wall_seconds": 0.16, "norm_max_rss_kib": 26624, "cap_bytes_each": 268435456},
+  "run_admission": {"authoritative_record": "raw/n{48,64}/run-preflight.stdout", "preliminary_records_are_not_execution_admission": true},
   "qualification": {"accepted_windows": 0, "claims_convergence": false, "claims_spatial_sufficiency": false, "claims_force_sufficiency": false, "claims_endpoint4096": false}
 }
