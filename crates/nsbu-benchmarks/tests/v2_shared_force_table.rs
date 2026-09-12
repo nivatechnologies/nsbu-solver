@@ -148,6 +148,31 @@ fn admission_binds_positive_ordered_manifest_resources_and_full_provider_identit
         SharedForceTablePlan::new(settings(16), domains(), &[], 1, CAP),
         Err(SolverError::InvalidPayload)
     ));
+    let manifest = one_clock([1; 3]);
+    assert!(matches!(
+        SharedForceTablePlan::new(settings(16), domains(), &manifest, 0, CAP),
+        Err(SolverError::ResourceLimit)
+    ));
+    let nonnested = [domain(8), domain(4), domain(12)];
+    assert!(matches!(
+        SharedForceTablePlan::new(settings(16), nonnested, &manifest, 3, CAP),
+        Err(SolverError::InvalidDomain)
+    ));
+    let foreign_lengths = [
+        domain(4),
+        Domain::new([8; 3], [2.0, 1.0, 1.0], 1.0).unwrap(),
+        domain(12),
+    ];
+    assert!(matches!(
+        SharedForceTablePlan::new(settings(16), foreign_lengths, &manifest, 3, CAP),
+        Err(SolverError::InvalidDomain)
+    ));
+    let invalid_time =
+        [SharedForceClock::new(TickClock::from_rest(-19, 8192).unwrap(), [1; 3]).unwrap()];
+    assert!(matches!(
+        SharedForceTablePlan::new(settings(16), domains(), &invalid_time, 3, CAP),
+        Err(SolverError::InvalidClock)
+    ));
     let reversed = [
         SharedForceClock::new(clock(4), [1; 3]).unwrap(),
         SharedForceClock::new(clock(0), [1; 3]).unwrap(),
@@ -164,7 +189,6 @@ fn admission_binds_positive_ordered_manifest_resources_and_full_provider_identit
         SharedForceTablePlan::new(settings(16), domains(), &foreign_target, 6, CAP),
         Err(SolverError::InvalidClock)
     ));
-    let manifest = one_clock([1; 3]);
     assert!(matches!(
         SharedForceTablePlan::new(settings(16), domains(), &manifest, 2, CAP),
         Err(SolverError::ResourceLimit)
@@ -286,5 +310,38 @@ fn foreign_unexpected_and_overconsumed_requests_fail_closed() {
         Err(SharedForceError::UnexpectedRequest)
     );
     assert_eq!(output, completed);
+    assert!(table.is_terminated());
+}
+
+#[test]
+fn total_attempt_cap_is_terminal_without_an_extra_charge_or_output_write() {
+    let manifest = one_clock([1; 3]);
+    let plan = SharedForceTablePlan::new(settings(16), domains(), &manifest, 3, CAP).unwrap();
+    let mut table = SharedForceTable::new(plan).unwrap();
+    for index in 0..3 {
+        let retained = domains()[index];
+        let mut output = field(retained.layout(), Complex64::new(1.0, 2.0));
+        table
+            .copy(
+                plan.binding(index).unwrap(),
+                clock(0),
+                output.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap();
+    }
+    let retained = domains()[0];
+    let mut output = field(retained.layout(), Complex64::new(7.0, 11.0));
+    let original = output.clone();
+    let charged = table.charged_work();
+    assert_eq!(
+        table.copy(
+            plan.binding(0).unwrap(),
+            clock(0),
+            output.each_mut().map(Vec::as_mut_slice),
+        ),
+        Err(SharedForceError::Numerical(SolverError::ResourceLimit))
+    );
+    assert_eq!(output, original);
+    assert_eq!(table.charged_work(), charged);
     assert!(table.is_terminated());
 }
