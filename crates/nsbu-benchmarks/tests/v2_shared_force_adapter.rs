@@ -4,7 +4,7 @@ use nsbu_benchmarks::{
     smooth_observer::v2::V2Observer,
     v2_experiment::shared_force::{
         SharedForceAdapter, SharedForceAdapterSet, SharedForceAdapterSetPlan, SharedForceAttempt,
-        SharedForceClock, SharedForceStream, SharedForceTablePlan,
+        SharedForceClock, SharedForceError, SharedForceStream, SharedForceTablePlan,
     },
     v2_run::{Plan, Run, Settings},
 };
@@ -287,6 +287,22 @@ fn one_attempt_plan() -> ([SharedForceAttempt; 3], [SharedForceClock; 5]) {
 
 #[test]
 fn joint_admission_rejects_schedule_or_cap_mismatch_before_table_allocation() {
+    assert_eq!(
+        SharedForceError::Numerical(nsbu_solver::SolverError::ResourceLimit).solver_error(),
+        nsbu_solver::SolverError::ResourceLimit
+    );
+    assert_eq!(
+        SharedForceError::ForeignBinding.solver_error(),
+        nsbu_solver::SolverError::InvalidPayload
+    );
+    assert_eq!(
+        SharedForceError::UnexpectedRequest.solver_error(),
+        nsbu_solver::SolverError::InvalidClock
+    );
+    assert_eq!(
+        SharedForceError::Terminated.solver_error(),
+        nsbu_solver::SolverError::ProviderBudgetExceeded
+    );
     let retained = [domain(4), domain(8), domain(12)];
     let (attempts, manifest) = one_attempt_plan();
     let streams = [

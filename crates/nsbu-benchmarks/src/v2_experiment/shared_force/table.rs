@@ -25,6 +25,17 @@ impl From<SolverError> for SharedForceError {
         Self::Numerical(error)
     }
 }
+impl SharedForceError {
+    /// Preserve deterministic table refusal categories at a generic force-provider boundary.
+    pub fn solver_error(self) -> SolverError {
+        match self {
+            Self::Numerical(error) => error,
+            Self::ForeignBinding => SolverError::InvalidPayload,
+            Self::UnexpectedRequest => SolverError::InvalidClock,
+            Self::Terminated => SolverError::ProviderBudgetExceeded,
+        }
+    }
+}
 
 /// One complete table copy; it is a diagnostic work record, not an acceptance result.
 #[derive(Debug, Clone, Copy, PartialEq)]
