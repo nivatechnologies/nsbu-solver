@@ -191,7 +191,6 @@ fn validate_manifest(manifest: &[SharedForceClock]) -> Result<usize, SolverError
         if clock.exponent() != first.clock.exponent()
             || clock.target() != first.clock.target()
             || previous.is_some_and(|elapsed| clock.elapsed() <= elapsed)
-            || request.maximum_copies.contains(&0)
             || crate::time::BenchmarkTime::new(clock).is_err()
         {
             return Err(SolverError::InvalidClock);
