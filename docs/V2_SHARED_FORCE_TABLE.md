@@ -60,7 +60,9 @@ No owned `Run`, `V2Family`, archive, CLI or default mode uses this table yet. Th
 adapter exercises the unchanged generic integrator only. Production family wiring requires
 a separately reviewed ownership and slab scheduler. In particular, the current table
 manifest requires a positive copy allowance for all three retained domains at every clock.
-The synchronized six-stream fixture satisfies that restriction; arbitrary mixed or nested
-family schedules with a zero-use domain at some clocks are not admitted. There is no
-interpolation, retry inference, velocity-state assignment, analytical reset, force-grid
-accuracy conclusion, convergence claim or PDE-window qualification.
+The synchronized six-stream fixture satisfies that restriction. The repository's current
+`FamilyPlan` can also satisfy it because N0/N1/N2 share the finest step and its extra
+temporal branches use N2. More general mixed-domain schedules with a zero-use domain at
+some clocks are not admitted. There is no interpolation, retry inference, velocity-state
+assignment, analytical reset, force-grid accuracy conclusion, convergence claim or
+PDE-window qualification.
