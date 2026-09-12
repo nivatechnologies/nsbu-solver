@@ -15,3 +15,14 @@ A trial continuing the tiny family to clock 4096 exceeded the requested few-minu
 Final selected Rust checks pass the exact artifact projection and mutation controls, reviewed-plan rest measurement, reordered/foreign gauge refusals, and tiny clock-2048 measurement. Generated Rust data adds no executable function. Changed Rust test functions conservatively score maximum CRAP 20 at zero assumed coverage; static maxima are CC 4, cognitive 4, and all-node Halstead difficulty 50.48. Whole Rust source remains within CC/cognitive 21, Halstead 75.93, and 477 file lines. Focused Clippy, format, strict workspace Rustdoc, and repository validation pass.
 
 All gauges remain empirical global mean estimates in one unit-cube gauge. They are not interval quadrature enclosures, regional gauge fits, continuum error bounds, analytical state assignments, force-precision results, or PDE-window qualification. Accepted PDE windows remain zero.
+
+A focused review correction at `b358f52090e23ff9713b23736eee1c4ba7d046f1`
+requires the generator base panel count to be an even integer in `[2,256]`, which
+keeps all five derived geometries even and within the producer's `[2,1024]`
+`MeanPlan` contract. Odd base 3 and over-limit even base 258 now refuse. The
+public `GaugeChanges` descriptions use coarse/middle/fine terms and direct
+callers to the estimates for actual panel counts. No raw gauge or generated
+gauge-data bytes changed. Corrected generator coverage is 101/109 statements
+and 29/30 branches with maximum CRAP 12; strict types, Black, Complexipy, and
+Rustdoc pass. Correction-specific raw reports and source hashes are retained
+alongside the original evidence rather than replacing its numerical records.

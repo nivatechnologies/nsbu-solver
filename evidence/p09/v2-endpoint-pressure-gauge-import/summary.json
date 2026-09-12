@@ -2,7 +2,7 @@
   "schema_version": 1,
   "base_commit": "b1efef8872a21a0d51ec888b9ce3ab5e20a8af74",
   "production_commit": "a5e03db5eb5505c3e1a040be576bbb641182158f",
-  "tested_tip": "0236d8e2d95e8bd91ba0e83ad901df16efcd36bb",
+  "tested_tip": "b358f52090e23ff9713b23736eee1c4ba7d046f1",
   "status": "DiagnosticOnly",
   "gauges": {
     "clock2048_sha256": "f20eb0e9b15d3316640e039ce8afcd432ed562c895f6434fe9a19fa448d39a44",
@@ -20,9 +20,21 @@
     "peak_reserved_bytes": 41418752
   },
   "reviewed_plan": {
-    "accepted_clocks": [0, 2048, 4096],
-    "grids": [12, 16, 24],
-    "steps": [64, 32, 16],
+    "accepted_clocks": [
+      0,
+      2048,
+      4096
+    ],
+    "grids": [
+      12,
+      16,
+      24
+    ],
+    "steps": [
+      64,
+      32,
+      16
+    ],
     "force_samples": 24,
     "force_workers": 12,
     "pressure_samples": 48,
@@ -31,27 +43,47 @@
     "actual_measurement_clock": 0
   },
   "tiny_runtime": {
-    "grids": [4, 8, 12],
-    "steps": [128, 64, 32],
+    "grids": [
+      4,
+      8,
+      12
+    ],
+    "steps": [
+      128,
+      64,
+      32
+    ],
     "force_samples": 12,
     "pressure_samples": 24,
-    "actual_measurement_clocks": [0, 2048],
-    "seconds": 319.60,
+    "actual_measurement_clocks": [
+      0,
+      2048
+    ],
+    "seconds": 319.6,
     "clock2048_branch2_pressure_rms": 32.92509043404963,
     "clock2048_branch2_pressure_gradient_rms": 1463.2236641115041,
     "state_hashes_unchanged": true,
     "clock4096_runtime_measured": false
   },
   "tests": {
-    "final_python_generator": {"passed": 3, "failed": 0},
-    "final_rust_selected": {"passed": 3, "failed": 0},
-    "final_rust_tiny_midpoint": {"passed": 1, "failed": 0}
+    "final_python_generator": {
+      "passed": 3,
+      "failed": 0
+    },
+    "final_rust_selected": {
+      "passed": 3,
+      "failed": 0
+    },
+    "final_rust_tiny_midpoint": {
+      "passed": 1,
+      "failed": 0
+    }
   },
   "python_coverage": {
-    "statements_covered": 99,
-    "statements_total": 107,
-    "branches_covered": 27,
-    "branches_total": 28,
+    "statements_covered": 101,
+    "statements_total": 109,
+    "branches_covered": 29,
+    "branches_total": 30,
     "maximum_crap": 12.0,
     "maximum_cognitive": 11,
     "maximum_halstead_difficulty": 7.185483870967742
@@ -68,5 +100,12 @@
   },
   "accepted_pde_windows": 0,
   "claims_quadrature_enclosure": false,
-  "claims_pde_qualification": false
+  "claims_pde_qualification": false,
+  "correction": {
+    "base_panel_contract": "even integer within [2,256], so every derived panel count is even within [2,1024]",
+    "odd_and_over_limit_refusals": true,
+    "gauge_change_docs_generalized": true,
+    "raw_gauge_bytes_changed": false,
+    "generated_gauge_data_changed": false
+  }
 }

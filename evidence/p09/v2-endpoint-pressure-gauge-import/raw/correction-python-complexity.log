@@ -1,0 +1,25 @@
+[92m──────────────────────────────── [39m🐙 complexipy[92m ─────────────────────────────────[39m
+[1mreference/generate_pressure_gauge_rust.py[0m
+    main [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    rust_string [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    emit_changes [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    emit_estimates [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    emit_one [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    option [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    optional_string [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    emit [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    integer [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    read_report [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    expected_profiles [32m4[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    validate_summary [32m4[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    validate_report [32m6[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    validate_profile [32m11[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mreference/tests/test_generate_pressure_gauge_rust.py[0m
+    test_complete_artifacts_regenerate_the_frozen_projection [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    write_changed [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_malformed_shape_time_and_scalar_types_refuse [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_changed_profile_identity_work_and_summary_refuse [32m7[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1m[32mAll functions are within the allowed complexity.[39m[0m
+[92m────────────────────────── [39m🎉 Analysis completed! 🎉[92m ───────────────────────────[39m
