@@ -1,7 +1,7 @@
 # Shared-force adapter evidence
 
-This package is bound to executable source bfae37e4 and the documentation-only tip
-7867daf. It preserves the earlier hardware-pause handoff separately, including the
+This package is bound to executable source bfae37e4 and documentation claim correction
+ece1613. It preserves the earlier hardware-pause handoff separately, including the
 user-interrupted exit 143, and does not rewrite that historical record.
 
 The focused fixture drives six independently owned CM/HO N4/N8/N12 trajectories through
@@ -22,7 +22,8 @@ branches share the finest step and extra temporal branches use N2. More general 
 with a zero-use domain remain unsupported. Owned Run/V2Family scheduling, retry/slab
 coordination, archive, and CLI integration are outside this increment.
 
-Focused branch coverage is reported at its measured 69.12 percent. The required
-production-plus-test CRAP maximum is 22.5. This evidence establishes a standalone
-trajectory-equivalence bridge; it does not establish force accuracy, convergence, a PDE
-window, or scientific qualification.
+Focused branch coverage is 69.12 percent, below the maintained whole-workspace 80 percent
+branch gate. This focused subset is not the whole maintained gate, and source-matched
+combined hosted validation remains pending. The focused production-plus-test CRAP maximum
+is 22.5. This evidence establishes a standalone trajectory-equivalence bridge; it does not
+establish force accuracy, convergence, a PDE window, or scientific qualification.

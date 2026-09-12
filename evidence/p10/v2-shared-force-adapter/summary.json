@@ -3,12 +3,27 @@
   "status": "StandaloneDiagnosticOnly",
   "base_commit": "9641bb0c44e414d3da147ea0bedd425c7685eeb5",
   "executable_source_commit": "bfae37e4cb80a375b60f93550c47d43a86e06613",
-  "documentation_tip": "7867daf95b41c2cfcf3146aa94cc237706be249d",
+  "documentation_tip": "ece161325d46d1770604e462a8f5010767dfd387",
   "profile": {
-    "retained_grids": [4, 8, 12],
-    "force_grid": [16, 16, 16],
-    "observer_force_grid": [32, 32, 32],
-    "methods": ["CoxMatthews", "HochbruckOstermann"],
+    "retained_grids": [
+      4,
+      8,
+      12
+    ],
+    "force_grid": [
+      16,
+      16,
+      16
+    ],
+    "observer_force_grid": [
+      32,
+      32,
+      32
+    ],
+    "methods": [
+      "CoxMatthews",
+      "HochbruckOstermann"
+    ],
     "independent_trajectories": 6,
     "committed_steps_per_trajectory": 2,
     "unique_table_clocks": 9,
@@ -16,8 +31,16 @@
     "provider_evaluations": 9
   },
   "tests": {
-    "functional": {"passed": 3, "failed": 0, "seconds": 46.04},
-    "instrumented_functional": {"passed": 3, "failed": 0, "seconds": 291.77},
+    "functional": {
+      "passed": 3,
+      "failed": 0,
+      "seconds": 46.04
+    },
+    "instrumented_functional": {
+      "passed": 3,
+      "failed": 0,
+      "seconds": 291.77
+    },
     "allocation": {
       "passed": true,
       "construction_bytes": 1965488,
@@ -33,7 +56,12 @@
     "line_percent": 94.81605351170569,
     "branches_covered": 47,
     "branches_total": 68,
-    "branch_percent": 69.11764705882354
+    "branch_percent": 69.11764705882354,
+    "scope": "focused_subset",
+    "maintained_whole_workspace_branch_gate_percent": 80.0,
+    "meets_maintained_whole_workspace_branch_gate": false,
+    "is_whole_maintained_gate": false,
+    "source_matched_combined_hosted_validation": "pending"
   },
   "quality": {
     "maximum_crap": 22.5,
