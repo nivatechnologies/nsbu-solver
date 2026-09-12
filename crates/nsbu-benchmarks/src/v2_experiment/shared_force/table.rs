@@ -173,12 +173,16 @@ impl<'a> SharedForceTable<'a> {
         let per_attempt = SharedForceWork {
             copy_attempts: 1,
             clock_comparisons: self.slots.len(),
+            binding_checks: allowance.binding_checks / allowance.copy_attempts,
             coefficient_words_copied: allowance.coefficient_words_copied / allowance.copy_attempts,
+            transfer_visits: allowance.transfer_visits / allowance.copy_attempts,
             ..SharedForceWork::default()
         };
         self.charged.copy_attempts += 1;
         self.charged.clock_comparisons += per_attempt.clock_comparisons;
+        self.charged.binding_checks += per_attempt.binding_checks;
         self.charged.coefficient_words_copied += per_attempt.coefficient_words_copied;
+        self.charged.transfer_visits += per_attempt.transfer_visits;
         per_attempt
     }
 

@@ -19,8 +19,10 @@ Admission counts the borrowed manifest separately. Persistent owned storage incl
 maximum-domain coefficient entry and metadata. Construction peak adds exactly one original
 force provider; runtime peak instead adds the largest caller-owned output. The joint cap
 covers the larger peak. Work reserves one provider evaluation per clock and conservative
-maximum-domain lookup/copy work for every attempt. Each live attempt is charged before
-binding, clock, remaining-copy or output validation. A refusal leaves caller output,
+maximum-domain lookup, binding, copy-word and strict-band transfer visits for every attempt.
+The transfer bound counts destination zero-fill plus strict-band source reads and destination
+writes, at most nine maximum-domain half-spectrum visits across three components. Each live
+attempt is charged before binding, clock, remaining-copy or output validation. A refusal leaves caller output,
 immutable table values, remaining successful-copy counts and the last complete copy record
 unchanged, then terminates the owner. Replaying a terminal call adds no charge.
 
