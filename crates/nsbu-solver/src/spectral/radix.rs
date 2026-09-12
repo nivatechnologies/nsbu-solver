@@ -28,13 +28,56 @@ pub(super) fn transform(
             inverse,
         );
     }
-    for (k, value) in scratch[..n].iter_mut().enumerate() {
-        *value = Complex64::new(0.0, 0.0);
-        for j in 0..radix {
-            let root = roots[(j * k * (roots.len() / n)) % roots.len()];
-            let twiddle = if inverse { root.conj() } else { root };
-            *value += output[j * width + k % width] * twiddle;
-        }
+    if radix == 2 {
+        combine_two(output, &mut scratch[..n], roots, inverse);
+    } else {
+        combine_three(output, &mut scratch[..n], roots, inverse);
     }
     output.copy_from_slice(&scratch[..n]);
+}
+
+fn combine_two(input: &[Complex64], output: &mut [Complex64], roots: &[Complex64], inverse: bool) {
+    let width = output.len() / 2;
+    let step = roots.len() / output.len();
+    let zeroth = if inverse { roots[0].conj() } else { roots[0] };
+    for quotient in 0..2 {
+        for remainder in 0..width {
+            let k = quotient * width + remainder;
+            output[k] = Complex64::new(0.0, 0.0);
+            output[k] += input[remainder] * zeroth;
+            let root = roots[k * step];
+            let twiddle = if inverse { root.conj() } else { root };
+            output[k] += input[width + remainder] * twiddle;
+        }
+    }
+}
+
+fn combine_three(
+    input: &[Complex64],
+    output: &mut [Complex64],
+    roots: &[Complex64],
+    inverse: bool,
+) {
+    let width = output.len() / 3;
+    let step = roots.len() / output.len();
+    let zeroth = if inverse { roots[0].conj() } else { roots[0] };
+    for quotient in 0..3 {
+        for remainder in 0..width {
+            let k = quotient * width + remainder;
+            output[k] = Complex64::new(0.0, 0.0);
+            output[k] += input[remainder] * zeroth;
+            let first = roots[k * step];
+            let first = if inverse { first.conj() } else { first };
+            output[k] += input[width + remainder] * first;
+            let second_index = 2 * k * step;
+            let second_index = if second_index >= roots.len() {
+                second_index - roots.len()
+            } else {
+                second_index
+            };
+            let second = roots[second_index];
+            let second = if inverse { second.conj() } else { second };
+            output[k] += input[2 * width + remainder] * second;
+        }
+    }
 }
