@@ -1,0 +1,18 @@
+{
+  "supersedes": "frozen-plan.json only for process deadlines",
+  "frozen_utc": "2026-09-12T10:25:00Z",
+  "numerical_profile_unchanged": true,
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "endpoint": 4096,
+  "step": 64,
+  "method": "CoxMatthews",
+  "force_grid": 192,
+  "workers": 32,
+  "grids": [64, 96, 128],
+  "attempts": 64,
+  "internal_deadline_seconds": 24600,
+  "outer_timeout_seconds": 25200,
+  "reason": "The first concurrent steps measured 164 to 248 seconds; the original 12600-second per-process bound could truncate N128 despite aggregate full-core throughput.",
+  "aborted_launches_retained_under": "runs/",
+  "qualification": "unqualified feasibility; accepted windows remain zero"
+}

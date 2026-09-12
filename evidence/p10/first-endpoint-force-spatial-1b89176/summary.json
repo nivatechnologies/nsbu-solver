@@ -1,0 +1,102 @@
+{
+  "status": "complete_unqualified_first_endpoint_fixed_force_spatial_screen",
+  "source": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "profile": {
+    "case": "similarity-mms-v2",
+    "retained_grids": [48, 64, 96],
+    "failed_retained_grid": 128,
+    "force_sampling_grid": 192,
+    "endpoint": 4096,
+    "target": 8192,
+    "clock_exponent": -20,
+    "from_rest": true,
+    "workers": 32,
+    "method": "CoxMatthews",
+    "step_ticks": 64,
+    "absolute_tolerances": [1e-5, 1e-4],
+    "relative_tolerances": [1e-5, 1e-5],
+    "advective_limit": 0.3
+  },
+  "completed_runs": {
+    "n48": {
+      "attempts": 64,
+      "committed": 64,
+      "wall_seconds": 7548.136393166,
+      "mean_step_seconds": 117.93963114321875,
+      "max_rss_kib": 4205568,
+      "snapshot_sha256": "daf149fa0d690c5e5198f89281ff8ff4e00dfbf954ec17e8cce43f8a605f96e2",
+      "maximum_local_ratios": [0.12577597761103987, 0.6975611539099142]
+    },
+    "n64": {
+      "attempts": 64,
+      "committed": 64,
+      "wall_seconds": 9425.637063083,
+      "mean_step_seconds": 147.27557911067188,
+      "max_rss_kib": 4495360,
+      "snapshot_sha256": "71ebf549c640dd63c250d6f708a6fb5dadf5b8545a4c09fc3cfd27395651cdae",
+      "maximum_local_ratios": [0.12626546618561604, 0.868207209008102]
+    },
+    "n96": {
+      "attempts": 64,
+      "committed": 64,
+      "wall_seconds": 11303.784279572,
+      "mean_step_seconds": 176.6216293683125,
+      "max_rss_kib": 5683200,
+      "snapshot_sha256": "a34e1ea9c9dd475baaaefceea3cb156a5f9dc81ce97b7a98c3d88ec549fe22e2",
+      "maximum_local_ratios": [0.12639928448689272, 0.9561150335763695]
+    }
+  },
+  "refused_run": {
+    "retained_grid": 128,
+    "attempts": 28,
+    "committed": 27,
+    "terminal_clock": 1728,
+    "cause": "AdvectiveLimit",
+    "max_rss_kib": 7989248,
+    "terminal_snapshot_sha256": "0441555feb16e21966057242031250c199a349bdcd8b050b11acfe714034a859",
+    "maximum_committed_local_ratios": [0.12640337792211107, 0.9630231129547554]
+  },
+  "state_norms": {
+    "n48": {"l2": 1.8386247948304213, "h1": 50.40719824532204, "vorticity_l2": 50.37365475928171},
+    "n64": {"l2": 1.838849200218861, "h1": 50.7328660927773, "vorticity_l2": 50.69952993480201},
+    "n96": {"l2": 1.8389006025787074, "h1": 50.859283199225004, "vorticity_l2": 50.82602809712748}
+  },
+  "endpoint_comparisons": {
+    "n48_to_n64": {
+      "absolute": {"l2": 0.028509751266165735, "h1": 5.75044324853682, "vorticity_l2": 5.750372574776155},
+      "common_h1": 0.026983120293689756,
+      "newly_resolved_h1": 5.750379941000587,
+      "relative_to_finer": {"l2": 0.015504126854324154, "h1": 0.11334749426576345, "vorticity_l2": 0.11342062899145124},
+      "newly_resolved_fraction_of_squared_h1_difference": 0.9999779818059181,
+      "multiples_of_total_h1_pilot_target": 113.34749426576345,
+      "multiple_of_allocated_h1_space_budget": 283.36873566440863
+    },
+    "n64_to_n96": {
+      "absolute": {"l2": 0.013585983445764145, "h1": 3.585227185610707, "vorticity_l2": 3.5852014439252846},
+      "common_h1": 0.011531152603783344,
+      "newly_resolved_h1": 3.5852086417615503,
+      "relative_to_finer": {"l2": 0.0073881010353209924, "h1": 0.07049307343885922, "vorticity_l2": 0.07053869007969774},
+      "newly_resolved_fraction_of_squared_h1_difference": 0.9999896554386991,
+      "multiples_of_total_h1_pilot_target": 70.49307343885922,
+      "multiple_of_allocated_h1_space_budget": 176.23268359714804
+    }
+  },
+  "interpretation": "The fixed-M192 endpoint differences decrease from N48-to-N64 to N64-to-N96, but remain 283 and 176 times the allocated H1 spatial budget and are almost entirely newly resolved modes. This family is underresolved and does not establish convergence.",
+  "missing_channels": [
+    "spatial grids at a budget-compatible retained resolution",
+    "force precision and derivative-rich force-resolution refinement",
+    "matched temporal refinement at a force-qualified sampling grid",
+    "current-grid integrator arithmetic",
+    "independent high-precision reference",
+    "local peak and location",
+    "pressure",
+    "balance and off-stage residual",
+    "reconstruction and sampling",
+    "perturbation",
+    "transfer and lineage"
+  ],
+  "claims_spatial_convergence": false,
+  "claims_force_sufficiency": false,
+  "claims_acceptance": false,
+  "accepted_windows": 0
+}
