@@ -161,10 +161,34 @@ impl<'a> ProbeRegionalWorkspace<'a> {
     ) -> Result<TickClock, ProbeRegionalError> {
         let expected = self.next_time().ok_or(FamilyError::InvalidFamily)?;
         let current = family.current.ok_or(FamilyError::InvalidFamily)?;
+        self.bind_owner(family, probe, current)?;
+        self.bind_reference(probe, supplied, expected)?;
+        self.bind_fields(family, probe, expected)?;
+        Ok(expected)
+    }
+
+    fn bind_owner(
+        &self,
+        family: &ProbeFamily<'_>,
+        probe: ProbeSample,
+        current: ProbeSample,
+    ) -> Result<(), ProbeRegionalError> {
         if family.failed
             || family.plan.identity() != self.plan.reference.probe_plan().identity()
             || current.identity() != probe.identity()
-            || probe.identity() != supplied.identity()
+        {
+            return Err(FamilyError::InvalidFamily.into());
+        }
+        Ok(())
+    }
+
+    fn bind_reference(
+        &self,
+        probe: ProbeSample,
+        supplied: ProbeReferenceSample,
+        expected: TickClock,
+    ) -> Result<(), ProbeRegionalError> {
+        if probe.identity() != supplied.identity()
             || probe.clock() != expected
             || supplied.clock() != expected
             || probe.origins() != supplied.origins()
@@ -176,6 +200,15 @@ impl<'a> ProbeRegionalWorkspace<'a> {
         {
             return Err(FamilyError::InvalidFamily.into());
         }
+        Ok(())
+    }
+
+    fn bind_fields(
+        &self,
+        family: &ProbeFamily<'_>,
+        probe: ProbeSample,
+        expected: TickClock,
+    ) -> Result<(), ProbeRegionalError> {
         for index in 0..6 {
             let fields = family.fields(index).ok_or(FamilyError::InvalidFamily)?;
             if fields.clock != expected
@@ -185,7 +218,7 @@ impl<'a> ProbeRegionalWorkspace<'a> {
                 return Err(FamilyError::InvalidFamily.into());
             }
         }
-        Ok(expected)
+        Ok(())
     }
 
     fn compute(
