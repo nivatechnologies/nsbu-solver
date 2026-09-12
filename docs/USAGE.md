@@ -15,6 +15,19 @@ method selections. A finite resource cap and worker allowance are admitted
 before construction. A run starts from rest; resume preserves the checkpoint's
 same profile and marks its external origin unverified.
 
+For an explicit attempt-force cache experiment, use the opt-in flag:
+
+```sh
+nsbu v2 --cache-force --dry-run
+nsbu v2 --cache-force
+```
+
+The cache is supported only for a new v2 run. It refuses checkpoint writes and
+`resume-v2`, so cached results cannot be used as checkpoint archives. The
+[cache CLI evidence](../evidence/p09/v2-cache-force-cli/README.md) records the
+refusal contract; the [paired timing study](../evidence/p09/v2-cli-cache-timing/README.md)
+is a small shared-host diagnostic with no general speed or convergence claim.
+
 Successful reports are bounded numerical diagnostics. A refusal, rejected
 terminal attempt, incomplete endpoint, resource failure, or invalid checkpoint
 returns nonzero and must remain visible to callers. Zero accepted concentrating
@@ -67,9 +80,12 @@ The [six-trajectory experiment example](EXPERIMENTS.md) adds independent grid,
 time-step and method comparisons, off-stage reconstruction and full-double-band
 residual measurements under a separately checked aggregate cap.
 Both are smooth verification profiles, distinct from `similarity-mms-v2`.
-The v2 CLI saves and resumes bounded exact-v2 checkpoints; all concentrating
-reports remain diagnostic-only and qualified restart provenance is still a
-separate scientific gate.
+The v2 CLI saves and resumes bounded exact-v2 checkpoints on its default path;
+`--cache-force` is an opt-in path that does not support checkpoint archives or
+`resume-v2`. All concentrating reports remain diagnostic-only and qualified
+restart provenance is still a separate scientific gate. Version-2 exports now
+include measured reconstructed off-stage physical reports, while analytical
+reference tracking remains unavailable off-stage; see the [integration evidence](../evidence/p09/v2-probe-physical-integration/README.md).
 
 ### Save and resume the smooth diagnostic
 

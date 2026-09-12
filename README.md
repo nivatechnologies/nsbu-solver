@@ -62,6 +62,18 @@ sha256sum -c SHA256SUMS
 ./bin/nsbu diagnose-v2
 ```
 
+The v2 attempt-force cache is opt-in and can be sampled with the same bounded
+profile:
+
+```sh
+./bin/nsbu v2 --cache-force --dry-run
+./bin/nsbu v2 --cache-force
+```
+
+Cached v2 runs do not support checkpoint writes or `resume-v2`; use the default
+path for checkpoint workflows. The [paired cache timing evidence](evidence/p09/v2-cli-cache-timing/README.md)
+is a tiny shared-host study, not a general performance claim.
+
 This artifact targets Linux x86_64 with GNU/glibc and requires GLIBC symbols
 up to 2.35; inspect `SOURCE-MANIFEST.txt` for the recorded requirements.
 Other platforms require a source build. The alpha is diagnostic-only, with
@@ -90,6 +102,9 @@ It independently evolves space, time-step, and CM/HO comparison trajectories
 on grids 4/8/12 through a short startup interval. JSON lines identify the case,
 branch profiles, exact clocks, resource reservations, separate physical
 quantities, pressure, reference tracking, and off-step residual summaries.
+The integrated reconstructed-probe path measures off-stage physical reports;
+off-stage analytical reference tracking remains unavailable. See the
+[reconstructed physical integration evidence](evidence/p09/v2-probe-physical-integration/README.md).
 Allow roughly one to two minutes on the measured host; runtime varies. Every
 report remains `UnqualifiedDiagnostic` and lists missing qualification
 channels. See the [diagnostic guide](docs/V2_DIAGNOSTIC_COORDINATOR.md) for
