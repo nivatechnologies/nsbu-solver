@@ -43,6 +43,9 @@ fn event_value(j: &Value, e: DiagnosticEvent) {
     if !j["reconstructed_physical"].is_null() {
         probe_physical(&j["reconstructed_physical"], e.reconstructed_physical());
     }
+    if !j["reconstructed_pressure"].is_null() {
+        probe_pressure(&j["reconstructed_pressure"], e.reconstructed_pressure());
+    }
     match (e.accepted().schedule(), e.accepted().sample()) {
         (AcceptedSchedule::NotScheduledAtResidualClock, None) => {
             assert_eq!(j["accepted"]["schedule"], "NotScheduledAtResidualClock");
@@ -172,6 +175,27 @@ fn physical(j: &Value, s: nsbu_benchmarks::v2_experiment::physical::PhysicalRefi
         for k in 0..5 {
             extrema(&j["quantities"][i]["extrema"][k], q.extrema(k).unwrap())
         }
+    }
+}
+fn probe_pressure(
+    j: &Value,
+    s: nsbu_benchmarks::v2_experiment::probes::pressure::ProbePressureSample,
+) {
+    clock(&j["clock"], s.clock());
+    assert_eq!(j["identity"], hex(s.identity()));
+    domain(&j["source_domain"], s.source_domain());
+    layout(&j["force_grid"], s.force_layout());
+    assert_eq!(j["force_workers"], s.force_workers().to_string());
+    layout(&j["sample_grid"], s.sample_layout());
+    words(&j["relative_floors"], &s.relative_floors());
+    for (i, q) in s.quantities().iter().enumerate() {
+        assert_eq!(j["quantities"][i]["quantity"], quantity(q.quantity));
+        local5(
+            &j["quantities"][i]["comparisons"],
+            [q.pairs[0], q.pairs[1]],
+            [q.pairs[2], q.pairs[3]],
+            q.pairs[4],
+        )
     }
 }
 fn pressure(j: &Value, s: nsbu_benchmarks::v2_experiment::pressure::PressureRefinementSample) {
