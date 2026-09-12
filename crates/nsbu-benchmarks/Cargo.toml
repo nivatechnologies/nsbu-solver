@@ -143,3 +143,7 @@ harness = false
 [[test]]
 name = "v2_shared_force_table_allocation"
 harness = false
+
+[[test]]
+name = "v2_shared_force_adapter_allocation"
+harness = false

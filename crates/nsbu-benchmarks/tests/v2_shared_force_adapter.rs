@@ -351,14 +351,46 @@ fn borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_
     assert!(owner.current().unwrap().is_none());
     assert!(!owner.is_terminated().unwrap());
 
-    let mut incomplete = owner.adapter(1).unwrap();
+    let mut wrong_clock = owner.adapter(1).unwrap();
+    let limits = wrong_clock.limits().unwrap();
+    assert_eq!(
+        wrong_clock.begin_attempt(clock(STEP / 4), STEP, limits),
+        Err(nsbu_solver::SolverError::InvalidClock)
+    );
+    assert_eq!(wrong_clock.charged_work().attempts, 1);
+    assert!(wrong_clock.is_terminated());
+    let _last = owner.adapter(2).unwrap();
+    assert!(matches!(
+        owner.adapter(2),
+        Err(nsbu_solver::SolverError::InvalidIndex)
+    ));
+    assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
+
+    let two = [
+        SharedForceAttempt::new(clock(0), STEP, Method::CoxMatthews).unwrap(),
+        SharedForceAttempt::new(clock(STEP), STEP, Method::CoxMatthews).unwrap(),
+    ];
+    let streams = [
+        SharedForceStream::new(0, &two).unwrap(),
+        SharedForceStream::new(1, &two).unwrap(),
+        SharedForceStream::new(2, &two).unwrap(),
+    ];
+    let multiplicities = [2, 2, 4, 2, 4, 2, 4, 2, 2];
+    let manifest: [SharedForceClock; 9] = std::array::from_fn(|index| {
+        SharedForceClock::new(clock(index as u128 * STEP / 4), [multiplicities[index]; 3]).unwrap()
+    });
+    let table = SharedForceTablePlan::new(force(), retained, &manifest, 72, CAP).unwrap();
+    let plan = SharedForceAdapterSetPlan::new(table, &streams, CAP).unwrap();
+    let owner = SharedForceAdapterSet::new(plan).unwrap();
+    let mut incomplete = owner.adapter(0).unwrap();
     let limits = incomplete.limits().unwrap();
     incomplete.begin_attempt(clock(0), STEP, limits).unwrap();
     assert_eq!(
-        incomplete.begin_attempt(clock(0), STEP, limits),
+        incomplete.begin_attempt(clock(STEP), STEP, limits),
         Err(nsbu_solver::SolverError::ProviderBudgetExceeded)
     );
-    assert_eq!(incomplete.charged_work().attempts, 1);
+    assert_eq!(incomplete.charged_work().attempts, 2);
+    assert_eq!(incomplete.charged_work().schedule_visits, 24);
     assert!(incomplete.is_terminated());
     assert_eq!(owner.table_work().unwrap().copy_attempts, 0);
 }
