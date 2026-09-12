@@ -983,3 +983,24 @@ The [paired timing study](evidence/p09/v2-cli-cache-timing/README.md) measured
 about 1.618x CM and 1.893x HO direct-to-cached wall time on a tiny profile under
 shared host load. These are profile-specific diagnostic timings, not a general
 performance promise, convergence result, or PDE qualification.
+
+## P09/P10 gated review increments
+
+The [review-geometry evidence](evidence/p09/v2-review-geometry/summary.json)
+admits caller-supplied strict nested exact-v2 geometry and a 4096-tick first-window
+plan-only control. It creates no observations, readiness decision or PDE window.
+The [imported endpoint pressure-gauge evidence](evidence/p09/v2-endpoint-pressure-gauge-import/summary.json)
+provides empirical 2048/4096 gauge inputs and a bounded runtime smoke through
+2048; the runtime did not measure clock 4096. Pressure off-stage remains pending
+final review.
+
+The [cached-integration Phase-B evidence](evidence/p09/v2-cached-integration/summary.json)
+records direct-versus-cached CM/HO and archive controls with selected focused
+quality checks. Its all-changed focused branch coverage is 74.5902%, below the
+whole-maintained gate, so final hosted quality remains pending. The
+[corrected M24 partial pilot](evidence/p10/resolution-pilot-corrected-487c330/README.md)
+reached probes through 4095 before its timeout; its accepted-4096 report and
+M24-to-M48 endpoint control were not completed. An archive-only reader recovered
+endpoint spectral comparisons from validated state archives, which is not a
+complete endpoint report or a convergence result. M48/M96 runs remain pending.
+P08/P09/P10 remain incomplete and accepted concentrating PDE windows remain zero.
