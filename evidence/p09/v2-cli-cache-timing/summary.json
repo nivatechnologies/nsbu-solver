@@ -16,7 +16,7 @@
       "method": "cm",
       "cache": "direct",
       "rep": 1,
-      "wall_seconds": 2374.2,
+      "wall_seconds": 39.57,
       "user_seconds": 584.58,
       "system_seconds": 0.11,
       "max_rss_kib": 68608,
@@ -34,7 +34,7 @@
       "method": "cm",
       "cache": "direct",
       "rep": 2,
-      "wall_seconds": 2463.6000000000004,
+      "wall_seconds": 41.06,
       "user_seconds": 588.87,
       "system_seconds": 0.11,
       "max_rss_kib": 69632,
@@ -52,7 +52,7 @@
       "method": "cm",
       "cache": "cached",
       "rep": 1,
-      "wall_seconds": 1465.2,
+      "wall_seconds": 24.42,
       "user_seconds": 384.52,
       "system_seconds": 0.09,
       "max_rss_kib": 70656,
@@ -70,7 +70,7 @@
       "method": "cm",
       "cache": "cached",
       "rep": 2,
-      "wall_seconds": 1525.2,
+      "wall_seconds": 25.42,
       "user_seconds": 395.19,
       "system_seconds": 0.09,
       "max_rss_kib": 69632,
@@ -88,7 +88,7 @@
       "method": "ho",
       "cache": "direct",
       "rep": 1,
-      "wall_seconds": 2796.6,
+      "wall_seconds": 46.61,
       "user_seconds": 671.11,
       "system_seconds": 0.15,
       "max_rss_kib": 69632,
@@ -106,7 +106,7 @@
       "method": "ho",
       "cache": "direct",
       "rep": 2,
-      "wall_seconds": 2882.4,
+      "wall_seconds": 48.04,
       "user_seconds": 671.46,
       "system_seconds": 0.13,
       "max_rss_kib": 69632,
@@ -124,7 +124,7 @@
       "method": "ho",
       "cache": "cached",
       "rep": 1,
-      "wall_seconds": 1503.0,
+      "wall_seconds": 25.05,
       "user_seconds": 390.58,
       "system_seconds": 0.09,
       "max_rss_kib": 70656,
@@ -142,7 +142,7 @@
       "method": "ho",
       "cache": "cached",
       "rep": 2,
-      "wall_seconds": 1497.6000000000001,
+      "wall_seconds": 24.96,
       "user_seconds": 390.33,
       "system_seconds": 0.09,
       "max_rss_kib": 69632,
@@ -158,14 +158,14 @@
   ],
   "median_speed": {
     "cm": {
-      "direct_wall_median_seconds": 2418.9,
-      "cached_wall_median_seconds": 1495.2,
-      "direct_to_cached_ratio": 1.617776886035313
+      "direct_wall_median_seconds": 40.315,
+      "cached_wall_median_seconds": 24.92,
+      "direct_to_cached_ratio": 1.6177768860353128
     },
     "ho": {
-      "direct_wall_median_seconds": 2839.5,
-      "cached_wall_median_seconds": 1500.3000000000002,
-      "direct_to_cached_ratio": 1.8926214757048587
+      "direct_wall_median_seconds": 47.325,
+      "cached_wall_median_seconds": 25.005000000000003,
+      "direct_to_cached_ratio": 1.892621475704859
     }
   },
   "paired_comparison": {
@@ -180,5 +180,9 @@
     ],
     "integration_ledger_difference_expected": true
   },
-  "scope": "Profile-specific timing under shared host load; no state-bit or PDE-convergence claim."
+  "scope": "Profile-specific timing under shared host load; no state-bit or PDE-convergence claim.",
+  "analysis": {
+    "parser": "analyze_timing.py: take text after final ': ', then fold parts as seconds = seconds*60 + part",
+    "correction": "Derived wall seconds were recomputed from preserved stderr; raw timing files were not rerun or modified."
+  }
 }

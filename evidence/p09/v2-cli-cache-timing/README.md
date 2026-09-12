@@ -11,8 +11,10 @@ Measured wall times were:
 
 | Method | Direct runs | Cached runs | Median direct/cached ratio |
 |---|---:|---:|---:|
-| CM | 39.57 s, 41.06 s | 24.42 s, 25.42 s | 1.619 |
-| HO | 46.61 s, 48.04 s | 25.05 s, 24.96 s | 1.893 |
+| CM | 39.57 s, 41.06 s | 24.42 s, 25.42 s | 1.617777 |
+| HO | 46.61 s, 48.04 s | 25.05 s, 24.96 s | 1.892621 |
+
+The corrected medians are CM 40.315 s direct and 24.920 s cached, and HO 47.325 s direct and 25.005 s cached. The follow-up derived-summary correction parses the text after the final `: ` in each GNU elapsed-time line and folds colon-separated fields as base-60 seconds; all raw JSON and stderr files remain byte-for-byte unchanged.
 
 These ratios are measurements for this profile under shared host load, not
 universal speed claims. Maximum resident set size was 68,608–70,656 KiB.
