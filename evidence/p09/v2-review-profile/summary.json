@@ -1,0 +1,70 @@
+{
+  "package": "P09",
+  "increment": "partial exact-v2 frozen review-profile admission",
+  "status": "focused admission, identity, allocation, coverage, CRAP, static and strict workspace Rustdoc gates passed; no numerical review performed",
+  "parent_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "source_commit": "1853eeaf2d7df5f8c75b175ac344a8c09cc6d083",
+  "profile_status": "PartialUnpopulatedDiagnostic",
+  "geometry": {
+    "coarse": [0, 64, 128],
+    "middle": [0, 63, 64, 127, 128],
+    "fine": [0, 7, 63, 64, 95, 127, 128],
+    "reconstruction_clocks": [7, 63, 95, 127],
+    "claim": "admitted source-plan node geometry, not published owner histories"
+  },
+  "inventory": {
+    "scalar_rows_per_clock": 88,
+    "required_rows": 616,
+    "mandatory_missing_groups": 9,
+    "semantics_bytes": 854,
+    "semantics_sha256": "e78576813a6bc3c0de69967b679a924707a026ca9649cd988f58d5086377692e"
+  },
+  "identity": {
+    "formula": "SHA256(tag || family_digest || probe_digest || SHA256(generic_canonical))",
+    "test_policy_profile_sha256": "67faab47380d6374f384de37724c4ac4813a767825595c8e60c7b0f8d6e1197a",
+    "generic_canonical_bytes": 29396,
+    "complete_profile_canonical_bytes": 29483
+  },
+  "resource_observation": {
+    "policy_pair_checks": 3828,
+    "review_attempt_allowance_test": 618,
+    "steady_allocations": 0
+  },
+  "focused_tests": {
+    "integration_tests": 6,
+    "allocator_executables": 1,
+    "result": "passed"
+  },
+  "focused_coverage": {
+    "scope": "new review_profile production module",
+    "lines": {"covered": 212, "count": 215, "percent": 98.6046511627907},
+    "branches": {"covered": 23, "count": 24, "percent": 95.83333333333333}
+  },
+  "quality": {
+    "focused_production_functions": 40,
+    "focused_production_crap_maximum": 18.11807580174927,
+    "changed_test_crap_maximum_at_conservative_zero_coverage": 12.0,
+    "whole_tree_function_cyclomatic_maximum": 21.0,
+    "whole_tree_function_cognitive_maximum": 21.0,
+    "whole_tree_function_halstead_difficulty_maximum": 60.0,
+    "whole_tree_all_node_halstead_difficulty_maximum": 75.9295154185022,
+    "whole_tree_maximum_rust_file_lines": 477
+  },
+  "execution": {
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "cargo_llvm_cov": "0.9.1",
+    "coverage_toolchain": "nightly-2026-03-03",
+    "cargo_lock_sha256": "48517159f46155c36c0b390a0e08e162336be89ee3685cdb7b5019c0d3a613f9",
+    "workspace_manifest_sha256": "5f5305f18de46684ef232eba59c18e5ebc6f1983737f6dd2f1fea0ed8909ad94",
+    "benchmark_manifest_sha256": "0f3f7253b74cfa17c27e07f2fddf4dabff4076d4ea981d91f416a1a8ca944318",
+    "toolchain_sha256": "d3c8887dfc80164497209239779196b11a208a9c2a6394f2fa5a5f4c60980096"
+  },
+  "accepted_pde_windows": 0,
+  "limitations": [
+    "No Observation or measurement value is created.",
+    "Caller policies are required; the test budgets are not scientific defaults.",
+    "Regional reference tracking does not populate regional Space, Time or Method field-difference channels.",
+    "Pressure reference/gauge, peak semantics, nominal and collar coverage, complete global qualification, and mean momentum remain mandatory gaps.",
+    "P09 and P10 remain incomplete; combined hosted gates remain pending."
+  ]
+}
