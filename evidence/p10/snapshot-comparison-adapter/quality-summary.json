@@ -1,22 +1,22 @@
 {
   "source_base": "b0f6b1d22e379d5cfbf64234bf1a7611bca95eb5",
   "status": "pass_review_required_before_time_diagnostic_use",
-  "focused_tests": {"passed": 9, "failed": 0},
+  "focused_tests": {"passed": 11, "failed": 0},
   "format": "pass",
   "strict_all_target_clippy": "pass",
   "maximum_function_cyclomatic": 18.0,
-  "maximum_function_cognitive": 8.0,
+  "maximum_function_cognitive": 7.0,
   "maximum_function_halstead_difficulty": 39.0,
-  "maximum_file_lines": 394,
-  "line_coverage": {"covered": 690, "count": 721, "percent": 95.7004160887656},
-  "branch_coverage": {"covered": 153, "count": 222, "percent": 68.91891891891892},
+  "maximum_file_lines": 402,
+  "line_coverage": {"covered": 703, "count": 732, "percent": 96.03825136612022},
+  "branch_coverage": {"covered": 157, "count": 228, "percent": 68.85964912280701},
   "maximum_production_function_crap": 22.5,
   "crap_violations": 0,
   "raw_sha256": {
-    "metrics": "cb78a73a3fcc7d83ad3356f3192fc1c4d1e4ab7e7cd21bb9b90d33837051a13b",
-    "production_metrics": "b5f8f8aa7f7a1e1745b1839ba7dc420bfc57b5ad643561a3c060b86ec7dc6070",
-    "coverage": "e409e90938e22806bc5c4b2158b04029e0f4cecfdee028f896e91ab9631f6ed0",
-    "production_crap": "9030360a9c237263c3ff5cabb99f24808a2fbee7059c489d178e33f06295717e"
+    "metrics": "d537b44ab0c29ceb1eb43e7f967bc5549eab66b29cc12c2fdcadd239876f9e86",
+    "production_metrics": "2cd2cba026319dfa353da4ba54224278a8028c4d95dd91bbd2656977a9de1a8f",
+    "coverage": "4a31bd69dc694450138b5ff9cb12fdf11ff42504fc7bfe1bd7babbd8b8db434a",
+    "production_crap": "fd65af374e9ea74399daae1417df9f8919b99e057e7289c3d68a16313f3fce32"
   },
   "coverage_scope": "standalone adapter production plus unit controls; test helper source is not a production CRAP input"
 }

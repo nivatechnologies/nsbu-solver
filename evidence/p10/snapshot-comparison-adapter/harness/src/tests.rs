@@ -1,7 +1,8 @@
 use super::{compare, decode};
 use crate::model::{
     AdmissionGuard, ArithmeticControl, ArithmeticReview, ArithmeticSide, ClockHeader,
-    ComparisonKind, Evolution, Manifest, MeasuredControl, ReviewedLineage, ScheduleSegment,
+    ComparisonKind, Evolution, Manifest, MeasuredControl, MeasuredSide, ProfileBinding,
+    ProfileBindingKind, ReviewedLineage, ScheduleSegment,
 };
 use nsbu_solver::{diagnostics::comparison::ComparisonPlan, domain::Layout, Complex64};
 use sha2::{Digest, Sha256};
@@ -64,10 +65,16 @@ fn enable_time(left: &mut Manifest, right: &mut Manifest, root: &std::path::Path
     left.comparison_kind = ComparisonKind::TimeDiagnostic;
     right.comparison_kind = ComparisonKind::TimeDiagnostic;
     left.epoch = 2;
-    left.profile = Some("n4-m384-h32-cadv045-serial".into());
-    right.profile = Some("n4-m384-piecewise-cadv33-w3".into());
-    left.identity = format!("fixture;profile={}", left.profile.as_deref().unwrap());
-    right.identity = format!("fixture;profile={}", right.profile.as_deref().unwrap());
+    left.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "n4-m384-h32-cadv045-serial".into(),
+    });
+    right.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "n4-m384-piecewise-cadv33-w3".into(),
+    });
+    left.identity = format!("fixture;profile={}", left.profile.as_ref().unwrap().value);
+    right.identity = format!("fixture;profile={}", right.profile.as_ref().unwrap().value);
     left.admission_guard = Some(AdmissionGuard {
         advective_limit: 0.45,
         maximum_attempts: 2,
@@ -98,17 +105,17 @@ fn enable_time(left: &mut Manifest, right: &mut Manifest, root: &std::path::Path
         integration_force_dimensions: left.evolution.integration_force_dimensions,
         measured_control: MeasuredControl {
             outcome: "successful-exact-bit".into(),
-            serial: ArithmeticSide {
+            serial: MeasuredSide {
                 source_commit: "8".repeat(40),
                 backend: "measured-serial-backend".into(),
                 execution: "measured-serial-execution".into(),
-                profile: "measured-n4-m384-serial-81bd".into(),
+                configuration: "measured-n4-m384-serial-81bd".into(),
             },
-            w3: ArithmeticSide {
+            w3: MeasuredSide {
                 source_commit: "f".repeat(40),
                 backend: "measured-w3-backend".into(),
                 execution: "measured-w3-execution".into(),
-                profile: "measured-n4-m384-w3-f13".into(),
+                configuration: "measured-n4-m384-w3-f13".into(),
             },
         },
         reviewed_lineage: ReviewedLineage {
@@ -550,7 +557,7 @@ fn time_diagnostic_rejects_mode_headers_guards_and_provenance() {
         .unwrap_err()
         .contains("side binding mismatch"));
     changed = right.clone();
-    changed.profile.as_mut().unwrap().push_str("-changed");
+    changed.profile.as_mut().unwrap().value.push_str("-changed");
     assert!(compare::time_diagnostic(&left, &ls, &changed, &rs, 0)
         .unwrap_err()
         .contains("profile does not match"));
@@ -600,4 +607,67 @@ fn time_diagnostic_rejects_mode_headers_guards_and_provenance() {
             .unwrap_err()
             .contains("physical contract mismatch")
     );
+}
+
+#[test]
+fn arithmetic_review_accepts_64_kib_and_rejects_one_byte_more() {
+    const CAP: usize = 64 * 1024;
+    let root = root("arithmetic-cap");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    enable_time(&mut left, &mut right, &root);
+    let values = fields(left.domain().unwrap().layout(), 1.0);
+    write(&mut left, &values);
+    left.snapshot = PathBuf::from("left.bin");
+    left.plan = PathBuf::from("plan-left.json");
+    let manifest_path = root.join("left.json");
+    let evidence_path = root.join("serial-w3-arithmetic-review.json");
+
+    let control = left.arithmetic_control.as_mut().unwrap();
+    let mut exact = serde_json::to_vec(&control.review).unwrap();
+    exact.resize(CAP, b' ');
+    fs::write(&evidence_path, &exact).unwrap();
+    control.evidence_sha256 = format!("{:x}", Sha256::digest(&exact));
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    assert!(decode::read_manifest(&manifest_path).is_ok());
+
+    exact.push(b' ');
+    fs::write(&evidence_path, &exact).unwrap();
+    left.arithmetic_control.as_mut().unwrap().evidence_sha256 =
+        format!("{:x}", Sha256::digest(&exact));
+    fs::write(&manifest_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    assert!(decode::read_manifest(&manifest_path)
+        .unwrap_err()
+        .contains("exceeds 64 KiB bound"));
+}
+
+#[test]
+fn legacy_profile_binding_requires_the_exact_complete_identity() {
+    let root = root("legacy-profile");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    enable_time(&mut left, &mut right, &root);
+    left.identity = "source=legacy;case=fixture;n=4;m=384;step=32".into();
+    left.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::LegacyFullIdentity,
+        value: left.identity.clone(),
+    });
+    let control = left.arithmetic_control.as_mut().unwrap();
+    control.review.reviewed_lineage.left.profile = left.profile.clone().unwrap();
+    right.arithmetic_control = Some(control.clone());
+    assert!(compare::validate_manifest_pair(&left, &right).is_ok());
+
+    left.profile
+        .as_mut()
+        .unwrap()
+        .value
+        .push_str(";invented=true");
+    assert!(compare::validate_manifest_pair(&left, &right)
+        .unwrap_err()
+        .contains("profile does not match"));
+    left.profile.as_mut().unwrap().value = left.identity.clone();
+    left.profile.as_mut().unwrap().kind = ProfileBindingKind::IdentityProfileField;
+    assert!(compare::validate_manifest_pair(&left, &right)
+        .unwrap_err()
+        .contains("profile does not match"));
 }

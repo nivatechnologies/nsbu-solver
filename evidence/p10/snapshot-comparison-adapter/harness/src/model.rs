@@ -24,7 +24,7 @@ pub(crate) struct Manifest {
     pub epoch: u128,
     pub accepted_steps: u128,
     #[serde(default)]
-    pub profile: Option<String>,
+    pub profile: Option<ProfileBinding>,
     #[serde(default)]
     pub admission_guard: Option<AdmissionGuard>,
     #[serde(default)]
@@ -60,6 +60,21 @@ pub(crate) struct AdmissionGuard {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(deny_unknown_fields)]
+pub(crate) struct ProfileBinding {
+    pub kind: ProfileBindingKind,
+    pub value: String,
+}
+
+#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
+pub(crate) enum ProfileBindingKind {
+    #[serde(rename = "legacy-full-identity")]
+    LegacyFullIdentity,
+    #[serde(rename = "identity-profile-field")]
+    IdentityProfileField,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ArithmeticControl {
     pub evidence: PathBuf,
     pub evidence_sha256: String,
@@ -82,8 +97,8 @@ pub(crate) struct ArithmeticReview {
 #[serde(deny_unknown_fields)]
 pub(crate) struct MeasuredControl {
     pub outcome: String,
-    pub serial: ArithmeticSide,
-    pub w3: ArithmeticSide,
+    pub serial: MeasuredSide,
+    pub w3: MeasuredSide,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
@@ -102,7 +117,16 @@ pub(crate) struct ArithmeticSide {
     pub source_commit: String,
     pub backend: String,
     pub execution: String,
-    pub profile: String,
+    pub profile: ProfileBinding,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct MeasuredSide {
+    pub source_commit: String,
+    pub backend: String,
+    pub execution: String,
+    pub configuration: String,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -224,14 +248,14 @@ pub(crate) struct TimeDiagnosticOutput<'a> {
     pub left_evolution: &'a Evolution,
     pub right_evolution: &'a Evolution,
     pub left_identity: &'a str,
-    pub left_profile: &'a str,
+    pub left_profile: &'a ProfileBinding,
     pub left_admission_guard: &'a AdmissionGuard,
     pub left_backend: &'a str,
     pub left_execution: &'a str,
     pub left_source_commit: &'a str,
     pub left_plan_sha256: &'a str,
     pub right_identity: &'a str,
-    pub right_profile: &'a str,
+    pub right_profile: &'a ProfileBinding,
     pub right_admission_guard: &'a AdmissionGuard,
     pub right_backend: &'a str,
     pub right_execution: &'a str,

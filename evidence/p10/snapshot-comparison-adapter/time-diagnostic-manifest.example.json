@@ -30,7 +30,10 @@
   "target": 8192,
   "epoch": 128,
   "accepted_steps": 128,
-  "profile": "COPY_THE_EXACT_UNRELABELLED_PROFILE",
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "COPY_THE_EXACT_UNRELABELLED_PROFILE_FIELD"
+  },
   "admission_guard": {
     "advective_limit": 0.45,
     "maximum_attempts": 128
@@ -50,13 +53,13 @@
           "source_commit": "COPY_THE_ACTUALLY_MEASURED_SERIAL_SOURCE",
           "backend": "COPY_THE_ACTUALLY_MEASURED_SERIAL_BACKEND",
           "execution": "COPY_THE_ACTUALLY_MEASURED_SERIAL_EXECUTION",
-          "profile": "COPY_THE_ACTUALLY_MEASURED_SERIAL_PROFILE"
+          "configuration": "COPY_THE_ACTUALLY_MEASURED_SERIAL_CONFIGURATION"
         },
         "w3": {
           "source_commit": "COPY_THE_ACTUALLY_MEASURED_W3_SOURCE",
           "backend": "COPY_THE_ACTUALLY_MEASURED_W3_BACKEND",
           "execution": "COPY_THE_ACTUALLY_MEASURED_W3_EXECUTION",
-          "profile": "COPY_THE_ACTUALLY_MEASURED_W3_PROFILE"
+          "configuration": "COPY_THE_ACTUALLY_MEASURED_W3_CONFIGURATION"
         }
       },
       "reviewed_lineage": {
@@ -67,13 +70,19 @@
           "source_commit": "COPY_THE_CURRENT_LEFT_SOURCE",
           "backend": "COPY_THE_CURRENT_LEFT_BACKEND",
           "execution": "COPY_THE_CURRENT_LEFT_EXECUTION",
-          "profile": "COPY_THE_CURRENT_LEFT_UNRELABELLED_PROFILE"
+          "profile": {
+            "kind": "legacy-full-identity",
+            "value": "COPY_THE_CURRENT_LEFT_COMPLETE_LEGACY_IDENTITY"
+          }
         },
         "right": {
           "source_commit": "COPY_THE_CURRENT_RIGHT_SOURCE",
           "backend": "COPY_THE_CURRENT_RIGHT_BACKEND",
           "execution": "COPY_THE_CURRENT_RIGHT_EXECUTION",
-          "profile": "COPY_THE_CURRENT_RIGHT_UNRELABELLED_PROFILE"
+          "profile": {
+            "kind": "identity-profile-field",
+            "value": "COPY_THE_CURRENT_RIGHT_UNRELABELLED_PROFILE_FIELD"
+          }
         }
       }
     }

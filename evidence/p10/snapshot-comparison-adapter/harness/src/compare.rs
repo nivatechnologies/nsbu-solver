@@ -77,14 +77,14 @@ pub(crate) fn time_diagnostic<'a>(
         left_evolution: &left_manifest.evolution,
         right_evolution: &right_manifest.evolution,
         left_identity: &left_manifest.identity,
-        left_profile: left_manifest.profile.as_deref().unwrap(),
+        left_profile: left_manifest.profile.as_ref().unwrap(),
         left_admission_guard: left_manifest.admission_guard.as_ref().unwrap(),
         left_backend: &left_manifest.backend,
         left_execution: &left_manifest.execution,
         left_source_commit: &left_manifest.source_commit,
         left_plan_sha256: &left_manifest.plan_sha256,
         right_identity: &right_manifest.identity,
-        right_profile: right_manifest.profile.as_deref().unwrap(),
+        right_profile: right_manifest.profile.as_ref().unwrap(),
         right_admission_guard: right_manifest.admission_guard.as_ref().unwrap(),
         right_backend: &right_manifest.backend,
         right_execution: &right_manifest.execution,
@@ -218,8 +218,8 @@ fn validate_time_side(manifest: &Manifest, left: bool) -> Result<(), String> {
     {
         return Err("time-diagnostic schedule/header derivation mismatch".into());
     }
-    let profile = manifest.profile.as_deref().ok_or("missing exact profile")?;
-    if profile.is_empty() || identity_profile(&manifest.identity) != Some(profile) {
+    let profile = manifest.profile.as_ref().ok_or("missing exact profile")?;
+    if !valid_profile_binding(&manifest.identity, profile) {
         return Err("exact profile does not match snapshot identity".into());
     }
     let control = manifest
@@ -234,11 +234,21 @@ fn validate_time_side(manifest: &Manifest, left: bool) -> Result<(), String> {
     if side.source_commit != manifest.source_commit
         || side.backend != manifest.backend
         || side.execution != manifest.execution
-        || side.profile != profile
+        || side.profile != *profile
     {
         return Err("arithmetic-control side binding mismatch".into());
     }
     Ok(())
+}
+
+fn valid_profile_binding(identity: &str, profile: &crate::model::ProfileBinding) -> bool {
+    use crate::model::ProfileBindingKind::{IdentityProfileField, LegacyFullIdentity};
+    match profile.kind {
+        LegacyFullIdentity => profile.value == identity,
+        IdentityProfileField => {
+            !profile.value.is_empty() && identity_profile(identity) == Some(&profile.value)
+        }
+    }
 }
 
 fn identity_profile(identity: &str) -> Option<&str> {
