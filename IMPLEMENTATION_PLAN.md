@@ -28,8 +28,9 @@ concentrating windows. In this bounded work block:
    the source-matched hosted gate before the next combined review.
 
 The combined exporter, partial review adapter and force-baseline binder from
-`31e99a1` passed both [source-matched hosted suites](evidence/p09/hosted-integration-31e99a1/summary.json).
-Whole-maintained Rust coverage is 97.98% lines / 87.48% branches. The recorded
+`31e99a1` remain the prior [source-matched hosted baseline](evidence/p09/hosted-integration-31e99a1/summary.json).
+The later b029 integration audit also passed for its exact source; latest main
+`def4730` still awaits its source-matched hosted result. Whole-maintained Rust coverage is 97.98% lines / 87.48% branches. The recorded
 focused branch percentages remain useful test-scope information; they are not
 separate per-module gates. P08/P09/P10 remain incomplete and accepted
 concentrating PDE windows remain zero. Release and documentation updates follow
@@ -969,13 +970,13 @@ zero accepted concentrating PDE windows.
 
 ## P09 runtime diagnostic integration and cache profile
 
-The runtime now exports the reconstructed physical probe consumer through the
-fixed version-2 diagnostic path; [integration evidence](evidence/p09/v2-probe-physical-integration/README.md)
-records measured off-stage physical reports. Those reports cover the physical
-quantities at their probe clocks, while analytical reference tracking remains
-unavailable off-stage. The [hosted b029 audit](evidence/p09/hosted-integration-b0295ee/summary.json)
-passed for its exact source; full combined hosted validation of the later
-runtime source remains pending.
+The runtime exports reconstructed physical probe reports through the fixed
+version-2 diagnostic path; [integration evidence](evidence/p09/v2-probe-physical-integration/README.md)
+records the measured off-stage quantities. Development-source producer/reference
+coordination is separately recorded below and does not make the latest main
+source hosted-validated. The [hosted b029 audit](evidence/p09/hosted-integration-b0295ee/summary.json)
+passed for its exact source; full combined hosted validation of main `def4730`
+remains pending.
 
 `v2 --cache-force` is an explicit opt-in attempt-force cache. It preserves the
 default direct path, and cached checkpoints are unsupported, including resume
