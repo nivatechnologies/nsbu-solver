@@ -52,7 +52,17 @@ fn policies() -> [ObservablePolicy; OBSERVABLE_COUNT] {
 fn geometry() -> ReviewGeometry {
     let profile = StartupProfile::new().unwrap();
     let plan = profile.plan(CAP).unwrap();
-    ReviewGeometry::startup(plan.probe_plan()).unwrap()
+    geometry_from(plan.probe_plan())
+}
+fn geometry_from(plan: ProbePlan<'_>) -> ReviewGeometry {
+    let startup = ReviewGeometry::startup(plan).unwrap();
+    let coarse = [0, 64, 128].map(tick);
+    let middle = [0, 63, 64, 127, 128].map(tick);
+    let fine = [0, 7, 63, 64, 95, 127, 128].map(tick);
+    ReviewGeometry::from_manifests(plan, coarse, middle, fine, *startup.probes()).unwrap()
+}
+fn tick(elapsed: u128) -> TickClock {
+    TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap()
 }
 fn caps(bytes: usize) -> ProfileCaps {
     ProfileCaps {
@@ -140,6 +150,79 @@ fn allocated_driver_plan_retains_the_bound_geometry_identities() {
     assert_eq!(
         geometry.probe_identity(),
         driver.plan().probe_plan().identity()
+    );
+}
+
+#[test]
+fn caller_manifests_must_be_strictly_nested_complete_and_node_bound() {
+    let startup = StartupProfile::new().unwrap();
+    let plan = startup.plan(CAP).unwrap().probe_plan();
+    let geometry = ReviewGeometry::startup(plan).unwrap();
+    let coarse = [0, 64, 128].map(tick);
+    let middle = [0, 63, 64, 127, 128].map(tick);
+    let fine = [0, 7, 63, 64, 95, 127, 128].map(tick);
+    assert_eq!(
+        ReviewGeometry::from_manifests(plan, coarse, middle, fine, *geometry.probes())
+            .unwrap()
+            .probe_identity(),
+        plan.identity()
+    );
+
+    let nonnested = [0, 32, 64, 96, 128].map(tick);
+    assert_eq!(
+        ReviewGeometry::from_manifests(plan, coarse, nonnested, fine, *geometry.probes())
+            .unwrap_err(),
+        ProfileError::InvalidGeometry
+    );
+    let duplicate = [0, 7, 63, 64, 95, 127, 127].map(tick);
+    assert_eq!(
+        ReviewGeometry::from_manifests(plan, coarse, middle, duplicate, *geometry.probes())
+            .unwrap_err(),
+        ProfileError::Verification(nsbu_solver::verification::VerificationError::InvalidTimes)
+    );
+    let missing_accepted = [0, 7, 63, 65, 95, 127, 128].map(tick);
+    assert_eq!(
+        ReviewGeometry::from_manifests(plan, coarse, middle, missing_accepted, *geometry.probes())
+            .unwrap_err(),
+        ProfileError::InvalidGeometry
+    );
+    let mut wrong_nodes = *geometry.probes();
+    wrong_nodes.swap(0, 1);
+    assert_eq!(
+        ReviewGeometry::from_manifests(plan, coarse, middle, fine, wrong_nodes).unwrap_err(),
+        ProfileError::InvalidGeometry
+    );
+}
+
+#[test]
+fn caller_cannot_relabel_geometry_as_a_foreign_family() {
+    let startup = StartupProfile::new().unwrap();
+    let original = startup.plan(CAP).unwrap();
+    let geometry = geometry_from(original.probe_plan());
+    let mut changed = original.family_plan().settings();
+    changed.advective_limit = 0.31;
+    let foreign_family = FamilyPlan::new(
+        changed,
+        TestedTimes::new(startup.accepted_times(), 3).unwrap(),
+        CAP,
+    )
+    .unwrap();
+    let foreign = ProbePlan::new(
+        foreign_family,
+        TestedTimes::new(startup.manifest(), 7).unwrap(),
+        7,
+        CAP,
+    )
+    .unwrap();
+    let policies = policies();
+    let foreign_inputs = ProfileInputs {
+        family: foreign.family_plan().identity(),
+        probe: foreign.identity(),
+        ..input(&geometry, &policies)
+    };
+    assert_eq!(
+        AdmittedProfile::new(&geometry, foreign_inputs, caps(usize::MAX)).unwrap_err(),
+        ProfileError::InvalidGeometry
     );
 }
 

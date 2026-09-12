@@ -26,16 +26,23 @@ The nested manifests use exponent -20 and target 8192:
 - middle: `0,63,64,127,128`
 - fine: `0,7,63,64,95,127,128`
 
-`ReviewGeometry::startup` accepts an already admitted `ProbePlan` only when its
-complete manifest equals the fine list. It obtains the h64, h32 and h16 steps
-from that plan and uses the shared probe-node routine. All four off-stage clocks
-therefore retain the same admitted node geometry as `ProbeFamily` and
-`ResidualFamily`: tick 7 uses `[0,64,128]`, `[0,32,64]`, `[0,16,32]`; tick 63
-uses `[0,64,128]`, `[0,32,64]`, `[32,48,64]`; tick 95 uses `[0,64,128]`,
-`[32,64,96]`, `[64,80,96]`; tick 127 uses `[0,64,128]`, `[64,96,128]`,
-`[96,112,128]`. This admission does not assert that an owner has published those
-histories. Family and probe-plan identities are part of the complete profile
-canonical bytes and identity.
+`ReviewGeometry::from_manifests` accepts caller-supplied fixed-size 3/5/7
+arrays and four refinements. It requires strict coarse-to-middle-to-fine nesting,
+the coarse array to equal the admitted `FamilyPlan` accepted-clock manifest, and
+the fine array to equal the admitted `ProbePlan` manifest. The four refinements
+must be the ordered off-stage complement of those accepted clocks. The constructor
+recomputes their h64, h32 and h16 nodes through the shared probe-node routine,
+then records the identities derived from that immutable plan. It does not accept
+caller-supplied identity words. `startup` remains the literal startup wrapper and
+delegates to this validation.
+
+All four off-stage clocks therefore retain the same admitted node geometry as
+`ProbeFamily` and `ResidualFamily`: tick 7 uses `[0,64,128]`, `[0,32,64]`,
+`[0,16,32]`; tick 63 uses `[0,64,128]`, `[0,32,64]`, `[32,48,64]`; tick 95
+uses `[0,64,128]`, `[32,64,96]`, `[64,80,96]`; tick 127 uses `[0,64,128]`,
+`[64,96,128]`, `[96,112,128]`. This admission does not assert that an owner has
+published those histories. Family and probe-plan identities are part of the
+complete profile canonical bytes and identity.
 
 ## Scalar inventory
 
