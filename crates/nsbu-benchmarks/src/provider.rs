@@ -1,5 +1,6 @@
 //! Bounded sampled v2 forcing. Sampling is a numerical approximation, never a qualification claim.
 pub mod parallel;
+pub mod parallel_reduced;
 pub mod reduced;
 use crate::{fields, time::BenchmarkTime};
 use nsbu_solver::{

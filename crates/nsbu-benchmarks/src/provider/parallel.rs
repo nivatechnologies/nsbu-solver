@@ -1,8 +1,8 @@
 //! Persistent bounded workers for exact-v2 physical sampling, followed by the original serial FFT.
 //! The sampler preserves every spatial point and its original arithmetic; it never evolves state.
-mod admission;
-mod pool;
-mod sampling;
+pub(super) mod admission;
+pub(super) mod pool;
+pub(super) mod sampling;
 #[cfg(test)]
 mod tests;
 mod worker;
@@ -45,7 +45,7 @@ impl ParallelV2Force {
         let serial = V2Force::preflight(domain, samples)?;
         Ok(Self {
             inner: V2Force::new(domain, samples, serial.storage_bytes)?,
-            pool: pool::Pool::new(samples, workers)?,
+            pool: pool::Pool::new(samples, workers, sampling::Arithmetic::Cartesian)?,
             limits,
         })
     }
