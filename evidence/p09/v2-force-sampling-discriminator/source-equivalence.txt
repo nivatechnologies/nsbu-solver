@@ -1,0 +1,4 @@
+frozen source commit: 31e99a17f97aec2ee18b26c67f8be88a0e931088
+original harness dependency checkout: a2f0c77bdd5cabafe0157ab3500b5222578717ac
+git diff --name-only frozen..original checkout: IMPLEMENTATION_PLAN.md, docs/NEXT_CONCENTRATING_WINDOW.md, project-status.json, evidence/p09/hosted-integration-31e99a1/**
+No crates/** source file changed between those commits. The original raw is retained as source-equivalent but superseded by the frozen-worktree rerun.

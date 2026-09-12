@@ -9,7 +9,9 @@ same N24 grid. It evaluates the original force at exact clocks
 For each clock, the harness reports full-band raw M24--M48, raw M24 and raw
 M48 norms, then applies the exact N24 Leray projector to each field and reports
 the same three norm sets. The raw output also records a SHA-256 digest of every
-coefficient payload. The projected comparison is relevant to the velocity
+coefficient payload. The frozen-worktree rerun is the source-bound result; the
+earlier main-checkout raw is retained separately as source-equivalent and its
+stdout payload is byte-identical. The projected comparison is relevant to the velocity
 forcing contribution; raw curl is also projection-invariant.
 
 The complete declared storage is 61,242,704 bytes:
@@ -26,7 +28,7 @@ and M48 force discretizations differ materially after projection. It does not
 compare a full RHS, use an evolved state, assess nonlinear aliasing, establish
 temporal reconstruction error, or qualify a PDE window.
 
-Reproduce from the repository root with:
+Reproduce from a checkout at the recorded frozen commit with:
 
 ```sh
 /usr/bin/time -v timeout 900s cargo run --release \
