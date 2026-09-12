@@ -27,6 +27,25 @@ branches. That focused shortfall remains explicit; the required whole-maintained
 [evidence](../evidence/p09/v2-force-binding/summary.json) retains the corrected
 CRAP result (18.779) and the earlier failed/incomplete run history.
 
+Three additional source-bound increments are recorded for review. The [review
+profile](../evidence/p09/v2-review-profile/summary.json) admits nested clock
+geometry and an 88-row-per-clock inventory but remains
+`PartialUnpopulatedDiagnostic`: it creates no observation or measurement value.
+Focused admission checks pass at 98.60% lines and 95.83% branches, with maximum
+focused production CRAP 18.1181. The [physical force channel](../evidence/p09/v2-force-physical/summary.json)
+is `DiagnosticOnly`; its functional, allocation and ordinary-physical checks
+pass at 97.93% lines and 86.96% branches, with maximum CRAP 15. It makes no
+force-sufficiency or convergence claim.
+
+The [regional coverage increment](../evidence/p09/v2-region-coverage/summary.json)
+distinguishes nominal region volume from observed sample counts and binds
+actual accepted publisher state before classifying three empirical panels. Its
+focused tests and controls pass, with production CRAP 23.9359 and focused plan
+coverage 95.40% lines / 78.57% branches; this is focused evidence rather than
+the whole-maintained release gate. Combined hosted validation for these
+increments remains pending. P08/P09/P10 remain incomplete and zero
+concentrating PDE windows are accepted.
+
 ## Numerical fact to carry forward
 
 The diagnostic-only N8/N12/N16 pilot reached tick 4096 (`1/256`) from rest, but

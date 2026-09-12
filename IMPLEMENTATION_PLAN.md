@@ -926,3 +926,24 @@ passing numerical/allocation/static checks and CRAP18.779; line coverage is
 98.51% and branch coverage65.22%. The focused branch shortfall remains explicit,
 and whole-maintained combined-source CI is pending. Spectral L2/H1 values are
 not relabeled as sampled gradient/Hessian RMS. P09 remains incomplete.
+
+## P09 review profile, physical force and regional coverage
+
+The source-bound [review-profile increment](evidence/p09/v2-review-profile/summary.json)
+admits nested exact-v2 clock geometry, actual accepted publisher binding and an
+88-row-per-clock inventory. It remains `PartialUnpopulatedDiagnostic` and
+creates no observation or measurement values. Focused admission/allocation
+checks pass at 98.60% lines and 95.83% branches, with focused production CRAP
+18.1181. The [physical force increment](evidence/p09/v2-force-physical/summary.json)
+is `DiagnosticOnly`; its functional, allocation and ordinary-physical checks
+pass at 97.9321% lines and 86.9565% branches, with maximum CRAP 15. Neither
+increment claims force sufficiency or convergence.
+
+The [regional coverage increment](evidence/p09/v2-region-coverage/summary.json)
+separates nominal region volume from observed sample counts and checks actual
+accepted publisher binding before classifying three empirical panels. Its
+focused checks pass; production maximum CRAP is 23.9359 and focused plan
+coverage is 95.40% lines / 78.57% branches. Combined hosted validation remains
+pending. Off-stage physical integration and the global pressure-gauge path are
+underway; the first-endpoint pilot is running and has no results claim yet.
+P08/P09/P10 remain incomplete, with zero accepted concentrating PDE windows.

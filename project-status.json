@@ -187,7 +187,13 @@
       "v2_balance_quadrature_evidence": "evidence/p09/v2-balance-quadrature/summary.json",
       "v2_partial_review_adapter_evidence": "evidence/p09/v2-review-adapter/summary.json",
       "v2_partial_review_adapter_scope": "Extraction-only seven-event, four-global-RMS inventory for velocity, ordered gradient, ordered Hessian and vorticity. It binds actual schedule, identities, finest-CM branch-2 tracking, layouts and floor words; status is permanently PartialUnqualifiedInventory. Off-stage accepted observables remain Missing. No generic MeasurementReview, tolerances, readiness result or PDE qualification.",
-      "v2_force_binding_evidence": "evidence/p09/v2-force-binding/summary.json"
+      "v2_force_binding_evidence": "evidence/p09/v2-force-binding/summary.json",
+      "v2_review_profile_evidence": "evidence/p09/v2-review-profile/summary.json",
+      "v2_review_profile_scope": "Source-bound PartialUnpopulatedDiagnostic exact-v2 review-profile admission for nested clock geometry, actual accepted publisher binding and an 88-row-per-clock inventory; no observation or measurement values; focused checks pass, combined hosted validation pending.",
+      "v2_force_physical_evidence": "evidence/p09/v2-force-physical/summary.json",
+      "v2_force_physical_scope": "Source-bound DiagnosticOnly physical force channel with functional, allocation and ordinary physical checks passed; 97.9321% focused lines, 86.9565% branches and maximum CRAP 15; no force-sufficiency or convergence claim; combined hosted validation pending.",
+      "v2_region_coverage_evidence": "evidence/p09/v2-region-coverage/summary.json",
+      "v2_region_coverage_scope": "Source-bound regional coverage diagnostic distinguishing nominal region volume from observed sample counts and binding actual accepted publisher state before classifying three empirical panels; focused checks pass, production CRAP 23.9359 and focused plan coverage 95.40% lines / 78.57% branches; no whole-maintained gate or PDE-window run."
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N4 exact-v2 CM/HO diagnostics; Rust smooth studies, N4 CM/HO runtime, and a six-trajectory N8/12/16 exact-v2 diagnostic pilot from rest to 1/256. Concentrating spatial/force resolution remains unresolved.",
