@@ -415,10 +415,11 @@
   "experimental_combined_integration_evidence": "evidence/p09/final-integration-20260911/summary.json",
   "combined_diagnostic_hosted_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
   "combined_diagnostic_hosted_source": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
-  "execution_pause": {
-    "status": "paused_for_user_hardware_change",
-    "date_utc": "2026-09-12",
-    "resume_requires_user_instruction": true,
+  "execution_window": {
+    "status": "active_two_hour_window",
+    "started_utc": "2026-09-12T07:49:34Z",
+    "hard_stop_utc": "2026-09-12T09:49:34Z",
+    "resumed_after_hardware_change": true,
     "handoff": "evidence/p09/hardware-pause-20260912/README.md",
     "numerical_evidence": "evidence/p10/m96-user-interruption/summary.json",
     "midpoint_comparisons": "evidence/p10/m96-spatial-midpoint-user-pause-def4730/summary.json",
