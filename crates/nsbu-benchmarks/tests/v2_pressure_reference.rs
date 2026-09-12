@@ -21,66 +21,70 @@ fn gauges() -> [ImportedGauge<'static>; 3] {
     [CLOCK0, CLOCK64, CLOCK128].map(|bytes| ImportedGauge::load(bytes, bytes.len()).unwrap())
 }
 
+fn assert_artifact_projection(gauge: ImportedGauge<'_>) {
+    let decoded: serde_json::Value = serde_json::from_slice(gauge.artifact_bytes()).unwrap();
+    let rows = decoded["estimates"].as_array().unwrap();
+    assert_eq!(gauge.estimates().len(), 10);
+    assert_eq!(gauge.estimates()[0].precision, 80);
+    assert_eq!(gauge.estimates()[5].precision, 120);
+    assert_eq!(
+        (
+            gauge.estimates()[7].axial_panels,
+            gauge.estimates()[7].radial_panels
+        ),
+        (32, 32)
+    );
+    assert_eq!(gauge.changes().precision_differences.len(), 5);
+    for ((typed, binary), raw) in gauge
+        .estimates()
+        .iter()
+        .zip(gauge.binary64_means())
+        .zip(rows)
+    {
+        assert_eq!(
+            typed.axial_panels,
+            raw["axial_panels"].as_u64().unwrap() as usize
+        );
+        assert_eq!(
+            typed.radial_panels,
+            raw["radial_squared_panels"].as_u64().unwrap() as usize
+        );
+        assert_eq!(typed.precision, raw["precision"].as_u64().unwrap() as usize);
+        assert_eq!(typed.raw_mean, raw["mean"].as_str().unwrap());
+        assert_eq!(
+            binary.to_bits(),
+            typed.raw_mean.parse::<f64>().unwrap().to_bits()
+        );
+    }
+    assert_eq!(
+        gauge.changes().finest_mean,
+        decoded["changes"]["finest_mean"].as_str().unwrap()
+    );
+    assert_eq!(gauge.estimates()[7].raw_mean, gauge.changes().finest_mean);
+    let changes = gauge.changes();
+    for (typed, key) in [
+        (changes.coarse_to_middle, "coarse_to_middle"),
+        (changes.middle_to_fine, "middle_to_fine"),
+        (changes.axial_only_to_fine, "axial_only_to_fine"),
+        (changes.radial_only_to_fine, "radial_only_to_fine"),
+    ] {
+        assert_eq!(typed, decoded["changes"][key].as_str().unwrap());
+    }
+    for (typed, raw) in changes.precision_differences.iter().zip(
+        decoded["changes"]["precision_differences"]
+            .as_array()
+            .unwrap(),
+    ) {
+        assert_eq!(*typed, raw.as_str().unwrap());
+    }
+}
+
 #[test]
 fn exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes() {
     let imported = gauges();
     assert_eq!(imported.map(|gauge| gauge.clock().elapsed()), [0, 64, 128]);
     for gauge in imported {
-        let decoded: serde_json::Value = serde_json::from_slice(gauge.artifact_bytes()).unwrap();
-        let rows = decoded["estimates"].as_array().unwrap();
-        assert_eq!(gauge.estimates().len(), 10);
-        assert_eq!(gauge.estimates()[0].precision, 80);
-        assert_eq!(gauge.estimates()[5].precision, 120);
-        assert_eq!(
-            (
-                gauge.estimates()[7].axial_panels,
-                gauge.estimates()[7].radial_panels
-            ),
-            (32, 32)
-        );
-        assert_eq!(gauge.changes().precision_differences.len(), 5);
-        for ((typed, binary), raw) in gauge
-            .estimates()
-            .iter()
-            .zip(gauge.binary64_means())
-            .zip(rows)
-        {
-            assert_eq!(
-                typed.axial_panels,
-                raw["axial_panels"].as_u64().unwrap() as usize
-            );
-            assert_eq!(
-                typed.radial_panels,
-                raw["radial_squared_panels"].as_u64().unwrap() as usize
-            );
-            assert_eq!(typed.precision, raw["precision"].as_u64().unwrap() as usize);
-            assert_eq!(typed.raw_mean, raw["mean"].as_str().unwrap());
-            assert_eq!(
-                binary.to_bits(),
-                typed.raw_mean.parse::<f64>().unwrap().to_bits()
-            );
-        }
-        assert_eq!(
-            gauge.changes().finest_mean,
-            decoded["changes"]["finest_mean"].as_str().unwrap()
-        );
-        assert_eq!(gauge.estimates()[7].raw_mean, gauge.changes().finest_mean);
-        let changes = gauge.changes();
-        for (typed, key) in [
-            (changes.coarse_to_middle, "coarse_to_middle"),
-            (changes.middle_to_fine, "middle_to_fine"),
-            (changes.axial_only_to_fine, "axial_only_to_fine"),
-            (changes.radial_only_to_fine, "radial_only_to_fine"),
-        ] {
-            assert_eq!(typed, decoded["changes"][key].as_str().unwrap());
-        }
-        for (typed, raw) in changes.precision_differences.iter().zip(
-            decoded["changes"]["precision_differences"]
-                .as_array()
-                .unwrap(),
-        ) {
-            assert_eq!(*typed, raw.as_str().unwrap());
-        }
+        assert_artifact_projection(gauge);
     }
     assert_eq!(imported[0].mean().to_bits(), 0.0f64.to_bits());
     assert!(imported[1].mean() < 0.0);

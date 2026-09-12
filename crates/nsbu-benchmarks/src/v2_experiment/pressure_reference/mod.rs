@@ -35,6 +35,8 @@ pub struct PressureReferenceWork {
     pub reference_evaluations: usize,
     /// Conservative analytical root-iteration allowance.
     pub root_iterations: usize,
+    /// Original-force provider work units.
+    pub provider_work_units: usize,
     /// Force and pressure sampling transforms.
     pub scalar_transforms: usize,
     /// Conservative coefficient, sample and reduction visits.
@@ -46,6 +48,7 @@ impl PressureReferenceWork {
             attempts: count,
             reference_evaluations: mul(self.reference_evaluations, count)?,
             root_iterations: mul(self.root_iterations, count)?,
+            provider_work_units: mul(self.provider_work_units, count)?,
             scalar_transforms: mul(self.scalar_transforms, count)?,
             weighted_visits: mul(self.weighted_visits, count)?,
         })
@@ -152,6 +155,7 @@ impl<'a> PressureReferenceWorkspace<'a> {
         self.charged.attempts += 1;
         self.charged.reference_evaluations += self.plan.per_attempt.reference_evaluations;
         self.charged.root_iterations += self.plan.per_attempt.root_iterations;
+        self.charged.provider_work_units += self.plan.per_attempt.provider_work_units;
         self.charged.scalar_transforms += self.plan.per_attempt.scalar_transforms;
         self.charged.weighted_visits += self.plan.per_attempt.weighted_visits;
         Ok(())
@@ -179,11 +183,14 @@ impl<'a> PressureReferenceWorkspace<'a> {
         })
     }
     fn evaluate_force(&mut self, clock: TickClock) -> Result<(), SolverError> {
-        self.provider.evaluate(
-            clock,
-            self.plan.pressure.provider_limits(),
-            self.force.each_mut().map(Vec::as_mut_slice),
-        )?;
+        let limits = self.plan.pressure.provider_limits();
+        let work =
+            self.provider
+                .evaluate(clock, limits, self.force.each_mut().map(Vec::as_mut_slice))?;
+        if work.work_units > limits.work_units || work.scalar_transforms > limits.scalar_transforms
+        {
+            return Err(SolverError::ProviderBudgetExceeded);
+        }
         Ok(())
     }
     fn evaluate_reference(&mut self, clock: TickClock, mean: f64) -> Result<(), SolverError> {

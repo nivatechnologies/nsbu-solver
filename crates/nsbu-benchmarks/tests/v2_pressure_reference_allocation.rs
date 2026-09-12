@@ -42,12 +42,13 @@ fn main() {
     assert_eq!(change.allocations, 0);
     assert_eq!(change.deallocations, 0);
     eprintln!(
-        "pressure reference construction_bytes={} consumer_bytes={} joint_bytes={} hash_bytes={} reference_evaluations={} transforms={} steady_allocations={}",
+        "pressure reference construction_bytes={} consumer_bytes={} joint_bytes={} hash_bytes={} reference_evaluations={} provider_work={} transforms={} steady_allocations={}",
         construction_change.bytes_allocated,
         bounds.storage_bytes,
         bounds.joint_storage_bytes,
         bounds.imported_gauge_hash_bytes,
         workspace.charged_work().reference_evaluations,
+        workspace.charged_work().provider_work_units,
         workspace.charged_work().scalar_transforms,
         change.allocations
     );

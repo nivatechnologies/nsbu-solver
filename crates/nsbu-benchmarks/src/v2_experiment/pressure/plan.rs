@@ -147,6 +147,9 @@ impl<'a> PressureFamilyPlan<'a> {
     pub(crate) fn provider_limits(self) -> nsbu_solver::integrators::forcing::ForceLimits {
         self.provider_limits
     }
+    pub(crate) fn per_attempt_work(self) -> PressureFamilyWork {
+        self.per_attempt
+    }
 }
 fn storage(
     source: Domain,

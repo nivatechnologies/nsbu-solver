@@ -26,7 +26,6 @@ impl<'a> PressureReferencePlan<'a> {
     ) -> Result<Self, FamilyError> {
         require_gauges(family, gauges)?;
         let pressure = PressureFamilyPlan::new(family, samples, floors, 3, joint_cap)?;
-        let diagnostic = pressure.diagnostic_domain();
         let points = samples.real_len();
         let storage_bytes = reservation(pressure)?;
         let joint_storage_bytes = family
@@ -42,25 +41,27 @@ impl<'a> PressureReferencePlan<'a> {
                 .checked_add(gauge.artifact_bytes().len())
                 .ok_or(SolverError::SizeOverflow)
         })?;
+        // The existing pressure visit envelope covers ten constructions plus all
+        // pair comparisons, conservatively exceeding this consumer's six.
+        let pressure_work = pressure.per_attempt_work();
+        let provider = pressure.provider_limits();
         let per_attempt = PressureReferenceWork {
             attempts: 1,
             reference_evaluations: points,
             root_iterations: points.checked_mul(128).ok_or(SolverError::SizeOverflow)?,
-            scalar_transforms: pressure
-                .force_settings()
-                .limits(diagnostic)?
+            provider_work_units: provider.work_units,
+            scalar_transforms: provider
                 .scalar_transforms
-                .checked_add(6 * 4)
+                .checked_add(6 * 9)
+                .and_then(|n| n.checked_add(6 * 4))
                 .ok_or(SolverError::SizeOverflow)?,
-            weighted_visits: points
-                .checked_mul(6 * 16 + 64)
-                .and_then(|n| {
-                    diagnostic
-                        .layout()
-                        .half_len()
-                        .checked_mul(6 * 64)
-                        .and_then(|modal| n.checked_add(modal))
-                })
+            weighted_visits: pressure_work
+                .weighted_visits
+                .checked_add(
+                    points
+                        .checked_mul(6 * 16 + 64)
+                        .ok_or(SolverError::SizeOverflow)?,
+                )
                 .ok_or(SolverError::SizeOverflow)?,
         };
         let work = per_attempt.scale(3)?;

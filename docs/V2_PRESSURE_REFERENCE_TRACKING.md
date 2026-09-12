@@ -39,7 +39,11 @@ The Rust plan explicitly reserves every owned complex field, real scratch vector
 `ReferenceEvaluation` cache entry, FFT/derivative/conservative workspace,
 original-force provider, vector header, report, and allocator allowance. Imported
 artifact hashing is one-time caller work retained separately from the per-attempt
-numerical ledger. The startup allocation test measures construction against that
+numerical ledger. That ledger includes provider work, all six conservative
+pressure constructions, all derivative transforms and a conservative visit
+envelope inherited from the larger ten-construction pressure-pair consumer; as
+elsewhere, weighted visits exclude internal FFT butterfly accounting. The
+startup allocation test measures construction against that
 consumer reservation and observes zero steady allocations for a complete rest
 report.
 
