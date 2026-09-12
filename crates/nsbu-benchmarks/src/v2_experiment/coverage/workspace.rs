@@ -139,20 +139,9 @@ impl<'a> CoverageFamilyWorkspace<'a> {
         family: &V2Family<'_>,
         regional: RegionalTrackingSample,
     ) -> Result<TickClock, FamilyError> {
-        let clock = self.next_time().ok_or(FamilyError::InvalidFamily)?;
-        if family.plan().identity() != self.plan.family.identity()
-            || regional.clock() != clock
-            || regional.identity() != self.plan.family.identity()
-        {
+        let clock = self.plan.family.require_sample(family, self.next)?;
+        if regional.clock() != clock || regional.identity() != self.plan.family.identity() {
             return Err(FamilyError::InvalidFamily);
-        }
-        for index in 0..6 {
-            if family
-                .branch(index)
-                .is_none_or(|run| run.state().clock() != clock)
-            {
-                return Err(FamilyError::InvalidFamily);
-            }
         }
         Ok(clock)
     }

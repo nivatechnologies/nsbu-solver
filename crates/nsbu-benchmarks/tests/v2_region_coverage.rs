@@ -80,6 +80,21 @@ fn actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state() {
 }
 
 #[test]
+fn fresh_unpublished_family_rejects_a_legitimate_same_plan_report() {
+    let times = clocks();
+    let (family_plan, regional_plan, coverage_plan) = plans(&times);
+    let fresh = V2Family::new(family_plan).unwrap();
+    let mut published = V2Family::new(family_plan).unwrap();
+    let mut regional = RegionalTrackingWorkspace::new(regional_plan).unwrap();
+    let mut coverage = CoverageFamilyWorkspace::new(coverage_plan);
+    published.advance().unwrap();
+    let report = regional.measure(&published).unwrap();
+    assert!(coverage.measure(&fresh, report).is_err());
+    assert!(coverage.last_report().is_none());
+    assert_eq!(coverage.charged_work().attempts, 1);
+}
+
+#[test]
 fn admission_requires_nested_panels_and_joint_cap() {
     let times = clocks();
     let family =
