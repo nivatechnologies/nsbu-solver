@@ -37,11 +37,12 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Released source def4730b08025fdd06e7a8a0d78116aea24b6e2c passed both full hosted workflows. Rust coverage 97.5760% lines / 86.8007% branches, CRAP24.0586; Python99.1617% lines / 97.5248% branches, CRAP20. Later development requires its own combined gates; zero accepted concentrating windows.",
+    "latest_hosted_ci_status": "Source def4730b08025fdd06e7a8a0d78116aea24b6e2c passed both full hosted workflows on main. Rust coverage is 97.5760% lines/86.8007% branches with maximum CRAP 24.0586; Python coverage is 99.1617% lines/97.5248% branches with maximum CRAP 20.0. No concentrating PDE window is accepted.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Main runtime/cache/diagnostic source passed full hosted gates and was released as alpha-20260912. Newer development diagnostics have separately recorded focused evidence; combined validation remains pending. P08/P09/P10 incomplete.",
-      "evidence": "evidence/p09/hosted-main-def4730/summary.json"
+      "status": "Main source def4730 passed both source-matched hosted workflows; later development increments remain separately scoped.",
+      "evidence": "evidence/p09/hosted-main-def4730/summary.json",
+      "additional_evidence": "evidence/runtime-alpha/alpha-20260912/summary.json"
     },
     "latest_hosted_quality_evidence": "evidence/p09/hosted-main-def4730/summary.json",
     "latest_local_python_evidence": "evidence/p09/python-combined-local-20260911/summary.json",
@@ -281,7 +282,7 @@
   },
   "alpha_release": {
     "ready": true,
-    "status": "alpha-20260912 published from exact main source def4730 after both full hosted suites passed; independently downloaded source inventory, CM/HO, cache and checkpoint/resume checks passed.",
+    "status": "Alpha 0.1.0-alpha.1 alpha-20260912 published from source-matched passing hosted suites; independently downloaded archive, CM/HO, checkpoint/resume and cache controls passed; zero accepted concentrating PDE windows.",
     "cadence": "Daily prereleases after first alpha, containing new verified changes; continue correctness and optimization toward stability.",
     "accepted_concentrating_windows": 0,
     "scientific_qualification_separate": true,
