@@ -91,8 +91,18 @@ git fetch --no-tags origin \
 git checkout --detach refs/remotes/origin/codex/evidence-sources-20260912
 test "$(git rev-parse HEAD^{tree})" = \
   "$(git rev-parse def4730b08025fdd06e7a8a0d78116aea24b6e2c^{tree})"
-git show HEAD:evidence/p09/source-history-20260912/summary.json
+git show HEAD:evidence/p09/v2-attempt-force-cache/summary.json
+SOURCE_SHA=9836cfc9f3b13a6f3df39865bd016d17e6bc1e85
+git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+git checkout --detach "$SOURCE_SHA"
+git show --stat --oneline "$SOURCE_SHA"
+git show "$SOURCE_SHA":crates/nsbu-benchmarks/src/runtime_force/attempt_cache.rs | sed -n '1,40p'
 ```
+
+The archive tree is deliberately the `def4730b` tree, so the explicit `git show`
+above inspects an evidence file present in that exact tree before checking out a
+retained source revision. The source checkout then shows the actual focused
+implementation file associated with `SOURCE_SHA`.
 
 A source ZIP created from the exact `def4730b` revision reproduces the same
 tracked files and evidence tree, but it cannot carry Git parent ancestry. Use
