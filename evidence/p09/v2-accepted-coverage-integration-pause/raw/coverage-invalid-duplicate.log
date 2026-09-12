@@ -1,0 +1,23 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 10.97s
+     Running tests/regions.rs (target/llvm-cov-target/debug/deps/regions-eeb770d703cd3841)
+
+running 7 tests
+test declared_panel_and_similarity_boundaries_are_included_correctly ... ok
+test geometric_emptiness_and_late_time_coverage_do_not_depend_on_underflow ... ok
+test invalid_geometry_work_budgets_and_clocks_are_refused ... ok
+test radial_masks_are_invariant_under_transverse_rotations ... ok
+test spherical_masks_do_not_use_the_rounded_smooth_step_value ... ok
+test startup_phase_uses_integer_ticks_even_when_binary64_rounds_onto_the_boundary ... ok
+test volume_fractions_match_independent_high_precision_quadrature ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/v2_diagnostic_coordinator.rs (target/llvm-cov-target/debug/deps/v2_diagnostic_coordinator-ea88727232b84d4e)
+
+running 3 tests
+test failed_child_terminates_without_partial_publication_or_retry_charge ... ok
+test publishes_crossed_consumers_in_one_unqualified_manifest ... 
