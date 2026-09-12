@@ -1,6 +1,7 @@
 //! Imported-gauge identity, global convention and actual all-six pressure tracking.
 use nsbu_benchmarks::{
     fields::reference,
+    runtime_force::ForceSettings,
     time::BenchmarkTime,
     v2_experiment::{
         diagnostic::StartupProfile,
@@ -8,18 +9,83 @@ use nsbu_benchmarks::{
             GaugeError, ImportedGauge, PressureReferencePlan, PressureReferenceSample,
             PressureReferenceWorkspace,
         },
-        FamilyError, V2Family,
+        FamilyError, FamilyPlan, FamilySettings, V2Family,
     },
 };
-use nsbu_solver::domain::{Layout, TickClock};
+use nsbu_solver::{
+    domain::{Layout, SpectralState, TickClock},
+    integrators::indicator::Tolerances,
+    verification::times::TestedTimes,
+};
+use sha2::{Digest, Sha256};
 
 const CAP: usize = 256 * 1024 * 1024;
+const ENDPOINT_CAP: usize = 1024 * 1024 * 1024;
 const CLOCK0: &[u8] = include_bytes!("../data/v2-pressure-gauge/clock0.json");
 const CLOCK64: &[u8] = include_bytes!("../data/v2-pressure-gauge/clock64.json");
 const CLOCK128: &[u8] = include_bytes!("../data/v2-pressure-gauge/clock128.json");
+const CLOCK2048: &[u8] = include_bytes!("../data/v2-pressure-gauge/clock2048.json");
+const CLOCK4096: &[u8] = include_bytes!("../data/v2-pressure-gauge/clock4096.json");
 
 fn gauges() -> [ImportedGauge<'static>; 3] {
     [CLOCK0, CLOCK64, CLOCK128].map(|bytes| ImportedGauge::load(bytes, bytes.len()).unwrap())
+}
+
+fn endpoint_gauges() -> [ImportedGauge<'static>; 3] {
+    [CLOCK0, CLOCK2048, CLOCK4096].map(|bytes| ImportedGauge::load(bytes, bytes.len()).unwrap())
+}
+
+fn endpoint_clocks() -> [TickClock; 3] {
+    [0, 2048, 4096].map(|elapsed| TickClock::restore(-20, 8192, elapsed, 8192 - elapsed).unwrap())
+}
+
+fn endpoint_settings() -> FamilySettings {
+    FamilySettings {
+        grids: [12, 16, 24],
+        steps: [64, 32, 16],
+        force: ForceSettings {
+            samples: Layout::new([24; 3]).unwrap(),
+            workers: 12,
+        },
+        endpoint: 4096,
+        tolerances: Tolerances {
+            absolute: [1e-5, 1e-4],
+            relative: [0.0; 2],
+        },
+        advective_limit: 0.3,
+    }
+}
+
+fn tiny_endpoint_settings() -> FamilySettings {
+    FamilySettings {
+        grids: [4, 8, 12],
+        steps: [128, 64, 32],
+        force: ForceSettings {
+            samples: Layout::new([12; 3]).unwrap(),
+            workers: 0,
+        },
+        endpoint: 4096,
+        tolerances: Tolerances {
+            absolute: [1e3; 2],
+            relative: [0.0; 2],
+        },
+        advective_limit: 1e3,
+    }
+}
+
+fn state_hash(state: &SpectralState) -> [u8; 32] {
+    let mut digest = Sha256::new();
+    for component in 0..3 {
+        for value in state.component(component).unwrap() {
+            digest.update(value.re.to_bits().to_le_bytes());
+            digest.update(value.im.to_bits().to_le_bytes());
+        }
+    }
+    digest.finalize().into()
+}
+
+fn family_hashes(family: &V2Family<'_>) -> [[u8; 32]; 6] {
+    std::array::from_fn(|branch| state_hash(family.branch(branch).unwrap().state()))
 }
 
 fn assert_artifact_projection(gauge: ImportedGauge<'_>) {
@@ -28,12 +94,13 @@ fn assert_artifact_projection(gauge: ImportedGauge<'_>) {
     assert_eq!(gauge.estimates().len(), 10);
     assert_eq!(gauge.estimates()[0].precision, 80);
     assert_eq!(gauge.estimates()[5].precision, 120);
+    let finest = 4 * gauge.estimates()[0].axial_panels;
     assert_eq!(
         (
             gauge.estimates()[7].axial_panels,
             gauge.estimates()[7].radial_panels
         ),
-        (32, 32)
+        (finest, finest)
     );
     assert_eq!(gauge.changes().precision_differences.len(), 5);
     for ((typed, binary), raw) in gauge
@@ -90,6 +157,18 @@ fn exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes() {
     assert_eq!(imported[0].mean().to_bits(), 0.0f64.to_bits());
     assert!(imported[1].mean() < 0.0);
     assert!(imported[2].mean() < imported[1].mean());
+    let endpoint = endpoint_gauges();
+    assert_eq!(
+        endpoint.map(|gauge| gauge.clock().elapsed()),
+        [0, 2048, 4096]
+    );
+    for gauge in endpoint {
+        assert_artifact_projection(gauge);
+        if gauge.clock().elapsed() > 0 {
+            assert_eq!(gauge.estimates()[0].axial_panels, 32);
+            assert_eq!(gauge.estimates()[7].radial_panels, 128);
+        }
+    }
 
     assert_eq!(
         ImportedGauge::load(CLOCK64, CLOCK64.len() - 1).unwrap_err(),
@@ -100,6 +179,13 @@ fn exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes() {
     changed[last] ^= 1;
     assert_eq!(
         ImportedGauge::load(&changed, changed.len()).unwrap_err(),
+        GaugeError::InvalidArtifact
+    );
+    let mut changed_endpoint = CLOCK2048.to_vec();
+    let middle = changed_endpoint.len() / 2;
+    changed_endpoint[middle] ^= 1;
+    assert_eq!(
+        ImportedGauge::load(&changed_endpoint, changed_endpoint.len()).unwrap_err(),
         GaugeError::InvalidArtifact
     );
 }
@@ -130,11 +216,13 @@ fn assert_actual_sample(
     sample: PressureReferenceSample<'_>,
     expected: u128,
     family_identity: [u8; 32],
+    sample_grid: usize,
+    force_grid: usize,
 ) {
     assert_eq!(sample.clock().elapsed(), expected);
     assert_eq!(sample.family_identity(), family_identity);
-    assert_eq!(sample.sample_layout().dimensions(), [24; 3]);
-    assert_eq!(sample.force_layout().dimensions(), [24; 3]);
+    assert_eq!(sample.sample_layout().dimensions(), [sample_grid; 3]);
+    assert_eq!(sample.force_layout().dimensions(), [force_grid; 3]);
     assert_eq!(sample.gauge().clock(), sample.clock());
     eprintln!(
         "clock={expected} branch2_pressure_rms={} branch2_gradient_rms={}",
@@ -178,13 +266,92 @@ fn actual_accepted_states_publish_all_six_only_after_complete_measurement() {
     for expected in [0, 64, 128] {
         family.advance().unwrap();
         let sample = workspace.measure(&family).unwrap();
-        assert_actual_sample(sample, expected, family_plan.identity());
+        assert_actual_sample(sample, expected, family_plan.identity(), 24, 24);
     }
     assert_eq!(workspace.remaining(), 0);
     assert!(matches!(
         workspace.measure(&family),
         Err(FamilyError::Numerical(_))
     ));
+}
+
+#[test]
+fn reviewed_endpoint_schedule_admits_and_measures_only_the_rest_state() {
+    let clocks = endpoint_clocks();
+    let family = FamilyPlan::new(
+        endpoint_settings(),
+        TestedTimes::new(&clocks, clocks.len()).unwrap(),
+        ENDPOINT_CAP,
+    )
+    .unwrap();
+    let plan = PressureReferencePlan::new(
+        family,
+        endpoint_gauges(),
+        Layout::new([48; 3]).unwrap(),
+        [1e-8, 1e-7],
+        ENDPOINT_CAP,
+    )
+    .unwrap();
+    assert_eq!(
+        plan.gauges().map(|gauge| gauge.clock().elapsed()),
+        [0, 2048, 4096]
+    );
+    assert_eq!(plan.sample_layout().dimensions(), [48; 3]);
+    assert_eq!(plan.force_layout().dimensions(), [48; 3]);
+
+    let mut states = V2Family::new(family).unwrap();
+    let mut reference = PressureReferenceWorkspace::new(plan).unwrap();
+    states.advance().unwrap();
+    let sample = reference.measure(&states).unwrap();
+    assert_actual_sample(sample, 0, family.identity(), 48, 48);
+
+    let mut reordered = endpoint_gauges();
+    reordered.swap(1, 2);
+    assert!(PressureReferencePlan::new(
+        family,
+        reordered,
+        Layout::new([48; 3]).unwrap(),
+        [1e-8, 1e-7],
+        ENDPOINT_CAP,
+    )
+    .is_err());
+    assert!(PressureReferencePlan::new(
+        family,
+        gauges(),
+        Layout::new([48; 3]).unwrap(),
+        [1e-8, 1e-7],
+        ENDPOINT_CAP,
+    )
+    .is_err());
+}
+
+#[test]
+fn midpoint_gauge_measures_tiny_nonzero_states_without_mutation() {
+    let clocks = endpoint_clocks();
+    let family = FamilyPlan::new(
+        tiny_endpoint_settings(),
+        TestedTimes::new(&clocks, clocks.len()).unwrap(),
+        ENDPOINT_CAP,
+    )
+    .unwrap();
+    let plan = PressureReferencePlan::new(
+        family,
+        endpoint_gauges(),
+        Layout::new([24; 3]).unwrap(),
+        [1e-8, 1e-7],
+        ENDPOINT_CAP,
+    )
+    .unwrap();
+    let mut states = V2Family::new(family).unwrap();
+    let mut reference = PressureReferenceWorkspace::new(plan).unwrap();
+    for expected in [0, 2048] {
+        states.advance().unwrap();
+        let before = family_hashes(&states);
+        let sample = reference.measure(&states).unwrap();
+        assert_actual_sample(sample, expected, family.identity(), 24, 24);
+        assert_eq!(sample.gauge().clock().elapsed(), expected);
+        assert_eq!(before, family_hashes(&states));
+    }
 }
 
 #[test]

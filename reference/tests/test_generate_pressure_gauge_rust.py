@@ -16,7 +16,7 @@ from tools.json_types import Json, array_value, decode, object_value
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACTS = [
     ROOT / "crates/nsbu-benchmarks/data/v2-pressure-gauge" / f"clock{clock}.json"
-    for clock in (0, 64, 128)
+    for clock in (0, 64, 128, 2048, 4096)
 ]
 GENERATED = (
     ROOT / "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/gauge_data.rs"
@@ -58,7 +58,13 @@ def test_malformed_shape_time_and_scalar_types_refuse() -> None:
         report["profiles"] = profiles
         changed = directory / "clock.json"
         changed.write_text(json.dumps(report))
-        with pytest.raises(KeyError):
+        with pytest.raises(ValueError, match="unsupported exact clock"):
+            emit_one(0, changed)
+        profiles[0]["time"] = "1/16384"
+        profiles[0]["domain"] = "different domain"
+        report["profiles"] = profiles
+        changed.write_text(json.dumps(report))
+        with pytest.raises(ValueError, match="profile convention mismatch"):
             emit_one(0, changed)
     with pytest.raises(ValueError):
         integer(True)
