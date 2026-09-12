@@ -1,0 +1,12 @@
+[package]
+name = "p10-force-grid-ranking"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+sha2 = "=0.10.9"
