@@ -56,13 +56,14 @@ retaining zero mode, gives `P(delta f)` L2 `1.3175466287891247`, H1
 
 The ranking-only Stokes response at `T=4096/2^20=1/256` gives L2
 `9.108013397637507e-7` and H1 `1.0809685444601123e-3`. It applies
-`(1-exp(-|k|^2*T))/|k|^2` to `P(delta f)`, with zero-mode factor `T`.
+`(1-exp(-|k|^2*T))/|k|^2` to `P(delta f)`, with zero-mode factor `T`. The H1
+proxy is 14.2% of the allocated absolute force budget.
 
-This two-grid result favors M512 over M384 for the next N384 pilot: raw
-H1/fine-H1 is about 0.518%, and the projected difference retains H1
-`1.6409822421544059e3`. It does not establish that M512 is sufficient. M768 was
-not run because the approved pair gives a clear ranking and further work needs
-root review.
+This ranking supports M384 as the cheap feasibility baseline and M512 as its
+refinement partner for a future N384 pilot. The raw H1/fine-H1 change is about
+0.518%, while the Stokes-response H1 proxy consumes 14.2% of the allocated
+absolute force budget. It does not establish that either grid is sufficient or
+qualify a trajectory. M768 was not run because further work needs root review.
 
 Exact commands and raw console/time output are in `summary.json` and `logs/`.
 The untracked raw archive is
