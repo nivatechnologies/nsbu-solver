@@ -71,6 +71,8 @@ fn actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state() {
     assert!(coverage.measure(&family, report).is_err());
     assert_eq!(coverage.last_report().unwrap().clock(), times[0]);
     assert_eq!(coverage.charged_work().attempts, 2);
+    assert!(coverage.measure(&family, report).is_err());
+    assert_eq!(coverage.charged_work().attempts, 2);
 
     let foreign =
         FamilyPlan::new(settings(2e-5), TestedTimes::new(&times, 3).unwrap(), CAP).unwrap();
