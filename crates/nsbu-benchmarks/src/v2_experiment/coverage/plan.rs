@@ -18,9 +18,9 @@ pub struct CoverageFamilyWork {
 /// Family and coverage-consumer reservation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CoverageFamilyBounds {
-    /// Consumer storage, including pending and last report; excludes caller regional workspace.
+    /// Consumer storage, including pending and last report.
     pub storage_bytes: usize,
-    /// Family plus this consumer storage; compose a caller-owned regional workspace separately.
+    /// Joint family, regional-tracking, and consumer storage reservation.
     pub joint_storage_bytes: usize,
     /// Maximum work across all admitted attempts.
     pub work: CoverageFamilyWork,

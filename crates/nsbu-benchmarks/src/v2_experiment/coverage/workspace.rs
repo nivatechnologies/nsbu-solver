@@ -104,24 +104,8 @@ impl<'a> CoverageFamilyWorkspace<'a> {
         family: &V2Family<'_>,
         regional: RegionalTrackingSample,
     ) -> Result<CoverageFamilySample, CoverageFamilyError> {
-        let clock = self.next_time().ok_or(FamilyError::InvalidFamily)?;
-        if family.plan().identity() != self.plan.family.identity()
-            || regional.clock() != clock
-            || regional.identity() != self.plan.family.identity()
-            || (0..6).any(|index| {
-                family
-                    .branch(index)
-                    .is_none_or(|run| run.state().clock() != clock)
-            })
-        {
-            return Err(FamilyError::InvalidFamily.into());
-        }
-        if regional.sample_layout() != self.plan.regional_samples
-            || regional.relative_floors().map(f64::to_bits)
-                != self.plan.regional_floors.map(f64::to_bits)
-        {
-            return Err(FamilyError::InvalidFamily.into());
-        }
+        let clock = self.validate_accepted_state(family, regional)?;
+        self.validate_regional_policy(regional)?;
         let sampling = metadata(regional, clock, self.plan.regional_floors)?;
         let core = self
             .plan
@@ -150,6 +134,40 @@ impl<'a> CoverageFamilyWorkspace<'a> {
             sampling,
         ))
     }
+    fn validate_accepted_state(
+        &self,
+        family: &V2Family<'_>,
+        regional: RegionalTrackingSample,
+    ) -> Result<TickClock, FamilyError> {
+        let clock = self.next_time().ok_or(FamilyError::InvalidFamily)?;
+        if family.plan().identity() != self.plan.family.identity()
+            || regional.clock() != clock
+            || regional.identity() != self.plan.family.identity()
+        {
+            return Err(FamilyError::InvalidFamily);
+        }
+        for index in 0..6 {
+            if family
+                .branch(index)
+                .is_none_or(|run| run.state().clock() != clock)
+            {
+                return Err(FamilyError::InvalidFamily);
+            }
+        }
+        Ok(clock)
+    }
+    fn validate_regional_policy(
+        &self,
+        regional: RegionalTrackingSample,
+    ) -> Result<(), FamilyError> {
+        if regional.sample_layout() != self.plan.regional_samples
+            || regional.relative_floors().map(f64::to_bits)
+                != self.plan.regional_floors.map(f64::to_bits)
+        {
+            return Err(FamilyError::InvalidFamily);
+        }
+        Ok(())
+    }
 }
 fn metadata(
     regional: RegionalTrackingSample,
@@ -160,53 +178,17 @@ fn metadata(
     let points = layout.real_len();
     let mut core = [None; 24];
     let mut annulus = [None; 24];
-    let mut expected_region_counts: Option<[Option<usize>; 5]> = None;
+    let mut expected_region_counts = None;
     for (branch_index, branch) in regional.branches().iter().enumerate() {
         if branch.branch != branch_index {
             return Err(FamilyError::InvalidFamily);
         }
         for (quantity_index, quantity) in branch.quantities.iter().enumerate() {
-            let report = quantity.regional;
-            if quantity.quantity != QUANTITIES[quantity_index]
-                || report.clock != clock
-                || report.dimensions != layout.dimensions()
-                || !report.grid_complete
-                || report.components != QUANTITIES[quantity_index].components()
-                || report.global != SampledError::Measured(quantity.global)
-                || quantity.global.samples != points
-                || regional.relative_floors().map(f64::to_bits) != floors.map(f64::to_bits)
-            {
-                return Err(FamilyError::InvalidFamily);
-            }
-            let mut count = 0usize;
-            let mut region_counts = [None; 5];
-            let expected_regions = [
-                SpatialRegion::Core,
-                SpatialRegion::Annulus,
-                SpatialRegion::InteriorOutsideNominal,
-                SpatialRegion::Collar,
-                SpatialRegion::Exterior,
-            ];
-            for (index, (region, value)) in report.regions.into_iter().enumerate() {
-                if region != expected_regions[index] {
-                    return Err(FamilyError::InvalidFamily);
-                }
-                let samples = sample_count(value);
-                count = count
-                    .checked_add(samples.unwrap_or(0))
-                    .ok_or(SolverError::SizeOverflow)?;
-                region_counts[index] = samples;
-            }
-            if expected_region_counts.is_some_and(|expected| expected != region_counts) {
-                return Err(FamilyError::InvalidFamily);
-            }
-            expected_region_counts.get_or_insert(region_counts);
-            if count != points {
-                return Err(FamilyError::InvalidFamily);
-            }
+            let counts = quantity_region_counts(quantity, quantity_index, clock, layout, points)?;
+            ensure_consistent_counts(&mut expected_region_counts, counts)?;
             let slot = branch_index * 4 + quantity_index;
-            core[slot] = region_counts[0];
-            annulus[slot] = region_counts[1];
+            core[slot] = counts[0];
+            annulus[slot] = counts[1];
         }
     }
     Ok(CoverageSamplingMetadata {
@@ -216,6 +198,67 @@ fn metadata(
         sampled_core: core,
         sampled_annulus: annulus,
     })
+}
+
+fn quantity_region_counts(
+    quantity: &crate::v2_experiment::reference::regional::RegionalTrackingQuantity,
+    quantity_index: usize,
+    clock: TickClock,
+    layout: nsbu_solver::domain::Layout,
+    points: usize,
+) -> Result<[Option<usize>; 5], FamilyError> {
+    let report = quantity.regional;
+    if quantity.quantity != QUANTITIES[quantity_index]
+        || report.clock != clock
+        || report.dimensions != layout.dimensions()
+        || !report.grid_complete
+        || report.components != QUANTITIES[quantity_index].components()
+        || report.global != SampledError::Measured(quantity.global)
+        || quantity.global.samples != points
+    {
+        return Err(FamilyError::InvalidFamily);
+    }
+    fixed_region_counts(report.regions, points)
+}
+
+fn fixed_region_counts(
+    regions: [(SpatialRegion, SampledError); 5],
+    points: usize,
+) -> Result<[Option<usize>; 5], FamilyError> {
+    let expected = [
+        SpatialRegion::Core,
+        SpatialRegion::Annulus,
+        SpatialRegion::InteriorOutsideNominal,
+        SpatialRegion::Collar,
+        SpatialRegion::Exterior,
+    ];
+    let mut total = 0usize;
+    let mut counts = [None; 5];
+    for (index, (region, value)) in regions.into_iter().enumerate() {
+        if region != expected[index] {
+            return Err(FamilyError::InvalidFamily);
+        }
+        let samples = sample_count(value);
+        total = total
+            .checked_add(samples.unwrap_or(0))
+            .ok_or(SolverError::SizeOverflow)?;
+        counts[index] = samples;
+    }
+    if total != points {
+        return Err(FamilyError::InvalidFamily);
+    }
+    Ok(counts)
+}
+
+fn ensure_consistent_counts(
+    expected: &mut Option<[Option<usize>; 5]>,
+    actual: [Option<usize>; 5],
+) -> Result<(), FamilyError> {
+    if expected.is_some_and(|value| value != actual) {
+        return Err(FamilyError::InvalidFamily);
+    }
+    expected.get_or_insert(actual);
+    Ok(())
 }
 
 fn sample_count(value: SampledError) -> Option<usize> {
