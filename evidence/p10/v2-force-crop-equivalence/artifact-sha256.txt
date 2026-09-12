@@ -1,0 +1,9 @@
+9c2991146fd2e77131338e041126430ad042443f9f15b117bf325372830fdd2d  evidence/p10/v2-force-crop-equivalence/raw/clippy.log.gz
+c37504bd3d2ca4aa74d69e97ad1f229a33a51e62fda24990f23108128547658a  evidence/p10/v2-force-crop-equivalence/raw/coverage-test.log.gz
+801dd82141e146d96cab579c79a7ed6b127e9519ef466f837671851c0501845e  evidence/p10/v2-force-crop-equivalence/raw/coverage.json.gz
+59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2  evidence/p10/v2-force-crop-equivalence/raw/fmt.log.gz
+28fdcaee0d96a939ef599113aa43cafd42bbde27e85d5f683b4e04d186110f75  evidence/p10/v2-force-crop-equivalence/raw/metrics.jsonl.gz
+5a7b80c7980b54def1880373f12343682678e12140bac27674f687d1e7bd1109  evidence/p10/v2-force-crop-equivalence/raw/repository.log.gz
+b696568b4e7c89d49c800636ca50cfb69769aa74fe4ef52f1edc73dce6432397  evidence/p10/v2-force-crop-equivalence/raw/reproduce.sh
+70b80fa774925bd56aa3a6a64476356d5eb656b5ddbc7f0a22f1f2419a378df8  evidence/p10/v2-force-crop-equivalence/raw/rustdoc.log.gz
+bb6ac9a41462286ea90c62f26dd10e20d0cdb85225ba8ba3fb8272757c005a75  evidence/p10/v2-force-crop-equivalence/raw/test.log.gz

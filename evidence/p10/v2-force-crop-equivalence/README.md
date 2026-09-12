@@ -1,0 +1,9 @@
+# Exact-v2 force crop equivalence evidence
+
+Source `91f756dec69c0866b8f08ca6e760dc67836483c5` adds only a focused regression oracle and a design-scope document. It does not add a shared cache or change production arithmetic.
+
+The actual original-force evaluator was run with the same force grid and complete clock against two retained-domain pairs: integration-scale N4/N8 with M16 and doubled-observer-scale N8/N16 with M32. Serial and two-worker providers were exercised at exact rest and at elapsed tick 2047 of target 8192. For each case, an independent signed-mode crop from the larger output matched every real and imaginary binary64 word of a direct smaller-domain evaluation. DC and all target Nyquist locations were checked explicitly; a synthetic signed-mode control independently crosschecked the production transfer.
+
+The focused run passed 3/3 tests in 3.67 seconds. It exercised 250/269 lines (92.94%) and 22/36 branches (61.11%) across the original provider, parallel provider/admission, and spectral transfer implementation. The uncovered branches are refusal paths outside this equivalence test; this report does not present the focused subset as the repository-wide coverage gate. Test binaries are absent from this LLVM source mapping, so changed-test CRAP is conservatively computed with zero coverage: maximum 20. Whole-crate static analysis remains within CC 21, cognitive 21, function Halstead difficulty 60, all-node Halstead difficulty 75.9296, and 477 physical lines per Rust file. The changed test has maximum function CC 4, cognitive 3, Halstead difficulty 29.75, and 195 physical lines.
+
+This proves a prerequisite only for equal original-force sample settings on the exact-v2 unit-cube, unit-viscosity case. It provides no equality across M and 2M, no nonunit-domain claim, no cache ownership semantics, no speedup measurement, and no force-sufficiency or PDE qualification result.

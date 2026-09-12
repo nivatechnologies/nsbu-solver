@@ -1,0 +1,43 @@
+{
+  "base_commit": "d7336c8",
+  "source_commit": "91f756dec69c0866b8f08ca6e760dc67836483c5",
+  "scope": "regression-only exact-v2 original-force retained-domain crop prerequisite",
+  "cases": [
+    {"smaller_retained": 4, "common_retained": 8, "samples": 16},
+    {"smaller_retained": 8, "common_retained": 16, "samples": 32}
+  ],
+  "workers": [0, 2],
+  "clocks": [
+    {"exponent": -20, "target": "8192", "elapsed": "0", "remaining": "8192"},
+    {"exponent": -20, "target": "8192", "elapsed": "2047", "remaining": "6145"}
+  ],
+  "tests": {"passed": 3, "failed": 0, "seconds": 3.67},
+  "focused_production_coverage": {
+    "scope": ["provider.rs", "provider/parallel.rs", "provider/parallel/admission.rs", "spectral/transfer.rs"],
+    "lines": {"covered": 250, "count": 269, "percent": 92.93680297397769},
+    "branches": {"covered": 22, "count": 36, "percent": 61.111111111111114},
+    "qualification": "informational focused subset; not the repository-wide coverage gate"
+  },
+  "quality": {
+    "changed_test_max_function_cc": 4,
+    "changed_test_max_function_cognitive": 3,
+    "changed_test_max_function_halstead_difficulty": 29.75,
+    "changed_test_zero_coverage_crap_maximum": 20,
+    "changed_test_physical_lines": 195,
+    "whole_crates_max_function_cc": 21,
+    "whole_crates_max_function_cognitive": 21,
+    "whole_crates_max_function_halstead_difficulty": 60.0,
+    "whole_crates_max_all_node_halstead_difficulty": 75.9295154185022,
+    "whole_crates_max_rust_file_lines": 477,
+    "fmt": "passed",
+    "focused_clippy": "passed",
+    "strict_package_rustdoc": "passed",
+    "repository_check": "passed"
+  },
+  "limitations": [
+    "No production implementation changed.",
+    "No shared bank, cache, state injection, timing benchmark, or M384 run was performed.",
+    "M and 2M remain distinct numerical settings.",
+    "The exact-v2 provider refuses nonunit lengths and viscosity."
+  ]
+}
