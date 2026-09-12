@@ -266,12 +266,20 @@
   },
   "runtime": {
     "exit_status": 0,
-    "maximum_rss_kib": 28672,
-    "system_seconds": 0.05,
+    "includes_fresh_harness_target_compile": true,
+    "maximum_rss_kib": 369616,
+    "system_seconds": 2.09,
     "timeout_seconds": 900,
-    "user_seconds": 20.57,
-    "wall_seconds": 2.6
+    "user_seconds": 37.08,
+    "wall_seconds": 7.83
   },
   "scope": "prescribed force only; no state, nonlinear product, full RHS, or PDE conclusion",
+  "source_binding": {
+    "frozen_raw": "raw/force-only-frozen.stdout.gz",
+    "frozen_stdout_sha256": "35786e1f0ab8b2fddac9c9526db381cd468dbf8dd1fed7b878ed5e156fb8cd73",
+    "frozen_worktree_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+    "original_main_source_equivalent_raw": "raw/force-only-main-source-equivalent.stdout.gz",
+    "stdout_payloads_identical": true
+  },
   "source_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088"
 }
