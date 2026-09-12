@@ -119,3 +119,7 @@ harness = false
 [[test]]
 name = "v2_pressure_reference_allocation"
 harness = false
+
+[[test]]
+name = "v2_attempt_force_cache_allocation"
+harness = false
