@@ -409,6 +409,7 @@
   "actual_v2_accepted_nominal_coverage_evidence": "evidence/p09/v2-accepted-coverage-integration/summary.json",
   "actual_v2_accepted_nominal_coverage_scope": "Independently evaluated nominal core/annulus geometry is attached to the three actual accepted diagnostic events with exact family/regional-policy binding and bounded transactional publication. Exact-source functional/allocation/static and changed-path CRAP gates pass. Off-stage and collar coverage remain missing; two focused integration targets and the whole-maintained80% gate remain pending hosted validation. UnqualifiedDiagnostic only; zero accepted PDE windows.",
   "additional_hosted_rust_quality_evidence": "evidence/p10/hosted-rust-34666644377/summary.json",
+  "combined_continuation_local_evidence": "evidence/p10/combined-continuation-38e4ddc/summary.json",
   "reference_spectrum_assessments": [
     "evidence/p10/reference-spectrum-first-endpoint-d511dbf/README.md",
     "evidence/p10/reference-spectrum-high-band-9c90c0a/README.md"

@@ -1,0 +1,74 @@
+{
+  "accepted_pde_windows": 0,
+  "claims_pde_qualification": false,
+  "claims_release_readiness": false,
+  "code_identity": {
+    "adapter_paths_unchanged_e83d685_to_eb4e60d": true,
+    "rust_workspace_unchanged_eb4e60d_to_38e4ddc": true
+  },
+  "combined_reruns": {
+    "adapter_allocation": {
+      "construction_bytes": 1965488,
+      "declared_joint_bytes": 2235840,
+      "steady_allocations": 0
+    },
+    "adapter_functional": {
+      "failed": 0,
+      "passed": 3,
+      "seconds": 46.0
+    },
+    "all_target_clippy_ci_policy": "passed",
+    "format": "passed",
+    "nominal_allocation": {
+      "admission_allocations": 0,
+      "construction_bytes": 64022624,
+      "events": 7,
+      "execution_allocations": 0,
+      "joint_bytes": 74750488
+    },
+    "nominal_coordinator": {
+      "failed": 0,
+      "passed": 3,
+      "seconds": 115.35
+    },
+    "nominal_export": {
+      "failed": 0,
+      "passed": 3,
+      "seconds": 104.67
+    },
+    "nominal_region": {
+      "failed": 0,
+      "passed": 3,
+      "seconds": 0.23
+    },
+    "repository_check": "passed"
+  },
+  "pending": [
+    "whole-maintained source-matched hosted line/branch coverage and CRAP",
+    "owned family/slab/CLI shared-force integration",
+    "complete concentrating profile channels and lineage"
+  ],
+  "schema_version": 1,
+  "source_association": {
+    "adapter_combined_rerun": {
+      "commit": "e83d685a17048e90247556ddf28762fb3cdc1a33",
+      "tree": "74e1e79c134c1102300afca79d747570d0171e2f"
+    },
+    "final_static": {
+      "commit": "38e4ddcbe6f4c963da3c6ce5790f99ed0ce6668b",
+      "tree": "6e8e965b52ea40dce3a1f0f6e32da619f6468b35"
+    },
+    "nominal_combined_rerun": {
+      "commit": "eb4e60dad62715239e7a52f04de9ec1e4696ad79",
+      "tree": "aa49e908bdeaaa8724aeddf0424f3898d7dcfe5f"
+    }
+  },
+  "static": {
+    "functions": 4660,
+    "maximum_all_node_halstead_difficulty": 77.46107784431138,
+    "maximum_cognitive": 21.0,
+    "maximum_cyclomatic": 21.0,
+    "maximum_rust_file_lines": 496
+  },
+  "status": "DevelopmentIntegrationValidatedLocally"
+}

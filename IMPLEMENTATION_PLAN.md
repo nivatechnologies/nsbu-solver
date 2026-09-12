@@ -23,8 +23,9 @@ concentrating windows. In this bounded work block:
 2. Connect independent force-family measurements and nominal-region volume
    coverage to the actual-clock physical observables, without substituting
    spectral norms for sampled RMS or node counts for geometric volume.
-3. Admit a genuine nested exact-time review profile with explicit observable
-   semantics, unavailable evidence and bounded required rows.
+3. Bind the admitted nested exact-time review profile to actual producer
+   reports, preserving observable semantics, unavailable evidence and bounded
+   required rows.
 4. Continue the integrated pressure/reference review from the focused standalone
    consumers, preserve the archived derivative-symmetry evidence, and complete
    the source-matched hosted gate before the next combined review.

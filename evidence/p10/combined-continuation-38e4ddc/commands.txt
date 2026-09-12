@@ -1,0 +1,8 @@
+cargo fmt --all -- --check
+cargo test -p nsbu-benchmarks --test v2_shared_force_adapter --locked -- --test-threads=1
+cargo test -p nsbu-benchmarks --test v2_shared_force_adapter_allocation --locked
+cargo test -p nsbu-benchmarks --test v2_region_coverage --test v2_diagnostic_coordinator --test v2_diagnostic_export --locked -- --test-threads=1
+cargo test -p nsbu-benchmarks --test v2_diagnostic_coordinator_allocation --locked
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+python tools/check_repository.py
+rust-code-analysis-cli -p crates -m -O json
