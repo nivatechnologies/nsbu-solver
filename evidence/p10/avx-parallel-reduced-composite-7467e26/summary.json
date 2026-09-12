@@ -1,5 +1,5 @@
 {
-  "status": "absolute_direct_profile_complete_matching_gate_pending",
+  "status": "direct_and_run_structured_startup_profiles_complete",
   "source": "codex/p10-fft-batch-20260912@de6dd09",
   "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
   "arithmetic": "rustfft-6.4.1-avx-avx2-fma",
@@ -38,4 +38,37 @@
   "attempt_cache_included": false,
   "archive_profile": "unsupported",
   "arithmetic_qualification": "missing"
+  ,
+  "cached_observed": {
+    "source": "codex/p10-fft-batch-20260912@727ea3a94a4d",
+    "cap32_status": "refused_before_construction",
+    "cap96_status": "admitted",
+    "reservation_bytes": 50599127160,
+    "maximum_rss_kib": 45166592,
+    "wall_seconds_pair": 512.81,
+    "user_seconds_pair": 7154.00,
+    "attempts": [
+      {
+        "start_state": "rest",
+        "integration_seconds": 106.480354574,
+        "observer_force_seconds": 108.021264631,
+        "observer_conservative_seconds": 15.222498735,
+        "observer_transfer_measure_seconds": 6.122374123,
+        "total_seconds": 235.906006640
+      },
+      {
+        "start_state": "startup-ramp",
+        "integration_seconds": 114.523400105,
+        "observer_force_seconds": 109.173139609,
+        "observer_conservative_seconds": 15.234429025,
+        "observer_transfer_measure_seconds": 5.869542100,
+        "total_seconds": 244.860915315
+      }
+    ],
+    "cache_hits_per_attempt": 7,
+    "cache_misses_per_attempt": 5,
+    "steady_allocations": 0,
+    "matched_speedup": null,
+    "matched_speedup_reason": "available structurally matched baseline was measured on different hardware"
+  }
 }

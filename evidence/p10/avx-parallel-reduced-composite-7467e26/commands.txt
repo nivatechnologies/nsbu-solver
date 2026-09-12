@@ -13,3 +13,15 @@ cargo build --release \
   timeout --signal=TERM --kill-after=30s 3600s \
   target/avx-reduced-composite/release/p10-avx-parallel-reduced-trajectory \
   192 384 32 16 2
+
+target/avx-reduced-composite/release/cached_observed \
+  192 384 32 16 2 preflight32
+
+target/avx-reduced-composite/release/cached_observed \
+  192 384 32 16 2 preflight96
+
+/usr/bin/time -v \
+  -o evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-n192-m384-w32.time \
+  timeout --signal=TERM --kill-after=30s 3600s \
+  target/avx-reduced-composite/release/cached_observed \
+  192 384 32 16 2 run96

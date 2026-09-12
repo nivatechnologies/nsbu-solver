@@ -6,6 +6,10 @@ This isolated harness composes the opt-in RustFFT 6.4.1 AVX/FMA scalar backend w
 therefore one direct 12-RHS attempt, not a complete accepted-step runtime under the current
 cached/observed `Run` policy.
 
+The `cached_observed` binary additionally reproduces the current Run work structure with a
+harness-local five-clock cache and independent doubled-force-grid conservative observer. It still
+does not enter public Run/checkpoint/archive paths.
+
 The binary embeds source identity `codex/p10-fft-batch-20260912@de6dd09`. The separately
 reproducible finite-plan audit at `../avx-fft-storage-audit-7467e26.md` supports the fixed catalog
 accounting reserve on this pinned host/profile. Accelerated trajectory arithmetic remains
@@ -22,6 +26,27 @@ The retained 1126.717 s original N192/M384 measurement used attempt-cached integ
 doubled-grid observer. It is not a matching denominator for this direct/no-observer harness, so
 no composite speedup is reported from that comparison. Independent force-only and FFT-only gains
 also cannot be multiplied into a trajectory claim.
+
+The Run-structured startup pair at source `727ea3a94a4d` measured:
+
+| state entering attempt | cached integration | observer force M768 | conservative FFT | transfer/measure | total |
+|---|---:|---:|---:|---:|---:|
+| exact rest | 106.480354574 s | 108.021264631 s | 15.222498735 s | 6.122374123 s | 235.906006640 s |
+| startup ramp after one h16 step | 114.523400105 s | 109.173139609 s | 15.234429025 s | 5.869542100 s | 244.860915315 s |
+
+Each integration attempt had seven cache hits, five physical misses, 12 RHS calls and 135 scalar
+transforms. Both complete integration-plus-observer regions allocated zero steady-state bytes.
+The pair used 512.81 s wall, 7154.00 s user, 27.37 s system and 45,166,592 KiB maximum RSS.
+The observer was 54.8% and 53.2% of the two step totals; its M768 force alone was 45.8% and 44.6%.
+
+The complete cached-plus-observer reservation is 50,599,127,160 bytes. The normal
+34,359,738,368-byte cap refused before construction, as preserved in the cap32 records. The
+separately identified 103,079,215,104-byte profiling cap admitted it. That profile is a resource
+experiment and does not change the production cap.
+
+The old 1126.717 s result was measured on a Sulaco EPYC 7C13 while this profile ran on a local
+EPYC 7702P under concurrent load, so no cross-host speedup is claimed even for the structurally
+matched cached/observed work.
 
 Each measured attempt made 12 provider requests and charged 156 scalar transforms: 36 provider
 transforms at M384 and 120 rotational-operator transforms at padded layout 288. Both attempts
@@ -46,9 +71,10 @@ capacity measurements and do not establish the requested matched step-reduction 
 At the measured startup-ramp cost, 256 h16 attempts to the first legal endpoint 4096 project to
 51,098.6 s (14.19 h) before observers, retries and I/O. Clock 32 is not representative of the
 later concentrating trajectory, so this is only a scale warning rather than an endpoint estimate.
-The next bounded experiment is the actual five-clock attempt-cache protocol plus the current
-doubled-grid observer at startup; scheduled observation follows only after that combined
-bottleneck is measured. No cached or observed benefit is inferred by scaling the direct result.
+The measured current observer is the largest component. The approved next experiment keeps the
+same cached integration while evaluating the observer only at the immutable nested Simpson nodes
+required by the endpoint protocol. No scheduled benefit is inferred by scaling these two startup
+steps, and clock 32 remains unrepresentative of the concentrating endpoint.
 
 ## Reproduction
 

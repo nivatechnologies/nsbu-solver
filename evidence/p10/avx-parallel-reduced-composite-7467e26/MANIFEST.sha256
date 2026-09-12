@@ -5,3 +5,13 @@ aa72b0e9c5fd3aa70903faf52fb43e0a78db0ef5dae339d0f674e830db2f965c  evidence/p10/a
 7058793565b0b0af70c8994b79d1222bd8dfdc68019506c6d4f0384311aaa78a  evidence/p10/avx-parallel-reduced-composite-7467e26/n64-m192-w32.time
 062eb6c0209d4200e16cb81fa8e6451a89faf9b1894e5e14ad904e68af3da15d  evidence/p10/avx-parallel-reduced-composite-7467e26/n192-m384-w32.stdout
 b7b1b615f7791c31494d8753b2cd1c088218511fdd52802d2c55145a5042f94f  evidence/p10/avx-parallel-reduced-composite-7467e26/n192-m384-w32.time
+ca35b385d647fbb48426c932a480bb412296a753b467e050b46114c6de405fbf  target/avx-reduced-composite/release/cached_observed
+ae3ef2785a1957b38ad7f6634f90753b8dd0f31ba7e4e4f7efaff715c0624981  evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/bin/cached_observed.rs
+f200c26d8d5643b8c011079171e7ac003f43f1017b923f4661042c846a5dd5ff  evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/cache.rs
+693e56cafe3f55801fef9cf98d8b6e9fced15d9b6ff563782e124a1cf7aeabcd  evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/observer.rs
+4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-cap32.status
+762d5b5bba04c4ca2d3b1fc24447f5b6c8e1ed5d2f2e217000c8a4aa1d8f3b93  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-cap32.stdout
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-cap96.status
+f004b3f41028373a31c0a66dcc07b9d3b68a5b646d6bbd0b024551f06ff4c339  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-cap96.stdout
+45f64a86c78818ddeca7f6d165487cdc3acb2121fa9df112cda356a21bea7c80  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-n192-m384-w32.stdout
+b9f69fae9e5685eeaf5cf09737bdee2daea835cd979a490313427ba441972586  evidence/p10/avx-parallel-reduced-composite-7467e26/cached-observed-n192-m384-w32.time
