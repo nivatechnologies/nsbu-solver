@@ -26,10 +26,15 @@ construct pressure or choose a gauge.
 
 The workspace uses the domain's actual lengths in `ik`, visits the complete
 strict retained band, zero-pads onto a componentwise equal or finer grid and
-performs one scalar inverse FFT per call. It does not project, remove a mean,
-recenter or align a field. Nyquist, finite-value and Hermitian admission follow
-the same spectrum contract as committed states. Retaining additional high modes
-cannot silently turn the primary comparison into a common-band comparison.
+performs one scalar inverse FFT per call. It first applies the unchanged strict
+Nyquist, finite-value and Hermitian admission used by committed states. In private
+staging scratch only, it then averages each admitted self-conjugate-plane pair and
+writes its partner as an exact conjugate before applying `ik`. This is the
+Hermitian projection of admitted roundoff, equivalent to differentiating the real
+part of the full signed Fourier sum; it does not modify or repair an input that
+failed admission. The workspace does not project onto a divergence-free field,
+remove a mean, recenter or align a field. Retaining additional high modes cannot
+silently turn the primary comparison into a common-band comparison.
 
 ```rust
 use nsbu_solver::{
