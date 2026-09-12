@@ -15,9 +15,11 @@ The catalog reservation charges 1 MiB plus 64 allocator/header bytes for each of
 length/direction plans, plus every catalog entry. At the largest admitted length, 1 MiB is more
 than 42 complete 1536-element complex vectors per direction. This bound is deliberately much
 larger than the spike's measured retained planner allocation; the measurement is not used as a
-production preflight guarantee. RustFFT does not expose the allocation size of its opaque plan
-graph, so this remains a conservative accounting allowance rather than an audited or
-allocator-enforced proof.
+production preflight guarantee. The pinned finite-catalog source audit and allocator measurement
+in `evidence/p10/avx-fft-storage-audit-7467e26.md` found 204,544 retained requested bytes and
+207,860 total requested construction bytes. The 29,362,480-byte reserve is therefore a tested
+fixed accounting allowance for this version, target, allocator, recipe order and length table.
+It is not an allocator-enforced or portable proof; any change to those inputs requires a rerun.
 
 Each scalar workspace separately charges its retained half-grid, one input row, one output row,
 four maximum-length scratch rows, the fixed plan/workspace objects, a boxed six-plan `Arc` header,
