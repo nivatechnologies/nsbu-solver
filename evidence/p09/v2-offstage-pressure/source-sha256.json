@@ -1,0 +1,66 @@
+{
+  "base_commit": "d33422ea8e9590af63f45157dfacada31f255bbe",
+  "measurement_source_commit": "d687b585d324699a484e15a91581e41977392007",
+  "files": [
+    {
+      "path": "crates/nsbu-benchmarks/Cargo.toml",
+      "bytes": 2357,
+      "sha256": "62d37ee32f8f511e5bff04606f31066fdd2feabff3beba88e5b1488a465df9e2"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs",
+      "bytes": 8362,
+      "sha256": "2ef21308b1cdb8f64518c6a049de8e80e35982833e2ff94293ab36d2db9fd10a"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/mod.rs",
+      "bytes": 299,
+      "sha256": "7b0497919c7a550c1074edb383ca7d3fb2a68bda6c5d3bb3b47ba445cf233358"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/plan.rs",
+      "bytes": 7618,
+      "sha256": "e271f04c421a2ca93786afbb830400eaf8c5fdf9f039ab5892a2a29a99cb7120"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/report.rs",
+      "bytes": 2643,
+      "sha256": "e63cf09034cb39172c8f13a6420205f266a3b1372aa7c3ae49c91598ab338529"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/workspace.rs",
+      "bytes": 9672,
+      "sha256": "bd0bf0a91623b25db508d2f4cecd1cc9727b8e354e970d0abde43f62afccd02c"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_probe_pressure.rs",
+      "bytes": 9204,
+      "sha256": "26f8066dad34fcce5d0b0218e194a70b10716945ade970ba9a8d366ae7960bf5"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_allocation.rs",
+      "bytes": 2137,
+      "sha256": "4a1279d803ff557b654dce7bdd737c216385a374a911ece1b74095a0e7bc9ffd"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_oracle.rs",
+      "bytes": 4862,
+      "sha256": "5f8d05f787e4036da9fc34db4ec6d83e6ad9141a355fbf8d54538e56f2163a7c"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_oracle/absolute.rs",
+      "bytes": 2436,
+      "sha256": "8726127ed220971fc6c1cb633edf1032f9c87c7b34075f9fb8564bf6db9f7924"
+    },
+    {
+      "path": "docs/V2_OFFSTAGE_PRESSURE.md",
+      "bytes": 1776,
+      "sha256": "a9b7fc10b44733f62ab04457abe0b2d18c4f98cde042a10feb9bec58fc007877"
+    }
+  ],
+  "final_documentation": {
+    "commit": "5ec1975e056ec84fce402b60f7cd6b2cee1eccb7",
+    "path": "docs/V2_OFFSTAGE_PRESSURE.md",
+    "sha256": "1768ad9ecdd149f07671ede00818723ea07accc82026a5d2fc6a89718340215a"
+  }
+}
