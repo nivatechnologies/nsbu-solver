@@ -1,8 +1,9 @@
 base table/evidence commit: 9641bb0c44e414d3da147ea0bedd425c7685eeb5
 final executable source and focused coverage: bfae37e4cb80a375b60f93550c47d43a86e06613
-final documentation-only scope correction: 7867daf95b41c2cfcf3146aa94cc237706be249d
-final evidence parent: 7867daf95b41c2cfcf3146aa94cc237706be249d
+documentation-only scope correction: 7867daf95b41c2cfcf3146aa94cc237706be249d
+documentation-only equality-claim correction: ece161325d46d1770604e462a8f5010767dfd387
+final evidence parent: ece161325d46d1770604e462a8f5010767dfd387
 
-The documentation-only commit changes no Cargo manifest, Rust production source, or Rust test.
+The documentation-only commits change no Cargo manifest, Rust production source, or Rust test.
 The preserved interrupted exit-143 evidence remains in the separate
 evidence/p10/v2-shared-force-adapter-wip directory and was not rewritten.
