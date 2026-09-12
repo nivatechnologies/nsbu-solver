@@ -29,7 +29,7 @@ fn evaluate(retained: Domain, settings: ForceSettings, clock: TickClock) -> (Fie
 
 fn independent_crop(source: Layout, target: Layout, input: &[Complex64]) -> Vec<Complex64> {
     assert_eq!(input.len(), source.half_len());
-    let [nx, ny, nz] = target.dimensions();
+    let [nx, ny, _] = target.dimensions();
     let mut output = vec![Complex64::new(0.0, 0.0); target.half_len()];
     for i in 0..nx {
         for j in 0..ny {
@@ -74,7 +74,7 @@ fn words(values: &[Complex64]) -> Vec<(u64, u64)> {
 }
 
 fn assert_strict_nyquist_zero(layout: Layout, values: &[Complex64]) {
-    let [nx, ny, nz] = layout.dimensions();
+    let [nx, ny, _] = layout.dimensions();
     for i in 0..nx {
         for j in 0..ny {
             assert_nyquist_row(layout, values, [i, j]);
