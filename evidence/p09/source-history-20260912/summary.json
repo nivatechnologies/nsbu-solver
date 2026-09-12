@@ -1,0 +1,23 @@
+{
+  "archive_remote_ref": "refs/remotes/origin/codex/evidence-sources-20260912",
+  "archive_commit": "200c5d4c8d02caf18561d4b8c1e2026e8168e924",
+  "archive_first_parent": "dfa38898e8f22ecfa4232dd849558ef8e08fac55",
+  "main_source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "archive_tree": "e187020bf3c7b91402ffc9baeb663ae29c9d29d3",
+  "main_tree": "e187020bf3c7b91402ffc9baeb663ae29c9d29d3",
+  "tree_equal": true,
+  "retained_source_revisions": [
+    "9836cfc9f3b13a6f3df39865bd016d17e6bc1e85",
+    "4fd1761deb25c37c3e46a66a1e8682810e27fa6d",
+    "2780b0b7638350933f084ec2ea5482d7fe7abed9",
+    "cfb613bf93db5f2064151cfd766128faf2496882",
+    "7999ea49f9ebb0f86f77e24f0f437b66032c9098",
+    "8f2bbb046e09bb8d5a7ad0b1c0bea3a7892e5575",
+    "b66fc14aedd0d3544196a4817785a6c73409e780",
+    "5b583d9678af631ba6a175a0175ccf3da132cc71",
+    "5dc435d63cb265632b60895330a3d70f5d9ad263",
+    "90a357103cd7e55e74e5acad2e6c490b7813fe65"
+  ],
+  "verification": "All ten retained revisions are ancestors of archive_commit after fetching the archive ref.",
+  "scope": "Archive-only ancestry for reproducing source-bound evidence. The extra parents do not merge implementation, release a binary, or make a new quality claim."
+}

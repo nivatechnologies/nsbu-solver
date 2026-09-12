@@ -64,3 +64,37 @@ high-precision sums and separately test analytic Taylor–Green pressure and all
 ordered derivatives. Regeneration uses the exact from-rest schedule and raw force
 inputs documented in [derived-field arithmetic](DERIVED_ARITHMETIC.md); changes
 must retain the original and replacement input hashes in execution evidence.
+
+## Archived source revisions for evidence reproduction
+
+Some source-bound evidence records revisions from focused work that was not
+merged into the public `main` history. The archive-only branch
+[`codex/evidence-sources-20260912`](https://github.com/nivatechnologies/nsbu-solver/tree/codex/evidence-sources-20260912)
+retains those ten revisions as additional ancestry. Its archive commit is
+`200c5d4c8d02caf18561d4b8c1e2026e8168e924`; its tree is exactly the
+`def4730b08025fdd06e7a8a0d78116aea24b6e2c` tree. The [source-history record](../evidence/p09/source-history-20260912/summary.json)
+contains the full revision list and verification values.
+
+The archive commit is for source retrieval and provenance. Its extra ancestry
+does not merge implementation into `main`, publish a release, or establish a
+new quality result. The evidence retains each report's own source and scope;
+P08/P09/P10 qualification and accepted concentrating windows remain separate.
+
+A fresh public clone can retrieve the archive ancestry and inspect the exact
+evidence tree as follows:
+
+```sh
+git clone https://github.com/nivatechnologies/nsbu-solver.git
+cd nsbu-solver
+git fetch --no-tags origin \
+  refs/heads/codex/evidence-sources-20260912:refs/remotes/origin/codex/evidence-sources-20260912
+git checkout --detach refs/remotes/origin/codex/evidence-sources-20260912
+test "$(git rev-parse HEAD^{tree})" = \
+  "$(git rev-parse def4730b08025fdd06e7a8a0d78116aea24b6e2c^{tree})"
+git show HEAD:evidence/p09/source-history-20260912/summary.json
+```
+
+A source ZIP created from the exact `def4730b` revision reproduces the same
+tracked files and evidence tree, but it cannot carry Git parent ancestry. Use
+the archive branch when checking the retained source revisions; use the ZIP
+when only the exact source tree is required.
