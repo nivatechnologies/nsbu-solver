@@ -74,28 +74,35 @@ pub fn probe_physical<W: Write>(
         if index > 0 {
             j.raw(",")?
         }
-        j.raw("{\"quantity\":")?;
-        j.string(v::quantity(quantity.quantity))?;
-        j.raw(",\"comparisons\":")?;
-        local5(
-            j,
-            [quantity.pairs[0], quantity.pairs[1]],
-            [quantity.pairs[2], quantity.pairs[3]],
-            quantity.pairs[4],
-        )?;
-        j.raw(",\"extrema\":[")?;
-        for pair in 0..5 {
-            if pair > 0 {
-                j.raw(",")?
-            }
-            extrema(
-                j,
-                quantity
-                    .extrema(pair)
-                    .map_err(|_| DiagnosticExportError::InvalidReport)?,
-            )?
+        probe_physical_quantity(j, *quantity)?
+    }
+    j.raw("]}")
+}
+
+fn probe_physical_quantity<W: Write>(
+    j: &mut Json<W>,
+    quantity: crate::v2_experiment::probes::physical::ProbePhysicalQuantity,
+) -> Result<(), DiagnosticExportError> {
+    j.raw("{\"quantity\":")?;
+    j.string(v::quantity(quantity.quantity))?;
+    j.raw(",\"comparisons\":")?;
+    local5(
+        j,
+        [quantity.pairs[0], quantity.pairs[1]],
+        [quantity.pairs[2], quantity.pairs[3]],
+        quantity.pairs[4],
+    )?;
+    j.raw(",\"extrema\":[")?;
+    for pair in 0..5 {
+        if pair > 0 {
+            j.raw(",")?
         }
-        j.raw("]}")?
+        extrema(
+            j,
+            quantity
+                .extrema(pair)
+                .map_err(|_| DiagnosticExportError::InvalidReport)?,
+        )?
     }
     j.raw("]}")
 }

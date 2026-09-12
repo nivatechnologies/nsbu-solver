@@ -136,22 +136,8 @@ impl DiagnosticExportPlan {
             family_identity: diagnostic.family_plan().identity(),
             probe_identity: diagnostic.probe_plan().identity(),
             coordinator: diagnostic.bounds(),
-            branches: [
-                branch(diagnostic, 0)?,
-                branch(diagnostic, 1)?,
-                branch(diagnostic, 2)?,
-                branch(diagnostic, 3)?,
-                branch(diagnostic, 4)?,
-                branch(diagnostic, 5)?,
-            ],
-            probe_domains: [
-                domain(diagnostic, 0)?,
-                domain(diagnostic, 1)?,
-                domain(diagnostic, 2)?,
-                domain(diagnostic, 3)?,
-                domain(diagnostic, 4)?,
-                domain(diagnostic, 5)?,
-            ],
+            branches: branch_contexts(diagnostic)?,
+            probe_domains: probe_domains(diagnostic)?,
             pressure_source,
             pressure_layout,
             residual_force,
@@ -178,6 +164,32 @@ impl DiagnosticExportPlan {
     pub fn residual_force_layout(self) -> nsbu_solver::domain::Layout {
         self.residual_force
     }
+}
+
+fn branch_contexts(
+    diagnostic: DiagnosticPlan<'_>,
+) -> Result<[BranchContext; 6], DiagnosticExportError> {
+    Ok([
+        branch(diagnostic, 0)?,
+        branch(diagnostic, 1)?,
+        branch(diagnostic, 2)?,
+        branch(diagnostic, 3)?,
+        branch(diagnostic, 4)?,
+        branch(diagnostic, 5)?,
+    ])
+}
+
+fn probe_domains(
+    diagnostic: DiagnosticPlan<'_>,
+) -> Result<[nsbu_solver::domain::Domain; 6], DiagnosticExportError> {
+    Ok([
+        domain(diagnostic, 0)?,
+        domain(diagnostic, 1)?,
+        domain(diagnostic, 2)?,
+        domain(diagnostic, 3)?,
+        domain(diagnostic, 4)?,
+        domain(diagnostic, 5)?,
+    ])
 }
 
 fn domain(
