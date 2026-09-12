@@ -16,12 +16,19 @@ pub struct Norms {
 /// Complete independently reduced pointwise statistics and first peak locations.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Errors {
+    /// Root mean squared pointwise error magnitude.
     pub rms: f64,
+    /// Largest pointwise absolute error magnitude.
     pub peak: f64,
+    /// Largest error divided by the floor-controlled reference magnitude.
     pub relative_peak: f64,
+    /// Largest finer-field reference magnitude.
     pub reference_peak: f64,
+    /// First linear sample index attaining the absolute error peak.
     pub peak_linear: usize,
+    /// First linear sample index attaining the relative error peak.
     pub relative_linear: usize,
+    /// First linear sample index attaining the reference peak.
     pub reference_linear: usize,
 }
 
