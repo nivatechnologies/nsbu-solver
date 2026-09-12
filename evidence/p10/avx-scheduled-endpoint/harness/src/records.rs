@@ -25,7 +25,7 @@ pub struct AttemptFacts {
 
 pub fn committed(identity: &str, timing: Option<ObservationTiming>, facts: AttemptFacts) -> String {
     let observer = timing.map_or_else(|| "null".to_owned(), |value| format!("{:.9}", value.total));
-    let non_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
+    let outside_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
     format!(
         concat!(
             "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
@@ -33,7 +33,7 @@ pub fn committed(identity: &str, timing: Option<ObservationTiming>, facts: Attem
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"committed\",\n",
             "  \"rhs_calls\": {},\n  \"cache_hits\": {},\n  \"cache_misses\": {},\n",
             "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
-            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"outside_rhs_evaluate_seconds\": {:.9},\n",
             "  \"observer_seconds\": {},\n",
             "  \"error_ratio_l2\": {:.17e},\n  \"error_ratio_h1\": {:.17e},\n",
             "  \"steady_allocations\": 0\n}}\n"
@@ -49,7 +49,7 @@ pub fn committed(identity: &str, timing: Option<ObservationTiming>, facts: Attem
         facts.integration_seconds,
         facts.rhs_timing.seconds,
         facts.rhs_timing.calls,
-        non_rhs,
+        outside_rhs,
         observer,
         facts.ratios[0],
         facts.ratios[1],
@@ -64,14 +64,14 @@ pub fn rejected(
     rhs_timing: Measurement,
     result: &AttemptResult,
 ) -> String {
-    let non_rhs = seconds - rhs_timing.seconds;
+    let outside_rhs = seconds - rhs_timing.seconds;
     format!(
         concat!(
             "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
             "  \"identity\": {},\n  \"attempt\": {},\n  \"attempted_from\": {},\n",
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"rejected\",\n",
             "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
-            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"outside_rhs_evaluate_seconds\": {:.9},\n",
             "  \"error_ratio_l2\": {:.17e},\n",
             "  \"error_ratio_h1\": {:.17e}\n}}\n"
         ),
@@ -83,7 +83,7 @@ pub fn rejected(
         seconds,
         rhs_timing.seconds,
         rhs_timing.calls,
-        non_rhs,
+        outside_rhs,
         result.indicators.ratios[0],
         result.indicators.ratios[1],
     )
@@ -97,14 +97,14 @@ pub fn numerical_error(
     rhs_timing: Measurement,
     error: &SolverError,
 ) -> String {
-    let non_rhs = seconds - rhs_timing.seconds;
+    let outside_rhs = seconds - rhs_timing.seconds;
     format!(
         concat!(
             "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
             "  \"identity\": {},\n  \"attempt\": {},\n  \"attempted_from\": {},\n",
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"numerical_error\",\n",
             "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
-            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"outside_rhs_evaluate_seconds\": {:.9},\n",
             "  \"error\": {}\n}}\n"
         ),
         artifact::json_string(identity),
@@ -115,7 +115,7 @@ pub fn numerical_error(
         seconds,
         rhs_timing.seconds,
         rhs_timing.calls,
-        non_rhs,
+        outside_rhs,
         artifact::json_string(&format!("{error:?}")),
     )
 }
@@ -126,9 +126,9 @@ pub fn report(
     publication: crate::artifact::PublicationKind,
     hash: Option<&str>,
 ) {
-    let non_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
+    let outside_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
     println!(
-        "attempt={} clock={} integration_seconds={:.9} rhs_evaluate_seconds={:.9} rhs_timed_calls={} non_rhs_seconds={non_rhs:.9} cache_hit_miss={:?} observer_seconds={:?} ratios={:?} publication={publication:?} state_sha256={hash:?} steady_allocations=0",
+        "attempt={} clock={} integration_seconds={:.9} rhs_evaluate_seconds={:.9} rhs_timed_calls={} outside_rhs_evaluate_seconds={outside_rhs:.9} cache_hit_miss={:?} observer_seconds={:?} ratios={:?} publication={publication:?} state_sha256={hash:?} steady_allocations=0",
         facts.index,
         facts.clock,
         facts.integration_seconds,

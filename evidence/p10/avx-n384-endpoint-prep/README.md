@@ -28,10 +28,12 @@ reservation is checked together.
 
 The same-host one-step probe wraps the final RHS in a harness-owned delegating timer. It measures
 each of the 12 `evaluate` calls with `std::time::Instant`, includes timer call overhead without
-subtraction, and records the sum, timed call count, whole `try_advance` wall time, and their
-difference. The difference attributes coefficient construction, indicators, wrapper accumulation,
-and other attempt work without caching coefficients or changing numerical inputs or outputs. The
-timer adds no allocation and its storage overhead is included in harness overhead.
+subtraction, and records the sum, timed call count, whole `try_advance` wall time, and
+`outside_rhs_evaluate_seconds`, their difference. That remainder includes coefficient construction,
+`begin_attempt` and force-cache setup, indicators, wrapper accumulation, validation, and other
+attempt work; it is not an isolated ETD coefficient measurement. The wrapper does not cache
+coefficients or change numerical inputs or outputs. It adds no allocation and its storage overhead
+is included in harness overhead.
 
 The observer runs at exact clocks 0, 512, 1024, 1536, 2048, 2560, 3072, 3584, and 4096. Rest is
 the exact analytic record. Each of the eight positive nodes evaluates the force at M768 and the
