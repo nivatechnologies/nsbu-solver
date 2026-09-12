@@ -16,6 +16,10 @@ comparison variables before launching. Measure representative throughput before
 committing to an expensive family; account for contention and the user's deadline.
 Reuse valid source-bound runs when their settings actually match.
 
+Distinguish mathematical definitions from initial numerical settings. Where the
+reviewed design explicitly permits measured tuning, freeze a new comparison
+profile and preserve prior failures; pilot values are not universal limits.
+
 The first exact-v2 concentrating interval ends at tick 4096 with quantum 2^-20
 and T*=1/128. Tick 2048 is a feasibility midpoint. Evolve each comparison branch
 independently from rest. Use analytical reference spectra to guide resolution,
