@@ -85,10 +85,11 @@ Both are smooth verification profiles, distinct from `similarity-mms-v2`.
 The v2 CLI saves and resumes bounded exact-v2 checkpoints on its default path;
 `--cache-force` is an opt-in current-source path that does not support checkpoint
 archives or `resume-v2`. The published alpha binary predates this cache option
-and the reconstructed-probe export. In a current source build, the v2 diagnostic
-path includes measured reconstructed off-stage physical reports, while
-analytical reference tracking remains unavailable off-stage; see the
-[integration evidence](../evidence/p09/v2-probe-physical-integration/README.md).
+and the reconstructed-probe export. In a current source build,
+`DiagnosticExportPlan::new_v2` exposes the full integrated reconstructed-probe
+export in the library; `diagnose-v2` emits bounded CLI summaries rather than
+that full export. Off-stage analytical reference tracking remains unavailable;
+see the [integration evidence](../evidence/p09/v2-probe-physical-integration/README.md).
 All concentrating reports remain diagnostic-only and qualified restart
 provenance is still a separate scientific gate.
 
