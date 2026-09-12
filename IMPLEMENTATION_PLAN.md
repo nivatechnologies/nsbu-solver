@@ -30,7 +30,8 @@ concentrating windows. In this bounded work block:
 The combined exporter, partial review adapter and force-baseline binder from
 `31e99a1` remain the prior [source-matched hosted baseline](evidence/p09/hosted-integration-31e99a1/summary.json).
 The later b029 integration audit also passed for its exact source; latest main
-`def4730` still awaits its source-matched hosted result. Whole-maintained Rust coverage is 97.98% lines / 87.48% branches. The recorded
+`def4730` still awaits its source-matched hosted result. The b029 source recorded
+97.47% whole-maintained Rust line coverage and 87.19% branch coverage. The recorded
 focused branch percentages remain useful test-scope information; they are not
 separate per-module gates. P08/P09/P10 remain incomplete and accepted
 concentrating PDE windows remain zero. Release and documentation updates follow

@@ -1,0 +1,35 @@
+{
+  "status": "focused_checks_passed",
+  "qualification": "UnqualifiedDiagnostic; zero accepted concentrating PDE windows",
+  "export_source": "dc129141503c7b92b67c5c44a2fe3435703daa8c",
+  "cli_source": "473bdda44fb7128f26702c4789ab7c603809ed72",
+  "evidence_kind": "root tool execution transcript; raw test logs not archived",
+  "checks": [
+    {
+      "command": "cargo test -p nsbu-benchmarks --test v2_diagnostic_export --locked",
+      "passed": 3,
+      "failed": 0,
+      "seconds": 99.85
+    },
+    {
+      "command": "cargo test -p nsbu-cli --test diagnose_v2_cli actual_command_reports_all_raw_summaries_without_qualifying_a_window --locked -- --exact --nocapture",
+      "passed": 1,
+      "failed": 0,
+      "seconds": 100.24,
+      "published_events": 7,
+      "joint_storage_bytes": 74716312
+    },
+    {
+      "command": "cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code",
+      "status": "passed"
+    },
+    {
+      "command": "cargo fmt --all --check",
+      "status": "passed"
+    }
+  ],
+  "limits": [
+    "Whole-maintained coverage and CRAP for this combined source have not completed hosted CI.",
+    "This export test exercises the fixed startup profile, not a concentrating window."
+  ]
+}
