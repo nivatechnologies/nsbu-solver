@@ -1,0 +1,13 @@
+[package]
+name = "p10-avx-w3-batching-spike"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+sha2 = "=0.10.9"
+stats_alloc = "=0.1.10"
+
