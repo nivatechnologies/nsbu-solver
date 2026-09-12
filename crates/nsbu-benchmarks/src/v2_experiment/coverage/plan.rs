@@ -46,7 +46,9 @@ impl<'a> CoverageFamilyPlan<'a> {
         maximum_attempts: usize,
         joint_cap: usize,
     ) -> Result<Self, FamilyError> {
-        if regional.tracking_plan().family_plan().identity() != family.identity()
+        if panels[0] == 0
+            || !panels[0].is_multiple_of(2)
+            || regional.tracking_plan().family_plan().identity() != family.identity()
             || maximum_attempts < family.times().as_slice().len()
             || !(panels[0] < panels[1]
                 && panels[1] < panels[2]
