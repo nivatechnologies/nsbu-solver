@@ -1,0 +1,37 @@
+{
+  "schema": "p10-avx-ho-pilot-plan-v1",
+  "source_commit": "1d58b59d3cd62e2dc2ec871a7c74eb3cf9e2e3de",
+  "numerical_base": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "binary_sha256": "252826b508ed4418f9a90f9bcc21d25a911d47d3558e4ad1c87fbeeeb9a52729",
+  "preflight_sha256": "c4f90755b04b54769815126d6073c5cbc167b359ca0f65f409e0522296711367",
+  "watchdog_sha256": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
+  "profile": {
+    "retained": 384,
+    "force_samples": 384,
+    "observer_force_samples": 768,
+    "observer_conservative": 768,
+    "method": "HochbruckOstermann",
+    "ticks": 64,
+    "advective_limit": 3.3,
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001],
+    "sampling_workers": 32,
+    "rhs_w3_workers": 3,
+    "force_w3_workers": 3
+  },
+  "reservation_bytes": 198987813712,
+  "execution_cap_bytes": 240518168576,
+  "live_memavailable_floor_bytes": 274877906944,
+  "output_cap_bytes": 1048576,
+  "integration_work_bound": 110846361675,
+  "observer_force_work_bound": 58435043328,
+  "hard_timeout_seconds": 1200,
+  "publication": ["attempt-timing.json", "observer-timing.json", "complete.json"],
+  "forbidden_publication": ["state", "balance", "history", "frontier", "checkpoint"],
+  "protected_processes_at_freeze": [
+    {"pid": 430766, "role": "old-n256"},
+    {"pid": 842148, "role": "matched-n256"}
+  ],
+  "measurement_label": "contended-local-rest-timing-only"
+}
