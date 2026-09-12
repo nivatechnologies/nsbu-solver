@@ -6,6 +6,10 @@ publish = false
 
 [workspace]
 
+[features]
+default = []
+n256 = []
+
 [dependencies]
 nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }
 nsbu-solver = { path = "../../../../crates/nsbu-solver" }

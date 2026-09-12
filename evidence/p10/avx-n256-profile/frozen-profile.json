@@ -15,5 +15,7 @@
   "observer_nodes": [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096],
   "execution_cap_bytes": 103079215104,
   "startup_probe": "one accepted from-rest step followed by explicit current observer",
+  "endpoint_build_feature": "n256",
+  "endpoint_identity_profile": "n256-m384",
   "qualification": "none"
 }
