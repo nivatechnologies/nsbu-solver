@@ -1,0 +1,66 @@
+{
+  "frozen_utc": "2026-09-12T11:20:00Z",
+  "status": "unqualified_first_endpoint_time_and_force_feasibility",
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "case": "similarity-mms-v2",
+  "clock": {
+    "exponent": -20,
+    "target": 8192,
+    "endpoint": 4096,
+    "window": "[0,T_1]",
+    "from_rest": true
+  },
+  "runs": [
+    {
+      "retained_grid": 96,
+      "force_sampling_grid": 96,
+      "method": "CoxMatthews",
+      "step_ticks": 32,
+      "maximum_attempts": 128,
+      "internal_deadline_seconds": 9000,
+      "outer_timeout_seconds": 9600,
+      "purpose": "matched endpoint temporal comparison against the h64 run below"
+    },
+    {
+      "retained_grid": 96,
+      "force_sampling_grid": 96,
+      "method": "CoxMatthews",
+      "step_ticks": 64,
+      "maximum_attempts": 64,
+      "internal_deadline_seconds": 6000,
+      "outer_timeout_seconds": 6600,
+      "purpose": "shared endpoint state for the h32 temporal comparison and M96/M192 force comparison"
+    }
+  ],
+  "shared_profile": {
+    "force_workers": 32,
+    "attempt_force_cache": "original_five_clock_cache",
+    "absolute_tolerances": [1e-5, 1e-4],
+    "relative_tolerances": [1e-5, 1e-5],
+    "advective_limit": 0.3,
+    "memory_cap_bytes_per_process": 34359738368
+  },
+  "matched_existing_run": {
+    "path": "../first-endpoint-force-spatial-1b89176/runs-relaunch/n96-m192-h64",
+    "retained_grid": 96,
+    "force_sampling_grid": 192,
+    "method": "CoxMatthews",
+    "step_ticks": 64
+  },
+  "pilot_relative_targets": {
+    "global_velocity_l2": 1e-4,
+    "full_h1": 1e-3,
+    "vorticity_l2": 1e-3,
+    "absolute_floor": 1e-8
+  },
+  "harness": {
+    "source_sha256": "1fb26db36489470e8cf788f7fa319ea4a0fcc54e2a3abfb2ef92ef40b3e8ca62",
+    "manifest_sha256": "fed7db10db72c90ff4b06f66112c4d2d0087519d48d44be4deba4506cbcf2c54",
+    "lock_sha256": "4c6bb262ae605bb07f464eaf9d01911ff61360d40574dd4252cb9dff0e718f94",
+    "binary_sha256": "d5e467604d0a8c0ef01d35b099407d23c4abd471dbe23b6dbadd374a719c700a"
+  },
+  "launch_order": "Start h32 when N64/M192 releases capacity; start h64 when N96/M192 releases capacity. Do not launch either after 2026-09-12T17:15:00Z.",
+  "qualification_rule": "These matched endpoint comparisons screen feasibility only. Missing HO, current-grid integrator arithmetic, independent reference, reconstruction, local, pressure, balance, residual, perturbation, provenance, or lineage evidence remains unresolved and forbids WindowAcceptedEmpirically.",
+  "accepted_windows_before": 0,
+  "claims_acceptance": false
+}
