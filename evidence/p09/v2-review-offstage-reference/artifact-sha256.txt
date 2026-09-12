@@ -1,9 +1,13 @@
-401706d06f2582c4105ac95cbcf9402beb3bb39ba7bdc2461d32ef28c8f208fe  evidence/p09/v2-review-offstage-reference/README.md
+fd0adbf7e2cc448a28779330348a9deb508ce44f1669811382560b6f6cbafd96  evidence/p09/v2-review-offstage-reference/README.md
 78ee8866bac77e1d6dc383785f18fbbf4454f7a59e717b2315ea47010e6b0ded  evidence/p09/v2-review-offstage-reference/commands.txt
 1ebfff181bf24331e6c03e59b7b098011b8aa4c84feedea78300a55f454541c7  evidence/p09/v2-review-offstage-reference/raw/review-adapter-53ce-coverage.json.gz
 fcfcd24e0ecc5f591e0c792199b0a0f65008793023c8575b1f2ebf224ab4c5f8  evidence/p09/v2-review-offstage-reference/raw/review-adapter-53ce-coverage.log.gz
 568d2200ea6c4a026d573967443a966da3f5c843f34a5926f7637a5d96e77cd8  evidence/p09/v2-review-offstage-reference/raw/review-adapter-53ce-crap.json.gz
+500760150b8f203410394c16c93e8c1007a20ef1a12c81ad6728063a68e4802b  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-coverage-inclusive.json.gz
+f1a17b869d028cbf80cf4d6bda21df938c0e074bd327ad0bfde02f7111013158  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-coverage-normalized.json.gz
 c993be2d342777a6cdb824f939d24d35c605e38d90359e5a9a9ec98cd592f30b  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-coverage.json.gz
 725f2e7f09190273aa2ad10c2ff7d8ddbeb650651ea9cfbc47d69c649ac77680  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-crap.json.gz
 65147015f8f52c8da12859f423b691128d81c5b2dab9d7ed5c495491e7ba22f3  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-metrics.jsonl.gz
+747b459356aaed3403c9eb350d0e0e99272e6ca0faf9a90e6a1a814f7d6e5424  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-test-crap.json.gz
 a50a9fecb228d3d649ab20caf965f4bed8419fd006a288698fbc730a1549e054  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-test-metrics.jsonl.gz
+aa8b7dca8c81900a3c32580fd38e087c878c1235dc6f99481fbdd35264d01f4d  evidence/p09/v2-review-offstage-reference/raw/review-adapter-ddd-test.log.gz
