@@ -1,0 +1,1 @@
+case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e retained=384 sampled=512 workers=32 repeated=3 steady_allocations=0 steady_deallocations=0 steady_reallocations=0 harness=standalone
