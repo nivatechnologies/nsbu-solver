@@ -1,0 +1,17 @@
+{
+  "archive_commit": "11e9ffb711ab3644b8c5cb1cf02ca86936d8b258",
+  "first_parent": "faa18a7fec87e4db6752908c302f324c9415af53",
+  "tree": "e187020bf3c7b91402ffc9baeb663ae29c9d29d3",
+  "tree_matches_release_source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "retained_source_ancestors": [
+    "55eec9e2d0281c8ea7a2de420b11762183be41d3",
+    "3a6306748bf0a1af7e6376684e48180d6603b71c",
+    "ddd886474e716d27b472ea8dd4639ea78bb8aff2",
+    "cb25421130539e68a9827cbeedbb4dc6c136a2a1",
+    "d511dbfb8f5ae7681cdeaef6131ae7d198315bc7",
+    "9c90c0a796f9583c2d165bdca44f93406f179d48",
+    "1efaa79a55fcfb176dc2f74126c92e2275a7b81f"
+  ],
+  "remote_verified": true,
+  "scope": "Historical source reachability and hardware-pause backup only. WIP source retention does not establish implementation readiness."
+}
