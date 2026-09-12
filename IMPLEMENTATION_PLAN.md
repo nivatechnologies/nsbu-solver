@@ -23,6 +23,9 @@ concentrating windows. In this bounded work block:
    spectral norms for sampled RMS or node counts for geometric volume.
 3. Admit a genuine nested exact-time review profile with explicit observable
    semantics, unavailable evidence and bounded required rows.
+4. Integrate the startup-only pressure-reference and standalone off-stage
+   physical consumers, and archive the corrected derivative-symmetry evidence,
+   before attempting the next combined review.
 
 The combined exporter, partial review adapter and force-baseline binder from
 `31e99a1` passed both [source-matched hosted suites](evidence/p09/hosted-integration-31e99a1/summary.json).
@@ -32,6 +35,19 @@ separate per-module gates. P08/P09/P10 remain incomplete and accepted
 concentrating PDE windows remain zero. Release and documentation updates follow
 verified results; no source hash, reference state or acceptance policy is changed
 to make a failed numerical study pass.
+
+The current bounded work also includes force-grid and worker correctness studies
+and a larger N24 baseline pilot. The baseline stopped after completed probe 2047,
+before accepted 2048 publication, with `InvalidSpectrum`; its shell exit was
+zero but its terminal status was `Failed`, so it supplies no endpoint result.
+The force-grid and worker reports remain prescribed-force diagnostics, and the
+derivative-symmetry correction at source `5dc435d` has a smaller N12 run whose
+evidence archive is pending.
+
+The opt-in core-only attempt-force cache at source `9836cfc` has focused
+small-grid CM/HO bit-equality evidence and reduces force evaluations from 12/15
+to 5. It is not yet integrated into the owned runtime. See the
+[attempt-cache evidence](evidence/p09/v2-attempt-force-cache/summary.json).
 
 ## Runtime-first execution priority · 11 September 2026
 
