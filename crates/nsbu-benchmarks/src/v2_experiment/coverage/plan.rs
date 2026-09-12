@@ -46,14 +46,9 @@ impl<'a> CoverageFamilyPlan<'a> {
         maximum_attempts: usize,
         joint_cap: usize,
     ) -> Result<Self, FamilyError> {
-        if panels[0] == 0
-            || !panels[0].is_multiple_of(2)
-            || regional.tracking_plan().family_plan().identity() != family.identity()
+        validate_panels(panels)?;
+        if regional.tracking_plan().family_plan().identity() != family.identity()
             || maximum_attempts < family.times().as_slice().len()
-            || !(panels[0] < panels[1]
-                && panels[1] < panels[2]
-                && panels[1].is_multiple_of(panels[0])
-                && panels[2].is_multiple_of(panels[1]))
         {
             return Err(FamilyError::InvalidFamily);
         }
@@ -104,6 +99,18 @@ impl<'a> CoverageFamilyPlan<'a> {
     pub fn panels(self) -> [usize; 3] {
         self.panels
     }
+}
+fn validate_panels(panels: [usize; 3]) -> Result<(), FamilyError> {
+    if panels[0] == 0
+        || !panels[0].is_multiple_of(2)
+        || !(panels[0] < panels[1]
+            && panels[1] < panels[2]
+            && panels[1].is_multiple_of(panels[0])
+            && panels[2].is_multiple_of(panels[1]))
+    {
+        return Err(FamilyError::InvalidFamily);
+    }
+    Ok(())
 }
 fn work(panels: [usize; 3]) -> Result<CoverageFamilyWork, SolverError> {
     let geometry_evaluations = panels
