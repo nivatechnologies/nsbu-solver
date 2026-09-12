@@ -57,6 +57,7 @@ pthread `129064444622528`. Symbolized frames resolve through
 and 82-byte string growth to 164 bytes form the monitor report's buffer
 lifecycle. The W3 provider owner made no recorded allocation. Raw output and
 symbolization are preserved under `review-diagnostic-20260912T2228Z`.
+The published process inventory redacts one unrelated user-home prefix; the original raw inventory remains outside Git, and no solver process fields were changed.
 
 Root architecture review approved one final standalone closure. Commit
 `1417be336a426b61e10a0112befb5bf71bc42594` adds an explicitly resource-gated,
