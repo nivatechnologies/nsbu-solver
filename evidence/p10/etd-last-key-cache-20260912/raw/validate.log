@@ -1,0 +1,7 @@
+    Finished `release` profile [optimized] target(s) in 0.02s
+     Running `evidence/p10/etd-last-key-cache-20260912/harness/target/release/p10-etd-last-key-cache validate`
+identity base_source=ba2ad3904769dad0f8611daed307d352d8ec5d6a method=cox-matthews rhs=zero cache_key=dt_bits+half_dt_bits baseline_attempt_workspace_bytes=784 cached_attempt_workspace_bytes=800
+measurement kind=forced_miss n=4 wall_seconds=0.000020570 rhs_seconds=0.000000690 outside_rhs_seconds=0.000019880 rhs_calls=12 indicators_bits=0000000000000000,0000000000000000 state_sha256=cfc335996cfae29fdf14fd2db7ea853366d350a5d387aa3c322616e81dacd56b diagnostics_reservation_bytes=22664 allocations=0 deallocations=0 reallocations=0
+measurement kind=cache_hit n=4 wall_seconds=0.000013521 rhs_seconds=0.000000650 outside_rhs_seconds=0.000012871 rhs_calls=12 indicators_bits=0000000000000000,0000000000000000 state_sha256=cfc335996cfae29fdf14fd2db7ea853366d350a5d387aa3c322616e81dacd56b diagnostics_reservation_bytes=22664 allocations=0 deallocations=0 reallocations=0
+gate n=4 miss_minus_hit_seconds=0.000007009 outside_fraction_saved=0.352565392 seconds_pass=false fraction_pass=true exact=true zero_steady_allocations=true
+terminal=profile-complete

@@ -1,0 +1,10 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.10s
+     Running unittests src/lib.rs (target/debug/deps/nsbu_solver-96b5f53feaa6bdcd)
+
+running 4 tests
+test integrators::attempt::cache_tests::cache_key_and_default_workspace_resource_abi_are_exact ... ok
+test integrators::attempt::cache_tests::downstream_rhs_failure_retains_completed_tables_and_key ... ok
+test integrators::attempt::cache_tests::failed_partial_rebuild_invalidates_then_repairs_every_word ... ok
+test integrators::attempt::cache_tests::exact_hit_and_forced_miss_match_every_cm_and_ho_table_word ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 26 filtered out; finished in 0.00s

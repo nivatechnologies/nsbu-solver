@@ -1,0 +1,6 @@
+b938d05f80092a8de43d5858ba6784ad71837bb2241d356d6c921098977d8305  evidence/p10/etd-last-key-cache-20260912/harness/Cargo.lock
+75e3b62c8a6347e605e844db7182912732a40d8ab66c81a069f1c4042d3f0ef1  evidence/p10/etd-last-key-cache-20260912/harness/Cargo.toml
+d4715f9e1d1354870d64d40597c1ff9a9f5c2d5c2380d202a07d762950eec7f6  evidence/p10/etd-last-key-cache-20260912/harness/src/main.rs
+06b95e8cf20f50e38c5de97e752ed677875074a542458857549be07e3dc28d93  crates/nsbu-solver/src/integrators/attempt.rs
+570221f482eb7387732a97c491f4ca8cade1e02798b6ae2c861cb6e20c2c732c  crates/nsbu-solver/src/integrators/attempt_cache_tests.rs
+541dd877e36447efa23745eb07c1ca712893f95303265304f0d4ca8978098999  crates/nsbu-solver/tests/etd_last_key_cache.rs

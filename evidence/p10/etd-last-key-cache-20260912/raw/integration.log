@@ -1,0 +1,9 @@
+   Compiling nsbu-solver v0.1.0-alpha.1 (<isolated-worktree>/crates/nsbu-solver)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.37s
+     Running tests/etd_last_key_cache.rs (target/debug/deps/etd_last_key_cache-83904063e9c9016e)
+
+running 2 tests
+test unconditional_default_workspace_resource_abi_is_frozen ... ok
+test same_dt_hit_matches_nonzero_forced_checkpoint_cold_rebuild ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

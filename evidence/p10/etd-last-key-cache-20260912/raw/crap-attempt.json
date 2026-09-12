@@ -1,0 +1,84 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "is_valid",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "reservation_with_method",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "new_with_method",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "method",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "try_advance",
+      "cyclomatic": 19.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 19.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "admit",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/attempt.rs",
+      "function": "coefficients",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    }
+  ],
+  "maximum": 19.0
+}

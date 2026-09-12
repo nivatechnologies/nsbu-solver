@@ -1,0 +1,6 @@
+identity base_source=ba2ad3904769dad0f8611daed307d352d8ec5d6a method=cox-matthews rhs=zero cache_key=dt_bits+half_dt_bits baseline_attempt_workspace_bytes=784 cached_attempt_workspace_bytes=800
+measurement kind=forced_miss n=384 wall_seconds=16.804300711 rhs_seconds=1.068942986 outside_rhs_seconds=15.735357725 rhs_calls=12 indicators_bits=0000000000000000,0000000000000000 state_sha256=65db2aea053eb94f3d5b9c5c2dd8bd4be8dae247064a40cc13316441afa54460 diagnostics_reservation_bytes=12749636744 allocations=0 deallocations=0 reallocations=0
+measurement kind=cache_hit n=384 wall_seconds=13.083795970 rhs_seconds=1.051052333 outside_rhs_seconds=12.032743637 rhs_calls=12 indicators_bits=0000000000000000,0000000000000000 state_sha256=65db2aea053eb94f3d5b9c5c2dd8bd4be8dae247064a40cc13316441afa54460 diagnostics_reservation_bytes=12749636744 allocations=0 deallocations=0 reallocations=0
+gate n=384 miss_minus_hit_seconds=3.702614088 outside_fraction_saved=0.235305365 seconds_pass=false fraction_pass=true exact=true zero_steady_allocations=true
+decision=stop-negative-result
+terminal=profile-complete

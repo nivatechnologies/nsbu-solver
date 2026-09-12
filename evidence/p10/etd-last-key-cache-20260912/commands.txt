@@ -1,0 +1,8 @@
+cargo test -p nsbu-solver attempt::cache_tests --lib --locked
+cargo test -p nsbu-solver --test etd_last_key_cache --locked
+cargo test -p nsbu-solver --test attempt_allocation --locked
+cargo fmt --all -- --check
+cargo clippy -p nsbu-solver --all-targets --locked -- -D warnings
+cargo build --release --manifest-path evidence/p10/etd-last-key-cache-20260912/harness/Cargo.toml --locked
+cargo run --release --manifest-path evidence/p10/etd-last-key-cache-20260912/harness/Cargo.toml --locked -- validate
+(ulimit -v 25165824; exec timeout 1800s nice -n 19 taskset -c 51 evidence/p10/etd-last-key-cache-20260912/harness/target/release/p10-etd-last-key-cache profile-384)

@@ -28,8 +28,26 @@ pub struct AttemptResult {
 pub struct AttemptWorkspace {
     plan: ResourcePlan,
     kernel: MethodWorkspace,
+    coefficients: CoefficientKey,
     coarse: Field,
     midpoint: Field,
+}
+
+const INVALID_COEFFICIENT_BITS: u64 = u64::MAX;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct CoefficientKey {
+    dt: u64,
+    half_dt: u64,
+}
+impl CoefficientKey {
+    const INVALID: Self = Self {
+        dt: INVALID_COEFFICIENT_BITS,
+        half_dt: INVALID_COEFFICIENT_BITS,
+    };
+    const fn is_valid(self) -> bool {
+        self.dt != INVALID_COEFFICIENT_BITS && self.half_dt != INVALID_COEFFICIENT_BITS
+    }
 }
 
 impl AttemptWorkspace {
@@ -65,6 +83,7 @@ impl AttemptWorkspace {
         Ok(Self {
             plan,
             kernel,
+            coefficients: CoefficientKey::INVALID,
             coarse,
             midpoint,
         })
@@ -173,6 +192,22 @@ impl AttemptWorkspace {
     }
 
     fn coefficients(&mut self, dt: f64, half_dt: f64) -> Result<(), SolverError> {
-        self.kernel.coefficients(self.plan.domain(), dt, half_dt)
+        let requested = CoefficientKey {
+            dt: dt.to_bits(),
+            half_dt: half_dt.to_bits(),
+        };
+        if self.coefficients.is_valid() && self.coefficients == requested {
+            return Ok(());
+        }
+        // In-place writes begin only after the old identity is invalidated. A failure or unwind
+        // therefore cannot authenticate partially rebuilt tables.
+        self.coefficients = CoefficientKey::INVALID;
+        self.kernel.coefficients(self.plan.domain(), dt, half_dt)?;
+        self.coefficients = requested;
+        Ok(())
     }
 }
+
+#[cfg(test)]
+#[path = "attempt_cache_tests.rs"]
+mod cache_tests;

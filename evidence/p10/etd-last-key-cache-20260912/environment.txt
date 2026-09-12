@@ -1,0 +1,12 @@
+date_utc=2026-09-12
+base_source=ba2ad3904769dad0f8611daed307d352d8ec5d6a
+architecture=x86_64
+numa_nodes=1
+logical_cpus=128
+physical_cores=64
+benchmark_cpu_set=51
+scheduler_priority=nice_19
+virtual_memory_limit_kib=25165824
+command_timeout_seconds=1800
+concurrent_endpoint_processes_preserved=2
+contention_qualification=both preserved endpoint processes were unbound and CPU-active
