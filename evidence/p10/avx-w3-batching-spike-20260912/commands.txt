@@ -1,0 +1,6 @@
+CARGO_TARGET_DIR=target/avx-w3-spike cargo check --release --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml
+CARGO_TARGET_DIR=target/avx-w3-spike SOURCE_ID=$(git rev-parse HEAD) cargo build --release --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml
+/usr/bin/time -v target/avx-w3-spike/release/p10-avx-w3-batching-spike > evidence/p10/avx-w3-batching-spike-20260912/profile.stdout 2> evidence/p10/avx-w3-batching-spike-20260912/profile.time
+cargo fmt --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml -- --check
+CARGO_TARGET_DIR=target/avx-w3-spike cargo clippy --release --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml -- -D warnings
+

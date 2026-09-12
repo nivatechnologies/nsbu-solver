@@ -1,0 +1,8 @@
+21b10cd4dc4bf0121506c555e2f78a7808fbdec7c3e824d3f9c454fd386c60aa  evidence/p10/avx-w3-batching-spike-20260912/README.md
+02043cf17d51addfae5cfe131a0400e3730a7022b855939a5e47db1e198cf05c  evidence/p10/avx-w3-batching-spike-20260912/commands.txt
+d33519583122ac59b1d14d7a8c8dc7ea5af72e9434ad9649fa7818d23a57140d  evidence/p10/avx-w3-batching-spike-20260912/summary.json
+ca3165df39f14d5753c9dac567ec268fa7635f585a3d7f5e4425d6aa5b459f6f  evidence/p10/avx-w3-batching-spike-20260912/profile.stdout
+90de050ade5e04bd4c8a42e6ca578fa4224c019836dcd3d6eb54f9fc059593b5  evidence/p10/avx-w3-batching-spike-20260912/profile.time
+ad1ec56a295003b1b2013bed172147e25f81e7d6c123fe4ac0cb26207bc2c4ca  evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml
+2ebd04d1e3291585d9866c9bdbbe7fa99ef4f1822f446f646dbe7b763ca3cb16  evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.lock
+37de77f3ff808e7eb7223e2ecd6c3640b5e578055e7d0ed9e9d18aa2fd6cfed9  evidence/p10/avx-w3-batching-spike-20260912/harness/src/main.rs
