@@ -1,0 +1,16 @@
+production {'lines': (1345, 1473, 91.3103), 'branches': (84, 118, 71.1864)}
+tests {'lines': (380, 380, 100.0), 'branches': (2, 2, 100.0)}
+all_changed {'lines': (1725, 1853, 93.0923), 'branches': (86, 120, 71.6667)}
+crap_max 90.0
+{'path': 'crates/nsbu-benchmarks/src/v2_experiment/diagnostic/profile.rs', 'function': 'admit', 'cyclomatic': 9.0, 'branch_coverage_fraction': 0.0, 'crap': 90.0}
+{'path': 'crates/nsbu-benchmarks/src/v2_run/reconstructed.rs', 'function': 'admit', 'cyclomatic': 21.0, 'branch_coverage_fraction': 0.5, 'crap': 76.125}
+{'path': 'crates/nsbu-benchmarks/src/runtime_force.rs', 'function': 'evaluate', 'cyclomatic': 14.0, 'branch_coverage_fraction': 0.5, 'crap': 38.5}
+{'path': 'crates/nsbu-benchmarks/src/v2_experiment/diagnostic/profile.rs', 'function': 'clocks', 'cyclomatic': 5.0, 'branch_coverage_fraction': 0.0, 'crap': 30.0}
+{'path': 'crates/nsbu-benchmarks/src/v2_run/archive.rs', 'function': 'read_reservation', 'cyclomatic': 11.0, 'branch_coverage_fraction': 0.5, 'crap': 26.125}
+{'path': 'crates/nsbu-benchmarks/src/v2_experiment/diagnostic/profile.rs', 'function': 'policy', 'cyclomatic': 4.0, 'branch_coverage_fraction': 0.0, 'crap': 20.0}
+{'path': 'crates/nsbu-benchmarks/src/runtime_force.rs', 'function': 'fmt', 'cyclomatic': 4.0, 'branch_coverage_fraction': 0.0, 'crap': 20.0}
+{'path': 'crates/nsbu-benchmarks/src/v2_experiment/plan.rs', 'function': 'validate', 'cyclomatic': 17.0, 'branch_coverage_fraction': 0.7916666666666666, 'crap': 19.613208912037038}
+{'path': 'crates/nsbu-benchmarks/src/runtime_force.rs', 'function': 'build_integration', 'cyclomatic': 9.0, 'branch_coverage_fraction': 0.5, 'crap': 19.125}
+{'path': 'crates/nsbu-benchmarks/src/v2_run.rs', 'function': 'restore_parts', 'cyclomatic': 9.0, 'branch_coverage_fraction': 0.5, 'crap': 19.125}
+{'path': 'crates/nsbu-benchmarks/src/v2_run/plan.rs', 'function': 'admit', 'cyclomatic': 19.0, 'branch_coverage_fraction': 1.0, 'crap': 19.0}
+{'path': 'crates/nsbu-benchmarks/src/v2_experiment/probes/plan.rs', 'function': 'new', 'cyclomatic': 17.0, 'branch_coverage_fraction': 1.0, 'crap': 17.0}

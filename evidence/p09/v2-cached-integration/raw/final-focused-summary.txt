@@ -1,0 +1,3 @@
+production {'lines': (1423, 1488, 95.6317), 'branches': (89, 120, 74.1667)}
+tests {'lines': (303, 398, 76.1307), 'branches': (2, 2, 100.0)}
+all_changed {'lines': (1726, 1886, 91.5164), 'branches': (91, 122, 74.5902)}

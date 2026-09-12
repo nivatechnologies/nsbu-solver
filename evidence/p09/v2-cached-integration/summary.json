@@ -1,0 +1,51 @@
+{
+  "status": "bounded_phase_b_increment_review_ready",
+  "base_commit": "d067c3528c74f890e4b03725b4435e11cb1a1d3c",
+  "core_source_commit": "7999ea49f9ebb0f86f77e24f0f437b66032c9098",
+  "quality_followup_commit": "8f2bbb046e09bb8d5a7ad0b1c0bea3a7892e5575",
+  "prechange_archive": {
+    "path": "crates/nsbu-benchmarks/tests/fixtures/v2-archive-pre-cache.bin",
+    "sha256": "ea2472d3397909ad79d9fc0afb6c4ed631f46244511664a15d117f05c370196c",
+    "decoded_by_core_source": true
+  },
+  "functional": {
+    "core_source_driver_tests": {"passed": 3, "failed": 0, "normal_seconds": 149.18, "instrumented_seconds": 951.21},
+    "archive_tests_core_source": {"passed": 6, "failed": 0},
+    "archive_tests_followup_selected": {"passed": 7, "failed": 0},
+    "phase_a_cache_tests": {"passed": 4, "failed": 0},
+    "state_contract": "all ordinary and reconstructed CM/HO branch coefficient words and normalized diagnostic events matched direct owners",
+    "provider_evaluations": {"cox_matthews": {"direct_calls": 12, "cached_evaluations": 5}, "hochbruck_ostermann": {"direct_calls": 15, "cached_evaluations": 5}},
+    "allocation_contract": "cached plan cap-minus-one refused without allocation; admitted construction completed; one committed step used zero steady allocations"
+  },
+  "core_source_coverage_after_supplement": {
+    "changed_lines": {"covered": 1725, "count": 1853, "percent": 93.0923},
+    "changed_branches": {"covered": 86, "count": 120, "percent": 71.6667},
+    "quality_status": "failed_before_followup",
+    "failed_crap_values": [90.0, 76.125, 38.5, 30.0, 26.125]
+  },
+  "followup_selected_coverage": {
+    "scope": "new controls and reconstructed-owner regression only; deliberately excludes the unchanged expensive complete driver body",
+    "changed_production_lines": {"covered": 1423, "count": 1488, "percent": 95.6317},
+    "changed_production_branches": {"covered": 89, "count": 120, "percent": 74.1667},
+    "all_changed_lines": {"covered": 1726, "count": 1886, "percent": 91.5164},
+    "all_changed_branches": {"covered": 91, "count": 122, "percent": 74.5902},
+    "changed_test_lines": {"covered": 303, "count": 398, "percent": 76.1307},
+    "changed_function_crap_max": 20.0,
+    "crap_threshold_passed_for_selected_scope": true,
+    "whole_changed_branch_80_passed": false,
+    "whole_source_gate": "pending exact combined hosted CI"
+  },
+  "static": {
+    "core_source_fmt": "passed",
+    "core_source_workspace_all_target_clippy": "passed",
+    "core_source_strict_rustdoc": "passed",
+    "followup_focused_clippy": "passed",
+    "combined_tree_metrics_owned_by_parent": {"function_cc_max": 21.0, "function_cognitive_max": 21.0, "all_node_halstead_difficulty_max": 75.9295, "rust_file_lines_max": 477}
+  },
+  "claims": {
+    "whole_changed_branch_gate": false,
+    "runtime_speedup": false,
+    "pde_convergence_or_qualification": false,
+    "cached_checkpoint_support": false
+  }
+}

@@ -1,0 +1,113 @@
+diff --git a/crates/nsbu-benchmarks/src/runtime_force.rs b/crates/nsbu-benchmarks/src/runtime_force.rs
+index 49b755e..19fa6e5 100644
+--- a/crates/nsbu-benchmarks/src/runtime_force.rs
++++ b/crates/nsbu-benchmarks/src/runtime_force.rs
+@@ -300,5 +300,21 @@ mod tests {
+             force.evaluate(stage, limits, output.each_mut().map(Vec::as_mut_slice)),
+             Err(SolverError::ProviderBudgetExceeded)
+         ));
++
++        for workers in [0, 1] {
++            let settings = ForceSettings {
++                samples: Layout::new([4; 3]).unwrap(),
++                workers,
++            };
++            let limits = settings.limits(domain).unwrap();
++            let mut force = settings.build(domain, limits.storage_bytes).unwrap();
++            assert!(!format!("{force:?}").is_empty());
++            let mut wrong = limits;
++            wrong.work_units -= 1;
++            assert!(matches!(
++                force.evaluate(stage, wrong, output.each_mut().map(Vec::as_mut_slice)),
++                Err(SolverError::ProviderBudgetExceeded)
++            ));
++        }
+     }
+ }
+diff --git a/crates/nsbu-benchmarks/src/v2_run/reconstructed.rs b/crates/nsbu-benchmarks/src/v2_run/reconstructed.rs
+index 5470b8f..387f5e8 100644
+--- a/crates/nsbu-benchmarks/src/v2_run/reconstructed.rs
++++ b/crates/nsbu-benchmarks/src/v2_run/reconstructed.rs
+@@ -32,11 +32,7 @@ impl ReconstructedPlan {
+     }
+ 
+     fn admit(settings: Settings, mode: IntegrationMode, cap: usize) -> Result<Self, SolverError> {
+-        if std::mem::size_of::<ReconstructedPlan>() != 480
+-            || std::mem::size_of::<ReconstructedRun>() != 7136
+-        {
+-            return Err(SolverError::ResourceLimit);
+-        }
++        validate_layout()?;
+         plan::validate_settings(settings)?;
+         let force_limits = settings.force.integration_limits(settings.domain, mode)?;
+         plan::validate_final_step(settings, force_limits.remaining_divisor)?;
+@@ -116,6 +112,16 @@ impl ReconstructedPlan {
+     }
+ }
+ 
++fn validate_layout() -> Result<(), SolverError> {
++    if std::mem::size_of::<ReconstructedPlan>() == 480
++        && std::mem::size_of::<ReconstructedRun>() == 7136
++    {
++        Ok(())
++    } else {
++        Err(SolverError::ResourceLimit)
++    }
++}
++
+ /// From-rest exact-v2 owner retaining three committed endpoint value/RHS nodes.
+ pub struct ReconstructedRun {
+     plan: ReconstructedPlan,
+diff --git a/crates/nsbu-benchmarks/tests/v2_archive.rs b/crates/nsbu-benchmarks/tests/v2_archive.rs
+index ea8f891..16c3c3d 100644
+--- a/crates/nsbu-benchmarks/tests/v2_archive.rs
++++ b/crates/nsbu-benchmarks/tests/v2_archive.rs
+@@ -218,3 +218,13 @@ fn cached_profile_refuses_every_version_one_archive_operation() {
+         Err(CheckpointError::InvalidEncoding)
+     ));
+ }
++
++#[test]
++fn direct_read_reservation_refuses_excess_records() {
++    let plan = Plan::from_rest(settings(Method::CoxMatthews), 1 << 26).unwrap();
++    let records = plan.settings().configuration.limits.maximum_attempts + 1;
++    assert_eq!(
++        archive::read_reservation(plan, records),
++        Err(CheckpointError::ResourceLimit)
++    );
++}
+diff --git a/crates/nsbu-benchmarks/tests/v2_cached_integration.rs b/crates/nsbu-benchmarks/tests/v2_cached_integration.rs
+index ec291bd..456a405 100644
+--- a/crates/nsbu-benchmarks/tests/v2_cached_integration.rs
++++ b/crates/nsbu-benchmarks/tests/v2_cached_integration.rs
+@@ -2,7 +2,7 @@
+ use nsbu_benchmarks::{
+     runtime_force::{ForceSettings, IntegrationMode},
+     v2_experiment::{
+-        diagnostic::{DiagnosticDriver, DiagnosticPlan, DiagnosticSettings},
++        diagnostic::{DiagnosticDriver, DiagnosticPlan, DiagnosticSettings, StartupProfile},
+         probes::ProbePlan,
+         FamilyPlan, FamilySettings,
+     },
+@@ -237,3 +237,21 @@ fn pre_rhs_terminal_retry_does_not_reopen_or_reuse_cache_state() {
+     assert_eq!(run.step(), Err(SolverError::RetryLimit));
+     assert_eq!(run.cache_work(), Some(work));
+ }
++
++#[test]
++fn startup_profile_admits_both_integration_policies_and_refuses_short_caps() {
++    let profile = StartupProfile::new().unwrap();
++    let direct = profile.plan(CAP).unwrap();
++    let cached = profile.plan_cached(CAP).unwrap();
++    assert_eq!(
++        direct.family_plan().integration_mode(),
++        IntegrationMode::Direct
++    );
++    assert_eq!(
++        cached.family_plan().integration_mode(),
++        IntegrationMode::AttemptCached
++    );
++    assert!(profile
++        .plan_cached(cached.bounds().joint_storage_bytes - 1)
++        .is_err());
++}
