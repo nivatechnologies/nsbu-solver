@@ -295,7 +295,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v1-starttime-cmdline-deadline",
         env!("RUN_SOURCE"),
         crate::timed_rhs::IDENTITY,
         2 * M,
@@ -331,11 +331,13 @@ mod n384_tests {
         assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();
-        assert!(identity.contains("provider=parallel-reduced-v2-force-w3"));
+        assert!(identity.contains("provider=parallel-reduced-v2-force-w3-attempt-cache"));
         assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200779136"));
         assert!(identity.contains("force_w3=layout384-width3-forward-add1827942144"));
         assert!(identity.contains("observer_force_samples=768"));
         assert!(identity.contains("observer_conservative=768"));
+        assert!(identity.contains("numa=whole-host-unbound-all-visible-cpus-memory"));
+        assert!(identity.contains("external_stop=pgid-watchdog-v1-starttime-cmdline-deadline"));
         assert!(identity.contains(&format!("artifact_cap={}", artifact::DISK_CAP_BYTES)));
     }
 
