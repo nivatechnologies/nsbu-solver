@@ -8,7 +8,6 @@ use std::{
     io::{self, BufWriter, Write},
     path::{Path, PathBuf},
 };
-
 pub const BUFFER_BYTES: usize = 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 pub const DISK_CAP_BYTES: usize = 4 * 1024 * 1024 * 1024;
@@ -18,7 +17,6 @@ pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
 pub const DISK_CAP_BYTES: usize = 128 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 const HEADER_ALLOWANCE: usize = 4096;
-
 pub struct NodeRecord<'a> {
     pub identity: &'a str,
     pub balance: BalanceSample,
