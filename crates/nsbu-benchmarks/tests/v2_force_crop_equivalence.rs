@@ -30,22 +30,32 @@ fn evaluate(retained: Domain, settings: ForceSettings, clock: TickClock) -> (Fie
 fn independent_crop(source: Layout, target: Layout, input: &[Complex64]) -> Vec<Complex64> {
     assert_eq!(input.len(), source.half_len());
     let [nx, ny, nz] = target.dimensions();
-    let half = nz / 2 + 1;
     let mut output = vec![Complex64::new(0.0, 0.0); target.half_len()];
     for i in 0..nx {
         for j in 0..ny {
-            for k in 0..nz / 2 {
-                if i == nx / 2 || j == ny / 2 {
-                    continue;
-                }
-                let mode = [signed(i, nx), signed(j, ny), k as isize];
-                if let Ok((source_index, _)) = source.locate(mode) {
-                    output[(i * ny + j) * half + k] = input[source_index];
-                }
-            }
+            crop_row(source, target, input, &mut output, [i, j]);
         }
     }
     output
+}
+
+fn crop_row(
+    source: Layout,
+    target: Layout,
+    input: &[Complex64],
+    output: &mut [Complex64],
+    row: [usize; 2],
+) {
+    let [nx, ny, nz] = target.dimensions();
+    if row[0] == nx / 2 || row[1] == ny / 2 {
+        return;
+    }
+    for k in 0..nz / 2 {
+        let mode = [signed(row[0], nx), signed(row[1], ny), k as isize];
+        let (source_index, _) = source.locate(mode).unwrap();
+        let target_index = (row[0] * ny + row[1]) * (nz / 2 + 1) + k;
+        output[target_index] = input[source_index];
+    }
 }
 
 fn signed(index: usize, length: usize) -> isize {
@@ -65,18 +75,31 @@ fn words(values: &[Complex64]) -> Vec<(u64, u64)> {
 
 fn assert_strict_nyquist_zero(layout: Layout, values: &[Complex64]) {
     let [nx, ny, nz] = layout.dimensions();
-    let half = nz / 2 + 1;
     for i in 0..nx {
         for j in 0..ny {
-            for k in 0..half {
-                if i == nx / 2 || j == ny / 2 || k == nz / 2 {
-                    let value = values[(i * ny + j) * half + k];
-                    assert_eq!(value.re.to_bits(), 0.0_f64.to_bits());
-                    assert_eq!(value.im.to_bits(), 0.0_f64.to_bits());
-                }
-            }
+            assert_nyquist_row(layout, values, [i, j]);
         }
     }
+}
+
+fn assert_nyquist_row(layout: Layout, values: &[Complex64], row: [usize; 2]) {
+    let [nx, ny, nz] = layout.dimensions();
+    let half = nz / 2 + 1;
+    for k in 0..half {
+        if row[0] == nx / 2 || row[1] == ny / 2 || k == nz / 2 {
+            let value = values[(row[0] * ny + row[1]) * half + k];
+            assert_eq!(value.re.to_bits(), 0.0_f64.to_bits());
+            assert_eq!(value.im.to_bits(), 0.0_f64.to_bits());
+        }
+    }
+}
+
+fn compare_component(small: Domain, large: Domain, direct: &[Complex64], common: &[Complex64]) {
+    let expected = independent_crop(large.layout(), small.layout(), common);
+    assert_eq!(words(direct), words(&expected));
+    assert_eq!(direct[0].re.to_bits(), expected[0].re.to_bits());
+    assert_eq!(direct[0].im.to_bits(), expected[0].im.to_bits());
+    assert_strict_nyquist_zero(small.layout(), direct);
 }
 
 fn assert_force_crop(case: (usize, usize, usize), workers: usize, clock: TickClock) {
@@ -94,11 +117,7 @@ fn assert_force_crop(case: (usize, usize, usize), workers: usize, clock: TickClo
 
     let mut observed_nonzero = false;
     for component in 0..3 {
-        let expected = independent_crop(large.layout(), small.layout(), &common[component]);
-        assert_eq!(words(&direct[component]), words(&expected));
-        assert_eq!(direct[component][0].re.to_bits(), expected[0].re.to_bits());
-        assert_eq!(direct[component][0].im.to_bits(), expected[0].im.to_bits());
-        assert_strict_nyquist_zero(small.layout(), &direct[component]);
+        compare_component(small, large, &direct[component], &common[component]);
         observed_nonzero |= direct[component]
             .iter()
             .any(|value| value.re != 0.0 || value.im != 0.0);
