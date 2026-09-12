@@ -1,9 +1,10 @@
 {
-  "source_commit": "d963f88674b63b7cc01fc22c065a3f8924fb4961",
+  "source_commit": "2534671b55be528e0620b16454c83b88f0189725",
+  "rust_measurement_source_commit": "d963f88674b63b7cc01fc22c065a3f8924fb4961",
   "files": [
     {
       "path": "README.md",
-      "sha256": "26027e2315d584db6528bbcbdbb2026df967719c8c08241bc80760a370ba46e8"
+      "sha256": "2af2ee50a6c5785fff38ef33632a58d164bd60b90e8ef17e297f3c13a6482bac"
     },
     {
       "path": "raw/clippy.log.gz",
@@ -42,6 +43,34 @@
       "sha256": "561fd0003dde5c65f8f06e59e41a9164d548fca9a8f25344f255ede8bb662480"
     },
     {
+      "path": "raw/python-complexity.json.gz",
+      "sha256": "b1eb7607cb0740ecde7fb77c5c4574537db8fa800bb4dfb5d35fd842c376bc56"
+    },
+    {
+      "path": "raw/python-coverage.json.gz",
+      "sha256": "4479acea5a8cf4cb6a5fa899e55dd75409cdfe6b675cc283b9679d3fd9a87af4"
+    },
+    {
+      "path": "raw/python-crap.json.gz",
+      "sha256": "01a4e686fabe3bb757dff8a9b8d95a12b718ff03846238aa144380945839745c"
+    },
+    {
+      "path": "raw/python-format.log.gz",
+      "sha256": "3b179fdcd031f876c2e6dd4ca82adb7c97b65ac2fb1558657fc6be3b17576647"
+    },
+    {
+      "path": "raw/python-lint-pending.txt",
+      "sha256": "848ad0b002201b8c785ed534e2bc459e79a49bc368f55f343a830958658f03fb"
+    },
+    {
+      "path": "raw/python-tests.log.gz",
+      "sha256": "ea8defab2b34591384c6b7872d774269d5045d9135341dbecc24ab94003d2369"
+    },
+    {
+      "path": "raw/python-types.log.gz",
+      "sha256": "05e5b6d8c1039eb4aa5c4a7e085d494b697cf3a557d1f017073d53ff49873adc"
+    },
+    {
       "path": "raw/reproduce.sh",
       "sha256": "55f67beb96b83a41e3161f61a07050ea4a43f64cb1d7dd4cccb0408f2b7707a4"
     },
@@ -55,11 +84,11 @@
     },
     {
       "path": "source-sha256.json",
-      "sha256": "61b27dc784c819a15f66b963e6df06f4fb7d2486c3325d5ab0b30c7e064ca723"
+      "sha256": "5175c663cdd2afa4d175c360f8360e6d5a4b9f4db0f6e92585e77bba95649857"
     },
     {
       "path": "summary.json",
-      "sha256": "38d3f046c1d0fb2470bb4c365bc864cee29e6b9d390e20a8573f4235dbcd823c"
+      "sha256": "402a12161918284c0d615a852c127fd9351335c30919b2451c593bdc9ed3cf8b"
     }
   ]
 }

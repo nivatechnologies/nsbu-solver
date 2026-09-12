@@ -13,3 +13,5 @@ Focused coverage of the new pressure-reference production module is 396/411 line
 The existing two pressure-kernel unit regressions passed at `f9660c0`; the shared pressure source blob is identical at final source `d963f88`. They include independent serial-force/pressure bit comparisons. Strict focused Clippy, formatting and exact workspace Rustdoc passed at final source.
 
 This increment does not admit the available clock-4096 artifact, define pressure budgets, close general pressure-reference/gauge requirements, establish quadrature enclosure, or qualify a concentrating window. P09 and P10 remain incomplete.
+
+The maintained Python generator has a separate final source-matched gate: two deterministic/malformed-input tests pass; generator coverage is 53/61 lines (87.3239%) and 9/10 branches (90%); Python CRAP peaks at 20 across all 13 changed generator/test functions. Strict basedpyright and Black checks pass. Ruff was unavailable in the installed/offline tool cache and is recorded as pending rather than waived.
