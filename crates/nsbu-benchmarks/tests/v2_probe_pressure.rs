@@ -46,6 +46,7 @@ fn actual_offstage_pressure_matches_independent_full_complex_differences() {
     assert_eq!(plan.force_workers(), 0);
     let mut owner = ProbeFamily::new(probes).unwrap();
     let mut pressure = ProbePressureWorkspace::new(plan).unwrap();
+    let mut stale = ProbePressureWorkspace::new(plan).unwrap();
     let foreign_clocks = [0, 7, 128].map(|e| TickClock::restore(-20, 8192, e, 8192 - e).unwrap());
     let foreign_family =
         FamilyPlan::new(settings(1e-5), TestedTimes::new(&accepted, 3).unwrap(), CAP).unwrap();
@@ -66,6 +67,7 @@ fn actual_offstage_pressure_matches_independent_full_complex_differences() {
     .unwrap();
     let mut foreign = ProbePressureWorkspace::new(foreign_plan).unwrap();
     let mut last = None;
+    let mut first = None;
     for clock in clocks {
         let sample = owner.advance().unwrap().unwrap();
         if clock.elapsed() == 0 {
@@ -76,6 +78,22 @@ fn actual_offstage_pressure_matches_independent_full_complex_differences() {
             assert!(foreign.current().is_none());
             assert!(matches!(
                 foreign.measure(&owner, sample),
+                Err(FamilyError::Terminated)
+            ));
+        }
+        if clock.elapsed() == 0 {
+            first = Some(sample);
+        }
+        if clock.elapsed() == 95 {
+            let old = first.unwrap();
+            assert!(matches!(
+                stale.measure(&owner, old),
+                Err(FamilyError::InvalidFamily)
+            ));
+            assert_eq!(stale.charged_work().attempts, 1);
+            assert!(stale.current().is_none());
+            assert!(matches!(
+                stale.measure(&owner, old),
                 Err(FamilyError::Terminated)
             ));
         }
@@ -159,27 +177,36 @@ fn check_absolute_force_control(
         force.each_ref().map(Vec::as_slice),
         report.sample_layout(),
     );
-    let reference = r.iter().map(|v| v.abs()).fold(0.0, f64::max);
-    let relative = l
-        .iter()
-        .zip(&r)
-        .map(|(a, b)| (a - b).abs() / (b.abs().max(FLOORS[0])))
-        .fold(0.0, f64::max);
-    let finding = report.quantities()[0].pairs[1];
-    assert!((finding.reference_peak - reference).abs() < 2e-11 * (reference + FLOORS[0]));
-    assert!((finding.peak_relative_error - relative).abs() < 2e-11 * (1.0 + relative));
-    let zero: [Vec<nsbu_solver::Complex64>; 3] = std::array::from_fn(|_| {
-        vec![nsbu_solver::Complex64::new(0.0, 0.0); force_domain.layout().half_len()]
-    });
-    let omitted = v2_probe_pressure_oracle::absolute(
-        right.domain,
-        right.value,
-        force_domain,
-        zero.each_ref().map(Vec::as_slice),
-        report.sample_layout(),
-    )
-    .iter()
-    .map(|v| v.abs())
-    .fold(0.0, f64::max);
-    assert!((reference - omitted).abs() > 1e-12 * (reference + FLOORS[0]));
+    for (index, floor) in FLOORS.into_iter().enumerate() {
+        let magnitude = |p: &v2_probe_pressure_oracle::AbsolutePressure, q: usize| {
+            if index == 0 {
+                p.scalar[q].abs()
+            } else {
+                (0..3).fold(0.0_f64, |v, a| v.hypot(p.gradient[a][q]))
+            }
+        };
+        let reference = (0..r.scalar.len())
+            .map(|q| magnitude(&r, q))
+            .fold(0.0, f64::max);
+        let relative = (0..r.scalar.len())
+            .map(|q| (magnitude(&l, q) - magnitude(&r, q)).abs() / magnitude(&r, q).max(floor))
+            .fold(0.0, f64::max);
+        let finding = report.quantities()[index].pairs[1];
+        assert!((finding.reference_peak - reference).abs() < 2e-11 * (reference + floor));
+        assert!((finding.peak_relative_error - relative).abs() < 2e-11 * (1.0 + relative));
+        let zero: [Vec<nsbu_solver::Complex64>; 3] = std::array::from_fn(|_| {
+            vec![nsbu_solver::Complex64::new(0.0, 0.0); force_domain.layout().half_len()]
+        });
+        let omitted = v2_probe_pressure_oracle::absolute(
+            right.domain,
+            right.value,
+            force_domain,
+            zero.each_ref().map(Vec::as_slice),
+            report.sample_layout(),
+        );
+        let omitted_reference = (0..omitted.scalar.len())
+            .map(|q| magnitude(&omitted, q))
+            .fold(0.0, f64::max);
+        assert!((reference - omitted_reference).abs() > 1e-12 * (reference + floor));
+    }
 }

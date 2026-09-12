@@ -142,4 +142,4 @@ fn signed(i: usize, n: usize) -> isize {
 }
 
 mod absolute;
-pub use absolute::absolute;
+pub use absolute::{absolute, AbsolutePressure};
