@@ -4,7 +4,7 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "2af2ee50a6c5785fff38ef33632a58d164bd60b90e8ef17e297f3c13a6482bac"
+      "sha256": "eb06fedd7600b3730bd37d5dc5a642bfe926eea92dd7145b9a6da080e4968eb8"
     },
     {
       "path": "raw/clippy.log.gz",
@@ -43,6 +43,10 @@
       "sha256": "561fd0003dde5c65f8f06e59e41a9164d548fca9a8f25344f255ede8bb662480"
     },
     {
+      "path": "raw/python-complexipy.log.gz",
+      "sha256": "e315289a2428debded36e68d4fd50afd7e09ddf581a484aefd19e9c516e320d7"
+    },
+    {
       "path": "raw/python-complexity.json.gz",
       "sha256": "b1eb7607cb0740ecde7fb77c5c4574537db8fa800bb4dfb5d35fd842c376bc56"
     },
@@ -59,8 +63,8 @@
       "sha256": "3b179fdcd031f876c2e6dd4ca82adb7c97b65ac2fb1558657fc6be3b17576647"
     },
     {
-      "path": "raw/python-lint-pending.txt",
-      "sha256": "848ad0b002201b8c785ed534e2bc459e79a49bc368f55f343a830958658f03fb"
+      "path": "raw/python-halstead.json.gz",
+      "sha256": "80d56e16ee1f5c94ecb3639ee37af66935808b9396ca3d3738425cd8002d2b6e"
     },
     {
       "path": "raw/python-tests.log.gz",
@@ -88,7 +92,7 @@
     },
     {
       "path": "summary.json",
-      "sha256": "402a12161918284c0d615a852c127fd9351335c30919b2451c593bdc9ed3cf8b"
+      "sha256": "e9f1f26247f1b0cfb896dfd9898f30ebc2f107b86df8ca9176002dd260d5db5e"
     }
   ]
 }

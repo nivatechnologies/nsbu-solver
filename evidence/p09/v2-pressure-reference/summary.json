@@ -121,6 +121,11 @@
     "changed_function_crap_maximum": 20.0,
     "basedpyright": "passed",
     "black": "passed",
-    "ruff": "pending: unavailable in installed/offline tool cache"
+    "complexipy_cognitive_maximum": 2,
+    "radon_all_node_halstead_difficulty_maximum": 3.5,
+    "physical_lines": {
+      "reference/generate_pressure_gauge_rust.py": 122,
+      "reference/tests/test_generate_pressure_gauge_rust.py": 68
+    }
   }
 }
