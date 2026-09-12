@@ -3,4 +3,9 @@ CARGO_TARGET_DIR=target/avx-w3-spike SOURCE_ID=$(git rev-parse HEAD) cargo build
 /usr/bin/time -v target/avx-w3-spike/release/p10-avx-w3-batching-spike > evidence/p10/avx-w3-batching-spike-20260912/profile.stdout 2> evidence/p10/avx-w3-batching-spike-20260912/profile.time
 cargo fmt --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml -- --check
 CARGO_TARGET_DIR=target/avx-w3-spike cargo clippy --release --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml -- -D warnings
-
+CARGO_TARGET_DIR=target/avx-w3-quality cargo test --release --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml
+CARGO_TARGET_DIR=target/avx-w3-quality cargo clippy --release --all-targets --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml -- -D warnings
+/mnt/niva-array/nsbu-solver/work/rust-tools/bin/rust-code-analysis-cli -m -O json -p evidence/p10/avx-w3-batching-spike-20260912/harness/src > evidence/p10/avx-w3-batching-spike-20260912/rust-metrics.jsonl
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH CARGO_TARGET_DIR=target/avx-w3-coverage cargo +nightly-2026-03-03 llvm-cov clean --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml --workspace
+PATH=/mnt/niva-array/nsbu-solver/work/rust-tools/bin:$PATH CARGO_TARGET_DIR=target/avx-w3-coverage cargo +nightly-2026-03-03 llvm-cov --branch --json --output-path evidence/p10/avx-w3-batching-spike-20260912/coverage.json --manifest-path evidence/p10/avx-w3-batching-spike-20260912/harness/Cargo.toml
+python3 quality/check_crap.py rust evidence/p10/avx-w3-batching-spike-20260912/rust-metrics.jsonl evidence/p10/avx-w3-batching-spike-20260912/coverage.json evidence/p10/avx-w3-batching-spike-20260912/crap.json

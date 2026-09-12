@@ -74,7 +74,13 @@ observer assumption is optimistic because its six product transforms currently
 have dependencies and would require additional product storage, so the result
 does not hide a plausible pass.
 
-The decision is therefore negative: preserve this spike as evidence and stop W3
-integration. There is no proposal to alter the numerical/backend contract or to
-integrate the worker owner into production.
+The decision is negative only for this frozen N192 scheduled-cost model: do not
+integrate W3 into that endpoint. It is not a global rejection. The measured
+2.27--2.67x copy-inclusive batch result remains promising for N256 and N384,
+whose component costs differ. `DESIGN_PROPOSAL.md` records a bounded, design-only
+N256 model and an unqualified N384 guard study for root review. Neither changes
+the numerical/backend contract, production code, the active endpoint, or a
+default API.
 
+`QUALITY.md` records the corrective module split and focused quality evidence.
+The original `profile.stdout` and `profile.time` bytes and hashes are unchanged.

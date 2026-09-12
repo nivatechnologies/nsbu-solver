@@ -1,11 +1,15 @@
 {
-  "status": "complete_negative_integration_gate",
+  "status": "complete_n192_negative_with_design_only_followup",
   "source_branch": "codex/p10-fft-batch-20260912",
   "source_commit": "f134856cd199e38ea87c595b5492cbf18fef2e4d",
   "production_changed": false,
   "backend": "rustfft-6.4.1-avx-avx2-fma",
   "width": 3,
-  "lengths": [288, 384, 576],
+  "lengths": [
+    288,
+    384,
+    576
+  ],
   "gate": {
     "minimum_batch_speedup": 1.8,
     "minimum_scheduled_step_reduction": 0.25
@@ -17,7 +21,7 @@
       "swap_speedup": 2.946078,
       "copy_seconds": 0.072917649,
       "copy_inclusive_speedup": 2.604664,
-      "dispatch_seconds": 0.000013904,
+      "dispatch_seconds": 1.3904e-05,
       "production_forward_additional_bytes": 776267520,
       "production_inverse_additional_bytes": 773613312,
       "production_bidirectional_additional_bytes": 1158473600
@@ -28,7 +32,7 @@
       "swap_speedup": 2.482403,
       "copy_seconds": 0.166618043,
       "copy_inclusive_speedup": 2.265267,
-      "dispatch_seconds": 0.000021447,
+      "dispatch_seconds": 2.1447e-05,
       "production_forward_additional_bytes": 1827942144,
       "production_inverse_additional_bytes": 1823223552,
       "production_bidirectional_additional_bytes": 2733911936
@@ -39,7 +43,7 @@
       "swap_speedup": 2.990101,
       "copy_seconds": 0.567298994,
       "copy_inclusive_speedup": 2.666383,
-      "dispatch_seconds": 0.000012946,
+      "dispatch_seconds": 1.2946e-05,
       "production_forward_additional_bytes": 6143131392,
       "production_inverse_additional_bytes": 6132514560,
       "production_bidirectional_additional_bytes": 9200779136
@@ -56,7 +60,7 @@
     "one_byte_short_caps_refused": true
   },
   "process": {
-    "wall_seconds": 333.70,
+    "wall_seconds": 333.7,
     "maximum_rss_kib": 53856448,
     "exit_status": 0
   },
@@ -71,10 +75,34 @@
     "copy_inclusive_reduction": 0.20536340794834382,
     "optimistic_conservative_batches": true
   },
-  "decision": "stop_without_production_integration_because_scheduled_step_reduction_is_below_25_percent",
+  "decision": "stop_n192_scheduled_endpoint_integration_because_its_modeled_step_reduction_is_below_25_percent",
   "qualification": {
     "improved_arithmetic": false,
     "accepted_windows": 0
+  },
+  "decision_scope": {
+    "n192_scheduled_model_negative": true,
+    "global_w3_rejection": false,
+    "production_integration": false,
+    "design_proposal": "DESIGN_PROPOSAL.md"
+  },
+  "quality_correction": {
+    "maximum_source_file_lines": 459,
+    "function_records": 93,
+    "maximum_function_cyclomatic": 15,
+    "maximum_function_cognitive": 6,
+    "maximum_function_halstead_difficulty": 30,
+    "maximum_function_crap": 20,
+    "coverage_lines_percent": 92.74092615769712,
+    "coverage_functions_percent": 91.02564102564102,
+    "coverage_branches_percent": 66.21621621621621,
+    "exclusions": false,
+    "large_profile_repeated": false
+  },
+  "design_only_followup": {
+    "n256_m384_scheduled_copy_inclusive_reduction": 0.25375827380127824,
+    "n256_m384_model_scope": "from-rest h32 plus startup-observer amortization; unqualified narrow pass",
+    "n384_h32_scope": "unqualified component guard; no whole-step claim",
+    "production_changed": false
   }
 }
-
