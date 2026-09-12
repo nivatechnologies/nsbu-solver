@@ -1,0 +1,16 @@
+{
+  "changed_rust_files": 13,
+  "changed_all_nodes": 169,
+  "changed_maximum_rca_cyclomatic_max": 13.0,
+  "changed_maximum_function_cyclomatic_sum": 16.0,
+  "changed_maximum_cognitive": 6.0,
+  "changed_maximum_all_node_halstead_difficulty": 66.96666666666667,
+  "changed_maximum_function_ploc": 43.0,
+  "changed_maximum_actual_file_lines": 322,
+  "production_maximum_crap": 16.512026239067055,
+  "changed_test_maximum_conservative_zero_coverage_crap": 20.0,
+  "whole_rust_maximum_rca_cyclomatic_max": 21.0,
+  "whole_rust_maximum_cognitive": 21.0,
+  "whole_rust_maximum_all_node_halstead_difficulty": 75.9295154185022,
+  "whole_rust_maximum_actual_file_lines": 477
+}

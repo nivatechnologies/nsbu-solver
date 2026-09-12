@@ -1,0 +1,1 @@
+An initial unlogged pre-freeze functional invocation exposed a test-fixture sequencing error: an exhaustion assertion reused a producer that had already advanced. The fixture was corrected before source commit 955e0ba. No production behavior or numerical kernel was changed for that correction. The final source-bound instrumented run passed all six tests.

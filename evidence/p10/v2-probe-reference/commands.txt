@@ -1,0 +1,13 @@
+# Source-bound coverage: code/test source 955e0ba; final tip differs only in docs/V2_PROBE_REFERENCE.md.
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov clean --workspace
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov --branch --no-report -p nsbu-benchmarks --lib --locked -- v2_experiment::reference::tests --nocapture
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov --branch --no-report -p nsbu-benchmarks --test v2_probe_reference --locked -- --nocapture
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov --branch --no-report -p nsbu-benchmarks --test v2_reference_tracking --test v2_regional_tracking --locked -- --test-threads=1 --nocapture
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov report --branch --json --output-path work/v2-probe-reference/final/coverage.json
+cargo test -p nsbu-benchmarks --test v2_probe_reference_allocation --locked -- --nocapture
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json
+python3 -m quality.check_crap rust work/v2-probe-reference/final/metrics-production.jsonl work/v2-probe-reference/final/coverage-focused.json work/v2-probe-reference/final/crap-production.json
+/mnt/niva-array/nsbu-solver/.venv/bin/python tools/check_repository.py

@@ -1,0 +1,6 @@
+{
+  "scope": "all changed executable production files, including the pre-existing probes module containing the new module registration",
+  "lines": {"covered": 835, "total": 891, "percent": 93.71492704826038},
+  "branches": {"covered": 44, "total": 60, "percent": 73.33333333333333},
+  "tests_excluded_by_default_source_mapping": true
+}

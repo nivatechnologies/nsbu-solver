@@ -1,0 +1,4 @@
+base_commit=3ec544d861b399509b510e16573decdf18839ef7
+code_source_commit=955e0ba5c7c46e57901643a3ebe6b27540cbdb86
+final_tip_before_evidence=55eec9e2d0281c8ea7a2de420b11762183be41d3
+coverage_source_note=Rust source and tests are byte-identical between code_source_commit and final_tip_before_evidence; the follow-up changes only docs/V2_PROBE_REFERENCE.md.

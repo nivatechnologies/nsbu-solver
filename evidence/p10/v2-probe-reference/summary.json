@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "base_commit": "3ec544d861b399509b510e16573decdf18839ef7",
+  "code_source_commit": "955e0ba5c7c46e57901643a3ebe6b27540cbdb86",
+  "final_tip_before_evidence": "55eec9e2d0281c8ea7a2de420b11762183be41d3",
+  "status": "DiagnosticOnly",
+  "profile": {
+    "source_grids": [4, 8, 12],
+    "probe_clocks": [0, 95, 128],
+    "sample_grid": [12, 12, 12],
+    "branches": 6,
+    "quantities_per_branch": 4
+  },
+  "tests": {
+    "probe_reference_instrumented": {"passed": 6, "failed": 0, "seconds": 975.98},
+    "accepted_reference_instrumented": {"passed": 4, "failed": 0, "seconds": 320.11},
+    "regional_reference_instrumented": {"passed": 3, "failed": 0, "seconds": 607.08},
+    "allocator": {
+      "passed": true,
+      "construction_bytes": 22247360,
+      "declared_joint_bytes": 27312296,
+      "steady_allocations": 0,
+      "scalar_transforms": 810,
+      "root_iterations": 663552
+    }
+  },
+  "focused_production_coverage": {
+    "lines_covered": 835,
+    "lines_total": 891,
+    "line_percent": 93.71492704826038,
+    "branches_covered": 44,
+    "branches_total": 60,
+    "branch_percent": 73.33333333333333
+  },
+  "quality": {
+    "production_maximum_crap": 16.512026239067055,
+    "test_maximum_conservative_zero_coverage_crap": 20.0,
+    "whole_rust_maximum_rca_cyclomatic": 21.0,
+    "whole_rust_maximum_cognitive": 21.0,
+    "whole_rust_maximum_all_node_halstead_difficulty": 75.9295154185022,
+    "whole_rust_maximum_actual_file_lines": 477,
+    "format": "passed",
+    "workspace_all_targets_clippy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_check": "passed"
+  },
+  "claims_independent_high_precision_grid_oracle": false,
+  "claims_continuum_bound": false,
+  "claims_pde_qualification": false,
+  "accepted_windows": 0
+}
