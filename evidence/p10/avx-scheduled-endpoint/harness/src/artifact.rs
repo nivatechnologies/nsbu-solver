@@ -1,5 +1,7 @@
 //! Harness-owned transactional snapshot and record publication; no resume decoder exists.
-use nsbu_solver::{diagnostics::balances::BalanceSample, domain::SpectralState, SolverError};
+#[cfg(not(feature = "n384-prep"))]
+use nsbu_solver::SolverError;
+use nsbu_solver::{diagnostics::balances::BalanceSample, domain::SpectralState};
 use sha2::{Digest, Sha256};
 use std::{
     fs::{self, File, OpenOptions},
@@ -8,7 +10,11 @@ use std::{
 };
 
 pub const BUFFER_BYTES: usize = 1024 * 1024;
+#[cfg(not(feature = "n384-prep"))]
 pub const DISK_CAP_BYTES: usize = 4 * 1024 * 1024 * 1024;
+#[cfg(feature = "n384-prep")]
+pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
+#[cfg(not(feature = "n384-prep"))]
 const HEADER_ALLOWANCE: usize = 4096;
 
 pub struct NodeRecord<'a> {
@@ -23,29 +29,68 @@ pub struct NodeRecord<'a> {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum PublicationKind {
     Attempt,
+    #[cfg(not(feature = "n384-prep"))]
     Node,
+    #[cfg(feature = "n384-prep")]
+    Step,
+}
+
+impl PublicationKind {
+    pub fn advances_durable_clock(self) -> bool {
+        match self {
+            Self::Attempt => false,
+            #[cfg(not(feature = "n384-prep"))]
+            Self::Node => true,
+            #[cfg(feature = "n384-prep")]
+            Self::Step => true,
+        }
+    }
 }
 
 pub struct StagedArtifact {
-    partial: PathBuf,
-    final_path: PathBuf,
-    root: PathBuf,
-    kind: PublicationKind,
-    state_hash: Option<String>,
-    published: bool,
-    preserve_on_failure: bool,
+    pub(crate) partial: PathBuf,
+    pub(crate) final_path: PathBuf,
+    pub(crate) root: PathBuf,
+    pub(crate) kind: PublicationKind,
+    pub(crate) state_hash: Option<String>,
+    pub(crate) published: bool,
+    pub(crate) preserve_on_failure: bool,
 }
 
 impl StagedArtifact {
     pub fn publish(mut self) -> io::Result<PublishedArtifact> {
+        self.publish_with_sync(|root| File::open(root)?.sync_all())
+    }
+
+    pub(crate) fn publish_with_sync(
+        &mut self,
+        sync_parent: impl FnOnce(&Path) -> io::Result<()>,
+    ) -> io::Result<PublishedArtifact> {
         self.preserve_on_failure = true;
-        fs::rename(&self.partial, &self.final_path)?;
-        File::open(&self.root)?.sync_all()?;
+        if let Err(error) = fs::rename(&self.partial, &self.final_path) {
+            return Err(self.publication_error(error));
+        }
+        if let Err(error) = sync_parent(&self.root) {
+            return Err(self.publication_error(error));
+        }
         self.published = true;
         Ok(PublishedArtifact {
             kind: self.kind,
             state_hash: self.state_hash.take(),
         })
+    }
+
+    fn publication_error(&self, cause: io::Error) -> io::Error {
+        io::Error::new(
+            cause.kind(),
+            format!(
+                "publication_unconfirmed partial_path={} partial_exists={} final_path={} final_exists={} parent_sync_confirmed=false cause={cause}",
+                self.partial.display(),
+                self.partial.exists(),
+                self.final_path.display(),
+                self.final_path.exists(),
+            ),
+        )
     }
 }
 
@@ -67,6 +112,7 @@ pub struct PublishedArtifact {
     pub state_hash: Option<String>,
 }
 
+#[cfg(not(feature = "n384-prep"))]
 pub fn disk_preflight(state_bytes: usize, nodes: usize) -> Result<usize, SolverError> {
     state_bytes
         .checked_add(HEADER_ALLOWANCE)
@@ -76,6 +122,7 @@ pub fn disk_preflight(state_bytes: usize, nodes: usize) -> Result<usize, SolverE
         .ok_or(SolverError::ResourceLimit)
 }
 
+#[cfg(not(feature = "n384-prep"))]
 pub fn publish_node(
     root: &Path,
     state: &SpectralState,
@@ -87,6 +134,7 @@ pub fn publish_node(
         .ok_or_else(|| io::Error::other("node publication omitted state hash"))
 }
 
+#[cfg(not(feature = "n384-prep"))]
 pub fn stage_node(
     root: &Path,
     state: &SpectralState,
@@ -126,6 +174,7 @@ pub fn stage_node(
     })
 }
 
+#[cfg(not(feature = "n384-prep"))]
 fn stage_node_inner(
     partial: &Path,
     state: &SpectralState,
@@ -141,7 +190,7 @@ fn stage_node_inner(
     Ok(hash)
 }
 
-fn write_snapshot(
+pub(crate) fn write_snapshot(
     path: &Path,
     state: &SpectralState,
     identity: &str,
@@ -181,7 +230,7 @@ fn write_snapshot(
     Ok((format!("{digest:x}"), coefficient_bytes))
 }
 
-fn node_json(
+pub(crate) fn node_json(
     state: &SpectralState,
     record: NodeRecord<'_>,
     hash: &str,
@@ -307,7 +356,7 @@ pub fn json_string(value: &str) -> String {
     escaped
 }
 
-fn write_file(path: &Path, bytes: &[u8]) -> io::Result<()> {
+pub(crate) fn write_file(path: &Path, bytes: &[u8]) -> io::Result<()> {
     let mut file = create(path)?;
     file.write_all(bytes)?;
     file.sync_all()
@@ -324,6 +373,7 @@ fn partial_path(root: &Path, name: &str) -> PathBuf {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[cfg(not(feature = "n384-prep"))]
     use nsbu_solver::domain::{
         Domain, Epoch, ExtraStorage, ResourcePlan, SpectralState, TickClock,
     };
@@ -372,6 +422,7 @@ mod tests {
         fs::remove_dir_all(root).unwrap();
     }
 
+    #[cfg(not(feature = "n384-prep"))]
     #[test]
     fn disk_preflight_refuses_more_than_the_fixed_cap() {
         assert_eq!(
@@ -388,6 +439,7 @@ mod tests {
         );
     }
 
+    #[cfg(not(feature = "n384-prep"))]
     #[test]
     fn scheduled_node_stages_and_publishes_snapshot_record_and_attempt_together() {
         let nonce = SystemTime::now()

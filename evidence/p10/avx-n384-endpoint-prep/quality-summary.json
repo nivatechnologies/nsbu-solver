@@ -1,0 +1,38 @@
+{
+  "status": "preparation_only_final_w3_recheck_required",
+  "tests": {
+    "n384_prep_passed": 16,
+    "default_regression_passed": 11,
+    "n256_regression_passed": 11
+  },
+  "format": "pass",
+  "strict_clippy_n384_prep": "pass",
+  "maximum_function_cyclomatic_complexity": 15,
+  "maximum_function_cognitive_complexity": 7,
+  "maximum_function_halstead_difficulty": 26.833333333333332,
+  "maximum_file_halstead_difficulty": 57.324380165289256,
+  "maximum_file_lines": 499,
+  "focused_n384_line_coverage": {
+    "covered": 616,
+    "count": 1578,
+    "percent": 39.04
+  },
+  "focused_n384_branch_coverage": {
+    "covered": 30,
+    "count": 92,
+    "percent": 32.61
+  },
+  "combined_n384_default_line_coverage": {
+    "covered": 724,
+    "count": 1751,
+    "percent": 41.35
+  },
+  "combined_n384_default_branch_coverage": {
+    "covered": 34,
+    "count": 100,
+    "percent": 34.0
+  },
+  "combined_maximum_per_function_crap": 22.5,
+  "combined_crap_violations": 0,
+  "coverage_note": "Focused harness coverage is reported honestly and is not the whole maintained-scope 80 percent gate. Final W3 source requires a fresh feature-specific quality run before freeze."
+}
