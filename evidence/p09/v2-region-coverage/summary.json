@@ -1,0 +1,15 @@
+{
+  "source_commit": "430d15ee8354d160e528c9713728bf1c390ee6dd",
+  "base_commit": "31e99a1",
+  "focused_test": "cargo test -p nsbu-benchmarks --test v2_region_coverage: 2 passed",
+  "library_control": "cargo test -p nsbu-benchmarks --lib no_samples_is_metadata_absence_not_a_zero_count: 1 passed, 44 filtered",
+  "clippy": "passed with -D warnings",
+  "crap": {"maximum": 23.93586005830904, "threshold": "<25", "status": "passed"},
+  "static_function_maximums": {"cognitive": 6, "halstead_difficulty": 32.333333333333336},
+  "focused_coverage": {
+    "plan": {"lines": 95.40229885057471, "branches": 78.57142857142857},
+    "report": {"lines": 100.0, "branches": null},
+    "workspace": {"lines": 92.99065420560748, "branches": 52.5}
+  },
+  "scope": "focused only; no whole-maintained coverage gate or PDE-window run"
+}
