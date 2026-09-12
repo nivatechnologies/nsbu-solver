@@ -1,8 +1,8 @@
 81f2c116b277680004d1483d6b54bfc8809eda4af351aa88641da7ba7e1ad8f5  evidence/p09/v2-accepted-coverage-integration/README.md
-7edb5962b8260405c8f36587701b0a04c90c3eba46745c9cad86b99f4371afb1  evidence/p09/v2-accepted-coverage-integration/artifact-sha256.txt
 bafa18c82ddfbabe4d2ea4f245e20bf2e248f7804610573d7d1ebbba949482c4  evidence/p09/v2-accepted-coverage-integration/raw/allocation.log
 aaace917cd48bf76308ff323cb1f229de81d935df16c93fed127f6f9c57c819a  evidence/p09/v2-accepted-coverage-integration/raw/check-repository.log
 1cfb819fdefa5aea831b73f97c7386a81eab2602bc5b6f98ee953e6ea3adfed5  evidence/p09/v2-accepted-coverage-integration/raw/clippy.log
+255beba5ce2c6b4515690acb3f594c026d08f70ba365fa828d7bb8036d2bc588  evidence/p09/v2-accepted-coverage-integration/raw/coordinator-normal.log
 f99a79dc5695da49d51648c01bcd38419017b0e1595f75d1f60f5f07c7c31d82  evidence/p09/v2-accepted-coverage-integration/raw/coverage-all-source.json.gz
 cca8a0aca4d20aa145c81d9cff1baccf072eadd9022cc34081075a69c8ddca9a  evidence/p09/v2-accepted-coverage-integration/raw/coverage-source3a-all-source.json.gz
 db4a6d09c1a23a223e93c487db1284657a927ee0e1e5d743148564e91946c0dc  evidence/p09/v2-accepted-coverage-integration/raw/coverage.log
@@ -11,6 +11,7 @@ db4a6d09c1a23a223e93c487db1284657a927ee0e1e5d743148564e91946c0dc  evidence/p09/v
 3cd828e8e19e455e25f2003edec085b1922c4f635c54be2fdfe5f89f8be4ff56  evidence/p09/v2-accepted-coverage-integration/raw/export-normal.log
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p09/v2-accepted-coverage-integration/raw/fmt.log
 b5ffba3e31f4fe664e8571000ac9d1637270784e5e8e2b26600a0dda04b4c956  evidence/p09/v2-accepted-coverage-integration/raw/metrics.jsonl.gz
+e4b46e0268c0af4cbd10aa1a3aad6acd30cfa3d122c8603d7dc8003e873ddcfc  evidence/p09/v2-accepted-coverage-integration/raw/region-normal.log
 03eaf82ff62fe4156ee2718455891d60d30249ea41aa52b5580e80f889a4d639  evidence/p09/v2-accepted-coverage-integration/raw/rustdoc.log
 119b04318374b35130ab2fabb247094a1c96fa4250f62a2487d9e9d7431825cd  evidence/p09/v2-accepted-coverage-integration/reproduce.sh
 c5392cbf5c7e727679d376e6bbfef8fb0c00525b18ca5cf5ea64645e3fa45859  evidence/p09/v2-accepted-coverage-integration/source-sha256.json

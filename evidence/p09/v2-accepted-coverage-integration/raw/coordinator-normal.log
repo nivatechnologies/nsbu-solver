@@ -1,0 +1,12 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.38s
+     Running tests/v2_diagnostic_coordinator.rs (target/debug/deps/v2_diagnostic_coordinator-491a238aad8bbedd)
+
+running 3 tests
+test rejects_incomplete_crossed_manifests_foreign_owners_caps_and_bad_regions ... ok
+test failed_child_terminates_without_partial_publication_or_retry_charge ... ok
+test publishes_crossed_consumers_in_one_unqualified_manifest has been running for over 60 seconds
+test publishes_crossed_consumers_in_one_unqualified_manifest ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 114.50s
+
