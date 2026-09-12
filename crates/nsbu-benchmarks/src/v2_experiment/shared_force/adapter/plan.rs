@@ -30,9 +30,9 @@ impl<'table, 'streams> SharedForceAdapterSetPlan<'table, 'streams> {
         if streams.is_empty() {
             return Err(SolverError::InvalidPayload);
         }
+        let admission_schedule_visits = admission_visits(table, streams)?;
         validate_streams(table, streams)?;
         let limits = adapter_limits(table)?;
-        let admission_schedule_visits = admission_visits(table, streams)?;
         let bounds = adapter_bounds(table, streams, limits, admission_schedule_visits)?;
         if bounds.joint_peak_bytes > joint_cap {
             return Err(SolverError::ResourceLimit);

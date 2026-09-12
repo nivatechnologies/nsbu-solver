@@ -93,7 +93,7 @@ pub struct SharedForceAdapterWork {
     pub binding_checks: usize,
     /// Abstract shared-table lookup, binding and strict-transfer work exposed to the RHS.
     pub table_work_units: usize,
-    /// Fixed schedule slots charged before each attempt is validated or constructed.
+    /// Populated call-schedule entries charged before attempt validation.
     pub schedule_visits: usize,
 }
 
@@ -112,7 +112,7 @@ pub struct SharedForceAdapterBounds {
     pub construction_peak_bytes: usize,
     /// Maximum simultaneous owner, caller manifests, handles and one caller output.
     pub joint_peak_bytes: usize,
-    /// Conservative schedule writes/comparisons and stream filters during admission.
+    /// Schedule entries/comparisons and stream filters bounded before nested validation.
     pub admission_schedule_visits: usize,
     /// Complete runtime handle allowance; table work remains separately queryable.
     pub work: SharedForceAdapterWork,
