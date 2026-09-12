@@ -98,7 +98,7 @@ impl<'a> ReferenceTrackingPlan<'a> {
     }
 }
 
-fn reservation(
+pub(crate) fn kernel_reservation(
     sources: [nsbu_solver::domain::Domain; 3],
     samples: Layout,
 ) -> Result<usize, SolverError> {
@@ -114,13 +114,24 @@ fn reservation(
     let allocator_allowance = 7usize.checked_mul(4096).ok_or(SolverError::SizeOverflow)?;
     derivatives
         .checked_add(arrays)
-        .and_then(|n| n.checked_add(std::mem::size_of::<ReferenceTrackingWorkspace<'_>>()))
-        .and_then(|n| n.checked_add(std::mem::size_of::<ReferenceTrackingSample>()))
         .and_then(|n| n.checked_add(allocator_allowance))
         .ok_or(SolverError::SizeOverflow)
 }
 
-fn work(sources: [Layout; 3], samples: Layout) -> Result<ReferenceTrackingWork, SolverError> {
+fn reservation(
+    sources: [nsbu_solver::domain::Domain; 3],
+    samples: Layout,
+) -> Result<usize, SolverError> {
+    kernel_reservation(sources, samples)?
+        .checked_add(std::mem::size_of::<ReferenceTrackingWorkspace<'_>>())
+        .and_then(|n| n.checked_add(std::mem::size_of::<ReferenceTrackingSample>()))
+        .ok_or(SolverError::SizeOverflow)
+}
+
+pub(crate) fn work(
+    sources: [Layout; 3],
+    samples: Layout,
+) -> Result<ReferenceTrackingWork, SolverError> {
     let transforms = 6 * QUANTITIES
         .into_iter()
         .map(|quantity| quantity.scalar_transforms() / 2)
