@@ -1,0 +1,11 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.96s
+     Running tests/v2_region_coverage.rs (target/debug/deps/v2_region_coverage-bd2683ffde43648c)
+
+running 3 tests
+test admission_requires_nested_panels_and_joint_cap ... ok
+test actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state ... ok
+test fresh_unpublished_family_rejects_a_legitimate_same_plan_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
