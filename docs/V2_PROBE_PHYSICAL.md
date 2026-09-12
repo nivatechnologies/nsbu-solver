@@ -17,7 +17,9 @@ points rather than tensor components.
 six source domains, one common sample layout, four binary64 floor words, a
 maximum whole-attempt count, and the simultaneous probe-owner and consumer
 storage cap. Its checked work allowance covers all twenty comparisons and the
-publication binding checks. The consumer reservation includes its shared
+publication binding checks. Each attempt reserves 128 conservative whole
+identity, clock, origin and domain comparisons; this is not a bytewise or
+scalar-word operation count. The consumer reservation includes its shared
 transform/reduction workspace, retained report, and 64 bytes for each of 32
 allocator-metadata allowance slots. This allowance is not a process-RSS bound.
 
