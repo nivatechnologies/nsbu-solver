@@ -996,11 +996,13 @@ final review.
 
 The [cached-integration Phase-B evidence](evidence/p09/v2-cached-integration/summary.json)
 records direct-versus-cached CM/HO and archive controls with selected focused
-quality checks. Its all-changed focused branch coverage is 74.5902%, below the
-whole-maintained gate, so final hosted quality remains pending. The
+quality checks. Its all-changed focused branch coverage is 74.5902%; that subset
+is not the whole-maintained coverage scope. The source-matched hosted check must
+independently meet the 80% line and branch gates and remains pending. The
 [corrected M24 partial pilot](evidence/p10/resolution-pilot-corrected-487c330/README.md)
-reached probes through 4095 before its timeout; its accepted-4096 report and
-M24-to-M48 endpoint control were not completed. An archive-only reader recovered
+reached probes through 4095 before its timeout. Its accepted-4096 consumers
+returned and saved all six states, but the report was not serialized and the
+M24-to-M48 endpoint control did not complete. An archive-only reader recovered
 endpoint spectral comparisons from validated state archives, which is not a
 complete endpoint report or a convergence result. M48/M96 runs remain pending.
 P08/P09/P10 remain incomplete and accepted concentrating PDE windows remain zero.
