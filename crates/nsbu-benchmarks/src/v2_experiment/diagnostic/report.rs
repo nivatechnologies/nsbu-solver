@@ -3,7 +3,7 @@ use crate::v2_experiment::{
     binding::NodeBindingSample,
     physical::PhysicalRefinementSample,
     pressure::PressureRefinementSample,
-    probes::{residuals::ResidualFamilySample, ProbeSample},
+    probes::{physical::ProbePhysicalSample, residuals::ResidualFamilySample, ProbeSample},
     reference::regional::RegionalTrackingSample,
     RefinementSample,
 };
@@ -153,6 +153,7 @@ pub struct DiagnosticEvent {
     pub(super) family_identity: [u8; 32],
     pub(super) probe_identity: [u8; 32],
     pub(super) probe: ProbeSample,
+    pub(super) probe_physical: ProbePhysicalSample,
     pub(super) accepted: AcceptedEvidence,
     pub(super) residual: ResidualEvidence,
 }
@@ -172,6 +173,10 @@ impl DiagnosticEvent {
     /// Reconstructed value and derivative comparisons at this clock.
     pub fn probe(self) -> ProbeSample {
         self.probe
+    }
+    /// Physical comparisons of the six reconstructed value fields at this clock.
+    pub fn reconstructed_physical(self) -> ProbePhysicalSample {
+        self.probe_physical
     }
     /// Accepted-state evidence or its schedule marker.
     pub fn accepted(self) -> AcceptedEvidence {

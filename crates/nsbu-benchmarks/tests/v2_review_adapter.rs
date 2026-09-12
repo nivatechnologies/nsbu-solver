@@ -120,10 +120,35 @@ fn assert_accepted(record: AdapterRecord, event: DiagnosticEvent, quantity: usiz
     }
 }
 
-fn assert_offstage(record: AdapterRecord, event: DiagnosticEvent) {
-    assert_eq!(record.availability, RecordAvailability::OffstageUnavailable);
+fn assert_offstage(record: AdapterRecord, event: DiagnosticEvent, quantity: usize) {
+    assert_eq!(
+        record.availability,
+        RecordAvailability::OffstagePhysicalMeasured
+    );
     assert!(record.tracking_error.is_none());
-    for channel in CHANNELS {
+    let physical = event.reconstructed_physical().quantities()[quantity];
+    let Evidence::Sequence(space) = record.channels[Channel::Space as usize] else {
+        panic!("space missing")
+    };
+    let Evidence::Sequence(time) = record.channels[Channel::Time as usize] else {
+        panic!("time missing")
+    };
+    let Evidence::Pair(method) = record.channels[Channel::Method as usize] else {
+        panic!("method missing")
+    };
+    assert_eq!(
+        space.map(f64::to_bits),
+        [physical.pairs[0], physical.pairs[1]].map(|x| x.rms_error.to_bits())
+    );
+    assert_eq!(
+        time.map(f64::to_bits),
+        [physical.pairs[2], physical.pairs[3]].map(|x| x.rms_error.to_bits())
+    );
+    assert_bits(method, physical.pairs[4].rms_error);
+    for channel in CHANNELS
+        .into_iter()
+        .filter(|channel| !matches!(channel, Channel::Space | Channel::Time | Channel::Method))
+    {
         assert_missing(record.channels[channel as usize]);
     }
     let actual = record.reconstruction.unwrap().levels();
@@ -149,7 +174,7 @@ fn assert_mapped(events: &[DiagnosticEvent], output: &[Option<AdapterRecord>; RE
             if event.accepted().sample().is_some() {
                 assert_accepted(record, event, quantity);
             } else {
-                assert_offstage(record, event);
+                assert_offstage(record, event, quantity);
             }
         }
     }

@@ -5,6 +5,9 @@ each clock in one complete probe manifest. It owns two independent six-branch
 families. The ordinary `V2Family` supplies actual accepted states, while the
 `ProbeFamily` evolves separately from rest and supplies reconstructed values,
 derivatives, accepted-node provenance and off-stage residual inputs.
+Every probe publication is also measured by the reconstructed-value physical
+consumer before the owner can advance; this uses `ProbeFields::value`, never its
+physical-time derivative as velocity.
 
 Admission requires every ordinary accepted clock to appear in the probe
 manifest. Every other manifest clock must occur exactly once in the residual
@@ -21,15 +24,16 @@ comparisons, physical velocity/gradient/Hessian/vorticity comparisons,
 pressure/pressure-gradient comparisons, global and regional binary64
 analytical tracking, and an exact retained-node provenance/bitwise finding.
 At a residual clock, it advances only the probe family and immediately measures
-the fresh-force doubled-band residual while the reconstructed fields remain
-published. The event records the other path as `NotScheduled` rather than
+the physical velocity/ordered-gradient/ordered-Hessian/vorticity differences
+and fresh-force doubled-band residual while the reconstructed fields remain
+published. The event records the accepted-state path as `NotScheduled` rather than
 representing missing data with zeros.
 
 The joint preflight counts the ordinary family once, the complete reconstructed
 probe owner once, each consumer's incremental storage, the exact retained event
 capacity and two transient event copies at the driver call boundary. Copies
 retained by a caller are outside the owner storage contract. Separate finite
-ledgers expose probe, physical, pressure, analytical-reference, regional,
+ledgers expose probe, accepted physical, reconstructed physical, pressure, analytical-reference, regional,
 residual and binding work. A failed event attempt terminates the driver and
 publishes no partial event. Numerical owners, published events and consumer
 charges remain inspectable read-only.
@@ -65,4 +69,6 @@ nsbu diagnose-v2
 The CLI prints concise diagnostic summaries. Complete raw event reports remain
 available through the library API. The versioned full JSON writer in
 [`V2_DIAGNOSTIC_EXPORT.md`](V2_DIAGNOSTIC_EXPORT.md) retains those detailed
-pair, branch, region, provenance and residual fields.
+pair, branch, region, provenance and residual fields. Its stable default schema
+version 1 omits the newer reconstructed physical field; callers must explicitly
+select version 2 to serialize it.

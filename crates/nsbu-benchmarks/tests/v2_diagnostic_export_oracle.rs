@@ -40,6 +40,9 @@ fn event_value(j: &Value, e: DiagnosticEvent) {
         e.missing_channels().len()
     );
     probe(&j["probe"], e.probe());
+    if !j["reconstructed_physical"].is_null() {
+        probe_physical(&j["reconstructed_physical"], e.reconstructed_physical());
+    }
     match (e.accepted().schedule(), e.accepted().sample()) {
         (AcceptedSchedule::NotScheduledAtResidualClock, None) => {
             assert_eq!(j["accepted"]["schedule"], "NotScheduledAtResidualClock");
@@ -114,6 +117,31 @@ fn event_value(j: &Value, e: DiagnosticEvent) {
             }
         }
         _ => panic!("invalid residual variant"),
+    }
+}
+fn probe_physical(
+    j: &Value,
+    s: nsbu_benchmarks::v2_experiment::probes::physical::ProbePhysicalSample,
+) {
+    clock(&j["clock"], s.clock());
+    assert_eq!(j["identity"], hex(s.identity()));
+    for (index, domain_value) in s.source_domains().into_iter().enumerate() {
+        domain(&j["source_domains"][index], domain_value)
+    }
+    layout(&j["sample_grid"], s.sample_layout());
+    words(&j["relative_floors"], &s.relative_floors());
+    for (index, quantity_value) in s.quantities().iter().enumerate() {
+        let q = &j["quantities"][index];
+        assert_eq!(q["quantity"], quantity(quantity_value.quantity));
+        local5(
+            &q["comparisons"],
+            [quantity_value.pairs[0], quantity_value.pairs[1]],
+            [quantity_value.pairs[2], quantity_value.pairs[3]],
+            quantity_value.pairs[4],
+        );
+        for pair in 0..5 {
+            extrema(&q["extrema"][pair], quantity_value.extrema(pair).unwrap())
+        }
     }
 }
 fn probe(j: &Value, p: ProbeSample) {

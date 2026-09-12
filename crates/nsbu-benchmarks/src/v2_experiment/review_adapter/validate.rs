@@ -23,6 +23,7 @@ pub(super) fn validate(
     let accepted_times = family.times().as_slice();
     for &event in events {
         validate_identity(event, family.identity(), plan.probe_plan().identity())?;
+        validate_probe_physical(event, plan, profile)?;
         if accepted_times.contains(&event.clock()) {
             validate_accepted(
                 event,
@@ -35,6 +36,34 @@ pub(super) fn validate(
         }
     }
     Ok(())
+}
+
+fn validate_probe_physical(
+    event: DiagnosticEvent,
+    plan: DiagnosticPlan<'_>,
+    profile: ReviewProfile,
+) -> Result<(), AdapterError> {
+    let sample = event.reconstructed_physical();
+    let domains = std::array::from_fn(|index| {
+        plan.family_plan()
+            .branch_plan(index)
+            .unwrap()
+            .resources()
+            .domain()
+    });
+    let quantities = OBSERVABLES.map(|item| item.quantity);
+    require(
+        sample.clock() == event.clock()
+            && sample.identity() == event.probe_identity()
+            && sample.reconstruction().clock() == event.probe().clock()
+            && sample.reconstruction().identity() == event.probe().identity()
+            && sample.origins() == event.probe().origins()
+            && sample.source_domains() == domains
+            && sample.sample_layout() == profile.physical_samples
+            && sample.relative_floors().map(f64::to_bits)
+                == profile.relative_floors.map(f64::to_bits)
+            && sample.quantities().map(|item| item.quantity) == quantities,
+    )
 }
 
 #[derive(PartialEq, Eq)]

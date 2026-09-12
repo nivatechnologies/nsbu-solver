@@ -149,6 +149,11 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     let profile = StartupProfile::new().unwrap();
     let diagnostic = profile.plan(CAP).unwrap();
     let export = DiagnosticExportPlan::new(&profile, diagnostic, CAP).unwrap();
+    let export_v2 = DiagnosticExportPlan::new_v2(&profile, diagnostic, CAP).unwrap();
+    assert_eq!(
+        (export.schema_version(), export_v2.schema_version()),
+        (1, 2)
+    );
     assert!(DiagnosticExportPlan::new(
         &profile,
         diagnostic,
@@ -184,6 +189,10 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
 
     let decoded: Value = serde_json::from_slice(&bytes).unwrap();
     assert_eq!(decoded["schema_version"], 1);
+    assert!(decoded["events"][0].get("reconstructed_physical").is_none());
+    assert!(decoded["context"]["coordinator_reservation"]
+        .get("reconstructed_physical_work")
+        .is_none());
     assert_eq!(decoded["scientific_status"], "UnqualifiedDiagnostic");
     assert_eq!(
         decoded["context"]["case_sha256"],
@@ -211,6 +220,19 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     );
 
     v2_diagnostic_export_oracle::document(&decoded, driver.reports());
+
+    let mut v2_bytes = Vec::new();
+    write_json(export_v2, driver.reports(), &mut v2_bytes).unwrap();
+    let decoded_v2: Value = serde_json::from_slice(&v2_bytes).unwrap();
+    assert_eq!(decoded_v2["schema_version"], 2);
+    assert!(decoded_v2["events"][0]
+        .get("reconstructed_physical")
+        .is_some());
+    assert_eq!(
+        decoded_v2["context"]["coordinator_reservation"]["reconstructed_physical_work"]["attempts"],
+        diagnostic.bounds().probe_physical.attempts.to_string()
+    );
+    v2_diagnostic_export_oracle::document(&decoded_v2, driver.reports());
 
     let mut failed = FailAfter { remaining: 97 };
     match write_json(export, driver.reports(), &mut failed).unwrap_err() {
