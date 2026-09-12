@@ -12,8 +12,10 @@ use std::{
 pub const BUFFER_BYTES: usize = 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 pub const DISK_CAP_BYTES: usize = 4 * 1024 * 1024 * 1024;
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n384-h64")))]
 pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
+#[cfg(feature = "n384-h64")]
+pub const DISK_CAP_BYTES: usize = 128 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 const HEADER_ALLOWANCE: usize = 4096;
 
