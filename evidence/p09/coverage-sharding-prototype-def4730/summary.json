@@ -1,0 +1,74 @@
+{
+  "limitations": [
+    "This validates runner mechanics only; it does not establish a faster full hosted gate.",
+    "The representative subset is not a substitute for workspace all-target execution, 80% coverage gates, CRAP, static gates, or doctests.",
+    "The direct-run example artifact is the executable produced by cargo test --example, matching all-target test semantics; it is not an additional cargo run invocation."
+  ],
+  "prototype": "same-source direct executable coverage sharding representative subset",
+  "prototype_runner_sha256": "b028f86d7e45d37fb08abafa4fa950a43980fb16b143246096dd1be7a05d2568",
+  "result": {
+    "branch_summary": {
+      "count": 1528,
+      "covered": 230,
+      "notcovered": 1298,
+      "percent": 15.052356020942408
+    },
+    "files": 180,
+    "function_records": 1641,
+    "function_summary": {
+      "count": 1528,
+      "covered": 268,
+      "percent": 17.539267015706805
+    },
+    "line_summary": {
+      "count": 13799,
+      "covered": 2506,
+      "percent": 18.16073628523806
+    },
+    "region_summary": {
+      "count": 23852,
+      "covered": 4625,
+      "notcovered": 19227,
+      "percent": 19.390407512996813
+    },
+    "serial_parallel_raw_json_sha256_equal": true
+  },
+  "scope": {
+    "all_target_inventory_candidates": 201,
+    "concurrency_limit": 4,
+    "doctests": "excluded; hosted workflow retains its separate doctest stage",
+    "executed_representative_targets": [
+      {
+        "harness": "standard",
+        "kind": "test",
+        "package": "nsbu-solver",
+        "target": "fft"
+      },
+      {
+        "harness": "false",
+        "kind": "test",
+        "package": "nsbu-solver",
+        "target": "allocation"
+      },
+      {
+        "execution": "Cargo example test artifact",
+        "kind": "example",
+        "package": "nsbu-benchmarks",
+        "target": "force_cache_profile"
+      }
+    ],
+    "full_workspace_coverage": "not run",
+    "resource_planning_limit_bytes": 8589934592,
+    "workflow_edits": false
+  },
+  "source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "tool_discovery": {
+    "default": "cargo-llvm-cov discovered through PATH",
+    "override": "--tool-bin DIRECTORY or NSBU_RUST_TOOLS; DIRECTORY must contain cargo-llvm-cov",
+    "portability_check": "local override and missing-directory refusal passed without coverage execution"
+  },
+  "toolchain": {
+    "cargo_llvm_cov": "0.9.1",
+    "rustc": "1.96.0-nightly (ec818fda3 2026-03-02)"
+  }
+}

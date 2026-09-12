@@ -1,0 +1,17 @@
+# Source and worktree
+git rev-parse HEAD
+# def4730b08025fdd06e7a8a0d78116aea24b6e2c
+
+# Installed tool inspection (the runner normally discovers cargo-llvm-cov on PATH)
+cargo +nightly-2026-03-03 llvm-cov --version
+cargo +nightly-2026-03-03 llvm-cov show-env --branch
+
+# Representative prototype, using the local installed tool directory explicitly for this checkout
+python3 tools/coverage_shard_prototype.py --tool-bin /mnt/niva-array/nsbu-solver/work/rust-tools/bin --workers 4
+
+# Post-run portability checks (no coverage execution)
+python3 -m py_compile tools/coverage_shard_prototype.py
+python3 tools/coverage_shard_prototype.py --tool-bin /mnt/niva-array/nsbu-solver/work/rust-tools/bin --help
+# The focused Python check calls command_env() with the same override and verifies that a missing directory is refused.
+
+# Runner internals use cargo metadata --no-deps --format-version 1 for the complete candidate inventory, cargo test --no-run --message-format=json under cargo-llvm-cov show-env --branch for artifact paths, unique LLVM_PROFILE_FILE values, and cargo llvm-cov report --branch --json.
