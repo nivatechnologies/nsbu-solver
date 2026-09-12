@@ -74,6 +74,7 @@ Options:                                  smooth default / v2 default
   --memory-cap N              Declared byte cap: 67108864
   --force-grid N              v2 force sampling grid, at least --grid (default: grid)
   --workers N                 v2 persistent force workers (0 selects serial)
+  --cache-force               v2 opt-in attempt-local force cache; no checkpoint/archive support
   --checkpoint PATH           Save a checkpoint or resume the specified file
   --checkpoint-after N        Save after N accepted steps and exit (zero permits rest)
   --dry-run                   Report the allocation-free numerical admission plan
