@@ -11,13 +11,21 @@ use nsbu_solver::{
     SolverError,
 };
 
+#[cfg(not(feature = "n256"))]
 pub const N: usize = 192;
+#[cfg(feature = "n256")]
+pub const N: usize = 256;
 pub const M: usize = 384;
 pub const WORKERS: usize = 32;
 pub const CAP: usize = 103_079_215_104;
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + 64 * 1024;
+
+#[cfg(not(feature = "n256"))]
+const PROFILE: &str = "n192-m384";
+#[cfg(feature = "n256")]
+const PROFILE: &str = "n256-m384";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -187,7 +195,7 @@ fn observer_work(geometry: Geometry) -> Result<usize, SolverError> {
 fn report(admission: &Admission) {
     let sizes = admission.reservations;
     println!(
-        "preflight source={} case_sha256={CASE_SHA256} schema=p10-avx-scheduled-endpoint-v2 backend=rustfft-6.4.1-avx-avx2-fma provider=parallel-reduced-attempt-cache retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} archive_profile=unsupported qualification=experimental",
+        "preflight source={} case_sha256={CASE_SHA256} schema=p10-avx-scheduled-endpoint-v2 profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma provider=parallel-reduced-attempt-cache retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} archive_profile=unsupported qualification=experimental",
         env!("RUN_SOURCE"),
         schedule::STEP,
         schedule::MAXIMUM_ATTEMPTS,
@@ -221,7 +229,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 
 pub fn identity() -> String {
     format!(
-        "source={};case={CASE_SHA256};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v2;resume=unsupported",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v2;resume=unsupported",
         env!("RUN_SOURCE"),
         schedule::STEP,
         schedule::ENDPOINT,

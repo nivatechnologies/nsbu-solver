@@ -15,3 +15,10 @@ It runs with arguments `256 384 32 32 1 run96`; the literal mode selects the fro
 103,079,215,104-byte cap. The launch record binds the source commit,
 binary hash, profile hash, host headroom, and exact output. The endpoint admission adds the fixed
 1,572,864-byte snapshot/history allowance to that one-step owner's reservation.
+
+The separately built full endpoint uses the cleared scheduled harness with the
+`n256` Cargo feature. That feature fixes the retained layout and embeds
+`profile=n256-m384` in preflight and artifact identity; the default feature set
+continues to describe N192. Both profiles retain M384, the same schedule, and
+the same transaction and refusal semantics. A full endpoint launch is allowed
+only after this one-step timing supports completion before the experiment cutoff.
