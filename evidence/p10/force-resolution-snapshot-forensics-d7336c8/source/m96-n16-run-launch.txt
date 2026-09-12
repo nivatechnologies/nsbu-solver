@@ -1,0 +1,2 @@
+launch_utc=2026-09-12T04:24:24Z
+timeout_seconds=5100 kill_after_seconds=10 absolute_cutoff_utc=2026-09-12T05:55:00Z
