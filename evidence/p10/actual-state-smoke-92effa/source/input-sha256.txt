@@ -1,0 +1,4 @@
+5f250babe867a7f8a334b350622ff1b05835fa0b038e4e533e1c558d9d0d487c  /mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-scheduled-endpoint/run-92effa6/node-0512/state.bin
+b2d4aa27c87806781f08c28fbcf8cc9821b24195a839cca956e12eb4d7d353d9  /mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-scheduled-endpoint/run-92effa6/node-0512/record.json
+4263f53310ce7bad83889eeb8cf0e77b7df53ac932ea56136d4985d560052018  /mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-scheduled-endpoint/run-92effa6/node-0512/attempt.json
+2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8  /mnt/niva-array/nsbu-solver/work/p10-state-smoke-source-92effa/crates/nsbu-benchmarks/src/scalar.rs

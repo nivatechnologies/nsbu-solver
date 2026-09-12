@@ -1,0 +1,11 @@
+[package]
+name = "p10-actual-state-smoke"
+version = "0.0.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+nsbu-benchmarks = { path = "../p10-state-smoke-source-92effa/crates/nsbu-benchmarks" }
+nsbu-solver = { path = "../p10-state-smoke-source-92effa/crates/nsbu-solver" }
+sha2 = "=0.10.9"

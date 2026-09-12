@@ -1,0 +1,18 @@
+{
+  "status": "completed_gross_actual_state_tracking_smoke",
+  "scope": "The integrated N192 state at clock512 is compared with a same-clock binary64 scalar exact-v2 reference sampled at M384 then strictly transferred to N192. This is not a grid search, error bound, convergence claim, acceptance decision, or PDE validation.",
+  "source_commit": "92effa6068d20d69e815c6a83f1e82490ce37fe7",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "snapshot": {
+    "path": "/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-scheduled-endpoint/run-92effa6/node-0512/state.bin",
+    "file_sha256": "5f250babe867a7f8a334b350622ff1b05835fa0b038e4e533e1c558d9d0d487c",
+    "payload_sha256": "f2c080900c828b88494ea0e1912a7acfe106637668701bea26b88d3bab6e039f",
+    "header": {"magic": "P10AVXSNAP1\\0", "clock": 512, "target": 8192, "epoch": 16, "accepted_steps": 16},
+    "identity_validated": true,
+    "finite_and_nyquist_validated": true
+  },
+  "reference": {"precision": "binary64 scalar exact-v2; independent high-precision reference remains missing", "sample_grid": 384, "retained_grid": 192, "clock": 512},
+  "resources": {"owner_cap_bytes": 4294967296, "owner_reservation_bytes": 2784661752, "observed_max_rss_kib": 2553684, "wall_seconds": 27.60},
+  "difference": {"full_l2": 6.099053852141595e-9, "full_h1": 3.314572575973381e-6, "full_vorticity": 3.225842065952358e-6, "full_divergence": 7.617723600063397e-7, "common_equals_full": true, "newly_resolved": "not_applicable_same_n192"},
+  "interpretation": "No gross clock512 tracking discrepancy was observed against this binary64 M384-sampled reference. This observation cannot compensate for missing independent precision, later-time tracking, sampling sensitivity, or acceptance evidence."
+}
