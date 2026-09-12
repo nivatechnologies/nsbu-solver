@@ -1,0 +1,43 @@
+{
+  "source_commit": "2c4e08a7c78866f0aec9d6152f26ca05551eb807",
+  "coverage_recomputed_from_files": {
+    "files": 103,
+    "lines": {
+      "count": 6203,
+      "covered": 6151,
+      "notcovered": 52,
+      "percent": 99.16169595357086
+    },
+    "branches": {
+      "count": 1212,
+      "covered": 1182,
+      "notcovered": 30,
+      "percent": 97.52475247524752
+    }
+  },
+  "raw_totals": {
+    "covered_lines": 6151,
+    "num_statements": 6203,
+    "percent_covered": 98.89413351314903,
+    "percent_covered_display": "99",
+    "missing_lines": 52,
+    "excluded_lines": 5,
+    "num_branches": 1212,
+    "num_partial_branches": 26,
+    "covered_branches": 1182,
+    "missing_branches": 30
+  },
+  "static_metrics": {
+    "cyclomatic_max": 16,
+    "halstead_difficulty_max": 13.826086956521738
+  },
+  "crap_maximum": 20.0,
+  "cognitive_complexity": {
+    "bound": "<=21",
+    "result": "passed from hosted complexipy command; exact maximum not retained"
+  },
+  "type_checks": {
+    "basedpyright": "0 errors, 0 warnings, 0 notes",
+    "Any_explicitAny": "strict source config exercised by passed basedpyright command"
+  }
+}

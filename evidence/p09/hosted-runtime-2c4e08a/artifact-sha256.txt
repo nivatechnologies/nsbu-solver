@@ -1,0 +1,7 @@
+223920d94945fdd239824cf1fe9fa7c6837fc7122c41cf248492e942b0ca8833  evidence/p09/hosted-runtime-2c4e08a/gate-audit.txt
+6626ff6f03cd25cc43801ba41147c789c8d82cdf72ca4463a351048fc524f44f  evidence/p09/hosted-runtime-2c4e08a/raw/python-hosted-log-excerpts.txt
+c2845cee0d34d29d8f2d5ff683343521c29509f5626df5fc51b7bf7873255f70  evidence/p09/hosted-runtime-2c4e08a/raw/python-quality-artifact.tar.gz
+a51ac64f5e7728fc1f3b82aaba38e31bfd0a8fbf41462d2d588fdcc76a40cfad  evidence/p09/hosted-runtime-2c4e08a/raw/python-quality-source-revision.txt
+dabdaee42e8b078a8def23daa49dc0bd911e67a6d18b6e92a7b608c3e7089b03  evidence/p09/hosted-runtime-2c4e08a/recomputed.json
+51f6548e1bacbd785b893be1010c2003b5cd512d1f667c77c86f6fe171d8802d  evidence/p09/hosted-runtime-2c4e08a/source-tree.txt
+2a1b27b6612e4f5999ab3d5bab73c9f8d5c55e71ca001270d6102c7878ee8fcc  evidence/p09/hosted-runtime-2c4e08a/summary.json

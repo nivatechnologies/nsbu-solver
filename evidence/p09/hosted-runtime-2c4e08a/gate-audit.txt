@@ -1,0 +1,4 @@
+Python hosted run 34669278653 completed successfully at exact source 2c4e08a7c78866f0aec9d6152f26ca05551eb807.
+Downloaded raw artifact source marker matches that source commit.
+Recomputed coverage and quality values are in recomputed.json. Hosted log confirms basedpyright 0 errors/warnings/notes, CC<22, Halstead difficulty<80, complexipy <=21, and completed coverage/CRAP gate.
+Rust run 34669278641 was pending when this Python-only evidence was prepared; no Rust result is claimed.
