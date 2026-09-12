@@ -26,6 +26,13 @@ pub fn positive_node(clock: u128) -> bool {
     clock > 0 && FINE.contains(&clock)
 }
 
+fn accepted_clock(clock: u128) -> bool {
+    if clock == ENDPOINT {
+        return true;
+    }
+    step(clock).is_ok()
+}
+
 #[cfg(not(feature = "n384-piecewise"))]
 pub fn step(clock: u128) -> Result<u128, SolverError> {
     if clock < ENDPOINT && clock.is_multiple_of(STEP) {
@@ -50,6 +57,7 @@ pub fn validate() -> Result<(), SolverError> {
         || FINE[FINE.len() - 1] != ENDPOINT
         || !nested(&MIDDLE, &FINE)
         || !nested(&COARSE, &MIDDLE)
+        || !FINE.iter().copied().all(accepted_clock)
         || !simpson(&FINE)
         || !simpson(&MIDDLE)
         || !simpson(&COARSE)
@@ -116,5 +124,14 @@ mod tests {
         for clock in [1, 2000, 2112, 4096] {
             assert_eq!(step(clock), Err(SolverError::InvalidClock));
         }
+        let mut clock = 0;
+        let mut reached = vec![clock];
+        for _ in 0..MAXIMUM_ATTEMPTS {
+            clock += step(clock).unwrap();
+            reached.push(clock);
+        }
+        assert_eq!(reached.len(), 49);
+        assert_eq!(reached[32], 2048);
+        assert!(FINE.iter().all(|clock| reached.contains(clock)));
     }
 }
