@@ -1,0 +1,434 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "new",
+      "cyclomatic": 17.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 17.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "bounds",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "family_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "panels",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "validate_panels",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 7.765625
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "work",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+      "function": "scale",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 16.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_identity",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_sampling_settings",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_regions",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_region_shape",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 4.592592592592593
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_fraction",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "validate_refinement",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "write",
+      "cyclomatic": 21.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 21.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "regions",
+      "cyclomatic": 18.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 18.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+      "function": "counts",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 9.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_region_coverage.rs",
+      "function": "plans",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_region_coverage.rs",
+      "function": "actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_region_coverage.rs",
+      "function": "fresh_unpublished_family_rejects_a_legitimate_same_plan_report",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_region_coverage.rs",
+      "function": "admission_requires_nested_panels_and_joint_cap",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "document",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "event",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_event",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_reference",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_reference_identity",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_reference_settings",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_reference_branch",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_reference_quantity",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_pressure",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5714285714285714,
+      "crap": 15.376093294460643
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_physical",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_physical_identity",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_probe_physical_settings",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 7.8984375
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_top",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_accepted",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_diagnostic_settings",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "validate_residual",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "event_header",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "event_accepted",
+      "cyclomatic": 21.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 21.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "event_residual",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "probe",
+      "cyclomatic": 21.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 21.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "bands",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "spectral",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "bands2",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "residual",
+      "cyclomatic": 17.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 17.0
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+      "function": "residual_branch",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    }
+  ],
+  "maximum": 21.0
+}
