@@ -20,7 +20,7 @@ pub struct ProbePhysicalWork {
     pub scalar_transforms: usize,
     /// Conservative source, sampling, reduction, and extrema visits.
     pub weighted_visits: usize,
-    /// Exact producer/sample/field identity, clock, origin, and domain checks.
+    /// Conservative whole producer/sample/field identity, clock, origin, and domain checks.
     pub binding_checks: usize,
 }
 
@@ -83,9 +83,9 @@ impl<'a> ProbePhysicalPlan<'a> {
             attempts: 1,
             scalar_transforms: physical.scalar_transforms,
             weighted_visits: physical.weighted_visits,
-            // Producer, publication and six complete field records, including all
-            // four clocks in every reconstruction origin.
-            binding_checks: 64,
+            // Whole logical comparisons, conservatively counting nested origins
+            // without claiming bytewise or scalar-word operation counts.
+            binding_checks: 128,
         };
         let work = scale(per_attempt, maximum_attempts)?;
         Ok(Self {

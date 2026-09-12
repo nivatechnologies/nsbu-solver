@@ -85,7 +85,7 @@ fn offstage_and_endpoint_reports_match_complete_independent_oracle() {
     assert_eq!(physical_plan.probe_plan().identity(), probe_plan.identity());
     assert_eq!(physical_plan.sample_layout().dimensions(), [12; 3]);
     assert_eq!(physical_plan.relative_floors(), FLOORS);
-    assert_eq!(physical_plan.bounds().work.binding_checks, 3 * 64);
+    assert_eq!(physical_plan.bounds().work.binding_checks, 3 * 128);
     let mut family = ProbeFamily::new(probe_plan).unwrap();
     let mut physical = ProbePhysicalWorkspace::new(physical_plan).unwrap();
     let mut raw = None;
