@@ -19,49 +19,18 @@ pub struct Owners {
 
 pub fn construct(admission: config::Admission) -> Result<Owners, SolverError> {
     let resources = admission.resources;
-    let domain = resources.domain();
     let catalog = FftCatalog::new(FftBackend::RustFft6_4_1AvxFma, resources.classes()[4])?;
-    let samples = Layout::new([config::M; 3])?;
-    let limits =
-        CachedReducedForce::preflight(domain, samples, config::WORKERS, catalog.backend(), true)?;
-    let force = CachedReducedForce::new(
-        domain,
-        samples,
-        config::WORKERS,
-        &catalog,
-        limits.storage_bytes,
-        true,
-    )?;
-    let rhs_bytes = SpectralRhs::<CachedReducedForce>::reservation_with_w3_fft_backend(
-        domain,
-        limits,
-        catalog.backend(),
-    )?;
-    let rhs = SpectralRhs::new_with_catalog_w3(
-        domain,
-        force,
-        config::ADVECTIVE_LIMIT,
-        &catalog,
-        rhs_bytes,
-    )?;
-    validate_w3(domain, &rhs)?;
-    let observer_bytes = ReducedObserver::preflight(
-        domain,
-        Layout::new([2 * config::M; 3])?,
-        config::WORKERS,
-        catalog.backend(),
-    )?;
-    let observer = ReducedObserver::new(
-        domain,
-        Layout::new([2 * config::M; 3])?,
-        config::WORKERS,
-        &catalog,
-        observer_bytes,
-    )?;
-    let clock = TickClock::from_rest(-20, 8192)?;
-    let state = SpectralState::from_rest(resources, clock, Epoch(0))?;
-    let candidate = CandidateState::new(resources, clock, Epoch(0))?;
-    let attempt = AttemptWorkspace::new_with_method(resources, Method::HochbruckOstermann)?;
+    construct_with_catalog(resources, catalog)
+}
+
+fn construct_with_catalog(
+    resources: ResourcePlan,
+    catalog: FftCatalog,
+) -> Result<Owners, SolverError> {
+    let domain = resources.domain();
+    let rhs = construct_rhs(domain, &catalog)?;
+    let observer = construct_observer(domain, &catalog)?;
+    let (state, candidate, attempt) = construct_evolution(resources)?;
     Ok(Owners {
         resources,
         state,
@@ -72,33 +41,118 @@ pub fn construct(admission: config::Admission) -> Result<Owners, SolverError> {
     })
 }
 
+fn construct_rhs(
+    domain: nsbu_solver::domain::Domain,
+    catalog: &FftCatalog,
+) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
+    let samples = Layout::new([config::M; 3])?;
+    let limits =
+        CachedReducedForce::preflight(domain, samples, config::WORKERS, catalog.backend(), true)?;
+    let force = CachedReducedForce::new(
+        domain,
+        samples,
+        config::WORKERS,
+        catalog,
+        limits.storage_bytes,
+        true,
+    )?;
+    construct_operator(domain, catalog, force, limits)
+}
+
+fn construct_operator(
+    domain: nsbu_solver::domain::Domain,
+    catalog: &FftCatalog,
+    force: CachedReducedForce,
+    limits: nsbu_solver::integrators::forcing::ForceLimits,
+) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
+    let rhs_bytes = SpectralRhs::<CachedReducedForce>::reservation_with_w3_fft_backend(
+        domain,
+        limits,
+        catalog.backend(),
+    )?;
+    let rhs = SpectralRhs::new_with_catalog_w3(
+        domain,
+        force,
+        config::ADVECTIVE_LIMIT,
+        catalog,
+        rhs_bytes,
+    )?;
+    validate_w3(domain, &rhs)?;
+    Ok(rhs)
+}
+
+fn construct_observer(
+    domain: nsbu_solver::domain::Domain,
+    catalog: &FftCatalog,
+) -> Result<ReducedObserver, SolverError> {
+    let layout = Layout::new([2 * config::M; 3])?;
+    let observer_bytes =
+        ReducedObserver::preflight(domain, layout, config::WORKERS, catalog.backend())?;
+    ReducedObserver::new(domain, layout, config::WORKERS, catalog, observer_bytes)
+}
+
+fn construct_evolution(
+    resources: ResourcePlan,
+) -> Result<(SpectralState, CandidateState, AttemptWorkspace), SolverError> {
+    let clock = TickClock::from_rest(-20, 8192)?;
+    construct_evolution_at(resources, clock)
+}
+
+fn construct_evolution_at(
+    resources: ResourcePlan,
+    clock: TickClock,
+) -> Result<(SpectralState, CandidateState, AttemptWorkspace), SolverError> {
+    let state = SpectralState::from_rest(resources, clock, Epoch(0))?;
+    let candidate = CandidateState::new(resources, clock, Epoch(0))?;
+    let attempt = AttemptWorkspace::new_with_method(resources, Method::HochbruckOstermann)?;
+    Ok((state, candidate, attempt))
+}
+
 fn validate_w3(
     domain: nsbu_solver::domain::Domain,
     rhs: &SpectralRhs<CachedReducedForce>,
 ) -> Result<(), SolverError> {
-    let operator = rhs.w3_fft_identity().ok_or(SolverError::InvalidPayload)?;
-    let force = rhs
-        .provider()
-        .w3_identity()
-        .ok_or(SolverError::InvalidPayload)?;
-    let expected_operator = W3FftIdentity {
+    validate_operator(domain, rhs.w3_fft_identity())?;
+    validate_force(rhs.provider().w3_identity())
+}
+
+fn validate_operator(
+    domain: nsbu_solver::domain::Domain,
+    actual: Option<W3FftIdentity>,
+) -> Result<(), SolverError> {
+    let actual = actual.ok_or(SolverError::InvalidPayload)?;
+    if actual != expected_operator(domain)? {
+        return Err(SolverError::InvalidPayload);
+    }
+    Ok(())
+}
+
+fn validate_force(actual: Option<W3FftIdentity>) -> Result<(), SolverError> {
+    let actual = actual.ok_or(SolverError::InvalidPayload)?;
+    if actual != expected_force()? {
+        return Err(SolverError::InvalidPayload);
+    }
+    Ok(())
+}
+
+fn expected_operator(domain: nsbu_solver::domain::Domain) -> Result<W3FftIdentity, SolverError> {
+    Ok(W3FftIdentity {
         layout: domain.padded_layout()?,
         backend: FftBackend::RustFft6_4_1AvxFma,
         width: 3,
         mode: W3FftMode::Bidirectional,
         additional_bytes: 9_200_779_136,
-    };
-    let expected_force = W3FftIdentity {
+    })
+}
+
+fn expected_force() -> Result<W3FftIdentity, SolverError> {
+    Ok(W3FftIdentity {
         layout: Layout::new([config::M; 3])?,
         backend: FftBackend::RustFft6_4_1AvxFma,
         width: 3,
         mode: W3FftMode::Forward,
         additional_bytes: 1_827_942_144,
-    };
-    if operator != expected_operator || force != expected_force {
-        return Err(SolverError::InvalidPayload);
-    }
-    Ok(())
+    })
 }
 
 pub fn is_rest(state: &SpectralState) -> Result<bool, SolverError> {

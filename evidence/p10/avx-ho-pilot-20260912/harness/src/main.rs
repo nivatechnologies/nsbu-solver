@@ -39,7 +39,11 @@ struct AttemptTiming {
 }
 
 fn main() -> AnyResult<()> {
-    match command()? {
+    execute(command()?)
+}
+
+fn execute(command: Command) -> AnyResult<()> {
+    match command {
         Command::Preflight => {
             let admission = config::preflight(config::CAP)?;
             config::report(&admission);
@@ -65,49 +69,138 @@ fn run(output: &Path) -> AnyResult<()> {
     prepare_output(output)?;
     let admission = config::preflight(config::CAP)?;
     config::report(&admission);
+    run_admitted(output, admission)
+}
+
+fn run_admitted(output: &Path, admission: config::Admission) -> AnyResult<()> {
     let construction_started = Instant::now();
     let mut owners = owners::construct(admission)?;
     let construction_seconds = construction_started.elapsed().as_secs_f64();
+    validate_constructed(output, &owners)?;
+    run_constructed(output, &mut owners, construction_seconds)
+}
+
+fn validate_constructed(output: &Path, owners: &owners::Owners) -> AnyResult<()> {
     if owners.resources.total() != config::EXPECTED_TOTAL {
         return fail(output, "constructed resource identity changed");
     }
     if !owners::is_rest(&owners.state)? {
         return fail(output, "committed state was not REST after construction");
     }
-    let attempt = match measure_attempt(&mut owners) {
-        Ok(value) => value,
-        Err(error) => return fail(output, &format!("attempt failed: {error}")),
-    };
+    Ok(())
+}
+
+fn run_constructed(
+    output: &Path,
+    owners: &mut owners::Owners,
+    construction_seconds: f64,
+) -> AnyResult<()> {
+    let attempt = attempt_phase(output, owners)?;
     publish_attempt(output, construction_seconds, &attempt)?;
-    let proposal = match owners.candidate.proposal(&owners.state, &attempt.token) {
-        Ok(value) => value,
-        Err(error) => return fail(output, &format!("proposal failed: {error:?}")),
-    };
+    observe_phase(output, owners, attempt)
+}
+
+fn attempt_phase(output: &Path, owners: &mut owners::Owners) -> AnyResult<AttemptTiming> {
+    match measure_attempt(owners) {
+        Ok(value) => Ok(value),
+        Err(error) => fail(output, &format!("attempt failed: {error}")),
+    }
+}
+
+fn observe_phase(
+    output: &Path,
+    owners: &mut owners::Owners,
+    attempt: AttemptTiming,
+) -> AnyResult<()> {
+    let proposal = proposal_or_fail(output, &owners.candidate, &owners.state, &attempt)?;
+    let (observed, observer_seconds) = measure_observer(output, &mut owners.observer, proposal)?;
+    finish_observer(
+        output,
+        owners,
+        attempt,
+        proposal,
+        observer_seconds,
+        observed,
+    )
+}
+
+fn measure_observer(
+    output: &Path,
+    observer: &mut observer::ReducedObserver,
+    proposal: &nsbu_solver::domain::SpectralState,
+) -> AnyResult<(observer::ObserverResult, f64)> {
     let observer_region = Region::new(GLOBAL);
     let observer_started = Instant::now();
-    let observed = owners.observer.sample(proposal);
+    let observed = observer.sample(proposal);
     let observer_seconds = observer_started.elapsed().as_secs_f64();
     let observer_allocations = observer_region.change();
-    let observed = match observed {
-        Ok(value) => value,
-        Err(error) => return fail(output, &format!("observer failed: {error:?}")),
-    };
+    let observed = observer_or_fail(output, observed)?;
     require_zero(observer_allocations)?;
-    if proposal.clock().elapsed() != config::TICKS {
-        return fail(output, "accepted proposal clock changed unexpectedly");
-    }
+    Ok((observed, observer_seconds))
+}
+
+fn finish_observer(
+    output: &Path,
+    owners: &owners::Owners,
+    attempt: AttemptTiming,
+    proposal: &nsbu_solver::domain::SpectralState,
+    observer_seconds: f64,
+    observed: observer::ObserverResult,
+) -> AnyResult<()> {
+    validate_proposal_clock(output, proposal)?;
     let _discarded_balance = observed.balance;
     publish_observer(output, observer_seconds, &observed)?;
     let _accepted_proposal_not_committed = attempt.token;
+    validate_committed_rest(output, owners)?;
+    publish_complete(output)
+}
+
+fn validate_proposal_clock(
+    output: &Path,
+    proposal: &nsbu_solver::domain::SpectralState,
+) -> AnyResult<()> {
+    if proposal.clock().elapsed() != config::TICKS {
+        return fail(output, "accepted proposal clock changed unexpectedly");
+    }
+    Ok(())
+}
+
+fn validate_committed_rest(output: &Path, owners: &owners::Owners) -> AnyResult<()> {
     if !owners::is_rest(&owners.state)? {
         return fail(output, "committed state changed without commit");
     }
+    Ok(())
+}
+
+fn publish_complete(output: &Path) -> AnyResult<()> {
     artifact::publish(output, "complete.json", &format!(
         "{{\n  \"status\": \"complete_timing_only\",\n  \"identity\": {},\n  \"committed_clock\": 0,\n  \"committed_epoch\": 0,\n  \"committed_steps\": 0,\n  \"state_payload\": false,\n  \"balance_published\": false,\n  \"frontier_published\": false\n}}\n",
         artifact::escape(config::IDENTITY),
     ))?;
     println!("complete timing_only committed_rest=true state_payload=false balance_published=false frontier_published=false");
     Ok(())
+}
+
+fn proposal_or_fail<'a>(
+    output: &Path,
+    candidate: &'a nsbu_solver::integrators::transaction::CandidateState,
+    state: &nsbu_solver::domain::SpectralState,
+    attempt: &AttemptTiming,
+) -> AnyResult<&'a nsbu_solver::domain::SpectralState> {
+    match candidate.proposal(state, &attempt.token) {
+        Ok(value) => Ok(value),
+        Err(error) => fail(output, &format!("proposal failed: {error:?}")),
+    }
+}
+
+fn observer_or_fail(
+    output: &Path,
+    result: Result<observer::ObserverResult, SolverError>,
+) -> AnyResult<observer::ObserverResult> {
+    match result {
+        Ok(value) => Ok(value),
+        Err(error) => fail(output, &format!("observer failed: {error:?}")),
+    }
 }
 
 fn measure_attempt(owners: &mut owners::Owners) -> AnyResult<AttemptTiming> {
@@ -132,9 +225,7 @@ fn measure_attempt(owners: &mut owners::Owners) -> AnyResult<AttemptTiming> {
     };
     let measurement = owners.rhs.measurement();
     let hit_miss = owners.rhs.inner().provider().hit_miss();
-    if result.rhs_calls != 15 || measurement.calls != 15 || hit_miss != [10, 5] {
-        return Err(SolverError::ProviderBudgetExceeded.into());
-    }
+    validate_attempt_accounting(result.rhs_calls, measurement.calls, hit_miss)?;
     Ok(AttemptTiming {
         seconds,
         rhs_seconds: measurement.seconds,
@@ -143,6 +234,18 @@ fn measure_attempt(owners: &mut owners::Owners) -> AnyResult<AttemptTiming> {
         hit_miss,
         token,
     })
+}
+
+fn validate_attempt_accounting(
+    rhs_calls: usize,
+    measured_calls: usize,
+    hit_miss: [usize; 2],
+) -> AnyResult<()> {
+    if rhs_calls == 15 && measured_calls == 15 && hit_miss == [10, 5] {
+        Ok(())
+    } else {
+        Err(SolverError::ProviderBudgetExceeded.into())
+    }
 }
 
 fn publish_attempt(output: &Path, construction: f64, attempt: &AttemptTiming) -> AnyResult<()> {
