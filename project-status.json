@@ -6,7 +6,7 @@
   "development_stage": "runtime-alpha-published; scientific-qualification-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
-  "implementation_plan_revision": "1.4",
+  "implementation_plan_revision": "1.5",
   "rust_workspace_exists": true,
   "runtime_implementation_exists": true,
   "simulation_cli_exists": true,
@@ -37,17 +37,17 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source 6f5c630 remains the last recorded combined hosted pass. Source109f9cf passed Rust/Python tests and overall coverage but failed per-function CRAP in example output paths and two Python pilot functions. Focused corrections are merged; full236-test local Python coverage/CRAP now passes. A new combined hosted release gate remains pending.",
+    "latest_hosted_ci_status": "Source31e99a17f97aec2ee18b26c67f8be88a0e931088 passed both full hosted workflows and independent raw-report audit. Whole-maintained Rust coverage97.98% lines/87.48% branches, maximumCRAP24.0586; Python99.28%/97.59%, CRAP19.9814. Earlier failures remain preserved in their source-bound evidence; no concentrating PDE window is accepted.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Exact-v2 diagnostic coordinator, balance/quadrature and pilot boundary corrections pass focused gates. Combined hosted validation is pending; zero accepted PDE windows.",
-      "evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
-      "additional_evidence": "evidence/p09/reference-arithmetic-full/ci-correction/summary.json"
+      "status": "Integrated full-event exporter, partial review adapter and spectral force-baseline binding pass the source-matched whole-maintained hosted gates. Focused scopes remain separately reported; P08/P09/P10 incomplete.",
+      "evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
+      "additional_evidence": "evidence/p09/final-integration-20260911/summary.json"
     },
-    "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
+    "latest_hosted_quality_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
     "latest_local_python_evidence": "evidence/p09/python-combined-local-20260911/summary.json",
     "latest_rust_crap_correction_evidence": "evidence/p09/v2-example-crap/ci-correction/summary.json",
-    "latest_local_integration_evidence": "evidence/p09/alpha1-local-integration/summary.json"
+    "latest_local_integration_evidence": "evidence/p09/final-integration-20260911/summary.json"
   },
   "packages": {
     "B00": {
