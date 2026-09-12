@@ -22,6 +22,8 @@
   "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
   "provider": "parallel-reduced-w3-pending-final-source",
   "rhs_fft": "w3-pending-final-source",
+  "rhs_timer": "harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included",
+  "attempt_schema": "p10-avx-scheduled-attempt-v3",
   "execution_cap_bytes": null,
   "artifact_cap_bytes": 274877906944,
   "artifact_bound_bytes": 174862106624,

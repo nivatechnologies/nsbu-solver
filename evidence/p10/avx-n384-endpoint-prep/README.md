@@ -26,6 +26,13 @@ dependency inputs, not the final execution preflight. The execution byte cap rem
 the final W3 commit is merged and the complete catalog/provider/RHS/attempt/observer/stack/queue
 reservation is checked together.
 
+The same-host one-step probe wraps the final RHS in a harness-owned delegating timer. It measures
+each of the 12 `evaluate` calls with `std::time::Instant`, includes timer call overhead without
+subtraction, and records the sum, timed call count, whole `try_advance` wall time, and their
+difference. The difference attributes coefficient construction, indicators, wrapper accumulation,
+and other attempt work without caching coefficients or changing numerical inputs or outputs. The
+timer adds no allocation and its storage overhead is included in harness overhead.
+
 The observer runs at exact clocks 0, 512, 1024, 1536, 2048, 2560, 3072, 3584, and 4096. Rest is
 the exact analytic record. Each of the eight positive nodes evaluates the force at M768 and the
 conservative balance at 2N=768. No balance is fabricated at an unscheduled step, and completion of
@@ -60,11 +67,11 @@ policy, and exact command are captured before launch. No launch is authorized by
 Focused tests cover the exact schedule, admission refusal while W3 is pending, the 256 GiB artifact
 bound, metadata-only rest, absence of a synthetic unscheduled balance, actual scheduled balance,
 same-bundle durable frontier movement, precommit failure semantics, and both post-rename locations.
-The preparation has 16 passing N384 tests plus 11 passing tests in each default and N256 regression
+The preparation has 17 passing N384 tests plus 12 passing tests in each default and N256 regression
 profile. Formatting and strict N384 Clippy pass. Maximum function cyclomatic/cognitive complexity is
 15/7, function/file Halstead difficulty is 26.833/57.324, and the maximum file is 499 lines. Combined
 N384/default coverage gives maximum per-function CRAP 22.5 with no violation. Focused N384 coverage
-is 616/1,578 lines (39.04%) and 30/92 branches (32.61%); it is recorded honestly and is not the whole
+is 703/1,686 lines (41.70%) and 33/92 branches (35.87%); it is recorded honestly and is not the whole
 maintained-scope 80% gate.
 
 The source/profile identity must be refrozen only after the final W3 merge, exact preflight, strict

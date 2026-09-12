@@ -1,5 +1,5 @@
 //! Attempt records and concise stdout reporting for the harness-owned schema.
-use crate::{artifact, publication::Frontiers, schedule};
+use crate::{artifact, publication::Frontiers, schedule, timed_rhs::Measurement};
 use nsbu_solver::{integrators::attempt::AttemptResult, SolverError};
 use stats_alloc::Stats;
 
@@ -20,17 +20,21 @@ pub struct AttemptFacts {
     pub rhs_calls: usize,
     pub ratios: [f64; 2],
     pub hit_miss: [usize; 2],
+    pub rhs_timing: Measurement,
 }
 
 pub fn committed(identity: &str, timing: Option<ObservationTiming>, facts: AttemptFacts) -> String {
     let observer = timing.map_or_else(|| "null".to_owned(), |value| format!("{:.9}", value.total));
+    let non_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
     format!(
         concat!(
-            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v2\",\n",
+            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
             "  \"identity\": {},\n  \"attempt\": {},\n  \"attempted_from\": {},\n",
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"committed\",\n",
             "  \"rhs_calls\": {},\n  \"cache_hits\": {},\n  \"cache_misses\": {},\n",
-            "  \"integration_seconds\": {:.9},\n  \"observer_seconds\": {},\n",
+            "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"observer_seconds\": {},\n",
             "  \"error_ratio_l2\": {:.17e},\n  \"error_ratio_h1\": {:.17e},\n",
             "  \"steady_allocations\": 0\n}}\n"
         ),
@@ -43,6 +47,9 @@ pub fn committed(identity: &str, timing: Option<ObservationTiming>, facts: Attem
         facts.hit_miss[0],
         facts.hit_miss[1],
         facts.integration_seconds,
+        facts.rhs_timing.seconds,
+        facts.rhs_timing.calls,
+        non_rhs,
         observer,
         facts.ratios[0],
         facts.ratios[1],
@@ -54,14 +61,18 @@ pub fn rejected(
     index: usize,
     from: u128,
     seconds: f64,
+    rhs_timing: Measurement,
     result: &AttemptResult,
 ) -> String {
+    let non_rhs = seconds - rhs_timing.seconds;
     format!(
         concat!(
-            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v2\",\n",
+            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
             "  \"identity\": {},\n  \"attempt\": {},\n  \"attempted_from\": {},\n",
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"rejected\",\n",
-            "  \"integration_seconds\": {:.9},\n  \"error_ratio_l2\": {:.17e},\n",
+            "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"error_ratio_l2\": {:.17e},\n",
             "  \"error_ratio_h1\": {:.17e}\n}}\n"
         ),
         artifact::json_string(identity),
@@ -70,6 +81,9 @@ pub fn rejected(
         from + result.ticks,
         result.ticks,
         seconds,
+        rhs_timing.seconds,
+        rhs_timing.calls,
+        non_rhs,
         result.indicators.ratios[0],
         result.indicators.ratios[1],
     )
@@ -80,14 +94,18 @@ pub fn numerical_error(
     index: usize,
     from: u128,
     seconds: f64,
+    rhs_timing: Measurement,
     error: &SolverError,
 ) -> String {
+    let non_rhs = seconds - rhs_timing.seconds;
     format!(
         concat!(
-            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v2\",\n",
+            "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v3\",\n",
             "  \"identity\": {},\n  \"attempt\": {},\n  \"attempted_from\": {},\n",
             "  \"attempted_to\": {},\n  \"ticks\": {},\n  \"outcome\": \"numerical_error\",\n",
-            "  \"integration_seconds\": {:.9},\n  \"error\": {}\n}}\n"
+            "  \"integration_seconds\": {:.9},\n  \"rhs_evaluate_seconds\": {:.9},\n",
+            "  \"rhs_timed_calls\": {},\n  \"non_rhs_seconds\": {:.9},\n",
+            "  \"error\": {}\n}}\n"
         ),
         artifact::json_string(identity),
         index,
@@ -95,6 +113,9 @@ pub fn numerical_error(
         from + schedule::STEP,
         schedule::STEP,
         seconds,
+        rhs_timing.seconds,
+        rhs_timing.calls,
+        non_rhs,
         artifact::json_string(&format!("{error:?}")),
     )
 }
@@ -105,11 +126,14 @@ pub fn report(
     publication: crate::artifact::PublicationKind,
     hash: Option<&str>,
 ) {
+    let non_rhs = facts.integration_seconds - facts.rhs_timing.seconds;
     println!(
-        "attempt={} clock={} integration_seconds={:.9} cache_hit_miss={:?} observer_seconds={:?} ratios={:?} publication={publication:?} state_sha256={hash:?} steady_allocations=0",
+        "attempt={} clock={} integration_seconds={:.9} rhs_evaluate_seconds={:.9} rhs_timed_calls={} non_rhs_seconds={non_rhs:.9} cache_hit_miss={:?} observer_seconds={:?} ratios={:?} publication={publication:?} state_sha256={hash:?} steady_allocations=0",
         facts.index,
         facts.clock,
         facts.integration_seconds,
+        facts.rhs_timing.seconds,
+        facts.rhs_timing.calls,
         facts.hit_miss,
         timing.map(|value| value.total),
         facts.ratios,
