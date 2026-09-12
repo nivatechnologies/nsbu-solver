@@ -1,5 +1,10 @@
 [workspace]
-members = ["crates/nsbu-solver", "crates/nsbu-benchmarks", "crates/nsbu-cli"]
+members = [
+    "crates/nsbu-solver",
+    "crates/nsbu-benchmarks",
+    "crates/nsbu-cli",
+    "crates/m512-alloc-trace",
+]
 resolver = "2"
 
 [workspace.package]

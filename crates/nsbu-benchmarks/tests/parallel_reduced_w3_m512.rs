@@ -1,4 +1,7 @@
 //! Explicitly gated, high-memory arithmetic control for the M512 W3 force owner.
+use m512_alloc_trace::{
+    begin_measurement, finish_measurement, print_traces, set_phase, TraceAllocator,
+};
 use nsbu_benchmarks::{
     provider::parallel_reduced::{ParallelReducedV2Force, ParallelReducedV2ForceW3},
     CASE_SHA256,
@@ -9,11 +12,9 @@ use nsbu_solver::{
     spectral::{FftBackend, FftCatalog, W3FftIdentity, W3FftMode},
     Complex64,
 };
-use stats_alloc::{Region, StatsAlloc, INSTRUMENTED_SYSTEM};
-use std::alloc::System;
 
 #[global_allocator]
-static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
+static GLOBAL: TraceAllocator = TraceAllocator;
 
 const RETAINED: usize = 384;
 const SAMPLED: usize = 512;
@@ -83,9 +84,10 @@ fn m512_w3_force_matches_serial_bits_work_and_steady_allocation() {
         }
     );
     let mut actual = output(domain);
-    let measured = Region::new(GLOBAL);
+    begin_measurement();
     let actual_work = repeat(&mut w3, clock, w3_limits, &mut actual);
-    let allocations = measured.change();
+    let allocations = finish_measurement();
+    print_traces();
 
     assert_bits(&actual, &expected);
     assert_work(actual_work, expected_work);
@@ -109,7 +111,8 @@ fn repeat(
     output: &mut [Vec<Complex64>; 3],
 ) -> ForceWork {
     let mut last = None;
-    for _ in 0..3 {
+    for phase in 1..=3 {
+        set_phase(phase);
         last = Some(
             provider
                 .evaluate(clock, limits, output.each_mut().map(Vec::as_mut_slice))
