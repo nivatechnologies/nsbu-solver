@@ -1,0 +1,7 @@
+launch_utc=2026-09-12T07:53:44Z
+absolute_cutoff_utc=2026-09-12T09:40:00Z
+internal_deadline_seconds=6256
+outer_timeout_seconds=6376
+command=setsid ./launch.sh 6256 6376 >run.stdout 2>run.time
+launcher_pid=27776
+  27776   27776   27776 Ss         00:01
