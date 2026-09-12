@@ -71,32 +71,73 @@ fn validate_probe_reference(
     e: DiagnosticEvent,
 ) -> Result<(), DiagnosticExportError> {
     let s = e.reconstructed_reference();
-    if (s.clock(), s.identity(), s.origins()) != (e.clock(), p.probe_identity, e.probe().origins())
-        || s.source_domains() != p.probe_domains
-        || s.sample_layout() != p.settings.reference_samples
-        || s.relative_floors().map(f64::to_bits) != p.settings.reference_floors.map(f64::to_bits)
+    validate_probe_reference_identity(p, e, s)?;
+    validate_probe_reference_settings(p, s)?;
+    for (index, branch) in s.branches().iter().enumerate() {
+        validate_reference_branch(p, index, branch)?;
+    }
+    Ok(())
+}
+
+fn validate_probe_reference_identity(
+    p: DiagnosticExportPlan,
+    e: DiagnosticEvent,
+    sample: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+) -> Result<(), DiagnosticExportError> {
+    if (sample.clock(), sample.identity(), sample.origins())
+        != (e.clock(), p.probe_identity, e.probe().origins())
     {
         return Err(DiagnosticExportError::InvalidReport);
     }
-    for (index, branch) in s.branches().iter().enumerate() {
-        if branch.branch != index {
-            return Err(DiagnosticExportError::InvalidReport);
-        }
-        for (slot, (quantity, expected)) in branch
-            .quantities
-            .iter()
-            .zip(crate::v2_experiment::reference::QUANTITIES)
-            .enumerate()
-        {
-            if quantity.quantity != expected
-                || quantity.error.components != expected.components()
-                || quantity.error.samples != p.settings.reference_samples.real_len()
-                || quantity.error.relative_floor.to_bits()
-                    != p.settings.reference_floors[slot].to_bits()
-            {
-                return Err(DiagnosticExportError::InvalidReport);
-            }
-        }
+    Ok(())
+}
+
+fn validate_probe_reference_settings(
+    p: DiagnosticExportPlan,
+    sample: crate::v2_experiment::probes::reference::ProbeReferenceSample,
+) -> Result<(), DiagnosticExportError> {
+    if sample.source_domains() != p.probe_domains
+        || sample.sample_layout() != p.settings.reference_samples
+        || sample.relative_floors().map(f64::to_bits)
+            != p.settings.reference_floors.map(f64::to_bits)
+    {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
+fn validate_reference_branch(
+    p: DiagnosticExportPlan,
+    index: usize,
+    branch: &crate::v2_experiment::reference::BranchTracking,
+) -> Result<(), DiagnosticExportError> {
+    if branch.branch != index {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    for (slot, (quantity, expected)) in branch
+        .quantities
+        .iter()
+        .zip(crate::v2_experiment::reference::QUANTITIES)
+        .enumerate()
+    {
+        validate_reference_quantity(p, slot, quantity, expected)?;
+    }
+    Ok(())
+}
+
+fn validate_reference_quantity(
+    p: DiagnosticExportPlan,
+    slot: usize,
+    quantity: &crate::v2_experiment::reference::TrackingQuantity,
+    expected: nsbu_solver::diagnostics::physical::PhysicalQuantity,
+) -> Result<(), DiagnosticExportError> {
+    if quantity.quantity != expected || quantity.error.components != expected.components() {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    if quantity.error.samples != p.settings.reference_samples.real_len()
+        || quantity.error.relative_floor.to_bits() != p.settings.reference_floors[slot].to_bits()
+    {
+        return Err(DiagnosticExportError::InvalidReport);
     }
     Ok(())
 }

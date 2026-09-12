@@ -14,16 +14,8 @@ pub fn validate(
         .accepted()
         .sample()
         .ok_or(DiagnosticExportError::InvalidReport)?;
-    if sample.clock() != event.clock()
-        || sample.family_identity() != plan.family_identity
-        || sample.tracking_identity() != accepted.regional_reference.identity()
-        || sample.sampling().layout != plan.settings.reference_samples
-        || sample.sampling().points != plan.settings.reference_samples.real_len()
-        || sample.sampling().relative_floors.map(f64::to_bits)
-            != plan.settings.reference_floors.map(f64::to_bits)
-    {
-        return Err(DiagnosticExportError::InvalidReport);
-    }
+    validate_identity(plan, event, sample, accepted.regional_reference.identity())?;
+    validate_sampling_settings(plan, sample)?;
     let metadata = crate::v2_experiment::coverage::sampling_metadata(
         accepted.regional_reference,
         event.clock(),
@@ -47,6 +39,35 @@ pub fn validate(
     )
 }
 
+fn validate_identity(
+    plan: DiagnosticExportPlan,
+    event: DiagnosticEvent,
+    sample: CoverageFamilySample,
+    tracking_identity: [u8; 32],
+) -> Result<(), DiagnosticExportError> {
+    if sample.clock() != event.clock()
+        || sample.family_identity() != plan.family_identity
+        || sample.tracking_identity() != tracking_identity
+    {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
+fn validate_sampling_settings(
+    plan: DiagnosticExportPlan,
+    sample: CoverageFamilySample,
+) -> Result<(), DiagnosticExportError> {
+    if sample.sampling().layout != plan.settings.reference_samples
+        || sample.sampling().points != plan.settings.reference_samples.real_len()
+        || sample.sampling().relative_floors.map(f64::to_bits)
+            != plan.settings.reference_floors.map(f64::to_bits)
+    {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
 fn validate_regions(
     values: [RegionCoverage; 3],
     panels: [usize; 3],
@@ -56,23 +77,42 @@ fn validate_regions(
     let status = crate::regions::coverage_status_at(clock, region)
         .map_err(|_| DiagnosticExportError::InvalidReport)?;
     for (value, coarse) in values.into_iter().zip(panels) {
-        if value.status != status
-            || value.panels
-                != coarse
-                    .checked_mul(2)
-                    .ok_or(DiagnosticExportError::SizeOverflow)?
-            || value.evaluations
-                != coarse
-                    .checked_mul(3)
-                    .and_then(|n| n.checked_add(2))
-                    .ok_or(DiagnosticExportError::SizeOverflow)?
-            || !value.fraction.is_finite()
-            || !(0.0..=1.0).contains(&value.fraction)
-            || !value.refinement_change.is_finite()
-            || value.refinement_change < 0.0
-        {
-            return Err(DiagnosticExportError::InvalidReport);
-        }
+        let expected_panels = coarse
+            .checked_mul(2)
+            .ok_or(DiagnosticExportError::SizeOverflow)?;
+        let expected_evaluations = coarse
+            .checked_mul(3)
+            .and_then(|n| n.checked_add(2))
+            .ok_or(DiagnosticExportError::SizeOverflow)?;
+        validate_region_shape(value, status, expected_panels, expected_evaluations)?;
+        validate_fraction(value.fraction)?;
+        validate_refinement(value.refinement_change)?;
+    }
+    Ok(())
+}
+
+fn validate_region_shape(
+    value: RegionCoverage,
+    status: CoverageStatus,
+    panels: usize,
+    evaluations: usize,
+) -> Result<(), DiagnosticExportError> {
+    if value.status != status || value.panels != panels || value.evaluations != evaluations {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
+fn validate_fraction(value: f64) -> Result<(), DiagnosticExportError> {
+    if !value.is_finite() || !(0.0..=1.0).contains(&value) {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    Ok(())
+}
+
+fn validate_refinement(value: f64) -> Result<(), DiagnosticExportError> {
+    if !value.is_finite() || value < 0.0 {
+        return Err(DiagnosticExportError::InvalidReport);
     }
     Ok(())
 }
