@@ -1,5 +1,14 @@
 //! Focused process-level coverage for the exact-v2 CLI.
 
+use nsbu_benchmarks::{
+    runtime_force::ForceSettings,
+    v2_run::{Plan, Run, Settings},
+};
+use nsbu_solver::{
+    domain::{Domain, Layout, SpectralState, TickClock},
+    experiment::control::Configuration,
+    integrators::{indicator::Tolerances, method::Method, trajectory::RunLimits},
+};
 use std::{
     fs,
     path::PathBuf,
@@ -265,5 +274,167 @@ fn checkpoint_count_and_total_buffer_budget_are_preflighted() {
     assert!(!path.exists());
     for command in ["v2", "resume-v2"] {
         assert!(invoke(&[command, "--help"]).status.success());
+    }
+}
+
+#[test]
+fn cached_cm_and_ho_preserve_direct_terminal_clock_and_report_actual_ledgers() {
+    for method in ["cm", "ho"] {
+        let direct = invoke(&small(method));
+        assert!(direct.status.success(), "{method}: {}", out(direct));
+        let cached = invoke(&[
+            "v2",
+            "--cache-force",
+            "--method",
+            method,
+            "--endpoint-ticks",
+            "256",
+            "--attempts",
+            "4",
+        ]);
+        assert!(cached.status.success(), "{method}: {}", out(cached));
+        let direct_s = out(direct);
+        let cached_s = out(cached);
+        for field in [
+            "actual_elapsed_ticks",
+            "remaining_ticks",
+            "started",
+            "committed",
+            "rejected",
+            "refused",
+        ] {
+            assert_eq!(
+                number_field(&direct_s, field),
+                number_field(&cached_s, field)
+            );
+        }
+        assert!(cached_s.contains("\"kind\":\"attempt_local_original_force_cache\""));
+        assert!(cached_s.contains("\"archive_support\":\"unsupported\""));
+        assert!(cached_s.contains("\"cache_ledger_scope\":\"current_attempt_only\""));
+        assert!(cached_s.contains("\"actual_charged_work\""));
+        assert!(cached_s.contains("\"current_attempt_cache_work\""));
+        assert!(number_field(&cached_s, "calls") > 0);
+        assert!(number_field(&cached_s, "provider_evaluations") > 0);
+        assert!(number_field(&cached_s, "coefficient_words_copied") > 0);
+    }
+}
+
+#[test]
+fn cached_admission_obeys_cap_and_refuses_all_archive_paths_before_io() {
+    let dry = invoke(&[
+        "v2",
+        "--cache-force",
+        "--dry-run",
+        "--endpoint-ticks",
+        "256",
+        "--attempts",
+        "4",
+    ]);
+    assert!(dry.status.success(), "{}", out(dry));
+    let report = out(dry);
+    assert!(report.contains("\"integration_force_policy\""));
+    let cap = number_field(&report, "total_bytes");
+    let capped = invoke(&[
+        "v2",
+        "--cache-force",
+        "--dry-run",
+        "--endpoint-ticks",
+        "256",
+        "--attempts",
+        "4",
+        "--memory-cap",
+        &(cap - 1).to_string(),
+    ]);
+    assert_eq!(capped.status.code(), Some(1));
+    assert!(out(capped).contains("resource_limit"));
+
+    let path = checkpoint();
+    let missing = path.to_str().unwrap();
+    for args in [
+        vec![
+            "v2",
+            "--cache-force",
+            "--checkpoint",
+            missing,
+            "--checkpoint-after",
+            "0",
+        ],
+        vec!["v2", "--cache-force", "--checkpoint", missing],
+        vec!["v2", "--cache-force", "--checkpoint-after", "0"],
+        vec!["resume-v2", "--cache-force", "--checkpoint", missing],
+        vec!["resume-v2", "--cache-force"],
+    ] {
+        let refused = invoke(&args);
+        assert_eq!(refused.status.code(), Some(1), "{args:?}");
+        assert!(out(refused).contains("cached_force_checkpoint_unsupported"));
+        assert!(!path.exists());
+    }
+}
+
+fn run_settings(method: Method) -> Settings {
+    Settings {
+        domain: Domain::new([4; 3], [1.0; 3], 1.0).unwrap(),
+        force: ForceSettings {
+            samples: Layout::new([4; 3]).unwrap(),
+            workers: 0,
+        },
+        initial_clock: TickClock::from_rest(-20, 8192).unwrap(),
+        configuration: Configuration {
+            method,
+            limits: RunLimits {
+                endpoint: 256,
+                step_ticks: 128,
+                maximum_attempts: 4,
+            },
+            tolerances: Tolerances {
+                absolute: [1e-5, 1e-4],
+                relative: [1e-5; 2],
+            },
+        },
+        advective_limit: 0.3,
+    }
+}
+
+fn assert_state_bits(left: &SpectralState, right: &SpectralState) {
+    assert_eq!(left.clock(), right.clock());
+    assert_eq!(left.epoch(), right.epoch());
+    assert_eq!(left.accepted_steps(), right.accepted_steps());
+    for axis in 0..3 {
+        for (a, b) in left
+            .component(axis)
+            .unwrap()
+            .iter()
+            .zip(right.component(axis).unwrap())
+        {
+            assert_eq!(
+                (a.re.to_bits(), a.im.to_bits()),
+                (b.re.to_bits(), b.im.to_bits())
+            );
+        }
+    }
+}
+
+#[test]
+fn cached_cm_and_ho_runs_preserve_direct_terminal_state_bits() {
+    for method in [Method::CoxMatthews, Method::HochbruckOstermann] {
+        let settings = run_settings(method);
+        let mut direct =
+            Run::from_rest(Plan::from_rest(settings, 64 * 1024 * 1024).unwrap()).unwrap();
+        let mut cached =
+            Run::from_rest(Plan::from_rest_cached(settings, 64 * 1024 * 1024).unwrap()).unwrap();
+        while direct.history().controller().stopped().is_none() {
+            direct.step().unwrap();
+            cached.step().unwrap();
+        }
+        assert_state_bits(direct.state(), cached.state());
+        assert_eq!(
+            direct.history().controller().clock(),
+            cached.history().controller().clock()
+        );
+        assert_eq!(
+            direct.history().controller().attempted(),
+            cached.history().controller().attempted()
+        );
+        assert!(cached.cache_work().unwrap().calls > 0);
     }
 }

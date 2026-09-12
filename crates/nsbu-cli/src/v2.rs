@@ -25,6 +25,10 @@ pub(crate) fn execute(args: Args, resume: bool) -> ExitCode {
     } else {
         "internal_from_rest"
     };
+    if args.cache_force && (resume || args.checkpoint.is_some() || args.checkpoint_after.is_some())
+    {
+        return v2_report::cache_checkpoint_refused(origin);
+    }
     let plan = match admit(&args) {
         Ok(plan) => plan,
         Err(error) => return v2_report::refused(error, origin),
@@ -34,7 +38,11 @@ pub(crate) fn execute(args: Args, resume: bool) -> ExitCode {
         Err(error) => return v2_report::refused(error, origin),
     };
     if args.dry_run {
-        v2_report::plan(&args, plan, maximum);
+        if args.cache_force {
+            v2_report::cached_plan(&args, plan, maximum);
+        } else {
+            v2_report::plan(&args, plan, maximum);
+        }
         return ExitCode::SUCCESS;
     }
     if resume {
@@ -83,7 +91,11 @@ fn admit(args: &Args) -> Result<Plan, SolverError> {
         },
         advective_limit: 0.3,
     };
-    let plan = Plan::from_rest(settings, args.memory_cap)?;
+    let plan = if args.cache_force {
+        Plan::from_rest_cached(settings, args.memory_cap)?
+    } else {
+        Plan::from_rest(settings, args.memory_cap)?
+    };
     if args
         .checkpoint_after
         .is_some_and(|n| n as u128 > args.endpoint_ticks / args.step_ticks)
@@ -120,7 +132,11 @@ fn finish(args: &Args, run: &mut Run) -> ExitCode {
             return v2_report::refused(error, v2_report::origin(run));
         }
     }
-    v2_report::run(args, run);
+    if args.cache_force {
+        v2_report::cached_run(args, run);
+    } else {
+        v2_report::run(args, run);
+    }
     if matches!(
         run.history().controller().stopped(),
         Some(StopReason::EndpointReached)

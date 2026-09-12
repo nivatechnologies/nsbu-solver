@@ -12,6 +12,15 @@ guard `0.3`. `--workers N` selects a finite persistent-worker allowance;
 `--workers 0` uses the serial provider. Resource preflight includes the maximum
 decoded checkpoint reservation and input buffer before construction.
 
+The default v2 profile evaluates the original force directly. `--cache-force` explicitly
+selects the attempt-local original-force cache; it reports that integration policy and
+current-attempt cache counters separately from the aggregate charged-work ledger. Cached
+runs cannot write or resume archives. For example:
+
+```sh
+nsbu v2 --cache-force --method cm --endpoint-ticks 256 --attempts 4
+```
+
 Try the installed binary with:
 
 ```sh

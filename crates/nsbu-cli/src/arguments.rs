@@ -19,6 +19,7 @@ pub(crate) struct Args {
     pub maximum_attempts: usize,
     pub memory_cap: usize,
     pub dry_run: bool,
+    pub cache_force: bool,
     pub checkpoint: Option<PathBuf>,
     pub checkpoint_after: Option<usize>,
     pub force_grid: Option<usize>,
@@ -70,6 +71,7 @@ fn defaults(concentrating: bool) -> Args {
         method: MethodName::CoxMatthews,
         memory_cap: 64 * 1024 * 1024,
         dry_run: false,
+        cache_force: false,
         checkpoint: None,
         checkpoint_after: None,
         force_grid: None,
@@ -82,7 +84,9 @@ fn profile(items: &[OsString], concentrating: bool, resume: bool) -> Command {
         return Command::Invalid;
     };
     if resume {
-        if args.dry_run || args.checkpoint.is_none() || args.checkpoint_after.is_some() {
+        if !args.cache_force
+            && (args.dry_run || args.checkpoint.is_none() || args.checkpoint_after.is_some())
+        {
             return Command::Invalid;
         }
         if concentrating {
@@ -91,7 +95,7 @@ fn profile(items: &[OsString], concentrating: bool, resume: bool) -> Command {
             Command::Resume(args)
         }
     } else {
-        if args.checkpoint.is_some() != args.checkpoint_after.is_some() {
+        if !args.cache_force && args.checkpoint.is_some() != args.checkpoint_after.is_some() {
             return Command::Invalid;
         }
         if concentrating {
@@ -112,6 +116,12 @@ fn parse_options(items: &[OsString], concentrating: bool) -> Option<Args> {
                 return None;
             }
             args.dry_run = true;
+            index += 1;
+        } else if name == "--cache-force" {
+            if !concentrating || args.cache_force {
+                return None;
+            }
+            args.cache_force = true;
             index += 1;
         } else {
             let value = items.get(index + 1)?.to_str()?;

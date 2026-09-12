@@ -1,6 +1,7 @@
 //! JSON summaries of the actual v2 trajectory, its measured balances and charged work.
 use crate::arguments::{Args, MethodName};
 use nsbu_benchmarks::{
+    runtime_force::AttemptCacheWork,
     smooth_observer::BalanceObserverWork,
     v2_run::{Origin, Plan, Run},
 };
@@ -22,6 +23,18 @@ pub(crate) fn plan(args: &Args, plan: Plan, checkpoint: usize) {
         plan.resources().total(), checkpoint, args.memory_cap);
 }
 
+pub(crate) fn cached_plan(args: &Args, plan: Plan, checkpoint: usize) {
+    let integration = plan.integration_limits().map(|n| n as u128);
+    let observer = plan.observer_limits();
+    println!(concat!("{{\"status\":\"dry_run\",{},\"integration_force_policy\":{},\"clock\":{},",
+        "\"work_limits\":{{\"integration\":{},\"observation\":{}}},",
+        "\"memory\":{{\"total_bytes\":\"{}\",\"checkpoint_buffer_bytes\":\"{}\",\"cap_bytes\":\"{}\"}}}}"),
+        profile(args, "internal_from_rest"), cache_policy(), clock(args, plan.settings().initial_clock),
+        integration_json(integration), observation_json(BalanceObserverWork { samples: observer.samples,
+            work_units: observer.work_units, scalar_transforms: observer.scalar_transforms }),
+        plan.resources().total(), checkpoint, args.memory_cap);
+}
+
 pub(crate) fn run(args: &Args, run: &Run) {
     let (status, reason) = match run.history().controller().stopped() {
         Some(StopReason::EndpointReached) => ("completed", "endpoint_reached"),
@@ -30,6 +43,27 @@ pub(crate) fn run(args: &Args, run: &Run) {
         None => ("failed", "not_stopped"),
     };
     snapshot(args, run, status, reason);
+}
+
+pub(crate) fn cached_run(args: &Args, run: &Run) {
+    let (status, reason) = match run.history().controller().stopped() {
+        Some(StopReason::EndpointReached) => ("completed", "endpoint_reached"),
+        Some(StopReason::LocalErrorRejected) => ("failed", "local_error_rejected"),
+        Some(StopReason::Refused(error)) => ("failed", crate::report::error_name(error)),
+        None => ("failed", "not_stopped"),
+    };
+    let controller = run.history().controller();
+    let counts = outcomes(run);
+    let cache = run
+        .cache_work()
+        .expect("cached CLI plan always constructs a cached provider");
+    println!(concat!("{{\"status\":\"{}\",{},\"integration_force_policy\":{},\"stop_reason\":\"{}\",\"clock\":{},",
+        "\"attempts\":{{\"started\":\"{}\",\"committed\":\"{}\",\"rejected\":\"{}\",\"refused\":\"{}\"}},",
+        "\"actual_charged_work\":{{\"integration\":{},\"observation\":{}}},",
+        "\"current_attempt_cache_work\":{},\"diagnostics\":{}}}"),
+        status, profile(args, origin(run)), cache_policy(), reason, clock(args, controller.clock()),
+        controller.attempted(), counts[0], counts[1], counts[2],
+        integration_json(total_work(run)), observation_json(run.observer_work()), cache_work_json(cache), diagnostics(run));
 }
 
 pub(crate) fn checkpoint(args: &Args, run: &Run) {
@@ -45,6 +79,30 @@ fn snapshot(args: &Args, run: &Run, status: &str, reason: &str) {
         status, profile(args, origin(run)), reason, clock(args, controller.clock()),
         controller.attempted(), counts[0], counts[1], counts[2],
         integration_json(total_work(run)), observation_json(run.observer_work()), diagnostics(run));
+}
+
+fn cache_policy() -> &'static str {
+    "{\"kind\":\"attempt_local_original_force_cache\",\"archive_support\":\"unsupported\",\"cache_ledger_scope\":\"current_attempt_only\"}"
+}
+
+fn cache_work_json(work: AttemptCacheWork) -> String {
+    format!(
+        concat!(
+            "{{\"calls\":\"{}\",\"provider_evaluations\":\"{}\",",
+            "\"provider_work_units\":\"{}\",\"provider_scalar_transforms\":\"{}\",",
+            "\"lookups\":\"{}\",\"clock_comparisons\":\"{}\",",
+            "\"coefficient_words_copied\":\"{}\",\"hits\":\"{}\",\"misses\":\"{}\"}}"
+        ),
+        work.calls,
+        work.provider_evaluations,
+        work.provider_work_units,
+        work.provider_scalar_transforms,
+        work.lookups,
+        work.clock_comparisons,
+        work.coefficient_words_copied,
+        work.hits,
+        work.misses
+    )
 }
 
 fn profile(args: &Args, origin: &str) -> String {
@@ -143,6 +201,10 @@ pub(crate) fn origin(run: &Run) -> &'static str {
         Origin::InternalFromRest => "internal_from_rest",
         Origin::ExternalUnverified => "external_unverified",
     }
+}
+
+pub(crate) fn cache_checkpoint_refused(origin: &str) -> ExitCode {
+    io_refused("cached_force_checkpoint_unsupported", origin)
 }
 
 pub(crate) fn refused(error: SolverError, origin: &str) -> ExitCode {
