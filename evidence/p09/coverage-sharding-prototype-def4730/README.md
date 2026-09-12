@@ -11,3 +11,9 @@ The runner discovers `cargo-llvm-cov` on `PATH` by default. A local tool directo
 `artifact-sha256.json` intentionally excludes itself to avoid a recursive checksum. Its listed 12 artifacts were independently rehashed after this portability correction.
 
 See [summary.json](summary.json), [commands.txt](commands.txt), the [target inventory](raw/all-target-inventory.json.gz), and compressed raw reports under `raw/`.
+
+## Python quality follow-up
+
+The maintained configured Python scope passed after the runner and seven focused orchestration tests were added: strict basedpyright reported zero errors and warnings; complexipy found every function at or below 21; full `pytest -q` passed under branch coverage; coverage measured 6,394/6,483 executable lines and 1,223/1,264 branch outcomes (98% displayed); the per-function CRAP maximum was 20. Compressed raw reports are retained in `raw/`, and [quality-followup.json](quality-followup.json) binds this result to the runner and test hashes.
+
+This remains **representative-only** infrastructure evidence: it exercises three artifacts and does not demonstrate full 201-target artifact inventory parity, a hosted speedup, CI workflow integration, or a replacement for required Rust coverage, CRAP, static, or doctest gates.

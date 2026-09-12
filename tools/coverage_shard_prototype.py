@@ -16,6 +16,9 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from typing import cast
+
+from tools.json_types import Json, array_value, decode, object_value, string_value
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "work" / "coverage-shard-prototype"
@@ -78,18 +81,26 @@ def inventory() -> None:
         cwd=ROOT, check=True, text=True, capture_output=True,
     )
     executable_kinds = {"lib", "bin", "example", "test", "bench"}
-    targets = []
-    for package in json.loads(metadata.stdout)["packages"]:
-        for target in package["targets"]:
-            if executable_kinds.intersection(target["kind"]):
+    targets: list[dict[str, Json]] = []
+    payload = object_value(decode(metadata.stdout))
+    for package_value in array_value(payload["packages"]):
+        package = object_value(package_value)
+        package_name = string_value(package["name"])
+        for target_value in array_value(package["targets"]):
+            target = object_value(target_value)
+            kinds = [string_value(kind) for kind in array_value(target["kind"])]
+            test_enabled = target["test"]
+            if not isinstance(test_enabled, bool):
+                raise ValueError("Cargo target test field must be boolean")
+            if executable_kinds.intersection(kinds):
                 targets.append({
-                    "package": package["name"],
-                    "name": target["name"],
-                    "kind": target["kind"],
-                    "source": target["src_path"],
-                    "cargo_test_enabled": target["test"],
+                    "package": package_name,
+                    "name": string_value(target["name"]),
+                    "kind": kinds,
+                    "source": string_value(target["src_path"]),
+                    "cargo_test_enabled": test_enabled,
                 })
-    document = {
+    document: dict[str, Json] = {
         "source": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "scope": "cargo metadata executable candidates for cargo test --workspace --all-targets; doctests excluded",
         "targets": targets,
@@ -104,13 +115,15 @@ def build(env: dict[str, str]) -> dict[str, str]:
         output = run(CARGO + ["test"] + selector + ["--no-run", "--message-format=json"], env=env, log=OUT / "logs" / f"build-{name}.log")
         for line in output.stdout.splitlines():
             try:
-                message = json.loads(line)
-            except json.JSONDecodeError:
+                message = object_value(decode(line))
+            except (json.JSONDecodeError, ValueError):
                 continue
-            if message.get("reason") == "compiler-artifact" and message.get("executable"):
-                target = message.get("target", {})
+            executable_path = message.get("executable")
+            target_value = message.get("target")
+            if message.get("reason") == "compiler-artifact" and isinstance(executable_path, str) and target_value is not None:
+                target = object_value(target_value)
                 if target.get("name") == name:
-                    executable[name] = message["executable"]
+                    executable[name] = executable_path
     absent = [name for name, _ in TARGETS if name not in executable]
     if absent:
         raise RuntimeError(f"Cargo did not emit representative artifacts: {absent}")
@@ -158,17 +171,21 @@ def report(mode: str, env: dict[str, str]) -> Path:
     return output
 
 
-def canonical_coverage(path: Path) -> dict[str, object]:
-    data = json.loads(path.read_text())
-    # LLVM's data array includes absolute paths and ordering, which are stable
-    # here but irrelevant to semantic equality. Keep all coverage counters.
+def canonical_coverage(path: Path) -> dict[str, Json]:
+    """Keep every summary and function record used for equality admission."""
+    exported = object_value(decode(path.read_text()))
+    entries = array_value(exported["data"])
+    if len(entries) != 1:
+        raise ValueError("LLVM export must contain one coverage data entry")
+    data = object_value(entries[0])
+    files: dict[str, Json] = {}
+    for file_value in array_value(data.get("files", [])):
+        file = object_value(file_value)
+        files[string_value(file["filename"])] = file["summary"]
     return {
-        "totals": data["data"][0]["totals"],
-        "files": {
-            file["filename"]: file["summary"]
-            for file in data["data"][0].get("files", [])
-        },
-        "functions": data["data"][0].get("functions", []),
+        "totals": data["totals"],
+        "files": files,
+        "functions": data.get("functions", []),
     }
 
 
@@ -189,16 +206,18 @@ def main() -> int:
         default=Path(os.environ["NSBU_RUST_TOOLS"]) if "NSBU_RUST_TOOLS" in os.environ else None,
         help="directory containing cargo-llvm-cov; defaults to PATH (or NSBU_RUST_TOOLS)",
     )
-    args = parser.parse_args()
-    if not 1 <= args.workers <= 4:
+    arguments = parser.parse_args()
+    workers = cast(int, arguments.workers)
+    tool_bin = cast(Path | None, arguments.tool_bin)
+    if not 1 <= workers <= 4:
         raise SystemExit("workers must be 1..4")
     OUT.mkdir(parents=True, exist_ok=True)
     inventory()
-    env = command_env(args.tool_bin)
+    env = command_env(tool_bin)
     executable = build(env)
     execute(executable, "serial", 1, env)
     serial = report("serial", env)
-    execute(executable, "parallel", args.workers, env)
+    execute(executable, "parallel", workers, env)
     parallel = report("parallel", env)
     compare(serial, parallel)
     print(f"coverage execution prototype passed: {serial} == {parallel}")

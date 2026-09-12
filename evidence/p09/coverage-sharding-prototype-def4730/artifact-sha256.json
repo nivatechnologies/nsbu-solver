@@ -1,8 +1,16 @@
 {
-  "README.md": "320f40305641704d71a85907ff9f954d7709e301d328f17b1028001b7ac2f48c",
-  "commands.txt": "c710d41d834dbb1e61c2ce46489ec61a20e22451124d2d8e7627a9b32a1a654f",
+  "README.md": "6a7efa468bc15754a3881755e62516f758c2d5a56136fccf68dff9e1fa8f422b",
+  "commands.txt": "9780997271be1fe86ed8b5481428a11b9bf8b5ef54a2c95e5f462cb69681def0",
+  "quality-followup.json": "0d36d7d63f05a80eb83e50b600aec55e097c836ac7961161c35dc5c0697774ec",
   "raw/all-target-inventory.json.gz": "714b8734850db8d76540e1d0c6f3e15eeed4d4d2d7ada0a8178e657278a2f5a0",
   "raw/comparison.json.gz": "363b14485652c62e45058f3d89c4eef820170d43eff434e6a38e8198e5c97f40",
+  "raw/focused-coverage.json.gz": "92442b8e0a78d2fefecd06efb605de2a2cff226cda50a3959bad523459c2563f",
+  "raw/focused-crap.json.gz": "6bf25802f96d3d169f99b6a233a1288f9d66993d4f0ae93f73009a9c31ede191",
+  "raw/focused-cyclomatic.json.gz": "ab5bfebc6d95dff708574dbd1de33e680f97ad8d146ae98f3c0df76f01665a04",
+  "raw/full-coverage.json.gz": "1254e59e34ad3ae2c2f4e194f13a0c62681c24cafc5ce21c77d9b49c40a96675",
+  "raw/full-crap.json.gz": "44d98ac6a46aad94b5b4e859e809def487ce57e7dc29f6b96d16aacc1d6ce5e1",
+  "raw/full-cyclomatic.json.gz": "518d6934700ef747898d2dfa183863b958b1b172cb655723bc313f62ee1ff882",
+  "raw/full-halstead.json.gz": "16f5d298607f8c02f14e30aa32ef368c74345d6b30177e0e9067d405bd2e6bf9",
   "raw/initial-failure.md": "d7cf562e064adef387b672eac65f54033fb879c7d978c53b5c776fb57d02ed02",
   "raw/logs.tar.gz": "c355dd660e1ecbdfcf288dcec8efaeff6da90098273e9823f6ba0ce9b6c6412c",
   "raw/manifest.json.gz": "a339b9df3f822b61e9aca04816879d2da39e57e0d252ad402ab5bc05f955db16",
@@ -10,5 +18,5 @@
   "raw/parallel-profiles.json.gz": "29ab33e35cbe34dab0139a41e991c2e895e31dfc236f9ea2e1a102eb8ff04387",
   "raw/serial-coverage.json.gz": "e7048708c8b223fbd16dee0c2448c7eebbdf81dfd4fee2ccb9727636823dd4b3",
   "raw/serial-profiles.json.gz": "48d4c0f37c3d7e672ff0064380b1514eb6746eac733e8b3201cbc8e15917c9f8",
-  "summary.json": "e8f10e7c3cab735f8bdd406938eb72c04330a4e4c544825f2918f039b9518490"
+  "summary.json": "12d525ac0f2508aa3f08304254e09a8e487099459524f189ed6a542af6e5f8d3"
 }

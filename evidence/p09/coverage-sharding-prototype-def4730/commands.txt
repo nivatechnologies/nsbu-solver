@@ -15,3 +15,13 @@ python3 tools/coverage_shard_prototype.py --tool-bin /mnt/niva-array/nsbu-solver
 # The focused Python check calls command_env() with the same override and verifies that a missing directory is refused.
 
 # Runner internals use cargo metadata --no-deps --format-version 1 for the complete candidate inventory, cargo test --no-run --message-format=json under cargo-llvm-cov show-env --branch for artifact paths, unique LLVM_PROFILE_FILE values, and cargo llvm-cov report --branch --json.
+
+# Maintained Python quality follow-up after adding tools/tests/test_coverage_shard_prototype.py
+/mnt/niva-array/nsbu-solver/.venv/bin/basedpyright
+/mnt/niva-array/nsbu-solver/.venv/bin/complexipy quality reference tools --max-complexity-allowed 21
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m radon cc -j -s quality reference tools > work/coverage-shard-prototype/full-cyclomatic.json
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m radon hal -j -f quality reference tools > work/coverage-shard-prototype/full-halstead.json
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m coverage run -m pytest -q
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m coverage combine
+/mnt/niva-array/nsbu-solver/.venv/bin/python -m coverage json -o work/coverage-shard-prototype/full-coverage.json
+/mnt/niva-array/nsbu-solver/.venv/bin/python quality/check_crap.py python work/coverage-shard-prototype/full-cyclomatic.json work/coverage-shard-prototype/full-coverage.json work/coverage-shard-prototype/full-crap.json

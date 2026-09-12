@@ -1,0 +1,24 @@
+{
+  "prototype_scope": "representative-only: 3 Cargo artifacts. This quality result does not establish full target-inventory parity or authorize workflow integration.",
+  "results": {
+    "basedpyright": "0 errors, 0 warnings",
+    "complexipy": "all functions <=21",
+    "coverage_totals": {
+      "covered_branches": 1223,
+      "covered_lines": 6394,
+      "excluded_lines": 5,
+      "missing_branches": 41,
+      "missing_lines": 89,
+      "num_branches": 1264,
+      "num_partial_branches": 35,
+      "num_statements": 6483,
+      "percent_covered": 98.32193107009165,
+      "percent_covered_display": "98"
+    },
+    "crap_maximum": 20.0,
+    "pytest": "passed"
+  },
+  "runner_source_sha256": "ee0fdc538e3cbdf11e74cefe861b13a6da710c9f319d27c2a718fe2a43fe681c",
+  "runner_test_source_sha256": "f27e0585ae38e5b3d19433bb34caaeb31fffe390b36ec5ac9e3798669afa3756",
+  "scope": "repository configured Python source: quality, reference, tools; full pytest suite under coverage.py"
+}
