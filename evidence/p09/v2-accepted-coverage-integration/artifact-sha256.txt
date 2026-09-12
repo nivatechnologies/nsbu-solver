@@ -15,3 +15,4 @@ e4b46e0268c0af4cbd10aa1a3aad6acd30cfa3d122c8603d7dc8003e873ddcfc  evidence/p09/v
 03eaf82ff62fe4156ee2718455891d60d30249ea41aa52b5580e80f889a4d639  evidence/p09/v2-accepted-coverage-integration/raw/rustdoc.log
 119b04318374b35130ab2fabb247094a1c96fa4250f62a2487d9e9d7431825cd  evidence/p09/v2-accepted-coverage-integration/reproduce.sh
 c5392cbf5c7e727679d376e6bbfef8fb0c00525b18ca5cf5ea64645e3fa45859  evidence/p09/v2-accepted-coverage-integration/source-sha256.json
+3cfd8ac8f0f156cc9b2e7af4f684090283bd6c196df0a89e2903520a1d584351  evidence/p09/v2-accepted-coverage-integration/summary.json

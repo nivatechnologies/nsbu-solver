@@ -1,0 +1,48 @@
+{
+  "schema": "nsbu.evidence-summary",
+  "schema_version": 1,
+  "source_commit": "e595d9b1851a4af1de5884dd0ddc62eed98caff4",
+  "scientific_status": "UnqualifiedDiagnostic",
+  "accepted_pde_windows": 0,
+  "normal_tests": {
+    "v2_region_coverage": {"passed": 3, "failed": 0, "seconds": 0.15},
+    "v2_diagnostic_coordinator": {"passed": 3, "failed": 0, "seconds": 114.50},
+    "v2_diagnostic_export": {"passed": 3, "failed": 0, "seconds": 105.30}
+  },
+  "instrumented_tests": {
+    "source_commit": "e595d9b1851a4af1de5884dd0ddc62eed98caff4",
+    "v2_diagnostic_export": {"passed": 3, "failed": 0, "seconds": 616.23},
+    "v2_region_coverage": {"passed": 3, "failed": 0, "seconds": 0.57}
+  },
+  "allocation": {
+    "admission_allocations": 0,
+    "construction_bytes": 64022624,
+    "joint_storage_bytes": 74750488,
+    "events": 7,
+    "execution_allocations": 0
+  },
+  "static": {
+    "format": "passed",
+    "workspace_all_target_clippy_ci_policy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_validation": "passed",
+    "maximum_cyclomatic": 21.0,
+    "maximum_cognitive": 21.0,
+    "maximum_all_node_halstead_difficulty": 75.9295154185022,
+    "maximum_tracked_rust_file_lines": 496
+  },
+  "crap": {
+    "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+    "final_modified_maintained_files": {"count": 4, "maximum": 21.0},
+    "source_3a630_byte_identical_observed_files": {"count": 13, "maximum": 20.671296296296294}
+  },
+  "focused_scope_gaps": [
+    "v2_cached_integration.rs was compiled by all-target Clippy but not executed in the focused coverage profile",
+    "v2_review_adapter.rs was compiled by all-target Clippy but not executed in the focused coverage profile"
+  ],
+  "whole_maintained_coverage": {
+    "required_line_percent": 80.0,
+    "required_branch_percent": 80.0,
+    "status": "pending_hosted_whole_workspace_ci"
+  }
+}
