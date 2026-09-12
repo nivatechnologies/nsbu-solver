@@ -1,0 +1,18 @@
+{
+  "parent_commit": "b1efef8872a21a0d51ec888b9ce3ab5e20a8af74",
+  "source_commit": "22e928992effdb64b4ed71723b68df6395b40278",
+  "files": [
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/geometry.rs",
+      "sha256": "92bd7d4bb194a881475a01417dde2536bb4d4a7474ffb1ed055325b6534ce943"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_review_profile.rs",
+      "sha256": "48e6ec02963b94785d2246bed75d98517c2751c82704a10d69e398dd32981e25"
+    },
+    {
+      "path": "docs/V2_REVIEW_PROFILE.md",
+      "sha256": "4c9ba020d536b6d34dcc3e5d0561cc19adff6c4e0bef09f85868ec2a841f06d7"
+    }
+  ]
+}
