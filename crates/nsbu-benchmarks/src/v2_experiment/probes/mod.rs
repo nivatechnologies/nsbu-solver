@@ -2,6 +2,7 @@
 pub mod balances;
 pub mod physical;
 mod plan;
+pub mod pressure;
 mod report;
 pub mod residuals;
 use super::{FamilyError, PAIRS};
