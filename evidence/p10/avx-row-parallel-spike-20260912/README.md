@@ -12,7 +12,7 @@ At N384 and N576, serial W3 and row-parallel W3 produced identical SHA-256 hashe
 
 | Length | Separate-owner dispatches per 3D triplet | Serial composite | Row composite | Speedup | Measured row non-FFT fraction | Decision |
 |---:|---:|---:|---:|---:|---:|---|
-| 384 | 3,468 | 1.307003214 s | 1.628431908 s | 0.802615x | 72.894% | fail |
+| 384 | 3,468 | 1.307003214 s | 1.628431908 s | 0.802615x | 72.896% | fail |
 | 576 | 7,794 | 3.972600625 s | 5.228691953 s | 0.759769x | 71.085% | fail |
 
 The non-FFT fraction is `(pack + atomic dispatch + completion-barrier excess beyond the slowest participant FFT + scatter + publication) / (that overhead + FFT barrier phase)`, summed over the three component owners. It is an owner-work fraction; concurrent component sums are not divided by triplet wall time. Full phase totals and hashes are in `raw/profile-384.log` and `raw/profile-576.log`. The stale gate-line overhead fraction in `raw/profile-384.log` and `raw/profile-576.log` divided aggregate component overhead by triplet wall time; the table applies the corrected formula to the unchanged raw phase fields. No benchmark was repeated for this reporting correction.
