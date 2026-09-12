@@ -12,7 +12,18 @@
   "m48": {
     "commit": "5fa65efbad0cc340efdf126278feaf579e0017fa",
     "tree": "f45a2b6045b079debdb093f04086d03dc5d70cd1",
-    "harness_sha256": "d7291991b0c4dbe8614bf9d28b4e7e05f2e6c44a28c7e5b4ea56747f03d17038"
+    "harness_sha256": "d7291991b0c4dbe8614bf9d28b4e7e05f2e6c44a28c7e5b4ea56747f03d17038",
+    "walkthrough": {
+      "mode": "--walkthrough",
+      "endpoint": 128,
+      "terminal": "complete",
+      "events": 5,
+      "accepted_events": 3,
+      "wall_seconds": 289.517688,
+      "stdout_sha256": "ef7e5c55bb5013c5175c670c25e2d19c255b300ee3fa1df54e75938ad151ceec",
+      "time_sha256": "8b8470be134b5aa4b9b2f95abd1b00e795c587007ba32d13fffb8858f5115579",
+      "status_sha256": "ed163d69a09ddc0ffcbdf126a42d5745a93449fa7a39354788e948b7ac795c04"
+    }
   },
   "m96": {
     "commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",

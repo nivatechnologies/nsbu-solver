@@ -92,7 +92,29 @@
         "4096": 256
       },
       "terminal": "complete",
-      "wall_seconds": 7652.919993
+      "wall_seconds": 7652.919993,
+      "full_run": {
+        "mode": "--full",
+        "endpoint": 4096,
+        "terminal": "complete",
+        "events": 5,
+        "wall_seconds": 7652.919993
+      },
+      "walkthrough_run": {
+        "mode": "--walkthrough",
+        "endpoint": 128,
+        "terminal": "complete",
+        "events": 5,
+        "accepted_events": 3,
+        "accepted_clocks": [
+          0,
+          64,
+          128
+        ],
+        "wall_seconds": 289.517688,
+        "from_rest": true,
+        "supplies_early_snapshots_only": true
+      }
     },
     "m96_spatial_midpoint": {
       "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
