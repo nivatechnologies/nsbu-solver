@@ -24,6 +24,10 @@ name = "allocation"
 harness = false
 
 [[test]]
+name = "fft_allocation"
+harness = false
+
+[[test]]
 name = "attempt_allocation"
 harness = false
 
