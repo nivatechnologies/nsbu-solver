@@ -1,5 +1,5 @@
 {
-  "schema": "p10-avx-scheduled-endpoint-plan-v1",
+  "schema": "p10-avx-scheduled-endpoint-plan-v2",
   "status": "approved_experimental_profile",
   "qualification": "none_until_endpoint_and_independent_refinements_pass",
   "retained_layout": [192, 192, 192],
@@ -25,8 +25,10 @@
   "simpson_middle_nodes": [0, 1024, 2048, 3072, 4096],
   "simpson_coarse_nodes": [0, 2048, 4096],
   "rest_policy": "exact_initial_state_and_BalanceSample_REST",
-  "publication": "atomic_node_directory_after_observer_and_snapshot_success",
-  "diagnostic_failure": "qualification_incomplete_preserve_last_complete_node",
+  "publication": "stage_full_proposal_bundle_then_commit_memory_then_single_node_directory_rename",
+  "frontiers": "attempted_index_in_memory_clock_durable_node_clock_durable_attempt_and_provisional_clock",
+  "diagnostic_failure": "drop_prepared_commit_and_preserve_committed_state_and_last_durable_frontier",
+  "post_commit_publication_failure": "retain_provisional_bundle_and_disclose_in_memory_ahead_of_durable_no_crash_atomicity_claim",
   "archive_profile": "unsupported_nonresumable_harness_schema",
   "default_run_behavior_changed": false
 }

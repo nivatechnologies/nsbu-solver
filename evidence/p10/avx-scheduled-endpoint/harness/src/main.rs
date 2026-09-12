@@ -1,28 +1,32 @@
 mod artifact;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/cache.rs"]
 mod cache;
+mod config;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
 mod observer;
+mod publication;
+mod records;
 mod schedule;
 
-use artifact::NodeRecord;
+use artifact::{NodeRecord, StagedArtifact};
 use cache::CachedReducedForce;
-use nsbu_benchmarks::CASE_SHA256;
+use config::{ADVECTIVE_LIMIT, M, WORKERS};
 use nsbu_solver::{
     diagnostics::{balances::BalanceSample, history::BalanceHistory, quadrature::BalanceIntegral},
-    domain::{Domain, Epoch, ExtraStorage, Layout, ResourcePlan, SpectralState, TickClock},
+    domain::{Epoch, Layout, ResourcePlan, SpectralState, TickClock},
     integrators::{
-        attempt::AttemptWorkspace,
-        indicator::Tolerances,
+        attempt::{AttemptResult, AttemptWorkspace},
         method::Method,
         rhs::SpectralRhs,
-        transaction::{commit_candidate, CandidateState},
+        transaction::{prepare_commit, CandidateState},
     },
     spectral::{FftBackend, FftCatalog},
     SolverError,
 };
 use observer::ReducedObserver;
-use stats_alloc::{Region, StatsAlloc, INSTRUMENTED_SYSTEM};
+use publication::Frontiers;
+use records::{AttemptFacts, ObservationTiming};
+use stats_alloc::{Region, Stats, StatsAlloc, INSTRUMENTED_SYSTEM};
 use std::{
     alloc::System,
     error::Error,
@@ -34,14 +38,6 @@ use std::{
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
-const N: usize = 192;
-const M: usize = 384;
-const WORKERS: usize = 32;
-const CAP: usize = 103_079_215_104;
-const ADVECTIVE_LIMIT: f64 = 0.45;
-const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
-const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + 64 * 1024;
-
 type AnyResult<T> = Result<T, HarnessError>;
 
 #[derive(Debug)]
@@ -49,6 +45,7 @@ enum HarnessError {
     Numerical(SolverError),
     Io(io::Error),
     Config(&'static str),
+    Rejected { ticks: u128, ratios: [f64; 2] },
 }
 
 impl fmt::Display for HarnessError {
@@ -57,6 +54,12 @@ impl fmt::Display for HarnessError {
             Self::Numerical(error) => write!(formatter, "numerical:{error:?}"),
             Self::Io(error) => write!(formatter, "io:{error}"),
             Self::Config(error) => formatter.write_str(error),
+            Self::Rejected { ticks, ratios } => {
+                write!(
+                    formatter,
+                    "attempt_rejected:ticks={ticks}:ratios={ratios:?}"
+                )
+            }
         }
     }
 }
@@ -81,6 +84,24 @@ struct TimedBalance {
     sample: BalanceSample,
 }
 
+struct AcceptedStage {
+    artifact: StagedArtifact,
+    balance: Option<TimedBalance>,
+    timing: Option<ObservationTiming>,
+}
+
+struct RunOwners {
+    resources: ResourcePlan,
+    state: SpectralState,
+    candidate: CandidateState,
+    attempts: AttemptWorkspace,
+    rhs: SpectralRhs<CachedReducedForce>,
+    observer: ReducedObserver,
+    identity: String,
+    balances: Vec<TimedBalance>,
+    frontiers: Frontiers,
+}
+
 fn main() -> AnyResult<()> {
     let arguments = std::env::args().skip(1).collect::<Vec<_>>();
     let [mode, path] = arguments.as_slice() else {
@@ -90,259 +111,331 @@ fn main() -> AnyResult<()> {
     };
     let output = PathBuf::from(path);
     match mode.as_str() {
-        "preflight" => preflight().map(|_| ()).map_err(HarnessError::from),
-        "run" => {
-            if output.exists() {
-                return Err(HarnessError::Config("output path already exists"));
-            }
-            fs::create_dir(&output)?;
-            match execute(&output) {
-                Ok(()) => Ok(()),
-                Err(error) => {
-                    let marker = format!(
-                        "{{\n  \"status\": \"qualification_incomplete\",\n  \"error\": \"{error}\"\n}}\n"
-                    );
-                    let _ =
-                        artifact::publish_status(&output, "qualification-incomplete.json", &marker);
-                    Err(error)
-                }
-            }
-        }
+        "preflight" => config::preflight().map(|_| ()).map_err(HarnessError::from),
+        "run" => start(&output),
         _ => Err(HarnessError::Config("unknown mode")),
     }
 }
 
-fn preflight() -> Result<ResourcePlan, SolverError> {
-    schedule::validate()?;
-    let domain = domain()?;
-    let samples = Layout::new([M; 3])?;
-    let observer_samples = Layout::new([2 * M; 3])?;
-    let backend = FftBackend::RustFft6_4_1AvxFma;
-    backend.ensure_available()?;
-    let catalog_bytes = FftCatalog::reservation(backend)?;
-    let force_limits = CachedReducedForce::preflight(domain, samples, WORKERS, backend)?;
-    let rhs_bytes = SpectralRhs::<CachedReducedForce>::reservation_with_fft_backend(
-        domain,
-        force_limits,
-        backend,
-    )?;
-    let attempt_bytes = AttemptWorkspace::reservation_with_method(domain, Method::CoxMatthews)?;
-    let observer_bytes = ReducedObserver::preflight(domain, observer_samples, WORKERS, backend)?;
-    let diagnostics = attempt_bytes
-        .checked_add(observer_bytes)
-        .ok_or(SolverError::SizeOverflow)?;
-    let resources = ResourcePlan::new(
-        domain,
-        ExtraStorage {
-            fft: catalog_bytes,
-            force: rhs_bytes,
-            diagnostics,
-            overhead: OVERHEAD,
-        },
-        CAP,
-        Epoch(0),
-    )?;
-    let snapshot_bytes = domain
-        .layout()
-        .half_len()
-        .checked_mul(3 * 16)
-        .ok_or(SolverError::SizeOverflow)?;
-    let disk_bytes = artifact::disk_preflight(snapshot_bytes, schedule::FINE.len())?;
-    let integration_work = force_limits
-        .work_units
-        .checked_mul(12)
-        .and_then(|n| n.checked_mul(schedule::MAXIMUM_ATTEMPTS))
-        .ok_or(SolverError::SizeOverflow)?;
-    let diagnostic =
-        nsbu_solver::diagnostics::conservative::ConservativeWorkspace::diagnostic_domain(domain)?;
-    let observer_force = nsbu_benchmarks::provider::parallel_reduced::ParallelReducedV2Force::preflight_with_fft_backend(
-        diagnostic,
-        observer_samples,
-        WORKERS,
-        backend,
-    )?;
-    let observer_work = observer_force
-        .work_units
-        .checked_mul(8)
-        .ok_or(SolverError::SizeOverflow)?;
-    println!(
-        "preflight source={} case_sha256={CASE_SHA256} schema=p10-avx-scheduled-endpoint-v1 backend=rustfft-6.4.1-avx-avx2-fma provider=parallel-reduced-attempt-cache retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={catalog_bytes} rhs_bytes={rhs_bytes} attempt_bytes={attempt_bytes} observer_bytes={observer_bytes} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={disk_bytes} disk_cap_bytes={} integration_work_bound={integration_work} observer_work_bound={observer_work} archive_profile=unsupported qualification=experimental",
-        env!("RUN_SOURCE"),
-        schedule::STEP,
-        schedule::MAXIMUM_ATTEMPTS,
-        schedule::ENDPOINT,
-        schedule::FINE,
-        2 * M,
-        schedule::MIDDLE,
-        schedule::COARSE,
-        resources.total(),
-        artifact::DISK_CAP_BYTES,
-    );
-    Ok(resources)
+fn start(output: &Path) -> AnyResult<()> {
+    if output.exists() {
+        return Err(HarnessError::Config("output path already exists"));
+    }
+    fs::create_dir(output)?;
+    let resources = config::preflight()?;
+    let mut run = RunOwners::new(resources)?;
+    if let Err(error) = run.execute(output) {
+        let marker = run.incomplete_json(&error);
+        let _ = artifact::publish_status(output, "qualification-incomplete.json", &marker);
+        return Err(error);
+    }
+    Ok(())
 }
 
-fn execute(output: &Path) -> AnyResult<()> {
-    let resources = preflight()?;
-    let domain = domain()?;
-    let backend = FftBackend::RustFft6_4_1AvxFma;
-    let catalog = FftCatalog::new(backend, resources.classes()[4])?;
-    let samples = Layout::new([M; 3])?;
-    let observer_samples = Layout::new([2 * M; 3])?;
-    let force_limits = CachedReducedForce::preflight(domain, samples, WORKERS, backend)?;
-    let force = CachedReducedForce::new(
-        domain,
-        samples,
-        WORKERS,
-        &catalog,
-        force_limits.storage_bytes,
-    )?;
-    let rhs_bytes = SpectralRhs::<CachedReducedForce>::reservation_with_catalog(
-        domain,
-        force_limits,
-        &catalog,
-    )?;
-    let mut rhs =
-        SpectralRhs::new_with_catalog(domain, force, ADVECTIVE_LIMIT, &catalog, rhs_bytes)?;
-    let observer_bytes = ReducedObserver::preflight(domain, observer_samples, WORKERS, backend)?;
-    let mut observer =
-        ReducedObserver::new(domain, observer_samples, WORKERS, &catalog, observer_bytes)?;
-    let initial_clock = TickClock::from_rest(-20, 8192)?;
-    let mut state = SpectralState::from_rest(resources, initial_clock, Epoch(0))?;
-    let mut candidate = CandidateState::new(resources, initial_clock, Epoch(0))?;
-    let mut attempts = AttemptWorkspace::new_with_method(resources, Method::CoxMatthews)?;
-    let tolerances = Tolerances {
-        absolute: [1e-5, 1e-4],
-        relative: [1e-5; 2],
-    };
-    let identity = identity();
-    let mut balances = Vec::new();
-    balances
-        .try_reserve_exact(schedule::FINE.len())
-        .map_err(|_| SolverError::AllocationFailed)?;
-    balances.push(TimedBalance {
-        clock: state.clock(),
-        sample: BalanceSample::REST,
-    });
-    let rest_hash = artifact::publish_node(
-        output,
-        &state,
-        NodeRecord {
-            identity: &identity,
-            balance: BalanceSample::REST,
-            observer_seconds: 0.0,
-            force_seconds: 0.0,
-            conservative_seconds: 0.0,
-            transfer_measure_seconds: 0.0,
-        },
-    )?;
-    println!("published clock=0 state_sha256={rest_hash} balance=REST");
+impl RunOwners {
+    fn new(resources: ResourcePlan) -> AnyResult<Self> {
+        let domain = config::domain()?;
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        let catalog = FftCatalog::new(backend, resources.classes()[4])?;
+        let samples = Layout::new([M; 3])?;
+        let observer_samples = Layout::new([2 * M; 3])?;
+        let force_limits = CachedReducedForce::preflight(domain, samples, WORKERS, backend)?;
+        let force = CachedReducedForce::new(
+            domain,
+            samples,
+            WORKERS,
+            &catalog,
+            force_limits.storage_bytes,
+        )?;
+        let rhs_bytes = SpectralRhs::<CachedReducedForce>::reservation_with_catalog(
+            domain,
+            force_limits,
+            &catalog,
+        )?;
+        let rhs =
+            SpectralRhs::new_with_catalog(domain, force, ADVECTIVE_LIMIT, &catalog, rhs_bytes)?;
+        let observer_bytes =
+            ReducedObserver::preflight(domain, observer_samples, WORKERS, backend)?;
+        let observer =
+            ReducedObserver::new(domain, observer_samples, WORKERS, &catalog, observer_bytes)?;
+        let initial_clock = TickClock::from_rest(-20, 8192)?;
+        let state = SpectralState::from_rest(resources, initial_clock, Epoch(0))?;
+        let candidate = CandidateState::new(resources, initial_clock, Epoch(0))?;
+        let attempts = AttemptWorkspace::new_with_method(resources, Method::CoxMatthews)?;
+        let mut balances = Vec::new();
+        balances
+            .try_reserve_exact(schedule::FINE.len())
+            .map_err(|_| SolverError::AllocationFailed)?;
+        balances.push(TimedBalance {
+            clock: state.clock(),
+            sample: BalanceSample::REST,
+        });
+        Ok(Self {
+            resources,
+            state,
+            candidate,
+            attempts,
+            rhs,
+            observer,
+            identity: config::identity(),
+            balances,
+            frontiers: Frontiers::default(),
+        })
+    }
 
-    for index in 1..=schedule::MAXIMUM_ATTEMPTS {
+    fn execute(&mut self, output: &Path) -> AnyResult<()> {
+        self.publish_rest(output)?;
+        for index in 1..=schedule::MAXIMUM_ATTEMPTS {
+            self.attempt(output, index)?;
+        }
+        self.finish(output)
+    }
+
+    fn publish_rest(&mut self, output: &Path) -> AnyResult<()> {
+        let rest_hash = artifact::publish_node(
+            output,
+            &self.state,
+            NodeRecord {
+                identity: &self.identity,
+                balance: BalanceSample::REST,
+                observer_seconds: 0.0,
+                force_seconds: 0.0,
+                conservative_seconds: 0.0,
+                transfer_measure_seconds: 0.0,
+            },
+        )?;
+        self.frontiers.durable_clock = 0;
+        println!("published clock=0 state_sha256={rest_hash} balance=REST");
+        Ok(())
+    }
+
+    fn attempt(&mut self, output: &Path, index: usize) -> AnyResult<()> {
+        self.frontiers.attempted = index;
+        let from = self.state.clock().elapsed();
         let integration_region = Region::new(GLOBAL);
         let started = Instant::now();
-        let result =
-            attempts.try_advance(&state, &mut candidate, schedule::STEP, tolerances, &mut rhs)?;
-        let integration_seconds = started.elapsed().as_secs_f64();
-        let integration_allocations = integration_region.change();
-        let accepted = result
-            .accepted
-            .ok_or(SolverError::ArithmeticResolutionLimited)?;
-        commit_candidate(resources, &mut state, &mut candidate, accepted)?;
-        let scheduled = schedule::positive_node(state.clock().elapsed());
-        let mut observer_seconds = None;
-        if scheduled {
-            let observer_region = Region::new(GLOBAL);
-            let observer_started = Instant::now();
-            let observed = observer.sample(&state)?;
-            let elapsed = observer_started.elapsed().as_secs_f64();
-            let observer_allocations = observer_region.change();
-            if observer_allocations.allocations != 0
-                || observer_allocations.deallocations != 0
-                || observer_allocations.reallocations != 0
-            {
-                return Err(SolverError::ResourceLimit.into());
+        let result = self.attempts.try_advance(
+            &self.state,
+            &mut self.candidate,
+            schedule::STEP,
+            config::tolerances(),
+            &mut self.rhs,
+        );
+        let seconds = started.elapsed().as_secs_f64();
+        let allocations = integration_region.change();
+        match result {
+            Ok(result) => self.finish_attempt(output, index, from, seconds, allocations, result),
+            Err(error) => {
+                self.publish_numerical_failure(output, index, from, seconds, &error)?;
+                Err(error.into())
             }
-            balances.push(TimedBalance {
-                clock: state.clock(),
-                sample: observed.balance,
-            });
-            let state_hash = artifact::publish_node(
+        }
+    }
+
+    fn finish_attempt(
+        &mut self,
+        output: &Path,
+        index: usize,
+        from: u128,
+        seconds: f64,
+        allocations: Stats,
+        result: AttemptResult,
+    ) -> AnyResult<()> {
+        if let Err(error) = require_no_allocations(allocations) {
+            self.publish_numerical_failure(
                 output,
-                &state,
-                NodeRecord {
-                    identity: &identity,
-                    balance: observed.balance,
-                    observer_seconds: elapsed,
-                    force_seconds: observed.force_seconds,
-                    conservative_seconds: observed.conservative_seconds,
-                    transfer_measure_seconds: observed.transfer_measure_seconds,
-                },
+                index,
+                from,
+                seconds,
+                &SolverError::ResourceLimit,
             )?;
-            observer_seconds = Some(elapsed);
-            println!(
-                "published clock={} state_sha256={state_hash} observer_seconds={elapsed:.9} observer_force_seconds={:.9} observer_conservative_seconds={:.9} observer_transfer_measure_seconds={:.9}",
-                state.clock().elapsed(),
-                observed.force_seconds,
-                observed.conservative_seconds,
-                observed.transfer_measure_seconds,
-            );
+            return Err(error);
         }
-        if integration_allocations.allocations != 0
-            || integration_allocations.deallocations != 0
-            || integration_allocations.reallocations != 0
-        {
-            return Err(SolverError::ResourceLimit.into());
-        }
-        let attempt_json = format!(
-            concat!(
-                "{{\n  \"schema\": \"p10-avx-scheduled-attempt-v1\",\n",
-                "  \"identity\": \"{}\",\n  \"attempt\": {},\n  \"clock\": {},\n",
-                "  \"outcome\": \"committed\",\n  \"rhs_calls\": {},\n",
-                "  \"cache_hits\": {},\n  \"cache_misses\": {},\n",
-                "  \"integration_seconds\": {:.9},\n  \"observer_seconds\": {},\n",
-                "  \"error_ratio_l2\": {:.17e},\n  \"error_ratio_h1\": {:.17e},\n",
-                "  \"steady_allocations\": 0\n}}\n"
-            ),
-            identity,
+        let ticks = result.ticks;
+        let rhs_calls = result.rhs_calls;
+        let ratios = result.indicators.ratios;
+        let Some(accepted) = result.accepted else {
+            let json = records::rejected(&self.identity, index, from, seconds, &result);
+            artifact::publish_attempt(output, index, &json)?;
+            self.frontiers.durable_attempt = index;
+            return Err(HarnessError::Rejected {
+                ticks: result.ticks,
+                ratios: result.indicators.ratios,
+            });
+        };
+        let clock = from.checked_add(ticks).ok_or(SolverError::SizeOverflow)?;
+        let facts = AttemptFacts {
             index,
-            state.clock().elapsed(),
-            result.rhs_calls,
-            rhs.provider().hit_miss()[0],
-            rhs.provider().hit_miss()[1],
-            integration_seconds,
-            observer_seconds.map_or_else(|| "null".to_owned(), |value| format!("{value:.9}")),
-            result.indicators.ratios[0],
-            result.indicators.ratios[1],
+            clock,
+            integration_seconds: seconds,
+            ticks,
+            rhs_calls,
+            ratios,
+            hit_miss: self.rhs.provider().hit_miss(),
+        };
+        let transaction = prepare_commit(
+            self.resources,
+            &mut self.state,
+            &mut self.candidate,
+            accepted,
+        )?;
+        let staged = stage_accepted(
+            output,
+            index,
+            &self.identity,
+            transaction.proposal(),
+            &mut self.observer,
+            facts,
         );
-        artifact::publish_attempt(output, index, &attempt_json)?;
-        println!(
-            "attempt={index} clock={} integration_seconds={integration_seconds:.9} cache_hit_miss={:?} observer_seconds={observer_seconds:?} ratios={:?} steady_allocations=0",
-            state.clock().elapsed(),
-            rhs.provider().hit_miss(),
-            result.indicators.ratios,
+        let stage_timing = staged.as_ref().ok().and_then(|stage| stage.timing);
+        let stage_balance = staged.as_ref().ok().and_then(|stage| stage.balance);
+        let published = publication::commit_staged(
+            &mut self.frontiers,
+            index,
+            clock,
+            staged,
+            || transaction.commit(),
+            |stage| stage.artifact.publish(),
+        )?;
+        if let Some(balance) = stage_balance {
+            self.balances.push(balance);
+        }
+        records::report(
+            facts,
+            stage_timing,
+            published.kind,
+            published.state_hash.as_deref(),
         );
+        Ok(())
     }
-    if state.clock().elapsed() != schedule::ENDPOINT || balances.len() != schedule::FINE.len() {
-        return Err(SolverError::InvalidClock.into());
+
+    fn publish_numerical_failure(
+        &mut self,
+        output: &Path,
+        index: usize,
+        from: u128,
+        seconds: f64,
+        error: &SolverError,
+    ) -> AnyResult<()> {
+        let json = records::numerical_error(&self.identity, index, from, seconds, error);
+        artifact::publish_attempt(output, index, &json)?;
+        self.frontiers.durable_attempt = index;
+        Ok(())
     }
-    let [coarse, middle, fine] = quadrature(&balances)?;
-    let terminal = format!(
-        concat!(
-            "{{\n  \"status\": \"endpoint_complete_qualification_pending\",\n",
-            "  \"identity\": \"{}\",\n  \"clock\": {},\n  \"samples\": {},\n",
-            "  \"quadrature_sufficiency\": \"not_assessed\",\n",
-            "  \"coarse\": \"{:?}\",\n  \"middle\": \"{:?}\",\n  \"fine\": \"{:?}\"\n}}\n"
-        ),
-        identity,
-        state.clock().elapsed(),
-        balances.len(),
-        coarse,
-        middle,
-        fine,
-    );
-    artifact::publish_status(output, "endpoint-complete.json", &terminal)?;
-    println!("terminal endpoint_complete_qualification_pending clock=4096");
-    Ok(())
+
+    fn incomplete_json(&self, error: &HarnessError) -> String {
+        let provisional = self
+            .frontiers
+            .provisional_clock
+            .map_or_else(|| "null".to_owned(), |value| value.to_string());
+        format!(
+            concat!(
+                "{{\n  \"status\": \"qualification_incomplete\",\n",
+                "  \"error\": {},\n  \"attempted_frontier\": {},\n",
+                "  \"in_memory_clock\": {},\n  \"durable_clock\": {},\n",
+                "  \"durable_attempt_frontier\": {},\n  \"provisional_clock\": {}\n}}\n"
+            ),
+            artifact::json_string(&error.to_string()),
+            self.frontiers.attempted,
+            self.frontiers.in_memory_clock,
+            self.frontiers.durable_clock,
+            self.frontiers.durable_attempt,
+            provisional,
+        )
+    }
+
+    fn finish(&self, output: &Path) -> AnyResult<()> {
+        if self.state.clock().elapsed() != schedule::ENDPOINT
+            || self.frontiers.durable_clock != schedule::ENDPOINT
+            || self.balances.len() != schedule::FINE.len()
+        {
+            return Err(SolverError::InvalidClock.into());
+        }
+        let [coarse, middle, fine] = quadrature(&self.balances)?;
+        let terminal = format!(
+            concat!(
+                "{{\n  \"status\": \"endpoint_complete_qualification_pending\",\n",
+                "  \"identity\": {},\n  \"clock\": {},\n  \"samples\": {},\n",
+                "  \"quadrature_sufficiency\": \"not_assessed\",\n",
+                "  \"coarse\": {},\n  \"middle\": {},\n  \"fine\": {}\n}}\n"
+            ),
+            artifact::json_string(&self.identity),
+            self.state.clock().elapsed(),
+            self.balances.len(),
+            artifact::json_string(&format!("{coarse:?}")),
+            artifact::json_string(&format!("{middle:?}")),
+            artifact::json_string(&format!("{fine:?}")),
+        );
+        artifact::publish_status(output, "endpoint-complete.json", &terminal)?;
+        println!("terminal endpoint_complete_qualification_pending clock=4096");
+        Ok(())
+    }
+}
+
+fn stage_accepted(
+    output: &Path,
+    index: usize,
+    identity: &str,
+    proposal: &SpectralState,
+    observer: &mut ReducedObserver,
+    facts: AttemptFacts,
+) -> AnyResult<AcceptedStage> {
+    let scheduled = schedule::positive_node(proposal.clock().elapsed());
+    let (balance, timing) = if scheduled {
+        let region = Region::new(GLOBAL);
+        let started = Instant::now();
+        let observed = observer.sample(proposal)?;
+        let timing = ObservationTiming {
+            total: started.elapsed().as_secs_f64(),
+            force: observed.force_seconds,
+            conservative: observed.conservative_seconds,
+            transfer_measure: observed.transfer_measure_seconds,
+        };
+        require_no_allocations(region.change())?;
+        (
+            Some(TimedBalance {
+                clock: proposal.clock(),
+                sample: observed.balance,
+            }),
+            Some(timing),
+        )
+    } else {
+        (None, None)
+    };
+    let attempt_json = records::committed(identity, timing, facts);
+    let artifact = if let (Some(balance), Some(timing)) = (balance, timing) {
+        artifact::stage_node(
+            output,
+            proposal,
+            NodeRecord {
+                identity,
+                balance: balance.sample,
+                observer_seconds: timing.total,
+                force_seconds: timing.force,
+                conservative_seconds: timing.conservative,
+                transfer_measure_seconds: timing.transfer_measure,
+            },
+            Some(&attempt_json),
+        )?
+    } else {
+        artifact::stage_attempt(output, index, &attempt_json)?
+    };
+    Ok(AcceptedStage {
+        artifact,
+        balance,
+        timing,
+    })
+}
+
+fn require_no_allocations(allocations: Stats) -> AnyResult<()> {
+    if allocations.allocations != 0
+        || allocations.deallocations != 0
+        || allocations.reallocations != 0
+    {
+        Err(SolverError::ResourceLimit.into())
+    } else {
+        Ok(())
+    }
 }
 
 fn quadrature(samples: &[TimedBalance]) -> Result<[BalanceIntegral; 3], SolverError> {
@@ -367,17 +460,4 @@ fn history(samples: &[TimedBalance], clocks: &[u128]) -> Result<BalanceIntegral,
         history = history.with_sample(sample.clock, sample.sample)?;
     }
     history.integral()
-}
-
-fn domain() -> Result<Domain, SolverError> {
-    Domain::new([N; 3], [1.0; 3], 1.0)
-}
-
-fn identity() -> String {
-    format!(
-        "source={};case={CASE_SHA256};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v1;resume=unsupported",
-        env!("RUN_SOURCE"),
-        schedule::STEP,
-        schedule::ENDPOINT,
-    )
 }
