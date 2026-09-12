@@ -1,0 +1,4 @@
+    Checking nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-probe-reference-development/crates/nsbu-solver)
+    Checking nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-probe-reference-development/crates/nsbu-benchmarks)
+    Checking nsbu-cli v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-probe-reference-development/crates/nsbu-cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.53s

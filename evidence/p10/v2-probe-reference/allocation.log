@@ -1,0 +1,4 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-probe-reference-development/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.46s
+     Running tests/v2_probe_reference_allocation.rs (target/debug/deps/v2_probe_reference_allocation-79b4a525c10f28eb)
+probe reference construction_bytes=22247360 declared_bytes=27312296 transforms=810 roots=663552 steady_allocations=0
