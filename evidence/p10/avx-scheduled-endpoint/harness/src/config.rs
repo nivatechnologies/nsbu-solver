@@ -51,6 +51,18 @@ const PROFILE: &str = "n256-m384";
 const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c";
 #[cfg(all(feature = "n384-h64", not(feature = "n256")))]
 const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
+#[cfg(feature = "n384-prep")]
+const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
+#[cfg(not(feature = "n384-prep"))]
+const PREFLIGHT_SCHEMA: &str = "p10-avx-scheduled-endpoint-v2";
+#[cfg(feature = "n384-prep")]
+const EXECUTION: &str = "separate-rhs-force-w3";
+#[cfg(not(feature = "n384-prep"))]
+const EXECUTION: &str = "serial-component-fft";
+#[cfg(feature = "n384-prep")]
+const PROVIDER: &str = "parallel-reduced-v2-force-w3-attempt-cache";
+#[cfg(not(feature = "n384-prep"))]
+const PROVIDER: &str = "parallel-reduced-attempt-cache";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -247,7 +259,7 @@ fn observer_work(geometry: Geometry) -> Result<usize, SolverError> {
 fn report(admission: &Admission) {
     let sizes = admission.reservations;
     println!(
-        "preflight source={} case_sha256={CASE_SHA256} schema=p10-avx-scheduled-endpoint-v2 profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma provider=parallel-reduced-attempt-cache retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} archive_profile=unsupported qualification=experimental",
+        "preflight source={} case_sha256={CASE_SHA256} schema={PREFLIGHT_SCHEMA} profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma execution={EXECUTION} provider={PROVIDER} retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} profile_identity={} archive_profile=unsupported qualification=experimental",
         env!("RUN_SOURCE"),
         schedule::STEP,
         schedule::MAXIMUM_ATTEMPTS,
@@ -265,6 +277,7 @@ fn report(admission: &Admission) {
         artifact::DISK_CAP_BYTES,
         admission.integration_work,
         admission.observer_work,
+        identity(),
     );
 }
 
