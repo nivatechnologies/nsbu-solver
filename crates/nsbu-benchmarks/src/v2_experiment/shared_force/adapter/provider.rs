@@ -1,6 +1,6 @@
 //! Allocation-free prescribed-force handle over a fallibly borrowed table.
 use super::{call_schedule, SharedForceAdapterWork, SharedForceStream, MAXIMUM_CALLS};
-use crate::v2_experiment::shared_force::{SharedForceBinding, SharedForceTable};
+use crate::v2_experiment::shared_force::{SharedForceBinding, SharedForceError, SharedForceTable};
 use nsbu_solver::{
     domain::TickClock,
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
@@ -135,7 +135,7 @@ impl SharedForceAdapter<'_, '_, '_> {
             .map_err(|_| SolverError::ProviderBudgetExceeded)?;
         table
             .copy(self.binding, clock, output)
-            .map_err(|_| SolverError::ProviderBudgetExceeded)?;
+            .map_err(SharedForceError::solver_error)?;
         Ok(())
     }
 
