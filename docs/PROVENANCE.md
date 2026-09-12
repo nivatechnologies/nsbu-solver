@@ -127,7 +127,7 @@ source closure: `a5e03db5eb5505c3e1a040be576bbb641182158f`,
 `955e0ba5c7c46e57901643a3ebe6b27540cbdb86`,
 `606e7e4a1445007447bbb43393c32324a50d1681`,
 `6634c35dbb7048754c1d9cc59953e047c335c816`, and
-`5ec1975e056ec84fce402b60f7cd6b2cee1eccb7`. All twelve candidate ancestors were
+`5ec1975e056ec84fce402b60f7cd6b2cee1eccb7`. The listed source revisions and the previous archive tip were
 independently verified reachable from the prepared follow-up commit. This is
 archive-only provenance and preserves the original source-history results and
 scope.

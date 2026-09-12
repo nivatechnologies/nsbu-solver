@@ -1,0 +1,33 @@
+{
+  "archive_commit": "faa18a7fec87e4db6752908c302f324c9415af53",
+  "previous_archive_commit": "200c5d4c8d02caf18561d4b8c1e2026e8168e924",
+  "archive_tree": "e187020bf3c7b91402ffc9baeb663ae29c9d29d3",
+  "first_parent": "200c5d4c8d02caf18561d4b8c1e2026e8168e924",
+  "previous_retained_sources": [
+    "9836cfc9f3b13a6f3df39865bd016d17e6bc1e85",
+    "4fd1761deb25c37c3e46a66a1e8682810e27fa6d",
+    "2780b0b7638350933f084ec2ea5482d7fe7abed9",
+    "cfb613bf93db5f2064151cfd766128faf2496882",
+    "7999ea49f9ebb0f86f77e24f0f437b66032c9098",
+    "8f2bbb046e09bb8d5a7ad0b1c0bea3a7892e5575",
+    "b66fc14aedd0d3544196a4817785a6c73409e780",
+    "5b583d9678af631ba6a175a0175ccf3da132cc71",
+    "5dc435d63cb265632b60895330a3d70f5d9ad263",
+    "90a357103cd7e55e74e5acad2e6c490b7813fe65"
+  ],
+  "additional_cited_sources": [
+    "a5e03db5eb5505c3e1a040be576bbb641182158f",
+    "0236d8e2d95e8bd91ba0e83ad901df16efcd36bb",
+    "b358f52090e23ff9713b23736eee1c4ba7d046f1",
+    "d687b585d324699a484e15a91581e41977392007",
+    "5ec1975e056ec84fce402b60f7cd6b2cee1eccb7",
+    "91f756dec69c0866b8f08ca6e760dc67836483c5",
+    "5fa65efbad0cc340efdf126278feaf579e0017fa",
+    "955e0ba5c7c46e57901643a3ebe6b27540cbdb86",
+    "606e7e4a1445007447bbb43393c32324a50d1681",
+    "6634c35dbb7048754c1d9cc59953e047c335c816"
+  ],
+  "all_sources_reachable": true,
+  "remote_ref": "refs/heads/codex/evidence-sources-20260912",
+  "scope": "Archive ancestry only; unchanged def4730 source tree; no new implementation or quality result."
+}
