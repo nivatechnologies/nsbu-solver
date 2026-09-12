@@ -86,12 +86,16 @@ fn assert_nyquist_row(layout: Layout, values: &[Complex64], row: [usize; 2]) {
     let [nx, ny, nz] = layout.dimensions();
     let half = nz / 2 + 1;
     for k in 0..half {
-        if row[0] == nx / 2 || row[1] == ny / 2 || k == nz / 2 {
+        if is_nyquist([nx, ny, nz], row, k) {
             let value = values[(row[0] * ny + row[1]) * half + k];
             assert_eq!(value.re.to_bits(), 0.0_f64.to_bits());
             assert_eq!(value.im.to_bits(), 0.0_f64.to_bits());
         }
     }
+}
+
+fn is_nyquist(shape: [usize; 3], row: [usize; 2], k: usize) -> bool {
+    row[0] == shape[0] / 2 || row[1] == shape[1] / 2 || k == shape[2] / 2
 }
 
 fn compare_component(small: Domain, large: Domain, direct: &[Complex64], common: &[Complex64]) {
@@ -100,6 +104,20 @@ fn compare_component(small: Domain, large: Domain, direct: &[Complex64], common:
     assert_eq!(direct[0].re.to_bits(), expected[0].re.to_bits());
     assert_eq!(direct[0].im.to_bits(), expected[0].im.to_bits());
     assert_strict_nyquist_zero(small.layout(), direct);
+}
+
+fn has_nonzero(values: &[Complex64]) -> bool {
+    values
+        .iter()
+        .any(|value| value.re != 0.0 || value.im != 0.0)
+}
+
+fn assert_activity(clock: TickClock, observed_nonzero: bool) {
+    if clock.elapsed() == 0 {
+        assert!(!observed_nonzero);
+    } else {
+        assert!(observed_nonzero);
+    }
 }
 
 fn assert_force_crop(case: (usize, usize, usize), workers: usize, clock: TickClock) {
@@ -118,15 +136,9 @@ fn assert_force_crop(case: (usize, usize, usize), workers: usize, clock: TickClo
     let mut observed_nonzero = false;
     for component in 0..3 {
         compare_component(small, large, &direct[component], &common[component]);
-        observed_nonzero |= direct[component]
-            .iter()
-            .any(|value| value.re != 0.0 || value.im != 0.0);
+        observed_nonzero |= has_nonzero(&direct[component]);
     }
-    if clock.elapsed() == 0 {
-        assert!(!observed_nonzero);
-    } else {
-        assert!(observed_nonzero);
-    }
+    assert_activity(clock, observed_nonzero);
 }
 
 #[test]
