@@ -61,6 +61,32 @@ Agreement in either representation does not replace the other, and sampled RMS
 is not a continuum supremum. The observed spatial trend is unresolved evidence;
 it does not predict the result at another grid or force profile.
 
+The later P10 campaign reached the same first legal endpoint from rest on N48,
+N64 and N96 with fixed M192 force sampling. Its N48-to-N64 and N64-to-N96 H1
+differences were 11.3347% and 7.0493% of the respective fine-state norms, with
+more than 99.997% of each squared difference in newly resolved modes. This
+confirms that the old small-grid family is underresolved and supersedes it as a
+resolution-planning basis. The raw states, failures and comparisons remain in
+the [fixed-force spatial screen](../evidence/p10/first-endpoint-force-spatial-1b89176/README.md).
+
+Analytical-reference spectrum screens at clock 4096 identify N192, N256 and
+N384 as the provisional next spatial ladder. These screens guide grid choice;
+they are binary64 sampled-reference evidence, not continuum error bounds or PDE
+validation. Fixed-retained force screens separately rank M384 as the cheaper
+feasibility profile and M512 as its refinement partner. The N256
+[force-grid ranking](../evidence/p10/force-grid-ranking-de6dd09/README.md) and
+N384 [M384/M512 comparison](../evidence/p10/force-grid-n384-baf54fa/README.md)
+do not qualify either force grid without matched trajectories.
+
+The opt-in AVX and three-lane FFT path reduced a measured N256 integration
+attempt by 29.58% while preserving the exact state hash, indicators, work and
+zero-allocation steady path. Its [performance evidence](../evidence/p10/avx-w3-n256-integration-20260912/README.md)
+is an execution result, not an arithmetic or PDE acceptance result. Frozen
+scheduled N192/N256 owners and an experimental N384 owner retain actual-state
+snapshots and explicit observer nodes without fabricating unscheduled balance
+samples. They still leave the mandatory refinement and observable channels
+open.
+
 ## Dependency gates
 
 1. **Freeze a real review geometry.** `MeasurementReview` requires three strict
@@ -103,18 +129,23 @@ it does not predict the result at another grid or force profile.
 
 ## Next bounded integration increment
 
-Bind the implemented, source-bound review-profile admission to actual producer
-reports on the identical exact-time geometry. Preserve the frozen observable
-keys and semantics identity, bounded row schedule, reconstruction origins and
-explicit unavailable rows. The existing admission evidence establishes profile
-validation only; create no `Observation` row until its required actual source
-and provenance are present.
+Complete and compare the actual-from-rest N192/N256/N384 feasibility ladder at
+clock 4096 on explicitly frozen execution profiles. Preserve every guard,
+local-error, resource and deadline refusal. Compare only matched force,
+arithmetic, time and method profiles as a spatial sequence; differing guard or
+piecewise-step studies remain time/admission evidence until independent matched
+controls exist. Use M384 as the measured cheap force baseline and M512 as the
+first matched force-refinement partner rather than assuming an automatic 2N or
+2M force choice.
 
-The next exit is a source-matched integrated inventory and focused refusal
-controls for mismatched clocks, identities, reconstruction origins, missing
-required rows and insufficient capacity, followed by the required combined
-quality gates. The resulting artifact remains unqualified until every channel
-row and the separate provenance/lineage review are present.
+After a three-grid trajectory sequence has the required reduction and fine-pair
+budget behavior, populate the full review geometry from its captured actual
+states. The fine observable schedule needs pressure, balances, residuals,
+regional derivative-sensitive quantities and off-stage reconstruction at its
+declared clocks, followed by nested time, method, force, arithmetic, reference,
+sampling, reconstruction and quadrature refinements. Source-bound profile
+admission and endpoint completion alone remain unqualified; zero concentrating
+windows are accepted until every required channel and lineage review passes.
 
 See [PROTOCOL_FORMAT.md](PROTOCOL_FORMAT.md), [EXPERIMENTS.md](EXPERIMENTS.md),
 and the active [P08/P09/P10 plan](../IMPLEMENTATION_PLAN.md) for the governing
