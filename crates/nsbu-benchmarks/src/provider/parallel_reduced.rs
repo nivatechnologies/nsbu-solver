@@ -252,7 +252,7 @@ impl PrescribedForce for ParallelReducedV2ForceW3 {
         limits: ForceLimits,
         output: [&mut [Complex64]; 3],
     ) -> Result<ForceWork, SolverError> {
-        if limits != self.limits || self.pool.failed() {
+        if limits != self.limits || self.is_terminated() {
             return Err(SolverError::ProviderBudgetExceeded);
         }
         if output
@@ -331,7 +331,7 @@ mod tests {
     }
 
     #[test]
-    fn opt_in_w3_force_admits_only_closed_layout_and_charges_exact_addition() {
+    fn opt_in_w3_force_charges_exact_experiment_addition() {
         let backend = FftBackend::RustFft6_4_1AvxFma;
         let domain = Domain::new([256; 3], [1.0; 3], 1.0).unwrap();
         let samples = Layout::new([384; 3]).unwrap();
@@ -352,16 +352,82 @@ mod tests {
             w3_limits.storage_bytes - serial_limits.storage_bytes,
             addition
         );
-        let unsupported_domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
-        let unsupported_samples = Layout::new([6; 3]).unwrap();
+    }
+
+    #[test]
+    fn fixture_w3_force_matches_serial_and_refuses_after_fft_failure() {
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        if backend.ensure_available().is_err() {
+            return;
+        }
+        let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+        let samples = Layout::new([6; 3]).unwrap();
+        let catalog_bytes = FftCatalog::reservation(backend).unwrap();
+        let catalog = FftCatalog::new(backend, catalog_bytes).unwrap();
+        let serial_limits =
+            ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 3, backend)
+                .unwrap();
+        let w3_limits =
+            ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, 3, backend)
+                .unwrap();
+        let mut serial = ParallelReducedV2Force::new_with_catalog(
+            domain,
+            samples,
+            3,
+            &catalog,
+            serial_limits.storage_bytes,
+        )
+        .unwrap();
+        let mut w3 = ParallelReducedV2ForceW3::new_with_catalog(
+            domain,
+            samples,
+            3,
+            &catalog,
+            w3_limits.storage_bytes,
+        )
+        .unwrap();
+        let mut serial_output =
+            std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); domain.layout().half_len()]);
+        let mut w3_output = serial_output.clone();
+        let serial_work = serial
+            .evaluate(
+                clock(1),
+                serial_limits,
+                serial_output.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap();
+        let w3_work = w3
+            .evaluate(
+                clock(1),
+                w3_limits,
+                w3_output.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap();
+        assert_eq!(w3_output, serial_output);
+        assert_eq!(w3_work.work_units, serial_work.work_units);
+        assert_eq!(w3_work.scalar_transforms, serial_work.scalar_transforms);
+
+        let prior_iterations = w3.inner.last_root_iterations;
+        w3.inner.physical[0][0] = f64::NAN;
+        let sentinel = Complex64::new(17.0, -19.0);
+        let mut unpublished = std::array::from_fn(|_| vec![sentinel; domain.layout().half_len()]);
         assert_eq!(
-            ParallelReducedV2ForceW3::preflight_with_fft_backend(
-                unsupported_domain,
-                unsupported_samples,
-                3,
-                backend,
-            ),
-            Err(SolverError::InvalidPayload)
+            w3.inner
+                .transform(unpublished.each_mut().map(Vec::as_mut_slice)),
+            Err(SolverError::ArithmeticResolutionLimited)
         );
+        assert!(unpublished.iter().flatten().all(|value| *value == sentinel));
+        assert!(w3.is_terminated());
+        assert_eq!(
+            w3.evaluate(
+                clock(4),
+                w3_limits,
+                unpublished.each_mut().map(Vec::as_mut_slice),
+            )
+            .unwrap_err(),
+            SolverError::ProviderBudgetExceeded
+        );
+        assert_eq!(w3.inner.last_root_iterations, prior_iterations);
+        assert!(unpublished.iter().flatten().all(|value| *value == sentinel));
     }
 }
