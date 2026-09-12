@@ -1,0 +1,23 @@
+	Command being timed: "/mnt/niva-array/nsbu-solver/work/p10-force-snapshot-forensics/work/p10-force-snapshot-tool/target/release/p10-force-snapshot-tool compare /mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-relaunch-midpoint-2048/n48/forensics/accepted-n48-m96-cm16-clock2048.coeff.bin /mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-relaunch-midpoint-2048/n64/forensics/accepted-n64-m96-cm16-clock2048.coeff.bin 2048 48 64 96 96 32 32 383c02753fa73b13bef107d4635e5083c6b8b7bf9b02e724988bd0c009e6adb3 22db0441ba7561aa350804d3d25e08203119d228cebd3160a5356003ca5fe2d4"
+	User time (seconds): 0.11
+	System time (seconds): 0.02
+	Percent of CPU this job got: 88%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.15
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 19456
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 4626
+	Voluntary context switches: 4
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 1192
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
