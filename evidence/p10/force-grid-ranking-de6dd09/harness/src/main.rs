@@ -173,6 +173,9 @@ fn projected_difference(
     let layout = domain.layout();
     for index in 0..layout.half_len() {
         let position = layout.position(index)?;
+        if layout.is_nyquist(position)? {
+            continue;
+        }
         let k = modal::wavevector(domain, layout.mode(position)?)?;
         let raw = std::array::from_fn(|axis| right[axis][index] - left[axis][index]);
         let projected = modal::project(k, raw)?;
@@ -192,6 +195,9 @@ fn apply_stokes_response(
     let layout = domain.layout();
     for index in 0..layout.half_len() {
         let position = layout.position(index)?;
+        if layout.is_nyquist(position)? {
+            continue;
+        }
         let k = modal::wavevector(domain, layout.mode(position)?)?;
         let squared = k.iter().map(|value| value * value).sum::<f64>();
         let factor = if squared == 0.0 {
