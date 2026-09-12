@@ -78,9 +78,10 @@ feasibility profile and M512 as its refinement partner. The N256
 N384 [M384/M512 comparison](../evidence/p10/force-grid-n384-baf54fa/README.md)
 do not qualify either force grid without matched trajectories.
 
-The opt-in AVX and three-lane FFT path reduced a measured N256 integration
-attempt by 29.58% while preserving the exact state hash, indicators, work and
-zero-allocation steady path. Its [performance evidence](../evidence/p10/avx-w3-n256-integration-20260912/README.md)
+Against the already-AVX serial-component baseline, the opt-in three-lane FFT
+path reduced a measured N256 integration attempt by 29.58% while preserving the
+exact state hash, indicators, work and zero-allocation steady path. Its
+[performance evidence](../evidence/p10/avx-w3-n256-integration-20260912/README.md)
 is an execution result, not an arithmetic or PDE acceptance result. Frozen
 scheduled N192/N256 owners and an experimental N384 owner retain actual-state
 snapshots and explicit observer nodes without fabricating unscheduled balance
@@ -132,11 +133,13 @@ open.
 Complete and compare the actual-from-rest N192/N256/N384 feasibility ladder at
 clock 4096 on explicitly frozen execution profiles. Preserve every guard,
 local-error, resource and deadline refusal. Compare only matched force,
-arithmetic, time and method profiles as a spatial sequence; differing guard or
-piecewise-step studies remain time/admission evidence until independent matched
-controls exist. Use M384 as the measured cheap force baseline and M512 as the
-first matched force-refinement partner rather than assuming an automatic 2N or
-2M force choice.
+arithmetic, time and method profiles as a spatial sequence. A differing guard
+threshold is admission metadata and does not change a trajectory when every
+otherwise identical step commits; preserve it and its refusals without
+inventing a state difference. Piecewise-step studies remain time/admission
+evidence until independent matched controls exist. Use M384 as the measured
+cheap force baseline and M512 as the first matched force-refinement partner
+rather than assuming an automatic 2N or 2M force choice.
 
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
