@@ -3,7 +3,7 @@
 This evidence binds the focused nominal Core/Annulus coverage consumer to
 implementation commit `430d15ee8354d160e528c9713728bf1c390ee6dd`, based on
 `31e99a1`. The reviewed implementation consists of commits `630e652`,
-`547f2a1`, and `430d15e`; documentation clarification is `318e0a8`.
+`547f2a1`, and `430d15e`; documentation clarification is `318e0a8`; the lightweight terminal-refusal control is `a83c329`.
 
 The focused executable test measured the actual accepted startup regional
 report on the unshifted 12³ lattice. It verified the three independently

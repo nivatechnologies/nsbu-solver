@@ -1,5 +1,6 @@
 {
-  "source_commit": "430d15ee8354d160e528c9713728bf1c390ee6dd",
+  "implementation_commit": "430d15ee8354d160e528c9713728bf1c390ee6dd",
+  "verification_commit": "a83c3296e38bbcda7975e81f145a85805e58d1e9",
   "base_commit": "31e99a1",
   "focused_test": "cargo test -p nsbu-benchmarks --test v2_region_coverage: 2 passed",
   "library_control": "cargo test -p nsbu-benchmarks --lib no_samples_is_metadata_absence_not_a_zero_count: 1 passed, 44 filtered",
