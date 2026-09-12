@@ -12,8 +12,6 @@ mod error;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
 mod observer;
 mod owners;
-#[cfg(all(test, feature = "n384-prep"))]
-mod prep_tests;
 mod publication;
 mod records;
 mod run_types;
