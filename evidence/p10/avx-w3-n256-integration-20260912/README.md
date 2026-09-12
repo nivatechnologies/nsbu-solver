@@ -25,5 +25,16 @@ This is an actual startup-step performance and numerical control, not arithmetic
 spatial, temporal, quadrature, PDE-window, or later-state qualification. The
 host was contended by two active endpoints, so paired ratios and the unchanged
 observer timings provide the load context. These runs bind pre-split source
-`8f57937dbb4ecda97a0667e959f13ecfdd67b20a`; a separately recorded final-source
-W3 confirmation follows after transplanting onto the integrated FFT split.
+`8f579375d2d5ad79a573880393c05a297acf98d5`. The binary's embedded `RUN_SOURCE`
+label used the intended short prefix with an invalid suffix; `source-commit.txt`
+records the resolvable source object, while the original stdout and binary hash
+remain unchanged.
+
+The final integrated source `f13c29c9ae91d0b8cf7a790132deb9bd076911c0`
+produced the same state hash, indicators, work, cache record, and balance sample
+as all four pre-split controls. Its integration time was 139.318356566 s, within
+0.368 s (0.264%) of the earlier W3 median; observer time was 175.143311236 s and
+total time was 314.604717602 s. It again reported zero steady allocations and
+the exact 36 RHS triplets, five force triplets, and 12 scalar pressure FFTs.
+This confirms the FFT-module and quality splits did not change the measured W3
+arithmetic or materially change startup-step performance.

@@ -6,3 +6,7 @@ RUN_SOURCE=8f57937dbb4ecda97a0667e959f13ecfdd67b20a cargo build --release --lock
 /usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96
 /usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 serial-run96
 /usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96
+
+# Final integrated source confirmation.
+RUN_SOURCE=f13c29c9ae91d0b8cf7a790132deb9bd076911c0 cargo build --release --manifest-path harness/Cargo.toml
+/usr/bin/time -v harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96
