@@ -124,22 +124,31 @@ fn exact_additional_cap_constructs_and_one_byte_short_refuses() {
 }
 
 #[test]
-fn admission_is_closed_to_fixture_6_and_experiment_lengths_384_and_576() {
-    for edge in [384, 576] {
+fn admission_is_closed_to_fixture_6_and_experiment_lengths_384_512_and_576() {
+    for edge in [384, 512, 576] {
         let layout = Layout::new([edge; 3]).unwrap();
         assert!(super::admission::additional(layout, BACKEND, W3FftMode::Forward).is_ok());
         assert!(super::admission::additional(layout, BACKEND, W3FftMode::Bidirectional).is_ok());
     }
-    let excluded = Layout::new([288; 3]).unwrap();
-    assert_eq!(
-        super::admission::additional(excluded, BACKEND, W3FftMode::Forward),
-        Err(SolverError::InvalidPayload)
-    );
+    for edge in [288, 510, 514] {
+        let excluded = Layout::new([edge; 3]).unwrap();
+        assert_eq!(
+            super::admission::additional(excluded, BACKEND, W3FftMode::Forward),
+            Err(SolverError::InvalidPayload)
+        );
+    }
     let supported = Layout::new([384; 3]).unwrap();
     assert_eq!(
         super::admission::additional(supported, FftBackend::OwnedRadix, W3FftMode::Forward),
         Err(SolverError::InvalidPayload)
     );
+}
+
+#[test]
+fn m512_force_layout_has_exact_forward_reservation() {
+    let layout = Layout::new([512; 3]).unwrap();
+    let bytes = super::admission::additional(layout, BACKEND, W3FftMode::Forward).unwrap();
+    assert_eq!(bytes, 4_318_334_720);
 }
 
 #[test]

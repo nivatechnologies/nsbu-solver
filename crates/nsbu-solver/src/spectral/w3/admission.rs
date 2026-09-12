@@ -52,7 +52,10 @@ pub(super) fn additional(
 
 fn admit_layout(layout: Layout) -> Result<(), SolverError> {
     let dimensions = layout.dimensions();
-    if matches!(dimensions, [6, 6, 6] | [384, 384, 384] | [576, 576, 576]) {
+    if matches!(
+        dimensions,
+        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576]
+    ) {
         return Ok(());
     }
     Err(SolverError::InvalidPayload)

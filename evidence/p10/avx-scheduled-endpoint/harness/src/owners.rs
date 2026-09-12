@@ -157,13 +157,23 @@ fn force_identity() -> Result<W3FftIdentity, SolverError> {
         backend: FftBackend::RustFft6_4_1AvxFma,
         width: 3,
         mode: W3FftMode::Forward,
-        additional_bytes: 1_827_942_144,
+        additional_bytes: force_w3_additional_bytes(),
     })
+}
+
+#[cfg(all(feature = "n384-prep", not(feature = "n384-m512-piecewise-cadv33")))]
+const fn force_w3_additional_bytes() -> usize {
+    1_827_942_144
+}
+
+#[cfg(feature = "n384-m512-piecewise-cadv33")]
+const fn force_w3_additional_bytes() -> usize {
+    4_318_334_720
 }
 
 fn new_observer(catalog: &FftCatalog) -> Result<ReducedObserver, SolverError> {
     let domain = config::domain()?;
-    let samples = Layout::new([2 * config::M; 3])?;
+    let samples = Layout::new([config::OBSERVER_M; 3])?;
     new_observer_for(domain, samples, catalog)
 }
 
