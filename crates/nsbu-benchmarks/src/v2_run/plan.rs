@@ -70,6 +70,7 @@ impl Plan {
     ) -> Result<Self, SolverError> {
         validate_layout()?;
         validate_settings(settings)?;
+        fft_backend.ensure_available()?;
         let force_limits = settings.force.integration_limits_with_fft_backend(
             settings.domain,
             mode,

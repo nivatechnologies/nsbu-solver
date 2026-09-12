@@ -97,15 +97,38 @@ pub(in crate::provider) fn reduced_limits(
     samples: Layout,
     workers: usize,
 ) -> Result<ForceLimits, SolverError> {
-    use crate::{
-        provider::{parallel_reduced::ParallelReducedV2Force, reduced::ReducedV2Force},
-        reduced_force::axial::AxialRoot as ReducedAxialRoot,
-    };
+    use crate::provider::reduced::ReducedV2Force;
 
     if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
         return Err(SolverError::InvalidPayload);
     }
     let serial = ReducedV2Force::preflight(domain, samples)?;
+    reduced_limits_parts(samples, workers, serial)
+}
+
+pub(in crate::provider) fn reduced_limits_with_fft_backend(
+    domain: Domain,
+    samples: Layout,
+    workers: usize,
+    backend: FftBackend,
+) -> Result<ForceLimits, SolverError> {
+    use crate::provider::reduced::ReducedV2Force;
+    if workers == 0 || workers > 128 || workers > samples.dimensions()[2] {
+        return Err(SolverError::InvalidPayload);
+    }
+    let serial = ReducedV2Force::preflight_with_fft_backend(domain, samples, backend)?;
+    reduced_limits_parts(samples, workers, serial)
+}
+
+fn reduced_limits_parts(
+    samples: Layout,
+    workers: usize,
+    serial: ForceLimits,
+) -> Result<ForceLimits, SolverError> {
+    use crate::{
+        provider::parallel_reduced::ParallelReducedV2Force,
+        reduced_force::axial::AxialRoot as ReducedAxialRoot,
+    };
     let physical = samples
         .real_len()
         .checked_mul(24)

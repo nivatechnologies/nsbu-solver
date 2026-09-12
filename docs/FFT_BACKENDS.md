@@ -16,7 +16,8 @@ length/direction plans, plus every catalog entry. At the largest admitted length
 than 42 complete 1536-element complex vectors per direction. This bound is deliberately much
 larger than the spike's measured retained planner allocation; the measurement is not used as a
 production preflight guarantee. RustFFT does not expose the allocation size of its opaque plan
-graph, so this remains a conservative audited allowance rather than allocator-enforced proof.
+graph, so this remains a conservative accounting allowance rather than an audited or
+allocator-enforced proof.
 
 Each scalar workspace separately charges its retained half-grid, one input row, one output row,
 four maximum-length scratch rows, the fixed plan/workspace objects, a boxed six-plan `Arc` header,
