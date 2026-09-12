@@ -1,0 +1,6 @@
+source_commit=68755e0797b607c7e79e2ad3700cfc33e6b66fd4
+binary_sha256=c58c04dfa9aef7adffb1234c314d9cbe2625f5abd7152b4f758fdb0415ec4882
+plan_sha256=5ac7859a64e57c07d8c86f0f276722d6a7714a0bf8e714fab0b47c28056a4971
+watchdog_sha256=2e5afc6cadad3549bb947aface8e2a2ae2aa6594ebe1e1f289441834e0f113ab
+numa_policy=whole-host-unbound-all-visible-cpus-memory
+command=setsid /usr/bin/time -v -o /tmp/nsbu-p10-sulaco-20260912T1420Z/n384-pilot-68755e0/runs/h32-pilot/time.txt /tmp/nsbu-p10-sulaco-20260912T1420Z/n384-pilot-68755e0/68755e0797b607c7e79e2ad3700cfc33e6b66fd4/p10-avx-n384-h32 run /tmp/nsbu-p10-sulaco-20260912T1420Z/n384-pilot-68755e0/runs/h32-pilot/output >/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-pilot-68755e0/runs/h32-pilot/stdout 2>/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-pilot-68755e0/runs/h32-pilot/stderr &

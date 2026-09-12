@@ -1,0 +1,11 @@
+{
+  "schema": "p10-avx-n384-step-v1",
+  "identity": "source=68755e0797b607c7e79e2ad3700cfc33e6b66fd4;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h32-cadv08-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step=32;endpoint=4096;advective_limit=0.8;execution_cap=206158430208;artifact_cap=274877906944;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v1-starttime-cmdline-deadline",
+  "resumable": false,
+  "clock": 32,
+  "epoch": 1,
+  "accepted_steps": 1,
+  "coefficient_bytes": 1366032384,
+  "state_sha256": "5c592e345948db1c2cbb3bd077227d71d29bddf48d24e2fa577bf674009fe5d4",
+  "observation_status": "NotScheduled"
+}

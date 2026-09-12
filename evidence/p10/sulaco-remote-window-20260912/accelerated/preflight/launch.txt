@@ -1,0 +1,2 @@
+/tmp/nsbu-p10-sulaco-20260912T1420Z/accelerated-n192-h64-cadv08/bin/p10-avx-scheduled-endpoint preflight unused
+/tmp/nsbu-p10-sulaco-20260912T1420Z/accelerated-n192-h64-cadv08/bin/p10-avx-n192-h64-cadv08-probe preflight

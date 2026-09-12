@@ -1,0 +1,17 @@
+{
+  "schema": "p10-avx-n192-h64-cadv08-build-v1",
+  "base_source_commit": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+  "cleared_ancestor_commit": "92effa6",
+  "source_manifest_sha256": "66a99d6d22c56202ccbd9d4a2d68c184a465157c8ac7cfa44661e225d77737ee",
+  "frozen_plan_sha256": "c57bdaa03c829e1c70bd9bb4b70e9ff45b7e9785d09a7da7a6adcff5c23e4988",
+  "run_source": "base=81bd07ec0e52a16044e2814bf0dbf9711669830e;profile_source_manifest_sha256=66a99d6d22c56202ccbd9d4a2d68c184a465157c8ac7cfa44661e225d77737ee",
+  "cargo_feature": "n192-h64-cadv08",
+  "build_command": "cargo build --locked --release --features n192-h64-cadv08 --bins",
+  "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+  "llvm": "21.1.8",
+  "target": "x86_64-unknown-linux-gnu",
+  "endpoint_binary_sha256": "785f41b51777f78eec56d24174a2d0c1387647d3420eaa99d49ca25e552ac16c",
+  "probe_binary_sha256": "38b6a758c22b80b04901ef5a12c93931bbc23d40cb7e9e54a4f218e033b0d9c6",
+  "remote_host": "192.168.88.228",
+  "remote_binary_result": "hash-matched transfer, required CPU features runnable, preflight successful; no cross-host bit-compatibility claim"
+}

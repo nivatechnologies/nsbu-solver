@@ -1,0 +1,24 @@
+{
+  "schema": "p10-hash-bound-snapshot-comparison-v1",
+  "status": 0,
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "clock": 4096,
+  "left_profile": "n128-m192-cm-h64-cadv045",
+  "left_sha256": "d2d2289956c398df328b599f8ed0e2e6f8ab38bbb3086bbd8fb7afc5e8df87fd",
+  "right_profile": "n128-m192-ho-h64-cadv045",
+  "right_sha256": "93b3a483a7c98f1ca05a77c742d67388dbe9ad1cbeef94aa22595dd163ce7cdf",
+  "full": {
+    "l2": 9.486263244459316e-10,
+    "h1": 1.4285421756356483e-7,
+    "vorticity_l2": 1.4285106784321692e-7,
+    "divergence_l2": 8.201781182123754e-15
+  },
+  "newly_resolved": {
+    "l2": 0.0,
+    "h1": 0.0,
+    "vorticity_l2": 0.0,
+    "divergence_l2": 0.0
+  },
+  "mean_error": [-2.534106871290195e-20, -2.0839766021759944e-20, 9.828229166110054e-20],
+  "metadata_binding": "externally_declared_and_hash_bound"
+}

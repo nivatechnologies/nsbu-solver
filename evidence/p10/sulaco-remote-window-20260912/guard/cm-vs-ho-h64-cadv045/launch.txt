@@ -1,0 +1,2 @@
+binary_sha256=64055c17607f2b35e69d8f5cbf6ef0b7f10503d11fe1b4a011a8450f3763553b
+command=/tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/bin/p10-snapshot-compare compare /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/runs/cm-cadv045/forensics/accepted-n128-m192-cm64-clock4096.coeff.bin /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/runs/ho-cadv045/forensics/accepted-n128-m192-ho64-clock4096.coeff.bin 4096 128 128 192 192 32 32 d2d2289956c398df328b599f8ed0e2e6f8ab38bbb3086bbd8fb7afc5e8df87fd 93b3a483a7c98f1ca05a77c742d67388dbe9ad1cbeef94aa22595dd163ce7cdf

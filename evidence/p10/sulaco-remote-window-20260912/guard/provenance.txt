@@ -1,0 +1,13 @@
+identity=p10-trajectory-guard-profile
+source_commit=1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02
+1b4902c9797be6cae97079522c3d9d4c780298f414091a4cb3026bb5792479bc  /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/source/frozen-plan.json
+b955ef7161b4c1160d1d9112603d4c2114e0d682eb01b7620d5d20b25809c000  /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/source/src/main.rs
+67f4ff65234522c1fb767b7e9e579f1d835aab7353e631185864ee08befd01e3  /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/source/Cargo.toml
+4c6bb262ae605bb07f464eaf9d01911ff61360d40574dd4252cb9dff0e718f94  /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/source/Cargo.lock
+bd42c2c8586cb58aabab34414b497a4a4d61fc41574a81172a461720cd37a7a3  /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/bin/p10-trajectory-guard-profile
+/tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/bin/p10-trajectory-guard-profile: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=b9a920eb31ef1cebc198b4d100fc1be43e471e01, not stripped
+	linux-vdso.so.1 (0x00007ffc519b4000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000799a71972000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000799a71889000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000799a71600000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000799a71a6c000)

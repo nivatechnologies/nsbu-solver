@@ -1,0 +1,12 @@
+{
+  "schema": "p10-avx-scheduled-node-v1",
+  "identity": "source=base=81bd07ec0e52a16044e2814bf0dbf9711669830e;profile_source_manifest_sha256=66a99d6d22c56202ccbd9d4a2d68c184a465157c8ac7cfa44661e225d77737ee;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n192-m384-h64-cadv08;backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n=192;m=384;workers=32;method=cox-matthews;step=64;endpoint=4096;advective_limit=0.8;cap=103079215104;schema=p10-avx-n192-h64-cadv08-endpoint-v1;resume=unsupported",
+  "resumable": false,
+  "clock": 2048,
+  "epoch": 32,
+  "accepted_steps": 32,
+  "coefficient_bytes": 171638784,
+  "state_sha256": "d8057ce3b11cd88fe9a1ac034393d223a09984dd66b06f713d396767a1e25049",
+  "timing": {"observer": 104.385197875, "force": 85.544420266, "conservative": 13.407148258, "transfer_measure": 5.433628261},
+  "balance": {"l2": 1.74192022071349206e0, "h1": 4.77854593722160814e1, "vorticity_l2": 4.77536997683961886e1, "divergence_l2": 5.56581054770832782e-15, "energy": 1.51714302766527043e0, "enstrophy": 1.14020792078506111e3, "energy_dissipation": 2.28041584157012221e3, "forcing_work": 2.35329556379842643e3, "stretching": 1.50882515263160931e4, "enstrophy_dissipation": 1.11770543259861395e7, "vorticity_forcing": 1.12174663475649618e7}
+}

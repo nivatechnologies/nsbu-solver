@@ -1,0 +1,67 @@
+{
+  "frozen_utc": "2026-09-12T15:03:39Z",
+  "status": "unqualified_empirical_advective_guard_study",
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "harness": {
+    "identity": "p10-trajectory-guard-profile",
+    "source_sha256": "b955ef7161b4c1160d1d9112603d4c2114e0d682eb01b7620d5d20b25809c000",
+    "manifest_sha256": "67f4ff65234522c1fb767b7e9e579f1d835aab7353e631185864ee08befd01e3",
+    "lock_sha256": "4c6bb262ae605bb07f464eaf9d01911ff61360d40574dd4252cb9dff0e718f94",
+    "binary_sha256": "bd42c2c8586cb58aabab34414b497a4a4d61fc41574a81172a461720cd37a7a3",
+    "cap_bytes": 34359738368,
+    "accepted_advective_limits": [0.3, 0.45]
+  },
+  "reproduction": {
+    "profile": "N64/M192 CoxMatthews h64 from rest through clock64, C_adv=0.3",
+    "command_args": [64, 192, 64, 64, "cm", 32, 540, 0.3],
+    "expected_snapshot_sha256": "332d321247cebd7a39b8aeef6ae66b291f3a3b0717938aead1b2467a3510d809",
+    "outer_timeout_seconds": 600,
+    "address_space_limit_kib": 41943040
+  },
+  "branches": [
+    {
+      "profile": "N128/M192 CoxMatthews h64 from rest through clock4096, C_adv=0.45",
+      "command_args": [128, 192, 64, 4096, "cm", 32, 21600, 0.45],
+      "maximum_attempts": 64,
+      "outer_timeout_seconds": 22200,
+      "numa_node": 0
+    },
+    {
+      "profile": "N128/M192 HochbruckOstermann h64 from rest through clock4096, C_adv=0.45",
+      "command_args": [128, 192, 64, 4096, "ho", 32, 28800, 0.45],
+      "maximum_attempts": 64,
+      "outer_timeout_seconds": 29400,
+      "numa_node": 1
+    }
+  ],
+  "unchanged": {
+    "case": "similarity-mms-v2",
+    "clock_exponent": -20,
+    "clock_target": 8192,
+    "endpoint": 4096,
+    "from_rest": true,
+    "force_grid": 192,
+    "force_workers": 32,
+    "attempt_force_cache": "original_five_clock_cache",
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001]
+  },
+  "amended": {
+    "advective_limit": 0.45,
+    "reason": "Empirical endpoint reference sample gives an h64 N128 guard estimate of approximately 0.39868, leaving approximately 12.9 percent margin below 0.45. This is a candidate screen, not a stability proof; each actual stage guard and local-error refusal remains active."
+  },
+  "comparisons": {
+    "pairs": [
+      "CM h64 C_adv=0.45 versus CM h32 C_adv=0.3",
+      "HO h64 C_adv=0.45 versus CM h32 C_adv=0.3",
+      "CM h64 C_adv=0.45 versus HO h64 C_adv=0.45"
+    ],
+    "relative_targets": {
+      "velocity_l2": 0.00002,
+      "h1": 0.0002,
+      "vorticity_l2": 0.0002
+    },
+    "absolute_floor": 1e-8
+  },
+  "qualification": "Unqualified three-pair diagnostic only. The original C_adv=0.3 N128 h64 refusal remains evidence. A successful CM h32 branch does not complete the required three-setting temporal study, and no result accepts a PDE window."
+}

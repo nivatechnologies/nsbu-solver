@@ -1,0 +1,7 @@
+source_commit=1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02
+guard_plan_sha256=1b4902c9797be6cae97079522c3d9d4c780298f414091a4cb3026bb5792479bc
+binary_sha256=bd42c2c8586cb58aabab34414b497a4a4d61fc41574a81172a461720cd37a7a3
+cap_bytes=34359738368
+address_space_limit_kib=41943040
+numa_node=0
+command=timeout --signal=TERM --kill-after=30s 22200s stdbuf -oL numactl --cpunodebind=0 --membind=0 /tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/bin/p10-trajectory-guard-profile 128 192 64 4096 cm 32 21600 0.45
