@@ -1,0 +1,56 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "snapshot": "state.bin",
+  "plan": "frozen-plan.json",
+  "identity": "COPY_THE_EXACT_REVIEWED_P10AVXSNAP_IDENTITY",
+  "source_commit": "0000000000000000000000000000000000000000",
+  "plan_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "coefficient_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "file_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "COPY_THE_EXACT_SIDE_EXECUTION",
+  "dimensions": [256, 256, 256],
+  "evolution": {
+    "case_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [1.0, 1.0, 1.0],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [384, 384, 384],
+    "schedule": [
+      {"from_inclusive": 0, "until_exclusive": 4096, "step_ticks": 32}
+    ],
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001]
+  },
+  "elapsed": 4096,
+  "target": 8192,
+  "epoch": 128,
+  "accepted_steps": 128,
+  "profile": "COPY_THE_EXACT_UNRELABELLED_PROFILE",
+  "admission_guard": {
+    "advective_limit": 0.45,
+    "maximum_attempts": 128
+  },
+  "arithmetic_control": {
+    "schema": "p10-time-arithmetic-control-v1",
+    "evidence": "reviewed-serial-w3-exact-bit-control.json",
+    "evidence_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "outcome": "successful-exact-bit",
+    "left": {
+      "source_commit": "0000000000000000000000000000000000000000",
+      "backend": "COPY_LEFT_BACKEND",
+      "execution": "COPY_LEFT_EXECUTION",
+      "profile": "COPY_LEFT_PROFILE"
+    },
+    "right": {
+      "source_commit": "0000000000000000000000000000000000000000",
+      "backend": "COPY_RIGHT_BACKEND",
+      "execution": "COPY_RIGHT_EXECUTION",
+      "profile": "COPY_RIGHT_PROFILE"
+    }
+  }
+}

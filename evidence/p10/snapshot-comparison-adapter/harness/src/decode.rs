@@ -28,6 +28,7 @@ pub(crate) fn read_manifest(path: &Path) -> Result<Manifest, String> {
     }
     manifest.domain()?;
     verify_plan(&manifest)?;
+    verify_arithmetic_control(path, &manifest)?;
     Ok(manifest)
 }
 
@@ -38,6 +39,14 @@ fn validate_envelope(manifest: &Manifest) -> Result<(), String> {
         || manifest.execution.is_empty()
     {
         return Err("invalid comparison manifest binding".into());
+    }
+    if let Some(guard) = &manifest.admission_guard {
+        if !guard.advective_limit.is_finite()
+            || guard.advective_limit <= 0.0
+            || guard.maximum_attempts == 0
+        {
+            return Err("invalid admission guard metadata".into());
+        }
     }
     Ok(())
 }
@@ -233,7 +242,48 @@ fn read_bounded(path: &Path, cap: u64, message: &str) -> Result<Vec<u8>, String>
 }
 
 fn verify_plan(manifest: &Manifest) -> Result<(), String> {
-    let file = File::open(&manifest.plan).map_err(debug)?;
+    verify_bounded_hash(
+        &manifest.plan,
+        &manifest.plan_sha256,
+        "plan exceeds 1 MiB bound",
+        "frozen plan SHA-256 mismatch",
+    )
+}
+
+fn verify_arithmetic_control(manifest_path: &Path, manifest: &Manifest) -> Result<(), String> {
+    let Some(control) = &manifest.arithmetic_control else {
+        return Ok(());
+    };
+    if control.schema != "p10-time-arithmetic-control-v1"
+        || control.outcome != "successful-exact-bit"
+        || !is_hex(&control.evidence_sha256, 64)
+        || !valid_arithmetic_side(&control.left)
+        || !valid_arithmetic_side(&control.right)
+    {
+        return Err("invalid arithmetic-control binding".into());
+    }
+    verify_bounded_hash(
+        &beside(manifest_path, &control.evidence),
+        &control.evidence_sha256,
+        "arithmetic control exceeds 1 MiB bound",
+        "arithmetic-control SHA-256 mismatch",
+    )
+}
+
+fn valid_arithmetic_side(side: &crate::model::ArithmeticSide) -> bool {
+    is_hex(&side.source_commit, 40)
+        && !side.backend.is_empty()
+        && !side.execution.is_empty()
+        && !side.profile.is_empty()
+}
+
+fn verify_bounded_hash(
+    path: &Path,
+    expected: &str,
+    oversized: &str,
+    mismatch: &str,
+) -> Result<(), String> {
+    let file = File::open(path).map_err(debug)?;
     let mut reader = file.take(MAX_PLAN_BYTES + 1);
     let mut hash = Sha256::new();
     let mut total = 0_u64;
@@ -247,10 +297,10 @@ fn verify_plan(manifest: &Manifest) -> Result<(), String> {
         hash.update(&buffer[..count]);
     }
     if total > MAX_PLAN_BYTES {
-        return Err("plan exceeds 1 MiB bound".into());
+        return Err(oversized.into());
     }
-    if format!("{:x}", hash.finalize()) != manifest.plan_sha256 {
-        return Err("frozen plan SHA-256 mismatch".into());
+    if format!("{:x}", hash.finalize()) != expected {
+        return Err(mismatch.into());
     }
     Ok(())
 }

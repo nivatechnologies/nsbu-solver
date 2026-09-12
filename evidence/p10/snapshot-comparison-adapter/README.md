@@ -8,6 +8,33 @@ The command is:
 cargo run --release --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml -- LEFT.json RIGHT.json CAP_BYTES
 ```
 
+The original three-argument command remains the only interface. Manifests that
+omit `comparison_kind` retain the original `MATCHED_SPATIAL` policy. A temporal
+screen is enabled only when both manifests explicitly say `TIME_DIAGNOSTIC`.
+Mixed modes are refused before state allocation.
+
+`TIME_DIAGNOSTIC` is a same-grid, same-physical-endpoint screen. It requires
+bit-exact equality of the case, retained dimensions, domain lengths, viscosity,
+clock quantum and target, comparison endpoint, Cox–Matthews method, M384 force
+grid, and both tolerance arrays. Each side retains and reports its own complete
+schedule, exact profile name, advective limit, maximum attempt guard, epoch,
+accepted-step count, identity, source, backend, execution, and plan hash. The
+adapter validates each schedule independently from zero through the endpoint
+and derives both the epoch and accepted-step count from it. Only the schedule,
+those derived counters, and the reported admission guards may differ.
+
+Every time manifest must also carry the same
+`p10-time-arithmetic-control-v1` object. That object binds both sides' exact
+source commit, backend, execution, and profile to a bounded, hash-verified
+artifact whose declared outcome is `successful-exact-bit`. Reviewers must
+confirm that the artifact is the applicable same-grid serial/W3 control; the
+adapter does not treat cross-grid state hashes as arithmetic evidence. The
+example in `time-diagnostic-manifest.example.json` shows one side of this
+binding. A time result uses schema `p10-snapshot-time-diagnostic-output-v1`,
+labels itself `TIME_DIAGNOSTIC`, and always reports acceptance as
+`not_assessed` with zero accepted windows. It is not a trajectory, resume,
+state-injection, acceptance, or PDE-qualification interface.
+
 Before allocating either coefficient array, the harness checks both exact file lengths and admits `left coefficient bytes + right coefficient bytes + 1 MiB fixed overhead` under `CAP_BYTES`. The cushion conservatively covers bounded manifest and plan streaming, identity decode, SHA states, JSON output, and allocator bookkeeping. It streams each snapshot once and retains only its decoded three-component state. The decoder checks framing, exact identity and u128 clock fields, coefficient trailer SHA-256, finite values, Hermitian zero plane, and exact Nyquist zero. It reports the coefficient-state SHA-256 separately from the whole-file SHA-256; hashes across different retained grids are provenance, never an equality condition.
 
 For cubic retained grids, the admitted pair bounds are 1,538,719,744 bytes for N192/N384 and 1,772,879,872 bytes for N256/N384. The Rust runtime and thread stack remain process overhead outside this single-threaded harness allocation bound.
