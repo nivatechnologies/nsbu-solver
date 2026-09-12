@@ -1,0 +1,45 @@
+{
+  "schema": "p10-time-arithmetic-review-v1",
+  "conclusion": "reviewed-equivalence-supported-by-controls",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "method": "cox-matthews",
+  "integration_force_dimensions": [384, 384, 384],
+  "measured_control": {
+    "outcome": "successful-exact-bit",
+    "serial": {
+      "source_commit": "8f579375d2d5ad79a573880393c05a297acf98d5",
+      "backend": "rustfft-6.4.1-avx-avx2-fma",
+      "execution": "serial;provider=parallel-reduced-attempt-cache;observer=parallel-reduced-2m;retained=256;sampled=384;observer_sampled=768;workers=32;ticks=32;attempts=1",
+      "configuration": "n256-m384-h32-startup-rest-serial-pre-split-8f579375"
+    },
+    "w3": {
+      "source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+      "backend": "rustfft-6.4.1-avx-avx2-fma",
+      "execution": "separate-rhs-force-w3;provider=parallel-reduced-attempt-cache;observer=parallel-reduced-2m;retained=256;sampled=384;observer_sampled=768;workers=32;ticks=32;attempts=1;rhs_w3=layout384-width3-bidirectional;force_w3=layout384-width3-forward",
+      "configuration": "n256-m384-h32-startup-rest-w3-integrated-f13c29c"
+    }
+  },
+  "reviewed_lineage": {
+    "status": "reviewed-unchanged-kernel-lineage",
+    "left_control_role": "serial",
+    "right_control_role": "w3",
+    "left": {
+      "source_commit": "92effa6068d20d69e815c6a83f1e82490ce37fe7",
+      "backend": "rustfft-6.4.1-avx-avx2-fma",
+      "execution": "serial-component-fft;parallel-reduced-attempt-cache;workers=32",
+      "profile": {
+        "kind": "legacy-full-identity",
+        "value": "source=codex/p10-fft-batch-20260912@92effa6068d2;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n=192;m=384;workers=32;method=cox-matthews;step=32;endpoint=4096;advective_limit=0.45;cap=103079215104;schema=p10-avx-scheduled-endpoint-v2;resume=unsupported"
+      }
+    },
+    "right": {
+      "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+      "backend": "rustfft-6.4.1-avx-avx2-fma",
+      "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;host=local",
+      "profile": {
+        "kind": "identity-profile-field",
+        "value": "n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c"
+      }
+    }
+  }
+}
