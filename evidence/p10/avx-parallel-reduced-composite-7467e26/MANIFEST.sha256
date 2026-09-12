@@ -1,0 +1,7 @@
+ea725b247080bd7817e924d4570f9992e71e95fffec72c21c552d43556ef81bb  target/avx-reduced-composite/release/p10-avx-parallel-reduced-trajectory
+c6d0a75a45b188092e3ef8adde39e023bb27d6230d689fb26dbe43fb168bb766  evidence/p10/avx-parallel-reduced-composite-7467e26/harness/Cargo.lock
+aa72b0e9c5fd3aa70903faf52fb43e0a78db0ef5dae339d0f674e830db2f965c  evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/main.rs
+49cb6a3a86b5adcb84f3c95b0b451e9185ab931badfa2a3b8cc17fffedc66c93  evidence/p10/avx-parallel-reduced-composite-7467e26/n64-m192-w32.stdout
+7058793565b0b0af70c8994b79d1222bd8dfdc68019506c6d4f0384311aaa78a  evidence/p10/avx-parallel-reduced-composite-7467e26/n64-m192-w32.time
+062eb6c0209d4200e16cb81fa8e6451a89faf9b1894e5e14ad904e68af3da15d  evidence/p10/avx-parallel-reduced-composite-7467e26/n192-m384-w32.stdout
+b7b1b615f7791c31494d8753b2cd1c088218511fdd52802d2c55145a5042f94f  evidence/p10/avx-parallel-reduced-composite-7467e26/n192-m384-w32.time

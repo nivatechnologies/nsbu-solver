@@ -1,0 +1,15 @@
+RUN_SOURCE=codex/p10-fft-batch-20260912@de6dd09 \
+CARGO_TARGET_DIR=target/avx-reduced-composite \
+cargo build --release \
+  --manifest-path evidence/p10/avx-parallel-reduced-composite-7467e26/harness/Cargo.toml
+
+/usr/bin/time -v \
+  -o evidence/p10/avx-parallel-reduced-composite-7467e26/n64-m192-w32.time \
+  target/avx-reduced-composite/release/p10-avx-parallel-reduced-trajectory \
+  64 192 32 16 2
+
+/usr/bin/time -v \
+  -o evidence/p10/avx-parallel-reduced-composite-7467e26/n192-m384-w32.time \
+  timeout --signal=TERM --kill-after=30s 3600s \
+  target/avx-reduced-composite/release/p10-avx-parallel-reduced-trajectory \
+  192 384 32 16 2
