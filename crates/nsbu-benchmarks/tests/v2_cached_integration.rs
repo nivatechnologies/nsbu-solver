@@ -2,7 +2,7 @@
 use nsbu_benchmarks::{
     runtime_force::{ForceSettings, IntegrationMode},
     v2_experiment::{
-        diagnostic::{DiagnosticDriver, DiagnosticPlan, DiagnosticSettings},
+        diagnostic::{DiagnosticDriver, DiagnosticPlan, DiagnosticSettings, StartupProfile},
         probes::ProbePlan,
         FamilyPlan, FamilySettings,
     },
@@ -236,4 +236,22 @@ fn pre_rhs_terminal_retry_does_not_reopen_or_reuse_cache_state() {
     assert_eq!((work.calls, work.provider_evaluations), (12, 5));
     assert_eq!(run.step(), Err(SolverError::RetryLimit));
     assert_eq!(run.cache_work(), Some(work));
+}
+
+#[test]
+fn startup_profile_admits_both_integration_policies_and_refuses_short_caps() {
+    let profile = StartupProfile::new().unwrap();
+    let direct = profile.plan(CAP).unwrap();
+    let cached = profile.plan_cached(CAP).unwrap();
+    assert_eq!(
+        direct.family_plan().integration_mode(),
+        IntegrationMode::Direct
+    );
+    assert_eq!(
+        cached.family_plan().integration_mode(),
+        IntegrationMode::AttemptCached
+    );
+    assert!(profile
+        .plan_cached(cached.bounds().joint_storage_bytes - 1)
+        .is_err());
 }

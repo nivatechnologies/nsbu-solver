@@ -32,11 +32,7 @@ impl ReconstructedPlan {
     }
 
     fn admit(settings: Settings, mode: IntegrationMode, cap: usize) -> Result<Self, SolverError> {
-        if std::mem::size_of::<ReconstructedPlan>() != 480
-            || std::mem::size_of::<ReconstructedRun>() != 7136
-        {
-            return Err(SolverError::ResourceLimit);
-        }
+        validate_layout()?;
         plan::validate_settings(settings)?;
         let force_limits = settings.force.integration_limits(settings.domain, mode)?;
         plan::validate_final_step(settings, force_limits.remaining_divisor)?;
@@ -113,6 +109,16 @@ impl ReconstructedPlan {
     /// Integration-only force policy inherited from the ordinary branch plan.
     pub fn integration_mode(self) -> IntegrationMode {
         plan::direct_or_cached(self.settings, self.resources)
+    }
+}
+
+fn validate_layout() -> Result<(), SolverError> {
+    if std::mem::size_of::<ReconstructedPlan>() == 480
+        && std::mem::size_of::<ReconstructedRun>() == 7136
+    {
+        Ok(())
+    } else {
+        Err(SolverError::ResourceLimit)
     }
 }
 

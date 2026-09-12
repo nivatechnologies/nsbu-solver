@@ -300,5 +300,21 @@ mod tests {
             force.evaluate(stage, limits, output.each_mut().map(Vec::as_mut_slice)),
             Err(SolverError::ProviderBudgetExceeded)
         ));
+
+        for workers in [0, 1] {
+            let settings = ForceSettings {
+                samples: Layout::new([4; 3]).unwrap(),
+                workers,
+            };
+            let limits = settings.limits(domain).unwrap();
+            let mut force = settings.build(domain, limits.storage_bytes).unwrap();
+            assert!(!format!("{force:?}").is_empty());
+            let mut wrong = limits;
+            wrong.work_units -= 1;
+            assert!(matches!(
+                force.evaluate(stage, wrong, output.each_mut().map(Vec::as_mut_slice)),
+                Err(SolverError::ProviderBudgetExceeded)
+            ));
+        }
     }
 }
