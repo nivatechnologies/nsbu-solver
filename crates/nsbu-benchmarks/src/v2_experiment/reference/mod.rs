@@ -2,20 +2,17 @@
 mod plan;
 pub mod regional;
 mod report;
+pub(crate) mod tracking;
 use super::{FamilyError, V2Family};
-use crate::{
-    fields::reference::{self, ReferenceEvaluation},
-    time::BenchmarkTime,
-};
+use crate::fields::reference::ReferenceEvaluation;
 use nsbu_solver::{
     diagnostics::{
-        derivatives::{Derivative, DerivativeWorkspace},
-        local::{LocalError, SampledError, TensorErrors},
-        physical::PhysicalQuantity,
+        derivatives::DerivativeWorkspace, local::LocalError, physical::PhysicalQuantity,
     },
     domain::{SpectralState, TickClock},
     SolverError,
 };
+pub(crate) use plan::{kernel_reservation, work as tracking_work};
 pub use plan::{ReferenceTrackingBounds, ReferenceTrackingPlan, ReferenceTrackingWork};
 pub use report::{BranchTracking, ReferenceTrackingSample, TrackingQuantity};
 
@@ -73,15 +70,11 @@ impl<'a> ReferenceTrackingWorkspace<'a> {
         let sources = [0, 1, 2].map(|index| plan.family.branches[index].resources().domain());
         let count = plan.samples.real_len();
         Ok(Self {
-            derivatives: [
-                DerivativeWorkspace::new(sources[0], plan.samples, plan.bounds.storage_bytes)?,
-                DerivativeWorkspace::new(sources[1], plan.samples, plan.bounds.storage_bytes)?,
-                DerivativeWorkspace::new(sources[2], plan.samples, plan.bounds.storage_bytes)?,
-            ],
-            actual: filled(count, 0.0)?,
-            error_magnitudes: filled(count, 0.0)?,
-            reference_magnitudes: filled(count, 0.0)?,
-            references: filled(count, zero_reference())?,
+            derivatives: tracking::derivatives(sources, plan.samples, plan.bounds.storage_bytes)?,
+            actual: tracking::real(count)?,
+            error_magnitudes: tracking::real(count)?,
+            reference_magnitudes: tracking::real(count)?,
+            references: tracking::references(count)?,
             plan,
             charged: ReferenceTrackingWork::default(),
             next: 0,
@@ -159,17 +152,7 @@ impl<'a> ReferenceTrackingWorkspace<'a> {
         })
     }
     fn evaluate_references(&mut self, clock: TickClock) -> Result<(), ReferenceTrackingError> {
-        let time = BenchmarkTime::new(clock)?;
-        let [nx, ny, nz] = self.plan.samples.dimensions();
-        for (index, output) in self.references.iter_mut().enumerate() {
-            let point = [
-                (index / (ny * nz)) as f64 / nx as f64,
-                ((index / nz) % ny) as f64 / ny as f64,
-                (index % nz) as f64 / nz as f64,
-            ];
-            *output = reference::evaluate(point, time)?;
-        }
-        Ok(())
+        tracking::evaluate_references(&mut self.references, self.plan.samples, clock)
     }
     fn branch(
         &mut self,
@@ -216,140 +199,33 @@ impl<'a> ReferenceTrackingWorkspace<'a> {
         branch: usize,
         quantity: PhysicalQuantity,
     ) -> Result<(), ReferenceTrackingError> {
-        self.error_magnitudes.fill(0.0);
-        self.reference_magnitudes.fill(0.0);
-        for component in 0..quantity.components() {
-            self.sample_component(state, branch, quantity, component)?;
-            for index in 0..self.actual.len() {
-                let expected = reference_component(self.references[index], quantity, component);
-                let difference = self.actual[index] - expected;
-                self.error_magnitudes[index] =
-                    accumulate_magnitude(self.error_magnitudes[index], difference)?;
-                self.reference_magnitudes[index] =
-                    accumulate_magnitude(self.reference_magnitudes[index], expected)?;
-            }
-        }
-        Ok(())
-    }
-    fn sample_component(
-        &mut self,
-        state: &SpectralState,
-        branch: usize,
-        quantity: PhysicalQuantity,
-        index: usize,
-    ) -> Result<(), SolverError> {
-        let workspace = if branch < 2 { branch } else { 2 };
-        let (component, derivative) = entry(quantity, index);
-        self.actual.copy_from_slice(
-            self.derivatives[workspace]
-                .sample(state.component(component)?, Derivative::new(derivative)?)?
-                .values,
-        );
-        if quantity == PhysicalQuantity::Vorticity {
-            let mut other = [0; 3];
-            other[(index + 2) % 3] = 1;
-            let values = self.derivatives[workspace]
-                .sample(state.component((index + 1) % 3)?, Derivative::new(other)?)?;
-            for (actual, &second) in self.actual.iter_mut().zip(values.values) {
-                *actual -= second;
-            }
-        }
-        Ok(())
+        let values = [
+            state.component(0)?,
+            state.component(1)?,
+            state.component(2)?,
+        ];
+        Ok((tracking::TrackingScratch {
+            derivatives: &mut self.derivatives,
+            actual: &mut self.actual,
+            errors: &mut self.error_magnitudes,
+            reference_magnitudes: &mut self.reference_magnitudes,
+            references: &self.references,
+        })
+        .prepare_quantity(values, branch, quantity)?)
     }
     fn reduce(&self, components: usize, floor: f64) -> Result<LocalError, SolverError> {
-        match components {
-            3 => reduce::<3>(&self.error_magnitudes, &self.reference_magnitudes, floor),
-            9 => reduce::<9>(&self.error_magnitudes, &self.reference_magnitudes, floor),
-            27 => reduce::<27>(&self.error_magnitudes, &self.reference_magnitudes, floor),
-            _ => Err(SolverError::InvalidPayload),
-        }
+        tracking::reduce(
+            components,
+            &self.error_magnitudes,
+            &self.reference_magnitudes,
+            floor,
+        )
     }
-}
-
-fn reduce<const C: usize>(
-    errors: &[f64],
-    references: &[f64],
-    floor: f64,
-) -> Result<LocalError, SolverError> {
-    let mut result = TensorErrors::<C>::new(errors.len(), floor)?;
-    for (&error, &reference) in errors.iter().zip(references) {
-        result.push_magnitudes(error, reference)?;
-    }
-    match result.finish()? {
-        SampledError::Measured(value) => Ok(value),
-        SampledError::NoSamples => Err(SolverError::InvalidPayload),
-    }
-}
-
-fn entry(quantity: PhysicalQuantity, index: usize) -> (usize, [u8; 3]) {
-    let mut orders = [0; 3];
-    let component = match quantity {
-        PhysicalQuantity::Vector => index,
-        PhysicalQuantity::Gradient => {
-            orders[index % 3] = 1;
-            index / 3
-        }
-        PhysicalQuantity::Hessian => {
-            orders[(index / 3) % 3] += 1;
-            orders[index % 3] += 1;
-            index / 9
-        }
-        PhysicalQuantity::Vorticity => {
-            orders[(index + 1) % 3] = 1;
-            (index + 2) % 3
-        }
-        _ => 0,
-    };
-    (component, orders)
-}
-
-fn reference_component(
-    value: ReferenceEvaluation,
-    quantity: PhysicalQuantity,
-    index: usize,
-) -> f64 {
-    match quantity {
-        PhysicalQuantity::Vector => value.velocity[index],
-        PhysicalQuantity::Gradient => value.gradient[index / 3][index % 3],
-        PhysicalQuantity::Hessian => value.hessian[index / 9][(index / 3) % 3][index % 3],
-        PhysicalQuantity::Vorticity => value.vorticity[index],
-        _ => f64::NAN,
-    }
-}
-
-fn accumulate_magnitude(current: f64, component: f64) -> Result<f64, SolverError> {
-    let result = current.hypot(component);
-    if result.is_finite() {
-        Ok(result)
-    } else {
-        Err(SolverError::InvalidSpectrum)
-    }
-}
-
-fn zero_reference() -> ReferenceEvaluation {
-    ReferenceEvaluation {
-        velocity: [0.0; 3],
-        gradient: [[0.0; 3]; 3],
-        hessian: [[[0.0; 3]; 3]; 3],
-        vorticity: [0.0; 3],
-        pressure_raw: 0.0,
-        pressure_gradient: [0.0; 3],
-        root: None,
-    }
-}
-
-fn filled<T: Clone>(count: usize, value: T) -> Result<Vec<T>, SolverError> {
-    let mut values = Vec::new();
-    values
-        .try_reserve_exact(count)
-        .map_err(|_| SolverError::AllocationFailed)?;
-    values.resize(count, value);
-    Ok(values)
 }
 
 #[cfg(test)]
 mod tests {
-    use super::accumulate_magnitude;
+    use super::tracking::accumulate_magnitude;
 
     #[test]
     fn component_magnitudes_preserve_tiny_values_and_avoid_intermediate_square_overflow() {
