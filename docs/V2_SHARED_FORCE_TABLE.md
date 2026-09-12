@@ -52,9 +52,10 @@ Nyquist plane are checked, including nonzero times. The table therefore reduces 
 fixture's original-force builds from 95 to 17 without changing any returned binary64 word.
 The adapter regression also advances six independently owned N=4/8/12 CM/HO trajectories
 from rest through the existing recorded-step transaction. At both nonzero commits, every
-state coefficient, outcome, complete history and observer sample is bit-identical to a
-separate direct-force `Run`. Integration work ledgers intentionally differ: the shared
-adapter performs no force FFT while each independently owned observer remains fresh.
+state coefficient is bit-identical to a separate direct-force `Run`; outcomes, complete
+histories and observer samples compare equal. Integration work ledgers intentionally
+differ: the shared adapter performs no force FFT while each independently owned observer
+remains fresh.
 
 No owned `Run`, `V2Family`, archive, CLI or default mode uses this table yet. The standalone
 adapter exercises the unchanged generic integrator only. Production family wiring requires
