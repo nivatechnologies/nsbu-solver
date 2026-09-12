@@ -1,5 +1,5 @@
 //! Attempt records and concise stdout reporting for the harness-owned schema.
-use crate::{artifact, publication::Frontiers, schedule, timed_rhs::Measurement};
+use crate::{artifact, publication::Frontiers, timed_rhs::Measurement};
 use nsbu_solver::{integrators::attempt::AttemptResult, SolverError};
 use stats_alloc::Stats;
 
@@ -93,6 +93,7 @@ pub fn numerical_error(
     identity: &str,
     index: usize,
     from: u128,
+    ticks: u128,
     seconds: f64,
     rhs_timing: Measurement,
     error: &SolverError,
@@ -110,8 +111,8 @@ pub fn numerical_error(
         artifact::json_string(identity),
         index,
         from,
-        from + schedule::STEP,
-        schedule::STEP,
+        from + ticks,
+        ticks,
         seconds,
         rhs_timing.seconds,
         rhs_timing.calls,

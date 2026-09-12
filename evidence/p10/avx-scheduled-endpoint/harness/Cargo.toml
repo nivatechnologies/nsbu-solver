@@ -12,6 +12,7 @@ n256 = []
 n384-prep = []
 n384-h32 = ["n384-prep"]
 n384-h64 = ["n384-prep"]
+n384-piecewise = ["n384-prep"]
 
 [dependencies]
 nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }
