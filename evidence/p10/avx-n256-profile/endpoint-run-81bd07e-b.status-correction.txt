@@ -1,0 +1,1 @@
+CORRECTION: the 81bd07e-b timeout and solver survived the launcher session and remained active; the earlier interrupted marker was false. Active timeout PID 430765, solver PID 430766.

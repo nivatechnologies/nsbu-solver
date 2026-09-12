@@ -1,0 +1,6 @@
+status=invalid_wrapper_arguments
+reason=numeric_cap_passed_where_reviewed_harness_requires_literal_run96
+source=codex/p10-fft-batch-20260912@e24a24158bda
+numerical_work=none
+maximum_rss_kib=2048
+qualification=none

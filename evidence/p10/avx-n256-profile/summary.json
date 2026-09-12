@@ -1,0 +1,62 @@
+{
+  "schema": "p10-avx-n256-profile-summary-v1",
+  "probe_source": "2593553ea6b616a0608694e67f0408702ae802b2",
+  "probe_under_n192_contention": true,
+  "startup_ramp": {
+    "integration_seconds": 184.520150132,
+    "observer_seconds": 158.601201704,
+    "observer_force_seconds": 102.187050541,
+    "observer_conservative_seconds": 42.253849017,
+    "observer_transfer_measure_seconds": 14.160300026,
+    "total_seconds": 343.257658166,
+    "steady_allocations": 0,
+    "maximum_rss_kib": 63331328,
+    "accepted_clock": 32,
+    "representative_later_state": false
+  },
+  "scheduled_projection": {
+    "attempts": 128,
+    "positive_observers": 8,
+    "average_seconds_per_attempt": 194.4327252385,
+    "endpoint_seconds": 24887.388830528,
+    "endpoint_hours": 6.913163564
+  },
+  "endpoint": {
+    "source": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+    "binary_sha256": "6d939d4eef61d9b4cfd303319eafe689349eb82ec0801db11a053831427c6c27",
+    "profile_sha256": "65e5aeb68900da0c8057dbf3c1cf2d2ccc76e0700328ff86104bf87321fa184f",
+    "reservation_bytes": 74924391544,
+    "cap_bytes": 103079215104,
+    "disk_preflight_bytes": 3652751360,
+    "disk_cap_bytes": 4294967296,
+    "start_utc": "2026-09-12T16:39:43Z",
+    "timeout_seconds": 30000,
+    "timeout_utc": "2026-09-13T00:59:43Z",
+    "timeout_pid": 430765,
+    "solver_pid": 430766,
+    "status": "active"
+  },
+  "quality": {
+    "tests_passed": 11,
+    "line_coverage_percent": 29.992992292,
+    "branch_coverage_percent": 56.0,
+    "maximum_crap": 22.5,
+    "crap_violations": 0,
+    "maximum_cyclomatic": 16,
+    "maximum_cognitive": 7,
+    "maximum_halstead_effort": 26.833,
+    "maximum_file_lines": 481
+  },
+  "w3_projection": {
+    "layout": 384,
+    "width": 3,
+    "operator_only_saved_seconds": 43.264158252,
+    "operator_only_reduction": 0.2225147963,
+    "operator_and_cached_force_saved_seconds": 49.338912727,
+    "operator_and_cached_force_reduction": 0.2537582738,
+    "shared_bidirectional_owner_additional_bytes": 2733911936,
+    "separate_owners_additional_bytes": 4561854080,
+    "decision": "narrow_opt_in_proposal_pending_review_and_composite_measurement"
+  },
+  "qualification": "none"
+}
