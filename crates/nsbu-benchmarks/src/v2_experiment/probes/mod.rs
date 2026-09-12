@@ -1,5 +1,6 @@
 //! Stream exact-v2 off-stage probes before bounded accepted histories are overwritten.
 pub mod balances;
+pub mod physical;
 mod plan;
 mod report;
 pub mod residuals;

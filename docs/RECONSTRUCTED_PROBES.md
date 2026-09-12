@@ -143,3 +143,7 @@ zero; sampled interpolation is not a continuous-window enclosure.
 The [independent balance consumer](BALANCE_QUADRATURE.md) retains full conservative
 energy/enstrophy terms at every probe and integrates a declared subset on three
 strictly nested Simpson schedules without changing the owner trajectories.
+
+The [sampled physical probe consumer](V2_PROBE_PHYSICAL.md) reports velocity,
+ordered gradient, ordered Hessian and vorticity differences directly from every
+complete reconstructed value publication, including genuine off-stage clocks.

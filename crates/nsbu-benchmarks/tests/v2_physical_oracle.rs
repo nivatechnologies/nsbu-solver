@@ -1,6 +1,6 @@
 //! Independent signed Fourier sums of full velocity, gradient, Hessian and curl differences.
 use nsbu_solver::{
-    domain::{Layout, SpectralState},
+    domain::{Domain, Layout, SpectralState},
     Complex64,
 };
 
@@ -16,19 +16,19 @@ pub struct Norms {
 /// Complete independently reduced pointwise statistics and first peak locations.
 #[derive(Debug, Clone, Copy, Default)]
 pub struct Errors {
-    /// Root mean squared pointwise error magnitude.
+    /// Root mean squared tensor error over sample points.
     pub rms: f64,
-    /// Largest pointwise absolute error magnitude.
+    /// Largest pointwise tensor error.
     pub peak: f64,
-    /// Largest error divided by the floor-controlled reference magnitude.
+    /// Largest pointwise error divided by the floored reference magnitude.
     pub relative_peak: f64,
-    /// Largest finer-field reference magnitude.
+    /// Largest pointwise reference tensor magnitude.
     pub reference_peak: f64,
-    /// First linear sample index attaining the absolute error peak.
+    /// First independently observed absolute-error peak linear index.
     pub peak_linear: usize,
-    /// First linear sample index attaining the relative error peak.
+    /// First independently observed relative-error peak linear index.
     pub relative_linear: usize,
-    /// First linear sample index attaining the reference peak.
+    /// First independently observed reference peak linear index.
     pub reference_linear: usize,
 }
 
@@ -66,22 +66,25 @@ fn coefficient(layout: Layout, field: &[Complex64], mode: [isize; 3]) -> Complex
     }
 }
 
-fn modes(left: &SpectralState, right: &SpectralState) -> Vec<Mode> {
-    let coarse = left.plan().domain().layout();
-    let fine = right.plan().domain().layout();
+fn view_modes(
+    left_domain: Domain,
+    left: [&[Complex64]; 3],
+    right_domain: Domain,
+    right: [&[Complex64]; 3],
+) -> Vec<Mode> {
+    let coarse = left_domain.layout();
+    let fine = right_domain.layout();
     let [nx, ny, nz] = fine.dimensions().map(|n| n as isize / 2);
     let mut result = Vec::new();
     for x in -nx + 1..nx {
         for y in -ny + 1..ny {
             for z in -nz + 1..nz {
                 let mode = [x, y, z];
-                let reference = std::array::from_fn(|axis| {
-                    coefficient(fine, right.component(axis).unwrap(), mode)
-                });
+                let reference = std::array::from_fn(|axis| coefficient(fine, right[axis], mode));
                 result.push(Mode {
                     wave: mode.map(|k| std::f64::consts::TAU * k as f64),
                     difference: std::array::from_fn(|axis| {
-                        reference[axis] - coefficient(coarse, left.component(axis).unwrap(), mode)
+                        reference[axis] - coefficient(coarse, left[axis], mode)
                     }),
                     reference,
                 });
@@ -89,6 +92,15 @@ fn modes(left: &SpectralState, right: &SpectralState) -> Vec<Mode> {
         }
     }
     result
+}
+
+fn modes(left: &SpectralState, right: &SpectralState) -> Vec<Mode> {
+    view_modes(
+        left.plan().domain(),
+        std::array::from_fn(|axis| left.component(axis).unwrap()),
+        right.plan().domain(),
+        std::array::from_fn(|axis| right.component(axis).unwrap()),
+    )
 }
 
 fn add_mode(tensor: &mut Tensor, values: [Complex64; 3], mode: &Mode, point: [f64; 3]) {
@@ -166,7 +178,10 @@ pub fn pair_errors(
     samples: Layout,
     floors: [f64; 4],
 ) -> [Errors; 4] {
-    let modes = modes(left, right);
+    reduce(modes(left, right), samples, floors)
+}
+
+fn reduce(modes: Vec<Mode>, samples: Layout, floors: [f64; 4]) -> [Errors; 4] {
     let mut sum = [0.0; 4];
     let mut result = [Errors::default(); 4];
     for linear in 0..samples.real_len() {
@@ -194,6 +209,22 @@ pub fn pair_errors(
     result
 }
 
+/// All reductions for borrowed coefficient components and their explicit domains.
+pub fn view_errors(
+    left_domain: Domain,
+    left: [&[Complex64]; 3],
+    right_domain: Domain,
+    right: [&[Complex64]; 3],
+    samples: Layout,
+    floors: [f64; 4],
+) -> [Errors; 4] {
+    reduce(
+        view_modes(left_domain, left, right_domain, right),
+        samples,
+        floors,
+    )
+}
+
 /// Difference and finer-state magnitudes reconstructed at one reported sample witness.
 pub fn point_magnitudes(
     left: &SpectralState,
@@ -203,4 +234,21 @@ pub fn point_magnitudes(
 ) -> ([f64; 4], [f64; 4]) {
     assert!(linear < samples.real_len());
     at_point(&modes(left, right), samples, linear)
+}
+
+/// Point magnitudes for borrowed coefficient components and their explicit domains.
+pub fn view_point_magnitudes(
+    left_domain: Domain,
+    left: [&[Complex64]; 3],
+    right_domain: Domain,
+    right: [&[Complex64]; 3],
+    samples: Layout,
+    linear: usize,
+) -> ([f64; 4], [f64; 4]) {
+    assert!(linear < samples.real_len());
+    at_point(
+        &view_modes(left_domain, left, right_domain, right),
+        samples,
+        linear,
+    )
 }
