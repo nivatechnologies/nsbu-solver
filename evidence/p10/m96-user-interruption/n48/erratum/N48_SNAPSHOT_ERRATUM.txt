@@ -1,0 +1,4 @@
+The prior N48 constant 2875392 was erroneous. The exact coefficient encoding is
+Layout::half_len 57600 * 3 components * 16 bytes per complex re/im word = 2764800.
+The earlier dry-run did not execute encode(), so it did not detect this mismatch.
+This record preserves the superseded dry-run source/preflight/hashes; it is not used for execution.

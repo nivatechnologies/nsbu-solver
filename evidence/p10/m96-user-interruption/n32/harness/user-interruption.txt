@@ -1,0 +1,9 @@
+pause_requested_utc=2026-09-12T06:56:57Z
+classification=user_interrupted_hardware_pause
+termination_process_group=2973010
+705f26123ad630ab4d8a76b278757ae87cd18598d5b4a75d2a305ddce06db7be  /mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-next-runs/n32/run.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-next-runs/n32/run.time
+8ff5042c147958c04259994f0e48901768a9ed1d9f1bb50e0496862047953011  /mnt/niva-array/nsbu-solver/work/p10-cli-m96-feasibility/work/m96-next-runs/n32/run-input.sha256
+last_progress=attempt=129 committed=129 clock=2064
+midpoint=forensic tag=accepted path=forensics/accepted-n32-m96-cm16-clock2048.coeff.bin bytes=835584 sha256=[9d, 0a, eb, f2, f7, e4, 56, c5, 8f, 7a, 3c, 98, 3f, 29, b0, 2c, f9, f3, 54, 0a, 12, 34, f6, b3, 8e, 6d, 97, d6, 18, 13, f3, 67] clock=TickClock { exponent: -20, target: 8192, elapsed: 2048
+termination_observed_utc=2026-09-12T06:56:59Z

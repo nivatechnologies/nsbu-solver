@@ -1,0 +1,1 @@
+No run.status or end_utc file was produced for N24: the first TERM was sent to the setsid leader and then to its separately grouped timeout child. `user-interruption.txt` records both signal times, the last recorded committed clock, and pre-termination hashes. This is a user hardware interruption, not a numerical terminal status.

@@ -1,0 +1,98 @@
+{
+  "continuation": "No continuation is valid: the owners were terminated in process and cached archive/resume is unsupported.",
+  "kind": "user_interrupted_cached_m96_midpoint_controls",
+  "qualification": "No endpoint or PDE/convergence qualification is claimed.",
+  "runs": [
+    {
+      "classification": "user_interrupted_hardware_pause",
+      "grid": 24,
+      "last_recorded_state": {
+        "attempts": 139,
+        "clock_ticks": 2224,
+        "committed": 139
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T06:04:49Z",
+        "internal_deadline_seconds=9000 outer_timeout_seconds=9120 kill_after_seconds=10"
+      ],
+      "midpoint_snapshot": {
+        "attempts": 128,
+        "bytes": 359424,
+        "clock_ticks": 2048,
+        "committed": 128,
+        "file": "accepted-n24-m96-cm16-clock2048.coeff.bin",
+        "sha256": "eef26edc20f0d98ffb649a0e0b65831b2ec188dcc8b50629658ac0b0d4ccb19e"
+      },
+      "run_status": "no run.status; see user-interruption record"
+    },
+    {
+      "classification": "user_interrupted_hardware_pause",
+      "grid": 32,
+      "last_recorded_state": {
+        "attempts": 129,
+        "clock_ticks": 2064,
+        "committed": 129
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T06:04:49Z",
+        "internal_deadline_seconds=9000 outer_timeout_seconds=9120 kill_after_seconds=10",
+        "end_utc=2026-09-12T06:56:57Z"
+      ],
+      "midpoint_snapshot": {
+        "attempts": 128,
+        "bytes": 835584,
+        "clock_ticks": 2048,
+        "committed": 128,
+        "file": "accepted-n32-m96-cm16-clock2048.coeff.bin",
+        "sha256": "9d0aebf2f7e456c58f7a3c983f29b02cf9f3540a1234f6b38e6d97d61813f367"
+      },
+      "run_status": "exit_status=143"
+    },
+    {
+      "classification": "user_interrupted_hardware_pause",
+      "grid": 48,
+      "last_recorded_state": {
+        "attempts": 129,
+        "clock_ticks": 2064,
+        "committed": 129
+      },
+      "launch_record": [
+        "launch_utc=2026-09-12T06:04:49Z",
+        "internal_deadline_seconds=9000 outer_timeout_seconds=9120 kill_after_seconds=10",
+        "end_utc=2026-09-12T07:09:02Z"
+      ],
+      "midpoint_snapshot": {
+        "attempts": 128,
+        "bytes": 2764800,
+        "clock_ticks": 2048,
+        "committed": 128,
+        "file": "accepted-n48-m96-cm16-clock2048.coeff.bin",
+        "sha256": "383c02753fa73b13bef107d4635e5083c6b8b7bf9b02e724988bd0c009e6adb3"
+      },
+      "run_status": "exit_status=143"
+    }
+  ],
+  "settings": {
+    "archive_support": "unsupported",
+    "clock_target_ticks": 8192,
+    "endpoint_ticks": 4096,
+    "force_grid": 96,
+    "force_policy": "attempt_local_original_force_cache",
+    "maximum_attempts": 256,
+    "method": "CoxMatthews",
+    "step_ticks": 16,
+    "tick_exponent": -20,
+    "tolerances": {
+      "absolute": [
+        1e-05,
+        0.0001
+      ],
+      "relative": [
+        1e-05,
+        1e-05
+      ]
+    },
+    "workers": 32
+  },
+  "source_commit": "def4730b08025fdd06e7a8a0d78116aea24b6e2c"
+}
