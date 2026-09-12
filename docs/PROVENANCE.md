@@ -70,10 +70,12 @@ must retain the original and replacement input hashes in execution evidence.
 Some source-bound evidence records revisions from focused work that was not
 merged into the public `main` history. The archive-only branch
 [`codex/evidence-sources-20260912`](https://github.com/nivatechnologies/nsbu-solver/tree/codex/evidence-sources-20260912)
-retains those ten revisions as additional ancestry. Its archive commit is
+retains those ten revisions as additional ancestry. The original archive commit was
 `200c5d4c8d02caf18561d4b8c1e2026e8168e924`; its tree is exactly the
 `def4730b08025fdd06e7a8a0d78116aea24b6e2c` tree. The [source-history record](../evidence/p09/source-history-20260912/summary.json)
 contains the full revision list and verification values.
+
+The current archive head is `faa18a7fec87e4db6752908c302f324c9415af53`.
 
 The archive commit is for source retrieval and provenance. Its extra ancestry
 does not merge implementation into `main`, publish a release, or establish a
@@ -108,3 +110,24 @@ A source ZIP created from the exact `def4730b` revision reproduces the same
 tracked files and evidence tree, but it cannot carry Git parent ancestry. Use
 the archive branch when checking the retained source revisions; use the ZIP
 when only the exact source tree is required.
+
+### Archive ancestry follow-up (2026-09-12)
+
+The archive branch was fast-forwarded normally to
+`faa18a7fec87e4db6752908c302f324c9415af53` after verifying its prior remote
+tip was `200c5d4c8d02caf18561d4b8c1e2026e8168e924`. The follow-up commit keeps
+the exact `def4730b08025fdd06e7a8a0d78116aea24b6e2c` tree and uses the prior
+archive tip as its first parent. Its additional ancestry retains the cited
+source closure: `a5e03db5eb5505c3e1a040be576bbb641182158f`,
+`0236d8e2d95e8bd91ba0e83ad901df16efcd36bb`,
+`b358f52090e23ff9713b23736eee1c4ba7d046f1`,
+`d687b585d324699a484e15a91581e41977392007`,
+`91f756dec69c0866b8f08ca6e760dc67836483c5`,
+`5fa65efbad0cc340efdf126278feaf579e0017fa`,
+`955e0ba5c7c46e57901643a3ebe6b27540cbdb86`,
+`606e7e4a1445007447bbb43393c32324a50d1681`,
+`6634c35dbb7048754c1d9cc59953e047c335c816`, and
+`5ec1975e056ec84fce402b60f7cd6b2cee1eccb7`. All twelve candidate ancestors were
+independently verified reachable from the prepared follow-up commit. This is
+archive-only provenance and preserves the original source-history results and
+scope.
