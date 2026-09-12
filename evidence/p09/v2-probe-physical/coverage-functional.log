@@ -1,0 +1,48 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-v2-probe-physical-development/crates/nsbu-benchmarks)
+warning: struct `Norms` is never constructed
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:13:12
+   |
+13 | pub struct Norms {
+   |            ^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `views` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:20:4
+   |
+20 | fn views(state: &SpectralState) -> [&[Complex64]; 3] {
+   |    ^^^^^
+
+warning: function `pair_norms` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:26:8
+   |
+26 | pub fn pair_norms(left: &SpectralState, right: &SpectralState, samples: Layout) -> [Norms; 4] {
+   |        ^^^^^^^^^^
+
+warning: function `pair_errors` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:34:8
+   |
+34 | pub fn pair_errors(
+   |        ^^^^^^^^^^^
+
+warning: function `point_magnitudes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:51:8
+   |
+51 | pub fn point_magnitudes(
+   |        ^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "v2_probe_physical") generated 5 warnings
+    Finished `test` profile [optimized + debuginfo] target(s) in 4.84s
+     Running tests/v2_probe_physical.rs (target/llvm-cov-target/debug/deps/v2_probe_physical-38be0a93b8752382)
+
+running 3 tests
+test admission_and_publication_refusals_are_bounded_and_terminal ... ok
+test failed_probe_producer_cannot_replace_complete_report ... ok
+test offstage_and_endpoint_reports_match_complete_independent_oracle ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 481.11s
+
+
+    Finished report saved to work/v2-probe-physical/coverage.json

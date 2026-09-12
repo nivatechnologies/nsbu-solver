@@ -1,0 +1,7 @@
+{
+  "scope": "probe physical production modules, functional test, state wrapper, and borrowed-view oracle core",
+  "files": 6,
+  "lines": {"count": 766, "covered": 722, "percent": 94.25587467362924},
+  "branches": {"count": 54, "covered": 46, "percent": 85.18518518518519},
+  "allocator_harness": "excluded from final instrumented scope; exact final-source optimized audit passes and prior c9cd008 instrumented audit has byte-identical production and allocator sources"
+}
