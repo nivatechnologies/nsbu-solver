@@ -101,20 +101,20 @@ it does not predict the result at another grid or force profile.
    floor, force change, or analytical restart can repair the recorded N8/N12/N16
    trend.
 
-## Next bounded coding increment
+## Next bounded integration increment
 
-Implement the next frozen exact-v2 review-profile
-admission layer: caller-owned three nested exact time manifests, actual
-reconstruction geometry, complete observable keys/semantics identity, and a
-bounded row schedule. It should admit no measurements by substitution and should
-not create `Observation` rows until their required actual source exists.
+Bind the implemented, source-bound review-profile admission to actual producer
+reports on the identical exact-time geometry. Preserve the frozen observable
+keys and semantics identity, bounded row schedule, reconstruction origins and
+explicit unavailable rows. The existing admission evidence establishes profile
+validation only; create no `Observation` row until its required actual source
+and provenance are present.
 
-Its required exit evidence is a serialized/fingerprinted profile that the generic
-protocol accepts, plus focused controls showing rejection of non-nested clocks,
-wrong case/semantics identity, mismatched reconstruction geometry, duplicate or
-missing observable keys, insufficient capacity, and unavailable scheduled rows.
-The resulting artifact remains unqualified until every channel row and the
-separate provenance/lineage review are present.
+The next exit is a source-matched integrated inventory and focused refusal
+controls for mismatched clocks, identities, reconstruction origins, missing
+required rows and insufficient capacity, followed by the required combined
+quality gates. The resulting artifact remains unqualified until every channel
+row and the separate provenance/lineage review are present.
 
 See [PROTOCOL_FORMAT.md](PROTOCOL_FORMAT.md), [EXPERIMENTS.md](EXPERIMENTS.md),
 and the active [P08/P09/P10 plan](../IMPLEMENTATION_PLAN.md) for the governing
