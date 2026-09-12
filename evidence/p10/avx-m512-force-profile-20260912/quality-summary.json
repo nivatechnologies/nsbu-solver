@@ -1,0 +1,21 @@
+{
+  "source_commit": "000e80099a546f69076379387f8b2283602132c1",
+  "cargo_fmt_check": "passed",
+  "harness_feature_tests": {"passed": 19, "failed": 0},
+  "w3_focused_tests": {"passed": 7, "failed": 0},
+  "parallel_reduced_force_tests": {"passed": 2, "failed": 0},
+  "m512_resource_control": "compiled_ignored_not_executed",
+  "focused_solver_lib_clippy_warnings_denied": "passed",
+  "focused_m512_control_clippy_warnings_denied": "passed",
+  "harness_all_target_clippy_warnings_denied": "passed",
+  "existing_m384_preflight_regression": {
+    "total_bytes": 185782833928,
+    "rhs_bytes": 38807118904,
+    "observer_bytes": 98075173144,
+    "artifact_bytes": 65573289984,
+    "integration_work_bound": 4256500288320,
+    "observer_work_bound": 467480346624
+  },
+  "trajectory_launched": false,
+  "accepted_pde_windows": 0
+}
