@@ -1,0 +1,18 @@
+{
+  "status": "completed_read_only_actual_endpoint_advective_check",
+  "input": {
+    "path": "/mnt/niva-array/nsbu-solver/work/p10-sulaco-remote-20260912/accelerated-n192-h64-cadv08/endpoint/output/node-4096/state.bin",
+    "file_sha256": "1ce2f764d34a8da54611873ebed3eb84247941394c784f62e015d79e18ce000d",
+    "payload_sha256": "a3e93565644a4d3e4f1131d17994e6c80ef5e18ccd83c42809466157ddb66aec",
+    "base_source": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "header": [4096, 8192, 64, 64],
+    "parser_checks": ["magic", "exact identity", "payload hash", "finite coefficients", "Nyquist exclusion", "Hermitian validation"]
+  },
+  "method": "Inverse-transform each integrated N192 spectral component, then take max over the N192 physical grid of sum_i abs(u_i).",
+  "max_sum_abs": 16.488574618177264,
+  "formula": "advective_number = h / 2^20 * max_sum_abs * TAU * (N/2-1)",
+  "results": {"n192_h64": 0.6007124712426902, "n384_h128": 2.4154964633127123},
+  "interpretation": "N192/h64 is below the profile advective limit 0.8. The hypothetical N384/h128 value exceeds 0.3 and 0.8; it is not a feasibility claim for a distinct N384 state.",
+  "scope": "Read-only state diagnostic. No trajectory mutation, PDE qualification, grid-search conclusion, precision claim, or acceptance decision."
+}
