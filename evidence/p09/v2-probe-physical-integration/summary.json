@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "base_commit": "2c8be21442b4fd80dbd0d1c4c38f107887f6c691",
+  "source_commit": "2780b0b7638350933f084ec2ea5482d7fe7abed9",
+  "status": "UnqualifiedDiagnostic",
+  "profile": {
+    "manifest_clocks": [0, 7, 63, 64, 95, 127, 128],
+    "accepted_clocks": [0, 64, 128],
+    "source_grids": [4, 8, 12],
+    "physical_sample_grid": [12, 12, 12],
+    "pairs": 5,
+    "quantities": 4
+  },
+  "coordinator_work": {
+    "probe_physical_attempts": 7,
+    "probe_physical_scalar_transforms": 3150,
+    "probe_physical_weighted_visits": 45790528,
+    "probe_physical_binding_checks": 896
+  },
+  "tests": {
+    "initial_combined_instrumented": {"passed": 7, "failed": 0},
+    "final_export_instrumented": {"passed": 3, "failed": 0, "seconds": 580.08},
+    "adapter_steady_allocations": 0
+  },
+  "focused_coverage": {
+    "lines_covered": 2648,
+    "lines_total": 2702,
+    "line_percent": 98.00148038490008,
+    "branches_covered": 151,
+    "branches_total": 192,
+    "branch_percent": 78.64583333333333,
+    "functions_covered": 185,
+    "functions_total": 190,
+    "function_percent": 97.36842105263158
+  },
+  "focused_static": {
+    "maximum_cyclomatic": 21.0,
+    "maximum_cognitive": 21.0,
+    "maximum_all_node_halstead_difficulty": 53.99659863945578,
+    "maximum_function_ploc": 157.0,
+    "maximum_crap": 24.05859375
+  },
+  "whole_rust_static": {
+    "maximum_cyclomatic": 21.0,
+    "maximum_cognitive": 21.0,
+    "maximum_all_node_halstead_difficulty": 75.9295154185022,
+    "maximum_tracked_file_lines": 477
+  },
+  "quality": {
+    "format": "passed",
+    "workspace_all_targets_clippy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_check": "passed"
+  },
+  "schema_v1_default": true,
+  "schema_v2_opt_in": true,
+  "accepted_windows": 0,
+  "claims_pde_qualification": false
+}

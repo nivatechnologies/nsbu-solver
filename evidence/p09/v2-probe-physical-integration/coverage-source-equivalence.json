@@ -1,0 +1,46 @@
+{
+  "initial_coverage_source": "16f06450e5a75b2207cff86f11d5cb74da6389eb",
+  "final_source": "2780b0b7638350933f084ec2ea5482d7fe7abed9",
+  "unchanged_files": [
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/mod.rs",
+      "sha256": "5523da5bfe87ad1c2ea60cfdc5788aa1c7450798775f26b77c5a71f7396bdead",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/plan.rs",
+      "sha256": "6e886b4380e890211e6b8331b52fb8ce2c5701301e052b37db7248c35024fa3c",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/report.rs",
+      "sha256": "00a5c0747d426b1e386291dcff5ff7f756776dc7902d81490911d11906d560b0",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/mod.rs",
+      "sha256": "94d0f11a4a2465dcd799599b1a7d31fc9e27e54709788a605de3d4a7266f9f3e",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/validate.rs",
+      "sha256": "970317e0639db5d47a99b3413bf130772034230830b994e8bb90bd9bcdbc4110",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_diagnostic_coordinator.rs",
+      "sha256": "0179d653b7ad7a80be53df708f06b6f3f3a98567412c34e0fdf29ed5deaaafbe",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_diagnostic_export_oracle.rs",
+      "sha256": "8f03307f6b92d951c4f5dc77cfd16fd92417c6dbd939aa450e36d8c110cdcd34",
+      "identical": true
+    },
+    {
+      "path": "crates/nsbu-benchmarks/tests/v2_review_adapter.rs",
+      "sha256": "ff0ef641da2a11d6b26436124710bc53ba1ae6f49c66f743551d48079f40045f",
+      "identical": true
+    }
+  ]
+}

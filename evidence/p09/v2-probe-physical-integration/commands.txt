@@ -1,0 +1,10 @@
+cargo test -p nsbu-benchmarks --test v2_diagnostic_coordinator --test v2_review_adapter --test v2_diagnostic_export --locked -- --test-threads=1 --nocapture
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_diagnostic_coordinator --test v2_review_adapter --test v2_diagnostic_export --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-probe-physical-integration/coverage.json -- --test-threads=1 --nocapture
+PATH=$RUST_TOOLS:$PATH cargo +nightly-2026-03-03 llvm-cov -p nsbu-benchmarks --test v2_diagnostic_export --branch --no-default-ignore-filename-regex --ignore-filename-regex '(/rustc/|/\.cargo/registry/|/\.rustup/toolchains/|/target/)' --json --output-path work/v2-probe-physical-integration/coverage-final-export.json -- --test-threads=1 --nocapture
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates/nsbu-benchmarks -m -O json > work/v2-probe-physical-integration/metrics-final.jsonl
+python3 -m quality.check_crap rust work/v2-probe-physical-integration/metrics-focused-final.jsonl work/v2-probe-physical-integration/coverage-focused-final.json work/v2-probe-physical-integration/crap-final.json
+PATH=$RUST_TOOLS:$PATH rust-code-analysis-cli -p crates -m -O json > work/v2-probe-physical-integration/all-rust-metrics-final.jsonl
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --locked -- -D warnings -A dead_code
+RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps --locked
+/mnt/niva-array/nsbu-solver/.venv/bin/python tools/check_repository.py
