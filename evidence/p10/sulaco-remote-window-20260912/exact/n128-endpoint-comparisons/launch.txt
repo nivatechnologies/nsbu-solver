@@ -1,0 +1,16 @@
+source_commit=1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02
+case=similarity-mms-v2
+clock=4096
+force_grid=192
+workers=32
+method=cox-matthews
+from_rest=true
+absolute_tolerances=1e-5,1e-4
+relative_tolerances=1e-5,1e-5
+spatial_comparison=n96-h32-cadv03-to-n128-h32-cadv03
+time_comparison=n128-h64-cadv045-to-n128-h32-cadv03
+comparator_sha256=64055c4963c580614ce26124372e2802df90b770ea2f401fd298f77b38e75170
+n96_h32_sha256=4d250ccd8e9d386c99d0402b8c1ca2ffc75e54a265cf0924aa3b98087ea6d1a8
+n128_h32_sha256=ea947ff11e04c50f555bbaf1898af6f05616a9f889a18a100f382841d576f576
+n128_h64_sha256=d2d2289956c398df328b599f8ed0e2e6f8ab38bbb3086bbd8fb7afc5e8df87fd
+host=sulaco

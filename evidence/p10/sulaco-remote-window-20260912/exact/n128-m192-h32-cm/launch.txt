@@ -1,0 +1,6 @@
+source_commit=1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02
+binary_sha256=d5e467604d0a8c0ef01d35b099407d23c4abd471dbe23b6dbadd374a719c700a
+cap_bytes=34359738368
+address_space_limit_kib=41943040
+numa_node=0
+command=timeout --signal=TERM --kill-after=30s 36600s stdbuf -oL numactl --cpunodebind=0 --membind=0 /tmp/nsbu-p10-sulaco-20260912T1420Z/bin/p10-trajectory 128 192 32 4096 cm 32 36000

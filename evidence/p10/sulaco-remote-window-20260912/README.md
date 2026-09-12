@@ -11,8 +11,12 @@ The exact-source N96/M192 CM h32/Cadv0.3 endpoint completed all 128 attempts at 
 4096 in 17,073.967 s with maximum RSS 5,683,200 KiB and zero swap. It reported no
 rejection or refusal. The 21,676,032-byte terminal coefficient file hashes to
 `4d250ccd8e9d386c99d0402b8c1ca2ffc75e54a265cf0924aa3b98087ea6d1a8`.
-Its same-profile spatial comparison with N128 remains deferred until the independent N128
-endpoint completes.
+The independent exact N128/M192 CM h32/Cadv0.3 endpoint also completed all 128 attempts,
+in 21,358.418 s, with maximum RSS 7,989,248 KiB and zero swap. Its terminal coefficient
+file hashes to `ea947ff11e04c50f555bbaf1898af6f05616a9f889a18a100f382841d576f576`.
+The N96-to-N128 h32 difference is 1.0732587459533836 H1, or 2.1097816335308613%
+relative to the N128 state; 99.99975043851307% of its squared H1 difference is in newly
+resolved modes.
 
 The completed direct-from-rest N96/M192 CM h64 and h32 states differ by
 `9.018521337154418e-10` L2, `1.2125912739538688e-7` H1,
@@ -34,8 +38,11 @@ for HO.
 The hash-bound same-profile comparison reports L2 difference
 `9.486263244459316e-10`, H1 difference `1.4285421756356483e-7`, vorticity-L2
 difference `1.4285106784321692e-7`, and divergence-L2 difference
-`8.201781182123754e-15`. Comparison with the N128/M192 CM h32/Cadv0.3 endpoint is
-deferred until that independent endpoint completes.
+`8.201781182123754e-15`. The N128 CM h64/Cadv0.45 and h32/Cadv0.3 endpoints
+differ by `1.2671992127725778e-7` H1, or `2.4910243081759835e-9` relative to
+the h32 state. The guard limits differ: h64 under Cadv0.3 previously refused before the
+endpoint, so this remains a guard-differing two-setting comparison rather than a completed
+time study.
 
 ## Accelerated N192 endpoint
 

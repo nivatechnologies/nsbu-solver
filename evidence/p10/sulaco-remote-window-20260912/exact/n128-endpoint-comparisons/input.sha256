@@ -1,0 +1,4 @@
+ea947ff11e04c50f555bbaf1898af6f05616a9f889a18a100f382841d576f576  inputs/n128-m192-cm-h32-clock4096.coeff.bin
+d2d2289956c398df328b599f8ed0e2e6f8ab38bbb3086bbd8fb7afc5e8df87fd  inputs/n128-m192-cm-h64-clock4096.coeff.bin
+4d250ccd8e9d386c99d0402b8c1ca2ffc75e54a265cf0924aa3b98087ea6d1a8  inputs/n96-m192-cm-h32-clock4096.coeff.bin
+45720c4acde7bb4ef32455a0d66ff02ee1cb64dd918d3d87a5ba906cf6232483  inputs/zero-n128.coeff.bin

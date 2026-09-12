@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=10s 180s /mnt/niva-array/nsbu-solver/work/p10-numerical-window-20260912/target/profile-harness/release/p10-snapshot-compare compare inputs/zero-n128.coeff.bin inputs/n128-m192-cm-h32-clock4096.coeff.bin 4096 128 128 0 192 0 32 45720c4acde7bb4ef32455a0d66ff02ee1cb64dd918d3d87a5ba906cf6232483 ea947ff11e04c50f555bbaf1898af6f05616a9f889a18a100f382841d576f576"
+	User time (seconds): 1.24
+	System time (seconds): 0.15
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.40
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 201728
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 50139
+	Voluntary context switches: 3
+	Involuntary context switches: 3
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
