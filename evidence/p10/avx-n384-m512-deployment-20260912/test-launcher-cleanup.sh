@@ -7,12 +7,22 @@ CLEANUP_GRACE_SECONDS=2
 
 capture_identity() {
     capture_pid=$1
-    capture_stat=$(cat "/proc/$capture_pid/stat")
-    capture_rest=${capture_stat##*) }
-    set -- $capture_rest
-    PROCESS_GROUP=$3
-    TIME_STARTTIME=${20}
-    TIME_CMDLINE_SHA256=$(sha256sum "/proc/$capture_pid/cmdline" | awk '{print $1}')
+    for _ in $(seq 1 100); do
+        capture_stat=$(cat "/proc/$capture_pid/stat" 2>/dev/null || true)
+        capture_rest=${capture_stat##*) }
+        set -- $capture_rest
+        if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$3" = "$capture_pid" ]; then
+            capture_argv0=$(tr '\000' '\n' <"/proc/$capture_pid/cmdline" | head -n 1)
+            if [ "$capture_argv0" = sh ]; then
+                PROCESS_GROUP=$3
+                TIME_STARTTIME=${20}
+                TIME_CMDLINE_SHA256=$(sha256sum "/proc/$capture_pid/cmdline" | awk '{print $1}')
+                return 0
+            fi
+        fi
+        sleep 0.02
+    done
+    return 1
 }
 
 assert_gone() {
@@ -48,6 +58,41 @@ start_wrapper_group() {
     LAUNCH_STARTED=1
 }
 
+reset_pending() {
+    LAUNCH_STARTED=1
+    LAUNCH_HANDOFF=0
+    SPAWN_PID=$1
+    SPAWN_PARENT_PID=$$
+    SPAWN_STARTTIME=
+    SPAWN_PENDING=1
+    TIME_PID=
+    SOLVER_PID=
+    PROCESS_GROUP=
+    STARTTIME=
+    CMDLINE_SHA256=
+}
+
+# Before setsid has changed the group, cleanup is restricted to the direct child.
+sh -c 'sleep 5; exec setsid sh -c '\''while :; do sleep 1; done'\''' &
+pending_pid=$!
+reset_pending "$pending_pid"
+trap_status=0
+(install_owned_cleanup_traps; exit 98) || trap_status=$?
+[ "$trap_status" -eq 98 ]
+wait "$pending_pid" || true
+assert_gone "$pending_pid"
+
+# Immediately after an actual setsid spawn, the same trap handles either side of the PGID race.
+setsid sh -c 'while :; do sleep 1; done' &
+pending_pid=$!
+reset_pending "$pending_pid"
+trap_status=0
+(install_owned_cleanup_traps; exit 99) || trap_status=$?
+[ "$trap_status" -eq 99 ]
+wait "$pending_pid" || true
+assert_gone "$pending_pid"
+SPAWN_PENDING=0
+
 # Capture failure: only the exact setsid leader identity is available.
 setsid sh -c 'trap "exit 0" TERM; while :; do sleep 1; done' &
 TIME_PID=$!
@@ -80,4 +125,4 @@ wait "$TIME_PID" || true
 assert_gone "$TIME_PID"
 assert_gone "$SOLVER_PID"
 
-echo "capture_exit80_cleanup=passed child_group_exit81_cleanup=passed attachment_exit96_cleanup=passed"
+echo "pre_setsid_cleanup=passed post_spawn_race_cleanup=passed capture_exit80_cleanup=passed child_group_exit81_cleanup=passed attachment_exit96_cleanup=passed"

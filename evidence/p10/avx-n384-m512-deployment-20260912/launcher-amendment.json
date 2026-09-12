@@ -1,22 +1,27 @@
 {
-  "schema": "p10-avx-n384-m512-launcher-amendment-v1",
-  "status": "review_blocker_fixed_dummy_cleanup_tests_passed_not_launched",
+  "schema": "p10-avx-n384-m512-launcher-amendment-v2",
+  "status": "root_review_blockers_fixed_dummy_cleanup_tests_passed_not_launched",
   "preserved_binary_sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
   "preserved_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
   "prior_launch_recipe_sha256": "a8091549adf7d168f1787f94d170b9880ef3fe3ff5c8bd85a50fd2b04f1f9f63",
-  "amended_launch_recipe_sha256": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
+  "amended_launch_recipe_sha256": "87de25340d8d1e3d33f4481f6c1f8ef1aa6dcb9c53098e0d54a776ea6c3df137",
   "owned_cleanup_source": "launcher-owned-cleanup.sh",
-  "owned_cleanup_sha256": "d1317f52922bcd20525d26bb5cf817c3cc7fe8715c5d372fe4b09a1913a549f7",
+  "owned_cleanup_sha256": "e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524",
   "cleanup_test_source": "test-launcher-cleanup.sh",
-  "cleanup_test_sha256": "27999f11078d3ad115e5558a8fbc87f910929a4629772529221f28f108d12fbf",
-  "blocker": "capture exits 80/81 and watchdog spawn failure could return after setsid without terminating the owned solver process group",
-  "fix": "install EXIT/HUP/INT/TERM cleanup after binding the setsid leader PID, process group, starttime and cmdline hash and before any group-validation or child-capture exit; retain solver identity when captured; TERM then KILL after 60 seconds only while an exact owned identity remains; require the watchdog exact started record and live non-zombie PID through the first-step gate",
+  "cleanup_test_sha256": "85838d558f236740dcd68f20d8954f7ebd6ba75dd15de9bf4a706eda9eb3cb72",
+  "blocker": "metadata capture before trap arming left an early setsid race; balance integrity incorrectly required inherently signed channels to be nonnegative",
+  "fix": "arm failure traps before spawn; during transition clean only the exact direct child or its PID-equal process group; bind stable wrapper PID/starttime only after the new PGID and exact GNU time/timeout command appear; wrap the solver in GNU timeout --foreground with TERM/KILL derived from the absolute deadline; then bind the solver grandchild and require v2 watchdog startup and liveness through the first-step gate",
   "tests": {
+    "pre_setsid_transition_cleanup": "passed_direct_child_only",
+    "post_spawn_setsid_race_cleanup": "passed_pid_equal_group_or_direct_child",
     "capture_failure_cleanup": "passed_exit80_trap_terminated_dummy_group",
     "child_group_validation_failure_cleanup": "passed_exit81_trap_terminated_dummy_wrapper_and_child_group",
-    "watchdog_attachment_failure_cleanup": "passed_exit96_trap_terminated_dummy_wrapper_and_child_group"
+    "watchdog_attachment_failure_cleanup": "passed_exit96_trap_terminated_dummy_wrapper_and_child_group",
+    "gnu_time_timeout_solver_tree": "passed_exact_argv_parentage_and_single_setsid_process_group"
   },
   "kernel_rebuilt": false,
   "trajectory_launched": false,
-  "predecessor_screen": "launch admission validates all eight non-rest observer nodes for exact predecessor identity, committed complete artifacts, expected state size, exact counters, finite nonnegative measurements and accepted error ratios"
+  "predecessor_screen": "launch admission validates all eight non-rest observer nodes for exact predecessor identity, committed complete artifacts, expected state size, exact counters, finite nonnegative measurements and accepted error ratios",
+  "prior_amended_launch_recipe_sha256": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
+  "predecessor_observer_integrity": "all eight non-rest observer nodes require exact predecessor identity, complete committed artifacts, expected state size and counters; norms, energies, dissipations, timings and ratios must be finite nonnegative; signed forcing_work, stretching and vorticity_forcing must be finite"
 }

@@ -1,32 +1,32 @@
 {
   "schema": "p10-avx-n384-m512-deployment-manifest-v1",
-  "status": "staged_hash_verified_not_launched_predecessor_running",
+  "status": "final_amendment_staged_hash_verified_not_launched_predecessor_running",
   "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "branch": "codex/p10-m512-force-profile-20260912",
   "bundle_directory": "deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "transfer_archive": "deployment/p10-n384-m512-326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72.tar.gz",
-  "transfer_archive_sha256": "536d63ceddc7fb5165d7319885d905637e0c419ede2857acf4465e9aaf89cdef",
-  "intended_sulaco_directory": "/tmp/nsbu-p10-sulaco-m512-20260913",
+  "transfer_archive_sha256": "d72bd08e27f563eff708019a6d70f8f0258c81bff1cfda6bbb0c9374ed7cd39c",
+  "intended_sulaco_directory": "/tmp/nsbu-p10-sulaco-m512-20260913-r2",
   "files": {
     "p10-avx-n384-m512-piecewise-cadv33": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
     "pgid-watchdog-v2.sh": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
     "frozen-plan.json": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
     "forecast.json": "fd92ca1d5d75ff4b0e7c3b5423b699509415d338fba348436ec7b96b08bc1973",
     "preflight.stdout": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
-    "launch-reviewed.sh": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
-    "launcher-owned-cleanup.sh": "d1317f52922bcd20525d26bb5cf817c3cc7fe8715c5d372fe4b09a1913a549f7",
-    "BUNDLE-SHA256SUMS": "24044e94a07e06a30a03ec26e3d37944c2c93441cff66016a5b94eaeace4b3a6"
+    "launch-reviewed.sh": "87de25340d8d1e3d33f4481f6c1f8ef1aa6dcb9c53098e0d54a776ea6c3df137",
+    "launcher-owned-cleanup.sh": "e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524",
+    "BUNDLE-SHA256SUMS": "45474d0614a420c265ad32c50ee2fa1e51d4e3f31b681082d7c283d57fb8a6b2"
   },
   "supporting_evidence": {
     "build.json": "dc0d27f1ea82c76755ddab5e1fcba5081cc17b4b35edc30923a9b5b32c63e54a",
-    "quality-summary.json": "a2adc8da1ab50de70115aed978be5afec86fcd5dd98ed61a77ecfc36654ceef1",
+    "quality-summary.json": "4f685b6339e04677a25700711cc32020bdaa7597e0cca10fdbb2913e24cabb45",
     "forecast_force_source": "evidence/p10/force-grid-n384-baf54fa/summary.json",
     "forecast_force_source_sha256": "892853212e5002199af93a0ab1c9e3fdea08b38028b5be04b1943ce2b985b6db",
     "m512_control_archive": "evidence/p10/avx-m512-force-profile-20260912",
     "current_n384_snapshot_sha256": "d307a86c889f8b3e88a8d721991180707022e15f51e9411f439fdb4168cb1b83",
-    "launcher-amendment.json": "0f56b414c5e1092c47718c952e3d9d386b6f832c051f2142d6a218bbecc176b4",
-    "test-launcher-cleanup.sh": "27999f11078d3ad115e5558a8fbc87f910929a4629772529221f28f108d12fbf",
-    "sulaco-stage.json": "7be91f30348faa21234457e030534bcd8c65e3c5ea1466eca874220ff4e833e1"
+    "launcher-amendment.json": "c8f22c6187ae8a87abb4d50aaf4d8ca3a5c8516e42812b4303386d236ede39df",
+    "test-launcher-cleanup.sh": "85838d558f236740dcd68f20d8954f7ebd6ba75dd15de9bf4a706eda9eb3cb72",
+    "sulaco-stage.json": "540123954f4c2b4a8e4218e2f54bd8338163a5bce59de8889e1f312f284d02e6"
   },
   "transfer_authorized": true,
   "launch_authorized": false,

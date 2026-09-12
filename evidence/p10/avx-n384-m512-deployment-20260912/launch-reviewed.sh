@@ -4,7 +4,7 @@ set -eu
 SOURCE=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72
 BINARY_SHA256=85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57
 WATCHDOG_SHA256=4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b
-CLEANUP_SHA256=d1317f52922bcd20525d26bb5cf817c3cc7fe8715c5d372fe4b09a1913a549f7
+CLEANUP_SHA256=e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524
 PLAN_SHA256=2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84
 PREFLIGHT_SHA256=b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274
 LATEST_START_EPOCH=1789260352
@@ -88,15 +88,24 @@ for clock, attempt_number in expected.items():
         raise SystemExit(f"observer screen clock {clock}: execution counters mismatch")
     if record.get("observation_status") != "Scheduled" or record.get("clock") != clock:
         raise SystemExit(f"observer screen clock {clock}: observation record mismatch")
-    values = [
+    nonnegative_values = [
         attempt.get("observer_seconds"),
         attempt.get("error_ratio_l2"),
         attempt.get("error_ratio_h1"),
         *record.get("timing", {}).values(),
-        *record.get("balance", {}).values(),
     ]
-    if not values or any(not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0 for value in values):
+    balance = record.get("balance", {})
+    nonnegative_balance = [
+        balance.get(name) for name in (
+            "l2", "h1", "vorticity_l2", "divergence_l2", "energy", "enstrophy",
+            "energy_dissipation", "enstrophy_dissipation",
+        )
+    ]
+    signed_balance = [balance.get(name) for name in ("forcing_work", "stretching", "vorticity_forcing")]
+    if any(not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0 for value in nonnegative_values + nonnegative_balance):
         raise SystemExit(f"observer screen clock {clock}: non-finite or negative measurement")
+    if any(not isinstance(value, (int, float)) or not math.isfinite(value) for value in signed_balance):
+        raise SystemExit(f"observer screen clock {clock}: non-finite signed balance channel")
     if attempt["error_ratio_l2"] > 1 or attempt["error_ratio_h1"] > 1:
         raise SystemExit(f"observer screen clock {clock}: rejected error ratio")
 print("predecessor_observer_screen=passed nodes=8")
@@ -120,6 +129,10 @@ available_disk=$(df -B1 --output=avail "$BUNDLE" | awk 'NR==2{print $1}')
 
 LAUNCH_STARTED=0
 LAUNCH_HANDOFF=0
+SPAWN_PENDING=0
+SPAWN_PID=
+SPAWN_PARENT_PID=
+SPAWN_STARTTIME=
 TIME_PID=
 TIME_STARTTIME=
 TIME_CMDLINE_SHA256=
@@ -129,20 +142,79 @@ STARTTIME=
 CMDLINE_SHA256=
 . "$CLEANUP"
 
-setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" "$BIN" run "$OUTPUT" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
-TIME_PID=$!
-time_stat=$(cat "/proc/$TIME_PID/stat")
-time_rest=${time_stat##*) }
-set -- $time_rest
-PROCESS_GROUP=$3
-TIME_STARTTIME=${20}
-TIME_CMDLINE_SHA256=$(sha256sum "/proc/$TIME_PID/cmdline" | awk '{print $1}')
-LAUNCH_STARTED=1
+timeout_seconds=$((DEADLINE_EPOCH - $(date +%s)))
+[ "$timeout_seconds" -gt 0 ] || exit 71
 install_owned_cleanup_traps
-[ "$PROCESS_GROUP" = "$TIME_PID" ] || exit 95
-SOLVER_PID=
+setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" /usr/bin/timeout --foreground --signal=TERM --kill-after=60s "$timeout_seconds" "$BIN" run "$OUTPUT" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
+SPAWN_PID=$!
+SPAWN_PARENT_PID=$$
+SPAWN_PENDING=1
+LAUNCH_STARTED=1
+
+TIME_PID=$SPAWN_PID
+TIME_BOUND=0
+for _ in $(seq 1 100); do
+    if [ -r "/proc/$TIME_PID/stat" ] && [ -r "/proc/$TIME_PID/cmdline" ]; then
+        time_stat=$(cat "/proc/$TIME_PID/stat" 2>/dev/null || true)
+        time_rest=${time_stat##*) }
+        set -- $time_rest
+        if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$2" = "$SPAWN_PARENT_PID" ]; then
+            [ -z "$SPAWN_STARTTIME" ] && SPAWN_STARTTIME=${20}
+            if [ "${20}" = "$SPAWN_STARTTIME" ] && [ "$3" = "$TIME_PID" ] && python3 - "$TIME_PID" "$LOG_DIR/time.txt" "$timeout_seconds" "$BIN" "$OUTPUT" <<'PY'
+import pathlib
+import sys
+
+pid, time_path, seconds, binary, output = sys.argv[1:]
+actual = pathlib.Path(f"/proc/{pid}/cmdline").read_bytes().rstrip(b"\0").split(b"\0")
+expected = [
+    "/usr/bin/time", "-v", "-o", time_path,
+    "/usr/bin/timeout", "--foreground", "--signal=TERM", "--kill-after=60s", seconds,
+    binary, "run", output,
+]
+raise SystemExit(actual != [part.encode() for part in expected])
+PY
+            then
+                PROCESS_GROUP=$3
+                TIME_STARTTIME=${20}
+                TIME_CMDLINE_SHA256=$(sha256sum "/proc/$TIME_PID/cmdline" | awk '{print $1}')
+                TIME_BOUND=1
+                break
+            fi
+        fi
+    fi
+    sleep 0.05
+done
+[ "$TIME_BOUND" -eq 1 ] || exit 95
+SPAWN_PENDING=0
+
+TIMEOUT_PID=
 for _ in $(seq 1 100); do
     children=$(pgrep -P "$TIME_PID" || true)
+    if [ "$(printf '%s\n' "$children" | sed '/^$/d' | wc -l)" -eq 1 ]; then
+        candidate=$children
+        if python3 - "$candidate" "$timeout_seconds" "$BIN" "$OUTPUT" <<'PY'
+import pathlib
+import sys
+
+pid, seconds, binary, output = sys.argv[1:]
+actual = pathlib.Path(f"/proc/{pid}/cmdline").read_bytes().rstrip(b"\0").split(b"\0")
+expected = [
+    "/usr/bin/timeout", "--foreground", "--signal=TERM", "--kill-after=60s", seconds,
+    binary, "run", output,
+]
+raise SystemExit(actual != [part.encode() for part in expected])
+PY
+        then
+            TIMEOUT_PID=$candidate
+            break
+        fi
+    fi
+    sleep 0.05
+done
+[ -n "$TIMEOUT_PID" ] || exit 80
+SOLVER_PID=
+for _ in $(seq 1 100); do
+    children=$(pgrep -P "$TIMEOUT_PID" || true)
     if [ "$(printf '%s\n' "$children" | sed '/^$/d' | wc -l)" -eq 1 ]; then
         SOLVER_PID=$children
         break
@@ -181,6 +253,9 @@ done
 {
     echo "source=$SOURCE"
     echo "time_pid=$TIME_PID"
+    echo "timeout_pid=$TIMEOUT_PID"
+    echo "timeout_seconds=$timeout_seconds"
+    echo "timeout_mode=foreground-signal-TERM-kill-after-60s"
     echo "solver_pid=$SOLVER_PID"
     echo "process_group=$PROCESS_GROUP"
     echo "starttime=$STARTTIME"

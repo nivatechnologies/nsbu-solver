@@ -40,25 +40,30 @@ full command-line SHA-256. Its numerical deadline is
 2026-09-13T07:16:47Z. Root authorization is still required. Running preflight,
 building this bundle, or reviewing its hashes does not authorize launch.
 
-The final launcher amendment installs identity-checked cleanup immediately
-after the `setsid` leader is captured, so child-capture, child-group validation, or watchdog-attachment
-failure cannot leave the owned solver group running. Handoff requires both the
-watchdog's exact `started` record and a live watchdog PID. Dummy process-group
-tests cover capture exit 80, child-group validation exit 81, and attachment exit 96. `launcher-amendment.json`
-binds the preserved binary and plan hashes, the amended recipe, support source,
-and test source. The numerical binary and frozen plan were not rebuilt or
-changed for this amendment.
+The final launcher amendment arms failure traps before spawn. During the
+`setsid` transition, cleanup is restricted to the direct child or a process
+group whose ID is that exact child PID. Handoff from this transitional state
+requires a stable starttime, the expected new process group, and the exact GNU
+time/timeout wrapper command. GNU timeout independently applies TERM and KILL
+from the remaining absolute-deadline budget. The launcher then binds the actual
+solver grandchild and requires the identity-bound v2 watchdog's exact `started`
+record and live non-zombie state through the first-step gate. Dummy controls
+cover the pre-setsid transition, immediate post-spawn race, capture exit 80,
+child-group validation exit 81, and watchdog attachment exit 96. The numerical
+binary and frozen plan were not rebuilt or changed.
 
-Launch admission also performs the complete eight-node predecessor screen at
-clocks 512 through 4096. It requires exact N384/M384 source and profile
-identity, committed attempt and observation records, the expected snapshot
-size, exact RHS/cache/allocation counters, finite nonnegative timings and
-balances, and accepted error ratios at every non-rest observer node.
+Launch admission also performs complete observer integrity checks at the eight
+non-rest predecessor nodes from clocks 512 through 4096. It requires exact
+N384/M384 source and profile identity, committed attempt and observation
+records, the expected snapshot size, and exact RHS/cache/allocation counters.
+Norms, energies, dissipations, timings, and error ratios must be finite and
+nonnegative. The signed forcing-work, stretching, and vorticity-forcing
+channels must be finite; their sign is preserved.
 
 The final inert archive was staged at
-`/tmp/nsbu-p10-sulaco-m512-20260913` on Sulaco and all seven runtime file
+`/tmp/nsbu-p10-sulaco-m512-20260913-r2` on Sulaco and all seven runtime file
 hashes passed. At staging time the predecessor was still the sole solver,
-`MemAvailable` was 97,720,217,600 bytes (108,438,212,608 below the future
-admission floor), filesystem availability was 1,710,977,822,720 bytes, and the
+`MemAvailable` was 97,695,559,680 bytes (108,462,870,528 below the future
+admission floor), filesystem availability was 1,708,243,427,328 bytes, and the
 new bundle had no `run` directory. Same-host preflight and launch were not
 executed.
