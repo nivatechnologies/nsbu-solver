@@ -12,6 +12,8 @@ The initial release implements periodic 3D incompressible Navier–Stokes at fix
 
 ## Current execution priority · 12 September 2026
 
+The `alpha-20260912` snapshot is published from `def4730b08025fdd06e7a8a0d78116aea24b6e2c` and independently verified; see the [release evidence](evidence/runtime-alpha/alpha-20260912/summary.json) and [source-matched hosted quality evidence](evidence/p09/hosted-main-def4730/summary.json). It remains diagnostic-only with zero accepted concentrating PDE windows.
+
 The runtime alpha is published and verified. The former runtime-first deferrals
 below have served their purpose; the current priority is the scientific path to
 concentrating windows. In this bounded work block:

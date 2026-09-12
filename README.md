@@ -6,7 +6,7 @@ A standalone Rust project for incompressible, three-dimensional Navier–Stokes 
 
 *Actual coarse N=4/M=4 HO diagnostic measurements. A successful finite run is a runtime check, not evidence of convergence or blow-up.*
 
-**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/alpha-20260911-2/README.md).
+**Status: [runtime alpha released](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260912); zero accepted PDE convergence windows.** The Rust library and CLI run bounded smooth and exact-v2 CM/HO trajectories from rest, including checkpoint/resume. Local and hosted runtime/quality gates pass, and the downloaded binary is verified. Scientific qualification continues. See the [runtime guide](docs/RUNTIME_ALPHA.md) and [latest release evidence](evidence/runtime-alpha/alpha-20260912/README.md).
 
 The `main` branch can contain experimental APIs added after the latest binary
 release. Each increment records its own validation scope in
@@ -44,17 +44,17 @@ The explicit slow-mesh strategy is `FeasibilityExcluded` under the documented re
 
 ## Download and run the alpha
 
-The [alpha-20260911-2 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260911-2)
+The [alpha-20260912 prerelease](https://github.com/nivatechnologies/nsbu-solver/releases/tag/alpha-20260912)
 provides the tested Linux x86_64 GNU/glibc binary. Download the archive and
 its detached checksum, verify both the archive and its extracted contents,
 then run the bounded diagnostic:
 
 ```sh
-curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911-2/nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz
-curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260911-2/nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz.sha256
-sha256sum -c nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz.sha256
-tar -xzf nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu.tar.gz
-cd nsbu-solver-alpha-20260911-2-x86_64-unknown-linux-gnu
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260912/nsbu-solver-alpha-20260912-x86_64-unknown-linux-gnu.tar.gz
+curl -fLO https://github.com/nivatechnologies/nsbu-solver/releases/download/alpha-20260912/nsbu-solver-alpha-20260912-x86_64-unknown-linux-gnu.tar.gz.sha256
+sha256sum -c nsbu-solver-alpha-20260912-x86_64-unknown-linux-gnu.tar.gz.sha256
+tar -xzf nsbu-solver-alpha-20260912-x86_64-unknown-linux-gnu.tar.gz
+cd nsbu-solver-alpha-20260912-x86_64-unknown-linux-gnu
 sha256sum -c SHA256SUMS
 ./bin/nsbu v2 --dry-run
 ./bin/nsbu v2
@@ -88,8 +88,8 @@ cargo build --release --locked -p nsbu-cli
 ./target/release/nsbu v2 --cache-force
 ```
 
-The cache and reconstructed-probe export are current-source capabilities; they
-are not included in the downloaded `alpha-20260911-2` binary. The library's
+The cache and reconstructed-probe export are included in the downloaded
+`alpha-20260912` binary. The library's
 `DiagnosticExportPlan::new_v2` exposes the full integrated export; `diagnose-v2`
 emits bounded CLI summaries. Cached v2 runs do
 not support checkpoint writes or `resume-v2`; use the default path for
