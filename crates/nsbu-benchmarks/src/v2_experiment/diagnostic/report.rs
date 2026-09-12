@@ -3,7 +3,10 @@ use crate::v2_experiment::{
     binding::NodeBindingSample,
     physical::PhysicalRefinementSample,
     pressure::PressureRefinementSample,
-    probes::{physical::ProbePhysicalSample, pressure::ProbePressureSample, residuals::ResidualFamilySample, ProbeSample},
+    probes::{
+        physical::ProbePhysicalSample, pressure::ProbePressureSample,
+        residuals::ResidualFamilySample, ProbeSample,
+    },
     reference::regional::RegionalTrackingSample,
     RefinementSample,
 };

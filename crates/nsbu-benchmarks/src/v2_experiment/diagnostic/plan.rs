@@ -128,7 +128,13 @@ impl<'a> DiagnosticPlan<'a> {
             events,
             joint_cap,
         )?;
-        let probe_pressure = ProbePressurePlan::new(probes, settings.pressure_samples, settings.pressure_floors, events, joint_cap)?;
+        let probe_pressure = ProbePressurePlan::new(
+            probes,
+            settings.pressure_samples,
+            settings.pressure_floors,
+            events,
+            joint_cap,
+        )?;
         let tracking = ReferenceTrackingPlan::new(
             family,
             settings.reference_samples,
