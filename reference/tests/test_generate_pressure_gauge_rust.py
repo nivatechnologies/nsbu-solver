@@ -114,3 +114,15 @@ def test_changed_profile_identity_work_and_summary_refuse() -> None:
         changed.write_text(json.dumps(report))
         with pytest.raises(ValueError, match="ten declared profiles"):
             emit_one(0, changed)
+
+        for base in (3, 258):
+            report = dict(original)
+            profiles = [
+                dict(object_value(item)) for item in array_value(report["profiles"])
+            ]
+            profiles[0]["axial_panels"] = base
+            report["profiles"] = profiles
+            changed = directory / f"invalid-base-{base}.json"
+            changed.write_text(json.dumps(report))
+            with pytest.raises(ValueError, match=r"even and within \[2,256\]"):
+                emit_one(0, changed)
