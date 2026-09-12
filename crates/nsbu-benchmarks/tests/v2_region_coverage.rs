@@ -103,6 +103,8 @@ fn admission_requires_nested_panels_and_joint_cap() {
         ReferenceTrackingPlan::new(family, Layout::new([12; 3]).unwrap(), FLOORS, 3, CAP).unwrap();
     let regional = RegionalTrackingPlan::new(tracking, 128, CAP).unwrap();
     assert!(CoverageFamilyPlan::new(family, regional, [4, 6, 12], 3, CAP).is_err());
+    assert!(CoverageFamilyPlan::new(family, regional, [0, 2, 4], 3, CAP).is_err());
+    assert!(CoverageFamilyPlan::new(family, regional, [3, 6, 12], 3, CAP).is_err());
     assert!(CoverageFamilyPlan::new(family, regional, [4, 8, 16], 2, CAP).is_err());
     let plan = CoverageFamilyPlan::new(family, regional, [256, 512, 1024], 3, CAP).unwrap();
     assert!(CoverageFamilyPlan::new(
