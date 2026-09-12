@@ -403,7 +403,7 @@
   "exact_v2_partial_review_adapter_scope": "Four global sampled RMS observables over seven fixed events retain reconstructed physical pairwise RMS and same-clock reconstructed-reference RMS separately at off-stage clocks. Status remains PartialUnqualifiedInventory; no generic review, tolerance, readiness or PDE qualification.",
   "exact_v2_partial_review_adapter_evidence": "evidence/p09/v2-review-offstage-reference/README.md",
   "exact_v2_shared_force_table_evidence": "evidence/p10/v2-shared-force-table/README.md",
-  "exact_v2_shared_force_table_scope": "Bounded standalone original-force slab table for identical configured force evaluation; it is not a shared review adapter, does not change source state or acceptance, and has no PDE qualification.",
+  "exact_v2_shared_force_table_scope": "Bounded standalone original-force slab table for identical configured force evaluation; trajectory integration through this table has not yet been merged or qualified. It does not change the prescribed source or acceptance criteria.",
   "reference_spectrum_assessments": ["evidence/p10/reference-spectrum-first-endpoint-d511dbf/README.md", "evidence/p10/reference-spectrum-high-band-9c90c0a/README.md"],
   "reference_spectrum_assessments_scope": "Reference-only spectral assessments are diagnostic evidence, not physical sampled RMS, a nominal-volume gate, or a concentrating-window qualification.",
   "exact_v2_force_baseline_binding_exists": true,

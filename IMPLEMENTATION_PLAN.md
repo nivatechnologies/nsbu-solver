@@ -38,11 +38,14 @@ concentrating PDE windows remain zero. Release and documentation updates follow
 verified results; no source hash, reference state or acceptance policy is changed
 to make a failed numerical study pass.
 
-Historical negative-control evidence includes a larger N24 baseline pilot. It
+Historical failed-run evidence includes a larger N24 baseline pilot. It
 stopped after completed probe 2047,
 before accepted 2048 publication, with `InvalidSpectrum`; its shell exit was
 zero but its terminal status was `Failed`, so it supplies no endpoint result.
-The current spatial N8/N12/N16 endpoint differences remain unresolved. The
+The completed [M48 N12/N16/N24 family](evidence/p10/cached-m48-feasibility/README.md)
+and [M96 controls](evidence/p10/m96-spatial-controls/README.md) still show unresolved
+spatial differences; the M96 N16/N24 controls reached only the midpoint before
+timeout. New N24/N32/N48 M96 runs are in progress with explicit deadlines. The
 force-grid and worker reports remain prescribed-force diagnostics. The historical
 derivative-symmetry correction is archived at source
 `5b583d9678af631ba6a175a0175ccf3da132cc71` with a smaller N12 checkpoint and
