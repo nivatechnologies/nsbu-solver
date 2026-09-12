@@ -1,4 +1,5 @@
-# Executed from work/p09-v2-region-coverage at source commit 430d15e
+# Executed from work/p09-v2-region-coverage with the source tree that became c0521b591616958da3f41312cfa9808fc445de36.
+# The tracked evidence update is a later commit; it did not alter the measured source files.
 cargo fmt --check
 cargo test -p nsbu-benchmarks --test v2_region_coverage
 cargo test -p nsbu-benchmarks --lib no_samples_is_metadata_absence_not_a_zero_count
