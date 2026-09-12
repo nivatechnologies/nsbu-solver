@@ -124,7 +124,7 @@ fn exact_additional_cap_constructs_and_one_byte_short_refuses() {
 }
 
 #[test]
-fn production_admission_is_closed_to_384_and_576() {
+fn admission_is_closed_to_fixture_6_and_experiment_lengths_384_and_576() {
     for edge in [384, 576] {
         let layout = Layout::new([edge; 3]).unwrap();
         assert!(super::admission::additional(layout, BACKEND, W3FftMode::Forward).is_ok());

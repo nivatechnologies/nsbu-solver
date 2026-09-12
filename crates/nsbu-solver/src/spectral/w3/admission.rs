@@ -52,13 +52,7 @@ pub(super) fn additional(
 
 fn admit_layout(layout: Layout) -> Result<(), SolverError> {
     let dimensions = layout.dimensions();
-    if matches!(dimensions, [384, 384, 384] | [576, 576, 576]) {
-        return Ok(());
-    }
-    // Unit controls exercise ownership and failure drainage without allocating
-    // the multi-gigabyte production lanes.
-    #[cfg(test)]
-    if dimensions == [6, 6, 6] {
+    if matches!(dimensions, [6, 6, 6] | [384, 384, 384] | [576, 576, 576]) {
         return Ok(());
     }
     Err(SolverError::InvalidPayload)
