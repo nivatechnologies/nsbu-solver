@@ -3,8 +3,8 @@
   "artifacts": [
     {
       "path": "README.md",
-      "bytes": 4164,
-      "sha256": "28eca0544163f95b341af693526ef6b98b7232b7073cadba2fd98719ca5960f2"
+      "bytes": 4328,
+      "sha256": "d7a5327249ed40a2ccf3db24d977fe760cb5806c485dd71076c0180046784084"
     },
     {
       "path": "archive-recovery-Cargo.lock",
@@ -293,8 +293,8 @@
     },
     {
       "path": "summary.json",
-      "bytes": 2906,
-      "sha256": "b9178da769d9c5ce8726b99097f673d41b91bc02356c2dc6f4a02fbf5d5b62c6"
+      "bytes": 3033,
+      "sha256": "eea69e55f9d13e49c93b751427e7605c5fba9d1ac12a72bb0f2a84a73d1a27fc"
     }
   ]
 }

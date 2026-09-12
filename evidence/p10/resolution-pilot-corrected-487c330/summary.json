@@ -67,6 +67,7 @@
     "No event-5 accepted diagnostic report was serialized.",
     "No endpoint M24-to-M48 control completed.",
     "The endpoint spectral comparisons were recovered from validated archives only.",
+    "Absolute differences from the prior M16/eight-worker pilot are confounded by this pilot's M24/12-worker force settings.",
     "The observed norms do not establish convergence, force sufficiency, or an accepted PDE window."
   ]
 }

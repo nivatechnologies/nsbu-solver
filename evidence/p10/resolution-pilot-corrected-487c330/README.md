@@ -48,7 +48,9 @@ completed in 0.03 seconds at 3,076 KiB maximum RSS with a conservative
 
 L2 decreases from the first to the second spatial pair, while H1 increases. This
 repeats the qualitative nonmonotone H1 behavior in the prior N8/12/16 pilot, at
-smaller absolute differences. It does not demonstrate convergence. At clock 2048,
+smaller absolute differences. The cross-pilot absolute change is confounded by
+the prior M16/eight-worker and current M24/12-worker force settings, so it is not
+an isolated spatial improvement. It does not demonstrate convergence. At clock 2048,
 the one M24-to-M48 force comparison had L2 0.3332248325130536 and H1
 9.868231645532276. An independent cached M48 run with 32 workers matched this
 run's 12-worker M48 coefficient-only hash exactly at 2048; that verifies state
