@@ -13,6 +13,7 @@ pub mod pressure;
 pub mod pressure_reference;
 pub mod probes;
 pub mod sampling;
+pub mod shared_force;
 
 pub mod reference;
 pub mod review_adapter;
