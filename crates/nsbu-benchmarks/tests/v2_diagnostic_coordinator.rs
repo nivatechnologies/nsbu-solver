@@ -282,6 +282,10 @@ fn publishes_crossed_consumers_in_one_unqualified_manifest() {
         driver.consumer_work().probe_physical,
         plan.bounds().probe_physical
     );
+    assert_eq!(
+        driver.consumer_work().probe_pressure,
+        plan.bounds().probe_pressure
+    );
     assert_eq!(driver.consumer_work().pressure, plan.bounds().pressure);
     assert_eq!(driver.consumer_work().reference, plan.bounds().reference);
     assert_eq!(driver.consumer_work().regional, plan.bounds().regional);

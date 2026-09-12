@@ -129,6 +129,7 @@ fn context_reservations<W: Write>(
     j.counter(p.coordinator.work.residual_events)?;
     if p.schema_version() == 2 {
         reconstructed_physical_work(j, p.coordinator.probe_physical)?;
+        reconstructed_pressure_work(j, p.coordinator.probe_pressure)?;
     }
     j.raw("}")?;
     export_reservation(j, p)
@@ -140,6 +141,23 @@ fn reconstructed_physical_work<W: Write>(
 ) -> Result<(), DiagnosticExportError> {
     j.raw(",\"reconstructed_physical_work\":{\"attempts\":")?;
     j.counter(work.attempts)?;
+    j.raw(",\"scalar_transforms\":")?;
+    j.counter(work.scalar_transforms)?;
+    j.raw(",\"weighted_visits\":")?;
+    j.counter(work.weighted_visits)?;
+    j.raw(",\"binding_checks\":")?;
+    j.counter(work.binding_checks)?;
+    j.raw("}")
+}
+
+fn reconstructed_pressure_work<W: Write>(
+    j: &mut Json<W>,
+    work: crate::v2_experiment::probes::pressure::ProbePressureWork,
+) -> Result<(), DiagnosticExportError> {
+    j.raw(",\"reconstructed_pressure_work\":{\"attempts\":")?;
+    j.counter(work.attempts)?;
+    j.raw(",\"provider_work_units\":")?;
+    j.counter(work.provider_work_units)?;
     j.raw(",\"scalar_transforms\":")?;
     j.counter(work.scalar_transforms)?;
     j.raw(",\"weighted_visits\":")?;
