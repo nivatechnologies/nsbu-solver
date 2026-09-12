@@ -1,0 +1,8 @@
+source_commit=ffee8b7dac733fb17e41ac7bafb1a7f4498be985
+cargo test -p nsbu-benchmarks --test parallel_reduced_force: 2 passed
+cargo test -p nsbu-benchmarks --test parallel_reduced_force_allocation: exit 0; constructor allocations=37 heap_bytes=50816 configured_stack_bytes=6291456 total_reservation=6541600 steady allocations/deallocations/reallocations=0/0/0
+cargo test -p nsbu-benchmarks --test parallel_force: 2 passed
+cargo test -p nsbu-benchmarks --test parallel_force_allocation: exit 0; original provider regression unchanged
+cargo test -p nsbu-benchmarks --lib provider::parallel: 5 passed, including original/reduced error and panic drainage and idle/submitted worker Drop joins
+cargo clippy -p nsbu-benchmarks --lib --test parallel_reduced_force --test parallel_reduced_force_allocation -- -D warnings: exit 0
+cargo doc -p nsbu-benchmarks --no-deps: exit 0

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "status": "diagnostic_only",
+  "accepted_pde_windows": 0,
+  "base_source": "02a7785aa9720d2166ebb82f5f8f27a713ee0f4c",
+  "measured_production_source": "ffee8b7dac733fb17e41ac7bafb1a7f4498be985",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": {
+    "quantum_exponent": -20,
+    "target_ticks": 8192,
+    "elapsed_ticks": 4096,
+    "remaining_ticks": 4096
+  },
+  "workers": 32,
+  "force_profiles": [
+    {
+      "retained": 64,
+      "sampled": 192,
+      "timings_seconds": {
+        "original_parallel": 9.443814679,
+        "reduced_serial": 22.834749370,
+        "reduced_parallel": 3.006074871
+      },
+      "speedup_reduced_parallel_over_original_parallel": 3.1415766686670796,
+      "speedup_reduced_parallel_over_reduced_serial": 7.5962011426561045,
+      "sequential_owner_peak_bytes": 543407528,
+      "serial_parallel_reduced_bit_equal": true,
+      "full_spectra_valid": true,
+      "original_reduced": {
+        "l2": 7.079946679536221e-13,
+        "h1": 1.221477512353411e-10,
+        "vorticity_l2": 9.916756157122511e-11,
+        "divergence_l2": 7.131175644599603e-11,
+        "maximum_scaled_coefficient_difference": 8.516994471706635e-15
+      }
+    },
+    {
+      "retained": 192,
+      "sampled": 384,
+      "timings_seconds": {
+        "original_parallel": 69.322047436,
+        "reduced_serial": 196.187730639,
+        "reduced_parallel": 23.042640458
+      },
+      "speedup_reduced_parallel_over_original_parallel": 3.0084246448385046,
+      "speedup_reduced_parallel_over_reduced_serial": 8.514116730528036,
+      "sequential_owner_peak_bytes": 4213777832,
+      "serial_parallel_reduced_bit_equal": true,
+      "full_spectra_valid": true,
+      "original_reduced": {
+        "l2": 1.069594072203025e-12,
+        "h1": 5.41326634246041e-10,
+        "vorticity_l2": 4.4531081814575463e-10,
+        "divergence_l2": 3.0778508110268463e-10,
+        "maximum_scaled_coefficient_difference": 9.314002514124181e-15
+      }
+    }
+  ],
+  "trajectory_control": {
+    "retained": 64,
+    "sampled": 192,
+    "from_rest": true,
+    "method": "CoxMatthews",
+    "step_ticks": 128,
+    "accepted_steps": 1,
+    "rhs_calls_per_branch": 12,
+    "rhs_consumption_per_branch": [12, 84942396, 156],
+    "timings_seconds": {
+      "original_parallel": 111.259913604,
+      "reduced_parallel": 47.470672393
+    },
+    "speedup": 2.343761063312984,
+    "time_difference_seconds": 63.789241211000004,
+    "full_spectra_valid": true,
+    "original_reduced": {
+      "l2": 1.0307006762371699e-22,
+      "h1": 1.0437666041569832e-20,
+      "vorticity_l2": 1.0388429523382618e-20,
+      "divergence_l2": 1.0073633873451354e-21,
+      "maximum_scaled_coefficient_difference": 2.646977769354886e-23
+    }
+  },
+  "verification": {
+    "parallel_reduced_tests_passed": 2,
+    "parallel_pool_unit_tests_passed": 5,
+    "original_parallel_regression_tests_passed": 2,
+    "reduced_constructor_allocations": 37,
+    "reduced_constructor_heap_bytes": 50816,
+    "reduced_small_profile_reservation_bytes": 6541600,
+    "steady_allocations": 0,
+    "steady_deallocations": 0,
+    "steady_reallocations": 0,
+    "focused_clippy": "passed",
+    "rustdoc": "passed"
+  },
+  "harness": {
+    "force_source_sha256": "1a82c483aee0da82c7fa7bbc99790c9280cb113b717924c03b8eabe243dd31b5",
+    "force_binary_sha256": "cb0861f09fb0644b2c2c16603552dc97e48cd9795c9a153be92b725abcddd0a1",
+    "trajectory_source_sha256": "1dacadb7d0be0108769281b27f5796758544d38e126bcba05fd98358be947d6b",
+    "trajectory_binary_sha256": "21800e5ee8fa45b1ae77522c652f2fed5aae120e5798aca5ea380d35e94a282b",
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "cargo": "1.94.0 (85eff7c80 2026-01-15)",
+    "host": "Linux baccus 6.8.0-139-generic x86_64"
+  },
+  "limitations": [
+    "Parallel reduced arithmetic is an optional provider identity and is not wired into Run, checkpoints, runtime settings, or the CLI.",
+    "Original and reduced arithmetic discrepancies are measured separately; bit equality is claimed only between serial and parallel reduced evaluation.",
+    "The trajectory control is one accepted step through tick 128 and is not an endpoint or convergence study.",
+    "Isolated force and one-step speedups are not multiplied into a full-run projection."
+  ]
+}
