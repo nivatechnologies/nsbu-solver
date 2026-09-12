@@ -139,3 +139,7 @@ harness = false
 [[test]]
 name = "v2_probe_reference_allocation"
 harness = false
+
+[[test]]
+name = "v2_probe_regional_allocation"
+harness = false

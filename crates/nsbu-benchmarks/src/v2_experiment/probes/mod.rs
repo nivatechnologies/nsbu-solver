@@ -4,6 +4,7 @@ pub mod physical;
 mod plan;
 pub mod pressure;
 pub mod reference;
+pub mod regional;
 mod report;
 pub mod residuals;
 use super::{FamilyError, PAIRS};
