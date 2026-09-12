@@ -2,3 +2,5 @@
 .github/workflows/checks.yml: mandatory Python static, source-size, 80% line+branch coverage and CRAP steps all completed successfully in hosted Python run 34662814808.
 The Rust workflow's "Informational mutation report with complete accounting" step was skipped. That step is informational; it neither waives nor changes the mandatory coverage, static, or CRAP gates.
 No mutation result is inferred from the skip.
+Python: basedpyright reported 0 errors, 0 warnings and 0 notes. Source-bound strict configuration makes Any and explicit Any errors. The hosted complexipy command completed with --max-complexity-allowed 21; the artifact has no complexipy report, so only that bound is recorded.
+Rust: the completed non-comment Any/unknown refusal scan passed. Its retained lexical inventory has two documentation-comment matches only.

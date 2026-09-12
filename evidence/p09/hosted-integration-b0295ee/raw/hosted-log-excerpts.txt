@@ -1,0 +1,9 @@
+Python hosted job 103468665758, run 34662814808, b0295ee:
+  basedpyright completed: "0 errors, 0 warnings, 0 notes".
+  The completed complexity step invoked: complexipy quality reference tools --max-complexity-allowed 21.
+  The source-bound pyproject declares strict checking plus reportAny = "error" and reportExplicitAny = "error".
+  The downloaded artifact did not retain a complexipy report, so this evidence records only the passed <=21 configured bound, not an invented exact cognitive maximum.
+
+Rust hosted job 103468665645, run 34662814858, b0295ee:
+  The completed coverage-inventory step ran the non-comment Any/unknown awk refusal scan over rust-source-files.txt.
+  The downloaded rust-type-lexical.log contains only two documentation-comment matches; the executable scan produced no refusal output.

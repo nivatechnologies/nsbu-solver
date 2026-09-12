@@ -106,5 +106,15 @@
       "maximum": 327,
       "over_or_equal_500": []
     }
+  },
+  "hosted_threshold_results": {
+    "python_cognitive_complexity": {
+      "bound": "<= 21",
+      "result": "passed",
+      "exact_maximum": "not retained"
+    },
+    "python_basedpyright": "0 errors, 0 warnings, 0 notes",
+    "python_Any_and_explicit_Any": "source config reportAny/reportExplicitAny = error; hosted basedpyright passed",
+    "rust_non_comment_Any_unknown_refusal_scan": "passed"
   }
 }
