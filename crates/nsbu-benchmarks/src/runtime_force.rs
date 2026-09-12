@@ -9,6 +9,9 @@ use nsbu_solver::{
     Complex64, SolverError,
 };
 
+mod attempt_cache;
+pub use attempt_cache::{AttemptCacheWork, AttemptForceCache};
+
 /// Sample-grid and worker selection for the exact-v2 prescribed force.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ForceSettings {
@@ -70,6 +73,20 @@ impl ForceSettings {
                 cap,
             )?))
         }
+    }
+
+    /// Declare the opt-in, attempt-local five-clock cache around this exact-v2 provider.
+    pub fn attempt_cache_limits(self, domain: Domain) -> Result<ForceLimits, SolverError> {
+        AttemptForceCache::preflight(domain, self)
+    }
+
+    /// Build the opt-in attempt-local cache after checking its complete reservation.
+    pub fn build_attempt_cache(
+        self,
+        domain: Domain,
+        cap: usize,
+    ) -> Result<AttemptForceCache, SolverError> {
+        AttemptForceCache::new(domain, self, cap)
     }
 
     /// Return settings for a checked two-times sample grid with the same worker count.

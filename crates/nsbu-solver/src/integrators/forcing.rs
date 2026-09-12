@@ -29,6 +29,18 @@ pub struct ForceWork {
 pub trait PrescribedForce {
     /// Complete immutable implementation-specific bounds; not an inferred cost estimate.
     fn limits(&self) -> Option<ForceLimits>;
+    /// Start one admitted integration attempt.
+    ///
+    /// Stateless providers need no preparation. Attempt-local providers may discard private
+    /// state here, but must not retain data from an earlier attempt after this returns `Ok`.
+    fn begin_attempt(
+        &mut self,
+        _clock: TickClock,
+        _ticks: u128,
+        _limit: ForceLimits,
+    ) -> Result<(), SolverError> {
+        Ok(())
+    }
     /// Fill normalized unprojected retained coefficients without allocating or resetting state.
     fn evaluate(
         &mut self,

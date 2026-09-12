@@ -111,6 +111,7 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         (self.limits.scalar_transforms + 10)
             .checked_mul(calls)
             .ok_or(SolverError::SizeOverflow)?;
+        self.force.begin_attempt(clock, ticks, self.limits)?;
         self.remaining_calls = calls;
         Ok(())
     }
@@ -124,6 +125,11 @@ impl<F: PrescribedForce> SpectralRhs<F> {
     /// Monotonic attempt-accounting generation, advanced whenever an RHS attempt resets costs.
     pub fn consumption_epoch(&self) -> u128 {
         self.consumption_epoch
+    }
+
+    /// Read-only access to provider-specific attempt diagnostics.
+    pub fn provider(&self) -> &F {
+        &self.force
     }
 }
 
