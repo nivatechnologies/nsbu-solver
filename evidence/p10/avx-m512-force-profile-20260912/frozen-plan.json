@@ -47,7 +47,7 @@
   "numa_policy": "whole-host-unbound-all-visible-cpus-memory",
   "preflight": "preflight.stdout",
   "resource_control": "crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512.rs",
-  "resource_control_status": "compiled_not_executed",
+  "resource_control_status": "executed_failed_steady_allocation_2_2_1_diagnosed_libtest_monitor",
   "deployment_binary": null,
   "launch_recipe": null,
   "qualification": "experimental",
