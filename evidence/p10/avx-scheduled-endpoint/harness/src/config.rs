@@ -17,11 +17,20 @@ use nsbu_solver::{
 compile_error!("n256 and n384-prep are mutually exclusive profiles");
 #[cfg(all(feature = "n384-h32", feature = "n384-h64"))]
 compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
+#[cfg(any(
+    all(feature = "n384-h32", feature = "n384-piecewise"),
+    all(feature = "n384-h64", feature = "n384-piecewise")
+))]
+compile_error!("select only one exact n384 profile");
 #[cfg(all(
     feature = "n384-prep",
-    not(any(feature = "n384-h32", feature = "n384-h64"))
+    not(any(
+        feature = "n384-h32",
+        feature = "n384-h64",
+        feature = "n384-piecewise"
+    ))
 ))]
-compile_error!("select exact top-level feature n384-h32 or n384-h64");
+compile_error!("select an exact top-level n384 feature");
 
 #[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 pub const N: usize = 192;
@@ -37,8 +46,10 @@ pub const CAP: usize = 103_079_215_104;
 pub const CAP: usize = 192 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise")))]
 pub const ADVECTIVE_LIMIT: f64 = 0.8;
+#[cfg(feature = "n384-piecewise")]
+pub const ADVECTIVE_LIMIT: f64 = 1.6;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
 const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + TIMER_OVERHEAD + 64 * 1024;
@@ -51,6 +62,8 @@ const PROFILE: &str = "n256-m384";
 const PROFILE: &str = "n384-m384-h32-cadv08-w3-f13c29c";
 #[cfg(all(feature = "n384-h64", not(feature = "n256")))]
 const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
+#[cfg(all(feature = "n384-piecewise", not(feature = "n256")))]
+const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv16-w3-f13c29c";
 #[cfg(feature = "n384-prep")]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 #[cfg(not(feature = "n384-prep"))]
@@ -259,9 +272,9 @@ fn observer_work(geometry: Geometry) -> Result<usize, SolverError> {
 fn report(admission: &Admission) {
     let sizes = admission.reservations;
     println!(
-        "preflight source={} case_sha256={CASE_SHA256} schema={PREFLIGHT_SCHEMA} profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma execution={EXECUTION} provider={PROVIDER} retained={N} sampled={M} workers={WORKERS} method=cox-matthews step={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} profile_identity={} archive_profile=unsupported qualification=experimental",
+        "preflight source={} case_sha256={CASE_SHA256} schema={PREFLIGHT_SCHEMA} profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma execution={EXECUTION} provider={PROVIDER} retained={N} sampled={M} workers={WORKERS} method=cox-matthews schedule={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} profile_identity={} archive_profile=unsupported qualification=experimental",
         env!("RUN_SOURCE"),
-        schedule::STEP,
+        schedule::IDENTITY,
         schedule::MAXIMUM_ATTEMPTS,
         schedule::ENDPOINT,
         schedule::FINE,
@@ -295,12 +308,12 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v1-starttime-cmdline-deadline",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v1-starttime-cmdline-deadline",
         env!("RUN_SOURCE"),
         crate::timed_rhs::IDENTITY,
         2 * M,
         2 * N,
-        schedule::STEP,
+        schedule::IDENTITY,
         schedule::ENDPOINT,
         artifact::DISK_CAP_BYTES,
     );
@@ -322,12 +335,17 @@ mod n384_tests {
     const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
     #[cfg(feature = "n384-h64")]
     const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
+    #[cfg(feature = "n384-piecewise")]
+    const EXPECTED_N384_TOTAL: usize = 185_782_833_928;
 
     #[test]
     fn selected_profile_is_exact_and_execution_ready() {
         assert_eq!(N, 384);
         assert_eq!(M, 384);
+        #[cfg(not(feature = "n384-piecewise"))]
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
+        #[cfg(feature = "n384-piecewise")]
+        assert_eq!(ADVECTIVE_LIMIT, 1.6);
         assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();

@@ -165,6 +165,8 @@ mod tests {
     fn exact_n384_artifact_profiles_are_bounded() {
         let state_bytes = 1_366_032_384;
         assert_eq!(disk_preflight(state_bytes, 64).unwrap(), 87_431_053_312);
+        #[cfg(feature = "n384-piecewise")]
+        assert_eq!(disk_preflight(state_bytes, 48).unwrap(), 65_573_289_984);
         #[cfg(feature = "n384-h32")]
         assert_eq!(disk_preflight(state_bytes, 128).unwrap(), 174_862_106_624);
     }

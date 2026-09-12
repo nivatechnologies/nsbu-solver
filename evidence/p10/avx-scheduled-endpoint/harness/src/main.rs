@@ -156,13 +156,14 @@ impl RunOwners {
     fn attempt(&mut self, output: &Path, index: usize) -> AnyResult<()> {
         self.frontiers.attempted = index;
         let from = self.state.clock().elapsed();
+        let ticks = schedule::step(from)?;
         let integration_region = Region::new(GLOBAL);
         self.rhs.reset_measurement();
         let started = Instant::now();
         let result = self.attempts.try_advance(
             &self.state,
             &mut self.candidate,
-            schedule::STEP,
+            ticks,
             config::tolerances(),
             &mut self.rhs,
         );
@@ -287,10 +288,12 @@ impl RunOwners {
         seconds: f64,
         error: &SolverError,
     ) -> AnyResult<()> {
+        let ticks = schedule::step(from)?;
         let json = records::numerical_error(
             &self.identity,
             index,
             from,
+            ticks,
             seconds,
             self.rhs.measurement(),
             error,
