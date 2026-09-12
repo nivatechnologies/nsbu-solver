@@ -1,5 +1,5 @@
 {
-  "status": "completed_midpoint_and_m24_m48_endpoint_postprocess",
+  "status": "completed_n12_force_and_midpoint_spatial_postprocess",
   "qualification": {
     "pde_qualified": false,
     "accepted_windows": 0,
@@ -94,9 +94,12 @@
       "terminal": "complete",
       "wall_seconds": 7652.919993
     },
-    "m96_midpoint": {
+    "m96_spatial_midpoint": {
       "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
-      "n": 12,
+      "n": [
+        16,
+        24
+      ],
       "m": 96,
       "workers": 32,
       "provider": "attempt_local_cache_original_force",
@@ -114,6 +117,32 @@
       "committed": 128,
       "rescheduled": false,
       "terminal_study_status": "ongoing_at_evidence_freeze"
+    },
+    "m96": {
+      "source": "def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+      "n": 12,
+      "m": 96,
+      "workers": 32,
+      "provider": "attempt_local_cache_original_force",
+      "step_ticks": 16,
+      "absolute": [
+        1e-05,
+        0.0001
+      ],
+      "relative": [
+        1e-05,
+        1e-05
+      ],
+      "clock": [
+        2048,
+        4096
+      ],
+      "attempts": 256,
+      "committed": 256,
+      "rescheduled": false,
+      "terminal_study_status": "completed",
+      "wall_clock": "1:24:34",
+      "measured_process_max_rss_kib": 505856
     }
   },
   "same_force_cached_uncached_identity": {
@@ -176,6 +205,34 @@
         "h1": 15.37145537156965,
         "vorticity_l2": 15.35916265504735,
         "divergence_l2": 2.0719894347578027e-14
+      }
+    },
+    {
+      "clock": 4096,
+      "n": 12,
+      "left_m": 48,
+      "right_m": 96,
+      "full": {
+        "l2": 0.05474123303374244,
+        "h1": 1.5562026002973386,
+        "vorticity_l2": 1.555239509071875,
+        "divergence_l2": 1.549966889155676e-14
+      },
+      "ratio_to_previous_adjacent": {
+        "l2": 0.08906457400284541,
+        "h1": 0.1012397696040949
+      }
+    },
+    {
+      "clock": 4096,
+      "n": 12,
+      "left_m": 24,
+      "right_m": 96,
+      "full": {
+        "l2": 0.6589897222087554,
+        "h1": 16.45286993798289,
+        "vorticity_l2": 16.439667324559924,
+        "divergence_l2": 1.9393807335930013e-14
       }
     }
   ],
@@ -250,12 +307,12 @@
     }
   ],
   "limitations": [
-    "M96 endpoint unavailable at this evidence boundary",
     "M96 relative tolerances differ from M24 and M48",
     "coefficient hashes exclude profile metadata",
     "same-force cached/uncached identity exists only for N12 M48 clock 2048",
     "no pressure or physical-sample comparison",
-    "two-level empirical differences do not establish convergence"
+    "two-level empirical differences do not establish convergence",
+    "M96 N16/N24 endpoint snapshots unavailable at this evidence boundary"
   ],
   "cached_m48_observer_identity": {
     "clocks": [
@@ -273,5 +330,41 @@
     "pairs": 12,
     "coefficient_words_byte_equal": true,
     "scope": "cached ordinary-family state versus cached probe-family integrated state"
-  }
+  },
+  "m96_spatial_midpoint": [
+    {
+      "clock": 2048,
+      "left_n": 12,
+      "right_n": 16,
+      "full": {
+        "l2": 0.4310546617012411,
+        "h1": 21.023313706952496
+      },
+      "common": {
+        "l2": 0.006193035194229757,
+        "h1": 0.2002279898232641
+      },
+      "newly_resolved": {
+        "l2": 0.4310101712134581,
+        "h1": 21.022360190355126
+      }
+    },
+    {
+      "clock": 2048,
+      "left_n": 16,
+      "right_n": 24,
+      "full": {
+        "l2": 0.3082363098359834,
+        "h1": 20.568202615924786
+      },
+      "common": {
+        "l2": 0.005343241570575549,
+        "h1": 0.23426737536152537
+      },
+      "newly_resolved": {
+        "l2": 0.3081899941121107,
+        "h1": 20.566868445307282
+      }
+    }
+  ]
 }
