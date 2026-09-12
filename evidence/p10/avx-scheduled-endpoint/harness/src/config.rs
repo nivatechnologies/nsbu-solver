@@ -11,21 +11,34 @@ use nsbu_solver::{
     SolverError,
 };
 
-#[cfg(not(feature = "n256"))]
+#[cfg(all(feature = "n256", feature = "n384-prep"))]
+compile_error!("n256 and n384-prep are mutually exclusive profiles");
+
+#[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 pub const N: usize = 192;
-#[cfg(feature = "n256")]
+#[cfg(all(feature = "n256", not(feature = "n384-prep")))]
 pub const N: usize = 256;
+#[cfg(all(feature = "n384-prep", not(feature = "n256")))]
+pub const N: usize = 384;
 pub const M: usize = 384;
 pub const WORKERS: usize = 32;
+#[cfg(not(feature = "n384-prep"))]
 pub const CAP: usize = 103_079_215_104;
+#[cfg(feature = "n384-prep")]
+pub const CAP: usize = 0;
+#[cfg(not(feature = "n384-prep"))]
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
+#[cfg(feature = "n384-prep")]
+pub const ADVECTIVE_LIMIT: f64 = 0.8;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + 64 * 1024;
 
-#[cfg(not(feature = "n256"))]
+#[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 const PROFILE: &str = "n192-m384";
-#[cfg(feature = "n256")]
+#[cfg(all(feature = "n256", not(feature = "n384-prep")))]
 const PROFILE: &str = "n256-m384";
+#[cfg(all(feature = "n384-prep", not(feature = "n256")))]
+const PROFILE: &str = "n384-m384-h32-cadv08-w3-pending";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -53,10 +66,21 @@ struct Admission {
 }
 
 pub fn preflight() -> Result<ResourcePlan, SolverError> {
+    require_execution_ready()?;
     schedule::validate()?;
     let admission = admit()?;
     report(&admission);
     Ok(admission.resources)
+}
+
+#[cfg(not(feature = "n384-prep"))]
+pub fn require_execution_ready() -> Result<(), SolverError> {
+    Ok(())
+}
+
+#[cfg(feature = "n384-prep")]
+pub fn require_execution_ready() -> Result<(), SolverError> {
+    Err(SolverError::InvalidPayload)
 }
 
 fn admit() -> Result<Admission, SolverError> {
@@ -172,6 +196,9 @@ fn disk_bound(domain: Domain) -> Result<usize, SolverError> {
         .half_len()
         .checked_mul(3 * 16)
         .ok_or(SolverError::SizeOverflow)?;
+    #[cfg(feature = "n384-prep")]
+    return crate::step_artifact::disk_preflight(snapshot, schedule::MAXIMUM_ATTEMPTS);
+    #[cfg(not(feature = "n384-prep"))]
     artifact::disk_preflight(snapshot, schedule::FINE.len())
 }
 
@@ -228,10 +255,40 @@ pub fn domain() -> Result<Domain, SolverError> {
 }
 
 pub fn identity() -> String {
+    #[cfg(feature = "n384-prep")]
+    return format!(
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-w3-pending;rhs_w3=pending;retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap=pending;artifact_cap={};schema=p10-avx-n384-every-step-v1;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
+        env!("RUN_SOURCE"),
+        2 * M,
+        2 * N,
+        schedule::STEP,
+        schedule::ENDPOINT,
+        artifact::DISK_CAP_BYTES,
+    );
+    #[cfg(not(feature = "n384-prep"))]
     format!(
         "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v2;resume=unsupported",
         env!("RUN_SOURCE"),
         schedule::STEP,
         schedule::ENDPOINT,
     )
+}
+
+#[cfg(all(test, feature = "n384-prep"))]
+mod n384_tests {
+    use super::*;
+
+    #[test]
+    fn pending_profile_is_exact_and_cannot_enter_execution() {
+        assert_eq!(N, 384);
+        assert_eq!(M, 384);
+        assert_eq!(ADVECTIVE_LIMIT, 0.8);
+        assert_eq!(CAP, 0);
+        assert_eq!(require_execution_ready(), Err(SolverError::InvalidPayload));
+        let identity = identity();
+        assert!(identity.contains("rhs_w3=pending"));
+        assert!(identity.contains("observer_force_samples=768"));
+        assert!(identity.contains("observer_conservative=768"));
+        assert!(identity.contains("artifact_cap=274877906944"));
+    }
 }

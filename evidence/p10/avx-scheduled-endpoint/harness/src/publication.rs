@@ -1,5 +1,5 @@
 //! Harness-owner transaction state: a proposal is staged before commit and published after it.
-use crate::artifact::{PublicationKind, PublishedArtifact};
+use crate::artifact::PublishedArtifact;
 use std::io;
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -30,7 +30,7 @@ where
     frontiers.in_memory_clock = clock;
     let published = publish(staged)?;
     frontiers.durable_attempt = attempt;
-    if published.kind == PublicationKind::Node {
+    if published.kind.advances_durable_clock() {
         frontiers.durable_clock = clock;
     }
     frontiers.provisional_clock = None;
@@ -153,6 +153,41 @@ mod tests {
         .unwrap();
         assert_eq!(frontiers.in_memory_clock, 32);
         assert_eq!(frontiers.durable_clock, 0);
+        assert_eq!(frontiers.durable_attempt, 1);
+        assert_eq!(frontiers.provisional_clock, None);
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[cfg(feature = "n384-prep")]
+    #[test]
+    fn every_step_bundle_moves_durable_attempt_and_clock_together() {
+        let root = root("step-success");
+        let partial = root.join("step-001-clock-0032.partial");
+        fs::create_dir(&partial).unwrap();
+        let staged = StagedArtifact {
+            partial,
+            final_path: root.join("step-001-clock-0032"),
+            root: root.clone(),
+            kind: crate::artifact::PublicationKind::Step,
+            state_hash: Some("hash".into()),
+            published: false,
+            preserve_on_failure: false,
+        };
+        let mut frontiers = Frontiers {
+            attempted: 1,
+            ..Frontiers::default()
+        };
+        commit_staged(
+            &mut frontiers,
+            1,
+            32,
+            Ok::<_, io::Error>(staged),
+            || {},
+            StagedArtifact::publish,
+        )
+        .unwrap();
+        assert_eq!(frontiers.in_memory_clock, 32);
+        assert_eq!(frontiers.durable_clock, 32);
         assert_eq!(frontiers.durable_attempt, 1);
         assert_eq!(frontiers.provisional_clock, None);
         fs::remove_dir_all(root).unwrap();

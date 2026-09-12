@@ -4,18 +4,25 @@ mod balance;
 mod cache;
 mod command;
 mod config;
+mod error;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
 mod observer;
 mod owners;
+#[cfg(all(test, feature = "n384-prep"))]
+mod prep_tests;
 mod publication;
 mod records;
 mod schedule;
+#[cfg(feature = "n384-prep")]
+mod step_artifact;
 
 use artifact::{NodeRecord, StagedArtifact};
 use balance::TimedBalance;
 use cache::CachedReducedForce;
+use error::{AnyResult, HarnessError};
+#[cfg(not(feature = "n384-prep"))]
+use nsbu_solver::diagnostics::balances::BalanceSample;
 use nsbu_solver::{
-    diagnostics::balances::BalanceSample,
     domain::{ResourcePlan, SpectralState},
     integrators::{
         attempt::{AttemptResult, AttemptWorkspace},
@@ -28,48 +35,10 @@ use observer::ReducedObserver;
 use publication::Frontiers;
 use records::{AttemptFacts, ObservationTiming};
 use stats_alloc::{Region, Stats, StatsAlloc, INSTRUMENTED_SYSTEM};
-use std::{alloc::System, error::Error, fmt, fs, io, path::Path, time::Instant};
+use std::{alloc::System, fs, path::Path, time::Instant};
 
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
-
-type AnyResult<T> = Result<T, HarnessError>;
-
-#[derive(Debug)]
-enum HarnessError {
-    Numerical(SolverError),
-    Io(io::Error),
-    Rejected { ticks: u128, ratios: [f64; 2] },
-}
-
-impl fmt::Display for HarnessError {
-    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::Numerical(error) => write!(formatter, "numerical:{error:?}"),
-            Self::Io(error) => write!(formatter, "io:{error}"),
-            Self::Rejected { ticks, ratios } => {
-                write!(
-                    formatter,
-                    "attempt_rejected:ticks={ticks}:ratios={ratios:?}"
-                )
-            }
-        }
-    }
-}
-
-impl Error for HarnessError {}
-
-impl From<SolverError> for HarnessError {
-    fn from(error: SolverError) -> Self {
-        Self::Numerical(error)
-    }
-}
-
-impl From<io::Error> for HarnessError {
-    fn from(error: io::Error) -> Self {
-        Self::Io(error)
-    }
-}
 
 struct AcceptedStage {
     artifact: StagedArtifact,
@@ -112,10 +81,15 @@ fn dispatch(command: command::Command) -> AnyResult<()> {
 }
 
 fn start(output: &Path) -> AnyResult<()> {
-    prepare_output(output)?;
-    let resources = config::preflight()?;
+    let resources = prepare_run(output)?;
     let mut run = RunOwners::new(resources)?;
     run.execute_and_record(output)
+}
+
+fn prepare_run(output: &Path) -> AnyResult<ResourcePlan> {
+    config::require_execution_ready()?;
+    prepare_output(output)?;
+    config::preflight().map_err(HarnessError::from)
 }
 
 fn prepare_output(output: &Path) -> AnyResult<()> {
@@ -163,6 +137,15 @@ impl RunOwners {
         }
     }
 
+    #[cfg(feature = "n384-prep")]
+    fn publish_rest(&mut self, output: &Path) -> AnyResult<()> {
+        step_artifact::publish_rest(output, &self.identity)?;
+        self.frontiers.durable_clock = 0;
+        println!("published clock=0 state_payload=false balance=REST");
+        Ok(())
+    }
+
+    #[cfg(not(feature = "n384-prep"))]
     fn publish_rest(&mut self, output: &Path) -> AnyResult<()> {
         let rest_hash = artifact::publish_node(
             output,
@@ -453,6 +436,7 @@ fn stage_observed(
     })
 }
 
+#[cfg(not(feature = "n384-prep"))]
 fn stage_artifact(
     output: &Path,
     index: usize,
@@ -478,4 +462,28 @@ fn stage_artifact(
         .map_err(HarnessError::from),
         None => artifact::stage_attempt(output, index, attempt_json).map_err(HarnessError::from),
     }
+}
+
+#[cfg(feature = "n384-prep")]
+fn stage_artifact(
+    output: &Path,
+    index: usize,
+    identity: &str,
+    proposal: &SpectralState,
+    attempt_json: &str,
+    observation: Option<(TimedBalance, ObservationTiming)>,
+) -> AnyResult<StagedArtifact> {
+    let observation = match observation {
+        Some((balance, timing)) => step_artifact::Observation::Scheduled(NodeRecord {
+            identity,
+            balance: balance.sample,
+            observer_seconds: timing.total,
+            force_seconds: timing.force,
+            conservative_seconds: timing.conservative,
+            transfer_measure_seconds: timing.transfer_measure,
+        }),
+        None => step_artifact::Observation::NotScheduled { identity },
+    };
+    step_artifact::stage_step(output, index, proposal, observation, attempt_json)
+        .map_err(HarnessError::from)
 }
