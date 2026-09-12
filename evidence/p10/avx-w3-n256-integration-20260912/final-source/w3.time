@@ -1,0 +1,23 @@
+	Command being timed: "evidence/p10/avx-w3-n256-integration-20260912/harness/target/release/p10-avx-w3-n256-integration 256 384 32 32 1 w3-run96"
+	User time (seconds): 3805.10
+	System time (seconds): 42.97
+	Percent of CPU this job got: 1054%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:04.81
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 67770368
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 16943545
+	Voluntary context switches: 632
+	Involuntary context switches: 3287
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

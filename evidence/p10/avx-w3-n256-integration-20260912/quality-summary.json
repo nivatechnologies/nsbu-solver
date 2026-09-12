@@ -1,0 +1,32 @@
+{
+  "source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "maximum_function_cyclomatic": 19.0,
+  "maximum_function_cognitive": 8.0,
+  "maximum_all_node_halstead_difficulty": 73.55421686746988,
+  "threshold_offenders": {
+    "cyclomatic": [],
+    "cognitive": [],
+    "halstead": []
+  },
+  "maximum_physical_file_lines": 433,
+  "largest_file": "crates/nsbu-benchmarks/src/provider/parallel_reduced.rs",
+  "production_crap": {
+    "maximum": 24.640625,
+    "maximum_row": {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "from_scalar_lane",
+      "cyclomatic": 19.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 24.640625
+    },
+    "functions": 135
+  },
+  "coverage_exclusions": false,
+  "focused_tests": {
+    "w3_pool": 6,
+    "rotational": 2,
+    "rhs_admission": 1,
+    "parallel_reduced_provider": 4,
+    "harness_attempt_cache": 1
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "status": "complete_n256_actual_interleaved_gate_pass_pre_split_source",
-  "source_commit": "8f57937dbb4ecda97a0667e959f13ecfdd67b20a",
+  "status": "complete_n256_actual_interleaved_gate_pass_and_final_source_confirmation",
+  "source_commit": "8f579375d2d5ad79a573880393c05a297acf98d5",
   "base_commit": "bd9f6b6eaf51ecff60ed0c68483c55e8b55186a8",
   "backend": "rustfft-6.4.1-avx-avx2-fma",
   "profile": {
@@ -93,6 +93,24 @@
     "accepted_windows": 0,
     "observer_unchanged_serial": true,
     "host_contended_by_two_endpoint_processes": true,
-    "final_integrated_source_confirmation_pending": true
+    "final_integrated_source_confirmation_pending": false
+  },
+  "binary_run_source_label": "8f57937dbb4ecda97a0667e959f13ecfdd67b20a",
+  "final_source_confirmation": {
+    "source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+    "base_commit": "29d9f1ce04e11544a9108286a0863cbd31b30372",
+    "binary_sha256": "aa0cad32ce2d2acd5b986b0513851745722775d65ab4b5f8743a4807ff8104db",
+    "integration_seconds": 139.318356566,
+    "observer_seconds": 175.143311236,
+    "total_seconds": 314.604717602,
+    "state_sha256": "a36034adc5665a950b33252691a5acc2c6c22ea61ad3304ba19b542b61dcf054",
+    "matches_pre_split_serial_and_w3_state_bits": true,
+    "indicators_work_cache_and_balance_equal": true,
+    "steady_allocations": 0,
+    "rhs_triplets": 36,
+    "force_triplets": 5,
+    "scalar_pressure_ffts": 12,
+    "integration_delta_from_prior_w3_median_seconds": -0.3680069505,
+    "integration_delta_fraction": -0.002634524
   }
 }
