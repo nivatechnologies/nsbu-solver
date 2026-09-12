@@ -1,0 +1,52 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling cpufeatures v0.2.17
+   Compiling cfg-if v1.0.4
+   Compiling serde_json v1.0.145
+   Compiling itoa v1.0.18
+   Compiling ryu v1.0.23
+   Compiling memchr v2.8.3
+   Compiling stats_alloc v0.1.10
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-complex v0.4.6
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p09-accepted-coverage-integration/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 10.64s
+     Running tests/regions.rs (target/llvm-cov-final/llvm-cov-target/debug/deps/regions-eeb770d703cd3841)
+
+running 7 tests
+test declared_panel_and_similarity_boundaries_are_included_correctly ... ok
+test geometric_emptiness_and_late_time_coverage_do_not_depend_on_underflow ... ok
+test invalid_geometry_work_budgets_and_clocks_are_refused ... ok
+test radial_masks_are_invariant_under_transverse_rotations ... ok
+test spherical_masks_do_not_use_the_rounded_smooth_step_value ... ok
+test startup_phase_uses_integer_ticks_even_when_binary64_rounds_onto_the_boundary ... ok
+test volume_fractions_match_independent_high_precision_quadrature ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/v2_diagnostic_coordinator.rs (target/llvm-cov-final/llvm-cov-target/debug/deps/v2_diagnostic_coordinator-ea88727232b84d4e)
+
+running 3 tests
+test failed_child_terminates_without_partial_publication_or_retry_charge ... ok
+test publishes_crossed_consumers_in_one_unqualified_manifest ... maximum off-stage residual L2=5.10135856591621556e-2 reconstructed_physical_work=ProbePhysicalWork { attempts: 7, scalar_transforms: 3150, weighted_visits: 45790528, binding_checks: 896 }
+ok
+test rejects_incomplete_crossed_manifests_foreign_owners_caps_and_bad_regions ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 755.50s
+
+     Running tests/v2_diagnostic_coordinator_allocation.rs (target/llvm-cov-final/llvm-cov-target/debug/deps/v2_diagnostic_coordinator_allocation-28641edd51fefdd1)
+v2 diagnostic admission=0 construction_bytes=64022624 joint_bytes=74750488 events=7 execution_allocations=0
+     Running tests/v2_diagnostic_export.rs (target/llvm-cov-final/llvm-cov-target/debug/deps/v2_diagnostic_export-5e7a7ecb584d0e88)
+
+running 3 tests
+test diagnostic_export_complete_profile_preserves_every_raw_finding ... 
