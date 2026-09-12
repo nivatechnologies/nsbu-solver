@@ -5,11 +5,14 @@ each clock in one complete probe manifest. It owns two independent six-branch
 families. The ordinary `V2Family` supplies actual accepted states, while the
 `ProbeFamily` evolves separately from rest and supplies reconstructed values,
 derivatives, accepted-node provenance and off-stage residual inputs.
-Every probe publication is also measured by reconstructed-value physical and
-pressure consumers before the owner can advance; both use `ProbeFields::value`,
-never its physical-time derivative as velocity. The pressure consumer constructs
-pressure and its gradient on the common doubled finest retained grid with the
-original force at that probe clock.
+Every probe publication is also measured by reconstructed-value physical,
+pressure and analytical-reference consumers before the owner can advance. All
+three use `ProbeFields::value`, never its physical-time derivative as velocity.
+The pressure consumer constructs pressure and its gradient on the common doubled
+finest retained grid with the original force at that probe clock. The reference
+consumer reports velocity, gradient, Hessian and vorticity errors separately for
+all six fields on the configured lattice. Those global sampled errors do not
+replace accepted regional tracking or establish region coverage.
 
 Admission requires every ordinary accepted clock to appear in the probe
 manifest. Every other manifest clock must occur exactly once in the residual
@@ -36,8 +39,8 @@ probe owner once, each consumer's incremental storage, the exact retained event
 capacity and two transient event copies at the driver call boundary. Copies
 retained by a caller are outside the owner storage contract. Separate finite
 ledgers expose probe, accepted physical, reconstructed physical, reconstructed
-pressure, accepted pressure, analytical-reference, regional, residual and
-binding work. A failed event attempt terminates the driver and
+pressure, reconstructed analytical-reference, accepted pressure, accepted
+analytical-reference, regional, residual and binding work. A failed event attempt terminates the driver and
 publishes no partial event. Numerical owners, published events and consumer
 charges remain inspectable read-only.
 

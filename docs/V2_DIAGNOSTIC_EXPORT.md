@@ -12,12 +12,18 @@ No cross-quantity maximum or other numerical reduction is introduced.
 
 `DiagnosticExportPlan::new` retains schema version 1 and its existing object
 shape. `DiagnosticExportPlan::new_v2` explicitly selects version 2, which adds
-`reconstructed_physical` and `reconstructed_pressure` to every event. The
+`reconstructed_physical`, `reconstructed_pressure` and
+`reconstructed_reference` to every event. The
 pressure finding records its reconstructed clock and identity, source and
 doubled force layouts, worker count, comparison layout and floors, then raw
 pressure and pressure-gradient `LocalError` findings for each of the five
 branch pairs. Version 2 context records the complete admitted reconstructed
-physical and reconstructed-pressure work ledgers. Version 1 intentionally
+physical, reconstructed-pressure and reconstructed-reference work ledgers.
+The reference payload binds six origins and source domains, its common sample
+grid, four floors, case hash, and all 24 raw `LocalError` findings in
+velocity/gradient/Hessian/vorticity order. It remains diagnostic-only and does
+not relabel accepted-state, regional, pressure-reference, gauge, or readiness
+evidence. Version 1 intentionally
 omits these newer fields; the library `DiagnosticEvent` still retains them.
 The version 1 event keys and value definitions remain stable. Its context's
 coordinator reservation numbers can increase because the driver now admits the

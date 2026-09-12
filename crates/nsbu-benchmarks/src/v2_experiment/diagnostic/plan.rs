@@ -7,6 +7,7 @@ use crate::v2_experiment::{
     probes::{
         physical::{ProbePhysicalPlan, ProbePhysicalWork},
         pressure::{ProbePressurePlan, ProbePressureWork},
+        reference::{ProbeReferencePlan, ProbeReferenceWork},
         residuals::{ResidualFamilyPlan, ResidualFamilyWork},
         ProbePlan, ProbeWork,
     },
@@ -70,6 +71,8 @@ pub struct DiagnosticBounds {
     pub probe_physical: ProbePhysicalWork,
     /// Reconstructed pressure construction and comparison work at every probe clock.
     pub probe_pressure: ProbePressureWork,
+    /// Reconstructed analytical-reference tracking work at every manifest clock.
+    pub probe_reference: ProbeReferenceWork,
     /// Pressure work allowance.
     pub pressure: PressureFamilyWork,
     /// Analytical tracking work allowance.
@@ -90,6 +93,7 @@ pub struct DiagnosticPlan<'a> {
     pub(super) physical: PhysicalFamilyPlan<'a>,
     pub(super) probe_physical: ProbePhysicalPlan<'a>,
     pub(super) probe_pressure: ProbePressurePlan<'a>,
+    pub(super) probe_reference: ProbeReferencePlan<'a>,
     pub(super) pressure: PressureFamilyPlan<'a>,
     pub(super) regional: RegionalTrackingPlan<'a>,
     pub(super) residual: ResidualFamilyPlan<'a>,
@@ -135,6 +139,13 @@ impl<'a> DiagnosticPlan<'a> {
             events,
             joint_cap,
         )?;
+        let probe_reference = ProbeReferencePlan::new(
+            probes,
+            settings.reference_samples,
+            settings.reference_floors,
+            events,
+            joint_cap,
+        )?;
         let tracking = ReferenceTrackingPlan::new(
             family,
             settings.reference_samples,
@@ -158,6 +169,7 @@ impl<'a> DiagnosticPlan<'a> {
             physical.bounds().storage_bytes,
             probe_physical.bounds().storage_bytes,
             probe_pressure.bounds().storage_bytes,
+            probe_reference.bounds().storage_bytes,
             pressure.bounds().storage_bytes,
             regional_increment,
             residual.bounds().storage_bytes,
@@ -189,6 +201,7 @@ impl<'a> DiagnosticPlan<'a> {
             physical,
             probe_physical,
             probe_pressure,
+            probe_reference,
             pressure,
             regional,
             residual,
@@ -201,6 +214,7 @@ impl<'a> DiagnosticPlan<'a> {
                 physical: physical.bounds().work,
                 probe_physical: probe_physical.bounds().work,
                 probe_pressure: probe_pressure.bounds().work,
+                probe_reference: probe_reference.bounds().work,
                 pressure: pressure.bounds().work,
                 reference: regional.bounds().tracking_work,
                 regional: regional.bounds().regional_work,

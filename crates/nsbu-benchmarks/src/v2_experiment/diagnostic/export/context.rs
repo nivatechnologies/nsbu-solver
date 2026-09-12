@@ -130,9 +130,28 @@ fn context_reservations<W: Write>(
     if p.schema_version() == 2 {
         reconstructed_physical_work(j, p.coordinator.probe_physical)?;
         reconstructed_pressure_work(j, p.coordinator.probe_pressure)?;
+        reconstructed_reference_work(j, p.coordinator.probe_reference)?;
     }
     j.raw("}")?;
     export_reservation(j, p)
+}
+fn reconstructed_reference_work<W: Write>(
+    j: &mut Json<W>,
+    work: crate::v2_experiment::probes::reference::ProbeReferenceWork,
+) -> Result<(), DiagnosticExportError> {
+    j.raw(",\"reconstructed_reference_work\":{\"attempts\":")?;
+    j.counter(work.attempts)?;
+    j.raw(",\"reference_evaluations\":")?;
+    j.counter(work.reference_evaluations)?;
+    j.raw(",\"root_iterations\":")?;
+    j.counter(work.root_iterations)?;
+    j.raw(",\"scalar_transforms\":")?;
+    j.counter(work.scalar_transforms)?;
+    j.raw(",\"weighted_visits\":")?;
+    j.counter(work.weighted_visits)?;
+    j.raw(",\"binding_checks\":")?;
+    j.counter(work.binding_checks)?;
+    j.raw("}")
 }
 
 fn reconstructed_physical_work<W: Write>(

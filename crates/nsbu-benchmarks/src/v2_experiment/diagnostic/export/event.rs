@@ -39,6 +39,8 @@ fn event<W: Write>(
         findings::probe_physical(j, e.reconstructed_physical())?;
         j.raw(",\"reconstructed_pressure\":")?;
         findings::probe_pressure(j, e.reconstructed_pressure())?;
+        j.raw(",\"reconstructed_reference\":")?;
+        findings::probe_reference(j, e.reconstructed_reference())?;
     }
     event_accepted(j, e)?;
     event_residual(j, e)?;
@@ -53,12 +55,47 @@ fn validate_event(
     if p.schema_version() == 2 {
         validate_probe_physical(p, e)?;
         validate_probe_pressure(p, e)?;
+        validate_probe_reference(p, e)?;
     }
     if let Some(a) = e.accepted().sample() {
         validate_accepted(p, e, a)?
     }
     if let Some(r) = e.residual().sample() {
         validate_residual(p, e, r)?
+    }
+    Ok(())
+}
+fn validate_probe_reference(
+    p: DiagnosticExportPlan,
+    e: DiagnosticEvent,
+) -> Result<(), DiagnosticExportError> {
+    let s = e.reconstructed_reference();
+    if (s.clock(), s.identity(), s.origins()) != (e.clock(), p.probe_identity, e.probe().origins())
+        || s.source_domains() != p.probe_domains
+        || s.sample_layout() != p.settings.reference_samples
+        || s.relative_floors().map(f64::to_bits) != p.settings.reference_floors.map(f64::to_bits)
+    {
+        return Err(DiagnosticExportError::InvalidReport);
+    }
+    for (index, branch) in s.branches().iter().enumerate() {
+        if branch.branch != index {
+            return Err(DiagnosticExportError::InvalidReport);
+        }
+        for (slot, (quantity, expected)) in branch
+            .quantities
+            .iter()
+            .zip(crate::v2_experiment::reference::QUANTITIES)
+            .enumerate()
+        {
+            if quantity.quantity != expected
+                || quantity.error.components != expected.components()
+                || quantity.error.samples != p.settings.reference_samples.real_len()
+                || quantity.error.relative_floor.to_bits()
+                    != p.settings.reference_floors[slot].to_bits()
+            {
+                return Err(DiagnosticExportError::InvalidReport);
+            }
+        }
     }
     Ok(())
 }
