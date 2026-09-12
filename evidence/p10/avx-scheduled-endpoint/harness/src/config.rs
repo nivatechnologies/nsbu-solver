@@ -1,5 +1,7 @@
 //! Immutable endpoint profile and its complete memory/work/disk admission.
-use crate::{artifact, cache::CachedReducedForce, observer::ReducedObserver, schedule};
+use crate::{
+    artifact, cache::CachedReducedForce, observer::ReducedObserver, schedule, timed_rhs::TimedRhs,
+};
 use nsbu_benchmarks::CASE_SHA256;
 use nsbu_solver::{
     domain::{Domain, Epoch, ExtraStorage, Layout, ResourcePlan},
@@ -31,7 +33,8 @@ pub const ADVECTIVE_LIMIT: f64 = 0.45;
 #[cfg(feature = "n384-prep")]
 pub const ADVECTIVE_LIMIT: f64 = 0.8;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
-const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + 64 * 1024;
+const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
+const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + TIMER_OVERHEAD + 64 * 1024;
 
 #[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 const PROFILE: &str = "n192-m384";
@@ -257,8 +260,9 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-w3-pending;rhs_w3=pending;retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap=pending;artifact_cap={};schema=p10-avx-n384-every-step-v1;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-w3-pending;rhs_w3=pending;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap=pending;artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-pending-exact-command;external_stop=required-pending-identity",
         env!("RUN_SOURCE"),
+        crate::timed_rhs::IDENTITY,
         2 * M,
         2 * N,
         schedule::STEP,
@@ -267,8 +271,9 @@ pub fn identity() -> String {
     );
     #[cfg(not(feature = "n384-prep"))]
     format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v2;resume=unsupported",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;rhs_timer={};n={N};m={M};workers={WORKERS};method=cox-matthews;step={};endpoint={};advective_limit={ADVECTIVE_LIMIT};cap={CAP};schema=p10-avx-scheduled-endpoint-v2;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported",
         env!("RUN_SOURCE"),
+        crate::timed_rhs::IDENTITY,
         schedule::STEP,
         schedule::ENDPOINT,
     )

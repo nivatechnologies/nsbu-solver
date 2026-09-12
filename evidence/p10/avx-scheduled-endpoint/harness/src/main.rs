@@ -12,9 +12,11 @@ mod owners;
 mod prep_tests;
 mod publication;
 mod records;
+mod run_types;
 mod schedule;
 #[cfg(feature = "n384-prep")]
 mod step_artifact;
+mod timed_rhs;
 
 use artifact::{NodeRecord, StagedArtifact};
 use balance::TimedBalance;
@@ -27,42 +29,27 @@ use nsbu_solver::{
     integrators::{
         attempt::{AttemptResult, AttemptWorkspace},
         rhs::SpectralRhs,
-        transaction::{prepare_commit, AcceptedAttempt, CandidateState, PreparedCommit},
+        transaction::{prepare_commit, CandidateState, PreparedCommit},
     },
     SolverError,
 };
 use observer::ReducedObserver;
 use publication::Frontiers;
 use records::{AttemptFacts, ObservationTiming};
+use run_types::{AcceptedFacts, AcceptedStage, StageMeta};
 use stats_alloc::{Region, Stats, StatsAlloc, INSTRUMENTED_SYSTEM};
 use std::{alloc::System, fs, path::Path, time::Instant};
+use timed_rhs::TimedRhs;
 
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
-
-struct AcceptedStage {
-    artifact: StagedArtifact,
-    balance: Option<TimedBalance>,
-    timing: Option<ObservationTiming>,
-}
-
-struct AcceptedFacts {
-    token: AcceptedAttempt,
-    facts: AttemptFacts,
-}
-
-#[derive(Clone, Copy)]
-struct StageMeta {
-    balance: Option<TimedBalance>,
-    timing: Option<ObservationTiming>,
-}
 
 struct RunOwners {
     resources: ResourcePlan,
     state: SpectralState,
     candidate: CandidateState,
     attempts: AttemptWorkspace,
-    rhs: SpectralRhs<CachedReducedForce>,
+    rhs: TimedRhs<SpectralRhs<CachedReducedForce>>,
     observer: ReducedObserver,
     identity: String,
     balances: Vec<TimedBalance>,
@@ -110,7 +97,7 @@ impl RunOwners {
             state: state_owners.state,
             candidate: state_owners.candidate,
             attempts: state_owners.attempts,
-            rhs: execution.rhs,
+            rhs: TimedRhs::new(execution.rhs),
             observer: execution.observer,
             identity: config::identity(),
             balances,
@@ -168,6 +155,7 @@ impl RunOwners {
         self.frontiers.attempted = index;
         let from = self.state.clock().elapsed();
         let integration_region = Region::new(GLOBAL);
+        self.rhs.reset_measurement();
         let started = Instant::now();
         let result = self.attempts.try_advance(
             &self.state,
@@ -233,7 +221,14 @@ impl RunOwners {
         result: AttemptResult,
     ) -> AnyResult<AcceptedFacts> {
         let Some(token) = result.accepted else {
-            let json = records::rejected(&self.identity, index, from, seconds, &result);
+            let json = records::rejected(
+                &self.identity,
+                index,
+                from,
+                seconds,
+                self.rhs.measurement(),
+                &result,
+            );
             artifact::publish_attempt(output, index, &json)?;
             self.frontiers.durable_attempt = index;
             return Err(HarnessError::Rejected {
@@ -251,7 +246,8 @@ impl RunOwners {
             ticks: result.ticks,
             rhs_calls: result.rhs_calls,
             ratios: result.indicators.ratios,
-            hit_miss: self.rhs.provider().hit_miss(),
+            hit_miss: self.rhs.inner().provider().hit_miss(),
+            rhs_timing: self.rhs.measurement(),
         };
         Ok(AcceptedFacts { token, facts })
     }
@@ -289,7 +285,14 @@ impl RunOwners {
         seconds: f64,
         error: &SolverError,
     ) -> AnyResult<()> {
-        let json = records::numerical_error(&self.identity, index, from, seconds, error);
+        let json = records::numerical_error(
+            &self.identity,
+            index,
+            from,
+            seconds,
+            self.rhs.measurement(),
+            error,
+        );
         artifact::publish_attempt(output, index, &json)?;
         self.frontiers.durable_attempt = index;
         Ok(())

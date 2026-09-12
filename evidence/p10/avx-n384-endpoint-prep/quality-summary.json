@@ -1,9 +1,9 @@
 {
   "status": "preparation_only_final_w3_recheck_required",
   "tests": {
-    "n384_prep_passed": 16,
-    "default_regression_passed": 11,
-    "n256_regression_passed": 11
+    "n384_prep_passed": 17,
+    "default_regression_passed": 12,
+    "n256_regression_passed": 12
   },
   "format": "pass",
   "strict_clippy_n384_prep": "pass",
@@ -13,24 +13,24 @@
   "maximum_file_halstead_difficulty": 57.324380165289256,
   "maximum_file_lines": 499,
   "focused_n384_line_coverage": {
-    "covered": 616,
-    "count": 1578,
-    "percent": 39.04
+    "covered": 703,
+    "count": 1686,
+    "percent": 41.7
   },
   "focused_n384_branch_coverage": {
-    "covered": 30,
+    "covered": 33,
     "count": 92,
-    "percent": 32.61
+    "percent": 35.87
   },
   "combined_n384_default_line_coverage": {
-    "covered": 724,
-    "count": 1751,
-    "percent": 41.35
+    "covered": 811,
+    "count": 1859,
+    "percent": 43.63
   },
   "combined_n384_default_branch_coverage": {
-    "covered": 34,
+    "covered": 37,
     "count": 100,
-    "percent": 34.0
+    "percent": 37.0
   },
   "combined_maximum_per_function_crap": 22.5,
   "combined_crap_violations": 0,
