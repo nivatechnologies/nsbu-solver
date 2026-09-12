@@ -73,7 +73,10 @@ impl<'a> CoverageFamilyWorkspace<'a> {
         if self.failed {
             return Err(FamilyError::Terminated.into());
         }
-        self.charge()?;
+        if let Err(error) = self.charge() {
+            self.failed = true;
+            return Err(error.into());
+        }
         let result = self.compute(family, regional);
         match result {
             Ok(sample) => {
@@ -113,7 +116,13 @@ impl<'a> CoverageFamilyWorkspace<'a> {
         {
             return Err(FamilyError::InvalidFamily.into());
         }
-        let sampling = metadata(regional, clock)?;
+        if regional.sample_layout() != self.plan.regional_samples
+            || regional.relative_floors().map(f64::to_bits)
+                != self.plan.regional_floors.map(f64::to_bits)
+        {
+            return Err(FamilyError::InvalidFamily.into());
+        }
+        let sampling = metadata(regional, clock, self.plan.regional_floors)?;
         let core = self
             .plan
             .coverage
@@ -145,11 +154,13 @@ impl<'a> CoverageFamilyWorkspace<'a> {
 fn metadata(
     regional: RegionalTrackingSample,
     clock: TickClock,
+    floors: [f64; 4],
 ) -> Result<CoverageSamplingMetadata, FamilyError> {
     let layout = regional.sample_layout();
     let points = layout.real_len();
     let mut core = [None; 24];
     let mut annulus = [None; 24];
+    let mut expected_region_counts: Option<[Option<usize>; 5]> = None;
     for (branch_index, branch) in regional.branches().iter().enumerate() {
         if branch.branch != branch_index {
             return Err(FamilyError::InvalidFamily);
@@ -163,35 +174,45 @@ fn metadata(
                 || report.components != QUANTITIES[quantity_index].components()
                 || report.global != SampledError::Measured(quantity.global)
                 || quantity.global.samples != points
+                || regional.relative_floors().map(f64::to_bits) != floors.map(f64::to_bits)
             {
                 return Err(FamilyError::InvalidFamily);
             }
             let mut count = 0usize;
-            let mut sampled_core = None;
-            let mut sampled_annulus = None;
-            for (region, value) in report.regions {
+            let mut region_counts = [None; 5];
+            let expected_regions = [
+                SpatialRegion::Core,
+                SpatialRegion::Annulus,
+                SpatialRegion::InteriorOutsideNominal,
+                SpatialRegion::Collar,
+                SpatialRegion::Exterior,
+            ];
+            for (index, (region, value)) in report.regions.into_iter().enumerate() {
+                if region != expected_regions[index] {
+                    return Err(FamilyError::InvalidFamily);
+                }
                 let samples = sample_count(value);
                 count = count
                     .checked_add(samples.unwrap_or(0))
                     .ok_or(SolverError::SizeOverflow)?;
-                if region == SpatialRegion::Core {
-                    sampled_core = samples;
-                }
-                if region == SpatialRegion::Annulus {
-                    sampled_annulus = samples;
-                }
+                region_counts[index] = samples;
             }
+            if expected_region_counts.is_some_and(|expected| expected != region_counts) {
+                return Err(FamilyError::InvalidFamily);
+            }
+            expected_region_counts.get_or_insert(region_counts);
             if count != points {
                 return Err(FamilyError::InvalidFamily);
             }
             let slot = branch_index * 4 + quantity_index;
-            core[slot] = sampled_core;
-            annulus[slot] = sampled_annulus;
+            core[slot] = region_counts[0];
+            annulus[slot] = region_counts[1];
         }
     }
     Ok(CoverageSamplingMetadata {
         layout,
         points,
+        relative_floors: floors,
         sampled_core: core,
         sampled_annulus: annulus,
     })

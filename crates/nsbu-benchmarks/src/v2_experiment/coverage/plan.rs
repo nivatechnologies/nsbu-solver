@@ -1,6 +1,6 @@
 use crate::{
     regions::CoveragePlan,
-    v2_experiment::{FamilyError, FamilyPlan},
+    v2_experiment::{reference::regional::RegionalTrackingPlan, FamilyError, FamilyPlan},
 };
 use nsbu_solver::SolverError;
 
@@ -31,6 +31,8 @@ pub struct CoverageFamilyBounds {
 pub struct CoverageFamilyPlan<'a> {
     pub(super) family: FamilyPlan<'a>,
     pub(super) coverage: [CoveragePlan; 3],
+    pub(super) regional_samples: nsbu_solver::domain::Layout,
+    pub(super) regional_floors: [f64; 4],
     pub(super) bounds: CoverageFamilyBounds,
     pub(super) per_attempt: CoverageFamilyWork,
 }
@@ -38,11 +40,13 @@ impl<'a> CoverageFamilyPlan<'a> {
     /// Admit three nested panel settings and family-plus-consumer storage before allocation.
     pub fn new(
         family: FamilyPlan<'a>,
+        regional: RegionalTrackingPlan<'a>,
         panels: [usize; 3],
         maximum_attempts: usize,
         joint_cap: usize,
     ) -> Result<Self, FamilyError> {
-        if maximum_attempts < family.times().as_slice().len()
+        if regional.tracking_plan().family_plan().identity() != family.identity()
+            || maximum_attempts < family.times().as_slice().len()
             || !(panels[0] < panels[1]
                 && panels[1] < panels[2]
                 && panels[1].is_multiple_of(panels[0])
@@ -63,9 +67,9 @@ impl<'a> CoverageFamilyPlan<'a> {
             .checked_add(2 * std::mem::size_of::<super::CoverageFamilySample>())
             .and_then(|n| n.checked_add(4096))
             .ok_or(SolverError::SizeOverflow)?;
-        let joint_storage_bytes = family
+        let joint_storage_bytes = regional
             .bounds()
-            .storage_bytes
+            .joint_storage_bytes
             .checked_add(storage_bytes)
             .ok_or(SolverError::SizeOverflow)?;
         if joint_storage_bytes > joint_cap {
@@ -74,6 +78,8 @@ impl<'a> CoverageFamilyPlan<'a> {
         Ok(Self {
             family,
             coverage,
+            regional_samples: regional.tracking_plan().sample_layout(),
+            regional_floors: regional.tracking_plan().relative_floors(),
             bounds: CoverageFamilyBounds {
                 storage_bytes,
                 joint_storage_bytes,
@@ -82,7 +88,7 @@ impl<'a> CoverageFamilyPlan<'a> {
             per_attempt,
         })
     }
-    /// Family-plus-this-consumer reservation; regional workspace composition remains caller-owned.
+    /// Family, regional tracking, and this consumer reservation.
     pub fn bounds(self) -> CoverageFamilyBounds {
         self.bounds
     }

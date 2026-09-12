@@ -2,12 +2,14 @@ use crate::{regions::RegionCoverage, v2_experiment::reference::regional::Regiona
 use nsbu_solver::domain::{Layout, TickClock};
 
 /// Actual regional-sampling context retained without interpreting it as volume.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct CoverageSamplingMetadata {
     /// Actual regional tracking lattice, retained without interpreting it as a volume quadrature grid.
     pub layout: Layout,
     /// Number of actual regional tracking sample points.
     pub points: usize,
+    /// Frozen binary64 regional tracking relative-floor words.
+    pub relative_floors: [f64; 4],
     /// Sample counts for the exclusive actual `SpatialRegion::Core` class, by branch/quantity; None is `NoSamples`.
     pub sampled_core: [Option<usize>; 24],
     /// Sample counts for the exclusive actual `SpatialRegion::Annulus` class, by branch/quantity; None is `NoSamples`.

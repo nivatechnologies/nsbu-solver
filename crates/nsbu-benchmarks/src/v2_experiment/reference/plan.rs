@@ -84,6 +84,10 @@ impl<'a> ReferenceTrackingPlan<'a> {
     pub fn bounds(self) -> ReferenceTrackingBounds {
         self.bounds
     }
+    /// Immutable family policy whose identity is bound to every tracking report.
+    pub fn family_plan(self) -> FamilyPlan<'a> {
+        self.family
+    }
     /// Physical sampling lattice, independent of every retained trajectory grid.
     pub fn sample_layout(self) -> Layout {
         self.samples
