@@ -24,7 +24,7 @@ concentrating windows. In this bounded work block:
 3. Admit a genuine nested exact-time review profile with explicit observable
    semantics, unavailable evidence and bounded required rows.
 4. Integrate the startup-only pressure-reference and standalone off-stage
-   physical consumers, and archive the corrected derivative-symmetry evidence,
+   physical consumers, and use the archived corrected derivative-symmetry evidence,
    before attempting the next combined review.
 
 The combined exporter, partial review adapter and force-baseline binder from
@@ -40,9 +40,12 @@ The current bounded work also includes force-grid and worker correctness studies
 and a larger N24 baseline pilot. The baseline stopped after completed probe 2047,
 before accepted 2048 publication, with `InvalidSpectrum`; its shell exit was
 zero but its terminal status was `Failed`, so it supplies no endpoint result.
-The force-grid and worker reports remain prescribed-force diagnostics, and the
-derivative-symmetry correction at source `5dc435d` has a smaller N12 run whose
-evidence archive is pending.
+The force-grid and worker reports remain prescribed-force diagnostics. The
+derivative-symmetry correction is archived at source
+`5b583d9678af631ba6a175a0175ccf3da132cc71` with a smaller N12 checkpoint and
+physical-test scope. Hosted run 489 failed on test-file Halstead difficulty
+84.37; the corrected test split awaits new hosted CI and does not overwrite the
+latest verified evidence.
 
 The opt-in core-only attempt-force cache at source `9836cfc` has focused
 small-grid CM/HO bit-equality evidence and reduces force evaluations from 12/15
