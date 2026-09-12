@@ -1,6 +1,8 @@
 //! Three-halves padded rotational nonlinearity and physical-pressure reconstruction.
 use super::transfer::transfer_validated;
-use super::{modal, FftBackend, FftCatalog, FftPlan, FftWorkspace};
+use super::{
+    modal, FftBackend, FftCatalog, FftPlan, FftWorkspace, W3FftIdentity, W3FftMode, W3FftPool,
+};
 use crate::{
     domain::{validate_spectrum, Domain, Layout},
     storage::filled,
@@ -13,14 +15,33 @@ use crate::{
 pub struct RotationalWorkspace {
     domain: Domain,
     padded: Layout,
-    fft: FftPlan,
-    transform: FftWorkspace,
+    transform: TransformOwner,
     velocity: [Vec<f64>; 3],
     vorticity: [Vec<f64>; 3],
     curl: [Vec<Complex64>; 3],
     acceleration: [Vec<Complex64>; 3],
-    staging: Vec<Complex64>,
     energy: Vec<Complex64>,
+}
+
+enum TransformOwner {
+    Serial {
+        fft: FftPlan,
+        workspace: FftWorkspace,
+        staging: Vec<Complex64>,
+    },
+    W3(W3FftPool),
+}
+
+impl std::fmt::Debug for TransformOwner {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Serial { .. } => formatter.write_str("SerialFftOwner"),
+            Self::W3(pool) => formatter
+                .debug_tuple("W3FftOwner")
+                .field(&pool.identity())
+                .finish(),
+        }
+    }
 }
 
 impl RotationalWorkspace {
@@ -45,6 +66,21 @@ impl RotationalWorkspace {
         let padded = domain.padded_layout()?;
         let fft = FftPlan::reservation_with_shared_backend(padded, backend)?;
         Self::reservation_parts(domain, padded, fft)
+    }
+
+    /// Opt-in reservation for a separately owned bidirectional W3 operator pool.
+    pub fn reservation_with_w3_fft_backend(
+        domain: Domain,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
+        let base = Self::reservation_with_fft_backend(domain, backend)?;
+        let additional = W3FftPool::additional_reservation_with_backend(
+            domain.padded_layout()?,
+            backend,
+            W3FftMode::Bidirectional,
+        )?;
+        base.checked_add(additional)
+            .ok_or(SolverError::SizeOverflow)
     }
 
     fn reservation_inner(
@@ -107,6 +143,45 @@ impl RotationalWorkspace {
         Self::allocate(domain, padded, fft, transform)
     }
 
+    /// Construct the explicit experimental W3 operator without changing serial defaults.
+    pub fn new_with_catalog_w3(
+        domain: Domain,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let total = Self::reservation_with_w3_fft_backend(domain, catalog.backend())?;
+        if total > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let base = Self::reservation_with_catalog(domain, catalog)?;
+        let mut owner = Self::new_with_catalog(domain, catalog, base)?;
+        let additional = total.checked_sub(base).ok_or(SolverError::SizeOverflow)?;
+        let TransformOwner::Serial {
+            fft,
+            workspace,
+            staging,
+        } = owner.transform
+        else {
+            return Err(SolverError::InvalidPayload);
+        };
+        owner.transform = TransformOwner::W3(W3FftPool::from_scalar_lane(
+            owner.padded,
+            catalog,
+            W3FftMode::Bidirectional,
+            (fft, workspace, staging),
+            additional,
+        )?);
+        Ok(owner)
+    }
+
+    /// W3 execution identity, present only for the explicit opt-in constructor.
+    pub fn w3_fft_identity(&self) -> Option<W3FftIdentity> {
+        match &self.transform {
+            TransformOwner::Serial { .. } => None,
+            TransformOwner::W3(pool) => Some(pool.identity()),
+        }
+    }
+
     fn allocate(
         domain: Domain,
         padded: Layout,
@@ -119,13 +194,15 @@ impl RotationalWorkspace {
         Ok(Self {
             domain,
             padded,
-            fft,
-            transform,
+            transform: TransformOwner::Serial {
+                fft,
+                workspace: transform,
+                staging: filled(padded.half_len(), zero)?,
+            },
             velocity: [filled(real, 0.0)?, filled(real, 0.0)?, filled(real, 0.0)?],
             vorticity: [filled(real, 0.0)?, filled(real, 0.0)?, filled(real, 0.0)?],
             curl: [filled(h, zero)?, filled(h, zero)?, filled(h, zero)?],
             acceleration: [filled(h, zero)?, filled(h, zero)?, filled(h, zero)?],
-            staging: filled(padded.half_len(), zero)?,
             energy: filled(h, zero)?,
         })
     }
@@ -181,20 +258,31 @@ impl RotationalWorkspace {
         }
         self.spatial_fields(velocity)?;
         self.cross_product();
-        for (axis, source) in force.iter().enumerate() {
-            self.fft.forward(
-                &self.vorticity[axis],
-                &mut self.staging,
-                &mut self.transform,
-            )?;
-            transfer_validated(
-                self.padded,
-                layout,
-                &self.staging,
-                &mut self.acceleration[axis],
-            );
-            for (value, &forcing) in self.acceleration[axis].iter_mut().zip(*source) {
-                *value += forcing;
+        match &mut self.transform {
+            TransformOwner::Serial {
+                fft,
+                workspace,
+                staging,
+            } => {
+                for (axis, source) in force.iter().enumerate() {
+                    fft.forward(&self.vorticity[axis], staging, workspace)?;
+                    transfer_validated(self.padded, layout, staging, &mut self.acceleration[axis]);
+                    add_force(&mut self.acceleration[axis], source);
+                }
+            }
+            TransformOwner::W3(pool) => {
+                pool.forward3(&mut self.vorticity)?;
+                for (axis, source) in force.iter().enumerate() {
+                    pool.with_spectrum(axis, |staging| {
+                        transfer_validated(
+                            self.padded,
+                            layout,
+                            staging,
+                            &mut self.acceleration[axis],
+                        );
+                    })?;
+                    add_force(&mut self.acceleration[axis], source);
+                }
             }
         }
         self.project_and_pressure(&mut output, pressure)?;
@@ -215,16 +303,33 @@ impl RotationalWorkspace {
                 self.curl[axis][index] = coefficient;
             }
         }
-        for (axis, component) in velocity.into_iter().enumerate() {
-            transfer_validated(layout, self.padded, component, &mut self.staging);
-            self.fft
-                .inverse(&self.staging, &mut self.velocity[axis], &mut self.transform)?;
-            transfer_validated(layout, self.padded, &self.curl[axis], &mut self.staging);
-            self.fft.inverse(
-                &self.staging,
-                &mut self.vorticity[axis],
-                &mut self.transform,
-            )?;
+        match &mut self.transform {
+            TransformOwner::Serial {
+                fft,
+                workspace,
+                staging,
+            } => {
+                for (axis, component) in velocity.into_iter().enumerate() {
+                    transfer_validated(layout, self.padded, component, staging);
+                    fft.inverse(staging, &mut self.velocity[axis], workspace)?;
+                    transfer_validated(layout, self.padded, &self.curl[axis], staging);
+                    fft.inverse(staging, &mut self.vorticity[axis], workspace)?;
+                }
+            }
+            TransformOwner::W3(pool) => {
+                for (axis, component) in velocity.into_iter().enumerate() {
+                    pool.prepare_inverse(axis, |staging| {
+                        transfer_validated(layout, self.padded, component, staging);
+                    })?;
+                }
+                pool.inverse3(&mut self.velocity)?;
+                for axis in 0..3 {
+                    pool.prepare_inverse(axis, |staging| {
+                        transfer_validated(layout, self.padded, &self.curl[axis], staging);
+                    })?;
+                }
+                pool.inverse3(&mut self.vorticity)?;
+            }
         }
         Ok(())
     }
@@ -284,14 +389,27 @@ impl RotationalWorkspace {
                     + self.velocity[1][index].powi(2)
                     + self.velocity[2][index].powi(2));
         }
-        self.fft
-            .forward(&self.vorticity[0], &mut self.staging, &mut self.transform)?;
-        transfer_validated(
-            self.padded,
-            self.domain.layout(),
-            &self.staging,
-            &mut self.energy,
-        );
+        match &mut self.transform {
+            TransformOwner::Serial {
+                fft,
+                workspace,
+                staging,
+            } => {
+                fft.forward(&self.vorticity[0], staging, workspace)?;
+                transfer_validated(self.padded, self.domain.layout(), staging, &mut self.energy);
+            }
+            TransformOwner::W3(pool) => {
+                pool.forward_one(&self.vorticity[0])?;
+                pool.with_spectrum(0, |staging| {
+                    transfer_validated(
+                        self.padded,
+                        self.domain.layout(),
+                        staging,
+                        &mut self.energy,
+                    );
+                })?;
+            }
+        }
         for (value, energy) in pressure.iter_mut().zip(&self.energy) {
             *value -= energy;
         }
@@ -299,3 +417,12 @@ impl RotationalWorkspace {
         super::hermitian::finite(pressure)
     }
 }
+
+fn add_force(acceleration: &mut [Complex64], force: &[Complex64]) {
+    for (value, &forcing) in acceleration.iter_mut().zip(force) {
+        *value += forcing;
+    }
+}
+
+#[cfg(test)]
+mod tests;

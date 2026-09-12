@@ -5,7 +5,7 @@ use super::{
 };
 use crate::{
     domain::{Domain, TickClock},
-    spectral::{FftBackend, FftCatalog, RotationalWorkspace},
+    spectral::{FftBackend, FftCatalog, RotationalWorkspace, W3FftIdentity},
     storage::filled,
     Complex64, SolverError,
 };
@@ -50,6 +50,17 @@ impl<F: PrescribedForce> SpectralRhs<F> {
     ) -> Result<usize, SolverError> {
         Self::validate_limits(limits)?;
         let operator = RotationalWorkspace::reservation_with_fft_backend(domain, backend)?;
+        Self::reservation_parts(domain, limits, operator)
+    }
+
+    /// Opt-in reservation for an independently owned W3 rotational operator.
+    pub fn reservation_with_w3_fft_backend(
+        domain: Domain,
+        limits: ForceLimits,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
+        Self::validate_limits(limits)?;
+        let operator = RotationalWorkspace::reservation_with_w3_fft_backend(domain, backend)?;
         Self::reservation_parts(domain, limits, operator)
     }
 
@@ -152,6 +163,34 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         )
     }
 
+    /// Construct only the explicit W3 rotational path; serial constructors are unchanged.
+    pub fn new_with_catalog_w3(
+        domain: Domain,
+        force: F,
+        advective_limit: f64,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = force.limits().ok_or(SolverError::UnknownProviderCost)?;
+        let storage_bytes =
+            Self::reservation_with_w3_fft_backend(domain, limits, catalog.backend())?;
+        if storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        if !advective_limit.is_finite() || advective_limit <= 0.0 {
+            return Err(SolverError::InvalidStep);
+        }
+        let operator = RotationalWorkspace::new_with_catalog_w3(domain, catalog, cap)?;
+        Self::allocate(
+            domain,
+            force,
+            limits,
+            advective_limit,
+            storage_bytes,
+            operator,
+        )
+    }
+
     fn allocate(
         domain: Domain,
         force: F,
@@ -222,6 +261,11 @@ impl<F: PrescribedForce> SpectralRhs<F> {
     /// Read-only access to provider-specific attempt diagnostics.
     pub fn provider(&self) -> &F {
         &self.force
+    }
+
+    /// Experimental W3 operator identity; absent for every existing constructor.
+    pub fn w3_fft_identity(&self) -> Option<W3FftIdentity> {
+        self.operator.w3_fft_identity()
     }
 }
 

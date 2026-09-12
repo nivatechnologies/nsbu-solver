@@ -6,7 +6,10 @@ use crate::{
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
-    spectral::{transfer, FftBackend, FftCatalog, FftPlan, FftWorkspace},
+    spectral::{
+        transfer, FftBackend, FftCatalog, FftPlan, FftWorkspace, W3FftIdentity, W3FftMode,
+        W3FftPool,
+    },
     Complex64, SolverError,
 };
 
@@ -164,6 +167,101 @@ impl ReducedV2Force {
             transfer(self.sampled, self.retained, &self.spectral, coefficients)?;
         }
         Ok(())
+    }
+}
+
+/// Reduced provider transform state for the explicit forward-only W3 path.
+pub(super) struct ReducedV2ForceW3 {
+    retained: Layout,
+    sampled: Layout,
+    transform: W3FftPool,
+    pub(super) physical: [Vec<f64>; 3],
+    _roots: Vec<Option<AxialRoot>>,
+    _limits: ForceLimits,
+    pub(super) last_root_iterations: usize,
+}
+
+impl ReducedV2ForceW3 {
+    pub(super) fn preflight_with_fft_backend(
+        domain: Domain,
+        sampled: Layout,
+        backend: FftBackend,
+    ) -> Result<ForceLimits, SolverError> {
+        let mut limits = ReducedV2Force::preflight_with_fft_backend(domain, sampled, backend)?;
+        let additional =
+            W3FftPool::additional_reservation_with_backend(sampled, backend, W3FftMode::Forward)?;
+        limits.storage_bytes = limits
+            .storage_bytes
+            .checked_add(additional)
+            .ok_or(SolverError::SizeOverflow)?;
+        Ok(limits)
+    }
+
+    pub(super) fn new_with_catalog(
+        domain: Domain,
+        sampled: Layout,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_fft_backend(domain, sampled, catalog.backend())?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let base_limits =
+            ReducedV2Force::preflight_with_fft_backend(domain, sampled, catalog.backend())?;
+        let serial =
+            ReducedV2Force::new_with_catalog(domain, sampled, catalog, base_limits.storage_bytes)?;
+        let ReducedV2Force {
+            retained,
+            sampled,
+            plan,
+            workspace,
+            physical,
+            spectral,
+            roots,
+            last_root_iterations,
+            ..
+        } = serial;
+        let additional = limits
+            .storage_bytes
+            .checked_sub(base_limits.storage_bytes)
+            .ok_or(SolverError::SizeOverflow)?;
+        Ok(Self {
+            retained,
+            sampled,
+            transform: W3FftPool::from_scalar_lane(
+                sampled,
+                catalog,
+                W3FftMode::Forward,
+                (plan, workspace, spectral),
+                additional,
+            )?,
+            physical,
+            _roots: roots,
+            _limits: limits,
+            last_root_iterations,
+        })
+    }
+
+    pub(super) fn transform(&mut self, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
+        if output.iter().any(|v| v.len() != self.retained.half_len()) {
+            return Err(SolverError::InvalidPayload);
+        }
+        self.transform.forward3(&mut self.physical)?;
+        for (axis, coefficients) in output.into_iter().enumerate() {
+            self.transform.with_spectrum(axis, |spectrum| {
+                transfer(self.sampled, self.retained, spectrum, coefficients)
+            })??;
+        }
+        Ok(())
+    }
+
+    pub(super) fn fft_identity(&self) -> W3FftIdentity {
+        self.transform.identity()
+    }
+
+    pub(super) fn is_terminated(&self) -> bool {
+        self.transform.is_terminated()
     }
 }
 

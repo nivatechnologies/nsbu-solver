@@ -1,8 +1,21 @@
 //! Workspace identity, shape, scratch, and finite-value validation.
-use super::{BackendPlan, FftPlan, FftWorkspace};
-use crate::SolverError;
+use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace};
+use crate::{domain::Layout, SolverError};
 
 impl FftPlan {
+    pub(crate) fn matches_lane(
+        &self,
+        layout: Layout,
+        backend: FftBackend,
+        workspace: &FftWorkspace,
+    ) -> bool {
+        self.layout == layout
+            && self.backend() == backend
+            && self
+                .validate(layout.real_len(), layout.half_len(), workspace)
+                .is_ok()
+    }
+
     pub(super) fn validate(
         &self,
         real: usize,
