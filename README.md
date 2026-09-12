@@ -62,18 +62,6 @@ sha256sum -c SHA256SUMS
 ./bin/nsbu diagnose-v2
 ```
 
-The v2 attempt-force cache is opt-in and can be sampled with the same bounded
-profile:
-
-```sh
-./bin/nsbu v2 --cache-force --dry-run
-./bin/nsbu v2 --cache-force
-```
-
-Cached v2 runs do not support checkpoint writes or `resume-v2`; use the default
-path for checkpoint workflows. The [paired cache timing evidence](evidence/p09/v2-cli-cache-timing/README.md)
-is a tiny shared-host study, not a general performance claim.
-
 This artifact targets Linux x86_64 with GNU/glibc and requires GLIBC symbols
 up to 2.35; inspect `SOURCE-MANIFEST.txt` for the recorded requirements.
 Other platforms require a source build. The alpha is diagnostic-only, with
@@ -82,21 +70,31 @@ blow-up.
 
 ## Refinement diagnostics
 
-The current alpha includes a fixed, reproducible diagnostic family:
+The published alpha includes a fixed, reproducible diagnostic family:
 
 ```sh
 ./bin/nsbu diagnose-v2 --dry-run
 ./bin/nsbu diagnose-v2
 ```
 
-To build the CLI from source instead, run these commands from the repository
+To build the current CLI from source instead, run these commands from the repository
 root:
 
 ```sh
 cargo build --release --locked -p nsbu-cli
 ./target/release/nsbu diagnose-v2 --dry-run
 ./target/release/nsbu diagnose-v2
+./target/release/nsbu v2 --cache-force --dry-run
+./target/release/nsbu v2 --cache-force
 ```
+
+The cache and reconstructed-probe export are current-source capabilities; they
+are not included in the downloaded `alpha-20260911-2` binary. The current
+source `diagnose-v2` callsite uses the version-2 diagnostic driver and emits the
+integrated export. Cached v2 runs do
+not support checkpoint writes or `resume-v2`; use the default path for
+checkpoint workflows. The [paired cache timing evidence](evidence/p09/v2-cli-cache-timing/README.md)
+is a tiny shared-host study, not a general performance claim.
 
 It independently evolves space, time-step, and CM/HO comparison trajectories
 on grids 4/8/12 through a short startup interval. JSON lines identify the case,

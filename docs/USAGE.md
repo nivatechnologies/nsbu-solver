@@ -59,6 +59,8 @@ cargo run -p nsbu-cli -- --version
 cargo run -p nsbu-cli -- smooth --dry-run
 cargo run -p nsbu-cli -- smooth --method cm
 cargo run -p nsbu-cli -- smooth --method ho
+cargo run --release -p nsbu-cli -- v2 --cache-force --dry-run
+cargo run --release -p nsbu-cli -- v2 --cache-force
 cargo run -p nsbu-benchmarks --example smooth_from_rest
 cargo run --release -p nsbu-benchmarks --example smooth_refinement
 ```
@@ -81,11 +83,14 @@ time-step and method comparisons, off-stage reconstruction and full-double-band
 residual measurements under a separately checked aggregate cap.
 Both are smooth verification profiles, distinct from `similarity-mms-v2`.
 The v2 CLI saves and resumes bounded exact-v2 checkpoints on its default path;
-`--cache-force` is an opt-in path that does not support checkpoint archives or
-`resume-v2`. All concentrating reports remain diagnostic-only and qualified
-restart provenance is still a separate scientific gate. Version-2 exports now
-include measured reconstructed off-stage physical reports, while analytical
-reference tracking remains unavailable off-stage; see the [integration evidence](../evidence/p09/v2-probe-physical-integration/README.md).
+`--cache-force` is an opt-in current-source path that does not support checkpoint
+archives or `resume-v2`. The published alpha binary predates this cache option
+and the reconstructed-probe export. In a current source build, the v2 diagnostic
+path includes measured reconstructed off-stage physical reports, while
+analytical reference tracking remains unavailable off-stage; see the
+[integration evidence](../evidence/p09/v2-probe-physical-integration/README.md).
+All concentrating reports remain diagnostic-only and qualified restart
+provenance is still a separate scientific gate.
 
 ### Save and resume the smooth diagnostic
 
