@@ -2,7 +2,7 @@
 
 Run `endpoint-run-81bd07e-b`; source identity `codex/p10-fft-batch-20260912@81bd07ec0e52`; case SHA-256 `e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e`; profile `n256-m384`; retained N256, M384 integration force, M768 observer force, 32 workers, rustfft 6.4.1 AVX/AVX2/FMA, parallel-reduced-attempt-cache, Cox–Matthews h32.
 
-Terminal marker is `endpoint_complete_qualification_pending` at clock 4096. All 128 attempts are committed over exact contiguous 32-tick ranges [0,4096], with nine observer nodes (0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096). Steady allocations are zero and no refusal records/output were present. Process exited with status 0. The `.time` sidecar is empty; completed resource telemetry records elapsed 25462 seconds and maximum RSS 63335844 KiB.
+Terminal marker is `endpoint_complete_qualification_pending` at clock 4096. All 128 attempts are committed over exact contiguous 32-tick ranges [0,4096], with nine observer nodes (0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096). Steady allocations are zero and no refusal records/output were present. Process exited with status 0. The `.time` sidecar is empty; completed resource telemetry records elapsed 25462 seconds and an observed polling `VmHWM` of 63335844 KiB.
 
 Identity hashes: binary `6d939d4eef61d9b4cfd303319eafe689349eb82ec0801db11a053831427c6c27`; frozen profile `65e5aeb68900da0c8057dbf3c1cf2d2ccc76e0700328ff86104bf87321fa184f`; preflight stdout `131b2f5083c914170814c3a5ebfd8006377d083abe1b2a27a806fbb531c9b1e4`; watchdog script `09b860be378c0c9b658ffde006200a581de87c0eef9598bbb096c72b664868fb`.
 
