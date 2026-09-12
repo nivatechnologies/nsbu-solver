@@ -77,6 +77,13 @@ verifies that this admits no numerical-grid allocations, and admitted live and
 imported run advances allocate no heap storage. The caller still budgets its
 own I/O and allocator costs. `--help` lists the actual supported options.
 
+CLI velocity grids must be multiples of four and contain only prime factors
+2 and 3: examples include 4, 8, 12, 16, 24, 32 and 48; 20 is unsupported.
+The FFT backend limits each axis to 1024 points. The 3/2 product grids, doubled
+diagnostic grids and separately configured force grids must also satisfy the
+backend limits. These are shape constraints, not promises that a run fits in
+memory or resolves the flow. Use `--dry-run` to check the complete profile.
+
 The single-run library example uses viscosity 1 and a separate small four-step configuration.
 The [six-trajectory experiment example](EXPERIMENTS.md) adds independent grid,
 time-step and method comparisons, off-stage reconstruction and full-double-band
