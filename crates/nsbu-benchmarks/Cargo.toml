@@ -107,3 +107,7 @@ harness = false
 [[test]]
 name = "v2_review_adapter"
 harness = false
+
+[[test]]
+name = "v2_review_profile_allocation"
+harness = false
