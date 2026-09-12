@@ -23,9 +23,9 @@ concentrating windows. In this bounded work block:
    spectral norms for sampled RMS or node counts for geometric volume.
 3. Admit a genuine nested exact-time review profile with explicit observable
    semantics, unavailable evidence and bounded required rows.
-4. Integrate the startup-only pressure-reference and standalone off-stage
-   physical consumers, and use the archived corrected derivative-symmetry evidence,
-   before attempting the next combined review.
+4. Continue the integrated pressure/reference review from the focused standalone
+   consumers, preserve the archived derivative-symmetry evidence, and complete
+   the source-matched hosted gate before the next combined review.
 
 The combined exporter, partial review adapter and force-baseline binder from
 `31e99a1` passed both [source-matched hosted suites](evidence/p09/hosted-integration-31e99a1/summary.json).
@@ -47,10 +47,11 @@ physical-test scope. Hosted run 489 failed on test-file Halstead difficulty
 84.37; the corrected test split awaits new hosted CI and does not overwrite the
 latest verified evidence.
 
-The opt-in core-only attempt-force cache at source `9836cfc` has focused
-small-grid CM/HO bit-equality evidence and reduces force evaluations from 12/15
-to 5. It is not yet integrated into the owned runtime. See the
-[attempt-cache evidence](evidence/p09/v2-attempt-force-cache/summary.json).
+The owned runtime now exposes the opt-in attempt-force cache; default direct
+execution remains unchanged and cached checkpoint/resume forms remain unsupported.
+Focused cache evidence records small-grid CM/HO bit equality and force evaluations
+reduced from 12/15 to 5. The latest main source `def4730` still awaits its
+source-matched hosted CI result. See the [attempt-cache evidence](evidence/p09/v2-attempt-force-cache/summary.json).
 
 ## Runtime-first execution priority · 11 September 2026
 
@@ -1004,5 +1005,7 @@ reached probes through 4095 before its timeout. Its accepted-4096 consumers
 returned and saved all six states, but the report was not serialized and the
 M24-to-M48 endpoint control did not complete. An archive-only reader recovered
 endpoint spectral comparisons from validated state archives, which is not a
-complete endpoint report or a convergence result. M48/M96 runs remain pending.
-P08/P09/P10 remain incomplete and accepted concentrating PDE windows remain zero.
+complete endpoint report or a convergence result. The M48 cached-force feasibility run is complete through five events;
+M96 N12 completed clock 4096, while N16/N24 timed out at 05:49:24 (exit 124) with
+midpoint data only and no endpoint. P08/P09/P10 remain incomplete and accepted
+concentrating PDE windows remain zero.
