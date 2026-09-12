@@ -1,40 +1,48 @@
 {
-  "status": "w3_merged_preparation_only_final_confirmation_required",
+  "source_commit": "68755e0797b607c7e79e2ad3700cfc33e6b66fd4",
+  "status": "pass",
   "tests": {
-    "n384_prep_passed": 19,
-    "default_regression_passed": 12,
-    "n256_regression_passed": 12,
+    "n384_h32_passed": 18,
+    "n384_h64_passed": 18,
+    "default_transactional_passed": 12,
     "solver_w3_passed": 9,
     "provider_w3_passed": 4
   },
   "format": "pass",
-  "strict_clippy_n384_prep": "pass",
-  "maximum_function_cyclomatic_complexity": 15,
+  "strict_clippy_n384_h32": "pass",
+  "strict_clippy_n384_h64": "pass",
+  "maximum_function_cyclomatic_complexity": 16,
   "maximum_function_cognitive_complexity": 7,
   "maximum_function_halstead_difficulty": 26.833333333333332,
-  "maximum_file_halstead_difficulty": 57.324380165289256,
   "maximum_file_lines": 499,
-  "focused_n384_line_coverage": {
-    "covered": 907,
-    "count": 1799,
-    "percent": 50.42
+  "h32_plus_default_line_coverage": {
+    "covered": 995,
+    "count": 2157,
+    "percent": 46.12888270746407
   },
-  "focused_n384_branch_coverage": {
-    "covered": 33,
-    "count": 100,
-    "percent": 33.0
-  },
-  "combined_n384_default_line_coverage": {
-    "covered": 1015,
-    "count": 2170,
-    "percent": 46.77
-  },
-  "combined_n384_default_branch_coverage": {
+  "h32_plus_default_branch_coverage": {
     "covered": 37,
-    "count": 108,
-    "percent": 34.26
+    "count": 64,
+    "percent": 57.8125
   },
-  "combined_maximum_per_function_crap": 22.5,
-  "combined_crap_violations": 0,
-  "coverage_note": "Focused harness coverage is reported honestly and is not the whole maintained-scope 80 percent gate. Final W3 source requires a fresh feature-specific quality run before freeze."
+  "h64_plus_default_line_coverage": {
+    "covered": 994,
+    "count": 2156,
+    "percent": 46.103896103896105
+  },
+  "h64_plus_default_branch_coverage": {
+    "covered": 37,
+    "count": 64,
+    "percent": 57.8125
+  },
+  "maximum_per_function_crap": 22.5,
+  "crap_violations": 0,
+  "raw_report_sha256": {
+    "metrics": "0f777b750ae1e4366e792101b3c7bc06c2d65112f93b3f3faf7cfb327323ccf5",
+    "h32_plus_default_coverage": "bdf158ff110695a6e67ba2a2618db81b34f39259e319157e783481c6e83c3f3e",
+    "h64_plus_default_coverage": "bdbf718e07ddadf0e54887bfe3ab10d9b18842735b8212118f1f89778585d52a",
+    "h32_crap": "ace613d12890df4f4c2f8eaebacbf15c3dab4eb07e1ffb391292d4df224ea832",
+    "h64_crap": "ace613d12890df4f4c2f8eaebacbf15c3dab4eb07e1ffb391292d4df224ea832"
+  },
+  "coverage_note": "Focused feature plus default-profile transactional coverage is reported honestly and is not the whole maintained-scope 80 percent gate."
 }

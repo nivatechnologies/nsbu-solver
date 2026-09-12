@@ -1,0 +1,29 @@
+{
+  "schema": "p10-avx-n384-deployment-v1",
+  "status": "prepared_not_launched",
+  "source_commit": "68755e0797b607c7e79e2ad3700cfc33e6b66fd4",
+  "branch": "codex/p10-n384-endpoint-prep-20260912",
+  "build": {
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "cargo": "1.94.0 (85eff7c80 2026-01-15)",
+    "target": "x86_64-unknown-linux-gnu",
+    "cargo_lock_sha256": "fcce0d69957ee07e8c67729cea668d5f4d480bbd1fe836501e825c61c5fd544d",
+    "harness_cargo_lock_sha256": "33d7bd67d4b9362ae32a5e943e142b5af8fc258f38f661e2fa8b1ee145a1641b",
+    "harness_cargo_toml_sha256": "a581f5a850e81b7101860a3db460238fb30f64e051689543cb6ea5822dce2681"
+  },
+  "files": {
+    "p10-avx-n384-h32": "c58c04dfa9aef7adffb1234c314d9cbe2625f5abd7152b4f758fdb0415ec4882",
+    "p10-avx-n384-h64": "5e60947ae82c2cf09bf4960fec869440343eb47d37324b5ac406c81b9878e5df",
+    "frozen-plan-h32.json": "5ac7859a64e57c07d8c86f0f276722d6a7714a0bf8e714fab0b47c28056a4971",
+    "frozen-plan-h64.json": "a9e456c0d5779f648871ce7c070fa2ba1fc697f9c0470eef2acda0d49efac777",
+    "h32-preflight.stdout": "e74ce280e9218daf463d375512d65390e48450b0e4020962ca912374dde05473",
+    "h64-preflight.stdout": "bdf56ba3d9f4e00c3d2c00834fd00ced80ec9c04a24be62e7522d480a8d816a7",
+    "pgid-watchdog-v1.sh": "2e5afc6cadad3549bb947aface8e2a2ae2aa6594ebe1e1f289441834e0f113ab",
+    "quality-summary.json": "306cae1cead15b50230ab9ed76d8883db5f3835d8ad9eae8c42d4e64bde1962f",
+    "README.md": "3134b84b63f8afed84dc3e9ddaadf96fa49016e7cd08b677374b0be60e5f8a11",
+    "DEPLOY.md": "274c4c749f77e9482b8430f897cf2ff7ee94d026fed6a17a799577b014551048"
+  },
+  "selection_order": ["n384-h32", "n384-h64"],
+  "host_admission": "remeasure Sulaco immediately before construction; preserve any refusal",
+  "run_authorized": false
+}
