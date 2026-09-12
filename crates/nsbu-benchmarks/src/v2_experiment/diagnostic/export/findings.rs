@@ -178,6 +178,42 @@ pub fn pressure<W: Write>(
     }
     j.raw("]}")
 }
+pub fn probe_pressure<W: Write>(
+    j: &mut Json<W>,
+    s: crate::v2_experiment::probes::pressure::ProbePressureSample,
+) -> Result<(), DiagnosticExportError> {
+    j.raw("{\"clock\":")?;
+    v::clock(j, s.clock())?;
+    j.raw(",\"identity\":")?;
+    j.hex(s.identity())?;
+    j.raw(",\"source_domain\":")?;
+    v::domain(j, s.source_domain())?;
+    j.raw(",\"force_grid\":")?;
+    v::layout(j, s.force_layout())?;
+    j.raw(",\"force_workers\":")?;
+    j.counter(s.force_workers())?;
+    j.raw(",\"sample_grid\":")?;
+    v::layout(j, s.sample_layout())?;
+    j.raw(",\"relative_floors\":")?;
+    v::f64_array(j, s.relative_floors())?;
+    j.raw(",\"quantities\":[")?;
+    for (i, q) in s.quantities().iter().enumerate() {
+        if i > 0 {
+            j.raw(",")?
+        }
+        j.raw("{\"quantity\":")?;
+        j.string(v::quantity(q.quantity))?;
+        j.raw(",\"comparisons\":")?;
+        local5(
+            j,
+            [q.pairs[0], q.pairs[1]],
+            [q.pairs[2], q.pairs[3]],
+            q.pairs[4],
+        )?;
+        j.raw("}")?;
+    }
+    j.raw("]}")
+}
 fn pressure_quantity<W: Write>(
     j: &mut Json<W>,
     q: crate::v2_experiment::pressure::QuantityRefinement,

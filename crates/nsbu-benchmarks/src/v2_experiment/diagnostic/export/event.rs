@@ -37,6 +37,8 @@ fn event<W: Write>(
     if p.schema_version() == 2 {
         j.raw(",\"reconstructed_physical\":")?;
         findings::probe_physical(j, e.reconstructed_physical())?;
+        j.raw(",\"reconstructed_pressure\":")?;
+        findings::probe_pressure(j, e.reconstructed_pressure())?;
     }
     event_accepted(j, e)?;
     event_residual(j, e)?;
@@ -50,12 +52,34 @@ fn validate_event(
     validate_top(p, index, e)?;
     if p.schema_version() == 2 {
         validate_probe_physical(p, e)?;
+        validate_probe_pressure(p, e)?;
     }
     if let Some(a) = e.accepted().sample() {
         validate_accepted(p, e, a)?
     }
     if let Some(r) = e.residual().sample() {
         validate_residual(p, e, r)?
+    }
+    Ok(())
+}
+fn validate_probe_pressure(
+    p: DiagnosticExportPlan,
+    e: DiagnosticEvent,
+) -> Result<(), DiagnosticExportError> {
+    let s = e.reconstructed_pressure();
+    if (s.clock(), s.identity(), s.origins()) != (e.clock(), p.probe_identity, e.probe().origins())
+        || s.source_domain() != p.pressure_source
+        || s.force_layout() != p.pressure_layout
+        || s.sample_layout() != p.settings.pressure_samples
+        || s.relative_floors().map(f64::to_bits) != p.settings.pressure_floors.map(f64::to_bits)
+        || s.force_workers() != p.family.force.workers
+        || s.quantities().map(|q| q.quantity)
+            != [
+                nsbu_solver::diagnostics::physical::PhysicalQuantity::Scalar,
+                nsbu_solver::diagnostics::physical::PhysicalQuantity::ScalarGradient,
+            ]
+    {
+        return Err(DiagnosticExportError::InvalidReport);
     }
     Ok(())
 }
