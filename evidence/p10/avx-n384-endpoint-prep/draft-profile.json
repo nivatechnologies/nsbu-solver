@@ -1,5 +1,5 @@
 {
-  "status": "w3_merged_admission_closed_not_frozen",
+  "status": "superseded_by_frozen-plan-h32.json",
   "base_source": "29d9f1c",
   "run_authorized": false,
   "retained_layout": 384,
@@ -21,7 +21,7 @@
   "provider_w3_workers": 3,
   "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
   "w3_source": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
-  "provider": "parallel-reduced-v2-force-w3",
+  "provider": "parallel-reduced-v2-force-w3-attempt-cache",
   "rhs_fft": "layout576-width3-bidirectional-add9200779136",
   "force_fft": "layout384-width3-forward-add1827942144",
   "rhs_timer": "harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included",
