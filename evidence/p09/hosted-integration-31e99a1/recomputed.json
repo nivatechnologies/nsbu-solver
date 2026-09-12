@@ -1,0 +1,54 @@
+{
+  "source_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "coverage_recomputed_from_per_file_summaries": {
+    "rust": {
+      "lines": {
+        "count": 43327,
+        "covered": 42453,
+        "percent": 97.98278209892214
+      },
+      "branches": {
+        "count": 3114,
+        "covered": 2724,
+        "percent": 87.47591522157997
+      }
+    },
+    "python": {
+      "lines": {
+        "count": 6098,
+        "covered": 6054,
+        "percent": 99.2784519514595
+      },
+      "branches": {
+        "count": 1202,
+        "covered": 1173,
+        "percent": 97.5873544093178
+      }
+    }
+  },
+  "static_metrics_from_hosted_raw": {
+    "rust": {
+      "cyclomatic_max": 21.0,
+      "cognitive_max": 21.0,
+      "halstead_difficulty_max": 60.0,
+      "halstead_difficulty_all_node_max": 75.9295154185022,
+      "halstead_difficulty_function_max": 60.0
+    },
+    "python": {
+      "cyclomatic_max": 16,
+      "halstead_difficulty_max": 13.826086956521738
+    }
+  },
+  "physical_file_lines_from_git_show": {
+    "files": 570,
+    "maximum": 477,
+    "over_or_equal_500": [],
+    "python_maintained_files": 102,
+    "python_maintained_maximum": 327,
+    "python_over_or_equal_500": []
+  },
+  "crap_max": {
+    "rust": 24.05859375,
+    "python": 19.9814453125
+  }
+}
