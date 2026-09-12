@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "StandaloneDiagnosticOnly",
+  "base_commit": "9641bb0c44e414d3da147ea0bedd425c7685eeb5",
+  "executable_source_commit": "bfae37e4cb80a375b60f93550c47d43a86e06613",
+  "documentation_tip": "7867daf95b41c2cfcf3146aa94cc237706be249d",
+  "profile": {
+    "retained_grids": [4, 8, 12],
+    "force_grid": [16, 16, 16],
+    "observer_force_grid": [32, 32, 32],
+    "methods": ["CoxMatthews", "HochbruckOstermann"],
+    "independent_trajectories": 6,
+    "committed_steps_per_trajectory": 2,
+    "unique_table_clocks": 9,
+    "shared_force_copies": 162,
+    "provider_evaluations": 9
+  },
+  "tests": {
+    "functional": {"passed": 3, "failed": 0, "seconds": 46.04},
+    "instrumented_functional": {"passed": 3, "failed": 0, "seconds": 291.77},
+    "allocation": {
+      "passed": true,
+      "construction_bytes": 1965488,
+      "declared_joint_bytes": 2235840,
+      "steady_allocations": 0,
+      "steady_reallocations": 0,
+      "steady_deallocations": 0
+    }
+  },
+  "focused_coverage": {
+    "lines_covered": 1134,
+    "lines_total": 1196,
+    "line_percent": 94.81605351170569,
+    "branches_covered": 47,
+    "branches_total": 68,
+    "branch_percent": 69.11764705882354
+  },
+  "quality": {
+    "maximum_crap": 22.5,
+    "whole_maximum_function_cyclomatic": 21.0,
+    "whole_maximum_function_cognitive": 21.0,
+    "whole_maximum_all_node_halstead_difficulty": 77.46107784431138,
+    "changed_maximum_function_cyclomatic": 20.0,
+    "changed_maximum_function_cognitive": 14.0,
+    "changed_maximum_function_halstead_difficulty": 48.18556701030928,
+    "whole_maximum_file_lines": 489,
+    "format": "passed",
+    "workspace_all_targets_clippy": "passed",
+    "strict_workspace_rustdoc": "passed",
+    "repository_check": "passed"
+  },
+  "scope_limits": {
+    "owned_run_or_family_wired": false,
+    "general_zero_copy_domain_clocks_admitted": false,
+    "current_family_plan_geometry_can_supply_positive_counts": true,
+    "interpolation": false,
+    "analytical_state_injection": false,
+    "claims_force_accuracy": false,
+    "claims_convergence": false,
+    "claims_pde_qualification": false,
+    "accepted_windows": 0
+  }
+}
