@@ -1,9 +1,13 @@
 {
   "schema": "p10-snapshot-time-diagnostic-review-handoff-v1",
-  "status": "pending-root-review-comparison-not-run",
+  "status": "root-approved-single-comparison-complete",
   "adapter_source_commit": "e59dc06",
   "comparison_kind": "TIME_DIAGNOSTIC",
   "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "comparison_output": {
+    "path": "evidence/p10/snapshot-comparison-adapter/review-n192-time-endpoint/comparison-output.json",
+    "sha256": "c9fd48037abb6ac55d3d4e77d09bb72285d1bd7b0f1ee67fcd8a1d0accbd8ab7"
+  },
   "left": {
     "source_commit": "92effa6068d20d69e815c6a83f1e82490ce37fe7",
     "record": {
