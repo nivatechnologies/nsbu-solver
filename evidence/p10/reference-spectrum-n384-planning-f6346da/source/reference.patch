@@ -1,41 +1,58 @@
 --- src/main.rs
 +++ src/main.rs
-@@ -16 +16 @@
+@@ -0,0 +1,3 @@
++mod high_bands;
++
++use high_bands::HighBandShells;
+@@ -16 +19 @@
 -const OWNER_CAP: usize = 3 * 1024 * 1024 * 1024;
 +const OWNER_CAP: usize = 20 * 1024 * 1024 * 1024;
-@@ -23 +23 @@
+@@ -23 +26 @@
 -        .ok_or("usage: p10-reference-spectrum-hi M [--preflight|--run]")?
 +        .ok_or("usage: p10-reference-spectrum-n384 M [--preflight|--run]")?
-@@ -27,2 +27,2 @@
+@@ -27,2 +30,2 @@
 -    if args.len() != 3 || (!run && args[2] != "--preflight") || ![192, 384].contains(&m) {
 -        return Err("usage: p10-reference-spectrum-hi {192|384} {--preflight|--run}".into());
 +    if args.len() != 3 || (!run && args[2] != "--preflight") || ![384, 768].contains(&m) {
 +        return Err("usage: p10-reference-spectrum-n384 {384|768} {--preflight|--run}".into());
-@@ -32 +32 @@
+@@ -32 +35 @@
 -    let retained = Layout::new([192; 3]).map_err(debug)?;
 +    let retained = Layout::new([384; 3]).map_err(debug)?;
-@@ -33,0 +34,3 @@
+@@ -33,0 +37,6 @@
 +    let audit_visits = samples.half_len().checked_mul(3).ok_or("work overflow")?;
 +    let strict_visits = retained.half_len().checked_mul(3).ok_or("work overflow")?;
 +    let shell_visits = retained.half_len().checked_mul(4).ok_or("work overflow")?;
-@@ -35 +38 @@
++    let extended_shells = usize::from(m == 768)
++        .checked_mul(samples.half_len().checked_mul(3).ok_or("work overflow")?)
++        .ok_or("work overflow")?;
+@@ -35 +44 @@
 -        "preflight case_sha256={CASE_SHA256} clock_exponent=-20 target=8192 elapsed=4096 remaining=4096 samples={m} evaluations={} root_iteration_bound={} transforms=3 retained=192 owner_cap={OWNER_CAP} owner_reservation={reservation}",
-+        "preflight case_sha256={CASE_SHA256} clock_exponent=-20 target=8192 elapsed=4096 remaining=4096 samples={m} evaluations={} root_iteration_bound={} main_transforms=3 control_transforms=1 scalar_jet_points=3 raw_fft_audit_visits={audit_visits} strict_validation_visits={strict_visits} shell_coefficient_visits={shell_visits} retained=384 owner_cap={OWNER_CAP} owner_reservation={reservation}",
-@@ -39,2 +41,0 @@
++        "preflight case_sha256={CASE_SHA256} clock_exponent=-20 target=8192 elapsed=4096 remaining=4096 samples={m} evaluations={} root_iteration_bound={} main_transforms=3 control_transforms=1 scalar_jet_points=3 raw_fft_audit_visits={audit_visits} extended_shell_visits={extended_shells} strict_validation_visits={strict_visits} shell_coefficient_visits={shell_visits} retained=384 owner_cap={OWNER_CAP} owner_reservation={reservation}",
+@@ -39,2 +47,0 @@
 -    normalization_control(samples)?;
 -    reference_control()?;
-@@ -43,0 +45,2 @@
+@@ -43,0 +51,2 @@
 +    normalization_control(samples)?;
 +    reference_control()?;
-@@ -54,0 +58 @@
+@@ -54,0 +64 @@
 +    let mut sampled_max_sum_abs = 0.0_f64;
-@@ -63,0 +68,2 @@
+@@ -63,0 +74,2 @@
 +                let sum_abs = value.velocity.iter().map(|v| v.abs()).sum::<f64>();
 +                sampled_max_sum_abs = sampled_max_sum_abs.max(sum_abs);
-@@ -105 +111 @@
+@@ -87,0 +100 @@
++    let mut high_bands = None;
+@@ -91 +104,6 @@
+-        let audit = audit_fft_output(samples, &output)?;
++        drop(std::mem::take(&mut physical[c]));
++        if m == 768 && high_bands.is_none() {
++            high_bands = Some(HighBandShells::new(samples)?);
++        }
++        let component = high_bands.as_ref().map(|_| c);
++        let audit = audit_fft_output(samples, &output, component, high_bands.as_mut())?;
+@@ -105 +123 @@
 -    let path = format!("work/p10-reference-spectrum/reference-m{m}-clock4096-n192.coeff.bin");
 +    let path = format!("work/p10-reference-output-n384/reference-m{m}-clock4096-n384.coeff.bin");
-@@ -111,0 +118,9 @@
+@@ -111,0 +130,9 @@
 +    println!(
 +        "sampled_stage_speed clock=4096 samples={m} max_sum_abs={sampled_max_sum_abs} status=nonrigorous_exact_reference_grid_sample"
 +    );
@@ -45,7 +62,16 @@
 +            "sampled_stage_candidate n={n} continuous_dt={continuous} dyadic_ticks_over_2pow20={ticks} guard_product={product} guard_limit=0.3"
 +        );
 +    }
-@@ -135,0 +151,15 @@
+@@ -117,0 +145,8 @@
++    if let Some(high_bands) = high_bands {
++        for (name, value) in high_bands.finish()? {
++            println!(
++                "raw_sample_shell={name} l2={} h1={} vorticity={} divergence={}",
++                value.l2, value.h1, value.vorticity, value.divergence
++            );
++        }
++    }
+@@ -135,0 +171,15 @@
 +fn sampled_stage_candidate(max_sum_abs: f64, n: usize) -> Result<(f64, u128, f64), String> {
 +    if !max_sum_abs.is_finite() || max_sum_abs <= 0.0 || n < 4 {
 +        return Err("invalid sampled stage-speed input".into());
@@ -61,13 +87,54 @@
 +    Ok((continuous, ticks, product))
 +}
 +
-@@ -289,5 +318,0 @@
+@@ -137 +187 @@
+-    let real = samples
++    let one_physical = samples
+@@ -139 +189 @@
+-        .checked_mul(3 * size_of::<f64>())
++        .checked_mul(size_of::<f64>())
+@@ -150,2 +200,12 @@
+-    // Six Vec allocations, result accumulators and allocator metadata receive 64 KiB.
+-    let total = real
++    let physical = one_physical.checked_mul(3).ok_or("size overflow")?.max(
++        if samples.dimensions() == [768; 3] {
++            one_physical
++                .checked_mul(2)
++                .and_then(|x| x.checked_add(output))
++                .ok_or("size overflow")?
++        } else {
++            0
++        },
++    );
++    // The M768 raw-shell dot buffer replaces a released physical component.
++    let total = physical
+@@ -181 +241 @@
+-    let audit = audit_fft_output(layout, &spectrum)?;
++    let audit = audit_fft_output(layout, &spectrum, None, None)?;
+@@ -253 +313,6 @@
+-fn audit_fft_output(layout: Layout, spectrum: &[Complex64]) -> Result<FftAudit, String> {
++fn audit_fft_output(
++    layout: Layout,
++    spectrum: &[Complex64],
++    component: Option<usize>,
++    high_bands: Option<&mut HighBandShells>,
++) -> Result<FftAudit, String> {
+@@ -257,0 +323,4 @@
++    if high_bands.is_some() != component.is_some() {
++        return Err("shell audit component mismatch".into());
++    }
++    let mut high_bands = high_bands;
+@@ -264,0 +334,3 @@
++        if let Some(shells) = high_bands.as_deref_mut() {
++            shells.add(component.expect("validated component"), index, p, z)?;
++        }
+@@ -289,5 +360,0 @@
 -        ("inside_n48", norm_range(layout, spectra, 0, 48)?),
 -        ("n48_to_n64", norm_range(layout, spectra, 48, 64)?),
 -        ("n64_to_n96", norm_range(layout, spectra, 64, 96)?),
 -        ("n96_to_n128", norm_range(layout, spectra, 96, 128)?),
 -        ("n128_to_n192", norm_range(layout, spectra, 128, 192)?),
-@@ -294,0 +320,3 @@
+@@ -294,0 +362,3 @@
 +        ("n192_to_n256", norm_range(layout, spectra, 192, 256)?),
 +        ("n256_to_n384", norm_range(layout, spectra, 256, 384)?),
 +        ("inside_n384", norm_range(layout, spectra, 0, 384)?),

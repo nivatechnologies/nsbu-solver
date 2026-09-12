@@ -3,20 +3,24 @@
   "implementation_base": "f6346da8085365fad84874db08aa1213c75df331",
   "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
   "clock": {"exponent": -20, "target": 8192, "elapsed": 4096, "remaining": 4096},
-  "purpose": "Estimate analytical-reference N192-to-N256/N384 shell magnitudes and the M384-to-M768 sampling discrepancy over strict N384.",
+  "purpose": "Estimate analytical-reference N192-to-N256/N384 shell magnitudes, raw M768 N384-to-N512/N512-to-N768 shell magnitudes, and the M384-to-M768 sampling discrepancy over strict N384.",
   "claims_excluded": ["PDE validation", "trajectory error", "continuum tail bound", "independent high-precision reference", "accepted window"],
   "generation": {
     "retained_grid": 384,
     "sample_grids": [384, 768],
     "outputs": ["inside_n192", "n192_to_n256", "n256_to_n384", "inside_n384"],
+    "m768_raw_sample_shells": ["n384_to_n512", "n512_to_n768"],
+    "m768_raw_shell_method": "Accumulate Parseval-weighted component energy and k dot u in the existing raw FFT audit pass; derive vorticity from k_squared_energy minus abs(k dot u)_squared, excluding every Nyquist plane.",
+    "m768_raw_shell_accumulator_bytes": 3633315840,
     "owner_cap_bytes": 21474836480,
     "rlimit_as_bytes": 21474836480,
     "m384_owner_reservation_bytes": 3635777784,
-    "m768_owner_reservation_bytes": 19504439544,
+    "m768_owner_reservation_bytes": 19513876728,
     "m384_evaluations": 56623104,
     "m768_evaluations": 452984832,
     "m384_root_iteration_bound": 7247757312,
     "m768_root_iteration_bound": 57982058496,
+    "m768_extended_shell_visits": 681246720,
     "main_scalar_transforms_per_run": 3,
     "normalization_control_transforms_per_run": 1,
     "scalar_jet_control_points": 3
@@ -40,7 +44,7 @@
     "metadata_caveat": "The reusable comparator receives grid/sample labels externally; direct-reference files have no workers, so the command supplies workers=0 and binds both files by printed SHA-256."
   },
   "disk_cap_bytes": 3221225472,
-  "expected_wall_seconds": {"m384": 90, "m768": 600, "comparison": 90, "total": 780},
+  "expected_wall_seconds": {"m384": 90, "m768": 630, "comparison": 90, "total": 810},
   "hard_timeout_seconds": {"m384": 180, "m768": 720, "comparison": 180},
   "commands_after_cpu_release": {
     "prepare_and_preflight": "sh evidence/p10/reference-spectrum-n384-planning-f6346da/source/setup-and-preflight.sh",
@@ -48,5 +52,5 @@
     "m768": "(ulimit -v 20971520; timeout 720s work/p10-reference-n384-target/release/p10-reference-spectrum-n384 768 --run)",
     "compare_template": "(ulimit -v 7340032; timeout 180s work/p10-reference-n384-target/release/p10-force-snapshot-tool-n384 compare LEFT_M384 RIGHT_M768 4096 384 384 384 768 0 0 LEFT_SHA256 RIGHT_SHA256)"
   },
-  "launch_rule": "Do not start while the four endpoint PDE jobs own the CPU. Run M384 and M768 independently, then compare their retained strict-N384 files only after both exit zero and hashes are recorded."
+  "launch_rule": "Do not start while the four endpoint PDE jobs own the CPU. Run M384 and the amended M768 independently, then compare their retained strict-N384 files only after both exit zero and hashes are recorded. An already completed pre-amendment M768 strict-N384 file cannot recover raw outer shells and must be repeated with the amended source-bound binary."
 }

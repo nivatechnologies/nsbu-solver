@@ -1,6 +1,7 @@
 e783d90a7a7f0ea8e489f972e56e42fa181b9079162ef0ab361702dc2aebbb72  work/p10-reference-spectrum-n384/Cargo.toml
 5b954418b4406d999002aa37e1b4906a395f584a02b6263a0bd5b3ae9446c8c7  work/p10-reference-spectrum-n384/Cargo.lock
-376adc98879faea7d7028219fd27c341c76befb12449c0bcf614816dbf7d2cbd  work/p10-reference-spectrum-n384/src/main.rs
+caa65c8681d8514f71388f324d80db2b5effb7404773cd4dbbc50bbab5bcfdb4  work/p10-reference-spectrum-n384/src/main.rs
+2eb51d845b596da86933ad54dfbf88794839f00d333e131769b26db675762114  work/p10-reference-spectrum-n384/src/high_bands.rs
 df37ffc065c25891e1205742244c3c963f418171e7aa37693264f0d968665532  work/p10-force-snapshot-tool-n384/Cargo.toml
 a6ed0f6bd00a7906e8a3d8dd4fcde36039f41f9451af6c3b2b2eb6e653db90fc  work/p10-force-snapshot-tool-n384/Cargo.lock
 5b847204474ee51652a097d92d6162f7ffafac38ce04f7072560361bd1171aa5  work/p10-force-snapshot-tool-n384/src/main.rs

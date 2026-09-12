@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-09-12T14:43:03Z",
+  "remote_schedule_commit": "02a7785aa9720d2166ebb82f5f8f27a713ee0f4c",
+  "reason": "The strict N384 transfer intentionally discards modes needed for the requested N384-to-N512 and N512-to-N768 raw M768 shells.",
+  "required_remote_action": "Do not use a pre-amendment M768 binary or its strict-N384 file for outer shells. Reconstruct the amended harness from this plan, verify generated-harness-sha256.txt, and repeat only the M768 reference screen.",
+  "source_binding": {
+    "implementation_base": "f6346da8085365fad84874db08aa1213c75df331",
+    "reference_patch_sha256": "47f86b38af96491a0c7bb8b1ee4ec1a2134b60fdb51c295bc970d73a03f2504e",
+    "high_bands_sha256": "2eb51d845b596da86933ad54dfbf88794839f00d333e131769b26db675762114"
+  },
+  "unchanged": ["case", "clock", "M384", "M768 sampling grid", "20GiB owner cap", "20GiB generation RLIMIT_AS", "sequential execution", "strict-N384 serialized outputs", "PDE separation"],
+  "amended": {
+    "m768_owner_reservation_bytes": 19513876728,
+    "m768_raw_shells": ["n384_to_n512", "n512_to_n768"],
+    "m768_extended_shell_visits": 681246720,
+    "m768_expected_wall_seconds": 630,
+    "m768_hard_timeout_seconds": 720
+  },
+  "scope": "Binary64 analytical reference resolution planning only; raw sample shells are neither a continuum tail bound nor PDE validation."
+}
