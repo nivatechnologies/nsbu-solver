@@ -15,6 +15,19 @@ use nsbu_solver::{
 
 #[cfg(all(feature = "n256", feature = "n384-prep"))]
 compile_error!("n256 and n384-prep are mutually exclusive profiles");
+#[cfg(all(feature = "n192-piecewise-cadv33", feature = "n256-piecewise-cadv33"))]
+compile_error!("select only one matched retained layout");
+#[cfg(any(
+    all(feature = "n192-piecewise-cadv33", feature = "n384-h32"),
+    all(feature = "n192-piecewise-cadv33", feature = "n384-h64"),
+    all(feature = "n192-piecewise-cadv33", feature = "n384-piecewise"),
+    all(feature = "n192-piecewise-cadv33", feature = "n384-piecewise-cadv33"),
+    all(feature = "n256-piecewise-cadv33", feature = "n384-h32"),
+    all(feature = "n256-piecewise-cadv33", feature = "n384-h64"),
+    all(feature = "n256-piecewise-cadv33", feature = "n384-piecewise"),
+    all(feature = "n256-piecewise-cadv33", feature = "n384-piecewise-cadv33")
+))]
+compile_error!("matched and N384 profiles are mutually exclusive");
 #[cfg(all(feature = "n384-h32", feature = "n384-h64"))]
 compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
 #[cfg(any(
@@ -31,7 +44,9 @@ compile_error!("select only one exact n384 profile");
         feature = "n384-h32",
         feature = "n384-h64",
         feature = "n384-piecewise",
-        feature = "n384-piecewise-cadv33"
+        feature = "n384-piecewise-cadv33",
+        feature = "n192-piecewise-cadv33",
+        feature = "n256-piecewise-cadv33"
     ))
 ))]
 compile_error!("select an exact top-level n384 feature");
@@ -40,7 +55,16 @@ compile_error!("select an exact top-level n384 feature");
 pub const N: usize = 192;
 #[cfg(all(feature = "n256", not(feature = "n384-prep")))]
 pub const N: usize = 256;
-#[cfg(all(feature = "n384-prep", not(feature = "n256")))]
+#[cfg(feature = "n192-piecewise-cadv33")]
+pub const N: usize = 192;
+#[cfg(feature = "n256-piecewise-cadv33")]
+pub const N: usize = 256;
+#[cfg(all(
+    feature = "n384-prep",
+    not(feature = "n256"),
+    not(feature = "n192-piecewise-cadv33"),
+    not(feature = "n256-piecewise-cadv33")
+))]
 pub const N: usize = 384;
 pub const M: usize = 384;
 pub const WORKERS: usize = 32;
@@ -54,7 +78,11 @@ pub const ADVECTIVE_LIMIT: f64 = 0.45;
 pub const ADVECTIVE_LIMIT: f64 = 0.8;
 #[cfg(feature = "n384-piecewise")]
 pub const ADVECTIVE_LIMIT: f64 = 1.6;
-#[cfg(feature = "n384-piecewise-cadv33")]
+#[cfg(any(
+    feature = "n384-piecewise-cadv33",
+    feature = "n192-piecewise-cadv33",
+    feature = "n256-piecewise-cadv33"
+))]
 pub const ADVECTIVE_LIMIT: f64 = 3.3;
 const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
@@ -72,12 +100,27 @@ const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
 const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv16-w3-f13c29c";
 #[cfg(all(feature = "n384-piecewise-cadv33", not(feature = "n256")))]
 const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
-#[cfg(feature = "n384-prep")]
+#[cfg(feature = "n192-piecewise-cadv33")]
+const PROFILE: &str = "n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c";
+#[cfg(feature = "n256-piecewise-cadv33")]
+const PROFILE: &str = "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+#[cfg(all(
+    feature = "n384-prep",
+    not(feature = "n192-piecewise-cadv33"),
+    not(feature = "n256-piecewise-cadv33")
+))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
+#[cfg(any(
+    feature = "n192-piecewise-cadv33",
+    feature = "n256-piecewise-cadv33"
+))]
+const PREFLIGHT_SCHEMA: &str = "p10-avx-matched-piecewise-preflight-v1";
 #[cfg(not(feature = "n384-prep"))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-scheduled-endpoint-v2";
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 const EXECUTION: &str = "separate-rhs-force-w3";
+#[cfg(feature = "n192-piecewise-cadv33")]
+const EXECUTION: &str = "serial-component-avx-rhs-separate-force-w3";
 #[cfg(not(feature = "n384-prep"))]
 const EXECUTION: &str = "serial-component-fft";
 #[cfg(feature = "n384-prep")]
@@ -88,6 +131,16 @@ const PROVIDER: &str = "parallel-reduced-attempt-cache";
 const EXTERNAL_STOP: &str = "pgid-watchdog-v1-starttime-cmdline-deadline";
 #[cfg(feature = "n384-piecewise-common")]
 const EXTERNAL_STOP: &str = "pgid-watchdog-v2-starttime-cmdline-deadline";
+#[cfg(feature = "n192-piecewise-cadv33")]
+const RHS_FFT_IDENTITY: &str = "serial-component-avx-padded288";
+#[cfg(feature = "n256-piecewise-cadv33")]
+const RHS_FFT_IDENTITY: &str = "layout384-width3-bidirectional-add2733911936";
+#[cfg(all(
+    feature = "n384-prep",
+    not(feature = "n192-piecewise-cadv33"),
+    not(feature = "n256-piecewise-cadv33")
+))]
+const RHS_FFT_IDENTITY: &str = "layout576-width3-bidirectional-add9200779136";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -184,7 +237,7 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
     Ok((catalog, force, rhs))
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
     let catalog = FftCatalog::reservation(geometry.backend)?;
     let force = CachedReducedForce::preflight(
@@ -195,6 +248,24 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
         true,
     )?;
     let rhs = SpectralRhs::<CachedReducedForce>::reservation_with_w3_fft_backend(
+        geometry.domain,
+        force,
+        geometry.backend,
+    )?;
+    Ok((catalog, force, rhs))
+}
+
+#[cfg(feature = "n192-piecewise-cadv33")]
+fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
+    let catalog = FftCatalog::reservation(geometry.backend)?;
+    let force = CachedReducedForce::preflight(
+        geometry.domain,
+        geometry.samples,
+        WORKERS,
+        geometry.backend,
+        true,
+    )?;
+    let rhs = SpectralRhs::<CachedReducedForce>::reservation_with_fft_backend(
         geometry.domain,
         force,
         geometry.backend,
@@ -320,11 +391,12 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft={RHS_FFT_IDENTITY};force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers={};provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
         env!("RUN_SOURCE"),
         crate::timed_rhs::IDENTITY,
         2 * M,
         2 * N,
+        if cfg!(feature = "n192-piecewise-cadv33") { 0 } else { 3 },
         schedule::IDENTITY,
         schedule::ENDPOINT,
         artifact::DISK_CAP_BYTES,
@@ -347,27 +419,55 @@ mod n384_tests {
     const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
     #[cfg(feature = "n384-h64")]
     const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
-    #[cfg(feature = "n384-piecewise-common")]
+    #[cfg(all(
+        feature = "n384-piecewise-common",
+        not(feature = "n192-piecewise-cadv33"),
+        not(feature = "n256-piecewise-cadv33")
+    ))]
     const EXPECTED_N384_TOTAL: usize = 185_782_833_928;
+    #[cfg(feature = "n192-piecewise-cadv33")]
+    const EXPECTED_N384_TOTAL: usize = 52_428_314_504;
+    #[cfg(feature = "n256-piecewise-cadv33")]
+    const EXPECTED_N384_TOTAL: usize = 79_485_917_960;
+    #[cfg(feature = "n192-piecewise-cadv33")]
+    const EXPECTED_MATCHED_DISK: usize = 8_242_397_184;
+    #[cfg(feature = "n256-piecewise-cadv33")]
+    const EXPECTED_MATCHED_DISK: usize = 19_482_083_328;
+    #[cfg(feature = "n192-piecewise-cadv33")]
+    const EXPECTED_MATCHED_WORK: usize = 4_213_502_118_720;
+    #[cfg(feature = "n256-piecewise-cadv33")]
+    const EXPECTED_MATCHED_WORK: usize = 4_221_931_883_328;
 
     #[test]
     fn selected_profile_is_exact_and_execution_ready() {
+        #[cfg(not(any(
+            feature = "n192-piecewise-cadv33",
+            feature = "n256-piecewise-cadv33"
+        )))]
         assert_eq!(N, 384);
+        #[cfg(feature = "n192-piecewise-cadv33")]
+        assert_eq!(N, 192);
+        #[cfg(feature = "n256-piecewise-cadv33")]
+        assert_eq!(N, 256);
         assert_eq!(M, 384);
         #[cfg(not(feature = "n384-piecewise-common"))]
         assert_eq!(ADVECTIVE_LIMIT, 0.8);
         #[cfg(feature = "n384-piecewise")]
         assert_eq!(ADVECTIVE_LIMIT, 1.6);
-        #[cfg(feature = "n384-piecewise-cadv33")]
+        #[cfg(any(
+            feature = "n384-piecewise-cadv33",
+            feature = "n192-piecewise-cadv33",
+            feature = "n256-piecewise-cadv33"
+        ))]
         assert_eq!(ADVECTIVE_LIMIT, 3.3);
         assert_eq!(CAP, 206_158_430_208);
         assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();
         assert!(identity.contains("provider=parallel-reduced-v2-force-w3-attempt-cache"));
-        assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200779136"));
+        assert!(identity.contains(&format!("rhs_fft={RHS_FFT_IDENTITY}")));
         assert!(identity.contains("force_w3=layout384-width3-forward-add1827942144"));
         assert!(identity.contains("observer_force_samples=768"));
-        assert!(identity.contains("observer_conservative=768"));
+        assert!(identity.contains(&format!("observer_conservative={}", 2 * N)));
         assert!(identity.contains("numa=whole-host-unbound-all-visible-cpus-memory"));
         assert!(identity.contains(&format!("external_stop={EXTERNAL_STOP}")));
         assert!(identity.contains(&format!("artifact_cap={}", artifact::DISK_CAP_BYTES)));
@@ -390,6 +490,15 @@ mod n384_tests {
             admission.disk,
         );
         assert_eq!(total, EXPECTED_N384_TOTAL);
+        #[cfg(any(
+            feature = "n192-piecewise-cadv33",
+            feature = "n256-piecewise-cadv33"
+        ))]
+        {
+            assert_eq!(admission.disk, EXPECTED_MATCHED_DISK);
+            assert_eq!(admission.integration_work, EXPECTED_MATCHED_WORK);
+            assert_eq!(admission.observer_work, 467_480_346_624);
+        }
         assert!(matches!(
             admit_geometry(geometry, total - 1),
             Err(SolverError::ResourceLimit)

@@ -15,6 +15,8 @@ n384-h64 = ["n384-prep"]
 n384-piecewise-common = []
 n384-piecewise = ["n384-prep", "n384-piecewise-common"]
 n384-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common"]
+n192-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common"]
+n256-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common"]
 
 [dependencies]
 nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }

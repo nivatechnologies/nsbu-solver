@@ -85,7 +85,7 @@ fn finish_rhs(
     SpectralRhs::new_with_catalog(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn finish_rhs(
     domain: Domain,
     force: CachedReducedForce,
@@ -103,7 +103,32 @@ fn finish_rhs(
     Ok(rhs)
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(feature = "n192-piecewise-cadv33")]
+fn finish_rhs(
+    domain: Domain,
+    force: CachedReducedForce,
+    limits: ForceLimits,
+    catalog: &FftCatalog,
+) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
+    let bytes =
+        SpectralRhs::<CachedReducedForce>::reservation_with_catalog(domain, limits, catalog)?;
+    let rhs = SpectralRhs::new_with_catalog(
+        domain,
+        force,
+        config::ADVECTIVE_LIMIT,
+        catalog,
+        bytes,
+    )?;
+    require_identity(
+        rhs.provider()
+            .w3_identity()
+            .ok_or(SolverError::InvalidPayload)?,
+        force_identity()?,
+    )?;
+    Ok(rhs)
+}
+
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn validate_w3_identity(
     domain: Domain,
     rhs: &SpectralRhs<CachedReducedForce>,
@@ -114,7 +139,7 @@ fn validate_w3_identity(
     require_identity(force, expected_force)
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn actual_identities(
     rhs: &SpectralRhs<CachedReducedForce>,
 ) -> Result<(W3FftIdentity, W3FftIdentity), SolverError> {
@@ -126,7 +151,7 @@ fn actual_identities(
     Ok((operator, force))
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn expected_identities(domain: Domain) -> Result<(W3FftIdentity, W3FftIdentity), SolverError> {
     Ok((rhs_identity(domain)?, force_identity()?))
 }
@@ -139,14 +164,18 @@ fn require_identity(actual: W3FftIdentity, expected: W3FftIdentity) -> Result<()
     Ok(())
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]
 fn rhs_identity(domain: Domain) -> Result<W3FftIdentity, SolverError> {
+    #[cfg(feature = "n256-piecewise-cadv33")]
+    let additional_bytes = 2_733_911_936;
+    #[cfg(not(feature = "n256-piecewise-cadv33"))]
+    let additional_bytes = 9_200_779_136;
     Ok(W3FftIdentity {
         layout: domain.padded_layout()?,
         backend: FftBackend::RustFft6_4_1AvxFma,
         width: 3,
         mode: W3FftMode::Bidirectional,
-        additional_bytes: 9_200_779_136,
+        additional_bytes,
     })
 }
 
@@ -199,8 +228,10 @@ mod tests {
 
     #[test]
     fn exact_w3_identity_values_accept_and_any_change_refuses() {
-        let domain = config::domain().unwrap();
-        let expected = rhs_identity(domain).unwrap();
+        #[cfg(not(feature = "n192-piecewise-cadv33"))]
+        let expected = rhs_identity(config::domain().unwrap()).unwrap();
+        #[cfg(feature = "n192-piecewise-cadv33")]
+        let expected = force_identity().unwrap();
         require_identity(expected, expected).unwrap();
         let changed = W3FftIdentity {
             additional_bytes: expected.additional_bytes - 1,
