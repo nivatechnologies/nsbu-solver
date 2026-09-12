@@ -11,6 +11,7 @@ and provides no arithmetic, spatial, temporal, quadrature, or PDE-window qualifi
 
 The frozen one-step source is the existing reviewed harness at
 `evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/bin/cached_observed.rs`.
-It runs with arguments `256 384 32 32 1 103079215104`; the launch record binds the source commit,
+It runs with arguments `256 384 32 32 1 run96`; the literal mode selects the frozen
+103,079,215,104-byte cap. The launch record binds the source commit,
 binary hash, profile hash, host headroom, and exact output. The endpoint admission adds the fixed
 1,572,864-byte snapshot/history allowance to that one-step owner's reservation.
