@@ -116,6 +116,16 @@ impl<'a> ProbePhysicalWorkspace<'a> {
     fn bind(&self, family: &ProbeFamily<'_>, sample: ProbeSample) -> Result<(), FamilyError> {
         let clock = self.next_time().ok_or(FamilyError::InvalidFamily)?;
         let current = family.current.ok_or(FamilyError::InvalidFamily)?;
+        self.bind_publication(family, sample, current, clock)?;
+        self.bind_fields(family, sample, clock)
+    }
+    fn bind_publication(
+        &self,
+        family: &ProbeFamily<'_>,
+        sample: ProbeSample,
+        current: ProbeSample,
+        clock: TickClock,
+    ) -> Result<(), FamilyError> {
         if family.failed
             || family.plan.identity() != self.plan.probes.identity()
             || current.identity() != self.plan.probes.identity()
@@ -126,6 +136,14 @@ impl<'a> ProbePhysicalWorkspace<'a> {
         {
             return Err(FamilyError::InvalidFamily);
         }
+        Ok(())
+    }
+    fn bind_fields(
+        &self,
+        family: &ProbeFamily<'_>,
+        sample: ProbeSample,
+        clock: TickClock,
+    ) -> Result<(), FamilyError> {
         for index in 0..6 {
             let fields = family.fields(index).ok_or(FamilyError::InvalidFamily)?;
             if fields.clock != clock
