@@ -148,24 +148,51 @@ pub const OBSERVABLES: [ObservableDescriptor; OBSERVABLE_COUNT] = build_inventor
 const fn build_inventory() -> [ObservableDescriptor; OBSERVABLE_COUNT] {
     let mut out = [EMPTY; OBSERVABLE_COUNT];
     let mut cursor = 0;
-    let fields = [
-        ObservableQuantity::Velocity,
-        ObservableQuantity::Gradient,
-        ObservableQuantity::Hessian,
-        ObservableQuantity::Vorticity,
-    ];
-    let regions = [
-        ObservableRegion::Core,
-        ObservableRegion::Annulus,
-        ObservableRegion::InteriorOutsideNominal,
-        ObservableRegion::Collar,
-        ObservableRegion::Exterior,
-    ];
-    let statistics = [
-        ObservableStatistic::SampledRmsError,
-        ObservableStatistic::SampledAbsolutePeakError,
-        ObservableStatistic::SampledRelativePeakError,
-    ];
+    (out, cursor) = spectral_inventory(out, cursor);
+    (out, cursor) = sampled_inventory(
+        out,
+        cursor,
+        ObservableSource::AcceptedPhysical,
+        ObservableRegion::Global,
+        &[
+            ObservableQuantity::Velocity,
+            ObservableQuantity::Gradient,
+            ObservableQuantity::Hessian,
+            ObservableQuantity::Vorticity,
+        ],
+    );
+    (out, cursor) = sampled_inventory(
+        out,
+        cursor,
+        ObservableSource::AcceptedPressure,
+        ObservableRegion::Global,
+        &[
+            ObservableQuantity::Pressure,
+            ObservableQuantity::PressureGradient,
+        ],
+    );
+    (out, cursor) = regional_inventory(out, cursor);
+    (out, cursor) = residual_inventory(out, cursor);
+    out[cursor] = balance(
+        cursor,
+        ObservableQuantity::EnergyDefect,
+        ObservableUnits::Energy,
+    );
+    cursor += 1;
+    out[cursor] = balance(
+        cursor,
+        ObservableQuantity::EnstrophyDefect,
+        ObservableUnits::Enstrophy,
+    );
+    cursor += 1;
+    assert!(cursor == OBSERVABLE_COUNT);
+    out
+}
+
+const fn spectral_inventory(
+    mut out: [ObservableDescriptor; OBSERVABLE_COUNT],
+    mut cursor: usize,
+) -> ([ObservableDescriptor; OBSERVABLE_COUNT], usize) {
     out[cursor] = norm(
         cursor,
         ObservableSource::AcceptedSpectral,
@@ -198,62 +225,81 @@ const fn build_inventory() -> [ObservableDescriptor; OBSERVABLE_COUNT] {
         ObservableUnits::VelocityPerLength,
     );
     cursor += 1;
+    (out, cursor)
+}
+
+const fn sampled_inventory(
+    mut out: [ObservableDescriptor; OBSERVABLE_COUNT],
+    mut cursor: usize,
+    source: ObservableSource,
+    region: ObservableRegion,
+    quantities: &[ObservableQuantity],
+) -> ([ObservableDescriptor; OBSERVABLE_COUNT], usize) {
+    let statistics = [
+        ObservableStatistic::SampledRmsError,
+        ObservableStatistic::SampledAbsolutePeakError,
+        ObservableStatistic::SampledRelativePeakError,
+    ];
     let mut field = 0;
-    while field < fields.len() {
+    while field < quantities.len() {
         let mut statistic = 0;
         while statistic < statistics.len() {
             out[cursor] = sampled(
                 cursor,
-                ObservableSource::AcceptedPhysical,
-                fields[field],
+                source,
+                quantities[field],
                 statistics[statistic],
-                ObservableRegion::Global,
+                region,
             );
             cursor += 1;
             statistic += 1;
         }
         field += 1;
     }
-    let pressure = [
-        ObservableQuantity::Pressure,
-        ObservableQuantity::PressureGradient,
+    (out, cursor)
+}
+
+const fn regional_inventory(
+    mut out: [ObservableDescriptor; OBSERVABLE_COUNT],
+    mut cursor: usize,
+) -> ([ObservableDescriptor; OBSERVABLE_COUNT], usize) {
+    let fields = [
+        ObservableQuantity::Velocity,
+        ObservableQuantity::Gradient,
+        ObservableQuantity::Hessian,
+        ObservableQuantity::Vorticity,
     ];
-    let mut quantity = 0;
-    while quantity < pressure.len() {
-        let mut statistic = 0;
-        while statistic < statistics.len() {
-            out[cursor] = sampled(
-                cursor,
-                ObservableSource::AcceptedPressure,
-                pressure[quantity],
-                statistics[statistic],
-                ObservableRegion::Global,
-            );
-            cursor += 1;
-            statistic += 1;
-        }
-        quantity += 1;
-    }
+    let regions = [
+        ObservableRegion::Core,
+        ObservableRegion::Annulus,
+        ObservableRegion::InteriorOutsideNominal,
+        ObservableRegion::Collar,
+        ObservableRegion::Exterior,
+    ];
     let mut region = 0;
     while region < regions.len() {
         let mut field = 0;
         while field < fields.len() {
-            let mut statistic = 0;
-            while statistic < statistics.len() {
-                out[cursor] = sampled(
-                    cursor,
-                    ObservableSource::RegionalTracking,
-                    fields[field],
-                    statistics[statistic],
-                    regions[region],
-                );
-                cursor += 1;
-                statistic += 1;
-            }
+            let result = sampled_inventory(
+                out,
+                cursor,
+                ObservableSource::RegionalTracking,
+                regions[region],
+                &[fields[field]],
+            );
+            out = result.0;
+            cursor = result.1;
             field += 1;
         }
         region += 1;
     }
+    (out, cursor)
+}
+
+const fn residual_inventory(
+    mut out: [ObservableDescriptor; OBSERVABLE_COUNT],
+    mut cursor: usize,
+) -> ([ObservableDescriptor; OBSERVABLE_COUNT], usize) {
     out[cursor] = norm(
         cursor,
         ObservableSource::OffStageResidual,
@@ -286,18 +332,7 @@ const fn build_inventory() -> [ObservableDescriptor; OBSERVABLE_COUNT] {
         ObservableUnits::AccelerationH1,
     );
     cursor += 1;
-    out[cursor] = balance(
-        cursor,
-        ObservableQuantity::EnergyDefect,
-        ObservableUnits::Energy,
-    );
-    cursor += 1;
-    out[cursor] = balance(
-        cursor,
-        ObservableQuantity::EnstrophyDefect,
-        ObservableUnits::Enstrophy,
-    );
-    out
+    (out, cursor)
 }
 
 const fn sampled(
@@ -323,16 +358,20 @@ const fn sampled_units(
     if matches!(statistic, ObservableStatistic::SampledRelativePeakError) {
         return ObservableUnits::Dimensionless;
     }
-    match quantity {
-        ObservableQuantity::Velocity => ObservableUnits::Velocity,
-        ObservableQuantity::Gradient | ObservableQuantity::Vorticity => {
-            ObservableUnits::VelocityPerLength
-        }
-        ObservableQuantity::Hessian => ObservableUnits::VelocityPerLengthSquared,
-        ObservableQuantity::Pressure => ObservableUnits::Pressure,
-        ObservableQuantity::PressureGradient => ObservableUnits::PressurePerLength,
-        _ => ObservableUnits::Dimensionless,
-    }
+    const ABSOLUTE: [ObservableUnits; 11] = [
+        ObservableUnits::Dimensionless,
+        ObservableUnits::Velocity,
+        ObservableUnits::VelocityPerLength,
+        ObservableUnits::VelocityPerLengthSquared,
+        ObservableUnits::VelocityPerLength,
+        ObservableUnits::Pressure,
+        ObservableUnits::PressurePerLength,
+        ObservableUnits::Dimensionless,
+        ObservableUnits::Dimensionless,
+        ObservableUnits::Dimensionless,
+        ObservableUnits::Dimensionless,
+    ];
+    ABSOLUTE[quantity as usize]
 }
 const fn norm(
     index: usize,

@@ -11,7 +11,9 @@ The mathematical identity is the raw 32-byte digest represented by
 `CASE_SHA256`. The separate semantics identity is SHA-256 over a version tag, all
 typed scalar descriptors and all explicit mandatory gaps. The generic protocol
 then binds those identities, caller budgets, three exact time manifests and
-reconstruction geometry into its own canonical fingerprint.
+reconstruction geometry. The profile canonical form and identity additionally
+bind the source family and probe-plan identities, so equal manifests from a
+different numerical family cannot collide.
 
 ## Time and reconstruction profile
 
@@ -24,12 +26,13 @@ The nested manifests use exponent -20 and target 8192:
 `ReviewGeometry::startup` accepts an already admitted `ProbePlan` only when its
 complete manifest equals the fine list. It obtains the h64, h32 and h16 steps
 from that plan and uses the shared probe-node routine. All four off-stage clocks
-therefore retain the same actual accepted-node geometry as `ProbeFamily` and
+therefore retain the same admitted node geometry as `ProbeFamily` and
 `ResidualFamily`: tick 7 uses `[0,64,128]`, `[0,32,64]`, `[0,16,32]`; tick 63
 uses `[0,64,128]`, `[0,32,64]`, `[32,48,64]`; tick 95 uses `[0,64,128]`,
 `[32,64,96]`, `[64,80,96]`; tick 127 uses `[0,64,128]`, `[64,96,128]`,
-`[96,112,128]`. Family and probe-plan identities remain available beside the
-generic protocol identity.
+`[96,112,128]`. This admission does not assert that an owner has published those
+histories. Family and probe-plan identities are part of the complete profile
+canonical bytes and identity.
 
 ## Scalar inventory
 
@@ -69,7 +72,8 @@ of the five exclusive sampled classes and their point counts.
 
 For 88 observables and seven fine clocks the immutable schedule has 616 rows,
 with observable index varying fastest. Admission declares 3,828 policy duplicate
-checks, 29,396 generic canonical bytes, 854 semantics-hash bytes and a caller
+checks, 29,396 generic canonical bytes, 29,483 complete profile canonical bytes,
+854 semantics-hash bytes and a caller
 selected review-attempt allowance of at least 616. Policy storage remains
 caller-owned. Canonical writing refuses a short buffer before modification.
 

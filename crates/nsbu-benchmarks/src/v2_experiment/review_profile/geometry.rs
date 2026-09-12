@@ -22,7 +22,7 @@ pub struct ReviewGeometry {
     probe_identity: [u8; 32],
 }
 impl ReviewGeometry {
-    /// Bind the known nested manifests and all actual h64/h32/h16 probe histories.
+    /// Bind the known nested manifests and admitted h64/h32/h16 node geometry.
     pub fn startup(plan: ProbePlan<'_>) -> Result<Self, ProfileError> {
         let coarse = clocks([0, 64, 128])?;
         let middle = clocks([0, 63, 64, 127, 128])?;
@@ -58,7 +58,7 @@ impl ReviewGeometry {
             TestedTimes::new(&self.fine, self.fine.len())?,
         ])
     }
-    /// All four actual-node reconstruction refinements bound to the fine manifest.
+    /// All four admitted reconstruction refinements bound to the fine manifest.
     pub fn reconstruction(&self) -> Result<ReconstructionSamples<'_>, VerificationError> {
         let fine = TestedTimes::new(&self.fine, self.fine.len())?;
         ReconstructionSamples::new(&self.probes, fine, self.probes.len())
@@ -67,7 +67,7 @@ impl ReviewGeometry {
     pub fn fine(&self) -> &[TickClock; 7] {
         &self.fine
     }
-    /// Exact histories for probes 7, 63, 95 and 127.
+    /// Admitted node geometry for probes 7, 63, 95 and 127.
     pub fn probes(&self) -> &[ProbeRefinement; 4] {
         &self.probes
     }

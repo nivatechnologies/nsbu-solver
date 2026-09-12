@@ -12,6 +12,10 @@ use nsbu_solver::{
         VerificationError,
     },
 };
+use sha2::{Digest, Sha256};
+
+const PROFILE_TAG: &[u8] = b"NSBUV2REVIEWPROFILE0001";
+const PROFILE_PREFIX_BYTES: usize = PROFILE_TAG.len() + 64;
 
 /// Caller-provided identities and numerical policies; no benchmark budget is implied.
 #[derive(Debug, Clone, Copy)]
@@ -20,6 +24,10 @@ pub struct ProfileInputs<'a> {
     pub problem: [u8; 32],
     /// Canonical typed inventory and mandatory-gap digest.
     pub semantics: [u8; 32],
+    /// Expected source exact-v2 family identity.
+    pub family: [u8; 32],
+    /// Expected source probe-plan identity.
+    pub probe: [u8; 32],
     /// Caller-owned numerical budgets in exact [`super::OBSERVABLES`] order.
     pub policies: &'a [ObservablePolicy],
 }
@@ -29,7 +37,7 @@ pub struct ProfileInputs<'a> {
 pub struct ProfileCaps {
     /// Maximum duplicate-key comparisons during generic policy admission.
     pub policy_pair_checks: usize,
-    /// Maximum canonical generic-protocol bytes.
+    /// Maximum canonical profile bytes, including source-plan identities.
     pub protocol_bytes: usize,
     /// Maximum required schedule rows.
     pub required_rows: usize,
@@ -42,7 +50,7 @@ pub struct ProfileCaps {
 pub struct ProfileBounds {
     /// Borrowed policy slice size, excluding caller allocation overhead.
     pub borrowed_policy_bytes: usize,
-    /// Exact generic-protocol canonical byte count.
+    /// Exact complete profile canonical byte count.
     pub protocol_bytes: usize,
     /// Exact canonical semantics hash traversal byte count.
     pub semantics_bytes: usize,
@@ -124,6 +132,10 @@ impl<'a> AdmittedProfile<'a> {
         if inputs.semantics != semantics_identity() {
             return Err(ProfileError::InvalidSemantics);
         }
+        if inputs.family != geometry.family_identity() || inputs.probe != geometry.probe_identity()
+        {
+            return Err(ProfileError::InvalidGeometry);
+        }
         require_inventory(inputs.policies)?;
         let pair_checks = OBSERVABLE_COUNT
             .checked_mul(OBSERVABLE_COUNT - 1)
@@ -137,6 +149,10 @@ impl<'a> AdmittedProfile<'a> {
             return Err(ProfileError::CapacityExceeded);
         }
         let policies = Policies::new(inputs.policies, caps.policy_pair_checks)?;
+        let protocol_cap = caps
+            .protocol_bytes
+            .checked_sub(PROFILE_PREFIX_BYTES)
+            .ok_or(ProfileError::CapacityExceeded)?;
         let protocol = FrozenProtocol::new(
             ProtocolInputs {
                 problem: inputs.problem,
@@ -145,11 +161,15 @@ impl<'a> AdmittedProfile<'a> {
                 time_sets: geometry.time_sets()?,
                 reconstruction: geometry.reconstruction()?,
             },
-            caps.protocol_bytes,
+            protocol_cap,
         )?;
+        let protocol_bytes = protocol
+            .encoded_bytes()
+            .checked_add(PROFILE_PREFIX_BYTES)
+            .ok_or(ProfileError::CapacityExceeded)?;
         let bounds = ProfileBounds {
             borrowed_policy_bytes: std::mem::size_of_val(inputs.policies),
-            protocol_bytes: protocol.encoded_bytes(),
+            protocol_bytes,
             semantics_bytes: super::SEMANTICS_BYTES,
             policy_pair_checks: pair_checks,
             required_rows: rows,
@@ -163,9 +183,14 @@ impl<'a> AdmittedProfile<'a> {
             probe_identity: geometry.probe_identity(),
         })
     }
-    /// Generic frozen-protocol identity including caller-supplied budgets.
+    /// Profile identity binding source plans and generic protocol, including budgets.
     pub fn identity(self) -> [u8; 32] {
-        self.protocol.identity()
+        let mut hash = Sha256::new();
+        hash.update(PROFILE_TAG);
+        hash.update(self.family_identity);
+        hash.update(self.probe_identity);
+        hash.update(self.protocol.identity());
+        hash.finalize().into()
     }
     /// Canonical typed inventory and explicit mandatory-gap identity.
     pub fn semantics_identity(self) -> [u8; 32] {
@@ -200,9 +225,20 @@ impl<'a> AdmittedProfile<'a> {
             observable,
         })
     }
-    /// Delegate canonical protocol serialization into caller-owned storage.
+    /// Write source-plan identities followed by generic protocol bytes.
     pub fn write_canonical(self, output: &mut [u8]) -> Result<usize, ProfileError> {
-        self.protocol.write_canonical(output).map_err(Into::into)
+        if output.len() < self.bounds.protocol_bytes {
+            return Err(ProfileError::CapacityExceeded);
+        }
+        let (prefix, protocol) = output.split_at_mut(PROFILE_PREFIX_BYTES);
+        let tag_end = PROFILE_TAG.len();
+        prefix[..tag_end].copy_from_slice(PROFILE_TAG);
+        prefix[tag_end..tag_end + 32].copy_from_slice(&self.family_identity);
+        prefix[tag_end + 32..].copy_from_slice(&self.probe_identity);
+        let written = self.protocol.write_canonical(protocol)?;
+        written
+            .checked_add(PROFILE_PREFIX_BYTES)
+            .ok_or(ProfileError::CapacityExceeded)
     }
     /// Create the generic empty numerical review with the admitted attempt bound.
     pub fn review(self) -> Result<MeasurementReview<'a>, ProfileError> {

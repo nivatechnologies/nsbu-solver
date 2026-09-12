@@ -61,10 +61,12 @@ fn caps(bytes: usize) -> ProfileCaps {
         review_attempts: ROWS + 2,
     }
 }
-fn input(policies: &[ObservablePolicy]) -> ProfileInputs<'_> {
+fn input<'a>(geometry: &ReviewGeometry, policies: &'a [ObservablePolicy]) -> ProfileInputs<'a> {
     ProfileInputs {
         problem: PROBLEM_IDENTITY,
         semantics: semantics_identity(),
+        family: geometry.family_identity(),
+        probe: geometry.probe_identity(),
         policies,
     }
 }
@@ -73,7 +75,8 @@ fn input(policies: &[ObservablePolicy]) -> ProfileInputs<'_> {
 fn actual_probe_plan_geometry_admits_the_unpopulated_generic_protocol() {
     let geometry = geometry();
     let policies = policies();
-    let admitted = AdmittedProfile::new(&geometry, input(&policies), caps(usize::MAX)).unwrap();
+    let admitted =
+        AdmittedProfile::new(&geometry, input(&geometry, &policies), caps(usize::MAX)).unwrap();
     assert_eq!(
         admitted.status(),
         ProfileStatus::PartialUnpopulatedDiagnostic
@@ -105,9 +108,9 @@ fn actual_probe_plan_geometry_admits_the_unpopulated_generic_protocol() {
     assert_eq!(
         admitted.identity(),
         [
-            0x6d, 0x0b, 0xf5, 0x45, 0xdc, 0x8f, 0x66, 0x04, 0x14, 0x98, 0xfc, 0xee, 0x0b, 0x2d,
-            0xa1, 0x5b, 0x3a, 0x58, 0xd2, 0xfb, 0x03, 0xae, 0xc7, 0xcb, 0x6d, 0xcb, 0xf2, 0x03,
-            0x52, 0x29, 0x94, 0xba,
+            0x67, 0xfa, 0xab, 0x47, 0x38, 0x0d, 0x63, 0x74, 0xf3, 0x84, 0xde, 0x37, 0x72, 0x4c,
+            0x4a, 0xc4, 0x81, 0x3a, 0x76, 0x78, 0x25, 0x59, 0x5c, 0x8e, 0x60, 0xc7, 0xb0, 0xf8,
+            0xd6, 0xe1, 0x19, 0x7a,
         ]
     );
 }
@@ -129,7 +132,7 @@ fn allocated_driver_plan_retains_the_bound_geometry_identities() {
 }
 
 #[test]
-fn all_actual_offstage_histories_and_inventory_semantics_are_exact() {
+fn all_admitted_offstage_geometries_and_inventory_semantics_are_exact() {
     let geometry = geometry();
     assert_eq!(
         semantics_identity(),
@@ -168,16 +171,67 @@ fn all_actual_offstage_histories_and_inventory_semantics_are_exact() {
 }
 
 #[test]
+fn complete_identity_distinguishes_equal_manifests_from_an_altered_family() {
+    let startup = StartupProfile::new().unwrap();
+    let original = startup.plan(CAP).unwrap();
+    let mut changed = original.family_plan().settings();
+    changed.advective_limit = 0.31;
+    let family = FamilyPlan::new(
+        changed,
+        TestedTimes::new(startup.accepted_times(), 3).unwrap(),
+        CAP,
+    )
+    .unwrap();
+    let probe = ProbePlan::new(
+        family,
+        TestedTimes::new(startup.manifest(), 7).unwrap(),
+        7,
+        CAP,
+    )
+    .unwrap();
+    let original_geometry = ReviewGeometry::startup(original.probe_plan()).unwrap();
+    let altered_geometry = ReviewGeometry::startup(probe).unwrap();
+    let policies = policies();
+    let original = AdmittedProfile::new(
+        &original_geometry,
+        input(&original_geometry, &policies),
+        caps(usize::MAX),
+    )
+    .unwrap();
+    let altered = AdmittedProfile::new(
+        &altered_geometry,
+        input(&altered_geometry, &policies),
+        caps(usize::MAX),
+    )
+    .unwrap();
+    assert_ne!(original.family_identity(), altered.family_identity());
+    assert_ne!(original.probe_identity(), altered.probe_identity());
+    assert_ne!(original.identity(), altered.identity());
+    let mut original_bytes = vec![0; original.bounds().protocol_bytes];
+    let mut altered_bytes = vec![0; altered.bounds().protocol_bytes];
+    original.write_canonical(&mut original_bytes).unwrap();
+    altered.write_canonical(&mut altered_bytes).unwrap();
+    assert_ne!(original_bytes, altered_bytes);
+    let mut wrong_source = input(&altered_geometry, &policies);
+    wrong_source.family = original_geometry.family_identity();
+    wrong_source.probe = original_geometry.probe_identity();
+    assert_eq!(
+        AdmittedProfile::new(&altered_geometry, wrong_source, caps(usize::MAX)).unwrap_err(),
+        ProfileError::InvalidGeometry
+    );
+}
+
+#[test]
 fn wrong_identity_inventory_and_every_short_cap_fail_before_review() {
     let geometry = geometry();
     let policies = policies();
-    let mut wrong = input(&policies);
+    let mut wrong = input(&geometry, &policies);
     wrong.problem[0] ^= 1;
     assert_eq!(
         AdmittedProfile::new(&geometry, wrong, caps(usize::MAX)).unwrap_err(),
         ProfileError::InvalidProblem
     );
-    wrong = input(&policies);
+    wrong = input(&geometry, &policies);
     wrong.semantics[0] ^= 1;
     assert_eq!(
         AdmittedProfile::new(&geometry, wrong, caps(usize::MAX)).unwrap_err(),
@@ -187,13 +241,14 @@ fn wrong_identity_inventory_and_every_short_cap_fail_before_review() {
     let mut reordered = policies;
     reordered.swap(0, 1);
     assert_eq!(
-        AdmittedProfile::new(&geometry, input(&reordered), caps(usize::MAX)).unwrap_err(),
+        AdmittedProfile::new(&geometry, input(&geometry, &reordered), caps(usize::MAX))
+            .unwrap_err(),
         ProfileError::InvalidInventory
     );
     assert_eq!(
         AdmittedProfile::new(
             &geometry,
-            input(&policies[..OBSERVABLE_COUNT - 1]),
+            input(&geometry, &policies[..OBSERVABLE_COUNT - 1]),
             caps(usize::MAX)
         )
         .unwrap_err(),
@@ -202,10 +257,12 @@ fn wrong_identity_inventory_and_every_short_cap_fail_before_review() {
     let mut duplicate = policies;
     duplicate[1].key = duplicate[0].key;
     assert_eq!(
-        AdmittedProfile::new(&geometry, input(&duplicate), caps(usize::MAX)).unwrap_err(),
+        AdmittedProfile::new(&geometry, input(&geometry, &duplicate), caps(usize::MAX))
+            .unwrap_err(),
         ProfileError::InvalidInventory
     );
-    let admitted = AdmittedProfile::new(&geometry, input(&policies), caps(usize::MAX)).unwrap();
+    let admitted =
+        AdmittedProfile::new(&geometry, input(&geometry, &policies), caps(usize::MAX)).unwrap();
     let exact = admitted.bounds().protocol_bytes;
     for short in [
         ProfileCaps {
@@ -222,7 +279,7 @@ fn wrong_identity_inventory_and_every_short_cap_fail_before_review() {
         },
         caps(exact - 1),
     ] {
-        assert!(AdmittedProfile::new(&geometry, input(&policies), short).is_err());
+        assert!(AdmittedProfile::new(&geometry, input(&geometry, &policies), short).is_err());
     }
     let mut output = vec![0x5a; exact - 1];
     assert!(admitted.write_canonical(&mut output).is_err());

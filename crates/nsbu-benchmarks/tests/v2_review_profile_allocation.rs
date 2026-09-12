@@ -18,7 +18,7 @@ static GLOBAL: &StatsAlloc<std::alloc::System> = &INSTRUMENTED_SYSTEM;
 const CAP: usize = 256 * 1024 * 1024;
 const ROWS: usize = OBSERVABLE_COUNT * 7;
 const PAIRS: usize = OBSERVABLE_COUNT * (OBSERVABLE_COUNT - 1) / 2;
-const BYTES: usize = 29_396;
+const BYTES: usize = 29_483;
 
 fn main() {
     let budget = test_only_budget();
@@ -36,6 +36,8 @@ fn main() {
         ProfileInputs {
             problem: PROBLEM_IDENTITY,
             semantics: semantics_identity(),
+            family: geometry.family_identity(),
+            probe: geometry.probe_identity(),
             policies: &policies,
         },
         ProfileCaps {
