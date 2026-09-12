@@ -1,0 +1,11 @@
+{
+  "status":"midpoint_complete_then_user_interrupted_hardware_pause",
+  "source":"def4730b08025fdd06e7a8a0d78116aea24b6e2c",
+  "case_sha256":"e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "profile":{"n":[24,32,48],"m":96,"workers":32,"method":"CoxMatthews","step_ticks":16,"absolute":[0.00001,0.0001],"relative":[0.00001,0.00001],"initial_exponent":-20,"target":8192,"planned_endpoint":4096},
+  "midpoint":{"clock":2048,"attempts":128,"committed":128,"rescheduled":false,"snapshots":{"n24":{"bytes":359424,"sha256":"eef26edc20f0d98ffb649a0e0b65831b2ec188dcc8b50629658ac0b0d4ccb19e"},"n32":{"bytes":835584,"sha256":"9d0aebf2f7e456c58f7a3c983f29b02cf9f3540a1234f6b38e6d97d61813f367"},"n48":{"bytes":2764800,"sha256":"383c02753fa73b13bef107d4635e5083c6b8b7bf9b02e724988bd0c009e6adb3"}}},
+  "termination":{"reason":"user_requested_hardware_pause","numerical_failure":false,"endpoint_completed":false,"n24":{"last_clock":2224,"last_committed":139,"run_status":"absent_launcher_terminated"},"n32":{"last_clock":2064,"last_committed":129,"exit_status":143},"n48":{"last_clock":2064,"last_committed":129,"exit_status":143},"all_owned_processes_stopped":true},
+  "comparisons":{"n24_n32":{"l2":0.0856908152343462,"h1":8.798708622268867,"common_h1":0.08430944544469413,"new_h1":8.798304685592369,"finer_l2":1.7391847285186925,"finer_h1":45.4690957826769,"relative_to_finer_l2":0.04927068058338531,"relative_to_finer_h1":0.19350964585535158},"n32_n48":{"l2":0.09067440011254291,"h1":13.020025187935694,"common_h1":0.06457304868392429,"new_h1":13.019865061353883,"finer_l2":1.741555603643163,"finer_h1":47.30133476918206,"relative_to_finer_l2":0.05206517662879152,"relative_to_finer_h1":0.2752570355883181}},
+  "n24_reproduction":{"matches_prior_midpoint_bitwise":true,"sha256":"eef26edc20f0d98ffb649a0e0b65831b2ec188dcc8b50629658ac0b0d4ccb19e"},
+  "qualification":{"accepted_windows":0,"claims_convergence":false,"claims_spatial_sufficiency":false,"claims_force_sufficiency":false}
+}

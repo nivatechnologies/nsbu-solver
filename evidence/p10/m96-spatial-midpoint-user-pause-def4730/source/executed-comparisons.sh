@@ -1,0 +1,6 @@
+# Working directory: repository root. Comparator source/binary binding is inherited from evidence/p10/force-resolution-snapshot-forensics-d7336c8.
+p10-force-snapshot-tool compare N24_SNAPSHOT N32_SNAPSHOT 2048 24 32 96 96 32 32 eef26edc20f0d98ffb649a0e0b65831b2ec188dcc8b50629658ac0b0d4ccb19e 9d0aebf2f7e456c58f7a3c983f29b02cf9f3540a1234f6b38e6d97d61813f367
+p10-force-snapshot-tool compare N32_SNAPSHOT N48_SNAPSHOT 2048 32 48 96 96 32 32 9d0aebf2f7e456c58f7a3c983f29b02cf9f3540a1234f6b38e6d97d61813f367 383c02753fa73b13bef107d4635e5083c6b8b7bf9b02e724988bd0c009e6adb3
+# Exact paths are retained in raw stdout. Zero-spectrum denominator hashes:
+# N32 11b353f6852241a3c0377a1b1dc545e47c1fb8c0b2c7f96d8455704d73d2d90c
+# N48 822e3a311bc34185394aeb709bb83310f1243089b95cdadc218eee179b1d6f78

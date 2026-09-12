@@ -1,0 +1,1 @@
+RUN_SOURCE=def4730b08025fdd06e7a8a0d78116aea24b6e2c timeout --signal=TERM --kill-after=10s 9120s /usr/bin/time -v target/release/p10-m96-next-n32-forensics --run --deadline-seconds 9000
