@@ -1,0 +1,37 @@
+running 1 test
+test m512_w3_force_matches_serial_bits_work_and_steady_allocation has been running for over 60 seconds
+allocation_trace index=0 operation=1 phase=1 size=512 new_size=512 align=8 thread=129064448048128 owner_thread=129064444622528 frames= 0x31c93f 0x276c6d 0x276acf 0x2742f8 0x26bb7d 0x2744d9 0x25f44b 0x23fe03 0x240869 0x329a26 0x23fdfc 0x75622862a1ca 0x75622862a28b 0x23e625 0x0
+allocation_trace index=1 operation=1 phase=1 size=82 new_size=82 align=1 thread=129064448048128 owner_thread=129064444622528 frames= 0x31c93f 0x3671a8 0x249c8c 0x26d972 0x26bc64 0x2744d9 0x25f44b 0x23fe03 0x240869 0x329a26 0x23fdfc 0x75622862a1ca 0x75622862a28b 0x23e625 0x0
+allocation_trace index=2 operation=3 phase=1 size=82 new_size=164 align=1 thread=129064448048128 owner_thread=129064444622528 frames= 0x31cb60 0x3676bb 0x367762 0x366fa3 0x3698e8 0x3671de 0x249c8c 0x26d972 0x26bc64 0x2744d9 0x25f44b 0x23fe03 0x240869 0x329a26 0x23fdfc 0x75622862a1ca 0x75622862a28b 0x23e625 0x0
+allocation_trace index=3 operation=2 phase=1 size=164 new_size=0 align=1 thread=129064448048128 owner_thread=129064444622528 frames= 0x31ca32 0x249cdb 0x26d972 0x26bc64 0x2744d9 0x25f44b 0x23fe03 0x240869 0x329a26 0x23fdfc 0x75622862a1ca 0x75622862a28b 0x23e625 0x0
+allocation_trace index=4 operation=2 phase=1 size=512 new_size=0 align=8 thread=129064448048128 owner_thread=129064444622528 frames= 0x31ca32 0x26bd63 0x2744d9 0x25f44b 0x23fe03 0x240869 0x329a26 0x23fdfc 0x75622862a1ca 0x75622862a28b 0x23e625 0x0
+
+thread 'm512_w3_force_matches_serial_bits_work_and_steady_allocation' (871983) panicked at crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512.rs:94:5:
+assertion `left == right` failed
+  left: (2, 2, 1)
+ right: (0, 0, 0)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test m512_w3_force_matches_serial_bits_work_and_steady_allocation ... FAILED
+
+failures:
+
+failures:
+    m512_w3_force_matches_serial_bits_work_and_steady_allocation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 120.79s
+
+Command exited with non-zero status 101
+	Command being timed: "target/debug/deps/parallel_reduced_w3_m512-7be535ca7bcba730 --ignored --exact m512_w3_force_matches_serial_bits_work_and_steady_allocation --nocapture"
+	User time (seconds): 2247.78
+	System time (seconds): 13.95
+	Percent of CPU this job got: 1872%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:00.78
+	Maximum resident set size (kbytes): 15278244
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 5918962
+	Voluntary context switches: 360
+	Involuntary context switches: 1557
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Exit status: 101

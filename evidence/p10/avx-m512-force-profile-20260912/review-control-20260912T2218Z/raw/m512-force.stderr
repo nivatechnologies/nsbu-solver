@@ -1,0 +1,9 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.08s
+     Running tests/parallel_reduced_w3_m512.rs (target/debug/deps/parallel_reduced_w3_m512-185d8a656398ed43)
+
+thread 'm512_w3_force_matches_serial_bits_work_and_steady_allocation' (862618) panicked at crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512.rs:92:5:
+assertion `left == right` failed
+  left: (2, 2, 1)
+ right: (0, 0, 0)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+error: test failed, to rerun pass `-p nsbu-benchmarks --test parallel_reduced_w3_m512`

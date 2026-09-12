@@ -4,7 +4,7 @@
   "harness_feature_tests": {"passed": 19, "failed": 0},
   "w3_focused_tests": {"passed": 7, "failed": 0},
   "parallel_reduced_force_tests": {"passed": 2, "failed": 0},
-  "m512_resource_control": "compiled_ignored_not_executed",
+  "m512_resource_control": "executed_failed_steady_allocation_2_2_1_diagnosed_libtest_monitor",
   "focused_solver_lib_clippy_warnings_denied": "passed",
   "focused_m512_control_clippy_warnings_denied": "passed",
   "harness_all_target_clippy_warnings_denied": "passed",

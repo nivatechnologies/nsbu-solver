@@ -1,0 +1,12 @@
+0x31c93f m512_alloc_trace::record crates/m512-alloc-trace/src/lib.rs:152
+0x276c6d alloc::raw_vec::RawVecInner<A>::finish_grow library/alloc/src/raw_vec/mod.rs:547
+0x2744d9 test::test_main_with_exit_callback library/test/src/lib.rs:162
+0x31cb60 m512_alloc_trace::record crates/m512-alloc-trace/src/lib.rs:152
+0x3676bb alloc::raw_vec::RawVecInner<A>::finish_grow library/alloc/src/raw_vec/mod.rs:547
+0x366fa3 alloc::raw_vec::RawVecInner<A>::reserve library/alloc/src/raw_vec/mod.rs:658
+0x249c8c test::formatters::pretty::PrettyFormatter<T>::write_plain library/test/src/formatters/pretty.rs:90
+0x26d972 test::console::on_test_event library/test/src/console.rs:268
+0x26bc64 test::run_tests library/test/src/lib.rs:459
+0x31ca32 m512_alloc_trace::record crates/m512-alloc-trace/src/lib.rs:153
+0x249cdb alloc::alloc::dealloc library/alloc/src/alloc.rs:115
+0x26bd63 test::run_tests library/test/src/lib.rs:462

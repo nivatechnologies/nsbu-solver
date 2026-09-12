@@ -41,9 +41,31 @@ The source includes an ignored, explicit environment-gated M512 force-only
 control. It constructs serial and W3 providers sequentially, compares every
 coefficient bit word and the complete `ForceWork`, validates the W3 identity,
 and requires three repeated W3 evaluations to allocate, deallocate, and
-reallocate zero times. It was compiled but deliberately not executed while the
-live numerical trajectories were active. Run it only after separate memory and
-contention admission:
+reallocate zero times.
+
+The first admitted execution failed the unchanged steady-allocation assertion
+with `(2 allocations, 2 deallocations, 1 reallocation)`. Its stdout also shows
+libtest's `has been running for over 60 seconds` report inside the measured
+region. A single source-changed diagnostic at
+`29adfa60287edea6e1d748ffcf07bc6c7fb5e1d0` reproduced the exact counts. All
+five events came from pthread `129064448048128`, while the control owner was
+pthread `129064444622528`. Symbolized frames resolve through
+`test::formatters::pretty::PrettyFormatter::write_plain`,
+`test::console::on_test_event`, and `test::run_tests`. The 512-byte allocation
+and 82-byte string growth to 164 bytes form the monitor report's buffer
+lifecycle. The W3 provider owner made no recorded allocation. Raw output and
+symbolization are preserved under `review-diagnostic-20260912T2228Z`.
+
+The resource control therefore remains failed. The correction path is a
+standalone, explicitly resource-gated executable owner that keeps the same
+measurement boundary around the same three first-attempt W3 evaluations but
+has no libtest monitor thread. It must still require exact serial bit words,
+complete `ForceWork`, identity binding, and global `(0,0,0)` counts; no warm-up
+or owner-thread filtering is admissible. That owner requires architecture
+review and a fresh memory/contention admission before execution. The retained
+libtest failure must remain in the review record.
+
+The original invocation was:
 
 ```text
 NSBU_RUN_M512_W3_FORCE_CONTROL=1 cargo test -p nsbu-benchmarks \
