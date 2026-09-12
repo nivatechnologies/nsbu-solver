@@ -21,7 +21,8 @@ allocation, growth to 164 bytes, and both deallocations. This exactly coincides
 with libtest's one slow-test status line after 60 seconds. No event came from
 the W3 owner thread.
 
-The zero-allocation resource gate remains failed until an architecture-reviewed
-standalone executable owner runs the same first-attempt three-evaluation region
-without libtest. That owner must preserve all existing arithmetic, work,
-identity, resource, and global zero-allocation assertions.
+At this diagnostic stage the zero-allocation resource gate remained failed.
+Root subsequently approved one standalone execution of the same first-attempt
+three-evaluation region without libtest. That closure passed and is preserved
+in `../review-standalone-20260912T2237Z`; this failed diagnostic record remains
+unchanged.

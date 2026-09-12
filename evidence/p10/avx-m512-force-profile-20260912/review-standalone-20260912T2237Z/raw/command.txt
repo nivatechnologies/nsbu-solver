@@ -1,0 +1,4 @@
+cargo test -p nsbu-benchmarks --test parallel_reduced_w3_m512_standalone --no-run
+cargo clippy -p nsbu-benchmarks --test parallel_reduced_w3_m512_standalone -- -D warnings
+ulimit -v 33554432
+NSBU_RUN_M512_W3_FORCE_CONTROL=1 /usr/bin/time -v timeout 600s target/debug/deps/parallel_reduced_w3_m512_standalone-f4ef88baa3d93ce0

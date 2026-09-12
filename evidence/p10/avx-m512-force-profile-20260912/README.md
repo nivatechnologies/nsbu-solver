@@ -56,20 +56,30 @@ and 82-byte string growth to 164 bytes form the monitor report's buffer
 lifecycle. The W3 provider owner made no recorded allocation. Raw output and
 symbolization are preserved under `review-diagnostic-20260912T2228Z`.
 
-The resource control therefore remains failed. The correction path is a
-standalone, explicitly resource-gated executable owner that keeps the same
-measurement boundary around the same three first-attempt W3 evaluations but
-has no libtest monitor thread. It must still require exact serial bit words,
-complete `ForceWork`, identity binding, and global `(0,0,0)` counts; no warm-up
-or owner-thread filtering is admissible. That owner requires architecture
-review and a fresh memory/contention admission before execution. The retained
-libtest failure must remain in the review record.
+Root architecture review approved one final standalone closure. Commit
+`1417be336a426b61e10a0112befb5bf71bc42594` adds an explicitly resource-gated,
+harness-free executable owner. It keeps the original `stats_alloc::Region`
+boundary around the same three first-attempt W3 evaluations and applies no
+warm-up or owner-thread filter. Its only admitted execution passed exact serial
+bit words, complete `ForceWork`, W3 identity, and global `(0,0,0)` allocation
+counts with exit status zero. It completed in 124.32 seconds with peak RSS
+15,278,380 KiB under a 32 GiB virtual-memory limit and 600-second timeout. The
+closure record is preserved under `review-standalone-20260912T2237Z`; the
+original libtest failure and attribution trace remain preserved separately.
 
 The original invocation was:
 
 ```text
 NSBU_RUN_M512_W3_FORCE_CONTROL=1 cargo test -p nsbu-benchmarks \
   --test parallel_reduced_w3_m512 -- --ignored --nocapture
+```
+
+The successful standalone invocation was:
+
+```text
+ulimit -v 33554432
+NSBU_RUN_M512_W3_FORCE_CONTROL=1 /usr/bin/time -v timeout 600s \
+  target/debug/deps/parallel_reduced_w3_m512_standalone-f4ef88baa3d93ce0
 ```
 
 The inherited profile identity names Sulaco and its whole-host unbound NUMA
