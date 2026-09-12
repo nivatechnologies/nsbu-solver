@@ -1,0 +1,49 @@
+{
+  "source_commit": "22e928992effdb64b4ed71723b68df6395b40278",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "6972b81dfaf3795b39297187076e13dac6950274f7a16903cc5ac2fefee4b3b4"
+    },
+    {
+      "path": "raw/clippy.log.gz",
+      "sha256": "71867b21bc8917f0e243517ba1916aa4a62f7ab3dbd22fbb293b897c36914292"
+    },
+    {
+      "path": "raw/fmt.log.gz",
+      "sha256": "2cde324c23768ebad57e18a4ccc756902c92a90f28c6759b196a2b9ed5449361"
+    },
+    {
+      "path": "raw/focused-coverage.json.gz",
+      "sha256": "422d92bf70f213b301abd5096ce98102d990628b40a3166944876e98de5863ac"
+    },
+    {
+      "path": "raw/focused-production-crap.json.gz",
+      "sha256": "e416638171fe26e5e39b915bd5b60be60caf886bb8f771beeece25384bad21c3"
+    },
+    {
+      "path": "raw/focused-production-metrics.jsonl.gz",
+      "sha256": "76c53e421deece35225f927f1583bdc3e4a168a8cc9ac053fb1d26e389f62c0b"
+    },
+    {
+      "path": "raw/reproduce.sh",
+      "sha256": "1b42bd196acbe502de299660278a6f6c1f587331beeabd29b9d4b8d0cee87da5"
+    },
+    {
+      "path": "raw/rustdoc.log.gz",
+      "sha256": "f6414afa06c42dc51c7b0e0de615472fd1fc4d4a3289438916ea5e1161d0ee4d"
+    },
+    {
+      "path": "raw/tests.log.gz",
+      "sha256": "9908ebdf41e89a5f61c337e1f8b2659a1774c22c954d4a34caa97a6051412060"
+    },
+    {
+      "path": "source-sha256.json",
+      "sha256": "2e55a20533f58cf42258b13d0a54cdbc30c4165dbe9ac5da2db51c8cab714312"
+    },
+    {
+      "path": "summary.json",
+      "sha256": "3b2f7d7c5923da4d416030c7e5e5994f5e36da4bbf5a89ca495d5358c5715772"
+    }
+  ]
+}
