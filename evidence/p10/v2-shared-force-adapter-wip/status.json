@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "HardwarePauseWip",
+  "base_commit": "9641bb0c44e414d3da147ea0bedd425c7685eeb5",
+  "source_commit": "1efaa79a55fcfb176dc2f74126c92e2275a7b81f",
+  "user_interrupted_exit": 143,
+  "ready_for_merge": false,
+  "ready_for_release": false,
+  "completed": {
+    "normal_functional_pre_split_equivalent": {"passed": 3, "failed": 0, "seconds": 54.41},
+    "allocation_pre_split": {
+      "passed": true,
+      "construction_bytes": 1965488,
+      "declared_joint_bytes": 2235840,
+      "steady_allocations": 0
+    },
+    "final_source_cheap_tests": "passed",
+    "final_source_fmt": "passed",
+    "final_source_static": {
+      "whole_function_cyclomatic_max": 21.0,
+      "whole_function_cognitive_max": 21.0,
+      "changed_validation_cyclomatic_max": 10.0,
+      "changed_validation_cognitive_max": 14.0,
+      "whole_rust_file_lines_max": 477
+    }
+  },
+  "incomplete": [
+    "final source focused coverage",
+    "final source CRAP",
+    "final source workspace all-target Clippy rerun",
+    "final source strict workspace Rustdoc rerun",
+    "final source repository check rerun",
+    "final source full normal functional rerun",
+    "final source allocation rerun"
+  ],
+  "claims_pde_qualification": false,
+  "accepted_windows": 0
+}
