@@ -930,7 +930,7 @@ not relabeled as sampled gradient/Hessian RMS. P09 remains incomplete.
 ## P09 review profile, physical force and regional coverage
 
 The source-bound [review-profile increment](evidence/p09/v2-review-profile/summary.json)
-admits nested exact-v2 clock geometry, actual accepted publisher binding and an
+admits nested exact-v2 clock geometry, source-plan identity binding and an
 88-row-per-clock inventory. It remains `PartialUnpopulatedDiagnostic` and
 creates no observation or measurement values. Focused admission/allocation
 checks pass at 98.60% lines and 95.83% branches, with focused production CRAP
