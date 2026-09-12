@@ -1,0 +1,6 @@
+e6f58472d81cd6e5b1f9fe34706bc9c06bcd3dd201a59468ccfe639eb8ef2702  evidence/p09/v2-force-sampling-discriminator/harness/Cargo.toml
+a8232f14311f96e440ae7eefa908d2b3f4b9b02bdcc9405a906ad9cd8aac778b  evidence/p09/v2-force-sampling-discriminator/harness/Cargo.lock
+cf27d73845c11e68098ca105d899bc4d8777f842701eb2fe759b3f136b22c097  evidence/p09/v2-force-sampling-discriminator/harness/main.rs
+5546d4442a6fdf7c2bc48800c6c2998955ace845a245696bd8b26ebac6c909a4  evidence/p09/v2-force-sampling-discriminator/raw/force-only.stdout.gz
+3098995b0e7bec82c50ec4fe51dba268431f5be9a0fe722f7e04c78435b6b7c7  evidence/p09/v2-force-sampling-discriminator/raw/force-only.stderr.gz
+353980b5f1efbb9ea5bccd873d00452e5aa427f71601b0c456db628d412261ae  evidence/p09/v2-force-sampling-discriminator/summary.json
