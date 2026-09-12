@@ -29,28 +29,25 @@ concentrating windows. In this bounded work block:
    consumers, preserve the archived derivative-symmetry evidence, and complete
    the source-matched hosted gate before the next combined review.
 
-The combined exporter, partial review adapter and force-baseline binder from
-`31e99a1` remain the prior [source-matched hosted baseline](evidence/p09/hosted-integration-31e99a1/summary.json).
-The later b029 integration audit also passed for its exact source; latest main
-`def4730` passed both complete hosted suites and was released as `alpha-20260912`;
-see the [exact-source audit](evidence/p09/hosted-main-def4730/summary.json). The b029 source recorded
-97.47% whole-maintained Rust line coverage and 87.19% branch coverage. The recorded
-focused branch percentages remain useful test-scope information; they are not
-separate per-module gates. P08/P09/P10 remain incomplete and accepted
+`def4730` is the current [source-matched hosted baseline](evidence/p09/hosted-main-def4730/summary.json)
+and the source of `alpha-20260912`: 97.5760% whole-maintained Rust lines and
+86.8007% branches. `31e99a1` and b029 remain historical exact-source audits.
+Focused branch percentages remain test-scope information, not separate
+per-module gates. P08/P09/P10 remain incomplete and accepted
 concentrating PDE windows remain zero. Release and documentation updates follow
 verified results; no source hash, reference state or acceptance policy is changed
 to make a failed numerical study pass.
 
-The current bounded work also includes force-grid and worker correctness studies
-and a larger N24 baseline pilot. The baseline stopped after completed probe 2047,
+Historical negative-control evidence includes a larger N24 baseline pilot. It
+stopped after completed probe 2047,
 before accepted 2048 publication, with `InvalidSpectrum`; its shell exit was
 zero but its terminal status was `Failed`, so it supplies no endpoint result.
-The force-grid and worker reports remain prescribed-force diagnostics. The
+The current spatial N8/N12/N16 endpoint differences remain unresolved. The
+force-grid and worker reports remain prescribed-force diagnostics. The historical
 derivative-symmetry correction is archived at source
 `5b583d9678af631ba6a175a0175ccf3da132cc71` with a smaller N12 checkpoint and
-physical-test scope. Hosted run 489 failed on test-file Halstead difficulty
-84.37; the corrected test split awaits new hosted CI and does not overwrite the
-latest verified evidence.
+physical-test scope. Historical hosted run 489 failed on test-file Halstead
+difficulty 84.37; it does not overwrite corrected source-matched evidence.
 
 The owned runtime now exposes the opt-in attempt-force cache; default direct
 execution remains unchanged and cached checkpoint/resume forms remain unsupported.
