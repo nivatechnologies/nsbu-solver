@@ -1,7 +1,10 @@
-d4489829bb91f058fdf4f4421ee2b855c60b570f865cc28de109a57e70a73765  evidence/p10/force-resolution-snapshot-forensics-d7336c8/README.md
+bdda22d579fdb4ba64c6992b94a0b3e7695a5d83c26757399c1bc49398b81d7e  evidence/p10/force-resolution-snapshot-forensics-d7336c8/README.md
 39a4159300d085e2364224992a0a4a5ef532b4346fb13439eecb54c28e735556  evidence/p10/force-resolution-snapshot-forensics-d7336c8/input-sha256.json
 047fb2acf055c64fef90826822741c184c56c1f06da1f4903726753307db1621  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-m48-full.stdout.gz
 e36dbaa2d49d609eb19d8d1245159fe853d3c983d4b52a90924962417d709487  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-m48-full.time.gz
+1cfda07721d434ceb7f965803f697dcaf36f8afa63249bee4339a153b0765e02  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-m48-walkthrough.status.gz
+85b5768c0ccf2e6b18d287157f8c7346518ec560fd40795537dc4cedb7b83c27  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-m48-walkthrough.stdout.gz
+99d5c4bb94420c7d37090d890046885f65656705a1a72321c62e65214c587456  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-m48-walkthrough.time.gz
 5abd7ac574fd271973ee2cf254845ca1af0514be933cc9b157493e54ca749f2b  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/cached-ordinary-probe-identity.stdout.gz
 3c44c67ab29e4a8a11e6249afdb5c40fcc5e662523a331d772ca4ac3badcf8c4  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/clippy.stderr.gz
 59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2  evidence/p10/force-resolution-snapshot-forensics-d7336c8/raw/clippy.stdout.gz
@@ -121,8 +124,10 @@ d2647936922c11a9bac47360d1dce4c84c88526c3491be276b27cc019cb364e8  evidence/p10/f
 3422241015b83d6785bfe0fac131e6d0eeff067fad15d98dded93888bbb04641  evidence/p10/force-resolution-snapshot-forensics-d7336c8/snapshots/m96-n24-clock2048.coeff.bin.gz
 84018b33c79ee38aa270ef2397459d59cd572ced1136878bc4e9f26ea1c1ab7b  evidence/p10/force-resolution-snapshot-forensics-d7336c8/snapshots/zero-n16.coeff.bin.gz
 c3fe7f4f14fbe0bcf98e1e518f7a969af5887a46235feb577c78b5daa9e3aa1b  evidence/p10/force-resolution-snapshot-forensics-d7336c8/snapshots/zero-n24.coeff.bin.gz
-7344e3cfb1f13905809c4ce32825ed22357fca2531955d31013472cf919f6bde  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source-binding.json
+c84106c468f64b2c340b3f6d9948121e196a7f1386651bdb633e07558cdec0de  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source-binding.json
 d7291991b0c4dbe8614bf9d28b4e7e05f2e6c44a28c7e5b4ea56747f03d17038  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/cached-m48-harness.rs
+fceb65ed501e388d5ea1e9673d62dfb9ff771e4b65c150723d8d771e3f2c4f66  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/cached-m48-walkthrough-input.sha256
+f8d419d485d8f0dadeff897ab97720bf27ac301907964cb346a280b8785ed0eb  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/cached-m48-walkthrough-verification.sha256
 a53d92a54f90b67a2ed688393aaeb176591d12e209a613c29df126c813061d82  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/comparator-Cargo.lock
 121783c61b2c85a22aae059a16478bd00d6f98b7fd1277041269e6296fb1f315  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/comparator-Cargo.toml
 09e2f1f104b5ed10c4866a3e27f927a8bd0e1b7a98457a2de7bf2a64cf42bddf  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/comparator.rs
@@ -153,4 +158,4 @@ f608c5bf1b3605ee89242aa0e068b7437544120f7af284a702fafe58bef69332  evidence/p10/f
 598e39feef98a98d0885303cb266922cc0d745c2dd3e067aa6ba9dcd17eaee23  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/run-launch.txt
 1fa2b00e72fbf36936df002aec73011c830d5918bdc0a696fa2f6f419e306057  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/validate_production.py
 0ec1858fe4bdd2273b3e1fd5c1913a4bfd47f2c6cc89c01f4578dd08994c8dca  evidence/p10/force-resolution-snapshot-forensics-d7336c8/source/validate_snapshot_hashes.py
-a56723b22fb56df3f3936831ae96edcbbc35fb7613ac5832d668b2fabc1528a1  evidence/p10/force-resolution-snapshot-forensics-d7336c8/summary.json
+8910cdd12026d2c5f0fdcdc1b5da8ce297a43915ac4e73571cfa41f941ada16b  evidence/p10/force-resolution-snapshot-forensics-d7336c8/summary.json
