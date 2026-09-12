@@ -3,6 +3,10 @@
 
 : "${LAUNCH_STARTED:=0}"
 : "${LAUNCH_HANDOFF:=0}"
+: "${SPAWN_PENDING:=0}"
+: "${SPAWN_PID:=}"
+: "${SPAWN_PARENT_PID:=}"
+: "${SPAWN_STARTTIME:=}"
 : "${TIME_PID:=}"
 : "${TIME_STARTTIME:=}"
 : "${TIME_CMDLINE_SHA256:=}"
@@ -38,8 +42,48 @@ owned_group_matches() {
     return 1
 }
 
+pending_spawn_identity() {
+    [ "$SPAWN_PENDING" -eq 1 ] && [ -n "$SPAWN_PID" ] && [ -r "/proc/$SPAWN_PID/stat" ] || return 1
+    pending_stat=$(cat "/proc/$SPAWN_PID/stat" 2>/dev/null) || return 1
+    pending_rest=${pending_stat##*) }
+    set -- $pending_rest
+    [ "$1" != Z ] || return 1
+    [ "$2" = "$SPAWN_PARENT_PID" ] || return 1
+    if [ -n "$SPAWN_STARTTIME" ]; then
+        [ "${20}" = "$SPAWN_STARTTIME" ] || return 1
+    fi
+    PENDING_PROCESS_GROUP=$3
+}
+
+cleanup_pending_spawn() {
+    pending_spawn_identity || return 0
+    if [ "$PENDING_PROCESS_GROUP" = "$SPAWN_PID" ]; then
+        /bin/kill -TERM -- "-$PENDING_PROCESS_GROUP"
+    else
+        /bin/kill -TERM "$SPAWN_PID"
+    fi
+    cleanup_seconds=0
+    while [ "$cleanup_seconds" -lt "$CLEANUP_GRACE_SECONDS" ]; do
+        pending_spawn_identity || return 0
+        sleep 1
+        cleanup_seconds=$((cleanup_seconds + 1))
+    done
+    if pending_spawn_identity; then
+        if [ "$PENDING_PROCESS_GROUP" = "$SPAWN_PID" ]; then
+            /bin/kill -KILL -- "-$PENDING_PROCESS_GROUP"
+        else
+            /bin/kill -KILL "$SPAWN_PID"
+        fi
+    fi
+    return 0
+}
+
 cleanup_owned_group() {
     [ "$LAUNCH_STARTED" -eq 1 ] || return 0
+    if [ "$SPAWN_PENDING" -eq 1 ]; then
+        cleanup_pending_spawn
+        return 0
+    fi
     owned_group_matches || return 0
     /bin/kill -TERM -- "-$PROCESS_GROUP"
     cleanup_seconds=0
