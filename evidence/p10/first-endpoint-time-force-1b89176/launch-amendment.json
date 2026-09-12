@@ -1,0 +1,9 @@
+{
+  "recorded_utc": "2026-09-12T12:30:00Z",
+  "numerical_profile_unchanged": true,
+  "source_commit": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "change": "Launch the frozen N96/M96 h32 run when the N128/M192 h64 process releases capacity, rather than waiting for N64/M192 h64 to finish.",
+  "reason": "N128/M192 h64 refused on the unchanged advective limit at clock 1728 and released its reserved CPU and memory at 12:27 UTC. Starting the already frozen h32 control now preserves the hard block deadline without increasing simultaneous compute load.",
+  "failed_run": "../first-endpoint-force-spatial-1b89176/runs-relaunch/n128-m192-h64",
+  "qualification": "Operational scheduling amendment only; the failed run remains evidence and accepted windows remain zero."
+}

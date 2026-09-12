@@ -1,0 +1,94 @@
+{
+  "status": "complete_unqualified_first_endpoint_time_method_force_screen",
+  "source": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "profile": {
+    "case": "similarity-mms-v2",
+    "retained_grid": 96,
+    "endpoint": 4096,
+    "target": 8192,
+    "clock_exponent": -20,
+    "from_rest": true,
+    "workers": 32,
+    "absolute_tolerances": [1e-5, 1e-4],
+    "relative_tolerances": [1e-5, 1e-5],
+    "advective_limit": 0.3
+  },
+  "completed_runs": {
+    "cm_h32_m96": {
+      "attempts": 128,
+      "committed": 128,
+      "wall_seconds": 7640.980774803,
+      "mean_step_seconds": 59.694276215195316,
+      "max_rss_kib": 2194432,
+      "snapshot_sha256": "28e9f133fa4b8e63d160926a51e8857e0c703fcc34d9df971f55f4221089d0dd",
+      "maximum_local_ratios": [0.004315894514209202, 0.05674415938887255]
+    },
+    "cm_h64_m96": {
+      "attempts": 64,
+      "committed": 64,
+      "wall_seconds": 3913.627383656,
+      "mean_step_seconds": 61.14871051725,
+      "max_rss_kib": 2194432,
+      "snapshot_sha256": "154b87c53ec318130558eacfaf58eae9817213ac4d17ed2a6a03a5f4f91a1892",
+      "maximum_local_ratios": [0.12640510182733009, 0.9606653319875286]
+    },
+    "ho_h64_m96": {
+      "attempts": 64,
+      "committed": 64,
+      "wall_seconds": 4353.998738495,
+      "mean_step_seconds": 68.02917596728125,
+      "max_rss_kib": 2399232,
+      "snapshot_sha256": "4edb5098b49ac0cd162b5c3e82a6a04ac6d112af28a01f29f318ea99e31c4302",
+      "maximum_local_ratios": [0.12640510158828536, 0.9606637591587555]
+    }
+  },
+  "state_norms": {
+    "cm_h32_m96": {
+      "l2": 1.838748274100012,
+      "h1": 50.86615478512332,
+      "vorticity_l2": 50.83290968874734
+    },
+    "cm_h64_m96": {
+      "l2": 1.838748274093983,
+      "h1": 50.86615478744218,
+      "vorticity_l2": 50.832909691065794
+    },
+    "cm_h64_m192": {
+      "l2": 1.8389006025787074,
+      "h1": 50.859283199225004,
+      "vorticity_l2": 50.82602809712748
+    }
+  },
+  "endpoint_comparisons": {
+    "temporal_cm_m96_h64_to_h32": {
+      "absolute": {"l2": 9.080076190894665e-10, "h1": 1.2256229678712585e-7, "vorticity_l2": 1.2255893323589754e-7},
+      "relative_to_h32": {"l2": 4.938183392905682e-10, "h1": 2.4095058355575032e-9, "vorticity_l2": 2.411015501302847e-9}
+    },
+    "method_m96_cm_h64_to_ho_h64": {
+      "absolute": {"l2": 9.246829885237889e-10, "h1": 1.3708326525277625e-7, "vorticity_l2": 1.3708014653391973e-7},
+      "relative_to_cm_h64": {"l2": 5.028872094954995e-10, "h1": 2.6949799100328167e-9}
+    },
+    "force_cm_h64_m96_to_m192": {
+      "absolute": {"l2": 0.003543124196235533, "h1": 0.8282200257556894, "vorticity_l2": 0.8282124469809309},
+      "relative_to_m192": {"l2": 0.001926762213937489, "h1": 0.0162845398845163, "vorticity_l2": 0.016295045628948897},
+      "multiples_of_total_pilot_target": {"l2": 19.26762213937489, "h1": 16.2845398845163},
+      "multiple_of_allocated_h1_force_budget": 108.56359923010867
+    }
+  },
+  "interpretation": "CM h32/h64 and CM/HO agree at fixed M96, but M96-to-M192 force sampling changes the N96 endpoint state by 1.628 percent H1. The time and method findings therefore apply only to an underresolved-force profile and cannot be transferred to M192.",
+  "missing_channels": [
+    "third temporal setting",
+    "matched time refinement at a force-qualified sampling grid",
+    "force precision and derivative-rich force-resolution refinement",
+    "current-grid integrator arithmetic",
+    "independent high-precision reference",
+    "local peak and location",
+    "pressure",
+    "balance and off-stage residual",
+    "reconstruction and sampling",
+    "perturbation",
+    "transfer and lineage"
+  ],
+  "claims_acceptance": false,
+  "accepted_windows": 0
+}
