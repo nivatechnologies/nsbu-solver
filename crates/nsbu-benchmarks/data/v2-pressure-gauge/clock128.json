@@ -1,0 +1,265 @@
+{
+  "status": "pressure-mean-diagnostic-complete",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "profiles": [
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 80,
+      "axial_panels": 8,
+      "radial_squared_panels": 8,
+      "collar_pressure_evaluations": 81,
+      "root_solves": 9,
+      "maximum_root_iterations": 18432,
+      "reserved_bytes": 38797312,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 80,
+      "axial_panels": 16,
+      "radial_squared_panels": 16,
+      "collar_pressure_evaluations": 289,
+      "root_solves": 17,
+      "maximum_root_iterations": 34816,
+      "reserved_bytes": 38797312,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 80,
+      "axial_panels": 32,
+      "radial_squared_panels": 32,
+      "collar_pressure_evaluations": 1089,
+      "root_solves": 33,
+      "maximum_root_iterations": 67584,
+      "reserved_bytes": 38797312,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 80,
+      "axial_panels": 16,
+      "radial_squared_panels": 32,
+      "collar_pressure_evaluations": 561,
+      "root_solves": 17,
+      "maximum_root_iterations": 34816,
+      "reserved_bytes": 38797312,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 80,
+      "axial_panels": 32,
+      "radial_squared_panels": 16,
+      "collar_pressure_evaluations": 561,
+      "root_solves": 33,
+      "maximum_root_iterations": 67584,
+      "reserved_bytes": 38797312,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 120,
+      "axial_panels": 8,
+      "radial_squared_panels": 8,
+      "collar_pressure_evaluations": 81,
+      "root_solves": 9,
+      "maximum_root_iterations": 18432,
+      "reserved_bytes": 41418752,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 120,
+      "axial_panels": 16,
+      "radial_squared_panels": 16,
+      "collar_pressure_evaluations": 289,
+      "root_solves": 17,
+      "maximum_root_iterations": 34816,
+      "reserved_bytes": 41418752,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 120,
+      "axial_panels": 32,
+      "radial_squared_panels": 32,
+      "collar_pressure_evaluations": 1089,
+      "root_solves": 33,
+      "maximum_root_iterations": 67584,
+      "reserved_bytes": 41418752,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 120,
+      "axial_panels": 16,
+      "radial_squared_panels": 32,
+      "collar_pressure_evaluations": 561,
+      "root_solves": 17,
+      "maximum_root_iterations": 34816,
+      "reserved_bytes": 41418752,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    },
+    {
+      "case": "similarity-mms-v2",
+      "time": "1/8192",
+      "precision": 120,
+      "axial_panels": 32,
+      "radial_squared_panels": 16,
+      "collar_pressure_evaluations": 561,
+      "root_solves": 33,
+      "maximum_root_iterations": 67584,
+      "reserved_bytes": 41418752,
+      "cap_bytes": 67108864,
+      "classification": "EmpiricalQuadrature; conservative Python planning",
+      "domain": "centered unit periodic cube",
+      "support_radius": "21/50",
+      "radial_rule": "exact Gaussian core plus Simpson cutoff collar",
+      "accepted_pde_windows": 0
+    }
+  ],
+  "sequential_profiles": 10,
+  "peak_reserved_bytes": 41418752,
+  "pressure_evaluations": 5162,
+  "maximum_root_iterations": 446464,
+  "classification": "EmpiricalQuadrature",
+  "accepted_pde_windows": 0,
+  "estimates": [
+    {
+      "axial_panels": 8,
+      "radial_squared_panels": 8,
+      "precision": 80,
+      "mean": "-0.0000000000000171760867557482793879567817339668029824488736192082609176582095418609862627525418718611099672575190617066513365885371819"
+    },
+    {
+      "axial_panels": 16,
+      "radial_squared_panels": 16,
+      "precision": 80,
+      "mean": "-0.0000000000000172870835120471076284403688076165874348244205681489557381022970966445740405274698703725659006293971136746398482267863697"
+    },
+    {
+      "axial_panels": 32,
+      "radial_squared_panels": 32,
+      "precision": 80,
+      "mean": "-0.0000000000000173023331203708058525426611366745291805709178458555397144010229507973702782015573798392547496060966166838383887780012553"
+    },
+    {
+      "axial_panels": 16,
+      "radial_squared_panels": 32,
+      "precision": 80,
+      "mean": "-0.000000000000017287026532806259216099712154336557227731068478526978649916461082827872575318406836903584830625998843379109772401831486"
+    },
+    {
+      "axial_panels": 32,
+      "radial_squared_panels": 16,
+      "precision": 80,
+      "mean": "-0.0000000000000173023730712009003333286424908233992978976529108705876159199472681089656722706640432457538023615454339923406543462077601"
+    },
+    {
+      "axial_panels": 8,
+      "radial_squared_panels": 8,
+      "precision": 120,
+      "mean": "-0.0000000000000171760867557482793879567817339668029824488736192082609176582095418609862627525418986117670153077548540474466388841612382"
+    },
+    {
+      "axial_panels": 16,
+      "radial_squared_panels": 16,
+      "precision": 120,
+      "mean": "-0.0000000000000172870835120471076284403688076165874348244205681489557381022970966445740405274698974488338243178180011773083915981256105"
+    },
+    {
+      "axial_panels": 32,
+      "radial_squared_panels": 32,
+      "precision": 120,
+      "mean": "-0.0000000000000173023331203708058525426611366745291805709178458555397144010229507973702782015574037981851109057871812918068988549291138"
+    },
+    {
+      "axial_panels": 16,
+      "radial_squared_panels": 32,
+      "precision": 120,
+      "mean": "-0.0000000000000172870265328062592160997121543365572277310684785269786499164610828278725753184068864259008634184318762870200985297796511"
+    },
+    {
+      "axial_panels": 32,
+      "radial_squared_panels": 16,
+      "precision": 120,
+      "mean": "-0.0000000000000173023730712009003333286424908233992978976529108705876159199472681089656722706640602033115109849795747079835211060760485"
+    }
+  ],
+  "changes": {
+    "coarse_to_middle": "0.0000000000000001109967562988282404835870736497844523755469489406948204440875547835877777749279988370668090100631471",
+    "middle_to_fine": "0.00000000000000001524960832369822410229232905794174574649727770658397629872585415279623767408750634935128658796918011",
+    "axial_only_to_fine": "0.000000000000000015306587564546636442948982337971952839849367328561064484561867969497702883150517372284247487355305",
+    "radial_only_to_fine": "0.00000000000000000003995083009448078598135414887011732673506501504790151892431731159539406910665640512640007919239341618",
+    "precision_differences": [
+      "2.675065704805023579234079530229562405631771153970326881582636156496808916510793286491206579450613249e-95",
+      "2.707626792368842088750266854337133924088848037586378771596419704312832520832986092702664453601621735e-95",
+      "2.395893036129969056460796851007692785853625608800191837439060277502295469978345018128673244776317234e-95",
+      "4.952231603279243303290791032612794816512719192947764557779440394847517735995222822528104607351586732e-95",
+      "1.695755770862343414071564286675986828840944654569001793828001543682431466609842990346930856137031912e-95"
+    ],
+    "maximum_precision_to_finest_quadrature_ratio": "3.235359666154252141404385914386982482531457867253344438537673148520859476462276979805079479576370136e-78",
+    "finest_mean": "-0.0000000000000173023331203708058525426611366745291805709178458555397144010229507973702782015574037981851109057871812918068988549291138",
+    "relative_finest_quadrature_change": "0.0008846545409835804480034094519366803910685669669454182547240440328072638438169783373846215938421667166"
+  },
+  "limitations": [
+    "Empirical refinements, not rigorous quadrature enclosures",
+    "One global unit-cube gauge; regional errors must not refit it",
+    "Independent reference only; no state assignment or PDE qualification"
+  ]
+}

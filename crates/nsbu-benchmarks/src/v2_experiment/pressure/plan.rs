@@ -6,7 +6,7 @@ use crate::{
 };
 use nsbu_solver::{
     diagnostics::{
-        conservative::ConservativeWorkspace, local::TensorErrors,
+        conservative::ConservativeWorkspace, derivatives::DerivativeWorkspace, local::TensorErrors,
         physical::PhysicalComparisonWorkspace,
     },
     domain::{Domain, Layout},
@@ -135,6 +135,21 @@ impl<'a> PressureFamilyPlan<'a> {
     pub fn relative_floors(self) -> [f64; 2] {
         self.floors
     }
+    pub(crate) fn family_plan(self) -> FamilyPlan<'a> {
+        self.family
+    }
+    pub(crate) fn diagnostic_domain(self) -> Domain {
+        self.diagnostic
+    }
+    pub(crate) fn force_settings(self) -> ForceSettings {
+        self.force
+    }
+    pub(crate) fn provider_limits(self) -> nsbu_solver::integrators::forcing::ForceLimits {
+        self.provider_limits
+    }
+    pub(crate) fn per_attempt_work(self) -> PressureFamilyWork {
+        self.per_attempt
+    }
 }
 fn storage(
     source: Domain,
@@ -183,7 +198,10 @@ fn work(
     let visits = add(
         add(
             mul(assembly, 10)?,
-            mul(diagnostic.layout().half_len(), 6 * 40)?,
+            mul(
+                DerivativeWorkspace::coefficient_visits(diagnostic.layout())?,
+                40,
+            )?,
         )?,
         add(mul(samples.real_len(), 4 * 40 + 10 * 5 * 2)?, 1024)?,
     )?;

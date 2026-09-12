@@ -1,0 +1,75 @@
+{
+  "source_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+  "hosted_runs": {
+    "rust": {
+      "id": 34626557292,
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34626557292",
+      "conclusion": "success"
+    },
+    "python": {
+      "id": 34626557356,
+      "url": "https://github.com/nivatechnologies/nsbu-solver/actions/runs/34626557356",
+      "conclusion": "success"
+    }
+  },
+  "whole_maintained_scope_recomputed_coverage": {
+    "rust": {
+      "lines": {
+        "count": 43327,
+        "covered": 42453,
+        "percent": 97.98278209892214
+      },
+      "branches": {
+        "count": 3114,
+        "covered": 2724,
+        "percent": 87.47591522157997
+      }
+    },
+    "python": {
+      "lines": {
+        "count": 6098,
+        "covered": 6054,
+        "percent": 99.2784519514595
+      },
+      "branches": {
+        "count": 1202,
+        "covered": 1173,
+        "percent": 97.5873544093178
+      }
+    }
+  },
+  "static_limits": {
+    "rust": {
+      "cyclomatic_max": 21.0,
+      "cognitive_max": 21.0,
+      "crap_max": 24.05859375,
+      "physical_file_lines_max": 477,
+      "halstead_difficulty_all_node_max": 75.9295154185022,
+      "halstead_difficulty_function_max": 60.0
+    },
+    "python": {
+      "cyclomatic_max": 16,
+      "halstead_difficulty_max": 13.826086956521738,
+      "crap_max": 19.9814453125,
+      "physical_file_lines_max": 327,
+      "physical_file_lines_scope": "102 maintained Python files measured with git show at frozen source"
+    }
+  },
+  "gates": {
+    "coverage_line_and_branch_minimum": 80,
+    "crap_exclusive_maximum": 25,
+    "cyclomatic_exclusive_maximum": 22,
+    "cognitive_exclusive_maximum": 22,
+    "halstead_difficulty_exclusive_maximum": 80,
+    "physical_file_lines_exclusive_maximum": 500,
+    "result": "passed"
+  },
+  "execution_evidence": {
+    "rust": "hosted llvm-cov --workspace --all-targets; allocation tests present, including v2 diagnostic coordinator execution_allocations=0",
+    "python": "hosted coverage pytest: 236 passed in 407.55s"
+  },
+  "waiver_audit": "no hidden coverage, static-limit, or CRAP waiver found; set +e applies only to informational duplicate/dead-code and mutation inventories.",
+  "scope_note": "The mandatory 80 percent gate is the whole maintained scope. Focused binder 65.22 percent and adapter 75 percent are informational and are not separate gate failures.",
+  "merge_assessment": "passed hosted CI and independent recomputation; suitable for root review/merge, subject to normal integration review.",
+  "raw_inventory_sha256_file": "artifact-sha256.txt"
+}

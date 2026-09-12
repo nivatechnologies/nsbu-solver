@@ -6,7 +6,7 @@
   "development_stage": "runtime-alpha-published; scientific-qualification-in-progress",
   "adopted_runtime_design_revision": "0.7",
   "adopted_review_revision": "0.8",
-  "implementation_plan_revision": "1.4",
+  "implementation_plan_revision": "1.5",
   "rust_workspace_exists": true,
   "runtime_implementation_exists": true,
   "simulation_cli_exists": true,
@@ -37,17 +37,17 @@
     "duplication_findings": "informational with independent numerical oracles preserved",
     "policy_evidence": "evidence/quality-policy-v2/cli-contract/summary.json",
     "reference_hosted_ci": "evidence/quality-reference/hosted-ci.json",
-    "latest_hosted_ci_status": "Source 6f5c630 remains the last recorded combined hosted pass. Source109f9cf passed Rust/Python tests and overall coverage but failed per-function CRAP in example output paths and two Python pilot functions. Focused corrections are merged; full236-test local Python coverage/CRAP now passes. A new combined hosted release gate remains pending.",
+    "latest_hosted_ci_status": "Source31e99a17f97aec2ee18b26c67f8be88a0e931088 passed both full hosted workflows and independent raw-report audit. Whole-maintained Rust coverage97.98% lines/87.48% branches, maximumCRAP24.0586; Python99.28%/97.59%, CRAP19.9814. Earlier failures remain preserved in their source-bound evidence; no concentrating PDE window is accepted.",
     "hosted_ci": "evidence/runtime-alpha/daily-20260911/hosted-rust.json",
     "latest_increment": {
-      "status": "Exact-v2 diagnostic coordinator, balance/quadrature and pilot boundary corrections pass focused gates. Combined hosted validation is pending; zero accepted PDE windows.",
-      "evidence": "evidence/p09/v2-diagnostic-coordinator/summary.json",
-      "additional_evidence": "evidence/p09/reference-arithmetic-full/ci-correction/summary.json"
+      "status": "Integrated full-event exporter, partial review adapter and spectral force-baseline binding pass the source-matched whole-maintained hosted gates. Focused scopes remain separately reported; P08/P09/P10 incomplete.",
+      "evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
+      "additional_evidence": "evidence/p09/final-integration-20260911/summary.json"
     },
-    "latest_hosted_quality_evidence": "evidence/p09/combined-20260911-6f5c630/summary.json",
+    "latest_hosted_quality_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
     "latest_local_python_evidence": "evidence/p09/python-combined-local-20260911/summary.json",
     "latest_rust_crap_correction_evidence": "evidence/p09/v2-example-crap/ci-correction/summary.json",
-    "latest_local_integration_evidence": "evidence/p09/alpha1-local-integration/summary.json"
+    "latest_local_integration_evidence": "evidence/p09/final-integration-20260911/summary.json"
   },
   "packages": {
     "B00": {
@@ -187,7 +187,13 @@
       "v2_balance_quadrature_evidence": "evidence/p09/v2-balance-quadrature/summary.json",
       "v2_partial_review_adapter_evidence": "evidence/p09/v2-review-adapter/summary.json",
       "v2_partial_review_adapter_scope": "Extraction-only seven-event, four-global-RMS inventory for velocity, ordered gradient, ordered Hessian and vorticity. It binds actual schedule, identities, finest-CM branch-2 tracking, layouts and floor words; status is permanently PartialUnqualifiedInventory. Off-stage accepted observables remain Missing. No generic MeasurementReview, tolerances, readiness result or PDE qualification.",
-      "v2_force_binding_evidence": "evidence/p09/v2-force-binding/summary.json"
+      "v2_force_binding_evidence": "evidence/p09/v2-force-binding/summary.json",
+      "v2_review_profile_evidence": "evidence/p09/v2-review-profile/summary.json",
+      "v2_review_profile_scope": "Source-bound PartialUnpopulatedDiagnostic exact-v2 review-profile admission for nested clock geometry, source-plan identity binding and an 88-row-per-clock inventory; no observation or measurement values; focused checks pass, combined hosted validation pending.",
+      "v2_force_physical_evidence": "evidence/p09/v2-force-physical/summary.json",
+      "v2_force_physical_scope": "Source-bound DiagnosticOnly physical force channel with functional, allocation and ordinary physical checks passed; 97.9321% focused lines, 86.9565% branches and maximum CRAP 15; no force-sufficiency or convergence claim; combined hosted validation pending.",
+      "v2_region_coverage_evidence": "evidence/p09/v2-region-coverage/summary.json",
+      "v2_region_coverage_scope": "Source-bound regional coverage diagnostic distinguishing nominal region volume from observed sample counts and binding actual accepted publisher state before classifying three empirical panels; focused checks pass, production CRAP 23.9359 and focused plan coverage 95.40% lines / 78.57% branches; no whole-maintained gate or PDE-window run."
     }
   },
   "pde_integration_scope": "Independent Python smooth studies and N4 exact-v2 CM/HO diagnostics; Rust smooth studies, N4 CM/HO runtime, and a six-trajectory N8/12/16 exact-v2 diagnostic pilot from rest to 1/256. Concentrating spatial/force resolution remains unresolved.",
@@ -356,13 +362,15 @@
   "actual_v2_first_endpoint_family_pilot_scope": "Frozen source961e718 independently evolved N8/12/16, fixed M16 and three time settings with CM/HO from rest to1/256; five accepted/off-stage reports completed in2168.763s under2700s. Full spectral spatial H1 differences34.19->39.17 remain unresolved despite much smaller temporal/method differences; no force-grid sufficiency, arithmetic or PDE qualification.",
   "actual_v2_first_endpoint_family_pilot_evidence": "evidence/p09/v2-first-endpoint-diagnostic/manifest.json",
   "exact_v2_diagnostic_event_export_exists": true,
-  "exact_v2_diagnostic_event_export_scope": "Full fixed-startup DiagnosticEvent library JSON export preserves raw accepted/off-stage findings and explicit missing variants after bounded validation. Focused 96.83% line/84% branch coverage, CRAP21; combined hosted CI pending. Artifact export is not provenance, readiness or PDE qualification.",
+  "exact_v2_diagnostic_event_export_scope": "Full fixed-startup DiagnosticEvent library JSON export preserves raw accepted/off-stage findings and explicit missing variants after bounded validation. Focused 96.83% line/84% branch coverage, CRAP21; combined hosted CI passed at31e99a1. Artifact export is not provenance, readiness or PDE qualification.",
   "exact_v2_diagnostic_event_export_evidence": "evidence/p08/v2-diagnostic-export/summary.json",
   "exact_v2_partial_review_adapter_exists": true,
-  "exact_v2_partial_review_adapter_scope": "Four global sampled RMS observables over seven fixed events are extracted with explicit off-stage Missing records and permanent PartialUnqualifiedInventory status. Production branch coverage80%; all-changed production-and-test scope75% is below80%; whole-maintained hosted CI pending. No generic review, tolerance, readiness or PDE qualification.",
+  "exact_v2_partial_review_adapter_scope": "Four global sampled RMS observables over seven fixed events are extracted with explicit off-stage Missing records and permanent PartialUnqualifiedInventory status. Production branch coverage80%; all-changed production-and-test scope75% is below80%; whole-maintained hosted CI passed at31e99a1 (97.98% lines/87.48% branches). No generic review, tolerance, readiness or PDE qualification.",
   "exact_v2_partial_review_adapter_evidence": "evidence/p09/v2-review-adapter/summary.json",
   "exact_v2_force_baseline_binding_exists": true,
-  "exact_v2_force_baseline_binding_scope": "Experimental read-only spectral force-family to ordinary-family baseline binding; exact clocks, settings and all coefficient words. Source e1dc2d3 numerical/allocation/static/CRAP gates pass; focused lines98.51%/branches65.22%, maximumCRAP18.779. Focused branch shortfall explicit; required whole-maintained80% line/branch gate on combined source pending. DiagnosticOnly; no sampled-RMS channel substitution or PDE acceptance.",
+  "exact_v2_force_baseline_binding_scope": "Experimental read-only spectral force-family to ordinary-family baseline binding; exact clocks, settings and all coefficient words. Source e1dc2d3 numerical/allocation/static/CRAP gates pass; focused lines98.51%/branches65.22%, maximumCRAP18.779. Focused branch shortfall explicit; required whole-maintained80% line/branch gate passed on31e99a1 (97.98%/87.48%). DiagnosticOnly; no sampled-RMS channel substitution or PDE acceptance.",
   "exact_v2_force_baseline_binding_evidence": "evidence/p09/v2-force-binding/summary.json",
-  "experimental_combined_integration_evidence": "evidence/p09/final-integration-20260911/summary.json"
+  "experimental_combined_integration_evidence": "evidence/p09/final-integration-20260911/summary.json",
+  "combined_diagnostic_hosted_evidence": "evidence/p09/hosted-integration-31e99a1/summary.json",
+  "combined_diagnostic_hosted_source": "31e99a17f97aec2ee18b26c67f8be88a0e931088"
 }

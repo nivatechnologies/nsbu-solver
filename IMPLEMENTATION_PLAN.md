@@ -1,6 +1,6 @@
 # NSBU Solver implementation plan
 
-Revision 1.4 · 11 September 2026 · First runtime alpha released; scientific packages through P07 verified
+Revision 1.5 · 12 September 2026 · First runtime alpha released; scientific packages through P07 verified
 
 ## Adopted decisions
 
@@ -9,6 +9,29 @@ Build a standalone Rust library and CLI named **NSBU Solver**, hosted in `nivate
 This document is the active repository plan. It supersedes the historical roadmap's project naming and proposed `MIT OR Apache-2.0` license. It does not alter the frozen equations, benchmark parameters, arithmetic contracts, or acceptance criteria. The [historical detailed fixtures](docs/design/IMPLEMENTATION_PLAN.md) remain normative where consistent with these explicit naming, licensing, and release-scope decisions.
 
 The initial release implements periodic 3D incompressible Navier–Stokes at fixed positive viscosity and the separately defined `similarity-mms-v2` manufactured case. Literal source reproduction is excluded from this release. The mathematics compiler and a possible averaged-stress surrogate do not block the runtime. Visualization follows numerical validation. An optional Niva adapter is maintained outside this public workspace.
+
+## Current execution priority · 12 September 2026
+
+The runtime alpha is published and verified. The former runtime-first deferrals
+below have served their purpose; the current priority is the scientific path to
+concentrating windows. In this bounded work block:
+
+1. Measure spatial versus force-resolution effects at the first endpoint with
+   one admitted, source-frozen larger pilot; preserve negative or partial results.
+2. Connect independent force-family measurements and nominal-region volume
+   coverage to the actual-clock physical observables, without substituting
+   spectral norms for sampled RMS or node counts for geometric volume.
+3. Admit a genuine nested exact-time review profile with explicit observable
+   semantics, unavailable evidence and bounded required rows.
+
+The combined exporter, partial review adapter and force-baseline binder from
+`31e99a1` passed both [source-matched hosted suites](evidence/p09/hosted-integration-31e99a1/summary.json).
+Whole-maintained Rust coverage is 97.98% lines / 87.48% branches. The recorded
+focused branch percentages remain useful test-scope information; they are not
+separate per-module gates. P08/P09/P10 remain incomplete and accepted
+concentrating PDE windows remain zero. Release and documentation updates follow
+verified results; no source hash, reference state or acceptance policy is changed
+to make a failed numerical study pass.
 
 ## Runtime-first execution priority · 11 September 2026
 
@@ -903,3 +926,24 @@ passing numerical/allocation/static checks and CRAP18.779; line coverage is
 98.51% and branch coverage65.22%. The focused branch shortfall remains explicit,
 and whole-maintained combined-source CI is pending. Spectral L2/H1 values are
 not relabeled as sampled gradient/Hessian RMS. P09 remains incomplete.
+
+## P09 review profile, physical force and regional coverage
+
+The source-bound [review-profile increment](evidence/p09/v2-review-profile/summary.json)
+admits nested exact-v2 clock geometry, source-plan identity binding and an
+88-row-per-clock inventory. It remains `PartialUnpopulatedDiagnostic` and
+creates no observation or measurement values. Focused admission/allocation
+checks pass at 98.60% lines and 95.83% branches, with focused production CRAP
+18.1181. The [physical force increment](evidence/p09/v2-force-physical/summary.json)
+is `DiagnosticOnly`; its functional, allocation and ordinary-physical checks
+pass at 97.9321% lines and 86.9565% branches, with maximum CRAP 15. Neither
+increment claims force sufficiency or convergence.
+
+The [regional coverage increment](evidence/p09/v2-region-coverage/summary.json)
+separates nominal region volume from observed sample counts and checks actual
+accepted publisher binding before classifying three empirical panels. Its
+focused checks pass; production maximum CRAP is 23.9359 and focused plan
+coverage is 95.40% lines / 78.57% branches. Combined hosted validation remains
+pending. Off-stage physical integration and the global pressure-gauge path are
+underway; the first-endpoint pilot is running and has no results claim yet.
+P08/P09/P10 remain incomplete, with zero accepted concentrating PDE windows.

@@ -1,0 +1,9 @@
+eef9e1f25f50c6ac06cb4421f219ff741fc0b9b30e4ce2e5159441d535b2cb5c  evidence/p09/v2-force-sampling-discriminator/harness/Cargo.toml
+a8232f14311f96e440ae7eefa908d2b3f4b9b02bdcc9405a906ad9cd8aac778b  evidence/p09/v2-force-sampling-discriminator/harness/Cargo.lock
+cf27d73845c11e68098ca105d899bc4d8777f842701eb2fe759b3f136b22c097  evidence/p09/v2-force-sampling-discriminator/harness/src/main.rs
+58c71103bec93ae1ad3b7deb393fccefbd8266461f25d08b604eea8bcda1cec1  evidence/p09/v2-force-sampling-discriminator/raw/force-only-frozen.stderr.gz
+5546d4442a6fdf7c2bc48800c6c2998955ace845a245696bd8b26ebac6c909a4  evidence/p09/v2-force-sampling-discriminator/raw/force-only-frozen.stdout.gz
+3098995b0e7bec82c50ec4fe51dba268431f5be9a0fe722f7e04c78435b6b7c7  evidence/p09/v2-force-sampling-discriminator/raw/force-only-main-source-equivalent.stderr.gz
+5546d4442a6fdf7c2bc48800c6c2998955ace845a245696bd8b26ebac6c909a4  evidence/p09/v2-force-sampling-discriminator/raw/force-only-main-source-equivalent.stdout.gz
+eb62f7ee4672263f3c60f79251a09d8f4a1b3ac8975eef882acb8b4bb853d01d  evidence/p09/v2-force-sampling-discriminator/summary.json
+0105444654f0f75afb21e2199940e0dac21fe77fb6cacaad08bc60aa88a4c203  evidence/p09/v2-force-sampling-discriminator/source-equivalence.txt

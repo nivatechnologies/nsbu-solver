@@ -1,0 +1,131 @@
+{
+  "package": "P09",
+  "increment": "exact-v2 startup analytical pressure and global-gauge tracking",
+  "status": "focused actual-state, import, allocation, coverage, CRAP and static gates passed; hosted integration pending",
+  "parent_commit": "78aaf2a0af908a5c79a38b1d52cb61bdda17e576",
+  "source_commit": "2534671b55be528e0620b16454c83b88f0189725",
+  "profile": {
+    "clocks": [
+      0,
+      64,
+      128
+    ],
+    "sample_grid": [
+      24,
+      24,
+      24
+    ],
+    "force_grid": [
+      24,
+      24,
+      24
+    ],
+    "branches": 6,
+    "accepted_pde_windows": 0
+  },
+  "gauge_artifacts": [
+    {
+      "clock": 0,
+      "sha256": "cb4c80287af0694a57e2f84776d62162f15193bd5c7657423e62f93cf69f10c9",
+      "finest_mean": "0.0"
+    },
+    {
+      "clock": 64,
+      "sha256": "3b3d7eb41d22437fa1ec389b6cdf509e33cffbf877f24a0a6804d0cd541a371a",
+      "finest_mean": "-0.000000000000000000000000000204246269016581465726478162981366720792811613831525505186962103958461292797714910749034406954085048721425099865720110085"
+    },
+    {
+      "clock": 128,
+      "sha256": "70933d509cdf65f59feb3f766cf2e86a4f0ec04f80a5c43293fdda7aca4350d1",
+      "finest_mean": "-0.0000000000000173023331203708058525426611366745291805709178458555397144010229507973702782015574037981851109057871812918068988549291138"
+    }
+  ],
+  "gauge_profile": {
+    "base_panels": 8,
+    "profiles_per_clock": 10,
+    "precisions": [
+      80,
+      120
+    ],
+    "pressure_evaluations_per_clock": 5162,
+    "maximum_root_iterations_per_clock": 446464,
+    "peak_reserved_bytes": 41418752,
+    "classification": "empirical quadrature, not an enclosure"
+  },
+  "actual_branch2_rms": {
+    "clock64": {
+      "pressure": 2.3396815209674412e-11,
+      "pressure_gradient": 1.5156023160597217e-09
+    },
+    "clock128": {
+      "pressure": 6.083804293434028e-05,
+      "pressure_gradient": 0.0038093010562817026
+    }
+  },
+  "resources": {
+    "construction_bytes": 9079296,
+    "consumer_storage_bytes": 9147992,
+    "joint_storage_bytes": 33338416,
+    "steady_allocations": 0,
+    "per_attempt_provider_work_units": 1783296,
+    "per_attempt_scalar_transforms": 81,
+    "imported_gauge_hash_bytes": 29498
+  },
+  "focused_coverage": {
+    "scope": "new pressure_reference production module",
+    "lines": {
+      "covered": 396,
+      "count": 411,
+      "percent": 96.35036496350365
+    },
+    "branches": {
+      "covered": 21,
+      "count": 26,
+      "percent": 80.76923076923077
+    }
+  },
+  "quality": {
+    "production_functions": 65,
+    "production_crap_maximum": 14.0,
+    "changed_test_crap_at_zero_coverage_maximum": 20.0,
+    "whole_cc_maximum": 21.0,
+    "whole_cognitive_maximum": 21.0,
+    "whole_function_halstead_maximum": 60.0,
+    "whole_all_node_halstead_maximum": 75.9295154185022,
+    "maximum_rust_file_lines": 477
+  },
+  "compatibility": {
+    "existing_pressure_unit_tests": 2,
+    "result": "passed at f9660c0; pressure/mod.rs blob unchanged through final source",
+    "pressure_mod_blob": "e5e22abbbf32ddb310235a1deb66df28623adbab"
+  },
+  "limitations": [
+    "Only the frozen startup clock allowlist is admitted.",
+    "Gauge refinements are empirical and supply no certified error bound or accepted tolerance.",
+    "No off-stage or clock-4096 pressure observation is produced.",
+    "General pressure-reference and gauge obligations remain open for concentrating windows.",
+    "P09 and P10 remain incomplete; hosted integration is pending."
+  ],
+  "python_quality": {
+    "tests": 2,
+    "generator_lines": {
+      "covered": 53,
+      "count": 61,
+      "percent": 87.32394366197182
+    },
+    "generator_branches": {
+      "covered": 9,
+      "count": 10,
+      "percent": 90.0
+    },
+    "changed_function_crap_maximum": 20.0,
+    "basedpyright": "passed",
+    "black": "passed",
+    "complexipy_cognitive_maximum": 2,
+    "radon_all_node_halstead_difficulty_maximum": 3.5,
+    "physical_lines": {
+      "reference/generate_pressure_gauge_rust.py": 122,
+      "reference/tests/test_generate_pressure_gauge_rust.py": 68
+    }
+  }
+}

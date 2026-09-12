@@ -1,0 +1,98 @@
+{
+  "source_commit": "2534671b55be528e0620b16454c83b88f0189725",
+  "rust_measurement_source_commit": "d963f88674b63b7cc01fc22c065a3f8924fb4961",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "eb06fedd7600b3730bd37d5dc5a642bfe926eea92dd7145b9a6da080e4968eb8"
+    },
+    {
+      "path": "raw/clippy.log.gz",
+      "sha256": "9bfa304abcc75d2f46ee7847744ecb8f6fbaac5d585f16502d984d505540a27e"
+    },
+    {
+      "path": "raw/clock0.time",
+      "sha256": "b78060131cef88d37a69839888288dcbd85cf86102b22521821e183b494086fa"
+    },
+    {
+      "path": "raw/clock128.time",
+      "sha256": "46147e3ca69d9962ae69662ad1f96b2156427a80f54558e11a6fab72a5a69c5f"
+    },
+    {
+      "path": "raw/clock64.time",
+      "sha256": "6f1ef5437a25fcc753b505657d6a74f3acbb723e90168737e890553d99d0a0d4"
+    },
+    {
+      "path": "raw/fmt.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "raw/focused-coverage.json.gz",
+      "sha256": "428dcb1c5567161c0d616d3747e214828d8dc46e801ef18f0f762af6a9fa9a2b"
+    },
+    {
+      "path": "raw/focused-production-crap.json.gz",
+      "sha256": "7e0d4bf3d42888c7762e338e42c0bd8c8250a2bfa744d1975dc88a70eee51a32"
+    },
+    {
+      "path": "raw/focused-production-metrics.jsonl.gz",
+      "sha256": "790d69405dc505289cdc374823ddb58e577e0d4a9ed0b87e154f20a8e0d8663b"
+    },
+    {
+      "path": "raw/generator-check.log.gz",
+      "sha256": "561fd0003dde5c65f8f06e59e41a9164d548fca9a8f25344f255ede8bb662480"
+    },
+    {
+      "path": "raw/python-complexipy.log.gz",
+      "sha256": "e315289a2428debded36e68d4fd50afd7e09ddf581a484aefd19e9c516e320d7"
+    },
+    {
+      "path": "raw/python-complexity.json.gz",
+      "sha256": "b1eb7607cb0740ecde7fb77c5c4574537db8fa800bb4dfb5d35fd842c376bc56"
+    },
+    {
+      "path": "raw/python-coverage.json.gz",
+      "sha256": "4479acea5a8cf4cb6a5fa899e55dd75409cdfe6b675cc283b9679d3fd9a87af4"
+    },
+    {
+      "path": "raw/python-crap.json.gz",
+      "sha256": "01a4e686fabe3bb757dff8a9b8d95a12b718ff03846238aa144380945839745c"
+    },
+    {
+      "path": "raw/python-format.log.gz",
+      "sha256": "3b179fdcd031f876c2e6dd4ca82adb7c97b65ac2fb1558657fc6be3b17576647"
+    },
+    {
+      "path": "raw/python-halstead.json.gz",
+      "sha256": "80d56e16ee1f5c94ecb3639ee37af66935808b9396ca3d3738425cd8002d2b6e"
+    },
+    {
+      "path": "raw/python-tests.log.gz",
+      "sha256": "ea8defab2b34591384c6b7872d774269d5045d9135341dbecc24ab94003d2369"
+    },
+    {
+      "path": "raw/python-types.log.gz",
+      "sha256": "05e5b6d8c1039eb4aa5c4a7e085d494b697cf3a557d1f017073d53ff49873adc"
+    },
+    {
+      "path": "raw/reproduce.sh",
+      "sha256": "55f67beb96b83a41e3161f61a07050ea4a43f64cb1d7dd4cccb0408f2b7707a4"
+    },
+    {
+      "path": "raw/rustdoc.log.gz",
+      "sha256": "534d7eb84dc78e238fcb7d862746bff46424c20fa2dd291d9a439ed527ca7555"
+    },
+    {
+      "path": "raw/whole-metrics.jsonl.gz",
+      "sha256": "85dac8f9379a6cfeb1cdc58859a4e7dc119211a14c213d2fd47d306ece619e07"
+    },
+    {
+      "path": "source-sha256.json",
+      "sha256": "5175c663cdd2afa4d175c360f8360e6d5a4b9f4db0f6e92585e77bba95649857"
+    },
+    {
+      "path": "summary.json",
+      "sha256": "e9f1f26247f1b0cfb896dfd9898f30ebc2f107b86df8ca9176002dd260d5db5e"
+    }
+  ]
+}

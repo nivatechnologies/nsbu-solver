@@ -1,0 +1,285 @@
+{
+  "profile": {
+    "clocks": [
+      1920,
+      1984,
+      2016,
+      2032,
+      2047,
+      2048
+    ],
+    "force_grids": [
+      "M24",
+      "M48"
+    ],
+    "retained_grid": "N24",
+    "workers": 12
+  },
+  "records": [
+    {
+      "clock": 1920,
+      "projected_difference": {
+        "divergence_l2": 1.4511602430078821e-11,
+        "h1": 140946.86512168086,
+        "l2": 1854.3188936572626,
+        "vorticity_l2": 140934.66673984026
+      },
+      "projected_m24": {
+        "divergence_l2": 1.3429845786567777e-11,
+        "h1": 165078.54240302055,
+        "l2": 2517.7278335811516,
+        "vorticity_l2": 165059.34147591318
+      },
+      "projected_m48": {
+        "divergence_l2": 6.6703117236349705e-12,
+        "h1": 119427.89154422675,
+        "l2": 2002.5828919512337,
+        "vorticity_l2": 119411.10057469842
+      },
+      "raw_difference": {
+        "divergence_l2": 108482.72330719673,
+        "h1": 177866.93150765527,
+        "l2": 2358.7663582708606,
+        "vorticity_l2": 140934.66673984026
+      },
+      "raw_m24": {
+        "divergence_l2": 109355.5548265202,
+        "h1": 198019.45274642704,
+        "l2": 2912.058741873956,
+        "vorticity_l2": 165059.3414759132
+      },
+      "raw_m48": {
+        "divergence_l2": 14849.034542918496,
+        "h1": 120347.64708069275,
+        "l2": 2012.8066329028509,
+        "vorticity_l2": 119411.10057469842
+      }
+    },
+    {
+      "clock": 1984,
+      "projected_difference": {
+        "divergence_l2": 1.4880292657871997e-11,
+        "h1": 140934.13103263898,
+        "l2": 1854.2472981857125,
+        "vorticity_l2": 140921.93249058817
+      },
+      "projected_m24": {
+        "divergence_l2": 1.3786423254648949e-11,
+        "h1": 165109.7008280689,
+        "l2": 2519.3532896701527,
+        "vorticity_l2": 165090.47872768546
+      },
+      "projected_m48": {
+        "divergence_l2": 6.7427953273486174e-12,
+        "h1": 119482.27565623012,
+        "l2": 2004.7365730941724,
+        "vorticity_l2": 119465.45620916369
+      },
+      "raw_difference": {
+        "divergence_l2": 108517.33308790624,
+        "h1": 177877.95848375533,
+        "l2": 2359.126311674524,
+        "vorticity_l2": 140921.93249058817
+      },
+      "raw_m24": {
+        "divergence_l2": 109393.01243099911,
+        "h1": 198066.11950580112,
+        "l2": 2913.8223730674436,
+        "vorticity_l2": 165090.4787276854
+      },
+      "raw_m48": {
+        "divergence_l2": 14858.55620839885,
+        "h1": 120402.79073493552,
+        "l2": 2014.9682128820355,
+        "vorticity_l2": 119465.45620916369
+      }
+    },
+    {
+      "clock": 2016,
+      "projected_difference": {
+        "divergence_l2": 1.4739386414984274e-11,
+        "h1": 140927.72213490447,
+        "l2": 1854.2109410077114,
+        "vorticity_l2": 140915.52351646396
+      },
+      "projected_m24": {
+        "divergence_l2": 1.369418027650391e-11,
+        "h1": 165126.0969148769,
+        "l2": 2520.199185351765,
+        "vorticity_l2": 165106.86381373854
+      },
+      "projected_m48": {
+        "divergence_l2": 6.700712734156614e-12,
+        "h1": 119510.69922237955,
+        "l2": 2005.8539349796936,
+        "vorticity_l2": 119493.8650250014
+      },
+      "raw_difference": {
+        "divergence_l2": 108534.80646329999,
+        "h1": 177883.54424566653,
+        "l2": 2359.307410131381,
+        "vorticity_l2": 140915.52351646396
+      },
+      "raw_m24": {
+        "divergence_l2": 109411.91804849527,
+        "h1": 198090.23187616892,
+        "l2": 2914.7341724989255,
+        "vorticity_l2": 165106.8638137385
+      },
+      "raw_m48": {
+        "divergence_l2": 14863.331840785748,
+        "h1": 120431.58650638451,
+        "l2": 2016.0893884064756,
+        "vorticity_l2": 119493.86502500139
+      }
+    },
+    {
+      "clock": 2032,
+      "projected_difference": {
+        "divergence_l2": 1.4434924243320216e-11,
+        "h1": 140924.485368506,
+        "l2": 1854.192360445281,
+        "vorticity_l2": 140912.2867143564
+      },
+      "projected_m24": {
+        "divergence_l2": 1.3657297288105758e-11,
+        "h1": 165134.3762084843,
+        "l2": 2520.625852849643,
+        "vorticity_l2": 165115.137558842
+      },
+      "projected_m48": {
+        "divergence_l2": 6.736713301131222e-12,
+        "h1": 119525.04936387899,
+        "l2": 2006.417439252219,
+        "vorticity_l2": 119508.20772857881
+      },
+      "raw_difference": {
+        "divergence_l2": 108543.56100493816,
+        "h1": 177886.3230855352,
+        "l2": 2359.3978447781,
+        "vorticity_l2": 140912.2867143564
+      },
+      "raw_m24": {
+        "divergence_l2": 109421.39053098948,
+        "h1": 198102.3667443701,
+        "l2": 2915.1934603802815,
+        "vorticity_l2": 165115.13755884196
+      },
+      "raw_m48": {
+        "divergence_l2": 14865.723137393175,
+        "h1": 120446.12212706571,
+        "l2": 2016.654792784445,
+        "vorticity_l2": 119508.20772857881
+      }
+    },
+    {
+      "clock": 2047,
+      "projected_difference": {
+        "divergence_l2": 1.4484212971649335e-11,
+        "h1": 140921.43129427923,
+        "l2": 1854.1746972397223,
+        "vorticity_l2": 140909.23260815843
+      },
+      "projected_m24": {
+        "divergence_l2": 1.3781623569832898e-11,
+        "h1": 165142.18815824128,
+        "l2": 2521.0281347385016,
+        "vorticity_l2": 165122.94427739593
+      },
+      "projected_m48": {
+        "divergence_l2": 6.629566487088939e-12,
+        "h1": 119538.5876722989,
+        "l2": 2006.9486800855382,
+        "vorticity_l2": 119521.73902551546
+      },
+      "raw_difference": {
+        "divergence_l2": 108551.77923781262,
+        "h1": 177888.91974447208,
+        "l2": 2359.482557822461,
+        "vorticity_l2": 140909.23260815843
+      },
+      "raw_m24": {
+        "divergence_l2": 109430.28294079084,
+        "h1": 198113.79161231348,
+        "l2": 2915.6261196485043,
+        "vorticity_l2": 165122.94427739593
+      },
+      "raw_m48": {
+        "divergence_l2": 14867.967107964372,
+        "h1": 120459.83393758703,
+        "l2": 2017.1878108430883,
+        "vorticity_l2": 119521.73902551546
+      }
+    },
+    {
+      "clock": 2048,
+      "projected_difference": {
+        "divergence_l2": 1.4427031748517275e-11,
+        "h1": 140921.22701405382,
+        "l2": 1854.1735112899182,
+        "vorticity_l2": 140909.02832585396
+      },
+      "projected_m24": {
+        "divergence_l2": 1.347687693314057e-11,
+        "h1": 165142.71069544664,
+        "l2": 2521.0550325333465,
+        "vorticity_l2": 165123.4664648336
+      },
+      "projected_m48": {
+        "divergence_l2": 6.936394278439062e-12,
+        "h1": 119539.49317533747,
+        "l2": 2006.9841984608472,
+        "vorticity_l2": 119522.6440597921
+      },
+      "raw_difference": {
+        "divergence_l2": 108552.32749404556,
+        "h1": 177889.09256244887,
+        "l2": 2359.4882029685077,
+        "vorticity_l2": 140909.028325854
+      },
+      "raw_m24": {
+        "divergence_l2": 109430.87618035376,
+        "h1": 198114.55495053472,
+        "l2": 2915.6550355123873,
+        "vorticity_l2": 165123.46646483362
+      },
+      "raw_m48": {
+        "divergence_l2": 14868.11677969567,
+        "h1": 120460.75099407397,
+        "l2": 2017.2234475571242,
+        "vorticity_l2": 119522.6440597921
+      }
+    }
+  ],
+  "resources": {
+    "cap_bytes": 1073741824,
+    "comparison_work_bound": 1886976,
+    "harness_allowance_bytes": 4096,
+    "joint_bytes": 61242704,
+    "m24_provider_bytes": 26925608,
+    "m48_provider_bytes": 33234728,
+    "projection_coefficient_visits": 269568,
+    "provider_evaluations": 12,
+    "provider_scalar_transforms": 36,
+    "provider_work_bound": 96297984,
+    "retained_fields_bytes": 1078272
+  },
+  "runtime": {
+    "exit_status": 0,
+    "includes_fresh_harness_target_compile": true,
+    "maximum_rss_kib": 369616,
+    "system_seconds": 2.09,
+    "timeout_seconds": 900,
+    "user_seconds": 37.08,
+    "wall_seconds": 7.83
+  },
+  "scope": "prescribed force only; no state, nonlinear product, full RHS, or PDE conclusion",
+  "source_binding": {
+    "frozen_raw": "raw/force-only-frozen.stdout.gz",
+    "frozen_stdout_sha256": "35786e1f0ab8b2fddac9c9526db381cd468dbf8dd1fed7b878ed5e156fb8cd73",
+    "frozen_worktree_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+    "original_main_source_equivalent_raw": "raw/force-only-main-source-equivalent.stdout.gz",
+    "stdout_payloads_identical": true
+  },
+  "source_commit": "31e99a17f97aec2ee18b26c67f8be88a0e931088"
+}

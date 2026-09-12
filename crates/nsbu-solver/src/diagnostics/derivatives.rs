@@ -78,6 +78,18 @@ pub struct DerivativeWorkspace {
     values: Vec<f64>,
 }
 impl DerivativeWorkspace {
+    /// Conservative coefficient visits for one scalar sample, excluding FFT internals.
+    ///
+    /// This includes source validation, staging and the extra partner reads, midpoint
+    /// operations and exact partner writes on the stored self-conjugate plane.
+    pub fn coefficient_visits(source: Layout) -> Result<usize, SolverError> {
+        let [nx, ny, _] = source.dimensions();
+        source
+            .half_len()
+            .checked_mul(6)
+            .and_then(|n| nx.checked_mul(ny)?.checked_mul(4)?.checked_add(n))
+            .ok_or(SolverError::SizeOverflow)
+    }
     // Only the complete comparison layer rebinds a source, after validating its
     // unchanged physical geometry, full sample-grid admission and stored reservation.
     pub(crate) fn bind_source(&mut self, source: Domain) {
@@ -121,8 +133,9 @@ impl DerivativeWorkspace {
         })
     }
     /// Differentiate every strict-band mode with physical `ik`, zero-pad and apply one
-    /// inverse scalar FFT. No allocation, alignment, projection or mean subtraction occurs.
-    /// Input must obey the committed-spectrum contract. Failure returns no sample view;
+    /// inverse scalar FFT. After strict source validation, admitted roundoff on the stored
+    /// self-conjugate plane is projected to the exact real-field symmetry in staging scratch.
+    /// No allocation, alignment or mean subtraction occurs. Failure returns no sample view;
     /// scratch may change, while input bytes remain untouched and the workspace is reusable.
     pub fn sample(
         &mut self,
@@ -134,7 +147,7 @@ impl DerivativeWorkspace {
         self.staging.fill(Complex64::new(0.0, 0.0));
         for (index, &coefficient) in input.iter().enumerate() {
             let position = source.position(index)?;
-            if source.is_nyquist(position)? {
+            if source.is_nyquist(position)? || position[2] == 0 {
                 continue;
             }
             let mode = source.mode(position)?;
@@ -142,6 +155,7 @@ impl DerivativeWorkspace {
             let (target, _) = self.samples.locate(mode)?;
             self.staging[target] = derivative.apply(wave, coefficient)?;
         }
+        self.stage_self_conjugate_plane(input, derivative)?;
         self.fft
             .inverse(&self.staging, &mut self.values, &mut self.transform)?;
         Ok(ScalarSamples {
@@ -150,5 +164,72 @@ impl DerivativeWorkspace {
             lengths: self.source.lengths(),
             derivative,
         })
+    }
+
+    fn stage_self_conjugate_plane(
+        &mut self,
+        input: &[Complex64],
+        derivative: Derivative,
+    ) -> Result<(), SolverError> {
+        if derivative.orders()[2] > 0 {
+            return Ok(());
+        }
+        let source = self.source.layout();
+        let [nx, ny, _] = source.dimensions();
+        for i in 0..nx {
+            for j in 0..ny {
+                let position = [i, j, 0];
+                if source.is_nyquist(position)? {
+                    continue;
+                }
+                let partner = [(nx - i) % nx, (ny - j) % ny, 0];
+                let index = source.index(position)?;
+                let partner_index = source.index(partner)?;
+                if index > partner_index {
+                    continue;
+                }
+                let mode = source.mode(position)?;
+                let (target, _) = self.samples.locate(mode)?;
+                if index == partner_index {
+                    self.staging[target] = if derivative.orders() == [0; 3] {
+                        Complex64::new(input[index].re, 0.0)
+                    } else {
+                        Complex64::new(0.0, 0.0)
+                    };
+                    continue;
+                }
+                let projected = project_pair(input[index], input[partner_index]);
+                let value = derivative.apply(modal::wavevector(self.source, mode)?, projected)?;
+                self.staging[target] = value;
+                let partner_mode = source.mode(partner)?;
+                let (partner_target, _) = self.samples.locate(partner_mode)?;
+                self.staging[partner_target] = value.conj();
+            }
+        }
+        Ok(())
+    }
+}
+
+fn project_pair(value: Complex64, partner: Complex64) -> Complex64 {
+    Complex64::new(
+        value.re.midpoint(partner.re),
+        value.im.midpoint(-partner.im),
+    )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn pair_projection_preserves_exact_subnormal_and_large_pairs() {
+        for value in [
+            Complex64::new(f64::from_bits(1), -f64::from_bits(1)),
+            Complex64::new(f64::MAX, -f64::MAX),
+        ] {
+            let projected = project_pair(value, value.conj());
+            assert_eq!(projected.re.to_bits(), value.re.to_bits());
+            assert_eq!(projected.im.to_bits(), value.im.to_bits());
+        }
     }
 }

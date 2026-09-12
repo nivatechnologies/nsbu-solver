@@ -1,0 +1,93 @@
+{
+  "claim": "Failed feasibility diagnostic only. It produced no accepted first-endpoint result and supports no convergence, force-sufficiency, PDE-qualification or accepted-window claim.",
+  "execution": {
+    "accepted_2048": false,
+    "end_utc": "2026-09-12T01:01:35Z",
+    "endpoint_4096": false,
+    "error": "Family(Numerical(InvalidSpectrum))",
+    "events_emitted": 2,
+    "force_controls_emitted": 1,
+    "last_event_clock": 2047,
+    "nonzero_force_controls": 0,
+    "shell_exit": 0,
+    "shell_exit_is_pass": false,
+    "start_utc": "2026-09-12T00:21:58Z",
+    "system_seconds": 2.85,
+    "terminal": "Failed",
+    "user_seconds": 12487.11,
+    "wall_seconds": 2376.97
+  },
+  "isolator": {
+    "cap_bytes": 268435456,
+    "max_rss_kib": 10248,
+    "result": "Original exact-v2 force spectra at clock2048 N24 M24/M48 passed source admission, but every x/y first derivative and applicable x/y second/mixed derivative refused InvalidSpectrum.",
+    "wall_seconds": 0.44,
+    "witness": {
+      "defect": 1.2978287563624116e-13,
+      "local_64eps_tolerance": 1.432875845887993e-14,
+      "mode": [
+        9,
+        6,
+        0
+      ],
+      "ratio": 9.05751018196633,
+      "setting": "M24 axis0 dx"
+    }
+  },
+  "profile": {
+    "accepted_clocks": [
+      0,
+      2048,
+      4096
+    ],
+    "endpoint": 4096,
+    "exponent": -20,
+    "force_workers": 12,
+    "from_rest": true,
+    "grids": [
+      12,
+      16,
+      24
+    ],
+    "ordinary_force_samples": 24,
+    "physical_samples": 24,
+    "pressure_force_samples": 48,
+    "pressure_samples": 48,
+    "probe_clocks": [
+      0,
+      2047,
+      2048,
+      4095,
+      4096
+    ],
+    "reference_samples": 24,
+    "residual_clocks": [
+      2047,
+      4095
+    ],
+    "residual_force_samples": 48,
+    "single_force_control": "N12 M24->M48 at accepted clocks",
+    "steps": [
+      64,
+      32,
+      16
+    ],
+    "target": 8192
+  },
+  "resources": {
+    "cap_bytes": 4294967296,
+    "declared_simultaneous_bytes": 1514111936,
+    "diagnostic_joint_storage_bytes": 1393212608,
+    "high_force_run_bytes": 120898776,
+    "measured_max_rss_kib_single_process": 575488,
+    "owned_comparison_hash_scratch_bytes": 552
+  },
+  "schema": "p10_resolution_pilot_baseline_failure_v1",
+  "source": {
+    "binary_sha256": "f09fb540c44790e5ccf6ffc80c825a9dae2b8ca5c2b06ceb1136bd09ee7d9610",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "git": "31e99a17f97aec2ee18b26c67f8be88a0e931088",
+    "harness_sha256": "b84121768056a5c59b736d202336efcce59d54dda862a0165a79cffca96b82b4",
+    "tree": "a1050c0fae125f96766200528480c3f356b1a841"
+  }
+}

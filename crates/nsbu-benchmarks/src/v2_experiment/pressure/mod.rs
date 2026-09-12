@@ -16,7 +16,7 @@ use nsbu_solver::{
     Complex64, SolverError,
 };
 pub use plan::{PressureFamilyBounds, PressureFamilyPlan, PressureFamilyWork};
-type Field = [Vec<Complex64>; 3];
+pub(crate) type Field = [Vec<Complex64>; 3];
 /// Fixed pressure and pressure-gradient order.
 pub const QUANTITIES: [PhysicalQuantity; 2] =
     [PhysicalQuantity::Scalar, PhysicalQuantity::ScalarGradient];
@@ -216,21 +216,48 @@ impl<'a> PressureFamilyWorkspace<'a> {
         values: [&[Complex64]; 3],
         side: usize,
     ) -> Result<(), SolverError> {
-        for (axis, value) in values.into_iter().enumerate() {
-            transfer(
-                domain.layout(),
-                self.plan.source.layout(),
-                value,
-                &mut self.velocity[axis],
-            )?;
-        }
-        self.products.evaluate(
-            self.velocity.each_ref().map(Vec::as_slice),
-            self.force.each_ref().map(Vec::as_slice),
-            self.conservative.each_mut().map(Vec::as_mut_slice),
+        construct_pressure(
+            PressureScratch {
+                products: &mut self.products,
+                velocity: &mut self.velocity,
+                force: &self.force,
+                conservative: &mut self.conservative,
+            },
+            self.plan.source,
+            domain,
+            values,
             &mut self.pressure[side],
         )
     }
+}
+/// Borrowed scratch needed by one shared pressure construction.
+pub(crate) struct PressureScratch<'a> {
+    pub(crate) products: &'a mut ConservativeWorkspace,
+    pub(crate) velocity: &'a mut Field,
+    pub(crate) force: &'a Field,
+    pub(crate) conservative: &'a mut Field,
+}
+pub(crate) fn construct_pressure(
+    scratch: PressureScratch<'_>,
+    source: Domain,
+    domain: Domain,
+    values: [&[Complex64]; 3],
+    pressure: &mut [Complex64],
+) -> Result<(), SolverError> {
+    for (axis, value) in values.into_iter().enumerate() {
+        transfer(
+            domain.layout(),
+            source.layout(),
+            value,
+            &mut scratch.velocity[axis],
+        )?;
+    }
+    scratch.products.evaluate(
+        scratch.velocity.each_ref().map(Vec::as_slice),
+        scratch.force.each_ref().map(Vec::as_slice),
+        scratch.conservative.each_mut().map(Vec::as_mut_slice),
+        pressure,
+    )
 }
 fn field(n: usize) -> Result<Field, SolverError> {
     Ok([filled(n)?, filled(n)?, filled(n)?])

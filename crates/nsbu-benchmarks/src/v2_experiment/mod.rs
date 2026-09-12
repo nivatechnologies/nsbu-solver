@@ -4,16 +4,19 @@
 //! sampling, reference and other missing channels remain open, so no PDE
 //! acceptance or qualification claim follows from these samples.
 pub mod binding;
+pub mod coverage;
 pub mod diagnostic;
 mod identity;
 pub mod physical;
 mod plan;
 pub mod pressure;
+pub mod pressure_reference;
 pub mod probes;
 pub mod sampling;
 
 pub mod reference;
 pub mod review_adapter;
+pub mod review_profile;
 use crate::v2_run::Run;
 use nsbu_solver::{
     diagnostics::comparison::{BandComparison, ComparisonPlan},

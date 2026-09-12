@@ -19,13 +19,32 @@ ordered gradient, ordered Hessian and vorticity; its status is permanently
 [adapter evidence](../evidence/p09/v2-review-adapter/README.md).
 
 The [force-resolution baseline binder](V2_FORCE_BINDING.md) is now integrated
-on the experimental development branch. Numerical, allocation, CRAP and static
+on `main` after both source-matched hosted suites passed. Numerical, allocation, CRAP and static
 checks pass at source `e1dc2d3`; focused coverage is 98.51% lines and 65.22%
 branches. That focused shortfall remains explicit; the required whole-maintained
-80% line/branch gate is pending on the combined source. The binder remains
+80% line/branch gate passed on combined source `31e99a1` (97.98% / 87.48%). The binder remains
 `DiagnosticOnly` and does not complete the partial review inventory. Its
 [evidence](../evidence/p09/v2-force-binding/summary.json) retains the corrected
 CRAP result (18.779) and the earlier failed/incomplete run history.
+
+Three additional source-bound increments are recorded for review. The [review
+profile](../evidence/p09/v2-review-profile/summary.json) admits nested clock
+geometry and an 88-row-per-clock inventory but remains
+`PartialUnpopulatedDiagnostic`: it creates no observation or measurement value.
+Focused admission checks pass at 98.60% lines and 95.83% branches, with maximum
+focused production CRAP 18.1181. The [physical force channel](../evidence/p09/v2-force-physical/summary.json)
+is `DiagnosticOnly`; its functional, allocation and ordinary-physical checks
+pass at 97.93% lines and 86.96% branches, with maximum CRAP 15. It makes no
+force-sufficiency or convergence claim.
+
+The [regional coverage increment](../evidence/p09/v2-region-coverage/summary.json)
+distinguishes nominal region volume from observed sample counts and binds
+actual accepted publisher state before classifying three empirical panels. Its
+focused tests and controls pass, with production CRAP 23.9359 and focused plan
+coverage 95.40% lines / 78.57% branches; this is focused evidence rather than
+the whole-maintained release gate. Combined hosted validation for these
+increments remains pending. P08/P09/P10 remain incomplete and zero
+concentrating PDE windows are accepted.
 
 ## Numerical fact to carry forward
 
@@ -84,7 +103,7 @@ it does not predict the result at another grid or force profile.
 
 ## Next bounded coding increment
 
-After combined source gates pass, implement a frozen exact-v2 review-profile
+Implement the next frozen exact-v2 review-profile
 admission layer: caller-owned three nested exact time manifests, actual
 reconstruction geometry, complete observable keys/semantics identity, and a
 bounded row schedule. It should admit no measurements by substitution and should
