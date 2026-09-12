@@ -1,8 +1,8 @@
 # N192 endpoint time diagnostic: review handoff
 
-Status: prepared for root review; comparator not invoked. This package requests
-only a `TIME_DIAGNOSTIC` comparison. It does not assess acceptance and does not
-support trajectory injection or resume.
+Status: root-approved `TIME_DIAGNOSTIC` completed once with exit status zero.
+This package does not assess acceptance and does not support trajectory
+injection or resume.
 
 Both snapshots are real completed N192/M384 states at physical clock 4096 with
 target 8192, case `e1236f...68f7e`, quantum exponent -20, unit domain lengths,
@@ -45,8 +45,7 @@ Specific review inputs are:
   `SHA256SUMS`.
 
 The manifests refer to immutable state and plan files in their originating
-isolated worktrees by absolute path. Root review should verify those paths and
-hashes, inspect `arithmetic-review.json`, and approve the lineage before any
-adapter command is run. The intended command, withheld here, would use cap
-`344326144` bytes: two 171,638,784-byte coefficient payloads plus the fixed
-1 MiB adapter overhead.
+isolated worktrees by absolute path. Root reviewed these manifests and approved
+one adapter invocation with cap `344326144` bytes: two 171,638,784-byte
+coefficient payloads plus the fixed 1 MiB adapter overhead. `RESULT.md`,
+`comparison-output.json`, and `run-provenance.json` preserve that single run.

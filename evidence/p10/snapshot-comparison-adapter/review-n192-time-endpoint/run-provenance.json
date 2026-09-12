@@ -1,0 +1,33 @@
+{
+  "schema": "p10-snapshot-time-diagnostic-run-v1",
+  "status": "complete-exit-zero",
+  "authorization": "root-approved-single-run",
+  "completed_utc_recorded_after_run": "2026-09-12T23:51:24Z",
+  "adapter_source_commit": "e59dc06",
+  "branch_head_before_run": "39b2281a2e2403242a96ea0d5aea1a57892cc5e0",
+  "binary": {
+    "path": "evidence/p10/snapshot-comparison-adapter/harness/target/release/p10-snapshot-comparison-adapter",
+    "sha256": "89d375a41338fc862dd1f9d349f202b5123ad02e2b1e3c8474c42f7d52c1e704"
+  },
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--manifest-path",
+    "evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml",
+    "--",
+    "evidence/p10/snapshot-comparison-adapter/review-n192-time-endpoint/n192-h32-clock4096.json",
+    "evidence/p10/snapshot-comparison-adapter/review-n192-time-endpoint/n192-piecewise-clock4096.json",
+    "344326144"
+  ],
+  "cap_bytes": 344326144,
+  "left_manifest_sha256": "abe118fbc5e5fe6570ed3b0d40ada1b4e0a651c84f631008c334e3d74e452950",
+  "right_manifest_sha256": "bd4a33ef7e3205c9a09594532e759d986f3c8a49c0ee3c4b9450d053a09982c4",
+  "output": {
+    "path": "evidence/p10/snapshot-comparison-adapter/review-n192-time-endpoint/comparison-output.json",
+    "sha256": "c9fd48037abb6ac55d3d4e77d09bb72285d1bd7b0f1ee67fcd8a1d0accbd8ab7"
+  },
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "interpretation_scope": "reviewed-equivalence-supported-by-controls-time-execution-diagnostic-only"
+}
