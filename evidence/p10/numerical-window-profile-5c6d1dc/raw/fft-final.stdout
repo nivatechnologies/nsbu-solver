@@ -1,0 +1,6 @@
+preflight source=worktree-specialized-radix n=96 repeats=2 fft_reservation=7234808 io_bytes=14303232 cap=21538040
+terminal=complete n=96 repeats=2 scalar_transforms=4 seconds=0.254330754 sha256=8d36117b656f36e67abb1b3958b3ac96889251fc7cffa46ad0bfa59169fd9a53
+preflight source=worktree-specialized-radix n=144 repeats=2 fft_reservation=24233720 io_bytes=48107520 cap=72341240
+terminal=complete n=144 repeats=2 scalar_transforms=4 seconds=0.891595223 sha256=718465d658393316576d967b51a70cdf4167c48c411773eb7b8017ff940726ca
+preflight source=worktree-specialized-radix n=192 repeats=2 fft_reservation=57231608 io_bytes=113836032 cap=171067640
+terminal=complete n=192 repeats=2 scalar_transforms=4 seconds=2.255839544 sha256=11adf21b8819a3529569f2181b86d0b0234b3666cf544196d52fd49fa0cd8a46

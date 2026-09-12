@@ -1,0 +1,15 @@
+{
+  "status": "complete_unqualified_current_grid_provider_comparison",
+  "source": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "profile": {"retained_grid": 64, "sample_grid": 192, "clock": 4096, "original_workers": 32},
+  "seconds": {"original_parallel": 8.913830808, "reduced_serial": 23.487763120},
+  "difference": {
+    "l2": 7.079946679536221e-13,
+    "h1": 1.221477512353411e-10,
+    "vorticity_l2": 9.916756157122511e-11,
+    "divergence_l2": 7.131175644599603e-11,
+    "maximum_scaled_coefficient": 8.516994471706635e-15
+  },
+  "decision": "Do not replace the parallel original provider with the slower serial reduced provider for the active endpoint runs.",
+  "qualification": {"current_grid_integrator_arithmetic": false, "force_convergence": false, "accepted_windows": 0}
+}

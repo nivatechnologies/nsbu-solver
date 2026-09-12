@@ -1,0 +1,3 @@
+n=96 user=0.28 system=0.02 cpu=99% elapsed=0.31 rss_kib=22528 status=0
+n=144 user=1.00 system=0.05 cpu=100% elapsed=1.06 rss_kib=72704 status=0
+n=192 user=2.52 system=0.10 cpu=99% elapsed=2.62 rss_kib=168960 status=0

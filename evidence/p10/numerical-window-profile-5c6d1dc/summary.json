@@ -1,0 +1,34 @@
+{
+  "status": "complete_bit_identical_fft_bottleneck_optimization",
+  "baseline_source": "5c6d1dc20c0bf13cedb6f5fea0a68164bb84ae09",
+  "optimized_source": "1b89176f63737bbeb3ed65c7e3c7fe6dbeef8f02",
+  "change": "specialized serial radix-2/radix-3 combination loops",
+  "fft_seconds_four_transforms": {
+    "m96": {"baseline": 0.517444858, "optimized": 0.254330754, "speedup": 2.034535147094},
+    "m144": {"baseline": 1.840686577, "optimized": 0.891595223, "speedup": 2.064486809167},
+    "m192": {"baseline": 4.688585241, "optimized": 2.255839544, "speedup": 2.078421425615}
+  },
+  "fft_output_hashes_bit_identical": true,
+  "n64_m96_cm16_four_attempts": {
+    "baseline_wall_seconds": 146.23,
+    "optimized_wall_seconds": 94.199074304,
+    "speedup": 1.552347,
+    "clock64_snapshot_sha256": "d90b61015d4c68bd8cb50cde8c7094d93b128a42abac9d625b4d9fb93449eeed",
+    "snapshot_matches_baseline": true
+  },
+  "controls": {
+    "direct_dft_all_modes": "passed",
+    "lengths_6_18_144": "passed",
+    "hermitian_nyquist_signed_zero": "passed",
+    "large_finite_and_overflow_refusal": "passed",
+    "bitwise_repeat_determinism": "passed",
+    "steady_allocation": "passed",
+    "convolution": "passed",
+    "nsbu_solver_tests": "passed",
+    "nsbu_solver_all_targets_clippy": "passed"
+  },
+  "qualification": {
+    "improved_arithmetic_channel": false,
+    "accepted_windows": 0
+  }
+}
