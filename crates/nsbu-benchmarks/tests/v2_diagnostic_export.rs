@@ -162,6 +162,18 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     .unwrap();
     let mismatched_export =
         DiagnosticExportPlan::new_v2(&profile, mismatched_diagnostic, CAP).unwrap();
+    let mut mismatched_pressure_settings = diagnostic.diagnostic_settings();
+    mismatched_pressure_settings.pressure_floors[0] *= 2.0;
+    let mismatched_pressure_diagnostic = DiagnosticPlan::new(
+        diagnostic.family_plan(),
+        diagnostic.probe_plan(),
+        diagnostic.residual_times(),
+        mismatched_pressure_settings,
+        CAP,
+    )
+    .unwrap();
+    let mismatched_pressure_export =
+        DiagnosticExportPlan::new_v2(&profile, mismatched_pressure_diagnostic, CAP).unwrap();
     assert_eq!(
         (export.schema_version(), export_v2.schema_version()),
         (1, 2)
@@ -189,6 +201,12 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
         Err(DiagnosticExportError::InvalidReport)
     ));
     assert!(untouched.is_empty());
+    assert!(matches!(
+        write_json(mismatched_pressure_export, driver.reports(), &mut untouched),
+        Err(DiagnosticExportError::InvalidReport)
+    ));
+    assert!(untouched.is_empty());
+    assert_eq!(driver.reports().len(), 7);
     let mut bytes = Vec::new();
     let work = write_json(export, driver.reports(), &mut bytes).unwrap();
     assert_eq!(work.events, 7);
@@ -209,6 +227,9 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert!(decoded["events"][0].get("reconstructed_physical").is_none());
     assert!(decoded["context"]["coordinator_reservation"]
         .get("reconstructed_physical_work")
+        .is_none());
+    assert!(decoded["context"]["coordinator_reservation"]
+        .get("reconstructed_pressure_work")
         .is_none());
     assert_eq!(decoded["scientific_status"], "UnqualifiedDiagnostic");
     assert_eq!(
@@ -253,6 +274,29 @@ fn diagnostic_export_complete_profile_preserves_every_raw_finding() {
     assert_eq!(
         decoded_v2["context"]["coordinator_reservation"]["reconstructed_physical_work"]["attempts"],
         diagnostic.bounds().probe_physical.attempts.to_string()
+    );
+    let pressure_work = diagnostic.bounds().probe_pressure;
+    let pressure_reservation =
+        &decoded_v2["context"]["coordinator_reservation"]["reconstructed_pressure_work"];
+    assert_eq!(
+        pressure_reservation["attempts"],
+        pressure_work.attempts.to_string()
+    );
+    assert_eq!(
+        pressure_reservation["provider_work_units"],
+        pressure_work.provider_work_units.to_string()
+    );
+    assert_eq!(
+        pressure_reservation["scalar_transforms"],
+        pressure_work.scalar_transforms.to_string()
+    );
+    assert_eq!(
+        pressure_reservation["weighted_visits"],
+        pressure_work.weighted_visits.to_string()
+    );
+    assert_eq!(
+        pressure_reservation["binding_checks"],
+        pressure_work.binding_checks.to_string()
     );
     v2_diagnostic_export_oracle::document(&decoded_v2, driver.reports());
 
