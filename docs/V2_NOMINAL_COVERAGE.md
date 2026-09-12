@@ -10,15 +10,17 @@ count for the fixed nominal Core (`0 <= X <= 1/2`) and Annulus
 (`1/2 < X <= 8`) intersections with the mathematical `c_x = 1` set on
 `|eta| <= 1/2`.
 
-The plan binds an exact accepted clock, V2 family identity, regional-tracking
-identity, all six branch labels, all four quantity labels, and the complete
-actual sample-grid count. Its sampled Core/Annulus metadata is separate from
+The plan binds the V2 family policy to the frozen regional-tracking policy:
+identity, sample layout, and binary64 floor words. Each report also binds an
+exact accepted clock, all six branch labels, all four quantity labels, fixed
+five-region order, identical five-region counts across the complete 6-by-4
+inventory, and the complete actual sample-grid count. Its sampled Core/Annulus metadata is separate from
 the nominal fractions. `CoverageStatus::Nonempty` is geometric and empirical;
 a sampled class may be `NoSamples` without becoming geometrically empty.
 Conversely, a nonzero node count does not establish nominal volume.
 
-`CoverageFamilyPlan` reserves the six-run family plus this consumer only. The
-caller retains and budgets the regional tracking workspace separately. A
+`CoverageFamilyPlan` admits one joint reservation for the six-run family,
+regional tracking, and this consumer. A
 consumer attempt charges both nominal regions and all three plans before
 validation; a foreign, stale, invalid, exhausted, or failed call publishes no
 new report. The workspace retains only its last complete report and borrows all
