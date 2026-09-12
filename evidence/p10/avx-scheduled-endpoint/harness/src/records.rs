@@ -1,6 +1,7 @@
 //! Attempt records and concise stdout reporting for the harness-owned schema.
-use crate::{artifact, schedule};
+use crate::{artifact, publication::Frontiers, schedule};
 use nsbu_solver::{integrators::attempt::AttemptResult, SolverError};
+use stats_alloc::Stats;
 
 #[derive(Clone, Copy, Default)]
 pub struct ObservationTiming {
@@ -113,4 +114,35 @@ pub fn report(
         timing.map(|value| value.total),
         facts.ratios,
     );
+}
+
+pub fn require_no_allocations(allocations: Stats) -> Result<(), SolverError> {
+    if allocations.allocations != 0
+        || allocations.deallocations != 0
+        || allocations.reallocations != 0
+    {
+        Err(SolverError::ResourceLimit)
+    } else {
+        Ok(())
+    }
+}
+
+pub fn incomplete(frontiers: Frontiers, error: &str) -> String {
+    let provisional = frontiers
+        .provisional_clock
+        .map_or_else(|| "null".to_owned(), |value| value.to_string());
+    format!(
+        concat!(
+            "{{\n  \"status\": \"qualification_incomplete\",\n",
+            "  \"error\": {},\n  \"attempted_frontier\": {},\n",
+            "  \"in_memory_clock\": {},\n  \"durable_clock\": {},\n",
+            "  \"durable_attempt_frontier\": {},\n  \"provisional_clock\": {}\n}}\n"
+        ),
+        artifact::json_string(error),
+        frontiers.attempted,
+        frontiers.in_memory_clock,
+        frontiers.durable_clock,
+        frontiers.durable_attempt,
+        provisional,
+    )
 }
