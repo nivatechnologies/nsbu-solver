@@ -131,8 +131,19 @@ fn validate_streams(
     table: SharedForceTablePlan<'_>,
     streams: &[SharedForceStream<'_>],
 ) -> Result<(), SolverError> {
+    let calls = validate_stream_headers(table, streams)?;
+    let matched = validate_manifest_copies(table, streams)?;
+    if calls != table.maximum_attempts() || matched != calls {
+        return Err(SolverError::InvalidPayload);
+    }
+    Ok(())
+}
+
+fn validate_stream_headers(
+    table: SharedForceTablePlan<'_>,
+    streams: &[SharedForceStream<'_>],
+) -> Result<usize, SolverError> {
     let mut calls = 0usize;
-    let mut matched = 0usize;
     for stream in streams {
         if stream.domain_index >= 3 || stream.attempts.is_empty() {
             return Err(SolverError::InvalidPayload);
@@ -155,29 +166,17 @@ fn validate_streams(
             }
         }
     }
-    if calls != table.maximum_attempts() {
-        return Err(SolverError::InvalidPayload);
-    }
+    Ok(calls)
+}
+
+fn validate_manifest_copies(
+    table: SharedForceTablePlan<'_>,
+    streams: &[SharedForceStream<'_>],
+) -> Result<usize, SolverError> {
+    let mut matched = 0usize;
     for request in table.manifest() {
         for domain_index in 0..3 {
-            let mut expected = 0usize;
-            for stream in streams
-                .iter()
-                .filter(|stream| stream.domain_index == domain_index)
-            {
-                for attempt in stream.attempts {
-                    expected = expected
-                        .checked_add(
-                            call_schedule(*attempt)?
-                                .into_iter()
-                                .flatten()
-                                .take(attempt.method.rhs_calls())
-                                .filter(|clock| *clock == request.clock())
-                                .count(),
-                        )
-                        .ok_or(SolverError::SizeOverflow)?;
-                }
-            }
+            let expected = expected_copies(streams, domain_index, request.clock())?;
             if expected != request.maximum_copies()[domain_index] {
                 return Err(SolverError::InvalidPayload);
             }
@@ -186,10 +185,32 @@ fn validate_streams(
                 .ok_or(SolverError::SizeOverflow)?;
         }
     }
-    if matched != calls {
-        return Err(SolverError::InvalidPayload);
+    Ok(matched)
+}
+
+fn expected_copies(
+    streams: &[SharedForceStream<'_>],
+    domain_index: usize,
+    clock: nsbu_solver::domain::TickClock,
+) -> Result<usize, SolverError> {
+    let mut expected = 0usize;
+    for stream in streams
+        .iter()
+        .filter(|stream| stream.domain_index == domain_index)
+    {
+        for attempt in stream.attempts {
+            let matches = call_schedule(*attempt)?
+                .into_iter()
+                .flatten()
+                .take(attempt.method.rhs_calls())
+                .filter(|candidate| *candidate == clock)
+                .count();
+            expected = expected
+                .checked_add(matches)
+                .ok_or(SolverError::SizeOverflow)?;
+        }
     }
-    Ok(())
+    Ok(expected)
 }
 
 fn admission_visits(
