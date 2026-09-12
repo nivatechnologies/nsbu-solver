@@ -1,0 +1,19 @@
+{
+  "schema": "p10-avx-n256-profile-v1",
+  "status": "experimental_preflight_and_startup_probe",
+  "retained_layout": [256, 256, 256],
+  "integration_force_layout": [384, 384, 384],
+  "observer_force_layout": [768, 768, 768],
+  "observer_conservative_layout": [512, 512, 512],
+  "workers": 32,
+  "fft_backend": "rustfft-6.4.1-avx-avx2-fma-closed-lengths",
+  "force_provider": "parallel-reduced-attempt-cache",
+  "method": "cox-matthews",
+  "step_ticks": 32,
+  "maximum_attempts": 128,
+  "endpoint_clock": 4096,
+  "observer_nodes": [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096],
+  "execution_cap_bytes": 103079215104,
+  "startup_probe": "one accepted from-rest step followed by explicit current observer",
+  "qualification": "none"
+}
