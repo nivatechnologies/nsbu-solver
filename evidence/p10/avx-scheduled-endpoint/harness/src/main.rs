@@ -9,6 +9,7 @@ mod cache;
 mod command;
 mod config;
 mod error;
+mod json;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
 mod observer;
 mod owners;
@@ -22,41 +23,27 @@ mod timed_rhs;
 
 use artifact::{NodeRecord, StagedArtifact};
 use balance::TimedBalance;
-use cache::CachedReducedForce;
 use error::{AnyResult, HarnessError};
 #[cfg(not(feature = "n384-prep"))]
 use nsbu_solver::diagnostics::balances::BalanceSample;
 use nsbu_solver::{
     domain::{ResourcePlan, SpectralState},
     integrators::{
-        attempt::{AttemptResult, AttemptWorkspace},
-        rhs::SpectralRhs,
-        transaction::{prepare_commit, CandidateState, PreparedCommit},
+        attempt::AttemptResult,
+        transaction::{prepare_commit, PreparedCommit},
     },
     SolverError,
 };
 use observer::ReducedObserver;
 use publication::Frontiers;
 use records::{AttemptFacts, ObservationTiming};
-use run_types::{AcceptedFacts, AcceptedStage, StageMeta};
+use run_types::{AcceptedFacts, AcceptedStage, RunOwners, StageMeta};
 use stats_alloc::{Region, Stats, StatsAlloc, INSTRUMENTED_SYSTEM};
 use std::{alloc::System, fs, path::Path, time::Instant};
-use timed_rhs::TimedRhs;
 
+use timed_rhs::TimedRhs;
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
-
-struct RunOwners {
-    resources: ResourcePlan,
-    state: SpectralState,
-    candidate: CandidateState,
-    attempts: AttemptWorkspace,
-    rhs: TimedRhs<SpectralRhs<CachedReducedForce>>,
-    observer: ReducedObserver,
-    identity: String,
-    balances: Vec<TimedBalance>,
-    frontiers: Frontiers,
-}
 
 fn main() -> AnyResult<()> {
     dispatch(command::parse()?)
@@ -169,6 +156,18 @@ impl RunOwners {
         );
         let seconds = started.elapsed().as_secs_f64();
         let allocations = integration_region.change();
+        self.handle_attempt_result(output, index, from, seconds, allocations, result)
+    }
+
+    fn handle_attempt_result(
+        &mut self,
+        output: &Path,
+        index: usize,
+        from: u128,
+        seconds: f64,
+        allocations: Stats,
+        result: Result<AttemptResult, SolverError>,
+    ) -> AnyResult<()> {
         match result {
             Ok(result) => self.finish_attempt(output, index, from, seconds, allocations, result),
             Err(error) => {

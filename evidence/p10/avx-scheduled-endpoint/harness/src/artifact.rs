@@ -144,25 +144,9 @@ pub fn stage_node(
     let clock = state.clock().elapsed();
     let final_path = root.join(format!("node-{clock:04}"));
     let partial = root.join(format!("node-{clock:04}.partial"));
-    if final_path.exists() || partial.exists() {
-        return Err(io::Error::new(
-            io::ErrorKind::AlreadyExists,
-            "node path already exists",
-        ));
-    }
-    fs::create_dir(&partial)?;
+    prepare_node_dir(&final_path, &partial)?;
     let result = stage_node_inner(&partial, state, record, attempt_json);
-    let hash = match result {
-        Ok(hash) => hash,
-        Err(error) => {
-            let _ = fs::remove_dir_all(&partial);
-            return Err(error);
-        }
-    };
-    if let Err(error) = File::open(&partial)?.sync_all() {
-        let _ = fs::remove_dir_all(&partial);
-        return Err(error);
-    }
+    let hash = finish_node_stage(&partial, result)?;
     Ok(StagedArtifact {
         partial,
         final_path,
@@ -175,6 +159,40 @@ pub fn stage_node(
 }
 
 #[cfg(not(feature = "n384-prep"))]
+fn prepare_node_dir(final_path: &Path, partial: &Path) -> io::Result<()> {
+    refuse_existing(final_path, partial)?;
+    fs::create_dir(partial)
+}
+
+#[cfg(not(feature = "n384-prep"))]
+fn finish_node_stage(partial: &Path, result: io::Result<String>) -> io::Result<String> {
+    let hash = unwrap_node_stage(partial, result)?;
+    sync_node_stage(partial)?;
+    Ok(hash)
+}
+
+#[cfg(not(feature = "n384-prep"))]
+fn unwrap_node_stage(partial: &Path, result: io::Result<String>) -> io::Result<String> {
+    let hash = match result {
+        Ok(hash) => hash,
+        Err(error) => {
+            let _ = fs::remove_dir_all(&partial);
+            return Err(error);
+        }
+    };
+    Ok(hash)
+}
+
+#[cfg(not(feature = "n384-prep"))]
+fn sync_node_stage(partial: &Path) -> io::Result<()> {
+    if let Err(error) = File::open(&partial)?.sync_all() {
+        let _ = fs::remove_dir_all(&partial);
+        return Err(error);
+    }
+    Ok(())
+}
+
+#[cfg(not(feature = "n384-prep"))]
 fn stage_node_inner(
     partial: &Path,
     state: &SpectralState,
@@ -184,10 +202,16 @@ fn stage_node_inner(
     let (hash, bytes) = write_snapshot(&partial.join("state.bin"), state, record.identity)?;
     let json = node_json(state, record, &hash, bytes);
     write_file(&partial.join("record.json"), json.as_bytes())?;
+    write_optional_attempt(partial, attempt_json)?;
+    Ok(hash)
+}
+
+#[cfg(not(feature = "n384-prep"))]
+fn write_optional_attempt(partial: &Path, attempt_json: Option<&str>) -> io::Result<()> {
     if let Some(attempt) = attempt_json {
         write_file(&partial.join("attempt.json"), attempt.as_bytes())?;
     }
-    Ok(hash)
+    Ok(())
 }
 
 pub(crate) fn write_snapshot(
@@ -335,26 +359,7 @@ fn refuse_existing(final_path: &Path, partial: &Path) -> io::Result<()> {
     }
 }
 
-pub fn json_string(value: &str) -> String {
-    let mut escaped = String::with_capacity(value.len() + 2);
-    escaped.push('"');
-    for character in value.chars() {
-        match character {
-            '"' => escaped.push_str("\\\""),
-            '\\' => escaped.push_str("\\\\"),
-            '\n' => escaped.push_str("\\n"),
-            '\r' => escaped.push_str("\\r"),
-            '\t' => escaped.push_str("\\t"),
-            value if value <= '\u{1f}' => {
-                use std::fmt::Write as _;
-                write!(&mut escaped, "\\u{:04x}", value as u32).expect("String writes cannot fail");
-            }
-            value => escaped.push(value),
-        }
-    }
-    escaped.push('"');
-    escaped
-}
+pub use crate::json::json_string;
 
 pub(crate) fn write_file(path: &Path, bytes: &[u8]) -> io::Result<()> {
     let mut file = create(path)?;
@@ -428,14 +433,6 @@ mod tests {
         assert_eq!(
             disk_preflight(DISK_CAP_BYTES, 2),
             Err(SolverError::ResourceLimit)
-        );
-    }
-
-    #[test]
-    fn json_string_escapes_quotes_newlines_and_control_characters() {
-        assert_eq!(
-            json_string("quoted \"line\"\nslash\\tab\t\u{1}"),
-            "\"quoted \\\"line\\\"\\nslash\\\\tab\\t\\u0001\""
         );
     }
 

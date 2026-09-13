@@ -114,13 +114,17 @@ fn finish_rhs(
         SpectralRhs::<CachedReducedForce>::reservation_with_catalog(domain, limits, catalog)?;
     let rhs =
         SpectralRhs::new_with_catalog(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)?;
-    require_identity(
-        rhs.provider()
-            .w3_identity()
-            .ok_or(SolverError::InvalidPayload)?,
-        force_identity()?,
-    )?;
+    validate_force_identity(&rhs)?;
     Ok(rhs)
+}
+
+#[cfg(feature = "n192-piecewise-cadv33")]
+fn validate_force_identity(rhs: &SpectralRhs<CachedReducedForce>) -> Result<(), SolverError> {
+    let actual = rhs
+        .provider()
+        .w3_identity()
+        .ok_or(SolverError::InvalidPayload)?;
+    require_identity(actual, force_identity()?)
 }
 
 #[cfg(all(feature = "n384-prep", not(feature = "n192-piecewise-cadv33")))]

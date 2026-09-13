@@ -52,19 +52,37 @@ pub fn step(clock: u128) -> Result<u128, SolverError> {
 }
 
 pub fn validate() -> Result<(), SolverError> {
-    if terminal_clock()? != ENDPOINT
-        || FINE[0] != 0
-        || FINE[FINE.len() - 1] != ENDPOINT
-        || !nested(&MIDDLE, &FINE)
-        || !nested(&COARSE, &MIDDLE)
-        || !FINE.iter().copied().all(accepted_clock)
-        || !simpson(&FINE)
-        || !simpson(&MIDDLE)
-        || !simpson(&COARSE)
-    {
+    validate_terminal()?;
+    validate_nodes()?;
+    validate_quadrature()
+}
+
+fn validate_terminal() -> Result<(), SolverError> {
+    if terminal_clock()? != ENDPOINT {
         return Err(SolverError::InvalidClock);
     }
     Ok(())
+}
+
+fn validate_nodes() -> Result<(), SolverError> {
+    if FINE[0] != 0 || FINE[FINE.len() - 1] != ENDPOINT {
+        return Err(SolverError::InvalidClock);
+    }
+    if !nested(&MIDDLE, &FINE) || !nested(&COARSE, &MIDDLE) {
+        return Err(SolverError::InvalidClock);
+    }
+    if !FINE.iter().copied().all(accepted_clock) {
+        return Err(SolverError::InvalidClock);
+    }
+    Ok(())
+}
+
+fn validate_quadrature() -> Result<(), SolverError> {
+    if simpson(&FINE) && simpson(&MIDDLE) && simpson(&COARSE) {
+        Ok(())
+    } else {
+        Err(SolverError::InvalidClock)
+    }
 }
 
 fn terminal_clock() -> Result<u128, SolverError> {
