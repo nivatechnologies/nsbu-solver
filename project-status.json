@@ -508,5 +508,14 @@
     "omitted_h1_residual": 1932.9133166324302,
     "full_h1_residual": 1933.0419833621916,
     "scope": "Actual from-rest M512-force history, independent M768 force. Retained residual contracts but unresolved spatial band dominates. Strict expanded squared-norm closure fails; term-scaled heuristic is not qualification. No velocity error bound or accepted PDE window."
+  },
+  "p10_w3_layout768_controls": {
+    "status": "full_size_backend_controls_passed",
+    "evidence": "evidence/p10/w3-768-controls-20260913/prepared/runs/completion.json",
+    "force_bitwise_serial_match": true,
+    "rhs_bitwise_serial_match": true,
+    "steady_allocations": 0,
+    "root_focused_core_tests_passed": 7,
+    "scope": "Forward force and bidirectional RHS at retained N512/layout768, three repeated evaluations. Larger layouts1024/1152 remain refused. Backend admission only; no N512 trajectory, convergence or PDE qualification."
   }
 }
