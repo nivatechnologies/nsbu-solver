@@ -86,7 +86,9 @@ fn validate_hashes(manifest: &Manifest, admission: ForceAdmission) -> Result<(),
 fn validate_evolution(manifest: &Manifest, admission: ForceAdmission) -> Result<(), String> {
     let evolution = &manifest.evolution;
     let profile_admitted = match admission {
-        ForceAdmission::ExistingM384 => valid_evolution_profile(manifest.comparison_kind, evolution),
+        ForceAdmission::ExistingM384 => {
+            valid_evolution_profile(manifest.comparison_kind, evolution)
+        }
         ForceAdmission::ExternalReferenceM384OrM512 => {
             evolution.method == "cox-matthews"
                 && [[384; 3], [512; 3]].contains(&evolution.integration_force_dimensions)
@@ -106,6 +108,7 @@ fn validate_evolution(manifest: &Manifest, admission: ForceAdmission) -> Result<
 fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolution) -> bool {
     match kind {
         ComparisonKind::MatchedSpatial | ComparisonKind::TimeDiagnostic => valid_cm_m384(evolution),
+        ComparisonKind::MatchedM512SpatialDiagnostic => valid_cm_m512(evolution),
         ComparisonKind::ForceResolutionDiagnostic | ComparisonKind::MixedForceSpaceDiagnostic => {
             valid_force_resolution_profile(evolution)
         }
@@ -115,6 +118,10 @@ fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolu
 
 fn valid_cm_m384(evolution: &crate::model::Evolution) -> bool {
     evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [384; 3]
+}
+
+fn valid_cm_m512(evolution: &crate::model::Evolution) -> bool {
+    evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [512; 3]
 }
 
 fn valid_force_resolution_profile(evolution: &crate::model::Evolution) -> bool {

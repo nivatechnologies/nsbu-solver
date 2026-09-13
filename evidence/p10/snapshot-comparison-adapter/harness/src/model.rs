@@ -47,6 +47,8 @@ pub(crate) enum ComparisonKind {
     #[default]
     #[serde(rename = "MATCHED_SPATIAL")]
     MatchedSpatial,
+    #[serde(rename = "MATCHED_M512_SPATIAL_DIAGNOSTIC")]
+    MatchedM512SpatialDiagnostic,
     #[serde(rename = "TIME_DIAGNOSTIC")]
     TimeDiagnostic,
     #[serde(rename = "FORCE_RESOLUTION_DIAGNOSTIC")]

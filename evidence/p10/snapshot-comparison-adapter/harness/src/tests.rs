@@ -200,6 +200,65 @@ fn enable_fixed_diagnostic(left: &mut Manifest, right: &mut Manifest, kind: Comp
     }
 }
 
+fn enable_matched_m512_spatial(left: &mut Manifest, right: &mut Manifest) {
+    left.comparison_kind = ComparisonKind::MatchedM512SpatialDiagnostic;
+    right.comparison_kind = ComparisonKind::MatchedM512SpatialDiagnostic;
+    left.dimensions = [384; 3];
+    right.dimensions = [512; 3];
+    for manifest in [&mut *left, &mut *right] {
+        manifest.evolution.case_sha256 =
+            "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e".into();
+        manifest.evolution.clock_target = 8192;
+        manifest.evolution.comparison_endpoint = 4096;
+        manifest.evolution.lengths = [1.0; 3];
+        manifest.evolution.viscosity = 1.0;
+        manifest.evolution.integration_force_dimensions = [512; 3];
+        manifest.evolution.schedule = vec![
+            ScheduleSegment {
+                from_inclusive: 0,
+                until_exclusive: 2048,
+                step_ticks: 64,
+            },
+            ScheduleSegment {
+                from_inclusive: 2048,
+                until_exclusive: 4096,
+                step_ticks: 128,
+            },
+        ];
+        manifest.elapsed = 4096;
+        manifest.target = 8192;
+        manifest.epoch = 48;
+        manifest.accepted_steps = 48;
+        manifest.admission_guard = Some(AdmissionGuard {
+            advective_limit: 3.3,
+            maximum_attempts: 48,
+        });
+    }
+    left.source_commit = "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72".into();
+    right.source_commit = "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645".into();
+    left.plan_sha256 = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84".into();
+    right.plan_sha256 = "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634".into();
+    left.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c".into(),
+    });
+    right.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f".into(),
+    });
+    left.identity = format!(
+        "source={};profile={}",
+        left.source_commit,
+        left.profile.as_ref().unwrap().value
+    );
+    right.identity = format!(
+        "source={};profile={};production_source=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0;test_source={};external_stop=pgid-watchdog-v2-starttime-cmdline-deadline;schema=p10-avx-n512-observer-state-v1",
+        right.source_commit,
+        right.profile.as_ref().unwrap().value,
+        right.source_commit,
+    );
+}
+
 fn fields(layout: Layout, scale: f64) -> [Vec<Complex64>; 3] {
     let mut result = std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); layout.half_len()]);
     for (axis, component) in result.iter_mut().enumerate() {
@@ -1209,6 +1268,61 @@ fn force_resolution_diagnostic_is_closed_and_directional() {
     changed.dimensions = [383; 3];
     assert!(compare::validate_manifest_pair(&left, &changed).is_err());
     assert_other_physics_rejected(&left, &right);
+}
+
+#[test]
+fn matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted() {
+    let root = root("matched-m512-spatial");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 6, "right");
+    write(&mut left, &fields(Layout::new([4; 3]).unwrap(), 1.0));
+    write(&mut right, &fields(Layout::new([6; 3]).unwrap(), 1.25));
+    enable_matched_m512_spatial(&mut left, &mut right);
+
+    assert!(compare::validate_manifest_pair(&left, &right).is_ok());
+    assert_eq!(
+        decode::admitted_bytes(&left, &right).unwrap(),
+        4_600_889_344
+    );
+
+    for changed in [
+        {
+            let mut value = right.clone();
+            value.source_commit = "a".repeat(40);
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.plan_sha256 = "a".repeat(64);
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.profile.as_mut().unwrap().value.push_str("-changed");
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.dimensions = [384; 3];
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.evolution.schedule[1].step_ticks = 64;
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.evolution.relative_tolerances[0] = 2e-5;
+            value
+        },
+    ] {
+        assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    }
+
+    let mut changed = right.clone();
+    changed.comparison_kind = ComparisonKind::MatchedSpatial;
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
 }
 
 #[test]

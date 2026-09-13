@@ -209,6 +209,19 @@ fn format_output(
             )?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
+        (
+            model::ComparisonKind::MatchedM512SpatialDiagnostic,
+            model::ComparisonKind::MatchedM512SpatialDiagnostic,
+        ) => {
+            let output = compare::matched_m512_spatial_diagnostic(
+                left_manifest,
+                left,
+                right_manifest,
+                right,
+                admitted,
+            )?;
+            serde_json::to_string_pretty(&output).map_err(model::debug)
+        }
         (model::ComparisonKind::MethodDiagnostic, model::ComparisonKind::MethodDiagnostic) => {
             let output =
                 compare::method_diagnostic(left_manifest, left, right_manifest, right, admitted)?;
