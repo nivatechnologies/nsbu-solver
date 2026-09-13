@@ -36,7 +36,12 @@ const PROJECTION: &str = "none";
 const CLASSIFICATION: &str = "sampled-binary64-reference-diagnostic-not-continuum-or-enclosure";
 const EXECUTION_CONTEXT: &str = "contended-local-p10-campaign-bounded-1800s";
 const REFERENCE_SOURCE_COMMIT: &str = "6bdea3084d737ce6585cb67ab5d48810bd03cd50";
-const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const PROFILE_M384: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const PROFILE_M512: &str = "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const SOURCE_M384: &str = "aed49b7d7874a0a720dee88b65ba180c7286fa65";
+const SOURCE_M512: &str = "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72";
+const PLAN_M384: &str = "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a";
+const PLAN_M512: &str = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84";
 const SNAPSHOT_EXECUTION_CAP: usize = 206_158_430_208;
 const SNAPSHOT_ARTIFACT_CAP: usize = 137_438_953_472;
 const SOURCES: [(&str, &str); 7] = [
@@ -259,7 +264,7 @@ fn validate_production_input(bridge: &BridgeManifest) -> Result<(), String> {
 }
 
 fn bind_snapshot(bridge: &BridgeManifest) -> Result<SnapshotManifest, String> {
-    let snapshot = crate::decode::read_manifest(&bridge.snapshot_manifest)?;
+    let snapshot = crate::decode::read_external_reference_manifest(&bridge.snapshot_manifest)?;
     validate_binding(bridge, &snapshot)?;
     validate_snapshot_review(bridge, &snapshot)?;
     // The reviewed decoder validates both snapshot lengths before allocating either state.

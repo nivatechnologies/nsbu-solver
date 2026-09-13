@@ -17,10 +17,26 @@ const MAX_PLAN_BYTES: u64 = 1024 * 1024;
 const MAX_ARITHMETIC_REVIEW_BYTES: u64 = 64 * 1024;
 
 pub(crate) fn read_manifest(path: &Path) -> Result<Manifest, String> {
+    read_manifest_with(path, ForceAdmission::ExistingM384)
+}
+
+/// Preserve the comparison adapter's M384 contract while admitting the two
+/// explicitly reviewed trajectory force grids for the read-only reference bridge.
+pub(crate) fn read_external_reference_manifest(path: &Path) -> Result<Manifest, String> {
+    read_manifest_with(path, ForceAdmission::ExternalReferenceM384OrM512)
+}
+
+#[derive(Clone, Copy)]
+enum ForceAdmission {
+    ExistingM384,
+    ExternalReferenceM384OrM512,
+}
+
+fn read_manifest_with(path: &Path, admission: ForceAdmission) -> Result<Manifest, String> {
     let bytes = read_bounded(path, MAX_MANIFEST_BYTES, "manifest exceeds 64 KiB bound")?;
     let mut manifest: Manifest = serde_json::from_slice(&bytes).map_err(debug)?;
     validate_envelope(&manifest)?;
-    validate_hashes(&manifest)?;
+    validate_hashes(&manifest, admission)?;
     if manifest.snapshot.is_relative() {
         manifest.snapshot = beside(path, &manifest.snapshot);
     }
@@ -52,7 +68,7 @@ fn validate_envelope(manifest: &Manifest) -> Result<(), String> {
     Ok(())
 }
 
-fn validate_hashes(manifest: &Manifest) -> Result<(), String> {
+fn validate_hashes(manifest: &Manifest, admission: ForceAdmission) -> Result<(), String> {
     if !is_hex(&manifest.source_commit, 40)
         || !is_hex(&manifest.plan_sha256, 64)
         || !is_hex(&manifest.coefficient_sha256, 64)
@@ -61,16 +77,22 @@ fn validate_hashes(manifest: &Manifest) -> Result<(), String> {
     {
         return Err("invalid comparison manifest binding".into());
     }
-    validate_evolution(manifest)?;
+    validate_evolution(manifest, admission)?;
     Ok(())
 }
 
-fn validate_evolution(manifest: &Manifest) -> Result<(), String> {
+fn validate_evolution(manifest: &Manifest, admission: ForceAdmission) -> Result<(), String> {
     let evolution = &manifest.evolution;
+    let force_admitted = match admission {
+        ForceAdmission::ExistingM384 => evolution.integration_force_dimensions == [384; 3],
+        ForceAdmission::ExternalReferenceM384OrM512 => {
+            [[384; 3], [512; 3]].contains(&evolution.integration_force_dimensions)
+        }
+    };
     if evolution.clock_target != manifest.target
         || evolution.comparison_endpoint != manifest.elapsed
         || evolution.method != "cox-matthews"
-        || evolution.integration_force_dimensions != [384; 3]
+        || !force_admitted
         || evolution.schedule.is_empty()
     {
         return Err("invalid evolution semantics".into());
