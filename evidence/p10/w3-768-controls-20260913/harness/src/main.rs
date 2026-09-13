@@ -1,6 +1,7 @@
 //! Standalone, sequential controls for a prospective W3 layout-768 admission.
-use nsbu_benchmarks::provider::parallel_reduced::{
-    ParallelReducedV2Force, ParallelReducedV2ForceW3,
+use nsbu_benchmarks::{
+    provider::parallel_reduced::{ParallelReducedV2Force, ParallelReducedV2ForceW3},
+    CASE_SHA256,
 };
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
@@ -23,6 +24,27 @@ const LAYOUT: usize = 768;
 const WORKERS: usize = 32;
 const FORWARD_ADDITIONAL: usize = 14_539_902_720;
 const BIDIRECTIONAL_ADDITIONAL: usize = 21_787_660_160;
+const CONTROL_OVERHEAD: usize = 64 * 1024;
+const FORCE_CAP_BYTES: usize = 64 * 1024 * 1024 * 1024;
+const RHS_CAP_BYTES: usize = 96 * 1024 * 1024 * 1024;
+const ADMISSION_REVIEW_COMMIT: &str = "7491b44b37a161bfde981e41137078252f2ef9d0";
+
+#[derive(Clone, Copy)]
+struct ControlPlan {
+    serial_peak: usize,
+    w3_peak: usize,
+    cap: usize,
+}
+impl ControlPlan {
+    fn peak(self) -> usize {
+        self.serial_peak.max(self.w3_peak)
+    }
+    fn require(self, name: &str) -> Result<(), String> {
+        (self.peak() <= self.cap)
+            .then_some(())
+            .ok_or_else(|| format!("{name} peak {} exceeds cap {}", self.peak(), self.cap))
+    }
+}
 
 fn main() -> Result<(), String> {
     match env::args().nth(1).as_deref() {
@@ -57,14 +79,63 @@ fn admission() -> Result<bool, String> {
 }
 
 fn preflight() -> Result<(), String> {
-    if admission()? {
-        println!("status=admitted_preallocation layout=768 forward={FORWARD_ADDITIONAL} bidirectional={BIDIRECTIONAL_ADDITIONAL}");
-    } else {
-        println!("status=blocked_current_closed_admission layout=768 expected_forward={FORWARD_ADDITIONAL} expected_bidirectional={BIDIRECTIONAL_ADDITIONAL}");
+    if !admission()? {
+        return Err("layout768 is not admitted".into());
     }
+    let force = force_plan()?;
+    let rhs = rhs_plan()?;
+    force.require("force")?;
+    rhs.require("rhs")?;
+    println!("status=admitted_preallocation layout=768 forward={FORWARD_ADDITIONAL} bidirectional={BIDIRECTIONAL_ADDITIONAL} force_serial_peak={} force_w3_peak={} force_peak={} force_cap={} rhs_serial_peak={} rhs_w3_peak={} rhs_peak={} rhs_cap={} source_case_sha256={CASE_SHA256} admission_review_commit={ADMISSION_REVIEW_COMMIT}", force.serial_peak, force.w3_peak, force.peak(), force.cap, rhs.serial_peak, rhs.w3_peak, rhs.peak(), rhs.cap);
     Ok(())
 }
 
+fn field_bytes(domain: Domain) -> Result<usize, String> {
+    domain
+        .layout()
+        .half_len()
+        .checked_mul(3 * std::mem::size_of::<Complex64>())
+        .ok_or("field byte overflow".into())
+}
+fn catalog_bytes(backend: FftBackend) -> Result<usize, String> {
+    FftCatalog::reservation(backend).map_err(debug)
+}
+fn force_plan() -> Result<ControlPlan, String> {
+    let backend = backend()?;
+    let domain = Domain::new([RETAINED; 3], [1.0; 3], 1.0).map_err(debug)?;
+    let samples = Layout::new([LAYOUT; 3]).map_err(debug)?;
+    let serial =
+        ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, WORKERS, backend)
+            .map_err(debug)?
+            .storage_bytes;
+    let w3 =
+        ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, WORKERS, backend)
+            .map_err(debug)?
+            .storage_bytes;
+    let output = field_bytes(domain)?;
+    let catalog = catalog_bytes(backend)?;
+    Ok(ControlPlan {
+        serial_peak: catalog + serial + output + CONTROL_OVERHEAD,
+        w3_peak: catalog + w3 + 2 * output + CONTROL_OVERHEAD,
+        cap: FORCE_CAP_BYTES,
+    })
+}
+fn rhs_plan() -> Result<ControlPlan, String> {
+    let backend = backend()?;
+    let domain = Domain::new([RETAINED; 3], [1.0; 3], 1.0).map_err(debug)?;
+    let limits = FixtureForce::LIMITS;
+    let serial = SpectralRhs::<FixtureForce>::reservation_with_fft_backend(domain, limits, backend)
+        .map_err(debug)?;
+    let w3 = SpectralRhs::<FixtureForce>::reservation_with_w3_fft_backend(domain, limits, backend)
+        .map_err(debug)?;
+    let field = field_bytes(domain)?;
+    let catalog = catalog_bytes(backend)?;
+    Ok(ControlPlan {
+        serial_peak: catalog + serial + 2 * field + CONTROL_OVERHEAD,
+        w3_peak: catalog + w3 + 3 * field + CONTROL_OVERHEAD,
+        cap: RHS_CAP_BYTES,
+    })
+}
 fn gated(name: &str, run: fn() -> Result<(), String>) -> Result<(), String> {
     if env::var(name).as_deref() != Ok("1") {
         return Err(format!(
@@ -159,7 +230,7 @@ fn force_control() -> Result<(), String> {
         allocations.deallocations,
         allocations.reallocations,
     )?;
-    println!("control=force-forward retained=512 layout=768 serial_bytes={} w3_bytes={} additional={} repeated=3 bitwise=true steady_allocations=0", serial_limits.storage_bytes, w3_limits.storage_bytes, FORWARD_ADDITIONAL);
+    println!("control=force-forward retained=512 layout=768 serial_bytes={} w3_bytes={} additional={} repeated=3 bitwise=true steady_allocations=0 source_case_sha256={CASE_SHA256} admission_review_commit={ADMISSION_REVIEW_COMMIT}", serial_limits.storage_bytes, w3_limits.storage_bytes, FORWARD_ADDITIONAL);
     Ok(())
 }
 
@@ -178,21 +249,39 @@ fn rhs_control() -> Result<(), String> {
     }
     let catalog = catalog(backend)?;
     if !matches!(
-        SpectralRhs::new_with_catalog_w3(domain, FixtureForce, 1.0e9, &catalog, w3_bytes - 1),
+        SpectralRhs::new_with_catalog_w3(
+            domain,
+            FixtureForce { mean: 0.125 },
+            1.0e9,
+            &catalog,
+            w3_bytes - 1
+        ),
         Err(SolverError::ResourceLimit)
     ) {
         return Err("RHS one-byte-under cap did not refuse".into());
     }
     let clock = TickClock::restore(-20, 8192, 4096, 4096).map_err(debug)?;
     let state = fixture_state(domain)?;
+    let mut expected_output = field(domain);
     let expected = {
-        let mut rhs =
-            SpectralRhs::new_with_catalog(domain, FixtureForce, 1.0e9, &catalog, serial_bytes)
-                .map_err(debug)?;
-        evaluate_rhs(&mut rhs, &state, clock)?
-    };
-    let mut rhs = SpectralRhs::new_with_catalog_w3(domain, FixtureForce, 1.0e9, &catalog, w3_bytes)
+        let mut rhs = SpectralRhs::new_with_catalog(
+            domain,
+            FixtureForce { mean: 0.125 },
+            1.0e9,
+            &catalog,
+            serial_bytes,
+        )
         .map_err(debug)?;
+        evaluate_rhs(&mut rhs, &state, clock, &mut expected_output)?
+    };
+    let mut rhs = SpectralRhs::new_with_catalog_w3(
+        domain,
+        FixtureForce { mean: 0.125 },
+        1.0e9,
+        &catalog,
+        w3_bytes,
+    )
+    .map_err(debug)?;
     require_identity(
         rhs.w3_fft_identity().ok_or("missing RHS W3 identity")?,
         domain.padded_layout().map_err(debug)?,
@@ -200,15 +289,16 @@ fn rhs_control() -> Result<(), String> {
         W3FftMode::Bidirectional,
         BIDIRECTIONAL_ADDITIONAL,
     )?;
+    let mut actual_output = field(domain);
     let measured = Region::new(GLOBAL);
     let mut actual = None;
     for _ in 0..3 {
-        actual = Some(evaluate_rhs(&mut rhs, &state, clock)?);
+        actual = Some(evaluate_rhs(&mut rhs, &state, clock, &mut actual_output)?);
     }
     let allocations = measured.change();
     let actual = actual.ok_or("missing RHS output")?;
-    same_bits(&actual.0, &expected.0)?;
-    if actual.1 != expected.1 {
+    same_bits(&actual_output, &expected_output)?;
+    if actual != expected {
         return Err("RHS consumption differs".into());
     }
     zero_steady(
@@ -216,7 +306,7 @@ fn rhs_control() -> Result<(), String> {
         allocations.deallocations,
         allocations.reallocations,
     )?;
-    println!("control=rhs-bidirectional retained=512 padded=768 serial_bytes={serial_bytes} w3_bytes={w3_bytes} additional={BIDIRECTIONAL_ADDITIONAL} repeated=3 bitwise=true steady_allocations=0");
+    println!("control=rhs-bidirectional retained=512 padded=768 serial_bytes={serial_bytes} w3_bytes={w3_bytes} additional={BIDIRECTIONAL_ADDITIONAL} repeated=3 bitwise=true steady_allocations=0 source_case_sha256={CASE_SHA256} admission_review_commit={ADMISSION_REVIEW_COMMIT}");
     Ok(())
 }
 
@@ -229,11 +319,21 @@ fn field(domain: Domain) -> [Vec<Complex64>; 3] {
 }
 fn fixture_state(domain: Domain) -> Result<[Vec<Complex64>; 3], String> {
     let mut state = field(domain);
-    for (axis, value) in [(1, 0.25), (2, -0.125)] {
-        for mode in [[1, 0, 0], [-1, 0, 0]] {
-            let index = domain.layout().locate(mode).map_err(debug)?.0;
-            state[axis][index] = Complex64::new(value, 0.0);
-        }
+    let put = |state: &mut [Vec<Complex64>; 3],
+               axis: usize,
+               mode: [isize; 3],
+               value: Complex64|
+     -> Result<(), String> {
+        state[axis][domain.layout().locate(mode).map_err(debug)?.0] = value;
+        Ok(())
+    };
+    // u=(A cos y, B sin z, C cos x): strict Hermitian and divergence-free, with mixed directions/phases.
+    for mode in [[0, 1, 0], [0, -1, 0]] {
+        put(&mut state, 0, mode, Complex64::new(0.25, 0.0))?;
+    }
+    put(&mut state, 1, [0, 0, 1], Complex64::new(0.0, -0.125))?;
+    for mode in [[1, 0, 0], [-1, 0, 0]] {
+        put(&mut state, 2, mode, Complex64::new(0.2, 0.0))?;
     }
     Ok(state)
 }
@@ -241,16 +341,16 @@ fn evaluate_rhs(
     rhs: &mut SpectralRhs<FixtureForce>,
     state: &[Vec<Complex64>; 3],
     clock: TickClock,
-) -> Result<([Vec<Complex64>; 3], [usize; 3]), String> {
+    output: &mut [Vec<Complex64>; 3],
+) -> Result<[usize; 3], String> {
     rhs.begin_attempt(clock, 64).map_err(debug)?;
-    let mut output = field(Domain::new([RETAINED; 3], [1.0; 3], 1.0).map_err(debug)?);
     rhs.evaluate(
         state.each_ref().map(Vec::as_slice),
         clock,
         output.each_mut().map(Vec::as_mut_slice),
     )
     .map_err(debug)?;
-    Ok((output, rhs.consumption()))
+    Ok(rhs.consumption())
 }
 fn require_identity(
     actual: W3FftIdentity,
@@ -274,6 +374,9 @@ fn require_identity(
     }
 }
 fn same_bits(actual: &[Vec<Complex64>; 3], expected: &[Vec<Complex64>; 3]) -> Result<(), String> {
+    if actual.iter().zip(expected).any(|(a, b)| a.len() != b.len()) {
+        return Err("coefficient component lengths differ".into());
+    }
     if actual
         .iter()
         .flatten()
@@ -305,7 +408,9 @@ fn debug(error: SolverError) -> String {
     format!("{error:?}")
 }
 
-struct FixtureForce;
+struct FixtureForce {
+    mean: f64,
+}
 impl FixtureForce {
     const LIMITS: ForceLimits = ForceLimits {
         storage_bytes: 0,
@@ -330,7 +435,7 @@ impl PrescribedForce for FixtureForce {
         for values in &mut out {
             values.fill(Complex64::new(0.0, 0.0));
         }
-        out[0][0] = Complex64::new(0.125, 0.0);
+        out[0][0] = Complex64::new(self.mean, 0.0);
         Ok(ForceWork {
             work_units: 1,
             scalar_transforms: 0,
@@ -341,6 +446,53 @@ impl PrescribedForce for FixtureForce {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn strict_hermitian_multidirectional_fixture_has_nonzero_projected_advection() {
+        let backend = FftBackend::RustFft6_4_1AvxFma;
+        if backend.ensure_available().is_err() {
+            return;
+        }
+        let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+        let catalog = catalog(backend).unwrap();
+        let bytes = SpectralRhs::<FixtureForce>::reservation_with_fft_backend(
+            domain,
+            FixtureForce::LIMITS,
+            backend,
+        )
+        .unwrap();
+        let mut rhs = SpectralRhs::new_with_catalog(
+            domain,
+            FixtureForce { mean: 0.0 },
+            1.0e9,
+            &catalog,
+            bytes,
+        )
+        .unwrap();
+        let clock = TickClock::restore(-20, 8192, 4096, 4096).unwrap();
+        let state = fixture_state(domain).unwrap();
+        let mut output = field(domain);
+        evaluate_rhs(&mut rhs, &state, clock, &mut output).unwrap();
+        assert!(output
+            .iter()
+            .flatten()
+            .any(|value| value.re != 0.0 || value.im != 0.0));
+    }
+
+    #[test]
+    fn planned_whole_control_peaks_fit_the_declared_external_caps() {
+        assert!(force_plan().unwrap().peak() <= FORCE_CAP_BYTES);
+        assert!(rhs_plan().unwrap().peak() <= RHS_CAP_BYTES);
+    }
+
+    #[test]
+    fn coefficient_bit_comparison_rejects_length_mismatch() {
+        let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+        let actual = field(domain);
+        let mut expected = field(domain);
+        expected[0].pop();
+        assert!(same_bits(&actual, &expected).is_err());
+    }
+
     #[test]
     fn reviewed_768_admission_matches_formulas_and_1024_remains_closed() {
         assert_eq!(FORWARD_ADDITIONAL, 14_539_902_720);
