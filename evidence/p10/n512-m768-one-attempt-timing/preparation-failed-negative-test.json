@@ -1,0 +1,16 @@
+{
+  "schema": "p10-n512-m768-one-attempt-preparation-failure-v1",
+  "status": "failed_test_preserved_no_numerical_evaluation",
+  "command": "cargo test --manifest-path evidence/p10/n512-m768-one-attempt-timing/harness/Cargo.toml",
+  "failed_test": "tests::each_constructor_refuses_its_one_byte_under_budget_before_large_allocation",
+  "elapsed_seconds": 71.34,
+  "cause": "the DeclaredForce RHS negative test used cached-force-sized a.rhs - 1; because DeclaredForce has a smaller concrete type, that cap exceeded its own exact reservation and admitted W3 operator construction before the assertion failed",
+  "correction": "derive SpectralRhs<DeclaredForce>::reservation_with_w3_fft_backend through the actual API and pass exactly that type-specific reservation minus one",
+  "large_constructor_reached": true,
+  "rhs_evaluations": 0,
+  "solver_attempts": 0,
+  "result_outputs_created": 0,
+  "processes_remaining_after_failure": 0,
+  "fresh_mem_available_kib_after_release": 500690984,
+  "qualification": false
+}
