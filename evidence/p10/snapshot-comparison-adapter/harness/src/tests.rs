@@ -419,20 +419,20 @@ fn mixed_force_space_algebra_preserves_sign_closure_and_band_splits() {
         std::array::from_fn(|axis| force[axis].as_slice()),
     )
     .unwrap();
-    for (a, b, c, cross, angle) in [
+    for (a, b, c, cross, cosine) in [
         (
             positive.spatial_a.full.l2,
             positive.force_b.full.l2,
             positive.combined_c.full.l2,
             positive.cross_a_b.full.twice_real_inner_product.l2,
-            positive.cross_a_b.full.angle.l2,
+            positive.cross_a_b.full.cosine_similarity.l2,
         ),
         (
             positive.spatial_a.common.h1,
             positive.force_b.common.h1,
             positive.combined_c.common.h1,
             positive.cross_a_b.common.twice_real_inner_product.h1,
-            positive.cross_a_b.common.angle.h1,
+            positive.cross_a_b.common.cosine_similarity.h1,
         ),
         (
             positive.spatial_a.newly_resolved.vorticity_l2,
@@ -443,11 +443,15 @@ fn mixed_force_space_algebra_preserves_sign_closure_and_band_splits() {
                 .newly_resolved
                 .twice_real_inner_product
                 .vorticity_l2,
-            positive.cross_a_b.newly_resolved.angle.vorticity_l2,
+            positive
+                .cross_a_b
+                .newly_resolved
+                .cosine_similarity
+                .vorticity_l2,
         ),
     ] {
         close(c * c, a * a + b * b + cross);
-        close(angle.unwrap(), 1.0);
+        close(cosine.unwrap(), 1.0);
     }
 
     let zero_force = zero_fields(fine_domain.layout());
@@ -465,7 +469,7 @@ fn mixed_force_space_algebra_preserves_sign_closure_and_band_splits() {
         negative.cross_a_b.full.twice_real_inner_product.l2,
         -2.0 * negative.spatial_a.full.l2.powi(2),
     );
-    close(negative.cross_a_b.full.angle.l2.unwrap(), -1.0);
+    close(negative.cross_a_b.full.cosine_similarity.l2.unwrap(), -1.0);
 }
 
 #[test]

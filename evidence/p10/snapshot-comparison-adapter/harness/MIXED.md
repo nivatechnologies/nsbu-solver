@@ -24,8 +24,8 @@ C = U384M512 - lift(U256M384) = A + B.
 
 It reports volume-average L2, H1, and vorticity L2 norms for A, B, and C, each split into the N256
 common band and the newly resolved N384 shell. For the same splits it reports the weighted signed
-cross term `2 Re <A,B>` and the real angle `Re <A,B> / (||A|| ||B||)` when both denominators are
-nonzero; an undefined angle is serialized as `null`. Half-plane Parseval weights restore omitted
+cross term `2 Re <A,B>` and the cosine similarity `Re <A,B> / (||A|| ||B||)` when both denominators are
+nonzero; an undefined cosine similarity is serialized as `null`. Half-plane Parseval weights restore omitted
 conjugate modes and strict Nyquist planes remain excluded.
 
 This is an explicit sensitivity diagnostic with `acceptance: not_assessed`, no assigned budget,
