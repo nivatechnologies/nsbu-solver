@@ -1,0 +1,35 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-comparison-v1",
+  "status": "completed_exploratory_not_adopted",
+  "order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+  "rounds": {
+    "untiled-a": {"forward_ns": 13534340466, "inverse_ns": 13286405420, "max_rss_kib": 14176256, "exit": 0},
+    "tiled-a": {"forward_ns": 12600462389, "inverse_ns": 13111597678, "max_rss_kib": 14176256, "exit": 0},
+    "tiled-b": {"forward_ns": 9166952699, "inverse_ns": 9351963895, "max_rss_kib": 14175232, "exit": 0},
+    "untiled-b": {"forward_ns": 14419463007, "inverse_ns": 15023047423, "max_rss_kib": 14176256, "exit": 0}
+  },
+  "median_ns": {
+    "untiled_forward": 13976901736.5,
+    "tiled_forward": 10883707544.0,
+    "untiled_inverse": 14154726421.5,
+    "tiled_inverse": 11231780786.5,
+    "untiled_combined": 28131628158.0,
+    "tiled_combined": 22115488330.5
+  },
+  "tiled_over_untiled": {
+    "forward": 0.7786924276342106,
+    "inverse": 0.7935003794520353,
+    "combined": 0.786143205302209
+  },
+  "workspace_reservation_bytes": {"untiled": 3633389976, "tiled": 3633488304, "delta": 98328},
+  "word_hashes": {
+    "forward_sha256": "2b18c10cda3ff0f7c65f94cbac8aecef9aee43947695e1ae9d3c0c89506a6cd3",
+    "inverse_sha256": "0b3380283b4ebf42aa06f1f643f31a7d1f83fd7a6fdb8baf2d6c0cbcdf26ee40",
+    "identical_all_four_rounds": true
+  },
+  "limits": {"address_space_bytes": 25769803776, "timeout_seconds": 600, "kill_grace_seconds": 60},
+  "resource_outcome": {"all_exit_zero": true, "all_swaps_zero": true, "all_major_faults_zero": true, "matching_processes_absent_after_run": true, "postrun_mem_available_bytes": 442306809856},
+  "selection_heuristic": {"minimum_combined_improvement": 0.10, "neither_direction_regressed": true, "passed": true},
+  "qualification": false,
+  "production_adoption": false
+}

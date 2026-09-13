@@ -1,0 +1,21 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-launch-receipt-v1",
+  "prototype_source": "47c8927",
+  "untiled_source": "f3960e157f26f37fa9a9fe808a4a596395164706",
+  "tiled_binary_sha256": "f151b41a1c03874d699a49154321a1e45038f3f98cb5d4443ffbae5aa97dea04",
+  "untiled_binary_sha256": "003969a932f7cc794db8030c99dc50aca6256f48307c34fdd80eedf7d9b2b984",
+  "address_space_limit_bytes": 25769803776,
+  "tiled_accounted_payload_workspace_catalog_bytes": 14543923936,
+  "untiled_accounted_payload_workspace_catalog_bytes": 14543825608,
+  "harness_runtime_overhead_allowance_bytes": 1048576,
+  "tiled_declared_peak_bytes": 14544972512,
+  "untiled_declared_peak_bytes": 14544874184,
+  "prelaunch_mem_available_kib": 468814084,
+  "minimum_mem_available_bytes": 68719476736,
+  "maximum_artifact_bytes": 4194304,
+  "prelaunch_disk_available_bytes": 6955103154176,
+  "minimum_disk_available_bytes": 8388608,
+  "campaign_deadline_utc": "2026-09-13T19:52:54Z",
+  "campaign_deadline_epoch": 1789329174,
+  "round_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"]
+}

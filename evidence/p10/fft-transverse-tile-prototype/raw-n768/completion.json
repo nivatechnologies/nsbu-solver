@@ -1,0 +1,16 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-completion-v1",
+  "launcher_pid": 1809327,
+  "launcher_pgid": 1809327,
+  "launcher_exit": 0,
+  "started_utc": "2026-09-13T15:38:42Z",
+  "completed_utc": "2026-09-13T15:48:25Z",
+  "round_owner_identities": [
+    {"round": "untiled-a", "pid": 1809444, "pgid": 1809444, "starttime": 11566139},
+    {"round": "tiled-a", "pid": 1811124, "pgid": 1811124, "starttime": 11579550},
+    {"round": "tiled-b", "pid": 1812930, "pgid": 1812930, "starttime": 11595901},
+    {"round": "untiled-b", "pid": 1814507, "pgid": 1814507, "starttime": 11607239}
+  ],
+  "all_recorded_pids_and_pgids_absent": true,
+  "postrun_mem_available_bytes": 442306809856
+}

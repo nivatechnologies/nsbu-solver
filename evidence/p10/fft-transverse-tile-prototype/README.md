@@ -16,3 +16,19 @@ receipt was frozen. Their word equality remains observed evidence, not a retrosp
 proven immutable build relation. The later dense width-four controls and prepared N768
 binaries have explicit source, harness and build bindings. This historical limitation does
 not block the prepared N768 comparison.
+
+## N768 scalar A/B
+
+After the endpoint projection owner explicitly released the host, the reviewed launcher
+ran the frozen order untiled A, tiled A, tiled B, untiled B. All four rounds exited zero,
+remained below the 24 GiB address-space limit, used no swap, and produced identical
+forward and inverse canonical-word hashes. The workspace reservation increased by exactly
+98,328 bytes.
+
+The two-round medians were 13.9769017365 s untiled versus 10.883707544 s tiled forward,
+and 14.1547264215 s untiled versus 11.2317807865 s tiled inverse. The combined median
+improved 21.39%; forward improved 22.13% and inverse improved 20.65%. Per-round timings
+varied substantially, so `raw-n768/comparison.json` retains every observation and the
+alternating order. This passes the predeclared 10% exploratory selection heuristic and
+supports preparing cross-source full-word W3 controls. It is not production adoption, a
+PDE gate, or evidence of full-trajectory speedup.
