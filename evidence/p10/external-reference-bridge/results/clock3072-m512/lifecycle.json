@@ -1,0 +1,23 @@
+{
+  "schema": "p10-external-reference-bridge-lifecycle-v1",
+  "execution_context": "contended-local-p10-campaign-bounded-1800s",
+  "remote_state_path": "/tmp/nsbu-p10-sulaco-m512-prefix-r5/run/output/step-040-clock-3072/state.bin",
+  "remote_state_bytes": 1366033529,
+  "remote_state_mtime_utc": "2026-09-13T05:52:27.395166648Z",
+  "hash_capture_utc": "2026-09-13T06:07:50Z",
+  "bounded_transfer_verified_utc": "2026-09-13T06:10:51Z",
+  "process_lstart_utc": "2026-09-13T06:11:30Z",
+  "wrapper_start_utc": "2026-09-13T06:11:30Z",
+  "wrapper_end_utc": "2026-09-13T06:13:29Z",
+  "launcher_pid": 1288667,
+  "evaluator_pid": 1288691,
+  "timeout_seconds": 1800,
+  "timeout_kill_after_seconds": 30,
+  "exit_status": 0,
+  "wall_seconds": 117.18,
+  "maximum_rss_kib": 20382720,
+  "sampling_seconds": 48.457116596,
+  "candidate_validated_before_promotion": true,
+  "result_sha256": "c6b7ef403feb4af11acab0b991c22e2ef1323b2caf5c5bfd9e6e0d928efce06f",
+  "claim": "individual sampled binary64 reference diagnostic; no acceptance or extrapolation"
+}
