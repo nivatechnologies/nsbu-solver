@@ -1,6 +1,6 @@
 //! Forward and inverse transform execution for an admitted plan and workspace.
 use super::workspace::finite_real;
-use super::{owned, BackendPlan, FftPlan, FftWorkspace};
+use super::{owned, BackendPlan, FftPlan, FftWorkspace, TRANSVERSE_TILE_LANES};
 use crate::spectral::radix::transform;
 use crate::{Complex64, SolverError};
 
@@ -121,22 +121,52 @@ impl FftPlan {
             } else {
                 row * ny * half
             };
-            for k in 0..half {
-                let base = row_base + k;
-                for j in 0..length {
-                    work.input[j] = work.grid[base + j * stride];
-                }
-                self.transform_axis(
-                    axis,
-                    inverse,
-                    &mut work.input,
-                    &mut work.output,
-                    &mut work.scratch,
-                );
-                for j in 0..length {
-                    work.grid[base + j * stride] = work.output[j];
-                }
+            for k_start in (0..half).step_by(TRANSVERSE_TILE_LANES) {
+                let width = (half - k_start).min(TRANSVERSE_TILE_LANES);
+                gather_tile(work, row_base + k_start, width, length, stride);
+                self.transform_tile(work, inverse, axis, width, length);
+                scatter_tile(work, row_base + k_start, width, length, stride);
             }
+        }
+    }
+
+    fn transform_tile(
+        &self,
+        work: &mut FftWorkspace,
+        inverse: bool,
+        axis: usize,
+        width: usize,
+        length: usize,
+    ) {
+        for lane in 0..width {
+            let tile = lane * length..(lane + 1) * length;
+            work.input[..length].copy_from_slice(&work.transverse_tile[tile.clone()]);
+            self.transform_axis(
+                axis,
+                inverse,
+                &mut work.input,
+                &mut work.output,
+                &mut work.scratch,
+            );
+            work.transverse_tile[tile].copy_from_slice(&work.output[..length]);
+        }
+    }
+}
+
+fn gather_tile(work: &mut FftWorkspace, base: usize, width: usize, length: usize, stride: usize) {
+    for j in 0..length {
+        let source = base + j * stride;
+        for lane in 0..width {
+            work.transverse_tile[lane * length + j] = work.grid[source + lane];
+        }
+    }
+}
+
+fn scatter_tile(work: &mut FftWorkspace, base: usize, width: usize, length: usize, stride: usize) {
+    for j in 0..length {
+        let target = base + j * stride;
+        for lane in 0..width {
+            work.grid[target + lane] = work.transverse_tile[lane * length + j];
         }
     }
 }
