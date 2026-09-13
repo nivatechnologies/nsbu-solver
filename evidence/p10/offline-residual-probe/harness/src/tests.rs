@@ -218,6 +218,21 @@ fn localized_force_delta_has_plus_sign_and_strict_shell_mask() {
 }
 
 #[test]
+fn identity_instrumentation_distinguishes_conditioning_from_wrong_algebra() {
+    let large = 100_000_000.0;
+    let nearby = 99_999_999.0;
+    let correct_cross = [0.0, -2.0 * large * nearby, 0.0];
+    let conditioned = identity_scalars([large, 0.0, nearby], 1.0, correct_cross);
+    assert!(conditioned.residual_relative_error > 5e-11);
+    assert!(conditioned.term_scaled_error < 1e-12);
+
+    let wrong_sign = identity_scalars([large, 0.0, nearby], 1.0, [0.0, -correct_cross[1], 0.0]);
+    let omitted = identity_scalars([large, 0.0, nearby], 1.0, [0.0; 3]);
+    assert!(wrong_sign.term_scaled_error > 0.5);
+    assert!(omitted.term_scaled_error > 0.5);
+}
+
+#[test]
 fn selected_retained_force_constructor_matches_scalar_avx_reference() {
     let backend = FftBackend::RustFft6_4_1AvxFma;
     if backend.ensure_available().is_err() {
