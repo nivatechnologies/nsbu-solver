@@ -167,7 +167,7 @@ fn force_identity() -> Result<W3FftIdentity, SolverError> {
     not(feature = "n512-m512-piecewise-cadv33")
 ))]
 const fn force_w3_additional_bytes() -> usize {
-    1_827_942_144
+    1_828_040_448
 }
 
 #[cfg(feature = "n384-m512-piecewise-cadv33")]
@@ -182,7 +182,7 @@ const fn force_w3_additional_bytes() -> usize {
 
 #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
 const fn rhs_w3_additional_bytes() -> usize {
-    9_200_779_136
+    9_200_926_592
 }
 
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
@@ -237,11 +237,31 @@ fn state_pair(resources: ResourcePlan) -> Result<(SpectralState, CandidateState)
 ))]
 mod tests {
     use super::*;
+    use nsbu_solver::spectral::W3FftPool;
 
     #[test]
     fn exact_w3_identity_values_accept_and_any_change_refuses() {
         let domain = config::domain().unwrap();
         let expected = rhs_identity(domain).unwrap();
+        assert_eq!(
+            W3FftPool::additional_reservation_with_backend(
+                domain.padded_layout().unwrap(),
+                FftBackend::RustFft6_4_1AvxFma,
+                W3FftMode::Bidirectional,
+            )
+            .unwrap(),
+            expected.additional_bytes,
+        );
+        let expected_force = force_identity().unwrap();
+        assert_eq!(
+            W3FftPool::additional_reservation_with_backend(
+                expected_force.layout,
+                expected_force.backend,
+                expected_force.mode,
+            )
+            .unwrap(),
+            expected_force.additional_bytes,
+        );
         require_identity(expected, expected).unwrap();
         let changed = W3FftIdentity {
             additional_bytes: expected.additional_bytes - 1,

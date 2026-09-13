@@ -58,3 +58,10 @@ attempt, fresh output path, host floor, disk floor, and durable archive guards.
 No endpoint attempt, state allocation, state write, or observer run was made by
 this preparation. Passing the preflight and focused harness tests does not
 qualify a PDE window.
+
+The reused harness `main.rs` and `config.rs` exceed 500 lines. This preparation
+keeps the established transaction and scheduling structure intact rather than
+splitting historical harness files during a run-critical adaptation. The N512
+dead-code allowances are scoped to the individual balance, observer, owners,
+records, and artifact modules that remain compiled to expose the offline
+resource API; there is no crate-wide dead-code allowance.

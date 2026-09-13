@@ -1,9 +1,7 @@
-#![cfg_attr(
-    feature = "n512-m512-piecewise-cadv33",
-    allow(dead_code, clippy::needless_return)
-)]
+#![cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(clippy::needless_return))]
 
 mod artifact;
+#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
 mod balance;
 #[cfg(not(feature = "n384-prep"))]
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/cache.rs"]
@@ -15,13 +13,17 @@ mod command;
 mod config;
 mod error;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
+#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
 mod observer;
+#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
 mod owners;
 mod publication;
+#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
 mod records;
 mod run_types;
 mod schedule;
 #[cfg(feature = "n384-prep")]
+#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
 mod step_artifact;
 mod timed_rhs;
 

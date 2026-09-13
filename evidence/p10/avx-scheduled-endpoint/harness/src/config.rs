@@ -17,6 +17,17 @@ use nsbu_solver::{
 compile_error!("n256 and n384-prep are mutually exclusive profiles");
 #[cfg(all(feature = "n384-h32", feature = "n384-h64"))]
 compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
+#[cfg(all(
+    feature = "n512-m512-piecewise-cadv33",
+    any(
+        feature = "n384-h32",
+        feature = "n384-h64",
+        feature = "n384-piecewise",
+        feature = "n384-piecewise-cadv33",
+        feature = "n384-m512-piecewise-cadv33"
+    )
+))]
+compile_error!("n512-m512-piecewise-cadv33 is mutually exclusive with every n384 profile");
 #[cfg(any(
     all(feature = "n384-h32", feature = "n384-piecewise"),
     all(feature = "n384-h64", feature = "n384-piecewise"),
@@ -400,7 +411,7 @@ pub fn identity() -> String {
     );
     #[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200926592;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
         env!("RUN_SOURCE"),
         force_w3_identity(),
         crate::timed_rhs::IDENTITY,
@@ -425,7 +436,7 @@ pub fn identity() -> String {
     not(feature = "n512-m512-piecewise-cadv33")
 ))]
 fn force_w3_identity() -> &'static str {
-    "layout384-width3-forward-add1827942144"
+    "layout384-width3-forward-add1828040448"
 }
 
 #[cfg(feature = "n384-m512-piecewise-cadv33")]
@@ -447,14 +458,14 @@ mod n384_tests {
     use super::*;
 
     #[cfg(feature = "n384-h32")]
-    const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
+    const EXPECTED_N384_TOTAL: usize = 185_783_726_856;
     #[cfg(feature = "n384-h64")]
-    const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
+    const EXPECTED_N384_TOTAL: usize = 185_783_464_712;
     #[cfg(all(
         feature = "n384-piecewise-common",
         not(feature = "n384-m512-piecewise-cadv33")
     ))]
-    const EXPECTED_N384_TOTAL: usize = 185_782_833_928;
+    const EXPECTED_N384_TOTAL: usize = 185_783_399_176;
     #[cfg(feature = "n384-m512-piecewise-cadv33")]
     const EXPECTED_N384_TOTAL: usize = 193_243_685_640;
 
@@ -479,7 +490,7 @@ mod n384_tests {
         assert_eq!(require_execution_ready(), Ok(()));
         let identity = identity();
         assert!(identity.contains("provider=parallel-reduced-v2-force-w3-attempt-cache"));
-        assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200779136"));
+        assert!(identity.contains("rhs_w3=layout576-width3-bidirectional-add9200926592"));
         assert!(identity.contains(&format!("force_w3={}", force_w3_identity())));
         assert!(identity.contains("observer_force_samples=768"));
         assert!(identity.contains("observer_conservative=768"));
@@ -548,6 +559,24 @@ mod n512_resource_probe {
         )
         .unwrap();
         assert_eq!(observer, 232_283_988_248);
+        assert_eq!(
+            nsbu_solver::spectral::W3FftPool::additional_reservation_with_backend(
+                geometry.domain.padded_layout().unwrap(),
+                geometry.backend,
+                nsbu_solver::spectral::W3FftMode::Bidirectional,
+            )
+            .unwrap(),
+            21_787_856_768,
+        );
+        assert_eq!(
+            nsbu_solver::spectral::W3FftPool::additional_reservation_with_backend(
+                geometry.samples,
+                geometry.backend,
+                nsbu_solver::spectral::W3FftMode::Forward,
+            )
+            .unwrap(),
+            4_318_465_792,
+        );
         let reservations = reservations(geometry).unwrap();
         assert_eq!(
             resources(geometry.domain, reservations, CAP)
