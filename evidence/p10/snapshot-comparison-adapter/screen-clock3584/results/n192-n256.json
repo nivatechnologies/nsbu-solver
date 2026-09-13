@@ -1,0 +1,96 @@
+{
+  "schema": "p10-snapshot-comparison-output-v1",
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 3584,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 3584,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "left_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=192;force_samples=384;observer_force_samples=768;observer_conservative=384;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;observer_conservative=384;host=local",
+  "left_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "left_plan_sha256": "d03ffea53ed6f41ab7e38e4962b15ca8f5213b304641ce41816ed1d7840bd4f1",
+  "right_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=512;host=local",
+  "right_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "right_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "left_hashes": {
+    "coefficient_sha256": "86d7e4ba540484afdfe805f2b02dae9dbe87791db58e5def1b0ed37b9fb15b6e",
+    "file_sha256": "51b7ea32d315aeae23ffe7026bbd202f7ddf2ad123502cb9980968bf6726a1af"
+  },
+  "right_hashes": {
+    "coefficient_sha256": "6ca4e18519a637a623aa7702caa5562d9021061b9bb4f44525717f5965d30f0b",
+    "file_sha256": "b4ace2bdb6f34ec49f90ac4d173a91dde7af4e9a5f6ced5834bfa6982dfbb330"
+  },
+  "clock": {
+    "elapsed": 3584,
+    "target": 8192,
+    "epoch": 44,
+    "left_accepted_steps": 44,
+    "right_accepted_steps": 44
+  },
+  "full": {
+    "l2": 0.0001042987736575404,
+    "h1": 0.0778132351183085,
+    "vorticity_l2": 0.07781316522141823,
+    "divergence_l2": 7.443194466794803e-15
+  },
+  "common": {
+    "l2": 8.69310623252481e-8,
+    "h1": 0.000055257450806962394,
+    "vorticity_l2": 0.000055257382428774266,
+    "divergence_l2": 7.443192835242259e-15
+  },
+  "newly_resolved": {
+    "l2": 0.000104298737429833,
+    "h1": 0.0778132154983412,
+    "vorticity_l2": 0.07781314560148188,
+    "divergence_l2": 4.928277901057614e-18
+  },
+  "fine_absolute": {
+    "l2": 1.8112442321357154,
+    "h1": 49.9047487050971,
+    "vorticity_l2": 49.87186920689578,
+    "divergence_l2": 5.436603232915533e-15
+  },
+  "mean_error": [
+    -3.259054857942151e-20,
+    2.0872760818683274e-20,
+    -2.0719146312454932e-19
+  ],
+  "admitted_bytes": 578486272
+}
