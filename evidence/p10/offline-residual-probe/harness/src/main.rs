@@ -5,15 +5,13 @@ mod model;
 
 use cache::CachedReducedForce;
 use model::{
-    debug, DifferenceOutput, NodeBinding, NodeOutput, NormOutput, ProbePlan, ReservationOutput,
-    RunOutput, ScaleOutput, Snapshot, CASE_SHA256, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS,
-    W3_SOURCE,
+    debug, LocalizationRunOutput, NodeBinding, NodeOutput, ProbePlan, ReservationOutput, Snapshot,
+    CASE_SHA256, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS, W3_SOURCE,
 };
 use nsbu_benchmarks::provider::parallel_reduced::ParallelReducedV2Force;
 use nsbu_solver::{
     diagnostics::{
-        comparison::ComparisonPlan, conservative::ConservativeWorkspace, hermite::HermiteWeights,
-        residual::ResidualPlan,
+        conservative::ConservativeWorkspace, hermite::HermiteWeights, residual::ResidualPlan,
     },
     domain::{Domain, Layout, TickClock},
     integrators::{forcing::PrescribedForce, kernel::RightHandSide, rhs::SpectralRhs},
@@ -186,24 +184,24 @@ fn reservations(plan: &ProbePlan, cap: usize) -> Result<ReservationOutput, Strin
     let residual_force_bytes = residual_force.storage_bytes;
     let conservative_workspace_bytes =
         ConservativeWorkspace::reservation_with_fft_backend(source, backend).map_err(debug)?;
-    // Three values plus three derivatives, current and previous reconstructed value/derivative,
-    // and the previous full diagnostic residual retained for the next adjacent comparison.
+    // Three fine-support values and derivatives plus reconstructed value and derivative.
     let reconstruction_peak_bytes = checked_sum(&[
-        checked_mul(source_state_bytes, 10)?,
-        checked_mul(diagnostic_field_bytes, 3)?,
+        checked_mul(source_state_bytes, 8)?,
         integration_rhs_bytes,
         fft_catalog_bytes,
         FIXED_OVERHEAD_BYTES,
     ])?;
-    // Center value/derivative can still be retained at the middle-scale residual. Thirteen
-    // diagnostic component fields are force(3), conservative(3), current residual(3),
-    // pressure(1), and the previous full residual(3).
+    // Reconstructed value/derivative and retained M384 force are three N384 fields. Ten
+    // diagnostic components are force(3), conservative(3), base residual(3), and pressure(1).
+    // Both force providers are conservatively admitted although their mutable owners are used
+    // sequentially. Localization adds scalar accumulators only.
     let residual_peak_bytes = checked_sum(&[
-        checked_mul(source_state_bytes, 6)?,
+        checked_mul(source_state_bytes, 3)?,
+        integration_force.storage_bytes,
         residual_force_bytes,
         conservative_workspace_bytes,
         fft_catalog_bytes,
-        checked_mul(diagnostic_field_bytes, 13)?,
+        checked_mul(diagnostic_field_bytes, 10)?,
         FIXED_OVERHEAD_BYTES,
     ])?;
     let admitted_peak_bytes = reconstruction_peak_bytes.max(residual_peak_bytes);
@@ -257,106 +255,80 @@ struct Reconstruction {
 }
 
 #[derive(Debug)]
-struct ResidualResult {
-    norms: NormOutput,
+struct LocalizedResidualResult {
+    localization: nsbu_solver::diagnostics::residual::ResidualLocalization,
     coefficients: Field,
-    force_work: nsbu_solver::integrators::forcing::ForceWork,
+    base_force_work: nsbu_solver::integrators::forcing::ForceWork,
+    control_force_work: nsbu_solver::integrators::forcing::ForceWork,
 }
 
 fn evaluate(
     plan: &ProbePlan,
     snapshot_root: PathBuf,
     reservations: ReservationOutput,
-) -> Result<RunOutput, String> {
+) -> Result<LocalizationRunOutput, String> {
     let source = plan.domain()?;
-    let mut center: Option<Node> = None;
-    let mut previous: Option<(&'static str, Reconstruction)> = None;
-    let mut previous_residual: Option<Field> = None;
     let mut nodes = Vec::new();
-    let mut scales = Vec::new();
-    let mut differences = Vec::new();
-    for (index, (label, support)) in ["coarse", "middle", "fine"]
-        .into_iter()
-        .zip(SUPPORTS)
-        .enumerate()
+    let support = SUPPORTS[2];
+    eprintln!("offline-probe: reconstructing fine support={support:?}");
+    let mut rhs = build_w3_rhs(
+        source,
+        Layout::new(plan.integration_force_dimensions).map_err(debug)?,
+        plan.integration_force_workers,
+        plan.advective_limit,
+    )
+    .map_err(debug)?;
+    let left = load_node(
+        plan,
+        binding(plan, support[0])?,
+        &snapshot_root,
+        &mut rhs,
+        &mut nodes,
+    )?;
+    let middle = load_node(
+        plan,
+        binding(plan, support[1])?,
+        &snapshot_root,
+        &mut rhs,
+        &mut nodes,
+    )?;
+    let right = load_node(
+        plan,
+        binding(plan, support[2])?,
+        &snapshot_root,
+        &mut rhs,
+        &mut nodes,
+    )?;
+    let reconstruction = reconstruct(source, support, [&left, &middle, &right])?;
+    drop(rhs);
+    drop(left);
+    drop(middle);
+    drop(right);
+    let reconstructed_value_sha256 = hash_field(&reconstruction.value);
+    let reconstructed_derivative_sha256 = hash_field(&reconstruction.derivative);
+    if reconstructed_value_sha256
+        != "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865"
+        || reconstructed_derivative_sha256
+            != "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c"
     {
-        eprintln!("offline-probe: reconstructing {label} support={support:?}");
-        let mut rhs = build_w3_rhs(
-            source,
-            Layout::new(plan.integration_force_dimensions).map_err(debug)?,
-            plan.integration_force_workers,
-            plan.advective_limit,
-        )
-        .map_err(debug)?;
-        if center.is_none() {
-            center = Some(load_node(
-                plan,
-                binding(plan, 1152)?,
-                &snapshot_root,
-                &mut rhs,
-                &mut nodes,
-            )?);
-        }
-        let left = load_node(
-            plan,
-            binding(plan, support[0])?,
-            &snapshot_root,
-            &mut rhs,
-            &mut nodes,
-        )?;
-        let right = load_node(
-            plan,
-            binding(plan, support[2])?,
-            &snapshot_root,
-            &mut rhs,
-            &mut nodes,
-        )?;
-        let middle = center.as_ref().ok_or("missing shared center")?;
-        let current = reconstruct(source, support, [&left, middle, &right])?;
-        drop(rhs);
-        drop(left);
-        drop(right);
-
-        let residual = residual(plan, source, &current)?;
-        let value_sha256 = hash_field(&current.value);
-        let derivative_sha256 = hash_field(&current.derivative);
-        scales.push(ScaleOutput {
-            label,
-            support,
-            probe: PROBE,
-            residual_acceleration: residual.norms,
-            residual_force_work_units: residual.force_work.work_units,
-            residual_force_scalar_transforms: residual.force_work.scalar_transforms,
-            residual_sha256: hash_field(&residual.coefficients),
-            reconstructed_value_sha256: value_sha256,
-            reconstructed_derivative_sha256: derivative_sha256,
-        });
-        if let (Some((previous_label, earlier)), Some(earlier_residual)) =
-            (previous.take(), previous_residual.take())
-        {
-            differences.push(compare_reconstructions(
-                source,
-                previous_label,
-                &earlier,
-                label,
-                &current,
-                &earlier_residual,
-                &residual.coefficients,
-            )?);
-        }
-        previous = Some((label, current));
-        previous_residual = Some(residual.coefficients);
-        if index == 2 {
-            center = None;
-        }
+        return Err("fine reconstruction replay hash mismatch".into());
     }
-    drop(center);
-    drop(previous);
-    drop(previous_residual);
+    let residual = localized_residual(plan, source, &reconstruction)?;
+    let base_residual_sha256 = hash_field(&residual.coefficients);
+    if base_residual_sha256 != "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8" {
+        return Err("base M768 residual replay hash mismatch".into());
+    }
+    if residual.localization.retained_modes != 28_164_288
+        || residual.localization.new_shell_modes != 197_738_688
+        || residual.localization.excluded_nyquist_slots != 1_179_264
+    {
+        return Err("strict retained/shell partition mismatch".into());
+    }
+    enforce_identity_tolerance(&residual.localization, 5e-11)?;
     nodes.sort_by_key(|node| node.clock);
-    Ok(RunOutput {
-        schema: "p10-offline-residual-probe-result-v1",
-        status: "one_probe_complete_diagnostic_only",
+    Ok(LocalizationRunOutput {
+        schema: "p10-offline-residual-localization-result-v1",
+        status: "one_probe_fine_localization_complete_diagnostic_only",
         source_commit: SOURCE,
         w3_source_commit: W3_SOURCE,
         case_sha256: CASE_SHA256,
@@ -364,21 +336,56 @@ fn evaluate(
         profile: PROFILE,
         arithmetic: "binary64; empirical values have no outward-rounding or interval enclosure",
         integration_force: "exact archived constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout384 width3 forward provider add1827942144 with32 workers",
-        residual_force: "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112 for each residual",
+        base_residual_force: "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112",
+        discrete_retained_force_control: "fresh exact integration CachedReducedForce targeting N384/M384 at clock1112; strict zero padding; R384=R768+P(f768-pad(f384)); changes the discrete target equation outside the retained band",
         retained_grid: [384; 3],
         diagnostic_grid: [768; 3],
         probe_clock: PROBE,
-        supports: SUPPORTS,
-        support_relationship: "interval widths and spacings are nested; node sets share only clock1152",
+        support,
         reservations,
         nodes,
-        scales,
-        differences,
+        reconstructed_value_sha256,
+        reconstructed_derivative_sha256,
+        base_residual_sha256,
+        base_force_work_units: residual.base_force_work.work_units,
+        base_force_scalar_transforms: residual.base_force_work.scalar_transforms,
+        control_force_work_units: residual.control_force_work.work_units,
+        control_force_scalar_transforms: residual.control_force_work.scalar_transforms,
+        localization: residual.localization.into(),
         runtime_owner_imported: false,
         accepted_interpolation: false,
         acceptance_windows: 0,
-        qualification: "offline empirical diagnostic; no velocity-budget or pass claim without a reviewed dimensional policy",
+        qualification: "offline empirical binary64 localization only; no velocity-budget, residual-pass, qualification, accepted interpolation, or accepted-window claim",
     })
+}
+
+fn enforce_identity_tolerance(
+    localization: &nsbu_solver::diagnostics::residual::ResidualLocalization,
+    tolerance: f64,
+) -> Result<(), String> {
+    for band in [
+        localization.retained_strict_n384,
+        localization.new_shell_n768,
+        localization.full_n768,
+    ] {
+        for errors in [
+            band.base_identity_relative_error,
+            band.control_identity_relative_error,
+        ] {
+            if [
+                errors.l2,
+                errors.h1,
+                errors.vorticity_l2,
+                errors.divergence_l2,
+            ]
+            .into_iter()
+            .any(|error| error > tolerance)
+            {
+                return Err("cross-term norm identity exceeded tolerance".into());
+            }
+        }
+    }
+    Ok(())
 }
 
 fn binding(plan: &ProbePlan, wanted: u128) -> Result<&NodeBinding, String> {
@@ -535,16 +542,59 @@ fn reconstruct(
     Ok(Reconstruction { value, derivative })
 }
 
-fn residual(
+fn localized_residual(
     plan: &ProbePlan,
     source: Domain,
     reconstruction: &Reconstruction,
-) -> Result<ResidualResult, String> {
-    eprintln!("offline-probe: independent N768 residual at clock={PROBE}");
+) -> Result<LocalizedResidualResult, String> {
+    eprintln!("offline-probe: M384 force control and independent N768 residual at clock={PROBE}");
     let diagnostic = ConservativeWorkspace::diagnostic_domain(source).map_err(debug)?;
     let backend = FftBackend::RustFft6_4_1AvxFma;
     let catalog_bytes = FftCatalog::reservation(backend).map_err(debug)?;
     let catalog = FftCatalog::new(backend, catalog_bytes).map_err(debug)?;
+    let retained_samples = Layout::new(plan.integration_force_dimensions).map_err(debug)?;
+    let retained_limits = CachedReducedForce::preflight(
+        source,
+        retained_samples,
+        plan.integration_force_workers,
+        backend,
+        true,
+    )
+    .map_err(debug)?;
+    let mut retained_provider = CachedReducedForce::new(
+        source,
+        retained_samples,
+        plan.integration_force_workers,
+        &catalog,
+        retained_limits.storage_bytes,
+        true,
+    )
+    .map_err(debug)?;
+    let expected_retained = W3FftIdentity {
+        layout: retained_samples,
+        backend,
+        width: 3,
+        mode: W3FftMode::Forward,
+        additional_bytes: 1_827_942_144,
+    };
+    if retained_provider.w3_identity() != Some(expected_retained) {
+        return Err("retained force constructor identity mismatch".into());
+    }
+    let mut retained_force = field(source)?;
+    retained_provider
+        .begin_attempt(clock(PROBE), 64, retained_limits)
+        .map_err(debug)?;
+    let control_force_work = retained_provider
+        .evaluate(
+            clock(PROBE),
+            retained_limits,
+            retained_force.each_mut().map(Vec::as_mut_slice),
+        )
+        .map_err(debug)?;
+    if retained_provider.hit_miss() != [0, 1] {
+        return Err("retained force cache accounting mismatch".into());
+    }
+    drop(retained_provider);
     let samples = Layout::new(plan.residual_force_dimensions).map_err(debug)?;
     let limits = ParallelReducedV2Force::preflight_with_fft_backend(
         diagnostic,
@@ -562,7 +612,7 @@ fn residual(
     )
     .map_err(debug)?;
     let mut force = field(diagnostic)?;
-    let force_work = provider
+    let base_force_work = provider
         .evaluate(
             clock(PROBE),
             limits,
@@ -585,23 +635,25 @@ fn residual(
             &mut pressure,
         )
         .map_err(debug)?;
-    drop(force);
     drop(pressure);
     drop(products);
     let mut residual = field(diagnostic)?;
-    let norms = ResidualPlan::new(source)
+    let localization = ResidualPlan::new(source)
         .map_err(debug)?
-        .evaluate(
+        .evaluate_localized(
             reconstruction.value.each_ref().map(Vec::as_slice),
             reconstruction.derivative.each_ref().map(Vec::as_slice),
             conservative.each_ref().map(Vec::as_slice),
+            force.each_ref().map(Vec::as_slice),
+            retained_force.each_ref().map(Vec::as_slice),
             residual.each_mut().map(Vec::as_mut_slice),
         )
         .map_err(debug)?;
-    Ok(ResidualResult {
-        norms: norms.into(),
+    Ok(LocalizedResidualResult {
+        localization,
         coefficients: residual,
-        force_work,
+        base_force_work,
+        control_force_work,
     })
 }
 
@@ -628,45 +680,6 @@ fn build_scalar_rhs_reference(
     let bytes =
         SpectralRhs::<CachedReducedForce>::reservation_with_fft_backend(domain, limits, backend)?;
     SpectralRhs::new_with_catalog(domain, force, advective_limit, &catalog, bytes)
-}
-
-fn compare_reconstructions(
-    source: Domain,
-    left_label: &'static str,
-    left: &Reconstruction,
-    right_label: &'static str,
-    right: &Reconstruction,
-    left_residual: &Field,
-    right_residual: &Field,
-) -> Result<DifferenceOutput, String> {
-    let plan = ComparisonPlan::new(source, source).map_err(debug)?;
-    let value = plan
-        .compare(
-            left.value.each_ref().map(Vec::as_slice),
-            right.value.each_ref().map(Vec::as_slice),
-        )
-        .map_err(debug)?;
-    let derivative = plan
-        .compare(
-            left.derivative.each_ref().map(Vec::as_slice),
-            right.derivative.each_ref().map(Vec::as_slice),
-        )
-        .map_err(debug)?;
-    let diagnostic = ConservativeWorkspace::diagnostic_domain(source).map_err(debug)?;
-    let residual = ComparisonPlan::new(diagnostic, diagnostic)
-        .map_err(debug)?
-        .compare(
-            left_residual.each_ref().map(Vec::as_slice),
-            right_residual.each_ref().map(Vec::as_slice),
-        )
-        .map_err(debug)?;
-    Ok(DifferenceOutput {
-        left: left_label,
-        right: right_label,
-        reconstructed_velocity: value.full.into(),
-        reconstructed_derivative: derivative.full.into(),
-        residual_acceleration: residual.full.into(),
-    })
 }
 
 fn field(domain: Domain) -> Result<Field, String> {

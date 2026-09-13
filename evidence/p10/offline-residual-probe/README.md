@@ -40,3 +40,22 @@ physical derivative, and the residual kernel adds the opposite viscous term once
 
 All numerical output is binary64 empirical data. It has neither outward rounding nor interval
 enclosure and is unsuitable for a rigorous bound without a separate reviewed arithmetic layer.
+
+## Fine residual localization extension
+
+The reviewed extension executes only the fine support `[1088,1152,1216]` at clock 1112. It
+splits every non-N768-Nyquist residual mode with the strict `Layout::locate` N384 mask, reports
+per-term norms and signed cancellation data on the retained band and new shell, and preserves the
+completed base-residual coefficient operation order as a SHA-256 replay gate.
+
+A discrete retained-force control samples the exact integration `CachedReducedForce` constructor
+into N384/M384 storage and applies strict zero padding. During the existing N768 traversal it uses
+`R384=R768+P(f768-pad(f384))`; the plus sign follows from the `-P f768` already present in the
+conservative term. This changes the discrete target equation outside the retained band and is
+reported only as a force-resolution diagnostic. It performs no second conservative FFT set.
+
+The fine-only checked reconstruction peak is 49,781,517,672 bytes. Including both conservatively
+admitted provider classes and the retained-force field, the residual/control peak is
+114,575,696,272 bytes. The unchanged scoped 128 GiB cap leaves 22,863,257,200 bytes before a live
+host admission check. The detailed algebra, work accounting, controls, and claim limits are frozen
+in `localization-proposal.json` and `localization-proposal.md`.

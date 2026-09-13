@@ -1,4 +1,13 @@
-use nsbu_solver::{diagnostics::norms::Norms, domain::Domain, Complex64};
+use nsbu_solver::{
+    diagnostics::{
+        norms::{Norms, SignedNormChannels},
+        residual::{
+            CancellationChannels, NormChannels, ResidualBandLocalization, ResidualLocalization,
+        },
+    },
+    domain::Domain,
+    Complex64,
+};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
@@ -122,30 +131,142 @@ pub(crate) struct NodeOutput {
     pub force_cache_misses: usize,
 }
 
-#[derive(Debug, Serialize)]
-pub(crate) struct ScaleOutput {
-    pub label: &'static str,
-    pub support: [u128; 3],
-    pub probe: u128,
-    pub residual_acceleration: NormOutput,
-    pub residual_force_work_units: usize,
-    pub residual_force_scalar_transforms: usize,
-    pub residual_sha256: String,
-    pub reconstructed_value_sha256: String,
-    pub reconstructed_derivative_sha256: String,
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) struct SignedNormOutput {
+    pub l2: f64,
+    pub h1: f64,
+    pub vorticity_l2: f64,
+    pub divergence_l2: f64,
+}
+
+impl From<SignedNormChannels> for SignedNormOutput {
+    fn from(value: SignedNormChannels) -> Self {
+        Self {
+            l2: value.l2,
+            h1: value.h1,
+            vorticity_l2: value.vorticity_l2,
+            divergence_l2: value.divergence_l2,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) struct ChannelOutput {
+    pub l2: f64,
+    pub h1: f64,
+    pub vorticity_l2: f64,
+    pub divergence_l2: f64,
+}
+
+impl From<NormChannels> for ChannelOutput {
+    fn from(value: NormChannels) -> Self {
+        Self {
+            l2: value.l2,
+            h1: value.h1,
+            vorticity_l2: value.vorticity_l2,
+            divergence_l2: value.divergence_l2,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) struct CancellationOutput {
+    pub l2: Option<f64>,
+    pub h1: Option<f64>,
+    pub vorticity_l2: Option<f64>,
+    pub divergence_l2: Option<f64>,
+}
+
+impl From<CancellationChannels> for CancellationOutput {
+    fn from(value: CancellationChannels) -> Self {
+        Self {
+            l2: value.l2,
+            h1: value.h1,
+            vorticity_l2: value.vorticity_l2,
+            divergence_l2: value.divergence_l2,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) struct BandLocalizationOutput {
+    pub derivative: NormOutput,
+    pub viscous: NormOutput,
+    pub conservative_m768: NormOutput,
+    pub residual_m768: NormOutput,
+    pub projected_force_delta: NormOutput,
+    pub conservative_m384: NormOutput,
+    pub residual_m384: NormOutput,
+    pub base_cross: [SignedNormOutput; 3],
+    pub control_cross: [SignedNormOutput; 3],
+    pub base_alignment: [CancellationOutput; 3],
+    pub control_alignment: [CancellationOutput; 3],
+    pub base_cancellation: CancellationOutput,
+    pub control_cancellation: CancellationOutput,
+    pub base_identity_relative_error: ChannelOutput,
+    pub control_identity_relative_error: ChannelOutput,
+}
+
+impl From<ResidualBandLocalization> for BandLocalizationOutput {
+    fn from(value: ResidualBandLocalization) -> Self {
+        Self {
+            derivative: value.derivative.into(),
+            viscous: value.viscous.into(),
+            conservative_m768: value.conservative_m768.into(),
+            residual_m768: value.residual_m768.into(),
+            projected_force_delta: value.projected_force_delta.into(),
+            conservative_m384: value.conservative_m384.into(),
+            residual_m384: value.residual_m384.into(),
+            base_cross: value.base_cross.map(Into::into),
+            control_cross: value.control_cross.map(Into::into),
+            base_alignment: value.base_alignment.map(Into::into),
+            control_alignment: value.control_alignment.map(Into::into),
+            base_cancellation: value.base_cancellation.into(),
+            control_cancellation: value.control_cancellation.into(),
+            base_identity_relative_error: value.base_identity_relative_error.into(),
+            control_identity_relative_error: value.control_identity_relative_error.into(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub(crate) struct LocalizationOutput {
+    pub retained_strict_n384: BandLocalizationOutput,
+    pub new_shell_n768: BandLocalizationOutput,
+    pub full_n768: BandLocalizationOutput,
+    pub retained_modes: usize,
+    pub new_shell_modes: usize,
+    pub excluded_nyquist_slots: usize,
+    pub projected_force_delta_component_sha256: [String; 3],
+    pub residual_m384_component_sha256: [String; 3],
+}
+
+impl From<ResidualLocalization> for LocalizationOutput {
+    fn from(value: ResidualLocalization) -> Self {
+        Self {
+            retained_strict_n384: value.retained_strict_n384.into(),
+            new_shell_n768: value.new_shell_n768.into(),
+            full_n768: value.full_n768.into(),
+            retained_modes: value.retained_modes,
+            new_shell_modes: value.new_shell_modes,
+            excluded_nyquist_slots: value.excluded_nyquist_slots,
+            projected_force_delta_component_sha256: value
+                .projected_force_delta_component_sha256
+                .map(hex),
+            residual_m384_component_sha256: value.residual_m384_component_sha256.map(hex),
+        }
+    }
+}
+
+fn hex(bytes: [u8; 32]) -> String {
+    bytes
+        .into_iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect()
 }
 
 #[derive(Debug, Serialize)]
-pub(crate) struct DifferenceOutput {
-    pub left: &'static str,
-    pub right: &'static str,
-    pub reconstructed_velocity: NormOutput,
-    pub reconstructed_derivative: NormOutput,
-    pub residual_acceleration: NormOutput,
-}
-
-#[derive(Debug, Serialize)]
-pub(crate) struct RunOutput {
+pub(crate) struct LocalizationRunOutput {
     pub schema: &'static str,
     pub status: &'static str,
     pub source_commit: &'static str,
@@ -155,16 +276,22 @@ pub(crate) struct RunOutput {
     pub profile: &'static str,
     pub arithmetic: &'static str,
     pub integration_force: &'static str,
-    pub residual_force: &'static str,
+    pub base_residual_force: &'static str,
+    pub discrete_retained_force_control: &'static str,
     pub retained_grid: [usize; 3],
     pub diagnostic_grid: [usize; 3],
     pub probe_clock: u128,
-    pub supports: [[u128; 3]; 3],
-    pub support_relationship: &'static str,
+    pub support: [u128; 3],
     pub reservations: ReservationOutput,
     pub nodes: Vec<NodeOutput>,
-    pub scales: Vec<ScaleOutput>,
-    pub differences: Vec<DifferenceOutput>,
+    pub reconstructed_value_sha256: String,
+    pub reconstructed_derivative_sha256: String,
+    pub base_residual_sha256: String,
+    pub base_force_work_units: usize,
+    pub base_force_scalar_transforms: usize,
+    pub control_force_work_units: usize,
+    pub control_force_scalar_transforms: usize,
+    pub localization: LocalizationOutput,
     pub runtime_owner_imported: bool,
     pub accepted_interpolation: bool,
     pub acceptance_windows: usize,
