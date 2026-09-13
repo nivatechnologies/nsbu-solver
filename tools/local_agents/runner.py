@@ -192,43 +192,43 @@ class QueueRunner:
         output: dict[str, JsonValue] | None = None
         original_hash = self._task_hash(task)
         for attempt in range(self.config.max_repairs + 1):
-                if self._expired(begun, run_started):
-                    errors = ["task or run wall-clock budget exhausted"]
+            if self._expired(begun, run_started):
+                errors = ["task or run wall-clock budget exhausted"]
+                status = "budget_exhausted"
+                break
+            deadline = min(
+                begun + self.config.task_timeout_seconds,
+                run_started + self.config.max_run_seconds,
+            )
+            try:
+                result = self._attempt(task, errors, usage, deadline)
+            except Exception as exc:
+                errors = [f"inference failed: {type(exc).__name__}: {exc}"]
+                attempts.append({"number": attempt + 1, "validator_errors": list(errors)})
+                if isinstance(exc, TimeoutError):
                     status = "budget_exhausted"
+                    errors.append("server-side cancellation is unknown")
+                    usage[1:] = [-1, -1, -1]
                     break
-                deadline = min(
-                    begun + self.config.task_timeout_seconds,
-                    run_started + self.config.max_run_seconds,
-                )
-                try:
-                    result = self._attempt(task, errors, usage, deadline)
-                except Exception as exc:
-                    errors = [f"inference failed: {type(exc).__name__}: {exc}"]
-                    attempts.append({"number": attempt + 1, "validator_errors": list(errors)})
-                    if isinstance(exc, TimeoutError):
-                        status = "budget_exhausted"
-                        errors.append("server-side cancellation is unknown")
-                        usage[1:] = [-1, -1, -1]
-                        break
-                    continue
-                output, errors, checker_seconds = self._validate(task, result)
-                attempts.append(
-                    {
-                        "number": attempt + 1,
-                        "validator_errors": list(errors),
-                        "checker_seconds": checker_seconds,
-                    }
-                )
-                try:
-                    unchanged = self._task_hash(task, refresh=True) == original_hash
-                except (OSError, ValueError) as exc:
-                    unchanged = False
-                    errors.append(f"artifact recheck failed: {type(exc).__name__}: {exc}")
-                if not errors and unchanged:
-                    status = "validated_candidate"
-                    break
-                if not errors:
-                    errors = ["declared artifact changed during task"]
+                continue
+            output, errors, checker_seconds = self._validate(task, result)
+            attempts.append(
+                {
+                    "number": attempt + 1,
+                    "validator_errors": list(errors),
+                    "checker_seconds": checker_seconds,
+                }
+            )
+            try:
+                unchanged = self._task_hash(task, refresh=True) == original_hash
+            except (OSError, ValueError) as exc:
+                unchanged = False
+                errors.append(f"artifact recheck failed: {type(exc).__name__}: {exc}")
+            if not errors and unchanged:
+                status = "validated_candidate"
+                break
+            if not errors:
+                errors = ["declared artifact changed during task"]
         return status, output, errors, attempts, usage
 
     def _attempt(
