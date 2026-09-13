@@ -1,0 +1,63 @@
+{
+  "schema": "p10-method-diagnostic-clock3072-provenance-v1",
+  "status": "completed_once_under_root_preauthorization_not_assessed",
+  "comparison_kind": "METHOD_DIAGNOSTIC",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "unchanged_method_mode_lineage": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "cap_bytes": 2733113344,
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "left": {
+    "manifest": "left-n384-cm-clock3072.json",
+    "snapshot_sha256": "637bbc8e57ff5bdcd32a5cb40b7dc27e15fbc98e262d072e81e175431425b64b",
+    "coefficient_sha256": "1b811dceea2d21d64d10589c6ce0846531a5e849303c805d3a9c45c906da95ee",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "method": "cox-matthews",
+    "staging": "idle-priority exact-byte transfer from Sulaco; temporary, not archived"
+  },
+  "right": {
+    "manifest": "right-n384-ho-clock3072.json",
+    "snapshot_sha256": "0e0d2113052dbe16af1435ac8f035901ff0cc43d3a14c77f7c6f3d3123471d64",
+    "coefficient_sha256": "6452b56e38274b7ec3ddfc21031e013c053a3b85bb307bfce1bf634d682a9285",
+    "plan_sha256": "ef337eb28924a335a78dbfc1c710ca40e8b507b10b96687bc4197971e411b60c",
+    "source_commit": "0faec11e507e07c08ad20fd29cec04ddf8cd8946",
+    "method": "hochbruck-ostermann",
+    "producer_worktree_commit": "a6095c0c6ae13f3ada574e170a23a6d395bb01fc"
+  },
+  "shared_semantics": {
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "clock": 3072,
+    "epoch": 40,
+    "accepted_steps": 40,
+    "maximum_attempts": 48,
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 3072,
+        "step_ticks": 128
+      }
+    ]
+  },
+  "snapshot_handling": "read immutable pre-existing local HO exact-hash path and exact-hash temporary CM staging; no state committed or exposed for continuation",
+  "budget": "unassigned; candidate 2e-4 is not applied because no active policy supplied to this run explicitly assigns Method to Time",
+  "executions": 1,
+  "exit_status": 0,
+  "comparison_output_sha256": "9f1e3fc3df5a5b651bf89045acf48a74944746a9a76a27a6af5b00e393442725",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "maximum_resident_set_kbytes": 2669568,
+  "elapsed_wall_seconds": 38.26
+}

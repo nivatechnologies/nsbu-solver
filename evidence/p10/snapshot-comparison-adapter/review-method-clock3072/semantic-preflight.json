@@ -1,0 +1,27 @@
+{
+  "schema": "p10-method-diagnostic-semantic-preflight-v1",
+  "status": "passed_before_single_execution",
+  "checks": {
+    "comparison_kind_both_method": true,
+    "same_dimensions": true,
+    "same_force_dimensions": true,
+    "methods_exact_pair": true,
+    "same_bound_physics_except_method": true,
+    "same_clock_epoch_steps": true,
+    "prefix_schedule": true,
+    "prefix40_within_cap48": true,
+    "left_file_hash": true,
+    "right_file_hash": true,
+    "left_plan_hash": true,
+    "right_plan_hash": true,
+    "left_record_hash": true,
+    "left_attempt_hash": true,
+    "right_record_hash": true,
+    "right_attempt_hash": true
+  },
+  "state_sizes_bytes": {
+    "left": 1366033529,
+    "right": 1366033539
+  },
+  "exact_cap_bytes": 2733113344
+}
