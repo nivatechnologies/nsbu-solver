@@ -1,0 +1,59 @@
+{
+  "schema": "p10-force-resolution-diagnostic-result-v1",
+  "status": "completed_not_assessed",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "host": "sulaco",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "unchanged_force_mode_lineage": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "comparison_output_sha256": "2832470cfbfa8094037d729210547a1b0b1902c2f0d19ce983977309409b458d",
+  "cap_bytes": 2733113344,
+  "full": {
+    "l2": 8.998593960051878e-07,
+    "h1": 0.0010685686294396289,
+    "vorticity_l2": 0.0010685682508323163,
+    "divergence_l2": 5.817104634945183e-15
+  },
+  "fine_absolute": {
+    "l2": 1.7861396108591048,
+    "h1": 49.09020430319196,
+    "vorticity_l2": 49.05769934770939,
+    "divergence_l2": 4.364467662837907e-15
+  },
+  "relative_to_right_total": {
+    "l2": 5.03801265329069e-07,
+    "h1": 2.1767451258501852e-05,
+    "vorticity_l2": 2.1781866354118176e-05,
+    "divergence_l2": 1.3328325661514304
+  },
+  "force_resolution_pilot_allocation": {
+    "status": "informational_only_unassigned_to_acceptance",
+    "l2": 1.5e-05,
+    "h1": 0.00015,
+    "vorticity_l2": 0.00015
+  },
+  "multiples_of_force_resolution_pilot_allocation": {
+    "l2": 0.033586751021937936,
+    "h1": 0.1451163417233457,
+    "vorticity_l2": 0.14521244236078784
+  },
+  "shell_partition": {
+    "same_retained_dimensions": true,
+    "common_equals_full": true,
+    "newly_resolved": {
+      "l2": 0.0,
+      "h1": 0.0,
+      "vorticity_l2": 0.0,
+      "divergence_l2": 0.0
+    }
+  },
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "interpretation_limits": [
+    "Diagnostic isolates integration force dimensions M384 versus M512 at the bound N384 clock-3072 prefix.",
+    "The ForceResolution pilot allocation ratios are informational and are not an acceptance decision.",
+    "No acceptance extrapolation, finest-grid qualification, whole-trajectory equivalence, pointwise claim, or continuum claim is made."
+  ]
+}

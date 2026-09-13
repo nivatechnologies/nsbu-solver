@@ -1,0 +1,33 @@
+{
+  "schema": "p10-force-resolution-clock3072-provenance-v1",
+  "status": "completed_once_exit_zero",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "unchanged_force_mode_lineage": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "host": "sulaco",
+  "cap_bytes": 2733113344,
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "left_file_sha256": "637bbc8e57ff5bdcd32a5cb40b7dc27e15fbc98e262d072e81e175431425b64b",
+  "right_file_sha256": "7bae7d6749f209a89bd990ea70befdffbdfd6e577d80e27107b4537ca082a8bd",
+  "left_coefficient_sha256": "1b811dceea2d21d64d10589c6ce0846531a5e849303c805d3a9c45c906da95ee",
+  "right_coefficient_sha256": "bf48328467b01d96dcd9d7412b889710e7801d7e5f5e6955f451e16890fb74ac",
+  "left_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "right_plan_sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "limits": [
+    "single endpoint force-resolution diagnostic",
+    "no acceptance extrapolation",
+    "no finest-grid or trajectory claim"
+  ],
+  "comparison_output_sha256": "2832470cfbfa8094037d729210547a1b0b1902c2f0d19ce983977309409b458d",
+  "comparison_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "execution": {
+    "count": 1,
+    "exit_status": 0,
+    "peak_rss_kib": 2668544,
+    "elapsed_wall_seconds": 32.14,
+    "stderr_bytes": 0
+  }
+}
