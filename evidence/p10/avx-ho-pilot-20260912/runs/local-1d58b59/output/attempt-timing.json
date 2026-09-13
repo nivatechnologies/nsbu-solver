@@ -1,0 +1,16 @@
+{
+  "status": "accepted_proposal_timing_only",
+  "identity": "p10-avx-n384-ho-rest-proposal-observer-timing-v1;numerical_base=aed49b7d7874a0a720dee88b65ba180c7286fa65;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;backend=rustfft-6.4.1-avx-avx2-fma;method=hochbruck-ostermann;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;ticks=64;advective_limit=3.3;absolute_tolerances=1e-5,1e-4;relative_tolerances=1e-5,1e-5;scope=one-rest-attempt-then-unscheduled-proposal-observer;publication=timing-json-only-no-state-no-balance-no-frontier;host=local;contention=old-n256-plus-matched-n256;execution_cap=240518168576;output_cap=1048576;timeout_seconds=1200;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "construction_seconds": 88.767370409,
+  "integration_seconds": 383.681601824,
+  "rhs_evaluate_seconds": 340.388826382,
+  "outside_rhs_evaluate_seconds": 43.292775442,
+  "rhs_calls": 15,
+  "cache_hits": 10,
+  "cache_misses": 5,
+  "ratios": [1.58779382315294797e-8, 4.32468389579983775e-8],
+  "committed_clock": 0,
+  "proposal_clock": 64,
+  "state_payload": false,
+  "frontier_published": false
+}

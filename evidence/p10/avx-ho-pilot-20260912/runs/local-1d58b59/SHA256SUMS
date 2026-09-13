@@ -1,0 +1,12 @@
+3d18c0251108c43f30436c366cd071bc8bf055b885dacd73b2c7dbcb8fdd5f88  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/admission.txt
+c4f90755b04b54769815126d6073c5cbc167b359ca0f65f409e0522296711367  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/fresh-preflight.stdout
+a377f8fe92aac4be5fd941e26f2caf9ff36f0958f45b2cb1926711c9960b1576  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/stderr
+605a6ac4ab9f232d17ce5f2d3de3c25b15a38b82955df01fbfe684f189e976cd  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/time.txt
+a40b213065c42a36c7d8bc9d2e4606003da54c615aa08f71d56ebe1fae9bf992  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/watchdog.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/watchdog.stdout
+810f76ccb616978f2b47ce0c3970cc7c52f818990d0f38798f964931f6901d4b  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/exit.txt
+d7c7aced728c610d575d435b0a87ec382641d686b529193c73b09ee9ee15dadf  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/output/attempt-timing.json
+a058d6a07d7a61597f67bb19a00e1cb994de56280a458bfe7ca336f3d167a114  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/output/observer-timing.json
+985893253963114df571b10b9ea8e926114703c66d72356406c2f6bfde402197  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/output/complete.json
+917940883a794ba2e40add227d519bb264e83f52ec5ad96e1ee4eea38d5a276d  evidence/p10/avx-ho-pilot-20260912/runs/local-1d58b59/SUMMARY.md

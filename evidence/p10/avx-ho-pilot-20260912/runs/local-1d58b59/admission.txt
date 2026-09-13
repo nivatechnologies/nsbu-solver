@@ -1,0 +1,15 @@
+started_at=2026-09-12T23:46:24Z
+memavailable_bytes=381351952384
+required_floor_bytes=274877906944
+reservation_bytes=198987813712
+cap_bytes=240518168576
+label=contended-local-rest-timing-only
+protected_pid=430766 cmdline_sha256=6a292c88066d3b8e33a9524f491e76474df4e124dab83e3533dbc275a7b91897
+protected_pid=842148 cmdline_sha256=c9ba0074902b85295fab5c136cea78188e1ba0ce178d0cf872f3af2826de25ad
+wrapper_pid=940186
+solver_pid=940190
+process_group=940186
+solver_starttime=5852141
+solver_cmdline_sha256=b356fe7c0508402d0ae20bb079f917229861495ed3a086e079ae806518105a04
+watchdog_pid=940199
+deadline_epoch=1789257984
