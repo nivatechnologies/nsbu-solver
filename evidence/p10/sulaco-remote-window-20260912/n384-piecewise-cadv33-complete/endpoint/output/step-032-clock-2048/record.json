@@ -1,0 +1,13 @@
+{
+  "schema": "p10-avx-n384-step-v1",
+  "observation_status": "Scheduled",
+  "identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "resumable": false,
+  "clock": 2048,
+  "epoch": 32,
+  "accepted_steps": 32,
+  "coefficient_bytes": 1366032384,
+  "state_sha256": "a4d0e4edcff71a03b3281850412a6bab8889bd1f3770be3bb5701ec6b50e557c",
+  "timing": {"observer": 271.525316904, "force": 84.330054352, "conservative": 134.303175329, "transfer_measure": 52.892084313},
+  "balance": {"l2": 1.74192022378787925e0, "h1": 4.77855247336391287e1, "vorticity_l2": 4.77537651865122896e1, "divergence_l2": 4.78601276498288422e-15, "energy": 1.51714303302060771e0, "enstrophy": 1.14021104474427648e3, "energy_dissipation": 2.28042208948855296e3, "forcing_work": 2.35330181112576474e3, "stretching": 1.50882120814723949e4, "enstrophy_dissipation": 1.11808607261450756e7, "vorticity_forcing": 1.12212712372848783e7}
+}

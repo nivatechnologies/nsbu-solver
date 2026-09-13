@@ -1,0 +1,83 @@
+{
+  "schema": "p10-sulaco-n384-piecewise-endpoint-archive-v1",
+  "status": "endpoint_complete_qualification_pending",
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "integrated_source_commit": "68755e0797b607c7e79e2ad3700cfc33e6b66fd4",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "binary_sha256": "58a208f12f5d855dfc806e9d06e4f34e85e819ab844b467915d9258e8af8e81c",
+  "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "preflight_sha256": "e6df79b85f53e27b31b1dd57ba711d58c6f1a2ff721e9f89b3107b93ed0d645d",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "host": "sulaco",
+  "started_utc": "2026-09-12T19:41:08Z",
+  "terminal_published_utc": "2026-09-13T00:17:24.117214Z",
+  "solver_exit_observed_utc": "2026-09-13T00:17:47Z",
+  "wall_to_terminal_publish_seconds": 16576.117214,
+  "endpoint_clock": 4096,
+  "attempts": 48,
+  "committed": 48,
+  "refusals": 0,
+  "steady_allocations": 0,
+  "schedule": {
+    "h64": {"attempts": 32, "from_clock": 0, "to_clock": 2048},
+    "h128": {"attempts": 16, "from_clock": 2048, "to_clock": 4096}
+  },
+  "integration_seconds": {
+    "all": {"sum": 13901.672632698, "mean": 289.618179847875, "min": 254.856390581, "max": 373.409226051},
+    "h64": {"sum": 9613.105775165, "mean": 300.40955547390627, "min": 263.315273789, "max": 373.409226051},
+    "h128": {"sum": 4288.566857533, "mean": 268.0354285958125, "min": 254.856390581, "max": 283.69522883}
+  },
+  "rhs_evaluate_seconds": {
+    "all": {"sum": 12389.258523136, "mean": 258.10955256533333, "min": 232.321790616, "max": 323.984028396},
+    "h64": {"sum": 8508.028401571, "mean": 265.87588754909376, "min": 232.321790616, "max": 323.984028396},
+    "h128": {"sum": 3881.230121565, "mean": 242.5768825978125, "min": 234.571129614, "max": 255.50004298}
+  },
+  "outside_rhs_evaluate_seconds": {
+    "all": {"sum": 1512.414109562, "mean": 31.508627282541667, "min": 19.507772523, "max": 58.918726497},
+    "h64": {"sum": 1105.077373594, "mean": 34.5336679248125, "min": 19.507772523, "max": 58.918726497},
+    "h128": {"sum": 407.336735968, "mean": 25.458545998, "min": 19.686626793, "max": 28.635913629}
+  },
+  "observers": {
+    "count": 8,
+    "seconds": {"sum": 2257.142119163, "mean": 282.142764895375, "min": 271.525316904, "max": 296.722222789},
+    "force_seconds": {"sum": 741.225069616, "mean": 92.653133702, "min": 84.330054352, "max": 107.858518158},
+    "conservative_seconds": {"sum": 1095.458412849, "mean": 136.932301606125, "min": 125.790269305, "max": 147.808592367},
+    "transfer_measure_seconds": {"sum": 420.458619218, "mean": 52.55732740225, "min": 46.025932692, "max": 56.232062039}
+  },
+  "construction_seconds_to_rest_publication": 72.94347333908081,
+  "unmeasured_per_step_publication_seconds": {"sum": 344.35598874340064, "mean": 7.174083098820846, "min": 6.561784824818005, "max": 9.152996906611065},
+  "maximum_local_ratios": {
+    "velocity": {"value": 0.12640355448293944, "attempt": 3},
+    "h1": {"value": 0.9636019681132327, "attempt": 4}
+  },
+  "final_local_ratios": {"velocity": 0.0011706010613226408, "h1": 0.007761858743615543},
+  "terminal_state": {
+    "logical_sha256": "921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b",
+    "encoded_sha256": "2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592",
+    "encoded_bytes": 1366033529,
+    "balance": {"l2": 1.8388998883830083, "h1": 50.872462085830314, "vorticity_l2": 50.83921564426453, "unprojected_divergence_l2": 5.574260810187483e-15}
+  },
+  "resources": {
+    "execution_reservation_bytes": 185782833928,
+    "execution_cap_bytes": 206158430208,
+    "maximum_rss_kib_observed": 148652728,
+    "maximum_hwm_kib_observed": 148652728,
+    "minimum_memavailable_kib_observed": 86737884,
+    "maximum_swap_kib_observed": 0,
+    "sidecar_samples": 535,
+    "artifact_bytes_observed": 65570540554,
+    "state_bytes_total": 65569609392
+  },
+  "watchdog": {
+    "version": 2,
+    "sha256": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
+    "deadline_utc": "2026-09-13T01:40:00Z",
+    "terminal_record": "solver_exited_or_identity_changed_before_deadline"
+  },
+  "solver_identity": {"pid": 184964, "pgid": 184964, "starttime": 31812239, "cmdline_sha256": "9e1860ac93274bff060809e9235927c800a47165fbbb85c43f4c479cfa485892"},
+  "remote_artifacts_manifest_sha256": "6f8cfa4c6672a581a09e69ae3bbfae5b8e22c8df91b7cc3685cfca72d8ed1852",
+  "remote_state_location": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output",
+  "m512_forecast_basis": "The measured M384 endpoint provides integration, RHS, outside-RHS, observer, publication, and memory baselines. An M512 integration-force forecast requires its own reviewed reservation and force-cost model; the M768 observer cost is not a substitute for per-stage M512 force sampling.",
+  "claims_qualification": false
+}
