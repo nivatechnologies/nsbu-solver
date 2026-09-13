@@ -283,3 +283,73 @@ fn explicit_parallel_w3_shares_identity_and_matches_serial_bits() {
         assert!(same_bits(&actual, &expected), "lane {lane}");
     }
 }
+
+#[test]
+fn parallel_w3_drains_failures_and_panics_before_termination() {
+    if !avx_available() {
+        return;
+    }
+    let layout = Layout::new([6; 3]).unwrap();
+    let catalog = catalog();
+    let cap = W3FftPool::additional_parallel_reservation_with_backend(
+        layout,
+        BACKEND,
+        W3FftMode::Forward,
+        8,
+    )
+    .unwrap();
+    for panic in [false, true] {
+        let mut owner = W3FftPool::from_scalar_lane_parallel(
+            layout,
+            &catalog,
+            W3FftMode::Forward,
+            8,
+            seed(layout, &catalog),
+            cap,
+        )
+        .unwrap();
+        let mut values = inputs(layout);
+        let prior = values.clone();
+        let pointers = ownership(&values);
+        owner.inject_failure(1, panic);
+        assert!(owner.forward3(&mut values).is_err());
+        assert!(owner.is_terminated());
+        assert!(owner.all_collected());
+        assert_eq!(values, prior);
+        assert_eq!(ownership(&values), pointers);
+        assert!(owner.forward3(&mut values).is_err());
+        assert!(owner.all_collected());
+        drop(owner);
+    }
+}
+
+#[test]
+fn parallel_w3_drop_collects_poisoned_parked_worker() {
+    if !avx_available() {
+        return;
+    }
+    let layout = Layout::new([6; 3]).unwrap();
+    let catalog = catalog();
+    let cap = W3FftPool::additional_parallel_reservation_with_backend(
+        layout,
+        BACKEND,
+        W3FftMode::Bidirectional,
+        8,
+    )
+    .unwrap();
+    let owner = W3FftPool::from_scalar_lane_parallel(
+        layout,
+        &catalog,
+        W3FftMode::Bidirectional,
+        8,
+        seed(layout, &catalog),
+        cap,
+    )
+    .unwrap();
+    let poisoned = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        let _guard = owner.workers[0].shared.state.lock().unwrap();
+        panic!("independent parked-worker poison control");
+    }));
+    assert!(poisoned.is_err());
+    drop(owner);
+}

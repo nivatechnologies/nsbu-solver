@@ -1,0 +1,9 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.07s
+     Running tests/fft_parallel_allocation.rs (/tmp/nsbu-terra-fft-independent/debug/deps/fft_parallel_allocation-93da9aa25b27fe00)
+
+thread 'main' (2477488) panicked at crates/nsbu-solver/tests/fft_parallel_allocation.rs:88:5:
+assertion `left == right` failed: workers=8, Stats { allocations: 1, deallocations: 1, reallocations: 0, bytes_allocated: 1520, bytes_deallocated: 1520, bytes_reallocated: 0 }
+  left: 1
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+error: test failed, to rerun pass `-p nsbu-solver --test fft_parallel_allocation`

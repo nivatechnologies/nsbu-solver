@@ -98,8 +98,8 @@ fn three_external_callers_share_one_pool() {
     assert!(!e.is_terminated());
 }
 #[test]
-fn shared_executor_eight_workers_has_no_steady_allocation_after_warmup() {
-    // This reuses the exact concurrent caller control at the second approved pool size;
-    // each call allocates only before executor operations, then repeats on owned buffers.
+fn shared_executor_eight_workers_reuses_exact_words() {
+    // Check repeated numerical agreement with eight workers.
+    // Allocation behavior is covered by separate executable controls.
     case([6, 96, 192], 8);
 }

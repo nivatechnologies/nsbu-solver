@@ -41,6 +41,10 @@ struct LineWorkspace {
 /// Leaves lock one preallocated line workspace only while running one RustFFT
 /// line. Locks are released before Rayon joins. A worker panic or poisoned line
 /// permanently terminates the executor; partially written outputs are unspecified.
+///
+/// Direct calls from external threads may allocate scheduler queue blocks even
+/// after warm-up. The allocation-free numerical path uses the explicit W3 pool,
+/// whose three persistent callers enter this executor during construction.
 pub struct ParallelFftExecutor {
     identity: ParallelFftIdentity,
     pool: ThreadPool,

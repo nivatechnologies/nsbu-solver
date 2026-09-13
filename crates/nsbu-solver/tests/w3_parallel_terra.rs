@@ -9,7 +9,7 @@ use std::alloc::System;
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
 #[test]
-fn rectangular_helpers_eight_and_sixteen_are_exact_and_steady() {
+fn admitted_cube_helpers_eight_and_sixteen_are_exact_and_steady() {
     let backend = FftBackend::RustFft6_4_1AvxFma;
     if backend.ensure_available().is_err() {
         return;
