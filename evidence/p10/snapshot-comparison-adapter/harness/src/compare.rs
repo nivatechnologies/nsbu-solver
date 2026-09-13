@@ -61,15 +61,78 @@ pub(crate) fn time_diagnostic<'a>(
     admitted_bytes: usize,
 ) -> Result<TimeDiagnosticOutput<'a>, String> {
     validate_manifest_pair(left_manifest, right_manifest)?;
+    diagnostic_output(
+        left_manifest,
+        left,
+        right_manifest,
+        right,
+        admitted_bytes,
+        "p10-snapshot-time-diagnostic-output-v1",
+        "TIME_DIAGNOSTIC",
+        left_manifest.arithmetic_control.as_ref(),
+    )
+}
+
+pub(crate) fn force_resolution_diagnostic<'a>(
+    left_manifest: &'a Manifest,
+    left: &'a Snapshot,
+    right_manifest: &'a Manifest,
+    right: &'a Snapshot,
+    admitted_bytes: usize,
+) -> Result<TimeDiagnosticOutput<'a>, String> {
+    validate_manifest_pair(left_manifest, right_manifest)?;
+    diagnostic_output(
+        left_manifest,
+        left,
+        right_manifest,
+        right,
+        admitted_bytes,
+        "p10-snapshot-force-resolution-diagnostic-output-v1",
+        "FORCE_RESOLUTION_DIAGNOSTIC",
+        None,
+    )
+}
+
+pub(crate) fn method_diagnostic<'a>(
+    left_manifest: &'a Manifest,
+    left: &'a Snapshot,
+    right_manifest: &'a Manifest,
+    right: &'a Snapshot,
+    admitted_bytes: usize,
+) -> Result<TimeDiagnosticOutput<'a>, String> {
+    validate_manifest_pair(left_manifest, right_manifest)?;
+    diagnostic_output(
+        left_manifest,
+        left,
+        right_manifest,
+        right,
+        admitted_bytes,
+        "p10-snapshot-method-diagnostic-output-v1",
+        "METHOD_DIAGNOSTIC",
+        None,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn diagnostic_output<'a>(
+    left_manifest: &'a Manifest,
+    left: &'a Snapshot,
+    right_manifest: &'a Manifest,
+    right: &'a Snapshot,
+    admitted_bytes: usize,
+    schema: &'static str,
+    comparison_kind: &'static str,
+    arithmetic_control: Option<&'a crate::model::ArithmeticControl>,
+) -> Result<TimeDiagnosticOutput<'a>, String> {
     if left.clock != crate::model::ClockHeader::from_manifest(left_manifest)
         || right.clock != crate::model::ClockHeader::from_manifest(right_manifest)
     {
-        return Err("time-diagnostic snapshot clock mismatch".into());
+        return Err("diagnostic snapshot clock mismatch".into());
     }
     let metrics = calculate(left_manifest, left, right_manifest, right)?;
     Ok(TimeDiagnosticOutput {
-        schema: "p10-snapshot-time-diagnostic-output-v1",
-        comparison_kind: "TIME_DIAGNOSTIC",
+        schema,
+        comparison_kind,
         acceptance: AcceptanceOutput {
             status: "not_assessed",
             accepted_windows: 0,
@@ -90,7 +153,7 @@ pub(crate) fn time_diagnostic<'a>(
         right_execution: &right_manifest.execution,
         right_source_commit: &right_manifest.source_commit,
         right_plan_sha256: &right_manifest.plan_sha256,
-        arithmetic_control: left_manifest.arithmetic_control.as_ref().unwrap(),
+        arithmetic_control,
         left_hashes: hashes(left),
         right_hashes: hashes(right),
         clock: TimeClockOutput {
@@ -162,8 +225,51 @@ pub(crate) fn validate_manifest_pair(
         (ComparisonKind::TimeDiagnostic, ComparisonKind::TimeDiagnostic) => {
             validate_time_manifests(left_manifest, right_manifest)
         }
+        (ComparisonKind::ForceResolutionDiagnostic, ComparisonKind::ForceResolutionDiagnostic) => {
+            validate_force_manifests(left_manifest, right_manifest)
+        }
+        (ComparisonKind::MethodDiagnostic, ComparisonKind::MethodDiagnostic) => {
+            validate_method_manifests(left_manifest, right_manifest)
+        }
         _ => Err("comparison kind mismatch".into()),
     }
+}
+
+fn validate_force_manifests(left: &Manifest, right: &Manifest) -> Result<(), String> {
+    if left.dimensions != [384; 3]
+        || right.dimensions != [384; 3]
+        || left.evolution.integration_force_dimensions != [384; 3]
+        || right.evolution.integration_force_dimensions != [512; 3]
+        || !same_evolution_except_force(&left.evolution, &right.evolution)
+    {
+        return Err("force-resolution diagnostic contract mismatch".into());
+    }
+    validate_fixed_diagnostic_pair(left, right)
+}
+
+fn validate_method_manifests(left: &Manifest, right: &Manifest) -> Result<(), String> {
+    if left.dimensions != [384; 3]
+        || right.dimensions != [384; 3]
+        || left.evolution.method != "cox-matthews"
+        || right.evolution.method != "hochbruck-ostermann"
+        || left.evolution.integration_force_dimensions != [384; 3]
+        || right.evolution.integration_force_dimensions != [384; 3]
+        || !same_evolution_except_method(&left.evolution, &right.evolution)
+    {
+        return Err("method diagnostic contract mismatch".into());
+    }
+    validate_fixed_diagnostic_pair(left, right)
+}
+
+fn validate_fixed_diagnostic_pair(left: &Manifest, right: &Manifest) -> Result<(), String> {
+    if left.elapsed != right.elapsed || left.target != right.target {
+        return Err("diagnostic physical clock mismatch".into());
+    }
+    if left.arithmetic_control.is_some() || right.arithmetic_control.is_some() {
+        return Err("diagnostic does not admit an arithmetic-control override".into());
+    }
+    validate_schedule_bound_side(left)?;
+    validate_schedule_bound_side(right)
 }
 
 fn validate_time_manifests(
@@ -180,8 +286,8 @@ fn validate_time_manifests(
     {
         return Err("time-diagnostic physical clock mismatch".into());
     }
-    validate_time_side(left_manifest, true)?;
-    validate_time_side(right_manifest, false)?;
+    validate_schedule_bound_side(left_manifest)?;
+    validate_schedule_bound_side(right_manifest)?;
     let left_control = left_manifest
         .arithmetic_control
         .as_ref()
@@ -201,10 +307,12 @@ fn validate_time_manifests(
     {
         return Err("arithmetic-control physical contract mismatch".into());
     }
+    validate_time_lineage(left_manifest, true)?;
+    validate_time_lineage(right_manifest, false)?;
     Ok(())
 }
 
-fn validate_time_side(manifest: &Manifest, left: bool) -> Result<(), String> {
+fn validate_schedule_bound_side(manifest: &Manifest) -> Result<(), String> {
     let steps = schedule_steps(&manifest.evolution)?;
     let guard = manifest
         .admission_guard
@@ -222,6 +330,11 @@ fn validate_time_side(manifest: &Manifest, left: bool) -> Result<(), String> {
     if !valid_profile_binding(&manifest.identity, profile) {
         return Err("exact profile does not match snapshot identity".into());
     }
+    Ok(())
+}
+
+fn validate_time_lineage(manifest: &Manifest, left: bool) -> Result<(), String> {
+    let profile = manifest.profile.as_ref().ok_or("missing exact profile")?;
     let control = manifest
         .arithmetic_control
         .as_ref()
@@ -292,6 +405,32 @@ fn same_evolution_except_schedule(left: &Evolution, right: &Evolution) -> bool {
         && left.viscosity.to_bits() == right.viscosity.to_bits()
         && left.method == right.method
         && left.integration_force_dimensions == right.integration_force_dimensions
+        && same_f64_array(left.absolute_tolerances, right.absolute_tolerances)
+        && same_f64_array(left.relative_tolerances, right.relative_tolerances)
+}
+
+fn same_evolution_except_force(left: &Evolution, right: &Evolution) -> bool {
+    left.case_sha256 == right.case_sha256
+        && left.quantum_exponent == right.quantum_exponent
+        && left.clock_target == right.clock_target
+        && left.comparison_endpoint == right.comparison_endpoint
+        && same_f64_array(left.lengths, right.lengths)
+        && left.viscosity.to_bits() == right.viscosity.to_bits()
+        && left.method == right.method
+        && left.schedule == right.schedule
+        && same_f64_array(left.absolute_tolerances, right.absolute_tolerances)
+        && same_f64_array(left.relative_tolerances, right.relative_tolerances)
+}
+
+fn same_evolution_except_method(left: &Evolution, right: &Evolution) -> bool {
+    left.case_sha256 == right.case_sha256
+        && left.quantum_exponent == right.quantum_exponent
+        && left.clock_target == right.clock_target
+        && left.comparison_endpoint == right.comparison_endpoint
+        && same_f64_array(left.lengths, right.lengths)
+        && left.viscosity.to_bits() == right.viscosity.to_bits()
+        && left.integration_force_dimensions == right.integration_force_dimensions
+        && left.schedule == right.schedule
         && same_f64_array(left.absolute_tolerances, right.absolute_tolerances)
         && same_f64_array(left.relative_tolerances, right.relative_tolerances)
 }

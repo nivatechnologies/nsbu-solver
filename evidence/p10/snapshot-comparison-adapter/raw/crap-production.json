@@ -3,20 +3,6 @@
   "branchless": "observed executable body coverage",
   "functions": [
     {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
-      "function": "main",
-      "cyclomatic": 1.0,
-      "branch_coverage_fraction": 0.0,
-      "crap": 2.0
-    },
-    {
-      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
-      "function": "run",
-      "cyclomatic": 18.0,
-      "branch_coverage_fraction": 0.875,
-      "crap": 18.6328125
-    },
-    {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
       "function": "measure",
       "cyclomatic": 10.0,
@@ -66,6 +52,20 @@
       "crap": 2.5
     },
     {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "main",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "run",
+      "cyclomatic": 22.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 22.9453125
+    },
+    {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
       "function": "domain",
       "cyclomatic": 1.0,
@@ -103,9 +103,30 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "time_diagnostic",
-      "cyclomatic": 5.0,
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "force_resolution_diagnostic",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "method_diagnostic",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "diagnostic_output",
+      "cyclomatic": 4.0,
       "branch_coverage_fraction": 0.5,
-      "crap": 8.125
+      "crap": 6.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
@@ -138,23 +159,51 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "validate_manifest_pair",
-      "cyclomatic": 5.0,
+      "cyclomatic": 7.0,
       "branch_coverage_fraction": 1.0,
-      "crap": 5.0
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_force_manifests",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.9,
+      "crap": 6.036
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_method_manifests",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.8571428571428571,
+      "crap": 8.1865889212828
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_fixed_diagnostic_pair",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 7.8984375
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "validate_time_manifests",
-      "cyclomatic": 13.0,
+      "cyclomatic": 15.0,
       "branch_coverage_fraction": 0.75,
-      "crap": 15.640625
+      "crap": 18.515625
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
-      "function": "validate_time_side",
-      "cyclomatic": 16.0,
-      "branch_coverage_fraction": 0.8636363636363636,
-      "crap": 16.649135987978962
+      "function": "validate_schedule_bound_side",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 10.462962962962962
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_time_lineage",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 8.512
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
@@ -200,6 +249,20 @@
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_force",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_method",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.9444444444444444,
+      "crap": 10.017146776406035
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
       "function": "same_f64_array",
       "cyclomatic": 2.0,
       "branch_coverage_fraction": 1.0,
@@ -223,8 +286,8 @@
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "read_manifest",
       "cyclomatic": 10.0,
-      "branch_coverage_fraction": 0.5,
-      "crap": 22.5
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -243,9 +306,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
       "function": "validate_evolution",
-      "cyclomatic": 7.0,
+      "cyclomatic": 6.0,
       "branch_coverage_fraction": 0.5,
-      "crap": 13.125
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_evolution_profile",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 10.37037037037037
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
@@ -535,5 +605,5 @@
       "crap": 4.125
     }
   ],
-  "maximum": 22.5
+  "maximum": 22.9453125
 }

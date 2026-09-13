@@ -49,6 +49,29 @@ fn run(args: &[OsString]) -> Result<String, String> {
                 compare::time_diagnostic(&left_manifest, &left, &right_manifest, &right, admitted)?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
+        (
+            model::ComparisonKind::ForceResolutionDiagnostic,
+            model::ComparisonKind::ForceResolutionDiagnostic,
+        ) => {
+            let output = compare::force_resolution_diagnostic(
+                &left_manifest,
+                &left,
+                &right_manifest,
+                &right,
+                admitted,
+            )?;
+            serde_json::to_string_pretty(&output).map_err(model::debug)
+        }
+        (model::ComparisonKind::MethodDiagnostic, model::ComparisonKind::MethodDiagnostic) => {
+            let output = compare::method_diagnostic(
+                &left_manifest,
+                &left,
+                &right_manifest,
+                &right,
+                admitted,
+            )?;
+            serde_json::to_string_pretty(&output).map_err(model::debug)
+        }
         _ => Err("comparison kind mismatch".into()),
     }
 }
