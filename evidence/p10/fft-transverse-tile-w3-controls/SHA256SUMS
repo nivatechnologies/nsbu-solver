@@ -10,6 +10,9 @@ a6845ac8387b848e56a346f627dd93040518b9dd49d88034e12abbc4f7892f3c  evidence/p10/f
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/fft-transverse-tile-w3-controls/checks/tiled-preflight.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-w3-controls/checks/tiled-preflight.stderr
 1620bf91d216c7b296659aa6bf5cf63e89e903da6bd53b7b2aa2560ca6bc5cca  evidence/p10/fft-transverse-tile-w3-controls/checks/tiled-preflight.stdout
+913f5d1da2feaf4deeccc9e55cbb350a20f12b3f507e87be85dbb77fdd3cb9bc  evidence/p10/fft-transverse-tile-w3-controls/checks/unauthorized-launch.status
+d0c631c8cdbac9c15ee0a8ad17361f54cfd9852a118e57ef3a0cb6704ab63963  evidence/p10/fft-transverse-tile-w3-controls/checks/unauthorized-launch.stderr
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-w3-controls/checks/unauthorized-launch.stdout
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/fft-transverse-tile-w3-controls/checks/untiled-harness.status
 789653bc1dd7e7024bff4e5b8e839dde393e2a829ffdbb55ccd7aa90ee4b876e  evidence/p10/fft-transverse-tile-w3-controls/checks/untiled-harness.stderr
 62854f399195c7f1187299d4bb35e0b7fcc2b78ac65a7a1bed74b94d983a1c32  evidence/p10/fft-transverse-tile-w3-controls/checks/untiled-harness.stdout
@@ -20,6 +23,8 @@ d8cd8eac945a28299861b084ea8a269a52e572fa27072ddba64b159e66fa5972  evidence/p10/f
 d50d85d203c4a92022c7af445c8faa827ebd837a14f3c7900ab1f413848ac03f  evidence/p10/fft-transverse-tile-w3-controls/checks/w3.stderr
 d8cd8eac945a28299861b084ea8a269a52e572fa27072ddba64b159e66fa5972  evidence/p10/fft-transverse-tile-w3-controls/checks/w3.stdout
 5589f1f131b03ceae65934f956a2bbfab08a79064a1ce877200cff7589c6e810  evidence/p10/fft-transverse-tile-w3-controls/prepared/harness-source.sha256
+5a4c874c433cbbba45a22a36f73d90a7d1bbf3393057cce71b49000046beae15  evidence/p10/fft-transverse-tile-w3-controls/prepared/launcher-freeze.json
+48a10e604a4c01d83ec4559adc8c0f82ba02b3ce7fedb494ce47d769b656db7b  evidence/p10/fft-transverse-tile-w3-controls/prepared/launcher.sha256
 1aceeaafd9d5271883de54f1a6d4919c3cc6d9b25a48b67ec6d92f8513d7f7da  evidence/p10/fft-transverse-tile-w3-controls/prepared/source-bindings.txt
 fa0c120c74bda9ba151f85ee28ecb5b16239ba7f2cbda5609da83a9f720aaaa4  evidence/p10/fft-transverse-tile-w3-controls/prepared/tiled-binary.sha256
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/fft-transverse-tile-w3-controls/prepared/tiled-preflight.status

@@ -19,16 +19,23 @@ forward 14,539,902,720 to 14,540,099,376 and bidirectional 21,787,660,160 to
 21,787,856,816. At layout 512 the corresponding W3 increase is
 `2 * (8 * 512 * 16 + 24) = 131,120`, giving forward 4,318,465,840 bytes.
 
-The current tiled preflight reports whole-control peaks of 50,117,087,056 bytes for force
-and 72,386,085,136 bytes for RHS. These are 32 and 40 bytes above the earlier desk ledger
-because the actual APIs also reflect small type/header changes outside the two W3
-workspace delta. Launch limits must bind the actual API values; this discrepancy requires
-review before any large control is run. The existing 64 GiB and 96 GiB caps still contain
-the measured preflight values.
+The matching untiled and tiled API preflights report whole-control peaks of
+50,116,792,040 versus 50,117,087,056 bytes for force, and 72,385,790,112 versus
+72,386,085,136 bytes for RHS. The observed increases decompose as three scalar workspace
+increments plus 32 bytes for force and plus 40 bytes for RHS. These are 32 and 40 bytes
+above the earlier desk ledger; this evidence records the API deltas without assigning the
+small remainder to an unverified type or padding cause. Launch limits bind the actual API
+values. The existing 64 GiB and 96 GiB caps contain them.
 
 Terra reported that 6 of 7 W3 tests passed before the stale reservation constants were
 corrected, but no raw log was saved. That report is retained as a review note rather than
 claimed as archived evidence. The local source-bound validation logs in `checks/` are the
 first archived runs for the repaired constants.
 
-No large force or RHS control has been launched from this tree.
+`launch-controls.sh` prepares the fixed order untiled force, tiled force, untiled RHS,
+tiled RHS. It rechecks both source trees, the identical harness sources, binary hashes,
+memory, disk, quiet-host state, and the campaign deadline before every round. Each worker
+has an identity-bound process group, foreground timeout, 60-second kill grace, and the
+reviewed 64/96 GiB address-space cap. The launcher refuses unless
+`CONTROL_LAUNCH_AUTHORIZED=1` is explicitly supplied. No large force or RHS control has
+been launched from this tree.
