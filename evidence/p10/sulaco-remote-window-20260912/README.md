@@ -104,3 +104,24 @@ true starttime, and command-line hash were verified before TERM at 19:39:24Z; it
 KILL at 19:39:37Z. This is a manual guard-based supersession, not an actual advective or resource
 refusal. The three 1,366,033,529-byte encoded states and every small record were transferred to
 the ignored local archive and verified against the committed hash inventory.
+
+## N384 piecewise Cadv3.3 completed endpoint
+
+The corrected, separately identified Cadv3.3 profile completed all 48 scheduled attempts at
+clock 4096: 32 h64 attempts through clock 2048 followed by 16 h128 attempts. It reported no
+refusal and zero steady allocations. The terminal logical state hashes to
+`921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b`;
+the 1,366,033,529-byte encoded file hashes to
+`2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592`.
+Its status remains `endpoint_complete_qualification_pending`.
+
+Launch to terminal publication took 16,576.117 seconds. The 48 integrations totaled
+13,901.673 seconds, including 12,389.259 seconds in timed RHS evaluation and 1,512.414 seconds
+outside it. Eight positive-node observers totaled 2,257.142 seconds. The h64 integrations
+averaged 300.410 seconds and the h128 integrations averaged 268.035 seconds. Live monitoring
+reached 148,652,728 KiB RSS/HWM with zero swap.
+
+All small records, timing, source and plan identities, watchdog evidence, and hash inventories
+were transferred and verified locally. The 48 raw states remain on Sulaco under the complete
+SHA-256 inventory. These measurements provide a cost baseline for a separately reviewed M512
+force-refinement profile; they do not by themselves predict its per-stage force cost or memory.
