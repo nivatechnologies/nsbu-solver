@@ -4,10 +4,10 @@ set -eu
 
 SOURCE=e25f3816f83c6a7c07202cac2878f58ace460511
 BINARY_SHA256=2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143
-PLAN_SHA256=85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360
+PLAN_SHA256=338197a8d033c6eb435554f8a5ce4533f1a6a18cc606b72bd367781e067c8651
 PREFLIGHT_SHA256=b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6
 WATCHDOG_SHA256=e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1
-ARCHIVE_HELPER_SHA256=947f6738c75257a49917396587780a765538979523eb39ee70cb498fc62eae6f
+ARCHIVE_HELPER_SHA256=df8d9ad38454b0a42edb90b6adb287c02af2b0ffa2060c67680b7934eef49386
 MEMORY_FLOOR_BYTES=241937824240
 DISK_FLOOR_BYTES=189586276352
 ADDRESS_SPACE_LIMIT_KIB=268435456
@@ -189,6 +189,15 @@ fake_wrapper_cleanup_test() {
     echo "wrapper exit plus TERM-ignoring solver cleanup passed"
 }
 
+fake_archive_collision_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-archive-collision.XXXXXX")
+    mkdir "$temp/output" "$temp/archive" "$temp/logs"
+    printf x >"$temp/output/state"
+    if "$ARCHIVE_HELPER" "$temp/output" "$temp/partial" "$temp/archive" "$temp/logs"; then return 1; fi
+    [ -d "$temp/partial" ] && [ -d "$temp/archive" ]
+    echo "preexisting archive target refused with partial preserved"
+}
+
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
 ARCHIVE_HELPER=$BUNDLE/archive-local.sh
@@ -206,6 +215,7 @@ case "${1:-}" in
     --self-test-handshake) fake_handshake_test; exit $? ;;
     --self-test-archive-timeout) fake_archive_timeout_test; exit $? ;;
     --self-test-wrapper-cleanup) fake_wrapper_cleanup_test; exit $? ;;
+    --self-test-archive-collision) fake_archive_collision_test; exit $? ;;
     --self-test-identity) require_v3_identity; echo "v3 binary identity admitted"; exit 0 ;;
 esac
 
@@ -253,7 +263,8 @@ source_disk=$(df -B1 --output=avail "$BUNDLE" | awk 'NR==2{print $1}')
 archive_disk=$(df -B1 --output=avail "$ARCHIVE_PARENT" | awk 'NR==2{print $1}')
 [ "$source_disk" -ge "$DISK_FLOOR_BYTES" ] && [ "$archive_disk" -ge "$DISK_FLOOR_BYTES" ] || exit 75
 
-mkdir -p "$LOG_DIR"
+mkdir "$RUN_ROOT" || { echo "refused: run root won launch race" >&2; exit 68; }
+mkdir "$LOG_DIR"
 "$BIN" preflight unused >"$LOG_DIR/preflight.stdout"
 [ "$(sha256sum "$LOG_DIR/preflight.stdout" | awk '{print $1}')" = "$PREFLIGHT_SHA256" ] || exit 76
 

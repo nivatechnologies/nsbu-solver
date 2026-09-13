@@ -11,5 +11,6 @@ cp -a "$output/." "$partial/"
 (cd "$partial" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$logs/archive.sha256"
 cmp "$logs/source.sha256" "$logs/archive.sha256"
 sync "$partial"
-mv "$partial" "$archive"
+mv --no-clobber --no-target-directory "$partial" "$archive"
+[ ! -e "$partial" ] || { echo "refused: archive publication target already exists; partial preserved" >&2; exit 84; }
 printf 'archive=%s files=%s bytes=%s\n' "$archive" "$(find "$archive" -type f | wc -l)" "$(du -sb "$archive" | awk '{print $1}')" >"$logs/archive-receipt.txt"

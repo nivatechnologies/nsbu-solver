@@ -2,12 +2,12 @@
   "schema": "p10-n512-m512-v3-launch-receipt-v1",
   "status": "prepared_unexecuted",
   "harness_commit_and_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
-  "launch_plan_sha256": "85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360",
-  "launcher_sha256": "ff6242bef16fc8c0de4a44483ded313619282d90a5962e2d66cdafecb1ed40b7",
+  "launch_plan_sha256": "338197a8d033c6eb435554f8a5ce4533f1a6a18cc606b72bd367781e067c8651",
+  "launcher_sha256": "25b5f438ab8578d1fc42ad9d4e23100e682c680ca031005e98b2b992d55f1f0b",
   "binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
   "preflight_sha256": "b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6",
   "watchdog_sha256": "e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
-  "archive_helper_sha256": "947f6738c75257a49917396587780a765538979523eb39ee70cb498fc62eae6f",
+  "archive_helper_sha256": "df8d9ad38454b0a42edb90b6adb287c02af2b0ffa2060c67680b7934eef49386",
   "focused_n512_tests_status": 0,
   "release_build_status": 0,
   "preflight_status": 0,
@@ -21,5 +21,6 @@
   "shellcheck_available": false,
   "endpoint_attempts_executed": 0,
   "launch_authorized": false,
-  "wrapper_exit_term_ignoring_solver_cleanup_test_status": 0
+  "wrapper_exit_term_ignoring_solver_cleanup_test_status": 0,
+  "preexisting_archive_collision_test_status": 0
 }
