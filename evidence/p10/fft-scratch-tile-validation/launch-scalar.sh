@@ -109,7 +109,7 @@ if [[ ${1-} == --preflight-only ]]; then
     exit 0
 fi
 [[ $# == 0 ]] || exit 64
-mkdir -p "$script_dir/raw-n768"
+mkdir -p "$script_dir/raw-scalar"
 mkdir "$run_dir"
 cat > "$run_dir/launch-receipt.json" <<EOF
 {
