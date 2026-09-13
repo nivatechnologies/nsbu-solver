@@ -566,6 +566,54 @@ fn manifest_and_command_enforce_schema_and_cap() {
 }
 
 #[test]
+fn ordered_hessian_option_serializes_bound_output_and_rejects_clock_or_profile_gaps() {
+    let root = root("hessian-command");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    for item in [&mut left, &mut right] {
+        item.epoch = 2;
+        item.profile = Some(ProfileBinding {
+            kind: ProfileBindingKind::LegacyFullIdentity,
+            value: item.identity.clone(),
+        });
+        item.admission_guard = Some(AdmissionGuard {
+            advective_limit: 3.3,
+            maximum_attempts: 2,
+        });
+    }
+    let left_fields = fields(left.domain().unwrap().layout(), 1.0);
+    let right_fields = fields(right.domain().unwrap().layout(), 1.5);
+    write(&mut left, &left_fields);
+    write(&mut right, &right_fields);
+    let left_path = root.join("left.json");
+    let right_path = root.join("right.json");
+    fs::write(&left_path, serde_json::to_vec(&left).unwrap()).unwrap();
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    let cap = decode::admitted_bytes(&left, &right).unwrap();
+    let args = [
+        left_path.clone().into_os_string(),
+        right_path.clone().into_os_string(),
+        cap.to_string().into(),
+        "--ordered-hessian".into(),
+    ];
+    let output = super::run(&args).unwrap();
+    assert!(output.contains("p10-snapshot-ordered-hessian-diagnostic-output-v1"));
+    assert!(output.contains("\"status\": \"not_assessed\""));
+
+    right.epoch += 1;
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    assert!(super::run(&args)
+        .unwrap_err()
+        .contains("matched spatial clocks"));
+    right.epoch = left.epoch;
+    right.profile = None;
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    assert!(super::run(&args)
+        .unwrap_err()
+        .contains("exact profile binding"));
+}
+
+#[test]
 fn rejects_profile_clock_domain_direction_and_cap() {
     let root = root("binding");
     let mut left = manifest(root.join("left.bin"), 4, "left");
