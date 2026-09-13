@@ -64,3 +64,8 @@ allocation-free preflight SHA-256 is
 `b96e88b1dcf02a38270cd8adc5cf4bcecb3f6eb26d98ed5d075441f392221159`.
 All 16 focused tests and clippy with warnings denied pass. Dry runs refuse both a mismatched cap and
 a missing root-review gate before allocating the producer, and neither creates an output file.
+
+Source verification is split by source commit. `SOURCE_SHA256SUMS` binds the current N512 harness
+at `a1d04a7ffc866fa3c826c01eae7269c575ba927a`; its manifest SHA-256 is `e4292d40718463c1aad841db3cf5c60420b9bc4b2967cea02ff05434e21c9811`.
+`HISTORICAL-SOURCE-VERIFICATION.md` gives an archive-based command for checking the original N384
+evidence at `ae9691834d842dc89eb3a4ccf6a27317f7bc131a` without rewriting its historical hashes.

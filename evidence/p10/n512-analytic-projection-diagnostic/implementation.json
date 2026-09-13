@@ -26,5 +26,11 @@
     "trajectory_from_rest_claims": 0,
     "state_import_or_resume_interfaces": 0,
     "acceptance": "not_assessed"
+  },
+  "source_manifest": {
+    "source_commit": "a1d04a7ffc866fa3c826c01eae7269c575ba927a",
+    "sha256sums": "SOURCE_SHA256SUMS",
+    "sha256": "e4292d40718463c1aad841db3cf5c60420b9bc4b2967cea02ff05434e21c9811",
+    "historical_n384_verification": "HISTORICAL-SOURCE-VERIFICATION.md"
   }
 }
