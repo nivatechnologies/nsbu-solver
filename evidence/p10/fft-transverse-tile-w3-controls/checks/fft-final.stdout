@@ -1,0 +1,20 @@
+
+running 15 tests
+test avx::execution_catalog_is_eager_shared_and_separately_reserved ... ok
+test avx::explicit_avx_backend_has_closed_lengths_caps_and_workspace_identity ... ok
+test avx::explicit_avx_backend_matches_direct_dft_and_repeats_bits ... ok
+test avx::largest_admitted_avx_lengths_execute_forward_and_inverse ... ok
+test avx::same_layout_cross_backend_workspaces_are_checked_before_transform ... ok
+test owned_direct::constant_and_negative_frequency_modes_keep_normalized_amplitudes ... ok
+test owned_direct::full_anisotropic_oracle_covers_rows_hermitian_planes_and_nyquist ... ok
+test owned_direct::mixed_radix_anisotropic_forward_matches_independent_direct_sums ... ok
+test owned_direct::repeated_transform_output_is_bitwise_deterministic ... ok
+test radix_edges::specialized_butterflies_handle_large_finite_and_overflow_inputs ... ok
+test radix_edges::specialized_butterflies_match_zero_heavy_nyquist_oracles ... ok
+test validation::finite_input_that_overflows_transform_arithmetic_is_refused ... ok
+test validation::inverse_checks_both_conjugate_planes_and_declared_roundoff_boundary ... ok
+test validation::plans_refuse_unsupported_lengths_memory_caps_and_payloads ... ok
+test validation::reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

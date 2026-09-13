@@ -1,0 +1,1 @@
+status=admitted_preallocation variant=untiled layout=768 forward=14539902720 bidirectional=21787660160 force_serial_peak=32343080936 force_w3_peak=50116792040 force_peak=50116792040 force_cap=68719476736 rhs_serial_peak=47364321568 rhs_w3_peak=72385790112 rhs_peak=72385790112 rhs_cap=103079215104 source_case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e

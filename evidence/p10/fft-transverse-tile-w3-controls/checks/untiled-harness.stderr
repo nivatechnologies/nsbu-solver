@@ -1,0 +1,5 @@
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-fft-untiled-w3-controls-20260913/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-fft-untiled-w3-controls-20260913/crates/nsbu-benchmarks)
+   Compiling p10-w3-768-controls v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-fft-untiled-w3-controls-20260913/evidence/p10/fft-transverse-tile-w3-controls/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.96s
+     Running unittests src/main.rs (evidence/p10/fft-transverse-tile-w3-controls/harness/target/debug/deps/p10_w3_768_controls-0dbe566f619b7499)
