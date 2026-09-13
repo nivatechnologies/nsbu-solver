@@ -1,6 +1,6 @@
 {
   "schema": "p10-force-resolution-clock0512-review-handoff-v1",
-  "status": "review_only_right_clock0512_state_pending_no_comparison_authorized",
+  "status": "completed_once_under_root_preauthorization_not_assessed",
   "adapter_source_commit": "f046bce428ac4facc86237e1dbaf67062fa905d9",
   "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
   "host": "sulaco",
@@ -100,7 +100,7 @@
   },
   "right": {
     "template": "right-n384-m512-clock0512.template.json",
-    "publication_status": "pending",
+    "publication_status": "durable_clock0512_published",
     "required_record": {
       "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
       "clock": 512,
@@ -123,22 +123,46 @@
       "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"
     },
     "plan": {
-      "path": "plans/n384-m512-frozen-plan.json",
-      "sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
-      "origin": "/mnt/niva-array/nsbu-solver/work/p10-m512-force-profile-20260912/deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72/frozen-plan.json"
+      "path": "plans/n384-m512-frozen-prefix-plan.json",
+      "sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+      "role": "actual v3 external prefix policy"
     },
     "preflight_identity_record": {
       "path": "records/n384-m512-preflight.stdout",
       "sha256": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
       "origin": "/mnt/niva-array/nsbu-solver/work/p10-m512-force-profile-20260912/deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72/preflight.stdout"
-    }
+    },
+    "manifest": "right-n384-m512-clock0512.json",
+    "remote_state_path": "/tmp/nsbu-p10-sulaco-m512-prefix-r5/run/output/step-008-clock-0512/state.bin",
+    "file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+    "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+    "clock_header": [
+      512,
+      8192,
+      8,
+      8
+    ],
+    "record": {
+      "path": "records/n384-m512-clock0512-record.json",
+      "sha256": "1ff72cfc499f48b508f78ad42f25c9060894d73a94e7546e27ba7dda62d7e8b3"
+    },
+    "attempt": {
+      "path": "records/n384-m512-clock0512-attempt.json",
+      "sha256": "0702d169488e7bf50665a2bd4c38ba9341d7268c8db8e70a640f675dd428c9b7"
+    },
+    "actual_external_plan": {
+      "path": "plans/n384-m512-frozen-prefix-plan.json",
+      "sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+      "watchdog": "v3"
+    },
+    "identity_external_stop_literal": "pgid-watchdog-v2-starttime-cmdline-deadline"
   },
   "execution_gate": [
-    "M512 clock-512 record and complete state published",
-    "right template materialized as a new final manifest with exact hashes/path",
-    "both exact state files and plan hashes reverified on Sulaco",
-    "root semantic review approves the final pair and exact command",
-    "fresh memory and process admission recorded"
+    "M512 clock-512 record and complete state published: satisfied",
+    "right final manifest materialized with exact hashes/path: satisfied",
+    "both exact state files and plan hashes reverified by the adapter on Sulaco: satisfied",
+    "root semantic review and exact-command preauthorization: satisfied",
+    "fresh memory and process admission recorded: satisfied"
   ],
   "proposed_command": [
     "cargo",
@@ -155,5 +179,20 @@
   "acceptance": {
     "status": "not_assessed",
     "accepted_windows": 0
+  },
+  "run": {
+    "host": "sulaco",
+    "remote_directory": "/tmp/nsbu-force-clock0512-f046bce-r1",
+    "command": "./adapter input/left-n384-m384-clock0512.json input/right-n384-m512-clock0512.json 2733113344",
+    "executions": 1,
+    "exit_status": 0,
+    "cap_bytes": 2733113344,
+    "adapter_binary_sha256": "d1dde0333286e2ace34a1ee22df0dec8c25188cbaebcb846929d55f54e6d4106",
+    "comparison_output": "comparison-output.json",
+    "comparison_output_sha256": "37577a5fd544fee8d1dd46d3608b428821190038857b62bd342a2ed78948026d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "maximum_resident_set_kbytes": 2666496,
+    "elapsed_wall_seconds": 35.18,
+    "snapshot_transfer": "none; comparison ran against immutable Sulaco paths"
   }
 }
