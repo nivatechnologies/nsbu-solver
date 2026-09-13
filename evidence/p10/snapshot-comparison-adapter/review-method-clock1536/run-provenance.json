@@ -1,0 +1,52 @@
+{
+  "schema": "p10-method-diagnostic-clock1536-provenance-v1",
+  "status": "completed_once_under_root_preauthorization_not_assessed",
+  "comparison_kind": "METHOD_DIAGNOSTIC",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "unchanged_method_mode_lineage": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "cap_bytes": 2733113344,
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "left": {
+    "manifest": "left-n384-cm-clock1536.json",
+    "snapshot_sha256": "b74201d12a04cc1377813d281852f4b60dd3b247ea2f32229290a229590221ec",
+    "coefficient_sha256": "a1118690148c4366e2ac24b8901279c279c3fb8392ec8fdc2df7e7306d28a86f",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "method": "cox-matthews",
+    "staging": "idle-priority exact-byte transfer from Sulaco; temporary, not archived"
+  },
+  "right": {
+    "manifest": "right-n384-ho-clock1536.json",
+    "snapshot_sha256": "8a0ba7e1ddc671ea9dbb93c5f8a034106486cd77c90027ef0dae1ae3b5514818",
+    "coefficient_sha256": "8a8d8a798b417e292697b8b5a6d53eb44cd24575f6659907a6624c25df56d970",
+    "plan_sha256": "ef337eb28924a335a78dbfc1c710ca40e8b507b10b96687bc4197971e411b60c",
+    "source_commit": "0faec11e507e07c08ad20fd29cec04ddf8cd8946",
+    "method": "hochbruck-ostermann",
+    "producer_worktree_commit": "a6095c0c6ae13f3ada574e170a23a6d395bb01fc"
+  },
+  "shared_semantics": {
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "clock": 1536,
+    "epoch": 24,
+    "accepted_steps": 24,
+    "maximum_attempts": 48,
+    "step_ticks": 64
+  },
+  "snapshot_handling": "read immutable pre-existing local HO exact-hash path and exact-hash temporary CM staging; no state committed or exposed for continuation",
+  "budget": "unassigned; candidate 2e-4 is not applied because no active policy supplied to this run explicitly assigns Method to Time",
+  "executions": 1,
+  "exit_status": 0,
+  "comparison_output_sha256": "79bd18ace0cf2445788ab53abe61f3ed2eaf98855d8378019aa49867e261bd9a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "maximum_resident_set_kbytes": 2669568,
+  "elapsed_wall_seconds": 42.34
+}
