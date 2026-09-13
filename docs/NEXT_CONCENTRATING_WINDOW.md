@@ -133,8 +133,15 @@ Global RMS errors are `6.029e-9` (velocity), `1.12745e-5` (gradient), and
 peak decreases from `1.16563` to `0.203022`. Both retained and measurement grids
 changed, so these are sampled representation diagnostics, not an isolated
 same-lattice convergence rate or continuum bound. A projection at clock4096 is
-prepared but unexecuted; early-clock improvement does not establish endpoint
+in progress with its result pending; early-clock improvement does not establish endpoint
 resolution. See the [N512 execution evidence](../evidence/p10/n512-analytic-projection-diagnostic/run-clock0512.json).
+
+A single actual N512/M768 Cox–Matthews attempt from rest to clock64 completed
+with passing local indicators and zero steady allocations, but its candidate was
+not committed. Integration took `2067.91` seconds, including `1969.46` seconds
+in RHS evaluation. This exceeds the preliminary runtime estimate and motivates
+a bounded FFT locality benchmark before a long trajectory; it does not establish
+trajectory convergence. See the [timing result](../evidence/p10/n512-m768-one-attempt-timing/RUN-RESULT.md).
 
 The matched M512-force residual probe at clock 1112 is now complete. Its retained-band
 H1 residual decreases from `935.56` to `22.303`, while the omitted-band value

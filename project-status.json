@@ -529,6 +529,18 @@
     },
     "wall_seconds": 4168,
     "maximum_rss_kib": 297840300,
-    "scope": "Sampled analytic projection, zero trajectory input. Retained N384\u2192N512 and measurement lattice768\u21921024 both change; observed RMS improvement11.35x/8.69x/6.68x is not an isolated spatial convergence rate or continuum bound. Endpoint4096 projection remains unexecuted; no accepted window."
+    "scope": "Sampled analytic projection, zero trajectory input. Retained N384\u2192N512 and measurement lattice768\u21921024 both change; observed RMS improvement11.35x/8.69x/6.68x is not an isolated spatial convergence rate or continuum bound. Endpoint4096 projection result remains pending; no accepted window."
+  },
+  "p10_n512_m768_one_attempt_timing": {
+    "status": "actual_attempt_complete_uncommitted",
+    "evidence": "evidence/p10/n512-m768-one-attempt-timing/raw/one-attempt-20260913/validation.json",
+    "integration_seconds": 2067.912943179,
+    "rhs_seconds": 1969.460301335,
+    "wall_seconds": 2209.71,
+    "maximum_rss_kib": 155283456,
+    "steady_allocations": 0,
+    "local_accepted_token_present": true,
+    "candidate_committed": false,
+    "scope": "One actual CM attempt from rest0\u219264ticks; local acceptance is not PDE acceptance. No trajectory publication or convergence evidence. Runtime exceeds preliminary estimate; FFT locality prototype remains unadopted."
   }
 }
