@@ -1,0 +1,125 @@
+#!/bin/bash
+set -euo pipefail
+
+readonly SOURCE_COMMIT=6442ec98bf55582e1990aac874e3b0234252add8
+readonly BINARY_SHA256=0df5f007d26d836819f582a7028bb5534ca8a5c5d3047831c8022fac1f6f0e88
+readonly AS_BYTES=274877906944
+readonly MIN_AVAILABLE_KIB=285212672
+readonly PROJECTION_PID=1586745
+
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo=$(CDPATH= cd -- "$script_dir/../../.." && pwd)
+binary="$script_dir/harness/target/release/p10-n512-m768-one-attempt-timing"
+run_dir="$script_dir/raw/one-attempt-20260913"
+
+if [[ ${1-} == --worker ]]; then
+    shift
+    [[ $# == 1 && $1 == "$run_dir" ]] || exit 64
+    ulimit -v 268435456
+    printf '%s\n' "$AS_BYTES" > "$run_dir/run.rlimit-as-bytes"
+    date -u +'%Y-%m-%dT%H:%M:%SZ' > "$run_dir/run.start-utc"
+    set +e
+    NSBU_RUN_N512_M768_ONE_ATTEMPT=1 /usr/bin/time -v -o "$run_dir/run.time" \
+        timeout --foreground --signal=TERM --kill-after=60s 2400s \
+        "$binary" run "$run_dir/result.json" \
+        > "$run_dir/run.stdout" 2> "$run_dir/run.stderr"
+    status=$?
+    set -e
+    printf '%s\n' "$status" > "$run_dir/run.status"
+    date -u +'%Y-%m-%dT%H:%M:%SZ' > "$run_dir/run.end-utc"
+    exit "$status"
+fi
+
+[[ ${PROJECTION_RELEASE_CONFIRMED-} == 1 ]] || {
+    echo 'refusing launch without PROJECTION_RELEASE_CONFIRMED=1' >&2
+    exit 64
+}
+[[ ! -e /proc/$PROJECTION_PID ]] || {
+    echo "refusing launch while projection PID $PROJECTION_PID exists" >&2
+    exit 64
+}
+available_kib=$(awk '$1 == "MemAvailable:" { print $2 }' /proc/meminfo)
+[[ $available_kib =~ ^[0-9]+$ && $available_kib -ge $MIN_AVAILABLE_KIB ]] || {
+    echo "refusing launch: MemAvailable ${available_kib:-unknown} KiB below $MIN_AVAILABLE_KIB KiB" >&2
+    exit 64
+}
+[[ $(sha256sum "$binary" | awk '{ print $1 }') == "$BINARY_SHA256" ]]
+git -C "$repo" merge-base --is-ancestor "$SOURCE_COMMIT" HEAD
+git -C "$repo" diff --quiet "$SOURCE_COMMIT" -- \
+    evidence/p10/n512-m768-one-attempt-timing/harness
+git -C "$repo" diff --quiet -- \
+    evidence/p10/n512-m768-one-attempt-timing/harness
+(cd "$repo" && sha256sum --check --status \
+    evidence/p10/n512-m768-one-attempt-timing/prepared/source-sha256.list)
+[[ $(sha256sum "$repo/evidence/p10/w3-768-controls-20260913/prepared/runs/completion.json" | awk '{ print $1 }') == a78a26b6949059083d3a0e1f6fb4bf04010571cfa663430a2d548cf3c78a8834 ]]
+
+mkdir -p "$script_dir/raw"
+mkdir "$run_dir"
+setsid "$script_dir/launch-one-attempt.sh" --worker "$run_dir" </dev/null &
+owner_pid=$!
+expected_cmdline_sha256=$(
+    printf '/bin/bash\0%s\0--worker\0%s\0' \
+        "$script_dir/launch-one-attempt.sh" "$run_dir" | sha256sum | awk '{ print $1 }'
+)
+same_bound_owner() {
+    [[ -n ${bound_starttime-} && -r /proc/$owner_pid/stat && -r /proc/$owner_pid/cmdline ]] || return 1
+    [[ $(awk '{ print $22 }' "/proc/$owner_pid/stat") == "$bound_starttime" ]] || return 1
+    [[ $(ps -o pgid= -p "$owner_pid" | tr -d ' ') == "$owner_pid" ]] || return 1
+    [[ $(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }') == "$expected_cmdline_sha256" ]]
+}
+stable=0
+for _ in {1..200}; do
+    if [[ -r /proc/$owner_pid/stat && -r /proc/$owner_pid/cmdline ]]; then
+        owner_pgid=$(ps -o pgid= -p "$owner_pid" | tr -d ' ')
+        owner_cmdline_sha256=$(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }')
+        if [[ $owner_pgid == "$owner_pid" && $owner_cmdline_sha256 == "$expected_cmdline_sha256" ]]; then
+            bound_starttime=$(awk '{ print $22 }' "/proc/$owner_pid/stat")
+            stable=$((stable + 1))
+            [[ $stable == 2 ]] && break
+        else
+            stable=0
+        fi
+    fi
+    sleep 0.01
+done
+if [[ $stable != 2 ]]; then
+    if same_bound_owner; then
+        kill -TERM -- "-$owner_pid" 2>/dev/null || true
+        deadline=$((SECONDS + 60))
+        while same_bound_owner && ((SECONDS < deadline)); do
+            sleep 1
+        done
+        if same_bound_owner; then
+            kill -KILL -- "-$owner_pid" 2>/dev/null || true
+            echo 'worker identity did not stabilize; bound identity received TERM then KILL' > "$run_dir/launch-refusal.txt"
+        else
+            echo 'worker identity did not stabilize; bound identity received TERM and exited or changed' > "$run_dir/launch-refusal.txt"
+        fi
+    else
+        echo 'worker identity did not stabilize; no identity bound and no signal sent; active timeout retained' > "$run_dir/launch-refusal.txt"
+    fi
+    exit 64
+fi
+owner_starttime=$bound_starttime
+cat > "$run_dir/launch-receipt.json" <<EOF
+{
+  "schema": "p10-n512-m768-one-attempt-launch-receipt-v1",
+  "source_commit": "$SOURCE_COMMIT",
+  "binary_sha256": "$BINARY_SHA256",
+  "address_space_limit_bytes": $AS_BYTES,
+  "internal_resource_bytes": 238209735152,
+  "mem_available_kib": $available_kib,
+  "minimum_mem_available_bytes": 292057776128,
+  "timeout_seconds": 2400,
+  "kill_grace_seconds": 60,
+  "projection_pid_confirmed_absent": $PROJECTION_PID,
+  "owner_pid": $owner_pid,
+  "owner_pgid": $owner_pgid,
+  "owner_starttime": $owner_starttime,
+  "owner_cmdline_sha256": "$owner_cmdline_sha256",
+  "expected_owner_cmdline_sha256": "$expected_cmdline_sha256",
+  "run_dir": "$run_dir"
+}
+EOF
+printf 'launched run_dir=%s owner_pid=%s owner_pgid=%s owner_starttime=%s\n' \
+    "$run_dir" "$owner_pid" "$owner_pgid" "$owner_starttime"
