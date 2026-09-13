@@ -1,0 +1,3 @@
+2026-09-13T00:44:43Z started leader_pid=987769 process_group=987769 starttime=6202065 cmdline_sha256=6b1e68c82a84ea52bf7ce22475ffdd7c592fa8798e4289659e70a010b8da57b8 deadline_epoch=1789260285
+2026-09-13T00:44:45Z deadline_reached_sending_TERM now=1789260285
+2026-09-13T00:44:45Z solver_exited_after_TERM seconds=0 component=stat_read expected_state=non_zombie observed_state=missing expected_process_group=987769 observed_process_group=missing expected_starttime=6202065 observed_starttime=missing expected_cmdline_sha256=6b1e68c82a84ea52bf7ce22475ffdd7c592fa8798e4289659e70a010b8da57b8 observed_cmdline_sha256=missing

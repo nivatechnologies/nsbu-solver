@@ -1,0 +1,23 @@
+{
+  "schema": "p10-pgid-watchdog-v3-amendment-v1",
+  "status": "prepared_tested_not_launched_latest_start_elapsed",
+  "original_v2_immutable_sha256": "4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b",
+  "v3_source": "pgid-watchdog-v3.sh",
+  "v3_sha256": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01",
+  "test_source": "test-watchdog-v3.sh",
+  "test_sha256": "9c4e60b56a4314760dcbd0380242ae411711fdc8ea2d39f914bcd2448ffd647f",
+  "diagnosis": "v2 could leave its loop on one transient identity sample, recover on the immediate second sample, and then fall through to TERM without independently establishing that the deadline had arrived",
+  "fix": "v3 records component and observed state, PGID, starttime and cmdline hash; confirms a mismatch after one second; treats recovery as recovery; and asserts current epoch is at or past the absolute deadline before TERM",
+  "independent_fallback": "launcher GNU timeout --foreground TERM with kill-after 60 seconds remains active",
+  "controls": {
+    "transient_cmdline_mismatch": "passed_and_logged_exact_expected_observed",
+    "transient_recovery": "passed_without_TERM",
+    "explicit_deadline_TERM": "passed"
+  },
+  "control_stdout": "watchdog-v3-control.stdout",
+  "transient_log": "watchdog-v3-transient.log",
+  "deadline_log": "watchdog-v3-deadline.log",
+  "prepared_utc": "2026-09-13T00:45:08Z",
+  "latest_start_utc": "2026-09-13T00:45:52Z",
+  "launched_with_v3": false
+}
