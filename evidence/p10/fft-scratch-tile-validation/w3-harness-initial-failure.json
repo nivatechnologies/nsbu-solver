@@ -1,0 +1,8 @@
+{
+  "schema": "p10-fft-scratch-tile-w3-harness-initial-failure-v1",
+  "status": 101,
+  "failed_test": "reviewed_768_admission_matches_formulas_and_1024_remains_closed",
+  "actual_workspace_pair_delta_bytes": 196608,
+  "stale_copied_expectation_bytes": 196656,
+  "classification": "private harness expectation retained the superseded separate-Vec header"
+}
