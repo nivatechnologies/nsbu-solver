@@ -1,3 +1,4 @@
 raw*/n*/*.bin
 raw-anisotropic/*/*.bin
 harness/target/
+raw-dense-width4/*/*.bin

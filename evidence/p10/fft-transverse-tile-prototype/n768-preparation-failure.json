@@ -1,0 +1,9 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-preparation-failure-v1",
+  "commit": "7ae95c6",
+  "status": "compile_failed_before_any_n768_execution",
+  "error": "Hash state was formatted with LowerHex before finalize; rustc E0277 at both hash functions.",
+  "correction_commit": "47c8927",
+  "correction": "Finalize each Sha256 state, then format the digest. cargo check passed.",
+  "numerical_runs": 0
+}

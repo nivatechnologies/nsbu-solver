@@ -15,6 +15,15 @@ a33a99ae04906d0a0222e1100249efc4271fcb4304f93ad3586248a23358d1ee  evidence/p10/f
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-anisotropic/96x6x192-owned-untiled.stderr
 4c27a07026a047a850dff7e2b86904bd8d921e0b32280b0b6e383d742ee80b01  evidence/p10/fft-transverse-tile-prototype/raw-anisotropic/96x6x192-owned-untiled.stdout
 950013bc27094e5868a29ebc49bcf5413864d2a54edb969b67b47e2cda39b7d8  evidence/p10/fft-transverse-tile-prototype/raw-anisotropic/comparison.json
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-avx-tiled.stderr
+e6a9d8abef5d353bc9e27a4686a1c5962f6ba9ab685841c8cc6138db411d1d7e  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-avx-tiled.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-avx-untiled.stderr
+97286e2a78ea9c39f5e0fb3a68c9f18aed35edfa7fbbeb70fc4d7ff3eeb8e5fd  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-avx-untiled.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-owned-tiled.stderr
+ead758559e58e16f8af64edeb8f7d3e251836dbdd6366b36f5e00f6ae6ded6e6  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-owned-tiled.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-owned-untiled.stderr
+9b9501a4176477925c5abc502cb60fa02805b0764c10a92cdda5cf3fdd759454  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/96x6x6-owned-untiled.stdout
+6a87c53e012869034c6da0d2821ac226ffab69eb11c79bb7327eb35c389a90fb  evidence/p10/fft-transverse-tile-prototype/raw-dense-width4/comparison.json
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-simple-before-helper-extraction/n192-tiled-a.stderr
 4a628ffdb221b42fd2d6560c4a4a2de9b7b42fe3e2477fae1b908a0edd0c8237  evidence/p10/fft-transverse-tile-prototype/raw-simple-before-helper-extraction/n192-tiled-a.stdout
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-transverse-tile-prototype/raw-simple-before-helper-extraction/n192-tiled-b.stderr

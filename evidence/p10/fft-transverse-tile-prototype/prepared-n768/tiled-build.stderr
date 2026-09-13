@@ -1,0 +1,6 @@
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-fft-transverse-tile-20260913/crates/nsbu-solver)
+   Compiling p10-fft-transverse-tile-benchmark v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-fft-transverse-tile-20260913/evidence/p10/fft-transverse-tile-prototype/harness)
+    Finished `release` profile [optimized] target(s) in 16.29s

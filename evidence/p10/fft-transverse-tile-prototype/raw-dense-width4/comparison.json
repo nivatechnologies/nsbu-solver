@@ -1,0 +1,58 @@
+[
+  {
+    "dimensions": [
+      96,
+      6,
+      6
+    ],
+    "backend": "owned",
+    "input": "dense-lcg-bits-v1",
+    "reservation_bytes": 43448,
+    "variant": "untiled",
+    "binary_sha256": "8807326298a89a79fb8b157a9566924f26d683b665cb1293ff785e244237e455",
+    "forward_sha256": "40988213006417a11a47e845c2ba53c7952722ea701841ff7b74927ac098741b",
+    "inverse_sha256": "69e3bbe08ac491693cb3362ab25915c9d1a8432a7453ce796a919a8fff2acbac"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      6
+    ],
+    "backend": "owned",
+    "input": "dense-lcg-bits-v1",
+    "reservation_bytes": 55760,
+    "variant": "tiled",
+    "binary_sha256": "73f0399d14b74cc183fc3d0bb7e1d9c3823a2af57d950930b6d9c4cf77694367",
+    "forward_sha256": "40988213006417a11a47e845c2ba53c7952722ea701841ff7b74927ac098741b",
+    "inverse_sha256": "69e3bbe08ac491693cb3362ab25915c9d1a8432a7453ce796a919a8fff2acbac"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      6
+    ],
+    "backend": "avx",
+    "input": "dense-lcg-bits-v1",
+    "reservation_bytes": 46488,
+    "variant": "untiled",
+    "binary_sha256": "8807326298a89a79fb8b157a9566924f26d683b665cb1293ff785e244237e455",
+    "forward_sha256": "844913cd4d0717c0750fcbc1de1bdd40a3b17f4805aae4ff061a0b5c45259e16",
+    "inverse_sha256": "b0a6b21d95397241091ac3ccb8c9c056de210f6ea372360ed236128de0581d26"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      6
+    ],
+    "backend": "avx",
+    "input": "dense-lcg-bits-v1",
+    "reservation_bytes": 58800,
+    "variant": "tiled",
+    "binary_sha256": "73f0399d14b74cc183fc3d0bb7e1d9c3823a2af57d950930b6d9c4cf77694367",
+    "forward_sha256": "844913cd4d0717c0750fcbc1de1bdd40a3b17f4805aae4ff061a0b5c45259e16",
+    "inverse_sha256": "b0a6b21d95397241091ac3ccb8c9c056de210f6ea372360ed236128de0581d26"
+  }
+]

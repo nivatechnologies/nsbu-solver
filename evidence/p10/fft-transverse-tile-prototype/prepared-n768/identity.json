@@ -1,0 +1,35 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-build-identity-v1",
+  "status": "built_not_executed_not_adopted",
+  "prototype_commit": "47c8927",
+  "prototype_production_and_harness_tree_clean_at_build": true,
+  "untiled_production_commit": "f3960e157f26f37fa9a9fe808a4a596395164706",
+  "untiled_harness_files_copied_byte_for_byte_from_prototype": true,
+  "source_sha256": {
+    "crates/nsbu-solver/src/spectral/fft.rs": "f01a0467efaaea5906f00591d7b620e2142922e9e53f42e3fb99a4c36e1626f3",
+    "crates/nsbu-solver/src/spectral/fft/avx.rs": "3d5c979bb68b29d80f9019e5750ddc5e7de21c93546fe0ef46b3aa7aaa39915f",
+    "crates/nsbu-solver/src/spectral/fft/owned.rs": "035209aa3ca55938df30ddb46ddfccce4c34f8860187f534b4d01431e8802592",
+    "crates/nsbu-solver/src/spectral/fft/transform.rs": "0ba8a8a59ee9c5f4a603b602b5d578c675c5fd052a01b3f2142e71a9b8e358bb",
+    "crates/nsbu-solver/src/spectral/fft/workspace.rs": "21464ed7e03098812dc35e97fb3dd475e9ef4ca31c221650784c6456b5cd8ab8",
+    "evidence/p10/fft-transverse-tile-prototype/harness/Cargo.toml": "ecbe8f1327c4f55eb0b018d5e9bb787fd74ee63320e546c28ba3df0178a6511c",
+    "evidence/p10/fft-transverse-tile-prototype/harness/Cargo.lock": "dc6412826b9c216441e17406b5fe0499747f990cd1103c56f1a4d4f530584e9c",
+    "evidence/p10/fft-transverse-tile-prototype/harness/src/main.rs": "eca6ebcb3cc693db3cf077d82d9e393b100e23e8781ff3b1062e6b8cbc5be791",
+    "evidence/p10/fft-transverse-tile-prototype/harness/src/bin/anisotropic.rs": "e2cae3484f79a44b18a73a855e94a42c71ef5d1922756cadd0d4a3a6d4444f76"
+  },
+  "untiled_production_source_sha256": {
+    "crates/nsbu-solver/src/spectral/fft.rs": "510a3e8e604e36a94d734fbfbcadbf0b5066669044059afd0048d8860001f69e",
+    "crates/nsbu-solver/src/spectral/fft/avx.rs": "42a9514a23fe8a2f081963fa3090f540d56f630c0279ab9819d20c2b6a48b55b",
+    "crates/nsbu-solver/src/spectral/fft/owned.rs": "cad008bc4934fa71a07962e6ebfe364ab2df7ebe12ce5112b7db40642f5ba609",
+    "crates/nsbu-solver/src/spectral/fft/transform.rs": "1da0e37c10b8552e7255f20c6927c3574409a6cab45075eac41632d8b3fdebe9",
+    "crates/nsbu-solver/src/spectral/fft/workspace.rs": "6b05c9866b5bf52f7088075a92330e50f389191cd1a1ad4fa62d436bbdd7c1cb"
+  },
+  "binaries": {
+    "prototype_cube_sha256": "f151b41a1c03874d699a49154321a1e45038f3f98cb5d4443ffbae5aa97dea04",
+    "untiled_cube_sha256": "003969a932f7cc794db8030c99dc50aca6256f48307c34fdd80eedf7d9b2b984",
+    "prototype_anisotropic_sha256": "73f0399d14b74cc183fc3d0bb7e1d9c3823a2af57d950930b6d9c4cf77694367",
+    "untiled_anisotropic_sha256": "8807326298a89a79fb8b157a9566924f26d683b665cb1293ff785e244237e455"
+  },
+  "build_command": "CARGO_BUILD_JOBS=2 cargo build --manifest-path evidence/p10/fft-transverse-tile-prototype/harness/Cargo.toml --release --bins",
+  "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+  "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)"
+}

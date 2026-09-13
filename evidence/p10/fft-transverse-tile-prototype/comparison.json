@@ -295,5 +295,26 @@
     ],
     "expected_delta_bytes": 24600,
     "results": "raw-anisotropic/comparison.json"
+  },
+  "dense_width4_controls": {
+    "layout": [
+      96,
+      6,
+      6
+    ],
+    "half_length": 4,
+    "input": "dense-lcg-bits-v1",
+    "backends": [
+      "owned",
+      "avx"
+    ],
+    "all_forward_words_bitwise_equal": true,
+    "all_inverse_words_bitwise_equal": true,
+    "observed_reservation_delta_bytes": [
+      12312,
+      12312
+    ],
+    "expected_delta_bytes": 12312,
+    "results": "raw-dense-width4/comparison.json"
   }
 }
