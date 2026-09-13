@@ -1,0 +1,38 @@
+{
+  "schema": "p10-fft-scratch-tail-crap-remediation-v1",
+  "candidate_source_commit": "0a775f5be1282e068b1c78fbb175387b5ae1af2f",
+  "production_parent_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "change_scope": "cfg(test) AVX unit test only; production logic unchanged",
+  "meaningful_contract": "from_parts refuses a real RustFFT plan set whose inplace scratch requirement exceeds the closed small-layout allowance before workspace allocation",
+  "tests": {
+    "focused_passed": 1,
+    "coverage_package_passed": 252,
+    "failed": 0,
+    "ignored": 0
+  },
+  "before": {
+    "from_parts_branch_coverage_fraction": 0.5,
+    "from_parts_crap": 26.125,
+    "five_file_max_crap": 26.125
+  },
+  "after": {
+    "from_parts_branch_coverage_fraction": 1.0,
+    "from_parts_crap": 11.0,
+    "five_file_max_crap": 19.125,
+    "five_file_max_crap_function": "avx.rs::from_catalog",
+    "function_cyclomatic_max": 14.0,
+    "function_cognitive_max": 15.0,
+    "halstead_difficulty_all_nodes_max": 74.66666666666667,
+    "file_sloc_max": 283.0
+  },
+  "threshold_results": {
+    "function_cyclomatic_lt_22": true,
+    "function_cognitive_lt_22": true,
+    "halstead_lt_80": true,
+    "file_sloc_lt_500": true,
+    "function_crap_lt_25": true
+  },
+  "production_change": false,
+  "test_exclusion_change": false,
+  "metric_change": false
+}
