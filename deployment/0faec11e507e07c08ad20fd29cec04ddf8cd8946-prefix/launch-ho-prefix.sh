@@ -75,7 +75,7 @@ starttime=${stable%%:*}; remainder=${stable#*:}; stable_group=${remainder%%:*}; 
 setsid "$watchdog" "$solver_pid" "$process_group" "$starttime" "$cmdline_sha" 1789282740 "$run_dir/watchdog.log" > "$run_dir/watchdog.stdout" 2>&1 &
 watchdog_pid=$!
 expected_start="started leader_pid=$solver_pid process_group=$process_group starttime=$starttime cmdline_sha256=$cmdline_sha deadline_epoch=1789282740"
-watchdog_live() { kill -0 "$watchdog_pid" 2>/dev/null && [ -r "/proc/$watchdog_pid/status" ] && ! awk '$1 == "State:" && $2 == "Z" { exit 1 }' "/proc/$watchdog_pid/status"; }
+watchdog_live() { kill -0 "$watchdog_pid" 2>/dev/null && [ -r "/proc/$watchdog_pid/status" ] && awk '$1 == "State:" && $2 == "Z" { exit 1 }' "/proc/$watchdog_pid/status"; }
 tries=0
 while [ "$tries" -lt 100 ]; do grep -F "$expected_start" "$run_dir/watchdog.log" >/dev/null 2>&1 && watchdog_live && break; watchdog_live || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; exit 73; }; sleep 0.1; tries=$((tries+1)); done
 grep -F "$expected_start" "$run_dir/watchdog.log" >/dev/null 2>&1 && watchdog_live || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; kill "$watchdog_pid" 2>/dev/null || true; exit 73; }
