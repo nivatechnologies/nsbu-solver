@@ -1,8 +1,8 @@
 {
   "schema": "p10-offline-residual-m512-preflight-v1",
   "status": "exact_inputs_staged_preflight_passed_heavy_run_not_started",
-  "implementation_commit": "d8fb8f6d48f1a8665b6d5bf7158c9b5658c160d0",
-  "release_binary_sha256": "9cdfc73add93adb58857fd64d6614fd7be9b29be44ecf64adfacd47d1a4234f9",
+  "implementation_commit": "2a2db1e07faa9c806a00dd4ff36db87de41e5b6f",
+  "release_binary_sha256": "ff5456f81007dc7a605cebaa2150c13d8a22c2e8ecf574f5122d8e4b58966ed6",
   "probe_plan_sha256": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
   "remote_root": "/tmp/nsbu-p10-sulaco-m512-prefix-r5/run/output",
   "local_root": "/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913",
