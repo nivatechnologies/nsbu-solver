@@ -1,0 +1,14 @@
+For complex vector u and real wavevector k, with Parseval weight w:
+l2_squared = w * sum_j |u_j|^2
+h1_squared = w * (1 + sum_j k_j^2) * sum_j |u_j|^2
+curl_squared = w * (|k1*u2-k2*u1|^2 + |k2*u0-k0*u2|^2 + |k0*u1-k1*u0|^2)
+divergence_squared = w * |k0*u0+k1*u1+k2*u2|^2
+
+For complex (re,im), |z|^2 = re^2 + im^2. All supplied values yield exact integers.
+
+shell_index uses max(abs(shell_mode)) and the first strict cutoff it is less than:
+index 0 cutoff 24; index 1 cutoff 32; index 2 cutoff 48; index 3 cutoff 64;
+index 4 cutoff 96; index 5 cutoff 128; index 6 cutoff 192.
+
+Return one JSON object with exactly: case, shell, l2_squared, h1_squared,
+curl_squared, divergence_squared. Do not return prose or intermediate calculations.

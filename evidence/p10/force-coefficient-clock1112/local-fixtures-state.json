@@ -1,0 +1,346 @@
+{
+  "family_consecutive_failures": {
+    "clock1112-shell-fixture": 6
+  },
+  "inflight": {},
+  "receipts": [
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 2.6e-05,
+          "number": 3,
+          "validator_errors": [
+            "exact fixture mismatch: expected {'case': 'boundary_n256', 'shell': 6, 'l2_squared': 2, 'h1_squared': 32770, 'curl_squared': 32768, 'divergence_squared': 0}, got {'case': 'boundary_n256', 'shell': 128, 'l2_squared': 2, 'h1_squared': 2, 'curl_squared': 0, 'divergence_squared': 0}"
+          ]
+        }
+      ],
+      "completion_tokens": 2668,
+      "errors": [
+        "exact fixture mismatch: expected {'case': 'boundary_n256', 'shell': 6, 'l2_squared': 2, 'h1_squared': 32770, 'curl_squared': 32768, 'divergence_squared': 0}, got {'case': 'boundary_n256', 'shell': 128, 'l2_squared': 2, 'h1_squared': 2, 'curl_squared': 0, 'divergence_squared': 0}"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "6e8e463b9bb67eeb5a15198f6aad4d77b5c58ae0fa1d9e7cc4266c1806651a98",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 12646,
+      "reasoning_tokens": 2568,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-boundary-n256-v1",
+      "timing_seconds": 138.211297,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 1e-05,
+          "number": 2,
+          "validator_errors": []
+        }
+      ],
+      "completion_tokens": 3080,
+      "errors": [],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "9ab78dbc96e2af9142512c2151d7a77b6a1c1de1032fa832b6b3d9e948b2d1eb",
+      "output": {
+        "case": "longitudinal",
+        "curl_squared": 0,
+        "divergence_squared": 45,
+        "h1_squared": 50,
+        "l2_squared": 5,
+        "shell": 0
+      },
+      "output_hash": "479afcffd647d731f8a17b639fe8db9ff2203a68fac089374dc15218a549fd35",
+      "prompt_tokens": 17743,
+      "reasoning_tokens": 2686,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "validated_candidate",
+      "task_id": "clock1112-shell-longitudinal-v1",
+      "timing_seconds": 148.811466,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 0.0,
+          "number": 3,
+          "validator_errors": [
+            "missing required output field: case",
+            "missing required output field: shell",
+            "missing required output field: l2_squared",
+            "missing required output field: h1_squared",
+            "missing required output field: curl_squared",
+            "missing required output field: divergence_squared"
+          ]
+        }
+      ],
+      "completion_tokens": 3000,
+      "errors": [
+        "missing required output field: case",
+        "missing required output field: shell",
+        "missing required output field: l2_squared",
+        "missing required output field: h1_squared",
+        "missing required output field: curl_squared",
+        "missing required output field: divergence_squared"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "3ba45bcecc0776136f6a4cece6c31ad26faceebb6c4ecf4cb9c0203eb3763e2b",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18036,
+      "reasoning_tokens": 2869,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-zero-mode-v1",
+      "timing_seconds": 155.985166,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 0.0,
+          "number": 3,
+          "validator_errors": [
+            "missing required output field: case",
+            "missing required output field: shell",
+            "missing required output field: l2_squared",
+            "missing required output field: h1_squared",
+            "missing required output field: curl_squared",
+            "missing required output field: divergence_squared"
+          ]
+        }
+      ],
+      "completion_tokens": 3568,
+      "errors": [
+        "missing required output field: case",
+        "missing required output field: shell",
+        "missing required output field: l2_squared",
+        "missing required output field: h1_squared",
+        "missing required output field: curl_squared",
+        "missing required output field: divergence_squared"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "edae9211248711bcd2aab9d29c0295a9e0c1ca719a5f3c9af299497212b03208",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18120,
+      "reasoning_tokens": 3417,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-conjugacy-weight-v1",
+      "timing_seconds": 161.271926,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 0.0,
+          "number": 3,
+          "validator_errors": [
+            "missing required output field: case",
+            "missing required output field: shell",
+            "missing required output field: l2_squared",
+            "missing required output field: h1_squared",
+            "missing required output field: curl_squared",
+            "missing required output field: divergence_squared"
+          ]
+        }
+      ],
+      "completion_tokens": 3314,
+      "errors": [
+        "missing required output field: case",
+        "missing required output field: shell",
+        "missing required output field: l2_squared",
+        "missing required output field: h1_squared",
+        "missing required output field: curl_squared",
+        "missing required output field: divergence_squared"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "99839ff5450c339f90a941927932d8f46287138b311e23bf723ff7e64c12ee36",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18336,
+      "reasoning_tokens": 2912,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-transverse-v1",
+      "timing_seconds": 167.271353,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "checker_seconds": 0.0,
+          "number": 3,
+          "validator_errors": [
+            "final output is not one JSON object"
+          ]
+        }
+      ],
+      "completion_tokens": 3773,
+      "errors": [
+        "final output is not one JSON object"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "03bdadae70b1c593e9c323aa26b4d2257311e8140ad46b359012b451fc441f74",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18036,
+      "reasoning_tokens": 3627,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-mixed-complex-v1",
+      "timing_seconds": 170.236739,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 3,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        }
+      ],
+      "completion_tokens": 4673,
+      "errors": [
+        "inference failed: ValueError: model response refused due to finish_reason=length"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "f297ec162808a431d29859a4ff40168aaff174798554b2f981d2de3a70384daa",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18108,
+      "reasoning_tokens": 4540,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-boundary-n48-v1",
+      "timing_seconds": 193.6114,
+      "tool_calls": 2
+    },
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        },
+        {
+          "number": 3,
+          "validator_errors": [
+            "inference failed: ValueError: model response refused due to finish_reason=length"
+          ]
+        }
+      ],
+      "completion_tokens": 4701,
+      "errors": [
+        "inference failed: ValueError: model response refused due to finish_reason=length"
+      ],
+      "family": "clock1112-shell-fixture",
+      "input_hash": "4a31f122210e7ddb50e169fbd348f8a834e16b079868d393d5ad1271d4aec89c",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 18114,
+      "reasoning_tokens": 4584,
+      "review_required": false,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "clock1112-shell-boundary-n192-v1",
+      "timing_seconds": 193.844799,
+      "tool_calls": 2
+    }
+  ],
+  "schema": "nsbu-local-agent-queue-v1"
+}

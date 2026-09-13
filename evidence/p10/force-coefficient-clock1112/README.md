@@ -7,7 +7,8 @@ It evolves no trajectory and changes no equation, reference state, frozen plan, 
 status.
 
 For each adjacent artifact pair, `compare` reports raw and Leray-projected differences on disjoint
-max-mode shells: inside N48, N48--N64, N64--N96, N96--N128, N128--N192, and N192--N384. It also
+max-mode shells: inside N48, N48--N64, N64--N96, N96--N128, N128--N192,
+N192--N256, and N256--N384. It also
 reports the same projected difference after the explicitly labeled linear Stokes response over
 `1112 * 2^-20`. Contracting M384--M512 and M512--M768 differences supports improved convergence
 of the sampled-force coefficients on the retained band. It does not prove that the M768-only shell
@@ -38,3 +39,28 @@ Actual sample runs require the separately reviewed host resource plan. Artifacts
 source/case/clock bound, and refused on mismatch. They remain local because each retained N384
 artifact is about 1.37 GB. All results are empirical binary64 diagnostics without interval
 enclosure, force sufficiency, PDE qualification, accepted interpolation, or accepted window.
+
+## Result
+
+The reviewed sequential M384/M512/M768 ladder completed at source `f7bb588` with zero swaps.
+The full strict-N384 Leray-projected H1 difference fell from `935.8629343304178` for
+M384--M512 to `22.289249597245494` for M512--M768, an adjacent ratio of
+`0.023816788527043` (about a 42-fold contraction). The initial N192--N384 outer shell gave
+essentially the same contraction, from `935.7371539965881` to `22.28445957063686`. The projected
+Stokes-response H1 proxy contracted from `6.134187955851721e-4` to
+`1.351263724368082e-5`.
+
+This fixed-retained contraction strongly supports coarse M384 sampled-force aliasing or
+discretization sensitivity as the main cause of the huge retained residual response. Together
+with the exact archived residual replay and the nearly one-for-one residual/force-delta H1 values,
+it disfavors reconstruction or operator assembly as the main cause. It does not prove every
+archived coefficient error is bounded, that M768 is force-sufficient, or that its new shell is a
+continuum tail. M1024 was therefore not run. Full identities, timings, hashes, and limitations are
+in `summary.json`.
+
+Eight independently checked exact modal fixtures were also requested through the maintained local
+Qwen controller. The first overlarge-context packet validated one task after repair and exhausted
+seven tasks after 15 total repairs; that failed batch is preserved. The explicitly authorized
+compact redesign validated the remaining seven tasks, five on the first attempt and two after one
+local repair each. All eight outputs are consumed by the Rust shell/norm test table. These fixture
+results validate finite analyzer arithmetic cases only and make no scientific acceptance claim.

@@ -1,0 +1,40 @@
+{
+  "schema": "p10-force-coefficient-clock1112-result-v1",
+  "status": "force_only_sampling_ladder_complete_diagnostic_only",
+  "source_commit": "f7bb5880013f0bf0bc4f61506fc4654a7f2fc444",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": {"quantum_exponent": -20, "target": 8192, "elapsed": 1112, "remaining": 7080},
+  "retained_grid": 384,
+  "provider": "ParallelReducedV2Force",
+  "backend": "RustFft6_4_1AvxFma",
+  "workers": 32,
+  "samples": [
+    {"grid": 384, "coefficient_sha256": "1568239009c96b8332f7746e1a13c54f582bcda5c2bf09f5f469f539fb152c41", "artifact_sha256": "6616f8c93920cb46c1b61540c471490394faa95187c2fd89d90f2c47871ed8df", "artifact_bytes": 1366032600, "force_seconds": 12.708305836, "wall_seconds": 30.76, "maximum_rss_kib": 4881408, "swaps": 0},
+    {"grid": 512, "coefficient_sha256": "5e5e242248066c89b8a595bec1475afde76dd52aa4575ae6587c19831ebc7d1f", "artifact_sha256": "b820f93e1750b5b1b41635664103b4b9d8d0b63f111500dd233c0e268d3cb790", "artifact_bytes": 1366032600, "force_seconds": 30.187083677, "wall_seconds": 51.40, "maximum_rss_kib": 9736192, "swaps": 0},
+    {"grid": 768, "coefficient_sha256": "9ba0e99619b59c7a0c71728e2bd341f5e6a681be0670532ef7ca5035b2df7ced", "artifact_sha256": "d1761aebd8d2185d0226980ada012b95cef13b6d52fa165056819bf411faaf16", "artifact_bytes": 1366032600, "force_seconds": 99.268964959, "wall_seconds": 132.95, "maximum_rss_kib": 29668352, "swaps": 0}
+  ],
+  "projected_pair_differences": {
+    "m384_to_m512": {"l2": 0.7492148223219322, "h1": 935.8629343304178, "vorticity_l2": 935.8626344343612, "divergence_l2": 1.3619200040453582e-13, "stokes_response_h1": 0.0006134187955851721},
+    "m512_to_m768": {"l2": 0.017111547052727476, "h1": 22.289249597245494, "vorticity_l2": 22.289243028942312, "divergence_l2": 3.742402895004445e-15, "stokes_response_h1": 0.00001351263724368082},
+    "adjacent_h1_ratio": 0.023816788527043,
+    "adjacent_stokes_h1_ratio": 0.02202840431517983
+  },
+  "dominant_initial_outer_shell": {"shell": "n192_to_n384_before_n256_split", "m384_to_m512_projected_h1": 935.7371539965881, "m512_to_m768_projected_h1": 22.28445957063686, "adjacent_ratio": 0.023814870955437252},
+  "relation_to_offline_residual": {
+    "m768_minus_padded_m384_retained_projected_h1": 935.561405170177,
+    "m768_minus_padded_m384_new_shell_projected_h1": 1932.914846937184,
+    "retained_fraction_of_h1_squared": 0.18980537569035405,
+    "base_m768_residual_retained_h1": 935.5579161334231,
+    "base_m768_residual_new_shell_h1": 1932.9048270592857,
+    "discrete_m384_residual_retained_h1": 0.7830415812306416,
+    "discrete_m384_residual_new_shell_h1": 0.441153443692872
+  },
+  "interpretation": "the fixed-retained projected force difference contracts by about 42 times from M384-to-M512 to M512-to-M768, including the dominant upper retained modes; this strongly supports M384 sampled-force aliasing/discretization sensitivity as the source of the huge retained residual response and disfavors reconstruction or operator assembly as its main cause",
+  "limitations": "the M768-only N384-to-N768 shell remains sampled content rather than a proven continuum tail; residual acceleration H1 is not a velocity H1 error; all arithmetic is empirical binary64 without outward enclosure",
+  "conditional_m1024_run": false,
+  "trajectory_evolved": false,
+  "reference_replaced": false,
+  "accepted_interpolation": false,
+  "qualification": false,
+  "accepted_pde_windows": 0
+}

@@ -1,0 +1,546 @@
+[
+  {
+    "task_id": "clock1112-shell-transverse-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source. For the supplied integer wavevector k, complex vector u represented by [re,im], Parseval weight, and max-mode shell_mode, compute the exact integer squared L2, H1, curl-L2, and divergence-L2 accumulators used by ShellSums::push and the zero-based shell_index. Return only the contracted JSON object.",
+    "inputs": {
+      "case": "transverse",
+      "k": [
+        2,
+        0,
+        0
+      ],
+      "u": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        2,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-longitudinal-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Return only JSON.",
+    "inputs": {
+      "case": "longitudinal",
+      "k": [
+        3,
+        0,
+        0
+      ],
+      "u": [
+        [
+          2,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "weight": 1,
+      "shell_mode": [
+        3,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-mixed-complex-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Return only JSON.",
+    "inputs": {
+      "case": "mixed_complex",
+      "k": [
+        1,
+        2,
+        3
+      ],
+      "u": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          -1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        1,
+        2,
+        3
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-zero-mode-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Return only JSON.",
+    "inputs": {
+      "case": "zero_mode",
+      "k": [
+        0,
+        0,
+        0
+      ],
+      "u": [
+        [
+          1,
+          -2
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "weight": 1,
+      "shell_mode": [
+        0,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-boundary-n48-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Pay attention to the strict cutoff boundary. Return only JSON.",
+    "inputs": {
+      "case": "boundary_n48",
+      "k": [
+        24,
+        0,
+        0
+      ],
+      "u": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        24,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-boundary-n192-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Pay attention to the strict cutoff boundary. Return only JSON.",
+    "inputs": {
+      "case": "boundary_n192",
+      "k": [
+        96,
+        0,
+        0
+      ],
+      "u": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        96,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-boundary-n256-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. Pay attention to the strict cutoff boundary. Return only JSON.",
+    "inputs": {
+      "case": "boundary_n256",
+      "k": [
+        128,
+        0,
+        0
+      ],
+      "u": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        128,
+        0,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  },
+  {
+    "task_id": "clock1112-shell-conjugacy-weight-v1",
+    "family": "clock1112-shell-fixture",
+    "instructions": "Read the analyzer source and compute the exact contracted squared-norm and shell result for the supplied integer fixture. The weight is the half-spectrum conjugacy multiplicity. Return only JSON.",
+    "inputs": {
+      "case": "conjugacy_weight",
+      "k": [
+        5,
+        -7,
+        0
+      ],
+      "u": [
+        [
+          1,
+          2
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          3,
+          -1
+        ]
+      ],
+      "weight": 2,
+      "shell_mode": [
+        5,
+        -7,
+        0
+      ]
+    },
+    "output_contract": {
+      "required": [
+        "case",
+        "shell",
+        "l2_squared",
+        "h1_squared",
+        "curl_squared",
+        "divergence_squared"
+      ],
+      "properties": {
+        "case": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "integer"
+        },
+        "l2_squared": {
+          "type": "integer"
+        },
+        "h1_squared": {
+          "type": "integer"
+        },
+        "curl_squared": {
+          "type": "integer"
+        },
+        "divergence_squared": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "fixture_oracle",
+    "artifacts": {
+      "analyzer": "evidence/p10/force-coefficient-clock1112/src/main.rs"
+    },
+    "review_required": false
+  }
+]

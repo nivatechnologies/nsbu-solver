@@ -1,0 +1,9 @@
+{
+  "schema": "p10-clock1112-local-fixture-batch-v1",
+  "tasks": 8,
+  "validated": 1,
+  "first_attempt": 0,
+  "repairs": 15,
+  "terminal_failures": 7,
+  "scientific_accepted": false
+}

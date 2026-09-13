@@ -26,13 +26,14 @@ const SOURCE_LENGTH: usize = 40;
 const CASE_LENGTH: usize = 64;
 const MAGIC: [u8; 16] = *b"NSBUFORCEv2\0\0\0\0\0";
 const SAMPLE_GRIDS: [usize; 4] = [384, 512, 768, 1024];
-const SHELLS: [(&str, usize); 6] = [
+const SHELLS: [(&str, usize); 7] = [
     ("inside_n48", 24),
     ("n48_to_n64", 32),
     ("n64_to_n96", 48),
     ("n96_to_n128", 64),
     ("n128_to_n192", 96),
-    ("n192_to_n384", 192),
+    ("n192_to_n256", 128),
+    ("n256_to_n384", 192),
 ];
 
 struct Spectrum {
