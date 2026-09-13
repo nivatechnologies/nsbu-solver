@@ -1,0 +1,22 @@
+{
+  "recorded_utc": "2026-09-13T11:58:49.415052Z",
+  "force": {
+    "directory": "evidence/p10/w3-768-controls-20260913/prepared/runs/force-20260913T112700Z",
+    "stdout": "control=force-forward retained=512 layout=768 serial_bytes=29079844536 w3_bytes=43619747256 additional=14539902720 repeated=3 bitwise=true steady_allocations=0 source_case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e admission_review_commit=7491b44b37a161bfde981e41137078252f2ef9d0",
+    "stderr_bytes": 0,
+    "elapsed": "5:38.37",
+    "max_rss_kib": 48839672,
+    "signals_delivered": 0,
+    "exit_status": 0
+  },
+  "rhs": {
+    "directory": "evidence/p10/w3-768-controls-20260913/prepared/runs/rhs-20260913T115209Z",
+    "stdout": "control=rhs-bidirectional retained=512 padded=768 serial_bytes=40867276784 w3_bytes=62654936944 additional=21787660160 repeated=3 bitwise=true steady_allocations=0 source_case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e admission_review_commit=7491b44b37a161bfde981e41137078252f2ef9d0",
+    "stderr_bytes": 0,
+    "elapsed": "5:56.50",
+    "max_rss_kib": 70653808,
+    "signals_delivered": 0,
+    "exit_status": 0
+  },
+  "processes_released": true
+}
