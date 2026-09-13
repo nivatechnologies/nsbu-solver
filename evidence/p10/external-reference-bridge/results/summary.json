@@ -79,5 +79,27 @@
       "vorticity_l2": 1.17328478881366e-05,
       "divergence_l2": 4.778121325158749e-09
     }
+  },
+  "clock2048_m512": {
+    "trajectory_role": "individual-M512-force trajectory; no pair, acceptance, or extrapolation claim",
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "bridge_sha256": "a975f09bacd6ecdd1c47d6918db822a1560ff8b670559e0300b270b16d85433a",
+    "snapshot_file_sha256": "25307e71e89cfbdf5ea677efe0c5c8c161e99b4518aa435e431ba553976cdeaa",
+    "snapshot_coefficient_sha256": "461e6f2a95eb578558493bbacebc5456c7e8a3e8f8fb933ac0176a23a3f67cad",
+    "harness_source_commit": "809cc0e6cdd94e8cd80ed79f615657161ea4b45c",
+    "binary_sha256": "4d18638cc040d86e48eb330daff8ee46db985fef23a9247b7ad2df990f9f3a1d",
+    "result_sha256": "f3d43d15a561a3f0aea38c395522998617b2f23b5836392c807e941a5a434a52",
+    "start_utc": "2026-09-13T04:58:10Z",
+    "end_utc": "2026-09-13T05:00:09Z",
+    "exit_status": 0,
+    "wall_seconds": 116.62,
+    "maximum_rss_kib": 20380672,
+    "difference": {
+      "l2": 1.9230753257341655e-08,
+      "h1": 2.3322572052843224e-05,
+      "vorticity_l2": 2.332256212308309e-05,
+      "divergence_l2": 9.675644384980373e-09
+    }
   }
 }

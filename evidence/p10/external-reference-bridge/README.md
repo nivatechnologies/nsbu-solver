@@ -14,7 +14,7 @@ coefficient SHA-256 `5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf5
 Clock 4096 binds whole-file SHA-256
 `2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592` and
 coefficient SHA-256 `921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b`.
-The closed M512-force clock-512 and clock-1024 inputs bind source `326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72`,
+The closed M512-force clock-512, clock-1024, and clock-2048 inputs bind source `326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72`,
 plan SHA-256 `2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84`,
 and exact state hash pairs. Clock 512 uses whole-file SHA-256
 `7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9`
@@ -22,6 +22,9 @@ and coefficient SHA-256 `4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a
 Clock 1024 uses whole-file SHA-256
 `d62fdf81db2547e6343e21e6be6faabfdf0130a8e686d771785434fe2bd16365`
 and coefficient SHA-256 `bb12be8f266268813ffbeddc3c78659bc84efb2361f14dfd471e5da354fc2324`.
+Clock 2048 uses whole-file SHA-256
+`25307e71e89cfbdf5ea677efe0c5c8c161e99b4518aa435e431ba553976cdeaa`
+and coefficient SHA-256 `461e6f2a95eb578558493bbacebc5456c7e8a3e8f8fb933ac0176a23a3f67cad`.
 The decoder verifies length, magic, identity, exact clock words, coefficient
 trailer, whole-file hash and strict spectrum before numerical reference work.
 
@@ -57,9 +60,11 @@ it took 119.54 seconds and 20,381,696 KiB maximum RSS.
 The closed M512-force clock-1024 run used bridge source
 `c0b711174bfc8406d6bfff1b1a85d4affd03829a` and binary SHA-256
 `87656e3654a5a9c1a3861a785f9f856e5d3ba3dadeda48a0215ea73964eb6ebc`;
-it took 119.72 seconds and 20,384,772 KiB maximum RSS. The source revision
-does not admit clocks 1536 or 2048 because their exact durable artifacts and
-full hash pairs were not available when it was frozen.
+it took 119.72 seconds and 20,384,772 KiB maximum RSS. The closed M512-force
+clock-2048 run used bridge source `809cc0e6cdd94e8cd80ed79f615657161ea4b45c`
+and binary SHA-256 `4d18638cc040d86e48eb330daff8ee46db985fef23a9247b7ad2df990f9f3a1d`;
+it took 116.62 seconds and 20,380,672 KiB maximum RSS. The source revision
+does not admit clock 1536.
 
 | trajectory | clock | difference L2 | difference H1 | difference curl L2 | difference divergence L2 |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -67,6 +72,7 @@ full hash pairs were not available when it was frozen.
 | M384 force | 4096 | 9.10406983035357e-7 | 1.0804989124323632e-3 | 1.080498529134934e-3 | 9.924936495841918e-9 |
 | M512 force | 512 | 4.000166602277882e-8 | 3.5115274672560813e-6 | 3.511299566616361e-6 | 6.170649568651455e-10 |
 | M512 force | 1024 | 1.533540926959983e-8 | 1.173285888058905e-5 | 1.173284788813660e-5 | 4.778121325158749e-9 |
+| M512 force | 2048 | 1.9230753257341655e-8 | 2.3322572052843224e-5 | 2.332256212308309e-5 | 9.675644384980373e-9 |
 
 Each row is an individual actual-state versus sampled-reference diagnostic. The
 M384 and M512 rows are not a force-grid pair comparison and establish no
