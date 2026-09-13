@@ -1,0 +1,53 @@
+{
+  "schema": "p10-avx-n384-ho-prefix-manual-stop-v1",
+  "source_commit": "0faec11e507e07c08ad20fd29cec04ddf8cd8946",
+  "binary_sha256": "9112ad80007147550a81df1ac870af6e09b0a2dae9f28a6510f96fbf861a86a0",
+  "plan_sha256": "ef337eb28924a335a78dbfc1c710ca40e8b507b10b96687bc4197971e411b60c",
+  "launcher_sha256": "203b26a6200d1a4c77af363ea2a06caf3cf4a648dbc9c77c14dad96c37b0ff8a",
+  "watchdog_v3_sha256": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01",
+  "durable_attempt": 40,
+  "durable_clock": 3072,
+  "in_memory_attempt_at_signal": 41,
+  "attempt41_published": false,
+  "decision_epoch": 1789279464,
+  "decision_utc": "2026-09-13T06:04:24Z",
+  "gate": {
+    "attempts": 40,
+    "positive_observations": 6,
+    "integration_seconds_sum": 15234.781304115,
+    "observer_seconds_sum": 1707.657968855,
+    "elapsed_seconds": 17604,
+    "overhead_remainder_seconds": 661.56072703,
+    "next_segment_raw_seconds": 3748.487729181,
+    "margin_fraction": 0.1,
+    "next_segment_bound_seconds": 4124,
+    "watchdog_term_epoch": 1789282740,
+    "remaining_seconds": 3276,
+    "deficit_seconds": 848,
+    "decision": "refuse-continuation-to-4096"
+  },
+  "termination": {
+    "owner": "parent",
+    "mechanism": "TERM exact hash-bound process group 1010314",
+    "classification": "manual-deadline-fit-stop",
+    "numerical_refusal": false,
+    "watchdog_timeout": false,
+    "solver_pid": 1010319,
+    "process_group": 1010314,
+    "solver_starttime": 6359826,
+    "solver_cmdline_sha256": "3f5d1f7131968b1c70ed1a27a1065e290dc5bdaa5855204b43ce172f1487601d"
+  },
+  "publication": {
+    "rest_metadata": true,
+    "durable_state_bundles": 40,
+    "last_state_coefficient_sha256": "6452b56e38274b7ec3ddfc21031e013c053a3b85bb307bfce1bf634d682a9285",
+    "last_state_file_sha256": "0e0d2113052dbe16af1435ac8f035901ff0cc43d3a14c77f7c6f3d3123471d64",
+    "last_attempt_json_sha256": "fbb15cffc59acc7260f3f5e310bf15c5506d8ec0bb2e6092918c26d7b901842b",
+    "last_record_json_sha256": "e1401f6748c3f1388c2e2891b3fd85a8502c4e2ed141bb1b4828277ff3a45c16",
+    "endpoint_complete": false,
+    "claim": "durable-feasibility-prefix-through3072-no-endpoint-or-window-claim",
+    "bulk_snapshot_storage": "local-worktree-not-git; exact hashes in output-SHA256SUMS"
+  },
+  "measurement_limit": "GNU time output is empty because TERM targeted the entire process group including the time wrapper; per-attempt timing and monitor RSS remain available",
+  "future_control_todo": "freeze a deterministic predeclared checkpoint/deadline controller before another conditional trajectory; do not depend on delayed manual observation while a new attempt starts"
+}
