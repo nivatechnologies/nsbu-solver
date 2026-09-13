@@ -1,0 +1,29 @@
+{
+  "schema": "p10-fft-scratch-tile-n768-comparison-v1",
+  "status": "completed_exploratory_not_adopted",
+  "order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+  "rounds": {
+    "untiled-a": {"forward_ns": 14757605467, "inverse_ns": 14741389271, "max_rss_kib": 14176256, "exit": 0},
+    "tiled-a": {"forward_ns": 8922485203, "inverse_ns": 9082959792, "max_rss_kib": 14175232, "exit": 0},
+    "tiled-b": {"forward_ns": 9113928042, "inverse_ns": 9285727303, "max_rss_kib": 14176256, "exit": 0},
+    "untiled-b": {"forward_ns": 13015299561, "inverse_ns": 13374206828, "max_rss_kib": 14176256, "exit": 0}
+  },
+  "median_ns": {
+    "untiled_forward": 13886452514.0,
+    "tiled_forward": 9018206622.5,
+    "untiled_inverse": 14057798049.5,
+    "tiled_inverse": 9184343547.5,
+    "untiled_combined": 27944250563.5,
+    "tiled_combined": 18202550170.0
+  },
+  "tiled_over_untiled": {"forward": 0.6494247982634912, "inverse": 0.6533273216161093, "combined": 0.6513880244752623},
+  "reservation_bytes": {"untiled": 3633389976, "tiled": 3633488280, "delta": 98304},
+  "word_hashes": {
+    "forward_sha256": "2b18c10cda3ff0f7c65f94cbac8aecef9aee43947695e1ae9d3c0c89506a6cd3",
+    "inverse_sha256": "0b3380283b4ebf42aa06f1f643f31a7d1f83fd7a6fdb8baf2d6c0cbcdf26ee40",
+    "identical_all_four_rounds": true
+  },
+  "selection_heuristic": {"minimum_combined_improvement": 0.10, "neither_direction_regressed": true, "passed": true},
+  "qualification": false,
+  "production_adoption": false
+}

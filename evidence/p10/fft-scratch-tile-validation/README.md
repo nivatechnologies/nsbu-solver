@@ -24,5 +24,8 @@ OwnedRadix and AVX. These cover unequal axes plus one-lane and four-lane partial
 tails. The scalar harness is byte-identical to the earlier hash harness. The W3 harness
 diff contains only the two scratch-tail reservation constants and their two delta checks.
 
-No N768 diagnostic from this replacement source has been launched. This is validation of
-an isolated optimization candidate, not production adoption or a PDE acceptance gate.
+The scalar N768 diagnostic completed with identical hashes across all four rounds. Median
+forward time fell from 13.8865 s to 9.0182 s and inverse from 14.0578 s to 9.1843 s; the
+combined median improved 34.86% with neither direction regressing. This passes the
+exploratory selection heuristic. It is validation of an isolated optimization candidate,
+not production adoption or a PDE acceptance gate.

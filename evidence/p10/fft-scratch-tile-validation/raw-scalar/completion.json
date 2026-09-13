@@ -1,0 +1,10 @@
+{
+  "schema": "p10-fft-scratch-tile-n768-completion-v1",
+  "launcher_pid": 1991324,
+  "launcher_pgid": 1991324,
+  "launcher_exit": 0,
+  "completed_utc": "2026-09-13T17:15:52Z",
+  "round_owner_pid_pgids": [1991441, 1993941, 1995651, 1997121],
+  "all_recorded_pids_and_pgids_absent": true,
+  "postrun_mem_available_bytes": 442866446336
+}
