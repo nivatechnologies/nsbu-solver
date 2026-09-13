@@ -119,8 +119,13 @@ This is a measurable improvement from force refinement, with remaining errors
 of the same order; the diagnostic floor is not an acceptance tolerance. See the
 [matched result](../evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512-m512.json)
 and [execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-m512-clock0512.json).
-The separate analytical-projection diagnostic is prepared to isolate the sampled
-N384 representation contribution without using or modifying trajectory state.
+The separate analytical-projection diagnostic completed without trajectory input.
+Its global gradient RMS error is `9.79324e-5` and ordered-Hessian RMS error is
+`0.1428795`, closely matching the actual M512-force trajectory. This strongly
+supports retained N384 spatial representation as the main limitation in these
+measured derivatives. These ratios are not an exact error decomposition or a
+continuum bound. The next spatial diagnostic is an N512 analytical projection;
+it has not run. See the [projection execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-analytic-projection-clock0512.json).
 
 The first off-stage residual probe at clock 1112 shows that force-representation
 differences, including the unresolved higher-frequency force, dominate that
