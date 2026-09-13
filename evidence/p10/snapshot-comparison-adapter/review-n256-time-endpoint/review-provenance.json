@@ -1,0 +1,65 @@
+{
+  "schema": "p10-snapshot-time-diagnostic-review-handoff-v1",
+  "status": "both-endpoints-complete-pending-root-review-comparison-not-run",
+  "adapter_source_commit": "e59dc06",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "proposed_cap_bytes": 812646400,
+  "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "left": {
+    "source_commit": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+    "record": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-n256-profile/endpoint-run-81bd07e-b/node-4096/record.json",
+      "sha256": "069488119f69e99f8ccd8b0cfb9b358778c86eed49d09cefb4c21d74c41a6789"
+    },
+    "state": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-n256-profile/endpoint-run-81bd07e-b/node-4096/state.bin",
+      "file_sha256": "5b638492dba468ba610a25b539d733c98967954cc4ae40b8f14853e2bc117d15",
+      "coefficient_sha256": "e6fb1c5482f3dafff4ada005a84ed43d65c5392c9479fc6feabdf8bdb8143831",
+      "clock_header": [4096, 8192, 128, 128]
+    },
+    "plan": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-fft-batch-20260912/evidence/p10/avx-n256-profile/frozen-profile.json",
+      "sha256": "65e5aeb68900da0c8057dbf3c1cf2d2ccc76e0700328ff86104bf87321fa184f"
+    }
+  },
+  "right": {
+    "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+    "record": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-matched-piecewise-20260912/runs/n256-local-569fd0c/output/state/step-048-clock-4096/record.json",
+      "sha256": "a7063391ce3d3073b9a8d3028b539a9baa5ba232e3f223a0b1312d0da3637828"
+    },
+    "state": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-matched-piecewise-20260912/runs/n256-local-569fd0c/output/state/step-048-clock-4096/state.bin",
+      "file_sha256": "b3289a527271982a560f44d20d18867c065a18d64b5f75c7f80f4ccbfc766c8b",
+      "coefficient_sha256": "793c45ed6e5f18e352e2a1c2f013ab6972c5d9870a40e390e1bf5503f2997fcc",
+      "clock_header": [4096, 8192, 48, 48]
+    },
+    "plan": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-matched-piecewise-20260912/frozen-plan-n256.json",
+      "sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e"
+    },
+    "completed_stdout": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-matched-piecewise-20260912/runs/n256-local-569fd0c/logs/stdout",
+      "sha256": "be3ee083d2b744bcbcdcd65dcfd5206b066eb59ce2ea4c9bb623b7d8c06d1180"
+    }
+  },
+  "measured_control_evidence": [
+    {
+      "path": "evidence/p10/avx-w3-n256-integration-20260912/summary.json",
+      "sha256": "6340a01b2324d8f30caf619bd087c8714b6a12a2c1065b3f7eb789ff9c8e881c"
+    },
+    {
+      "path": "evidence/p10/avx-w3-n256-integration-20260912/runs/serial-1.stdout",
+      "sha256": "90d96b1e029487eebe930dec57681565868d7fc204795d52552dd5f851089311"
+    },
+    {
+      "path": "evidence/p10/avx-w3-n256-integration-20260912/final-source/w3.stdout",
+      "sha256": "e1340e79300d6dcca39a80a7a7ea890f7f12719a4860de96ebc19743705f7676"
+    }
+  ],
+  "lineage": {
+    "left_endpoint_is_ancestor_of_measured_serial_source": true,
+    "measured_w3_source_is_ancestor_of_right_endpoint_source": true,
+    "scope": "reviewed-equivalence-supported-by-controls-time-execution-diagnostic-only"
+  }
+}
