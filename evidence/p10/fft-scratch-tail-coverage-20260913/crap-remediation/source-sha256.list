@@ -1,0 +1,5 @@
+18e24485202fde1836a392fce3c123f74a90bf3bcbf2b246b03f92c06280c2b1  crates/nsbu-solver/src/spectral/fft.rs
+2f252628c36501fa61887fc027eb4ead3c60fdb6815cf46b87af119ce173f168  crates/nsbu-solver/src/spectral/fft/avx.rs
+2cb8e2fd329f720bf93a6389d6089b2197bbe9b02e115bb1a69c9d328678217b  crates/nsbu-solver/src/spectral/fft/transform.rs
+748a9bff6e16be5212b05c135b75aafcda7ae51e135465208adc53f93a5fa570  crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+140492c633f1fa1414675c0a800159f3f88edbe07c88f8327795d253f820ffeb  crates/nsbu-solver/src/spectral/fft/workspace.rs
