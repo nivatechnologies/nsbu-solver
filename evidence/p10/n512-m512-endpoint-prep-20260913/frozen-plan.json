@@ -3,7 +3,9 @@
   "status": "prepared_do_not_launch_current_deadline_insufficient",
   "source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
   "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
-  "prepared_release_binary_sha256": "47e88c719cd4504ff49341c0a2e8803777b04dbdddde11642b7824bb573082cc",
+  "harness_commit": "3f5ba07205f495242ceef09616e289fe3b854957",
+  "harness_base_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "prepared_release_binary_sha256": "7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211",
   "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
   "profile": {
     "initial_state": "exact_rest",
@@ -80,6 +82,14 @@
     "remaining-time continuation guard",
     "all 48 committed state bundles before endpoint completion",
     "matched local and remote archive inventories"
+  ],
+  "guard_implementation_status": "proposed_wrapper_not_emitted_or_executed",
+  "executed_harness_checks": [
+    "exact API preflight and one-byte-under refusal",
+    "exact N512 feature opt-in gate refusal without output creation",
+    "exact schedule and maximum attempt validation",
+    "transaction and state-bundle publication unit checks",
+    "final reservation API identity checks"
   ],
   "current_deadline_utc": "2026-09-13T19:52:54Z",
   "current_deadline_admits_run": false,

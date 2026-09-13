@@ -1,0 +1,2 @@
+    Finished `release` profile [optimized] target(s) in 0.05s
+     Running unittests src/main.rs (evidence/p10/avx-scheduled-endpoint/harness/target/release/deps/p10_avx_scheduled_endpoint-999a93775097cd12)

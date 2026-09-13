@@ -55,6 +55,12 @@ plan, watchdog, and launcher hashes; retain the r6 startup identity capture,
 process-group watchdog, signal cleanup, first-step checks, sole trajectory
 attempt, fresh output path, host floor, disk floor, and durable archive guards.
 
+Those watchdog, host, time, memory, disk, first-step continuation, and archive
+checks are proposed wrapper requirements; no new v3 launcher exists or has been
+executed. The checks executed during preparation are limited to the harness
+tests, Clippy, build, exact API preflight, feature-exclusion compile refusal,
+and opt-in run-gate refusal preserved under `raw/`.
+
 No endpoint attempt, state allocation, state write, or observer run was made by
 this preparation. Passing the preflight and focused harness tests does not
 qualify a PDE window.

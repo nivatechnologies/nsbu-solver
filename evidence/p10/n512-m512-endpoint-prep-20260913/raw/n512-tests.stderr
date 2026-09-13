@@ -1,0 +1,3 @@
+   Compiling p10-avx-scheduled-endpoint v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-n512-m512-endpoint-prep-20260913/evidence/p10/avx-scheduled-endpoint/harness)
+    Finished `release` profile [optimized] target(s) in 1.38s
+     Running unittests src/main.rs (evidence/p10/avx-scheduled-endpoint/harness/target/release/deps/p10_avx_scheduled_endpoint-7637fdf979e879f1)
