@@ -1,0 +1,106 @@
+[
+  {
+    "dimensions": [
+      6,
+      96,
+      192
+    ],
+    "backend": "owned",
+    "reservation_bytes": 908120,
+    "variant": "untiled",
+    "binary_sha256": "254a320f6d100cf60bd67aef6f48a8befecf2dd72a0763427edd88dfc99b9017",
+    "forward_sha256": "09b6362dc73ee06649699f4771f29409a7d71f9c2e7f6a1bff39334000213c52",
+    "inverse_sha256": "a9735204c7905545cfd2f07dfaa728a3343a5f7b9f9768e9a60bf6294b601fde"
+  },
+  {
+    "dimensions": [
+      6,
+      96,
+      192
+    ],
+    "backend": "owned",
+    "reservation_bytes": 932720,
+    "variant": "tiled",
+    "binary_sha256": "a7ca5fe9483e1bd01bddedb2b72cbeb3088b7e2b55ba718dbc9e3a43798bed1c",
+    "forward_sha256": "09b6362dc73ee06649699f4771f29409a7d71f9c2e7f6a1bff39334000213c52",
+    "inverse_sha256": "a9735204c7905545cfd2f07dfaa728a3343a5f7b9f9768e9a60bf6294b601fde"
+  },
+  {
+    "dimensions": [
+      6,
+      96,
+      192
+    ],
+    "backend": "avx",
+    "reservation_bytes": 912792,
+    "variant": "untiled",
+    "binary_sha256": "254a320f6d100cf60bd67aef6f48a8befecf2dd72a0763427edd88dfc99b9017",
+    "forward_sha256": "78f9c9639be552af2342caa0a90ceb95ad61e0b9ab7c479e0b467e853f4cf124",
+    "inverse_sha256": "a4d97ca9a8762a509740182a6ea5578abb649a4516ec2e7438a09f0b4255dc36"
+  },
+  {
+    "dimensions": [
+      6,
+      96,
+      192
+    ],
+    "backend": "avx",
+    "reservation_bytes": 937392,
+    "variant": "tiled",
+    "binary_sha256": "a7ca5fe9483e1bd01bddedb2b72cbeb3088b7e2b55ba718dbc9e3a43798bed1c",
+    "forward_sha256": "78f9c9639be552af2342caa0a90ceb95ad61e0b9ab7c479e0b467e853f4cf124",
+    "inverse_sha256": "a4d97ca9a8762a509740182a6ea5578abb649a4516ec2e7438a09f0b4255dc36"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      192
+    ],
+    "backend": "owned",
+    "reservation_bytes": 908120,
+    "variant": "untiled",
+    "binary_sha256": "254a320f6d100cf60bd67aef6f48a8befecf2dd72a0763427edd88dfc99b9017",
+    "forward_sha256": "4e217ff3454deb0ae1b84bd90b0299ebfee59d72bac12b719afd2d46e2762375",
+    "inverse_sha256": "442cd81aac82020cc45ca63126354e2c4092f793c240819f2a6cfabedc09a4fc"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      192
+    ],
+    "backend": "owned",
+    "reservation_bytes": 932720,
+    "variant": "tiled",
+    "binary_sha256": "a7ca5fe9483e1bd01bddedb2b72cbeb3088b7e2b55ba718dbc9e3a43798bed1c",
+    "forward_sha256": "4e217ff3454deb0ae1b84bd90b0299ebfee59d72bac12b719afd2d46e2762375",
+    "inverse_sha256": "442cd81aac82020cc45ca63126354e2c4092f793c240819f2a6cfabedc09a4fc"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      192
+    ],
+    "backend": "avx",
+    "reservation_bytes": 912792,
+    "variant": "untiled",
+    "binary_sha256": "254a320f6d100cf60bd67aef6f48a8befecf2dd72a0763427edd88dfc99b9017",
+    "forward_sha256": "a3c0a01c71189f482e32b553075a84f374a7a475f3ec666550d4fda3f66f469e",
+    "inverse_sha256": "ec6cd9692693c1074741a1b2c5fa2bf1f12dced2a0e78f4073c58e4961916e09"
+  },
+  {
+    "dimensions": [
+      96,
+      6,
+      192
+    ],
+    "backend": "avx",
+    "reservation_bytes": 937392,
+    "variant": "tiled",
+    "binary_sha256": "a7ca5fe9483e1bd01bddedb2b72cbeb3088b7e2b55ba718dbc9e3a43798bed1c",
+    "forward_sha256": "a3c0a01c71189f482e32b553075a84f374a7a475f3ec666550d4fda3f66f469e",
+    "inverse_sha256": "ec6cd9692693c1074741a1b2c5fa2bf1f12dced2a0e78f4073c58e4961916e09"
+  }
+]

@@ -265,5 +265,35 @@
     "clippy_lib_deny_warnings": "passed",
     "maximum_cognitive_complexity_after_helpers": 8
   },
-  "interpretation": "N256 final medians improved 27.3% forward and 27.0% inverse with exact bitwise outputs, while N96 improved 5.7/7.4% and N192 was mixed (-9.6/+3.0%). The page-aligned N256 behavior makes a representative N768 A/B warranted after resource handoff. Shared-host noise and small sizes preclude production adoption or a trajectory speedup claim."
+  "interpretation": "N256 final medians improved 27.3% forward and 27.0% inverse with exact bitwise outputs, while N96 improved 5.7/7.4% and N192 was mixed (-9.6/+3.0%). The page-aligned N256 behavior makes a representative N768 A/B warranted after resource handoff. Shared-host noise and small sizes preclude production adoption or a trajectory speedup claim.",
+  "anisotropic_controls": {
+    "layouts": [
+      [
+        6,
+        96,
+        192
+      ],
+      [
+        96,
+        6,
+        192
+      ]
+    ],
+    "backends": [
+      "owned",
+      "avx"
+    ],
+    "maximum_axis": 192,
+    "partial_half_tail": "nz/2+1=97 leaves one lane after complete 8-lane tiles",
+    "all_forward_words_bitwise_equal": true,
+    "all_inverse_words_bitwise_equal": true,
+    "all_observed_reservation_deltas_bytes": [
+      24600,
+      24600,
+      24600,
+      24600
+    ],
+    "expected_delta_bytes": 24600,
+    "results": "raw-anisotropic/comparison.json"
+  }
 }
