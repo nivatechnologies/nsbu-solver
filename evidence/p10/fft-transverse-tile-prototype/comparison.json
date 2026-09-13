@@ -1,0 +1,269 @@
+{
+  "schema": "p10-fft-transverse-tile-small-ab-v1",
+  "untiled_source_commit": "f3960e157f26f37fa9a9fe808a4a596395164706",
+  "prototype_source_commit": "75ad6ec",
+  "tile_lanes": 8,
+  "execution_order": [
+    "untiled-a",
+    "tiled-a",
+    "tiled-b",
+    "untiled-b"
+  ],
+  "shared_host_caveat": "The authorized N512 endpoint projection owned the heavy localhost slot during these small runs. Results are alternating exploratory timings, not isolated-host performance qualification.",
+  "simple_before_helper_extraction": [
+    {
+      "layout": 96,
+      "forward_ns": {
+        "untiled_runs": [
+          185093590,
+          187179086
+        ],
+        "tiled_runs": [
+          188810913,
+          188112147
+        ],
+        "untiled_median": 186136338.0,
+        "tiled_median": 188461530.0,
+        "tiled_over_untiled": 1.0124918757131667,
+        "reduction_fraction": -0.012491875713166678
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          193030418,
+          195507905
+        ],
+        "tiled_runs": [
+          201550011,
+          202817879
+        ],
+        "untiled_median": 194269161.5,
+        "tiled_median": 202183945.0,
+        "tiled_over_untiled": 1.040741327336197,
+        "reduction_fraction": -0.04074132733619695
+      },
+      "reservation": {
+        "untiled_bytes": 7234968,
+        "tiled_bytes": 7247280,
+        "expected_extra_tile_elements": 768,
+        "expected_extra_bytes_including_vec_header": 12312,
+        "observed_extra_bytes": 12312
+      },
+      "forward_sha256": "92720573afbc810b877f866b8bb3c27ad8bfc304340fdd025a2243ca17826912",
+      "inverse_sha256": "247c021f7a35085508b08e03b5a80b9c7155bac01c5220ab08dd6fd6567c47ab"
+    },
+    {
+      "layout": 192,
+      "forward_ns": {
+        "untiled_runs": [
+          1016031977,
+          832769021
+        ],
+        "tiled_runs": [
+          1010813746,
+          1143927996
+        ],
+        "untiled_median": 924400499.0,
+        "tiled_median": 1077370871.0,
+        "tiled_over_untiled": 1.1654806246486027,
+        "reduction_fraction": -0.1654806246486027
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          1134273576,
+          902839060
+        ],
+        "tiled_runs": [
+          1049323934,
+          1203643312
+        ],
+        "untiled_median": 1018556318.0,
+        "tiled_median": 1126483623.0,
+        "tiled_over_untiled": 1.1059610579137362,
+        "reduction_fraction": -0.10596105791373622
+      },
+      "reservation": {
+        "untiled_bytes": 57231768,
+        "tiled_bytes": 57256368,
+        "expected_extra_tile_elements": 1536,
+        "expected_extra_bytes_including_vec_header": 24600,
+        "observed_extra_bytes": 24600
+      },
+      "forward_sha256": "7129de09e220f8a6a219d6e5c950f408bfda99bf682f8c939f07d349a21e7da2",
+      "inverse_sha256": "0bc0ce51fc6e4220e49c35e45007fa2aa20bdfe00a284f9cd3df086750178511"
+    },
+    {
+      "layout": 256,
+      "forward_ns": {
+        "untiled_runs": [
+          1717435131,
+          1779005087
+        ],
+        "tiled_runs": [
+          1209662409,
+          1191144755
+        ],
+        "untiled_median": 1748220109.0,
+        "tiled_median": 1200403582.0,
+        "tiled_over_untiled": 0.6866432755350488,
+        "reduction_fraction": 0.3133567244649512
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          1611030508,
+          1544252503
+        ],
+        "tiled_runs": [
+          1210331763,
+          1220007854
+        ],
+        "untiled_median": 1577641505.5,
+        "tiled_median": 1215169808.5,
+        "tiled_over_untiled": 0.7702445734748071,
+        "reduction_fraction": 0.22975542652519287
+      },
+      "reservation": {
+        "untiled_bytes": 135291288,
+        "tiled_bytes": 135324080,
+        "expected_extra_tile_elements": 2048,
+        "expected_extra_bytes_including_vec_header": 32792,
+        "observed_extra_bytes": 32792
+      },
+      "forward_sha256": "a27a36545488b21e053604709ed10fa1d552e7b6e508272e8601c6b66f01e411",
+      "inverse_sha256": "c10debe4fa4e29c67b18dab719d2ff4546f9d39755596e77d0d308122570c5d1"
+    }
+  ],
+  "final_after_helper_extraction": [
+    {
+      "layout": 96,
+      "forward_ns": {
+        "untiled_runs": [
+          208080231,
+          205155616
+        ],
+        "tiled_runs": [
+          192498042,
+          197309210
+        ],
+        "untiled_median": 206617923.5,
+        "tiled_median": 194903626.0,
+        "tiled_over_untiled": 0.9433045434705475,
+        "reduction_fraction": 0.056695456529452515
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          230288150,
+          217225857
+        ],
+        "tiled_runs": [
+          198812473,
+          215593270
+        ],
+        "untiled_median": 223757003.5,
+        "tiled_median": 207202871.5,
+        "tiled_over_untiled": 0.9260173682116726,
+        "reduction_fraction": 0.07398263178832742
+      },
+      "reservation": {
+        "untiled_bytes": 7234968,
+        "tiled_bytes": 7247280,
+        "expected_extra_tile_elements": 768,
+        "expected_extra_bytes_including_vec_header": 12312,
+        "observed_extra_bytes": 12312
+      },
+      "forward_sha256": "92720573afbc810b877f866b8bb3c27ad8bfc304340fdd025a2243ca17826912",
+      "inverse_sha256": "247c021f7a35085508b08e03b5a80b9c7155bac01c5220ab08dd6fd6567c47ab"
+    },
+    {
+      "layout": 192,
+      "forward_ns": {
+        "untiled_runs": [
+          793481153,
+          626602822
+        ],
+        "tiled_runs": [
+          786796710,
+          769104321
+        ],
+        "untiled_median": 710041987.5,
+        "tiled_median": 777950515.5,
+        "tiled_over_untiled": 1.0956401581814907,
+        "reduction_fraction": -0.09564015818149074
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          869989539,
+          655437369
+        ],
+        "tiled_runs": [
+          812239641,
+          667727326
+        ],
+        "untiled_median": 762713454.0,
+        "tiled_median": 739983483.5,
+        "tiled_over_untiled": 0.9701985452324274,
+        "reduction_fraction": 0.029801454767572566
+      },
+      "reservation": {
+        "untiled_bytes": 57231768,
+        "tiled_bytes": 57256368,
+        "expected_extra_tile_elements": 1536,
+        "expected_extra_bytes_including_vec_header": 24600,
+        "observed_extra_bytes": 24600
+      },
+      "forward_sha256": "7129de09e220f8a6a219d6e5c950f408bfda99bf682f8c939f07d349a21e7da2",
+      "inverse_sha256": "0bc0ce51fc6e4220e49c35e45007fa2aa20bdfe00a284f9cd3df086750178511"
+    },
+    {
+      "layout": 256,
+      "forward_ns": {
+        "untiled_runs": [
+          1506076863,
+          1390944170
+        ],
+        "tiled_runs": [
+          982166342,
+          1124113712
+        ],
+        "untiled_median": 1448510516.5,
+        "tiled_median": 1053140027.0,
+        "tiled_over_untiled": 0.7270503147914149,
+        "reduction_fraction": 0.2729496852085851
+      },
+      "inverse_ns": {
+        "untiled_runs": [
+          1500479935,
+          1412676626
+        ],
+        "tiled_runs": [
+          1003034660,
+          1123675482
+        ],
+        "untiled_median": 1456578280.5,
+        "tiled_median": 1063355071.0,
+        "tiled_over_untiled": 0.730036336004531,
+        "reduction_fraction": 0.269963663995469
+      },
+      "reservation": {
+        "untiled_bytes": 135291288,
+        "tiled_bytes": 135324080,
+        "expected_extra_tile_elements": 2048,
+        "expected_extra_bytes_including_vec_header": 32792,
+        "observed_extra_bytes": 32792
+      },
+      "forward_sha256": "a27a36545488b21e053604709ed10fa1d552e7b6e508272e8601c6b66f01e411",
+      "inverse_sha256": "c10debe4fa4e29c67b18dab719d2ff4546f9d39755596e77d0d308122570c5d1"
+    }
+  ],
+  "validation": {
+    "all_forward_words_bitwise_equal_across_variants_rounds_and_both_prototype_shapes": true,
+    "all_inverse_words_bitwise_equal_across_variants_rounds_and_both_prototype_shapes": true,
+    "partial_tile_tail_covered": "half lengths 49,97,129 each leave one lane after 8-lane tiles",
+    "nyquist_covered": "deterministic physical input includes a z-Nyquist alternating term",
+    "focused_fft_tests": "15 passed serially",
+    "catalog_one_byte_under": "passed serially",
+    "zero_steady_allocations": "fft_avx_allocation process passed serially",
+    "clippy_lib_deny_warnings": "passed",
+    "maximum_cognitive_complexity_after_helpers": 8
+  },
+  "interpretation": "N256 final medians improved 27.3% forward and 27.0% inverse with exact bitwise outputs, while N96 improved 5.7/7.4% and N192 was mixed (-9.6/+3.0%). The page-aligned N256 behavior makes a representative N768 A/B warranted after resource handoff. Shared-host noise and small sizes preclude production adoption or a trajectory speedup claim."
+}
