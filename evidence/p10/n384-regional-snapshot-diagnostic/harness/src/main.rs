@@ -34,13 +34,40 @@ fn run(args: &[OsString]) -> Result<(), String> {
             Ok(())
         }
         [command] if command == "projection-n512-preflight" => {
-            print!("{}", diagnostic::json(&projection_n512::preflight()?)?);
+            print!(
+                "{}",
+                diagnostic::json(&projection_n512::preflight(
+                    projection_n512::ProjectionClock::Early512,
+                )?)?
+            );
+            Ok(())
+        }
+        [command] if command == "projection-n512-endpoint-preflight" => {
+            print!(
+                "{}",
+                diagnostic::json(&projection_n512::preflight(
+                    projection_n512::ProjectionClock::Endpoint4096,
+                )?)?
+            );
             Ok(())
         }
         [command, cap, output, review]
             if command == "projection-n512-execute" && review == "--root-reviewed" =>
         {
-            projection_n512::execute(parse_cap(cap)?, &PathBuf::from(output))
+            projection_n512::execute(
+                projection_n512::ProjectionClock::Early512,
+                parse_cap(cap)?,
+                &PathBuf::from(output),
+            )
+        }
+        [command, cap, output, review]
+            if command == "projection-n512-endpoint-execute" && review == "--root-reviewed" =>
+        {
+            projection_n512::execute(
+                projection_n512::ProjectionClock::Endpoint4096,
+                parse_cap(cap)?,
+                &PathBuf::from(output),
+            )
         }
         [command, cap, output, review]
             if command == "projection-execute" && review == "--root-reviewed" =>
@@ -55,7 +82,7 @@ fn run(args: &[OsString]) -> Result<(), String> {
             let report = diagnostic::execute(&input)?;
             diagnostic::write_transactional(&PathBuf::from(output), &report)
         }
-        _ => Err("usage: p10-n384-regional-snapshot-diagnostic pilot | preflight SNAPSHOT.json CAP_BYTES | execute SNAPSHOT.json CAP_BYTES OUTPUT.json --root-reviewed | projection-preflight | projection-execute CAP_BYTES OUTPUT.json --root-reviewed | projection-n512-preflight | projection-n512-execute CAP_BYTES OUTPUT.json --root-reviewed".into()),
+        _ => Err("usage: p10-n384-regional-snapshot-diagnostic pilot | preflight SNAPSHOT.json CAP_BYTES | execute SNAPSHOT.json CAP_BYTES OUTPUT.json --root-reviewed | projection-preflight | projection-execute CAP_BYTES OUTPUT.json --root-reviewed | projection-n512-preflight | projection-n512-execute CAP_BYTES OUTPUT.json --root-reviewed | projection-n512-endpoint-preflight | projection-n512-endpoint-execute CAP_BYTES OUTPUT.json --root-reviewed".into()),
     }
 }
 
@@ -79,6 +106,14 @@ mod tests {
             "execute".into(),
             "snapshot.json".into(),
             diagnostic::CAP_BYTES.to_string().into(),
+            "output.json".into(),
+            "--not-reviewed".into(),
+        ])
+        .unwrap_err()
+        .contains("usage"));
+        assert!(run(&[
+            "projection-n512-endpoint-execute".into(),
+            "305085516888".into(),
             "output.json".into(),
             "--not-reviewed".into(),
         ])

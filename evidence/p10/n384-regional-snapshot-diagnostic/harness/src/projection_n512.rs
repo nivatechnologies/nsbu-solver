@@ -32,6 +32,29 @@ const STACK_BYTES: usize = 2 * 1024 * 1024;
 const PRODUCER_ALLOWANCE: usize = 40_960;
 const SERIALIZATION_BYTES: usize = 65_536;
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum ProjectionClock {
+    Early512,
+    Endpoint4096,
+}
+
+impl ProjectionClock {
+    fn elapsed(self) -> u128 {
+        match self {
+            Self::Early512 => 512,
+            Self::Endpoint4096 => 4096,
+        }
+    }
+
+    fn exact(self) -> Result<TickClock, String> {
+        let elapsed = self.elapsed();
+        let remaining = 8192_u128
+            .checked_sub(elapsed)
+            .ok_or("projection clock exceeds exact target")?;
+        TickClock::restore(-20, 8192, elapsed, remaining).map_err(debug)
+    }
+}
+
 #[derive(Clone, Copy, Serialize)]
 struct SourceIdentity {
     role: &'static str,
@@ -115,13 +138,14 @@ struct ProjectionAcceptance {
     accepted_windows: usize,
 }
 
-pub(crate) fn preflight() -> Result<ProjectionRecord, String> {
+pub(crate) fn preflight(clock: ProjectionClock) -> Result<ProjectionRecord, String> {
     validate_sources()?;
     validate_resources()?;
-    record("bound_preflight_only_no_state_input", None, None)
+    clock.exact()?;
+    record(clock, "bound_preflight_only_no_state_input", None, None)
 }
 
-pub(crate) fn execute(cap: usize, output: &PathBuf) -> Result<(), String> {
+pub(crate) fn execute(clock: ProjectionClock, cap: usize, output: &PathBuf) -> Result<(), String> {
     if cap != CONSERVATIVE_CAP_BYTES {
         return Err("projection CAP_BYTES differs from reviewed conservative cap".into());
     }
@@ -133,18 +157,19 @@ pub(crate) fn execute(cap: usize, output: &PathBuf) -> Result<(), String> {
         ADDRESS_SPACE_LIMIT_BYTES,
         MINIMUM_MEM_AVAILABLE_BYTES,
     )?;
-    let coefficients = produce_projection()?;
+    let coefficients = produce_projection(clock)?;
     let borrowed = coefficients.each_ref().map(Vec::as_slice);
-    let clock = crate::model::ClockHeader {
-        elapsed: 512,
-        target: 8192,
+    let exact = clock.exact()?;
+    let clock_header = crate::model::ClockHeader {
+        elapsed: exact.elapsed(),
+        target: exact.target(),
         epoch: 0,
         accepted_steps: 0,
     };
     let before = crate::diagnostic::hash_coefficients(borrowed);
     let measurements = crate::diagnostic::measure_coefficients_at(
         borrowed,
-        clock,
+        clock_header,
         RETAINED_DIMENSION,
         SAMPLE_DIMENSION,
         DERIVATIVE_WORKSPACE_BYTES,
@@ -155,6 +180,7 @@ pub(crate) fn execute(cap: usize, output: &PathBuf) -> Result<(), String> {
     crate::diagnostic::write_transactional(
         output,
         &record(
+            clock,
             "sampled_analytic_projection_diagnostic_complete",
             Some(measurements),
             Some(before),
@@ -163,6 +189,7 @@ pub(crate) fn execute(cap: usize, output: &PathBuf) -> Result<(), String> {
 }
 
 fn record(
+    clock: ProjectionClock,
     status: &'static str,
     measurements: Option<crate::diagnostic::Measurements>,
     before: Option<String>,
@@ -178,7 +205,7 @@ fn record(
         reference_source_commit: REFERENCE_SOURCE_COMMIT,
         reference_sources: SOURCES,
         case_sha256: CASE_SHA256,
-        clock: [-20, 8192, 512],
+        clock: [-20, 8192, clock.elapsed() as i128],
         sample_dimensions: [SAMPLE_DIMENSION; 3],
         retained_dimensions: [RETAINED_DIMENSION; 3],
         physical_grid: "unshifted-periodic-x_i=i/n",
@@ -208,7 +235,7 @@ fn record(
     })
 }
 
-fn produce_projection() -> Result<[Vec<Complex64>; 3], String> {
+fn produce_projection(clock: ProjectionClock) -> Result<[Vec<Complex64>; 3], String> {
     let samples = Layout::new([SAMPLE_DIMENSION; 3]).map_err(debug)?;
     let retained = Layout::new([RETAINED_DIMENSION; 3]).map_err(debug)?;
     let backend = FftBackend::RustFft6_4_1AvxFma;
@@ -218,18 +245,17 @@ fn produce_projection() -> Result<[Vec<Complex64>; 3], String> {
         retained,
         &catalog,
         FFT_BUDGET_BYTES,
-        sample_velocity(samples)?,
+        sample_velocity(samples, clock)?,
     )
 }
 
-fn sample_velocity(layout: Layout) -> Result<[Vec<f64>; 3], String> {
+fn sample_velocity(layout: Layout, clock: ProjectionClock) -> Result<[Vec<f64>; 3], String> {
     let mut physical = [
         zeros(layout.real_len())?,
         zeros(layout.real_len())?,
         zeros(layout.real_len())?,
     ];
-    let clock = TickClock::restore(-20, 8192, 512, 7680).map_err(debug)?;
-    let time = BenchmarkTime::new(clock).map_err(debug)?;
+    let time = BenchmarkTime::new(clock.exact()?).map_err(debug)?;
     let plane = SAMPLE_DIMENSION * SAMPLE_DIMENSION;
     let [x_all, y_all, z_all] = &mut physical;
     std::thread::scope(|scope| -> Result<(), String> {
@@ -401,11 +427,26 @@ mod tests {
         assert_eq!(projection_subphase, PRODUCER_PEAK_BYTES);
         assert_eq!(MEASUREMENT_PEAK_BYTES, CONSERVATIVE_CAP_BYTES);
         validate_resources().unwrap();
-        let record = preflight().unwrap();
+        let record = preflight(ProjectionClock::Early512).unwrap();
         assert_eq!(
             (record.state_inputs, record.trajectory_from_rest_claims),
             (0, 0)
         );
+    }
+
+    #[test]
+    fn projection_clocks_are_closed_and_restore_exact_remainders() {
+        for (clock, elapsed, remaining) in [
+            (ProjectionClock::Early512, 512, 7680),
+            (ProjectionClock::Endpoint4096, 4096, 4096),
+        ] {
+            let exact = clock.exact().unwrap();
+            assert_eq!((exact.elapsed(), exact.remaining()), (elapsed, remaining));
+            let record = preflight(clock).unwrap();
+            assert_eq!(record.clock, [-20, 8192, elapsed as i128]);
+            assert_eq!(record.state_inputs, 0);
+            assert_eq!(record.trajectory_from_rest_claims, 0);
+        }
     }
 
     #[test]
