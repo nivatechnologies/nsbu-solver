@@ -1,0 +1,17 @@
+{
+  "schema": "p10-n512-m512-single-trial-host-comparison-v1",
+  "status": "descriptive_single_trial_not_throughput_guarantee",
+  "candidate_and_error_words_match": true,
+  "candidate_coefficient_sha256": "5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff",
+  "local": {
+    "integration_seconds": 1470.457289408,
+    "wall_seconds": 1655.39
+  },
+  "sulaco": {
+    "integration_seconds": 954.894656332,
+    "wall_seconds": 1051.2
+  },
+  "local_over_sulaco_integration_ratio": 1.5399157170450726,
+  "local_over_sulaco_wall_ratio": 1.5747621765601219,
+  "note": "Like-for-like integration and wall comparisons. One trial per host does not establish general throughput."
+}

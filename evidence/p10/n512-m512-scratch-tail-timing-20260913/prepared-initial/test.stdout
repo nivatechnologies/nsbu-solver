@@ -1,0 +1,11 @@
+
+running 6 tests
+test tests::candidate_hash_uses_component_order_and_little_endian_binary64_words ... ok
+test tests::each_constructor_refuses_its_one_byte_under_budget_before_large_allocation ... ok
+test tests::exact_api_reservation_and_one_byte_under_are_closed ... ok
+test tests::execution_is_explicitly_gated_before_output_creation ... ok
+test tests::sole_from_rest_interval_has_exact_clock_and_five_cache_nodes ... ok
+test timed_rhs::tests::delegates_and_accounts_each_evaluation ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

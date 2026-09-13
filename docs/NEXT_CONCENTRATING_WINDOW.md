@@ -261,6 +261,14 @@ M512 spatial branches. This is planning only: no trajectory is prepared or
 authorized, and the force alias, precision, and full-observable requirements
 remain open.
 
+The N512/M512 single-attempt host controls now pass on both baccus and Sulaco
+with identical candidate coefficient hashes and local-error words. Sulaco used
+954.89 seconds in integration and 1051.20 seconds wall time; baccus used
+1470.46 and 1655.39 seconds respectively. These are single-trial cost and
+reproducibility measurements through clock64, with no committed trajectory.
+The exact internal peak is 207,576,840,688 bytes, and the separate Sulaco
+preflight reserves another 32 GiB of available memory. See the [host-control evidence](../evidence/p10/n512-m512-sulaco-timing-20260913/README.md).
+
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
 states. The fine observable schedule still needs pressure, regional

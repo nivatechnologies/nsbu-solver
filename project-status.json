@@ -589,5 +589,21 @@
     "actual_attempt_integration_seconds": 1982.648986471,
     "prior_actual_attempt_integration_seconds": 2067.912943179,
     "scope": "AVX scratch-tail layout preserves OwnedRadix allocation and traversal. Full experiment regression remains pending. One actual from-rest uncommitted attempt, exact local-error words versus prior source, no prior candidate hash for state equality comparison. Single-sample timing does not establish general speedup. No PDE qualification or accepted window."
+  },
+  "p10_n512_m512_host_controls": {
+    "status": "both_hosts_complete_uncommitted",
+    "local_evidence": "evidence/p10/n512-m512-scratch-tail-timing-20260913/README.md",
+    "sulaco_evidence": "evidence/p10/n512-m512-sulaco-timing-20260913/README.md",
+    "local_integration_seconds": 1470.457289408,
+    "sulaco_integration_seconds": 954.894656332,
+    "local_wall_seconds": 1655.39,
+    "sulaco_wall_seconds": 1051.2,
+    "internal_resource_bytes": 207576840688,
+    "candidate_coefficient_sha256": "5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff",
+    "cross_host_candidate_hash_equal": true,
+    "cross_host_local_error_words_equal": true,
+    "steady_allocations": 0,
+    "accepted_windows": 0,
+    "scope": "One exact from-rest0-to64 CM attempt per host with identical executable and linked runtime libraries. Candidate hashes and local-error words match; single-trial timing is not general throughput. New Sulaco profile admits exact API peak plus32GiB operational headroom, preserving prior host guards. No state commit/publication or endpoint trajectory; no PDE qualification."
   }
 }

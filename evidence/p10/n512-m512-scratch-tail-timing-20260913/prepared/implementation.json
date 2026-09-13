@@ -1,0 +1,58 @@
+{
+  "schema": "p10-n512-m512-scratch-tail-timing-prepared-v1",
+  "status": "prepared_not_launched_pending_root_review_and_prior_owner_release",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "test_only_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "harness_adaptation_commit": "f82df1b6d0e9a507d7bf11cd749dd94e19b08212",
+  "profile_note_commit": "ac6739001bbf9531a4074dd23fd38c64f7abc040",
+  "release_binary_sha256": "635726f54b5078fa6a2093c812a4750ce904d67e517728f58e82a9b2f003d9f0",
+  "retained": 512,
+  "force_samples": 512,
+  "rhs_padded_layout": 768,
+  "workers": 32,
+  "method": "cox-matthews",
+  "ticks": 64,
+  "maximum_attempts": 1,
+  "advective_limit": 3.3,
+  "absolute_tolerances": [
+    1e-05,
+    0.0001
+  ],
+  "relative_tolerances": [
+    1e-05,
+    1e-05
+  ],
+  "internal_resource_bytes": 207576840688,
+  "resource_classes_bytes": [
+    38805700608,
+    32614907904,
+    10899947520,
+    3233808384,
+    29362480,
+    91810835512,
+    30182212728,
+    65552
+  ],
+  "catalog_bytes": 29362480,
+  "cached_force_bytes": 29155601864,
+  "force_work_units": 17516199941,
+  "force_scalar_transforms": 3,
+  "rhs_bytes": 91810835512,
+  "attempt_bytes": 30182212728,
+  "overhead_bytes": 65552,
+  "w3_force_forward_additional_bytes": 4318465792,
+  "w3_rhs_bidirectional_additional_bytes": 21787856768,
+  "external_address_space_limit_bytes": 274877906944,
+  "prepared_minimum_mem_available_bytes": 292057776128,
+  "focused_tests": {
+    "passed": 6,
+    "failed": 0,
+    "serial": true
+  },
+  "clippy_all_targets_deny_warnings": "passed",
+  "preflight_status": 0,
+  "numerical_attempts_executed": 0,
+  "candidate_committed": false,
+  "candidate_published": false,
+  "qualification": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "p10-n512-m512-sulaco-feasibility-v1",
+  "status": "read_only_memory_fact_and_unreviewed_host_gate_proposal",
+  "observed_utc": "2026-09-13T18:14:49Z",
+  "mem_total_bytes": 270208679936,
+  "mem_available_bytes": 257334657024,
+  "internal_exact_api_peak_bytes": 207576840688,
+  "address_space_cap_bytes": 274877906944,
+  "address_space_headroom_bytes": 67301066256,
+  "current_available_headroom_over_internal_bytes": 49757816336,
+  "existing_policy_margin_bytes": 17179869184,
+  "possible_host_specific_floor_bytes": 224756709872,
+  "current_headroom_over_possible_floor_bytes": 32577947152,
+  "prepared_launcher_floor_unchanged_bytes": 292057776128,
+  "sulaco_admitted_by_exact_internal_and_as_cap": true,
+  "sulaco_admitted_by_current_prepared_mem_floor": false,
+  "qualification": false,
+  "note": "A host-specific floor of exact internal peak plus the existing 16 GiB operational margin would fit the observed host, but is a proposal requiring separate root review; RSS is not used."
+}

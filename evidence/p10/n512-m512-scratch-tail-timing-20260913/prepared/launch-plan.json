@@ -1,0 +1,21 @@
+{
+  "schema": "p10-n512-m512-scratch-tail-launch-plan-v1",
+  "status": "prepared_do_not_launch_pending_root_review_and_prior_owner_release",
+  "binary_sha256": "635726f54b5078fa6a2093c812a4750ce904d67e517728f58e82a9b2f003d9f0",
+  "launcher_sha256": "45fa2ed16ad2930d8bc78e9566b5c88794225691f5d3afb7b3883abfadb34460",
+  "launch_command": "NSBU_LAUNCH_N512_M512_SCRATCH_TAIL=1 PRIOR_N512_M768_RELEASE_CONFIRMED=1 evidence/p10/n512-m512-scratch-tail-timing-20260913/launch-reviewed.sh",
+  "internal_resource_bytes": 207576840688,
+  "external_address_space_limit_bytes": 274877906944,
+  "minimum_mem_available_kib": 285212672,
+  "timeout_seconds": 2700,
+  "kill_grace_seconds": 60,
+  "post_run_review_cleanup_reserve_seconds": 300,
+  "required_remaining_seconds_at_launch": 3060,
+  "campaign_deadline_utc": "2026-09-13T19:52:54Z",
+  "latest_launch_utc": "2026-09-13T19:01:54Z",
+  "maximum_attempts": 1,
+  "state_commit": false,
+  "state_publication": false,
+  "qualification": false,
+  "minimum_disk_available_bytes": 1073741824
+}

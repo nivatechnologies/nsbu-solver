@@ -1,0 +1,22 @@
+{
+  "schema": "p10-n512-m512-sulaco-environment-contract-v1",
+  "executable_identical_across_hosts": true,
+  "local_cpu": "AMD EPYC 7702P 64-Core Processor",
+  "local_logical_cpus": 128,
+  "remote_cpu": "AMD EPYC 7C13 64-Core Processor",
+  "remote_logical_cpus": 256,
+  "required_remote_features": ["avx", "avx2", "fma"],
+  "required_remote_features_observed": true,
+  "compiler": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+  "compiler_host_target": "x86_64-unknown-linux-gnu",
+  "explicit_target_cpu_override": false,
+  "local_glibc": "2.39-0ubuntu8.9",
+  "remote_glibc": "2.39-0ubuntu8.9",
+  "linked_library_hashes_identical": true,
+  "copied_system_libraries": false,
+  "remote_rustc_present": false,
+  "preflight_exit_status": 0,
+  "preflight_stdout_sha256": "0892ddc08ecbd8fc9ee3bcaa1b901b6d0e80b595bb026e9aca2b6ae0b95d4e1e",
+  "local_preflight_stdout_sha256": "0892ddc08ecbd8fc9ee3bcaa1b901b6d0e80b595bb026e9aca2b6ae0b95d4e1e",
+  "candidate_hash_interpretation": "cross-host diagnostic; any mismatch must be assessed with this environment inventory and is not by itself a solver defect"
+}

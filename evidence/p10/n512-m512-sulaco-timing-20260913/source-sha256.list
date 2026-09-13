@@ -1,0 +1,13 @@
+18e24485202fde1836a392fce3c123f74a90bf3bcbf2b246b03f92c06280c2b1  source/crates/nsbu-solver/src/spectral/fft.rs
+a8ce69416764d4c5620f113099304187c8b5f777a3d2198c6d36db1330cede61  source/crates/nsbu-solver/src/spectral/fft/avx.rs
+2cb8e2fd329f720bf93a6389d6089b2197bbe9b02e115bb1a69c9d328678217b  source/crates/nsbu-solver/src/spectral/fft/transform.rs
+748a9bff6e16be5212b05c135b75aafcda7ae51e135465208adc53f93a5fa570  source/crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+140492c633f1fa1414675c0a800159f3f88edbe07c88f8327795d253f820ffeb  source/crates/nsbu-solver/src/spectral/fft/workspace.rs
+bed7e9a6ccfd035254471c50ff53287e587a907f5ef51466d0dbd019e3ca42af  source/crates/nsbu-solver/src/spectral/w3/tests.rs
+5f535de675e7b08ce73e9dc7f229ad428c8d68777032fd9ff07c45f44c27fe08  source/crates/nsbu-solver/tests/fft/avx.rs
+cad9391eae9784be75a636bbee03808f565a9ef1c18633feb59942da7bb7e5e1  source/evidence/p10/avx-scheduled-endpoint/harness/src/timed_rhs.rs
+875b1decd9844d3f3605dea8dd367c2cd8006cb543e6d7b246e58f895e6ec4c4  source/evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs
+3041ecc921cc8d8458ec52cfb8f026345122938dba3112a62195b3c50b97b6ec  source/evidence/p10/n512-m512-scratch-tail-timing-20260913/harness/Cargo.lock
+db9e75823458d368a68b817ec4f86a3bc3c6f2b06d226874740094a7f3d42b17  source/evidence/p10/n512-m512-scratch-tail-timing-20260913/harness/Cargo.toml
+15239e744480687eabcf880df4b3c551c17074bcab1e297c84891758a207c2ab  source/evidence/p10/n512-m512-scratch-tail-timing-20260913/harness/src/main.rs
+d356fd6b8e398e795ed384a6562e7c7f1191ff08f916ebb653ac6c7813039728  source/evidence/p10/n512-m512-scratch-tail-timing-20260913/harness/src/tests.rs
