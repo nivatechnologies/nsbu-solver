@@ -1,10 +1,9 @@
 use super::{
-    model, Acceptance, LaunchPolicy, RegionCount, SnapshotBinding, Storage, Work,
-    ALLOCATOR_ALLOWANCE, CAP_BYTES, COEFFICIENT_SHA256, DECODED_BYTES, DECODER_OVERHEAD,
-    DERIVATIVE_WORKSPACE_BUDGET, DIMENSION, EXTRA_MEMORY_GATE, FFT_CATALOG_BYTES, LABEL_BYTES,
-    MAGNITUDE_BYTES, OUTPUT_CAP, PACKED_CACHE_BYTES, PLAN_SHA256, PROFILE, ROOT_BUDGET,
-    SCOPED_RLIMIT_AS_BYTES, SNAPSHOT_FILE_SHA256, SNAPSHOT_MANIFEST_SHA256, SOURCE_COMMIT,
-    STACK_BYTES, WORKERS, WORKER_STACK_BYTES,
+    model, Acceptance, LaunchPolicy, RegionCount, ReviewedSnapshot, SnapshotBinding, Storage, Work,
+    ALLOCATOR_ALLOWANCE, CAP_BYTES, DECODED_BYTES, DECODER_OVERHEAD, DERIVATIVE_WORKSPACE_BUDGET,
+    DIMENSION, EXTRA_MEMORY_GATE, FFT_CATALOG_BYTES, LABEL_BYTES, MAGNITUDE_BYTES, OUTPUT_CAP,
+    PACKED_CACHE_BYTES, REVIEWED_SNAPSHOTS, ROOT_BUDGET, SCOPED_RLIMIT_AS_BYTES, STACK_BYTES,
+    WORKERS, WORKER_STACK_BYTES,
 };
 use crate::{
     cache::PackedReference,
@@ -20,14 +19,21 @@ use nsbu_solver::{
 use sha2::{Digest, Sha256};
 use std::{fs, io::Read, path::Path};
 
-pub(super) fn validate_snapshot(manifest: &Manifest) -> Result<(), String> {
+pub(super) fn validate_snapshot(manifest: &Manifest) -> Result<&'static ReviewedSnapshot, String> {
+    REVIEWED_SNAPSHOTS
+        .iter()
+        .find(|binding| snapshot_matches(manifest, binding))
+        .ok_or_else(|| "snapshot is not a reviewed N384 clock-512 regional baseline".into())
+}
+
+fn snapshot_matches(manifest: &Manifest, binding: &ReviewedSnapshot) -> bool {
     let profile = manifest.profile.as_ref();
     let exact = [
         manifest.comparison_kind == ComparisonKind::MatchedSpatial,
-        manifest.source_commit == SOURCE_COMMIT,
-        manifest.plan_sha256 == PLAN_SHA256,
-        manifest.coefficient_sha256 == COEFFICIENT_SHA256,
-        manifest.file_sha256 == SNAPSHOT_FILE_SHA256,
+        manifest.source_commit == binding.source_commit,
+        manifest.plan_sha256 == binding.plan_sha256,
+        manifest.coefficient_sha256 == binding.coefficient_sha256,
+        manifest.file_sha256 == binding.file_sha256,
         manifest.dimensions == [384; 3],
         manifest.evolution.case_sha256 == CASE_SHA256,
         manifest.evolution.quantum_exponent == -20,
@@ -36,13 +42,13 @@ pub(super) fn validate_snapshot(manifest: &Manifest) -> Result<(), String> {
         manifest.evolution.lengths == [1.0; 3],
         manifest.evolution.viscosity == 1.0,
         manifest.evolution.method == "cox-matthews",
-        manifest.evolution.integration_force_dimensions == [384; 3],
+        manifest.evolution.integration_force_dimensions == [binding.integration_force_dimension; 3],
         manifest.elapsed == 512,
         manifest.target == 8192,
         manifest.epoch == 8,
         manifest.accepted_steps == 8,
         profile.is_some_and(|value| {
-            value.kind == ProfileBindingKind::IdentityProfileField && value.value == PROFILE
+            value.kind == ProfileBindingKind::IdentityProfileField && value.value == binding.profile
         }),
         manifest.evolution.schedule.len() == 1,
         manifest.evolution.schedule.first().is_some_and(|segment| {
@@ -50,19 +56,20 @@ pub(super) fn validate_snapshot(manifest: &Manifest) -> Result<(), String> {
                 && segment.until_exclusive == 512
                 && segment.step_ticks == 64
         }),
-        identity_value(&manifest.identity, "source") == Some(SOURCE_COMMIT),
+        identity_value(&manifest.identity, "source") == Some(binding.source_commit),
         identity_value(&manifest.identity, "case") == Some(CASE_SHA256),
-        identity_value(&manifest.identity, "profile") == Some(PROFILE),
+        identity_value(&manifest.identity, "profile") == Some(binding.profile),
         identity_value(&manifest.identity, "retained") == Some("384"),
-        identity_value(&manifest.identity, "force_samples") == Some("384"),
+        identity_value(&manifest.identity, "force_samples")
+            == Some(if binding.integration_force_dimension == 384 {
+                "384"
+            } else {
+                "512"
+            }),
         identity_value(&manifest.identity, "observer_conservative") == Some("768"),
         manifest.backend == "rustfft-6.4.1-avx-avx2-fma",
     ];
-    exact
-        .into_iter()
-        .all(std::convert::identity)
-        .then_some(())
-        .ok_or_else(|| "snapshot is not the reviewed N384/M384 clock-512 baseline".into())
+    exact.into_iter().all(std::convert::identity)
 }
 
 pub(super) fn verify_manifest_hash(path: &Path) -> Result<(), String> {
@@ -70,7 +77,11 @@ pub(super) fn verify_manifest_hash(path: &Path) -> Result<(), String> {
     if bytes.len() > OUTPUT_CAP {
         return Err("snapshot manifest exceeds 64 KiB".into());
     }
-    if format!("{:x}", Sha256::digest(bytes)) != SNAPSHOT_MANIFEST_SHA256 {
+    let observed = format!("{:x}", Sha256::digest(bytes));
+    if !REVIEWED_SNAPSHOTS
+        .iter()
+        .any(|binding| observed == binding.manifest_sha256)
+    {
         return Err("snapshot manifest SHA-256 mismatch".into());
     }
     Ok(())

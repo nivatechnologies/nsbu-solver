@@ -1,0 +1,61 @@
+{
+  "schema": "p10-n384-m512-regional-snapshot-admission-v1",
+  "status": "binding_tested_full_run_root_review_pending",
+  "date_utc": "2026-09-13",
+  "planning_base_commit": "58ba61a",
+  "scientific_baseline_commit": "dd5f14ad03621c996fcfee014d89fd0684ae0efc",
+  "scope": {
+    "comparison": "matched N384/M512 versus analytical clock-512 reference and historical N384/M384 regional result",
+    "trajectory_origin": "rest",
+    "elapsed": 512,
+    "accepted_steps": 8,
+    "step_ticks": 64,
+    "retained_dimensions": [384, 384, 384],
+    "integration_force_dimensions": [512, 512, 512],
+    "sample_dimensions": [768, 768, 768],
+    "quantities": ["velocity", "gradient", "ordered_hessian"],
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0}
+  },
+  "snapshot": {
+    "manifest": "evidence/p10/external-reference-bridge/inputs/clock0512-m512/snapshot.json",
+    "manifest_sha256": "92bf674356740ae230fe10eab617c9d9c1bdcb4edf84c2f446983a12d148f4d1",
+    "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+    "file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+    "file_bytes": 1366033529,
+    "raw_source": "sulaco:/tmp/nsbu-p10-sulaco-m512-prefix-r5/run/output/step-008-clock-0512/state.bin",
+    "staged_copy": "evidence/p10/external-reference-bridge/inputs/clock0512-m512/staged/n384-state.bin",
+    "raw_and_staged_sha256_equal": true
+  },
+  "historical_baseline": {
+    "result": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json",
+    "result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07",
+    "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "input_manifest_sha256": "cc9e328b6b0dcd4518c27cd2724e839f50a7d64539ed45e7ac902dfd68c71d21"
+  },
+  "implementation": {
+    "arithmetic": "unchanged packed 30-word reference cache, 39 scalar inverse transforms, and ordered-Hessian mapping checks",
+    "sampling_lattice": "unchanged unshifted 768 cubed",
+    "admission": "two separately exact source/profile/plan/coefficient/file bindings",
+    "cross_profile_control": "passed_refused",
+    "cross_history_hash_control": "passed_refused",
+    "tests_passed": 12,
+    "clippy_all_targets_deny_warnings": "passed",
+    "release_binary_sha256": "6a5fbc74fee9e553ffd181f8e6d598b28953a83cc9f1bc37c8cf904abacc1e39",
+    "m384_release_preflight_sha256": "7147e2177263c1682443b82b954b6555f2dbe510e30e5bfb8be2821cd0fe5c13",
+    "m512_release_preflight_sha256": "7d353e4c108f34f46dd36caa18b907f97540b1be188646642501dbe3cd502e2e",
+    "execute_without_root_review": "refused_before_state_file_access"
+  },
+  "execution_plan": {
+    "exact_cap_bytes": 128771370072,
+    "external_address_space_limit_bytes": 137438953472,
+    "minimum_mem_available_bytes": 145951239256,
+    "workers": 32,
+    "hard_timeout_seconds": 2400,
+    "requires_root_review": true,
+    "requires_other_campaign_jobs_idle": true,
+    "full_run_started": false
+  }
+}

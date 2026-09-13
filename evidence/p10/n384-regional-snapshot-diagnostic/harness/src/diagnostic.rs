@@ -32,14 +32,24 @@ const WORKERS: usize = 32;
 const STACK_BYTES: usize = 2 * 1024 * 1024;
 const ROOT_BUDGET: usize = 128;
 const DIMENSION: usize = 768;
-const SNAPSHOT_MANIFEST_SHA256: &str =
+const M384_SNAPSHOT_MANIFEST_SHA256: &str =
     "cc9e328b6b0dcd4518c27cd2724e839f50a7d64539ed45e7ac902dfd68c71d21";
-const SNAPSHOT_FILE_SHA256: &str =
+const M384_SNAPSHOT_FILE_SHA256: &str =
     "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243";
-const COEFFICIENT_SHA256: &str = "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a";
-const SOURCE_COMMIT: &str = "aed49b7d7874a0a720dee88b65ba180c7286fa65";
-const PLAN_SHA256: &str = "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a";
-const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const M384_COEFFICIENT_SHA256: &str =
+    "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a";
+const M384_SOURCE_COMMIT: &str = "aed49b7d7874a0a720dee88b65ba180c7286fa65";
+const M384_PLAN_SHA256: &str = "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a";
+const M384_PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const M512_SNAPSHOT_MANIFEST_SHA256: &str =
+    "92bf674356740ae230fe10eab617c9d9c1bdcb4edf84c2f446983a12d148f4d1";
+const M512_SNAPSHOT_FILE_SHA256: &str =
+    "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9";
+const M512_COEFFICIENT_SHA256: &str =
+    "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af";
+const M512_SOURCE_COMMIT: &str = "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72";
+const M512_PLAN_SHA256: &str = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84";
+const M512_PROFILE: &str = "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
 
 const DECODED_BYTES: usize = 1_366_032_384;
 const DECODER_OVERHEAD: usize = 1_048_576;
@@ -86,10 +96,43 @@ pub(crate) struct Work {
 
 pub(crate) struct BoundInput {
     manifest: Manifest,
+    binding: &'static ReviewedSnapshot,
     storage: Storage,
     work: Work,
     binary_sha256: String,
 }
+
+#[derive(Clone, Copy, Debug)]
+struct ReviewedSnapshot {
+    manifest_sha256: &'static str,
+    file_sha256: &'static str,
+    coefficient_sha256: &'static str,
+    source_commit: &'static str,
+    plan_sha256: &'static str,
+    profile: &'static str,
+    integration_force_dimension: usize,
+}
+
+const REVIEWED_SNAPSHOTS: [ReviewedSnapshot; 2] = [
+    ReviewedSnapshot {
+        manifest_sha256: M384_SNAPSHOT_MANIFEST_SHA256,
+        file_sha256: M384_SNAPSHOT_FILE_SHA256,
+        coefficient_sha256: M384_COEFFICIENT_SHA256,
+        source_commit: M384_SOURCE_COMMIT,
+        plan_sha256: M384_PLAN_SHA256,
+        profile: M384_PROFILE,
+        integration_force_dimension: 384,
+    },
+    ReviewedSnapshot {
+        manifest_sha256: M512_SNAPSHOT_MANIFEST_SHA256,
+        file_sha256: M512_SNAPSHOT_FILE_SHA256,
+        coefficient_sha256: M512_COEFFICIENT_SHA256,
+        source_commit: M512_SOURCE_COMMIT,
+        plan_sha256: M512_PLAN_SHA256,
+        profile: M512_PROFILE,
+        integration_force_dimension: 512,
+    },
+];
 
 #[derive(Debug, Serialize)]
 pub(crate) struct PreflightOutput<'a> {
@@ -266,7 +309,7 @@ pub(crate) fn bind(path: &Path, cap: usize, require_state: bool) -> Result<Bound
     }
     verify_manifest_hash(path)?;
     let manifest = decode::read_external_reference_manifest(path)?;
-    validate_snapshot(&manifest)?;
+    let binding = validate_snapshot(&manifest)?;
     let binary_sha256 = current_executable_hash()?;
     if require_state {
         launch_gate(&binary_sha256)?;
@@ -276,6 +319,7 @@ pub(crate) fn bind(path: &Path, cap: usize, require_state: bool) -> Result<Bound
     let work = work(&manifest)?;
     Ok(BoundInput {
         manifest,
+        binding,
         storage,
         work,
         binary_sha256,
@@ -357,7 +401,7 @@ pub(crate) fn execute(input: &BoundInput) -> Result<DiagnosticOutput<'_>, String
     ];
     let coverage = coverage(snapshot.clock)?;
     let post_hash = coefficient_hash(coefficients);
-    if post_hash != COEFFICIENT_SHA256 || post_hash != snapshot.coefficient_sha256 {
+    if post_hash != input.binding.coefficient_sha256 || post_hash != snapshot.coefficient_sha256 {
         return Err("post-measurement immutable coefficient hash mismatch".into());
     }
     Ok(DiagnosticOutput {
