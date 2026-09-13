@@ -2,6 +2,7 @@ mod absolute;
 mod compare;
 mod decode;
 mod hessian;
+mod m512_spatial;
 mod mixed;
 mod mixed_math;
 mod model;
@@ -213,7 +214,7 @@ fn format_output(
             model::ComparisonKind::MatchedM512SpatialDiagnostic,
             model::ComparisonKind::MatchedM512SpatialDiagnostic,
         ) => {
-            let output = compare::matched_m512_spatial_diagnostic(
+            let output = m512_spatial::diagnostic_output(
                 left_manifest,
                 left,
                 right_manifest,

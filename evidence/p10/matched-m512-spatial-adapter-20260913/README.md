@@ -12,6 +12,11 @@ N384 state, 3,233,808,384 bytes for the N512 state, and the existing 1 MiB
 bounded overhead. It reports full, common-band, newly-resolved-shell, and fine
 absolute L2/H1/vorticity/divergence norms with `acceptance=not_assessed`.
 
-The focused closed-contract test and the complete 23-test adapter suite pass.
+The focused closed-contract test and the complete 24-test adapter suite pass.
 Clippy passes for all targets with warnings denied. No trajectory, snapshot,
 large allocation, or numerical comparison was executed.
+
+The new closed implementation is isolated in 112-line `m512_spatial.rs`, and
+`compare.rs` remains below 500 lines (443). The historical consolidated
+`tests.rs` was already 1,399 lines at the base commit and is now 1,539 lines;
+this bounded change does not reorganize unrelated historical tests.

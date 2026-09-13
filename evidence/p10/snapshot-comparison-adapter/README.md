@@ -78,8 +78,9 @@ root review of the exact manifests.
 `MATCHED_M512_SPATIAL_DIAGNOSTIC` is a separate closed spatial screen for the
 completed r6 N384/M512 endpoint and the prepared N512/M512 capture profile. It
 admits only left N384 source `326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72`
-and right N512 source `9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645`,
-with their exact profile names. Both sides must use the same M512 force, case,
+and right N512 harness source `e25f3816f83c6a7c07202cac2878f58ace460511`,
+with their exact profile names and the prepared N512 v3 external-stop identity.
+Both sides must use the same M512 force, case,
 clock-4096 endpoint, 32-by-64 then 16-by-128 schedule, Cox--Matthews method,
 tolerances, domain, viscosity, and 3.3/48 admission guard. Its output reports
 acceptance as `not_assessed`; common-band and newly-resolved-shell norms are

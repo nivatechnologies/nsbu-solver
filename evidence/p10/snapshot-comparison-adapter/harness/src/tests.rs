@@ -235,7 +235,7 @@ fn enable_matched_m512_spatial(left: &mut Manifest, right: &mut Manifest) {
         });
     }
     left.source_commit = "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72".into();
-    right.source_commit = "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645".into();
+    right.source_commit = "e25f3816f83c6a7c07202cac2878f58ace460511".into();
     left.plan_sha256 = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84".into();
     right.plan_sha256 = "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634".into();
     left.profile = Some(ProfileBinding {
@@ -252,10 +252,10 @@ fn enable_matched_m512_spatial(left: &mut Manifest, right: &mut Manifest) {
         left.profile.as_ref().unwrap().value
     );
     right.identity = format!(
-        "source={};profile={};production_source=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0;test_source={};external_stop=pgid-watchdog-v2-starttime-cmdline-deadline;schema=p10-avx-n512-observer-state-v1",
+        "source={};profile={};production_source=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0;test_source={};external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline;schema=p10-avx-n512-observer-state-v1",
         right.source_commit,
         right.profile.as_ref().unwrap().value,
-        right.source_commit,
+        "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
     );
 }
 
@@ -1303,6 +1303,16 @@ fn matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted() {
         },
         {
             let mut value = right.clone();
+            value.identity.push_str(";source=duplicate");
+            value
+        },
+        {
+            let mut value = right.clone();
+            value.identity.push_str(";production_source=duplicate");
+            value
+        },
+        {
+            let mut value = right.clone();
             value.dimensions = [384; 3];
             value
         },
@@ -1323,6 +1333,22 @@ fn matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted() {
     let mut changed = right.clone();
     changed.comparison_kind = ComparisonKind::MatchedSpatial;
     assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+}
+
+#[test]
+fn matched_m512_kind_has_a_distinct_small_decoder_route() {
+    let root = root("matched-m512-decoder");
+    let mut input = manifest(root.join("state.bin"), 4, "fixture");
+    let layout = input.domain().unwrap().layout();
+    write(&mut input, &fields(layout, 1.0));
+    input.comparison_kind = ComparisonKind::MatchedM512SpatialDiagnostic;
+    input.evolution.integration_force_dimensions = [512; 3];
+    assert_manifest_decodes(&root, "m512-kind.json", &input);
+
+    input.comparison_kind = ComparisonKind::MatchedSpatial;
+    let path = root.join("old-kind.json");
+    fs::write(&path, serde_json::to_vec(&input).unwrap()).unwrap();
+    assert!(decode::read_manifest(&path).is_err());
 }
 
 #[test]

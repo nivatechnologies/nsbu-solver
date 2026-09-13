@@ -1,10 +1,11 @@
 
-running 23 tests
+running 24 tests
 test tests::arithmetic_review_accepts_64_kib_and_rejects_one_byte_more ... ok
 test tests::fixed_diagnostics_serialize_tiny_spectrum_outputs ... ok
 test tests::force_resolution_diagnostic_is_closed_and_directional ... ok
 test tests::legacy_profile_binding_requires_the_exact_complete_identity ... ok
 test tests::manifest_and_command_enforce_schema_and_cap ... ok
+test tests::matched_m512_kind_has_a_distinct_small_decoder_route ... ok
 test tests::matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted ... ok
 test tests::matched_spatial_reports_different_guards_without_gating ... ok
 test tests::method_diagnostic_is_closed_and_directional ... ok
@@ -24,4 +25,4 @@ test tests::time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope ... ok
 test tests::time_diagnostic_rejects_every_immutable_semantic_change ... ok
 test tests::time_diagnostic_rejects_mode_headers_guards_and_provenance ... ok
 
-test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s

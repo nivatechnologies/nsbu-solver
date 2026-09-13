@@ -1,3 +1,2 @@
-   Compiling p10-snapshot-comparison-adapter v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-m512-spatial-adapter-20260913/evidence/p10/snapshot-comparison-adapter/harness)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.91s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
      Running unittests src/main.rs (/tmp/nsbu-m512-spatial-adapter-target-20260913/debug/deps/p10_snapshot_comparison_adapter-29c8e870e00f4763)
