@@ -1,0 +1,246 @@
+{
+  "schema": "p10-offline-residual-probe-result-v1",
+  "status": "one_probe_complete_diagnostic_only",
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "arithmetic": "binary64; empirical values have no outward-rounding or interval enclosure",
+  "integration_force": "exact archived constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout384 width3 forward provider add1827942144 with32 workers",
+  "residual_force": "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112 for each residual",
+  "retained_grid": [
+    384,
+    384,
+    384
+  ],
+  "diagnostic_grid": [
+    768,
+    768,
+    768
+  ],
+  "probe_clock": 1112,
+  "supports": [
+    [
+      896,
+      1152,
+      1408
+    ],
+    [
+      1024,
+      1152,
+      1280
+    ],
+    [
+      1088,
+      1152,
+      1216
+    ]
+  ],
+  "support_relationship": "interval widths and spacings are nested; node sets share only clock1152",
+  "reservations": {
+    "schema": "p10-offline-residual-probe-reservation-v1",
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 38807118904,
+    "integration_force_bytes": 12356287944,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 63413529960,
+    "residual_peak_bytes": 117217453000,
+    "admitted_peak_bytes": 117217453000,
+    "cap_bytes": 137438953472
+  },
+  "nodes": [
+    {
+      "clock": 896,
+      "state_file_sha256": "b85aee25a9365c41cd3ca24d4a559e3addf630181521edb85e08fc13eb0cc490",
+      "coefficient_sha256": "7ff551613ca80ea9d46e0061beb84ef7096ff0708dd67397bde949d577a4761f",
+      "physical_derivative_sha256": "42e80d103a53591c732e1e5002892967e76d1bfbfebf5c32c01510cd9fb063c4",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1024,
+      "state_file_sha256": "909c3ff78c9d182b141b9393bde25677459c533a426410cc2890b94419bf2420",
+      "coefficient_sha256": "35160a4319fc1f20bb4cc6af1ac87d57a60b3923ee16402f83178feaf8a4f05a",
+      "physical_derivative_sha256": "16980523db62e89d71b642b71fe9fc42f37e7957c1251704c45b38e2d7c78869",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1088,
+      "state_file_sha256": "b2bf7efe0231b0d7940b7a1e9332bcd15967d4c27889eeb8b116b7a8723e33c7",
+      "coefficient_sha256": "ce8d57a69f249b2b4838f01d79eb7478e8041baa0bc928877d280bdae64616da",
+      "physical_derivative_sha256": "badf6a01e4d67dca30096322e6ee565c0245eaa86916925a637a23f1a37840d3",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1152,
+      "state_file_sha256": "1b04fad79092f3f561b752e2fa817237c133bb92db85fd77bbfb77e565374d84",
+      "coefficient_sha256": "1ea19cb3c37004c147a906ff07c7c8555410e0cb7611ea03ab3b4afc2233a6f4",
+      "physical_derivative_sha256": "4a4ed829270fd2eed337664af17d2fe34284aa67153b142fc4ae02d23d81f228",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1216,
+      "state_file_sha256": "d236a0ab72874906a84690c583e44a86db7d75c3c7ab109f94a0b4b680d61874",
+      "coefficient_sha256": "28ba1b97c02efc1477200a9d72067929f7b88c234c9436ab4f8b8699ddef0bce",
+      "physical_derivative_sha256": "035abbb6e2ed6a474af99360ec1f8016da73a94c0d74d31e5908238b91cbaa01",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001689,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1280,
+      "state_file_sha256": "8bf5dc7d8d2406ba0bc9019752451001f5f43dde34b9c25ce7d47b5cc6a31a63",
+      "coefficient_sha256": "90b25cbb66dc1b5993b35d6df334560527d9ff5d13c5cd95ebc746696845d3d5",
+      "physical_derivative_sha256": "0c6a13b5f5f696d105079a9d5a31f727f93a21d54e528a8faf66b22caeb9bd56",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001689,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1408,
+      "state_file_sha256": "4e0ed778077ec81d6466e8e585ed74225e0f737d845fecc7aec19707a2f5f9c2",
+      "coefficient_sha256": "72f4e4a18e26a2ed79310e7098bc9bcd53d5b0acaad666af0e99cbc8ffa40f6e",
+      "physical_derivative_sha256": "ebdca0e24b144ea836a1ff25b0d1ddd5d4e53dfa5768f965fcfdc773aec33e49",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    }
+  ],
+  "scales": [
+    {
+      "label": "coarse",
+      "support": [
+        896,
+        1152,
+        1408
+      ],
+      "probe": 1112,
+      "residual_acceleration": {
+        "l2": 1.5121866792218766,
+        "h1": 2147.417190815263,
+        "vorticity_l2": 2147.4166620268475,
+        "divergence_l2": 1.3015244020919659e-10
+      },
+      "residual_force_work_units": 452987946,
+      "residual_force_scalar_transforms": 3,
+      "residual_sha256": "c84ec7fe1d2e05560528fe38c4b4f3fdd7344a6661e1eabcd85bb76cd83ca25e",
+      "reconstructed_value_sha256": "6adacb1418a70a571ada244d8197188e72b9f8aad2e49b12a6d8bef94aec04d3",
+      "reconstructed_derivative_sha256": "6d35f4f6d812897cf687a468fa587e62321d78654e4c761c7b9383f85b3cbd84"
+    },
+    {
+      "label": "middle",
+      "support": [
+        1024,
+        1152,
+        1280
+      ],
+      "probe": 1112,
+      "residual_acceleration": {
+        "l2": 1.4966726610197094,
+        "h1": 2147.4121783028486,
+        "vorticity_l2": 2147.4116603839543,
+        "divergence_l2": 1.1883104180939868e-10
+      },
+      "residual_force_work_units": 452987946,
+      "residual_force_scalar_transforms": 3,
+      "residual_sha256": "ab969760b605a5c06b2451bb516549932cc32984dfd7fbd7ecfde6bae5fc4c7e",
+      "reconstructed_value_sha256": "0e7584816217d69150e99ed00b0c9191c68bf1d0c87215248197ea7b0e7e1369",
+      "reconstructed_derivative_sha256": "371643e917a2f59fa0783234f4d7b2dc4354f93a2034d9c3dc968d2af0224468"
+    },
+    {
+      "label": "fine",
+      "support": [
+        1088,
+        1152,
+        1216
+      ],
+      "probe": 1112,
+      "residual_acceleration": {
+        "l2": 1.496656758277266,
+        "h1": 2147.4146505555054,
+        "vorticity_l2": 2147.4141326478734,
+        "divergence_l2": 9.320012738826833e-11
+      },
+      "residual_force_work_units": 452987946,
+      "residual_force_scalar_transforms": 3,
+      "residual_sha256": "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8",
+      "reconstructed_value_sha256": "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865",
+      "reconstructed_derivative_sha256": "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c"
+    }
+  ],
+  "differences": [
+    {
+      "left": "coarse",
+      "right": "middle",
+      "reconstructed_velocity": {
+        "l2": 4.395916673587694e-6,
+        "h1": 0.00012102959404501215,
+        "vorticity_l2": 0.00012094973568404963,
+        "divergence_l2": 2.6225972881659786e-15
+      },
+      "reconstructed_derivative": {
+        "l2": 0.21226433321037655,
+        "h1": 5.849950008347667,
+        "vorticity_l2": 5.846097756508518,
+        "divergence_l2": 2.0160754888834013e-11
+      },
+      "residual_acceleration": {
+        "l2": 0.20909346131614476,
+        "h1": 5.383528353812892,
+        "vorticity_l2": 5.379466281250301,
+        "divergence_l2": 5.0509510668355146e-11
+      }
+    },
+    {
+      "left": "middle",
+      "right": "fine",
+      "reconstructed_velocity": {
+        "l2": 1.8509271472878577e-7,
+        "h1": 7.407336258150511e-6,
+        "vorticity_l2": 7.405023373826288e-6,
+        "divergence_l2": 2.8401430218529198e-15
+      },
+      "reconstructed_derivative": {
+        "l2": 0.00753975148065771,
+        "h1": 0.3685526054064386,
+        "vorticity_l2": 0.36847547428366995,
+        "divergence_l2": 5.34500253766832e-11
+      },
+      "residual_acceleration": {
+        "l2": 0.00742149596715501,
+        "h1": 0.5808991173075279,
+        "vorticity_l2": 0.5808517074781606,
+        "divergence_l2": 8.095399001355863e-11
+      }
+    }
+  ],
+  "runtime_owner_imported": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": "offline empirical diagnostic; no velocity-budget or pass claim without a reviewed dimensional policy"
+}

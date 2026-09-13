@@ -1,0 +1,46 @@
+{
+  "schema": "p10-offline-residual-probe-summary-v1",
+  "status": "one_probe_complete_diagnostic_only",
+  "probe_clock": 1112,
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "harness_commit": "d41ed9fe13c4811226c03a8a96e586fe6f0880b0",
+  "binary_sha256": "308a07dc16fab3253ea8a7c6268db659ab7efb41300383d0037037ccd163525c",
+  "exit_status": 0,
+  "started_utc": "2026-09-13T02:05:39Z",
+  "ended_utc": "2026-09-13T02:36:00Z",
+  "wall_seconds": 1821.08,
+  "maximum_rss_kib": 75379184,
+  "swaps": 0,
+  "supports": {
+    "coarse": [896, 1152, 1408],
+    "middle": [1024, 1152, 1280],
+    "fine": [1088, 1152, 1216],
+    "relationship": "interval widths and spacings are nested; node sets share only clock1152"
+  },
+  "absolute_residual_acceleration": {
+    "coarse": {"l2": 1.5121866792218766, "h1": 2147.417190815263, "vorticity_l2": 2147.4166620268475, "divergence_l2": 1.3015244020919659e-10},
+    "middle": {"l2": 1.4966726610197094, "h1": 2147.4121783028486, "vorticity_l2": 2147.4116603839543, "divergence_l2": 1.1883104180939868e-10},
+    "fine": {"l2": 1.496656758277266, "h1": 2147.4146505555054, "vorticity_l2": 2147.4141326478734, "divergence_l2": 9.320012738826833e-11}
+  },
+  "coarse_to_middle": {
+    "velocity": {"l2": 4.395916673587694e-6, "h1": 0.00012102959404501215, "vorticity_l2": 0.00012094973568404963},
+    "derivative": {"l2": 0.21226433321037655, "h1": 5.849950008347667, "vorticity_l2": 5.846097756508518},
+    "residual": {"l2": 0.20909346131614476, "h1": 5.383528353812892, "vorticity_l2": 5.379466281250301}
+  },
+  "middle_to_fine": {
+    "velocity": {"l2": 1.8509271472878577e-7, "h1": 7.407336258150511e-6, "vorticity_l2": 7.405023373826288e-6},
+    "derivative": {"l2": 0.00753975148065771, "h1": 0.3685526054064386, "vorticity_l2": 0.36847547428366995},
+    "residual": {"l2": 0.00742149596715501, "h1": 0.5808991173075279, "vorticity_l2": 0.5808517074781606}
+  },
+  "adjacent_difference_ratios": {
+    "velocity": {"l2": 0.04210560128241097, "h1": 0.061202686141338676, "vorticity_l2": 0.06122397318147122},
+    "derivative": {"l2": 0.035520576474734514, "h1": 0.06300098374866919, "vorticity_l2": 0.06302930426940646},
+    "residual": {"l2": 0.035493677900974005, "h1": 0.10790304780248909, "vorticity_l2": 0.10797571303730868}
+  },
+  "interpretation": "adjacent reconstructed value, derivative, and residual fields contract strongly under support refinement; the absolute residual remains large and does not support a residual-pass claim",
+  "runtime_owner_imported": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": false,
+  "arithmetic_limitation": "binary64 empirical values without outward rounding or interval enclosure"
+}
