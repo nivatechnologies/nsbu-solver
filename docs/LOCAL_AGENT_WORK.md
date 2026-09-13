@@ -109,8 +109,9 @@ iteration budget uses chunked prefill; it is not the maximum prompt length or
 an output cap. Keep the operating concurrency at eight for this deployment.
 
 Reasoning consumes the client output budget. Use about 8,192 output tokens for
-compact fixture packets and 16,384–32,768 for bounded coding packets, with a
-600–900-second coding task limit and a separate final-report time reserve.
+compact fixture packets and 16,384–32,768 for bounded coding packets, with request timeouts sized for concurrent decode: 600 seconds for 8K,
+900 for 16K, and 1,800 for 32K output tokens. Coding tasks have an explicit
+1,800–3,600-second total limit and a final-report reserve sized for their output.
 Supply the relevant interfaces and contract rather than an unrelated full file.
 The transport byte cap covers the entire response, including reasoning: allow
 sufficient space (for example 524,288 bytes for a 32K-token coding request), then
@@ -120,3 +121,9 @@ task settings, not permission to increase tool, repair or review budgets.
 Report actual endpoint activity. A prepared packet is not a running agent, and
 zero running/waiting requests must not be explained away as prefill without
 evidence. Idle time after a completed queue is distinct from inference failure.
+
+At an observed aggregate 220–250 tokens/second across eight equally loaded
+requests, generating 32K tokens per request alone takes approximately 18–20
+minutes. Prompt processing adds time. A larger output cap without a matching
+wall-clock budget merely changes truncation into timeout. Actual short responses
+finish early; these limits do not require filling the output allowance.
