@@ -2,11 +2,11 @@
 # Proposed only: a future deadline and explicit authorization are required.
 set -eu
 
-SOURCE=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
-BINARY_SHA256=7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211
-PLAN_SHA256=6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634
-PREFLIGHT_SHA256=4393b5cbbcd963ae0a2bda51c50765bcd38f6b9d1ed2dc39aedec1fe66a3a60d
-WATCHDOG_SHA256=555474618d31235073123cef4025c6e9b9aa955067308a217551d9ede7edebc3
+SOURCE=e25f3816f83c6a7c07202cac2878f58ace460511
+BINARY_SHA256=2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143
+PLAN_SHA256=85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360
+PREFLIGHT_SHA256=b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6
+WATCHDOG_SHA256=e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1
 MEMORY_FLOOR_BYTES=241937824240
 DISK_FLOOR_BYTES=189586276352
 ADDRESS_SPACE_LIMIT_KIB=268435456
@@ -14,7 +14,7 @@ MINIMUM_LAUNCH_REMAINING_SECONDS=66672
 REMAINING_AFTER_FIRST_SECONDS=65410
 FIRST_STEP_INTEGRATION_LIMIT_SECONDS=1200
 STATE_COEFFICIENT_BYTES=3233808384
-PREPARED_BINARY_EXTERNAL_STOP=pgid-watchdog-v2-starttime-cmdline-deadline
+PREPARED_BINARY_EXTERNAL_STOP=pgid-watchdog-v3-confirmed-identity-absolute-deadline
 REQUIRED_EXTERNAL_STOP=pgid-watchdog-v3-confirmed-identity-absolute-deadline
 
 numeric() { case "$1" in '' | *[!0-9]*) return 1 ;; esac; }
@@ -53,9 +53,48 @@ cleanup_owned() {
     status=$?
     trap - EXIT HUP INT TERM
     if [ "$status" -ne 0 ] && owned_matches; then
-        /bin/kill -TERM -- "-$owned_pgid" 2>/dev/null || true
+        stop_owned "${CLEANUP_GRACE_SECONDS:-60}"
     fi
     exit "$status"
+}
+
+stop_owned() {
+    grace=$1
+    /bin/kill -TERM -- "-$owned_pgid" 2>/dev/null || true
+    seconds=0
+    while [ "$seconds" -lt "$grace" ] && owned_matches; do sleep 1; seconds=$((seconds + 1)); done
+    if owned_matches; then /bin/kill -KILL -- "-$owned_pgid" 2>/dev/null || true; fi
+    wait "$owned_pid" 2>/dev/null || true
+}
+
+acquire_owned_identity() {
+    candidate=$1
+    expected_program=$2
+    count=0
+    while [ "$count" -lt 200 ]; do
+        if [ -r "/proc/$candidate/stat" ] && [ -r "/proc/$candidate/cmdline" ]; then
+            first=$(tr '\000' '\n' <"/proc/$candidate/cmdline" 2>/dev/null | head -n 1)
+            stat=$(cat "/proc/$candidate/stat" 2>/dev/null || true)
+            rest=${stat##*) }; set -- $rest
+            if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$3" = "$candidate" ] && [ "$first" = "$expected_program" ]; then
+                candidate_start=${20}
+                candidate_cmd=$(sha256sum "/proc/$candidate/cmdline" | awk '{print $1}')
+                sleep 0.05
+                stat2=$(cat "/proc/$candidate/stat" 2>/dev/null || true)
+                rest2=${stat2##*) }; set -- $rest2
+                if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$3" = "$candidate" ] && [ "${20}" = "$candidate_start" ] && [ "$(sha256sum "/proc/$candidate/cmdline" | awk '{print $1}')" = "$candidate_cmd" ]; then
+                    owned_pid=$candidate; owned_pgid=$candidate; owned_starttime=$candidate_start; owned_cmdline=$candidate_cmd
+                    return 0
+                fi
+            fi
+        fi
+        sleep 0.05; count=$((count + 1))
+    done
+    /bin/kill -TERM "$candidate" 2>/dev/null || true
+    sleep 1
+    /bin/kill -KILL "$candidate" 2>/dev/null || true
+    wait "$candidate" 2>/dev/null || true
+    return 1
 }
 
 fake_owner_test() {
@@ -83,6 +122,28 @@ fake_owner_test() {
     echo "fake-child owner/deadline test passed"
 }
 
+fake_handshake_test() {
+    setsid /bin/sh -c 'sleep 30' & child=$!
+    acquire_owned_identity "$child" /bin/sh
+    [ "$owned_pgid" = "$child" ]
+    stop_owned 1
+    [ ! -r "/proc/$child/stat" ]
+    owned_pid=
+    echo "post-setsid stable identity handshake passed"
+}
+
+fake_archive_timeout_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-archive-timeout.XXXXXX")
+    setsid /bin/sh -c 'trap "" TERM; while :; do sleep 1; done' & child=$!
+    acquire_owned_identity "$child" /bin/sh
+    WATCHDOG_POLL_SECONDS=1 WATCHDOG_GRACE_SECONDS=1 "$WATCHDOG" "$owned_pid" "$owned_pgid" "$owned_starttime" "$owned_cmdline" "$(( $(date +%s) + 1 ))" "$temp/watchdog.log"
+    wait "$child" 2>/dev/null || true
+    [ ! -r "/proc/$child/stat" ]
+    grep -q 'grace_expired_sending_KILL' "$temp/watchdog.log"
+    owned_pid=
+    echo "TERM-ignoring archive deadline escalation passed"
+}
+
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
 case "${1:-}" in
@@ -96,11 +157,9 @@ case "${1:-}" in
         exit 0
         ;;
     --self-test-owner) fake_owner_test; exit $? ;;
-    --self-test-identity-refusal)
-        if require_v3_identity; then exit 1; fi
-        echo "legacy v2 binary identity refusal passed"
-        exit 0
-        ;;
+    --self-test-handshake) fake_handshake_test; exit $? ;;
+    --self-test-archive-timeout) fake_archive_timeout_test; exit $? ;;
+    --self-test-identity) require_v3_identity; echo "v3 binary identity admitted"; exit 0 ;;
 esac
 
 [ "${NSBU_LAUNCH_N512_M512_ENDPOINT:-}" = 1 ] || {
@@ -120,8 +179,8 @@ case "$ARCHIVE_PARENT" in /*) ;; *) echo "refused: absolute archive parent requi
 [ -d "$ARCHIVE_PARENT" ] || { echo "refused: archive parent missing" >&2; exit 67; }
 
 BIN=$BUNDLE/p10-avx-scheduled-endpoint
-PLAN=$BUNDLE/frozen-plan.json
-PREFLIGHT=$BUNDLE/n512-preflight.stdout
+PLAN=$BUNDLE/v3-launch-plan.json
+PREFLIGHT=$BUNDLE/v3-n512-preflight.stdout
 RUN_ROOT=$BUNDLE/run-$DEADLINE_EPOCH
 OUTPUT=$RUN_ROOT/output
 LOG_DIR=$RUN_ROOT/logs
@@ -155,14 +214,8 @@ ulimit -v "$ADDRESS_SPACE_LIMIT_KIB"
 export NSBU_RUN_N512_M512_ENDPOINT_CAPTURE=1
 setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" /usr/bin/timeout --foreground --signal=TERM --kill-after=60s "$timeout_seconds" "$BIN" run "$OUTPUT" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
 time_pid=$!
-stat=$(cat "/proc/$time_pid/stat")
-rest=${stat##*) }
-set -- $rest
-time_pgid=$3
-owned_pid=$time_pid
-owned_pgid=$time_pgid
-owned_starttime=${20}
-owned_cmdline=$(sha256sum "/proc/$time_pid/cmdline" | awk '{print $1}')
+acquire_owned_identity "$time_pid" /usr/bin/time || { echo "refused: solver owner identity handshake failed" >&2; exit 77; }
+time_pgid=$owned_pgid
 trap cleanup_owned EXIT
 trap 'exit 129' HUP
 trap 'exit 130' INT
@@ -174,18 +227,13 @@ for _ in $(seq 1 100); do
     [ -n "$timeout_pid" ] && solver_pid=$(pgrep -P "$timeout_pid" || true) && [ -n "$solver_pid" ] && break
     sleep 0.05
 done
-[ -n "$solver_pid" ] || { /bin/kill -TERM -- "-$time_pgid" 2>/dev/null || true; exit 77; }
+[ -n "$solver_pid" ] || exit 77
 stat=$(cat "/proc/$solver_pid/stat")
 rest=${stat##*) }
 set -- $rest
 pgid=$3
 starttime=${20}
 cmdline=$(sha256sum "/proc/$solver_pid/cmdline" | awk '{print $1}')
-[ "$pgid" = "$time_pgid" ] || { /bin/kill -TERM -- "-$time_pgid" 2>/dev/null || true; exit 77; }
-owned_pid=$solver_pid
-owned_pgid=$pgid
-owned_starttime=$starttime
-owned_cmdline=$cmdline
 setsid "$WATCHDOG" "$solver_pid" "$pgid" "$starttime" "$cmdline" "$DEADLINE_EPOCH" "$LOG_DIR/watchdog.log" >"$LOG_DIR/watchdog.stdout" 2>"$LOG_DIR/watchdog.stderr" &
 watchdog_pid=$!
 
@@ -208,8 +256,8 @@ awk -v actual="$first_seconds" -v limit="$FIRST_STEP_INTEGRATION_LIMIT_SECONDS" 
 
 if wait "$time_pid"; then solver_status=0; else solver_status=$?; fi
 [ "$solver_status" -eq 0 ] || exit "$solver_status"
-owned_pid=
 wait "$watchdog_pid" 2>/dev/null || true
+owned_pid=
 grep -q '^terminal endpoint_capture_complete_offline_observer_required clock=4096$' "$LOG_DIR/stdout" || exit 82
 python3 - "$OUTPUT" "$STATE_COEFFICIENT_BYTES" <<'PY'
 import json, pathlib, sys
@@ -232,12 +280,13 @@ PY
 
 archive_disk=$(df -B1 --output=avail "$ARCHIVE_PARENT" | awk 'NR==2{print $1}')
 [ "$archive_disk" -ge "$DISK_FLOOR_BYTES" ] || exit 75
-mkdir "$ARCHIVE_PARTIAL"
-(cd "$OUTPUT" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$LOG_DIR/source.sha256"
-cp -a "$OUTPUT/." "$ARCHIVE_PARTIAL/"
-(cd "$ARCHIVE_PARTIAL" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$LOG_DIR/archive.sha256"
-cmp "$LOG_DIR/source.sha256" "$LOG_DIR/archive.sha256"
-sync "$ARCHIVE_PARTIAL"
-mv "$ARCHIVE_PARTIAL" "$ARCHIVE"
-printf 'archive=%s files=%s bytes=%s\n' "$ARCHIVE" "$(find "$ARCHIVE" -type f | wc -l)" "$(du -sb "$ARCHIVE" | awk '{print $1}')" >"$LOG_DIR/archive-receipt.txt"
+setsid "$BUNDLE/archive-local.sh" "$OUTPUT" "$ARCHIVE_PARTIAL" "$ARCHIVE" "$LOG_DIR" >"$LOG_DIR/archive.stdout" 2>"$LOG_DIR/archive.stderr" &
+archive_pid=$!
+acquire_owned_identity "$archive_pid" /bin/sh || { echo "refused: archive owner identity handshake failed" >&2; exit 83; }
+setsid "$WATCHDOG" "$owned_pid" "$owned_pgid" "$owned_starttime" "$owned_cmdline" "$DEADLINE_EPOCH" "$LOG_DIR/archive-watchdog.log" >"$LOG_DIR/archive-watchdog.stdout" 2>"$LOG_DIR/archive-watchdog.stderr" &
+archive_watchdog_pid=$!
+if wait "$archive_pid"; then archive_status=0; else archive_status=$?; fi
+[ "$archive_status" -eq 0 ] || exit "$archive_status"
+owned_pid=
+wait "$archive_watchdog_pid" 2>/dev/null || true
 echo "endpoint and archive complete; offline baccus observer remains required"

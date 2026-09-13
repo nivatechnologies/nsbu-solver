@@ -1,0 +1,3 @@
+refused: numeric future absolute deadline required
+refused: absolute deadline has passed
+refused: deadline leaves less than reviewed run budget

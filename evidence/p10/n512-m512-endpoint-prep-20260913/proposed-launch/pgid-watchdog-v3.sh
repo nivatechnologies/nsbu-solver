@@ -9,7 +9,8 @@ expected_cmdline_sha256=$4
 deadline_epoch=$5
 log=$6
 poll_seconds=${WATCHDOG_POLL_SECONDS:-30}
-case "$leader_pid:$process_group:$expected_starttime:$deadline_epoch:$poll_seconds" in
+grace_seconds=${WATCHDOG_GRACE_SECONDS:-60}
+case "$leader_pid:$process_group:$expected_starttime:$deadline_epoch:$poll_seconds:$grace_seconds" in
     *[!0-9:]* | *::* | :* | *:) echo "numeric identity arguments required" >&2; exit 64 ;;
 esac
 [ "${#expected_cmdline_sha256}" -eq 64 ] || exit 64
@@ -73,7 +74,7 @@ sample_identity || { record "identity_mismatch_at_deadline $(diagnostic)"; exit 
 record "deadline_reached_sending_TERM now=$now"
 /bin/kill -TERM -- "-$process_group"
 seconds=0
-while [ "$seconds" -lt 60 ]; do
+while [ "$seconds" -lt "$grace_seconds" ]; do
     sample_identity || { record "solver_exited_after_TERM seconds=$seconds $(diagnostic)"; exit 0; }
     sleep 1
     seconds=$((seconds + 1))

@@ -1,0 +1,43 @@
+{
+  "schema": "p10-n512-m512-v3-launch-plan-v1",
+  "status": "prepared_unexecuted_future_authorization_and_absolute_deadline_required",
+  "numerical_test_source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "harness_commit_and_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "feature": "n512-m512-piecewise-cadv33",
+  "profile": "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f",
+  "external_stop": "pgid-watchdog-v3-confirmed-identity-absolute-deadline",
+  "binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
+  "preflight_sha256": "b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6",
+  "watchdog_sha256": "e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
+  "local_archive_helper_sha256": "947f6738c75257a49917396587780a765538979523eb39ee70cb498fc62eae6f",
+  "historical_preparation": {
+    "immutable_trajectory_plan_sha256": "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634",
+    "v2_binary_sha256": "7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211",
+    "preparation_results": "../preparation-results.json"
+  },
+  "deadline": {
+    "source": "caller_supplied_future_absolute_epoch",
+    "minimum_remaining_at_launch_seconds": 66672,
+    "minimum_remaining_after_first_step_seconds": 65410
+  },
+  "resources": {
+    "memory_floor_bytes": 241937824240,
+    "source_disk_floor_bytes": 189586276352,
+    "local_archive_disk_floor_bytes": 189586276352,
+    "address_space_limit_bytes": 274877906944
+  },
+  "guards": {
+    "explicit_opt_in": true,
+    "stable_process_identity_before_group_ownership": true,
+    "term_grace_then_kill_seconds": 60,
+    "solver_and_local_archive_share_absolute_deadline": true,
+    "first_step": "clock64;rhs12;hits7;misses5;steady_allocations0;integration<=1200",
+    "committed_states": 48,
+    "offline_observer_nodes": 8,
+    "qualification": false
+  },
+  "archive_scope": "local_create_new_partial_copy_inventory_compare_sync_rename; no remote durable transfer is claimed",
+  "endpoint_attempts_executed": 0,
+  "launch_authorized": false
+}
