@@ -1,0 +1,23 @@
+{
+  "scope": "operator fixtures only",
+  "tests_passed": 6,
+  "fixture_rows": 312,
+  "commands": [
+    {
+      "command": "cargo test -p nsbu-solver --test derivative_modal_fixtures --test derivative_sampling",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy -p nsbu-solver --test derivative_modal_fixtures -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "python tools/check_repository.py",
+      "exit_code": 0
+    }
+  ],
+  "source_sha256": {
+    "crates/nsbu-solver/tests/derivative_modal_fixtures.rs": "9714364a7f0421f51429e3a8cf7cf7843bfef7a764fe896353f75f207a179a26",
+    "crates/nsbu-solver/tests/fixtures/local_modal_derivatives.rs": "c44ccb60d35af5df68aeebede27e9d5bf48796d4aec86f2f3652f9913c45a30f"
+  }
+}

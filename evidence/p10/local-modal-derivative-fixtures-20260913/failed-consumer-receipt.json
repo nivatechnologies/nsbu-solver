@@ -1,0 +1,35 @@
+[
+  {
+    "task_id": "modal-fixture-consumer-v1",
+    "family": "rust_test_candidates",
+    "status": "budget_exhausted",
+    "scientific_accepted": false,
+    "review_required": true,
+    "attempts": [
+      {
+        "number": 1,
+        "validator_errors": [
+          "inference failed: ValueError: model response refused due to finish_reason=length"
+        ]
+      },
+      {
+        "number": 2,
+        "validator_errors": [
+          "inference failed: TimeoutError: model request exceeded remaining wall-clock budget"
+        ]
+      }
+    ],
+    "tool_calls": 0,
+    "timing_seconds": 300.000925,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "reasoning_tokens": 0,
+    "input_hash": "611e3c289b183846d0af50ad85a863bc266c25eaa44ad04f84d2de1f26079c2e",
+    "output_hash": null,
+    "output": null,
+    "errors": [
+      "inference failed: TimeoutError: model request exceeded remaining wall-clock budget",
+      "server-side cancellation is unknown"
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "wall_s": 166.93946338399837,
+  "tasks": 8,
+  "validated": 8,
+  "first_attempt_validated": 8,
+  "local_repairs": 0,
+  "pending_review": 0,
+  "scope": "artificial_modal_fixtures_not_PDE_validation"
+}

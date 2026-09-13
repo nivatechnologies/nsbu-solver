@@ -1,0 +1,10 @@
+{
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/run_batch.py": "cdfea49feb2e637995be42d3b128506ad7174fe0fa19f138e95865fa7de4a4b1",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/fixtures.py": "1d0130317e619716f52fba1cea583c8b3e8845e793b1fd3487f1eabeece87b57",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/__init__.py": "a1f80f891c17d083345047cc4dc5506bee007d77ce1f4b248937802f796875f7",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/__main__.py": "38eee40ea5f4d24334b1349dcbfb9a36f947f2641373af9d2fbf5ec19a95c833",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/contracts.py": "5c2df6a720241fbcab34a283456174bea845a47b8ba964b1961a23f5b044374e",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/runner.py": "b528f1117fc92df40d4bd4f389725c640e66ad130dea93e4ec5e81148f767567",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/transport.py": "34243a9059db27b3fb92a3b28bf372af98ffbcb72affe9523bbb6accebdc00ba",
+  "/mnt/niva-array/nsbu-solver/work/local-derivative-fixtures-20260913/runtime/tools/local_agents/validators.py": "422172c9da3bead19a844f2b343a47b40b6a86bbfc2e618bcdc21d9b6fc7af90"
+}

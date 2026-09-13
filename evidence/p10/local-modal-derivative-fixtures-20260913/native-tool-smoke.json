@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "source": "dfb6ff1",
+  "receipts": [
+    {
+      "task_id": "named-artifact-nonce",
+      "family": "native_tool_transport",
+      "status": "validated_candidate",
+      "scientific_accepted": false,
+      "review_required": false,
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [],
+          "checker_seconds": 6e-06
+        }
+      ],
+      "tool_calls": 1,
+      "timing_seconds": 3.454182,
+      "prompt_tokens": 603,
+      "completion_tokens": 115,
+      "reasoning_tokens": 61,
+      "input_hash": "79e28dd0144a5bec29abda53b75cdf6e66779b4fed5f3a887d10bc09cc98df84",
+      "output_hash": "aadd8579d79dc216cc059c4adb0f6f1e5901705f498e39a425762cd522762e51",
+      "output": {
+        "nonce": "60daaee02fc82d9a368ebdd1"
+      },
+      "errors": []
+    }
+  ]
+}
