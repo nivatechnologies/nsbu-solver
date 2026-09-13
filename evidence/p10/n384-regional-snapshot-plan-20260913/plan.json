@@ -1,7 +1,7 @@
 {
-  "schema": "p10-n384-regional-snapshot-plan-v1",
-  "status": "read_only_plan_not_implemented_not_run_architecture_review_required",
-  "purpose": "One bounded clock-512 diagnostic over the immutable N384/M384 baseline state, using a 768^3 unshifted physical lattice to measure analytical-reference errors for full velocity, ordered gradient, ordered Hessian and derived vorticity globally and in every existing sampled spatial class.",
+  "schema": "p10-n384-regional-snapshot-plan-v2",
+  "status": "bounded_adapter_implemented_tests_and_x_plane_pilot_complete_full_run_not_started",
+  "purpose": "One bounded clock-512 diagnostic over the immutable N384/M384 baseline state, using a 768^3 unshifted physical lattice to measure analytical-reference errors for full velocity, ordered gradient and ordered Hessian globally and in every existing sampled spatial class.",
   "claims_excluded": [
     "PDE window acceptance",
     "continuous spatial supremum",
@@ -10,8 +10,16 @@
     "physical sampling convergence",
     "pressure or pressure-gradient qualification",
     "collar volume coverage",
-    "peak-location qualification"
+    "peak qualification"
   ],
+  "implementation": {
+    "harness": "evidence/p10/n384-regional-snapshot-diagnostic/harness",
+    "pilot": "evidence/p10/n384-regional-snapshot-diagnostic/pilot-x000.json",
+    "runbook": "evidence/p10/n384-regional-snapshot-diagnostic/README.md",
+    "production_seam": "crates/nsbu-solver/src/diagnostics/derivatives.rs::DerivativeWorkspace::new_from_catalog",
+    "full_run_started": false,
+    "state_payload_read": false
+  },
   "planning_base": {
     "commit": "59761b4aea2de0ffd527231771af9e168464240d",
     "branch": "codex/p10-regional-snapshot-plan-20260913",
@@ -34,7 +42,7 @@
       {"path": "crates/nsbu-benchmarks/src/regions/point.rs", "sha256": "efab39819df44a98ba168b3be9f5d2faaafa7d244ae8a8d17cd491cfa0e183bd", "role": "exclusive point classification and startup phase"},
       {"path": "crates/nsbu-benchmarks/src/regions/errors.rs", "sha256": "d379419fed244aa015f444c328d58689980206f4a4b015ef3fead5626928e77e", "role": "regional report semantics"},
       {"path": "crates/nsbu-benchmarks/src/regions/coverage.rs", "sha256": "3a0d3a9b627e44798820b95f1295c0b03714fdbe8b2510c54bb97115dec02fd6", "role": "core and annulus physical coverage"},
-      {"path": "crates/nsbu-solver/src/diagnostics/derivatives.rs", "sha256": "ed47cd13b2233dbce87ed45cad0093fabfd42c2f2934e69a21a07d150f98da72", "role": "spectral derivative staging and sampling"},
+      {"path": "crates/nsbu-solver/src/diagnostics/derivatives.rs", "sha256": "c3285b370dd7193dbd3e01e1a1a96cfa281287be10f7172ed645b91ee664d0b4", "role": "spectral derivative staging, catalog-backed AVX construction and sampling"},
       {"path": "crates/nsbu-solver/src/diagnostics/local.rs", "sha256": "421b8e4cb647981c1f484c6979bd55c80f3a07777a559bdc8ea7129726a4c3b0", "role": "tensor error reduction"},
       {"path": "crates/nsbu-solver/src/diagnostics/physical/mod.rs", "sha256": "1ccd5f7eef19ee2310bac1bed99ef37a724ef9e8da2de90561e09a743d26c425", "role": "physical diagnostic orchestration semantics"},
       {"path": "crates/nsbu-solver/src/diagnostics/physical/quantity.rs", "sha256": "77a20e2bf8a1440515296d8717f3548befbd0e192ef258e2f415571def7e8561", "role": "component schedule and curl orientation"},
@@ -45,7 +53,13 @@
       {"path": "crates/nsbu-solver/src/spectral/fft/transform.rs", "sha256": "1da0e37c10b8552e7255f20c6927c3574409a6cab45075eac41632d8b3fdebe9", "role": "inverse transform implementation"},
       {"path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/mod.rs", "sha256": "631e10b3a24bf8472177ad5a8bba2a9e922e41780be8970521e1d81018b520a5", "role": "current six-family consumer template"},
       {"path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/plan.rs", "sha256": "edd969d063793c291f11e3f329f978ba0fc77b3fa49c5043d079b1319e138604", "role": "current regional planning semantics"},
-      {"path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/report.rs", "sha256": "f7882fd511d160528435a86ca46f902aa279e75cbfcbf4890ae934b485eed9c0", "role": "current regional report bindings"}
+      {"path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/report.rs", "sha256": "f7882fd511d160528435a86ca46f902aa279e75cbfcbf4890ae934b485eed9c0", "role": "current regional report bindings"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/Cargo.toml", "sha256": "46717346bb1d3cce397cf9512697f4ba72517e0057103b524ab773b7eaff1673", "role": "adapter dependency closure"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/Cargo.lock", "sha256": "cd855785f745a750ae57aa510c822ecbc59886168b842c9bd950db3b7b924292", "role": "adapter resolved dependency closure"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/main.rs", "sha256": "7c2a570efde83480d2a663b489ea270c55b0dc2c69127be66c38bcc9aa245e22", "role": "explicit preflight, pilot and reviewed execute command boundary"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/cache.rs", "sha256": "51ffe26d8428db74f18436d59169e09e1a27c078e3ecb50dbdf5d4fb94c1f590", "role": "packed 30-word reference and ordered-Hessian equality check"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/diagnostic.rs", "sha256": "adf81cee71b92d5b8624a72e7df6dbe0627706cb4aaf53eb79129dfec16b4e5f", "role": "single-snapshot binding, admission, immutable sampling, reductions and transactional output"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/pilot.rs", "sha256": "4b9686e29d838d83223302ae0d298acebfb2e878339385e3cfdd75c9c6f12ae9", "role": "representative complete x-plane timing pilot"}
     ]
   },
   "immutable_snapshot": {
@@ -88,13 +102,11 @@
     "quantities": [
       {"name": "velocity", "components": 3, "scalar_inverse_transforms": 3, "absolute_floor": 1e-8},
       {"name": "gradient", "components": 9, "scalar_inverse_transforms": 9, "absolute_floor": 1e-7},
-      {"name": "ordered_hessian", "components": 27, "scalar_inverse_transforms": 27, "absolute_floor": 1e-6},
-      {"name": "vorticity", "components": 3, "scalar_inverse_transforms": 6, "absolute_floor": 1e-7}
+      {"name": "ordered_hessian", "components": 27, "scalar_inverse_transforms": 27, "absolute_floor": 1e-6}
     ],
     "relative_floor_rule": "For each quantity, max(fixed positive absolute_floor, 1e-3 * analytical reference_peak) is computed from the already complete immutable reference cache before any error reduction.",
     "hessian_order": "velocity component, first derivative axis, second derivative axis; both mixed ordered entries are emitted and counted",
     "packed_reference_layout": "30 binary64 words per point: velocity[3], gradient component-major[9], then six symmetric Hessian entries xx,xy,xz,yy,yz,zz for each velocity component[18]; ordered mixed Hessian entries are expanded twice from the same canonical jet coefficient",
-    "vorticity": "derived from the cached analytical gradient and from six independently inverse-transformed actual gradient entries, with the existing physical curl orientation",
     "sampled_regions": [
       "Core",
       "Annulus",
@@ -103,13 +115,13 @@
       "Exterior"
     ],
     "startup_phase_at_clock": "Ramping",
-    "publication": "one transactional JSON candidate promoted only after complete validation, all four global reports, all 20 quantity-by-class regional entries, core/annulus coverage reports, post-measurement coefficient hash and output validation"
+    "publication": "one transactional JSON candidate promoted only after complete validation, all three global reports, all 15 quantity-by-class regional entries, core/annulus coverage reports, post-measurement coefficient hash and output validation"
   },
   "required_output": {
-    "global_physical_rows": 12,
-    "global_physical_row_meaning": "four quantities times RMS error, sampled absolute peak and sampled relative peak",
-    "regional_rows": 60,
-    "regional_row_meaning": "five exclusive sampled masks times four quantities times RMS error, sampled absolute peak and sampled relative peak",
+    "global_physical_rows": 9,
+    "global_physical_row_meaning": "three quantities times RMS error, sampled absolute peak and sampled relative peak",
+    "regional_rows": 45,
+    "regional_row_meaning": "five exclusive sampled masks times three quantities times RMS error, sampled absolute peak and sampled relative peak",
     "additional_fields": [
       "sample count and NoSamples status for each class",
       "reference peak and exact relative floor for every global and regional report",
@@ -125,7 +137,7 @@
     "Preflight exact storage and work with checked integer arithmetic; refuse unless CAP_BYTES equals the admitted reservation and the external memory/wall admission gates pass.",
     "Stream-decode and hash the snapshot into three owned coefficient vectors; thereafter expose only immutable slices.",
     "In 32 disjoint deterministic x-plane shards, call fields::reference::evaluate once per point, pack 30 unique reference values, call regions::classify once per point and store one u8 class label.",
-    "Measure velocity, gradient, ordered Hessian and vorticity sequentially with one reusable AVX derivative workspace; reuse two pointwise magnitude arrays between quantities.",
+    "Measure velocity, gradient and ordered Hessian sequentially with one reusable AVX derivative workspace; reuse two pointwise magnitude arrays between quantities.",
     "For each completed quantity, reduce the same magnitudes into one global and five exclusive sampled-class TensorErrors reports before clearing scratch.",
     "Evaluate nominal core and annulus CoveragePlan refinements at panels 256, 512 and 1024, keeping sampled counts separate from physical-volume coverage.",
     "Rehash the immutable coefficient slices, validate the complete result, fsync a candidate, rename it atomically and emit hashes/provenance."
@@ -187,33 +199,35 @@
       "use": "already reviewed allocation-free spectral ordered-Hessian norm and manifest-output pattern; it is global spectral evidence only and cannot replace the pointwise regional path"
     }
   ],
-  "missing_adapter_glue": [
-    "A one-snapshot manifest mode that accepts exactly the reviewed N384/M384 clock-512 profile and binds a diagnostic sampling policy without constructing V2Family.",
-    "A catalog-backed AVX constructor/reservation for DerivativeWorkspace, or an equivalent narrowly scoped diagnostic sampler that reuses its exact staging and self-conjugate-plane rules. The present public constructor selects OwnedRadix.",
-    "A fixed 30-word packed analytical-reference cache and ordered-entry mapping. The existing ReferenceTrackingWorkspace caches the much larger full ReferenceEvaluation and owns three derivative workspaces for six family branches.",
-    "A one-time cached SpatialRegion label partition and reducer over externally supplied magnitudes. RegionalTensorErrors currently invokes classify independently for every quantity.",
-    "A snapshot-specific report/provenance type and transactional writer. Existing regional report constructors carry six-branch family identity and schedule assumptions.",
+  "implemented_adapter_glue": [
+    "An exact one-snapshot binding accepts only the reviewed N384/M384 clock-512 manifest and refuses any different source, plan, coefficient, profile, case, schedule or clock identity.",
+    "DerivativeWorkspace exposes catalog-backed AVX reservation and construction while retaining the existing strict-band staging, normalization and self-conjugate-plane projection.",
+    "A fixed 30-word cache packs velocity, gradient and 18 canonical symmetric-Hessian words; every insertion compares the expansion bitwise with all 27 independently evaluated ordered entries.",
+    "SpatialRegion is classified once per sample and cached as a u8 label; global and five-class TensorErrors reducers consume the same two magnitude arrays.",
+    "The snapshot-specific report preserves no-sample states, sampled collar counts/errors, core/annulus coverage, no-acceptance status, the exact storage/work ledgers and a post-measurement coefficient rehash. Its bounded candidate is synced and atomically renamed."
+  ],
+  "remaining_out_of_scope_glue": [
     "A reviewed cutoff-collar physical-volume coverage consumer. Current CoveragePlan implements nominal core and annulus only; sampled Collar errors and counts must not be described as collar volume coverage.",
-    "A reviewed sampled-peak location and tie rule if this artifact is intended to satisfy the design's concentration-location rows. LocalError currently retains peak height only.",
-    "A source closure and executable self-hash covering decoder, evaluator/jet/root, clock/case, derivative/FFT backend, regional classifier/reducer and the adapter itself."
+    "A reviewed sampled-peak qualification adapter, including location and a tie rule, if a later artifact is intended to satisfy the design's concentration rows. This bounded diagnostic reports sampled peak values but makes no peak qualification claim.",
+    "A root-reviewed full-run build binding the final implementation commit and release executable hash. The execute gate verifies the supplied running-binary hash, but no full-run binary has been approved or launched."
   ],
   "storage_reservation_bytes": {
     "decoded_actual_coefficients": 1366032384,
     "snapshot_decoder_overhead": 1048576,
     "avx_fft_catalog": 29362480,
-    "single_catalog_backed_derivative_workspace": 10890584872,
+    "single_catalog_backed_derivative_workspace": 10890584880,
     "packed_reference_30_f64_per_point": 108716359680,
     "two_reusable_pointwise_magnitude_arrays": 7247757312,
     "cached_u8_region_labels": 452984832,
     "configured_32_worker_stacks_at_2_mib": 67108864,
-    "allocator_allowance": 65536,
+    "allocator_allowance": 65528,
     "serialization_and_report_allowance": 65536,
     "admitted_total": 128771370072,
     "scoped_cap": 137438953472,
     "cap_headroom": 8667583400
   },
   "storage_notes": [
-    "The derivative-workspace figure uses the measured 768^3 AVX shared-plan reservation 3633389976 bytes plus a 227082240-element Complex64 staging buffer, a 452984832-element f64 value buffer and a 400-byte object allowance.",
+    "The derivative-workspace figure uses the measured 768^3 AVX shared-plan reservation 3633389976 bytes plus a 227082240-element Complex64 staging buffer, a 452984832-element f64 value buffer and the compiled 408-byte object size.",
     "The 30-word cache relies on Hessian mixed-partial symmetry but expands both ordered mixed entries during reduction; no component is omitted from the reported Frobenius magnitude.",
     "The cap excludes the immutable state file on disk and output candidate on disk; both have separate filesystem capacity checks."
   ],
@@ -224,22 +238,23 @@
     "reference_cache_scalar_writes": 13589544960,
     "regional_classifications": 452984832,
     "maximum_classification_root_iterations": 57982058496,
-    "scalar_inverse_transforms": 45,
+    "scalar_inverse_transforms": 39,
     "coefficient_visits_per_transform": 171343872,
-    "total_derivative_coefficient_visits": 7710474240,
-    "complete_tensor_component_point_visits": 19025362944,
-    "regional_magnitude_pushes": 1811939328,
+    "total_derivative_coefficient_visits": 6682411008,
+    "complete_tensor_component_point_visits": 17666408448,
+    "regional_magnitude_pushes": 1358954496,
     "core_annulus_coverage_geometry_evaluations": 10764,
     "post_measurement_coefficient_hash_bytes": 1366032384,
     "fft_internal_work": "bounded by the selected immutable 768^3 AVX plan but not represented as primitive FLOPs"
   },
   "wall_and_launch_envelope": {
-    "forecast_seconds": {"low": 720, "high": 1500},
+    "forecast_seconds": {"low": 1000, "high": 2400},
     "hard_timeout_seconds": 2400,
     "forecast_basis": [
       "The completed scalar external-reference bridge evaluated 452984832 points and three 768^3 forward FFTs in 119.99 seconds at 19.44 GiB measured RSS.",
       "Completed positive-node doubled-grid observer work required 271.5 to 296.7 seconds per node under the campaign profile.",
-      "This plan performs one more expensive degree-four reference pass, one classification pass, 45 scalar inverse FFTs and four complete regional reductions; no same-profile pilot has measured their exact split."
+      "The complete x=0 plane pilot evaluated and checked 589824 packed references in 35.543683109 seconds and classified them in 0.044999717 seconds. Linear scaling gives 27332.108825088 seconds sequential and 853.048394616 seconds under ideal 32-worker reference scaling, before the 39 inverse transforms and reductions.",
+      "The forecast remains a review envelope because the pilot does not measure 32-worker scaling, full-grid memory bandwidth, 39 transforms or reductions together."
     ],
     "admission": [
       "Run only after active trajectory and residual/reference jobs release the host.",
@@ -248,11 +263,11 @@
       "Treat timeout, allocation refusal, nonzero exit, hash mismatch, incomplete grid, missing class metadata or a missing required output field as no diagnostic publication."
     ]
   },
-  "architecture_decisions_for_root": [
-    "Approve 768^3 as this single finest physical sampling lattice; it is one diagnostic and supplies no sampling-refinement channel by itself.",
-    "Approve the packed symmetric-Hessian cache and expansion rule, plus the AVX derivative sampler addition, before implementation.",
-    "Decide whether sampled collar error/count is sufficient for this bounded diagnostic or whether the absent collar-volume consumer must block publication under the requested design wording.",
-    "Freeze the peak-location tie rule separately if the output is expected to populate mandatory PeakHeight/PeakLocation review rows.",
-    "Keep binary64 reference and diagnostic arithmetic labeled unresolved; this artifact cannot allocate zero uncertainty to reference precision or arithmetic."
+  "root_full_run_review": [
+    "Confirm residual localization and every other campaign workload are idle.",
+    "Confirm MemAvailable is at least 145951239256 bytes and at least 32 CPUs fit the host allocation.",
+    "Review the final source commit and release executable SHA-256, then supply the explicit execution gates documented in the runbook.",
+    "Apply an external 128771370072-byte address-space limit and a 2400-second TERM timeout with a 60-second kill-after.",
+    "Keep sampled collar results, sampled peak values, binary64 reference arithmetic and the single 768^3 lattice labeled as diagnostic measurements without collar-volume, peak, reference-precision or sampling-convergence qualification."
   ]
 }

@@ -2,7 +2,7 @@
 use super::squares::finite;
 use crate::{
     domain::{validate_spectrum, Domain, Layout},
-    spectral::{modal, FftPlan, FftWorkspace},
+    spectral::{modal, FftBackend, FftCatalog, FftPlan, FftWorkspace},
     storage::filled,
     Complex64, SolverError,
 };
@@ -98,6 +98,31 @@ impl DerivativeWorkspace {
     /// Element/header reservation, excluding caller storage and allocator overhead.
     /// A sample grid must retain every source mode componentwise, including high modes.
     pub fn reservation(source: Domain, samples: Layout) -> Result<usize, SolverError> {
+        let buffers = Self::buffer_reservation(source, samples)?;
+        FftPlan::reservation(samples)?
+            .checked_add(buffers)
+            .ok_or(SolverError::SizeOverflow)
+    }
+    /// Element/header reservation when immutable AVX plans are owned by an admitted catalog.
+    pub fn reservation_from_catalog(
+        source: Domain,
+        samples: Layout,
+        catalog: &FftCatalog,
+    ) -> Result<usize, SolverError> {
+        Self::reservation_with_shared_backend(source, samples, catalog.backend())
+    }
+    /// Element/header reservation for an enclosing execution's immutable FFT backend.
+    pub fn reservation_with_shared_backend(
+        source: Domain,
+        samples: Layout,
+        backend: FftBackend,
+    ) -> Result<usize, SolverError> {
+        let buffers = Self::buffer_reservation(source, samples)?;
+        FftPlan::reservation_with_shared_backend(samples, backend)?
+            .checked_add(buffers)
+            .ok_or(SolverError::SizeOverflow)
+    }
+    fn buffer_reservation(source: Domain, samples: Layout) -> Result<usize, SolverError> {
         if source
             .layout()
             .dimensions()
@@ -113,9 +138,7 @@ impl DerivativeWorkspace {
             .and_then(|a| complex.and_then(|b| a.checked_add(b)))
             .and_then(|bytes| bytes.checked_add(std::mem::size_of::<Self>()))
             .ok_or(SolverError::SizeOverflow)?;
-        FftPlan::reservation(samples)?
-            .checked_add(buffers)
-            .ok_or(SolverError::SizeOverflow)
+        Ok(buffers)
     }
     /// Admit the complete owned workspace before allocating any arrays.
     pub fn new(source: Domain, samples: Layout, cap: usize) -> Result<Self, SolverError> {
@@ -123,6 +146,26 @@ impl DerivativeWorkspace {
             return Err(SolverError::ResourceLimit);
         }
         let (fft, transform) = FftPlan::new(samples, cap)?;
+        Ok(Self {
+            source,
+            samples,
+            fft,
+            transform,
+            staging: filled(samples.half_len(), Complex64::new(0.0, 0.0))?,
+            values: filled(samples.real_len(), 0.0)?,
+        })
+    }
+    /// Admit one scalar sampler while reusing an execution-owned immutable FFT catalog.
+    pub fn new_from_catalog(
+        source: Domain,
+        samples: Layout,
+        catalog: &FftCatalog,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        if Self::reservation_from_catalog(source, samples, catalog)? > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let (fft, transform) = FftPlan::new_from_catalog(samples, catalog, cap)?;
         Ok(Self {
             source,
             samples,
@@ -220,6 +263,7 @@ fn project_pair(value: Complex64, partner: Complex64) -> Complex64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::spectral::FftBackend;
 
     #[test]
     fn pair_projection_preserves_exact_subnormal_and_large_pairs() {
@@ -230,6 +274,63 @@ mod tests {
             let projected = project_pair(value, value.conj());
             assert_eq!(projected.re.to_bits(), value.re.to_bits());
             assert_eq!(projected.im.to_bits(), value.im.to_bits());
+        }
+    }
+
+    #[test]
+    fn catalog_avx_sampler_matches_owned_normalization_and_derivatives() {
+        if !cfg!(target_arch = "x86_64") {
+            return;
+        }
+        let source = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+        let samples = Layout::new([6; 3]).unwrap();
+        let mut spectrum = vec![Complex64::new(0.0, 0.0); source.layout().half_len()];
+        for mode in [[1, 0, 0], [-1, 0, 0]] {
+            spectrum[source.layout().locate(mode).unwrap().0] = Complex64::new(0.5, 0.0);
+        }
+        spectrum[source.layout().locate([0, 0, 1]).unwrap().0] = Complex64::new(0.25, -0.125);
+        let catalog = match FftCatalog::new(FftBackend::RustFft6_4_1AvxFma, 64 << 20) {
+            Ok(value) => value,
+            Err(SolverError::InvalidDomain) => return,
+            Err(error) => panic!("unexpected AVX catalog refusal: {error:?}"),
+        };
+        let mut owned = DerivativeWorkspace::new(source, samples, 64 << 20).unwrap();
+        let reservation =
+            DerivativeWorkspace::reservation_from_catalog(source, samples, &catalog).unwrap();
+        assert!(matches!(
+            DerivativeWorkspace::new_from_catalog(source, samples, &catalog, reservation - 1),
+            Err(SolverError::ResourceLimit)
+        ));
+        let mut avx =
+            DerivativeWorkspace::new_from_catalog(source, samples, &catalog, reservation).unwrap();
+        for orders in [
+            [0, 0, 0],
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1],
+            [2, 0, 0],
+            [1, 1, 0],
+            [1, 0, 1],
+            [0, 2, 0],
+            [0, 1, 1],
+            [0, 0, 2],
+        ] {
+            let derivative = Derivative::new(orders).unwrap();
+            let expected = owned.sample(&spectrum, derivative).unwrap().values.to_vec();
+            let observed = avx.sample(&spectrum, derivative).unwrap();
+            for (&left, &right) in expected.iter().zip(observed.values) {
+                assert!((left - right).abs() <= 32.0 * f64::EPSILON * left.abs().max(1.0));
+            }
+        }
+
+        let values = avx
+            .sample(&spectrum, Derivative::new([1, 0, 0]).unwrap())
+            .unwrap();
+        let wave = std::f64::consts::TAU;
+        for (index, &value) in values.values.iter().enumerate() {
+            let x = (index / 36) as f64 / 6.0;
+            let expected = -wave * (wave * x).sin();
+            assert!((value - expected).abs() <= 64.0 * f64::EPSILON * wave);
         }
     }
 }

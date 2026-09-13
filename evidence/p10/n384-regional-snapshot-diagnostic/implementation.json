@@ -1,0 +1,105 @@
+{
+  "schema": "p10-n384-regional-snapshot-implementation-v1",
+  "status": "implemented_tested_pilot_complete_full_run_not_started",
+  "date_utc": "2026-09-13",
+  "branch": "codex/p10-regional-snapshot-plan-20260913",
+  "planning_base_commit": "59761b4aea2de0ffd527231771af9e168464240d",
+  "scope": {
+    "snapshot": "immutable N384/M384 clock-512 direct-from-rest archive",
+    "sample_dimensions": [768, 768, 768],
+    "quantities": ["velocity", "gradient", "ordered_hessian"],
+    "ordered_hessian_components": 27,
+    "sampled_regions": [
+      "core",
+      "annulus",
+      "interior_outside_nominal",
+      "collar",
+      "exterior"
+    ],
+    "collar_volume_coverage": "not_assessed",
+    "peak_qualification": "not_assessed",
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0}
+  },
+  "implementation": {
+    "catalog_backed_sampler": "crates/nsbu-solver/src/diagnostics/derivatives.rs",
+    "harness": "evidence/p10/n384-regional-snapshot-diagnostic/harness",
+    "packed_words_per_point": 30,
+    "packed_mapping": "velocity[3], gradient[9], symmetric Hessian[18]; expansion checked bitwise against all independently evaluated ordered Hessian[27] entries at every cached point",
+    "region_classifications_per_point": 1,
+    "pointwise_magnitude_arrays": 2,
+    "scalar_inverse_transforms": 39,
+    "state_import_or_resume_interfaces": 0,
+    "transactional_output": true,
+    "post_measurement_coefficient_rehash": true
+  },
+  "admission": {
+    "exact_cap_bytes": 128771370072,
+    "catalog_backed_derivative_workspace_bytes": 10890584880,
+    "planning_correction": "compiled DerivativeWorkspace header was 408 bytes, eight bytes above the planning estimate; eight bytes moved from allocator allowance and total cap stayed unchanged",
+    "allocator_allowance_bytes": 65528,
+    "minimum_mem_available_bytes": 145951239256,
+    "workers": 32,
+    "worker_stack_bytes": 2097152,
+    "hard_timeout_seconds": 2400,
+    "release_binary_sha256_at_validation": "df26e8846773679961223a12d34d7712e43fc985be632ff2bbce6c4a4e732053",
+    "full_run_gates": [
+      "root review approval",
+      "residual localization idle declaration",
+      "32-worker CPU fit",
+      "exact external address-space cap",
+      "running release-binary SHA-256 match",
+      "MemAvailable threshold"
+    ]
+  },
+  "validation": [
+    {
+      "command": "cargo clippy --all-targets -- -D warnings",
+      "scope": "standalone diagnostic harness",
+      "status": "passed"
+    },
+    {
+      "command": "cargo test",
+      "scope": "standalone diagnostic harness",
+      "status": "passed",
+      "tests": 8
+    },
+    {
+      "command": "cargo clippy -p nsbu-solver --lib -- -D warnings",
+      "scope": "production AVX sampler seam",
+      "status": "passed"
+    },
+    {
+      "command": "cargo test -p nsbu-solver --lib",
+      "scope": "production library including AVX parity, normalization and one-byte-short admission",
+      "status": "passed",
+      "tests": 28
+    },
+    {
+      "command": "preflight reviewed-clock512-manifest 128771370072",
+      "scope": "manifest/profile/hash/work/storage binding without reading the staged state payload",
+      "status": "passed"
+    },
+    {
+      "command": "execute reviewed-clock512-manifest 128771370072 output --root-reviewed",
+      "scope": "negative launch-gate control without approval environment",
+      "status": "refused_before_state_file_access",
+      "message": "full run requires P10_ROOT_FULL_RUN_REVIEW=approved"
+    }
+  ],
+  "pilot": {
+    "path": "evidence/p10/n384-regional-snapshot-diagnostic/pilot-x000.json",
+    "sha256": "cc26ddddda11bf4c9acb91050ef3b5fc33b3d020b8d4f258bac8538ac7abe34e",
+    "points": 589824,
+    "reference_seconds": 35.543683109,
+    "classification_seconds": 0.044999717,
+    "ordered_hessian_mapping_comparisons": 15925248,
+    "all_five_spatial_classes_observed": true,
+    "collar_samples": 160088,
+    "full_grid_reference_only_ideal_32_worker_extrapolation_seconds": 853.048394616
+  },
+  "full_run": {
+    "started": false,
+    "state_payload_read": false,
+    "reason": "residual localization remained active and root full-run review is required after CPU and memory fit"
+  }
+}

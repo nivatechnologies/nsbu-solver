@@ -1,0 +1,37 @@
+{
+  "schema": "p10-n384-regional-x-plane-pilot-v1",
+  "status": "representative-full-x-plane-complete",
+  "scope": "binary64 timing and mapping pilot only; no snapshot load or full-grid claim",
+  "dimensions": [768, 768, 768],
+  "x_index": 0,
+  "x_coordinate": 0.0,
+  "points": 589824,
+  "packed_words_per_point": 30,
+  "packed_bytes": 141557760,
+  "ordered_hessian_comparisons": 15925248,
+  "reference_seconds": 35.543683109,
+  "classification_seconds": 0.044999717,
+  "total_seconds": 35.588683366,
+  "sequential_full_grid_extrapolation_seconds": 27332.108825088,
+  "ideal_32_worker_reference_extrapolation_seconds": 853.048394616,
+  "region_counts": {
+    "core": 18649,
+    "annulus": 42662,
+    "interior_outside_nominal": 105458,
+    "collar": 160088,
+    "exterior": 262967
+  },
+  "representative_coordinates": {
+    "core": [0.0, 0.0, 0.0],
+    "annulus": [0.0, 0.0859375, 0.0],
+    "interior_outside_nominal": [0.0, 0.0, 0.08854166666666667],
+    "collar": [0.0, 0.0, 0.30078125],
+    "exterior": [0.0, 0.0, 0.4205729166666667]
+  },
+  "collar_volume_coverage": "not_assessed_sampled_collar_counts_only",
+  "peak_qualification": "not_assessed",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  }
+}
