@@ -3,7 +3,7 @@ set -eu
 [ "$#" -eq 1 ] || { echo "usage: $0 BUNDLE" >&2; exit 64; }
 BUNDLE=$(CDPATH= cd -- "$1" && pwd)
 PLAN=$BUNDLE/frozen-prefix-plan.json
-PLAN_SHA256=e44ca2db9f667749e8b33b88f346f1880f0c1b4961e16e14cba2fe071e0b3a84
+PLAN_SHA256=07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9
 DEADLINE_EPOCH=1789282800
 [ "$(sha256sum "$PLAN" | awk '{print $1}')" = "$PLAN_SHA256" ] || exit 65
 RUN_ROOT=$BUNDLE/run

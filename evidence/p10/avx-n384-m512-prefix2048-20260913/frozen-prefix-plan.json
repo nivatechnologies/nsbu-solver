@@ -16,12 +16,41 @@
   "observer_conservative_layout": 768,
   "method": "cox-matthews",
   "advective_limit": 3.3,
-  "absolute_tolerances": [0.00001, 0.0001],
-  "relative_tolerances": [0.00001, 0.00001],
-  "minimum_prefix": {"attempts": 32, "step_ticks": 64, "clock": 2048, "observer_nodes": [0, 512, 1024, 1536, 2048]},
+  "absolute_tolerances": [
+    1e-05,
+    0.0001
+  ],
+  "relative_tolerances": [
+    1e-05,
+    1e-05
+  ],
+  "minimum_prefix": {
+    "attempts": 32,
+    "step_ticks": 64,
+    "clock": 2048,
+    "observer_nodes": [
+      0,
+      512,
+      1024,
+      1536,
+      2048
+    ]
+  },
   "conditional_segments": [
-    {"from_clock": 2048, "to_clock": 3072, "attempts": 8, "step_ticks": 128, "positive_observers": 2},
-    {"from_clock": 3072, "to_clock": 4096, "attempts": 8, "step_ticks": 128, "positive_observers": 2}
+    {
+      "from_clock": 2048,
+      "to_clock": 3072,
+      "attempts": 8,
+      "step_ticks": 128,
+      "positive_observers": 2
+    },
+    {
+      "from_clock": 3072,
+      "to_clock": 4096,
+      "attempts": 8,
+      "step_ticks": 128,
+      "positive_observers": 2
+    }
   ],
   "checkpoint_rule": "at durable clocks 2048 and 3072, let Imax be the maximum integration_seconds in the most recent 8 accepted attempts and Omax the maximum positive observer_seconds observed so far; segment_budget=ceil(1.15*(8*Imax+2*Omax+300)); continue exactly one segment only when segment_budget <= numerical_deadline_epoch-now, otherwise TERM the exact owned process group",
   "forecast": {
@@ -50,6 +79,14 @@
   "numerical_deadline_epoch": 1789282800,
   "every_accepted_step_snapshot": true,
   "full_plan_preserved": "evidence/p10/avx-n384-m512-deployment-20260912/frozen-plan.json",
-  "prior_failures_preserved": ["missing predecessor run.time admission refusal", "r3 v2 launch stopped on pause at zero accepted steps"],
-  "launch_attempts_authorized": 1
+  "prior_failures_preserved": [
+    "missing predecessor run.time admission refusal",
+    "r3 v2 launch stopped on pause at zero accepted steps"
+  ],
+  "launch_attempts_authorized": 1,
+  "first_step_gate": {
+    "integration_max_seconds": 399,
+    "minimum_remaining_seconds": 14017,
+    "derivation": "ceil(1.15*(31*346.9130395536+4*283.5050339656+300))"
+  }
 }

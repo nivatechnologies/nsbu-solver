@@ -28,7 +28,7 @@ The measured central forecast is 18,919.87 seconds. It combines the current
 N384/M384 integration and observer means through attempt 38 with five measured
 force misses per step and the independent M512-minus-M384 force increment.
 After a 600-second startup allowance and 15% margin, the frozen budget is
-22,448 seconds (06:14:08). Launch must begin by 2026-09-13T00:45:52Z. The
+22,448 seconds (06:14:08). The original full-run forecast required launch by 2026-09-13T00:45:52Z. The active bounded-prefix policy instead requires launch by 2026-09-13T02:53:59Z and a first-step remaining budget of 14,017 seconds. The
 first accepted step must take at most 399 integration seconds and leave at
 least 21,359 seconds before the numerical deadline, along with exact identity,
 12 RHS calls, cache `[7,5]`, and zero steady allocations.
