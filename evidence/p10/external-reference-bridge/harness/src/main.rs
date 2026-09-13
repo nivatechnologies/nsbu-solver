@@ -46,6 +46,9 @@ mod tests {
     #[test]
     fn command_requires_explicit_execute_and_cap() {
         assert!(run(&[]).unwrap_err().contains("usage"));
+        assert!(run(&["x".into(), "1".into(), "not-execute".into()])
+            .unwrap_err()
+            .contains("usage"));
         assert!(run(&["x".into(), "bad".into()])
             .unwrap_err()
             .contains("InvalidDigit"));

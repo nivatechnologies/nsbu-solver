@@ -1,0 +1,94 @@
+{
+  "schema": "p10-external-reference-bridge-output-v1",
+  "status": "preflight-only",
+  "bridge": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "reference_source_commit": "6bdea3084d737ce6585cb67ab5d48810bd03cd50",
+    "reference_sources": [
+      {
+        "role": "scalar-evaluator",
+        "sha256": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8"
+      },
+      {
+        "role": "scalar-root",
+        "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b"
+      },
+      {
+        "role": "benchmark-time",
+        "sha256": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06"
+      },
+      {
+        "role": "benchmark-error",
+        "sha256": "9cd63ed56079fcf20e90d3139aeff3ebe45525f9b2acf81ef9bcea522a97137a"
+      },
+      {
+        "role": "benchmark-module",
+        "sha256": "398dd1e167349fa99e79ada2815e34cedd458d7989855a19973135688986ef2b"
+      },
+      {
+        "role": "tick-clock",
+        "sha256": "c8d56c25c03aeda44fb69e8896406ee02eb32646de0222ea5782c11fac5cc4ce"
+      },
+      {
+        "role": "case-definition",
+        "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+      }
+    ],
+    "harness_source_commit": "47a4d9c7096d1e02c9ce995bbd61514a8dede1d2",
+    "binary_sha256": "a39b4811138a0f5dd39540e4bc70b83f5f48b8bce5de1c5b822b420ace201047",
+    "reference_evaluator": "nsbu_benchmarks::scalar::evaluate",
+    "arithmetic": "binary64-explicit-scalar-root-and-velocity",
+    "sample_dimensions": [
+      768,
+      768,
+      768
+    ],
+    "retained_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "physical_grid": "unshifted-periodic-x_i=i/n",
+    "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
+    "fft_normalization": "forward-r2c-divide-by-complete-real-sample-count",
+    "crop": "normalization-preserving-strict-band-transfer-no-rescale",
+    "nyquist": "sample-nyquist-not-retained;target-nyquist-explicit-zero",
+    "projection": "none",
+    "coordinate_shift": false,
+    "mean_alignment": false,
+    "classification": "sampled-binary64-reference-diagnostic-not-continuum-or-enclosure",
+    "execution_context": "contended-local-p10-campaign-bounded-1800s",
+    "execution_cap_bytes": 20900924104,
+    "clock_exponent": -20,
+    "clock_target": 8192,
+    "elapsed": 512
+  },
+  "snapshot_identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "snapshot_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "snapshot_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "snapshot_coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+  "snapshot_file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+  "preflight": {
+    "storage": {
+      "decoded_actual_state": 1366032384,
+      "snapshot_decoder_overhead": 1048576,
+      "physical_reference_velocity": 10871635968,
+      "fft_catalog": 29362480,
+      "fft_plan_and_workspace": 3633389976,
+      "fft_output_spectrum": 3633315840,
+      "retained_reference_velocity": 1366032384,
+      "allocator_allowance": 40960,
+      "serialization": 65536,
+      "total": 20900924104
+    },
+    "work": {
+      "reference_evaluations": 452984832,
+      "maximum_root_iterations": 57982058496,
+      "scalar_forward_transforms": 3,
+      "transfer_coefficient_visits": 681246720,
+      "comparison_work_units": 199213056
+    }
+  },
+  "reference_assignments": 0,
+  "resume_or_import_interfaces": 0
+}
