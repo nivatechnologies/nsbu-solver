@@ -1,0 +1,18 @@
+{
+  "schema": "p10-n512-m768-one-attempt-source-sha256-v1",
+  "run_source": "6442ec98bf55582e1990aac874e3b0234252add8",
+  "files": {
+    "evidence/p10/n512-m768-one-attempt-timing/harness/Cargo.toml": "d2b573daa47ad3a2247966d266538152e14242455d65ce116e7fada37aece8e0",
+    "evidence/p10/n512-m768-one-attempt-timing/harness/Cargo.lock": "575cd295ad274e3712f35288d1a966bae2917ccae41e7b3ac807b4db89e6645e",
+    "evidence/p10/n512-m768-one-attempt-timing/harness/src/main.rs": "9bddc9d202eedc49a213cc2f8ec1811573afd9775e382c71857cd34b105db83f",
+    "evidence/p10/n512-m768-one-attempt-timing/harness/src/tests.rs": "826df62b04c9c1f611a375b59bb2ba4d854b2418765003081aa15d5bc077390b",
+    "evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs": "875b1decd9844d3f3605dea8dd367c2cd8006cb543e6d7b246e58f895e6ec4c4",
+    "evidence/p10/avx-scheduled-endpoint/harness/src/timed_rhs.rs": "cad9391eae9784be75a636bbee03808f565a9ef1c18633feb59942da7bb7e5e1",
+    "crates/nsbu-solver/src/spectral/w3/admission.rs": "0fc47b1e72bb8f6c821ede4607ad495d66e8d4a6041cb1c83952a7383b2dff24",
+    "crates/nsbu-solver/src/spectral/w3/tests.rs": "8fceec04f5ee60cbbc9a53ecaf92bd7aa9b383aefb056ca92736d8a75400d27c",
+    "crates/nsbu-solver/src/integrators/rhs/w3.rs": "8acbe1d49972e450a0a49bae8d20d8ce40d81145cb5a5e50fd49901fc7f440e2",
+    "crates/nsbu-solver/src/integrators/attempt.rs": "29c7bdcc8696b3c32d15724a56883d04cb48307c74feb6aa976fec8851f309bf",
+    "crates/nsbu-solver/src/domain/resources.rs": "4ecff25c131b6bc56c89bbeee55bfc17b34ecdfabc4bfe6dfa76119085f0dc80",
+    "crates/nsbu-benchmarks/src/provider/parallel_reduced.rs": "14565a26a47bab09dab7b500a17881025197b256bef5a1691ef778a203920ed2"
+  }
+}
