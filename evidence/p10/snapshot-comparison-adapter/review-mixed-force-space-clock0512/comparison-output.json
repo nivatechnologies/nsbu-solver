@@ -1,0 +1,280 @@
+{
+  "schema": "p10-snapshot-mixed-force-space-diagnostic-output-v1",
+  "comparison_kind": "MIXED_FORCE_SPACE_DIAGNOSTIC",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "coarse": {
+    "role": "coarse_u256_m384",
+    "dimensions": [
+      256,
+      256,
+      256
+    ],
+    "evolution": {
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "quantum_exponent": -20,
+      "clock_target": 8192,
+      "comparison_endpoint": 512,
+      "lengths": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "viscosity": 1.0,
+      "method": "cox-matthews",
+      "integration_force_dimensions": [
+        384,
+        384,
+        384
+      ],
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 512,
+          "step_ticks": 64
+        }
+      ],
+      "absolute_tolerances": [
+        0.00001,
+        0.0001
+      ],
+      "relative_tolerances": [
+        0.00001,
+        0.00001
+      ]
+    },
+    "identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "profile": {
+      "kind": "identity-profile-field",
+      "value": "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+    },
+    "admission_guard": {
+      "advective_limit": 3.3,
+      "maximum_attempts": 48
+    },
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=512;host=local",
+    "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+    "plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+    "hashes": {
+      "coefficient_sha256": "a98b82093364ee94877a66106a09a528ada045cc71b3d2c2b5621ec8e6a7fd20",
+      "file_sha256": "d6ff2831a4a3de57d8d1ce210de326a64568a309da137989bcbff522bc65d5f4"
+    }
+  },
+  "baseline": {
+    "role": "baseline_u384_m384",
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "evolution": {
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "quantum_exponent": -20,
+      "clock_target": 8192,
+      "comparison_endpoint": 512,
+      "lengths": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "viscosity": 1.0,
+      "method": "cox-matthews",
+      "integration_force_dimensions": [
+        384,
+        384,
+        384
+      ],
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 512,
+          "step_ticks": 64
+        }
+      ],
+      "absolute_tolerances": [
+        0.00001,
+        0.0001
+      ],
+      "relative_tolerances": [
+        0.00001,
+        0.00001
+      ]
+    },
+    "identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "profile": {
+      "kind": "identity-profile-field",
+      "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+    },
+    "admission_guard": {
+      "advective_limit": 3.3,
+      "maximum_attempts": 48
+    },
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=768;host=sulaco",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "hashes": {
+      "coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+      "file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243"
+    }
+  },
+  "force": {
+    "role": "force_u384_m512",
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "evolution": {
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "quantum_exponent": -20,
+      "clock_target": 8192,
+      "comparison_endpoint": 512,
+      "lengths": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "viscosity": 1.0,
+      "method": "cox-matthews",
+      "integration_force_dimensions": [
+        512,
+        512,
+        512
+      ],
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 512,
+          "step_ticks": 64
+        }
+      ],
+      "absolute_tolerances": [
+        0.00001,
+        0.0001
+      ],
+      "relative_tolerances": [
+        0.00001,
+        0.00001
+      ]
+    },
+    "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "profile": {
+      "kind": "identity-profile-field",
+      "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"
+    },
+    "admission_guard": {
+      "advective_limit": 3.3,
+      "maximum_attempts": 48
+    },
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "plan_sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+    "hashes": {
+      "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+      "file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9"
+    }
+  },
+  "clock": {
+    "elapsed": 512,
+    "target": 8192,
+    "epoch": 8,
+    "accepted_steps": 8
+  },
+  "metrics": {
+    "spatial_a": {
+      "full": {
+        "l2": 1.2096041932421298e-6,
+        "h1": 0.001190327045752841,
+        "vorticity_l2": 0.0011903264313918459
+      },
+      "common": {
+        "l2": 3.9551997629170425e-11,
+        "h1": 3.360004418935379e-8,
+        "vorticity_l2": 3.360002091324126e-8
+      },
+      "newly_resolved": {
+        "l2": 1.2096041925954883e-6,
+        "h1": 0.0011903270452786171,
+        "vorticity_l2": 0.0011903264309176223
+      }
+    },
+    "force_b": {
+      "full": {
+        "l2": 5.6674035312333814e-8,
+        "h1": 0.0000674519751074314,
+        "vorticity_l2": 0.00006745195130986213
+      },
+      "common": {
+        "l2": 1.2312746037281554e-8,
+        "h1": 9.914737253037577e-6,
+        "vorticity_l2": 9.914729608215602e-6
+      },
+      "newly_resolved": {
+        "l2": 5.5320363010423814e-8,
+        "h1": 0.00006671931452807929,
+        "vorticity_l2": 0.00006671929160523202
+      }
+    },
+    "combined_c": {
+      "full": {
+        "l2": 1.2084744529458722e-6,
+        "h1": 0.0011886273630703078,
+        "vorticity_l2": 0.0011886267489713965
+      },
+      "common": {
+        "l2": 1.2312832002305394e-8,
+        "h1": 9.91481136959822e-6,
+        "vorticity_l2": 9.914803724718964e-6
+      },
+      "newly_resolved": {
+        "l2": 1.2084117251958904e-6,
+        "h1": 0.0011885860106677086,
+        "vorticity_l2": 0.0011885853966112033
+      }
+    },
+    "cross_a_b": {
+      "full": {
+        "twice_real_inner_product": {
+          "l2": -5.9437471686223855e-15,
+          "h1": -8.593236598252155e-9,
+          "vorticity_l2": -8.593230654504986e-9
+        },
+        "cosine_similarity": {
+          "l2": -0.04335137847477781,
+          "h1": -0.05351380123881023,
+          "vorticity_l2": -0.05351381072456552
+        }
+      },
+      "common": {
+        "twice_real_inner_product": {
+          "l2": 5.525778873910808e-22,
+          "h1": 3.4073484362594796e-16,
+          "vorticity_l2": 3.4073429104806057e-16
+        },
+        "cosine_similarity": {
+          "l2": 0.0005673357633132433,
+          "h1": 0.0005114056161723135,
+          "vorticity_l2": 0.0005114055354071312
+        }
+      },
+      "newly_resolved": {
+        "twice_real_inner_product": {
+          "l2": -5.943747721200273e-15,
+          "h1": -8.593236938986998e-9,
+          "vorticity_l2": -8.593230995239277e-9
+        },
+        "cosine_similarity": {
+          "l2": -0.04441217755171056,
+          "h1": -0.05410145111892233,
+          "vorticity_l2": -0.054101460209148564
+        }
+      }
+    }
+  },
+  "admitted_bytes": 3138912256
+}
