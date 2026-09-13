@@ -612,5 +612,21 @@
     "steady_allocations": 0,
     "accepted_windows": 0,
     "scope": "One exact from-rest0-to64 CM attempt per host with identical executable and linked runtime libraries. Candidate hashes and local-error words match; single-trial timing is not general throughput. New Sulaco profile admits exact API peak plus32GiB operational headroom, preserving prior host guards. No state commit/publication or endpoint trajectory; no PDE qualification."
+  },
+  "p10_n512_m512_endpoint_preparation": {
+    "status": "prepared_reviewed_not_launched",
+    "evidence": "evidence/p10/n512-m512-endpoint-prep-20260913/README.md",
+    "reviewed_preparation_commit": "4a9a0a2f4f4b18746f2f552061fa6eb8874ec813",
+    "prepared_binary_sha256": "7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211",
+    "captured_states_planned": 48,
+    "endpoint_exact_api_bytes": 207578085872,
+    "archive_bound_bytes": 155226537984,
+    "n512_tests_passed": 19,
+    "run_executed": false,
+    "offline_observer": "required_not_implemented_or_executed",
+    "time_extension": "20 hours requested; pending user response",
+    "launch_wrapper": "proposed; absolute deadline and source-bound launch guards still need freeze and review",
+    "quality_limit": "Harness main.rs555/config.rs617 exceed requested file-size threshold; not whole-project quality certified.",
+    "qualification": false
   }
 }

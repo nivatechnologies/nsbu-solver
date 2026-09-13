@@ -259,9 +259,10 @@ attributing a channel; keep sampled-reference bridge values explicitly diagnosti
 The [next spatial and force profile note](../evidence/p10/next-spatial-force-profile-20260913/README.md)
 records the existing trajectory anchors and the separate force-resolution
 contract. It recommends N512/M512 followed by N256/M512 as the next matched
-M512 spatial branches. This is planning only: no trajectory is prepared or
-authorized, and the force alias, precision, and full-observable requirements
-remain open.
+M512 spatial branches. The [N512 capture harness](../evidence/p10/n512-m512-endpoint-prep-20260913/README.md)
+is now prepared and reviewed, with 19 focused tests passing. The longer run
+awaits a time extension and final launch-wrapper review. Force alias, precision,
+and full-observable requirements remain open.
 
 The N512/M512 single-attempt host controls now pass on both baccus and Sulaco
 with identical candidate coefficient hashes and local-error words. Sulaco used
