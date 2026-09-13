@@ -1,6 +1,6 @@
 {
   "schema": "p10-n512-m1024-analytic-projection-endpoint4096-implementation-v1",
-  "status": "frozen_source_endpoint_timeout_archived",
+  "status": "frozen_preflight_validated_not_executed",
   "source_commit": "9b4a980f147978b03cece70a265cc97090984c91",
   "base_early512_source_commit": "a1d04a7ffc866fa3c826c01eae7269c575ba927a",
   "release_binary_sha256": "bdf43acd1926f45ae5b066679e59753653f19473d38bf21585009a715ca432a5",
@@ -31,8 +31,6 @@
   "state_inputs": 0,
   "trajectory_from_rest_claims": 0,
   "state_import_or_resume_interfaces": 0,
-  "heavy_executions": 1,
-  "acceptance": "not_assessed",
-  "execution_result": "timeout_exit_124_no_result",
-  "run_receipt": "run-clock4096.json"
+  "heavy_executions": 0,
+  "acceptance": "not_assessed"
 }
