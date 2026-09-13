@@ -66,3 +66,32 @@ The execute path validates the fixed manifest/profile/source/plan/clock hashes b
 uses immutable coefficient borrows after decode, and rehashes the coefficient bytes after all
 measurements. Output is written to a bounded candidate, synced, and atomically renamed only after
 the diagnostic is complete.
+
+The root-reviewed M512 run completed in 1844.53 seconds with result
+`results/clock0512-m512.json`. The result remains diagnostic-only. The direct comparison with the
+historical M384 result is recorded in `m384-vs-m512-clock0512.tsv`; M512 reduced every headline
+error, while ordered-Hessian collar and exterior errors remained the same order.
+
+The separately identified analytical projection path accepts no snapshot or state argument. It
+samples analytical velocity on the unshifted 768³ lattice, applies the reviewed normalized forward
+FFT and strict 768-to-384 crop, drops producer scratch, then passes only the projected coefficients
+to the unchanged regional measurement path. Its origin is `sampled_analytic_projection`; it makes
+zero trajectory-from-rest, state-import, resume, or acceptance claims.
+
+```text
+cargo run --release --manifest-path evidence/p10/n384-regional-snapshot-diagnostic/harness/Cargo.toml -- \
+  projection-preflight
+```
+
+A later root-reviewed execution uses the same conservative cap and launch environment as the
+snapshot diagnostic, but has no input-manifest parameter:
+
+```text
+"$REGIONAL_BINARY" projection-execute 128771370072 OUTPUT.json --root-reviewed
+```
+
+The analytical producer peak is 19533843144 bytes. Its worker-stack sampling subphase ends before
+the FFT projection subphase. The projected coefficients survive into measurement after all other
+producer allocations drop. The measurement peak is 128770321496 bytes, exactly the historical
+measurement reservation with the 1048576-byte snapshot decoder overhead removed. The external cap
+and minimum-memory gate remain conservatively unchanged.

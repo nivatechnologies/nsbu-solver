@@ -1,0 +1,72 @@
+{
+  "schema": "p10-n384-regional-snapshot-run-v1",
+  "status": "complete_exit_0_validated",
+  "source_commit": "2c59233b9a849f596aa04f91149d906641330798",
+  "launcher": {
+    "launch_utc": "2026-09-13T10:11:26Z",
+    "output_mtime_utc": "2026-09-13T10:42:10.666712465Z",
+    "wall_seconds": 1844.53,
+    "timeout_pid": 1456924,
+    "diagnostic_pid": 1456925,
+    "exit_code": 0,
+    "timeout_term_seconds": 2400,
+    "timeout_kill_after_seconds": 60
+  },
+  "fresh_admission": {
+    "other_heavy_campaign_jobs_idle": true,
+    "mem_available_bytes": 513238220800,
+    "minimum_mem_available_bytes": 145951239256,
+    "visible_cpus": 128,
+    "required_workers": 32,
+    "internal_reservation_bytes": 128771370072,
+    "actual_rlimit_as_soft_bytes": 137438953472,
+    "actual_rlimit_as_hard_bytes": 137438953472
+  },
+  "observed_resources": {
+    "maximum_rss_kib": 125659136,
+    "maximum_rss_gib": 119.837890625,
+    "cpu_percent": 957,
+    "major_page_faults": 0,
+    "swaps": 0
+  },
+  "bindings": {
+    "snapshot_manifest_sha256": "92bf674356740ae230fe10eab617c9d9c1bdcb4edf84c2f446983a12d148f4d1",
+    "frozen_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "release_binary_sha256": "6a5fbc74fee9e553ffd181f8e6d598b28953a83cc9f1bc37c8cf904abacc1e39",
+    "snapshot_file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+    "coefficient_sha256_before_and_after": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+    "result_sha256": "1926f05798c20f1caa9d58f9b3d7e20ad4bacc3f649f13bd752bf9288ad441a6",
+    "time_log_sha256": "fce7943d41263e1e9616271f30d0f42615764f8d15efac861fdb6d52a6c488a7"
+  },
+  "validation": {
+    "root_independent_validation": [
+      "result_sha256",
+      "snapshot_and_post_coefficient_hash_equality",
+      "region_counts_equal_historical_m384",
+      "region_counts_sum_to_768_cubed",
+      "quantity_ids_and_relative_floors_equal_historical_m384",
+      "headline_rms_values"
+    ],
+    "region_counts_sum_to_sample_points": true,
+    "region_counts_equal_historical_m384": true,
+    "every_quantity_global_sample_count_complete": true,
+    "every_quantity_has_all_five_sampled_regions": true,
+    "all_reported_measurements_finite": true,
+    "immutable_coefficient_hash_equal": true,
+    "transactional_final_present_and_candidate_absent": true,
+    "stdout_empty": true,
+    "stderr_empty": true,
+    "state_import_or_resume_interfaces": 0
+  },
+  "comparison": {
+    "historical_m384_result": "results/clock0512.json",
+    "historical_m384_result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07",
+    "m384_vs_m512_table": "m384-vs-m512-clock0512.tsv",
+    "interpretation": "M512 force reduces every headline error, but ordered-Hessian collar and exterior errors remain the same order; a separate sampled analytic N384 projection diagnostic is the next truncation discriminator."
+  },
+  "claims": {
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+    "collar_volume_coverage": "not_assessed_sampled_collar_errors_and_counts_only",
+    "peak_qualification": "not_assessed"
+  }
+}

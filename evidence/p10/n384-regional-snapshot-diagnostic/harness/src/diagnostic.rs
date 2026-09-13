@@ -24,6 +24,18 @@ use policy::{
     snapshot_binding, storage, validate_snapshot, verify_manifest_hash, work,
 };
 
+pub(crate) fn executable_hash() -> Result<String, String> {
+    current_executable_hash()
+}
+
+pub(crate) fn authorize_full_run(binary_sha256: &str) -> Result<(), String> {
+    launch_gate(binary_sha256)
+}
+
+pub(crate) fn hash_coefficients(coefficients: [&[nsbu_solver::Complex64]; 3]) -> String {
+    coefficient_hash(coefficients)
+}
+
 pub(crate) const CAP_BYTES: usize = 128_771_370_072;
 const SCOPED_RLIMIT_AS_BYTES: usize = 137_438_953_472;
 const EXTRA_MEMORY_GATE: usize = 16 * 1024 * 1024 * 1024;
@@ -215,6 +227,14 @@ struct QuantityReport {
     regions: [RegionOutput; 5],
 }
 
+#[derive(Debug, Serialize)]
+pub(crate) struct Measurements {
+    region_counts: [RegionCount; 5],
+    quantities: [QuantityReport; 3],
+    coverage: [CoverageOutput; 6],
+    pub(crate) coefficient_sha256: String,
+}
+
 #[derive(Clone, Copy, Debug, Serialize)]
 struct RegionOutput {
     region: &'static str,
@@ -346,11 +366,42 @@ pub(crate) fn preflight_output(input: &BoundInput) -> PreflightOutput<'_> {
 
 pub(crate) fn execute(input: &BoundInput) -> Result<DiagnosticOutput<'_>, String> {
     let snapshot = decode::load(&input.manifest)?;
-    let domain = input.manifest.domain()?;
+    let coefficients = snapshot.coefficients.each_ref().map(Vec::as_slice);
+    let measured = measure_coefficients(coefficients, snapshot.clock)?;
+    if measured.coefficient_sha256 != input.binding.coefficient_sha256
+        || measured.coefficient_sha256 != snapshot.coefficient_sha256
+    {
+        return Err("post-measurement immutable coefficient hash mismatch".into());
+    }
+    Ok(DiagnosticOutput {
+        schema: "p10-n384-regional-snapshot-diagnostic-v1",
+        status: "sampled_read_only_diagnostic_complete",
+        snapshot: snapshot_binding(&input.manifest),
+        sample_dimensions: [DIMENSION; 3],
+        region_counts: measured.region_counts,
+        quantities: measured.quantities,
+        diagnostic_binary_sha256: &input.binary_sha256,
+        coverage: measured.coverage,
+        storage: input.storage,
+        work: input.work,
+        post_measurement_coefficient_sha256: measured.coefficient_sha256,
+        immutable_coefficient_hash_equal: true,
+        collar_volume_coverage: "not_assessed_sampled_collar_errors_and_counts_only",
+        peak_qualification: "not_assessed",
+        acceptance: no_acceptance(),
+        state_import_or_resume_interfaces: 0,
+    })
+}
+
+pub(crate) fn measure_coefficients(
+    coefficients: [&[nsbu_solver::Complex64]; 3],
+    clock: model::ClockHeader,
+) -> Result<Measurements, String> {
+    let domain = nsbu_solver::domain::Domain::new([384; 3], [1.0; 3], 1.0).map_err(model::debug)?;
     let samples = Layout::new([DIMENSION; 3]).map_err(model::debug)?;
     let mut cache = try_zeros(samples.real_len())?;
     let mut labels = try_zeros(samples.real_len())?;
-    let region_counts = sample_reference(&mut cache, &mut labels, snapshot.clock)?;
+    let region_counts = sample_reference(&mut cache, &mut labels, clock)?;
     let catalog =
         FftCatalog::new(FftBackend::RustFft6_4_1AvxFma, FFT_CATALOG_BYTES).map_err(model::debug)?;
     let reservation = DerivativeWorkspace::reservation_from_catalog(domain, samples, &catalog)
@@ -369,7 +420,6 @@ pub(crate) fn execute(input: &BoundInput) -> Result<DiagnosticOutput<'_>, String
     .map_err(model::debug)?;
     let mut errors = try_zeros(samples.real_len())?;
     let mut references = try_zeros(samples.real_len())?;
-    let coefficients = snapshot.coefficients.each_ref().map(Vec::as_slice);
     let quantities = [
         measure::<3>(
             Quantity::Velocity,
@@ -399,28 +449,13 @@ pub(crate) fn execute(input: &BoundInput) -> Result<DiagnosticOutput<'_>, String
             &mut references,
         )?,
     ];
-    let coverage = coverage(snapshot.clock)?;
+    let coverage = coverage(clock)?;
     let post_hash = coefficient_hash(coefficients);
-    if post_hash != input.binding.coefficient_sha256 || post_hash != snapshot.coefficient_sha256 {
-        return Err("post-measurement immutable coefficient hash mismatch".into());
-    }
-    Ok(DiagnosticOutput {
-        schema: "p10-n384-regional-snapshot-diagnostic-v1",
-        status: "sampled_read_only_diagnostic_complete",
-        snapshot: snapshot_binding(&input.manifest),
-        sample_dimensions: [DIMENSION; 3],
+    Ok(Measurements {
         region_counts,
         quantities,
-        diagnostic_binary_sha256: &input.binary_sha256,
         coverage,
-        storage: input.storage,
-        work: input.work,
-        post_measurement_coefficient_sha256: post_hash,
-        immutable_coefficient_hash_equal: true,
-        collar_volume_coverage: "not_assessed_sampled_collar_errors_and_counts_only",
-        peak_qualification: "not_assessed",
-        acceptance: no_acceptance(),
-        state_import_or_resume_interfaces: 0,
+        coefficient_sha256: post_hash,
     })
 }
 

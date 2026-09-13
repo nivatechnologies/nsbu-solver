@@ -8,6 +8,7 @@ mod model;
 mod cache;
 mod diagnostic;
 mod pilot;
+mod projection;
 
 use std::{env, ffi::OsString, path::PathBuf};
 
@@ -27,6 +28,15 @@ fn run(args: &[OsString]) -> Result<(), String> {
             print!("{}", diagnostic::json(&diagnostic::preflight_output(&input))?);
             Ok(())
         }
+        [command] if command == "projection-preflight" => {
+            print!("{}", diagnostic::json(&projection::preflight()?)?);
+            Ok(())
+        }
+        [command, cap, output, review]
+            if command == "projection-execute" && review == "--root-reviewed" =>
+        {
+            projection::execute(parse_cap(cap)?, &PathBuf::from(output))
+        }
         [command, manifest, cap, output, review]
             if command == "execute" && review == "--root-reviewed" =>
         {
@@ -35,7 +45,7 @@ fn run(args: &[OsString]) -> Result<(), String> {
             let report = diagnostic::execute(&input)?;
             diagnostic::write_transactional(&PathBuf::from(output), &report)
         }
-        _ => Err("usage: p10-n384-regional-snapshot-diagnostic pilot | preflight SNAPSHOT.json CAP_BYTES | execute SNAPSHOT.json CAP_BYTES OUTPUT.json --root-reviewed".into()),
+        _ => Err("usage: p10-n384-regional-snapshot-diagnostic pilot | preflight SNAPSHOT.json CAP_BYTES | execute SNAPSHOT.json CAP_BYTES OUTPUT.json --root-reviewed | projection-preflight | projection-execute CAP_BYTES OUTPUT.json --root-reviewed".into()),
     }
 }
 
