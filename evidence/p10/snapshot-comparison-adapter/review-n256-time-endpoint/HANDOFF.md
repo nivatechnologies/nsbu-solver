@@ -1,9 +1,8 @@
 # N256 endpoint time diagnostic: review handoff
 
-Status: both endpoints complete; manifests prepared for root review; comparator
-not invoked. This package requests only a `TIME_DIAGNOSTIC` comparison with cap
-812,646,400 bytes. It does not assess acceptance and does not support trajectory
-injection or resume.
+Status: root-approved `TIME_DIAGNOSTIC` completed once with exit status zero at
+cap 812,646,400 bytes. It does not assess acceptance and does not support
+trajectory injection or resume.
 
 Both snapshots are real completed N256/M384 states at physical clock 4096 with
 target 8192, case `e1236f...68f7e`, quantum exponent -20, unit domain lengths,
@@ -34,6 +33,6 @@ relabeled as a directly measured control source.
 `review-provenance.json` binds both endpoint records, full files, coefficient
 payloads, plans, clock headers, control records, and lineage records. The
 manifests use absolute paths to the immutable files in their originating
-isolated worktrees. Root review must approve the manifests and
-`arithmetic-review.json` before any adapter command is run. No comparison output
-exists in this directory.
+isolated worktrees. Root reviewed and approved these inputs before the single
+run. `RESULT.md`, `comparison-output.json`, and `run-provenance.json` preserve
+the result and its exact field values.

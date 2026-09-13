@@ -1,10 +1,14 @@
 {
   "schema": "p10-snapshot-time-diagnostic-review-handoff-v1",
-  "status": "both-endpoints-complete-pending-root-review-comparison-not-run",
+  "status": "root-approved-single-comparison-complete",
   "adapter_source_commit": "e59dc06",
   "comparison_kind": "TIME_DIAGNOSTIC",
   "proposed_cap_bytes": 812646400,
   "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "comparison_output": {
+    "path": "evidence/p10/snapshot-comparison-adapter/review-n256-time-endpoint/comparison-output.json",
+    "sha256": "e7ac14340d9d0c25683d059c5c0b334b9035cd72e1b6ccf3f8d30bef945e2ed8"
+  },
   "left": {
     "source_commit": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
     "record": {

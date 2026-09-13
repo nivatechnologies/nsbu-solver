@@ -1,0 +1,34 @@
+{
+  "schema": "p10-snapshot-time-diagnostic-run-v1",
+  "status": "complete-exit-zero",
+  "authorization": "root-approved-single-run",
+  "completed_utc_recorded_after_run": "2026-09-13T00:15:59Z",
+  "adapter_source_commit": "e59dc06",
+  "branch_head_before_run": "307f38341c9f787419ae2285dec8e81575fbb890",
+  "binary": {
+    "path": "evidence/p10/snapshot-comparison-adapter/harness/target/release/p10-snapshot-comparison-adapter",
+    "sha256": "89d375a41338fc862dd1f9d349f202b5123ad02e2b1e3c8474c42f7d52c1e704"
+  },
+  "command": [
+    "cargo",
+    "run",
+    "--release",
+    "--manifest-path",
+    "evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml",
+    "--",
+    "evidence/p10/snapshot-comparison-adapter/review-n256-time-endpoint/n256-h32-clock4096.json",
+    "evidence/p10/snapshot-comparison-adapter/review-n256-time-endpoint/n256-piecewise-clock4096.json",
+    "812646400"
+  ],
+  "cap_bytes": 812646400,
+  "left_manifest_sha256": "38b260498ec838032d353798569bc267052a260bbf66dc34bde67f4d04debd5a",
+  "right_manifest_sha256": "463de2d72e1d69fbb187a2fc76f1e1116a0f19b0aa5cb4a86ce0a165115f9db0",
+  "output": {
+    "path": "evidence/p10/snapshot-comparison-adapter/review-n256-time-endpoint/comparison-output.json",
+    "sha256": "e7ac14340d9d0c25683d059c5c0b334b9035cd72e1b6ccf3f8d30bef945e2ed8",
+    "serialization": "all emitted fields and values preserved; insignificant JSON whitespace normalized during archival"
+  },
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "interpretation_scope": "reviewed-equivalence-supported-by-controls-time-execution-diagnostic-only"
+}
