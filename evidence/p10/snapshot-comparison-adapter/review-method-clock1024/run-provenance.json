@@ -1,0 +1,51 @@
+{
+  "schema": "p10-method-diagnostic-clock1024-provenance-v1",
+  "status": "completed_once_under_root_preauthorization_not_assessed",
+  "comparison_kind": "METHOD_DIAGNOSTIC",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "unchanged_method_mode_lineage": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "cap_bytes": 2733113344,
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "left": {
+    "manifest": "left-n384-cm-clock1024.json",
+    "snapshot_sha256": "909c3ff78c9d182b141b9393bde25677459c533a426410cc2890b94419bf2420",
+    "coefficient_sha256": "35160a4319fc1f20bb4cc6af1ac87d57a60b3923ee16402f83178feaf8a4f05a",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "method": "cox-matthews"
+  },
+  "right": {
+    "manifest": "right-n384-ho-clock1024.json",
+    "snapshot_sha256": "0d5ac759a5536ffb8b4149d2ca4ed7eede6614a73b63cf37b4f4ad2fc967be79",
+    "coefficient_sha256": "bd46875a7057bb725d01cde3523d35a9d854fdf37dc8cc11dcf44a16687083aa",
+    "plan_sha256": "ef337eb28924a335a78dbfc1c710ca40e8b507b10b96687bc4197971e411b60c",
+    "source_commit": "0faec11e507e07c08ad20fd29cec04ddf8cd8946",
+    "method": "hochbruck-ostermann",
+    "producer_worktree_commit": "a6095c0c6ae13f3ada574e170a23a6d395bb01fc"
+  },
+  "shared_semantics": {
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "clock": 1024,
+    "epoch": 16,
+    "accepted_steps": 16,
+    "maximum_attempts": 48,
+    "step_ticks": 64
+  },
+  "snapshot_handling": "read immutable pre-existing local exact-hash paths; no copy or transfer made for this comparison",
+  "budget": "unassigned; candidate 2e-4 is not applied because no active policy supplied to this run explicitly assigns Method to Time",
+  "executions": 1,
+  "exit_status": 0,
+  "comparison_output_sha256": "f3dcb22946822da8cc5fac746e6a00563acf39bca28ededc7799a26fe9d9096f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "maximum_resident_set_kbytes": 2669568,
+  "elapsed_wall_seconds": 38.14
+}
