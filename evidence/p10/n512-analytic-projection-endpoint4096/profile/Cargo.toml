@@ -1,0 +1,9 @@
+[package]
+name = "p10-clock-sampler-profile"
+version = "0.0.0"
+edition = "2021"
+publish = false
+[workspace]
+[dependencies]
+nsbu-benchmarks = { path = "/mnt/niva-array/nsbu-solver/work/p10-n512-projection-endpoint4096-20260913/crates/nsbu-benchmarks" }
+nsbu-solver = { path = "/mnt/niva-array/nsbu-solver/work/p10-n512-projection-endpoint4096-20260913/crates/nsbu-solver" }
