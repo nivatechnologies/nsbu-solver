@@ -1,0 +1,10 @@
+{
+  "schema": "p10-fft-tile-w3-controls-local-authorization-v1",
+  "authorized_utc": "2026-09-13T16:12:00Z",
+  "reviewed_launcher_sha256": "66ae0ce1479d46596bf8cff38dc59b2c0d074f9a6627db40faa1b8821503e07d",
+  "reviewed_tiled_source": "335f6741c21e5b56409ca47e335b1bbb920a60e9",
+  "reviewed_tiled_binary_sha256": "5ad30a91ecf3ae8c1dad34cfe52d06cbeaa9694c618e40d06019fab2d711c797",
+  "authorized_order": ["untiled-force", "tiled-force", "untiled-rhs", "tiled-rhs"],
+  "scope": "bounded cross-source numerical controls only; stop on failure",
+  "production_adoption": false
+}
