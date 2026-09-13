@@ -1,0 +1,152 @@
+{
+  "schema": "p10-snapshot-ordered-hessian-diagnostic-output-v1",
+  "comparison_kind": "ORDERED_HESSIAN_DIAGNOSTIC",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "normalization": "all-27-ordered-entries; rms=volume-average; l2=physical-domain-integral",
+  "left_dimensions": [
+    256,
+    256,
+    256
+  ],
+  "left_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 4096,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "left_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "left_profile": {
+    "kind": "identity-profile-field",
+    "value": "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "left_admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  },
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=512;host=local",
+  "left_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "left_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "left_hashes": {
+    "coefficient_sha256": "793c45ed6e5f18e352e2a1c2f013ab6972c5d9870a40e390e1bf5503f2997fcc",
+    "file_sha256": "b3289a527271982a560f44d20d18867c065a18d64b5f75c7f80f4ccbfc766c8b"
+  },
+  "right_dimensions": [
+    384,
+    384,
+    384
+  ],
+  "right_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 4096,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "right_identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_profile": {
+    "kind": "identity-profile-field",
+    "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "right_admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  },
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=768;host=sulaco",
+  "right_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "right_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "right_hashes": {
+    "coefficient_sha256": "921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b",
+    "file_sha256": "2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592"
+  },
+  "clock": {
+    "elapsed": 4096,
+    "target": 8192,
+    "left_epoch": 48,
+    "right_epoch": 48,
+    "left_accepted_steps": 48,
+    "right_accepted_steps": 48
+  },
+  "hessian": {
+    "difference": {
+      "l2": 19.009226022991264,
+      "rms": 19.009226022991264
+    },
+    "fine_absolute": {
+      "l2": 3406.702540739857,
+      "rms": 3406.702540739857
+    },
+    "relative_to_fine": {
+      "l2": 0.005579948878912951,
+      "rms": 0.005579948878912951
+    }
+  },
+  "admitted_bytes": 1772879872
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "p10-ordered-hessian-screen-summary-v1",
+  "status": "completed_not_assessed",
+  "source_commit": "a4f99ad35b9e290ab8a9e548ece155303a8b66b9",
+  "adapter_binary_sha256": "410a2ffa737e637c0b6a4a2d6505c7316d04e0e84712523020365a78c2189acc",
+  "execution_order": [
+    "clock0512/N192\u2192N256",
+    "clock0512/N256\u2192N384",
+    "clock4096/N192\u2192N256",
+    "clock4096/N256\u2192N384"
+  ],
+  "screens": [
+    {
+      "clock": 512,
+      "pair": "N192\u2192N256",
+      "cap_bytes": 578486272,
+      "output_sha256": "7345fe565c4b4e248a26142cf0202318f1fdad23fdef37d808b5343e0592418c",
+      "difference": {
+        "l2": 3.7801537790776787,
+        "rms": 3.7801537790776787
+      },
+      "fine_absolute": {
+        "l2": 215.39656559308554,
+        "rms": 215.39656559308554
+      },
+      "relative_to_fine": {
+        "l2": 0.017549740260106663,
+        "rms": 0.017549740260106663
+      },
+      "exit_status": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_resident_set_kbytes": 564224,
+      "elapsed_wall": "0:07.33"
+    },
+    {
+      "clock": 512,
+      "pair": "N256\u2192N384",
+      "cap_bytes": 1772879872,
+      "output_sha256": "c33d75bdae8d92f049f0f888c482a86d9ac692c97e08ea7f91bc9cd310470af8",
+      "difference": {
+        "l2": 1.2002800944889471,
+        "rms": 1.2002800944889471
+      },
+      "fine_absolute": {
+        "l2": 215.39990978269407,
+        "rms": 215.39990978269407
+      },
+      "relative_to_fine": {
+        "l2": 0.005572333320379977,
+        "rms": 0.005572333320379977
+      },
+      "exit_status": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_resident_set_kbytes": 1731584,
+      "elapsed_wall": "0:22.52"
+    },
+    {
+      "clock": 4096,
+      "pair": "N192\u2192N256",
+      "cap_bytes": 578486272,
+      "output_sha256": "ecd9d4d7bbbb05ccda847ffcd4976ba8fd82620ca4a0ccc5d030412a3b32ce5f",
+      "difference": {
+        "l2": 59.685374727037384,
+        "rms": 59.685374727037384
+      },
+      "fine_absolute": {
+        "l2": 3406.6495054595234,
+        "rms": 3406.6495054595234
+      },
+      "relative_to_fine": {
+        "l2": 0.017520256965497957,
+        "rms": 0.017520256965497957
+      },
+      "exit_status": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_resident_set_kbytes": 565248,
+      "elapsed_wall": "0:07.25"
+    },
+    {
+      "clock": 4096,
+      "pair": "N256\u2192N384",
+      "cap_bytes": 1772879872,
+      "output_sha256": "2b7d89372f37d1ab0ee9622a1ab332b06bfdb275f502460a2e55e9398ddddff5",
+      "difference": {
+        "l2": 19.009226022991264,
+        "rms": 19.009226022991264
+      },
+      "fine_absolute": {
+        "l2": 3406.702540739857,
+        "rms": 3406.702540739857
+      },
+      "relative_to_fine": {
+        "l2": 0.005579948878912951,
+        "rms": 0.005579948878912951
+      },
+      "exit_status": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_resident_set_kbytes": 1731584,
+      "elapsed_wall": "0:23.46"
+    }
+  ],
+  "adjacent_ratio_contraction": {
+    "512": 0.31751656935041783,
+    "4096": 0.31848556159315206
+  },
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0,
+    "assigned_hessian_budget": null
+  },
+  "interpretation_limits": [
+    "Full-band ordered-Hessian Fourier L2/RMS screen only.",
+    "Unit-volume domains make reported L2 and RMS numerically equal.",
+    "No pointwise, time-supremum, finest-grid, or continuum claim."
+  ]
+}

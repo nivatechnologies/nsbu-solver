@@ -1,6 +1,6 @@
 {
   "schema": "p10-ordered-hessian-review-handoff-v1",
-  "status": "review_only_no_numerical_use",
+  "status": "completed_in_preauthorized_sequence_not_assessed",
   "source_commit": "861b25d23d55ab409221a8a43a2b0638b79a4551",
   "implementation_commit": "861b25d23d55ab409221a8a43a2b0638b79a4551",
   "test_commit": "861b25d23d55ab409221a8a43a2b0638b79a4551 (includes 78c1d14f8b20948e11bf2c5a7937b20c4a8eaddc focused numerical tests plus optional-output binding regression)",
@@ -60,5 +60,20 @@
     "no finest-grid qualification",
     "no continuum claim"
   ],
-  "authorization": "root semantic review required before any --ordered-hessian invocation"
+  "authorization": "root preauthorized sequential clock512 coarse then fine, followed by clock4096 after both clock512 runs passed",
+  "executed_source_commit": "a4f99ad35b9e290ab8a9e548ece155303a8b66b9",
+  "adapter_binary_sha256": "410a2ffa737e637c0b6a4a2d6505c7316d04e0e84712523020365a78c2189acc",
+  "executions": 4,
+  "completed_order": [
+    "clock0512/N192\u2192N256",
+    "clock0512/N256\u2192N384",
+    "clock4096/N192\u2192N256",
+    "clock4096/N256\u2192N384"
+  ],
+  "raw_output_sha256": {
+    "clock0512/N192\u2192N256": "7345fe565c4b4e248a26142cf0202318f1fdad23fdef37d808b5343e0592418c",
+    "clock0512/N256\u2192N384": "c33d75bdae8d92f049f0f888c482a86d9ac692c97e08ea7f91bc9cd310470af8",
+    "clock4096/N192\u2192N256": "ecd9d4d7bbbb05ccda847ffcd4976ba8fd82620ca4a0ccc5d030412a3b32ce5f",
+    "clock4096/N256\u2192N384": "2b7d89372f37d1ab0ee9622a1ab332b06bfdb275f502460a2e55e9398ddddff5"
+  }
 }
