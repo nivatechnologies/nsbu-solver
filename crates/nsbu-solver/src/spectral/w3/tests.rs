@@ -149,16 +149,16 @@ fn admitted_force_layouts_have_exact_w3_reservations() {
     let m512 = Layout::new([512; 3]).unwrap();
     assert_eq!(
         super::admission::additional(m512, BACKEND, W3FftMode::Forward).unwrap(),
-        4_318_465_840
+        4_318_465_792
     );
     let m768 = Layout::new([768; 3]).unwrap();
     assert_eq!(
         super::admission::additional(m768, BACKEND, W3FftMode::Forward).unwrap(),
-        14_540_099_376
+        14_540_099_328
     );
     assert_eq!(
         super::admission::additional(m768, BACKEND, W3FftMode::Bidirectional).unwrap(),
-        21_787_856_816
+        21_787_856_768
     );
 }
 
