@@ -1,0 +1,11 @@
+{
+  "source": "2cbad43",
+  "tests_passed": 32,
+  "covered_lines": 497,
+  "num_statements": 548,
+  "covered_branches": 141,
+  "num_branches": 176,
+  "max_crap": 22.5,
+  "scope": "Final controller package; not whole-maintained release or PDE acceptance",
+  "notes": "coverage/CC/CRAP JSON supersede earlier consolidated logs; earlier pytest log records26 tests, final32 count from executing agent report."
+}

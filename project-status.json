@@ -458,5 +458,15 @@
     "wall_seconds": 166.93946338399837,
     "evidence": "evidence/p10/local-modal-derivative-fixtures-20260913/README.md",
     "scope": "Artificial integer modal fixtures only; not a PDE trajectory or general coding-autonomy demonstration. Separate Rust consumer generation exhausted its budget and was not accepted. Cloud review time unmeasured."
+  },
+  "local_agent_controller": {
+    "source": "2cbad43",
+    "status": "bounded_controller_verified",
+    "focused_tests_passed": 32,
+    "line_coverage_fraction": 0.906934306569343,
+    "branch_coverage_fraction": 0.8011363636363636,
+    "max_crap": 22.5,
+    "evidence": "evidence/p10/local-agent-controller-20260913/README.md",
+    "scope": "Task and review budgets, reasoning-enabled requests, tool-free final phase, deterministic validation. No unattended general coding or PDE acceptance claim."
   }
 }

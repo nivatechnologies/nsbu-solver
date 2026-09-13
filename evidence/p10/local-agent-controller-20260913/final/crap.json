@@ -1,0 +1,574 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "checked",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 17.333333333333336
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "checked",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 17.333333333333336
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "_check_contract_definition",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 13.703703703703706
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "validate_contract",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 10.799999999999999
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "checked",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 5.9259259259259265
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "_matches_type",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 5.390625
+    },
+    {
+      "path": "tools/local_agents/contracts.py",
+      "function": "checked",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 5.9259259259259265
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "complete",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "_tool_calls",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "__init__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "endpoint",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "complete",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "_integer",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "_optional_string",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "complete",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "__init__",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "complete",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/transport.py",
+      "function": "endpoint",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "run",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.9166666666666666,
+      "crap": 13.097800925925926
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_unique_tasks",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_load_state",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 22.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_attempts",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 9.648
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_attempt",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_submit_ready",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_task_hash",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 7.3919999999999995
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_run_task",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_check_reply",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "__init__",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "stop",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "run",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.9166666666666666,
+      "crap": 13.097800925925926
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_submit_ready",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_reserve",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_record_result",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_next_dispatchable",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_run_task",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_attempts",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 9.648
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_attempt",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_complete",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_check_reply",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_bounded_complete",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "call",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_validate",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 5.1157407407407405
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_expired",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_unique_tasks",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "save_state",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_parse_object",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_system_prompt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_task_hash",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 7.3919999999999995
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_json_hash",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_add_tokens",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_read_artifact",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_load_state",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 22.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_deferred_receipt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_install_signal_handler",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_validate",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 5.1157407407407405
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_next_dispatchable",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "__init__",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_record_result",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_complete",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_bounded_complete",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "call",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_expired",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_parse_object",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_read_artifact",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_install_signal_handler",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "stop",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_reserve",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "save_state",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_system_prompt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_json_hash",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_add_tokens",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/runner.py",
+      "function": "_deferred_receipt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/validators.py",
+      "function": "exact_expected",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "load_config",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "load_tasks",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "_integer",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "_number",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "_optional_string",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "_bool",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "_object",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/local_agents/__main__.py",
+      "function": "main",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    }
+  ],
+  "maximum": 22.5
+}

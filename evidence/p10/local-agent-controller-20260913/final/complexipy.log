@@ -1,0 +1,96 @@
+[92m──────────────────────────────── [39m🐙 complexipy[92m ─────────────────────────────────[39m
+[1mtools/local_agents/__main__.py[0m
+    _object [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    main [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _bool [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _optional_string [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _integer [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _number [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    load_config [32m4[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    load_tasks [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mtools/local_agents/contracts.py[0m
+    TaskPacket::checked [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _matches_type [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _check_contract_definition [32m10[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    RunnerConfig::checked [32m11[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    validate_contract [32m16[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mtools/local_agents/runner.py[0m
+    QueueRunner::_add_tokens [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_deferred_receipt [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_json_hash [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_reserve [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_system_prompt [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::save_state [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::stop [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_expired [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_install_signal_handler [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_read_artifact [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::__init__ [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_complete [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_parse_object [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_record_result [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_bounded_complete [32m4[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_next_dispatchable [32m4[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_check_reply [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_run_task [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_validate [32m5[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_submit_ready [32m8[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_attempt [32m10[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_load_state [32m12[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_task_hash [32m14[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_unique_tasks [32m14[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::_attempts [32m15[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    QueueRunner::run [32m19[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mtools/local_agents/transport.py[0m
+    HttpTransport::endpoint [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    Transport::complete [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    HttpTransport::__init__ [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _optional_string [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _integer [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    HttpTransport::complete [32m3[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    _tool_calls [32m3[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mtools/local_agents/validators.py[0m
+    exact_expected [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1mtools/tests/test_local_agents.py[0m
+    FakeHttpResponse::__init__ [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    FakeHttpResponse::close [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    FakeTransport::__init__ [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    HangingTransport::complete [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    attempts [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    config [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    messages [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    packet [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    runner [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_cli_loads_checked_config_and_task_packets [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_cli_rejects_malformed_config [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_cli_rejects_malformed_task_payloads [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_duplicate_task_id_with_different_packet_is_rejected [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_endpoint_normalization_and_truncated_reply_refusal [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_final_tool_calls_and_unknown_finish_reasons_fail_closed [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_http_transport_bounds_and_closes_failed_reads [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_http_transport_parses_usage_tools_and_closes_response [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_invalid_outputs_get_two_repairs_with_exact_errors_then_fail_closed [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_no_endpoint_fallback_and_nonreview_requires_trust [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_nonfinite_time_budgets_are_rejected [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_numeric_contract_rejects_bool_and_nonfinite [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_outer_wall_guard_does_not_wait_for_uncooperative_transport [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_output_byte_limit_and_expired_budget_fail_closed [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_terminal_state_prevents_duplicate_rerun [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_tool_reads_only_declared_artifact_and_honors_call_budget [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_unsupported_contract_is_rejected_before_inference [32m0[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    FakeHttpResponse::read [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    FakeTransport::complete [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    errors [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_final_phase_omits_tools_and_all_requests_enable_thinking [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_review_capacity_reserves_inflight_slots_and_defers_without_failure [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_task_timeouts_count_toward_family_pause [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_three_consecutive_failures_pause_family_without_more_inference [32m1[39m  ✅ [1m[30;42m PASSED [0m[0m 
+    test_queue_refills_configured_worker_slot_for_trusted_tasks [32m2[39m  ✅ [1m[30;42m PASSED [0m[0m 
+
+[1m[32mAll functions are within the allowed complexity.[39m[0m
+[92m────────────────────────── [39m🎉 Analysis completed! 🎉[92m ───────────────────────────[39m
