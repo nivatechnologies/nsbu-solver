@@ -1,0 +1,22 @@
+{
+  "schema": "p10-m512-endpoint-r6-clock512-comparison-v1",
+  "observed_utc": "2026-09-13T11:51:37Z",
+  "status": "committed",
+  "attempt": 8,
+  "clock": 512,
+  "integration_seconds": 403.033639744,
+  "observer_seconds": 289.538332974,
+  "rhs_timed_calls": 12,
+  "cache_hits": 7,
+  "cache_misses": 5,
+  "steady_allocations": 0,
+  "coefficient_bytes": 1366032384,
+  "r6_state_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+  "r5_state_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+  "comparison": "exact_match",
+  "deadline_remaining_seconds": 28877,
+  "attempt_json_sha256": "a2a92ef7b61fe2968f8fa1324daf658853432629297b2ae8312e8e3d6b9b5c5c",
+  "record_json_sha256": "2d22cb28566f7005260decfece6c34b2846af5e793451ead66e062f1941a1876",
+  "state_bin_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+  "qualification": "comparison only; no state was injected or reset"
+}

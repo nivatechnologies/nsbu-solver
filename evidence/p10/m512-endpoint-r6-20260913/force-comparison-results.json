@@ -1,0 +1,68 @@
+{
+  "schema": "p10-m512-endpoint-r6-force-comparison-results-v1",
+  "status": "completed_exit_zero",
+  "completed_utc": "2026-09-13T16:50:03Z",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "adapter": {
+    "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+    "binary_sha256": "9d3d473109e32dac98582aae7bd286ffc38016cebd46c82adb1e12346d1ff2be",
+    "internal_cap_bytes": 2733113344,
+    "external_vmem_cap_kib": 8388608
+  },
+  "executed_launcher": {
+    "sha256": "7cc732e65036a9079ae7342199097e779d0debe3c335104852a425c126c88dbb",
+    "note": "Expected argv hash, PGID, starttime and cmdline were bound. The loop lacks a final explicit stable_samples>=2 assertion, so a theoretical last-iteration single-sample bind was possible; observed launches completed normally and receipts match the precomputed exact argv hashes."
+  },
+  "clock_3584": {
+    "exit_status": 0,
+    "elapsed_seconds": 32.54,
+    "maximum_resident_set_kib": 2668544,
+    "stderr_bytes": 0,
+    "result_sha256": "92e183d8396cd421351d63d58d2b3079fa16f8202161dcd2bdab53d87829baed",
+    "full_l2": 9.052613042457037e-07,
+    "full_h1": 0.0010746999869829384,
+    "full_vorticity_l2": 0.0010746996060022977,
+    "newly_resolved_l2": 0.0,
+    "newly_resolved_h1": 0.0
+  },
+  "clock_4096": {
+    "exit_status": 0,
+    "elapsed_seconds": 31.83,
+    "maximum_resident_set_kib": 2668544,
+    "stderr_bytes": 0,
+    "result_sha256": "e3265117da3db3715a67a7954875449d3bce64abd2064b68f3e49777240d080d",
+    "full_l2": 9.107692885188672e-07,
+    "full_h1": 0.0010809675503320475,
+    "full_vorticity_l2": 0.0010809671669365236,
+    "newly_resolved_l2": 0.0,
+    "newly_resolved_h1": 0.0
+  },
+  "qualification": "diagnostic only; PDE force-channel qualification and acceptance not assessed",
+  "clock_2560": {
+    "exit_status": 0,
+    "elapsed_seconds": 32.02,
+    "maximum_resident_set_kib": 2668544,
+    "stderr_bytes": 0,
+    "result_sha256": "1b8d145af8b724598877478df72804d9ade064a5f67aab93460ca26fcb3162f9",
+    "full_l2": 8.945623831487807e-07,
+    "full_h1": 0.0010625736864702529,
+    "full_vorticity_l2": 0.0010625733101957626,
+    "newly_resolved_l2": 0.0,
+    "newly_resolved_h1": 0.0,
+    "launcher_sha256": "d141277fc8a3ed3d095a27dfa76938103f9c7e178ab0b75ae05c4af80569e7e8"
+  },
+  "completed_observer_clocks": [
+    512,
+    1024,
+    1536,
+    2048,
+    2560,
+    3072,
+    3584,
+    4096
+  ]
+}

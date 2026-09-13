@@ -1,0 +1,104 @@
+{
+  "schema": "p10-m512-endpoint-r6-force-comparison-binding-v1",
+  "status": "all_8_nonzero_observer_clock_force_comparisons_completed",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "retained_dimensions": [
+    384,
+    384,
+    384
+  ],
+  "left_integration_force_dimensions": [
+    384,
+    384,
+    384
+  ],
+  "right_integration_force_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "method": "cox-matthews",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "left": {
+    "role": "actual_independently_evolved_n384_m384_trajectory",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "clock_3584": {
+      "snapshot": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-044-clock-3584/state.bin",
+      "record": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-044-clock-3584/record.json",
+      "coefficient_sha256": "a1490c09bff7c7fa191a845785e94420882eafb1842bbb95dff9f5a42f4f97bc",
+      "file_sha256": "a8ff93feb0950af68a9cc93e5a62e59fe8f3538e94555be70bda6e7c8403a004"
+    },
+    "clock_4096": {
+      "snapshot": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-048-clock-4096/state.bin",
+      "record": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-048-clock-4096/record.json",
+      "coefficient_sha256": "921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b",
+      "file_sha256": "2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592"
+    }
+  },
+  "right": {
+    "role": "fresh_independently_evolved_n384_m512_r6_trajectory",
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "plan": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/frozen-plan.json",
+    "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "clock_3584": {
+      "snapshot": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output/step-044-clock-3584/state.bin",
+      "record": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output/step-044-clock-3584/record.json",
+      "coefficient_sha256": "267c1b92de5e4562ae96dc6fcc05813a9c49c6c5238e03add5154503d4afa721",
+      "file_sha256": "7389d17c82c56acd0878408dca73be59675b62e8f8d25b372781dd1e771f187d",
+      "manifest": "force-clock3584-right.json",
+      "manifest_sha256": "71029ede82ee9dfea3d2ba0af240b22f4f1d3a39fad0355c2620f142a5541aa2"
+    },
+    "clock_4096": {
+      "snapshot": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output/step-048-clock-4096/state.bin",
+      "record": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output/step-048-clock-4096/record.json",
+      "coefficient_sha256": "1d1500409962c4af37182f6733c2c88a086247c8e8728570e9c93238ed1c04fd",
+      "file_sha256": "43308ca8ddb499916a09183266e3a83811b3214536c14c7ba2f6814363cef0a0",
+      "manifest": "force-clock4096-right.json",
+      "manifest_sha256": "72f148b50c5d2c877d838a1b5d576edc7f2d44bdad925d2bbfb06436138ca5f4"
+    }
+  },
+  "prepared_left_manifests": {
+    "force-clock3584-left.json": "51ef4dd2346622382fb1d014f6a55360ce4f036a5e17a134650f4bd75db0bd48",
+    "force-clock4096-left.json": "8485f526274711ac6cf0c18d0ecc2135e22f4085f1b31c17cc4b7af8feeff2d7",
+    "force-clock2560-left.json": "038e02b7d97cd6bda168407d040bc8398a65156c9b3c9290aebd726516c0cb49"
+  },
+  "adapter": {
+    "reviewed_mode_source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+    "prior_reviewed_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+    "cap_bytes": 2733113344,
+    "availability": "fresh local build from exact reviewed source is available; see adapter-build-binding.json",
+    "prepared_local_binary": {
+      "path": "/mnt/niva-array/nsbu-solver/work/p10-force-adapter-62b7635-20260913/evidence/p10/snapshot-comparison-adapter/harness/target/release/p10-snapshot-comparison-adapter",
+      "sha256": "9d3d473109e32dac98582aae7bd286ffc38016cebd46c82adb1e12346d1ff2be"
+    },
+    "excluded_older_binary": {
+      "path": "/tmp/nsbu-p10-sulaco-20260912T1420Z/guard-profile/bin/p10-snapshot-compare",
+      "sha256": "64055c4963c580614ce26124372e2802df90b770ea2f401fd298f77b38e75170",
+      "reason": "does not match the reviewed FORCE_RESOLUTION_DIAGNOSTIC binary"
+    }
+  },
+  "execution_gate": "completed",
+  "analytical_projection_is_counterpart": false,
+  "qualification": "diagnostic only; acceptance not assessed",
+  "prepared_right_manifests": {
+    "force-clock3584-right.json": "71029ede82ee9dfea3d2ba0af240b22f4f1d3a39fad0355c2620f142a5541aa2",
+    "force-clock4096-right.json": "72f148b50c5d2c877d838a1b5d576edc7f2d44bdad925d2bbfb06436138ca5f4",
+    "force-clock2560-right.json": "acbed0801b7001d467205a5bf15077a1cbd241d6ca97919d686efd465ae86da7"
+  },
+  "launcher": {
+    "path": "launch-force-comparisons-reviewed.sh",
+    "sha256": "7cc732e65036a9079ae7342199097e779d0debe3c335104852a425c126c88dbb",
+    "status": "executed"
+  },
+  "results": {
+    "clock_3584": "force-comparison-run/clock3584.json",
+    "clock_3584_sha256": "92e183d8396cd421351d63d58d2b3079fa16f8202161dcd2bdab53d87829baed",
+    "clock_4096": "force-comparison-run/clock4096.json",
+    "clock_4096_sha256": "e3265117da3db3715a67a7954875449d3bce64abd2064b68f3e49777240d080d",
+    "clock_2560": "force-comparison-clock2560-run/clock2560.json",
+    "clock_2560_sha256": "1b8d145af8b724598877478df72804d9ade064a5f67aab93460ca26fcb3162f9"
+  }
+}

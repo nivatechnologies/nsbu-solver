@@ -1,0 +1,23 @@
+	Command being timed: "/usr/bin/timeout --foreground --signal=TERM --kill-after=30s 600 /tmp/nsbu-p10-sulaco-m512-r6-force-comparisons-20260913/p10-snapshot-comparison-adapter /tmp/nsbu-p10-sulaco-m512-r6-force-comparisons-20260913/force-clock3584-left.json /tmp/nsbu-p10-sulaco-m512-r6-force-comparisons-20260913/force-clock3584-right.json 2733113344"
+	User time (seconds): 29.98
+	System time (seconds): 2.55
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:32.54
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2668544
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 667232
+	Voluntary context switches: 3
+	Involuntary context switches: 84
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

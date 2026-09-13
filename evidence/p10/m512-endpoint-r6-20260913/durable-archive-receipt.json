@@ -1,0 +1,20 @@
+{
+  "schema": "p10-m512-endpoint-r6-durable-archive-receipt-v1",
+  "status": "verified_complete",
+  "source_host": "sulaco",
+  "source_output": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output",
+  "destination_output": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "file_count": 146,
+  "state_file_count": 48,
+  "metadata_file_count": 98,
+  "total_bytes": 65569755172,
+  "inventory_sha256": "28e6c237190980174c8bcfcc41622a0f7fa60b8837d3d588ec4e9f5e3e48bb36",
+  "verification": "all local and remote sorted SHA-256 inventory lines byte-identical",
+  "priority_nodes_verified_first": [
+    3584,
+    4096
+  ],
+  "copy_policy": "100MiB/s cap; 1200s timeout plus 60s kill grace; partial-dir; ignore-existing; no overwrite conflicts",
+  "qualification": "preservation only; acceptance not assessed"
+}

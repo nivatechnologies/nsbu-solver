@@ -1,0 +1,20 @@
+{
+  "schema": "p10-m512-endpoint-r6-numa-placement-v1",
+  "observed_utc": "2026-09-13T11:51:52Z",
+  "host": "sulaco",
+  "solver_pid": 260583,
+  "phase": "immediate_post_clock512_observer",
+  "observer_sample_obtained": false,
+  "observer_sample_note": "monitor output arrived after the observer completed; this measurement is not represented as in-observer",
+  "measurement": "numastat -p 260583",
+  "process_memory_mb": {
+    "node0_total": 123387.87,
+    "node1_total": 28895.40,
+    "total": 152283.27
+  },
+  "vm_size_kib": 160669976,
+  "vm_rss_kib": 155938068,
+  "cpus_allowed_list": "0-255",
+  "mems_allowed_list": "0-1",
+  "run_settings_changed": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "p10-m512-endpoint-r6-progress-checkpoint-v1",
+  "requested_utc": "2026-09-13T11:52:54Z",
+  "observed_utc": "2026-09-13T11:53:06Z",
+  "durable_attempts": 8,
+  "durable_clock": 512,
+  "durable_file_count": 25,
+  "output_bytes": 10928293000,
+  "deadline_remaining_seconds": 28788,
+  "disk_available_bytes": 1635828899840,
+  "mem_available_kib": 95242884,
+  "stderr_bytes": 0,
+  "solver_pid": 260583,
+  "solver_starttime": 37283148,
+  "watchdog_pid": 260597,
+  "watchdog_starttime": 37283171,
+  "watchdog_deadline_epoch": 1789329174,
+  "status": "running_identity_verified"
+}

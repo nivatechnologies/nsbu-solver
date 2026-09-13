@@ -1,0 +1,55 @@
+{
+  "schema": "p10-force-resolution-adapter-build-binding-v1",
+  "status": "built_and_focused_validation_passed_not_staged_not_executed",
+  "source_worktree": "/mnt/niva-array/nsbu-solver/work/p10-force-adapter-62b7635-20260913",
+  "source_branch": "codex/p10-force-adapter-62b7635-20260913",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "manifest": "evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml",
+  "manifest_sha256": "574e29a2484b7abac9b09b7ba59d78cc6bac92e9f674e864623a3f8e1c06a22d",
+  "lock_sha256": "c497a17c123d07dae1c67205216dcbffc1d7b60c07bee7f03fe75497d5b7ac99",
+  "source_sha256": {
+    "absolute.rs": "33ddbd114f809b54f990181833d0e4d2567a704e9721555ecbdb77239e5c19fb",
+    "compare.rs": "fbbba413f603c753909e5317afa8281dcd8847c36fb78ef23442764cb592c1d1",
+    "decode.rs": "ce93d16ae3cb7a6666621897ce83cadabbd319254a33d30cdecffd2f10a90ecf",
+    "hessian.rs": "ed2b89e4036a4735da99f1ec0453faa15d4c86ffc77073d4f99999183547021f",
+    "main.rs": "b0bf4383547af3b84b9f7baa50c54579ed0c5f759622d360391a999a0e45ee1c",
+    "mixed.rs": "1aa8f5831a2ac8efe0faab4dc05f5aa7ea96304f3e53563b097648afa8af9d0d",
+    "model.rs": "6282c61e916dfcba7641f31472a762604042a7ab6cf6b65b0ef61007ba16f3f6",
+    "tests.rs": "b1f32c94cf4d85d30dd91b697fe9ed7ad98862ccff35b13738c1e7cac4afbff8"
+  },
+  "toolchain": {
+    "rustc": "1.94.0 (4a4ef493e 2026-03-02)",
+    "rustc_commit": "4a4ef493e3a1488c6e321570238084b38948f6db",
+    "llvm": "21.1.8",
+    "cargo": "1.94.0 (85eff7c80 2026-01-15)",
+    "host": "x86_64-unknown-linux-gnu",
+    "kernel": "Linux baccus 6.8.0-139-generic x86_64"
+  },
+  "commands": {
+    "test": "cargo test --locked --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml",
+    "clippy": "cargo clippy --locked --all-targets --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml -- -D warnings",
+    "build": "cargo build --release --locked --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml"
+  },
+  "validation": {
+    "tests": "21 passed; 0 failed",
+    "focused_force_resolution_test": "force_resolution_diagnostic_is_closed_and_directional passed",
+    "clippy": "passed with warnings denied",
+    "semantic_preflight": "reviewed clock3072 force manifests and both frozen plans opened and validated; stopped before allocation because their /tmp Sulaco snapshots are absent on localhost",
+    "semantic_preflight_exit_status": 1,
+    "comparison_executed": false
+  },
+  "raw_logs": {
+    "adapter-test.log": "3ccc611c7dace9c24b39282905638cfb6717cc692582f574f500dc9df9687248",
+    "adapter-clippy.log": "fecede7c2157efe2f16c8c8b9dce94b0fb4dd384dca8207046c8bf7636eb0ffe",
+    "adapter-build.log": "670aea0b731167ae29089db4c1fd31151f390d32d04668c07d960665095e43d8"
+  },
+  "binary": {
+    "path": "/mnt/niva-array/nsbu-solver/work/p10-force-adapter-62b7635-20260913/evidence/p10/snapshot-comparison-adapter/harness/target/release/p10-snapshot-comparison-adapter",
+    "sha256": "9d3d473109e32dac98582aae7bd286ffc38016cebd46c82adb1e12346d1ff2be",
+    "bytes": 929784,
+    "mode": "775"
+  },
+  "prior_reviewed_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "prior_hash_reproduced": false,
+  "existing_binaries_modified": false
+}

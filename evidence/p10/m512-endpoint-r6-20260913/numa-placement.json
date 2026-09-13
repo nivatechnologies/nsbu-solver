@@ -1,0 +1,24 @@
+{
+  "schema": "p10-m512-endpoint-r6-numa-placement-v1",
+  "observed_utc": "2026-09-13T11:08:03Z",
+  "host": "sulaco",
+  "solver_pid": 260583,
+  "measurement": "numastat -p 260583",
+  "topology": {
+    "cpus": 256,
+    "sockets": 2,
+    "numa_nodes": 2,
+    "node0_cpus": "0-63,128-191",
+    "node1_cpus": "64-127,192-255"
+  },
+  "process_memory_mb": {
+    "node0_total": 123432.26,
+    "node1_total": 28850.49,
+    "total": 152282.75
+  },
+  "vm_size_kib": 160669976,
+  "vm_rss_kib": 155937540,
+  "cpus_allowed_list": "0-255",
+  "mems_allowed_list": "0-1",
+  "run_settings_changed": false
+}

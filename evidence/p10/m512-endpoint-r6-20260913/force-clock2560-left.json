@@ -1,0 +1,68 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "snapshot": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-036-clock-2560/state.bin",
+  "plan": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/aed49b7d7874a0a720dee88b65ba180c7286fa65/frozen-plan-piecewise-cadv33.json",
+  "identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "coefficient_sha256": "a45c2c950bd800956058f921795a325de0f37c40fd8e35f05f1e43e0984a76b4",
+  "file_sha256": "12e4b8818008461cdd95b4d7532d1e4acd3fac4ba41aaeacc6cda8f74ef70963",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+  "dimensions": [
+    384,
+    384,
+    384
+  ],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 2560,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 2560,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "elapsed": 2560,
+  "target": 8192,
+  "epoch": 36,
+  "accepted_steps": 36,
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  }
+}

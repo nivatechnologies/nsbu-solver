@@ -1,0 +1,36 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "snapshot": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/run/output/step-044-clock-3584/state.bin",
+  "plan": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913/frozen-plan.json",
+  "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "coefficient_sha256": "267c1b92de5e4562ae96dc6fcc05813a9c49c6c5238e03add5154503d4afa721",
+  "file_sha256": "7389d17c82c56acd0878408dca73be59675b62e8f8d25b372781dd1e771f187d",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+  "dimensions": [384, 384, 384],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 3584,
+    "lengths": [1.0, 1.0, 1.0],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [512, 512, 512],
+    "schedule": [
+      {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 64},
+           {"from_inclusive": 2048, "until_exclusive": 3584, "step_ticks": 128}
+       ],
+    "absolute_tolerances": [1e-5, 1e-4],
+    "relative_tolerances": [1e-5, 1e-5]
+  },
+  "elapsed": 3584,
+  "target": 8192,
+  "epoch": 44,
+  "accepted_steps": 44,
+  "profile": {"kind": "identity-profile-field", "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"},
+  "admission_guard": {"advective_limit": 3.3, "maximum_attempts": 48}
+}

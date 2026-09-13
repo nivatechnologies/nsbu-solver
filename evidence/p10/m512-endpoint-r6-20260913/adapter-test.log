@@ -1,0 +1,28 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running unittests src/main.rs (evidence/p10/snapshot-comparison-adapter/harness/target/debug/deps/p10_snapshot_comparison_adapter-2e68b679ad59ad88)
+
+running 21 tests
+test tests::ordered_hessian_matches_small_grid_parseval_reconstruction ... ok
+test tests::ordered_hessian_scaled_squares_keep_large_finite_modes_finite ... ok
+test tests::ordered_hessian_single_oblique_mode_uses_hermitian_weight_and_domain_volume ... ok
+test tests::ordered_hessian_sums_all_27_independent_component_derivative_entries ... ok
+test tests::legacy_profile_binding_requires_the_exact_complete_identity ... ok
+test tests::mixed_force_space_rejects_every_non_force_or_spatial_contract_change ... ok
+test tests::force_resolution_diagnostic_is_closed_and_directional ... ok
+test tests::mixed_force_space_algebra_preserves_sign_closure_and_band_splits ... ok
+test tests::method_diagnostic_is_closed_and_directional ... ok
+test tests::rejects_truncated_and_wrong_magic_without_state_allocation ... ok
+test tests::time_diagnostic_rejects_every_immutable_semantic_change ... ok
+test tests::ordered_hessian_option_serializes_bound_output_and_rejects_clock_or_profile_gaps ... ok
+test tests::fixed_diagnostics_serialize_tiny_spectrum_outputs ... ok
+test tests::time_diagnostic_rejects_mode_headers_guards_and_provenance ... ok
+test tests::rejects_profile_clock_domain_direction_and_cap ... ok
+test tests::rejects_identity_hash_nonfinite_and_nyquist ... ok
+test tests::time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope ... ok
+test tests::manifest_and_command_enforce_schema_and_cap ... ok
+test tests::matched_spatial_reports_different_guards_without_gating ... ok
+test tests::streamed_adapter_matches_comparison_plan ... ok
+test tests::arithmetic_review_accepts_64_kib_and_rejects_one_byte_more ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+

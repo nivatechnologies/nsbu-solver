@@ -1,0 +1,8 @@
+label=clock4096
+leader_pid=290269
+process_group=290269
+starttime=39422338
+cmdline_sha256=a9a5824772589fde642b6f64821691ec57c74116e0bf165294aeb7a86f4f0ba8
+timeout_seconds=600
+kill_grace_seconds=30
+deadline_epoch=1789329174

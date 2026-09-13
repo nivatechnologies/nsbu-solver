@@ -1,0 +1,8 @@
+label=clock3584
+leader_pid=290169
+process_group=290169
+starttime=39419081
+cmdline_sha256=85db1df9825a40584fa3a509054768ad94cc6f6c778d3b346e6f025b0569145e
+timeout_seconds=600
+kill_grace_seconds=30
+deadline_epoch=1789329174

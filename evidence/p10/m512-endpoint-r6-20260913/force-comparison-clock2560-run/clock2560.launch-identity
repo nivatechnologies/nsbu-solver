@@ -1,0 +1,7 @@
+leader_pid=291730
+process_group=291730
+starttime=39522269
+cmdline_sha256=a5693a99f9e6ae3442160f32e067b6b2e33f08900f339eb1d4d9463b43b6490a
+timeout_seconds=600
+kill_grace_seconds=30
+deadline_epoch=1789329174

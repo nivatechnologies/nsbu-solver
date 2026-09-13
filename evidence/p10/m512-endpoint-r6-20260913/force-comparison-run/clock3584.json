@@ -1,0 +1,156 @@
+{
+  "schema": "p10-snapshot-force-resolution-diagnostic-output-v1",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "left_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 3584,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 3584,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "right_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 3584,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      512,
+      512,
+      512
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 3584,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ]
+  },
+  "left_identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "left_profile": {
+    "kind": "identity-profile-field",
+    "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "left_admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  },
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+  "left_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "left_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "right_identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_profile": {
+    "kind": "identity-profile-field",
+    "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "right_admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  },
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+  "right_source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "right_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "left_hashes": {
+    "coefficient_sha256": "a1490c09bff7c7fa191a845785e94420882eafb1842bbb95dff9f5a42f4f97bc",
+    "file_sha256": "a8ff93feb0950af68a9cc93e5a62e59fe8f3538e94555be70bda6e7c8403a004"
+  },
+  "right_hashes": {
+    "coefficient_sha256": "267c1b92de5e4562ae96dc6fcc05813a9c49c6c5238e03add5154503d4afa721",
+    "file_sha256": "7389d17c82c56acd0878408dca73be59675b62e8f8d25b372781dd1e771f187d"
+  },
+  "clock": {
+    "elapsed": 3584,
+    "target": 8192,
+    "left_epoch": 44,
+    "right_epoch": 44,
+    "left_accepted_steps": 44,
+    "right_accepted_steps": 44
+  },
+  "full": {
+    "l2": 9.052613042457037e-7,
+    "h1": 0.0010746999869829384,
+    "vorticity_l2": 0.0010746996060022977,
+    "divergence_l2": 5.9047623055788185e-15
+  },
+  "common": {
+    "l2": 9.052613042457037e-7,
+    "h1": 0.0010746999869829384,
+    "vorticity_l2": 0.0010746996060022977,
+    "divergence_l2": 5.9047623055788185e-15
+  },
+  "newly_resolved": {
+    "l2": 0.0,
+    "h1": 0.0,
+    "vorticity_l2": 0.0,
+    "divergence_l2": 0.0
+  },
+  "fine_absolute": {
+    "l2": 1.811244234820787,
+    "h1": 49.90475219677252,
+    "vorticity_l2": 49.87187271007433,
+    "divergence_l2": 4.4868806209133865e-15
+  },
+  "mean_error": [
+    -9.963975197734084e-19,
+    -1.5740651754642108e-18,
+    -9.664329912765983e-11
+  ],
+  "admitted_bytes": 2733113344
+}
