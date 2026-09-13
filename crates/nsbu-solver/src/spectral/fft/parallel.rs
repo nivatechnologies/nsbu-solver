@@ -114,6 +114,10 @@ impl ParallelFftExecutor {
             .thread_name(|index| format!("nsbu-fft-{index}"))
             .build()
             .map_err(|_| SolverError::AllocationFailed)?;
+        // ThreadPoolBuilder may return before every worker has initialized its
+        // thread-local state. Complete that startup while construction is
+        // still inside the admitted allocation phase.
+        pool.broadcast(|_| {});
         Ok(Self {
             identity: ParallelFftIdentity {
                 layout,
@@ -151,15 +155,20 @@ impl ParallelFftExecutor {
         let half = nz / 2 + 1;
         self.execute(|| {
             input
-                .par_chunks(nz)
-                .zip(work.grid.par_chunks_mut(half))
-                .for_each(|(source, target)| {
+                .par_chunks(ny * nz)
+                .zip(work.grid.par_chunks_mut(ny * half))
+                .for_each(|(source_slab, target_slab)| {
                     self.line(|line| {
-                        for (slot, value) in line.input[..nz].iter_mut().zip(source) {
-                            *slot = Complex64::new(*value, 0.0);
+                        for (source, target) in source_slab
+                            .chunks_exact(nz)
+                            .zip(target_slab.chunks_exact_mut(half))
+                        {
+                            for (slot, value) in line.input[..nz].iter_mut().zip(source) {
+                                *slot = Complex64::new(*value, 0.0);
+                            }
+                            process(plan, line, 2, false);
+                            target.copy_from_slice(&line.input[..half]);
                         }
-                        process(plan, line, 2, false);
-                        target.copy_from_slice(&line.input[..half]);
                     });
                 });
         })?;
@@ -189,17 +198,22 @@ impl ParallelFftExecutor {
         self.axis1(plan, work, true, nx, ny, half)?;
         self.execute(|| {
             work.grid
-                .par_chunks(half)
-                .zip(output.par_chunks_mut(nz))
-                .for_each(|(source, target)| {
+                .par_chunks(ny * half)
+                .zip(output.par_chunks_mut(ny * nz))
+                .for_each(|(source_slab, target_slab)| {
                     self.line(|line| {
-                        line.input[..half].copy_from_slice(source);
-                        for k in half..nz {
-                            line.input[k] = line.input[nz - k].conj();
-                        }
-                        process(plan, line, 2, true);
-                        for (slot, value) in target.iter_mut().zip(&line.input[..nz]) {
-                            *slot = value.re;
+                        for (source, target) in source_slab
+                            .chunks_exact(half)
+                            .zip(target_slab.chunks_exact_mut(nz))
+                        {
+                            line.input[..half].copy_from_slice(source);
+                            for k in half..nz {
+                                line.input[k] = line.input[nz - k].conj();
+                            }
+                            process(plan, line, 2, true);
+                            for (slot, value) in target.iter_mut().zip(&line.input[..nz]) {
+                                *slot = value.re;
+                            }
                         }
                     });
                 });
