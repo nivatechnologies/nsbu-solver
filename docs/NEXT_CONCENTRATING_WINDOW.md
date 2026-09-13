@@ -247,6 +247,13 @@ pressure and regional policies. Preserve every guard, local-error, resource and
 deadline refusal. Compare only identical physical and arithmetic profiles when
 attributing a channel; keep sampled-reference bridge values explicitly diagnostic.
 
+The [next spatial and force profile note](../evidence/p10/next-spatial-force-profile-20260913/README.md)
+records the existing trajectory anchors and the separate force-resolution
+contract. It recommends N512/M512 followed by N256/M512 as the next matched
+M512 spatial branches. This is planning only: no trajectory is prepared or
+authorized, and the force alias, precision, and full-observable requirements
+remain open.
+
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
 states. The fine observable schedule still needs pressure, regional
