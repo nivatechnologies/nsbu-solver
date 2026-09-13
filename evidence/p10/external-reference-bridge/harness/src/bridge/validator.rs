@@ -25,7 +25,10 @@ pub(super) fn validate_bridge(bridge: &BridgeManifest) -> Result<(), String> {
         bridge.execution_context == EXECUTION_CONTEXT,
         bridge.execution_cap_bytes > 0,
     ];
-    let clock = bridge.elapsed > 0 && bridge.elapsed < bridge.clock_target;
+    let clock = bridge.clock_exponent == -20
+        && bridge.clock_target == 8192
+        && bridge.elapsed > 0
+        && bridge.elapsed < bridge.clock_target;
     if !identity.into_iter().all(std::convert::identity)
         || !arithmetic.into_iter().all(std::convert::identity)
         || !clock
@@ -75,6 +78,8 @@ pub(super) fn validate_binding(
         snapshot.evolution.comparison_endpoint == bridge.elapsed,
         snapshot.evolution.lengths == [1.0; 3],
         snapshot.evolution.viscosity == 1.0,
+        snapshot.backend == bridge.fft_backend,
+        identity_value(&snapshot.identity, "backend") == Some(bridge.fft_backend.as_str()),
     ];
     if !matched.into_iter().all(std::convert::identity) {
         return Err("snapshot/reference binding mismatch".into());
@@ -97,14 +102,25 @@ pub(super) fn validate_snapshot_review(
     let profile = snapshot.profile.as_ref();
     let guard = snapshot.admission_guard.as_ref();
     let steps = schedule_steps(snapshot)?;
+    let trajectory = trajectory(snapshot);
     let matched = [
         snapshot.comparison_kind == ComparisonKind::MatchedSpatial,
         profile.is_some_and(|value| {
-            value.kind == ProfileBindingKind::IdentityProfileField && value.value == PROFILE
+            value.kind == ProfileBindingKind::IdentityProfileField
+                && trajectory.is_some_and(|accepted| value.value == accepted.profile)
         }),
-        identity_value(&snapshot.identity, "profile") == Some(PROFILE),
+        trajectory.is_some_and(|accepted| {
+            snapshot.source_commit == accepted.source
+                && snapshot.plan_sha256 == accepted.plan_sha256
+                && snapshot.evolution.integration_force_dimensions == [accepted.force_samples; 3]
+                && identity_value(&snapshot.identity, "profile") == Some(accepted.profile)
+                && identity_usize(&snapshot.identity, "force_samples")
+                    == Some(accepted.force_samples)
+        }),
         identity_value(&snapshot.identity, "case") == Some(bridge.case_sha256.as_str()),
         identity_value(&snapshot.identity, "source") == Some(snapshot.source_commit.as_str()),
+        identity_usize(&snapshot.identity, "retained") == Some(384),
+        identity_usize(&snapshot.identity, "observer_force_samples") == Some(768),
         identity_usize(&snapshot.identity, "execution_cap") == Some(SNAPSHOT_EXECUTION_CAP),
         identity_usize(&snapshot.identity, "artifact_cap") == Some(SNAPSHOT_ARTIFACT_CAP),
         snapshot.accepted_steps == steps,
@@ -119,6 +135,33 @@ pub(super) fn validate_snapshot_review(
         .all(std::convert::identity)
         .then_some(())
         .ok_or_else(|| "snapshot reviewed profile/schedule/header/cap binding mismatch".into())
+}
+
+#[derive(Clone, Copy)]
+struct Trajectory {
+    profile: &'static str,
+    source: &'static str,
+    plan_sha256: &'static str,
+    force_samples: usize,
+}
+
+fn trajectory(snapshot: &SnapshotManifest) -> Option<Trajectory> {
+    let profile = snapshot.profile.as_ref()?.value.as_str();
+    match profile {
+        PROFILE_M384 => Some(Trajectory {
+            profile: PROFILE_M384,
+            source: SOURCE_M384,
+            plan_sha256: PLAN_M384,
+            force_samples: 384,
+        }),
+        PROFILE_M512 => Some(Trajectory {
+            profile: PROFILE_M512,
+            source: SOURCE_M512,
+            plan_sha256: PLAN_M512,
+            force_samples: 512,
+        }),
+        _ => None,
+    }
 }
 
 fn schedule_steps(snapshot: &SnapshotManifest) -> Result<u128, String> {

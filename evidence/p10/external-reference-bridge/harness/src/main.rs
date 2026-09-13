@@ -2,6 +2,7 @@
 mod absolute;
 mod bridge;
 #[path = "../../../snapshot-comparison-adapter/harness/src/decode.rs"]
+#[allow(dead_code)]
 mod decode;
 #[path = "../../../snapshot-comparison-adapter/harness/src/model.rs"]
 #[allow(dead_code)]

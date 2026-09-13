@@ -66,6 +66,26 @@ fn binding_rejects_shift_projection_case_and_clock_changes() {
     validate_snapshot_review(&endpoint_bridge, &endpoint).unwrap();
     endpoint.elapsed = 300;
     assert!(validate_snapshot_review(&endpoint_bridge, &endpoint).is_err());
+
+    let mut m512 = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut m512);
+    validate_snapshot_review(&bridge, &m512).unwrap();
+    let mut changed = m512.clone();
+    changed.profile.as_mut().unwrap().value = PROFILE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &changed).is_err());
+    changed = m512.clone();
+    changed.evolution.integration_force_dimensions = [384; 3];
+    assert!(validate_snapshot_review(&bridge, &changed).is_err());
+    changed = m512;
+    changed.source_commit = SOURCE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &changed).is_err());
+    changed = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut changed);
+    changed.plan_sha256 = PLAN_M384.into();
+    assert!(validate_snapshot_review(&bridge, &changed).is_err());
+    let mut wrong_quantum = fixture_bridge([6; 3], [4; 3]);
+    wrong_quantum.clock_exponent = -19;
+    assert!(validate_bridge(&wrong_quantum).is_err());
 }
 
 #[test]
@@ -148,12 +168,13 @@ fn production_preflight_binds_sparse_length_without_decoding_state() {
     ));
     let _ = fs::remove_dir_all(&root);
     fs::create_dir_all(&root).unwrap();
-    let plan_path = root.join("plan.json");
-    fs::write(&plan_path, b"{}\n").unwrap();
+    let source_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../..");
+    let plan_path = source_root.join(
+        "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/deployment/frozen-plan-piecewise-cadv33.json",
+    );
     let mut snapshot = fixture_snapshot([384; 3]);
     snapshot.snapshot = root.join("state.bin");
     snapshot.plan = plan_path;
-    snapshot.plan_sha256 = format!("{:x}", Sha256::digest(b"{}\n"));
     let state_bytes = crate::decode::state_bytes(&snapshot).unwrap();
     let file_bytes = 12 + 8 + snapshot.identity.len() + 4 * 16 + state_bytes + 32;
     fs::File::create(&snapshot.snapshot)
@@ -167,7 +188,6 @@ fn production_preflight_binds_sparse_length_without_decoding_state() {
     let mut bridge = fixture_bridge([768; 3], [384; 3]);
     bridge.snapshot_manifest = snapshot_path;
     bridge.snapshot_manifest_sha256 = format!("{:x}", Sha256::digest(&snapshot_json));
-    let source_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../..");
     for (source, path) in bridge.reference_sources.iter_mut().zip([
         "crates/nsbu-benchmarks/src/scalar.rs",
         "crates/nsbu-benchmarks/src/root.rs",
@@ -261,20 +281,20 @@ fn fixture_bridge(samples: [usize; 3], retained: [usize; 3]) -> BridgeManifest {
 }
 
 fn fixture_snapshot(dimensions: [usize; 3]) -> SnapshotManifest {
-    let source_commit = "d".repeat(40);
+    let source_commit = SOURCE_M384.to_string();
     SnapshotManifest {
         schema: "p10-snapshot-comparison-input-v1".into(),
         comparison_kind: crate::model::ComparisonKind::MatchedSpatial,
         snapshot: "state.bin".into(),
         plan: "plan.json".into(),
         identity: format!(
-            "source={source_commit};case={CASE_SHA256};profile={PROFILE};execution_cap={SNAPSHOT_EXECUTION_CAP};artifact_cap={SNAPSHOT_ARTIFACT_CAP}"
+            "source={source_commit};case={CASE_SHA256};profile={PROFILE_M384};backend=rustfft-6.4.1-avx-avx2-fma;retained=384;force_samples=384;observer_force_samples=768;execution_cap={SNAPSHOT_EXECUTION_CAP};artifact_cap={SNAPSHOT_ARTIFACT_CAP}"
         ),
         source_commit,
-        plan_sha256: "e".repeat(64),
+        plan_sha256: PLAN_M384.into(),
         coefficient_sha256: "f".repeat(64),
         file_sha256: "1".repeat(64),
-        backend: "fixture".into(),
+        backend: "rustfft-6.4.1-avx-avx2-fma".into(),
         execution: "fixture".into(),
         dimensions,
         evolution: crate::model::Evolution {
@@ -300,7 +320,7 @@ fn fixture_snapshot(dimensions: [usize; 3]) -> SnapshotManifest {
         accepted_steps: 8,
         profile: Some(crate::model::ProfileBinding {
             kind: crate::model::ProfileBindingKind::IdentityProfileField,
-            value: PROFILE.into(),
+            value: PROFILE_M384.into(),
         }),
         admission_guard: Some(crate::model::AdmissionGuard {
             advective_limit: 3.3,
@@ -308,6 +328,16 @@ fn fixture_snapshot(dimensions: [usize; 3]) -> SnapshotManifest {
         }),
         arithmetic_control: None,
     }
+}
+
+fn set_m512_trajectory(snapshot: &mut SnapshotManifest) {
+    snapshot.source_commit = SOURCE_M512.into();
+    snapshot.plan_sha256 = PLAN_M512.into();
+    snapshot.evolution.integration_force_dimensions = [512; 3];
+    snapshot.profile.as_mut().unwrap().value = PROFILE_M512.into();
+    snapshot.identity = format!(
+        "source={SOURCE_M512};case={CASE_SHA256};profile={PROFILE_M512};backend=rustfft-6.4.1-avx-avx2-fma;retained=384;force_samples=512;observer_force_samples=768;execution_cap={SNAPSHOT_EXECUTION_CAP};artifact_cap={SNAPSHOT_ARTIFACT_CAP}"
+    );
 }
 
 fn current_executable_sha256() -> String {
