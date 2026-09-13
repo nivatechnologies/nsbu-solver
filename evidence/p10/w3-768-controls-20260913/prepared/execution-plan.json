@@ -1,0 +1,50 @@
+{
+  "schema": "p10-w3-768-controls-prepared-execution-v1",
+  "status": "prepared_not_executed_waiting_for_local_slot",
+  "source_commit": "b6beccd62e216c4f686ca7050d36d2cf1eb7c394",
+  "binary_sha256": "bb0e818cd8b2d7da777bbd06c7f976759d70cf86f21c9a416d9b0d2b3c7d02c5",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "admission_review_commit": "7491b44b37a161bfde981e41137078252f2ef9d0",
+  "preflight_receipt": {
+    "stdout": "preflight.stdout",
+    "stderr": "preflight.stderr",
+    "time": "preflight.time",
+    "status": "preflight.status",
+    "exit_status": 0
+  },
+  "execution": "sequential_only_force_then_rhs; no execution started by this preparation",
+  "timeout_pattern": "existing reviewed identity-bound process-group GNU-timeout/watchdog pattern; no new launcher in this evidence",
+  "controls": [
+    {
+      "command": "NSBU_RUN_W3_768_FORCE_CONTROL=1 p10-w3-768-controls force",
+      "as_limit_bytes": 68719476736,
+      "minimum_mem_available_bytes": 85899345920,
+      "timeout_seconds": 900,
+      "kill_grace_seconds": 60,
+      "whole_peak_bytes": 50116792040,
+      "archive": [
+        "stdout",
+        "stderr",
+        "time",
+        "status"
+      ]
+    },
+    {
+      "command": "NSBU_RUN_W3_768_RHS_CONTROL=1 p10-w3-768-controls rhs",
+      "as_limit_bytes": 103079215104,
+      "minimum_mem_available_bytes": 120259084288,
+      "timeout_seconds": 1800,
+      "kill_grace_seconds": 60,
+      "whole_peak_bytes": 72385790112,
+      "archive": [
+        "stdout",
+        "stderr",
+        "time",
+        "status"
+      ]
+    }
+  ],
+  "timing_basis": "The 900s/1800s limits are preliminary: existing M512 force standalone took 124.32s, and no full768 control has run. Nothing in the archived timing evidence shows these limits insufficient.",
+  "no_launch": true,
+  "qualification": "none"
+}

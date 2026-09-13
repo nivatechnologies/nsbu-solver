@@ -1,0 +1,5 @@
+bb0e818cd8b2d7da777bbd06c7f976759d70cf86f21c9a416d9b0d2b3c7d02c5  evidence/p10/w3-768-controls-20260913/harness/target/release/p10-w3-768-controls
+a1322bbefd1a4f64476e467fe459bfeba96fdb6145bfbe314ae6a411bd8de66d  evidence/p10/w3-768-controls-20260913/harness/Cargo.lock
+43e03d8e66d51b1a4f4e17e560fbce193a6c6f9c20b5b4f6296feb53cb4ed9e7  evidence/p10/w3-768-controls-20260913/harness/Cargo.toml
+0d6e970118fbd01007182da942077236316760d59fb48e058dd65d7e069fa6b4  evidence/p10/w3-768-controls-20260913/harness/src/main.rs
+d4444296a0a074d163d9512fe802b7989e7e4eb69d6f94cc32788ffbe9f9bdd5  evidence/p10/w3-768-controls-20260913/harness/src/tests.rs
