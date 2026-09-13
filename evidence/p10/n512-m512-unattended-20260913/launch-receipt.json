@@ -1,0 +1,32 @@
+{
+  "schema": "p10-n512-m512-unattended-launch-v1",
+  "status": "launched_live_first_step_pending",
+  "host": "sulaco",
+  "authorized": true,
+  "launch_utc": "2026-09-13T22:45:30Z",
+  "launch_epoch": 1789339530,
+  "deadline_utc": "2026-09-14T18:45:30Z",
+  "deadline_epoch": 1789411530,
+  "stage": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z",
+  "run_root": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530",
+  "archive_parent": "/tmp/nsbu-p10-n512-m512-v3-archive-20260913T2244Z",
+  "outer": {"pid":303552,"pgid":303552,"starttime":41558390,"cmdline_sha256":"40a6fd6c67922beb1f1b0714f4bacfe4e500023499bf7e067f6f86d6e6a9e263","log":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/unattended/outer.log","status":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/unattended/outer-exit.status"},
+  "launcher_pid": 303563,
+  "time_owner": {"pid":303598,"pgid":303598,"starttime":41558408,"cmdline_sha256":"c98a2eb80d3492e1f084fce590447809ebd8500ed26a55f0d48cc8f5be9200e7"},
+  "solver": {"pid":303603,"pgid":303598,"starttime":41558408,"cmdline_sha256":"f0fc1af1b663b4383da48581a65253f9e94f778020ab0ddff557fe1aa95ffa9a","stdout":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/logs/stdout","stderr":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/logs/stderr"},
+  "watchdog": {"pid":303644,"log":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/logs/watchdog.log"},
+  "verified_hashes": {
+    "binary":"2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
+    "plan":"4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+    "launcher":"a6d462af3ec78cdf1178f44e804d5d366fea8a9003728046a3cec70d575837c1",
+    "preflight":"b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6",
+    "watchdog":"e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
+    "archive_helper":"048fba75501aea77d9d54dc7e35562b75abb7a6bf981d831f32510113dd37e91"
+  },
+  "prelaunch_admission": {"competing_solver_jobs":0,"memory_available_bytes":257310855168,"memory_floor_bytes":241937824240,"stage_available_bytes":1581179322368,"archive_available_bytes":1581179322368,"disk_floor_bytes":189586276352},
+  "actual_preflight_total_bytes":207578085872,
+  "actual_preflight_status":0,
+  "outer_exit_status_present_at_verification":false,
+  "endpoint_attempts_complete_at_verification":0,
+  "qualification":false
+}
