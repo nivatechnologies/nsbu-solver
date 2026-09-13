@@ -3,6 +3,7 @@ mod compare;
 mod decode;
 mod hessian;
 mod mixed;
+mod mixed_math;
 mod model;
 
 use std::{env, ffi::OsString, path::PathBuf};
@@ -51,31 +52,90 @@ fn run_pair(args: &[OsString]) -> Result<String, String> {
 }
 
 fn run_mixed(args: &[OsString]) -> Result<String, String> {
-    let cap = args[3]
+    execute_mixed(read_mixed_request(args)?)
+}
+
+struct MixedRequest {
+    cap: usize,
+    manifests: MixedManifests,
+}
+
+struct MixedManifests {
+    coarse: model::Manifest,
+    baseline: model::Manifest,
+    force: model::Manifest,
+}
+
+struct MixedSnapshots {
+    coarse: model::Snapshot,
+    baseline: model::Snapshot,
+    force: model::Snapshot,
+}
+
+fn read_mixed_request(args: &[OsString]) -> Result<MixedRequest, String> {
+    Ok(MixedRequest {
+        cap: parse_cap(&args[3])?,
+        manifests: read_mixed_manifests(args)?,
+    })
+}
+
+fn parse_cap(value: &OsString) -> Result<usize, String> {
+    value
         .to_str()
         .ok_or("CAP_BYTES is not UTF-8")?
         .parse::<usize>()
-        .map_err(model::debug)?;
-    let coarse_manifest = decode::read_manifest(&PathBuf::from(&args[0]))?;
-    let baseline_manifest = decode::read_manifest(&PathBuf::from(&args[1]))?;
-    let force_manifest = decode::read_manifest(&PathBuf::from(&args[2]))?;
-    mixed::validate_manifests(&coarse_manifest, &baseline_manifest, &force_manifest)?;
-    let admitted = decode::preflight_three(&coarse_manifest, &baseline_manifest, &force_manifest)?;
+        .map_err(model::debug)
+}
+
+fn read_mixed_manifests(args: &[OsString]) -> Result<MixedManifests, String> {
+    Ok(MixedManifests {
+        coarse: decode::read_manifest(&PathBuf::from(&args[0]))?,
+        baseline: decode::read_manifest(&PathBuf::from(&args[1]))?,
+        force: decode::read_manifest(&PathBuf::from(&args[2]))?,
+    })
+}
+
+fn execute_mixed(request: MixedRequest) -> Result<String, String> {
+    let admitted = admit_mixed(&request.manifests, request.cap)?;
+    format_loaded_mixed(
+        &request.manifests,
+        load_mixed(&request.manifests)?,
+        admitted,
+    )
+}
+
+fn admit_mixed(manifests: &MixedManifests, cap: usize) -> Result<usize, String> {
+    mixed::validate_manifests(&manifests.coarse, &manifests.baseline, &manifests.force)?;
+    let admitted =
+        decode::preflight_three(&manifests.coarse, &manifests.baseline, &manifests.force)?;
     if admitted > cap {
         return Err(format!(
             "comparison reservation {admitted} exceeds cap {cap}"
         ));
     }
-    let coarse = decode::load(&coarse_manifest)?;
-    let baseline = decode::load(&baseline_manifest)?;
-    let force = decode::load(&force_manifest)?;
+    Ok(admitted)
+}
+
+fn load_mixed(manifests: &MixedManifests) -> Result<MixedSnapshots, String> {
+    Ok(MixedSnapshots {
+        coarse: decode::load(&manifests.coarse)?,
+        baseline: decode::load(&manifests.baseline)?,
+        force: decode::load(&manifests.force)?,
+    })
+}
+
+fn format_loaded_mixed(
+    manifests: &MixedManifests,
+    snapshots: MixedSnapshots,
+    admitted: usize,
+) -> Result<String, String> {
     let output = mixed::diagnostic_output(
-        &coarse_manifest,
-        &coarse,
-        &baseline_manifest,
-        &baseline,
-        &force_manifest,
-        &force,
+        &manifests.coarse,
+        &snapshots.coarse,
+        &manifests.baseline,
+        &snapshots.baseline,
+        &manifests.force,
+        &snapshots.force,
         admitted,
     )?;
     serde_json::to_string_pretty(&output).map_err(model::debug)

@@ -473,6 +473,67 @@ fn mixed_force_space_algebra_preserves_sign_closure_and_band_splits() {
 }
 
 #[test]
+fn mixed_force_space_small_publication_seam_serializes_bound_output() {
+    let root = root("mixed-publication");
+    let mut coarse = manifest(root.join("coarse.bin"), 4, "coarse");
+    let mut baseline = manifest(root.join("baseline.bin"), 8, "baseline");
+    let mut force = manifest(root.join("force.bin"), 8, "force");
+    for item in [&mut coarse, &mut baseline, &mut force] {
+        item.comparison_kind = ComparisonKind::MixedForceSpaceDiagnostic;
+        item.epoch = item.accepted_steps;
+        item.profile = Some(ProfileBinding {
+            kind: ProfileBindingKind::LegacyFullIdentity,
+            value: item.identity.clone(),
+        });
+        item.admission_guard = Some(AdmissionGuard {
+            advective_limit: 3.3,
+            maximum_attempts: 48,
+        });
+    }
+    force.evolution.integration_force_dimensions = [512; 3];
+    let coarse_fields = fields(coarse.domain().unwrap().layout(), 1.0);
+    let baseline_fields = fields(baseline.domain().unwrap().layout(), 1.5);
+    let force_fields = fields(force.domain().unwrap().layout(), 2.0);
+    write(&mut coarse, &coarse_fields);
+    write(&mut baseline, &baseline_fields);
+    write(&mut force, &force_fields);
+    let coarse_snapshot = decode::load(&coarse).unwrap();
+    let baseline_snapshot = decode::load(&baseline).unwrap();
+    let force_snapshot = decode::load(&force).unwrap();
+    let metrics = mixed::calculate(
+        coarse.domain().unwrap(),
+        std::array::from_fn(|axis| coarse_fields[axis].as_slice()),
+        baseline.domain().unwrap(),
+        std::array::from_fn(|axis| baseline_fields[axis].as_slice()),
+        force.domain().unwrap(),
+        std::array::from_fn(|axis| force_fields[axis].as_slice()),
+    )
+    .unwrap();
+    let output = mixed::bound_output(
+        mixed::BoundSide {
+            manifest: &coarse,
+            snapshot: &coarse_snapshot,
+        },
+        mixed::BoundSide {
+            manifest: &baseline,
+            snapshot: &baseline_snapshot,
+        },
+        mixed::BoundSide {
+            manifest: &force,
+            snapshot: &force_snapshot,
+        },
+        metrics,
+        999,
+    );
+    let json = serde_json::to_string_pretty(&output).unwrap();
+    assert!(json.contains("p10-snapshot-mixed-force-space-diagnostic-output-v1"));
+    assert!(json.contains("\"comparison_kind\": \"MIXED_FORCE_SPACE_DIAGNOSTIC\""));
+    assert!(json.contains("\"cosine_similarity\""));
+    assert!(json.contains("\"accepted_windows\": 0"));
+    assert!(json.contains("\"admitted_bytes\": 999"));
+}
+
+#[test]
 fn mixed_force_space_rejects_every_non_force_or_spatial_contract_change() {
     let root = root("mixed-contract");
     let mut coarse = manifest(root.join("coarse.bin"), 256, "coarse");
