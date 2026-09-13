@@ -1,0 +1,6 @@
+offline-probe: reconstructing fine support=[1088, 1152, 1216]
+offline-probe: hash-decoding clock=1088
+offline-probe: hash-decoding clock=1152
+offline-probe: hash-decoding clock=1216
+offline-probe: M384 force control and independent N768 residual at clock=1112
+Error: "cross-term norm identity exceeded tolerance"

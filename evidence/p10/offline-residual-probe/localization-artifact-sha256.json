@@ -1,0 +1,28 @@
+{
+  "schema": "p10-offline-residual-localization-artifact-sha256-v1",
+  "files": {
+    "README.md": "a8ec10f090fd2fe25c29c83d9602c6a1786acd83bb2e5a9ff1a4cbd6e97b3978",
+    "localization-proposal.json": "e0c797e29c24027e982cf419ecbed4768d3af990af5266782175302bea76e6c5",
+    "localization-proposal.md": "1babd8ded98946e16c96d22822d242ae7d4cfd50a89bbf39cb9bf86d7613973c",
+    "localization-preflight.json": "4a9d8fefc53d28284028bebb9e243bb25c3816ae5d9e06f67ac09f5736f44f2a",
+    "localization-source-sha256.json": "ad35ac2345fc5b21e5c937a8859ea7d710c4e6c28f5f8ffa37db921640d3e0ac",
+    "localization-retry-source-sha256.json": "1ff77ad9499da921405f6b4831657ffa62ce281a7ac580284a5a4444a4be2a96",
+    "localization-first-attempt.json": "15d3ae72ae6772ee6a90577c771c9845dae9939af60b080e024e30ae693e2d64",
+    "localization-identity-observations.json": "9cf014568d9ce82ea3a92bec46234756a6bf6b3ad77475aa92274ee61f5dea04",
+    "localization-summary.json": "855872869b13197e434b4a0c4be3bbd1b7c4b178a46132f8b35f96770bd8cb24",
+    "raw/localization-20260913/run.start-utc": "e0b9f84990d7733b2731664e8eccfd90aedeeac74c586454badfa573b47afc00",
+    "raw/localization-20260913/run.end-utc": "a0ea6abcaffff73b05ab1b48f6364f8946c43f58e3b8bdf510885170877fc274",
+    "raw/localization-20260913/run.pid": "ed202afea0a010fc5782df53000165104384bd3b2839aa9b5dcf76d04190ef3b",
+    "raw/localization-20260913/run.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "raw/localization-20260913/run.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "raw/localization-20260913/run.stderr": "2ec1fe634b132b8e99c97b64a76d552b91360c3962b1dd1f19520ff36857efae",
+    "raw/localization-20260913/run.time": "20d72cf8714a091f6b519f7a8c83a707b691a5afde08881f381cfdba3a20090a",
+    "raw/localization-retry-20260913/run.start-utc": "68c60318eb81ecacc9c74dc70c33ee5d57757bd2542d7bda6b3e0b023dca521f",
+    "raw/localization-retry-20260913/run.end-utc": "16aabaf2fff24fbb9c8497e0abc696e0ea79aa1e77b9fff9e9a7a60afee685c7",
+    "raw/localization-retry-20260913/run.pid": "f7af6e7d7a35b16fa18d409a99bee1fe4a440e165b3326a6f9d0b81c2cc8e8fd",
+    "raw/localization-retry-20260913/run.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "raw/localization-retry-20260913/run.stdout": "3012e2bc56dc7486442c935d59afda08800e832f6a1e03e92179c659dd33f5ff",
+    "raw/localization-retry-20260913/run.stderr": "51364a111f311c02182657d0aa1cafd734a8c8575168f325a2b01ace49556ecb",
+    "raw/localization-retry-20260913/run.time": "e4d4b3ab23e76ffc80093c99cd5432be1561a9478c9f46597ffe46e05ff6e769"
+  }
+}

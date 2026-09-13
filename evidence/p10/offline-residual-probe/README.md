@@ -59,3 +59,25 @@ admitted provider classes and the retained-force field, the residual/control pea
 114,575,696,272 bytes. The unchanged scoped 128 GiB cap leaves 22,863,257,200 bytes before a live
 host admission check. The detailed algebra, work accounting, controls, and claim limits are frozen
 in `localization-proposal.json` and `localization-proposal.md`.
+
+The first localization execution failed closed after 927.11 seconds because its original
+residual-relative squared-norm closure metric exceeded `5e-11`; it emitted no result JSON. The raw
+failure is preserved. Instrumentation then retained that metric and added the term-scaled closure
+`|lhs-rhs| / max(1, |lhs|, sum(abs(term and cross contributions)))`. Its declared threshold
+`64 * 225902976 * f64::EPSILON = 3.210274371667765e-6` is a conservative first-order
+sequential-sum heuristic for internal consistency. It is not a rigorous gamma bound, interval
+enclosure, or PDE error bound.
+
+The authorized instrumented retry completed in 929.56 seconds with exit status zero, maximum RSS
+60,736,644 KiB, and no swap. All 24 term-scaled channel observations met the declared heuristic;
+12 also met `5e-11` and 12 did not. The separately preserved residual-relative status also has 12
+passing and 12 failing observations, with maximum 1.0224415636947803. The base M768 residual field
+exactly replayed SHA-256 `0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8`.
+
+The full M768 residual H1 norm is 2147.4146513677792, split into 935.5579161334231 on strict N384
+and 1932.9048270592857 on the new shell. Under the discrete retained-force equation, the full H1
+norm is 0.8987605236203153, with retained/shell values 0.7830415812306416 and 0.441153443692872.
+That sharp change localizes sensitivity to the force discretization; because the control changes
+the target equation outside N384, it does not establish a PDE residual pass. Complete terms,
+cross contributions, cancellation factors, hashes, and identity observations are recorded in the
+localization result and summary artifacts.

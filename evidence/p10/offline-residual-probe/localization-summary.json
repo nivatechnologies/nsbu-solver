@@ -1,0 +1,133 @@
+{
+  "schema": "p10-offline-residual-localization-summary-v1",
+  "status": "one_probe_fine_localization_complete_diagnostic_only",
+  "probe_clock": 1112,
+  "support": [
+    1088,
+    1152,
+    1216
+  ],
+  "implementation_commit": "e16131414d959f254c76b7ae581aa4172ac919be",
+  "release_binary_sha256": "39ff0ae3408e48e8b95f0f964a605ee029e07997bd540104e27e7dafac1981d4",
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "exit_status": 0,
+  "started_utc": "2026-09-13T03:35:28Z",
+  "ended_utc": "2026-09-13T03:50:58Z",
+  "wall_seconds": 929.56,
+  "maximum_rss_kib": 60736644,
+  "swaps": 0,
+  "replay": {
+    "reconstructed_value_sha256": "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865",
+    "reconstructed_derivative_sha256": "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c",
+    "base_residual_sha256": "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8",
+    "base_residual_hash_matches_completed_run": true
+  },
+  "bands": {
+    "retained_strict_n384_modes": 28164288,
+    "new_shell_n768_modes": 197738688,
+    "excluded_nyquist_slots": 1179264
+  },
+  "base_m768_residual_acceleration": {
+    "l2": 1.4966567588396191,
+    "h1": 2147.4146513677792,
+    "vorticity_l2": 2147.4141334622,
+    "divergence_l2": 9.320012739017793e-11
+  },
+  "base_m768_by_band": {
+    "retained_strict_n384": {
+      "l2": 0.7489413477361235,
+      "h1": 935.5579161334231,
+      "vorticity_l2": 935.557616575224,
+      "divergence_l2": 9.320007569446831e-11
+    },
+    "new_shell_n768": {
+      "l2": 1.2957886831700272,
+      "h1": 1932.9048270592857,
+      "vorticity_l2": 1932.9043966687277,
+      "divergence_l2": 9.81635918866573e-14
+    }
+  },
+  "discrete_retained_force_m384_residual_acceleration": {
+    "l2": 0.0022349595961857647,
+    "h1": 0.8987605236203153,
+    "vorticity_l2": 0.8987577450776091,
+    "divergence_l2": 9.320014935966007e-11
+  },
+  "discrete_retained_force_m384_by_band": {
+    "retained_strict_n384": {
+      "l2": 0.0022092944747990873,
+      "h1": 0.7830415812306416,
+      "vorticity_l2": 0.7830384647695712,
+      "divergence_l2": 9.320009763804325e-11
+    },
+    "new_shell_n768": {
+      "l2": 0.0003377311359721833,
+      "h1": 0.441153443692872,
+      "vorticity_l2": 0.4411533146518358,
+      "divergence_l2": 9.818819761133409e-14
+    }
+  },
+  "projected_force_delta": {
+    "l2": 1.4966627781032413,
+    "h1": 2147.4251903976055,
+    "vorticity_l2": 2147.4246724914933,
+    "divergence_l2": 1.679435158647848e-13
+  },
+  "full_cancellation": {
+    "base_m768": {
+      "l2": 0.00022040464354748768,
+      "h1": 0.002989892628061234,
+      "vorticity_l2": 0.0029901069025308493,
+      "divergence_l2": 0.6701440256310727
+    },
+    "discrete_retained_force_m384": {
+      "l2": 3.2913056645538617e-07,
+      "h1": 1.2513714076258688e-06,
+      "vorticity_l2": 1.2514575224471634e-06,
+      "divergence_l2": 0.6588709044940371
+    }
+  },
+  "identity_closure": {
+    "residual_relative_tolerance": 5e-11,
+    "residual_relative_maximum": 1.0224415636947803,
+    "residual_relative_passed": false,
+    "term_scaled_tolerance": 3.210274371667765e-06,
+    "term_scaled_maximum": 3.6022323005541866e-10,
+    "term_scaled_passed": true,
+    "term_scaled_bound_basis": "64 rounded accumulator contributions per processed mode times binary64 epsilon; residual-relative 5e-11 status is reported independently and is not relabeled",
+    "term_scaled_passed_5e11_count": 12,
+    "term_scaled_failed_5e11_count": 12,
+    "term_scaled_heuristic_characterization": "conservative first-order sequential-sum heuristic for internal consistency only; not a rigorous gamma bound, interval enclosure, or PDE error bound"
+  },
+  "force_work": {
+    "base_m768_work_units": 452987946,
+    "base_m768_scalar_transforms": 3,
+    "control_m384_work_units": 142001687,
+    "control_m384_scalar_transforms": 3
+  },
+  "reservation": {
+    "schema": "p10-offline-residual-probe-reservation-v1",
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 38807118904,
+    "integration_force_bytes": 12356287944,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 49781517672,
+    "residual_peak_bytes": 114575696272,
+    "admitted_peak_bytes": 114575696272,
+    "cap_bytes": 137438953472
+  },
+  "interpretation": "the base M768 residual coefficient hash exactly replays; most H1 residual energy lies on the N768 new shell, and replacing M768 force by strict-padded M384 force reduces the empirical full H1 residual sharply. This is a discrete force-resolution localization and changes the target equation outside N384; it is not a PDE residual-pass or interpolation qualification.",
+  "runtime_owner_imported": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": false,
+  "arithmetic_limitation": "binary64 empirical values without outward rounding or interval enclosure",
+  "norm_reporting_note": "the base residual coefficient SHA exactly matches the completed run; the localized full norms are formed by hypot of retained and shell NormSums, so their last binary64 digits can differ from the earlier one-pass full-grid norm despite identical coefficients"
+}
