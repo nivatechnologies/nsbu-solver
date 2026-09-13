@@ -1,0 +1,314 @@
+{
+  "schema": "p10-n384-acceptance-gap-audit-v1",
+  "status": "read_only_architecture_input_no_acceptance_claim",
+  "audit_binding": {
+    "combined_head_audited": "1ace69ee55fff6a192ed5b4d1b1c9185636b9494",
+    "endpoint_screen_superseding_commit": "ad7131b3629dac1035a2018799e048fb5afa781b",
+    "assembled_audit_parent": "8b77de670e0e372629fbac8194edf36cf8d2ab33",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "scope": "Inventory and resource audit of immutable completed evidence; no numerical producer was run."
+  },
+  "source_artifacts": [
+    {
+      "path": "docs/design/COMPLETE_DESIGN.md",
+      "sha256": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9"
+    },
+    {
+      "path": "docs/NEXT_CONCENTRATING_WINDOW.md",
+      "sha256": "810a097dc0ab3f4a3eb22ff04f3ed0aa17a335a7efea5c030d5e38eec9fc862b"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/inventory.rs",
+      "sha256": "422da482a5ed4cc9a22dc96eba9a83ac8adb45d632055627357ad84c4b4fd43c"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/geometry.rs",
+      "sha256": "92bd7d4bb194a881475a01417dde2536bb4d4a7474ffb1ed055325b6534ce943"
+    },
+    {
+      "path": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/archive-summary.json",
+      "sha256": "e26a93b36dfd27b55c87ae44ea464dc14dc06715d5592ffe5e7ba1e56bf10339"
+    },
+    {
+      "path": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/endpoint/output/endpoint-complete.json",
+      "sha256": "7f134bb8c9de52d267002c467bc88cfb51ef7a69db97b90bad5098f6e733492a"
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/screen-clock4096/summary.json",
+      "sha256": "d14565a45a7c5a54f2b27cfa22c2a9e143452d4d77df23763e2310f9b52fda6f"
+    },
+    {
+      "path": "evidence/p10/reference-spectrum-n384-planning-f6346da/plan.json",
+      "sha256": "d00a3e35755db3ac7f142aac9fd08e19dd32801d3c269a9be85f5d85f6cff46c"
+    },
+    {
+      "path": "evidence/p10/force-grid-n384-baf54fa/summary.json",
+      "sha256": "892853212e5002199af93a0ab1c9e3fdea08b38028b5be04b1943ce2b985b6db"
+    },
+    {
+      "path": "evidence/p10/avx-n384-endpoint-prep/piecewise-cadv33-preflight.stdout",
+      "sha256": "e6df79b85f53e27b31b1dd57ba711d58c6f1a2ff721e9f89b3107b93ed0d645d"
+    }
+  ],
+  "completed_n384_owner": {
+    "clock": 4096,
+    "attempts": 48,
+    "commits": 48,
+    "refusals": 0,
+    "steady_allocations": 0,
+    "remote_state_files": 48,
+    "remote_state_bytes": 65569609392,
+    "terminal_state_file_bytes": 1366033529,
+    "positive_observer_records": 8,
+    "observer_clocks": [512, 1024, 1536, 2048, 2560, 3072, 3584, 4096],
+    "rest_clock": 0,
+    "payload_location": "Recorded remote location; the combined evidence tree contains hashes and compact records rather than all state payloads."
+  },
+  "review_geometry": {
+    "implemented_review_profile": {
+      "coarse_cardinality": 3,
+      "middle_cardinality": 5,
+      "fine_cardinality": 7,
+      "off_stage_probe_refinements": 4,
+      "required_rows": 616
+    },
+    "owner_observer_geometry": {
+      "coarse": [0, 2048, 4096],
+      "middle": [0, 1024, 2048, 3072, 4096],
+      "fine_if_adopted": [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096],
+      "required_rows_if_adopted": 792
+    },
+    "blocker": "ReviewGeometry is fixed at 3/5/7 and derives four probes from an owned ProbePlan. The external N384 owner supplies a 3/5/9 accepted observer schedule and no frozen off-stage reconstruction geometry, so its values cannot yet instantiate MeasurementReview. Architecture must freeze one honest geometry before record counts are treated as an admissible review prefix."
+  },
+  "observable_inventory_per_fine_clock": {
+    "rows": 88,
+    "groups": [
+      {
+        "source": "AcceptedSpectral",
+        "rows": 4,
+        "meaning": "velocity L2, velocity H1, vorticity L2, divergence L2"
+      },
+      {
+        "source": "AcceptedPhysical",
+        "rows": 12,
+        "meaning": "velocity, ordered gradient, ordered Hessian and vorticity, each with RMS, absolute peak and relative peak"
+      },
+      {
+        "source": "AcceptedPressure",
+        "rows": 6,
+        "meaning": "pressure and pressure gradient, each with RMS, absolute peak and relative peak"
+      },
+      {
+        "source": "RegionalTracking",
+        "rows": 60,
+        "meaning": "five masks by four fields by three statistics"
+      },
+      {
+        "source": "OffStageResidual",
+        "rows": 4,
+        "meaning": "momentum residual L2/H1, curl-residual L2 and divergence-residual L2"
+      },
+      {
+        "source": "BalanceQuadrature",
+        "rows": 2,
+        "meaning": "energy and enstrophy quadrature defects"
+      }
+    ]
+  },
+  "measured_payloads_and_glue": {
+    "spectral": {
+      "measured_values": 32,
+      "clocks": [512, 1024, 1536, 2048, 2560, 3072, 3584, 4096],
+      "status": "All eight positive-node matched N192/N256/N384 screens provide the four spectral quantities. Commit ad7131b supersedes the earlier audit count of 28 with 32 by adding clock 4096.",
+      "glue_missing": "No source-bound adapter maps these JSON values, their complete per-row provenance, tracking values and all eleven channel values into the ordered 88-key generic Observation stream. Rest-clock spectral rows are not explicitly emitted."
+    },
+    "balance": {
+      "measured_payload": "The endpoint artifact contains coarse, middle and fine Simpson energy/enstrophy integrals over nine observer samples.",
+      "status": "Potential numerical basis for two endpoint rows only; quadrature_sufficiency is explicitly not_assessed.",
+      "glue_missing": "Values are retained as BalanceIntegral debug strings and are not typed review rows, policy findings or per-fine-clock quadrature evidence."
+    },
+    "observer": {
+      "measured_payload": "Eight records contain state norms plus instantaneous energy, enstrophy, dissipation, force-work, stretching and vorticity-force terms.",
+      "status": "These are balance ingredients and absolute state diagnostics, not analytical tracking errors or generic channel comparisons."
+    }
+  },
+  "missing_numerical_measurements": {
+    "row_groups": [
+      "Global physical/reference tracking for velocity, gradient, Hessian and vorticity at the final frozen fine clocks and sampling refinements.",
+      "Pressure and pressure-gradient tracking, analytical pressure reference and gauge equivalence at the final frozen fine clocks.",
+      "All five-region derivative-sensitive tracking rows and complete sampled/volume coverage evidence.",
+      "Frozen off-stage reconstruction geometry and four residual rows under three reconstruction refinements.",
+      "Typed, independently reviewed balance quadrature rows at every required fine clock; only endpoint raw candidates exist.",
+      "Current-profile force-precision, improved integrator arithmetic and independent reference-precision comparisons."
+    ],
+    "mandatory_semantics_gaps": [
+      "PressureReference",
+      "PressureGauge",
+      "PeakHeight",
+      "PeakLocation",
+      "CoreNominalCoverage",
+      "AnnulusNominalCoverage",
+      "CollarVolumeCoverage",
+      "CompleteGlobalQualification",
+      "MeanMomentumBalance"
+    ],
+    "projected_missing_rows_if_owner_3_5_9_is_adopted": {
+      "spectral": 4,
+      "global_physical": 108,
+      "pressure": 54,
+      "regional": 540,
+      "off_stage_residual": 36,
+      "balance_quadrature": 18,
+      "total": 760,
+      "qualification": "Projection only. It is not an admissible MeasurementReview count until the 3/5/9 and off-stage geometry is frozen."
+    }
+  },
+  "eleven_channel_ledger": [
+    {
+      "channel": "Space",
+      "status": "partial",
+      "gap": "Three-grid full-band evidence exists for the four spectral quantities at eight positive nodes. Observable-specific spatial values for the other 84 row meanings and explicit rest records are absent."
+    },
+    {
+      "channel": "Time",
+      "status": "missing_at_n384",
+      "gap": "No three-setting finest-grid N384 family is complete. Lower-grid endpoint time diagnostics do not transfer."
+    },
+    {
+      "channel": "Method",
+      "status": "missing_at_n384",
+      "gap": "No complete matched N384 CM/HO trajectory comparison exists; a one-step pilot or unfinished prefix is insufficient."
+    },
+    {
+      "channel": "ForceResolution",
+      "status": "missing_trajectory_comparison",
+      "gap": "M384/M512 endpoint force snapshots and the M768 observer force are instantaneous/ranking evidence. A matched M512 trajectory must complete and be compared per observable."
+    },
+    {
+      "channel": "ForcePrecision",
+      "status": "missing",
+      "gap": "No higher-precision force evaluation is attached to this profile."
+    },
+    {
+      "channel": "Arithmetic",
+      "status": "missing",
+      "gap": "Serial/W3 exact-bit controls establish execution equivalence, not independently improved current-grid integrator/FFT/reduction arithmetic."
+    },
+    {
+      "channel": "ReferencePrecision",
+      "status": "missing",
+      "gap": "Current analytical tracking is binary64; no independent current-grid precision refinement exists."
+    },
+    {
+      "channel": "Transfer",
+      "status": "lineage_glue_missing",
+      "gap": "The N384 branch is direct from rest and uses no coarse-to-fine start, but still needs explicit direct-lineage confirmation and a supported nonzero allocation. Snapshot pad/crop comparison is not a transfer trajectory."
+    },
+    {
+      "channel": "Sampling",
+      "status": "missing",
+      "gap": "No three-level physical sample-lattice measurements are attached."
+    },
+    {
+      "channel": "Reconstruction",
+      "status": "missing",
+      "gap": "No frozen external-state off-stage geometry or three-level Hermite/residual measurements are attached."
+    },
+    {
+      "channel": "Quadrature",
+      "status": "partial_endpoint_payload_only",
+      "gap": "Endpoint three-level balance integrals exist without sufficiency review; other fine clocks, region quadrature and generic row binding are absent."
+    }
+  ],
+  "current_producer_boundary": {
+    "existing_code": "P09 has producers for physical/reference tracking, pressure-pair comparison, regional tracking, core/annulus coverage, residuals, balance quadrature, sampling and force binding.",
+    "binding_gap": "Those producers construct and evolve their own small-grid six-branch V2Family owners. They do not import the P10AVXSNAP1 N384 external states or bind this source/profile. Pressure reference/gauge import is limited to its startup-clock allowlist.",
+    "producer_semantics_absent": [
+      "Peak height discrepancy",
+      "Periodic peak-location discrepancy and tie rule",
+      "Collar volume coverage consumer",
+      "Complete global qualification consumer",
+      "Mean momentum balance consumer",
+      "Current-grid improved arithmetic path",
+      "Current-grid independent high-precision reference path"
+    ]
+  },
+  "resource_forecasts": {
+    "binary64_n384_owner": {
+      "execution_reservation_bytes": 185782833928,
+      "measured_max_rss_kib": 148652728,
+      "artifact_bytes_observed": 65570540554
+    },
+    "binary64_snapshot_spatial_pair_n256_n384": {
+      "admission_bytes": 1772879872,
+      "clock4096_measured_wall_seconds": 28.25,
+      "clock4096_measured_max_rss_kib": 1731584,
+      "status": "completed at all eight positive observer clocks"
+    },
+    "binary64_doubled_grid_observer": {
+      "reservation_bytes": 98075173144,
+      "observer_grid": 768,
+      "force_grid": 768,
+      "measured_seconds_per_positive_node_min": 271.525316904,
+      "measured_seconds_per_positive_node_max": 296.722222789
+    },
+    "binary64_analytical_reference_n384_plan_not_run": {
+      "m384_owner_reservation_bytes": 3635777784,
+      "m384_expected_wall_seconds": 90,
+      "m768_owner_reservation_bytes": 19513876728,
+      "m768_expected_wall_seconds": 630,
+      "retained_n384_comparison_reservation_bytes": 5464133632,
+      "comparison_expected_wall_seconds": 90,
+      "scope": "Reference-resolution planning only; not independent high precision or a continuum tail bound."
+    },
+    "binary64_force_snapshots_retained_n384": {
+      "m384": {
+        "admitted_peak_bytes": 6460723176,
+        "measured_wall_seconds": 36.12,
+        "measured_max_rss_kib": 4881408
+      },
+      "m512": {
+        "admitted_peak_bytes": 11430567912,
+        "measured_wall_seconds": 47.42,
+        "measured_max_rss_kib": 9735168
+      },
+      "scope": "Instantaneous force ranking at clock 4096; not force-trajectory sufficiency."
+    },
+    "unavailable_forecasts": {
+      "current_grid_improved_integrator_arithmetic": "No source-bound implementation or defensible preflight exists.",
+      "current_grid_independent_high_precision_reference": "No source-bound implementation or defensible preflight exists."
+    }
+  },
+  "cheap_offline_actions_during_long_prefixes": [
+    "Parse and bind the already completed eight spatial JSON files into a provenance ledger; no numerical rerun is required.",
+    "Parse the existing endpoint coarse/middle/fine balance payload into a typed architecture-review record while preserving quadrature_sufficiency=not_assessed.",
+    "Freeze an external-owner review geometry and immutable per-row provenance manifests from existing hashes before any costly diagnostic measurement.",
+    "Defer M384/M768 reference regeneration and force-grid regeneration while long prefixes own multiple CPU cores; their forecasts are materially larger than JSON-only bridge work."
+  ],
+  "future_bridge_constraint": {
+    "mode": "read_only_only",
+    "allowed": [
+      "Bounded streaming decode and hash/identity validation of immutable P10AVXSNAP1 files.",
+      "Borrow decoded coefficients for offline diagnostics and emit new evidence artifacts transactionally.",
+      "Preserve source, plan, clock, state, host and artifact identities on every emitted row."
+    ],
+    "forbidden": [
+      "Resume, evolve, inject, replace or mutate a committed trajectory state.",
+      "Expose decoded state through a runtime state-injection API.",
+      "Reset an integrated path to the analytical reference or interpolate an accepted state and label it actual.",
+      "Manufacture missing values as zero, a floor, an enclosure or a passing channel.",
+      "Alter source/profile identities or use adapter output as a PDE acceptance decision."
+    ]
+  },
+  "architecture_order": [
+    "Freeze the external-owner fine/off-stage geometry and record cardinality.",
+    "Implement only the bounded read-only provenance bridge required to consume immutable states.",
+    "Populate global/reference, regional and pressure rows with explicit sampling refinements.",
+    "Populate off-stage residual and balance/coverage quadrature rows.",
+    "Attach completed time, method, force, arithmetic, reference, transfer, sampling, reconstruction and quadrature evidence to every applicable row.",
+    "Run MeasurementReview, then perform a separate lineage review."
+  ],
+  "accepted_pde_windows": 0
+}
