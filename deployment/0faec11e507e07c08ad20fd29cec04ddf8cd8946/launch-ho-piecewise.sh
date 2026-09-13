@@ -47,11 +47,31 @@ solver_pid=
 tries=0
 while [ "$tries" -lt 100 ]; do timeout_pid=$(pgrep -P "$wrapper_pid" | head -1 || true); [ -n "$timeout_pid" ] && solver_pid=$(pgrep -P "$timeout_pid" | head -1 || true); [ -n "$solver_pid" ] && break; sleep 0.1; tries=$((tries+1)); done
 [ -n "$solver_pid" ] || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; exit 71; }
-actual_exe_sha=$(sha256sum "/proc/$solver_pid/exe" | awk '{print $1}')
-[ "$actual_exe_sha" = 9112ad80007147550a81df1ac870af6e09b0a2dae9f28a6510f96fbf861a86a0 ] || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; exit 72; }
-stat=$(cat "/proc/$solver_pid/stat"); rest=${stat##*) }; set -- $rest
-[ "$3" = "$process_group" ] || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; exit 72; }
-starttime=${20}; cmdline_sha=$(sha256sum "/proc/$solver_pid/cmdline" | awk '{print $1}')
+expected_cmdline_sha=$(printf '%s\0%s\0%s\0' "$bin" run "$output" | sha256sum | awk '{print $1}')
+identity_snapshot() {
+ [ -r "/proc/$solver_pid/stat" ] && [ -r "/proc/$solver_pid/cmdline" ] || return 1
+ actual_exe_sha=$(sha256sum "/proc/$solver_pid/exe" 2>/dev/null | awk '{print $1}') || return 1
+ [ "$actual_exe_sha" = 9112ad80007147550a81df1ac870af6e09b0a2dae9f28a6510f96fbf861a86a0 ] || return 1
+ stat=$(cat "/proc/$solver_pid/stat") || return 1
+ rest=${stat##*) }; set -- $rest
+ [ "$1" != Z ] && [ "$3" = "$process_group" ] || return 1
+ actual_cmdline_sha=$(sha256sum "/proc/$solver_pid/cmdline" | awk '{print $1}') || return 1
+ [ "$actual_cmdline_sha" = "$expected_cmdline_sha" ] || return 1
+ printf '%s:%s:%s\n' "${20}" "$3" "$actual_cmdline_sha"
+}
+previous=
+tries=0
+stable=
+while [ "$tries" -lt 100 ]; do
+ current=$(identity_snapshot || true)
+ if [ -n "$current" ] && [ "$current" = "$previous" ]; then stable=$current; break; fi
+ previous=$current
+ sleep 0.1
+ tries=$((tries+1))
+done
+[ -n "$stable" ] || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; exit 72; }
+starttime=${stable%%:*}; remainder=${stable#*:}; stable_group=${remainder%%:*}; cmdline_sha=${remainder#*:}
+[ "$stable_group" = "$process_group" ] || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; exit 72; }
 setsid "$watchdog" "$solver_pid" "$process_group" "$starttime" "$cmdline_sha" 1789282740 "$run_dir/watchdog.log" > "$run_dir/watchdog.stdout" 2>&1 &
 watchdog_pid=$!
 expected_start="started leader_pid=$solver_pid process_group=$process_group starttime=$starttime cmdline_sha256=$cmdline_sha deadline_epoch=1789282740"
@@ -60,7 +80,7 @@ tries=0
 while [ "$tries" -lt 100 ]; do grep -F "$expected_start" "$run_dir/watchdog.log" >/dev/null 2>&1 && watchdog_live && break; watchdog_live || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; exit 73; }; sleep 0.1; tries=$((tries+1)); done
 grep -F "$expected_start" "$run_dir/watchdog.log" >/dev/null 2>&1 && watchdog_live || { /bin/kill -TERM -- "-$process_group" 2>/dev/null || true; wait "$wrapper_pid" || true; kill "$watchdog_pid" 2>/dev/null || true; exit 73; }
 {
- echo time_pid="$wrapper_pid"; echo timeout_pid="$timeout_pid"; echo solver_pid="$solver_pid"; echo process_group="$process_group"; echo solver_starttime="$starttime"; echo solver_cmdline_sha256="$cmdline_sha"; echo watchdog_pid="$watchdog_pid"; echo watchdog_handshake=confirmed;
+ echo time_pid="$wrapper_pid"; echo timeout_pid="$timeout_pid"; echo solver_pid="$solver_pid"; echo process_group="$process_group"; echo solver_starttime="$starttime"; echo solver_cmdline_sha256="$cmdline_sha"; echo expected_argv_sha256="$expected_cmdline_sha"; echo identity_stable_polls=2; echo watchdog_pid="$watchdog_pid"; echo watchdog_handshake=confirmed;
 } >> "$run_dir/admission.txt"
 set +e; wait "$wrapper_pid"; status=$?; set -e
 wait "$watchdog_pid" || true
