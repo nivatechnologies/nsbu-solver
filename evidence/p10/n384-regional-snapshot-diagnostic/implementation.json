@@ -112,5 +112,12 @@
     "command": "one root-reviewed clock512 execute under timeout and prlimit",
     "status": "passed_exit_0",
     "result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07"
+  },
+  "post_run_maintenance": {
+    "record": "evidence/p10/n384-regional-snapshot-diagnostic/post-run-module-split.json",
+    "kind": "mechanical_module_split",
+    "maximum_module_lines": 419,
+    "behavior_changed": false,
+    "numerical_execution_performed": false
   }
 }

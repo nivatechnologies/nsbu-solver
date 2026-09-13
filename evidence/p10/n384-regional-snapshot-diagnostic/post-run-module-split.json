@@ -1,0 +1,51 @@
+{
+  "schema": "p10-n384-regional-snapshot-post-run-maintenance-v1",
+  "status": "mechanical_module_split_validated",
+  "performed_after_full_run_archive_commit": "b02dadb",
+  "full_run_source_commit": "0fdff78fdb8de8fdfdc9c7b88fbf9282be7de771",
+  "full_run_binary_sha256_unchanged": "c91d3f6b68c7ae4c7dd03b90e702f5f54d6e4d2152bde9fd090761fcb3d8b6ee",
+  "behavior_changed": false,
+  "numerical_execution_performed": false,
+  "modules": [
+    {
+      "path": "harness/src/diagnostic.rs",
+      "lines": 419,
+      "sha256": "26006f0e0f0368014de12a72b2672e6c22ff9d136441211213cc36a5d99784de",
+      "role": "orchestration and serializable report types"
+    },
+    {
+      "path": "harness/src/diagnostic/measurement.rs",
+      "lines": 253,
+      "sha256": "b10fde8ea58d8d690f35cf4485dce618f00c85621398c07be23aa4e8952c6975",
+      "role": "reference sampling, derivative measurement and regional reductions"
+    },
+    {
+      "path": "harness/src/diagnostic/policy.rs",
+      "lines": 327,
+      "sha256": "27ba08326b2f3f3a1664373ff135ad70f25c9ee4abe04c832a02338899df1479",
+      "role": "snapshot binding, admission, resource ledgers and hash helpers"
+    },
+    {
+      "path": "harness/src/diagnostic/tests.rs",
+      "lines": 77,
+      "sha256": "ac56023c78605bc19378c3ea0ebae0c394f9a95d4b31613631afd2ce34a546f3",
+      "role": "unchanged diagnostic unit tests"
+    }
+  ],
+  "validation": [
+    {
+      "command": "rustfmt --edition 2021 --check diagnostic module files",
+      "status": "passed"
+    },
+    {
+      "command": "cargo test",
+      "status": "passed",
+      "tests": 9
+    },
+    {
+      "command": "cargo clippy --all-targets -- -D warnings",
+      "status": "passed"
+    }
+  ],
+  "historical_binding": "The clock512 result and run record remain bound to the pre-split source commit and release binary; the split was applied only after the run archive commit."
+}
