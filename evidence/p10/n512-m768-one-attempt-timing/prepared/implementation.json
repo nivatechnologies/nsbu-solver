@@ -1,0 +1,40 @@
+{
+  "schema": "p10-n512-m768-one-attempt-prepared-v1",
+  "status": "frozen_release_preflight_only_not_executed",
+  "source_commit": "6442ec98bf55582e1990aac874e3b0234252add8",
+  "combined_w3_control_base_commit": "ca425692721a16039454215d4177732159451418",
+  "w3_control_completion_sha256": "a78a26b6949059083d3a0e1f6fb4bf04010571cfa663430a2d548cf3c78a8834",
+  "release_binary_sha256": "0df5f007d26d836819f582a7028bb5534ca8a5c5d3047831c8022fac1f6f0e88",
+  "preflight_stdout_sha256": "077f51887592d842bd189e094f9c238c2994a82d22af13d68509642cd8a25e7c",
+  "preflight_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "preflight_time_sha256": "7b68fbf969f6178fb8fdf78f466d236a2b5459235051e9674a6d750008e7a7bd",
+  "preflight_status": 0,
+  "retained": 512,
+  "samples": 768,
+  "method": "cox-matthews",
+  "ticks": 64,
+  "maximum_attempts": 1,
+  "advective_limit": 3.3,
+  "absolute_tolerances": [
+    1e-05,
+    0.0001
+  ],
+  "relative_tolerances": [
+    1e-05,
+    1e-05
+  ],
+  "internal_resource_bytes": 238209735152,
+  "external_address_space_limit_bytes": 274877906944,
+  "minimum_mem_available_bytes": 292057776128,
+  "planned_timeout_seconds": 2400,
+  "planned_kill_grace_seconds": 60,
+  "expected_rhs_calls": 12,
+  "expected_cache_hits": 7,
+  "expected_cache_misses": 5,
+  "runtime_owner_imported": false,
+  "reference_state_injected": false,
+  "candidate_committed": false,
+  "state_published": false,
+  "numerical_attempts_executed": 0,
+  "qualification": false
+}

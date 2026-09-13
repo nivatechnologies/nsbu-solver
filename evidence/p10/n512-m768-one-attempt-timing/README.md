@@ -43,3 +43,8 @@ RUN_SOURCE=<SOURCE_COMMIT> cargo test --manifest-path \
 
 Release compilation and the archived preflight must use the same frozen `RUN_SOURCE`; the binary,
 source files, and preflight receipt are hash-bound before any launch review.
+
+The frozen preflight source is `6442ec98bf55582e1990aac874e3b0234252add8`. Its release binary
+SHA-256 is `0df5f007d26d836819f582a7028bb5534ca8a5c5d3047831c8022fac1f6f0e88`.
+`prepared/implementation.json` records the exact launch bounds and zero executed numerical attempts;
+`prepared/source-sha256.json` binds the harness and reused production sources.
