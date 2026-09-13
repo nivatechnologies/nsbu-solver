@@ -1,0 +1,24 @@
+[
+  {
+    "task_id": "one-time-controller-arithmetic-selftest-v1",
+    "family": "controller-selftest",
+    "instructions": "Compute 2 + 3. Return one JSON object with exactly the integer field sum.",
+    "inputs": {
+      "expected_output": {
+        "sum": 5
+      }
+    },
+    "output_contract": {
+      "required": [
+        "sum"
+      ],
+      "properties": {
+        "sum": {
+          "type": "integer"
+        }
+      }
+    },
+    "validator": "exact_expected",
+    "review_required": false
+  }
+]
