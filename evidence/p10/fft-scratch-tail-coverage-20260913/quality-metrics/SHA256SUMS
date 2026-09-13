@@ -1,0 +1,14 @@
+e8095ba92f3a4d0086b965f601935f9da8c74c39bc4250683464f133127130c0  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/README.md
+1b208e538c2e87a2724c570862ec76e66f53d4b533c9a1ec1d88c2ae0fd3524b  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/binding.txt
+b344a6d5177c1a9359ef21442ef7ebd4d99ee1d38d373cfa2cf31b2754447417  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/crap.command
+de1b55991edf39e37b48569f5de473f450ccc3e56c8cb972cab481a74b2d441d  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/crap.json
+4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/crap.status
+6c104908573e3287cee97f7a5809611551bba0fc217f119bf3def4877ffc617c  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/crap.stderr
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/crap.stdout
+5466a35259ec46bead9fdc61af3cfdf8d6cd1a10a1bb718b97760a9040a50005  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/files.txt
+a2ecb54798cf0a97bad63f43ba0773092304e4b367196fb9276646ab5dda48f3  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/function-metrics.json
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/measurement.status
+b49a7c134bf496d0011c7107c2b46fb6113d39517d910ff5f46499d5c1df2101  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/rca.jsonl
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/rca.stderr
+f920fe1316b248c7ecacb3a2d81047282143ebc76b84d6f1dcc01015dfafab88  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/summary.json
+22b8eff9296a5b60eb2bd415af022078798e5b90fde342dfaa17f5df5f985914  evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/tool-version.txt

@@ -1,0 +1,108 @@
+{
+  "schema": "p10-fft-scratch-tail-five-file-quality-v1",
+  "source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "coverage_commit": "46cbc5f",
+  "scope": "five changed production FFT files only",
+  "thresholds": {
+    "function_cyclomatic_lt": 22,
+    "function_cognitive_lt": 22,
+    "halstead_difficulty_lt": 80,
+    "file_loc_lt": 500,
+    "function_crap_lt": 25
+  },
+  "maxima": {
+    "function_cyclomatic": 14.0,
+    "function_cognitive": 15.0,
+    "halstead_difficulty_all_rca_nodes": 74.66666666666667,
+    "file_loc_sloc": 258.0,
+    "function_crap": 26.125
+  },
+  "threshold_results": {
+    "function_cyclomatic": true,
+    "function_cognitive": true,
+    "halstead_difficulty": true,
+    "file_loc": true,
+    "function_crap": false
+  },
+  "crap_failure": {
+    "path": "crates/nsbu-solver/src/spectral/fft/avx.rs",
+    "function": "from_parts",
+    "cyclomatic": 11,
+    "branch_coverage_fraction": 0.5,
+    "crap": 26.125
+  },
+  "uncovered_debug_formatters": [
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft.rs",
+      "function": "fmt",
+      "cyclomatic": 1,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/avx.rs",
+      "function": "fmt",
+      "cyclomatic": 1,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    }
+  ],
+  "files": [
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft.rs",
+      "loc_sloc": 62.0,
+      "end_line": 62,
+      "cyclomatic_sum": 8.0,
+      "cognitive_sum": 1.0,
+      "halstead_difficulty": 12.98611111111111,
+      "function_max_cyclomatic": 3.0,
+      "function_max_cognitive": 1.0,
+      "function_max_halstead_difficulty": 8.75
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/avx.rs",
+      "loc_sloc": 258.0,
+      "end_line": 258,
+      "cyclomatic_sum": 78.0,
+      "cognitive_sum": 11.0,
+      "halstead_difficulty": 56.53333333333333,
+      "function_max_cyclomatic": 11.0,
+      "function_max_cognitive": 3.0,
+      "function_max_halstead_difficulty": 25.416666666666668
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "loc_sloc": 153.0,
+      "end_line": 153,
+      "cyclomatic_sum": 28.0,
+      "cognitive_sum": 29.0,
+      "halstead_difficulty": 70.0,
+      "function_max_cyclomatic": 8.0,
+      "function_max_cognitive": 15.0,
+      "function_max_halstead_difficulty": 37.05263157894737
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "loc_sloc": 103.0,
+      "end_line": 103,
+      "cyclomatic_sum": 15.0,
+      "cognitive_sum": 15.0,
+      "halstead_difficulty": 45.833333333333336,
+      "function_max_cyclomatic": 5.0,
+      "function_max_cognitive": 8.0,
+      "function_max_halstead_difficulty": 30.76923076923077
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "loc_sloc": 66.0,
+      "end_line": 66,
+      "cyclomatic_sum": 22.0,
+      "cognitive_sum": 6.0,
+      "halstead_difficulty": 33.2,
+      "function_max_cyclomatic": 14.0,
+      "function_max_cognitive": 4.0,
+      "function_max_halstead_difficulty": 33.09090909090909
+    }
+  ],
+  "claim_limit": "Metrics and CRAP cover only these five changed production files; no dead-code or mutation gate was measured."
+}
