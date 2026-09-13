@@ -193,14 +193,15 @@ fn reservations(plan: &ProbePlan, cap: usize) -> Result<ReservationOutput, Strin
         fft_catalog_bytes,
         FIXED_OVERHEAD_BYTES,
     ])?;
-    // Center value/derivative can still be retained at the middle-scale residual. Ten diagnostic
-    // component fields are force(3), conservative(3), residual(3), and pressure(1).
+    // Center value/derivative can still be retained at the middle-scale residual. Thirteen
+    // diagnostic component fields are force(3), conservative(3), current residual(3),
+    // pressure(1), and the previous full residual(3).
     let residual_peak_bytes = checked_sum(&[
         checked_mul(source_state_bytes, 6)?,
         residual_force_bytes,
         conservative_workspace_bytes,
         fft_catalog_bytes,
-        checked_mul(diagnostic_field_bytes, 10)?,
+        checked_mul(diagnostic_field_bytes, 13)?,
         FIXED_OVERHEAD_BYTES,
     ])?;
     let admitted_peak_bytes = reconstruction_peak_bytes.max(residual_peak_bytes);
@@ -253,6 +254,13 @@ struct Reconstruction {
     derivative: Field,
 }
 
+#[derive(Debug)]
+struct ResidualResult {
+    norms: NormOutput,
+    coefficients: Field,
+    force_work: nsbu_solver::integrators::forcing::ForceWork,
+}
+
 fn evaluate(
     plan: &ProbePlan,
     snapshot_root: PathBuf,
@@ -261,6 +269,7 @@ fn evaluate(
     let source = plan.domain()?;
     let mut center: Option<Node> = None;
     let mut previous: Option<(&'static str, Reconstruction)> = None;
+    let mut previous_residual: Option<Field> = None;
     let mut nodes = Vec::new();
     let mut scales = Vec::new();
     let mut differences = Vec::new();
@@ -306,35 +315,42 @@ fn evaluate(
         drop(left);
         drop(right);
 
-        let (residual, residual_force_work) = residual_norm(plan, source, &current)?;
+        let residual = residual(plan, source, &current)?;
         let value_sha256 = hash_field(&current.value);
         let derivative_sha256 = hash_field(&current.derivative);
         scales.push(ScaleOutput {
             label,
             support,
             probe: PROBE,
-            residual_acceleration: residual,
-            residual_force_work_units: residual_force_work.work_units,
-            residual_force_scalar_transforms: residual_force_work.scalar_transforms,
+            residual_acceleration: residual.norms,
+            residual_force_work_units: residual.force_work.work_units,
+            residual_force_scalar_transforms: residual.force_work.scalar_transforms,
+            residual_sha256: hash_field(&residual.coefficients),
             reconstructed_value_sha256: value_sha256,
             reconstructed_derivative_sha256: derivative_sha256,
         });
-        if let Some((previous_label, earlier)) = previous.take() {
+        if let (Some((previous_label, earlier)), Some(earlier_residual)) =
+            (previous.take(), previous_residual.take())
+        {
             differences.push(compare_reconstructions(
                 source,
                 previous_label,
                 &earlier,
                 label,
                 &current,
+                &earlier_residual,
+                &residual.coefficients,
             )?);
         }
         previous = Some((label, current));
+        previous_residual = Some(residual.coefficients);
         if index == 2 {
             center = None;
         }
     }
     drop(center);
     drop(previous);
+    drop(previous_residual);
     nodes.sort_by_key(|node| node.clock);
     Ok(RunOutput {
         schema: "p10-offline-residual-probe-result-v1",
@@ -517,11 +533,11 @@ fn reconstruct(
     Ok(Reconstruction { value, derivative })
 }
 
-fn residual_norm(
+fn residual(
     plan: &ProbePlan,
     source: Domain,
     reconstruction: &Reconstruction,
-) -> Result<(NormOutput, nsbu_solver::integrators::forcing::ForceWork), String> {
+) -> Result<ResidualResult, String> {
     eprintln!("offline-probe: independent N768 residual at clock={PROBE}");
     let diagnostic = ConservativeWorkspace::diagnostic_domain(source).map_err(debug)?;
     let backend = FftBackend::RustFft6_4_1AvxFma;
@@ -580,7 +596,11 @@ fn residual_norm(
             residual.each_mut().map(Vec::as_mut_slice),
         )
         .map_err(debug)?;
-    Ok((norms.into(), force_work))
+    Ok(ResidualResult {
+        norms: norms.into(),
+        coefficients: residual,
+        force_work,
+    })
 }
 
 #[cfg(test)]
@@ -614,6 +634,8 @@ fn compare_reconstructions(
     left: &Reconstruction,
     right_label: &'static str,
     right: &Reconstruction,
+    left_residual: &Field,
+    right_residual: &Field,
 ) -> Result<DifferenceOutput, String> {
     let plan = ComparisonPlan::new(source, source).map_err(debug)?;
     let value = plan
@@ -628,11 +650,20 @@ fn compare_reconstructions(
             right.derivative.each_ref().map(Vec::as_slice),
         )
         .map_err(debug)?;
+    let diagnostic = ConservativeWorkspace::diagnostic_domain(source).map_err(debug)?;
+    let residual = ComparisonPlan::new(diagnostic, diagnostic)
+        .map_err(debug)?
+        .compare(
+            left_residual.each_ref().map(Vec::as_slice),
+            right_residual.each_ref().map(Vec::as_slice),
+        )
+        .map_err(debug)?;
     Ok(DifferenceOutput {
         left: left_label,
         right: right_label,
         reconstructed_velocity: value.full.into(),
         reconstructed_derivative: derivative.full.into(),
+        residual_acceleration: residual.full.into(),
     })
 }
 

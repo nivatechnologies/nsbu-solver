@@ -9,9 +9,9 @@
   "residual_force_bytes": 29079844536,
   "conservative_workspace_bytes": 32662168544,
   "reconstruction_peak_bytes": 52513582440,
-  "residual_peak_bytes": 106317505480,
-  "admitted_peak_bytes": 106317505480,
+  "residual_peak_bytes": 117217453000,
+  "admitted_peak_bytes": 117217453000,
   "scoped_cap_bytes": 137438953472,
-  "cap_headroom_bytes": 31121447992,
+  "cap_headroom_bytes": 20221500472,
   "real_evaluation_started": false
 }

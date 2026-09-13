@@ -19,7 +19,7 @@
     "harness_sha256": "38e5a5f46e069ea50e7bf8fd54d34b75c088d5d5f4e8886436b8e5508c1d379c",
     "scope": "defer FFT reservation until after generic checked provider admission; evaluate arithmetic unchanged"
   },
-  "pre_review_release_binary_sha256": "9cf3f8351cdc0cb743c333d5eaff0abaa58519686fc5d43920fcec8db8759e4a",
+  "pre_run_release_binary_sha256": "e8bbdd79108f20e5a42107e46688de6f5e1a83553fc59f2e8d5132a4c14a8c06",
   "arithmetic": "binary64",
   "limitation": "empirical values are not outward-rounded intervals"
 }
