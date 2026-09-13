@@ -25,4 +25,3 @@ test tests::time_diagnostic_rejects_every_immutable_semantic_change ... ok
 test tests::time_diagnostic_rejects_mode_headers_guards_and_provenance ... ok
 
 test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
-

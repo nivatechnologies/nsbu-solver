@@ -1,0 +1,30 @@
+{
+  "schema": "p10-matched-m512-spatial-adapter-validation-v1",
+  "status": "source_frozen_tests_passed_no_numerical_execution",
+  "base_commit": "c1bbe1a30287e8882a25b9bd2b668b384083807b",
+  "source_commit": "cb29bf1fcfeaf534146bbbf6f3ef40ea79e00854",
+  "left_trajectory": {
+    "retained": 384,
+    "force_samples": 512,
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84"
+  },
+  "right_prepared_capture": {
+    "retained": 512,
+    "force_samples": 512,
+    "run_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+    "production_source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+    "harness_commit": "3f5ba07205f495242ceef09616e289fe3b854957",
+    "profile": "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f",
+    "plan_sha256": "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634",
+    "snapshot_exists": false
+  },
+  "admitted_bytes": 4600889344,
+  "tests": {"focused_passed": 1, "full_passed": 23, "failed": 0},
+  "clippy_all_targets_deny_warnings": "passed",
+  "format_check": "passed",
+  "trajectory_runs": 0,
+  "snapshot_comparisons": 0,
+  "qualification": false
+}

@@ -1,0 +1,14 @@
+ffbdf7d30b99c22a9e9e611eeebc37199f41b3e389a1306a6a1e1283c25fa089  evidence/p10/matched-m512-spatial-adapter-20260913/README.md
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/matched-m512-spatial-adapter-20260913/raw/clippy.status
+b8576453a86fe98dfade0696d14a90ae4797b051cf098215f581eda3cf1c0a9c  evidence/p10/matched-m512-spatial-adapter-20260913/raw/clippy.stderr
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/matched-m512-spatial-adapter-20260913/raw/clippy.stdout
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/matched-m512-spatial-adapter-20260913/raw/fmt.status
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/matched-m512-spatial-adapter-20260913/raw/fmt.stderr
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/matched-m512-spatial-adapter-20260913/raw/fmt.stdout
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/matched-m512-spatial-adapter-20260913/raw/focused-test.status
+3ffbb49affa56f1a06711e21102ca4c12293a747dedeb16b1f1be0061aa56f3d  evidence/p10/matched-m512-spatial-adapter-20260913/raw/focused-test.stderr
+8710052ea5c3598cb07235da8a4cf2019b10f3de0722d5e7aa815ff84553de33  evidence/p10/matched-m512-spatial-adapter-20260913/raw/focused-test.stdout
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/matched-m512-spatial-adapter-20260913/raw/tests.status
+6049dca95626ae326d289307e5388cab1eff46241ada9cfc00183d19fca7c0e6  evidence/p10/matched-m512-spatial-adapter-20260913/raw/tests.stderr
+f691406230a919eb1d2a265b07508049be4d68ee1a573b4d3f7e7ad46b597a99  evidence/p10/matched-m512-spatial-adapter-20260913/raw/tests.stdout
+a66aca13653f8f9ea24c46048b63a335dd924220c80943b893dc838a793857ec  evidence/p10/matched-m512-spatial-adapter-20260913/validation.json
