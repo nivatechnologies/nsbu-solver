@@ -1,0 +1,39 @@
+{
+  "schema": "p10-offline-residual-m512-preflight-v1",
+  "status": "exact_inputs_staged_preflight_passed_heavy_run_not_started",
+  "implementation_commit": "d8fb8f6d48f1a8665b6d5bf7158c9b5658c160d0",
+  "release_binary_sha256": "9cdfc73add93adb58857fd64d6614fd7be9b29be44ecf64adfacd47d1a4234f9",
+  "probe_plan_sha256": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
+  "remote_root": "/tmp/nsbu-p10-sulaco-m512-prefix-r5/run/output",
+  "local_root": "/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913",
+  "staged_bytes": 4098100587,
+  "staged_mode": "0444",
+  "inputs": [
+    {"clock": 1088, "relative_path": "step-017-clock-1088/state.bin", "bytes": 1366033529, "identity_bytes": 1029, "header": [1088, 8192, 17, 17], "coefficient_sha256": "ee970eca7a3a4bdab948242508decf25db181bdb66071b371024646c500d51f5", "file_sha256": "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e"},
+    {"clock": 1152, "relative_path": "step-018-clock-1152/state.bin", "bytes": 1366033529, "identity_bytes": 1029, "header": [1152, 8192, 18, 18], "coefficient_sha256": "836bc42ce42ce056d44b56d063fa41d9ca60144e8300bca199db51a6d007d7a0", "file_sha256": "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8"},
+    {"clock": 1216, "relative_path": "step-019-clock-1216/state.bin", "bytes": 1366033529, "identity_bytes": 1029, "header": [1216, 8192, 19, 19], "coefficient_sha256": "28a244c7153b4f1572683a38b677cecdf71e1301287f7df128e1e391f4a9bac5", "file_sha256": "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca"}
+  ],
+  "reservation": {
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 46267356216,
+    "integration_force_bytes": 19816525256,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 57241754984,
+    "residual_peak_bytes": 122035933584,
+    "admitted_peak_bytes": 122035933584,
+    "cap_bytes": 137438953472,
+    "cap_headroom_bytes": 15403019888
+  },
+  "focused_tests": {"passed": 9, "failed": 0},
+  "clippy_all_targets_deny_warnings": "passed",
+  "cargo_fmt_check": "passed",
+  "heavy_run_started": false,
+  "runtime_owner_imported": false,
+  "reference_state_injected": false,
+  "force_replaced": false,
+  "accepted_interpolation": false,
+  "accepted_pde_windows": 0
+}
