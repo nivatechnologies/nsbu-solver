@@ -1,0 +1,68 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-run-v1",
+  "status": "complete_exit_0_validated",
+  "source_commit": "a1d04a7ffc866fa3c826c01eae7269c575ba927a",
+  "launcher": {
+    "launch_utc": "2026-09-13T12:04:47Z",
+    "output_mtime_utc": "2026-09-13T13:14:15.695016901Z",
+    "wall_seconds": 4168,
+    "time_wrapper_pid_pgid": 1586738,
+    "timeout_pid_pgid": 1586745,
+    "diagnostic_pid": 1586748,
+    "diagnostic_pgid": 1586745,
+    "exit_code": 0,
+    "timeout_term_seconds": 6000,
+    "timeout_kill_after_seconds": 60,
+    "campaign_deadline_utc": "2026-09-13T19:52:54Z"
+  },
+  "fresh_admission": {
+    "other_heavy_campaign_jobs_idle": true,
+    "mem_available_bytes": 512562941952,
+    "minimum_mem_available_bytes": 322265386072,
+    "required_workers": 32,
+    "internal_reservation_bytes": 305085516888,
+    "actual_rlimit_as_soft_bytes": 343597383680,
+    "actual_rlimit_as_hard_bytes": 343597383680
+  },
+  "observed_resources": {
+    "maximum_rss_kib": 297840300,
+    "maximum_rss_gib": 284.0426445007324,
+    "cpu_percent": 925,
+    "major_page_faults": 0,
+    "swaps": 0,
+    "post_release_mem_available_bytes": 516013559808
+  },
+  "bindings": {
+    "release_binary_sha256": "992505c58def855cc4f81483411c610af9909a2f32a938f80bb6da047186ae2f",
+    "projected_coefficient_sha256_before_and_after": "19688e85af4a095acc139fa4a5dc32a6ba4dff407abab86d1e27daa6517f7e7b",
+    "result_sha256": "76b392b12a8bf86125a0abf2ee8b1f07e83a00d76014e2c25c95c03965d82027",
+    "time_log_sha256": "1027fa5ec60a7a3595bc23a7c1b41518c5798eadbda1c3938325751ed467bf8b",
+    "launch_identities_sha256": "7e9450622b9a3a17a41fb765223134adc1baf10c4080b6c0c60cc142cd9f6763"
+  },
+  "validation": {
+    "region_counts_sum_to_1024_cubed": true,
+    "every_quantity_global_sample_count_complete": true,
+    "every_quantity_has_all_five_sampled_regions": true,
+    "all_reported_measurements_finite": true,
+    "immutable_projected_coefficient_hash_equal": true,
+    "transactional_final_present_and_candidate_absent": true,
+    "stdout_empty": true,
+    "stderr_empty": true,
+    "state_inputs": 0,
+    "trajectory_from_rest_claims": 0,
+    "state_import_or_resume_interfaces": 0,
+    "owned_pids_and_process_groups_gone_before_release": true
+  },
+  "comparison": {
+    "n384_m768_result": "../n384-regional-snapshot-diagnostic/results/clock0512-analytic-n384-projection.json",
+    "n384_m768_result_sha256": "3bd863cb8206f3958d59dfcd9b9fdda83fe7bafb73b1e831a1d1f687501d4872",
+    "table": "n384-m768-vs-n512-m1024-clock0512.tsv",
+    "lattice_caveat": "Retained grid and measurement lattice both change; ratios are sampled diagnostics, not isolated same-lattice spatial convergence or continuum bounds."
+  },
+  "claims": {
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+    "continuum_or_peak_qualification": "not_assessed",
+    "trajectory": "not_applicable_sampled_analytic_projection",
+    "state_import_or_resume": "absent"
+  }
+}

@@ -69,3 +69,17 @@ Source verification is split by source commit. `SOURCE_SHA256SUMS` binds the cur
 at `a1d04a7ffc866fa3c826c01eae7269c575ba927a`; its manifest SHA-256 is `e4292d40718463c1aad841db3cf5c60420b9bc4b2967cea02ff05434e21c9811`.
 `HISTORICAL-SOURCE-VERIFICATION.md` gives an archive-based command for checking the original N384
 evidence at `ae9691834d842dc89eb3a4ccf6a27317f7bc131a` without rewriting its historical hashes.
+
+The root-reviewed clock-512 run completed with exit status zero in 4168 seconds. The immutable
+result is `results/clock0512-analytic-n512-m1024-projection.json`; its run receipt and captured
+process identities are under `run-clock0512.json` and `run-clock0512/`. The projected coefficient
+hash remained unchanged, every reported value is finite, and the five region counts sum to
+1024 cubed.
+
+The comparison in `n384-m768-vs-n512-m1024-clock0512.tsv` shows large contractions in the sampled
+analytical representation errors. Global RMS contractions are 11.35 for velocity, 8.69 for the
+gradient, and 6.68 for the ordered Hessian. Ordered-Hessian collar RMS contracts by 6.69 and its
+peak-relative diagnostic by 5.74. Both the retained grid (N384 to N512) and measurement lattice
+(768 to 1024) change in this comparison. These ratios are sampled diagnostics; they are not an
+isolated same-lattice spatial convergence rate, continuum bound, peak qualification, or acceptance
+result.

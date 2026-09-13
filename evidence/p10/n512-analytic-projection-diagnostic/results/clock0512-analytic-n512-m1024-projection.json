@@ -1,0 +1,405 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-regional-diagnostic-v1",
+  "status": "sampled_analytic_projection_diagnostic_complete",
+  "origin": "sampled_analytic_projection",
+  "reference_source_commit": "6bdea3084d737ce6585cb67ab5d48810bd03cd50",
+  "reference_sources": [
+    {
+      "role": "scalar-evaluator",
+      "sha256": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8"
+    },
+    {
+      "role": "scalar-root",
+      "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b"
+    },
+    {
+      "role": "benchmark-time",
+      "sha256": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06"
+    },
+    {
+      "role": "case-definition",
+      "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    }
+  ],
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": [
+    -20,
+    8192,
+    512
+  ],
+  "sample_dimensions": [
+    1024,
+    1024,
+    1024
+  ],
+  "retained_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "physical_grid": "unshifted-periodic-x_i=i/n",
+  "fft_normalization": "forward-r2c-divide-by-complete-real-sample-count",
+  "crop": "normalization-preserving-strict-band-transfer-no-rescale",
+  "producer_peak_bytes": 46246603464,
+  "producer_allocator_allowance_bytes": 40960,
+  "serialization_bytes": 65536,
+  "measurement_peak_bytes": 305085516888,
+  "conservative_cap_bytes": 305085516888,
+  "external_address_space_limit_bytes": 343597383680,
+  "minimum_mem_available_bytes": 322265386072,
+  "hard_timeout_seconds": 6000,
+  "measurement_storage": {
+    "projected_coefficients": 3233808384,
+    "fft_catalog": 29362480,
+    "derivative_workspace_required": 25803457328,
+    "derivative_workspace_budget": 25803457328,
+    "derivative_workspace_allowance": 0,
+    "packed_reference_cache": 257698037760,
+    "two_magnitude_arrays": 17179869184,
+    "cached_region_labels": 1073741824,
+    "worker_stacks": 67108864,
+    "allocator_allowance": 65528,
+    "serialization": 65536,
+    "measurement_total": 305085516888
+  },
+  "producer_scratch_dropped_before_measurement": true,
+  "diagnostic_binary_sha256": "992505c58def855cc4f81483411c610af9909a2f32a938f80bb6da047186ae2f",
+  "projected_coefficient_sha256_before": "19688e85af4a095acc139fa4a5dc32a6ba4dff407abab86d1e27daa6517f7e7b",
+  "projected_coefficient_hash_equal": true,
+  "measurements": {
+    "region_counts": [
+      {
+        "region": "core",
+        "samples": 4841613
+      },
+      {
+        "region": "annulus",
+        "samples": 47268728
+      },
+      {
+        "region": "interior_outside_nominal",
+        "samples": 69327434
+      },
+      {
+        "region": "collar",
+        "samples": 211783078
+      },
+      {
+        "region": "exterior",
+        "samples": 740520971
+      }
+    ],
+    "quantities": [
+      {
+        "quantity": "velocity",
+        "scalar_inverse_transforms": 3,
+        "relative_floor": 0.0006786014108170402,
+        "global": {
+          "status": "measured",
+          "components": 3,
+          "samples": 1073741824,
+          "rms_error": 6.029036428915792e-9,
+          "peak_error": 1.390049961899723e-7,
+          "peak_relative_error": 0.00020484041732629087,
+          "reference_peak": 0.6786014108170403,
+          "relative_floor": 0.0006786014108170402
+        },
+        "regions": [
+          {
+            "region": "core",
+            "sampled": {
+              "status": "measured",
+              "components": 3,
+              "samples": 4841613,
+              "rms_error": 1.6486101308494792e-9,
+              "peak_error": 3.961489412055119e-9,
+              "peak_relative_error": 1.6340937827955393e-8,
+              "reference_peak": 0.6222337526572552,
+              "relative_floor": 0.0006786014108170402
+            }
+          },
+          {
+            "region": "annulus",
+            "sampled": {
+              "status": "measured",
+              "components": 3,
+              "samples": 47268728,
+              "rms_error": 1.6709408715543236e-9,
+              "peak_error": 4.835448002832765e-9,
+              "peak_relative_error": 9.507952459572604e-8,
+              "reference_peak": 0.31495312233702294,
+              "relative_floor": 0.0006786014108170402
+            }
+          },
+          {
+            "region": "interior_outside_nominal",
+            "sampled": {
+              "status": "measured",
+              "components": 3,
+              "samples": 69327434,
+              "rms_error": 2.581641103871312e-9,
+              "peak_error": 1.0748145700787183e-8,
+              "peak_relative_error": 4.5498785713033e-8,
+              "reference_peak": 0.6786014108170403,
+              "relative_floor": 0.0006786014108170402
+            }
+          },
+          {
+            "region": "collar",
+            "sampled": {
+              "status": "measured",
+              "components": 3,
+              "samples": 211783078,
+              "rms_error": 1.177213876102378e-8,
+              "peak_error": 1.390049961899723e-7,
+              "peak_relative_error": 0.00020484041732629087,
+              "reference_peak": 0.4413288165614077,
+              "relative_floor": 0.0006786014108170402
+            }
+          },
+          {
+            "region": "exterior",
+            "sampled": {
+              "status": "measured",
+              "components": 3,
+              "samples": 740520971,
+              "rms_error": 3.5003046617757418e-9,
+              "peak_error": 9.386890837931777e-8,
+              "peak_relative_error": 0.0001383270162469881,
+              "reference_peak": 0.0,
+              "relative_floor": 0.0006786014108170402
+            }
+          }
+        ]
+      },
+      {
+        "quantity": "gradient",
+        "scalar_inverse_transforms": 9,
+        "relative_floor": 0.021838850763628678,
+        "global": {
+          "status": "measured",
+          "components": 9,
+          "samples": 1073741824,
+          "rms_error": 0.00001127447837183335,
+          "peak_error": 0.0002632446710286918,
+          "peak_relative_error": 0.0120539617161133,
+          "reference_peak": 21.838850763628677,
+          "relative_floor": 0.021838850763628678
+        },
+        "regions": [
+          {
+            "region": "core",
+            "sampled": {
+              "status": "measured",
+              "components": 9,
+              "samples": 4841613,
+              "rms_error": 2.6731538451314517e-6,
+              "peak_error": 6.3619464240738705e-6,
+              "peak_relative_error": 1.3393516585461658e-6,
+              "reference_peak": 12.315667020729883,
+              "relative_floor": 0.021838850763628678
+            }
+          },
+          {
+            "region": "annulus",
+            "sampled": {
+              "status": "measured",
+              "components": 9,
+              "samples": 47268728,
+              "rms_error": 2.9751659316646973e-6,
+              "peak_error": 7.79644949379348e-6,
+              "peak_relative_error": 4.837129912178632e-6,
+              "reference_peak": 7.084039996568661,
+              "relative_floor": 0.021838850763628678
+            }
+          },
+          {
+            "region": "interior_outside_nominal",
+            "sampled": {
+              "status": "measured",
+              "components": 9,
+              "samples": 69327434,
+              "rms_error": 4.5057222782723e-6,
+              "peak_error": 0.000018754044708446425,
+              "peak_relative_error": 8.999997765983096e-6,
+              "reference_peak": 7.875579612269715,
+              "relative_floor": 0.021838850763628678
+            }
+          },
+          {
+            "region": "collar",
+            "sampled": {
+              "status": "measured",
+              "components": 9,
+              "samples": 211783078,
+              "rms_error": 0.000022162030954028446,
+              "peak_error": 0.0002632446710286918,
+              "peak_relative_error": 0.0120539617161133,
+              "reference_peak": 21.838850763628677,
+              "relative_floor": 0.021838850763628678
+            }
+          },
+          {
+            "region": "exterior",
+            "sampled": {
+              "status": "measured",
+              "components": 9,
+              "samples": 740520971,
+              "rms_error": 6.429139132837763e-6,
+              "peak_error": 0.00016091428518886508,
+              "peak_relative_error": 0.007368257923940685,
+              "reference_peak": 0.0,
+              "relative_floor": 0.021838850763628678
+            }
+          }
+        ]
+      },
+      {
+        "quantity": "ordered_hessian",
+        "scalar_inverse_transforms": 27,
+        "relative_floor": 2.398147306134944,
+        "global": {
+          "status": "measured",
+          "components": 27,
+          "samples": 1073741824,
+          "rms_error": 0.02140217378759238,
+          "peak_error": 0.5055284697339233,
+          "peak_relative_error": 0.2030223492376691,
+          "reference_peak": 2398.147306134944,
+          "relative_floor": 2.398147306134944
+        },
+        "regions": [
+          {
+            "region": "core",
+            "sampled": {
+              "status": "measured",
+              "components": 27,
+              "samples": 4841613,
+              "rms_error": 0.00438247594837038,
+              "peak_error": 0.010237578578684792,
+              "peak_relative_error": 0.00010376046594812501,
+              "reference_peak": 226.0948425650234,
+              "relative_floor": 2.398147306134944
+            }
+          },
+          {
+            "region": "annulus",
+            "sampled": {
+              "status": "measured",
+              "components": 27,
+              "samples": 47268728,
+              "rms_error": 0.005362104006112003,
+              "peak_error": 0.012628879532139632,
+              "peak_relative_error": 0.00030052701358610287,
+              "reference_peak": 177.56677221407588,
+              "relative_floor": 2.398147306134944
+            }
+          },
+          {
+            "region": "interior_outside_nominal",
+            "sampled": {
+              "status": "measured",
+              "components": 27,
+              "samples": 69327434,
+              "rms_error": 0.007894936277763172,
+              "peak_error": 0.03042625513947626,
+              "peak_relative_error": 0.0008012413255209785,
+              "reference_peak": 222.4933384282146,
+              "relative_floor": 2.398147306134944
+            }
+          },
+          {
+            "region": "collar",
+            "sampled": {
+              "status": "measured",
+              "components": 27,
+              "samples": 211783078,
+              "rms_error": 0.04283464626618979,
+              "peak_error": 0.5055284697339233,
+              "peak_relative_error": 0.2030223492376691,
+              "reference_peak": 2398.147306134944,
+              "relative_floor": 2.398147306134944
+            }
+          },
+          {
+            "region": "exterior",
+            "sampled": {
+              "status": "measured",
+              "components": 27,
+              "samples": 740520971,
+              "rms_error": 0.011473107768468912,
+              "peak_error": 0.2795163014952472,
+              "peak_relative_error": 0.11655510100659296,
+              "reference_peak": 0.0,
+              "relative_floor": 2.398147306134944
+            }
+          }
+        ]
+      }
+    ],
+    "coverage": [
+      {
+        "region": "core",
+        "requested_panels": 256,
+        "fine_panels": 512,
+        "status": "nonempty",
+        "fraction": 1.0,
+        "refinement_change": 0.0,
+        "evaluations": 770
+      },
+      {
+        "region": "core",
+        "requested_panels": 512,
+        "fine_panels": 1024,
+        "status": "nonempty",
+        "fraction": 1.0,
+        "refinement_change": 0.0,
+        "evaluations": 1538
+      },
+      {
+        "region": "core",
+        "requested_panels": 1024,
+        "fine_panels": 2048,
+        "status": "nonempty",
+        "fraction": 1.0,
+        "refinement_change": 0.0,
+        "evaluations": 3074
+      },
+      {
+        "region": "annulus",
+        "requested_panels": 256,
+        "fine_panels": 512,
+        "status": "nonempty",
+        "fraction": 0.6513653534661611,
+        "refinement_change": 3.425201233753228e-10,
+        "evaluations": 770
+      },
+      {
+        "region": "annulus",
+        "requested_panels": 512,
+        "fine_panels": 1024,
+        "status": "nonempty",
+        "fraction": 0.6513653534875743,
+        "refinement_change": 2.1413204542852782e-11,
+        "evaluations": 1538
+      },
+      {
+        "region": "annulus",
+        "requested_panels": 1024,
+        "fine_panels": 2048,
+        "status": "nonempty",
+        "fraction": 0.6513653534889142,
+        "refinement_change": 1.3399281684201014e-12,
+        "evaluations": 3074
+      }
+    ],
+    "coefficient_sha256": "19688e85af4a095acc139fa4a5dc32a6ba4dff407abab86d1e27daa6517f7e7b"
+  },
+  "state_inputs": 0,
+  "trajectory_from_rest_claims": 0,
+  "state_import_or_resume_interfaces": 0,
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  }
+}

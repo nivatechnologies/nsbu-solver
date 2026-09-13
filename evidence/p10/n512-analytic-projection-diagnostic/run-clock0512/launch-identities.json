@@ -1,0 +1,30 @@
+{
+  "schema": "p10-n512-projection-launch-identities-v1",
+  "captured_utc": "2026-09-13T12:06:15.545804Z",
+  "processes": [
+    {
+      "role": "time_wrapper",
+      "pid": 1586738,
+      "pgid": 1586738,
+      "start_ticks": 10282514,
+      "cmdline_sha256": "87ca6062e47a424bed6053c57d0ca25dfe874b8a7c0d6197984a284453ae5820",
+      "cmdline": "/usr/bin/time -v -o evidence/p10/n512-analytic-projection-diagnostic/run-clock0512/time.txt timeout --signal=TERM --kill-after=60s 6000s prlimit --as=343597383680 -- evidence/p10/n384-regional-snapshot-diagnostic/harness/target/release/p10-n384-regional-snapshot-diagnostic projection-n512-execute 305085516888 evidence/p10/n512-analytic-projection-diagnostic/results/clock0512-analytic-n512-m1024-projection.json --root-reviewed"
+    },
+    {
+      "role": "timeout",
+      "pid": 1586745,
+      "pgid": 1586745,
+      "start_ticks": 10282514,
+      "cmdline_sha256": "8ca67b55576d54bb6de6aa1989c190af9be4d4a1362f7ee8a477c19e96de271e",
+      "cmdline": "timeout --signal=TERM --kill-after=60s 6000s prlimit --as=343597383680 -- evidence/p10/n384-regional-snapshot-diagnostic/harness/target/release/p10-n384-regional-snapshot-diagnostic projection-n512-execute 305085516888 evidence/p10/n512-analytic-projection-diagnostic/results/clock0512-analytic-n512-m1024-projection.json --root-reviewed"
+    },
+    {
+      "role": "diagnostic",
+      "pid": 1586748,
+      "pgid": 1586745,
+      "start_ticks": 10282515,
+      "cmdline_sha256": "1c4c6c5f7c682308292daf26f343da7a9292ce17ddfbc64320c7aa9e25c2c9f5",
+      "cmdline": "evidence/p10/n384-regional-snapshot-diagnostic/harness/target/release/p10-n384-regional-snapshot-diagnostic projection-n512-execute 305085516888 evidence/p10/n512-analytic-projection-diagnostic/results/clock0512-analytic-n512-m1024-projection.json --root-reviewed"
+    }
+  ]
+}
