@@ -1,10 +1,16 @@
 use super::{compare, decode};
+use crate::hessian::{measure_ordered_hessian, screen_ordered_hessian};
 use crate::model::{
     AdmissionGuard, ArithmeticControl, ArithmeticReview, ArithmeticSide, ClockHeader,
     ComparisonKind, Evolution, Manifest, MeasuredControl, MeasuredSide, ProfileBinding,
     ProfileBindingKind, ReviewedLineage, ScheduleSegment,
 };
-use nsbu_solver::{diagnostics::comparison::ComparisonPlan, domain::Layout, Complex64};
+use nsbu_solver::{
+    diagnostics::comparison::ComparisonPlan,
+    domain::{Domain, Layout},
+    spectral::modal,
+    Complex64,
+};
 use sha2::{Digest, Sha256};
 use std::{fs, path::PathBuf};
 
@@ -204,6 +210,180 @@ fn fields(layout: Layout, scale: f64) -> [Vec<Complex64>; 3] {
         component[b] = component[a].conj();
     }
     result
+}
+
+fn zero_fields(layout: Layout) -> [Vec<Complex64>; 3] {
+    std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); layout.half_len()])
+}
+
+fn hermitian_mode(
+    layout: Layout,
+    fields: &mut [Vec<Complex64>; 3],
+    mode: [isize; 3],
+    values: [Complex64; 3],
+) {
+    for (mode, values) in [
+        (mode, values),
+        (mode.map(|m| -m), values.map(|value| value.conj())),
+    ] {
+        let (index, conjugate) = layout.locate(mode).unwrap();
+        for (component, value) in fields.iter_mut().zip(values) {
+            component[index] = if conjugate { value.conj() } else { value };
+        }
+    }
+}
+
+fn close(actual: f64, expected: f64) {
+    assert!(
+        (actual - expected).abs() <= 64.0 * f64::EPSILON * (1.0 + expected.abs()),
+        "{actual:e} vs {expected:e}"
+    );
+}
+
+#[test]
+fn ordered_hessian_single_oblique_mode_uses_hermitian_weight_and_domain_volume() {
+    let domain = Domain::new([4; 3], [2.0, 3.0, 4.0], 0.01).unwrap();
+    let mut values = zero_fields(domain.layout());
+    let coefficient = [
+        Complex64::new(3.0, 4.0),
+        Complex64::new(-1.0, 2.0),
+        Complex64::new(0.0, 0.0),
+    ];
+    hermitian_mode(domain.layout(), &mut values, [1, -1, 1], coefficient);
+
+    let measured =
+        measure_ordered_hessian(domain, std::array::from_fn(|axis| values[axis].as_slice()))
+            .unwrap();
+    let k_squared = std::f64::consts::TAU.powi(2)
+        * (1.0 / 2.0_f64.powi(2) + 1.0 / 3.0_f64.powi(2) + 1.0 / 4.0_f64.powi(2));
+    let coefficient_squared = coefficient
+        .into_iter()
+        .map(|value| value.re * value.re + value.im * value.im)
+        .sum::<f64>();
+    let expected_rms = (2.0 * coefficient_squared * k_squared.powi(2)).sqrt();
+    close(measured.rms, expected_rms);
+    close(measured.l2, expected_rms * (2.0_f64 * 3.0 * 4.0).sqrt());
+}
+
+#[test]
+fn ordered_hessian_sums_all_27_independent_component_derivative_entries() {
+    let domain = Domain::new([4; 3], [1.0, 2.0, 4.0], 0.01).unwrap();
+    let mut values = zero_fields(domain.layout());
+    hermitian_mode(
+        domain.layout(),
+        &mut values,
+        [1, 0, 0],
+        [
+            Complex64::new(1.0, 2.0),
+            Complex64::new(3.0, -1.0),
+            Complex64::new(-2.0, 0.5),
+        ],
+    );
+    hermitian_mode(
+        domain.layout(),
+        &mut values,
+        [1, -1, 1],
+        [
+            Complex64::new(0.25, -0.5),
+            Complex64::new(-1.5, 0.75),
+            Complex64::new(2.0, 0.125),
+        ],
+    );
+
+    let zeros = zero_fields(domain.layout());
+    let screen = screen_ordered_hessian(
+        domain,
+        std::array::from_fn(|axis| zeros[axis].as_slice()),
+        domain,
+        std::array::from_fn(|axis| values[axis].as_slice()),
+    )
+    .unwrap();
+    let mut direct_sum = 0.0;
+    for index in 0..domain.layout().half_len() {
+        let position = domain.layout().position(index).unwrap();
+        if domain.layout().is_nyquist(position).unwrap() {
+            continue;
+        }
+        let wave = modal::wavevector(domain, domain.layout().mode(position).unwrap()).unwrap();
+        let weight = domain.layout().weight(position).unwrap();
+        for value in values.iter().map(|component| component[index]) {
+            for first in wave {
+                for second in wave {
+                    let derivative = value * first * second;
+                    direct_sum +=
+                        weight * (derivative.re * derivative.re + derivative.im * derivative.im);
+                }
+            }
+        }
+    }
+    close(screen.difference.rms, direct_sum.sqrt());
+    close(
+        screen.difference.l2,
+        direct_sum.sqrt() * (1.0_f64 * 2.0 * 4.0).sqrt(),
+    );
+    assert_eq!(screen.relative_to_fine.rms, Some(1.0));
+    assert_eq!(screen.relative_to_fine.l2, Some(1.0));
+}
+
+#[test]
+fn ordered_hessian_matches_small_grid_parseval_reconstruction() {
+    let domain = Domain::new([4; 3], [1.0; 3], 0.01).unwrap();
+    let mode = [1, -1, 1];
+    let coefficient = [
+        Complex64::new(0.25, 0.125),
+        Complex64::new(-0.375, 0.5),
+        Complex64::new(0.2, -0.3),
+    ];
+    let mut values = zero_fields(domain.layout());
+    hermitian_mode(domain.layout(), &mut values, mode, coefficient);
+    let measured =
+        measure_ordered_hessian(domain, std::array::from_fn(|axis| values[axis].as_slice()))
+            .unwrap();
+
+    let wave = modal::wavevector(domain, mode).unwrap();
+    let mut physical_sum = 0.0;
+    for x in 0..4 {
+        for y in 0..4 {
+            for z in 0..4 {
+                let phase =
+                    std::f64::consts::TAU * (x as f64 / 4.0 - y as f64 / 4.0 + z as f64 / 4.0);
+                for value in coefficient {
+                    let physical = 2.0 * (value.re * phase.cos() - value.im * phase.sin());
+                    for first in wave {
+                        for second in wave {
+                            physical_sum += (first * second * physical).powi(2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    let expected_rms = (physical_sum / 64.0).sqrt();
+    close(measured.rms, expected_rms);
+    close(measured.l2, expected_rms);
+}
+
+#[test]
+fn ordered_hessian_scaled_squares_keep_large_finite_modes_finite() {
+    let domain = Domain::new([4; 3], [1.0; 3], 0.01).unwrap();
+    let mut values = zero_fields(domain.layout());
+    hermitian_mode(
+        domain.layout(),
+        &mut values,
+        [1, 0, 1],
+        [
+            Complex64::new(1e200, 0.0),
+            Complex64::new(0.0, 0.0),
+            Complex64::new(0.0, 0.0),
+        ],
+    );
+    let measured =
+        measure_ordered_hessian(domain, std::array::from_fn(|axis| values[axis].as_slice()))
+            .unwrap();
+    let expected = 2.0_f64.sqrt() * 1e200 * (2.0 * std::f64::consts::TAU.powi(2));
+    assert!(measured.rms.is_finite());
+    close(measured.rms, expected);
+    close(measured.l2, expected);
 }
 
 fn encode(manifest: &Manifest, fields: &[Vec<Complex64>; 3]) -> Vec<u8> {
