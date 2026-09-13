@@ -7,6 +7,11 @@ local LAN inference endpoint, the packet stays dormant. `remote_execution: false
 means no worker SSH, remote shell, solver launch, or daemon launch; it allows
 calls to the operator-supplied Spark LAN inference endpoint.
 
+Task runners, Codex clients, isolated worktrees, Rust checks, and numerical
+validation remain on the current x86_64 server using its existing AVX backend
+and toolchain. Sparks provide inference only; building or validating ARM
+numerical substitutions on Sparks is forbidden.
+
 The implementer may take only the reviewed regional force-correction plan from
 commit `1f49f47` as its real bounded backlog task. The diagnostic compares
 `N384/M512` with `N384/M384` at clock 512 on the fixed unshifted `M768` lattice

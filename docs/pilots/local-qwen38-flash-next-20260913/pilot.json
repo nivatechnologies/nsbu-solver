@@ -10,6 +10,8 @@
     "cloud_fallback": false,
     "remote_execution": false,
     "remote_execution_meaning": "no worker SSH, remote shell, solver launch, or daemon launch; an operator-supplied Spark LAN inference endpoint may be called",
+    "platform_policy": "task runners, Codex clients, isolated worktrees, Rust checks, and numerical validation remain on the current x86_64 server using its existing AVX backend and toolchain; Sparks provide inference only",
+    "arm_numerical_substitutions": false,
     "model_identity": "record the actual server-reported model ID separately; do not guess an API model string from the user-facing label"
   },
   "immutable_inputs": [
@@ -27,6 +29,7 @@
     "additional_write_paths": "none unless root explicitly authorizes a necessary harness support file",
     "forbidden_paths": ["crates/", "tools/", "docs/", "evidence/p10/", "work/", "models/", "active numerical binaries", "active trajectory logs", "checks", "acceptance budgets"],
     "budget_policy": "do not modify checks, acceptance budgets, or numerical qualification policy",
+    "build_policy": "forbid building or validating ARM numerical substitutions on Sparks",
     "merge": "operator/root only after both agent receipts and review pass",
     "source_mutation": "no changes to frozen inputs"
   },
