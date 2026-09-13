@@ -75,5 +75,7 @@
   "attempt41_status": "begun_in_memory_after_checkpoint_then_discarded_unpublished_by_manual_group_term",
   "attempt41_artifacts_present": false,
   "clock2048_gate": "continuation-gate-2048.json",
-  "clock3072_gate": "continuation-gate-3072.json"
+  "clock3072_gate": "continuation-gate-3072.json",
+  "prefix_controller_started": false,
+  "continuation_gates_executed_manually": true
 }

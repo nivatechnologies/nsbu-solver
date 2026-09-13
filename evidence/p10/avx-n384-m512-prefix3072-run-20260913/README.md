@@ -5,7 +5,8 @@ the frozen N384/M512 profile. It produced 40 durable accepted snapshots through
 clock 3072. The first 32 steps used h64 and the next eight used h128. Scheduled
 observers completed at clocks 512, 1024, 1536, 2048, 2560, and 3072.
 
-The manual clock-2048 gate admitted exactly one continuation segment. At durable
+The prefix controller remained disabled for the entire run. The manual clock-2048
+gate admitted exactly one continuation segment. At durable
 clock 3072, the frozen formula used the maximum integration time from attempts
 33--40 and the maximum positive observer time seen in the run:
 
