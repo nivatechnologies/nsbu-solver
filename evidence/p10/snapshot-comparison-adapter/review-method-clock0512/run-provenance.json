@@ -1,0 +1,48 @@
+{
+  "schema": "p10-method-diagnostic-clock0512-provenance-v1",
+  "status": "completed_once_under_root_preauthorization_not_assessed",
+  "comparison_kind": "METHOD_DIAGNOSTIC",
+  "source_commit": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "executions": 1,
+  "exit_status": 0,
+  "cap_bytes": 2733113344,
+  "adapter_binary_sha256": "d1dde0333286e2ace34a1ee22df0dec8c25188cbaebcb846929d55f54e6d4106",
+  "left": {
+    "manifest": "left-n384-cm-clock0512.json",
+    "snapshot_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "method": "cox-matthews"
+  },
+  "right": {
+    "manifest": "right-n384-ho-clock0512.json",
+    "snapshot_sha256": "a4b2f4a6f4f3bbd6de234cf97ad9653f7c7ac2ea69a021a7cb8f3ddaa7b89cd3",
+    "plan_sha256": "ef337eb28924a335a78dbfc1c710ca40e8b507b10b96687bc4197971e411b60c",
+    "source_commit": "0faec11e507e07c08ad20fd29cec04ddf8cd8946",
+    "method": "hochbruck-ostermann",
+    "handoff_commit": "a6095c0c6ae13f3ada574e170a23a6d395bb01fc"
+  },
+  "shared_semantics": {
+    "dimensions": [
+      384,
+      384,
+      384
+    ],
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "clock": 512,
+    "epoch": 8,
+    "accepted_steps": 8,
+    "maximum_attempts": 48,
+    "step_ticks": 64
+  },
+  "comparison_output_sha256": "684c22fc18f7a35b164a78cac81c0a7bada50cfb1a6519bfe0855091418c93ed",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "maximum_resident_set_kbytes": 2669568,
+  "elapsed_wall_seconds": 38.09,
+  "snapshot_handling": "read immutable pre-existing local exact-hash paths; no copy or transfer made for this comparison",
+  "budget": "unassigned; candidate 2e-4 was not applied because no active policy supplied to this run explicitly assigned Method to Time"
+}
