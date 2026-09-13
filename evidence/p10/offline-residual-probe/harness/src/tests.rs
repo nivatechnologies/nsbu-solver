@@ -150,6 +150,133 @@ fn explicit_rhs_plus_one_viscous_term_has_the_residual_plan_sign() {
 }
 
 #[test]
+fn localized_force_delta_has_plus_sign_and_strict_shell_mask() {
+    let source = Domain::new([4; 3], [1.0; 3], 0.25).unwrap();
+    let diagnostic = ConservativeWorkspace::diagnostic_domain(source).unwrap();
+    let velocity = field(source).unwrap();
+    let derivative = field(source).unwrap();
+    let mut retained_force = field(source).unwrap();
+    let mut full_force = field(diagnostic).unwrap();
+    let mut conservative = field(diagnostic).unwrap();
+    let retained_positive = source.layout().index([1, 0, 0]).unwrap();
+    let retained_negative = source.layout().index([3, 0, 0]).unwrap();
+    retained_force[1][retained_positive] = Complex64::new(0.25, 0.0);
+    retained_force[1][retained_negative] = Complex64::new(0.25, 0.0);
+    let full_retained_positive = diagnostic.layout().index([1, 0, 0]).unwrap();
+    let full_retained_negative = diagnostic.layout().index([7, 0, 0]).unwrap();
+    let shell_positive = diagnostic.layout().index([3, 0, 0]).unwrap();
+    let shell_negative = diagnostic.layout().index([5, 0, 0]).unwrap();
+    for index in [full_retained_positive, full_retained_negative] {
+        full_force[1][index] = Complex64::new(1.0, 0.0);
+        conservative[1][index] = Complex64::new(-1.0, 0.0);
+    }
+    for index in [shell_positive, shell_negative] {
+        full_force[1][index] = Complex64::new(2.0, 0.0);
+        conservative[1][index] = Complex64::new(-2.0, 0.0);
+    }
+    let mut ordinary = field(diagnostic).unwrap();
+    let ordinary_norms = ResidualPlan::new(source)
+        .unwrap()
+        .evaluate(
+            velocity.each_ref().map(Vec::as_slice),
+            derivative.each_ref().map(Vec::as_slice),
+            conservative.each_ref().map(Vec::as_slice),
+            ordinary.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    let mut localized = field(diagnostic).unwrap();
+    let result = ResidualPlan::new(source)
+        .unwrap()
+        .evaluate_localized(
+            velocity.each_ref().map(Vec::as_slice),
+            derivative.each_ref().map(Vec::as_slice),
+            conservative.each_ref().map(Vec::as_slice),
+            full_force.each_ref().map(Vec::as_slice),
+            retained_force.each_ref().map(Vec::as_slice),
+            localized.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    assert_eq!(ordinary, localized);
+    assert!((ordinary_norms.l2 - result.full_n768.residual_m768.l2).abs() < 1e-14);
+    assert!((ordinary_norms.h1 - result.full_n768.residual_m768.h1).abs() < 1e-13);
+    assert!(
+        (ordinary_norms.vorticity_l2 - result.full_n768.residual_m768.vorticity_l2).abs() < 1e-13
+    );
+    assert_eq!(
+        ordinary_norms.divergence_l2,
+        result.full_n768.residual_m768.divergence_l2
+    );
+    assert_eq!(result.retained_modes, 18);
+    assert_eq!(result.new_shell_modes, 178);
+    assert_eq!(result.excluded_nyquist_slots, 124);
+    assert_eq!(
+        localized[1][shell_positive],
+        conservative[1][shell_positive]
+    );
+    assert!((result.full_n768.residual_m384.l2 - 0.25 * 2.0_f64.sqrt()).abs() < 1e-13);
+    enforce_identity_tolerance(&result, 1e-12).unwrap();
+}
+
+#[test]
+fn selected_retained_force_constructor_matches_scalar_avx_reference() {
+    let backend = FftBackend::RustFft6_4_1AvxFma;
+    if backend.ensure_available().is_err() {
+        return;
+    }
+    let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();
+    let samples = Layout::new([6; 3]).unwrap();
+    let catalog_bytes = FftCatalog::reservation(backend).unwrap();
+    let catalog = FftCatalog::new(backend, catalog_bytes).unwrap();
+    let selected_limits = CachedReducedForce::preflight(domain, samples, 3, backend, true).unwrap();
+    let scalar_limits = CachedReducedForce::preflight(domain, samples, 3, backend, false).unwrap();
+    let mut selected = CachedReducedForce::new(
+        domain,
+        samples,
+        3,
+        &catalog,
+        selected_limits.storage_bytes,
+        true,
+    )
+    .unwrap();
+    let mut scalar = CachedReducedForce::new(
+        domain,
+        samples,
+        3,
+        &catalog,
+        scalar_limits.storage_bytes,
+        false,
+    )
+    .unwrap();
+    let identity = selected.w3_identity().unwrap();
+    assert_eq!(identity.backend, backend);
+    assert_eq!(identity.layout, samples);
+    assert_eq!(identity.width, 3);
+    assert_eq!(identity.mode, W3FftMode::Forward);
+    let time = TickClock::restore(-20, 8192, PROBE, 8192 - PROBE).unwrap();
+    let mut actual = field(domain).unwrap();
+    let mut expected = field(domain).unwrap();
+    selected.begin_attempt(time, 64, selected_limits).unwrap();
+    scalar.begin_attempt(time, 64, scalar_limits).unwrap();
+    selected
+        .evaluate(
+            time,
+            selected_limits,
+            actual.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    scalar
+        .evaluate(
+            time,
+            scalar_limits,
+            expected.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    assert_eq!(actual, expected);
+    assert_eq!(selected.hit_miss(), [0, 1]);
+    assert_eq!(scalar.hit_miss(), [0, 1]);
+}
+
+#[test]
 fn selected_w3_constructor_matches_the_archived_scalar_avx_reference_bits() {
     let backend = FftBackend::RustFft6_4_1AvxFma;
     if backend.ensure_available().is_err() {
