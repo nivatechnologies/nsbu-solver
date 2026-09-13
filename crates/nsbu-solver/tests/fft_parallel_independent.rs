@@ -2,7 +2,7 @@
 use nsbu_solver::domain::Layout;
 use nsbu_solver::spectral::{FftBackend, FftCatalog, FftPlan, ParallelFftExecutor};
 use nsbu_solver::Complex64;
-use std::sync::Arc;
+use std::sync::{Arc, Barrier};
 fn input(l: Layout) -> Vec<f64> {
     (0..l.real_len())
         .map(|i| ((i * 37 + 11) % 251) as f64 / 251. - 0.3)
@@ -71,19 +71,27 @@ fn three_external_callers_share_one_pool() {
         )
         .unwrap(),
     );
+    let gate = Arc::new(Barrier::new(3));
     std::thread::scope(|s| {
         for _ in 0..3 {
-            let c = c.clone();
-            let e = e.clone();
+            let (c, e, gate) = (c.clone(), e.clone(), gate.clone());
             s.spawn(move || {
                 let (p, mut sw) = FftPlan::new_from_catalog(l, &c, cap).unwrap();
                 let (q, mut pw) = FftPlan::new_from_catalog(l, &c, cap).unwrap();
                 let x = input(l);
-                let mut a = vec![Complex64::new(0., 0.); l.half_len()];
-                let mut z = a.clone();
+                let (mut a, mut z) = (
+                    vec![Complex64::new(0., 0.); l.half_len()],
+                    vec![Complex64::new(0., 0.); l.half_len()],
+                );
                 p.forward(&x, &mut a, &mut sw).unwrap();
+                let (mut ar, mut zr) = (vec![0.; l.real_len()], vec![0.; l.real_len()]);
+                p.inverse(&a, &mut ar, &mut sw).unwrap();
+                gate.wait();
                 e.forward(&q, &x, &mut z, &mut pw).unwrap();
+                gate.wait();
+                e.inverse(&q, &z, &mut zr, &mut pw).unwrap();
                 assert_eq!(cbits(&a), cbits(&z));
+                assert_eq!(rbits(&ar), rbits(&zr));
             });
         }
     });
