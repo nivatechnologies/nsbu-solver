@@ -27,7 +27,7 @@ cargo run --release --manifest-path evidence/p10/n384-regional-snapshot-diagnost
 
 Do not launch the complete diagnostic while residual localization or another campaign job is
 active. A later root-reviewed launch must supply the staged snapshot, expose at least 32 CPUs, have
-`MemAvailable >= 145951239256`, apply an external 128771370072-byte address-space limit and a
+`MemAvailable >= 145951239256`, apply an external 137438953472-byte address-space limit and a
 2400-second timeout, and set all reviewed execution gates:
 
 ```text
@@ -38,10 +38,9 @@ REGIONAL_BINARY_SHA256=$(sha256sum "$REGIONAL_BINARY" | cut -d' ' -f1)
 P10_ROOT_FULL_RUN_REVIEW=approved \
 P10_RESIDUAL_LOCALIZATION_IDLE=1 \
 P10_CPU_WORKERS=32 \
-P10_ADDRESS_SPACE_CAP_BYTES=128771370072 \
 P10_DIAGNOSTIC_BINARY_SHA256="$REGIONAL_BINARY_SHA256" \
 timeout --signal=TERM --kill-after=60s 2400s \
-prlimit --as=128771370072 -- "$REGIONAL_BINARY" execute \
+prlimit --as=137438953472 -- "$REGIONAL_BINARY" execute \
   evidence/p10/external-reference-bridge/inputs/clock0512/snapshot.json \
   128771370072 OUTPUT.json --root-reviewed
 ```

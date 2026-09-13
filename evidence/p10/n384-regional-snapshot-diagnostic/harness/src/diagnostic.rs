@@ -27,7 +27,7 @@ use std::{
 };
 
 pub(crate) const CAP_BYTES: usize = 128_771_370_072;
-const CAP_BYTES_TEXT: &str = "128771370072";
+const SCOPED_RLIMIT_AS_BYTES: usize = 137_438_953_472;
 const EXTRA_MEMORY_GATE: usize = 16 * 1024 * 1024 * 1024;
 const OUTPUT_CAP: usize = 64 * 1024;
 const WORKERS: usize = 32;
@@ -124,6 +124,7 @@ struct SnapshotBinding<'a> {
 #[derive(Clone, Copy, Debug, Serialize)]
 struct LaunchPolicy {
     exact_cap_bytes: usize,
+    external_address_space_limit_bytes: usize,
     minimum_mem_available_bytes: usize,
     workers: usize,
     stack_bytes_per_worker: usize,
@@ -766,9 +767,10 @@ fn launch_gate(binary_sha256: &str) -> Result<(), String> {
     if std::env::var("P10_CPU_WORKERS").as_deref() != Ok("32") {
         return Err("full run requires the reviewed P10_CPU_WORKERS=32 fit".into());
     }
-    if std::env::var("P10_ADDRESS_SPACE_CAP_BYTES").as_deref() != Ok(CAP_BYTES_TEXT) {
+    let limits = address_space_limits()?;
+    if limits != [SCOPED_RLIMIT_AS_BYTES; 2] {
         return Err(format!(
-            "full run requires P10_ADDRESS_SPACE_CAP_BYTES={CAP_BYTES}"
+            "full run requires actual RLIMIT_AS soft/hard limits of {SCOPED_RLIMIT_AS_BYTES}, observed {limits:?}"
         ));
     }
     if std::env::var("P10_DIAGNOSTIC_BINARY_SHA256").as_deref() != Ok(binary_sha256) {
@@ -812,6 +814,26 @@ fn mem_available() -> Result<usize, String> {
         .ok_or_else(|| "MemAvailable overflow".into())
 }
 
+fn address_space_limits() -> Result<[usize; 2], String> {
+    let text = fs::read_to_string("/proc/self/limits").map_err(model::debug)?;
+    parse_address_space_limits(&text)
+}
+
+fn parse_address_space_limits(text: &str) -> Result<[usize; 2], String> {
+    let fields = text
+        .lines()
+        .find(|line| line.starts_with("Max address space"))
+        .ok_or("Max address space is missing from /proc/self/limits")?
+        .split_ascii_whitespace()
+        .collect::<Vec<_>>();
+    if fields.len() != 6 || fields[5] != "bytes" {
+        return Err("invalid Max address space record".into());
+    }
+    let soft = fields[3].parse::<usize>().map_err(model::debug)?;
+    let hard = fields[4].parse::<usize>().map_err(model::debug)?;
+    Ok([soft, hard])
+}
+
 fn current_executable_hash() -> Result<String, String> {
     let path = std::env::current_exe().map_err(model::debug)?;
     let mut file = fs::File::open(path).map_err(model::debug)?;
@@ -830,6 +852,7 @@ fn current_executable_hash() -> Result<String, String> {
 fn launch_policy() -> LaunchPolicy {
     LaunchPolicy {
         exact_cap_bytes: CAP_BYTES,
+        external_address_space_limit_bytes: SCOPED_RLIMIT_AS_BYTES,
         minimum_mem_available_bytes: CAP_BYTES + EXTRA_MEMORY_GATE,
         workers: WORKERS,
         stack_bytes_per_worker: STACK_BYTES,
@@ -983,6 +1006,19 @@ mod tests {
         {
             assert!(launch_gate(&"0".repeat(64)).is_err());
         }
+    }
+
+    #[test]
+    fn address_space_limit_parser_requires_numeric_soft_and_hard_bytes() {
+        let limits = parse_address_space_limits(
+            "Limit Soft Limit Hard Limit Units\nMax address space 137438953472 137438953472 bytes\n",
+        )
+        .unwrap();
+        assert_eq!(limits, [137_438_953_472; 2]);
+        assert!(parse_address_space_limits(
+            "Limit Soft Limit Hard Limit Units\nMax address space unlimited unlimited bytes\n",
+        )
+        .is_err());
     }
 
     #[test]

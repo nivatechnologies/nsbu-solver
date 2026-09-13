@@ -34,6 +34,7 @@
   },
   "admission": {
     "exact_cap_bytes": 128771370072,
+    "external_address_space_limit_bytes": 137438953472,
     "catalog_backed_derivative_workspace_bytes": 10890584880,
     "planning_correction": "compiled DerivativeWorkspace header was 408 bytes, eight bytes above the planning estimate; eight bytes moved from allocator allowance and total cap stayed unchanged",
     "allocator_allowance_bytes": 65528,
@@ -41,12 +42,12 @@
     "workers": 32,
     "worker_stack_bytes": 2097152,
     "hard_timeout_seconds": 2400,
-    "release_binary_sha256_at_validation": "df26e8846773679961223a12d34d7712e43fc985be632ff2bbce6c4a4e732053",
+    "release_binary_sha256_at_validation": "c91d3f6b68c7ae4c7dd03b90e702f5f54d6e4d2152bde9fd090761fcb3d8b6ee",
     "full_run_gates": [
       "root review approval",
       "residual localization idle declaration",
       "32-worker CPU fit",
-      "exact external address-space cap",
+      "actual 128 GiB external address-space limit",
       "running release-binary SHA-256 match",
       "MemAvailable threshold"
     ]
@@ -61,7 +62,7 @@
       "command": "cargo test",
       "scope": "standalone diagnostic harness",
       "status": "passed",
-      "tests": 8
+      "tests": 9
     },
     {
       "command": "cargo clippy -p nsbu-solver --lib -- -D warnings",

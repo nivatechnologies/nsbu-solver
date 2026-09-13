@@ -58,7 +58,7 @@
       {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/Cargo.lock", "sha256": "cd855785f745a750ae57aa510c822ecbc59886168b842c9bd950db3b7b924292", "role": "adapter resolved dependency closure"},
       {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/main.rs", "sha256": "7c2a570efde83480d2a663b489ea270c55b0dc2c69127be66c38bcc9aa245e22", "role": "explicit preflight, pilot and reviewed execute command boundary"},
       {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/cache.rs", "sha256": "51ffe26d8428db74f18436d59169e09e1a27c078e3ecb50dbdf5d4fb94c1f590", "role": "packed 30-word reference and ordered-Hessian equality check"},
-      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/diagnostic.rs", "sha256": "adf81cee71b92d5b8624a72e7df6dbe0627706cb4aaf53eb79129dfec16b4e5f", "role": "single-snapshot binding, admission, immutable sampling, reductions and transactional output"},
+      {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/diagnostic.rs", "sha256": "7a0f152888ddab6548d360bffbfe660913490fb4b7bbf8b15a733833ffdc2c66", "role": "single-snapshot binding, admission, actual RLIMIT_AS gate, immutable sampling, reductions and transactional output"},
       {"path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/pilot.rs", "sha256": "4b9686e29d838d83223302ae0d298acebfb2e878339385e3cfdd75c9c6f12ae9", "role": "representative complete x-plane timing pilot"}
     ]
   },
@@ -267,7 +267,7 @@
     "Confirm residual localization and every other campaign workload are idle.",
     "Confirm MemAvailable is at least 145951239256 bytes and at least 32 CPUs fit the host allocation.",
     "Review the final source commit and release executable SHA-256, then supply the explicit execution gates documented in the runbook.",
-    "Apply an external 128771370072-byte address-space limit and a 2400-second TERM timeout with a 60-second kill-after.",
+    "Apply an external 137438953472-byte address-space limit and a 2400-second TERM timeout with a 60-second kill-after.",
     "Keep sampled collar results, sampled peak values, binary64 reference arithmetic and the single 768^3 lattice labeled as diagnostic measurements without collar-volume, peak, reference-precision or sampling-convergence qualification."
   ]
 }
