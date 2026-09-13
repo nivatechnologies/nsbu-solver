@@ -1,0 +1,10 @@
+[package]
+name = "p10-fft-intra-transform-benchmark"
+version = "0.0.0"
+edition = "2021"
+publish = false
+[workspace]
+[dependencies]
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+stats_alloc = "=0.1.10"
+sha2 = { version = "=0.10.9", default-features = false, features = ["force-soft"] }
