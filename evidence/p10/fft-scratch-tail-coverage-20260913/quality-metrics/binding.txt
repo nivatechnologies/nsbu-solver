@@ -1,0 +1,5 @@
+source=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
+coverage=evidence/p10/fft-scratch-tail-coverage-20260913/coverage.json sha256=f0ecd624f890cbfc038937a19a8a8e52dfc1ceca4f00f832f41928f0649420dc
+scope=five changed production FFT files, exact paths in files.txt
+RCA command per file: rust-code-analysis-cli -p FILE -m -O json
+CRAP command: python3 quality/check_crap.py rust rca.jsonl ../coverage.json crap.json
