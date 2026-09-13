@@ -1,0 +1,572 @@
+
+running 28 tests
+test diagnostics::derivatives::tests::catalog_avx_sampler_matches_owned_normalization_and_derivatives ... ok
+test diagnostics::derivatives::tests::pair_projection_preserves_exact_subnormal_and_large_pairs ... ok
+test diagnostics::physical::quantity::tests::sampled_curl_has_the_physical_orientation ... ok
+test experiment::tests::failed_refusal_recording_still_discards_a_measured_observer_proposal ... ok
+test experiment::tests::injected_stale_or_inconsistent_holders_cannot_publish_accepted_history ... ok
+test experiment::tests::observer_pending_state_tracks_the_physical_and_history_transaction ... ok
+test experiment::tests::private_rejection_reports_must_actually_fail_a_local_channel ... ok
+test experiment::tests::private_update_admission_refuses_missing_or_misclassified_samples ... ok
+test integrators::indicator::tests::half_storage_weights_apply_to_both_complex_parts_and_both_error_channels ... ok
+test integrators::indicator::tests::overflowing_discrepancy_is_refused_even_with_a_finite_fine_state_budget ... ok
+test integrators::kernel::tests::field_allocation_refusal_propagates_without_partial_payload_construction ... ok
+test integrators::rhs::w3::tests::explicit_w3_rhs_admission_reports_identity_and_rejects_invalid_inputs ... ok
+test integrators::transaction::tests::accepted_step_counter_exhaustion_does_not_change_committed_time_or_storage ... ok
+test integrators::transaction::tests::coefficient_fingerprint_matches_independently_computed_bitstream_fixture ... ok
+test integrators::transaction::tests::every_private_acceptance_identity_is_validated_before_any_payload_exchange ... ok
+test integrators::transaction::tests::exhausted_candidate_generation_invalidates_prior_acceptance ... ok
+test integrators::transaction::tests::matching_private_metadata_commits_and_a_wrong_plan_does_not ... ok
+test spectral::hermitian::tests::finite_components_and_relative_pair_boundaries_are_checked_separately ... ok
+test spectral::rotational::tests::drained_w3_failure_does_not_publish_rhs_or_pressure ... ok
+test spectral::rotational::tests::opt_in_w3_operator_matches_serial_and_refuses_one_byte_short ... ok
+test spectral::w3::tests::admission_is_closed_to_fixture_6_and_experiment_lengths_through_768 ... ok
+test spectral::w3::tests::admitted_force_layouts_have_exact_w3_reservations ... ok
+test spectral::w3::tests::every_caught_injected_panic_drains_and_terminates_the_owner ... ok
+test spectral::w3::tests::every_injected_numerical_failure_drains_and_terminates_the_owner ... ok
+test spectral::w3::tests::exact_additional_cap_constructs_and_one_byte_short_refuses ... ok
+test spectral::w3::tests::mismatched_seed_backend_refuses_before_owner_construction ... ok
+test spectral::w3::tests::small_avx_w3_forward_matches_serial_bits_and_preserves_inputs ... ok
+test storage::tests::impossible_reservation_returns_a_typed_error ... ok
+
+test result: ok. 28 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 1 test
+test physical_grid_guard_matches_mean_velocity_and_checks_duration_arithmetic ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 1 test
+test unpadded_product_aliases_while_three_halves_sampling_removes_the_alias ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test both_catalog_shapes_preserve_version_lengths_hashes_and_exact_content ... ok
+test incomplete_excessive_and_modified_archives_never_publish_a_catalog ... ok
+test malformed_identity_and_declared_lengths_fail_before_content_access ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test invalid_policy_and_unadmitted_rhs_costs_preserve_the_clock ... ok
+test plan_source_spectrum_and_error_budget_refusals_are_structured ... ok
+test unrepresentable_modal_decay_is_an_arithmetic_failure_not_a_clock_repair ... ok
+test workspace_reservations_must_be_complete_and_addressable ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test finite_panel_results_cannot_publish_an_overflowing_cumulative_defect ... ok
+test malformed_samples_and_clocks_preserve_the_prior_history ... ok
+test pending_samples_and_compensation_survive_a_snapshot ... ok
+test variable_pair_spans_retain_the_initial_balance_values ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test failed_diagnostics_publish_neither_physical_nor_balance_history ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test a_new_divergence_free_mode_cannot_hide_behind_common_band_agreement ... ok
+test finite_large_mean_norms_do_not_overflow_when_squares_would ... ok
+test mean_and_transverse_and_longitudinal_errors_have_separate_norms ... ok
+test oblique_complex_modes_exercise_all_derivative_contractions ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test canonical_catalog_is_complete_bounded_and_keeps_optional_reference_explicit ... ok
+test hashing_preserves_exact_bytes_and_refuses_corruption_before_catalog_admission ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test clock_refuses_invalid_states_and_intervals ... ok
+test exact_quarter_stages_use_the_committed_counts ... ok
+test finite_clock_capacity_and_extreme_quantum_are_explicit ... ok
+test floating_sum_can_pass_while_elapsed_time_does_not_advance ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test full_and_two_half_steps_match_independent_full_band_fixtures ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 2 tests
+test diffusion_constant_source_rk4_and_actual_stage_clocks ... ok
+test every_rhs_failure_propagates_without_changing_input ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test all_coefficients_match_high_precision_at_junctions_and_weight_zeros ... ok
+test zero_operator_and_constant_source_identities_hold ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 9 tests
+test balances::a_three_dimensional_triad_has_nonzero_stretching_and_known_balances ... ok
+test balances::an_overflowing_forcing_contraction_is_not_reported_as_finite_work ... ok
+test balances::compensated_forcing_work_retains_a_small_term_between_large_cancellations ... ok
+test balances::large_mean_energy_is_computed_without_squaring_before_the_half_factor ... ok
+test cyclic_sines_have_transverse_conservative_acceleration ... ok
+test gradient_force_changes_pressure_without_accelerating_velocity ... ok
+test refusals::comparison_requires_matching_geometry_and_valid_complete_spectra ... ok
+test refusals::conservative_preflight_and_output_shapes_are_enforced_before_evaluation ... ok
+test taylor_green_pressure_contains_modes_outside_the_velocity_band ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 4 tests
+test malformed_outcomes_do_not_change_controller_state ... ok
+test outcome_access_preserves_both_available_channels_and_missing_indicators ... ok
+test rejected_and_refused_attempts_remain_terminal_after_copying ... ok
+test snapshots_preserve_frozen_configuration_and_stop_at_the_exact_endpoint ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test full_retained_band_matches_convolution_and_inviscid_energy_identity ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 1 test
+test all_312_modal_entries_match_actual_derivative_samples_without_mutation ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.72s
+
+
+running 2 tests
+test admitted_roundoff_matches_projected_signed_pair_on_a_padded_grid ... ok
+test vertical_derivative_of_huge_real_plane_pair_is_exact_zero ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 5 tests
+test all_first_and_second_partials_match_an_independent_physical_wave ... ok
+test derivative_overflow_is_refused_and_later_calls_start_with_clean_scratch ... ok
+test malformed_spectra_are_refused_and_scratch_recovers_without_input_changes ... ok
+test orders_grid_backend_and_memory_are_admitted_before_allocation ... ok
+test real_plane_high_modes_and_mean_are_not_dropped_or_realigned ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 1 test
+test unresolved_wave_numbers_and_derivatives_never_become_zero_diagnostics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 15 tests
+test avx::execution_catalog_is_eager_shared_and_separately_reserved ... ok
+test avx::explicit_avx_backend_has_closed_lengths_caps_and_workspace_identity ... ok
+test avx::explicit_avx_backend_matches_direct_dft_and_repeats_bits ... ok
+test avx::largest_admitted_avx_lengths_execute_forward_and_inverse ... ok
+test avx::same_layout_cross_backend_workspaces_are_checked_before_transform ... ok
+test owned_direct::constant_and_negative_frequency_modes_keep_normalized_amplitudes ... ok
+test owned_direct::full_anisotropic_oracle_covers_rows_hermitian_planes_and_nyquist ... ok
+test owned_direct::mixed_radix_anisotropic_forward_matches_independent_direct_sums ... ok
+test owned_direct::repeated_transform_output_is_bitwise_deterministic ... ok
+test radix_edges::specialized_butterflies_handle_large_finite_and_overflow_inputs ... ok
+test radix_edges::specialized_butterflies_match_zero_heavy_nyquist_oracles ... ok
+test validation::finite_input_that_overflows_transform_arithmetic_is_refused ... ok
+test validation::inverse_checks_both_conjugate_planes_and_declared_roundoff_boundary ... ok
+test validation::plans_refuse_unsupported_lengths_memory_caps_and_payloads ... ok
+test validation::reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 1 test
+test cropped_force_agreement_can_hide_aliasing_and_missing_high_modes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 6 tests
+test advective_refusal_preserves_the_supplied_state ... ok
+test declared_storage_transform_reports_and_exact_advective_boundary_are_preserved ... ok
+test exact_interval_call_cap_and_declared_work_are_enforced ... ok
+test failed_or_dishonest_provider_reports_keep_the_complete_charged_budget ... ok
+test selected_method_checks_its_complete_work_and_transform_counter_range ... ok
+test undeclared_and_overflowing_costs_are_refused_before_workspace_allocation ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 4 tests
+test every_quintic_is_reproduced_in_value_and_physical_derivative ... ok
+test inconsistent_or_degenerate_clocks_are_refused ... ok
+test node_only_residuals_hide_a_defect_revealed_between_nodes ... ok
+test reconstruction_refuses_incomplete_or_nonfinite_payloads ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 7 tests
+test actual_histories_resume_the_same_commit_and_failure_with_fresh_scratch ... ok
+test canonical_bytes_still_require_semantically_consistent_attempts ... ok
+test committed_logs_preserve_both_methods_configuration_raw_samples_and_pending_pairs ... ok
+test imported_history_does_not_authorize_a_different_physical_clock ... ok
+test lengths_clock_configuration_and_storage_are_preflighted ... ok
+test noncanonical_flags_fields_and_invalid_measurements_cannot_form_a_history ... ok
+test rejection_and_every_failure_code_preserve_optional_indicators ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test complete_raw_log_replays_cancellation_in_the_original_order ... ok
+test malformed_replay_refuses_counts_clock_sample_and_post_terminal_records ... ok
+test replay_keeps_raw_samples_pending_quadrature_and_terminal_failures ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test arguments_and_analytic_truncation_are_explicit ... ok
+test dissipative_row_and_weight_identities_hold_away_from_zero ... ok
+test independent_high_precision_coefficients_cover_junctions_and_extremes ... ok
+test zero_operator_satisfies_all_eight_fourth_order_conditions ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test ho_transaction_matches_independent_fine_step_spectrum ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 5 tests
+test a_provider_that_assumes_increasing_times_fails_the_ho_purity_control ... ok
+test coarse_stiff_steps_retain_the_observed_order_reduction ... ok
+test fifth_request_returns_to_half_time_and_all_failures_propagate ... ok
+test independently_evolved_stiff_nonautonomous_refinement ... ok
+test stiff_final_states_match_independent_high_precision_evolution ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+
+
+running 3 tests
+test complete_six_vector_reservation_is_required_before_allocation ... ok
+test invalid_shapes_steps_and_nonfinite_states_are_refused ... ok
+test invalid_source_and_finite_stage_or_output_overflows_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test exact_intervals_preserve_low_bits_and_refuse_arithmetic_loss ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test finite_stage_or_final_arithmetic_overflow_is_refused ... ok
+test invalid_buffers_intervals_and_nonfinite_results_are_refused ... ok
+test kernel_preflight_refuses_invalid_sizes_and_insufficient_storage ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test domain_preserves_positive_geometry_and_pads_all_axes ... ok
+test invalid_and_unaddressable_layouts_are_refused_before_allocation ... ok
+test storage_order_signed_modes_and_negative_last_axis ... ok
+test strict_band_and_half_spectrum_multiplicities ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test canonical_round_trip_replays_interleaved_refusals_and_invalidation ... ok
+test caps_corruption_missing_ancestor_and_bad_order_refuse_replay ... ok
+test replay_rejects_mismatched_declared_results_and_exhausted_allowance ... ok
+test replay_requires_the_declared_capacity_empty_storage_and_id_scratch ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test direct_continuations_retain_complete_ancestry ... ok
+test force_invalidation_replays_transitively_and_never_revives_history ... ok
+test identity_and_storage_are_explicit ... ok
+test malformed_origins_spend_attempts_without_publishing_records ... ok
+test transfers_and_reference_seeds_never_become_direct_branches ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test failed_arithmetic_preserves_every_prior_measurement ... ok
+test invalid_capacity_and_denominator_floors_are_refused ... ok
+test normalization_precedes_an_overflowing_unnormalized_norm ... ok
+test sampled_vector_errors_retain_absolute_and_floored_relative_information ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test attempt_exhaustion_preserves_missing_records_instead_of_accepting_a_partial_table ... ok
+test complete_numerical_findings_only_reach_the_separate_lineage_review ... ok
+test cropped_or_aligned_agreement_cannot_be_entered_as_primary_evidence ... ok
+test every_missing_channel_remains_a_permanent_failure ... ok
+test malformed_records_spend_work_without_committing_partial_findings ... ok
+test missing_tracking_and_failed_global_errors_cannot_be_hidden_by_later_success ... ok
+test policy_and_record_count_preflight_reject_missing_duplicate_and_excess_work ... ok
+test the_complete_time_and_reconstruction_manifest_must_match_the_review ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test gradient_force_changes_pressure_without_accelerating_velocity ... ok
+test invalid_modes_nonfinite_data_and_arithmetic_overflow_are_refused ... ok
+test projection_and_curl_follow_signed_cross_product_identities ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test accepted_recorded_step_commits_the_staged_observer_state_once ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test both_integrators_resume_the_same_next_attempt_from_unverified_bits ... ok
+test conjugacy_roundoff_is_preserved_and_nyquist_remains_exact ... ok
+test exact_payload_requires_matching_plan_caps_and_valid_fourier_input ... ok
+test headers_preflight_each_identity_clock_count_and_frame_before_field_allocation ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test aggregate_preflight_rejects_caps_and_incompatible_domain_or_sample_grids ... ok
+test all_quantities_retain_fine_only_modes_and_full_derivative_multiplicity ... ok
+test alternate_domain_pairs_reuse_sampling_storage_without_changing_default_domains ... ok
+test differences_are_of_fields_and_preserve_means_rather_than_subtracting_norms ... ok
+test incompatible_shapes_and_failed_late_components_cannot_produce_partial_reports ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+
+running 2 tests
+test capture_requires_the_complete_extra_reservation ... ok
+test fresh_method_scratch_reproduces_next_accepted_and_rejected_attempts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test changed_problem_coarsened_axes_and_exhausted_epoch_are_refused ... ok
+test missing_earlier_high_mode_survives_transfer_and_later_fine_integration ... ok
+test retained_modes_keep_their_bits_and_new_modes_are_zero_without_rescaling ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 7 tests
+test all_time_levels_and_reconstruction_geometry_are_bound ... ok
+test canonical_bytes_match_the_fingerprint_and_preserve_short_or_trailing_storage ... ok
+test canonical_fingerprint_and_bounded_review_match_the_declared_schema ... ok
+test cap_and_missing_identity_fail_before_a_protocol_is_issued ... ok
+test every_channel_budget_reduction_and_floor_is_bound ... ok
+test identities_keys_order_counts_and_total_tolerances_are_bound ... ok
+test reconstruction_cannot_be_rebound_to_a_different_fine_manifest ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Protocol admission, refusal, hashing, canonical output and review allocate zero bytes after caller fixture construction.
+
+running 3 tests
+test exact_cubic_rates_and_fourth_order_quadrature_refinement_are_distinct ... ok
+test nonfinite_enstrophy_rates_and_overflowing_integrals_are_refused ... ok
+test unresolved_weights_and_nonfinite_balance_terms_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test accepted_sequence_reconstructs_each_hermite_node_and_is_independently_owned ... ok
+test preflight_rejection_and_stale_or_uncommitted_tokens_leave_the_ring_unchanged ... ok
+test staged_segment_must_continue_from_the_last_published_endpoint ... ok
+test staging_refuses_foreign_plans_and_malformed_derivatives_before_copying ... ok
+test staging_refuses_inconsistent_clock_and_accepted_state_metadata ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test common_probes_survive_nested_refinement_without_losing_large_exact_ticks ... ok
+test every_full_and_half_step_stage_is_refused_as_off_stage_evidence ... ok
+test invalid_history_and_unrepresentable_reconstruction_remain_explicit ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test missing_unsorted_and_duplicate_off_stage_samples_never_pass_as_a_table ... ok
+test three_nested_histories_are_required_at_each_unchanged_probe ... ok
+test untested_probe_times_future_history_and_changed_quantum_are_refused ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test both_methods_retain_exact_attempts_and_complete_balance_history ... ok
+test cost_preflight_refuses_before_any_attempt ... ok
+test history_preflight_and_one_step_pending_state_are_explicit ... ok
+test integration_and_diagnostic_failures_are_recorded_without_advancing ... ok
+test later_failure_preserves_earlier_commits_and_pending_diagnostics ... ok
+test mismatched_clock_count_and_method_cannot_resume_a_history ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 5 tests
+test a_subordinate_floor_requires_separate_analysis_and_controls_both_changes ... ok
+test findings_preserve_the_difference_between_passed_and_unresolved_checks ... ok
+test independent_sensitivity_and_three_level_refinement_have_distinct_requirements ... ok
+test nonfinite_and_negative_measurements_are_refused_in_every_position ... ok
+test policy_admission_and_underflow_preserve_strict_subordination ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test constant_acceleration_is_not_removed_as_a_pressure_gauge ... ok
+test heat_flow_cancels_viscosity_while_unresolved_convection_remains_visible ... ok
+test localized_evaluator_is_bitwise_equal_to_ordinary_residual ... ok
+test localized_identity_reports_retained_cancellation_without_changing_residual_coefficients ... ok
+test residual_refuses_incomplete_output ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 3 tests
+test class_and_sum_overflows_are_refused ... ok
+test exact_ledger_and_cap_boundary_are_checked_without_grid_allocation ... ok
+test reviewed_cubic_reservations_are_reproduced ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test arithmetic_and_conjugacy_failures_preserve_input_state ... ok
+test force_conjugacy_is_checked_before_projection_with_relative_tolerance ... ok
+test gradient_force_pressure_and_mean_acceleration_are_preserved ... ok
+test invalid_payload_and_cap_refusals_are_structured ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 4 tests
+test incompatible_grids_caps_and_inputs_are_refused ... ok
+test maximum_locations_use_each_physical_axis_without_recentering ... ok
+test two_equal_sampled_maxima_do_not_establish_a_spatial_supremum ... ok
+test vector_magnitudes_preserve_means_and_refuse_overflow_without_returning_views ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 3 tests
+test arbitrary_positive_slice_and_conjugate_zero_plane_are_valid ... ok
+test invalid_payload_tolerance_and_nonfinite_coefficients_are_refused ... ok
+test nyquist_and_nonhermitian_inputs_are_refused_even_with_large_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test incomplete_nonfinite_and_unrepresentable_defects_are_refused ... ok
+test the_second_self_conjugate_plane_is_checked_even_though_strict_states_exclude_it ... ok
+test valid_fields_and_distinct_mean_and_plane_defects_are_reported ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test states_own_separate_buffers_and_preserve_their_exact_initial_metadata ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test directional_tail_norms_respect_physical_derivatives_and_overlap ... ok
+test invalid_tail_thresholds_and_incomplete_spectra_are_refused ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test complete_magnitudes_have_the_same_normalization_and_atomic_failure_contract ... ok
+test scalar_pressure_and_gradient_shapes_preserve_floors_and_transactional_refusal ... ok
+test tensor_magnitude_counts_every_ordered_entry_and_normalizes_only_samples ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test empty_unsorted_duplicate_and_mixed_clock_manifests_are_refused ... ok
+test strict_nested_sampling_preserves_exact_times_and_the_window_endpoint ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test complete_run_and_mid_run_refusal_preserve_actual_clock ... ok
+test configuration_and_numerical_rejection_do_not_commit ... ok
+test finite_work_and_quarter_tick_admission ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test every_full_and_half_step_failure_rolls_back_the_committed_trajectory ... ok
+test finite_scheduler_retries_only_local_error_and_never_silently_changes_a_core_request ... ok
+test rejected_and_failed_attempts_preserve_every_committed_value ... ok
+test tokens_refuse_reused_candidates_other_states_and_changed_plans ... ok
+test twelve_exact_requests_commit_fine_state_by_swapping_owned_buffers ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test anisotropic_pad_crop_roundtrip_preserves_upper_band_and_mean ... ok
+test nyquist_is_omitted_and_invalid_buffers_leave_output_unchanged ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test all_channels_have_frozen_allocations_and_mandatory_refinement_cannot_be_weakened ... ok
+test exact_sums_and_both_rounding_directions_are_accounted_for_conservatively ... ok
+test invalid_totals_and_overflow_are_explicit_refusals ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

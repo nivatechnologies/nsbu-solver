@@ -1,0 +1,173 @@
+{
+  "schema": "p10-fft-scratch-tail-changed-file-coverage-v1",
+  "source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "production_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "scope": "nsbu-solver package ordinary tests only; serial; no ignored tests; whole-file coverage for five changed production FFT files",
+  "tests": {
+    "passed": 251,
+    "failed": 0,
+    "ignored": 0
+  },
+  "changed_production_aggregate": {
+    "lines": {
+      "count": 449,
+      "covered": 425,
+      "percent": 94.65478841870824
+    },
+    "branches": {
+      "count": 40,
+      "covered": 33,
+      "percent": 82.5
+    },
+    "functions": {
+      "count": 41,
+      "covered": 39,
+      "percent": 95.1219512195122
+    }
+  },
+  "changed_files": {
+    "crates/nsbu-solver/src/spectral/fft.rs": {
+      "lines": {
+        "count": 12,
+        "covered": 4,
+        "percent": 33.33333333333333
+      },
+      "branches": {
+        "count": 0,
+        "covered": 0,
+        "percent": 0.0
+      },
+      "functions": {
+        "count": 2,
+        "covered": 1,
+        "percent": 50.0
+      }
+    },
+    "crates/nsbu-solver/src/spectral/fft/avx.rs": {
+      "lines": {
+        "count": 181,
+        "covered": 165,
+        "percent": 91.16022099447514
+      },
+      "branches": {
+        "count": 8,
+        "covered": 6,
+        "percent": 75.0
+      },
+      "functions": {
+        "count": 25,
+        "covered": 24,
+        "percent": 96.0
+      }
+    },
+    "crates/nsbu-solver/src/spectral/fft/transform.rs": {
+      "lines": {
+        "count": 115,
+        "covered": 115,
+        "percent": 100.0
+      },
+      "branches": {
+        "count": 6,
+        "covered": 6,
+        "percent": 100.0
+      },
+      "functions": {
+        "count": 5,
+        "covered": 5,
+        "percent": 100.0
+      }
+    },
+    "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs": {
+      "lines": {
+        "count": 86,
+        "covered": 86,
+        "percent": 100.0
+      },
+      "branches": {
+        "count": 4,
+        "covered": 4,
+        "percent": 100.0
+      },
+      "functions": {
+        "count": 4,
+        "covered": 4,
+        "percent": 100.0
+      }
+    },
+    "crates/nsbu-solver/src/spectral/fft/workspace.rs": {
+      "lines": {
+        "count": 55,
+        "covered": 55,
+        "percent": 100.0
+      },
+      "branches": {
+        "count": 22,
+        "covered": 17,
+        "percent": 77.27272727272727
+      },
+      "functions": {
+        "count": 5,
+        "covered": 5,
+        "percent": 100.0
+      }
+    },
+    "crates/nsbu-solver/src/spectral/w3/tests.rs": {
+      "lines": {
+        "count": 157,
+        "covered": 153,
+        "percent": 97.45222929936305
+      },
+      "branches": {
+        "count": 10,
+        "covered": 5,
+        "percent": 50.0
+      },
+      "functions": {
+        "count": 20,
+        "covered": 20,
+        "percent": 100.0
+      }
+    },
+    "crates/nsbu-solver/tests/fft/avx.rs": {
+      "lines": {
+        "count": 116,
+        "covered": 111,
+        "percent": 95.6896551724138
+      },
+      "branches": {
+        "count": 10,
+        "covered": 5,
+        "percent": 50.0
+      },
+      "functions": {
+        "count": 10,
+        "covered": 10,
+        "percent": 100.0
+      }
+    }
+  },
+  "threshold_result": {
+    "production_aggregate_lines_at_least_80": true,
+    "production_aggregate_branches_at_least_80": true
+  },
+  "per_file_below_80": {
+    "lines": [
+      "crates/nsbu-solver/src/spectral/fft.rs"
+    ],
+    "branches": [
+      "crates/nsbu-solver/src/spectral/fft/avx.rs",
+      "crates/nsbu-solver/src/spectral/fft/workspace.rs"
+    ],
+    "zero_instrumented_branches": [
+      "crates/nsbu-solver/src/spectral/fft.rs"
+    ]
+  },
+  "uncovered_lines": {
+    "crates/nsbu-solver/src/spectral/fft.rs": "27,55-61",
+    "crates/nsbu-solver/src/spectral/fft/avx.rs": "39,55-58,86-92,136,169,181,234",
+    "crates/nsbu-solver/src/spectral/fft/transform.rs": "none",
+    "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs": "none",
+    "crates/nsbu-solver/src/spectral/fft/workspace.rs": "none"
+  },
+  "claim_limit": "This is coverage of the five changed production files under nsbu-solver package tests, not a whole-project coverage claim."
+}
