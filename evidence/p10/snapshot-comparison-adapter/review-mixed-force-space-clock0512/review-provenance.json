@@ -1,0 +1,75 @@
+{
+  "schema": "p10-mixed-force-space-clock0512-review-handoff-v1",
+  "status": "review_only_no_numerical_use",
+  "source_commit": "beef0b06801a0f2bd7c4225aee8da5265a996f6b",
+  "comparison_kind": "MIXED_FORCE_SPACE_DIAGNOSTIC",
+  "ordered_states": [
+    "coarse-n256-m384.json",
+    "baseline-n384-m384.json",
+    "force-n384-m512.json"
+  ],
+  "algebra": {
+    "A": "U384M384 - lift(U256M384)",
+    "B": "U384M512 - U384M384",
+    "C": "U384M512 - lift(U256M384) = A + B"
+  },
+  "exact_cap_bytes": 3138912256,
+  "state_bytes": {
+    "N256": 405798912,
+    "N384_each": 1366032384,
+    "fixed_overhead": 1048576
+  },
+  "output": {
+    "norms": [
+      "l2",
+      "h1",
+      "vorticity_l2"
+    ],
+    "partitions": [
+      "full",
+      "common_N256",
+      "newly_resolved_N384_shell"
+    ],
+    "interaction": [
+      "weighted_2Re_A_B",
+      "real_angle_when_both_norms_nonzero"
+    ]
+  },
+  "bindings": {
+    "coarse": {
+      "file_sha256": "d6ff2831a4a3de57d8d1ce210de326a64568a309da137989bcbff522bc65d5f4",
+      "coefficient_sha256": "a98b82093364ee94877a66106a09a528ada045cc71b3d2c2b5621ec8e6a7fd20",
+      "plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+      "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf"
+    },
+    "baseline": {
+      "file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+      "coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+      "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+      "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65"
+    },
+    "force": {
+      "file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+      "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+      "plan_sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+      "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72"
+    }
+  },
+  "tests": {
+    "cargo_test": "21 passed",
+    "cargo_clippy_all_targets_deny_warnings": "passed",
+    "algebra_sign_closure_and_band_split": "passed",
+    "physics_schedule_method_grid_cap_rejections": "passed"
+  },
+  "acceptance": {
+    "status": "not_assessed",
+    "assigned_budget": null
+  },
+  "interpretation_limits": [
+    "no spatial acceptance",
+    "no force acceptance",
+    "no pointwise or time-supremum claim",
+    "no finest-grid or continuum claim"
+  ],
+  "authorization": "root source and exact-semantic manifest review required before any numerical use"
+}
