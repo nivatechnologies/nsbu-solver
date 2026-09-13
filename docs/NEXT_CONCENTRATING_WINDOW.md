@@ -120,6 +120,17 @@ not a residual repair or PDE pass. The archived [localization evidence](../evide
 also retains the failed strict arithmetic-closure checks and the separate broad
 internal-consistency heuristic.
 
+A fixed-clock force-only study at clock 1112 now separates retained-force
+sampling sensitivity: the strict-N384 projected H1 difference is about `935.86`
+for M384-to-M512 and `22.29` for M512-to-M768, a 42-fold contraction. The upper
+N256-to-N384 band dominates both differences. This supports improving force
+sampling, subject to the documented scalar/W3 execution-equivalence caveat; it
+does not establish force sufficiency or a trajectory error bound. See the
+[source-bound results and limitations](../evidence/p10/force-coefficient-clock1112/README.md).
+A separate [exact cancellation counterexample](../evidence/p10/residual-identity-cancellation-20260913/README.md)
+reproduces a squared-norm closure failure while leaving the directly assembled
+residual coefficients unchanged. Neither result changes an acceptance threshold.
+
 Analytical-reference spectrum screens provided the historical planning basis
 for the completed N192, N256 and N384 spatial ladder. These screens guide grid choice; they are
 binary64 sampled-reference evidence, not continuum error bounds or PDE

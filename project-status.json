@@ -468,5 +468,16 @@
     "max_crap": 22.5,
     "evidence": "evidence/p10/local-agent-controller-20260913/README.md",
     "scope": "Task and review budgets, reasoning-enabled requests, tool-free final phase, deterministic validation. No unattended general coding or PDE acceptance claim."
+  },
+  "p10_clock1112_force_sampling": {
+    "status": "diagnostic_only",
+    "evidence": "evidence/p10/force-coefficient-clock1112/summary.json",
+    "projected_h1_m384_to_m512": 935.8629343304156,
+    "projected_h1_m512_to_m768": 22.289249597246233,
+    "scope": "Fixed retained N384 scalar-provider force coefficients; approximately42-fold adjacent contraction, subject to documented W3 equivalence caveat. No trajectory, continuum tail bound, force sufficiency or PDE qualification."
+  },
+  "p10_residual_identity_counterexample": {
+    "evidence": "evidence/p10/residual-identity-cancellation-20260913/summary.json",
+    "scope": "Exact binary64 counterexample reproduces cancellation in expanded squared-norm closure with unchanged direct residual coefficients. No production arithmetic or acceptance tolerance changed."
   }
 }
