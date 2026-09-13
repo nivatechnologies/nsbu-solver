@@ -1,0 +1,5 @@
+head_commit=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0
+requested_commit=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0
+source_clean=true
+command=timeout --foreground -k 60s 5400s env CARGO_TARGET_DIR=/tmp/nsbu-terra-avx-tail-final-workspace-20260913 CARGO_BUILD_JOBS=2 cargo test --workspace --locked --no-fail-fast -- --test-threads=1
+ignored_tests=not_selected_by_default; no explicit ignored/heavy-test environment set

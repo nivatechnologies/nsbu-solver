@@ -1,0 +1,333 @@
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling typenum v1.20.1
+   Compiling num-integer v0.1.47
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling strength_reduce v0.2.4
+   Compiling digest v0.10.7
+   Compiling transpose v0.2.3
+   Compiling primal-check v0.3.4
+   Compiling num-complex v0.4.6
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+   Compiling rustfft v6.4.1
+   Compiling stats_alloc v0.1.10
+   Compiling serde_core v1.0.229
+   Compiling serde_json v1.0.145
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/nsbu-solver)
+   Compiling ryu v1.0.23
+   Compiling m512-alloc-trace v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/m512-alloc-trace)
+   Compiling memchr v2.8.3
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/nsbu-benchmarks)
+   Compiling itoa v1.0.18
+   Compiling nsbu-cli v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/nsbu-cli)
+warning: function `point_magnitudes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:51:8
+   |
+51 | pub fn point_magnitudes(
+   |        ^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `view_point_magnitudes` is never used
+   --> crates/nsbu-benchmarks/tests/v2_physical_oracle_core.rs:192:8
+    |
+192 | pub fn view_point_magnitudes(
+    |        ^^^^^^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "v2_physical_family") generated 2 warnings
+warning: function `compare` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:36:8
+   |
+36 | pub fn compare(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |        ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `assert_bits` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:76:4
+   |
+76 | fn assert_bits(left: &[Complex64], right: &[Complex64]) {
+   |    ^^^^^^^^^^^
+
+warning: function `compare_reconstruction` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:85:4
+   |
+85 | fn compare_reconstruction(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |    ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "offstage_residual") generated 3 warnings
+warning: struct `Norms` is never constructed
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:13:12
+   |
+13 | pub struct Norms {
+   |            ^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `views` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:20:4
+   |
+20 | fn views(state: &SpectralState) -> [&[Complex64]; 3] {
+   |    ^^^^^
+
+warning: function `pair_norms` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:26:8
+   |
+26 | pub fn pair_norms(left: &SpectralState, right: &SpectralState, samples: Layout) -> [Norms; 4] {
+   |        ^^^^^^^^^^
+
+warning: function `pair_errors` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:34:8
+   |
+34 | pub fn pair_errors(
+   |        ^^^^^^^^^^^
+
+warning: function `point_magnitudes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:51:8
+   |
+51 | pub fn point_magnitudes(
+   |        ^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "integrated_physical") generated 3 warnings (3 duplicates)
+warning: `nsbu-benchmarks` (test "v2_probe_physical") generated 5 warnings
+warning: `nsbu-benchmarks` (test "reconstruction_archive") generated 3 warnings (3 duplicates)
+warning: function `retained_band_excludes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_sampling_oracle.rs:10:15
+   |
+10 | pub(crate) fn retained_band_excludes(state: &SpectralState, mode: [isize; 3]) -> bool {
+   |               ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `nsbu-benchmarks` (test "v2_sampling_oracle") generated 1 warning
+warning: fields `candidate`, `attempts`, and `rhs` are never read
+  --> crates/nsbu-benchmarks/tests/smooth_support/mod.rs:18:5
+   |
+16 | pub struct SmoothRun {
+   |            --------- fields in this struct
+17 |     pub state: SpectralState,
+18 |     candidate: CandidateState,
+   |     ^^^^^^^^^
+19 |     attempts: AttemptWorkspace,
+   |     ^^^^^^^^
+20 |     rhs: SpectralRhs<CyclicSine>,
+   |     ^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `advance` is never used
+  --> crates/nsbu-benchmarks/tests/smooth_support/mod.rs:50:12
+   |
+22 | impl SmoothRun {
+   | -------------- method in this implementation
+...
+50 |     pub fn advance(&mut self, endpoint: u128, step: u128) {
+   |            ^^^^^^^
+
+warning: `nsbu-benchmarks` (test "v2_observer") generated 2 warnings
+warning: function `coefficient` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs:14:15
+   |
+14 | pub(super) fn coefficient(state: &SpectralState, component: usize, mode: [isize; 3]) -> Complex64 {
+   |               ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `actual` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs:61:15
+   |
+61 | pub(super) fn actual(
+   |               ^^^^^^
+
+warning: function `legacy_actual` is never used
+ --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:9:4
+  |
+9 | fn legacy_actual(
+  |    ^^^^^^^^^^^^^
+
+warning: function `assert_component` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:49:4
+   |
+49 | fn assert_component(actual: f64, legacy: f64, magnitude: f64, terms: usize) {
+   |    ^^^^^^^^^^^^^^^^
+
+warning: function `assert_phases` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:62:4
+   |
+62 | fn assert_phases(
+   |    ^^^^^^^^^^^^^
+
+warning: function `curl` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:88:4
+   |
+88 | fn curl(tensor: &Tensor) -> [f64; 3] {
+   |    ^^^^
+
+warning: function `assert_tensors` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:97:4
+   |
+97 | fn assert_tensors(cached: &Tensor, legacy: &Tensor, magnitudes: &Tensor, terms: usize) {
+   |    ^^^^^^^^^^^^^^
+
+warning: function `assert_legacy_equivalence` is never used
+   --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:135:8
+    |
+135 | pub fn assert_legacy_equivalence(state: &nsbu_solver::domain::SpectralState, samples: Layout) {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `tracking` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/tracking.rs:23:8
+   |
+23 | pub fn tracking(
+   |        ^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "v2_probe_reference") generated 9 warnings
+warning: function `method` is never used
+  --> crates/nsbu-benchmarks/examples/arithmetic_support/mod.rs:43:8
+   |
+43 | pub fn method(value: Option<String>) -> Result<Method, SolverError> {
+   |        ^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `plan` is never used
+  --> crates/nsbu-benchmarks/examples/arithmetic_support/evolution.rs:10:8
+   |
+10 | pub fn plan(n: usize, method: Method, cap: usize) -> Result<ReconstructedPlan, SolverError> {
+   |        ^^^^
+
+warning: function `evolve` is never used
+  --> crates/nsbu-benchmarks/examples/arithmetic_support/evolution.rs:36:8
+   |
+36 | pub fn evolve(n: usize, method: Method, cap: usize) -> Result<ReconstructedRun, SolverError> {
+   |        ^^^^^^
+
+warning: `nsbu-benchmarks` (example "smooth_force_coefficients") generated 3 warnings
+warning: function `fixture` is never used
+  --> crates/nsbu-benchmarks/tests/../examples/reduction_support/input.rs:92:8
+   |
+92 | pub fn fixture() -> Vec<u8> {
+   |        ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `nsbu-benchmarks` (test "reduction_allocation") generated 1 warning
+warning: `nsbu-benchmarks` (test "v2_force_physical") generated 2 warnings (2 duplicates)
+    Finished `test` profile [optimized + debuginfo] target(s) in 5m 12s
+     Running unittests src/lib.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/m512_alloc_trace-d7ce60bb8a187cea)
+     Running unittests src/lib.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/nsbu_benchmarks-57c93735702b1348)
+     Running tests/algebra.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/algebra-db6e1bfbf394c514)
+     Running tests/allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/allocation-26553875af992107)
+     Running tests/axial_force_cache.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/axial_force_cache-2936bafc9d1fb7de)
+     Running tests/balance_history.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/balance_history-1c20ea86d584e7f9)
+     Running tests/balance_probes.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/balance_probes-452d3fe5df08057b)
+     Running tests/clock_root.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/clock_root-61462fbb455bad49)
+     Running tests/concentrating.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/concentrating-1849b43d612968f7)
+     Running tests/cutoff.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/cutoff-df7c4b725e7072a1)
+     Running tests/diagnostic_history.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/diagnostic_history-fe78018f63004855)
+     Running tests/fields.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/fields-482d64979ee105ff)
+     Running tests/integrated_derivatives.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/integrated_derivatives-ec732f3e3e4f2606)
+     Running tests/integrated_physical.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/integrated_physical-a29264466612b06d)
+     Running tests/offstage_residual.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/offstage_residual-50f9a6027ac7db0a)
+     Running tests/owned_reconstruction.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/owned_reconstruction-984272b58ef4fa8b)
+     Running tests/parallel_force.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_force-552d6450c1eca89d)
+     Running tests/parallel_force_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_force_allocation-8a8252dfae3f0040)
+     Running tests/parallel_reduced_force.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_reduced_force-26fd1946458a5f5a)
+     Running tests/parallel_reduced_force_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_reduced_force_allocation-6261e17b4b7f939b)
+     Running tests/parallel_reduced_w3_m512.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_reduced_w3_m512-6ffb48dd9da14634)
+     Running tests/parallel_reduced_w3_m512_standalone.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/parallel_reduced_w3_m512_standalone-f4ef88baa3d93ce0)
+skipped: set NSBU_RUN_M512_W3_FORCE_CONTROL=1 after admitting the high-memory control
+     Running tests/physical_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/physical_family-5a36831ba0f795eb)
+     Running tests/pressure_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/pressure_family-6e543ead5a865bc1)
+     Running tests/probe_diagnostics.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/probe_diagnostics-5a0ff60d451664de)
+     Running tests/probe_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/probe_family-b54a356944bcc6f6)
+     Running tests/provider.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/provider-1058703ea65c1708)
+     Running tests/reconstructed_owner_archive.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reconstructed_owner_archive-497e07744d2936d3)
+     Running tests/reconstructed_replay.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reconstructed_replay-80de8769ddc44f2d)
+     Running tests/reconstruction_archive.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reconstruction_archive-ab4cc0138b4389e7)
+     Running tests/reconstruction_observer.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reconstruction_observer-1b1f2649802df382)
+     Running tests/reduced_force.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_force-a5a6f9938da661e2)
+     Running tests/reduced_force_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_force_allocation-e4708bb96f30c0b9)
+     Running tests/reduced_provider.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_provider-56de52fe0edb4748)
+     Running tests/reduced_provider_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_provider_allocation-afcc064fd9c4310b)
+     Running tests/reduced_provider_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_provider_oracle-0c96e8929bb79429)
+     Running tests/reduced_trajectory.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_trajectory-c13054e2bee3f34a)
+     Running tests/reduced_trajectory_support.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduced_trajectory_support-b7d727305beba985)
+     Running tests/reduction_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reduction_allocation-c9d0a164ba511238)
+     Running tests/reference_derivatives.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/reference_derivatives-959c945596fef01d)
+     Running tests/refinement.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/refinement-a3f6e085963cc740)
+     Running tests/regional_errors.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/regional_errors-9882d05d0dd50f94)
+     Running tests/regional_physical.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/regional_physical-e574101623ca3a0a)
+     Running tests/regional_tensors.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/regional_tensors-ac413793621277c5)
+     Running tests/regions.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/regions-de87adf0873307ce)
+     Running tests/runtime_force.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/runtime_force-36144e38b7bc6a7a)
+     Running tests/sampling_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/sampling_allocation-8083e1b1c7b2f1eb)
+     Running tests/sampling_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/sampling_family-b83e2263e2a1ed16)
+     Running tests/smooth.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/smooth-93e5902dda9a2cd1)
+     Running tests/smooth_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/smooth_family-933db824ff68d1b4)
+     Running tests/smooth_observer.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/smooth_observer-69d230fb7683dff9)
+     Running tests/smooth_run.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/smooth_run-8829dc48365b5b24)
+     Running tests/smooth_run_archive.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/smooth_run_archive-ec1d55e9d43f8bf7)
+     Running tests/streamed_residuals.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/streamed_residuals-1c3ccc46f9cc331c)
+     Running tests/v2_archive.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_archive-2c18c60751317a20)
+     Running tests/v2_archive_negative.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_archive_negative-5207f7eee8214b1a)
+     Running tests/v2_attempt_force_cache.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_attempt_force_cache-860beed5124f100d)
+     Running tests/v2_attempt_force_cache_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_attempt_force_cache_allocation-945480720f72915c)
+     Running tests/v2_balance_quadrature.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_balance_quadrature-2fb03b5b97daf675)
+     Running tests/v2_balance_quadrature_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_balance_quadrature_allocation-af2909721caa2804)
+     Running tests/v2_balance_support.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_balance_support-7023bcd8d03718fa)
+     Running tests/v2_cached_integration.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_cached_integration-3bbe51164f1bf1f9)
+     Running tests/v2_cached_run_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_cached_run_allocation-a9ea87399fd38bc3)
+     Running tests/v2_diagnostic_coordinator.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_diagnostic_coordinator-1975bb7c60bfa662)
+     Running tests/v2_diagnostic_coordinator_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_diagnostic_coordinator_allocation-caf44180f9d386d4)
+     Running tests/v2_diagnostic_export.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_diagnostic_export-fc717679a7793145)
+     Running tests/v2_diagnostic_export_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_diagnostic_export_oracle-6b8ca4347b1da83a)
+     Running tests/v2_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_family-5ee00fa647ab81f8)
+     Running tests/v2_family_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_family_allocation-0cabc8922cba229f)
+     Running tests/v2_family_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_family_oracle-ef0eef18dbe99b12)
+     Running tests/v2_family_support.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_family_support-3d31201f7c88eac8)
+     Running tests/v2_force_binding.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_binding-4fda92e6f1d29caf)
+     Running tests/v2_force_binding_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_binding_allocation-b1140539da318aa6)
+     Running tests/v2_force_crop_equivalence.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_crop_equivalence-a94e7beb9226d338)
+     Running tests/v2_force_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_family-cbe52df7902093cb)
+     Running tests/v2_force_family_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_family_allocation-12e91ff20d887bf5)
+     Running tests/v2_force_family_support.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_family_support-45eb4c550c686598)
+     Running tests/v2_force_physical.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_physical-7fa0f738e543a46c)
+     Running tests/v2_force_physical_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_force_physical_allocation-43fa67dcfbdd1579)
+     Running tests/v2_node_binding.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_node_binding-d9ebd403a871eccc)
+     Running tests/v2_node_binding_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_node_binding_allocation-47846c2db4def4ca)
+     Running tests/v2_observer.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_observer-9e86f094848b4d21)
+     Running tests/v2_physical_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_physical_allocation-157da5e48b93c193)
+     Running tests/v2_physical_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_physical_family-7b4ecb31155810a5)
+     Running tests/v2_physical_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_physical_oracle-376670592f771742)
+     Running tests/v2_physical_oracle_core.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_physical_oracle_core-7b2f36928e859371)
+     Running tests/v2_pressure_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_pressure_allocation-c49789f068aa727e)
+     Running tests/v2_pressure_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_pressure_family-7aede65b5d6653ce)
+     Running tests/v2_pressure_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_pressure_oracle-a8c9df07d06984bc)
+     Running tests/v2_pressure_reference.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_pressure_reference-0ef3636fe08d910c)
+     Running tests/v2_pressure_reference_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_pressure_reference_allocation-d7a3ff31a9b2de7d)
+pressure reference construction_bytes=9079296 consumer_bytes=9147992 joint_bytes=33338416 hash_bytes=29498 reference_evaluations=13824 provider_work=1783296 transforms=81 steady_allocations=0
+     Running tests/v2_probe_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_family-53ac0fc4ca3e809d)
+     Running tests/v2_probe_family_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_family_allocation-28fa46c3a80fd4b2)
+     Running tests/v2_probe_physical.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_physical-6a8ce6b78943ff14)
+     Running tests/v2_probe_physical_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_physical_allocation-eddf4ab1494705b0)
+     Running tests/v2_probe_pressure.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_pressure-8e3d1e3fcb7ee8fe)
+     Running tests/v2_probe_pressure_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_pressure_allocation-b7c819c58ed70535)
+     Running tests/v2_probe_pressure_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_pressure_oracle-925e53169f4fcb3d)
+     Running tests/v2_probe_reference.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_reference-7c9d50ba48ff3670)
+     Running tests/v2_probe_reference_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_reference_allocation-a8a0e91084c0e76a)
+     Running tests/v2_probe_regional.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_regional-b15edfcb44360c26)
+     Running tests/v2_probe_regional_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_probe_regional_allocation-494691f1b2c25ab0)
+     Running tests/v2_reconstructed_run.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reconstructed_run-eff252cf7b02e276)
+     Running tests/v2_reconstructed_run_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reconstructed_run_allocation-c68f622aa2bf22f3)
+     Running tests/v2_reference_arithmetic_pilot.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reference_arithmetic_pilot-2ca43103ac3dae04)
+     Running tests/v2_reference_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reference_oracle-a07e59d62900cd2c)
+     Running tests/v2_reference_tracking.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reference_tracking-b6ff3c02ee3f7366)
+     Running tests/v2_reference_tracking_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_reference_tracking_allocation-f208a3a563ddafe1)
+     Running tests/v2_region_coverage.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_region_coverage-125ec828352f22e4)
+     Running tests/v2_regional_tracking.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking-88d1b47718a6e9a7)

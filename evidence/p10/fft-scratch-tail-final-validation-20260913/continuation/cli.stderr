@@ -1,0 +1,5 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.03s
+     Running unittests src/main.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/nsbu-027c38a4882ff877)
+     Running tests/commands.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/commands-35aaeae144225344)
+     Running tests/diagnose_v2_cli.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/diagnose_v2_cli-66a0fb18c681b190)
+     Running tests/v2_cli.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_cli-64e3e6d2babeb678)

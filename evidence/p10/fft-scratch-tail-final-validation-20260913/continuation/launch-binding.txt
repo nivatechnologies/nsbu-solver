@@ -1,0 +1,2 @@
+launch_frozen_utc=2026-09-13T18:32:28Z
+launcher_sha256=302010debd7e950db150ac3e14e15a0300395a2dda33c7b461d02a509a6270be

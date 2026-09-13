@@ -1,0 +1,4 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
+   Doc-tests m512_alloc_trace
+   Doc-tests nsbu_benchmarks
+   Doc-tests nsbu_solver

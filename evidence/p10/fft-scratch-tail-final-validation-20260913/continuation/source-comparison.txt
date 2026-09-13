@@ -1,0 +1,4 @@
+M	crates/nsbu-solver/src/spectral/w3/tests.rs
+A	evidence/p10/fft-scratch-tile-validation/initial-w3-test-failure.json
+benchmark_diff_empty=true
+production_diff_empty=true

@@ -1,0 +1,46 @@
+
+running 2 tests
+test checkpoint_io::tests::collision_is_preserved_and_the_next_name_is_used ... ok
+test checkpoint_io::tests::exact_reader_rejects_shrinking_and_growing_contents ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 11 tests
+test bare_output_name_uses_the_current_directory ... ok
+test checkpoint_count_is_admitted_before_running_and_zero_saves_rest ... ok
+test checkpoint_dry_run_and_resume_dry_run_do_not_skip_admission_rules ... ok
+test checkpoint_output_is_never_overwritten ... ok
+test checkpoints_resume_both_methods_with_the_same_final_ledger ... ok
+test cm_and_ho_complete_independent_from_rest_runs ... ok
+test dry_run_reports_an_allocation_free_bounded_plan ... ok
+test help_and_version_describe_the_available_command ... ok
+test invalid_limits_and_resource_cap_are_structured_refusals ... ok
+test invalid_syntax_has_usage_exit_code ... ok
+test resume_refuses_corrupt_over_cap_and_wrong_profile_files ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.10s
+
+
+running 3 tests
+test actual_command_reports_all_raw_summaries_without_qualifying_a_window ... ok
+test dry_run_admits_the_complete_profile_before_driver_allocation ... ok
+test help_and_malformed_arguments_preserve_the_fixed_command_boundary ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 168.85s
+
+
+running 10 tests
+test cached_admission_obeys_cap_and_refuses_all_archive_paths_before_io ... ok
+test cached_cm_and_ho_preserve_direct_terminal_clock_and_report_actual_ledgers ... ok
+test cached_cm_and_ho_runs_preserve_direct_terminal_state_bits ... ok
+test checkpoint_count_and_total_buffer_budget_are_preflighted ... ok
+test checkpoint_refuses_foreign_profile_and_does_not_overwrite ... ok
+test checkpoint_resume_preserves_charges_and_profile ... ok
+test cm_and_ho_complete_two_exact_steps ... ok
+test dry_run_declares_exact_v2_admission_without_running ... ok
+test invalid_v2_flags_and_caps_are_nonzero_structured_refusals ... ok
+test terminal_failure_returns_nonzero_and_reports_reason ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.74s
+

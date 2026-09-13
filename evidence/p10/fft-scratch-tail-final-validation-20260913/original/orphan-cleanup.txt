@@ -1,0 +1,10 @@
+cleanup_observed_utc=2026-09-13T18:30:29Z
+pid=2127386
+pgid=1956764
+startticks=12591920
+cmdline_sha256=f925b2692436f4b5892041f7b3ad3a79f6646a5d00fa11ed1d8ad1096a0b44c0
+exe=/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking-88d1b47718a6e9a7
+term_sent_utc=2026-09-13T18:30:29Z
+released_utc=2026-09-13T18:30:30Z
+pid_absent=true
+pgid_members_after=0

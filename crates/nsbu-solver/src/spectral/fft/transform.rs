@@ -1,8 +1,10 @@
 //! Forward and inverse transform execution for an admitted plan and workspace.
 use super::workspace::finite_real;
-use super::{owned, BackendPlan, FftPlan, FftWorkspace};
+use super::{owned, BackendPlan, FftPlan, FftWorkspace, AVX_SCRATCH_LANES};
 use crate::spectral::radix::transform;
 use crate::{Complex64, SolverError};
+
+mod tiled;
 
 impl FftPlan {
     /// Forward R2C coefficients include division by the complete physical sample count.
@@ -95,7 +97,12 @@ impl FftPlan {
                 } else {
                     &axes.forward[axis]
                 };
-                plan.process_with_scratch(&mut input[..length], scratch);
+                let [nx, ny, nz] = self.layout.dimensions();
+                let maximum = nx.max(ny).max(nz);
+                plan.process_with_scratch(
+                    &mut input[..length],
+                    &mut scratch[..AVX_SCRATCH_LANES * maximum],
+                );
                 output[..length].copy_from_slice(&input[..length]);
             }
         }
@@ -108,6 +115,10 @@ impl FftPlan {
     }
 
     fn transverse_axis(&self, work: &mut FftWorkspace, inverse: bool, axis: usize) {
+        if matches!(&self.backend, BackendPlan::Avx(_)) {
+            self.transverse_axis_tiled(work, inverse, axis);
+            return;
+        }
         let [nx, ny, nz] = self.layout.dimensions();
         let half = nz / 2 + 1;
         let (length, rows, stride) = if axis == 0 {

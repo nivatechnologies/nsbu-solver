@@ -1,0 +1,26 @@
+{
+  "schema": "p10-fft-scratch-tail-integration-review-v1",
+  "decision": "integrate_reviewed_change_on_development_branch",
+  "tested_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "production_source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "integration_diff_sha256": "86961af2444180e42bb122bda1ed77ba6adca9255e0f51f3d8521ddccdaedc20",
+  "production_and_tests_match_tested_tree": true,
+  "review": [
+    "AVX tile reuses the existing scratch-vector tail; FftWorkspace object layout is unchanged.",
+    "OwnedRadix reservation and traversal remain unchanged.",
+    "Each RustFFT line call uses only the scratch prefix; tile lanes remain disjoint.",
+    "Transform operation order within each line and normalization remain unchanged.",
+    "Root verified scalar/W3 raw inventories, canonical output hashes, solver251 counts, and cross-host candidate/error words.",
+    "Root verified original/continuation archive hashes and separate counts272/32/26/1; one original ignored test remains unexecuted.",
+    "Root verified corrected-source coverage archive; five production files aggregate425/449 lines and33/40 branches. Individual-file gaps remain recorded."
+  ],
+  "original_workspace_exit": 124,
+  "targeted_continuation_exit": 0,
+  "provenance_note": "The separate solver-package validation was executed by residual_bottleneck_sol and reviewed by root. The historical continuation result receipt_owned_by label root/Terra is inaccurate; raw commands, source and numerical results are unaffected.",
+  "limits": [
+    "No successful single full-workspace invocation is claimed.",
+    "No whole-project quality gate or PDE window completion is claimed.",
+    "The old untiled attempt has no candidate hash; only its local-error words can be compared exactly."
+  ],
+  "accepted_windows": 0
+}

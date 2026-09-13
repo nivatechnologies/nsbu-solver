@@ -1,0 +1,7 @@
+crates/nsbu-solver/src/spectral/fft.rs
+crates/nsbu-solver/src/spectral/fft/avx.rs
+crates/nsbu-solver/src/spectral/fft/transform.rs
+crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+crates/nsbu-solver/src/spectral/fft/workspace.rs
+crates/nsbu-solver/src/spectral/w3/tests.rs
+crates/nsbu-solver/tests/fft/avx.rs

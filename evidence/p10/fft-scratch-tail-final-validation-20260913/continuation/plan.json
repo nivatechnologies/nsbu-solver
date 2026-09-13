@@ -1,0 +1,51 @@
+{
+  "schema": "p10-avx-tail-workspace-continuation-plan-v1",
+  "status": "frozen_before_execution",
+  "source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "reused_target": "/tmp/nsbu-terra-avx-tail-final-workspace-20260913",
+  "original_receipt": "/tmp/nsbu-terra-avx-tail-final-workspace-review-20260913",
+  "original_status": 124,
+  "original_recorded_pgid": 1956764,
+  "interrupted_target": "v2_regional_tracking",
+  "observed_benchmark_test_targets": 108,
+  "completed_benchmark_test_targets_before_interrupted": 107,
+  "metadata_benchmark_test_targets": 124,
+  "continuation_targets": [
+    "v2_regional_tracking",
+    "v2_regional_tracking_allocation",
+    "v2_residual_family",
+    "v2_residual_family_allocation",
+    "v2_review_adapter",
+    "v2_review_profile",
+    "v2_review_profile_allocation",
+    "v2_run",
+    "v2_run_allocation",
+    "v2_sampling",
+    "v2_sampling_allocation",
+    "v2_sampling_oracle",
+    "v2_shared_force_adapter",
+    "v2_shared_force_adapter_allocation",
+    "v2_shared_force_table",
+    "v2_shared_force_table_allocation",
+    "v2_startup_profile"
+  ],
+  "continuation_target_count": 17,
+  "solver_package_not_repeated": true,
+  "solver_separate_pass": {
+    "tests": "251/251",
+    "source": "df90af8",
+    "provenance_basis": "root-provided reviewed result"
+  },
+  "comparison_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "source_diff_scope": "only crates/nsbu-solver/src/spectral/w3/tests.rs literals plus evidence; benchmark and production source identical",
+  "commands": [
+    "cargo test -p nsbu-benchmarks --locked --no-fail-fast --test v2_regional_tracking --test v2_regional_tracking_allocation --test v2_residual_family --test v2_residual_family_allocation --test v2_review_adapter --test v2_review_profile --test v2_review_profile_allocation --test v2_run --test v2_run_allocation --test v2_sampling --test v2_sampling_allocation --test v2_sampling_oracle --test v2_shared_force_adapter --test v2_shared_force_adapter_allocation --test v2_shared_force_table --test v2_shared_force_table_allocation --test v2_startup_profile -- --test-threads=1",
+    "cargo test -p nsbu-cli --locked --no-fail-fast --bins --tests -- --test-threads=1",
+    "cargo test --workspace --locked --doc --no-fail-fast -- --test-threads=1"
+  ],
+  "ignored_heavy_tests": "not selected by default; no explicit ignored test or heavy-test environment",
+  "cargo_build_jobs": 2,
+  "hard_continuation_deadline_utc": "2026-09-13T19:47:54Z",
+  "campaign_deadline_utc": "2026-09-13T19:52:54Z",
+  "union_claim": "not a single full-workspace pass; original timeout and targeted continuation reported separately"
+}

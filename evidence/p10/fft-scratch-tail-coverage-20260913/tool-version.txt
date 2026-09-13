@@ -1,0 +1,2 @@
+cargo-llvm-cov 0.9.1
+rustc 1.96.0-nightly (ec818fda3 2026-03-02)

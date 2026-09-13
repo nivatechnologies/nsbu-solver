@@ -8,6 +8,9 @@ mod workspace;
 use crate::{domain::Layout, Complex64, SolverError};
 pub use avx::FftCatalog;
 
+const AVX_SCRATCH_LANES: usize = 4;
+const TRANSVERSE_TILE_LANES: usize = 8;
+
 /// Immutable arithmetic/backend identity for every scalar transform owner.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FftBackend {

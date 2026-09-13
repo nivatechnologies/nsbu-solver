@@ -1,0 +1,709 @@
+
+running 2 tests
+test tests::disabled_or_full_trace_keeps_complete_counts_without_exceeding_fixed_storage ... ok
+test tests::tracked_operations_preserve_counts_and_raw_event_attribution ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 51 tests
+test fields::axial::tests::every_force_derivative_and_root_word_matches_the_uncached_point_evaluator ... ok
+test fields::axial::tests::missing_wrong_plane_and_stale_time_caches_are_refused_for_active_points ... ok
+test fields::axial::tests::remaining_coordinate_cannot_be_replaced_by_a_colliding_rounded_elapsed_time ... ok
+test fields::tests::diagnostic_assembly_retains_component_signs_and_term_magnitudes ... ok
+test fields::tests::transport_magnitude_includes_diffusion_gradient ... ok
+test jet::derivative_tests::every_monomial_and_mixed_coefficient_word_keeps_the_original_derivative ... ok
+test jet::derivative_tests::invalid_axis_and_actual_derivative_overflow_remain_structured_refusals ... ok
+test jet::index::tests::generated_tables_cover_each_admissible_multi_index_and_product ... ok
+test jet::transcendental::tests::logarithmic_majorant_and_strict_underflow_admission ... ok
+test provider::parallel::tests::a_panicked_worker_wakes_the_controller_and_cannot_publish_coefficients ... ok
+test provider::parallel::tests::each_failed_worker_preserves_previous_coefficients_and_terminates_the_whole_provider ... ok
+test provider::parallel::worker::tests::dropping_idle_and_submitted_workers_joins_and_releases_all_shared_storage ... ok
+test provider::parallel_reduced::tests::fixture_w3_force_matches_serial_and_refuses_after_fft_failure ... ok
+test provider::parallel_reduced::tests::opt_in_w3_force_charges_exact_experiment_addition ... ok
+test provider::parallel_reduced::tests::worker_error_drains_the_attempt_and_preserves_the_previous_output ... ok
+test provider::parallel_reduced::tests::worker_panic_drains_the_attempt_and_preserves_unpublished_output ... ok
+test reduced_force::axial::tests::active_missing_wrong_periodic_plane_stale_time_and_invalid_inputs_are_refused ... ok
+test reduced_force::axial::tests::cached_samples_match_uncached_words_for_planes_and_nonmonotone_times ... ok
+test reduced_force::axial::tests::flat_rest_and_exterior_planes_return_zero_without_a_cache ... ok
+test reduced_force::axial::tests::periodic_plane_cache_uses_canonical_z_bits ... ok
+test reduced_force::jet::index::tests::runtime_tables_match_every_const_entry_and_refuse_an_absent_degree ... ok
+test reduced_force::jet::tests::complete_monomial_products_and_derivatives_match_direct_multi_indices ... ok
+test reduced_force::jet::tests::logarithmic_underflow_recovery_and_arithmetic_refusals_are_explicit ... ok
+test reduced_force::jet::tests::mixed_compositions_match_a_separate_degree_four_cartesian_algebra ... ok
+test root::tests::signed_bracket_updates_and_newton_safeguards ... ok
+test runtime_force::attempt_cache::tests::complete_direct_attempt_counter_products_are_checked ... ok
+test runtime_force::tests::rejected_boxed_begin_invalidates_the_inner_attempt ... ok
+test scalar::tests::centering_preserves_small_values_and_has_one_boundary_convention ... ok
+test smooth_experiment::pressure::tests::force_only_pressure_retains_modes_beyond_the_finest_velocity_band ... ok
+test smooth_experiment::pressure::tests::padded_taylor_green_retains_pressure_outside_the_original_velocity_band ... ok
+test smooth_experiment::probes::balances::tests::later_child_exhaustion_retains_work_and_previous_sample_without_partial_publication ... ok
+test smooth_experiment::probes::balances::tests::quadrature_failure_rolls_back_all_earlier_pending_level_updates_and_terminates ... ok
+test smooth_experiment::probes::diagnostics::tests::pressure_failure_after_physical_sampling_publishes_nothing_and_terminates ... ok
+test smooth_experiment::probes::residuals::tests::a_later_child_failure_retains_charges_and_never_publishes_partial_comparisons ... ok
+test smooth_experiment::probes::residuals::tests::a_new_legal_history_cannot_be_relabelled_as_the_previously_published_probe_origin ... ok
+test smooth_experiment::probes::tests::a_desynchronized_accepted_history_cannot_reuse_the_last_complete_probe_views ... ok
+test smooth_experiment::sampling::tests::a_desynchronized_child_terminates_the_complete_sampling_consumer ... ok
+test smooth_observer::reconstruction::tests::private_endpoint_admission_distinguishes_lineage_and_clock_failures ... ok
+test smooth_observer::reconstruction::tests::private_ring_and_budget_guards_cover_both_transaction_paths ... ok
+test v2_experiment::binding::tests::bitwise_control_preserves_false_for_finite_and_signed_zero_differences ... ok
+test v2_experiment::coverage::workspace::tests::no_samples_is_metadata_absence_not_a_zero_count ... ok
+test v2_experiment::diagnostic::export::findings::tests::diagnostic_export_missing_variants_are_not_zero_measurements ... ok
+test v2_experiment::diagnostic::export::json::tests::diagnostic_export_fixed_width_numbers_and_interrupts_are_bounded ... ok
+test v2_experiment::diagnostic::export::values::tests::diagnostic_export_extreme_clock_fits_reserved_width ... ok
+test v2_experiment::physical::extrema::tests::empty_invalid_and_first_tied_maxima_remain_distinct ... ok
+test v2_experiment::pressure::tests::configured_workers_match_serial_force_and_pressure_on_accepted_states ... ok
+test v2_experiment::pressure::tests::zero_velocity_uses_independent_full_band_force_and_mean_zero_pressure ... ok
+test v2_experiment::probes::balances::tests::failed_late_history_update_rolls_back_all_levels_and_terminates ... ok
+test v2_experiment::probes::residuals::workspace::tests::zero_allowance_small_cap_wrong_domain_and_exhaustion_are_refused ... ok
+test v2_experiment::reference::tests::component_magnitudes_preserve_tiny_values_and_avoid_intermediate_square_overflow ... ok
+test v2_force_experiment::binding::tests::one_word_corruption_and_length_change_fail_bitwise_binding ... ok
+
+test result: ok. 51 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 239.47s
+
+
+running 4 tests
+test coefficient_view_is_nonzero_and_preserves_degree_order ... ok
+test invalid_indices_domains_and_overflow_are_refused ... ok
+test mixed_polynomial_and_transcendental_derivatives ... ok
+test tail_recovery_and_total_underflow ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test all_coefficients_and_actual_plane_work_survive_nonmonotone_calls_and_rest ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+
+
+running 1 test
+test accepted_history_pressure_and_balance_refinements_are_recorded_separately ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.50s
+
+
+running 3 tests
+test changed_physics_and_skipped_probes_spend_only_aggregate_allowances ... ok
+test nonnested_incomplete_uneven_and_nonshrinking_quadrature_meshes_are_refused ... ok
+test three_quadratures_share_every_interpolated_value_without_modifying_the_six_states ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.59s
+
+
+running 7 tests
+test conversion_error_is_scaled_to_each_coordinate ... ok
+test full_evaluator_handles_both_extreme_positive_clock_coordinates ... ok
+test implicit_axis_mixed_derivatives_obey_equation ... ok
+test remaining_survives_rounded_target_elapsed ... ok
+test roots_have_small_residuals_and_bounded_work ... ok
+test safeguarded_newton_meets_small_observed_work_budgets ... ok
+test trailing_zero_removal_detects_exact_large_odd_significands ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test concentrating_transactional_trajectory_matches_independent_dft ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.76s
+
+
+running 3 tests
+test logistic_matches_scalar_derivative_and_symmetry ... ok
+test periodic_reference_and_force_and_exact_rest ... ok
+test scalar_collar_derivatives_during_startup_match_jets ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test accepted_smooth_histories_have_refining_off_stage_defects ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.28s
+
+
+running 2 tests
+test implicit_coefficients_match_independent_high_precision_jets ... ok
+test independent_high_precision_field_fixtures ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test independent_rest_evolution_retains_nonzero_derivative_errors_for_both_methods ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 1 test
+test complete_method_comparisons_preserve_both_actual_from_rest_states ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 3 tests
+test admission_and_wrong_domain_fail_with_bounded_charges ... ok
+test independent_offstage_residual_refines_without_changing_accepted_states ... ok
+test missing_history_stage_probes_and_external_origin_keep_their_restrictions ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
+
+
+running 3 tests
+test every_ring_phase_restores_the_next_cm_and_ho_commit_bit_for_bit ... ok
+test reconstruction_owner_preflights_live_and_snapshot_storage ... ok
+test restoration_retains_rejection_and_observer_exhaustion_without_budget_reset ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
+
+running 2 tests
+test admission_and_request_refusals_preserve_outputs_and_allow_a_valid_request ... ok
+test complete_fields_and_work_match_for_all_partition_shapes_and_nonmonotone_times ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.96s
+
+parallel provider constructor allocations=37 bytes=70016 configured_stack_bytes=6291456 total_reservation=6560704; first/repeated/refused requests allocate/deallocate/reallocate nothing
+
+running 2 tests
+test admission_and_request_refusals_preserve_output ... ok
+test every_parallel_reduced_coefficient_matches_the_serial_reduced_order ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+parallel reduced constructor allocations=37 bytes=50816 configured_stack_bytes=6291456 total_reservation=6541616; first/repeated/refused requests allocate/deallocate/reallocate nothing
+
+running 1 test
+test m512_w3_force_matches_serial_bits_work_and_steady_allocation ... ignored, requires explicit NSBU_RUN_M512_W3_FORCE_CONTROL=1 and about 25 GiB
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test all_quantities_and_refinement_pairs_come_from_actual_synchronized_rest_branches ... ok
+test changed_policy_words_manifests_and_stopped_families_cannot_reuse_measurements ... ok
+test joint_capacity_floors_sampling_and_finite_attempt_products_are_admitted ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.65s
+
+
+running 3 tests
+test all_quantities_and_refinement_pairs_come_from_actual_synchronized_rest_branches ... ok
+test changed_policy_words_manifests_and_stopped_families_cannot_reuse_measurements ... ok
+test joint_capacity_floors_sampling_and_finite_attempt_products_are_admitted ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.18s
+
+
+running 3 tests
+test admission_requires_full_joint_storage_floors_and_finite_attempts ... ok
+test complete_physical_probes_use_probe_time_and_leave_every_owned_field_unchanged ... ok
+test missing_changed_and_skipped_probe_requests_spend_attempts_without_child_work ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 13.86s
+
+
+running 3 tests
+test a_rejected_branch_cannot_publish_partial_probe_fields_or_retry ... ok
+test lookahead_window_memory_and_attempt_admission_are_explicit ... ok
+test streaming_probes_preserve_early_history_and_match_independent_final_state_words ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.60s
+
+
+running 3 tests
+test admission_refuses_mismatched_case_grid_and_cap ... ok
+test normalized_force_coefficients_match_independent_direct_dft ... ok
+test request_validation_precedes_output_changes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 4 tests
+test all_ring_phases_preserve_next_attempt_and_interpolant_after_external_import ... ok
+test common_frame_cannot_drop_reconstruction_and_rehashed_node_clocks_must_match_history ... ok
+test outer_integrity_caps_and_output_rollback_are_enforced ... ok
+test rejected_and_exhausted_runs_keep_the_same_terminal_state_and_work ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+
+
+running 4 tests
+test a_structurally_valid_rehashed_derivative_is_rejected_by_independent_evolution ... ok
+test every_ring_phase_replays_all_canonical_bytes_and_preserves_the_original_origin ... ok
+test replay_admission_requires_complete_attempt_and_simultaneous_storage_allowances ... ok
+test terminal_rejections_and_diagnostic_refusals_are_reproduced_with_spent_work ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+
+running 4 tests
+test complete_caps_and_output_rollback_are_enforced ... ok
+test earlier_node_identity_and_actual_rest_values_are_checked ... ok
+test every_accepted_ring_phase_roundtrips_for_both_methods ... ok
+test shape_clock_state_and_counter_corruption_are_refused ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 3 tests
+test both_methods_supply_actual_nodes_and_independent_offstage_derivatives ... ok
+test constructor_and_stage_boundaries_reject_invalid_history ... ok
+test rejected_and_failed_proposals_preserve_the_accepted_ring ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+
+running 3 tests
+test exact_word_inputs_match_80_120_digit_refinements_through_startup_collar_and_tiny_remaining_time ... ok
+test flat_support_periodicity_nonfinite_refusals_and_axial_asymmetry_remain_explicit ... ok
+test high_precision_values_and_complete_cartesian_momentum_terms_agree ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+reduced force first/repeated/nonmonotone/flat/refused calls: allocations=0 deallocations=0 reallocations=0; scalar/root/jet storage is fixed on the stack
+
+running 3 tests
+test complete_admission_limits_and_request_refusals_precede_output_changes ... ok
+test complete_spectra_match_uncached_direct_sums_and_original_provider_on_three_layouts ... ok
+test independent_80_120_digit_n4_force_fixture_remains_unprojected ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.72s
+
+reduced provider admission_allocations=0 constructor_heap_bytes=30560 declared_bytes=32088 steady_allocations=0 steady_deallocations=0 steady_reallocations=0 completed_requests=5 refused_requests=3
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test cm_and_ho_reduced_trajectories_match_fixtures_and_original_each_commit ... ok
+test rejected_reduced_attempt_charges_work_without_changing_committed_state ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.48s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test every_tensor_entry_and_pressure_derivative_matches_independent_fixtures ... ok
+test exact_flat_states_periodicity_and_invalid_inputs_have_explicit_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test cm_smooth_nonlinear_temporal_order_from_rest ... ok
+test ho_smooth_nonlinear_temporal_order_from_rest ... ok
+test smooth_full_band_spatial_family_tracks_the_same_exact_flow ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.10s
+
+
+running 4 tests
+test anisotropic_sample_coordinates_are_exposed_without_periodic_relabeling ... ok
+test failed_samples_preserve_position_and_failed_roots_consume_finite_work ... ok
+test integer_lattice_partition_preserves_global_and_collar_errors ... ok
+test invalid_identity_storage_and_work_are_refused_before_sampling ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test every_quantity_preserves_global_statistics_across_complete_geometric_partition ... ok
+test v2_region_adapter_refuses_a_different_physical_problem_geometry ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test hessian_error_in_collar_is_visible_in_global_and_collar_reports ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 7 tests
+test declared_panel_and_similarity_boundaries_are_included_correctly ... ok
+test geometric_emptiness_and_late_time_coverage_do_not_depend_on_underflow ... ok
+test invalid_geometry_work_budgets_and_clocks_are_refused ... ok
+test radial_masks_are_invariant_under_transverse_rotations ... ok
+test spherical_masks_do_not_use_the_rounded_smooth_step_value ... ok
+test startup_phase_uses_integer_ticks_even_when_binary64_rounds_onto_the_boundary ... ok
+test volume_fractions_match_independent_high_precision_quadrature ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test run_force_has_no_qualification_claim ... ok
+test serial_and_parallel_match_coefficients_and_declared_work ... ok
+test settings_refuse_invalid_grid_workers_and_capacity ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+
+running 3 tests
+test complete_sampling_refinements_retain_all_pairs_states_and_original_statistics ... ok
+test exact_rms_on_three_grids_cannot_hide_a_missed_physical_peak ... ok
+test joint_caps_strict_grid_refinement_floors_and_finite_work_are_required ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 53.37s
+
+
+running 2 tests
+test analytical_coefficients_agree_with_high_precision_physical_dft ... ok
+test source_refuses_invalid_geometry_budget_shape_and_arithmetic ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test a_rejected_branch_terminates_the_family_without_advancing_other_states ... ok
+test aggregate_cap_and_incompatible_family_settings_are_refused_before_allocation ... ok
+test reconstruction_admission_missing_history_and_domain_mismatch_keep_spent_attempts ... ok
+test six_branches_stay_independent_and_report_complete_fine_band_differences ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.82s
+
+
+running 3 tests
+test capacity_and_plan_reservations_refuse_before_observer_allocation ... ok
+test from_rest_and_accepted_cm_and_ho_samples_are_independent ... ok
+test restored_observer_matches_uninterrupted_measurement_and_rejects_bad_ledgers ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+
+running 6 tests
+test arithmetic_refusal_before_rhs_setup_records_zero_attempt_work ... ok
+test construction_and_restore_refuse_inadequate_or_mismatched_resources ... ok
+test immutable_profile_admission_and_restore_check_each_fixed_setting ... ok
+test snapshot_cap_is_preflighted_before_copying_history_or_work ... ok
+test snapshots_resume_cm_and_ho_with_identical_next_commit_and_ledgers ... ok
+test snapshots_resume_the_same_local_rejection_without_reusing_prior_work ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+
+running 3 tests
+test bounded_checksum_and_profile_frames_refuse_corruption_before_import ... ok
+test checksum_cannot_hide_epoch_drift_or_unrecorded_completed_rhs_work ... ok
+test checksum_import_is_explicitly_external_and_continues_with_fresh_scratch ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+running 3 tests
+test admission_refuses_nodes_missing_times_order_caps_and_unrepresentable_offstage_geometry ... ok
+test early_and_late_residuals_retain_complete_fields_and_strict_actual_temporal_geometry ... ok
+test missing_skipped_changed_and_rejected_owners_cannot_publish_residuals ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.15s
+
+
+running 8 tests
+test accelerated_arithmetic_plan_is_not_relabelled_as_version_one_archive ... ok
+test cached_profile_refuses_every_version_one_archive_operation ... ok
+test direct_layout_resources_and_pre_cache_archive_remain_compatible ... ok
+test direct_read_reservation_refuses_excess_records ... ok
+test hochbruck_round_trip_keeps_full_work_ledger ... ok
+test rejects_short_output_hash_and_caps ... ok
+test round_trip_preserves_cm_full_state ... ok
+test round_trip_preserves_ho_full_state ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.90s
+
+
+running 5 tests
+test foreign_plans_and_reservation_caps_are_rejected ... ok
+test rehashed_header_and_clock_mutations_are_rejected ... ok
+test rehashed_work_and_physical_counter_tampering_is_rejected ... ok
+test short_write_leaves_sentinel_untouched_and_truncation_fails ... ok
+test terminal_rejection_and_refusal_are_preserved ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s
+
+
+running 4 tests
+test five_exact_slots_match_fresh_force_and_reset_between_attempts ... ok
+test malformed_calls_and_caps_never_publish_a_slot ... ok
+test real_cm_and_ho_macro_attempts_preserve_every_state_word ... ok
+test rejected_macro_does_not_reuse_stale_force_slots ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+
+running 3 tests
+test actual_reconstructed_balances_and_nested_simpson_match_fresh_controls ... ok
+test independent_simpson_polynomial_control_is_exact_to_roundoff ... ok
+test invalid_admission_and_failed_bindings_publish_no_quadrature ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 125.09s
+
+v2 balance quadrature construction_bytes=34695488 declared_bytes=39798520 provider_work=10699776 transforms=72 steady_allocations=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test cached_and_direct_drivers_publish_bitwise_equal_states_and_events ... ok
+test cached_family_cap_shortfall_and_direct_identity_are_stable ... ok
+test pre_rhs_terminal_retry_does_not_reopen_or_reuse_cache_state ... ok
+test startup_profile_admits_both_integration_policies_and_refuses_short_caps ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 355.14s
+
+
+running 3 tests
+test failed_child_terminates_without_partial_publication_or_retry_charge ... ok
+test publishes_crossed_consumers_in_one_unqualified_manifest ... ok
+test rejects_incomplete_crossed_manifests_foreign_owners_caps_and_bad_regions ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 232.81s
+
+v2 diagnostic admission=0 construction_bytes=64022624 joint_bytes=74750488 events=7 execution_allocations=0
+
+running 3 tests
+test diagnostic_export_complete_profile_preserves_every_raw_finding ... ok
+test diagnostic_export_keeps_pressure_n_separate_from_residual_force_m ... ok
+test diagnostic_export_rejects_nonprofile_accepted_and_probe_schedules ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 123.59s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test canonical_identity_matches_independent_little_endian_fixture_and_exact_clock ... ok
+test extreme_exact_window_refuses_unrepresentable_attempt_count ... ok
+test identity_changes_with_every_meaningful_admitted_input ... ok
+test invalid_family_profiles_and_caps_are_refused_before_owner_allocation ... ok
+test six_branches_are_private_and_compare_complete_actual_bands ... ok
+test stopped_branch_is_terminal_and_retains_committed_work ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 89.41s
+
+exact-v2 family admission=0 construction_bytes=19219520 declared_bytes=24190424 sampled_times=3 steady_allocations=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test foreign_stale_and_insufficient_bindings_publish_nothing_and_terminate ... ok
+test independent_baseline_words_bind_raw_spectral_force_differences ... ok
+test terminal_force_owner_cannot_rebind_and_prior_report_survives ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 298.72s
+
+force binding construction_bytes=25620608 joint_bytes=30816624 coefficient_words=864 steady_allocations=0
+
+running 3 tests
+test direct_force_equals_common_domain_crop_at_every_word ... ok
+test exact_v2_case_refuses_nonunit_physical_domains ... ok
+test independent_crop_checks_signed_modes_dc_and_nyquist ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.39s
+
+
+running 4 tests
+test identity_binds_every_policy_word_and_complete_exact_manifest ... ok
+test invalid_profiles_caps_and_manifests_are_refused_during_admission ... ok
+test stopped_child_is_terminal_without_rollback_or_fresh_attempts ... ok
+test three_private_rest_trajectories_report_both_complete_force_pairs ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 28.98s
+
+v2 force family admission=0 construction_bytes=2279616 declared_bytes=2498488 attempts=6 steady_allocations=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test actual_force_states_report_complete_physical_pairs_without_mutation ... ok
+test failed_family_is_rejected_without_replacing_rest_report ... ok
+test refusals_charge_once_terminate_and_retain_prior_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 51.38s
+
+force physical construction_bytes=2433984 joint_bytes=2666184 steady_allocations=0 reports=3
+
+running 3 tests
+test admission_stale_foreign_terminal_and_exhausted_requests_retain_schedule ... ok
+test exact_retained_nodes_bind_bitwise_without_mutating_either_family ... ok
+test lookahead_eviction_is_missing_and_never_substitutes_current_or_interpolated_state ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 221.24s
+
+v2 node binding admission=0 construction_bytes=40551040 joint_bytes=50555344 reports=3 refusal=1 execution_allocations=0
+
+running 4 tests
+test v2_mismatched_force_grid_has_explicit_work_bounds ... ok
+test v2_refuses_cap_minus_one_before_construction_and_zero_samples ... ok
+test v2_restore_preserves_work_and_rejects_bad_budget ... ok
+test v2_samples_actual_state_and_doubles_provider_grid ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+v2 physical admission_allocations=0 construction_bytes=19369280 steady_allocations=0 reports=3 refusals=2 declared_joint_bytes=24355880
+
+running 3 tests
+test actual_rest_frames_measure_every_quantity_and_pair ... ok
+test physical_admission_rejects_invalid_floors_layout_count_caps_and_overflow ... ok
+test stale_wrong_identity_and_terminated_calls_spend_attempts_without_mutating_states ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 100.52s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+v2 pressure workers=1 force_grid=[24, 24, 24] admission_allocations=0 construction_bytes=25890880 steady_allocations=0 reports=3 refusals=2 declared_joint_bytes=59001336
+v2 pressure workers=2 force_grid=[24, 24, 24] admission_allocations=0 construction_bytes=25898208 steady_allocations=0 reports=3 refusals=2 declared_joint_bytes=87124288
+
+running 5 tests
+test actual_rest_states_supply_complete_pressure_and_gradient_pairs ... ok
+test complete_pressure_admission_refuses_bad_samples_floors_counts_caps_and_overflow ... ok
+test unrelated_stale_and_terminated_families_spend_attempts_without_state_changes ... ok
+test v2_pressure_oracle::rectangular_convolution_keeps_negative_modes_on_each_axis ... ok
+test v2_pressure_oracle::taylor_green_pressure_and_gradient_are_recovered ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 99.48s
+
+
+running 2 tests
+test rectangular_convolution_keeps_negative_modes_on_each_axis ... ok
+test taylor_green_pressure_and_gradient_are_recovered ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 6 tests
+test actual_accepted_states_publish_all_six_only_after_complete_measurement ... ok
+test exact_artifact_bytes_retain_all_raw_estimates_and_separate_changes ... ok
+test gauge_is_one_global_constant_and_gradient_is_invariant ... ok
+test midpoint_gauge_measures_tiny_nonzero_states_without_mutation ... ok
+test reordered_gauges_and_short_joint_cap_are_refused ... ok
+test reviewed_endpoint_schedule_admits_and_measures_only_the_rest_state ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 687.19s
+
+
+running 2 tests
+test admission_and_terminal_failure_never_publish_partial_fields ... ok
+test early_and_late_probes_publish_exact_origins_and_independent_comparisons ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 129.06s
+
+v2 probes construction_bytes=21331520 declared_bytes=26347560 attempts=3 weighted_visits=3553920 steady_allocations=0
+
+running 3 tests
+test admission_and_publication_refusals_are_bounded_and_terminal ... ok
+test failed_probe_producer_cannot_replace_complete_report ... ok
+test offstage_and_endpoint_reports_match_complete_independent_oracle ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 178.02s
+
+v2 probe physical construction_bytes=21481280 declared_bytes=26529464 transforms=1350 visits=19624512 steady_allocations=0
+
+running 2 tests
+test absolute_reducer_preserves_opposed_scalar_and_gradient_signs ... ok
+test actual_offstage_pressure_matches_independent_full_complex_differences ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 125.78s
+
+v2 probe pressure construction_bytes=25132352 declared_bytes=30174400 transforms=399 visits=35254272 steady_allocations=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test admission_refuses_bad_floors_samples_attempts_caps_and_overflow ... ok
+test cap_failure_is_a_numerical_refusal ... ok
+test failed_probe_producer_cannot_publish_reference_fields ... ok
+test late_offstage_fields_match_independent_analytical_oracle_without_mutation ... ok
+test shared_accepted_reference_regression_remains_green ... ok
+test stale_foreign_missing_and_exhausted_publications_are_terminal ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 235.01s
+
+probe reference construction_bytes=22247360 declared_bytes=27312296 transforms=810 roots=663552 steady_allocations=0
+
+running 3 tests
+test admission_refuses_bad_roots_caps_attempts_and_overflow ... ok
+test all_probe_clocks_match_independent_global_producer_and_exhaust_exact_allowance ... ok
+test stale_publication_is_terminal_and_retains_last_complete_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 129.79s
+
+probe regional construction_bytes=23163200 joint_bytes=28311160 transforms=1890 classifications=290304 steady_allocations=0
+
+running 3 tests
+test admission_refuses_caps_overflow_and_non_rest_construction_has_no_interface ... ok
+test cm_and_ho_match_default_runs_and_retain_actual_endpoint_rhs_nodes ... ok
+test rejection_and_refusal_preserve_rest_state_and_accepted_ring ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.58s
+
+v2 reconstruction construction_bytes=204608 declared_bytes=275416 initial_and_endpoint_samples=3 observer_work_units=1596 observer_transforms=36 modal_visits=432 steady_allocations=0
+
+running 2 tests
+test emit_fixed_binary64_reference_rows ... ok
+test emit_full_binary64_reference_rows ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test admission_refuses_bad_floors_layout_attempts_caps_and_work_overflow ... ok
+test analytical_tensor_path_retains_the_existing_high_precision_fixture ... ok
+test six_private_actual_states_track_all_reference_tensors_without_mutation ... ok
+test stale_foreign_terminal_and_exhausted_requests_retain_state_and_schedule ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 72.93s
+
+v2 reference tracking admission=0 construction_bytes=20135360 joint_bytes=25143560 reports=3 refusal=1 execution_allocations=0
+
+running 3 tests
+test actual_accepted_reports_bind_raw_nominal_coverage_without_changing_state ... ok
+test admission_requires_nested_panels_and_joint_cap ... ok
+test fresh_unpublished_family_rejects_a_legitimate_same_plan_report ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s
+
+
+running 3 tests
+test foreign_stale_failed_and_exhausted_requests_preserve_state_and_schedule ... ok
+test regional_admission_and_missing_classes_are_explicit ... ok
+test regional_findings_match_the_existing_global_path_on_identical_actual_states ... 

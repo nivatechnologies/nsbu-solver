@@ -1,0 +1,30 @@
+warning: function `retained_band_excludes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_sampling_oracle.rs:10:15
+   |
+10 | pub(crate) fn retained_band_excludes(state: &SpectralState, mode: [isize; 3]) -> bool {
+   |               ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `nsbu-benchmarks` (test "v2_sampling_oracle") generated 1 warning
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.10s
+     Running tests/v2_regional_tracking.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking-88d1b47718a6e9a7)
+     Running tests/v2_regional_tracking_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking_allocation-a5a1dfa46aac20ae)
+     Running tests/v2_residual_family.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_residual_family-bfec8477cf345525)
+     Running tests/v2_residual_family_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_residual_family_allocation-5ccd37ac8dd07c61)
+     Running tests/v2_review_adapter.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_review_adapter-ad7d7702e1417968)
+     Running tests/v2_review_profile.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_review_profile-a848fbfd2081fd4f)
+     Running tests/v2_review_profile_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_review_profile_allocation-9ffb6d74762e39d1)
+review profile protocol_bytes=29483 semantics_bytes=854 rows=616 pair_checks=3828 steady_allocations=0
+     Running tests/v2_run.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_run-c9b7842af3d3775e)
+     Running tests/v2_run_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_run_allocation-625efd4e69705623)
+     Running tests/v2_sampling.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_sampling-91635f14998eb8ca)
+     Running tests/v2_sampling_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_sampling_allocation-9c4a4f6c964545ef)
+     Running tests/v2_sampling_oracle.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_sampling_oracle-b4ae6d4c13f06a94)
+     Running tests/v2_shared_force_adapter.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_shared_force_adapter-ea7e25f1fac09734)
+     Running tests/v2_shared_force_adapter_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_shared_force_adapter_allocation-c1a0d2f638fa522a)
+shared adapter construction_bytes=1965488 declared_joint=2235840 steady_allocations=0
+     Running tests/v2_shared_force_table.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_shared_force_table-e62df36972097853)
+     Running tests/v2_shared_force_table_allocation.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_shared_force_table_allocation-87a8bc399beef420)
+shared force construction_bytes=241568 declared_peak=244312 steady_allocations=0
+     Running tests/v2_startup_profile.rs (/tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_startup_profile-cf4ab3cce3ddd1d4)

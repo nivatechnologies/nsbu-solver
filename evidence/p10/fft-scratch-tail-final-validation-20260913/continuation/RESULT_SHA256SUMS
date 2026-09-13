@@ -1,0 +1,13 @@
+57d2dd04176b5d047d28d7fdca1587fefb1f576e9a73af7a3e340add2a31110a  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/benchmarks.stdout
+9d147352db639da75be306d14b4cc256e9e8670cbebc713b366b01bdf23ee094  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/cli.stdout
+b38fc02e0503ce87871414f3d104559e0a3e368a6834442e0508b986d6bf836b  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/doctests.stdout
+bc2ef6e1dde32b81072e18635ea53713c17f9f673778c99cd0ab1f1378c19852  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/benchmarks.stderr
+396bf73856aa45e00b500ad6d3013fd1064246216f2423efaa02a34fbe15151f  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/cli.stderr
+cddfbba8330b86be8fc394ae159b4604925dcd8acf785056fc9105487360fab7  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/doctests.stderr
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/benchmarks.status
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/cli.status
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/doctests.status
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/overall.status
+9a2eb1405a3b5fd32cc791b2b9fb50fa6e037f97ef2b3912be48ac98d016f034  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/benchmarks.timing
+c639c602d61af67b31ee1c4d140782eec166548ef4b479e5399071c92a0503f2  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/cli.timing
+7fd7f8b78fc34bd9c1f20cef23ee9249e45cf7c6fad7955602ca1e2b6be7d224  /tmp/nsbu-terra-avx-tail-final-workspace-continuation-review-20260913/doctests.timing

@@ -1,0 +1,5 @@
+observed_utc=2026-09-13T18:30:10Z
+recorded_pgid=1956764
+2127386       1 1956764 Sun Sep 13 18:29:41 2026 Sl   /tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking-88d1b47718a6e9a7 --test-threads=1
+2127386 /tmp/nsbu-terra-avx-tail-final-workspace-20260913/debug/deps/v2_regional_tracking-88d1b47718a6e9a7 --test-threads=1
+2128156 /bin/bash -lc set -u receipt=/tmp/nsbu-terra-avx-tail-final-workspace-review-20260913 now=$(date -u +%FT%TZ) {   printf 'observed_utc=%s\nrecorded_pgid=1956764\n' "$now"   ps -eo pid,ppid,pgid,lstart,stat,args | awk '$3==1956764 {print}'   pgrep -af 'v2_regional_tracking-88d1b47718a6e9a7|nsbu-terra-avx-tail-final-workspace-20260913' || true } > "$receipt/post-timeout-process-check.txt" cat "$receipt/post-timeout-process-check.txt" stat -c '%n size=%s mtime=%y' "$receipt/stdout.txt" "$receipt/stderr.txt" "$receipt/status.txt" cat "$receipt/SHA256SUMS"

@@ -1,0 +1,83 @@
+
+running 3 tests
+test foreign_stale_failed_and_exhausted_requests_preserve_state_and_schedule ... ok
+test regional_admission_and_missing_classes_are_explicit ... ok
+test regional_findings_match_the_existing_global_path_on_identical_actual_states ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 163.25s
+
+v2 regional tracking admission=0 construction_bytes=20135360 joint_bytes=25185960 reports=3 refusal=1 execution_allocations=0
+
+running 3 tests
+test configured_workers_match_serial_residuals_on_the_same_probe_fields ... ok
+test early_and_late_nonstage_residuals_publish_complete_doubled_band_comparisons ... ok
+test invalid_bindings_caps_and_rejected_branches_publish_nothing_and_terminate ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 245.20s
+
+v2 residuals workers=1 force_grid=[24, 24, 24] construction_bytes=39373760 declared_bytes=83392136 provider_work=10699776 transforms=72 coefficient_work=4532224 steady_allocations=0
+v2 residuals workers=2 force_grid=[24, 24, 24] construction_bytes=39383488 declared_bytes=122331608 provider_work=10699776 transforms=72 coefficient_work=4532224 steady_allocations=0
+v2 review extraction records=28 caller_bytes=44352 transactional_bytes=44352 steady_allocations=0 status=PartialUnqualifiedInventory
+
+running 9 tests
+test a_foreign_probe_manifest_cannot_supply_the_frozen_geometry ... ok
+test actual_probe_plan_geometry_admits_the_unpopulated_generic_protocol ... ok
+test all_admitted_offstage_geometries_and_inventory_semantics_are_exact ... ok
+test allocated_driver_plan_retains_the_bound_geometry_identities ... ok
+test caller_cannot_relabel_geometry_as_a_foreign_family ... ok
+test caller_manifests_must_be_strictly_nested_complete_and_node_bound ... ok
+test complete_identity_distinguishes_equal_manifests_from_an_altered_family ... ok
+test independent_first_window_manifests_bind_without_allocating_a_trajectory ... ok
+test wrong_identity_inventory_and_every_short_cap_fail_before_review ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+
+
+running 5 tests
+test exact_v2_cm_and_ho_reach_endpoint_and_match_full_band_fixtures ... ok
+test guard_refusal_preserves_state_and_records_only_the_refused_attempt ... ok
+test low_tolerance_rejection_and_terminal_retry_preserve_committed_state_and_work ... ok
+test preflight_rejects_malformed_settings_without_allocating_a_run ... ok
+test serial_and_parallel_runtime_have_identical_words ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.08s
+
+exact-v2 allocation admission=0 construction_bytes=193600 steady_steps=2 declared_bytes=260120
+
+running 3 tests
+test actual::actual_family_retains_every_lattice_pair_metric_and_peak_witness ... ok
+test admission_identity_clock_and_attempt_refusals_are_bounded ... ok
+test selected_signed_dft_values_match_sample_arrays_on_every_layout ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 190.75s
+
+v2 nested sampling admission_allocations=0 construction_bytes=29520704 steady_allocations=0 reports=3 refusals=1 declared_joint_bytes=34644696
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test borrow_conflict_and_incomplete_attempt_fail_closed_without_touching_table_or_output ... ok
+test joint_admission_rejects_schedule_or_cap_mismatch_before_table_allocation ... ok
+test six_independent_recorded_trajectories_match_direct_force_at_every_commit ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 66.94s
+
+
+running 5 tests
+test admission_binds_positive_ordered_manifest_resources_and_full_provider_identity ... ok
+test charged_refusal_preserves_output_table_and_last_complete_report ... ok
+test foreign_unexpected_and_overconsumed_requests_fail_closed ... ok
+test six_branch_stage_streams_equal_fresh_same_m_force_at_every_word ... ok
+test total_attempt_cap_is_terminal_without_an_extra_charge_or_output_write ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 16.27s
+
+
+running 1 test
+test owned_clocks_admit_exactly_the_fixed_complete_partition ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

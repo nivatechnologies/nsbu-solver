@@ -151,8 +151,10 @@ The isolated AVX scratch-tail FFT candidate passed 251 solver tests and full-siz
 force/RHS word-equality controls. Its actual N512/M768 attempt took 1982.65 seconds
 in integration versus 2067.91 seconds previously; the local-error words matched
 exactly. This single sample gives about 4.1% lower integration time, rather than
-the roughly 35% isolated scalar-transform improvement. Experiment-level regression
-is still pending; the candidate is not integrated. See the [execution comparison](../evidence/p10/n512-m768-scratch-tail-timing-20260913/timing-comparison.json).
+the roughly 35% isolated scalar-transform improvement. The reviewed change is now integrated
+on the development branch. The original workspace command timed out; the
+interrupted and remaining benchmark, CLI, and documentation checks passed in
+a separately recorded continuation. See the [execution comparison](../evidence/p10/n512-m768-scratch-tail-timing-20260913/timing-comparison.json).
 
 The matched M512-force residual probe at clock 1112 is now complete. Its retained-band
 H1 residual decreases from `935.56` to `22.303`, while the omitted-band value

@@ -1,0 +1,130 @@
+{
+  "schema": "p10-avx-tail-workspace-targeted-continuation-result-v1",
+  "source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "source_clean": true,
+  "original_workspace_attempt": {
+    "status": 124,
+    "classification": "fixed_5400_second_timeout_not_a_full_workspace_pass",
+    "running_records": 110,
+    "benchmark_integration_targets_started": 108,
+    "result_counts_before_timeout": {
+      "result_blocks": 82,
+      "passed": 272,
+      "failed": 0,
+      "ignored": 1,
+      "non_ok_blocks": 0
+    },
+    "interrupted_target": "v2_regional_tracking",
+    "orphan": {
+      "pid": 2127386,
+      "pgid": 1956764,
+      "startticks": 12591920,
+      "cmdline_sha256": "f925b2692436f4b5892041f7b3ad3a79f6646a5d00fa11ed1d8ad1096a0b44c0",
+      "term_only": true,
+      "released_utc": "2026-09-13T18:30:30Z"
+    },
+    "raw_receipt": "/tmp/nsbu-terra-avx-tail-final-workspace-review-20260913",
+    "automatic_sha_preserved": true,
+    "final_sha_manifest": "FINAL_SHA256SUMS"
+  },
+  "targeted_continuation": {
+    "benchmark_targets": [
+      "v2_regional_tracking",
+      "v2_regional_tracking_allocation",
+      "v2_residual_family",
+      "v2_residual_family_allocation",
+      "v2_review_adapter",
+      "v2_review_profile",
+      "v2_review_profile_allocation",
+      "v2_run",
+      "v2_run_allocation",
+      "v2_sampling",
+      "v2_sampling_allocation",
+      "v2_sampling_oracle",
+      "v2_shared_force_adapter",
+      "v2_shared_force_adapter_allocation",
+      "v2_shared_force_table",
+      "v2_shared_force_table_allocation",
+      "v2_startup_profile"
+    ],
+    "benchmark_counts": {
+      "result_blocks": 9,
+      "passed": 32,
+      "failed": 0,
+      "ignored": 0,
+      "non_ok_blocks": 0
+    },
+    "cli_counts": {
+      "result_blocks": 4,
+      "passed": 26,
+      "failed": 0,
+      "ignored": 0,
+      "non_ok_blocks": 0
+    },
+    "doctest_counts": {
+      "result_blocks": 3,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "non_ok_blocks": 0
+    },
+    "phase_timings": {
+      "benchmarks": {
+        "start_utc": "2026-09-13T18:32:32Z",
+        "remaining_seconds": 4522,
+        "end_utc": "2026-09-13T18:50:01Z",
+        "status": 0
+      },
+      "cli": {
+        "start_utc": "2026-09-13T18:50:01Z",
+        "remaining_seconds": 3473,
+        "end_utc": "2026-09-13T18:52:54Z",
+        "status": 0
+      },
+      "doctests": {
+        "start_utc": "2026-09-13T18:52:54Z",
+        "remaining_seconds": 3300,
+        "end_utc": "2026-09-13T18:52:55Z",
+        "status": 0
+      }
+    },
+    "phase_statuses": {
+      "benchmarks": 0,
+      "cli": 0,
+      "doctests": 0
+    },
+    "overall_status": 0,
+    "hard_deadline_utc": "2026-09-13T19:47:54Z",
+    "finished_before_deadline": true,
+    "warnings": "one pre-existing dead_code warning for retained_band_excludes in v2_sampling_oracle; no test failure"
+  },
+  "separate_solver_validation": {
+    "status": "not_repeated",
+    "reported_result": "251/251 passed",
+    "source": "df90af8",
+    "receipt_owned_by": "root/Terra"
+  },
+  "source_equivalence": {
+    "comparison_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+    "benchmark_source_identical": true,
+    "production_source_identical_except_test_module": true,
+    "only_code_difference": "three expected reservation literals in crates/nsbu-solver/src/spectral/w3/tests.rs"
+  },
+  "process_release": {
+    "checked_utc": "2026-09-13T18:54:14Z",
+    "checked_pids": [
+      2127386,
+      2132193,
+      2132233,
+      2132234,
+      2132250
+    ],
+    "checked_pgids": [
+      1956764,
+      2132233
+    ],
+    "all_owned_absent": true,
+    "mem_available_bytes": 415702671360
+  },
+  "claim": "Original workspace command timed out and is preserved as status124. The targeted continuation passed separately; their union is not represented as one full-workspace pass. No ignored heavy tests ran and production source was not modified."
+}
