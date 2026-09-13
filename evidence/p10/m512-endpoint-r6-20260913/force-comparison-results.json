@@ -1,7 +1,7 @@
 {
   "schema": "p10-m512-endpoint-r6-force-comparison-results-v1",
   "status": "completed_exit_zero",
-  "completed_utc": "2026-09-13T16:50:03Z",
+  "completed_utc": "2026-09-13T17:06:42Z",
   "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
   "acceptance": {
     "status": "not_assessed",
@@ -64,5 +64,7 @@
     3072,
     3584,
     4096
-  ]
+  ],
+  "initial_two_clock_completed_utc": "2026-09-13T16:50:03Z",
+  "completed_utc_basis": "Clock2560 operator completion observation recorded in campaign handoff; raw run files preserve exit status and elapsed time."
 }

@@ -1,0 +1,46 @@
+{
+  "schema": "p10-r6-local-ratio-summary-v1",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "archive_inventory_sha256": "28e6c237190980174c8bcfcc41622a0f7fa60b8837d3d588ec4e9f5e3e48bb36",
+  "attempt_count": 48,
+  "all_outcomes_committed": true,
+  "segments": [
+    {
+      "ticks": 64,
+      "attempt_count": 32,
+      "maximum_error_ratio_l2": {
+        "value": 0.12640355447158066,
+        "from": 128,
+        "to": 192,
+        "archive_relative_path": "step-003-clock-0192/attempt.json",
+        "attempt_json_sha256": "e9609f2a0667e3233ea72908435525588d07f9e71e8236532899680778918672"
+      },
+      "maximum_error_ratio_h1": {
+        "value": 0.9636019710414355,
+        "from": 192,
+        "to": 256,
+        "archive_relative_path": "step-004-clock-0256/attempt.json",
+        "attempt_json_sha256": "04a23dd5e1dc023ade9db3ed07b71a13eacfb77137694ca4a4154caa84efdb46"
+      }
+    },
+    {
+      "ticks": 128,
+      "attempt_count": 16,
+      "maximum_error_ratio_l2": {
+        "value": 0.0011706010627771308,
+        "from": 3968,
+        "to": 4096,
+        "archive_relative_path": "step-048-clock-4096/attempt.json",
+        "attempt_json_sha256": "8deea435b7cf5509c2e0028452452ba9c928e4cd8534212d0b1713490bbbbb14"
+      },
+      "maximum_error_ratio_h1": {
+        "value": 0.007761858770443372,
+        "from": 3968,
+        "to": 4096,
+        "archive_relative_path": "step-048-clock-4096/attempt.json",
+        "attempt_json_sha256": "8deea435b7cf5509c2e0028452452ba9c928e4cd8534212d0b1713490bbbbb14"
+      }
+    }
+  ],
+  "scope": "Observed local acceptance ratios only. Startup values do not justify larger steps; changing the schedule requires a separate profile and cannot be treated as a matched spatial comparison. No temporal convergence or PDE qualification."
+}

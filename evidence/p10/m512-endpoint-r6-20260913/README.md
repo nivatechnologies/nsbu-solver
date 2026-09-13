@@ -44,3 +44,9 @@ but lacked a final counter assertion, leaving a theoretical single-sample edge
 on its last polling iteration. Its observed launch receipts match the expected
 command hashes. The later clock-2560 launcher added the explicit assertion and
 completed normally.
+
+`local-ratio-summary.json` aggregates all 48 archived attempt records. The
+startup 64-tick segment reaches H1 ratio 0.963602 at clocks 192–256, close to
+the local rejection threshold of 1. The later 128-tick segment reaches
+0.007762 at clocks 3968–4096. These observed ratios do not establish temporal
+convergence or justify enlarging the matched spatial comparison schedule.
