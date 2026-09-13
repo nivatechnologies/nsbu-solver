@@ -614,7 +614,7 @@
     "scope": "One exact from-rest0-to64 CM attempt per host with identical executable and linked runtime libraries. Candidate hashes and local-error words match; single-trial timing is not general throughput. New Sulaco profile admits exact API peak plus32GiB operational headroom, preserving prior host guards. No state commit/publication or endpoint trajectory; no PDE qualification."
   },
   "p10_n512_m512_endpoint_preparation": {
-    "status": "v3_launch_package_reviewed_not_launched",
+    "status": "prepared_and_launched_unattended",
     "evidence": "evidence/p10/n512-m512-endpoint-prep-20260913/README.md",
     "reviewed_preparation_commit": "1e04f45b510d38d08447dec44f79a9b458093fef",
     "prepared_binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
@@ -622,10 +622,10 @@
     "endpoint_exact_api_bytes": 207578085872,
     "archive_bound_bytes": 155226537984,
     "n512_tests_passed": 19,
-    "run_executed": false,
+    "run_executed": true,
     "offline_observer": "required_not_implemented_or_executed",
-    "time_extension": "20 hours requested; pending user response",
-    "launch_wrapper": "Reviewed v3 source/binary/plan binding; deadline/identity/TERM-KILL/archive-timeout/collision checks pass. Requires user time extension, actual absolute deadline and fresh Sulaco resource admission.",
+    "time_extension": "User authorized unattended 20-hour compute block; launched 2026-09-13T22:45:30Z",
+    "launch_wrapper": "Reviewed v3 wrapper launched after fresh resource admission; first-step and deadline guards remain active.",
     "quality_limit": "Harness main.rs555/config.rs625 exceed requested file-size threshold; not whole-project quality certified.",
     "qualification": false,
     "harness_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
@@ -643,6 +643,20 @@
     "right_retained": 512,
     "force_samples": 512,
     "snapshot_comparisons": 0,
+    "qualification": false
+  },
+  "p10_n512_m512_endpoint_run": {
+    "status": "running_first_step_pending_at_startup_review",
+    "launch_evidence": "evidence/p10/n512-m512-unattended-20260913/launch-receipt.json",
+    "started_utc": "2026-09-13T22:45:30Z",
+    "deadline_utc": "2026-09-14T18:45:30Z",
+    "host": "sulaco",
+    "solver_pid": 303603,
+    "monitor_host": "baccus",
+    "monitor_pid": 2425577,
+    "monitor_status_path": "/mnt/niva-array/nsbu-solver/work/n512-local-monitor-20260913/work/n512-monitor-20260913/status.json",
+    "monitor_poll_seconds": 300,
+    "continuous_llm_required": false,
     "qualification": false
   }
 }

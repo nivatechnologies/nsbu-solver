@@ -261,7 +261,7 @@ records the existing trajectory anchors and the separate force-resolution
 contract. It recommends N512/M512 followed by N256/M512 as the next matched
 M512 spatial branches. The [N512 capture harness](../evidence/p10/n512-m512-endpoint-prep-20260913/README.md)
 is now prepared and reviewed, with 19 focused tests passing. The longer run
-awaits a time extension and final launch-wrapper review. Force alias, precision,
+launched unattended on Sulaco at 2026-09-13 22:45:30 UTC. Force alias, precision,
 and full-observable requirements remain open.
 
 The N512/M512 single-attempt host controls now pass on both baccus and Sulaco
@@ -300,8 +300,14 @@ unchanged. See the [source-bound closure](../evidence/p10/fft-scratch-tail-cover
 
 The [reviewed v3 launch package](../evidence/p10/n512-m512-endpoint-prep-20260913/proposed-launch/v3-launch-receipt.json)
 binds the corrected watchdog identity and has synthetic deadline, process
-cleanup and exclusive archive-publication checks. It remains unlaunched pending
-a time extension and fresh Sulaco admission. Its archive is local to Sulaco;
+cleanup and exclusive archive-publication checks. It launched after a time extension and fresh Sulaco admission;
+the absolute run deadline is 2026-09-14 18:45:30 UTC. Its archive is local to Sulaco;
 transfer to baccus is a separate step. The [fixed-M512 comparison adapter](../evidence/p10/matched-m512-spatial-adapter-20260913/README.md)
 passes 24 tests and reserves 4,600,889,344 bytes for N384/N512 comparison. It
 has not compared actual N512 states; the trajectory must first be captured.
+
+The [unattended launch receipt](../evidence/p10/n512-m512-unattended-20260913/launch-receipt.json)
+records actual process identities, preflight and source hashes. A detached,
+read-only monitor polls every five minutes; neither computation nor monitoring
+requires continuous language-model inference. Startup verification is not
+first-step acceptance, endpoint completion or PDE qualification.
