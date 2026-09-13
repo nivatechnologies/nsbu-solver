@@ -4,7 +4,7 @@
   "source_commit": "2a2db1e07faa9c806a00dd4ff36db87de41e5b6f",
   "binary_sha256": "ff5456f81007dc7a605cebaa2150c13d8a22c2e8ecf574f5122d8e4b58966ed6",
   "plan_sha256": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
-  "launcher_sha256": "fb88bbdb0cfbc320b06fcb84298ce915f0cfa4872f844093e10b6a3024ab2852",
+  "launcher_sha256": "9b3608f2b86825dc9dece0bd81e79ce5b84ca062ec7c675d29f91c9bb79c2ba4",
   "input_root": "/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913",
   "run_dir": "evidence/p10/offline-residual-probe/raw/m512-localization-r5-20260913",
   "run_dir_must_not_exist": true,

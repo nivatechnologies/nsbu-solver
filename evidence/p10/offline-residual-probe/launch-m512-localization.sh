@@ -70,12 +70,19 @@ expected_cmdline_sha256=$(
     printf '/bin/bash\0%s\0--worker\0%s\0' \
         "$script_dir/launch-m512-localization.sh" "$run_dir" | sha256sum | awk '{ print $1 }'
 )
+same_bound_owner() {
+    [[ -n ${bound_starttime-} && -r /proc/$owner_pid/stat && -r /proc/$owner_pid/cmdline ]] || return 1
+    [[ $(awk '{ print $22 }' "/proc/$owner_pid/stat") == "$bound_starttime" ]] || return 1
+    [[ $(ps -o pgid= -p "$owner_pid" | tr -d ' ') == "$owner_pid" ]] || return 1
+    [[ $(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }') == "$expected_cmdline_sha256" ]]
+}
 stable=0
 for _ in {1..200}; do
     if [[ -r /proc/$owner_pid/stat && -r /proc/$owner_pid/cmdline ]]; then
         owner_pgid=$(ps -o pgid= -p "$owner_pid" | tr -d ' ')
         owner_cmdline_sha256=$(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }')
         if [[ $owner_pgid == "$owner_pid" && $owner_cmdline_sha256 == "$expected_cmdline_sha256" ]]; then
+            bound_starttime=$(awk '{ print $22 }' "/proc/$owner_pid/stat")
             stable=$((stable + 1))
             [[ $stable == 2 ]] && break
         else
@@ -85,12 +92,24 @@ for _ in {1..200}; do
     sleep 0.01
 done
 if [[ $stable != 2 ]]; then
-    kill -TERM -- "-$owner_pid" 2>/dev/null || true
-    wait "$owner_pid" 2>/dev/null || true
-    echo 'worker identity did not stabilize; launch refused' > "$run_dir/launch-refusal.txt"
+    if same_bound_owner; then
+        kill -TERM -- "-$owner_pid" 2>/dev/null || true
+        deadline=$((SECONDS + 60))
+        while same_bound_owner && ((SECONDS < deadline)); do
+            sleep 1
+        done
+        if same_bound_owner; then
+            kill -KILL -- "-$owner_pid" 2>/dev/null || true
+            echo 'worker identity did not stabilize; bound identity received TERM then KILL' > "$run_dir/launch-refusal.txt"
+        else
+            echo 'worker identity did not stabilize; bound identity received TERM and exited or changed' > "$run_dir/launch-refusal.txt"
+        fi
+    else
+        echo 'worker identity did not stabilize; no identity bound and no signal sent; active timeout retained' > "$run_dir/launch-refusal.txt"
+    fi
     exit 64
 fi
-owner_starttime=$(awk '{ print $22 }' "/proc/$owner_pid/stat")
+owner_starttime=$bound_starttime
 cat > "$run_dir/launch-receipt.json" <<EOF
 {
   "schema": "p10-offline-residual-m512-launch-receipt-v1",
