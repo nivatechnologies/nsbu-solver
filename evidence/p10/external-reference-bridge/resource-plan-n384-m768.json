@@ -23,5 +23,5 @@
     "transfer_coefficient_visits": 681246720,
     "comparison_work_units": 199213056
   },
-  "classification": "allocation-free exact reservation computation; no M768 evaluation executed"
+  "classification": "allocation-free exact reservation computation; both measured executions stayed below the exact cap"
 }

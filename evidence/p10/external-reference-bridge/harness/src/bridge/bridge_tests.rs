@@ -46,11 +46,31 @@ fn binding_rejects_shift_projection_case_and_clock_changes() {
     bridge.case_sha256 = CASE_SHA256.into();
     bridge.elapsed += 1;
     assert!(validate_binding(&bridge, &snapshot).is_err());
+
+    let mut endpoint = fixture_snapshot([4; 3]);
+    endpoint.elapsed = 4096;
+    endpoint.evolution.comparison_endpoint = 4096;
+    endpoint.evolution.schedule[0].until_exclusive = 2048;
+    endpoint
+        .evolution
+        .schedule
+        .push(crate::model::ScheduleSegment {
+            from_inclusive: 2048,
+            until_exclusive: 4096,
+            step_ticks: 128,
+        });
+    endpoint.epoch = 48;
+    endpoint.accepted_steps = 48;
+    let mut endpoint_bridge = fixture_bridge([6; 3], [4; 3]);
+    endpoint_bridge.elapsed = 4096;
+    validate_snapshot_review(&endpoint_bridge, &endpoint).unwrap();
+    endpoint.elapsed = 300;
+    assert!(validate_snapshot_review(&endpoint_bridge, &endpoint).is_err());
 }
 
 #[test]
 fn tiny_sampled_reference_is_finite_and_keeps_raw_divergence() {
-    let bridge = fixture_bridge([6; 3], [4; 3]);
+    let bridge = fixture_bridge([96, 6, 6], [4; 3]);
     let snapshot = fixture_snapshot([4; 3]);
     let plan = preflight(&bridge, &snapshot).unwrap();
     let reference = produce_reference(&bridge, &plan).unwrap();

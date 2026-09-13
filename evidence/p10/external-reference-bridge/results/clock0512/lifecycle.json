@@ -1,0 +1,27 @@
+{
+  "schema": "p10-external-reference-run-lifecycle-v1",
+  "clock": 512,
+  "directory_label_disposition": "clock0512-20260913T024400Z was an erroneous future label; filesystem and process evidence govern",
+  "first_attempt": {
+    "earliest_filesystem_timestamp_utc": "2026-09-13T01:59:52.462364095Z",
+    "process_start_observed_utc": "2026-09-13T01:59:51Z",
+    "candidate_timestamp_utc": "2026-09-13T02:01:51.146801078Z",
+    "candidate_bytes": 5184,
+    "candidate_sha256": "7a82559f84f376df5f3df926b658460db3361cc1984e7d30e02abaa2889858ca",
+    "candidate_json_and_bindings_validated": true,
+    "wrapper_exit_observed": false,
+    "time_file_bytes": 0,
+    "promoted": false,
+    "classification": "incomplete-publication-lifecycle"
+  },
+  "closure": {
+    "preflight_timestamp_utc": "2026-09-13T02:06:06.715043740Z",
+    "candidate_exit_status": 0,
+    "wall_seconds": 119.99,
+    "maximum_rss_kib": 20383744,
+    "validator_passed": true,
+    "promoted": true,
+    "diagnostic_sha256": "7a82559f84f376df5f3df926b658460db3361cc1984e7d30e02abaa2889858ca",
+    "byte_identical_to_first_candidate": true
+  }
+}
