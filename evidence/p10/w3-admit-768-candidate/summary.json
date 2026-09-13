@@ -1,0 +1,39 @@
+{
+  "schema": "p10-w3-admit-768-qwen-candidate-v1",
+  "receipts": [
+    {
+      "task_id": "w3-admit-cubic-768-v1",
+      "family": "w3-layout-admission",
+      "status": "failed",
+      "scientific_accepted": false,
+      "review_required": true,
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "git apply --check failed: error: corrupt patch at line 15"
+          ],
+          "checker_seconds": 0.005125
+        },
+        {
+          "number": 2,
+          "validator_errors": [
+            "patch must contain one hunk confined to fn admit_layout"
+          ],
+          "checker_seconds": 0.005363
+        }
+      ],
+      "tool_calls": 0,
+      "timing_seconds": 142.471877,
+      "prompt_tokens": 2246,
+      "completion_tokens": 7721,
+      "reasoning_tokens": 7180,
+      "input_hash": "6955e381435c5545a2bcfb852fba02f3a8826c668f0f43ceed0f092510f06ed1",
+      "output_hash": null,
+      "output": null,
+      "errors": [
+        "patch must contain one hunk confined to fn admit_layout"
+      ]
+    }
+  ]
+}

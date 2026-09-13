@@ -1,0 +1,18 @@
+[
+  {
+    "task_id": "w3-admit-cubic-768-v1",
+    "family": "w3-layout-admission",
+    "instructions": "Return exactly one JSON object and nothing else. The object must have exactly one string field named patch. Example shape: {\"patch\":\"diff --git a/crates/nsbu-solver/src/spectral/w3/admission.rs b/crates/nsbu-solver/src/spectral/w3/admission.rs\\n--- a/crates/nsbu-solver/src/spectral/w3/admission.rs\\n+++ b/crates/nsbu-solver/src/spectral/w3/admission.rs\\n@@ ...\"}. Its string must be a valid unified diff against the supplied complete source file. Modify only fn admit_layout in only crates/nsbu-solver/src/spectral/w3/admission.rs so cubic [768, 768, 768] is additionally admitted. Preserve [6,6,6], [384,384,384], [512,512,512], [576,576,576], every rejection, and all resource formulas byte-for-byte except formatting required to add the one new match alternative. Do not admit 1024, 1152, noncubic layouts, or any other layout. Add no tests, comments, APIs, claims, or other files. This is a review-required candidate, not an authorization or qualification.",
+    "inputs": {
+      "source_commit": "f5aa345bbc598ee3833878e207c9be31b7a84ab3",
+      "target": "crates/nsbu-solver/src/spectral/w3/admission.rs",
+      "complete_source": "use super::{W3FftMode, STACK_BYTES, WIDTH};\nuse crate::{\n    domain::Layout,\n    spectral::{FftBackend, FftPlan},\n    Complex64, SolverError,\n};\nuse std::mem::size_of;\n\nconst THREAD_ALLOWANCE: usize = 64 * 1024;\nconst ALLOCATION_ALLOWANCE: usize = 64;\nconst WORKER_METADATA_ALLOWANCE: usize = 944;\n\npub(super) fn additional(\n    layout: Layout,\n    backend: FftBackend,\n    mode: W3FftMode,\n) -> Result<usize, SolverError> {\n    admit_layout(layout)?;\n    if backend != FftBackend::RustFft6_4_1AvxFma {\n        return Err(SolverError::InvalidPayload);\n    }\n    let workspace = FftPlan::reservation_with_shared_backend(layout, backend)?;\n    let spectral = layout\n        .half_len()\n        .checked_mul(size_of::<Complex64>())\n        .ok_or(SolverError::SizeOverflow)?;\n    let physical = layout\n        .real_len()\n        .checked_mul(size_of::<f64>())\n        .ok_or(SolverError::SizeOverflow)?;\n    let lanes = match mode {\n        W3FftMode::Forward => 2usize\n            .checked_mul(workspace)\n            .and_then(|n| n.checked_add(2 * spectral))\n            .and_then(|n| n.checked_add(2 * ALLOCATION_ALLOWANCE)),\n        W3FftMode::Bidirectional => 2usize\n            .checked_mul(workspace)\n            .and_then(|n| n.checked_add(2 * spectral))\n            .and_then(|n| n.checked_add(2 * physical))\n            .and_then(|n| n.checked_add(4 * ALLOCATION_ALLOWANCE)),\n    }\n    .ok_or(SolverError::SizeOverflow)?;\n    let worker = STACK_BYTES\n        .checked_add(THREAD_ALLOWANCE)\n        .and_then(|n| n.checked_add(WORKER_METADATA_ALLOWANCE))\n        .ok_or(SolverError::SizeOverflow)?;\n    lanes\n        .checked_add(WIDTH * worker)\n        .and_then(|n| n.checked_add(ALLOCATION_ALLOWANCE))\n        .ok_or(SolverError::SizeOverflow)\n}\n\nfn admit_layout(layout: Layout) -> Result<(), SolverError> {\n    let dimensions = layout.dimensions();\n    if matches!(\n        dimensions,\n        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576]\n    ) {\n        return Ok(());\n    }\n    Err(SolverError::InvalidPayload)\n}\n"
+    },
+    "output_contract": {
+      "required": ["patch"],
+      "properties": {"patch": {"type": "string"}}
+    },
+    "validator": "only_768_admission",
+    "review_required": true
+  }
+]
