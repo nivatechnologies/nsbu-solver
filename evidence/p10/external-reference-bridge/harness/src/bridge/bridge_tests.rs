@@ -15,9 +15,26 @@ fn exact_storage_plan_accounts_for_every_live_buffer() {
 
 #[test]
 fn binding_rejects_shift_projection_case_and_clock_changes() {
-    let snapshot = fixture_snapshot([4; 3]);
+    let mut snapshot = fixture_snapshot([4; 3]);
     let mut bridge = fixture_bridge([6; 3], [4; 3]);
     validate_binding(&bridge, &snapshot).unwrap();
+    validate_snapshot_review(&bridge, &snapshot).unwrap();
+    snapshot.profile.as_mut().unwrap().kind = crate::model::ProfileBindingKind::LegacyFullIdentity;
+    assert!(validate_snapshot_review(&bridge, &snapshot).is_err());
+    snapshot.profile.as_mut().unwrap().kind =
+        crate::model::ProfileBindingKind::IdentityProfileField;
+    snapshot.epoch += 1;
+    assert!(validate_snapshot_review(&bridge, &snapshot).is_err());
+    snapshot.epoch -= 1;
+    snapshot.evolution.schedule[0].step_ticks = 128;
+    assert!(validate_snapshot_review(&bridge, &snapshot).is_err());
+    snapshot.evolution.schedule[0].step_ticks = 64;
+    snapshot.identity = snapshot.identity.replace(
+        &format!("execution_cap={SNAPSHOT_EXECUTION_CAP}"),
+        "execution_cap=1",
+    );
+    assert!(validate_snapshot_review(&bridge, &snapshot).is_err());
+    snapshot = fixture_snapshot([4; 3]);
     bridge.coordinate_shift = true;
     assert!(validate_bridge(&bridge).is_err());
     bridge.coordinate_shift = false;
@@ -130,8 +147,19 @@ fn production_preflight_binds_sparse_length_without_decoding_state() {
     let mut bridge = fixture_bridge([768; 3], [384; 3]);
     bridge.snapshot_manifest = snapshot_path;
     bridge.snapshot_manifest_sha256 = format!("{:x}", Sha256::digest(&snapshot_json));
-    bridge.reference_source = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../../../crates/nsbu-benchmarks/src/scalar.rs");
+    let source_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../..");
+    for (source, path) in bridge.reference_sources.iter_mut().zip([
+        "crates/nsbu-benchmarks/src/scalar.rs",
+        "crates/nsbu-benchmarks/src/root.rs",
+        "crates/nsbu-benchmarks/src/time.rs",
+        "crates/nsbu-benchmarks/src/error.rs",
+        "crates/nsbu-benchmarks/src/lib.rs",
+        "crates/nsbu-solver/src/domain/clock.rs",
+        "crates/nsbu-benchmarks/data/similarity-mms-v2.json",
+    ]) {
+        source.path = source_root.join(path);
+    }
+    bridge.execution_cap_bytes = preflight(&bridge, &snapshot).unwrap().storage.total;
     let bridge_path = root.join("bridge.json");
     fs::write(&bridge_path, serde_json::to_vec_pretty(&bridge).unwrap()).unwrap();
     let output = crate::run(&[bridge_path.into_os_string(), "20900924104".into()]).unwrap();
@@ -181,8 +209,16 @@ fn fixture_bridge(samples: [usize; 3], retained: [usize; 3]) -> BridgeManifest {
         snapshot_manifest_sha256: "a".repeat(64),
         case_sha256: CASE_SHA256.into(),
         reference_source_commit: REFERENCE_SOURCE_COMMIT.into(),
-        reference_source: "scalar.rs".into(),
-        reference_source_sha256: REFERENCE_SOURCE_SHA256.into(),
+        reference_sources: SOURCES
+            .into_iter()
+            .map(|(role, sha256)| SourceBinding {
+                role: role.into(),
+                path: format!("{role}.rs").into(),
+                sha256: sha256.into(),
+            })
+            .collect(),
+        harness_source_commit: "a".repeat(40),
+        binary_sha256: current_executable_sha256(),
         reference_evaluator: EVALUATOR.into(),
         arithmetic: ARITHMETIC.into(),
         sample_dimensions: samples,
@@ -196,6 +232,8 @@ fn fixture_bridge(samples: [usize; 3], retained: [usize; 3]) -> BridgeManifest {
         coordinate_shift: false,
         mean_alignment: false,
         classification: CLASSIFICATION.into(),
+        execution_context: EXECUTION_CONTEXT.into(),
+        execution_cap_bytes: 1,
         clock_exponent: -20,
         clock_target: 8192,
         elapsed: 512,
@@ -203,13 +241,16 @@ fn fixture_bridge(samples: [usize; 3], retained: [usize; 3]) -> BridgeManifest {
 }
 
 fn fixture_snapshot(dimensions: [usize; 3]) -> SnapshotManifest {
+    let source_commit = "d".repeat(40);
     SnapshotManifest {
         schema: "p10-snapshot-comparison-input-v1".into(),
         comparison_kind: crate::model::ComparisonKind::MatchedSpatial,
         snapshot: "state.bin".into(),
         plan: "plan.json".into(),
-        identity: "fixture".into(),
-        source_commit: "d".repeat(40),
+        identity: format!(
+            "source={source_commit};case={CASE_SHA256};profile={PROFILE};execution_cap={SNAPSHOT_EXECUTION_CAP};artifact_cap={SNAPSHOT_ARTIFACT_CAP}"
+        ),
+        source_commit,
         plan_sha256: "e".repeat(64),
         coefficient_sha256: "f".repeat(64),
         file_sha256: "1".repeat(64),
@@ -237,8 +278,19 @@ fn fixture_snapshot(dimensions: [usize; 3]) -> SnapshotManifest {
         target: 8192,
         epoch: 8,
         accepted_steps: 8,
-        profile: None,
-        admission_guard: None,
+        profile: Some(crate::model::ProfileBinding {
+            kind: crate::model::ProfileBindingKind::IdentityProfileField,
+            value: PROFILE.into(),
+        }),
+        admission_guard: Some(crate::model::AdmissionGuard {
+            advective_limit: 3.3,
+            maximum_attempts: 48,
+        }),
         arithmetic_control: None,
     }
+}
+
+fn current_executable_sha256() -> String {
+    let bytes = fs::read(std::env::current_exe().unwrap()).unwrap();
+    format!("{:x}", Sha256::digest(bytes))
 }

@@ -9,10 +9,17 @@ use nsbu_solver::{
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::{
-    fs::File,
-    io::{Read, Write},
+    io::Write,
     path::{Path, PathBuf},
 };
+
+mod io;
+mod producer;
+mod validator;
+
+use io::{read_bounded, resolve, verify_current_executable, verify_file};
+use producer::{backend, produce_reference};
+use validator::{validate_binding, validate_bridge, validate_snapshot_review};
 
 const MANIFEST_CAP: u64 = 64 * 1024;
 const SOURCE_CAP: u64 = 1024 * 1024;
@@ -27,9 +34,49 @@ const CROP: &str = "normalization-preserving-strict-band-transfer-no-rescale";
 const NYQUIST: &str = "sample-nyquist-not-retained;target-nyquist-explicit-zero";
 const PROJECTION: &str = "none";
 const CLASSIFICATION: &str = "sampled-binary64-reference-diagnostic-not-continuum-or-enclosure";
+const EXECUTION_CONTEXT: &str = "contended-local-p10-campaign-bounded-1800s";
 const REFERENCE_SOURCE_COMMIT: &str = "6bdea3084d737ce6585cb67ab5d48810bd03cd50";
-const REFERENCE_SOURCE_SHA256: &str =
-    "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8";
+const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+const SNAPSHOT_EXECUTION_CAP: usize = 206_158_430_208;
+const SNAPSHOT_ARTIFACT_CAP: usize = 137_438_953_472;
+const SOURCES: [(&str, &str); 7] = [
+    (
+        "scalar-evaluator",
+        "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8",
+    ),
+    (
+        "scalar-root",
+        "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b",
+    ),
+    (
+        "benchmark-time",
+        "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06",
+    ),
+    (
+        "benchmark-error",
+        "9cd63ed56079fcf20e90d3139aeff3ebe45525f9b2acf81ef9bcea522a97137a",
+    ),
+    (
+        "benchmark-module",
+        "398dd1e167349fa99e79ada2815e34cedd458d7989855a19973135688986ef2b",
+    ),
+    (
+        "tick-clock",
+        "c8d56c25c03aeda44fb69e8896406ee02eb32646de0222ea5782c11fac5cc4ce",
+    ),
+    (
+        "case-definition",
+        "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    ),
+];
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct SourceBinding {
+    pub role: String,
+    pub path: PathBuf,
+    pub sha256: String,
+}
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
@@ -39,8 +86,9 @@ pub(crate) struct BridgeManifest {
     pub snapshot_manifest_sha256: String,
     pub case_sha256: String,
     pub reference_source_commit: String,
-    pub reference_source: PathBuf,
-    pub reference_source_sha256: String,
+    pub reference_sources: Vec<SourceBinding>,
+    pub harness_source_commit: String,
+    pub binary_sha256: String,
     pub reference_evaluator: String,
     pub arithmetic: String,
     pub sample_dimensions: [usize; 3],
@@ -54,6 +102,8 @@ pub(crate) struct BridgeManifest {
     pub coordinate_shift: bool,
     pub mean_alignment: bool,
     pub classification: String,
+    pub execution_context: String,
+    pub execution_cap_bytes: usize,
     pub clock_exponent: i32,
     pub clock_target: u128,
     pub elapsed: u128,
@@ -92,7 +142,7 @@ pub(crate) struct Preflight {
 pub(crate) struct PreflightOutput<'a> {
     pub schema: &'static str,
     pub status: &'static str,
-    pub bridge: &'a BridgeManifest,
+    pub bridge: BridgeOutput<'a>,
     pub snapshot_identity: &'a str,
     pub snapshot_source_commit: &'a str,
     pub snapshot_plan_sha256: &'a str,
@@ -107,7 +157,7 @@ pub(crate) struct PreflightOutput<'a> {
 pub(crate) struct DiagnosticOutput<'a> {
     pub schema: &'static str,
     pub status: &'static str,
-    pub bridge: &'a BridgeManifest,
+    pub bridge: BridgeOutput<'a>,
     pub snapshot_identity: &'a str,
     pub snapshot_source_commit: &'a str,
     pub snapshot_plan_sha256: &'a str,
@@ -122,6 +172,39 @@ pub(crate) struct DiagnosticOutput<'a> {
     pub resume_or_import_interfaces: usize,
 }
 
+#[derive(Debug, Serialize)]
+pub(crate) struct BridgeOutput<'a> {
+    pub case_sha256: &'a str,
+    pub reference_source_commit: &'a str,
+    pub reference_sources: [SourceOutput<'a>; 7],
+    pub harness_source_commit: &'a str,
+    pub binary_sha256: &'a str,
+    pub reference_evaluator: &'a str,
+    pub arithmetic: &'a str,
+    pub sample_dimensions: [usize; 3],
+    pub retained_dimensions: [usize; 3],
+    pub physical_grid: &'a str,
+    pub fft_backend: &'a str,
+    pub fft_normalization: &'a str,
+    pub crop: &'a str,
+    pub nyquist: &'a str,
+    pub projection: &'a str,
+    pub coordinate_shift: bool,
+    pub mean_alignment: bool,
+    pub classification: &'a str,
+    pub execution_context: &'a str,
+    pub execution_cap_bytes: usize,
+    pub clock_exponent: i32,
+    pub clock_target: u128,
+    pub elapsed: u128,
+}
+
+#[derive(Debug, Serialize)]
+pub(crate) struct SourceOutput<'a> {
+    pub role: &'a str,
+    pub sha256: &'a str,
+}
+
 pub(crate) struct BoundInput {
     pub bridge: BridgeManifest,
     pub snapshot: SnapshotManifest,
@@ -133,6 +216,9 @@ pub(crate) fn bind(path: &Path) -> Result<BoundInput, String> {
     validate_production_input(&bridge)?;
     let snapshot = bind_snapshot(&bridge)?;
     let preflight = preflight(&bridge, &snapshot)?;
+    if preflight.storage.total != bridge.execution_cap_bytes {
+        return Err("bridge execution cap does not equal exact reservation".into());
+    }
     Ok(BoundInput {
         bridge,
         snapshot,
@@ -144,7 +230,9 @@ fn read_bridge(path: &Path) -> Result<BridgeManifest, String> {
     let bytes = read_bounded(path, MANIFEST_CAP, "bridge manifest exceeds 64 KiB")?;
     let mut bridge: BridgeManifest = serde_json::from_slice(&bytes).map_err(debug)?;
     resolve(path, &mut bridge.snapshot_manifest);
-    resolve(path, &mut bridge.reference_source);
+    for source in &mut bridge.reference_sources {
+        resolve(path, &mut source.path);
+    }
     Ok(bridge)
 }
 
@@ -164,18 +252,16 @@ fn validate_production_input(bridge: &BridgeManifest) -> Result<(), String> {
         &bridge.snapshot_manifest_sha256,
         "snapshot manifest",
     )?;
-    verify_file(
-        &bridge.reference_source,
-        SOURCE_CAP,
-        &bridge.reference_source_sha256,
-        "reference source",
-    )?;
+    for source in &bridge.reference_sources {
+        verify_file(&source.path, SOURCE_CAP, &source.sha256, &source.role)?;
+    }
     Ok(())
 }
 
 fn bind_snapshot(bridge: &BridgeManifest) -> Result<SnapshotManifest, String> {
     let snapshot = crate::decode::read_manifest(&bridge.snapshot_manifest)?;
     validate_binding(bridge, &snapshot)?;
+    validate_snapshot_review(bridge, &snapshot)?;
     // The reviewed decoder validates both snapshot lengths before allocating either state.
     crate::decode::preflight(&snapshot, &snapshot)?;
     Ok(snapshot)
@@ -185,7 +271,7 @@ pub(crate) fn preflight_output(input: &BoundInput) -> PreflightOutput<'_> {
     PreflightOutput {
         schema: "p10-external-reference-bridge-output-v1",
         status: "preflight-only",
-        bridge: &input.bridge,
+        bridge: bridge_output(&input.bridge),
         snapshot_identity: &input.snapshot.identity,
         snapshot_source_commit: &input.snapshot.source_commit,
         snapshot_plan_sha256: &input.snapshot.plan_sha256,
@@ -204,7 +290,10 @@ pub(crate) fn execute(input: &BoundInput, cap: usize) -> Result<DiagnosticOutput
             input.preflight.storage.total
         ));
     }
+    verify_current_executable(&input.bridge.binary_sha256)?;
+    eprintln!("{{\"event\":\"snapshot_decode_start\"}}");
     let actual = crate::decode::load(&input.snapshot)?;
+    eprintln!("{{\"event\":\"snapshot_decode_complete\"}}");
     let reference = produce_reference(&input.bridge, &input.preflight)?;
     let domain = input.snapshot.domain()?;
     let comparison = ComparisonPlan::new(domain, domain)
@@ -221,7 +310,7 @@ pub(crate) fn execute(input: &BoundInput, cap: usize) -> Result<DiagnosticOutput
     Ok(DiagnosticOutput {
         schema: "p10-external-reference-bridge-output-v1",
         status: "sampled-reference-diagnostic-complete",
-        bridge: &input.bridge,
+        bridge: bridge_output(&input.bridge),
         snapshot_identity: &input.snapshot.identity,
         snapshot_source_commit: &input.snapshot.source_commit,
         snapshot_plan_sha256: &input.snapshot.plan_sha256,
@@ -237,76 +326,44 @@ pub(crate) fn execute(input: &BoundInput, cap: usize) -> Result<DiagnosticOutput
     })
 }
 
-fn validate_bridge(bridge: &BridgeManifest) -> Result<(), String> {
-    let identity = [
-        bridge.schema == "p10-external-reference-bridge-input-v1",
-        hex(&bridge.snapshot_manifest_sha256, 64),
-        hex(&bridge.case_sha256, 64),
-        hex(&bridge.reference_source_commit, 40),
-        hex(&bridge.reference_source_sha256, 64),
-        bridge.reference_source_commit == REFERENCE_SOURCE_COMMIT,
-        bridge.reference_source_sha256 == REFERENCE_SOURCE_SHA256,
-        bridge.case_sha256 == CASE_SHA256,
-    ];
-    let arithmetic = [
-        bridge.reference_evaluator == EVALUATOR,
-        bridge.arithmetic == ARITHMETIC,
-        bridge.physical_grid == GRID,
-        bridge.fft_normalization == NORMALIZATION,
-        bridge.crop == CROP,
-        bridge.nyquist == NYQUIST,
-        bridge.projection == PROJECTION,
-        !bridge.coordinate_shift,
-        !bridge.mean_alignment,
-        bridge.classification == CLASSIFICATION,
-    ];
-    let clock = bridge.elapsed > 0 && bridge.elapsed < bridge.clock_target;
-    if !identity.into_iter().all(std::convert::identity)
-        || !arithmetic.into_iter().all(std::convert::identity)
-        || !clock
-    {
-        return Err("invalid external reference bridge binding".into());
-    }
-    let (Ok(samples), Ok(retained)) = (
-        Layout::new(bridge.sample_dimensions),
-        Layout::new(bridge.retained_dimensions),
-    ) else {
-        return Err("invalid external reference bridge dimensions".into());
+fn bridge_output(bridge: &BridgeManifest) -> BridgeOutput<'_> {
+    let source = |index: usize| SourceOutput {
+        role: &bridge.reference_sources[index].role,
+        sha256: &bridge.reference_sources[index].sha256,
     };
-    if retained
-        .dimensions()
-        .into_iter()
-        .zip(samples.dimensions())
-        .any(|(n, m)| n > m)
-    {
-        return Err("reference sample grid is smaller than retained grid".into());
+    BridgeOutput {
+        case_sha256: &bridge.case_sha256,
+        reference_source_commit: &bridge.reference_source_commit,
+        reference_sources: [
+            source(0),
+            source(1),
+            source(2),
+            source(3),
+            source(4),
+            source(5),
+            source(6),
+        ],
+        harness_source_commit: &bridge.harness_source_commit,
+        binary_sha256: &bridge.binary_sha256,
+        reference_evaluator: &bridge.reference_evaluator,
+        arithmetic: &bridge.arithmetic,
+        sample_dimensions: bridge.sample_dimensions,
+        retained_dimensions: bridge.retained_dimensions,
+        physical_grid: &bridge.physical_grid,
+        fft_backend: &bridge.fft_backend,
+        fft_normalization: &bridge.fft_normalization,
+        crop: &bridge.crop,
+        nyquist: &bridge.nyquist,
+        projection: &bridge.projection,
+        coordinate_shift: bridge.coordinate_shift,
+        mean_alignment: bridge.mean_alignment,
+        classification: &bridge.classification,
+        execution_context: &bridge.execution_context,
+        execution_cap_bytes: bridge.execution_cap_bytes,
+        clock_exponent: bridge.clock_exponent,
+        clock_target: bridge.clock_target,
+        elapsed: bridge.elapsed,
     }
-    backend(bridge)?;
-    Ok(())
-}
-
-fn validate_binding(bridge: &BridgeManifest, snapshot: &SnapshotManifest) -> Result<(), String> {
-    let matched = [
-        snapshot.dimensions == bridge.retained_dimensions,
-        snapshot.evolution.case_sha256 == bridge.case_sha256,
-        snapshot.evolution.quantum_exponent == bridge.clock_exponent,
-        snapshot.target == bridge.clock_target,
-        snapshot.elapsed == bridge.elapsed,
-        snapshot.evolution.comparison_endpoint == bridge.elapsed,
-        snapshot.evolution.lengths == [1.0; 3],
-        snapshot.evolution.viscosity == 1.0,
-    ];
-    if !matched.into_iter().all(std::convert::identity) {
-        return Err("snapshot/reference binding mismatch".into());
-    }
-    TickClock::restore(
-        bridge.clock_exponent,
-        bridge.clock_target,
-        bridge.elapsed,
-        bridge.clock_target - bridge.elapsed,
-    )
-    .map_err(debug)?;
-    Ok(())
 }
 
 fn preflight(bridge: &BridgeManifest, snapshot: &SnapshotManifest) -> Result<Preflight, String> {
@@ -360,106 +417,6 @@ fn preflight(bridge: &BridgeManifest, snapshot: &SnapshotManifest) -> Result<Pre
             comparison_work_units: comparison.work_units(),
         },
     })
-}
-
-fn produce_reference(
-    bridge: &BridgeManifest,
-    preflight: &Preflight,
-) -> Result<[Vec<Complex64>; 3], String> {
-    let samples = Layout::new(bridge.sample_dimensions).map_err(debug)?;
-    let retained = Layout::new(bridge.retained_dimensions).map_err(debug)?;
-    let backend = backend(bridge)?;
-    let catalog = FftCatalog::new(backend, preflight.storage.fft_catalog).map_err(debug)?;
-    let (plan, mut workspace) =
-        FftPlan::new_from_catalog(samples, &catalog, preflight.storage.fft_plan_and_workspace)
-            .map_err(debug)?;
-    let mut physical = three_zeros(samples.real_len())?;
-    sample_velocity(bridge, &mut physical)?;
-    let mut spectrum = try_zeros(samples.half_len())?;
-    let mut result = three_zeros(retained.half_len())?;
-    for component in 0..3 {
-        plan.forward(&physical[component], &mut spectrum, &mut workspace)
-            .map_err(debug)?;
-        transfer(samples, retained, &spectrum, &mut result[component]).map_err(debug)?;
-    }
-    Ok(result)
-}
-
-fn sample_velocity(bridge: &BridgeManifest, output: &mut [Vec<f64>; 3]) -> Result<(), String> {
-    let clock = TickClock::restore(
-        bridge.clock_exponent,
-        bridge.clock_target,
-        bridge.elapsed,
-        bridge.clock_target - bridge.elapsed,
-    )
-    .map_err(debug)?;
-    let time = BenchmarkTime::new(clock).map_err(debug)?;
-    let [nx, ny, nz] = bridge.sample_dimensions;
-    for i in 0..nx {
-        for j in 0..ny {
-            for k in 0..nz {
-                let index = (i * ny + j) * nz + k;
-                let point = [
-                    i as f64 / nx as f64,
-                    j as f64 / ny as f64,
-                    k as f64 / nz as f64,
-                ];
-                let velocity = scalar::evaluate(point, time).map_err(debug)?.velocity;
-                for component in 0..3 {
-                    output[component][index] = velocity[component];
-                }
-            }
-        }
-    }
-    Ok(())
-}
-
-fn backend(bridge: &BridgeManifest) -> Result<FftBackend, String> {
-    match bridge.fft_backend.as_str() {
-        "rustfft-6.4.1-avx-avx2-fma" => Ok(FftBackend::RustFft6_4_1AvxFma),
-        "project-owned-mixed-radix-binary64" => Ok(FftBackend::OwnedRadix),
-        _ => Err("unsupported FFT backend binding".into()),
-    }
-}
-
-fn resolve(manifest: &Path, value: &mut PathBuf) {
-    if value.is_relative() {
-        *value = manifest
-            .parent()
-            .unwrap_or_else(|| Path::new("."))
-            .join(&*value);
-    }
-}
-
-fn verify_file(path: &Path, cap: u64, expected: &str, label: &str) -> Result<(), String> {
-    let bytes = read_bounded(path, cap, &format!("{label} exceeds byte bound"))?;
-    if format!("{:x}", Sha256::digest(&bytes)) != expected {
-        return Err(format!("{label} SHA-256 mismatch"));
-    }
-    Ok(())
-}
-
-fn read_bounded(path: &Path, cap: u64, message: &str) -> Result<Vec<u8>, String> {
-    let file = File::open(path).map_err(debug)?;
-    let mut bytes = Vec::new();
-    file.take(cap + 1).read_to_end(&mut bytes).map_err(debug)?;
-    if bytes.len() as u64 > cap {
-        return Err(message.into());
-    }
-    Ok(bytes)
-}
-
-fn try_zeros<T: Clone + Default>(length: usize) -> Result<Vec<T>, String> {
-    let mut values = Vec::new();
-    values
-        .try_reserve_exact(length)
-        .map_err(|_| "bounded allocation failed")?;
-    values.resize(length, T::default());
-    Ok(values)
-}
-
-fn three_zeros<T: Clone + Default>(length: usize) -> Result<[Vec<T>; 3], String> {
-    Ok([try_zeros(length)?, try_zeros(length)?, try_zeros(length)?])
 }
 
 fn bytes(count: usize, width: usize) -> Result<usize, String> {

@@ -35,7 +35,7 @@
   "epoch": 8,
   "accepted_steps": 8,
   "profile": {
-    "kind": "legacy-full-identity",
+    "kind": "identity-profile-field",
     "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
   },
   "admission_guard": {
