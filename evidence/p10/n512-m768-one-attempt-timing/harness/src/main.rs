@@ -33,6 +33,7 @@ const RETAINED: usize = 512;
 const SAMPLES: usize = 768;
 const WORKERS: usize = 32;
 const TICKS: u128 = 64;
+const ADVECTIVE_LIMIT: f64 = 3.3;
 const CAP: usize = 238_209_735_152;
 const OVERHEAD: usize =
     64 * 1024 + TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
@@ -112,7 +113,7 @@ fn report_preflight() -> Result<(), String> {
         return Err("closed peak or one-byte-under admission mismatch".into());
     }
     println!(
-        "status=preflight_only source={SOURCE_COMMIT} case_sha256={CASE_SHA256} retained={RETAINED} samples={SAMPLES} ticks={TICKS} maximum_attempts=1 catalog_bytes={} cached_force_bytes={} force_work_units={} force_scalar_transforms={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={CAP}",
+        "status=preflight_only source={SOURCE_COMMIT} case_sha256={CASE_SHA256} retained={RETAINED} samples={SAMPLES} method=cox-matthews ticks={TICKS} maximum_attempts=1 advective_limit={ADVECTIVE_LIMIT} absolute_tolerance_l2=1e-5 absolute_tolerance_h1=1e-4 relative_tolerance_l2=1e-5 relative_tolerance_h1=1e-5 catalog_bytes={} cached_force_bytes={} force_work_units={} force_scalar_transforms={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={CAP}",
         a.catalog, a.force.storage_bytes, a.force.work_units, a.force.scalar_transforms, a.rhs, a.attempt
     );
     Ok(())
@@ -142,8 +143,8 @@ fn gated_run(output: &Path) -> Result<(), String> {
         true,
     )
     .map_err(debug)?;
-    let rhs =
-        SpectralRhs::new_with_catalog_w3(domain, force, 3.3, &catalog, a.rhs).map_err(debug)?;
+    let rhs = SpectralRhs::new_with_catalog_w3(domain, force, ADVECTIVE_LIMIT, &catalog, a.rhs)
+        .map_err(debug)?;
     require_identities(domain, samples, backend, &rhs)?;
     let mut rhs = TimedRhs::new(rhs);
     let clock = TickClock::from_rest(-20, 8192).map_err(debug)?;
@@ -154,16 +155,7 @@ fn gated_run(output: &Path) -> Result<(), String> {
     let region = Region::new(GLOBAL);
     let started = Instant::now();
     let result = attempt
-        .try_advance(
-            &state,
-            &mut candidate,
-            TICKS,
-            Tolerances {
-                absolute: [1e-5, 1e-4],
-                relative: [1e-5; 2],
-            },
-            &mut rhs,
-        )
+        .try_advance(&state, &mut candidate, TICKS, tolerances(), &mut rhs)
         .map_err(debug)?;
     let seconds = started.elapsed().as_secs_f64();
     let allocations = region.change();
@@ -181,7 +173,7 @@ fn gated_run(output: &Path) -> Result<(), String> {
     if result.rhs_calls != 12 || measurement.calls != 12 || hits != [7, 5] || consumption[0] != 12 {
         return Err("attempt work identity mismatch".into());
     }
-    writeln!(output, "{{\"schema\":\"p10-n512-m768-one-attempt-timing-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"source_commit\":\"{SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":768,\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"w3_forward_additional_bytes\":{FORWARD_ADDITIONAL},\"w3_bidirectional_additional_bytes\":{BIDIRECTIONAL_ADDITIONAL},\"timer_identity\":\"{}\",\"qualification\":false}}", result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
+    writeln!(output, "{{\"schema\":\"p10-n512-m768-one-attempt-timing-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"source_commit\":\"{SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":768,\"method\":\"cox-matthews\",\"advective_limit\":3.3,\"absolute_tolerances\":[1e-5,1e-4],\"relative_tolerances\":[1e-5,1e-5],\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"w3_forward_additional_bytes\":{FORWARD_ADDITIONAL},\"w3_bidirectional_additional_bytes\":{BIDIRECTIONAL_ADDITIONAL},\"timer_identity\":\"{}\",\"qualification\":false}}", result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
     output.flush().map_err(|e| e.to_string())
 }
 
@@ -211,6 +203,13 @@ fn require_identities(
         return Err("exact W3 identity mismatch".into());
     }
     Ok(())
+}
+
+fn tolerances() -> Tolerances {
+    Tolerances {
+        absolute: [1e-5, 1e-4],
+        relative: [1e-5; 2],
+    }
 }
 
 fn debug(error: SolverError) -> String {
