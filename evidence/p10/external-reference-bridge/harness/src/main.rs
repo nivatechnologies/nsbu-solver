@@ -26,9 +26,9 @@ fn run(args: &[OsString]) -> Result<String, String> {
         .parse::<usize>()
         .map_err(model::debug)?;
     let input = bridge::bind(&PathBuf::from(&args[0]))?;
-    if input.preflight.storage.total > cap {
+    if input.preflight.storage.total != cap || input.bridge.execution_cap_bytes != cap {
         return Err(format!(
-            "bridge reservation {} exceeds cap {cap}",
+            "CAP_BYTES {cap} does not equal exact bridge reservation {}",
             input.preflight.storage.total
         ));
     }

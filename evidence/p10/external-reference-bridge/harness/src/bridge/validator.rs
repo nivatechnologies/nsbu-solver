@@ -1,0 +1,165 @@
+use super::*;
+
+pub(super) fn validate_bridge(bridge: &BridgeManifest) -> Result<(), String> {
+    let identity = [
+        bridge.schema == "p10-external-reference-bridge-input-v1",
+        hex(&bridge.snapshot_manifest_sha256, 64),
+        hex(&bridge.case_sha256, 64),
+        hex(&bridge.reference_source_commit, 40),
+        bridge.reference_source_commit == REFERENCE_SOURCE_COMMIT,
+        hex(&bridge.harness_source_commit, 40),
+        hex(&bridge.binary_sha256, 64),
+        bridge.case_sha256 == CASE_SHA256,
+    ];
+    let arithmetic = [
+        bridge.reference_evaluator == EVALUATOR,
+        bridge.arithmetic == ARITHMETIC,
+        bridge.physical_grid == GRID,
+        bridge.fft_normalization == NORMALIZATION,
+        bridge.crop == CROP,
+        bridge.nyquist == NYQUIST,
+        bridge.projection == PROJECTION,
+        !bridge.coordinate_shift,
+        !bridge.mean_alignment,
+        bridge.classification == CLASSIFICATION,
+        bridge.execution_context == EXECUTION_CONTEXT,
+        bridge.execution_cap_bytes > 0,
+    ];
+    let clock = bridge.elapsed > 0 && bridge.elapsed < bridge.clock_target;
+    if !identity.into_iter().all(std::convert::identity)
+        || !arithmetic.into_iter().all(std::convert::identity)
+        || !clock
+    {
+        return Err("invalid external reference bridge binding".into());
+    }
+    let (Ok(samples), Ok(retained)) = (
+        Layout::new(bridge.sample_dimensions),
+        Layout::new(bridge.retained_dimensions),
+    ) else {
+        return Err("invalid external reference bridge dimensions".into());
+    };
+    if retained
+        .dimensions()
+        .into_iter()
+        .zip(samples.dimensions())
+        .any(|(n, m)| n > m)
+    {
+        return Err("reference sample grid is smaller than retained grid".into());
+    }
+    backend(bridge)?;
+    validate_sources(bridge)
+}
+
+fn validate_sources(bridge: &BridgeManifest) -> Result<(), String> {
+    let matched = bridge.reference_sources.len() == SOURCES.len()
+        && bridge
+            .reference_sources
+            .iter()
+            .zip(SOURCES)
+            .all(|(actual, expected)| actual.role == expected.0 && actual.sha256 == expected.1);
+    matched
+        .then_some(())
+        .ok_or_else(|| "reference source closure mismatch".into())
+}
+
+pub(super) fn validate_binding(
+    bridge: &BridgeManifest,
+    snapshot: &SnapshotManifest,
+) -> Result<(), String> {
+    let matched = [
+        snapshot.dimensions == bridge.retained_dimensions,
+        snapshot.evolution.case_sha256 == bridge.case_sha256,
+        snapshot.evolution.quantum_exponent == bridge.clock_exponent,
+        snapshot.target == bridge.clock_target,
+        snapshot.elapsed == bridge.elapsed,
+        snapshot.evolution.comparison_endpoint == bridge.elapsed,
+        snapshot.evolution.lengths == [1.0; 3],
+        snapshot.evolution.viscosity == 1.0,
+    ];
+    if !matched.into_iter().all(std::convert::identity) {
+        return Err("snapshot/reference binding mismatch".into());
+    }
+    TickClock::restore(
+        bridge.clock_exponent,
+        bridge.clock_target,
+        bridge.elapsed,
+        bridge.clock_target - bridge.elapsed,
+    )
+    .map_err(debug)?;
+    Ok(())
+}
+
+pub(super) fn validate_snapshot_review(
+    bridge: &BridgeManifest,
+    snapshot: &SnapshotManifest,
+) -> Result<(), String> {
+    use crate::model::{ComparisonKind, ProfileBindingKind};
+    let profile = snapshot.profile.as_ref();
+    let guard = snapshot.admission_guard.as_ref();
+    let steps = schedule_steps(snapshot)?;
+    let matched = [
+        snapshot.comparison_kind == ComparisonKind::MatchedSpatial,
+        profile.is_some_and(|value| {
+            value.kind == ProfileBindingKind::IdentityProfileField && value.value == PROFILE
+        }),
+        identity_value(&snapshot.identity, "profile") == Some(PROFILE),
+        identity_value(&snapshot.identity, "case") == Some(bridge.case_sha256.as_str()),
+        identity_value(&snapshot.identity, "source") == Some(snapshot.source_commit.as_str()),
+        identity_usize(&snapshot.identity, "execution_cap") == Some(SNAPSHOT_EXECUTION_CAP),
+        identity_usize(&snapshot.identity, "artifact_cap") == Some(SNAPSHOT_ARTIFACT_CAP),
+        snapshot.accepted_steps == steps,
+        snapshot.epoch == steps,
+        guard.is_some_and(|value| {
+            value.advective_limit.to_bits() == 3.3_f64.to_bits() && value.maximum_attempts == 48
+        }),
+        expected_schedule(snapshot),
+    ];
+    matched
+        .into_iter()
+        .all(std::convert::identity)
+        .then_some(())
+        .ok_or_else(|| "snapshot reviewed profile/schedule/header/cap binding mismatch".into())
+}
+
+fn schedule_steps(snapshot: &SnapshotManifest) -> Result<u128, String> {
+    snapshot
+        .evolution
+        .schedule
+        .iter()
+        .try_fold(0_u128, |sum, segment| {
+            let steps = (segment.until_exclusive - segment.from_inclusive) / segment.step_ticks;
+            sum.checked_add(steps)
+                .ok_or_else(|| "schedule step overflow".into())
+        })
+}
+
+fn expected_schedule(snapshot: &SnapshotManifest) -> bool {
+    let segments = &snapshot.evolution.schedule;
+    match snapshot.elapsed {
+        512 => segments.len() == 1 && segment(&segments[0], 0, 512, 64),
+        4096 => {
+            segments.len() == 2
+                && segment(&segments[0], 0, 2048, 64)
+                && segment(&segments[1], 2048, 4096, 128)
+        }
+        _ => false,
+    }
+}
+
+fn segment(value: &crate::model::ScheduleSegment, from: u128, until: u128, step: u128) -> bool {
+    value.from_inclusive == from && value.until_exclusive == until && value.step_ticks == step
+}
+
+fn identity_value<'a>(identity: &'a str, key: &str) -> Option<&'a str> {
+    let mut matches = identity
+        .split(';')
+        .filter_map(|field| field.split_once('='))
+        .filter(|(name, _)| *name == key)
+        .map(|(_, value)| value);
+    let value = matches.next()?;
+    matches.next().is_none().then_some(value)
+}
+
+fn identity_usize(identity: &str, key: &str) -> Option<usize> {
+    identity_value(identity, key)?.parse().ok()
+}
