@@ -154,8 +154,15 @@ fn enable_fixed_diagnostic(left: &mut Manifest, right: &mut Manifest, kind: Comp
     right.comparison_kind = kind;
     left.dimensions = [384; 3];
     right.dimensions = [384; 3];
-    left.epoch = 2;
-    right.epoch = 2;
+    for manifest in [&mut *left, &mut *right] {
+        manifest.evolution.clock_target = 256;
+        manifest.evolution.comparison_endpoint = 256;
+        manifest.evolution.schedule[0].until_exclusive = 256;
+        manifest.elapsed = 256;
+        manifest.target = 256;
+        manifest.epoch = 8;
+        manifest.accepted_steps = 8;
+    }
     left.profile = Some(ProfileBinding {
         kind: ProfileBindingKind::IdentityProfileField,
         value: "left-n384-profile".into(),
@@ -168,11 +175,11 @@ fn enable_fixed_diagnostic(left: &mut Manifest, right: &mut Manifest, kind: Comp
     right.identity = "fixture;profile=right-n384-profile".into();
     left.admission_guard = Some(AdmissionGuard {
         advective_limit: 0.45,
-        maximum_attempts: 2,
+        maximum_attempts: 48,
     });
     right.admission_guard = Some(AdmissionGuard {
         advective_limit: 3.3,
-        maximum_attempts: 2,
+        maximum_attempts: 48,
     });
     left.arithmetic_control = None;
     right.arithmetic_control = None;
@@ -727,6 +734,12 @@ fn force_resolution_diagnostic_is_closed_and_directional() {
     assert_manifest_decodes(&root, "force-right.json", &right);
     assert!(compare::validate_manifest_pair(&left, &right).is_ok());
     assert_ne!(left.admission_guard, right.admission_guard);
+    assert_eq!(left.accepted_steps, 8);
+    assert_eq!(left.admission_guard.as_ref().unwrap().maximum_attempts, 48);
+
+    let mut exhausted = right.clone();
+    exhausted.admission_guard.as_mut().unwrap().maximum_attempts = 7;
+    assert!(compare::validate_manifest_pair(&left, &exhausted).is_err());
 
     let mut changed = right.clone();
     changed.evolution.integration_force_dimensions = [384; 3];
@@ -758,6 +771,12 @@ fn method_diagnostic_is_closed_and_directional() {
     assert_manifest_decodes(&root, "method-right.json", &right);
     assert!(compare::validate_manifest_pair(&left, &right).is_ok());
     assert_ne!(left.admission_guard, right.admission_guard);
+    assert_eq!(right.accepted_steps, 8);
+    assert_eq!(right.admission_guard.as_ref().unwrap().maximum_attempts, 48);
+
+    let mut exhausted = right.clone();
+    exhausted.admission_guard.as_mut().unwrap().maximum_attempts = 7;
+    assert!(compare::validate_manifest_pair(&left, &exhausted).is_err());
 
     let mut changed = right.clone();
     changed.evolution.method = "cox-matthews".into();
@@ -774,6 +793,96 @@ fn method_diagnostic_is_closed_and_directional() {
     changed.dimensions = [256; 3];
     assert!(compare::validate_manifest_pair(&left, &changed).is_err());
     assert_other_physics_rejected(&left, &right);
+}
+
+#[test]
+fn fixed_diagnostics_serialize_tiny_spectrum_outputs() {
+    for (kind, schema, label) in [
+        (
+            ComparisonKind::ForceResolutionDiagnostic,
+            "p10-snapshot-force-resolution-diagnostic-output-v1",
+            "FORCE_RESOLUTION_DIAGNOSTIC",
+        ),
+        (
+            ComparisonKind::MethodDiagnostic,
+            "p10-snapshot-method-diagnostic-output-v1",
+            "METHOD_DIAGNOSTIC",
+        ),
+    ] {
+        let root = root(label);
+        let mut left = manifest(root.join("left.bin"), 4, "left");
+        let mut right = manifest(root.join("right.bin"), 4, "right");
+        left.comparison_kind = kind;
+        right.comparison_kind = kind;
+        left.profile = Some(ProfileBinding {
+            kind: ProfileBindingKind::LegacyFullIdentity,
+            value: left.identity.clone(),
+        });
+        right.profile = Some(ProfileBinding {
+            kind: ProfileBindingKind::LegacyFullIdentity,
+            value: right.identity.clone(),
+        });
+        left.admission_guard = Some(AdmissionGuard {
+            advective_limit: 0.45,
+            maximum_attempts: 48,
+        });
+        right.admission_guard = Some(AdmissionGuard {
+            advective_limit: 3.3,
+            maximum_attempts: 48,
+        });
+        for manifest in [&mut left, &mut right] {
+            manifest.evolution.clock_target = 256;
+            manifest.evolution.comparison_endpoint = 256;
+            manifest.evolution.schedule[0].until_exclusive = 256;
+            manifest.elapsed = 256;
+            manifest.target = 256;
+            manifest.epoch = 8;
+            manifest.accepted_steps = 8;
+        }
+        match kind {
+            ComparisonKind::ForceResolutionDiagnostic => {
+                right.evolution.integration_force_dimensions = [512; 3];
+            }
+            ComparisonKind::MethodDiagnostic => {
+                right.evolution.method = "hochbruck-ostermann".into();
+            }
+            _ => unreachable!(),
+        }
+        let left_values = fields(left.domain().unwrap().layout(), 1.0);
+        let right_values = fields(right.domain().unwrap().layout(), 1.25);
+        write(&mut left, &left_values);
+        write(&mut right, &right_values);
+        let left_state = decode::load(&left).unwrap();
+        let right_state = decode::load(&right).unwrap();
+        let output = compare::diagnostic_output(
+            &left,
+            &left_state,
+            &right,
+            &right_state,
+            123,
+            schema,
+            label,
+            None,
+        )
+        .unwrap();
+        let json = serde_json::to_value(output).unwrap();
+        assert_eq!(json["schema"], schema);
+        assert_eq!(json["comparison_kind"], label);
+        assert_eq!(json["acceptance"]["status"], "not_assessed");
+        assert_eq!(json["acceptance"]["accepted_windows"], 0);
+        assert!(json.get("arithmetic_control").is_none());
+        assert_eq!(json["left_identity"], "left");
+        assert_eq!(json["right_identity"], "right");
+        assert_eq!(json["left_admission_guard"]["advective_limit"], 0.45);
+        assert_eq!(json["right_admission_guard"]["advective_limit"], 3.3);
+        assert_eq!(json["left_plan_sha256"], left.plan_sha256);
+        assert_eq!(json["right_plan_sha256"], right.plan_sha256);
+        assert_eq!(json["clock"]["left_accepted_steps"], 8);
+        assert_eq!(json["clock"]["right_accepted_steps"], 8);
+        assert_eq!(json["left_admission_guard"]["maximum_attempts"], 48);
+        assert_eq!(json["right_admission_guard"]["maximum_attempts"], 48);
+        assert_eq!(json["admitted_bytes"], 123);
+    }
 }
 
 fn assert_other_physics_rejected(left: &Manifest, right: &Manifest) {

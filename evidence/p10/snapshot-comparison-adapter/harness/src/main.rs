@@ -35,18 +35,27 @@ fn run(args: &[OsString]) -> Result<String, String> {
     }
     let left = decode::load(&left_manifest)?;
     let right = decode::load(&right_manifest)?;
+    format_output(&left_manifest, &left, &right_manifest, &right, admitted)
+}
+
+fn format_output(
+    left_manifest: &model::Manifest,
+    left: &model::Snapshot,
+    right_manifest: &model::Manifest,
+    right: &model::Snapshot,
+    admitted: usize,
+) -> Result<String, String> {
     match (
         left_manifest.comparison_kind,
         right_manifest.comparison_kind,
     ) {
         (model::ComparisonKind::MatchedSpatial, model::ComparisonKind::MatchedSpatial) => {
-            let output =
-                compare::compare(&left_manifest, &left, &right_manifest, &right, admitted)?;
+            let output = compare::compare(left_manifest, left, right_manifest, right, admitted)?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
         (model::ComparisonKind::TimeDiagnostic, model::ComparisonKind::TimeDiagnostic) => {
             let output =
-                compare::time_diagnostic(&left_manifest, &left, &right_manifest, &right, admitted)?;
+                compare::time_diagnostic(left_manifest, left, right_manifest, right, admitted)?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
         (
@@ -54,22 +63,17 @@ fn run(args: &[OsString]) -> Result<String, String> {
             model::ComparisonKind::ForceResolutionDiagnostic,
         ) => {
             let output = compare::force_resolution_diagnostic(
-                &left_manifest,
-                &left,
-                &right_manifest,
-                &right,
+                left_manifest,
+                left,
+                right_manifest,
+                right,
                 admitted,
             )?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
         (model::ComparisonKind::MethodDiagnostic, model::ComparisonKind::MethodDiagnostic) => {
-            let output = compare::method_diagnostic(
-                &left_manifest,
-                &left,
-                &right_manifest,
-                &right,
-                admitted,
-            )?;
+            let output =
+                compare::method_diagnostic(left_manifest, left, right_manifest, right, admitted)?;
             serde_json::to_string_pretty(&output).map_err(model::debug)
         }
         _ => Err("comparison kind mismatch".into()),

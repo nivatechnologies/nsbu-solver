@@ -62,9 +62,10 @@ must otherwise match bit for bit. `METHOD_DIAGNOSTIC` admits only left
 `cox-matthews` and right `hochbruck-ostermann` at retained N384 and integration
 force M384, again with every other evolution field identical. Both modes
 validate each exact identity/profile, schedule-derived epoch and accepted-step
-count, and admission guard. They preserve both sides' guards, identities,
-sources, backends, executions, plans, hashes, schedules, and clocks in their
-outputs. An arithmetic-control object is refused in these modes because the
+count, and require those committed steps to fit within the admission guard's
+maximum-attempt cap. They preserve the exact cap and both sides' guards,
+identities, sources, backends, executions, plans, hashes, schedules, and clocks
+in their outputs. An arithmetic-control object is refused in these modes because the
 time-specific review schema cannot override their changed force or method
 contract. Their output schemas are respectively
 `p10-snapshot-force-resolution-diagnostic-output-v1` and
