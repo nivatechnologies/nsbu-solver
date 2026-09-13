@@ -15,3 +15,4 @@ timeout 20s sh evidence/p10/avx-n384-m512-deployment-20260912/test-launcher-clea
 scp deployment/p10-n384-m512-326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72.tar.gz 192.168.88.228:/tmp/nsbu-p10-sulaco-m512-20260913-r2.tar.gz
 # Remote: verify archive SHA, extract with --strip-components=1 into the fresh distinct stage path, then run sha256sum -c BUNDLE-SHA256SUMS.
 # Dummy /usr/bin/time -> /usr/bin/timeout --foreground -> /bin/sleep process-tree check passed exact argv, parentage, and one setsid PGID.
+timeout 20s sh evidence/p10/avx-n384-m512-deployment-20260912/test-watchdog-v3.sh

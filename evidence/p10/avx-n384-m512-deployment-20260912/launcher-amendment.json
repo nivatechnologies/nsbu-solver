@@ -4,7 +4,7 @@
   "preserved_binary_sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
   "preserved_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
   "prior_launch_recipe_sha256": "a8091549adf7d168f1787f94d170b9880ef3fe3ff5c8bd85a50fd2b04f1f9f63",
-  "amended_launch_recipe_sha256": "87de25340d8d1e3d33f4481f6c1f8ef1aa6dcb9c53098e0d54a776ea6c3df137",
+  "amended_launch_recipe_sha256": "7f1b6b0f170d65626ec3a0b8e8bc74303d7cf5efc1accff4c69492ed8213d4af",
   "owned_cleanup_source": "launcher-owned-cleanup.sh",
   "owned_cleanup_sha256": "e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524",
   "cleanup_test_source": "test-launcher-cleanup.sh",
@@ -23,5 +23,10 @@
   "trajectory_launched": false,
   "predecessor_screen": "launch admission validates all eight non-rest observer nodes for exact predecessor identity, committed complete artifacts, expected state size, exact counters, finite nonnegative measurements and accepted error ratios",
   "prior_amended_launch_recipe_sha256": "de8582d374ae93cf2e71953829338a78517de0c5ab4c0ed0963b6b519e57417e",
-  "predecessor_observer_integrity": "all eight non-rest observer nodes require exact predecessor identity, complete committed artifacts, expected state size and counters; norms, energies, dissipations, timings and ratios must be finite nonnegative; signed forcing_work, stretching and vorticity_forcing must be finite"
+  "predecessor_observer_integrity": "all eight non-rest observer nodes require exact predecessor identity, complete committed artifacts, expected state size and counters; norms, energies, dissipations, timings and ratios must be finite nonnegative; signed forcing_work, stretching and vorticity_forcing must be finite",
+  "prior_v3less_launch_recipe_sha256": "87de25340d8d1e3d33f4481f6c1f8ef1aa6dcb9c53098e0d54a776ea6c3df137",
+  "watchdog_source": "pgid-watchdog-v3.sh",
+  "watchdog_sha256": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01",
+  "watchdog_amendment": "watchdog-v3-amendment.json",
+  "trajectory_status": "prior_v2_attempt_stopped_at_zero_steps_on_pause; no_v3_launch_latest_start_elapsed"
 }

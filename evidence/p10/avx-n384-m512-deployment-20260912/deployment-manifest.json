@@ -1,6 +1,6 @@
 {
   "schema": "p10-avx-n384-m512-deployment-manifest-v1",
-  "status": "final_amendment_staged_hash_verified_not_launched_predecessor_running",
+  "status": "v3_prefix_policy_prepared_not_launched",
   "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
   "branch": "codex/p10-m512-force-profile-20260912",
   "bundle_directory": "deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
@@ -13,24 +13,35 @@
     "frozen-plan.json": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
     "forecast.json": "fd92ca1d5d75ff4b0e7c3b5423b699509415d338fba348436ec7b96b08bc1973",
     "preflight.stdout": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
-    "launch-reviewed.sh": "87de25340d8d1e3d33f4481f6c1f8ef1aa6dcb9c53098e0d54a776ea6c3df137",
+    "launch-reviewed.sh": "7f1b6b0f170d65626ec3a0b8e8bc74303d7cf5efc1accff4c69492ed8213d4af",
     "launcher-owned-cleanup.sh": "e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524",
-    "BUNDLE-SHA256SUMS": "45474d0614a420c265ad32c50ee2fa1e51d4e3f31b681082d7c283d57fb8a6b2"
+    "BUNDLE-SHA256SUMS": "45474d0614a420c265ad32c50ee2fa1e51d4e3f31b681082d7c283d57fb8a6b2",
+    "pgid-watchdog-v3.sh": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01",
+    "predecessor-completion-gate.json": "281f87c62e5f3a9022046742734d818f1ac1af5999de38ad852f4cc7206c67cb"
   },
   "supporting_evidence": {
     "build.json": "dc0d27f1ea82c76755ddab5e1fcba5081cc17b4b35edc30923a9b5b32c63e54a",
-    "quality-summary.json": "4f685b6339e04677a25700711cc32020bdaa7597e0cca10fdbb2913e24cabb45",
+    "quality-summary.json": "deb6cfb1909e857c329df200160a63b09c2a23d5dd54619aafd5f1d56a25a610",
     "forecast_force_source": "evidence/p10/force-grid-n384-baf54fa/summary.json",
     "forecast_force_source_sha256": "892853212e5002199af93a0ab1c9e3fdea08b38028b5be04b1943ce2b985b6db",
     "m512_control_archive": "evidence/p10/avx-m512-force-profile-20260912",
     "current_n384_snapshot_sha256": "d307a86c889f8b3e88a8d721991180707022e15f51e9411f439fdb4168cb1b83",
-    "launcher-amendment.json": "c8f22c6187ae8a87abb4d50aaf4d8ca3a5c8516e42812b4303386d236ede39df",
+    "launcher-amendment.json": "80f19e46df274bea4dd854ffefba5f3def96e4276bba3f78cd67fd3787c0ba32",
     "test-launcher-cleanup.sh": "85838d558f236740dcd68f20d8954f7ebd6ba75dd15de9bf4a706eda9eb3cb72",
-    "sulaco-stage.json": "540123954f4c2b4a8e4218e2f54bd8338163a5bce59de8889e1f312f284d02e6"
+    "sulaco-stage.json": "540123954f4c2b4a8e4218e2f54bd8338163a5bce59de8889e1f312f284d02e6",
+    "README.md": "ca51c39d26b98f0d29236a4bb0058137c80b876dc7eb153342d36dfe855497c5",
+    "predecessor-completion-gate.json": "281f87c62e5f3a9022046742734d818f1ac1af5999de38ad852f4cc7206c67cb",
+    "watchdog-v3-amendment.json": "76f71a376cb6c1261a1ef06379c95d31cf5025f327f39bda66abbd5e84c37a8e",
+    "test-watchdog-v3.sh": "9c4e60b56a4314760dcbd0380242ae411711fdc8ea2d39f914bcd2448ffd647f"
   },
   "transfer_authorized": true,
-  "launch_authorized": false,
+  "launch_authorized": "one_prefix_policy_attempt_root_authorized",
   "trajectory_launched": false,
   "transferred": true,
-  "remote_hash_verification": "all_7_files_ok"
+  "remote_hash_verification": "all_7_files_ok",
+  "operational_watchdog": "pgid-watchdog-v3.sh",
+  "historical_watchdog_preserved": "pgid-watchdog-v2.sh",
+  "prefix_plan": "evidence/p10/avx-n384-m512-prefix2048-20260913/frozen-prefix-plan.json",
+  "prefix_plan_sha256": "e44ca2db9f667749e8b33b88f346f1880f0c1b4961e16e14cba2fe071e0b3a84",
+  "prefix_controller_sha256": "118c479523befb80637d0dac3c57b4d44dd485970b6f1954391e819feb72ee8d"
 }

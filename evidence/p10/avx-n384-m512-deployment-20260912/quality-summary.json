@@ -23,11 +23,14 @@
   "trajectory_launched": false,
   "accepted_pde_windows": 0,
   "architecture_profile_forecast_review": "root_approved",
-  "review_status": "second_launcher_amendment_review_required_before_conditional_launch",
+  "review_status": "v3_watchdog_and_r4_review_required_no_launch",
   "launcher_child_group_validation_failure_cleanup": "passed_dummy_exit81_trap",
   "launcher_pre_setsid_transition_cleanup": "passed_dummy_direct_child",
   "launcher_post_spawn_setsid_race_cleanup": "passed_dummy_pid_or_group",
   "predecessor_eight_node_observer_integrity": "required_exact_identity_artifacts_counters_finite_signed_balances_accepted_ratios",
   "absolute_deadline_fallback": "gnu_timeout_foreground_term_kill_after_60_seconds",
-  "launcher_dummy_time_timeout_solver_tree": "passed_exact_parentage_single_pgid_and_argv"
+  "launcher_dummy_time_timeout_solver_tree": "passed_exact_parentage_single_pgid_and_argv",
+  "watchdog_v3_transient_recovery": "passed_exact_diagnostic_no_TERM",
+  "watchdog_v3_explicit_deadline_TERM": "passed",
+  "watchdog_v3_launch": "not_executed_latest_start_elapsed"
 }

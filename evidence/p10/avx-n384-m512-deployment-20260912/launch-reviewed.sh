@@ -3,8 +3,9 @@ set -eu
 
 SOURCE=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72
 BINARY_SHA256=85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57
-WATCHDOG_SHA256=4b65e13b74bd7a32237044b5467d4f223c8dc3e6e35d6e8d3498e1938fa53e4b
+WATCHDOG_SHA256=0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01
 CLEANUP_SHA256=e044f8509cd60030162c2e5372202999b61fcdf16dc81f005d81114c50014524
+COMPLETION_GATE_SHA256=281f87c62e5f3a9022046742734d818f1ac1af5999de38ad852f4cc7206c67cb
 PLAN_SHA256=2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84
 PREFLIGHT_SHA256=b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274
 LATEST_START_EPOCH=1789260352
@@ -17,6 +18,7 @@ REMAINING_AFTER_FIRST_SECONDS=21359
 PREDECESSOR=/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint
 PREDECESSOR_SOURCE=aed49b7d7874a0a720dee88b65ba180c7286fa65
 PREDECESSOR_PROFILE=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c
+PREDECESSOR_PID=184964
 
 [ "${NSBU_LAUNCH_N384_M512:-}" = 1 ] || {
     echo "root must set NSBU_LAUNCH_N384_M512=1 for this exact reviewed launch" >&2
@@ -26,8 +28,9 @@ PREDECESSOR_PROFILE=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c
 
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 BIN=$BUNDLE/p10-avx-n384-m512-piecewise-cadv33
-WATCHDOG=$BUNDLE/pgid-watchdog-v2.sh
+WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
 CLEANUP=$BUNDLE/launcher-owned-cleanup.sh
+COMPLETION_GATE=$BUNDLE/predecessor-completion-gate.json
 PLAN=$BUNDLE/frozen-plan.json
 RUN_ROOT=$BUNDLE/run
 OUTPUT=$RUN_ROOT/output
@@ -37,6 +40,7 @@ LOG_DIR=$RUN_ROOT/logs
 [ "$(sha256sum "$BIN" | awk '{print $1}')" = "$BINARY_SHA256" ] || exit 67
 [ "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = "$WATCHDOG_SHA256" ] || exit 68
 [ "$(sha256sum "$CLEANUP" | awk '{print $1}')" = "$CLEANUP_SHA256" ] || exit 94
+[ "$(sha256sum "$COMPLETION_GATE" | awk '{print $1}')" = "$COMPLETION_GATE_SHA256" ] || exit 98
 [ "$(sha256sum "$PLAN" | awk '{print $1}')" = "$PLAN_SHA256" ] || exit 69
 now=$(date +%s)
 [ "$now" -le "$LATEST_START_EPOCH" ] || { echo "latest reviewed start passed" >&2; exit 70; }
@@ -49,7 +53,7 @@ now=$(date +%s)
 }
 awk '/^attempt=/{line=$0} END{print line}' "$PREDECESSOR/run.stdout" | grep -q '^attempt=48 clock=4096 ' || exit 74
 grep -q '^terminal endpoint_complete_qualification_pending clock=4096$' "$PREDECESSOR/run.stdout" || exit 92
-[ -r "$PREDECESSOR/run.time" ] && grep -q '^[[:space:]]*Exit status: 0$' "$PREDECESSOR/run.time" || exit 93
+[ ! -e "/proc/$PREDECESSOR_PID" ] || exit 93
 python3 - "$PREDECESSOR" "$PREDECESSOR_SOURCE" "$PREDECESSOR_PROFILE" <<'PY'
 import glob
 import json
@@ -58,6 +62,24 @@ import os
 import sys
 
 root, source, profile = sys.argv[1:]
+clocks = list(range(64, 2049, 64)) + list(range(2176, 4097, 128))
+if len(clocks) != 48:
+    raise SystemExit("predecessor durable commit schedule mismatch")
+for attempt_number, clock in enumerate(clocks, 1):
+    step = os.path.join(root, "output", f"step-{attempt_number:03d}-clock-{clock:04d}")
+    if not os.path.isdir(step):
+        raise SystemExit(f"durable commit {attempt_number}: step directory missing")
+    for name in ("state.bin", "attempt.json", "record.json"):
+        if not os.path.isfile(os.path.join(step, name)) or os.path.getsize(os.path.join(step, name)) <= 0:
+            raise SystemExit(f"durable commit {attempt_number}: {name} missing")
+    if os.path.getsize(os.path.join(step, "state.bin")) != 1_366_033_529:
+        raise SystemExit(f"durable commit {attempt_number}: unexpected state size")
+    with open(os.path.join(step, "attempt.json"), encoding="utf-8") as stream:
+        durable_attempt = json.load(stream)
+    if (durable_attempt.get("attempt"), durable_attempt.get("attempted_to"), durable_attempt.get("outcome")) != (attempt_number, clock, "committed"):
+        raise SystemExit(f"durable commit {attempt_number}: attempt mismatch")
+    if f"source={source};" not in durable_attempt.get("identity", "") or f"profile={profile};" not in durable_attempt.get("identity", ""):
+        raise SystemExit(f"durable commit {attempt_number}: identity mismatch")
 expected = {
     512: 8,
     1024: 16,

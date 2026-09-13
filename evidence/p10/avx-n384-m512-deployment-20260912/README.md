@@ -33,8 +33,9 @@ first accepted step must take at most 399 integration seconds and leave at
 least 21,359 seconds before the numerical deadline, along with exact identity,
 12 RHS calls, cache `[7,5]`, and zero steady allocations.
 
-The true v2 watchdog is bound to the solver PID, process group, starttime and
-full command-line SHA-256. Its numerical deadline is
+The original full-run plan used true-v2 and remains immutable historical
+provenance. The current operational launcher uses reviewed v3, bound to the
+solver PID, process group, starttime, and full command-line SHA-256. Its numerical deadline is
 2026-09-13T07:00:00Z; it sends TERM to the solver process group and KILL after
 60 seconds if the same identity remains. The hard block is
 2026-09-13T07:16:47Z. Root authorization is still required. Running preflight,
@@ -46,7 +47,7 @@ group whose ID is that exact child PID. Handoff from this transitional state
 requires a stable starttime, the expected new process group, and the exact GNU
 time/timeout wrapper command. GNU timeout independently applies TERM and KILL
 from the remaining absolute-deadline budget. The launcher then binds the actual
-solver grandchild and requires the identity-bound v2 watchdog's exact `started`
+solver grandchild and requires the identity-bound v3 watchdog's exact `started`
 record and live non-zombie state through the first-step gate. Dummy controls
 cover the pre-setsid transition, immediate post-spawn race, capture exit 80,
 child-group validation exit 81, and watchdog attachment exit 96. The numerical
@@ -67,3 +68,12 @@ hashes passed. At staging time the predecessor was still the sole solver,
 admission floor), filesystem availability was 1,708,243,427,328 bytes, and the
 new bundle had no `run` directory. Same-host preflight and launch were not
 executed.
+
+The active v3 watchdog corrects the reviewed transient-sampling control-flow
+defect while retaining v2 unchanged. Initial attachment mismatch diagnostics and all later component/observed
+identity diagnostics go to the watchdog audit log. Its dummy control logged an intentional
+cmdline-hash mismatch with exact expected and observed identity, recovered on
+the confirmation sample, and sent no TERM. A separate control sent TERM only
+after the explicit deadline. V3 became ready at 00:45:08Z; safe review and
+staging could not complete before the frozen 00:45:52Z latest start, so no v3
+trajectory was launched.
