@@ -10,9 +10,13 @@ report = json.loads(candidate.read_text())
 base = bridge_path.parent
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 expected_bridge_sha = {
-    512: '1386090c1d2bfcf8a2cc846eb523029bd56cea3a84cdec83027d8dba2b700435',
-    4096: 'e2ed263e3d27a0cc8585320b02af76ad5c8e55e8c171212eb8ac54495199b1d4',
-}.get(bridge['elapsed'])
+    ('a39b4811138a0f5dd39540e4bc70b83f5f48b8bce5de1c5b822b420ace201047', 512):
+        '1386090c1d2bfcf8a2cc846eb523029bd56cea3a84cdec83027d8dba2b700435',
+    ('a39b4811138a0f5dd39540e4bc70b83f5f48b8bce5de1c5b822b420ace201047', 4096):
+        'e2ed263e3d27a0cc8585320b02af76ad5c8e55e8c171212eb8ac54495199b1d4',
+    ('7dc458760b2453b2c61a69db4c211389dfb6d8be80f1a993a64e656247854893', 512):
+        '8f10e1dd124a2d06a823bf71fc8a82aa02ac033686995056abb098fc069ef2bf',
+}.get((bridge['binary_sha256'], bridge['elapsed']))
 if hashlib.sha256(bridge_raw).hexdigest() != expected_bridge_sha:
     raise SystemExit('bridge manifest hash mismatch')
 if sha(binary_path) != bridge['binary_sha256']:

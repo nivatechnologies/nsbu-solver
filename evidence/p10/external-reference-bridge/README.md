@@ -6,7 +6,7 @@ does not construct a trajectory family, resume or import state into the solver,
 write a snapshot, alter review geometry, assign a reference field, or accept a
 PDE window.
 
-The frozen inputs cover clocks 512 and 4096. Their manifests preserve the complete
+The frozen M384-force inputs cover clocks 512 and 4096. Their manifests preserve the complete
 N384 trajectory identity and hashes, and expect the remotely retained states under
 each input's `staged/n384-state.bin`. Clock 512 binds whole-file SHA-256
 `951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243` and
@@ -14,6 +14,10 @@ coefficient SHA-256 `5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf5
 Clock 4096 binds whole-file SHA-256
 `2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592` and
 coefficient SHA-256 `921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b`.
+The closed M512-force clock-512 input binds source `326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72`,
+plan SHA-256 `2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84`,
+whole-file SHA-256 `7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9`,
+and coefficient SHA-256 `4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af`.
 The decoder verifies length, magic, identity, exact clock words, coefficient
 trailer, whole-file hash and strict spectrum before numerical reference work.
 
@@ -43,11 +47,19 @@ The completed clock-512 run took 119.99 seconds and 20,383,744 KiB maximum RSS.
 The completed clock-4096 run took 117.44 seconds and 20,379,648 KiB maximum RSS.
 Both exited zero, passed independent result validation, and were promoted only
 after their source, binary, snapshot, and report bindings matched.
+The closed M512-force clock-512 run used bridge source `96e9d373035183028a86f4ac2cdad48dcec16dd7`
+and binary SHA-256 `7dc458760b2453b2c61a69db4c211389dfb6d8be80f1a993a64e656247854893`;
+it took 119.54 seconds and 20,381,696 KiB maximum RSS.
 
-| clock | difference L2 | difference H1 | difference curl L2 | difference divergence L2 |
-| ---: | ---: | ---: | ---: | ---: |
-| 512 | 6.933499382700655e-8 | 6.749991863805842e-5 | 6.749988304326447e-5 | 6.170649568650966e-10 |
-| 4096 | 9.10406983035357e-7 | 1.0804989124323632e-3 | 1.080498529134934e-3 | 9.924936495841918e-9 |
+| trajectory | clock | difference L2 | difference H1 | difference curl L2 | difference divergence L2 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M384 force | 512 | 6.933499382700655e-8 | 6.749991863805842e-5 | 6.749988304326447e-5 | 6.170649568650966e-10 |
+| M384 force | 4096 | 9.10406983035357e-7 | 1.0804989124323632e-3 | 1.080498529134934e-3 | 9.924936495841918e-9 |
+| M512 force | 512 | 4.000166602277882e-8 | 3.5115274672560813e-6 | 3.511299566616361e-6 | 6.170649568651455e-10 |
+
+Each row is an individual actual-state versus sampled-reference diagnostic. The
+M384 and M512 rows are not a force-grid pair comparison and establish no
+trajectory acceptance or convergence claim.
 
 The command defaults to preflight. `--execute` is an explicit heavy-work gate:
 

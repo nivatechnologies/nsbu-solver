@@ -22,6 +22,7 @@ pub(crate) fn read_manifest(path: &Path) -> Result<Manifest, String> {
 
 /// Preserve the comparison adapter's M384 contract while admitting the two
 /// explicitly reviewed trajectory force grids for the read-only reference bridge.
+#[allow(dead_code)] // Called when this source is included by the external bridge crate.
 pub(crate) fn read_external_reference_manifest(path: &Path) -> Result<Manifest, String> {
     read_manifest_with(path, ForceAdmission::ExternalReferenceM384OrM512)
 }
@@ -29,6 +30,7 @@ pub(crate) fn read_external_reference_manifest(path: &Path) -> Result<Manifest, 
 #[derive(Clone, Copy)]
 enum ForceAdmission {
     ExistingM384,
+    #[allow(dead_code)] // Constructed by the external bridge crate's included copy.
     ExternalReferenceM384OrM512,
 }
 

@@ -14,9 +14,9 @@
     "wall_seconds": 119.99,
     "maximum_rss_kib": 20383744,
     "difference": {
-      "l2": 6.933499382700655e-8,
-      "h1": 6.749991863805842e-5,
-      "vorticity_l2": 6.749988304326447e-5,
+      "l2": 6.933499382700655e-08,
+      "h1": 6.749991863805842e-05,
+      "vorticity_l2": 6.749988304326447e-05,
       "divergence_l2": 6.170649568650966e-10
     }
   },
@@ -28,12 +28,34 @@
     "wall_seconds": 117.44,
     "maximum_rss_kib": 20379648,
     "difference": {
-      "l2": 9.10406983035357e-7,
-      "h1": 1.0804989124323632e-3,
-      "vorticity_l2": 1.080498529134934e-3,
-      "divergence_l2": 9.924936495841918e-9
+      "l2": 9.10406983035357e-07,
+      "h1": 0.0010804989124323632,
+      "vorticity_l2": 0.001080498529134934,
+      "divergence_l2": 9.924936495841918e-09
     }
   },
   "reference_assignments": 0,
-  "resume_or_import_interfaces": 0
+  "resume_or_import_interfaces": 0,
+  "clock0512_m512": {
+    "trajectory_role": "individual-M512-force trajectory; no pair or acceptance claim",
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+    "bridge_sha256": "8f10e1dd124a2d06a823bf71fc8a82aa02ac033686995056abb098fc069ef2bf",
+    "snapshot_file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+    "snapshot_coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+    "harness_source_commit": "96e9d373035183028a86f4ac2cdad48dcec16dd7",
+    "binary_sha256": "7dc458760b2453b2c61a69db4c211389dfb6d8be80f1a993a64e656247854893",
+    "result_sha256": "d3a96d83e56b432153cec83d396e1f9388ce914c26db14c6ff2a48a1a94e07dc",
+    "start_utc": "2026-09-13T02:30:37Z",
+    "end_utc": "2026-09-13T02:32:39Z",
+    "exit_status": 0,
+    "wall_seconds": 119.54,
+    "maximum_rss_kib": 20381696,
+    "difference": {
+      "l2": 4.000166602277882e-08,
+      "h1": 3.5115274672560813e-06,
+      "vorticity_l2": 3.511299566616361e-06,
+      "divergence_l2": 6.170649568651455e-10
+    }
+  }
 }
