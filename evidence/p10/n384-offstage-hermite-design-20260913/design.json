@@ -4,7 +4,7 @@
   "purpose": "Freeze sampled three-level quintic-Hermite reconstruction geometry and non-interpolation residual probes for the completed N384/M384 piecewise archive.",
   "design_basis": {
     "complete_design": "docs/design/COMPLETE_DESIGN.md:404",
-    "requirement": "Three strictly nested actual accepted-node histories per probe; residual probes are off interpolation nodes and quarter-stage clocks; evaluate residual through a separately implemented conservative 2N product path.",
+    "requirement": "Three actual accepted-node support triples per probe, with strictly nested support intervals and strictly decreasing node spacings; residual probes are off interpolation nodes and quarter-stage clocks; evaluate residual through a separately implemented conservative 2N product path.",
     "trajectory_identity_prefix": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
     "archive_state_manifest": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/endpoint/remote-state-files.sha256",
     "archive_state_manifest_sha256": "45a95d75a6b4c37eda8a1f3d5772018a48f1c3e4b71e78591ed6452a3c371fba",
