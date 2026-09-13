@@ -1,7 +1,7 @@
 {
   "schema": "p10-mixed-force-space-clock0512-review-handoff-v1",
   "status": "review_only_no_numerical_use",
-  "source_commit": "beef0b06801a0f2bd7c4225aee8da5265a996f6b",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
   "comparison_kind": "MIXED_FORCE_SPACE_DIAGNOSTIC",
   "ordered_states": [
     "coarse-n256-m384.json",
@@ -32,7 +32,7 @@
     ],
     "interaction": [
       "weighted_2Re_A_B",
-      "real_angle_when_both_norms_nonzero"
+      "cosine_similarity_when_both_norms_nonzero"
     ]
   },
   "bindings": {
@@ -71,5 +71,11 @@
     "no pointwise or time-supremum claim",
     "no finest-grid or continuum claim"
   ],
-  "authorization": "root source and exact-semantic manifest review required before any numerical use"
+  "authorization": "root source and exact-semantic manifest review required before any numerical use",
+  "quality_exception": {
+    "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+    "lines": 608,
+    "status": "explicitly_accepted_for_reviewed_clock0512_numerical_source",
+    "followup": "mechanical module split only after the result is archived; preserve this source commit as numerical provenance"
+  }
 }
