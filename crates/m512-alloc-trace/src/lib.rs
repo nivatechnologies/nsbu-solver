@@ -120,13 +120,21 @@ fn record(operation: usize, layout: Layout, new_size: usize) {
     if !TRACKING.load(Ordering::Relaxed) {
         return;
     }
+    count_operation(operation);
+    let index = EVENT_COUNT.fetch_add(1, Ordering::Relaxed);
+    capture_event(index, operation, layout, new_size);
+}
+
+fn count_operation(operation: usize) {
     match operation {
         ALLOC => ALLOCATIONS.fetch_add(1, Ordering::Relaxed),
         DEALLOC => DEALLOCATIONS.fetch_add(1, Ordering::Relaxed),
         REALLOC => REALLOCATIONS.fetch_add(1, Ordering::Relaxed),
         _ => unreachable!(),
     };
-    let index = EVENT_COUNT.fetch_add(1, Ordering::Relaxed);
+}
+
+fn capture_event(index: usize, operation: usize, layout: Layout, new_size: usize) {
     if index >= TRACE_CAPACITY {
         return;
     }
@@ -200,5 +208,105 @@ pub fn print_traces() {
             print!(" {:#x}", frame.load(Ordering::Relaxed));
         }
         println!();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::{Mutex, MutexGuard};
+
+    static TEST_LOCK: Mutex<()> = Mutex::new(());
+
+    fn guard() -> MutexGuard<'static, ()> {
+        TEST_LOCK
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+    }
+
+    fn reset_trace() {
+        TRACKING.store(false, Ordering::Relaxed);
+        CAPTURING.store(false, Ordering::Relaxed);
+        PHASE.store(0, Ordering::Relaxed);
+        EVENT_COUNT.store(0, Ordering::Relaxed);
+        ALLOCATIONS.store(0, Ordering::Relaxed);
+        DEALLOCATIONS.store(0, Ordering::Relaxed);
+        REALLOCATIONS.store(0, Ordering::Relaxed);
+        OWNER_THREAD.store(0, Ordering::Relaxed);
+        for event in &EVENTS {
+            event.operation.store(0, Ordering::Relaxed);
+            event.phase.store(0, Ordering::Relaxed);
+            event.size.store(0, Ordering::Relaxed);
+            event.new_size.store(0, Ordering::Relaxed);
+            event.align.store(0, Ordering::Relaxed);
+            event.thread.store(0, Ordering::Relaxed);
+            event.depth.store(0, Ordering::Relaxed);
+            for frame in &event.frames {
+                frame.store(0, Ordering::Relaxed);
+            }
+        }
+    }
+
+    #[test]
+    fn tracked_operations_preserve_counts_and_raw_event_attribution() {
+        let _guard = guard();
+        reset_trace();
+        let layout = Layout::from_size_align(32, 16).unwrap();
+        begin_measurement();
+        set_phase(7);
+        record(ALLOC, layout, layout.size());
+        record(DEALLOC, layout, 0);
+        record(REALLOC, layout, 64);
+        let counts = finish_measurement();
+
+        assert_eq!(
+            counts,
+            AllocationCounts {
+                allocations: 1,
+                deallocations: 1,
+                reallocations: 1,
+            }
+        );
+        assert_eq!(EVENT_COUNT.load(Ordering::Relaxed), 3);
+        for (event, (operation, new_size)) in
+            EVENTS[..3]
+                .iter()
+                .zip([(ALLOC, 32), (DEALLOC, 0), (REALLOC, 64)])
+        {
+            assert_eq!(event.operation.load(Ordering::Relaxed), operation);
+            assert_eq!(event.phase.load(Ordering::Relaxed), 7);
+            assert_eq!(event.size.load(Ordering::Relaxed), 32);
+            assert_eq!(event.new_size.load(Ordering::Relaxed), new_size);
+            assert_eq!(event.align.load(Ordering::Relaxed), 16);
+            assert_eq!(
+                event.thread.load(Ordering::Relaxed),
+                OWNER_THREAD.load(Ordering::Relaxed)
+            );
+            assert!(event.depth.load(Ordering::Acquire) > 0);
+        }
+    }
+
+    #[test]
+    fn disabled_or_full_trace_keeps_complete_counts_without_exceeding_fixed_storage() {
+        let _guard = guard();
+        reset_trace();
+        let layout = Layout::from_size_align(8, 8).unwrap();
+        record(ALLOC, layout, layout.size());
+        assert_eq!(EVENT_COUNT.load(Ordering::Relaxed), 0);
+
+        begin_measurement();
+        CAPTURING.store(true, Ordering::Relaxed);
+        for _ in 0..=TRACE_CAPACITY {
+            record(ALLOC, layout, layout.size());
+        }
+        CAPTURING.store(false, Ordering::Relaxed);
+        let counts = finish_measurement();
+        assert_eq!(counts.allocations, TRACE_CAPACITY + 1);
+        assert_eq!(EVENT_COUNT.load(Ordering::Relaxed), TRACE_CAPACITY + 1);
+        assert_eq!(
+            EVENTS[TRACE_CAPACITY - 1].operation.load(Ordering::Relaxed),
+            ALLOC
+        );
+        assert_eq!(EVENTS[TRACE_CAPACITY - 1].depth.load(Ordering::Acquire), 0);
     }
 }
