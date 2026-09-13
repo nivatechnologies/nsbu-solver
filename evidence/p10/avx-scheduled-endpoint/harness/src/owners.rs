@@ -14,7 +14,7 @@ use nsbu_solver::{
 
 pub struct ExecutionOwners {
     pub rhs: SpectralRhs<CachedReducedForce>,
-    pub observer: ReducedObserver,
+    pub observer: Option<ReducedObserver>,
 }
 
 pub struct StateOwners {
@@ -146,7 +146,7 @@ fn rhs_identity(domain: Domain) -> Result<W3FftIdentity, SolverError> {
         backend: FftBackend::RustFft6_4_1AvxFma,
         width: 3,
         mode: W3FftMode::Bidirectional,
-        additional_bytes: 9_200_779_136,
+        additional_bytes: rhs_w3_additional_bytes(),
     })
 }
 
@@ -161,20 +161,47 @@ fn force_identity() -> Result<W3FftIdentity, SolverError> {
     })
 }
 
-#[cfg(all(feature = "n384-prep", not(feature = "n384-m512-piecewise-cadv33")))]
+#[cfg(all(
+    feature = "n384-prep",
+    not(feature = "n384-m512-piecewise-cadv33"),
+    not(feature = "n512-m512-piecewise-cadv33")
+))]
 const fn force_w3_additional_bytes() -> usize {
     1_827_942_144
 }
 
 #[cfg(feature = "n384-m512-piecewise-cadv33")]
 const fn force_w3_additional_bytes() -> usize {
-    4_318_334_720
+    4_318_465_792
 }
 
-fn new_observer(catalog: &FftCatalog) -> Result<ReducedObserver, SolverError> {
-    let domain = config::domain()?;
-    let samples = Layout::new([config::OBSERVER_M; 3])?;
-    new_observer_for(domain, samples, catalog)
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const fn force_w3_additional_bytes() -> usize {
+    4_318_465_792
+}
+
+#[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+const fn rhs_w3_additional_bytes() -> usize {
+    9_200_779_136
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const fn rhs_w3_additional_bytes() -> usize {
+    21_787_856_768
+}
+
+fn new_observer(catalog: &FftCatalog) -> Result<Option<ReducedObserver>, SolverError> {
+    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    {
+        let _ = catalog;
+        return Ok(None);
+    }
+    #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+    {
+        let domain = config::domain()?;
+        let samples = Layout::new([config::OBSERVER_M; 3])?;
+        new_observer_for(domain, samples, catalog).map(Some)
+    }
 }
 
 fn new_observer_for(
@@ -203,7 +230,11 @@ fn state_pair(resources: ResourcePlan) -> Result<(SpectralState, CandidateState)
     Ok((state, candidate))
 }
 
-#[cfg(all(test, feature = "n384-prep"))]
+#[cfg(all(
+    test,
+    feature = "n384-prep",
+    not(feature = "n512-m512-piecewise-cadv33")
+))]
 mod tests {
     use super::*;
 

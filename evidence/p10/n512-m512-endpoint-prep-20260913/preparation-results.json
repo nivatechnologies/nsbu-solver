@@ -1,0 +1,22 @@
+{
+  "schema": "p10-n512-m512-endpoint-preparation-results-v1",
+  "status": "prepared_not_launched",
+  "prepared_utc": "2026-09-13T19:00:42Z",
+  "source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "feature": "n512-m512-piecewise-cadv33",
+  "release_binary_sha256": "47e88c719cd4504ff49341c0a2e8803777b04dbdddde11642b7824bb573082cc",
+  "n512_focused_tests": {"passed": 19, "failed": 0},
+  "n512_clippy_all_targets_deny_warnings": "passed",
+  "n384_m512_regression_tests": {"passed": 19, "failed": 0},
+  "n384_m512_clippy_all_targets_deny_warnings": "passed",
+  "preflight_status": 0,
+  "preflight_total_bytes": 207578085872,
+  "preflight_disk_bound_bytes": 155226537984,
+  "run_gate_refusal": {"status": 1, "output_path_created": false},
+  "endpoint_attempts_executed": 0,
+  "large_allocations_performed": 0,
+  "states_written": 0,
+  "observer_runs_executed": 0,
+  "qualification": false
+}

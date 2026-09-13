@@ -13,13 +13,22 @@ const FILESYSTEM_ALLOWANCE: usize = 64 * 1024;
 
 pub enum Observation<'a> {
     Scheduled(NodeRecord<'a>),
-    NotScheduled { identity: &'a str },
+    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    Captured {
+        identity: &'a str,
+        offline_observer_node: bool,
+    },
+    NotScheduled {
+        identity: &'a str,
+    },
 }
 
 impl Observation<'_> {
     fn identity(&self) -> &str {
         match self {
             Self::Scheduled(record) => record.identity,
+            #[cfg(feature = "n512-m512-piecewise-cadv33")]
+            Self::Captured { identity, .. } => identity,
             Self::NotScheduled { identity } => identity,
         }
     }
@@ -112,10 +121,50 @@ fn record_json(
                 1,
             )
         }
+        #[cfg(feature = "n512-m512-piecewise-cadv33")]
+        Observation::Captured {
+            identity,
+            offline_observer_node,
+        } => captured_json(
+            state,
+            identity,
+            hash,
+            coefficient_bytes,
+            offline_observer_node,
+        ),
         Observation::NotScheduled { identity } => {
             not_scheduled_json(state, identity, hash, coefficient_bytes)
         }
     }
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn captured_json(
+    state: &SpectralState,
+    identity: &str,
+    hash: &str,
+    coefficient_bytes: usize,
+    offline_observer_node: bool,
+) -> String {
+    format!(
+        concat!(
+            "{{\n  \"schema\": \"p10-avx-n512-observer-state-v1\",\n",
+            "  \"identity\": {},\n  \"resumable\": false,\n",
+            "  \"clock\": {},\n  \"epoch\": {},\n  \"accepted_steps\": {},\n",
+            "  \"coefficient_bytes\": {},\n  \"state_sha256\": \"{}\",\n",
+            "  \"observation_status\": \"CapturedActualState\",\n",
+            "  \"offline_observer_node\": {},\n",
+            "  \"observer_execution\": \"offline-baccus-required\",\n",
+            "  \"qualification\": false\n}}\n"
+        ),
+        artifact::json_string(identity),
+        state.clock().elapsed(),
+        state.epoch().0,
+        state.accepted_steps(),
+        coefficient_bytes,
+        hash,
+        offline_observer_node,
+    )
 }
 
 fn not_scheduled_json(
@@ -169,6 +218,35 @@ mod tests {
         assert_eq!(disk_preflight(state_bytes, 48).unwrap(), 65_573_289_984);
         #[cfg(feature = "n384-h32")]
         assert_eq!(disk_preflight(state_bytes, 128).unwrap(), 174_862_106_624);
+        #[cfg(feature = "n512-m512-piecewise-cadv33")]
+        assert_eq!(disk_preflight(3_233_808_384, 48).unwrap(), 155_226_537_984);
+    }
+
+    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    #[test]
+    fn captured_actual_state_has_no_inline_observer_claim() {
+        let root = root("captured");
+        let state = state();
+        stage_step(
+            &root,
+            8,
+            &state,
+            Observation::Captured {
+                identity: "identity",
+                offline_observer_node: true,
+            },
+            "{\"outcome\":\"committed\"}\n",
+        )
+        .unwrap()
+        .publish()
+        .unwrap();
+        let record = fs::read_to_string(root.join("step-008-clock-0000/record.json")).unwrap();
+        assert!(record.contains("\"observation_status\": \"CapturedActualState\""));
+        assert!(record.contains("\"observer_execution\": \"offline-baccus-required\""));
+        assert!(record.contains("\"offline_observer_node\": true"));
+        assert!(record.contains("\"qualification\": false"));
+        assert!(!record.contains("\"balance\""));
+        fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

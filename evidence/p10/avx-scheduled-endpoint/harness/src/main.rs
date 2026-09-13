@@ -1,3 +1,8 @@
+#![cfg_attr(
+    feature = "n512-m512-piecewise-cadv33",
+    allow(dead_code, clippy::needless_return)
+)]
+
 mod artifact;
 mod balance;
 #[cfg(not(feature = "n384-prep"))]
@@ -20,7 +25,9 @@ mod schedule;
 mod step_artifact;
 mod timed_rhs;
 
-use artifact::{NodeRecord, StagedArtifact};
+#[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+use artifact::NodeRecord;
+use artifact::StagedArtifact;
 use balance::TimedBalance;
 use cache::CachedReducedForce;
 use error::{AnyResult, HarnessError};
@@ -52,7 +59,7 @@ struct RunOwners {
     candidate: CandidateState,
     attempts: AttemptWorkspace,
     rhs: TimedRhs<SpectralRhs<CachedReducedForce>>,
-    observer: ReducedObserver,
+    observer: Option<ReducedObserver>,
     identity: String,
     balances: Vec<TimedBalance>,
     frontiers: Frontiers,
@@ -77,6 +84,7 @@ fn start(output: &Path) -> AnyResult<()> {
 
 fn prepare_run(output: &Path) -> AnyResult<ResourcePlan> {
     config::require_execution_ready()?;
+    config::require_run_authorized()?;
     prepare_output(output)?;
     config::preflight().map_err(HarnessError::from)
 }
@@ -305,22 +313,39 @@ impl RunOwners {
 
     fn finish(&self, output: &Path) -> AnyResult<()> {
         self.validate_finish()?;
-        let integrals = balance::quadrature(&self.balances)?;
-        let terminal = balance::terminal_json(
-            &self.identity,
-            self.state.clock(),
-            self.balances.len(),
-            integrals,
-        );
-        artifact::publish_status(output, "endpoint-complete.json", &terminal)?;
-        println!("terminal endpoint_complete_qualification_pending clock=4096");
-        Ok(())
+        #[cfg(feature = "n512-m512-piecewise-cadv33")]
+        {
+            let terminal = format!(
+                "{{\n  \"schema\": \"p10-avx-n512-endpoint-capture-v1\",\n  \"identity\": {:?},\n  \"clock\": {},\n  \"accepted_steps\": {},\n  \"captured_positive_observer_clocks\": {:?},\n  \"observer_execution\": \"offline-baccus-required\",\n  \"qualification\": false\n}}\n",
+                self.identity,
+                self.state.clock().elapsed(),
+                self.state.accepted_steps(),
+                &schedule::FINE[1..],
+            );
+            artifact::publish_status(output, "endpoint-capture-complete.json", &terminal)?;
+            println!("terminal endpoint_capture_complete_offline_observer_required clock=4096");
+            return Ok(());
+        }
+        #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+        {
+            let integrals = balance::quadrature(&self.balances)?;
+            let terminal = balance::terminal_json(
+                &self.identity,
+                self.state.clock(),
+                self.balances.len(),
+                integrals,
+            );
+            artifact::publish_status(output, "endpoint-complete.json", &terminal)?;
+            println!("terminal endpoint_complete_qualification_pending clock=4096");
+            Ok(())
+        }
     }
 
     fn validate_finish(&self) -> AnyResult<()> {
         if self.state.clock().elapsed() != schedule::ENDPOINT
             || self.frontiers.durable_clock != schedule::ENDPOINT
-            || self.balances.len() != schedule::FINE.len()
+            || (!cfg!(feature = "n512-m512-piecewise-cadv33")
+                && self.balances.len() != schedule::FINE.len())
         {
             return Err(SolverError::InvalidClock.into());
         }
@@ -386,7 +411,7 @@ fn stage_accepted(
     index: usize,
     identity: &str,
     proposal: &SpectralState,
-    observer: &mut ReducedObserver,
+    observer: &mut Option<ReducedObserver>,
     facts: AttemptFacts,
 ) -> AnyResult<AcceptedStage> {
     let observation = observe_proposal(proposal, observer)?;
@@ -395,28 +420,37 @@ fn stage_accepted(
 
 fn observe_proposal(
     proposal: &SpectralState,
-    observer: &mut ReducedObserver,
+    observer: &mut Option<ReducedObserver>,
 ) -> AnyResult<Option<(TimedBalance, ObservationTiming)>> {
-    if !schedule::positive_node(proposal.clock().elapsed()) {
+    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    {
+        let _ = (proposal, observer);
         return Ok(None);
     }
-    let region = Region::new(GLOBAL);
-    let started = Instant::now();
-    let observed = observer.sample(proposal)?;
-    let timing = ObservationTiming {
-        total: started.elapsed().as_secs_f64(),
-        force: observed.force_seconds,
-        conservative: observed.conservative_seconds,
-        transfer_measure: observed.transfer_measure_seconds,
-    };
-    records::require_no_allocations(region.change())?;
-    Ok(Some((
-        TimedBalance {
-            clock: proposal.clock(),
-            sample: observed.balance,
-        },
-        timing,
-    )))
+    #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+    {
+        if !schedule::positive_node(proposal.clock().elapsed()) {
+            return Ok(None);
+        }
+        let observer = observer.as_mut().ok_or(SolverError::InvalidPayload)?;
+        let region = Region::new(GLOBAL);
+        let started = Instant::now();
+        let observed = observer.sample(proposal)?;
+        let timing = ObservationTiming {
+            total: started.elapsed().as_secs_f64(),
+            force: observed.force_seconds,
+            conservative: observed.conservative_seconds,
+            transfer_measure: observed.transfer_measure_seconds,
+        };
+        records::require_no_allocations(region.change())?;
+        Ok(Some((
+            TimedBalance {
+                clock: proposal.clock(),
+                sample: observed.balance,
+            },
+            timing,
+        )))
+    }
 }
 
 fn stage_observed(
@@ -472,7 +506,7 @@ fn stage_artifact(
     }
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 fn stage_artifact(
     output: &Path,
     index: usize,
@@ -494,4 +528,26 @@ fn stage_artifact(
     };
     step_artifact::stage_step(output, index, proposal, observation, attempt_json)
         .map_err(HarnessError::from)
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn stage_artifact(
+    output: &Path,
+    index: usize,
+    identity: &str,
+    proposal: &SpectralState,
+    attempt_json: &str,
+    _observation: Option<(TimedBalance, ObservationTiming)>,
+) -> AnyResult<StagedArtifact> {
+    step_artifact::stage_step(
+        output,
+        index,
+        proposal,
+        step_artifact::Observation::Captured {
+            identity,
+            offline_observer_node: schedule::positive_node(proposal.clock().elapsed()),
+        },
+        attempt_json,
+    )
+    .map_err(HarnessError::from)
 }

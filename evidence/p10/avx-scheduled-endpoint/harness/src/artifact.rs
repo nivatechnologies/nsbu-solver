@@ -17,9 +17,13 @@ pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
     feature = "n384-h64",
     feature = "n384-piecewise",
     feature = "n384-piecewise-cadv33",
-    feature = "n384-m512-piecewise-cadv33"
+    feature = "n384-m512-piecewise-cadv33",
+    feature = "n512-m512-piecewise-cadv33"
 ))]
+#[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
 pub const DISK_CAP_BYTES: usize = 128 * 1024 * 1024 * 1024;
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+pub const DISK_CAP_BYTES: usize = 512 * 1024 * 1024 * 1024;
 #[cfg(not(feature = "n384-prep"))]
 const HEADER_ALLOWANCE: usize = 4096;
 pub struct NodeRecord<'a> {
