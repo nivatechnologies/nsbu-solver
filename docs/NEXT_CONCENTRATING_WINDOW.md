@@ -124,8 +124,17 @@ Its global gradient RMS error is `9.79324e-5` and ordered-Hessian RMS error is
 `0.1428795`, closely matching the actual M512-force trajectory. This strongly
 supports retained N384 spatial representation as the main limitation in these
 measured derivatives. These ratios are not an exact error decomposition or a
-continuum bound. The next spatial diagnostic is an N512 analytical projection;
-it has not run. See the [projection execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-analytic-projection-clock0512.json).
+continuum bound. See the [projection execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-analytic-projection-clock0512.json).
+
+The N512/M1024 analytical projection at clock512 completed in 4168 seconds.
+Global RMS errors are `6.029e-9` (velocity), `1.12745e-5` (gradient), and
+`0.0214022` (ordered Hessian), improvements of approximately 11.35, 8.69, and
+6.68 times over the N384/M768 projection. The collar Hessian floor-normalized
+peak decreases from `1.16563` to `0.203022`. Both retained and measurement grids
+changed, so these are sampled representation diagnostics, not an isolated
+same-lattice convergence rate or continuum bound. A projection at clock4096 is
+prepared but unexecuted; early-clock improvement does not establish endpoint
+resolution. See the [N512 execution evidence](../evidence/p10/n512-analytic-projection-diagnostic/run-clock0512.json).
 
 The matched M512-force residual probe at clock 1112 is now complete. Its retained-band
 H1 residual decreases from `935.56` to `22.303`, while the omitted-band value

@@ -518,5 +518,17 @@
     "root_focused_core_tests_passed": 7,
     "scope": "Forward force and bidirectional RHS at retained N512/layout768, three repeated evaluations. Larger layouts1024/1152 remain refused. Backend admission only; no N512 trajectory, convergence or PDE qualification.",
     "launch_metadata_erratum": "evidence/p10/w3-768-controls-20260913/prepared/runs/force-20260913T112700Z/metadata-erratum.json"
+  },
+  "p10_analytic_n512_projection_clock512": {
+    "status": "diagnostic_complete_not_qualified",
+    "evidence": "evidence/p10/n512-analytic-projection-diagnostic/run-clock0512.json",
+    "global_rms_error": {
+      "velocity": 6.029036428915792e-09,
+      "gradient": 1.127447837183335e-05,
+      "ordered_hessian": 0.02140217378759238
+    },
+    "wall_seconds": 4168,
+    "maximum_rss_kib": 297840300,
+    "scope": "Sampled analytic projection, zero trajectory input. Retained N384\u2192N512 and measurement lattice768\u21921024 both change; observed RMS improvement11.35x/8.69x/6.68x is not an isolated spatial convergence rate or continuum bound. Endpoint4096 projection remains unexecuted; no accepted window."
   }
 }
