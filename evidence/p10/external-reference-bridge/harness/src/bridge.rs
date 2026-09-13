@@ -246,7 +246,7 @@ fn validate_production_input(bridge: &BridgeManifest) -> Result<(), String> {
     let profile = [
         bridge.sample_dimensions == [768; 3],
         bridge.retained_dimensions == [384; 3],
-        [512, 4096].contains(&bridge.elapsed),
+        [512, 1024, 4096].contains(&bridge.elapsed),
     ];
     if !profile.into_iter().all(std::convert::identity) {
         return Err("unsupported production bridge profile".into());

@@ -83,9 +83,40 @@ fn binding_rejects_shift_projection_case_and_clock_changes() {
     set_m512_trajectory(&mut changed);
     changed.plan_sha256 = PLAN_M384.into();
     assert!(validate_snapshot_review(&bridge, &changed).is_err());
+    changed = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut changed);
+    set_elapsed(&mut changed, 1536);
+    assert!(validate_snapshot_review(&bridge, &changed).is_err());
     let mut wrong_quantum = fixture_bridge([6; 3], [4; 3]);
     wrong_quantum.clock_exponent = -19;
     assert!(validate_bridge(&wrong_quantum).is_err());
+}
+
+#[test]
+fn m512_clock1024_requires_closed_clock_and_state_hashes() {
+    let mut snapshot = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut snapshot);
+    set_elapsed(&mut snapshot, 1024);
+    snapshot.coefficient_sha256 =
+        "bb12be8f266268813ffbeddc3c78659bc84efb2361f14dfd471e5da354fc2324".into();
+    snapshot.file_sha256 =
+        "d62fdf81db2547e6343e21e6be6faabfdf0130a8e686d771785434fe2bd16365".into();
+    let mut bridge = fixture_bridge([6; 3], [4; 3]);
+    bridge.elapsed = 1024;
+    validate_binding(&bridge, &snapshot).unwrap();
+    validate_snapshot_review(&bridge, &snapshot).unwrap();
+
+    let mut wrong_coefficient = snapshot.clone();
+    wrong_coefficient.coefficient_sha256 = "0".repeat(64);
+    assert!(validate_snapshot_review(&bridge, &wrong_coefficient).is_err());
+    let mut wrong_file = snapshot.clone();
+    wrong_file.file_sha256 = "0".repeat(64);
+    assert!(validate_snapshot_review(&bridge, &wrong_file).is_err());
+
+    let mut wrong_clock = snapshot;
+    set_elapsed(&mut wrong_clock, 1536);
+    bridge.elapsed = 1536;
+    assert!(validate_snapshot_review(&bridge, &wrong_clock).is_err());
 }
 
 #[test]
@@ -335,9 +366,21 @@ fn set_m512_trajectory(snapshot: &mut SnapshotManifest) {
     snapshot.plan_sha256 = PLAN_M512.into();
     snapshot.evolution.integration_force_dimensions = [512; 3];
     snapshot.profile.as_mut().unwrap().value = PROFILE_M512.into();
+    snapshot.coefficient_sha256 =
+        "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af".into();
+    snapshot.file_sha256 =
+        "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9".into();
     snapshot.identity = format!(
         "source={SOURCE_M512};case={CASE_SHA256};profile={PROFILE_M512};backend=rustfft-6.4.1-avx-avx2-fma;retained=384;force_samples=512;observer_force_samples=768;execution_cap={SNAPSHOT_EXECUTION_CAP};artifact_cap={SNAPSHOT_ARTIFACT_CAP}"
     );
+}
+
+fn set_elapsed(snapshot: &mut SnapshotManifest, elapsed: u128) {
+    snapshot.elapsed = elapsed;
+    snapshot.evolution.comparison_endpoint = elapsed;
+    snapshot.evolution.schedule[0].until_exclusive = elapsed;
+    snapshot.epoch = elapsed / 64;
+    snapshot.accepted_steps = elapsed / 64;
 }
 
 fn current_executable_sha256() -> String {
