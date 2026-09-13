@@ -6,7 +6,7 @@ const N512_TEST_SOURCE: &str = "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645";
 const R6_PROFILE: &str = "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
 const N512_PROFILE: &str = "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f";
 const R6_PLAN: &str = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84";
-const N512_PLAN: &str = "85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360";
+const N512_PLAN: &str = "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8";
 const CASE_SHA256: &str = "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e";
 
 pub(crate) fn diagnostic_output<'a>(
