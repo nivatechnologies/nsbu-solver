@@ -1,0 +1,11 @@
+# P10 residual acceptance contract audit
+
+This read-only audit is bound to source `1eb3e4e3b82bdc96c39bfb17051ce4657956f891`. It changes no equation, estimator, verifier, policy, tolerance, trajectory, or acceptance status.
+
+The source-backed missing residual check is a same-profile, predeclared residual observable with three-level actual accepted-node Hermite refinement at unchanged off-stage probes, an independent conservative `2N` residual evaluation, and a bound or measured convergence for forcing above that band. It must cover the required fine schedule. The single clock-1112 residual probe does not meet that contract. Completing this residual check alone would not fill the other mandatory channels or accept a window.
+
+The clock-1112 full `H1` value `1933.04` is an acceleration-residual norm, not a velocity `H1` error estimate. Design section 6.5 states an `L2` energy/Gronwall time integral using the defect `b(s)` and strain amplification `a(t)`. It does not specify Stokes/semigroup weighting. The current Rust verifier consumes supplied tracking discrepancies and eleven empirical channels, including reconstruction refinement. It neither constructs nor temporally integrates residuals, implements no residual-to-velocity bound, and can return at most `ReadyForLineageReview`.
+
+The one Qwen request used the complete relevant excerpts inline, reasoning enabled, 8,192 maximum output tokens, zero tools, and zero repairs. It finished in `53.528048` seconds with `2,692` prompt, `2,789` completion, and `1,836` reasoning tokens. The local validator then rejected the response because a polarity-insensitive keyword guard matched `1933` together with a likely negated velocity-error phrase. The controller discarded the raw final body, so it is unavailable and cannot be adjudicated. This is classified as a validator-design failure and supports no model-capability conclusion. The request was not retried.
+
+`independent-audit.json` contains the independently checked conclusions and nine exact source line-range citations. `qwen-task.json`, `qwen-config.json`, `qwen-validator.py`, and `qwen-receipt.json` preserve the request, settings, faulty guard, timing, usage, and rejection.

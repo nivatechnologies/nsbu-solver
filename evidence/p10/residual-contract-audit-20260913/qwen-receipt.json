@@ -1,0 +1,31 @@
+{
+  "receipts": [
+    {
+      "task_id": "p10-residual-contract-readonly-audit",
+      "family": "p10-residual-contract-audit",
+      "status": "failed",
+      "scientific_accepted": false,
+      "review_required": true,
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "must not convert 1933 to a velocity error"
+          ],
+          "checker_seconds": 0.000107
+        }
+      ],
+      "tool_calls": 0,
+      "timing_seconds": 53.528048,
+      "prompt_tokens": 2692,
+      "completion_tokens": 2789,
+      "reasoning_tokens": 1836,
+      "input_hash": "e8d699b834e5029e883a1191ac0989c78845e6e4eed875b52c2fff9614864da0",
+      "output_hash": null,
+      "output": null,
+      "errors": [
+        "must not convert 1933 to a velocity error"
+      ]
+    }
+  ]
+}
