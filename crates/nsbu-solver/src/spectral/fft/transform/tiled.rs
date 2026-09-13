@@ -3,7 +3,7 @@ use super::*;
 use crate::spectral::fft::TRANSVERSE_TILE_LANES;
 
 impl FftPlan {
-    pub(super) fn transverse_axis_tiled(
+    pub(in crate::spectral::fft) fn transverse_axis_tiled(
         &self,
         work: &mut FftWorkspace,
         inverse: bool,

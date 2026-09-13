@@ -2,11 +2,13 @@
 mod api;
 mod avx;
 mod owned;
+mod parallel;
 mod transform;
 mod workspace;
 
 use crate::{domain::Layout, Complex64, SolverError};
 pub use avx::FftCatalog;
+pub use parallel::{ParallelFftExecutor, ParallelFftIdentity};
 
 const AVX_SCRATCH_LANES: usize = 4;
 const TRANSVERSE_TILE_LANES: usize = 8;

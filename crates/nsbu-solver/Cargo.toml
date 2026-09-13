@@ -16,6 +16,7 @@ workspace = true
 sha2.workspace = true
 num-complex.workspace = true
 rustfft.workspace = true
+rayon.workspace = true
 
 [dev-dependencies]
 stats_alloc = "=0.1.10"

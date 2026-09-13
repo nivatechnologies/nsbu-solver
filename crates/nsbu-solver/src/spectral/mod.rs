@@ -1,7 +1,9 @@
 //! Normalized Fourier transforms and strict-band spatial operators.
 mod fft;
 mod radix;
-pub use fft::{FftBackend, FftCatalog, FftPlan, FftWorkspace};
+pub use fft::{
+    FftBackend, FftCatalog, FftPlan, FftWorkspace, ParallelFftExecutor, ParallelFftIdentity,
+};
 pub mod modal;
 mod transfer;
 pub use transfer::transfer;
