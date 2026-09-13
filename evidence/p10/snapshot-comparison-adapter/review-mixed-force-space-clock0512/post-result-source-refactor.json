@@ -1,0 +1,37 @@
+{
+  "schema": "p10-mixed-force-space-post-result-source-refactor-v1",
+  "status": "completed_without_numerical_rerun_root_review_required_before_use",
+  "archived_numerical_source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "archived_result_commit": "95cc6d12ccdee265bf1b6fe0935bba0f2352c972",
+  "archived_comparison_output_sha256": "3463c3b1adcb83e305b0a187bd290b60f298e10cc9f56b103768bf8f70cdab1e",
+  "refactor_source_commit": "61e7d5778bb3a1dbb1de77151299c8788e109d32",
+  "changes": [
+    "moved the mixed traversal and accumulators to mixed_math.rs without changing operation order",
+    "separated mixed request parsing, admission, state loading, calculation, and publication",
+    "centralized the unchanged closed legacy-full-identity and identity-profile-field matcher",
+    "split evolution-profile predicates by explicit diagnostic kind without broadening allowed methods or force grids",
+    "added a small exact publication-seam serialization control without allocating production grids"
+  ],
+  "unchanged_contracts": [
+    "MIXED_FORCE_SPACE_DIAGNOSTIC dimensions and force-grid directions",
+    "physics, schedule, clock, profile, guard, and plan binding gates",
+    "A, B, C, common/new-shell, norm, cross-term, and cosine-similarity arithmetic order",
+    "output schema and acceptance:not_assessed with zero accepted windows"
+  ],
+  "verification": {
+    "command": "bash evidence/p10/snapshot-comparison-adapter/commands.sh",
+    "exit_status": 0,
+    "tests_passed": 22,
+    "strict_clippy": "pass",
+    "maximum_cc": 21.0,
+    "maximum_cognitive": 7.0,
+    "maximum_halstead_difficulty": 39.0,
+    "maximum_production_file_lines": 453,
+    "maximum_production_crap": 23.424492862509393,
+    "crap_violations": 0
+  },
+  "execution": {
+    "large_diagnostic_reruns": 0,
+    "trajectory_actions": 0
+  }
+}

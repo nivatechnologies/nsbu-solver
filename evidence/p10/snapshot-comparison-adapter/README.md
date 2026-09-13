@@ -75,6 +75,23 @@ other force sizes or methods, and any additional physics difference are
 refused before state allocation. Neither mode may be used before a separate
 root review of the exact manifests.
 
+The optional ordered-Hessian screen uses `LEFT.json RIGHT.json CAP_BYTES
+--ordered-hessian` and retains the matched-spatial manifest contract. The closed
+three-state force/space screen uses `COARSE.json BASELINE.json FORCE.json
+CAP_BYTES --mixed-force-space`. It binds N256/M384, N384/M384, and N384/M512 at
+one clock and reports the spatial difference A, force difference B, combined
+difference C=A+B, and weighted cross terms without assigning either acceptance
+budget. Both are read-only diagnostics with separate output schemas.
+
+After the reviewed clock-512 mixed result was archived, source commit
+`61e7d5778bb3a1dbb1de77151299c8788e109d32` separated manifest/output ownership
+in `mixed.rs` from the unchanged traversal and accumulation order in
+`mixed_math.rs`. It also centralized the existing two-form profile matcher and
+split request parsing, admission, loading, calculation, and publication by
+resource ownership. The archived result remains bound to numerical source
+`62b763546e70ff59edd2cc56396e72998e31e290`; it was not rerun or relabeled by
+this structural cleanup.
+
 Before allocating either coefficient array, the harness checks both exact file lengths and admits `left coefficient bytes + right coefficient bytes + 1 MiB fixed overhead` under `CAP_BYTES`. The cushion conservatively covers bounded manifest and plan streaming, identity decode, SHA states, JSON output, and allocator bookkeeping. It streams each snapshot once and retains only its decoded three-component state. The decoder checks framing, exact identity and u128 clock fields, coefficient trailer SHA-256, finite values, Hermitian zero plane, and exact Nyquist zero. It reports the coefficient-state SHA-256 separately from the whole-file SHA-256; hashes across different retained grids are provenance, never an equality condition.
 
 For cubic retained grids, the admitted pair bounds are 1,538,719,744 bytes for N192/N384 and 1,772,879,872 bytes for N256/N384. The Rust runtime and thread stack remain process overhead outside this single-threaded harness allocation bound.

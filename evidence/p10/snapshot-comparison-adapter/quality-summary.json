@@ -1,34 +1,39 @@
 {
   "source_base": "b0f6b1d22e379d5cfbf64234bf1a7611bca95eb5",
-  "status": "pass_root_review_required_before_new_diagnostic_use",
+  "source_commit": "61e7d5778bb3a1dbb1de77151299c8788e109d32",
+  "status": "scoped_adapter_commands_pass_root_review_required_before_new_diagnostic_use",
   "focused_tests": {
-    "passed": 14,
+    "passed": 22,
     "failed": 0
   },
   "format": "pass",
   "strict_all_target_clippy": "pass",
-  "maximum_function_cyclomatic": 15.0,
+  "commands_exit_status": 0,
+  "maximum_function_cyclomatic": 21.0,
   "maximum_function_cognitive": 7.0,
   "maximum_function_halstead_difficulty": 39.0,
-  "maximum_file_lines": 449,
+  "maximum_production_file_lines": 453,
+  "aggregate_test_module_lines": 1399,
   "line_coverage": {
-    "count": 875,
-    "covered": 802,
-    "percent": 91.65714285714286
+    "count": 1709,
+    "covered": 1467,
+    "percent": 85.83967232299591
   },
   "branch_coverage": {
-    "count": 300,
-    "covered": 222,
-    "notcovered": 78,
-    "percent": 74
+    "count": 444,
+    "covered": 305,
+    "notcovered": 139,
+    "percent": 68.69369369369369
   },
-  "maximum_production_function_crap": 18.515625,
+  "maximum_production_function_crap": 23.424492862509393,
   "crap_violations": 0,
   "raw_sha256": {
-    "metrics": "9c2a5e7ec2ebef0ac11b24f96307b94354b2cd149d0269927e61d69e52cdb73b",
-    "production_metrics": "352cba05943ab64664bfa170f01569ade7f1fce3ee66f78df7b67bbc22d858d7",
-    "coverage": "c280c5f334031f001b1fe677f15a6744b4f414da1531d343e72663a7372ab022",
-    "production_crap": "56346b0c44e05dc5513f137644c85c42e75bb548df1aba307b6e53789ccb8d00"
+    "metrics": "c2edd6a64c40ff697587b68a611e98b06d9395413d83a0e59db494ea40c05ec9",
+    "production_metrics": "394a63b00b29d93ea2feb0ea0be3667fcfcb4084045e20da98603003e0780a0f",
+    "coverage": "937f33f4c9b87f16703ded41d43c28e3b448fac6ed7c16627ebc5ff448fdd266",
+    "production_crap": "f8eeadba860c0e5ce9ad4e6748baad201e26371534a38d9c00e07e8b1ecfbcd3"
   },
-  "coverage_scope": "standalone adapter production plus unit controls; test helper source is not a production CRAP input"
+  "coverage_scope": "standalone adapter production plus unit controls; test helper source is not a production CRAP input",
+  "scope_note": "The scoped command records measured branch coverage but does not label it as the workspace-wide 80% branch gate.",
+  "preserved_failure_input": "raw/pre-refactor-quality-failure-20260913"
 }
