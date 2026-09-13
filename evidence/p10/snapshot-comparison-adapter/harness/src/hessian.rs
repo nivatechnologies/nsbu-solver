@@ -126,6 +126,7 @@ pub(crate) fn diagnostic_output<'a>(
 }
 
 pub(crate) fn validate_manifest_pair(left: &Manifest, right: &Manifest) -> Result<(), String> {
+    crate::compare::validate_manifest_pair(left, right)?;
     if left.comparison_kind != ComparisonKind::MatchedSpatial
         || right.comparison_kind != ComparisonKind::MatchedSpatial
         || left.elapsed != right.elapsed
