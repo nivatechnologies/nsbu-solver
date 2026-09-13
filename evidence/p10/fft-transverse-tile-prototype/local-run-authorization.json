@@ -1,0 +1,15 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-local-run-authorization-v1",
+  "recorded_utc": "2026-09-13T15:06:03Z",
+  "authorizer": "root architect",
+  "launcher_sha256": "48ff23d23565d227068d70982a05d8d3d286a0db4bf2bb8bc15d4305ad99d6fb",
+  "authorized_action": "Execute the exact four-round N768 scalar untiled-A/tiled-A/tiled-B/untiled-B diagnostic after explicit endpoint resource release and successful process, memory, deadline, disk, source and binary gates.",
+  "conditions": [
+    "regional owner explicitly releases the endpoint projection",
+    "exact v2 launcher and frozen source/binary identities remain unchanged",
+    "all repeated launcher gates pass"
+  ],
+  "additional_permission_required_after_conditions": false,
+  "production_adoption_authorized": false,
+  "numerical_rounds_executed_when_recorded": 0
+}
