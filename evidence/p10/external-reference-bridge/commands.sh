@@ -7,6 +7,8 @@ trap 'rm -rf "$quality_dir"' EXIT
 cargo fmt --check --manifest-path evidence/p10/external-reference-bridge/harness/Cargo.toml
 cargo test --manifest-path evidence/p10/external-reference-bridge/harness/Cargo.toml
 cargo clippy --manifest-path evidence/p10/external-reference-bridge/harness/Cargo.toml --all-targets -- -D warnings
+cargo test --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml
+cargo clippy --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml --all-targets -- -D warnings
 rust-code-analysis-cli -m -O json -p evidence/p10/external-reference-bridge/harness/src > "$quality_dir/metrics.jsonl"
 grep -v 'bridge/bridge_tests.rs' "$quality_dir/metrics.jsonl" > "$quality_dir/metrics-production.jsonl"
 cargo +nightly-2026-03-03 llvm-cov --manifest-path evidence/p10/external-reference-bridge/harness/Cargo.toml --all-targets --branch --json --output-path "$quality_dir/coverage.json"
