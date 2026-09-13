@@ -1,0 +1,13 @@
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-numerical-window-20260912/crates/nsbu-solver)
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.70s
+     Running tests/residual.rs (target/debug/deps/residual-a98752d38b76556d)
+
+running 5 tests
+test heat_flow_cancels_viscosity_while_unresolved_convection_remains_visible ... ok
+test constant_acceleration_is_not_removed_as_a_pressure_gauge ... ok
+test residual_refuses_incomplete_output ... ok
+test localized_evaluator_is_bitwise_equal_to_ordinary_residual ... ok
+test localized_identity_reports_retained_cancellation_without_changing_residual_coefficients ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
