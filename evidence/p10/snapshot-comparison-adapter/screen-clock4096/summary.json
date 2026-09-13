@@ -1,0 +1,105 @@
+{
+  "schema": "p10-spatial-screen-node-v1",
+  "clock": 4096,
+  "status": "complete_screen_only_no_acceptance_claim",
+  "pairs": {
+    "n192_n256": {
+      "full": {
+        "l2": 0.00010480243350975437,
+        "h1": 0.07815477879146271,
+        "vorticity_l2": 0.0781547085263208,
+        "divergence_l2": 6.502111012038559e-15
+      },
+      "fine_absolute": {
+        "l2": 1.83889988831728,
+        "h1": 50.872458584803965,
+        "vorticity_l2": 50.83921213196826,
+        "divergence_l2": 4.903251598879102e-15
+      },
+      "relative_to_fine": {
+        "l2": 5.6991919013957745e-05,
+        "h1": 0.0015362886120626417,
+        "vorticity_l2": 0.0015372918904299118
+      },
+      "allocated_budget_multiple": {
+        "l2": 1.4247979753489437,
+        "h1": 3.8407215301566042,
+        "vorticity_l2": 3.8432297260747794
+      },
+      "common": {
+        "l2": 8.871113271417647e-08,
+        "h1": 5.638139334011471e-05,
+        "vorticity_l2": 5.638132355242311e-05,
+        "divergence_l2": 6.502109112256337e-15
+      },
+      "newly_resolved": {
+        "l2": 0.0001048023959645075,
+        "h1": 0.07815475845449818,
+        "vorticity_l2": 0.07815468818938832,
+        "divergence_l2": 4.970431188320443e-18
+      },
+      "new_shell_squared_fraction": {
+        "l2": 0.9999992835044209,
+        "h1": 0.9999994795721465,
+        "vorticity_l2": 0.9999994795724989
+      }
+    },
+    "n256_n384": {
+      "full": {
+        "l2": 1.9256934063732502e-05,
+        "h1": 0.018904609111515817,
+        "vorticity_l2": 0.018904599307731886,
+        "divergence_l2": 7.0879563973671885e-15
+      },
+      "fine_absolute": {
+        "l2": 1.8388998883830083,
+        "h1": 50.872462085830314,
+        "vorticity_l2": 50.83921564426453,
+        "divergence_l2": 5.574260810187483e-15
+      },
+      "relative_to_fine": {
+        "l2": 1.0471986096353302e-05,
+        "h1": 0.00037160790605378195,
+        "vorticity_l2": 0.0003718507272026457
+      },
+      "allocated_budget_multiple": {
+        "l2": 0.2617996524088325,
+        "h1": 0.9290197651344548,
+        "vorticity_l2": 0.9296268180066143
+      },
+      "common": {
+        "l2": 1.0952257889424351e-08,
+        "h1": 9.29234399427311e-06,
+        "vorticity_l2": 9.292337540793308e-06,
+        "divergence_l2": 7.087956306225064e-15
+      },
+      "newly_resolved": {
+        "l2": 1.9256930949218992e-05,
+        "h1": 0.01890460682774307,
+        "vorticity_l2": 0.018904597023961127,
+        "divergence_l2": 1.1366718087945908e-18
+      },
+      "new_shell_squared_fraction": {
+        "l2": 0.9999996765307242,
+        "h1": 0.9999997583898618,
+        "vorticity_l2": 0.9999997583899468
+      }
+    }
+  },
+  "fine_to_coarse_error_ratio": {
+    "l2": 0.18374510418157594,
+    "h1": 0.24188679699239166,
+    "vorticity_l2": 0.2418868890204514
+  },
+  "fine_pair_budget_gate": {
+    "h1_below_one": true,
+    "vorticity_below_one": true
+  },
+  "hash_and_identity_checks": "passed_by_adapter",
+  "remote_transfer": {
+    "source": "ssh://192.168.88.228/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-048-clock-4096/state.bin",
+    "bytes": 1366033529,
+    "source_and_staged_file_sha256": "2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592"
+  },
+  "scope": "actual matched trajectory spatial screen at one positive node; no acceptance claim"
+}
