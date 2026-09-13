@@ -1,0 +1,24 @@
+{
+  "schema": "p10-offline-residual-localization-source-sha256-v1",
+  "implementation_commit": "027757e55d316d8d1b5644b1d3c7c0d005e0b49f",
+  "release_binary_sha256": "922c97bc54894d00f40447c4bfd1ad16c20910da50e0875124a3b9d0fd847a5c",
+  "probe_plan_sha256": "45fe8993e6c6fdc3b947221934f72dff0ec40999cf71437f2f30de171f5ae0c6",
+  "localization_proposal_sha256": "e0c797e29c24027e982cf419ecbed4768d3af990af5266782175302bea76e6c5",
+  "sources": {
+    "crates/nsbu-solver/src/diagnostics/residual.rs": "4d6d38faffa8a40c0c5f3c015e6e52bafbb1edd81d60b7e0fec1bfeab6e6df9b",
+    "crates/nsbu-solver/src/diagnostics/norms.rs": "c4949119f287d2cc93b3ffbf5acd03cb249099aa5631115adfa3d91ca36b38e9",
+    "evidence/p10/offline-residual-probe/harness/src/main.rs": "30971080ba016409c023768244abc60fd8547353af6015aae63504af440f64df",
+    "evidence/p10/offline-residual-probe/harness/src/model.rs": "e3c238c2c342680077474b4c9add5cd7a1e3f49ca8fa322633bfeb34e04fefa7",
+    "evidence/p10/offline-residual-probe/harness/src/tests.rs": "8c2a49fd04be1c2c7d113f64d0ea17e1f742c6605069ca3e93b25289ed90d79c"
+  },
+  "immutable_input_file_sha256": {
+    "step-017-clock-1088/state.bin": "b2bf7efe0231b0d7940b7a1e9332bcd15967d4c27889eeb8b116b7a8723e33c7",
+    "step-018-clock-1152/state.bin": "1b04fad79092f3f561b752e2fa817237c133bb92db85fd77bbfb77e565374d84",
+    "step-019-clock-1216/state.bin": "d236a0ab72874906a84690c583e44a86db7d75c3c7ab109f94a0b4b680d61874"
+  },
+  "baseline_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+}
