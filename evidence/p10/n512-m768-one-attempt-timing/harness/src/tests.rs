@@ -38,6 +38,9 @@ fn sole_from_rest_interval_has_exact_clock_and_five_cache_nodes() {
         [0, 16, 32, 48, 64]
     );
     assert_eq!(Method::CoxMatthews.rhs_calls(), 12);
+    assert_eq!(ADVECTIVE_LIMIT, 3.3);
+    assert_eq!(tolerances().absolute, [1e-5, 1e-4]);
+    assert_eq!(tolerances().relative, [1e-5; 2]);
 }
 
 #[test]

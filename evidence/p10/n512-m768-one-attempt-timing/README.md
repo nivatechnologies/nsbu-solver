@@ -27,3 +27,19 @@ controls passed bitwise and allocation checks in the combined base lineage; sour
 identities and an exclusive host resource plan still require separate review before launch. A local
 accepted token, if produced, is reported only as an integrator outcome and is never a PDE or window
 acceptance claim.
+
+Any external launch receipt must enforce an actual 256-GiB address-space limit
+(`274,877,906,944` bytes) and fresh `MemAvailable >= 292,057,776,128` bytes before constructing
+the catalog or any numerical owner. The output's `published:false` means no trajectory state is
+published; the JSON itself is a create-new diagnostic record.
+
+Focused tests must run serially because the process-global `StatsAlloc` regions can otherwise
+observe allocations from another test thread:
+
+```text
+RUN_SOURCE=<SOURCE_COMMIT> cargo test --manifest-path \
+  evidence/p10/n512-m768-one-attempt-timing/harness/Cargo.toml -- --test-threads=1
+```
+
+Release compilation and the archived preflight must use the same frozen `RUN_SOURCE`; the binary,
+source files, and preflight receipt are hash-bound before any launch review.
