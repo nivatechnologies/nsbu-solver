@@ -1,20 +1,35 @@
 from __future__ import annotations
 
-import json
 import time
+from collections.abc import Sequence
+from dataclasses import replace
 from pathlib import Path
+from typing import TypedDict, Unpack
 
 import pytest
 
 from tools.local_agents import QueueRunner, RunnerConfig, TaskPacket
 from tools.local_agents.contracts import JsonValue
-from tools.local_agents.runner import validate_contract
+from tools.local_agents.contracts import validate_contract
 from tools.local_agents.transport import HttpTransport, ModelReply, ToolCall
 from tools.local_agents.validators import exact_expected
+from tools.json_types import array_value, decode, object_value, string_value
+
+
+class ConfigChanges(TypedDict, total=False):
+    concurrency: int
+    max_run_seconds: float
+    request_timeout_seconds: float
+    task_timeout_seconds: float
+    max_tool_calls: int
+    max_repairs: int
+    pending_review_cap: int
+    max_output_bytes: int
+    final_report_reserve_seconds: float
 
 
 class FakeTransport:
-    def __init__(self, replies: list[str | ModelReply]) -> None:
+    def __init__(self, replies: Sequence[str | ModelReply]) -> None:
         self.replies = iter(replies)
         self.requests: list[dict[str, JsonValue]] = []
         self.timeouts: list[float] = []
@@ -47,18 +62,37 @@ def packet(task_id: str = "one", *, review: bool = True, family: str = "math") -
     )
 
 
-def config(tmp_path: Path, **changes: object) -> RunnerConfig:
-    values: dict[str, object] = {
-        "endpoint": "http://spark.local:8000",
-        "model": "qwen-test",
-        "state_path": tmp_path / "state.json",
-    }
-    values.update(changes)
-    return RunnerConfig(**values)  # type: ignore[arg-type]
+def config(
+    tmp_path: Path,
+    *,
+    concurrency: int = 8,
+    max_run_seconds: float = 7200,
+    request_timeout_seconds: float = 180,
+    task_timeout_seconds: float = 900,
+    max_tool_calls: int = 4,
+    max_repairs: int = 2,
+    pending_review_cap: int = 2,
+    max_output_bytes: int = 200_000,
+    final_report_reserve_seconds: float = 60,
+) -> RunnerConfig:
+    return RunnerConfig(
+        endpoint="http://spark.local:8000",
+        model="qwen-test",
+        state_path=tmp_path / "state.json",
+        concurrency=concurrency,
+        max_run_seconds=max_run_seconds,
+        request_timeout_seconds=request_timeout_seconds,
+        task_timeout_seconds=task_timeout_seconds,
+        max_tool_calls=max_tool_calls,
+        max_repairs=max_repairs,
+        pending_review_cap=pending_review_cap,
+        max_output_bytes=max_output_bytes,
+        final_report_reserve_seconds=final_report_reserve_seconds,
+    )
 
 
 def runner(
-    tmp_path: Path, replies: list[str | ModelReply], **changes: object
+    tmp_path: Path, replies: Sequence[str | ModelReply], **changes: Unpack[ConfigChanges]
 ) -> tuple[QueueRunner, FakeTransport]:
     fake = FakeTransport(replies)
     queue = QueueRunner(
@@ -68,6 +102,18 @@ def runner(
         trusted_nonreview_validators=frozenset({"exact_expected"}),
     )
     return queue, fake
+
+
+def messages(fake: FakeTransport, request_index: int) -> Sequence[JsonValue]:
+    return array_value(fake.requests[request_index]["messages"])
+
+
+def errors(receipt: dict[str, JsonValue]) -> list[str]:
+    return [string_value(item) for item in array_value(receipt["errors"])]
+
+
+def attempts(receipt: dict[str, JsonValue]) -> Sequence[JsonValue]:
+    return array_value(receipt["attempts"])
 
 
 def test_final_phase_omits_tools_and_all_requests_enable_thinking(tmp_path: Path) -> None:
@@ -85,7 +131,7 @@ def test_tool_reads_only_declared_artifact_and_honors_call_budget(tmp_path: Path
     artifact = tmp_path / "fixture.txt"
     artifact.write_text("fixed", encoding="utf-8")
     task = packet()
-    task = TaskPacket(**{**task.__dict__, "artifacts": {"fixture": artifact}})
+    task = replace(task, artifacts={"fixture": artifact})
     queue, fake = runner(
         tmp_path,
         [
@@ -98,8 +144,9 @@ def test_tool_reads_only_declared_artifact_and_honors_call_budget(tmp_path: Path
     )
     receipt = queue.run([task])[0]
     assert receipt["tool_calls"] == 1
-    assert fake.requests[1]["messages"][3]["content"] == "fixed"
-    assert fake.requests[1]["messages"][3]["role"] == "tool"
+    tool_message = object_value(messages(fake, 1)[3])
+    assert tool_message["content"] == "fixed"
+    assert tool_message["role"] == "tool"
     assert fake.timeouts[0] < fake.timeouts[1]
 
 
@@ -108,8 +155,9 @@ def test_invalid_outputs_get_two_repairs_with_exact_errors_then_fail_closed(tmp_
     queue, fake = runner(tmp_path, replies, max_tool_calls=0, max_repairs=2)
     receipt = queue.run([packet()])[0]
     assert receipt["status"] == "failed"
-    assert len(receipt["attempts"]) == 3
-    repair_prompt = json.loads(fake.requests[2]["messages"][1]["content"])
+    assert len(attempts(receipt)) == 3
+    prompt_text = string_value(object_value(messages(fake, 2)[1])["content"])
+    repair_prompt = object_value(decode(prompt_text))
     assert repair_prompt["repair_validator_errors"] == ["missing required output field: sum"]
     assert receipt["output"] is None
 
@@ -117,8 +165,10 @@ def test_invalid_outputs_get_two_repairs_with_exact_errors_then_fail_closed(tmp_
 def test_review_capacity_reserves_inflight_slots_and_defers_without_failure(tmp_path: Path) -> None:
     queue, _ = runner(tmp_path, ['{"sum":5}', '{"sum":5}'], pending_review_cap=1)
     receipts = queue.run([packet("a"), packet("b")])
-    assert sorted(r["status"] for r in receipts) == ["deferred_review_backpressure", "validated_candidate"]
-    assert queue._family_failures == {"math": 0}
+    assert sorted(string_value(r["status"]) for r in receipts) == [
+        "deferred_review_backpressure",
+        "validated_candidate",
+    ]
 
 
 def test_terminal_state_prevents_duplicate_rerun(tmp_path: Path) -> None:
@@ -174,8 +224,9 @@ def test_outer_wall_guard_does_not_wait_for_uncooperative_transport(tmp_path: Pa
     receipt = queue.run([packet()])[0]
     assert time.monotonic() - started < 0.2
     assert receipt["status"] == "budget_exhausted"
-    assert "TimeoutError" in receipt["errors"][0]
-    assert receipt["errors"][-1] == "server-side cancellation is unknown"
+    assert "TimeoutError" in errors(receipt)[0]
+    assert errors(receipt)[-1] == "server-side cancellation is unknown"
+    assert receipt["prompt_tokens"] is None
 
 
 def test_queue_refills_configured_worker_slot_for_trusted_tasks(tmp_path: Path) -> None:
@@ -193,22 +244,68 @@ def test_numeric_contract_rejects_bool_and_nonfinite() -> None:
 
 
 def test_endpoint_normalization_and_truncated_reply_refusal(tmp_path: Path) -> None:
-    assert HttpTransport("http://spark/v1")._endpoint == "http://spark/v1/chat/completions"
+    assert HttpTransport("http://spark/v1").endpoint == "http://spark/v1/chat/completions"
     queue, _ = runner(
         tmp_path,
-        [ModelReply('{"sum":5}', finish_reason="length")],
+        [ModelReply('{"sum":5}', prompt_tokens=10, completion_tokens=4, finish_reason="length")],
         max_tool_calls=0,
         max_repairs=0,
     )
     receipt = queue.run([packet()])[0]
     assert receipt["status"] == "failed"
-    assert "finish_reason=length" in receipt["errors"][0]
+    assert "finish_reason=length" in errors(receipt)[0]
+    assert receipt["completion_tokens"] == 4
 
 
 def test_unsupported_contract_is_rejected_before_inference(tmp_path: Path) -> None:
     task = packet()
-    invalid = TaskPacket(**{**task.__dict__, "output_contract": {"additionalProperties": False}})
+    invalid = replace(task, output_contract={"additionalProperties": False})
     queue, fake = runner(tmp_path, [])
     with pytest.raises(ValueError, match="unsupported output contract"):
         queue.run([invalid])
+    assert not fake.requests
+
+
+def test_duplicate_task_id_with_different_packet_is_rejected(tmp_path: Path) -> None:
+    first = packet("same")
+    second = replace(first, instructions="different work")
+    queue, fake = runner(tmp_path, [])
+    with pytest.raises(ValueError, match="task id reused"):
+        queue.run([first, second])
+    assert not fake.requests
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf")])
+def test_nonfinite_time_budgets_are_rejected(value: float) -> None:
+    with pytest.raises(ValueError, match="timeouts"):
+        RunnerConfig(endpoint="http://spark", model="qwen", max_run_seconds=value).checked()
+
+
+def test_final_tool_calls_and_unknown_finish_reasons_fail_closed(tmp_path: Path) -> None:
+    replies = [
+        ModelReply('{"sum":5}', tool_calls=(ToolCall("x", "read_artifact", '{}'),)),
+        ModelReply('{"sum":5}', finish_reason="error"),
+    ]
+    queue, _ = runner(tmp_path, replies, max_tool_calls=0, max_repairs=1)
+    receipt = queue.run([packet()])[0]
+    assert receipt["status"] == "failed"
+    assert len(attempts(receipt)) == 2
+
+
+def test_task_timeouts_count_toward_family_pause(tmp_path: Path) -> None:
+    for index in range(3):
+        queue = QueueRunner(
+            config(
+                tmp_path,
+                request_timeout_seconds=0.001,
+                task_timeout_seconds=0.002,
+                final_report_reserve_seconds=0.0005,
+                max_repairs=0,
+            ),
+            HangingTransport(),
+            validators={"exact_expected": exact_expected},
+        )
+        assert queue.run([packet(f"timeout-{index}")])[-1]["status"] == "budget_exhausted"
+    paused, fake = runner(tmp_path, [])
+    assert paused.run([packet("paused")])[-1]["status"] == "family_paused"
     assert not fake.requests

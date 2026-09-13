@@ -4,19 +4,21 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
 import os
 import queue
 import signal
 import threading
 import time
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
-from dataclasses import asdict
 from pathlib import Path
-from typing import Mapping
+from types import FrameType
+from typing import Callable, Mapping
 
-from .contracts import JsonValue, RunnerConfig, TaskPacket, Validator
+from .contracts import JsonValue, RunnerConfig, TaskPacket, Validator, validate_contract
 from .transport import HttpTransport, ModelReply, Transport
+from tools.json_types import decode, object_value, string_value
+
+type SignalHandler = int | signal.Handlers | Callable[[int, FrameType | None], object]
 
 READ_TOOL: dict[str, JsonValue] = {
     "type": "function",
@@ -59,8 +61,9 @@ class QueueRunner:
         started = time.monotonic()
         ready = self._unique_tasks(tasks)
         pending_review = sum(
-            r.get("status") == "validated_candidate" and r.get("review_required", True)
+            1
             for r in self.receipts
+            if r.get("status") == "validated_candidate" and r.get("review_required", True) is True
         )
         active_review = 0
         old_handler = self._install_signal_handler()
@@ -69,46 +72,23 @@ class QueueRunner:
                 futures: dict[Future[dict[str, JsonValue]], TaskPacket] = {}
                 while ready or futures:
                     run_expired = time.monotonic() - started >= self.config.max_run_seconds
-                    while (
-                        ready
-                        and len(futures) < self.config.concurrency
-                        and not self._stop.is_set()
-                        and not run_expired
-                    ):
-                        index = self._next_dispatchable(ready, pending_review + active_review)
-                        if index is None:
-                            break
-                        task = ready.pop(index)
-                        if self._family_failures.get(task.family, 0) >= 3:
-                            self.receipts.append(self._deferred_receipt(task, "family_paused"))
-                            continue
-                        self._inflight[task.task_id] = {
-                            "task_id": task.task_id,
-                            "family": task.family,
-                            "input_hash": self._task_hash(task),
-                            "status": "running",
-                            "attempts_reserved": self.config.max_repairs + 1,
-                            "tool_calls_reserved": self.config.max_tool_calls,
-                        }
-                        self.save_state()
-                        futures[pool.submit(self._run_task, task, started)] = task
-                        active_review += int(task.review_required)
+                    active_review += self._submit_ready(
+                        pool,
+                        futures,
+                        ready,
+                        pending_review + active_review,
+                        started,
+                        run_expired,
+                    )
                     if not futures:
                         break
                     done, _ = wait(futures, return_when=FIRST_COMPLETED)
                     for future in done:
                         task = futures.pop(future)
                         active_review -= int(task.review_required)
-                        receipt = future.result()
-                        self._inflight.pop(task.task_id, None)
-                        self.receipts.append(receipt)
-                        family = str(receipt["family"])
-                        if receipt["status"] == "validated_candidate":
-                            self._family_failures[family] = 0
+                        validated = self._record_result(task, future.result())
+                        if validated:
                             pending_review += int(task.review_required)
-                        elif receipt["status"] == "failed":
-                            self._family_failures[family] = self._family_failures.get(family, 0) + 1
-                        self.save_state()
                 for task in ready:
                     status = (
                         "deferred_on_shutdown"
@@ -124,6 +104,54 @@ class QueueRunner:
                 signal.signal(signal.SIGINT, old_handler)
         return self.receipts
 
+    def _submit_ready(
+        self,
+        pool: ThreadPoolExecutor,
+        futures: dict[Future[dict[str, JsonValue]], TaskPacket],
+        ready: list[TaskPacket],
+        used_review: int,
+        started: float,
+        run_expired: bool,
+    ) -> int:
+        submitted_review = 0
+        while ready and len(futures) < self.config.concurrency and not self._stop.is_set():
+            if run_expired:
+                break
+            index = self._next_dispatchable(ready, used_review + submitted_review)
+            if index is None:
+                break
+            task = ready.pop(index)
+            if self._family_failures.get(task.family, 0) >= 3:
+                self.receipts.append(self._deferred_receipt(task, "family_paused"))
+                continue
+            self._reserve(task)
+            futures[pool.submit(self._run_task, task, started)] = task
+            submitted_review += int(task.review_required)
+        return submitted_review
+
+    def _reserve(self, task: TaskPacket) -> None:
+        self._inflight[task.task_id] = {
+            "task_id": task.task_id,
+            "family": task.family,
+            "input_hash": self._task_hash(task),
+            "status": "running",
+            "attempts_reserved": self.config.max_repairs + 1,
+            "tool_calls_reserved": self.config.max_tool_calls,
+        }
+        self.save_state()
+
+    def _record_result(self, task: TaskPacket, receipt: dict[str, JsonValue]) -> bool:
+        self._inflight.pop(task.task_id, None)
+        self.receipts.append(receipt)
+        family = task.family
+        validated = receipt["status"] == "validated_candidate"
+        if validated:
+            self._family_failures[family] = 0
+        elif receipt["status"] in {"failed", "budget_exhausted"}:
+            self._family_failures[family] = self._family_failures.get(family, 0) + 1
+        self.save_state()
+        return validated
+
     def _next_dispatchable(self, ready: list[TaskPacket], used_review: int) -> int | None:
         for index, task in enumerate(ready):
             if not task.review_required or used_review < self.config.pending_review_cap:
@@ -132,18 +160,38 @@ class QueueRunner:
 
     def _run_task(self, task: TaskPacket, run_started: float) -> dict[str, JsonValue]:
         begun = time.monotonic()
+        status, output, errors, attempts, usage = self._attempts(task, begun, run_started)
+        if status != "validated_candidate":
+            output = None
+        elapsed = round(time.monotonic() - begun, 6)
+        return {
+            "task_id": task.task_id,
+            "family": task.family,
+            "status": status,
+            "scientific_accepted": False,
+            "review_required": task.review_required,
+            "attempts": attempts,
+            "tool_calls": usage[0],
+            "timing_seconds": elapsed,
+            "prompt_tokens": usage[1] if usage[1] >= 0 else None,
+            "completion_tokens": usage[2] if usage[2] >= 0 else None,
+            "reasoning_tokens": usage[3] if usage[3] >= 0 else None,
+            "input_hash": self._task_hash(task),
+            "output_hash": self._json_hash(output) if output is not None else None,
+            "output": output,
+            "errors": errors,
+        }
+
+    def _attempts(
+        self, task: TaskPacket, begun: float, run_started: float
+    ) -> tuple[str, dict[str, JsonValue] | None, list[str], list[JsonValue], list[int]]:
         attempts: list[JsonValue] = []
         errors: list[str] = []
-        tokens = [0, 0, 0]
-        tool_calls = 0
+        usage = [0, 0, 0, 0]
         status = "failed"
         output: dict[str, JsonValue] | None = None
         original_hash = self._task_hash(task)
-        if self._family_failures.get(task.family, 0) >= 3:
-            errors = ["task family paused after 3 consecutive failures"]
-            status = "family_paused"
-        else:
-            for attempt in range(self.config.max_repairs + 1):
+        for attempt in range(self.config.max_repairs + 1):
                 if self._expired(begun, run_started):
                     errors = ["task or run wall-clock budget exhausted"]
                     status = "budget_exhausted"
@@ -152,19 +200,17 @@ class QueueRunner:
                     begun + self.config.task_timeout_seconds,
                     run_started + self.config.max_run_seconds,
                 )
-                usage = [tool_calls, tokens[0], tokens[1], tokens[2]]
                 try:
                     result = self._attempt(task, errors, usage, deadline)
                 except Exception as exc:
                     errors = [f"inference failed: {type(exc).__name__}: {exc}"]
                     attempts.append({"number": attempt + 1, "validator_errors": list(errors)})
-                    tool_calls, tokens[0], tokens[1], tokens[2] = usage
                     if isinstance(exc, TimeoutError):
                         status = "budget_exhausted"
                         errors.append("server-side cancellation is unknown")
+                        usage[1:] = [-1, -1, -1]
                         break
                     continue
-                tool_calls, tokens[0], tokens[1], tokens[2] = usage
                 output, errors, checker_seconds = self._validate(task, result)
                 attempts.append(
                     {
@@ -183,32 +229,17 @@ class QueueRunner:
                     break
                 if not errors:
                     errors = ["declared artifact changed during task"]
-        if status != "validated_candidate":
-            output = None
-        elapsed = round(time.monotonic() - begun, 6)
-        return {
-            "task_id": task.task_id,
-            "family": task.family,
-            "status": status,
-            "scientific_accepted": False,
-            "review_required": task.review_required,
-            "attempts": attempts,
-            "tool_calls": tool_calls,
-            "timing_seconds": elapsed,
-            "prompt_tokens": tokens[0],
-            "completion_tokens": tokens[1],
-            "reasoning_tokens": tokens[2],
-            "input_hash": self._task_hash(task),
-            "output_hash": self._json_hash(output) if output is not None else None,
-            "output": output,
-            "errors": errors,
-        }
+        return status, output, errors, attempts, usage
 
     def _attempt(
         self, task: TaskPacket, errors: list[str], usage: list[int], deadline: float
     ) -> dict[str, JsonValue] | None:
         messages: list[JsonValue] = [{"role": "system", "content": self._system_prompt(task)}]
-        prompt = {"task": task.instructions, "inputs": task.inputs, "output_contract": task.output_contract}
+        prompt: dict[str, JsonValue] = {
+            "task": task.instructions,
+            "inputs": task.inputs,
+            "output_contract": task.output_contract,
+        }
         if errors:
             prompt["repair_validator_errors"] = list(errors)
         messages.append({"role": "user", "content": json.dumps(prompt, sort_keys=True)})
@@ -216,6 +247,7 @@ class QueueRunner:
         while usage[0] < self.config.max_tool_calls and time.monotonic() < tool_deadline:
             reply = self._complete(messages, include_tools=True, deadline=tool_deadline)
             self._add_tokens(usage, reply, offset=1)
+            self._check_reply(reply, final=False)
             if not reply.tool_calls:
                 break
             if len(reply.tool_calls) != 1:
@@ -223,10 +255,8 @@ class QueueRunner:
             call = reply.tool_calls[0]
             if call.name != "read_artifact":
                 raise ValueError(f"unsupported tool call: {call.name}")
-            arguments = json.loads(call.arguments)
-            request = arguments.get("name") if isinstance(arguments, dict) else None
-            if not isinstance(request, str):
-                raise ValueError("read_artifact requires string name")
+            arguments = object_value(decode(call.arguments))
+            request = string_value(arguments.get("name"))
             usage[0] += 1
             artifact = task.artifacts.get(request)
             content = self._read_artifact(artifact)
@@ -243,6 +273,7 @@ class QueueRunner:
         messages.append({"role": "user", "content": "FINAL REPORT: return only the contracted JSON object."})
         final_reply = self._complete(messages, include_tools=False, deadline=deadline)
         self._add_tokens(usage, final_reply, offset=1)
+        self._check_reply(final_reply, final=True)
         if len(final_reply.content.encode()) > self.config.max_output_bytes:
             return None
         return self._parse_object(final_reply.content)
@@ -262,12 +293,16 @@ class QueueRunner:
         timeout = min(self.config.request_timeout_seconds, deadline - time.monotonic())
         if timeout <= 0:
             raise TimeoutError("task or run wall-clock budget exhausted")
-        reply = self._bounded_complete(request, timeout)
-        if reply.finish_reason in {"length", "content_filter"}:
+        return self._bounded_complete(request, timeout)
+
+    def _check_reply(self, reply: ModelReply, *, final: bool) -> None:
+        allowed = {"stop"} if final else {"stop", "tool_calls"}
+        if reply.finish_reason not in allowed:
             raise ValueError(f"model response refused due to finish_reason={reply.finish_reason}")
+        if final and reply.tool_calls:
+            raise ValueError("final report must not contain tool calls")
         if len(reply.content.encode()) > self.config.max_output_bytes:
             raise ValueError("model response exceeds byte limit")
-        return reply
 
     def _bounded_complete(self, request: dict[str, JsonValue], timeout: float) -> ModelReply:
         result: queue.Queue[ModelReply | BaseException] = queue.Queue(maxsize=1)
@@ -323,12 +358,21 @@ class QueueRunner:
             "interrupted_requires_explicit_requeue",
         }
         seen = {str(r.get("input_hash")) for r in self.receipts if r.get("status") in terminal}
+        ids = {
+            str(r.get("task_id")): str(r.get("input_hash"))
+            for r in self.receipts
+            if r.get("task_id") is not None and r.get("input_hash") is not None
+        }
         result: list[TaskPacket] = []
         for task in tasks:
             task.checked()
             if not task.review_required and task.validator not in self._trusted_nonreview:
                 raise ValueError("review_required=false needs a trusted deterministic validator")
             digest = self._task_hash(task)
+            prior = ids.get(task.task_id)
+            if prior is not None and prior != digest:
+                raise ValueError(f"task id reused with different inputs: {task.task_id}")
+            ids[task.task_id] = digest
             if digest not in seen:
                 seen.add(digest)
                 result.append(task)
@@ -350,10 +394,10 @@ class QueueRunner:
     @staticmethod
     def _parse_object(content: str) -> dict[str, JsonValue] | None:
         try:
-            value = json.loads(content)
-        except (json.JSONDecodeError, TypeError):
+            value = decode(content)
+        except (json.JSONDecodeError, TypeError, UnicodeError):
             return None
-        return value if isinstance(value, dict) else None
+        return dict(value) if isinstance(value, Mapping) else None
 
     @staticmethod
     def _system_prompt(task: TaskPacket) -> str:
@@ -413,16 +457,22 @@ class QueueRunner:
         path = self.config.state_path
         if not path.is_file():
             return
-        value = json.loads(path.read_text(encoding="utf-8"))
+        value = object_value(decode(path.read_text(encoding="utf-8")))
         if value.get("schema") != "nsbu-local-agent-queue-v1":
             raise ValueError("unsupported queue state schema")
-        self.receipts = list(value.get("receipts", []))
-        self._family_failures = dict(value.get("family_consecutive_failures", {}))
+        raw_receipts = value.get("receipts", [])
+        if not isinstance(raw_receipts, list):
+            raise ValueError("queue receipts must be an array")
+        self.receipts = [dict(object_value(item)) for item in raw_receipts]
+        raw_failures = object_value(value.get("family_consecutive_failures", {}))
+        self._family_failures = {
+            name: count for name, count in raw_failures.items() if isinstance(count, int)
+        }
         abandoned = value.get("inflight", {})
         if isinstance(abandoned, dict):
             for item in abandoned.values():
                 if isinstance(item, dict):
-                    receipt = dict(item)
+                    receipt: dict[str, JsonValue] = dict(item)
                     receipt["status"] = "interrupted_requires_explicit_requeue"
                     receipt["scientific_accepted"] = False
                     receipt["errors"] = ["prior process ended with this task in flight"]
@@ -440,40 +490,9 @@ class QueueRunner:
             "errors": [],
         }
 
-    def _install_signal_handler(self) -> object | None:
+    def _install_signal_handler(self) -> SignalHandler | None:
         if threading.current_thread() is not threading.main_thread():
             return None
         previous = signal.getsignal(signal.SIGINT)
         signal.signal(signal.SIGINT, lambda _signum, _frame: self.stop())
         return previous
-
-
-def validate_contract(output: dict[str, JsonValue], contract: dict[str, JsonValue]) -> list[str]:
-    errors: list[str] = []
-    required = contract.get("required", [])
-    if isinstance(required, list):
-        for name in required:
-            if isinstance(name, str) and name not in output:
-                errors.append(f"missing required output field: {name}")
-    properties = contract.get("properties", {})
-    type_map: Mapping[str, type[object] | tuple[type[object], ...]] = {
-        "string": str,
-        "object": dict,
-        "array": list,
-        "boolean": bool,
-        "number": (int, float),
-        "integer": int,
-    }
-    if isinstance(properties, dict):
-        for name, rule in properties.items():
-            if name in output and isinstance(rule, dict) and isinstance(rule.get("type"), str):
-                expected = type_map.get(rule["type"])
-                value = output[name]
-                numeric = rule["type"] in {"number", "integer"}
-                invalid_number = numeric and (
-                    isinstance(value, bool)
-                    or (isinstance(value, float) and not math.isfinite(value))
-                )
-                if expected is not None and (not isinstance(value, expected) or invalid_number):
-                    errors.append(f"output field {name} must have type {rule['type']}")
-    return errors

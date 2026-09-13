@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import math
 from pathlib import Path
-from typing import Callable, Mapping, TypeAlias
+from typing import Callable, Mapping
 
-JsonScalar: TypeAlias = str | int | float | bool | None
-JsonValue: TypeAlias = JsonScalar | list["JsonValue"] | dict[str, "JsonValue"]
-Validator: TypeAlias = Callable[[dict[str, JsonValue], dict[str, JsonValue]], list[str]]
+from tools.json_types import Json as JsonValue
+
+type Validator = Callable[[dict[str, JsonValue], dict[str, JsonValue]], list[str]]
 
 
 @dataclass(frozen=True)
@@ -44,11 +45,14 @@ class RunnerConfig:
             self.max_output_bytes,
             self.max_tokens,
         )
-        if any(value <= 0 for value in positive):
+        if any(not math.isfinite(value) or value <= 0 for value in positive):
             raise ValueError("timeouts and pending review cap must be positive")
         if self.max_tool_calls < 0 or not 0 <= self.max_repairs <= 2:
             raise ValueError("tool calls must be nonnegative and repairs at most 2")
-        if not 0 <= self.final_report_reserve_seconds < self.task_timeout_seconds:
+        if (
+            not math.isfinite(self.final_report_reserve_seconds)
+            or not 0 <= self.final_report_reserve_seconds < self.task_timeout_seconds
+        ):
             raise ValueError("final report reserve must fit inside the task timeout")
         return self
 
@@ -61,7 +65,7 @@ class TaskPacket:
     inputs: dict[str, JsonValue]
     output_contract: dict[str, JsonValue]
     validator: str
-    artifacts: Mapping[str, Path] = field(default_factory=dict)
+    artifacts: Mapping[str, Path] = field(default_factory=lambda: {})
     review_required: bool = True
 
     def checked(self) -> "TaskPacket":
@@ -86,7 +90,40 @@ def _check_contract_definition(contract: dict[str, JsonValue]) -> None:
         raise ValueError("output contract properties must be an object")
     allowed_types = {"string", "object", "array", "boolean", "number", "integer"}
     for name, rule in properties.items():
-        if not isinstance(name, str) or not isinstance(rule, dict) or set(rule) != {"type"}:
+        if not isinstance(rule, dict) or set(rule) != {"type"}:
             raise ValueError(f"unsupported output property contract: {name}")
         if rule.get("type") not in allowed_types:
             raise ValueError(f"unsupported output property type: {rule.get('type')}")
+
+
+def validate_contract(output: dict[str, JsonValue], contract: dict[str, JsonValue]) -> list[str]:
+    errors: list[str] = []
+    required = contract.get("required", [])
+    if isinstance(required, list):
+        errors.extend(
+            f"missing required output field: {name}" for name in required if name not in output
+        )
+    properties = contract.get("properties", {})
+    if isinstance(properties, dict):
+        for name, rule in properties.items():
+            if name in output and isinstance(rule, dict):
+                expected = rule.get("type")
+                if isinstance(expected, str) and not _matches_type(output[name], expected):
+                    errors.append(f"output field {name} must have type {expected}")
+    return errors
+
+
+def _matches_type(value: JsonValue, expected: str) -> bool:
+    types: Mapping[str, type[object] | tuple[type[object], ...]] = {
+        "string": str,
+        "object": dict,
+        "array": list,
+        "boolean": bool,
+        "number": (int, float),
+        "integer": int,
+    }
+    if not isinstance(value, types[expected]):
+        return False
+    if expected not in {"number", "integer"}:
+        return True
+    return not isinstance(value, bool) and (not isinstance(value, float) or math.isfinite(value))
