@@ -1,0 +1,27 @@
+{
+  "schema": "p10-external-reference-bridge-resource-plan-v1",
+  "source_commit": "6bdea3084d737ce6585cb67ab5d48810bd03cd50",
+  "retained_dimensions": [384, 384, 384],
+  "sample_dimensions": [768, 768, 768],
+  "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "storage": {
+    "decoded_actual_state": 1366032384,
+    "snapshot_decoder_overhead": 1048576,
+    "physical_reference_velocity": 10871635968,
+    "fft_catalog": 29362480,
+    "fft_plan_and_workspace": 3633389976,
+    "fft_output_spectrum": 3633315840,
+    "retained_reference_velocity": 1366032384,
+    "allocator_allowance": 40960,
+    "serialization": 65536,
+    "total": 20900924104
+  },
+  "work": {
+    "reference_evaluations": 452984832,
+    "maximum_root_iterations": 57982058496,
+    "scalar_forward_transforms": 3,
+    "transfer_coefficient_visits": 681246720,
+    "comparison_work_units": 199213056
+  },
+  "classification": "allocation-free exact reservation computation; no M768 evaluation executed"
+}
