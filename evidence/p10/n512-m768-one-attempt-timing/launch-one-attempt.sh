@@ -6,6 +6,8 @@ readonly BINARY_SHA256=0df5f007d26d836819f582a7028bb5534ca8a5c5d3047831c8022fac1
 readonly AS_BYTES=274877906944
 readonly MIN_AVAILABLE_KIB=285212672
 readonly PROJECTION_PID=1586745
+readonly CAMPAIGN_DEADLINE_UTC=2026-09-13T19:52:54Z
+readonly CAMPAIGN_DEADLINE_EPOCH=1789329174
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo=$(CDPATH= cd -- "$script_dir/../../.." && pwd)
@@ -52,6 +54,11 @@ git -C "$repo" diff --quiet -- \
 (cd "$repo" && sha256sum --check --status \
     evidence/p10/n512-m768-one-attempt-timing/prepared/source-sha256.list)
 [[ $(sha256sum "$repo/evidence/p10/w3-768-controls-20260913/prepared/runs/completion.json" | awk '{ print $1 }') == a78a26b6949059083d3a0e1f6fb4bf04010571cfa663430a2d548cf3c78a8834 ]]
+now_epoch=$(date -u +%s)
+((now_epoch + 2400 + 60 <= CAMPAIGN_DEADLINE_EPOCH)) || {
+    echo "refusing launch: timeout plus grace exceeds campaign deadline $CAMPAIGN_DEADLINE_UTC" >&2
+    exit 64
+}
 
 mkdir -p "$script_dir/raw"
 mkdir "$run_dir"
@@ -112,6 +119,8 @@ cat > "$run_dir/launch-receipt.json" <<EOF
   "minimum_mem_available_bytes": 292057776128,
   "timeout_seconds": 2400,
   "kill_grace_seconds": 60,
+  "campaign_deadline_utc": "$CAMPAIGN_DEADLINE_UTC",
+  "campaign_deadline_epoch": $CAMPAIGN_DEADLINE_EPOCH,
   "projection_pid_confirmed_absent": $PROJECTION_PID,
   "owner_pid": $owner_pid,
   "owner_pgid": $owner_pgid,

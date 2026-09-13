@@ -54,3 +54,5 @@ while projection PID 1586745 exists, then requires the exact binary and source h
 `MemAvailable`, create-new run storage, and a stable PID/PGID/starttime/cmdline identity before
 recording a launch receipt. `prepared/launch-plan.json` binds the command and all limits. This does
 not authorize launch before explicit projection-owner resource release and root handoff.
+Before creating the run directory it also requires the current time plus the 2400-second timeout
+and 60-second grace to fit within the campaign deadline `2026-09-13T19:52:54Z`.
