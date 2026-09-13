@@ -98,6 +98,33 @@ acquire_owned_identity() {
     return 1
 }
 
+acquire_group_member_identity() {
+    candidate=$1
+    expected_program=$2
+    expected_pgid=$3
+    count=0
+    while [ "$count" -lt 200 ]; do
+        if [ -r "/proc/$candidate/stat" ] && [ -r "/proc/$candidate/cmdline" ]; then
+            first=$(tr '\000' '\n' <"/proc/$candidate/cmdline" 2>/dev/null | head -n 1)
+            stat=$(cat "/proc/$candidate/stat" 2>/dev/null || true)
+            rest=${stat##*) }; set -- $rest
+            if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$3" = "$expected_pgid" ] && [ "$first" = "$expected_program" ]; then
+                candidate_start=${20}
+                candidate_cmd=$(sha256sum "/proc/$candidate/cmdline" | awk '{print $1}')
+                sleep 0.05
+                stat2=$(cat "/proc/$candidate/stat" 2>/dev/null || true)
+                rest2=${stat2##*) }; set -- $rest2
+                if [ "$#" -ge 20 ] && [ "$1" != Z ] && [ "$3" = "$expected_pgid" ] && [ "${20}" = "$candidate_start" ] && [ "$(sha256sum "/proc/$candidate/cmdline" | awk '{print $1}')" = "$candidate_cmd" ]; then
+                    owned_pid=$candidate; owned_pgid=$expected_pgid; owned_starttime=$candidate_start; owned_cmdline=$candidate_cmd
+                    return 0
+                fi
+            fi
+        fi
+        sleep 0.05; count=$((count + 1))
+    done
+    return 1
+}
+
 fake_owner_test() {
     temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-watchdog.XXXXXX")
     setsid /bin/sleep 30 &
@@ -145,6 +172,23 @@ fake_archive_timeout_test() {
     echo "TERM-ignoring archive deadline escalation passed"
 }
 
+fake_wrapper_cleanup_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-wrapper-cleanup.XXXXXX")
+    setsid /bin/sh -c 'trap "exit 0" TERM; /bin/sh -c '\''trap "" TERM; while :; do sleep 1; done'\'' & echo $! >"$1"; wait' wrapper "$temp/child" &
+    wrapper=$!
+    count=0
+    while [ ! -s "$temp/child" ] && [ "$count" -lt 100 ]; do sleep 0.05; count=$((count + 1)); done
+    child=$(cat "$temp/child")
+    acquire_group_member_identity "$child" /bin/sh "$wrapper"
+    stop_owned 1
+    wait "$wrapper" 2>/dev/null || true
+    count=0
+    while [ -r "/proc/$child/stat" ] && [ "$count" -lt 100 ]; do sleep 0.05; count=$((count + 1)); done
+    [ ! -r "/proc/$child/stat" ]
+    owned_pid=
+    echo "wrapper exit plus TERM-ignoring solver cleanup passed"
+}
+
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
 ARCHIVE_HELPER=$BUNDLE/archive-local.sh
@@ -161,6 +205,7 @@ case "${1:-}" in
     --self-test-owner) fake_owner_test; exit $? ;;
     --self-test-handshake) fake_handshake_test; exit $? ;;
     --self-test-archive-timeout) fake_archive_timeout_test; exit $? ;;
+    --self-test-wrapper-cleanup) fake_wrapper_cleanup_test; exit $? ;;
     --self-test-identity) require_v3_identity; echo "v3 binary identity admitted"; exit 0 ;;
 esac
 
@@ -237,6 +282,11 @@ set -- $rest
 pgid=$3
 starttime=${20}
 cmdline=$(sha256sum "/proc/$solver_pid/cmdline" | awk '{print $1}')
+[ "$pgid" = "$time_pgid" ] || exit 77
+acquire_group_member_identity "$solver_pid" "$BIN" "$time_pgid" || { echo "refused: solver child identity handshake failed" >&2; exit 77; }
+pgid=$owned_pgid
+starttime=$owned_starttime
+cmdline=$owned_cmdline
 setsid "$WATCHDOG" "$solver_pid" "$pgid" "$starttime" "$cmdline" "$DEADLINE_EPOCH" "$LOG_DIR/watchdog.log" >"$LOG_DIR/watchdog.stdout" 2>"$LOG_DIR/watchdog.stderr" &
 watchdog_pid=$!
 

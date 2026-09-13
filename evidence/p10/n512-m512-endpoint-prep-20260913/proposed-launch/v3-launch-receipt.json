@@ -3,7 +3,7 @@
   "status": "prepared_unexecuted",
   "harness_commit_and_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
   "launch_plan_sha256": "85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360",
-  "launcher_sha256": "a08527f7630c572e5a76feaee7fae26fb1604516eef489d7f2767dfb8cdd230c",
+  "launcher_sha256": "ff6242bef16fc8c0de4a44483ded313619282d90a5962e2d66cdafecb1ed40b7",
   "binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
   "preflight_sha256": "b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6",
   "watchdog_sha256": "e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
@@ -20,5 +20,6 @@
   "term_ignoring_archive_timeout_test_status": 0,
   "shellcheck_available": false,
   "endpoint_attempts_executed": 0,
-  "launch_authorized": false
+  "launch_authorized": false,
+  "wrapper_exit_term_ignoring_solver_cleanup_test_status": 0
 }
