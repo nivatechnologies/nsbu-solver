@@ -75,11 +75,11 @@ and piecewise schedule. At clock 512 the N256-to-N384 pair is
 0.988227809391572 times the allocated H1 budget and 0.9888821775622612 times
 the allocated vorticity budget; at clock 4096 those values are
 0.9290197651344548 and 0.9296268180066143. Fine-pair errors decrease at every
-node, while the N192-to-N256 pair exceeds the allocated H1/vorticity context
-budget. The fine pair is smaller than the coarse pair at every clock; this is
-a spatial comparison across clocks, not a claim that the error is monotone in
-time, and the coarse pair need not meet the fine-pair budget. This is a matched
-spatial screen only; it does not establish an accepted window. See the [eight-node aggregate](../evidence/p10/snapshot-comparison-adapter/spatial-screen-8nodes/RESULT.md)
+node. At every node, the N256-to-N384 difference is smaller than the
+N192-to-N256 difference. The coarse pair exceeds the allocated H1/vorticity
+context budget; that is not a failure of the required spatial sequence, and the
+coarse pair need not meet the fine-pair budget. This is a matched spatial screen
+only; it does not establish an accepted window. See the [eight-node aggregate](../evidence/p10/snapshot-comparison-adapter/spatial-screen-8nodes/RESULT.md)
 and [clock-4096 detail](../evidence/p10/snapshot-comparison-adapter/screen-clock4096/RESULT.md).
 
 The current read-only bridge compares the actual N384 states with an
@@ -164,7 +164,7 @@ diagnostic.
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
 states. The fine observable schedule still needs pressure, regional
-derivative-sensitive quantities, off-stage residuals, sampling, arithmetic,
+derivative-sensitive quantities, qualified off-stage residual bounds, sampling, arithmetic,
 reference precision, force and time channels, plus typed balances and
 quadrature. Quality exceptions remain separate and attached to their exact
 scope. Source-bound profile admission, the eight-node screen,
