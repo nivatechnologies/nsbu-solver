@@ -28,6 +28,9 @@ use timed_rhs::TimedRhs;
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
+#[cfg(test)]
+static TEST_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
 const RETAINED: usize = 512;
 const SAMPLES: usize = 512;
 const WORKERS: usize = 32;
@@ -41,7 +44,8 @@ const FORWARD_ADDITIONAL: usize = 4_318_465_792;
 const BIDIRECTIONAL_ADDITIONAL: usize = 21_787_856_768;
 const PRODUCTION_SOURCE_COMMIT: &str = "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0";
 const TEST_SOURCE_COMMIT: &str = "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645";
-const PARALLEL_EXECUTOR_SOURCE_COMMIT: &str = "b09fb7719c66cfddb04e56a37fe3f0d0fadba5a5";
+const PARALLEL_LIBRARY_SOURCE_COMMIT: &str = "477c418d30d9f2c8b117ae05240fc5596ecbd33b";
+const PARALLEL_PROTOTYPE_SOURCE_COMMIT: &str = "b09fb7719c66cfddb04e56a37fe3f0d0fadba5a5";
 
 #[derive(Clone, Copy)]
 struct Admission {
@@ -137,7 +141,7 @@ fn report_preflight(parallel: bool) -> Result<(), String> {
     if !parallel && required != BASE_CAP {
         return Err("baseline resource identity changed".into());
     }
-    println!("status=preflight_only mode={} executor_source={} retained={RETAINED} samples={SAMPLES} fft_workers={} ticks={TICKS} catalog_bytes={} force_bytes={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={}", if parallel {"parallel"} else {"baseline"}, PARALLEL_EXECUTOR_SOURCE_COMMIT, if parallel {FFT_WORKERS} else {0}, a.catalog, a.force.storage_bytes, a.rhs, a.attempt, a.plan.total());
+    println!("status=preflight_only mode={} library_source={} prototype_source={} retained={RETAINED} samples={SAMPLES} fft_helpers={} fft_persistent_callers={} fft_total_workers={} ticks={TICKS} catalog_bytes={} force_bytes={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={}", if parallel {"parallel"} else {"baseline"}, PARALLEL_LIBRARY_SOURCE_COMMIT, PARALLEL_PROTOTYPE_SOURCE_COMMIT, if parallel {FFT_WORKERS} else {0}, if parallel {3} else {0}, if parallel {FFT_WORKERS + 3} else {0}, a.catalog, a.force.storage_bytes, a.rhs, a.attempt, a.plan.total());
     Ok(())
 }
 
@@ -221,7 +225,7 @@ fn gated_run(output: &Path, parallel: bool) -> Result<(), String> {
         )?),
         None => None,
     };
-    writeln!(output, "{{\"schema\":\"p10-n512-m512-parallel-fft-one-attempt-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"fft_execution_mode\":\"{}\",\"fft_workers\":{},\"production_source_commit\":\"{PRODUCTION_SOURCE_COMMIT}\",\"test_source_commit\":\"{TEST_SOURCE_COMMIT}\",\"executor_source_commit\":\"{PARALLEL_EXECUTOR_SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":512,\"method\":\"cox-matthews\",\"advective_limit\":3.3,\"absolute_tolerances\":[1e-5,1e-4],\"relative_tolerances\":[1e-5,1e-5],\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"candidate_coefficient_sha256\":{},\"candidate_hash_encoding\":\"component-major-axis-0-through-2;coefficient-order;re-u64-le-then-im-u64-le\",\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"timer_identity\":\"{}\",\"qualification\":false}}", if parallel { "parallel" } else { "baseline" }, if parallel { FFT_WORKERS } else { 0 }, result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), candidate_sha256.as_ref().map_or("null".to_string(), |value| format!("\"{value}\"")), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
+    writeln!(output, "{{\"schema\":\"p10-n512-m512-parallel-fft-one-attempt-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"fft_execution_mode\":\"{}\",\"fft_helper_workers\":{},\"fft_persistent_callers\":{},\"fft_total_workers\":{},\"production_source_commit\":\"{PRODUCTION_SOURCE_COMMIT}\",\"test_source_commit\":\"{TEST_SOURCE_COMMIT}\",\"parallel_library_source_commit\":\"{PARALLEL_LIBRARY_SOURCE_COMMIT}\",\"parallel_prototype_source_commit\":\"{PARALLEL_PROTOTYPE_SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":512,\"method\":\"cox-matthews\",\"advective_limit\":3.3,\"absolute_tolerances\":[1e-5,1e-4],\"relative_tolerances\":[1e-5,1e-5],\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"candidate_coefficient_sha256\":{},\"candidate_hash_encoding\":\"component-major-axis-0-through-2;coefficient-order;re-u64-le-then-im-u64-le\",\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"timer_identity\":\"{}\",\"qualification\":false}}", if parallel { "parallel" } else { "baseline" }, if parallel { FFT_WORKERS } else { 0 }, if parallel { 3 } else { 0 }, if parallel { FFT_WORKERS + 3 } else { 0 }, result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), candidate_sha256.as_ref().map_or("null".to_string(), |value| format!("\"{value}\"")), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
     output.flush().map_err(|e| e.to_string())
 }
 
@@ -262,7 +266,12 @@ fn require_identities(
         )
         .map_err(debug)?
     } else {
-        BIDIRECTIONAL_ADDITIONAL
+        W3FftPool::additional_reservation_with_backend(
+            domain.padded_layout().map_err(debug)?,
+            backend,
+            W3FftMode::Bidirectional,
+        )
+        .map_err(debug)?
     };
     let force_additional = if parallel {
         W3FftPool::additional_parallel_reservation_with_backend(
@@ -273,7 +282,8 @@ fn require_identities(
         )
         .map_err(debug)?
     } else {
-        FORWARD_ADDITIONAL
+        W3FftPool::additional_reservation_with_backend(samples, backend, W3FftMode::Forward)
+            .map_err(debug)?
     };
     let expected_rhs = W3FftIdentity {
         layout: domain.padded_layout().map_err(debug)?,
@@ -304,7 +314,9 @@ fn require_identities(
             let identity = identity.ok_or("missing parallel FFT identity")?;
             if identity.layout != layout
                 || identity.backend != backend
-                || identity.workers != FFT_WORKERS
+                || identity.helper_workers != FFT_WORKERS
+                || identity.persistent_callers != 3
+                || identity.workers != FFT_WORKERS + 3
             {
                 return Err("parallel FFT identity mismatch".into());
             }

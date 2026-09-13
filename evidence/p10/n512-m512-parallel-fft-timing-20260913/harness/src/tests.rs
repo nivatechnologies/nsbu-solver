@@ -7,6 +7,7 @@ use nsbu_solver::{
 
 #[test]
 fn small_actual_force_and_rhs_parallel_factories_match_legacy_w3_bits() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     let backend = FftBackend::RustFft6_4_1AvxFma;
     if backend.ensure_available().is_err() {
         return;
@@ -98,6 +99,8 @@ fn small_actual_force_and_rhs_parallel_factories_match_legacy_w3_bits() {
         parallel_cap,
     )
     .unwrap();
+    require_identities(domain, samples, backend, &baseline, false).unwrap();
+    require_identities(domain, samples, backend, &parallel, true).unwrap();
     let clock = TickClock::from_rest(-20, 8192).unwrap();
     baseline.begin_attempt(clock, TICKS).unwrap();
     parallel.begin_attempt(clock, TICKS).unwrap();
@@ -124,6 +127,7 @@ fn small_actual_force_and_rhs_parallel_factories_match_legacy_w3_bits() {
 
 #[test]
 fn exact_api_reservation_and_one_byte_under_are_closed() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     let a = admit(BASE_CAP, false).unwrap();
     assert_eq!(
         a.plan.classes(),
@@ -162,6 +166,7 @@ fn exact_api_reservation_and_one_byte_under_are_closed() {
 
 #[test]
 fn candidate_hash_uses_component_order_and_little_endian_binary64_words() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     let a = [Complex64::new(1.0, -2.0), Complex64::new(0.5, -0.0)];
     let b = [Complex64::new(3.25, 4.5)];
     assert_eq!(
@@ -172,6 +177,7 @@ fn candidate_hash_uses_component_order_and_little_endian_binary64_words() {
 
 #[test]
 fn sole_from_rest_interval_has_exact_clock_and_five_cache_nodes() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     let clock = TickClock::from_rest(-20, 8192).unwrap();
     assert_eq!(clock.elapsed(), 0);
     assert_eq!(
@@ -186,6 +192,7 @@ fn sole_from_rest_interval_has_exact_clock_and_five_cache_nodes() {
 
 #[test]
 fn each_constructor_refuses_its_one_byte_under_budget_before_large_allocation() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     let a = admit(BASE_CAP, false).unwrap();
     let (domain, samples, backend) = geometry().unwrap();
     assert!(matches!(
@@ -240,6 +247,7 @@ fn each_constructor_refuses_its_one_byte_under_budget_before_large_allocation() 
 
 #[test]
 fn execution_is_explicitly_gated_before_output_creation() {
+    let _test_guard = TEST_LOCK.lock().unwrap();
     std::env::remove_var("NSBU_RUN_N512_M512_PARALLEL_FFT_ONE_ATTEMPT");
     let path = std::env::temp_dir().join(format!("p10-n512-m512-refusal-{}", std::process::id()));
     let _ = std::fs::remove_file(&path);

@@ -94,6 +94,7 @@ mod tests {
 
     impl RightHandSide for Stub {
         fn bounds(&self) -> Option<RhsBounds> {
+            let _test_guard = crate::TEST_LOCK.lock().unwrap();
             Some(RhsBounds {
                 storage_bytes: 17,
                 work_units: 2,
