@@ -109,6 +109,7 @@ name = "p10-fft-transverse-tile-benchmark"
 version = "0.0.0"
 dependencies = [
  "nsbu-solver",
+ "sha2",
 ]
 
 [[package]]

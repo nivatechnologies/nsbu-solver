@@ -1,0 +1,45 @@
+{
+  "schema": "p10-fft-transverse-tile-n768-plan-v1",
+  "status": "prepared_not_executed_not_adopted",
+  "untiled_source_commit": "f3960e157f26f37fa9a9fe808a4a596395164706",
+  "prototype_source_commit_before_hash_harness": "75ad6ec908a7ba919be41a3543490531f19b8942",
+  "layout": [768, 768, 768],
+  "repeats_per_round": 1,
+  "round_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+  "per_round": {
+    "warm_forward": 1,
+    "warm_inverse": 1,
+    "timed_forward": 1,
+    "timed_inverse": 1,
+    "timeout_seconds": 600,
+    "kill_grace_seconds": 60
+  },
+  "resource_bytes": {
+    "input": 3623878656,
+    "spectrum": 3633315840,
+    "restored": 3623878656,
+    "untiled_fft_workspace": 3633389976,
+    "tiled_fft_workspace": 3633488304,
+    "fft_catalog_allowance": 29362480,
+    "untiled_total": 14543825608,
+    "tiled_total": 14543923936,
+    "tiled_minus_untiled": 98328,
+    "address_space_limit": 25769803776,
+    "minimum_mem_available": 68719476736
+  },
+  "artifact_plan": {
+    "mode": "canonical_little_endian_word_sha256_only",
+    "raw_word_files_created": false,
+    "maximum_small_logs_and_receipts_bytes": 4194304,
+    "create_new_unique_round_directories": true,
+    "failed_round_preserved": true
+  },
+  "launch_gates": [
+    "endpoint projection owner explicitly releases localhost and all recorded PIDs/PGIDs are absent",
+    "root reviews and authorizes the exact source, binaries, reservation report and launcher",
+    "each round rechecks MemAvailable, exact binary/source hashes, AS limit and campaign deadline",
+    "identity-bound process group cleanup uses bounded TERM then KILL only for the captured identity"
+  ],
+  "selection_heuristic": "Exploratory performance selection only: proceed to full W3 correctness/allocation and representative RHS timing review only if combined median improves at least 10 percent and neither direction regresses.",
+  "qualification": false
+}

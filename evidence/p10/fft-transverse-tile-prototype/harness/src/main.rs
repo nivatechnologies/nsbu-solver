@@ -1,6 +1,7 @@
 use nsbu_solver::domain::Layout;
 use nsbu_solver::spectral::{FftBackend, FftCatalog, FftPlan};
 use nsbu_solver::Complex64;
+use sha2::{Digest, Sha256};
 use std::fs::{create_dir, File};
 use std::io::{BufWriter, Write};
 use std::path::Path;
@@ -8,12 +9,18 @@ use std::time::Instant;
 
 fn main() {
     let args = std::env::args().collect::<Vec<_>>();
-    assert_eq!(args.len(), 4, "usage: benchmark N REPEATS OUTPUT_DIR");
+    assert!(
+        args.len() == 4 || args.len() == 5 && args[4] == "--hash-only",
+        "usage: benchmark N REPEATS OUTPUT_DIR [--hash-only]"
+    );
     let n = args[1].parse::<usize>().unwrap();
     let repeats = args[2].parse::<usize>().unwrap();
     assert!(repeats > 0);
     let output_dir = Path::new(&args[3]);
-    create_dir(output_dir).unwrap();
+    let hash_only = args.len() == 5;
+    if !hash_only {
+        create_dir(output_dir).unwrap();
+    }
     let layout = Layout::new([n; 3]).unwrap();
     let backend = FftBackend::RustFft6_4_1AvxFma;
     let catalog = FftCatalog::new(backend, FftCatalog::reservation(backend).unwrap()).unwrap();
@@ -42,11 +49,32 @@ fn main() {
         plan.inverse(&spectrum, &mut restored, &mut work).unwrap();
     }
     let inverse_ns = started.elapsed().as_nanos();
-    write_complex(&output_dir.join("forward.bin"), &spectrum);
-    write_real(&output_dir.join("inverse.bin"), &restored);
+    let forward_sha256 = hash_complex(&spectrum);
+    let inverse_sha256 = hash_real(&restored);
+    if !hash_only {
+        write_complex(&output_dir.join("forward.bin"), &spectrum);
+        write_real(&output_dir.join("inverse.bin"), &restored);
+    }
     println!(
-        "{{\"layout\":{n},\"repeats\":{repeats},\"reservation_bytes\":{reservation},\"forward_ns\":{forward_ns},\"inverse_ns\":{inverse_ns}}}"
+        "{{\"layout\":{n},\"repeats\":{repeats},\"reservation_bytes\":{reservation},\"forward_ns\":{forward_ns},\"inverse_ns\":{inverse_ns},\"forward_sha256\":\"{forward_sha256}\",\"inverse_sha256\":\"{inverse_sha256}\"}}"
     );
+}
+
+fn hash_complex(values: &[Complex64]) -> String {
+    let mut hash = Sha256::new();
+    for value in values {
+        hash.update(value.re.to_bits().to_le_bytes());
+        hash.update(value.im.to_bits().to_le_bytes());
+    }
+    format!("{hash:x}")
+}
+
+fn hash_real(values: &[f64]) -> String {
+    let mut hash = Sha256::new();
+    for value in values {
+        hash.update(value.to_bits().to_le_bytes());
+    }
+    format!("{hash:x}")
 }
 
 fn write_complex(path: &Path, values: &[Complex64]) {

@@ -7,10 +7,9 @@ use std::path::Path;
 
 fn main() {
     let args = std::env::args().collect::<Vec<_>>();
-    assert_eq!(
-        args.len(),
-        6,
-        "usage: anisotropic BACKEND NX NY NZ OUTPUT_DIR"
+    assert!(
+        args.len() == 6 || args.len() == 7 && args[6] == "--dense",
+        "usage: anisotropic BACKEND NX NY NZ OUTPUT_DIR [--dense]"
     );
     let dimensions = [
         args[2].parse::<usize>().unwrap(),
@@ -34,8 +33,15 @@ fn main() {
         (plan, work, bytes)
     };
     let [nx, ny, nz] = dimensions;
+    let dense = args.len() == 7;
     let input = (0..layout.real_len())
         .map(|index| {
+            if dense {
+                let bits = (index as u64)
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1_442_695_040_888_963_407);
+                return ((bits >> 11) as f64) * 2.0_f64.powi(-53) - 0.5;
+            }
             let z = index % nz;
             let y = index / nz % ny;
             let x = index / (ny * nz);
@@ -53,8 +59,9 @@ fn main() {
     write_complex(&output_dir.join("forward.bin"), &spectrum);
     write_real(&output_dir.join("inverse.bin"), &restored);
     println!(
-        "{{\"dimensions\":{dimensions:?},\"backend\":\"{}\",\"reservation_bytes\":{reservation}}}",
-        args[1]
+        "{{\"dimensions\":{dimensions:?},\"backend\":\"{}\",\"input\":\"{}\",\"reservation_bytes\":{reservation}}}",
+        args[1],
+        if dense { "dense-lcg-bits-v1" } else { "cosine-plus-nyquist-v1" }
     );
 }
 

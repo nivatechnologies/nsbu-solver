@@ -6,5 +6,6 @@ publish = false
 
 [dependencies]
 nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+sha2 = "=0.10.9"
 
 [workspace]
