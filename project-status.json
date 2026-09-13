@@ -529,7 +529,7 @@
     },
     "wall_seconds": 4168,
     "maximum_rss_kib": 297840300,
-    "scope": "Sampled analytic projection, zero trajectory input. Retained N384\u2192N512 and measurement lattice768\u21921024 both change; observed RMS improvement11.35x/8.69x/6.68x is not an isolated spatial convergence rate or continuum bound. Endpoint4096 projection result remains pending; no accepted window."
+    "scope": "Sampled analytic projection, zero trajectory input. Retained N384\u2192N512 and measurement lattice768\u21921024 both change; observed RMS improvement11.35x/8.69x/6.68x is not an isolated spatial convergence rate or continuum bound. Endpoint4096 projection timed out without a result; no accepted window."
   },
   "p10_n512_m768_one_attempt_timing": {
     "status": "actual_attempt_complete_uncommitted",
@@ -542,5 +542,14 @@
     "local_accepted_token_present": true,
     "candidate_committed": false,
     "scope": "One actual CM attempt from rest0\u219264ticks; local acceptance is not PDE acceptance. No trajectory publication or convergence evidence. Runtime exceeds preliminary estimate; FFT locality prototype remains unadopted."
+  },
+  "p10_analytic_n512_projection_clock4096": {
+    "status": "incomplete_timeout_no_result",
+    "evidence": "evidence/p10/n512-analytic-projection-endpoint4096/run-clock4096.json",
+    "exit_code": 124,
+    "wall_seconds": 6049,
+    "maximum_rss_kib": 297836312,
+    "accepted_windows": 0,
+    "scope": "Sampled analytical diagnostic only. Fixed 6000-second timeout plus termination grace; no final or candidate result, no retry, no endpoint qualification. Source-specific preflight preserved separately."
   }
 }

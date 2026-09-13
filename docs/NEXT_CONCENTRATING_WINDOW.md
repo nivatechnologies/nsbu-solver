@@ -132,9 +132,8 @@ Global RMS errors are `6.029e-9` (velocity), `1.12745e-5` (gradient), and
 6.68 times over the N384/M768 projection. The collar Hessian floor-normalized
 peak decreases from `1.16563` to `0.203022`. Both retained and measurement grids
 changed, so these are sampled representation diagnostics, not an isolated
-same-lattice convergence rate or continuum bound. A projection at clock4096 is
-in progress with its result pending; early-clock improvement does not establish endpoint
-resolution. See the [N512 execution evidence](../evidence/p10/n512-analytic-projection-diagnostic/run-clock0512.json).
+same-lattice convergence rate or continuum bound. The clock4096 projection timed out without a result after 6049 seconds;
+early-clock improvement does not establish endpoint resolution. The [timeout evidence](../evidence/p10/n512-analytic-projection-endpoint4096/run-clock4096.json) preserves the fixed limit and resource release. See the [N512 execution evidence](../evidence/p10/n512-analytic-projection-diagnostic/run-clock0512.json).
 
 A single actual N512/M768 Cox–Matthews attempt from rest to clock64 completed
 with passing local indicators and zero steady allocations, but its candidate was
