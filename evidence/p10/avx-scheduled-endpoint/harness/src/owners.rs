@@ -5,7 +5,7 @@ use nsbu_solver::spectral::{W3FftIdentity, W3FftMode};
 use nsbu_solver::{
     domain::{Domain, Epoch, Layout, ResourcePlan, SpectralState, TickClock},
     integrators::{
-        attempt::AttemptWorkspace, forcing::ForceLimits, method::Method, rhs::SpectralRhs,
+        attempt::AttemptWorkspace, forcing::ForceLimits, rhs::SpectralRhs,
         transaction::CandidateState,
     },
     spectral::{FftBackend, FftCatalog},
@@ -112,13 +112,8 @@ fn finish_rhs(
 ) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
     let bytes =
         SpectralRhs::<CachedReducedForce>::reservation_with_catalog(domain, limits, catalog)?;
-    let rhs = SpectralRhs::new_with_catalog(
-        domain,
-        force,
-        config::ADVECTIVE_LIMIT,
-        catalog,
-        bytes,
-    )?;
+    let rhs =
+        SpectralRhs::new_with_catalog(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)?;
     require_identity(
         rhs.provider()
             .w3_identity()
@@ -207,7 +202,7 @@ fn new_observer_for(
 
 pub fn states(resources: ResourcePlan) -> Result<StateOwners, SolverError> {
     let (state, candidate) = state_pair(resources)?;
-    let attempts = AttemptWorkspace::new_with_method(resources, Method::CoxMatthews)?;
+    let attempts = AttemptWorkspace::new_with_method(resources, config::method())?;
     Ok(StateOwners {
         state,
         candidate,

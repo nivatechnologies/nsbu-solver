@@ -35,7 +35,14 @@ compile_error!("n384-h32 and n384-h64 are mutually exclusive profiles");
     all(feature = "n384-h64", feature = "n384-piecewise"),
     all(feature = "n384-h32", feature = "n384-piecewise-cadv33"),
     all(feature = "n384-h64", feature = "n384-piecewise-cadv33"),
-    all(feature = "n384-piecewise", feature = "n384-piecewise-cadv33")
+    all(feature = "n384-piecewise", feature = "n384-piecewise-cadv33"),
+    all(feature = "n384-h32", feature = "n384-piecewise-ho-cadv33"),
+    all(feature = "n384-h64", feature = "n384-piecewise-ho-cadv33"),
+    all(feature = "n384-piecewise", feature = "n384-piecewise-ho-cadv33"),
+    all(
+        feature = "n384-piecewise-cadv33",
+        feature = "n384-piecewise-ho-cadv33"
+    )
 ))]
 compile_error!("select only one exact n384 profile");
 #[cfg(all(
@@ -46,7 +53,8 @@ compile_error!("select only one exact n384 profile");
         feature = "n384-piecewise",
         feature = "n384-piecewise-cadv33",
         feature = "n192-piecewise-cadv33",
-        feature = "n256-piecewise-cadv33"
+        feature = "n256-piecewise-cadv33",
+        feature = "n384-piecewise-ho-cadv33"
     ))
 ))]
 compile_error!("select an exact top-level n384 feature");
@@ -83,6 +91,18 @@ const HISTORY_BYTES: usize = schedule::MAXIMUM_ATTEMPTS * 4096;
 const TIMER_OVERHEAD: usize = TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
 const OVERHEAD: usize = artifact::BUFFER_BYTES + HISTORY_BYTES + TIMER_OVERHEAD + 64 * 1024;
 
+#[cfg(feature = "n384-piecewise-ho-cadv33")]
+const METHOD_NAME: &str = "hochbruck-ostermann";
+#[cfg(not(feature = "n384-piecewise-ho-cadv33"))]
+const METHOD_NAME: &str = "cox-matthews";
+
+pub fn method() -> Method {
+    #[cfg(feature = "n384-piecewise-ho-cadv33")]
+    return Method::HochbruckOstermann;
+    #[cfg(not(feature = "n384-piecewise-ho-cadv33"))]
+    Method::CoxMatthews
+}
+
 #[cfg(not(any(feature = "n256", feature = "n384-prep")))]
 const PROFILE: &str = "n192-m384";
 #[cfg(all(feature = "n256", not(feature = "n384-prep")))]
@@ -95,14 +115,13 @@ const PROFILE: &str = "n384-m384-h64-cadv08-w3-f13c29c";
 const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv16-w3-f13c29c";
 #[cfg(all(feature = "n384-piecewise-cadv33", not(feature = "n256")))]
 const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
+#[cfg(feature = "n384-piecewise-ho-cadv33")]
+const PROFILE: &str = "n384-m384-ho-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n192-piecewise-cadv33")]
 const PROFILE: &str = "n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c";
 #[cfg(feature = "n256-piecewise-cadv33")]
 const PROFILE: &str = "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
-#[cfg(all(
-    feature = "n384-prep",
-    not(feature = "n384-matched-piecewise")
-))]
+#[cfg(all(feature = "n384-prep", not(feature = "n384-matched-piecewise")))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 #[cfg(feature = "n384-matched-piecewise")]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-matched-piecewise-preflight-v1";
@@ -265,7 +284,7 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
 }
 
 fn diagnostic_reservations(geometry: Geometry) -> Result<(usize, usize), SolverError> {
-    let attempt = AttemptWorkspace::reservation_with_method(geometry.domain, Method::CoxMatthews)?;
+    let attempt = AttemptWorkspace::reservation_with_method(geometry.domain, method())?;
     let observer = ReducedObserver::preflight(
         geometry.domain,
         geometry.observer_samples,
@@ -302,7 +321,7 @@ fn work_admission(
     let integration_work = reservations
         .force
         .work_units
-        .checked_mul(12 * schedule::MAXIMUM_ATTEMPTS)
+        .checked_mul(method().rhs_calls() * schedule::MAXIMUM_ATTEMPTS)
         .ok_or(SolverError::SizeOverflow)?;
     let observer_work = observer_work(geometry)?;
     Ok(Admission {
@@ -346,7 +365,7 @@ fn observer_work(geometry: Geometry) -> Result<usize, SolverError> {
 fn report(admission: &Admission) {
     let sizes = admission.reservations;
     println!(
-        "preflight source={} case_sha256={CASE_SHA256} schema={PREFLIGHT_SCHEMA} profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma execution={EXECUTION} provider={PROVIDER} retained={N} sampled={M} workers={WORKERS} method=cox-matthews schedule={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} profile_identity={} archive_profile=unsupported qualification=experimental",
+        "preflight source={} case_sha256={CASE_SHA256} schema={PREFLIGHT_SCHEMA} profile={PROFILE} backend=rustfft-6.4.1-avx-avx2-fma execution={EXECUTION} provider={PROVIDER} retained={N} sampled={M} workers={WORKERS} method={METHOD_NAME} schedule={} maximum_attempts={} endpoint={} advective_limit={ADVECTIVE_LIMIT} observer_nodes={:?} observer_sampled={} nested_middle={:?} nested_coarse={:?} catalog_bytes={} rhs_bytes={} attempt_bytes={} observer_bytes={} overhead={OVERHEAD} total={} cap={CAP} disk_preflight_bytes={} disk_cap_bytes={} integration_work_bound={} observer_work_bound={} profile_identity={} archive_profile=unsupported qualification=experimental",
         env!("RUN_SOURCE"),
         schedule::IDENTITY,
         schedule::MAXIMUM_ATTEMPTS,
@@ -382,7 +401,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n384-prep")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft={RHS_FFT_IDENTITY};force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers={};provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft={RHS_FFT_IDENTITY};force_w3=layout384-width3-forward-add1827942144;rhs_timer={};retained={N};force_samples={M};observer_force_samples={};observer_conservative={};sampling_workers={WORKERS};rhs_w3_workers={};provider_w3_workers=3;method={METHOD_NAME};schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
         env!("RUN_SOURCE"),
         crate::timed_rhs::IDENTITY,
         2 * M,
@@ -403,88 +422,5 @@ pub fn identity() -> String {
 }
 
 #[cfg(all(test, feature = "n384-prep"))]
-mod n384_tests {
-    use super::*;
-
-    #[cfg(feature = "n384-h32")]
-    const EXPECTED_N384_TOTAL: usize = 185_783_161_608;
-    #[cfg(feature = "n384-h64")]
-    const EXPECTED_N384_TOTAL: usize = 185_782_899_464;
-    #[cfg(all(
-        feature = "n384-piecewise-common",
-        not(feature = "n192-piecewise-cadv33"),
-        not(feature = "n256-piecewise-cadv33")
-    ))]
-    const EXPECTED_N384_TOTAL: usize = 185_782_833_928;
-    #[cfg(feature = "n192-piecewise-cadv33")]
-    const EXPECTED_N384_TOTAL: usize = 52_428_314_504;
-    #[cfg(feature = "n256-piecewise-cadv33")]
-    const EXPECTED_N384_TOTAL: usize = 79_485_917_960;
-    #[cfg(feature = "n192-piecewise-cadv33")]
-    const EXPECTED_MATCHED_DISK: usize = 8_242_397_184;
-    #[cfg(feature = "n256-piecewise-cadv33")]
-    const EXPECTED_MATCHED_DISK: usize = 19_482_083_328;
-    #[cfg(feature = "n192-piecewise-cadv33")]
-    const EXPECTED_MATCHED_WORK: usize = 4_213_502_118_720;
-    #[cfg(feature = "n256-piecewise-cadv33")]
-    const EXPECTED_MATCHED_WORK: usize = 4_221_931_883_328;
-
-    #[test]
-    fn selected_profile_is_exact_and_execution_ready() {
-        #[cfg(not(any(
-            feature = "n384-matched-piecewise"
-        )))]
-        assert_eq!(N, 384);
-        #[cfg(feature = "n192-piecewise-cadv33")]
-        assert_eq!(N, 192);
-        #[cfg(feature = "n256-piecewise-cadv33")]
-        assert_eq!(N, 256);
-        assert_eq!(M, 384);
-        #[cfg(not(feature = "n384-piecewise-common"))]
-        assert_eq!(ADVECTIVE_LIMIT, 0.8);
-        #[cfg(feature = "n384-piecewise")]
-        assert_eq!(ADVECTIVE_LIMIT, 1.6);
-        #[cfg(feature = "n384-cadv33-profile")]
-        assert_eq!(ADVECTIVE_LIMIT, 3.3);
-        assert_eq!(CAP, 206_158_430_208);
-        assert_eq!(require_execution_ready(), Ok(()));
-        let identity = identity();
-        assert!(identity.contains("provider=parallel-reduced-v2-force-w3-attempt-cache"));
-        assert!(identity.contains(&format!("rhs_fft={RHS_FFT_IDENTITY}")));
-        assert!(identity.contains("force_w3=layout384-width3-forward-add1827942144"));
-        assert!(identity.contains("observer_force_samples=768"));
-        assert!(identity.contains(&format!("observer_conservative={}", 2 * N)));
-        assert!(identity.contains("numa=whole-host-unbound-all-visible-cpus-memory"));
-        assert!(identity.contains(&format!("external_stop={EXTERNAL_STOP}")));
-        assert!(identity.contains(&format!("artifact_cap={}", artifact::DISK_CAP_BYTES)));
-    }
-
-    #[test]
-    fn complete_w3_reservation_is_available_without_execution_admission() {
-        let geometry = geometry().unwrap();
-        let admission = admit_geometry(geometry, CAP).unwrap();
-        let total = admission.resources.total();
-        println!(
-            "n384_complete_reservation={total} classes={:?} catalog={} force_storage={} rhs={} attempt={} observer={} overhead={} disk={}",
-            admission.resources.classes(),
-            admission.reservations.catalog,
-            admission.reservations.force.storage_bytes,
-            admission.reservations.rhs,
-            admission.reservations.attempt,
-            admission.reservations.observer,
-            OVERHEAD,
-            admission.disk,
-        );
-        assert_eq!(total, EXPECTED_N384_TOTAL);
-        #[cfg(feature = "n384-matched-piecewise")]
-        {
-            assert_eq!(admission.disk, EXPECTED_MATCHED_DISK);
-            assert_eq!(admission.integration_work, EXPECTED_MATCHED_WORK);
-            assert_eq!(admission.observer_work, 467_480_346_624);
-        }
-        assert!(matches!(
-            admit_geometry(geometry, total - 1),
-            Err(SolverError::ResourceLimit)
-        ));
-    }
-}
+#[path = "config_tests.rs"]
+mod n384_tests;

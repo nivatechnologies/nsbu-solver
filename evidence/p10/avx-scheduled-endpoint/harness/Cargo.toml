@@ -17,6 +17,7 @@ n384-matched-piecewise = []
 n384-cadv33-profile = []
 n384-piecewise = ["n384-prep", "n384-piecewise-common"]
 n384-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common", "n384-cadv33-profile"]
+n384-piecewise-ho-cadv33 = ["n384-prep", "n384-piecewise-common", "n384-cadv33-profile"]
 n192-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common", "n384-matched-piecewise", "n384-cadv33-profile"]
 n256-piecewise-cadv33 = ["n384-prep", "n384-piecewise-common", "n384-matched-piecewise", "n384-cadv33-profile"]
 
