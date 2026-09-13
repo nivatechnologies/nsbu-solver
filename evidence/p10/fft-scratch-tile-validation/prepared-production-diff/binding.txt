@@ -1,0 +1,3 @@
+base=ca4256930c86f59864631a888d990cb9ec9d6ab8
+final=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
+scope=exact seven Rust files changed between commits; includes corrected W3 reservation tests; excludes evidence and abandoned separate-Vec prototype
