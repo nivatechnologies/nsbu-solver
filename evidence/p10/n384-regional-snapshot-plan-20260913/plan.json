@@ -1,6 +1,6 @@
 {
   "schema": "p10-n384-regional-snapshot-plan-v2",
-  "status": "bounded_adapter_implemented_tests_and_x_plane_pilot_complete_full_run_not_started",
+  "status": "bounded_adapter_implemented_one_full_clock512_run_complete_exit_0",
   "purpose": "One bounded clock-512 diagnostic over the immutable N384/M384 baseline state, using a 768^3 unshifted physical lattice to measure analytical-reference errors for full velocity, ordered gradient and ordered Hessian globally and in every existing sampled spatial class.",
   "claims_excluded": [
     "PDE window acceptance",
@@ -17,8 +17,11 @@
     "pilot": "evidence/p10/n384-regional-snapshot-diagnostic/pilot-x000.json",
     "runbook": "evidence/p10/n384-regional-snapshot-diagnostic/README.md",
     "production_seam": "crates/nsbu-solver/src/diagnostics/derivatives.rs::DerivativeWorkspace::new_from_catalog",
-    "full_run_started": false,
-    "state_payload_read": false
+    "full_run_started": true,
+    "full_run_result": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json",
+    "full_run_result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07",
+    "run_record": "evidence/p10/n384-regional-snapshot-diagnostic/run-clock0512.json",
+    "state_payload_read_after_all_gates": true
   },
   "planning_base": {
     "commit": "59761b4aea2de0ffd527231771af9e168464240d",

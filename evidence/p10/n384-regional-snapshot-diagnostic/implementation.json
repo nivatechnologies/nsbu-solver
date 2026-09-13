@@ -1,6 +1,6 @@
 {
   "schema": "p10-n384-regional-snapshot-implementation-v1",
-  "status": "implemented_tested_pilot_complete_full_run_not_started",
+  "status": "implemented_tested_pilot_and_one_full_run_complete",
   "date_utc": "2026-09-13",
   "branch": "codex/p10-regional-snapshot-plan-20260913",
   "planning_base_commit": "59761b4aea2de0ffd527231771af9e168464240d",
@@ -99,8 +99,18 @@
     "full_grid_reference_only_ideal_32_worker_extrapolation_seconds": 853.048394616
   },
   "full_run": {
-    "started": false,
-    "state_payload_read": false,
-    "reason": "residual localization remained active and root full-run review is required after CPU and memory fit"
+    "started": true,
+    "completed": true,
+    "exit_code": 0,
+    "state_payload_read_after_all_gates": true,
+    "result": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json",
+    "result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07",
+    "run_record": "evidence/p10/n384-regional-snapshot-diagnostic/run-clock0512.json",
+    "additional_full_runs": 0
+  },
+  "full_run_validation": {
+    "command": "one root-reviewed clock512 execute under timeout and prlimit",
+    "status": "passed_exit_0",
+    "result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07"
   }
 }

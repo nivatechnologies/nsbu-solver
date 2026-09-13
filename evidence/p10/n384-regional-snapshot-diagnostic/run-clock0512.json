@@ -1,0 +1,88 @@
+{
+  "schema": "p10-n384-regional-snapshot-run-v1",
+  "status": "complete_exit_0_validated",
+  "source_commit": "0fdff78fdb8de8fdfdc9c7b88fbf9282be7de771",
+  "launcher": {
+    "reported_start_utc": "2026-09-13T04:00:00Z",
+    "output_mtime_utc": "2026-09-13T04:31:43.145938034Z",
+    "observed_wall": "approximately 31 minutes 49 seconds from ps-derived process start",
+    "timeout_launcher_pid": 1185691,
+    "diagnostic_pid": 1185724,
+    "exit_code": 0,
+    "timeout_term_seconds": 2400,
+    "timeout_kill_after_seconds": 60
+  },
+  "fresh_admission": {
+    "residual_pid_1166623_absent": true,
+    "mem_available_bytes": 347564912640,
+    "minimum_mem_available_bytes": 145951239256,
+    "visible_cpus": 128,
+    "required_workers": 32,
+    "internal_reservation_bytes": 128771370072,
+    "actual_rlimit_as_soft_bytes": 137438953472,
+    "actual_rlimit_as_hard_bytes": 137438953472
+  },
+  "observed_resources": {
+    "maximum_rss_kib": 125662388,
+    "maximum_rss_gib": 119.84099197387695,
+    "maximum_virtual_kib": 127799412,
+    "maximum_virtual_gib": 121.8790168762207,
+    "measurement": "periodic /proc status sampling; not an exact terminal rusage record"
+  },
+  "bindings": {
+    "snapshot_manifest_sha256": "cc9e328b6b0dcd4518c27cd2724e839f50a7d64539ed45e7ac902dfd68c71d21",
+    "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "diagnostic_plan_sha256_at_launch": "d695b4d102781b76a117dfc4c42f25ddb0179f385596f1a5ccedd1e6ad5b62fb",
+    "release_binary_sha256": "c91d3f6b68c7ae4c7dd03b90e702f5f54d6e4d2152bde9fd090761fcb3d8b6ee",
+    "snapshot_file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+    "coefficient_sha256_before_and_after": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+    "result_sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07"
+  },
+  "result": {
+    "path": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json",
+    "sample_points": 452984832,
+    "sample_dimensions": [768, 768, 768],
+    "quantities": ["velocity", "gradient", "ordered_hessian"],
+    "scalar_inverse_transforms": 39,
+    "region_counts": {
+      "core": 2028843,
+      "annulus": 19840884,
+      "interior_outside_nominal": 29361750,
+      "collar": 89342992,
+      "exterior": 312410363
+    },
+    "global": {
+      "velocity": {
+        "rms_error": 9.74048204276882e-8,
+        "peak_error": 2.907671224709595e-6,
+        "peak_relative_error": 0.004284799852108679
+      },
+      "gradient": {
+        "rms_error": 0.00011894111907365046,
+        "peak_error": 0.003341018827507489,
+        "peak_relative_error": 0.15298845605909597
+      },
+      "ordered_hessian": {
+        "rms_error": 0.16494702826818963,
+        "peak_error": 4.136586523439207,
+        "peak_relative_error": 1.6738037091952862
+      }
+    }
+  },
+  "validation": {
+    "region_counts_sum_to_sample_points": true,
+    "every_quantity_global_sample_count_complete": true,
+    "every_quantity_has_all_five_sampled_regions": true,
+    "all_reported_measurements_finite": true,
+    "coverage_geometry_evaluations": 10764,
+    "immutable_coefficient_hash_equal": true,
+    "transactional_final_present_and_candidate_absent": true,
+    "state_import_or_resume_interfaces": 0
+  },
+  "claims": {
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+    "collar_volume_coverage": "not_assessed_sampled_collar_errors_and_counts_only",
+    "peak_qualification": "not_assessed",
+    "vorticity": "not_measured"
+  }
+}

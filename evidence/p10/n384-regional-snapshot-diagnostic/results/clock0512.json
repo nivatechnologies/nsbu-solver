@@ -1,0 +1,383 @@
+{
+  "schema": "p10-n384-regional-snapshot-diagnostic-v1",
+  "status": "sampled_read_only_diagnostic_complete",
+  "snapshot": {
+    "identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+    "file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+    "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "elapsed": 512
+  },
+  "sample_dimensions": [
+    768,
+    768,
+    768
+  ],
+  "region_counts": [
+    {
+      "region": "core",
+      "samples": 2028843
+    },
+    {
+      "region": "annulus",
+      "samples": 19840884
+    },
+    {
+      "region": "interior_outside_nominal",
+      "samples": 29361750
+    },
+    {
+      "region": "collar",
+      "samples": 89342992
+    },
+    {
+      "region": "exterior",
+      "samples": 312410363
+    }
+  ],
+  "quantities": [
+    {
+      "quantity": "velocity",
+      "scalar_inverse_transforms": 3,
+      "relative_floor": 0.0006786014108170402,
+      "global": {
+        "status": "measured",
+        "components": 3,
+        "samples": 452984832,
+        "rms_error": 9.74048204276882e-8,
+        "peak_error": 2.907671224709595e-6,
+        "peak_relative_error": 0.004284799852108679,
+        "reference_peak": 0.6786014108170403,
+        "relative_floor": 0.0006786014108170402
+      },
+      "regions": [
+        {
+          "region": "core",
+          "sampled": {
+            "status": "measured",
+            "components": 3,
+            "samples": 2028843,
+            "rms_error": 1.1029833266739981e-7,
+            "peak_error": 1.9311642419772142e-7,
+            "peak_relative_error": 5.25209455433406e-7,
+            "reference_peak": 0.620270458126649,
+            "relative_floor": 0.0006786014108170402
+          }
+        },
+        {
+          "region": "annulus",
+          "sampled": {
+            "status": "measured",
+            "components": 3,
+            "samples": 19840884,
+            "rms_error": 5.131561593657724e-8,
+            "peak_error": 1.636510514199761e-7,
+            "peak_relative_error": 1.7924118951552932e-6,
+            "reference_peak": 0.31495608279708126,
+            "relative_floor": 0.0006786014108170402
+          }
+        },
+        {
+          "region": "interior_outside_nominal",
+          "sampled": {
+            "status": "measured",
+            "components": 3,
+            "samples": 29361750,
+            "rms_error": 9.047625190666182e-8,
+            "peak_error": 2.45913974039199e-7,
+            "peak_relative_error": 9.346243771900829e-7,
+            "reference_peak": 0.6786014108170403,
+            "relative_floor": 0.0006786014108170402
+          }
+        },
+        {
+          "region": "collar",
+          "sampled": {
+            "status": "measured",
+            "components": 3,
+            "samples": 89342992,
+            "rms_error": 1.9396340411143667e-7,
+            "peak_error": 2.907671224709595e-6,
+            "peak_relative_error": 0.004284799852108679,
+            "reference_peak": 0.44133047452863267,
+            "relative_floor": 0.0006786014108170402
+          }
+        },
+        {
+          "region": "exterior",
+          "sampled": {
+            "status": "measured",
+            "components": 3,
+            "samples": 312410363,
+            "rms_error": 4.4521778852935505e-8,
+            "peak_error": 1.4315574800418675e-6,
+            "peak_relative_error": 0.002109570444774442,
+            "reference_peak": 0.0,
+            "relative_floor": 0.0006786014108170402
+          }
+        }
+      ]
+    },
+    {
+      "quantity": "gradient",
+      "scalar_inverse_transforms": 9,
+      "relative_floor": 0.02183837208094269,
+      "global": {
+        "status": "measured",
+        "components": 9,
+        "samples": 452984832,
+        "rms_error": 0.00011894111907365046,
+        "peak_error": 0.003341018827507489,
+        "peak_relative_error": 0.15298845605909597,
+        "reference_peak": 21.838372080942687,
+        "relative_floor": 0.02183837208094269
+      },
+      "regions": [
+        {
+          "region": "core",
+          "sampled": {
+            "status": "measured",
+            "components": 9,
+            "samples": 2028843,
+            "rms_error": 0.00004160535063224189,
+            "peak_error": 0.00009465883196590809,
+            "peak_relative_error": 0.000020187155153282537,
+            "reference_peak": 12.315494378812694,
+            "relative_floor": 0.02183837208094269
+          }
+        },
+        {
+          "region": "annulus",
+          "sampled": {
+            "status": "measured",
+            "components": 9,
+            "samples": 19840884,
+            "rms_error": 0.00004067332436508683,
+            "peak_error": 0.00011430505122725253,
+            "peak_relative_error": 0.0000650356462626746,
+            "reference_peak": 7.080014148086697,
+            "relative_floor": 0.02183837208094269
+          }
+        },
+        {
+          "region": "interior_outside_nominal",
+          "sampled": {
+            "status": "measured",
+            "components": 9,
+            "samples": 29361750,
+            "rms_error": 0.00006190560582997095,
+            "peak_error": 0.00029993873748978205,
+            "peak_relative_error": 0.00013971838722921022,
+            "reference_peak": 7.881068196019599,
+            "relative_floor": 0.02183837208094269
+          }
+        },
+        {
+          "region": "collar",
+          "sampled": {
+            "status": "measured",
+            "components": 9,
+            "samples": 89342992,
+            "rms_error": 0.00023859234817552862,
+            "peak_error": 0.003341018827507489,
+            "peak_relative_error": 0.15298845605909597,
+            "reference_peak": 21.838372080942687,
+            "relative_floor": 0.02183837208094269
+          }
+        },
+        {
+          "region": "exterior",
+          "sampled": {
+            "status": "measured",
+            "components": 9,
+            "samples": 312410363,
+            "rms_error": 0.00006128969986553007,
+            "peak_error": 0.0020129580765255698,
+            "peak_relative_error": 0.09217528069696106,
+            "reference_peak": 0.0,
+            "relative_floor": 0.02183837208094269
+          }
+        }
+      ]
+    },
+    {
+      "quantity": "ordered_hessian",
+      "scalar_inverse_transforms": 27,
+      "relative_floor": 2.398140767018279,
+      "global": {
+        "status": "measured",
+        "components": 27,
+        "samples": 452984832,
+        "rms_error": 0.16494702826818963,
+        "peak_error": 4.136586523439207,
+        "peak_relative_error": 1.6738037091952862,
+        "reference_peak": 2398.140767018279,
+        "relative_floor": 2.398140767018279
+      },
+      "regions": [
+        {
+          "region": "core",
+          "sampled": {
+            "status": "measured",
+            "components": 27,
+            "samples": 2028843,
+            "rms_error": 0.050385222251745354,
+            "peak_error": 0.1131053740869405,
+            "peak_relative_error": 0.0011352996737143478,
+            "reference_peak": 226.0948425650234,
+            "relative_floor": 2.398140767018279
+          }
+        },
+        {
+          "region": "annulus",
+          "sampled": {
+            "status": "measured",
+            "components": 27,
+            "samples": 19840884,
+            "rms_error": 0.05439000396027565,
+            "peak_error": 0.13851017300072263,
+            "peak_relative_error": 0.0028854998849778125,
+            "reference_peak": 177.55767782397785,
+            "relative_floor": 2.398140767018279
+          }
+        },
+        {
+          "region": "interior_outside_nominal",
+          "sampled": {
+            "status": "measured",
+            "components": 27,
+            "samples": 29361750,
+            "rms_error": 0.08096103729663326,
+            "peak_error": 0.3529393789153649,
+            "peak_relative_error": 0.01001313635917143,
+            "reference_peak": 222.69427579151758,
+            "relative_floor": 2.398140767018279
+          }
+        },
+        {
+          "region": "collar",
+          "sampled": {
+            "status": "measured",
+            "components": 27,
+            "samples": 89342992,
+            "rms_error": 0.3337399549663379,
+            "peak_error": 4.136586523439207,
+            "peak_relative_error": 1.6738037091952862,
+            "reference_peak": 2398.140767018279,
+            "relative_floor": 2.398140767018279
+          }
+        },
+        {
+          "region": "exterior",
+          "sampled": {
+            "status": "measured",
+            "components": 27,
+            "samples": 312410363,
+            "rms_error": 0.08231970325051452,
+            "peak_error": 2.1671708352466217,
+            "peak_relative_error": 0.9036879173448884,
+            "reference_peak": 0.0,
+            "relative_floor": 2.398140767018279
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostic_binary_sha256": "c91d3f6b68c7ae4c7dd03b90e702f5f54d6e4d2152bde9fd090761fcb3d8b6ee",
+  "coverage": [
+    {
+      "region": "core",
+      "requested_panels": 256,
+      "fine_panels": 512,
+      "status": "nonempty",
+      "fraction": 1.0,
+      "refinement_change": 0.0,
+      "evaluations": 770
+    },
+    {
+      "region": "core",
+      "requested_panels": 512,
+      "fine_panels": 1024,
+      "status": "nonempty",
+      "fraction": 1.0,
+      "refinement_change": 0.0,
+      "evaluations": 1538
+    },
+    {
+      "region": "core",
+      "requested_panels": 1024,
+      "fine_panels": 2048,
+      "status": "nonempty",
+      "fraction": 1.0,
+      "refinement_change": 0.0,
+      "evaluations": 3074
+    },
+    {
+      "region": "annulus",
+      "requested_panels": 256,
+      "fine_panels": 512,
+      "status": "nonempty",
+      "fraction": 0.6513653534661611,
+      "refinement_change": 3.425201233753228e-10,
+      "evaluations": 770
+    },
+    {
+      "region": "annulus",
+      "requested_panels": 512,
+      "fine_panels": 1024,
+      "status": "nonempty",
+      "fraction": 0.6513653534875743,
+      "refinement_change": 2.1413204542852782e-11,
+      "evaluations": 1538
+    },
+    {
+      "region": "annulus",
+      "requested_panels": 1024,
+      "fine_panels": 2048,
+      "status": "nonempty",
+      "fraction": 0.6513653534889142,
+      "refinement_change": 1.3399281684201014e-12,
+      "evaluations": 3074
+    }
+  ],
+  "storage": {
+    "decoded_actual_coefficients": 1366032384,
+    "snapshot_decoder_overhead": 1048576,
+    "avx_fft_catalog": 29362480,
+    "single_derivative_workspace_required": 10890584880,
+    "single_derivative_workspace_budget": 10890584880,
+    "derivative_workspace_reservation_allowance": 0,
+    "packed_reference_cache": 108716359680,
+    "two_magnitude_arrays": 7247757312,
+    "cached_region_labels": 452984832,
+    "worker_stacks": 67108864,
+    "allocator_allowance": 65528,
+    "serialization": 65536,
+    "total": 128771370072
+  },
+  "work": {
+    "sample_points": 452984832,
+    "reference_evaluations": 452984832,
+    "maximum_reference_root_iterations": 57982058496,
+    "ordered_hessian_mapping_comparisons": 12230590464,
+    "classifications": 452984832,
+    "maximum_classification_root_iterations": 57982058496,
+    "scalar_inverse_transforms": 39,
+    "coefficient_visits_per_transform": 171343872,
+    "derivative_coefficient_visits": 6682411008,
+    "tensor_component_point_visits": 17666408448,
+    "regional_magnitude_pushes": 1358954496,
+    "coverage_geometry_evaluations": 10764
+  },
+  "post_measurement_coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+  "immutable_coefficient_hash_equal": true,
+  "collar_volume_coverage": "not_assessed_sampled_collar_errors_and_counts_only",
+  "peak_qualification": "not_assessed",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "state_import_or_resume_interfaces": 0
+}
