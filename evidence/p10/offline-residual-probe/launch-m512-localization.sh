@@ -23,7 +23,7 @@ if [[ ${1-} == --worker ]]; then
     date -u +'%Y-%m-%dT%H:%M:%SZ' > "$run_dir/run.start-utc"
     set +e
     /usr/bin/time -v -o "$run_dir/run.time" \
-        timeout --signal=TERM --kill-after=60s 2700s \
+        timeout --foreground --signal=TERM --kill-after=60s 2700s \
         "$binary" run "$plan" "$INPUT_ROOT" "$CAP_BYTES" \
         > "$run_dir/run.stdout" 2> "$run_dir/run.stderr"
     status=$?
@@ -62,12 +62,35 @@ sha256sum --check --status <<EOF
 9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca  $INPUT_ROOT/step-019-clock-1216/state.bin
 EOF
 
+mkdir -p "$script_dir/raw"
 mkdir "$run_dir"
-setsid "$0" --worker "$run_dir" </dev/null &
+setsid "$script_dir/launch-m512-localization.sh" --worker "$run_dir" </dev/null &
 owner_pid=$!
-owner_pgid=$(ps -o pgid= -p "$owner_pid" | tr -d ' ')
+expected_cmdline_sha256=$(
+    printf '/bin/bash\0%s\0--worker\0%s\0' \
+        "$script_dir/launch-m512-localization.sh" "$run_dir" | sha256sum | awk '{ print $1 }'
+)
+stable=0
+for _ in {1..200}; do
+    if [[ -r /proc/$owner_pid/stat && -r /proc/$owner_pid/cmdline ]]; then
+        owner_pgid=$(ps -o pgid= -p "$owner_pid" | tr -d ' ')
+        owner_cmdline_sha256=$(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }')
+        if [[ $owner_pgid == "$owner_pid" && $owner_cmdline_sha256 == "$expected_cmdline_sha256" ]]; then
+            stable=$((stable + 1))
+            [[ $stable == 2 ]] && break
+        else
+            stable=0
+        fi
+    fi
+    sleep 0.01
+done
+if [[ $stable != 2 ]]; then
+    kill -TERM -- "-$owner_pid" 2>/dev/null || true
+    wait "$owner_pid" 2>/dev/null || true
+    echo 'worker identity did not stabilize; launch refused' > "$run_dir/launch-refusal.txt"
+    exit 64
+fi
 owner_starttime=$(awk '{ print $22 }' "/proc/$owner_pid/stat")
-owner_cmdline_sha256=$(sha256sum "/proc/$owner_pid/cmdline" | awk '{ print $1 }')
 cat > "$run_dir/launch-receipt.json" <<EOF
 {
   "schema": "p10-offline-residual-m512-launch-receipt-v1",
@@ -84,6 +107,7 @@ cat > "$run_dir/launch-receipt.json" <<EOF
   "owner_pgid": $owner_pgid,
   "owner_starttime": $owner_starttime,
   "owner_cmdline_sha256": "$owner_cmdline_sha256",
+  "expected_owner_cmdline_sha256": "$expected_cmdline_sha256",
   "run_dir": "$run_dir"
 }
 EOF

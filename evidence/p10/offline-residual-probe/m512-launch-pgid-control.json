@@ -1,0 +1,17 @@
+{
+  "schema": "p10-offline-residual-m512-launch-pgid-control-v1",
+  "status": "passed_non_numerical_sleep_only",
+  "command_shape": "setsid bash owner -> timeout --foreground 2s -> sleep 30",
+  "owner": {"pid": 1517925, "pgid": 1517925},
+  "timeout": {"pid": 1517927, "pgid": 1517925},
+  "sleep": {"pid": 1517928, "pgid": 1517925},
+  "all_processes_shared_owner_pgid": true,
+  "shebang_identity_control": {
+    "owner_pid": 1518576,
+    "owner_pgid": 1518576,
+    "expected_cmdline_sha256": "a064b4cf8d06af48d6df8a37ed8aaa860e260428690742fd2dfe7264dd73d0bb",
+    "observed_cmdline_sha256": "a064b4cf8d06af48d6df8a37ed8aaa860e260428690742fd2dfe7264dd73d0bb",
+    "stable_expected_identity_observed": true
+  },
+  "numerical_execution": false
+}
