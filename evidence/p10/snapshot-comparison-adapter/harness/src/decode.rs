@@ -119,6 +119,11 @@ fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolu
                 "cox-matthews" | "hochbruck-ostermann"
             ) && evolution.integration_force_dimensions == [384; 3]
         }
+        ComparisonKind::MixedForceSpaceDiagnostic => {
+            evolution.method == "cox-matthews"
+                && (evolution.integration_force_dimensions == [384; 3]
+                    || evolution.integration_force_dimensions == [512; 3])
+        }
     }
 }
 
@@ -169,6 +174,29 @@ pub(crate) fn admitted_bytes(left: &Manifest, right: &Manifest) -> Result<usize,
         .checked_add(state_bytes(right)?)
         .and_then(|value| value.checked_add(FIXED_OVERHEAD_BYTES))
         .ok_or_else(|| "resource bound overflow".into())
+}
+
+pub(crate) fn admitted_bytes_three(
+    coarse: &Manifest,
+    baseline: &Manifest,
+    force: &Manifest,
+) -> Result<usize, String> {
+    state_bytes(coarse)?
+        .checked_add(state_bytes(baseline)?)
+        .and_then(|value| value.checked_add(state_bytes(force).ok()?))
+        .and_then(|value| value.checked_add(FIXED_OVERHEAD_BYTES))
+        .ok_or_else(|| "resource bound overflow".into())
+}
+
+pub(crate) fn preflight_three(
+    coarse: &Manifest,
+    baseline: &Manifest,
+    force: &Manifest,
+) -> Result<usize, String> {
+    check_file_len(coarse)?;
+    check_file_len(baseline)?;
+    check_file_len(force)?;
+    admitted_bytes_three(coarse, baseline, force)
 }
 
 pub(crate) fn preflight(left: &Manifest, right: &Manifest) -> Result<usize, String> {
