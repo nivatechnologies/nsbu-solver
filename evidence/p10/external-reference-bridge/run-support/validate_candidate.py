@@ -20,6 +20,8 @@ expected_bridge_sha = {
         '9fde34d036493db73864bedb7c214e18e71047b017698a8593e93c2274e6d3e5',
     ('4d18638cc040d86e48eb330daff8ee46db985fef23a9247b7ad2df990f9f3a1d', 2048):
         'a975f09bacd6ecdd1c47d6918db822a1560ff8b670559e0300b270b16d85433a',
+    ('782444a29870e1a678fa8393149bd9ba0c28e4cc08dff3d635a7a0bb98c3cb52', 3072):
+        'c6f1fdb94617dadc11516cf3c1bdb30c49806b6bd3ce9c4e2b5adc27db8428b0',
 }.get((bridge['binary_sha256'], bridge['elapsed']))
 if hashlib.sha256(bridge_raw).hexdigest() != expected_bridge_sha:
     raise SystemExit('bridge manifest hash mismatch')
