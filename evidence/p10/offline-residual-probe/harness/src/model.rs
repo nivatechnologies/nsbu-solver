@@ -292,10 +292,22 @@ pub(crate) struct LocalizationRunOutput {
     pub control_force_work_units: usize,
     pub control_force_scalar_transforms: usize,
     pub localization: LocalizationOutput,
+    pub identity_closure: IdentityClosureOutput,
     pub runtime_owner_imported: bool,
     pub accepted_interpolation: bool,
     pub acceptance_windows: usize,
     pub qualification: &'static str,
+}
+
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(crate) struct IdentityClosureOutput {
+    pub residual_relative_tolerance: f64,
+    pub residual_relative_maximum: f64,
+    pub residual_relative_passed: bool,
+    pub term_scaled_tolerance: f64,
+    pub term_scaled_maximum: f64,
+    pub term_scaled_passed: bool,
+    pub term_scaled_bound_basis: &'static str,
 }
 
 pub(crate) fn debug(error: impl std::fmt::Debug) -> String {

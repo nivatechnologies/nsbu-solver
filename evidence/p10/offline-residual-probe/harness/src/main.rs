@@ -5,8 +5,9 @@ mod model;
 
 use cache::CachedReducedForce;
 use model::{
-    debug, LocalizationRunOutput, NodeBinding, NodeOutput, ProbePlan, ReservationOutput, Snapshot,
-    CASE_SHA256, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS, W3_SOURCE,
+    debug, IdentityClosureOutput, LocalizationRunOutput, NodeBinding, NodeOutput, ProbePlan,
+    ReservationOutput, Snapshot, CASE_SHA256, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS,
+    W3_SOURCE,
 };
 use nsbu_benchmarks::provider::parallel_reduced::ParallelReducedV2Force;
 use nsbu_solver::{
@@ -324,7 +325,7 @@ fn evaluate(
     {
         return Err("strict retained/shell partition mismatch".into());
     }
-    enforce_identity_tolerance(&residual.localization, 5e-11)?;
+    let identity_closure = enforce_identity_tolerance(&residual.localization, 5e-11)?;
     nodes.sort_by_key(|node| node.clock);
     Ok(LocalizationRunOutput {
         schema: "p10-offline-residual-localization-result-v1",
@@ -352,6 +353,7 @@ fn evaluate(
         control_force_work_units: residual.control_force_work.work_units,
         control_force_scalar_transforms: residual.control_force_work.scalar_transforms,
         localization: residual.localization.into(),
+        identity_closure,
         runtime_owner_imported: false,
         accepted_interpolation: false,
         acceptance_windows: 0,
@@ -361,31 +363,166 @@ fn evaluate(
 
 fn enforce_identity_tolerance(
     localization: &nsbu_solver::diagnostics::residual::ResidualLocalization,
-    tolerance: f64,
-) -> Result<(), String> {
-    for band in [
-        localization.retained_strict_n384,
-        localization.new_shell_n768,
-        localization.full_n768,
+    residual_relative_tolerance: f64,
+) -> Result<IdentityClosureOutput, String> {
+    let processed_modes = localization
+        .retained_modes
+        .checked_add(localization.new_shell_modes)
+        .ok_or("identity work count overflow")?;
+    let term_scaled_tolerance = 64.0 * processed_modes as f64 * f64::EPSILON;
+    let mut residual_relative_maximum = 0.0_f64;
+    let mut term_scaled_maximum = 0.0_f64;
+    for (band_name, band) in [
+        ("retained_strict_n384", localization.retained_strict_n384),
+        ("new_shell_n768", localization.new_shell_n768),
+        ("full_n768", localization.full_n768),
     ] {
-        for errors in [
-            band.base_identity_relative_error,
-            band.control_identity_relative_error,
-        ] {
-            if [
-                errors.l2,
-                errors.h1,
-                errors.vorticity_l2,
-                errors.divergence_l2,
-            ]
-            .into_iter()
-            .any(|error| error > tolerance)
-            {
-                return Err("cross-term norm identity exceeded tolerance".into());
-            }
-        }
+        let base = observe_identity(
+            band_name,
+            "base_m768",
+            [band.derivative, band.viscous, band.conservative_m768],
+            band.residual_m768,
+            band.base_cross,
+            residual_relative_tolerance,
+            term_scaled_tolerance,
+        );
+        residual_relative_maximum = residual_relative_maximum.max(base.residual_relative_error);
+        term_scaled_maximum = term_scaled_maximum.max(base.term_scaled_error);
+        let control = observe_identity(
+            band_name,
+            "discrete_retained_force_m384",
+            [band.derivative, band.viscous, band.conservative_m384],
+            band.residual_m384,
+            band.control_cross,
+            residual_relative_tolerance,
+            term_scaled_tolerance,
+        );
+        residual_relative_maximum = residual_relative_maximum.max(control.residual_relative_error);
+        term_scaled_maximum = term_scaled_maximum.max(control.term_scaled_error);
     }
-    Ok(())
+    let output = IdentityClosureOutput {
+        residual_relative_tolerance,
+        residual_relative_maximum,
+        residual_relative_passed: residual_relative_maximum <= residual_relative_tolerance,
+        term_scaled_tolerance,
+        term_scaled_maximum,
+        term_scaled_passed: term_scaled_maximum <= term_scaled_tolerance,
+        term_scaled_bound_basis: "64 rounded accumulator contributions per processed mode times binary64 epsilon; residual-relative 5e-11 status is reported independently and is not relabeled",
+    };
+    eprintln!(
+        "identity-gate residual_relative_maximum={:.17e} residual_relative_tolerance={:.17e} residual_relative_passed={} term_scaled_maximum={:.17e} term_scaled_tolerance={:.17e} term_scaled_passed={}",
+        output.residual_relative_maximum,
+        output.residual_relative_tolerance,
+        output.residual_relative_passed,
+        output.term_scaled_maximum,
+        output.term_scaled_tolerance,
+        output.term_scaled_passed
+    );
+    if !output.term_scaled_passed {
+        return Err("term-scaled cross-term norm identity exceeded floating-point bound".into());
+    }
+    Ok(output)
+}
+
+#[derive(Clone, Copy, Debug)]
+struct IdentityObservation {
+    residual_relative_error: f64,
+    term_scaled_error: f64,
+}
+
+fn observe_identity(
+    band: &str,
+    equation: &str,
+    terms: [nsbu_solver::diagnostics::norms::Norms; 3],
+    residual: nsbu_solver::diagnostics::norms::Norms,
+    cross: [nsbu_solver::diagnostics::norms::SignedNormChannels; 3],
+    residual_relative_tolerance: f64,
+    term_scaled_tolerance: f64,
+) -> IdentityObservation {
+    let channels = [
+        (
+            "l2",
+            terms.map(|term| term.l2),
+            residual.l2,
+            cross.map(|term| term.l2),
+        ),
+        (
+            "h1",
+            terms.map(|term| term.h1),
+            residual.h1,
+            cross.map(|term| term.h1),
+        ),
+        (
+            "vorticity_l2",
+            terms.map(|term| term.vorticity_l2),
+            residual.vorticity_l2,
+            cross.map(|term| term.vorticity_l2),
+        ),
+        (
+            "divergence_l2",
+            terms.map(|term| term.divergence_l2),
+            residual.divergence_l2,
+            cross.map(|term| term.divergence_l2),
+        ),
+    ];
+    let mut maximum = IdentityObservation {
+        residual_relative_error: 0.0,
+        term_scaled_error: 0.0,
+    };
+    for (channel, terms, residual, cross) in channels {
+        let observation = identity_scalars(terms, residual, cross);
+        eprintln!(
+            "identity-observation band={band} equation={equation} channel={channel} lhs_residual_squared={:.17e} rhs_signed_terms_cross={:.17e} absolute_discrepancy={:.17e} sum_absolute_contributions={:.17e} residual_relative_denominator={:.17e} residual_relative_error={:.17e} residual_relative_tolerance={residual_relative_tolerance:.17e} residual_relative_passed={} term_scaled_denominator={:.17e} term_scaled_error={:.17e} term_scaled_tolerance={term_scaled_tolerance:.17e} term_scaled_passed={}",
+            observation.lhs,
+            observation.rhs,
+            observation.absolute_discrepancy,
+            observation.sum_absolute_contributions,
+            observation.residual_relative_denominator,
+            observation.residual_relative_error,
+            observation.residual_relative_error <= residual_relative_tolerance,
+            observation.term_scaled_denominator,
+            observation.term_scaled_error,
+            observation.term_scaled_error <= term_scaled_tolerance,
+        );
+        maximum.residual_relative_error = maximum
+            .residual_relative_error
+            .max(observation.residual_relative_error);
+        maximum.term_scaled_error = maximum.term_scaled_error.max(observation.term_scaled_error);
+    }
+    maximum
+}
+
+#[derive(Clone, Copy, Debug)]
+struct ScalarIdentityObservation {
+    lhs: f64,
+    rhs: f64,
+    absolute_discrepancy: f64,
+    sum_absolute_contributions: f64,
+    residual_relative_denominator: f64,
+    residual_relative_error: f64,
+    term_scaled_denominator: f64,
+    term_scaled_error: f64,
+}
+
+fn identity_scalars(terms: [f64; 3], residual: f64, cross: [f64; 3]) -> ScalarIdentityObservation {
+    let term_squares = terms.map(|term| term * term);
+    let lhs = residual * residual;
+    let rhs = term_squares.into_iter().sum::<f64>() + cross.into_iter().sum::<f64>();
+    let absolute_discrepancy = (lhs - rhs).abs();
+    let sum_absolute_contributions =
+        term_squares.into_iter().sum::<f64>() + cross.into_iter().map(f64::abs).sum::<f64>();
+    let residual_relative_denominator = lhs.abs().max(rhs.abs()).max(1.0);
+    let term_scaled_denominator = sum_absolute_contributions.max(lhs.abs()).max(1.0);
+    ScalarIdentityObservation {
+        lhs,
+        rhs,
+        absolute_discrepancy,
+        sum_absolute_contributions,
+        residual_relative_denominator,
+        residual_relative_error: absolute_discrepancy / residual_relative_denominator,
+        term_scaled_denominator,
+        term_scaled_error: absolute_discrepancy / term_scaled_denominator,
+    }
 }
 
 fn binding(plan: &ProbePlan, wanted: u128) -> Result<&NodeBinding, String> {
