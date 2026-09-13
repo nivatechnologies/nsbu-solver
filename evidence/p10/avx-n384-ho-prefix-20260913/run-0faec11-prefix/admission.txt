@@ -1,0 +1,8 @@
+started_at=2026-09-13T01:08:35Z
+memavailable_bytes=515777699840
+disk_available_bytes=7229378469888
+reservation_bytes=198987813712
+execution_cap_bytes=206158430208
+artifact_cap_bytes=137438953472
+watchdog_term_epoch=1789282740
+numerical_hard_stop_epoch=1789282800
