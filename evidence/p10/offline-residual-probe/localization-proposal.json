@@ -1,0 +1,169 @@
+{
+  "schema": "p10-offline-residual-localization-proposal-v1",
+  "status": "review_pending_no_implementation_no_run",
+  "scope": {
+    "probe_clock": 1112,
+    "support": [1088, 1152, 1216],
+    "retained_grid": [384, 384, 384],
+    "diagnostic_grid": [768, 768, 768],
+    "maximum_real_probes": 1,
+    "other_clocks_forbidden": true,
+    "runtime_owner_imported": false,
+    "accepted_interpolation": false,
+    "acceptance_windows": 0
+  },
+  "lineage": {
+    "baseline_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+    "completed_result_commit": "74d4aa9d1e57653286cdc81b7135efb3c54daa7d",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+    "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "integration_rhs": "N384 source; N576 width3 bidirectional W3 rotational RHS; AVX FftCatalog; additional9200779136; cached parallel-reduced M384 width3 forward W3 force; additional1827942144; 32 sampling workers",
+    "base_residual_force": "fresh scalar AVX ParallelReducedV2Force targeting N768 with M768 samples and 32 workers at clock1112",
+    "control_force": "fresh CachedReducedForce targeting N384 with M384 samples, AVX FftCatalog, width3 forward W3 provider, attempt cache and 32 workers",
+    "arithmetic": "binary64 empirical arithmetic without outward rounding or interval enclosure"
+  },
+  "immutable_inputs": [
+    {
+      "clock": 1088,
+      "snapshot": "step-017-clock-1088/state.bin",
+      "state_file_sha256": "b2bf7efe0231b0d7940b7a1e9332bcd15967d4c27889eeb8b116b7a8723e33c7",
+      "coefficient_sha256": "ce8d57a69f249b2b4838f01d79eb7478e8041baa0bc928877d280bdae64616da",
+      "expected_fresh_physical_derivative_sha256": "badf6a01e4d67dca30096322e6ee565c0245eaa86916925a637a23f1a37840d3"
+    },
+    {
+      "clock": 1152,
+      "snapshot": "step-018-clock-1152/state.bin",
+      "state_file_sha256": "1b04fad79092f3f561b752e2fa817237c133bb92db85fd77bbfb77e565374d84",
+      "coefficient_sha256": "1ea19cb3c37004c147a906ff07c7c8555410e0cb7611ea03ab3b4afc2233a6f4",
+      "expected_fresh_physical_derivative_sha256": "4a4ed829270fd2eed337664af17d2fe34284aa67153b142fc4ae02d23d81f228"
+    },
+    {
+      "clock": 1216,
+      "snapshot": "step-019-clock-1216/state.bin",
+      "state_file_sha256": "d236a0ab72874906a84690c583e44a86db7d75c3c7ab109f94a0b4b680d61874",
+      "coefficient_sha256": "28ba1b97c02efc1477200a9d72067929f7b88c234c9436ab4f8b8699ddef0bce",
+      "expected_fresh_physical_derivative_sha256": "035abbb6e2ed6a474af99360ec1f8016da73a94c0d74d31e5908238b91cbaa01"
+    }
+  ],
+  "artifact_payload_policy": {
+    "available_payloads": "the three immutable state.bin files",
+    "prior_derivative_artifacts": "SHA-256 ledger values only; no derivative coefficient payload was serialized",
+    "prior_reconstruction_artifacts": "SHA-256 ledger values only; no reconstructed coefficient payload was serialized",
+    "prior_residual_artifacts": "SHA-256 ledger values only; no residual coefficient payload was serialized",
+    "required_action": "hash-decode each immutable state and freshly recompute each physical derivative; never deserialize or inject a runtime owner"
+  },
+  "sign_convention": {
+    "D": "fresh full physical-time derivative: ETD explicit rotational RHS plus -nu|k|^2u exactly once before Hermite reconstruction",
+    "V": "+nu|k|^2v",
+    "C768": "P(div(v tensor v)-f768)",
+    "R768": "D+C768+V",
+    "assembly_order": "r=C768; r+=D; then for each wave component add nu*wave*(wave*v) to both V and r, preserving the completed residual arithmetic order",
+    "force_count": "f768 appears exactly once inside C768"
+  },
+  "band_partition": {
+    "classification": "for each non-N768-Nyquist diagnostic mode, retained_strict_n384 iff source.layout().locate(mode) succeeds; otherwise new_shell_n768",
+    "retained_strict_n384_modes": 28164288,
+    "new_shell_n768_modes": 197738688,
+    "excluded_n768_nyquist_slots": 1179264,
+    "processed_modes": 225902976,
+    "retained_note": "Layout::locate refuses every N384 Nyquist ambiguity, matching normalization-preserving strict-band transfer",
+    "shell_invariant": "D and V are exact zero and R768 equals C768 bit-for-bit"
+  },
+  "localized_metrics": {
+    "regions": ["retained_strict_n384", "new_shell_n768", "full_n768"],
+    "channels": ["l2", "h1", "vorticity_l2", "divergence_l2"],
+    "base_terms": ["D", "V", "C768", "R768"],
+    "control_terms": ["projected_force_delta", "C384", "R384"],
+    "weighting": "the exact Parseval multiplicity and H1/curl/divergence formulas used by diagnostics::norms::NormSums",
+    "full_region": "derive squared sums by adding the two orthogonal regional sums before square root",
+    "base_pairwise_cross_terms": ["2Re<D,V>", "2Re<D,C768>", "2Re<V,C768>"],
+    "control_pairwise_cross_terms": ["2Re<D,V>", "2Re<D,C384>", "2Re<V,C384>"],
+    "cross_accumulation": "scaled compensated signed bilinear sums in each norm channel; also report normalized alignment when both term norms are nonzero",
+    "base_cancellation": "kappa=||R768||/(||D||+||V||+||C768||) independently for each region and norm channel; null for a zero denominator",
+    "control_cancellation": "kappa=||R384||/(||D||+||V||+||C384||) independently for each region and norm channel; null for a zero denominator",
+    "storage": "scalar accumulators only; retain the existing base residual field for replay hashing; stream per-component hashes for projected_force_delta and R384 without storing either field"
+  },
+  "discrete_retained_force_control": {
+    "label": "discrete_retained_force_control_changes_target_equation_outside_retained_band",
+    "cache_epoch": "synthetic read-only begin_attempt at clock1112 with 64 ticks, followed by one force evaluation at its first permitted stage clock1112",
+    "padding": "populate N384 output only, then strict-zero-pad modewise with Layout::locate; do not ask an M384 provider to populate N768",
+    "projected_force_delta": "P(f768-pad(f384))",
+    "C384": "C768+projected_force_delta=Pdiv(v tensor v)-P pad(f384)",
+    "R384": "R768+projected_force_delta",
+    "checked_sign": "plus",
+    "fft_reuse": "one existing N768 conservative product only; no second conservative FFT set",
+    "storage_reuse": "after ConservativeWorkspace consumes f768, overwrite that existing N768 force field modewise with projected_force_delta",
+    "claim_limit": "this is a discrete force-resolution localization control, not the production residual or an accepted equation"
+  },
+  "replay_gates": {
+    "fine_reconstructed_value_sha256": "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865",
+    "fine_reconstructed_derivative_sha256": "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c",
+    "base_m768_residual_sha256": "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8",
+    "policy": "a mismatch is preserved as a failed replay and stops interpretation; it must not be replaced by prior coefficients"
+  },
+  "reservation": {
+    "source_state_bytes": 1366032384,
+    "diagnostic_component_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 38807118904,
+    "integration_m384_cached_force_bytes": 12356287944,
+    "residual_m768_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "fixed_overhead_bytes": 16777216,
+    "reconstruction_formula": "8*source_state+integration_rhs+fft_catalog+fixed_overhead",
+    "reconstruction_peak_bytes": 49781517672,
+    "residual_control_formula": "3*source_state+integration_m384_cached_force+residual_m768_force+conservative_workspace+fft_catalog+10*diagnostic_component_field+fixed_overhead",
+    "residual_control_peak_bytes": 114575696272,
+    "admitted_peak_bytes": 114575696272,
+    "scoped_cap_bytes": 137438953472,
+    "cap_gib": 128,
+    "cap_headroom_bytes": 22863257200,
+    "accumulator_policy": "no heap field; scalar accumulator and hasher metadata is covered by fixed_overhead",
+    "launch_admission": "immediately before launch require fresh MemAvailable after subtracting other admitted reservations to cover scoped_cap_bytes"
+  },
+  "work": {
+    "formal_provider_bounds": {
+      "three_fine_node_rhs_work_units": 22169272335,
+      "three_fine_node_rhs_scalar_transforms": 39,
+      "m384_control_force_work_units": 7389757445,
+      "m384_control_force_scalar_transforms": 3,
+      "m768_base_force_work_units": 58435043328,
+      "m768_base_force_scalar_transforms": 3,
+      "provider_work_units_total": 87994073108
+    },
+    "conservative_product": {
+      "scalar_transforms": 9,
+      "explicit_loop_visits": 5755355136,
+      "explicit_loop_formula": "3*N384_half validation + 3*N768_half force validation + 3*N768_half transfer + 6*N768_real products + 6*N768_half Fourier product visits + N768_half finish",
+      "fft_arithmetic": "represented by the transform count rather than a primitive-FLOP claim"
+    },
+    "localization": {
+      "scalar_transforms": 0,
+      "validation_and_single_assembly_visits": 1845706752,
+      "visit_formula": "9*N384_half + 7*N768_half",
+      "base_residual_hash_visits": 681246720,
+      "fine_hermite_output_component_coefficients": 85377024,
+      "work_semantics": "coefficient visits in the ComparisonPlan convention, not primitive FLOPs; projected control and all accumulators are computed during the one assembly traversal"
+    },
+    "total_scalar_transforms": 54
+  },
+  "required_small_controls": [
+    "existing manufactured viscosity/sign control proves explicit RHS omits viscosity and physical derivative adds -nu|k|^2u exactly once",
+    "small selected W3 M384 CachedReducedForce constructor asserts AVX/backend/layout/width/mode identities and matches the archived scalar AVX reference",
+    "manufactured zero-velocity force case proves R384=R768+P(f768-pad(f384)) with the plus sign",
+    "strict padding omits source Nyquist and shell D/V are exact zero",
+    "retained and shell squared norm/cross sums reconstruct full metrics and both cancellation formulas",
+    "malformed lengths, source bindings and constructor identities refuse before numerical allocation"
+  ],
+  "prospective_run": {
+    "wall_forecast_central_minutes": [18, 24],
+    "wall_forecast_conservative_minutes": 35,
+    "hard_timeout_seconds": 2700,
+    "kill_grace_seconds": 60,
+    "authorization": "implementation, focused controls, source-bound preflight and a later heavy launch each require root review; this proposal authorizes none of them"
+  },
+  "interpretation_limit": "localized residual acceleration and force-resolution diagnostics only; no velocity budget, residual pass, qualification, accepted interpolation or accepted window claim"
+}
