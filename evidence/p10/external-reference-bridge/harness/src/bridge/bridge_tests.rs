@@ -149,6 +149,47 @@ fn m512_clock2048_requires_closed_clock_hash_source_and_profile() {
 }
 
 #[test]
+fn m512_clock3072_requires_closed_clock_hash_source_and_profile() {
+    let mut snapshot = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut snapshot);
+    set_elapsed(&mut snapshot, 3072);
+    snapshot.evolution.schedule[0].until_exclusive = 2048;
+    snapshot
+        .evolution
+        .schedule
+        .push(crate::model::ScheduleSegment {
+            from_inclusive: 2048,
+            until_exclusive: 3072,
+            step_ticks: 128,
+        });
+    snapshot.epoch = 40;
+    snapshot.accepted_steps = 40;
+    snapshot.coefficient_sha256 =
+        "bf48328467b01d96dcd9d7412b889710e7801d7e5f5e6955f451e16890fb74ac".into();
+    snapshot.file_sha256 =
+        "7bae7d6749f209a89bd990ea70befdffbdfd6e577d80e27107b4537ca082a8bd".into();
+    let mut bridge = fixture_bridge([6; 3], [4; 3]);
+    bridge.elapsed = 3072;
+    validate_binding(&bridge, &snapshot).unwrap();
+    validate_snapshot_review(&bridge, &snapshot).unwrap();
+
+    let mut wrong_hash = snapshot.clone();
+    wrong_hash.coefficient_sha256 = "0".repeat(64);
+    assert!(validate_snapshot_review(&bridge, &wrong_hash).is_err());
+    let mut wrong_source = snapshot.clone();
+    wrong_source.source_commit = SOURCE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &wrong_source).is_err());
+    let mut wrong_profile = snapshot.clone();
+    wrong_profile.profile.as_mut().unwrap().value = PROFILE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &wrong_profile).is_err());
+    let mut wrong_clock = snapshot;
+    wrong_clock.elapsed = 3000;
+    wrong_clock.evolution.comparison_endpoint = 3000;
+    bridge.elapsed = 3000;
+    assert!(validate_snapshot_review(&bridge, &wrong_clock).is_err());
+}
+
+#[test]
 fn tiny_sampled_reference_is_finite_and_keeps_raw_divergence() {
     let bridge = fixture_bridge([96, 6, 6], [4; 3]);
     let snapshot = fixture_snapshot([4; 3]);

@@ -181,10 +181,10 @@ fn expected_schedule(snapshot: &SnapshotManifest) -> bool {
     let segments = &snapshot.evolution.schedule;
     match snapshot.elapsed {
         512 | 1024 | 2048 => segments.len() == 1 && segment(&segments[0], 0, snapshot.elapsed, 64),
-        4096 => {
+        3072 | 4096 => {
             segments.len() == 2
                 && segment(&segments[0], 0, 2048, 64)
-                && segment(&segments[1], 2048, 4096, 128)
+                && segment(&segments[1], 2048, snapshot.elapsed, 128)
         }
         _ => false,
     }
@@ -206,6 +206,10 @@ fn admitted_state_hashes(snapshot: &SnapshotManifest) -> bool {
         2048 => (
             "461e6f2a95eb578558493bbacebc5456c7e8a3e8f8fb933ac0176a23a3f67cad",
             "25307e71e89cfbdf5ea677efe0c5c8c161e99b4518aa435e431ba553976cdeaa",
+        ),
+        3072 => (
+            "bf48328467b01d96dcd9d7412b889710e7801d7e5f5e6955f451e16890fb74ac",
+            "7bae7d6749f209a89bd990ea70befdffbdfd6e577d80e27107b4537ca082a8bd",
         ),
         _ => return false,
     };
