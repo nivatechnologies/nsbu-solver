@@ -1,0 +1,557 @@
+{
+  "schema": "p10-offline-residual-localization-result-v1",
+  "status": "one_probe_fine_localization_complete_diagnostic_only",
+  "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "arithmetic": "binary64; empirical values have no outward-rounding or interval enclosure",
+  "integration_force": "exact archived constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout384 width3 forward provider add1827942144 with32 workers",
+  "base_residual_force": "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112",
+  "discrete_retained_force_control": "fresh exact integration CachedReducedForce targeting N384/M384 at clock1112; strict zero padding; R384=R768+P(f768-pad(f384)); changes the discrete target equation outside the retained band",
+  "retained_grid": [
+    384,
+    384,
+    384
+  ],
+  "diagnostic_grid": [
+    768,
+    768,
+    768
+  ],
+  "probe_clock": 1112,
+  "support": [
+    1088,
+    1152,
+    1216
+  ],
+  "reservations": {
+    "schema": "p10-offline-residual-probe-reservation-v1",
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 38807118904,
+    "integration_force_bytes": 12356287944,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 49781517672,
+    "residual_peak_bytes": 114575696272,
+    "admitted_peak_bytes": 114575696272,
+    "cap_bytes": 137438953472
+  },
+  "nodes": [
+    {
+      "clock": 1088,
+      "state_file_sha256": "b2bf7efe0231b0d7940b7a1e9332bcd15967d4c27889eeb8b116b7a8723e33c7",
+      "coefficient_sha256": "ce8d57a69f249b2b4838f01d79eb7478e8041baa0bc928877d280bdae64616da",
+      "physical_derivative_sha256": "badf6a01e4d67dca30096322e6ee565c0245eaa86916925a637a23f1a37840d3",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1152,
+      "state_file_sha256": "1b04fad79092f3f561b752e2fa817237c133bb92db85fd77bbfb77e565374d84",
+      "coefficient_sha256": "1ea19cb3c37004c147a906ff07c7c8555410e0cb7611ea03ab3b4afc2233a6f4",
+      "physical_derivative_sha256": "4a4ed829270fd2eed337664af17d2fe34284aa67153b142fc4ae02d23d81f228",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001687,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1216,
+      "state_file_sha256": "d236a0ab72874906a84690c583e44a86db7d75c3c7ab109f94a0b4b680d61874",
+      "coefficient_sha256": "28ba1b97c02efc1477200a9d72067929f7b88c234c9436ab4f8b8699ddef0bce",
+      "physical_derivative_sha256": "035abbb6e2ed6a474af99360ec1f8016da73a94c0d74d31e5908238b91cbaa01",
+      "rhs_calls": 1,
+      "rhs_work_units": 142001689,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    }
+  ],
+  "reconstructed_value_sha256": "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865",
+  "reconstructed_derivative_sha256": "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c",
+  "base_residual_sha256": "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8",
+  "base_force_work_units": 452987946,
+  "base_force_scalar_transforms": 3,
+  "control_force_work_units": 142001687,
+  "control_force_scalar_transforms": 3,
+  "localization": {
+    "retained_strict_n384": {
+      "derivative": {
+        "l2": 1757.0225332358689,
+        "h1": 48189.52505648983,
+        "vorticity_l2": 48157.48330760966,
+        "divergence_l2": 5.448459959958457e-11
+      },
+      "viscous": {
+        "l2": 1947.8353549160706,
+        "h1": 323424.64761592995,
+        "vorticity_l2": 323418.7821957816,
+        "divergence_l2": 6.475371344737983e-11
+      },
+      "conservative_m768": {
+        "l2": 3085.6374243930313,
+        "h1": 346605.1095298975,
+        "vorticity_l2": 346591.37448255584,
+        "divergence_l2": 1.9836215792140103e-11
+      },
+      "residual_m768": {
+        "l2": 0.7489413477361235,
+        "h1": 935.5579161334231,
+        "vorticity_l2": 935.557616575224,
+        "divergence_l2": 9.320007569446831e-11
+      },
+      "projected_force_delta": {
+        "l2": 0.748941153026925,
+        "h1": 935.561405170177,
+        "vorticity_l2": 935.561105612518,
+        "divergence_l2": 1.3624131606881765e-13
+      },
+      "conservative_m384": {
+        "l2": 3085.637507810345,
+        "h1": 346606.267832221,
+        "vorticity_l2": 346592.5328428613,
+        "divergence_l2": 2.2215810607062662e-11
+      },
+      "residual_m384": {
+        "l2": 0.0022092944747990873,
+        "h1": 0.7830415812306416,
+        "vorticity_l2": 0.7830384647695712,
+        "divergence_l2": 9.320009763804325e-11
+      },
+      "base_cross": [
+        {
+          "l2": 2639963.913445384,
+          "h1": 13209949147.83854,
+          "vorticity_l2": 13207309183.925093,
+          "divergence_l2": 1.4643266998298159e-21
+        },
+        {
+          "l2": -8814221.22493816,
+          "h1": -17854413528.119198,
+          "vorticity_l2": -17845599306.89426,
+          "divergence_l2": -1.738365790516096e-23
+        },
+        {
+          "l2": -10228091.198383598,
+          "h1": -222415495475.65326,
+          "vorticity_l2": -222405267384.4549,
+          "divergence_l2": -7.408012613574504e-23
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 2639963.913445384,
+          "h1": 13209949147.83854,
+          "vorticity_l2": 13207309183.925093,
+          "divergence_l2": 1.4643266998298159e-21
+        },
+        {
+          "l2": -8814221.226238731,
+          "h1": -17854415403.46463,
+          "vorticity_l2": -17845601182.23839,
+          "divergence_l2": -1.1984475657063008e-23
+        },
+        {
+          "l2": -10228092.27292199,
+          "h1": -222417171828.1034,
+          "vorticity_l2": -222406943735.83047,
+          "divergence_l2": -8.241272461840497e-23
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": 0.3856900357930972,
+          "h1": 0.4237848143962827,
+          "vorticity_l2": 0.42398972197848084,
+          "divergence_l2": 0.20752457961118548
+        },
+        {
+          "l2": -0.8128898977643803,
+          "h1": -0.5344757273474358,
+          "vorticity_l2": -0.5345884957893787,
+          "divergence_l2": -0.008042268776379986
+        },
+        {
+          "l2": -0.8508783204923245,
+          "h1": -0.9920349454712459,
+          "vorticity_l2": -0.9920466279380028,
+          "divergence_l2": -0.028836876283349966
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": 0.3856900357930972,
+          "h1": 0.4237848143962827,
+          "vorticity_l2": 0.42398972197848084,
+          "divergence_l2": 0.20752457961118548
+        },
+        {
+          "l2": -0.8128898759086097,
+          "h1": -0.5344739973543194,
+          "vorticity_l2": -0.5345867652987188,
+          "divergence_l2": -0.004950546155495493
+        },
+        {
+          "l2": -0.8508783868808328,
+          "h1": -0.9920391072232309,
+          "vorticity_l2": -0.9920507897807213,
+          "divergence_l2": -0.028644248541584445
+        }
+      ],
+      "base_cancellation": {
+        "l2": 0.00011029259476146109,
+        "h1": 0.001302607628779706,
+        "vorticity_l2": 0.0013027008799693768,
+        "divergence_l2": 0.6701448243070561
+      },
+      "control_cancellation": {
+        "l2": 3.25351001064335e-7,
+        "h1": 1.0902524309673722e-6,
+        "vorticity_l2": 1.0903264895003733e-6,
+        "divergence_l2": 0.6588715495208537
+      },
+      "base_identity_relative_error": {
+        "l2": 0.0038150517001499518,
+        "h1": 0.00018469483436463172,
+        "vorticity_l2": 0.000039125891989026535,
+        "divergence_l2": 2.4169926203906833e-22
+      },
+      "control_identity_relative_error": {
+        "l2": 0.00395457718018219,
+        "h1": 1.0035547298159286,
+        "vorticity_l2": 1.0169430891264883,
+        "divergence_l2": 3.3882853949486078e-22
+      }
+    },
+    "new_shell_n768": {
+      "derivative": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "viscous": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "conservative_m768": {
+        "l2": 1.2957886831700272,
+        "h1": 1932.9048270592857,
+        "vorticity_l2": 1932.9043966687277,
+        "divergence_l2": 9.81635918866573e-14
+      },
+      "residual_m768": {
+        "l2": 1.2957886831700272,
+        "h1": 1932.9048270592857,
+        "vorticity_l2": 1932.9043966687277,
+        "divergence_l2": 9.81635918866573e-14
+      },
+      "projected_force_delta": {
+        "l2": 1.2957957480492102,
+        "h1": 1932.914846937184,
+        "vorticity_l2": 1932.9144165457196,
+        "divergence_l2": 9.820044967749259e-14
+      },
+      "conservative_m384": {
+        "l2": 0.0003377311359721833,
+        "h1": 0.441153443692872,
+        "vorticity_l2": 0.4411533146518358,
+        "divergence_l2": 9.818819761133409e-14
+      },
+      "residual_m384": {
+        "l2": 0.0003377311359721833,
+        "h1": 0.441153443692872,
+        "vorticity_l2": 0.4411533146518358,
+        "divergence_l2": 9.818819761133409e-14
+      },
+      "base_cross": [
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        }
+      ],
+      "base_cancellation": {
+        "l2": 1.0,
+        "h1": 1.0,
+        "vorticity_l2": 1.0,
+        "divergence_l2": 1.0
+      },
+      "control_cancellation": {
+        "l2": 1.0,
+        "h1": 1.0,
+        "vorticity_l2": 1.0,
+        "divergence_l2": 1.0
+      },
+      "base_identity_relative_error": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "control_identity_relative_error": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      }
+    },
+    "full_n768": {
+      "derivative": {
+        "l2": 1757.0225332358689,
+        "h1": 48189.52505648983,
+        "vorticity_l2": 48157.48330760966,
+        "divergence_l2": 5.448459959958457e-11
+      },
+      "viscous": {
+        "l2": 1947.8353549160706,
+        "h1": 323424.64761592995,
+        "vorticity_l2": 323418.7821957816,
+        "divergence_l2": 6.475371344737983e-11
+      },
+      "conservative_m768": {
+        "l2": 3085.6376964710507,
+        "h1": 346610.4990811772,
+        "vorticity_l2": 346596.7642450142,
+        "divergence_l2": 1.983645868201077e-11
+      },
+      "residual_m768": {
+        "l2": 1.4966567588396191,
+        "h1": 2147.4146513677792,
+        "vorticity_l2": 2147.4141334622,
+        "divergence_l2": 9.320012739017793e-11
+      },
+      "projected_force_delta": {
+        "l2": 1.4966627781032413,
+        "h1": 2147.4251903976055,
+        "vorticity_l2": 2147.4246724914933,
+        "divergence_l2": 1.679435158647848e-13
+      },
+      "conservative_m384": {
+        "l2": 3085.637507810364,
+        "h1": 346606.26783250173,
+        "vorticity_l2": 346592.53284314205,
+        "divergence_l2": 2.2216027589356024e-11
+      },
+      "residual_m384": {
+        "l2": 0.0022349595961857647,
+        "h1": 0.8987605236203153,
+        "vorticity_l2": 0.8987577450776091,
+        "divergence_l2": 9.320014935966007e-11
+      },
+      "base_cross": [
+        {
+          "l2": 2639963.913445384,
+          "h1": 13209949147.83854,
+          "vorticity_l2": 13207309183.925093,
+          "divergence_l2": 1.4643266998298159e-21
+        },
+        {
+          "l2": -8814221.22493816,
+          "h1": -17854413528.119198,
+          "vorticity_l2": -17845599306.89426,
+          "divergence_l2": -1.738365790516096e-23
+        },
+        {
+          "l2": -10228091.198383598,
+          "h1": -222415495475.65326,
+          "vorticity_l2": -222405267384.4549,
+          "divergence_l2": -7.408012613574504e-23
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 2639963.913445384,
+          "h1": 13209949147.83854,
+          "vorticity_l2": 13207309183.925093,
+          "divergence_l2": 1.4643266998298159e-21
+        },
+        {
+          "l2": -8814221.226238731,
+          "h1": -17854415403.46463,
+          "vorticity_l2": -17845601182.23839,
+          "divergence_l2": -1.1984475657063008e-23
+        },
+        {
+          "l2": -10228092.27292199,
+          "h1": -222417171828.1034,
+          "vorticity_l2": -222406943735.83047,
+          "divergence_l2": -8.241272461840497e-23
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": 0.3856900357930972,
+          "h1": 0.4237848143962827,
+          "vorticity_l2": 0.42398972197848084,
+          "divergence_l2": 0.20752457961118548
+        },
+        {
+          "l2": -0.8128898260873088,
+          "h1": -0.5344674166230119,
+          "vorticity_l2": -0.5345801826563593,
+          "divergence_l2": -0.008042170301866252
+        },
+        {
+          "l2": -0.8508782454656003,
+          "h1": -0.9920195200204185,
+          "vorticity_l2": -0.9920312010897926,
+          "divergence_l2": -0.028836523186798652
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": 0.3856900357930972,
+          "h1": 0.4237848143962827,
+          "vorticity_l2": 0.42398972197848084,
+          "divergence_l2": 0.20752457961118548
+        },
+        {
+          "l2": -0.8128898759086048,
+          "h1": -0.5344739973538866,
+          "vorticity_l2": -0.5345867652982859,
+          "divergence_l2": -0.004950497803878451
+        },
+        {
+          "l2": -0.8508783868808277,
+          "h1": -0.9920391072224274,
+          "vorticity_l2": -0.9920507897799176,
+          "divergence_l2": -0.028643968775333924
+        }
+      ],
+      "base_cancellation": {
+        "l2": 0.00022040464354748768,
+        "h1": 0.002989892628061234,
+        "vorticity_l2": 0.0029901069025308493,
+        "divergence_l2": 0.6701440256310727
+      },
+      "control_cancellation": {
+        "l2": 3.2913056645538617e-7,
+        "h1": 1.2513714076258688e-6,
+        "vorticity_l2": 1.2514575224471634e-6,
+        "divergence_l2": 0.6588709044940371
+      },
+      "base_identity_relative_error": {
+        "l2": 0.0017031619062346846,
+        "h1": 0.00003505615591274,
+        "vorticity_l2": 7.42631749854017e-6,
+        "divergence_l2": 2.4169926203906833e-22
+      },
+      "control_identity_relative_error": {
+        "l2": 0.003954575758503142,
+        "h1": 1.004688297819377,
+        "vorticity_l2": 1.0224415636947803,
+        "divergence_l2": 3.388285394948623e-22
+      }
+    },
+    "retained_modes": 28164288,
+    "new_shell_modes": 197738688,
+    "excluded_nyquist_slots": 1179264,
+    "projected_force_delta_component_sha256": [
+      "940e381674385cf209cd52c4201188d35785b30e41f8d1e86af225d962e4cb19",
+      "d330b30c6b5094f80e2dedba9f95c1684769eddfc71a8b0a2cc17905277e6d2c",
+      "e57d6e4f68e35e6ada8a233b24ea64bac499ca6936d62e7e262a8ab59ed18a2e"
+    ],
+    "residual_m384_component_sha256": [
+      "bc21394aafa635655cdd1735fb88664d81b106f61dd199dd0136fb7e4a85839a",
+      "53b2e5629122c9b59145d7811d798279ad83beff0bef9ce8f8ac3fdb1e819e40",
+      "ec3de20c4670098b86d8c7c7e1a0dd6f710c280bad0e00e9bb194b9ed6d5f6f9"
+    ]
+  },
+  "identity_closure": {
+    "residual_relative_tolerance": 5e-11,
+    "residual_relative_maximum": 1.0224415636947803,
+    "residual_relative_passed": false,
+    "term_scaled_tolerance": 3.210274371667765e-6,
+    "term_scaled_maximum": 3.6022323005541866e-10,
+    "term_scaled_passed": true,
+    "term_scaled_bound_basis": "64 rounded accumulator contributions per processed mode times binary64 epsilon; residual-relative 5e-11 status is reported independently and is not relabeled"
+  },
+  "runtime_owner_imported": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": "offline empirical binary64 localization only; no velocity-budget, residual-pass, qualification, accepted interpolation, or accepted-window claim"
+}

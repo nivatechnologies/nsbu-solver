@@ -1,0 +1,20 @@
+{
+  "schema": "p10-offline-residual-localization-retry-source-sha256-v1",
+  "implementation_commit": "e16131414d959f254c76b7ae581aa4172ac919be",
+  "release_binary_sha256": "39ff0ae3408e48e8b95f0f964a605ee029e07997bd540104e27e7dafac1981d4",
+  "probe_plan_sha256": "45fe8993e6c6fdc3b947221934f72dff0ec40999cf71437f2f30de171f5ae0c6",
+  "localization_proposal_sha256": "e0c797e29c24027e982cf419ecbed4768d3af990af5266782175302bea76e6c5",
+  "sources": {
+    "crates/nsbu-solver/src/diagnostics/residual.rs": "4d6d38faffa8a40c0c5f3c015e6e52bafbb1edd81d60b7e0fec1bfeab6e6df9b",
+    "crates/nsbu-solver/src/diagnostics/norms.rs": "c4949119f287d2cc93b3ffbf5acd03cb249099aa5631115adfa3d91ca36b38e9",
+    "evidence/p10/offline-residual-probe/harness/src/main.rs": "b7dcf8bcee2abc2c9080e00719c5e2e44a0ef12754b37a7161e847d8aa7269f4",
+    "evidence/p10/offline-residual-probe/harness/src/model.rs": "0a8cfa661b15bd063911586eebc390cd92adf5f1566ccc72846967e12713888e",
+    "evidence/p10/offline-residual-probe/harness/src/tests.rs": "c28e2fbfa84516ef013cc483577fa93d8abeba09f7d53e43a38a869ab7adbfc3"
+  },
+  "baseline_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+  "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "arithmetic": "binary64 empirical arithmetic without outward rounding or interval enclosure"
+}

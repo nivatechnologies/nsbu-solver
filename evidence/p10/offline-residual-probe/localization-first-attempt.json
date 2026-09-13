@@ -1,0 +1,29 @@
+{
+  "schema": "p10-offline-residual-localization-first-attempt-v1",
+  "status": "failed_closed_no_result_published",
+  "implementation_commit": "027757e55d316d8d1b5644b1d3c7c0d005e0b49f",
+  "release_binary_sha256": "922c97bc54894d00f40447c4bfd1ad16c20910da50e0875124a3b9d0fd847a5c",
+  "probe_clock": 1112,
+  "support": [
+    1088,
+    1152,
+    1216
+  ],
+  "exit_status": 1,
+  "started_utc": "2026-09-13T03:13:54Z",
+  "ended_utc": "2026-09-13T03:29:21Z",
+  "wall_seconds": 927.11,
+  "maximum_rss_kib": 60736552,
+  "swaps": 0,
+  "failure": "cross-term norm identity exceeded original residual-relative tolerance 5e-11 before JSON serialization",
+  "preservation": "empty stdout and complete stderr/time/status are retained; no numerical result was claimed",
+  "raw_sha256": {
+    "run.end-utc": "a0ea6abcaffff73b05ab1b48f6364f8946c43f58e3b8bdf510885170877fc274",
+    "run.pid": "ed202afea0a010fc5782df53000165104384bd3b2839aa9b5dcf76d04190ef3b",
+    "run.start-utc": "e0b9f84990d7733b2731664e8eccfd90aedeeac74c586454badfa573b47afc00",
+    "run.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "run.stderr": "2ec1fe634b132b8e99c97b64a76d552b91360c3962b1dd1f19520ff36857efae",
+    "run.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "run.time": "20d72cf8714a091f6b519f7a8c83a707b691a5afde08881f381cfdba3a20090a"
+  }
+}
