@@ -1,0 +1,12 @@
+[package]
+name = "p10-w3-768-controls"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+stats_alloc = "=0.1.10"
