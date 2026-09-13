@@ -21,4 +21,3 @@ test step_artifact::tests::scheduled_step_carries_actual_balance_in_same_bundle 
 test step_artifact::tests::rest_is_metadata_only_and_unscheduled_step_has_no_balance ... ok
 
 test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
-
