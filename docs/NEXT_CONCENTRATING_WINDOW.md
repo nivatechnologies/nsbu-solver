@@ -297,3 +297,11 @@ A subsequent test exercises rejection of an FFT plan whose scratch requirement
 exceeds the reserved allowance. The package coverage run passes 252 tests; the
 five-file maximum CRAP is now 19.125. Production behavior and thresholds are
 unchanged. See the [source-bound closure](../evidence/p10/fft-scratch-tail-coverage-20260913/crap-remediation/README.md).
+
+The [reviewed v3 launch package](../evidence/p10/n512-m512-endpoint-prep-20260913/proposed-launch/v3-launch-receipt.json)
+binds the corrected watchdog identity and has synthetic deadline, process
+cleanup and exclusive archive-publication checks. It remains unlaunched pending
+a time extension and fresh Sulaco admission. Its archive is local to Sulaco;
+transfer to baccus is a separate step. The [fixed-M512 comparison adapter](../evidence/p10/matched-m512-spatial-adapter-20260913/README.md)
+passes 24 tests and reserves 4,600,889,344 bytes for N384/N512 comparison. It
+has not compared actual N512 states; the trajectory must first be captured.

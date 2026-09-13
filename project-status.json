@@ -614,10 +614,10 @@
     "scope": "One exact from-rest0-to64 CM attempt per host with identical executable and linked runtime libraries. Candidate hashes and local-error words match; single-trial timing is not general throughput. New Sulaco profile admits exact API peak plus32GiB operational headroom, preserving prior host guards. No state commit/publication or endpoint trajectory; no PDE qualification."
   },
   "p10_n512_m512_endpoint_preparation": {
-    "status": "prepared_reviewed_not_launched",
+    "status": "v3_launch_package_reviewed_not_launched",
     "evidence": "evidence/p10/n512-m512-endpoint-prep-20260913/README.md",
-    "reviewed_preparation_commit": "4a9a0a2f4f4b18746f2f552061fa6eb8874ec813",
-    "prepared_binary_sha256": "7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211",
+    "reviewed_preparation_commit": "1e04f45b510d38d08447dec44f79a9b458093fef",
+    "prepared_binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
     "captured_states_planned": 48,
     "endpoint_exact_api_bytes": 207578085872,
     "archive_bound_bytes": 155226537984,
@@ -625,8 +625,24 @@
     "run_executed": false,
     "offline_observer": "required_not_implemented_or_executed",
     "time_extension": "20 hours requested; pending user response",
-    "launch_wrapper": "proposed; absolute deadline and source-bound launch guards still need freeze and review",
-    "quality_limit": "Harness main.rs555/config.rs617 exceed requested file-size threshold; not whole-project quality certified.",
+    "launch_wrapper": "Reviewed v3 source/binary/plan binding; deadline/identity/TERM-KILL/archive-timeout/collision checks pass. Requires user time extension, actual absolute deadline and fresh Sulaco resource admission.",
+    "quality_limit": "Harness main.rs555/config.rs625 exceed requested file-size threshold; not whole-project quality certified.",
+    "qualification": false,
+    "harness_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
+    "launch_plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+    "archive_scope": "Local Sulaco archive only; baccus transfer remains separate.",
+    "launch_evidence": "evidence/p10/n512-m512-endpoint-prep-20260913/proposed-launch/v3-launch-receipt.json",
+    "shellcheck": "unavailable; syntax and synthetic controls passed"
+  },
+  "p10_matched_m512_spatial_adapter": {
+    "status": "implemented_focused_validated_no_actual_comparison",
+    "evidence": "evidence/p10/matched-m512-spatial-adapter-20260913/validation.json",
+    "tests_passed": 24,
+    "admitted_bytes": 4600889344,
+    "left_retained": 384,
+    "right_retained": 512,
+    "force_samples": 512,
+    "snapshot_comparisons": 0,
     "qualification": false
   }
 }

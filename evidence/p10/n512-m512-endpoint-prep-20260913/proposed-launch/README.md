@@ -1,3 +1,9 @@
+Current status: the v3 packet below is prepared and reviewed, but unexecuted.
+Use `SHA256SUMS-V3` from the repository root and the six artifact bindings in
+`v3-launch-receipt.json` to verify the current packet. The earlier `SHA256SUMS`
+and proposal description refer to commit `60f9432c6a22727798901c9f3871ee02cecf4e05`;
+they are historical receipts, not checksums for the replacement scripts.
+
 # Proposed N512/M512 launch template
 
 This directory is a reviewable template only. It has not launched the solver,
