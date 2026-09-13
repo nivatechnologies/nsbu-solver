@@ -1,8 +1,5 @@
 {
-  "family_consecutive_failures": {
-    "w3-layout-admission": 0
-  },
-  "inflight": {},
+  "schema": "p10-w3-admit-768-qwen-replacement-v2",
   "receipts": [
     {
       "attempts": [
@@ -39,30 +36,29 @@
       "tool_calls": 0
     },
     {
+      "task_id": "w3-admit-cubic-768-replacement-v2",
+      "family": "w3-layout-admission",
+      "status": "validated_candidate",
+      "scientific_accepted": false,
+      "review_required": true,
       "attempts": [
         {
-          "checker_seconds": 3e-05,
           "number": 1,
-          "validator_errors": []
+          "validator_errors": [],
+          "checker_seconds": 3e-05
         }
       ],
+      "tool_calls": 0,
+      "timing_seconds": 11.335812,
+      "prompt_tokens": 431,
       "completion_tokens": 601,
-      "errors": [],
-      "family": "w3-layout-admission",
+      "reasoning_tokens": 461,
       "input_hash": "a9e5aa2f7e6f55d8f18c15b57414bd80b50aaca2302572d67637e32c714ac62a",
+      "output_hash": "708c8d8b9cdfd96c0bb52e8a9caaa9f7e7037da21a20cf8a7ee6c94b3cfad52d",
       "output": {
         "replacement": "fn admit_layout(layout: Layout) -> Result<(), SolverError> {\n    let dimensions = layout.dimensions();\n    if matches!(\n        dimensions,\n        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576] | [768, 768, 768]\n    ) {\n        return Ok(());\n    }\n    Err(SolverError::InvalidPayload)\n}"
       },
-      "output_hash": "708c8d8b9cdfd96c0bb52e8a9caaa9f7e7037da21a20cf8a7ee6c94b3cfad52d",
-      "prompt_tokens": 431,
-      "reasoning_tokens": 461,
-      "review_required": true,
-      "scientific_accepted": false,
-      "status": "validated_candidate",
-      "task_id": "w3-admit-cubic-768-replacement-v2",
-      "timing_seconds": 11.335812,
-      "tool_calls": 0
+      "errors": []
     }
-  ],
-  "schema": "nsbu-local-agent-queue-v1"
+  ]
 }

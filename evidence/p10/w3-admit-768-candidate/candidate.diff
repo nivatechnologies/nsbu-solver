@@ -1,0 +1,14 @@
+diff --git a/crates/nsbu-solver/src/spectral/w3/admission.rs b/crates/nsbu-solver/src/spectral/w3/admission.rs
+index ac12346..1efe9b2 100644
+--- a/crates/nsbu-solver/src/spectral/w3/admission.rs
++++ b/crates/nsbu-solver/src/spectral/w3/admission.rs
+@@ -54,7 +54,7 @@ fn admit_layout(layout: Layout) -> Result<(), SolverError> {
+     let dimensions = layout.dimensions();
+     if matches!(
+         dimensions,
+-        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576]
++        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576] | [768, 768, 768]
+     ) {
+         return Ok(());
+     }
+

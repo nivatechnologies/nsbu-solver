@@ -1,0 +1,30 @@
+{
+  "schema": "p10-w3-admit-768-review-candidate-v1",
+  "status": "validated_candidate_review_required_not_merged",
+  "source_commit": "f5aa345bbc598ee3833878e207c9be31b7a84ab3",
+  "target": "crates/nsbu-solver/src/spectral/w3/admission.rs",
+  "candidate_diff_sha256": "0ad9b9f7b0064d52608d1b15af4673e5f98f2c0610027bfc91b164fa624a158e",
+  "local_agent": {
+    "task_id": "w3-admit-cubic-768-replacement-v2",
+    "status": "validated_candidate",
+    "attempts": 1,
+    "timing_seconds": 11.335812,
+    "prompt_tokens": 431,
+    "completion_tokens": 601,
+    "reasoning_tokens": 461,
+    "tool_calls": 0,
+    "input_hash": "a9e5aa2f7e6f55d8f18c15b57414bd80b50aaca2302572d67637e32c714ac62a",
+    "output_hash": "708c8d8b9cdfd96c0bb52e8a9caaa9f7e7037da21a20cf8a7ee6c94b3cfad52d",
+    "review_required": true,
+    "scientific_accepted": false
+  },
+  "host_splice": "deterministic replacement of only fn admit_layout from the exact validated output",
+  "diff_numstat": {"added": 1, "deleted": 1},
+  "cargo_check_nsbu_solver": "passed",
+  "existing_layouts_preserved": [[6,6,6], [384,384,384], [512,512,512], [576,576,576]],
+  "new_layout": [768,768,768],
+  "not_admitted": [[1024,1024,1024], [1152,1152,1152]],
+  "tests_deferred_to_reviewed_followup": true,
+  "qualification": false,
+  "launch_authorized": false
+}

@@ -54,7 +54,7 @@ fn admit_layout(layout: Layout) -> Result<(), SolverError> {
     let dimensions = layout.dimensions();
     if matches!(
         dimensions,
-        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576]
+        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576] | [768, 768, 768]
     ) {
         return Ok(());
     }

@@ -1,0 +1,18 @@
+[
+  {
+    "task_id": "w3-admit-cubic-768-replacement-v2",
+    "family": "w3-layout-admission",
+    "instructions": "Return exactly one JSON object and nothing else, with exactly one string field named replacement. Shape: {\"replacement\":\"fn admit_layout(layout: Layout) -> Result<(), SolverError> {\\n...\"}. The replacement must be the complete supplied function with the sole semantic change of additionally admitting cubic [768, 768, 768]. Preserve every existing admitted layout and rejection. Do not admit 1024, 1152, noncubic layouts, or anything else. Do not return a diff, Markdown, tests, comments, prose, APIs, resource changes, or claims. This is a review-required candidate only.",
+    "inputs": {
+      "source_commit": "f5aa345bbc598ee3833878e207c9be31b7a84ab3",
+      "target": "crates/nsbu-solver/src/spectral/w3/admission.rs",
+      "function_source": "fn admit_layout(layout: Layout) -> Result<(), SolverError> {\n    let dimensions = layout.dimensions();\n    if matches!(\n        dimensions,\n        [6, 6, 6] | [384, 384, 384] | [512, 512, 512] | [576, 576, 576]\n    ) {\n        return Ok(());\n    }\n    Err(SolverError::InvalidPayload)\n}"
+    },
+    "output_contract": {
+      "required": ["replacement"],
+      "properties": {"replacement": {"type": "string"}}
+    },
+    "validator": "exact_768_replacement",
+    "review_required": true
+  }
+]
