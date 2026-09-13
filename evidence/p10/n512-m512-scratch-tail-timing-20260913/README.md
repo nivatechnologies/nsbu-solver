@@ -34,3 +34,22 @@ The prepared launcher allows 2700 seconds plus a 60-second kill grace and keeps
 launch is 2026-09-13T19:01:54Z. No numerical attempt has been executed here.
 Any future local acceptance is an integrator outcome only, with no PDE
 qualification or accepted-window claim.
+
+## Actual local attempt
+
+The single authorized attempt completed with exit status 0. Integration took
+1470.457289408 seconds and timed RHS work took 1371.158965519 seconds; external
+wall time was 1655.39 seconds with peak RSS 125,371,392 KiB, zero major faults,
+and zero swaps. The local accepted token was present and hashes to
+`5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff`.
+The error ratios were `1.5877938231527918e-8` in L2 and
+`4.324683895722008e-8` in H1. There were zero steady allocations. The candidate
+was not committed or published, and this diagnostic makes no qualification or
+accepted-window claim.
+
+The candidate hash and error words match the independently run Sulaco trial.
+Like-for-like times were 1470.457289408 local versus 954.894656332 seconds on
+Sulaco for integration, and 1655.39 versus 1051.20 seconds for external wall
+time. These are single trials on different hosts and do not establish a general
+throughput ratio. `raw/actual-attempt-20260913/` preserves the result, resource
+receipt, process release, validation, and SHA-256 inventory.

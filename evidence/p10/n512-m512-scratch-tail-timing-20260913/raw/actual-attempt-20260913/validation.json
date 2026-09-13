@@ -1,0 +1,21 @@
+{
+  "schema": "p10-n512-m512-local-result-validation-v1",
+  "status": "validated_terminal_actual_attempt",
+  "result_sha256": "cdd3b8c47dbd2b8e4c271b9fd952756021c96845188cf5c1288d8267e4584200",
+  "exit_status": 0,
+  "integration_seconds": 1470.457289408,
+  "rhs_seconds": 1371.1589655189998,
+  "error_ratio_l2": 1.5877938231527918e-08,
+  "error_ratio_h1": 4.324683895722008e-08,
+  "candidate_coefficient_sha256": "5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff",
+  "rhs_calls": 12,
+  "cache_misses": 5,
+  "cache_hits": 7,
+  "consumed_work_units": 3096453264,
+  "consumed_scalar_transforms": 135,
+  "steady_allocations": 0,
+  "local_accepted_token_present": true,
+  "committed": false,
+  "published": false,
+  "qualification": false
+}

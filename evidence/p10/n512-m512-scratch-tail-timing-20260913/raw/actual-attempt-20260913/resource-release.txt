@@ -1,0 +1,7 @@
+observed_utc=2026-09-13T18:45:41Z
+owner_pid=2081871 absent
+owner_pgid=2081871 absent
+time_pid=2081881 absent
+timeout_pid=2081883 absent
+solver_pid=2081884 absent
+fresh_mem_available_kib=425790724
