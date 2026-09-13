@@ -1,0 +1,64 @@
+{
+  "schema": "p10-ordered-hessian-review-handoff-v1",
+  "status": "review_only_no_numerical_use",
+  "source_commit": "78c1d14f8b20948e11bf2c5a7937b20c4a8eaddc",
+  "implementation_commit": "3540952",
+  "test_commit": "78c1d14",
+  "quality": {
+    "cargo_test": "18 passed",
+    "cargo_clippy_all_targets_deny_warnings": "passed",
+    "cargo_fmt_check": "passed",
+    "maximum_function_cyclomatic_complexity": 21
+  },
+  "normalization": "27 ordered entries; RMS volume average; L2 physical-domain integral",
+  "screens": [
+    {
+      "clock": 512,
+      "coarse": 192,
+      "fine": 256,
+      "cap_bytes": 578486272,
+      "left_manifest": "clock0512/n192.json",
+      "right_manifest": "clock0512/n256.json"
+    },
+    {
+      "clock": 512,
+      "coarse": 256,
+      "fine": 384,
+      "cap_bytes": 1772879872,
+      "left_manifest": "clock0512/n256.json",
+      "right_manifest": "clock0512/n384.json"
+    },
+    {
+      "clock": 4096,
+      "coarse": 192,
+      "fine": 256,
+      "cap_bytes": 578486272,
+      "left_manifest": "clock4096/n192.json",
+      "right_manifest": "clock4096/n256.json"
+    },
+    {
+      "clock": 4096,
+      "coarse": 256,
+      "fine": 384,
+      "cap_bytes": 1772879872,
+      "left_manifest": "clock4096/n256.json",
+      "right_manifest": "clock4096/n384.json"
+    }
+  ],
+  "execution_order": [
+    "both clock0512 screens and archival",
+    "root review of clock0512 output",
+    "both clock4096 screens and archival"
+  ],
+  "state_reverification": "all six immutable state file SHA-256 values reverified locally on 2026-09-13",
+  "acceptance": {
+    "status": "not_assessed",
+    "assigned_budget": null
+  },
+  "interpretation_limits": [
+    "no pointwise or time-supremum claim",
+    "no finest-grid qualification",
+    "no continuum claim"
+  ],
+  "authorization": "root semantic review required before any --ordered-hessian invocation"
+}

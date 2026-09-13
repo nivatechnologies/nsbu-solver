@@ -1,0 +1,68 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-n384-endpoint-prep-20260912/evidence/p10/avx-matched-piecewise-20260912/runs/n192-local-569fd0c/output/state/step-048-clock-4096/state.bin",
+  "plan": "../plans/n192-frozen-plan.json",
+  "identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=192;force_samples=384;observer_force_samples=768;observer_conservative=384;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "plan_sha256": "d03ffea53ed6f41ab7e38e4962b15ca8f5213b304641ce41816ed1d7840bd4f1",
+  "coefficient_sha256": "de1f8c30f8b5e4bc399754ddc95d9308dcd47f03a6c56c72b470304d45db499a",
+  "file_sha256": "cae9f3ba4a3e5a12cae7d1139827ba4f45089f06ace9ef7d08212e518202d80b",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=serial-component-avx-padded288;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=0;provider_w3_workers=3;observer_conservative=384;host=local",
+  "dimensions": [
+    192,
+    192,
+    192
+  ],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 64
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 4096,
+        "step_ticks": 128
+      }
+    ],
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "elapsed": 4096,
+  "target": 8192,
+  "epoch": 48,
+  "accepted_steps": 48,
+  "comparison_kind": "MATCHED_SPATIAL",
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "n192-m384-h64to2048-h128to4096-cadv33-avx-force-w3-f13c29c"
+  },
+  "admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  }
+}
