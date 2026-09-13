@@ -1,8 +1,11 @@
 //! Opt-in deterministic three-component FFT execution with owned worker state.
 mod admission;
 mod worker;
-use super::{FftBackend, FftCatalog, FftPlan, FftWorkspace};
+use super::{
+    FftBackend, FftCatalog, FftPlan, FftWorkspace, ParallelFftExecutor, ParallelFftIdentity,
+};
 use crate::{domain::Layout, storage::filled, Complex64, SolverError};
+use std::sync::Arc;
 use worker::{Lane, Operation, Worker};
 
 const WIDTH: usize = 3;
@@ -62,6 +65,25 @@ impl W3FftPool {
         admission::additional(layout, backend, mode)
     }
 
+    /// Addition for W3 lanes that share one bounded intra-transform executor.
+    pub fn additional_parallel_reservation_with_backend(
+        layout: Layout,
+        backend: FftBackend,
+        mode: W3FftMode,
+        workers: usize,
+    ) -> Result<usize, SolverError> {
+        let lanes = Self::additional_reservation_with_backend(layout, backend, mode)?;
+        let executor =
+            ParallelFftExecutor::additional_w3_reservation(layout, backend, workers, WIDTH)?;
+        let wrappers = WIDTH
+            .checked_mul(FftPlan::parallel_wrapper_additional_reservation())
+            .ok_or(SolverError::SizeOverflow)?;
+        lanes
+            .checked_add(executor)
+            .and_then(|n| n.checked_add(wrappers))
+            .ok_or(SolverError::SizeOverflow)
+    }
+
     /// Consume one scalar lane and construct the two extra lanes before starting workers.
     pub fn from_scalar_lane(
         layout: Layout,
@@ -70,13 +92,67 @@ impl W3FftPool {
         seed: (FftPlan, FftWorkspace, Vec<Complex64>),
         cap: usize,
     ) -> Result<Self, SolverError> {
-        if !seed.0.matches_lane(layout, catalog.backend(), &seed.1)
+        Self::from_scalar_lane_inner(layout, catalog, mode, seed, None, cap)
+    }
+
+    /// Consume one scalar lane and attach one shared bounded executor to all three plans.
+    pub fn from_scalar_lane_parallel(
+        layout: Layout,
+        catalog: &FftCatalog,
+        mode: W3FftMode,
+        workers: usize,
+        seed: (FftPlan, FftWorkspace, Vec<Complex64>),
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let required = Self::additional_parallel_reservation_with_backend(
+            layout,
+            catalog.backend(),
+            mode,
+            workers,
+        )?;
+        if required > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let executor_cap = ParallelFftExecutor::additional_w3_reservation(
+            layout,
+            catalog.backend(),
+            workers,
+            WIDTH,
+        )?;
+        let executor = Arc::new(ParallelFftExecutor::new_for_w3(
+            layout,
+            catalog.backend(),
+            workers,
+            WIDTH,
+            executor_cap,
+        )?);
+        Self::from_scalar_lane_inner(layout, catalog, mode, seed, Some(executor), cap)
+    }
+
+    fn from_scalar_lane_inner(
+        layout: Layout,
+        catalog: &FftCatalog,
+        mode: W3FftMode,
+        seed: (FftPlan, FftWorkspace, Vec<Complex64>),
+        executor: Option<Arc<ParallelFftExecutor>>,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        if seed.0.parallel_fft_identity().is_some()
+            || !seed.0.matches_lane(layout, catalog.backend(), &seed.1)
             || seed.2.len() != layout.half_len()
             || seed.2.capacity() < layout.half_len()
         {
             return Err(SolverError::InvalidPayload);
         }
-        let additional = Self::additional_reservation(layout, catalog, mode)?;
+        let additional = match &executor {
+            Some(executor) => Self::additional_parallel_reservation_with_backend(
+                layout,
+                catalog.backend(),
+                mode,
+                executor.identity().helper_workers,
+            )?,
+            None => Self::additional_reservation(layout, catalog, mode)?,
+        };
         if additional > cap {
             return Err(SolverError::ResourceLimit);
         }
@@ -84,8 +160,12 @@ impl W3FftPool {
         lanes
             .try_reserve_exact(WIDTH)
             .map_err(|_| SolverError::AllocationFailed)?;
+        let seed_plan = match &executor {
+            Some(executor) => seed.0.with_parallel_executor(Arc::clone(executor))?,
+            None => seed.0,
+        };
         lanes.push(Lane {
-            plan: seed.0,
+            plan: seed_plan,
             workspace: seed.1,
             physical: Vec::new(),
             spectrum: seed.2,
@@ -93,6 +173,10 @@ impl W3FftPool {
         for _ in 1..WIDTH {
             let bytes = FftPlan::reservation_from_catalog(layout, catalog)?;
             let (plan, workspace) = FftPlan::new_from_catalog(layout, catalog, bytes)?;
+            let plan = match &executor {
+                Some(executor) => plan.with_parallel_executor(Arc::clone(executor))?,
+                None => plan,
+            };
             let physical = match mode {
                 W3FftMode::Forward => Vec::new(),
                 W3FftMode::Bidirectional => filled(layout.real_len(), 0.0)?,
@@ -109,7 +193,8 @@ impl W3FftPool {
             .try_reserve_exact(WIDTH)
             .map_err(|_| SolverError::AllocationFailed)?;
         for lane in lanes {
-            workers.push(Worker::new(lane)?);
+            let executor = lane.plan.parallel_executor();
+            workers.push(Worker::new(lane, executor)?);
         }
         Ok(Self {
             workers,
@@ -127,6 +212,12 @@ impl W3FftPool {
     /// Bound layout, width, direction support and additional reservation.
     pub fn identity(&self) -> W3FftIdentity {
         self.identity
+    }
+
+    /// Shared intra-transform executor identity for the explicit parallel constructor.
+    pub fn parallel_fft_identity(&self) -> Option<ParallelFftIdentity> {
+        let state = self.workers.first()?.shared.state.lock().ok()?;
+        state.lane.plan.parallel_fft_identity()
     }
 
     /// Whether a drained numerical failure or panic permanently terminated this owner.

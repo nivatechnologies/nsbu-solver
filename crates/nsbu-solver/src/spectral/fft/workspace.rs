@@ -32,11 +32,12 @@ impl FftPlan {
             .ok_or(SolverError::InvalidDomain)?;
         let valid_scratch = match &self.backend {
             BackendPlan::Owned(_) => work.scratch.len() == maximum,
-            BackendPlan::Avx(axes) => {
-                let required = axes[0]
+            BackendPlan::Avx(_) | BackendPlan::ParallelAvx(_) => {
+                let axes = self.avx_axes().ok_or(SolverError::InvalidPayload)?;
+                let required = axes
                     .forward
                     .iter()
-                    .chain(&axes[0].inverse)
+                    .chain(&axes.inverse)
                     .map(|plan| plan.get_inplace_scratch_len())
                     .max()
                     .ok_or(SolverError::InvalidDomain)?;

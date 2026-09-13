@@ -10,7 +10,7 @@ use crate::time::BenchmarkTime;
 use nsbu_solver::{
     domain::{Domain, Layout, TickClock},
     integrators::forcing::{ForceLimits, ForceWork, PrescribedForce},
-    spectral::{FftBackend, FftCatalog, W3FftIdentity},
+    spectral::{FftBackend, FftCatalog, ParallelFftIdentity, W3FftIdentity},
     Complex64, SolverError,
 };
 
@@ -187,6 +187,23 @@ impl ParallelReducedV2ForceW3 {
         admission::reduced_w3_limits_with_fft_backend(domain, samples, workers, backend)
     }
 
+    /// Complete provider reservation with one shared bounded intra-transform executor.
+    pub fn preflight_with_parallel_fft_backend(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        backend: FftBackend,
+        fft_workers: usize,
+    ) -> Result<ForceLimits, SolverError> {
+        admission::reduced_parallel_w3_limits_with_fft_backend(
+            domain,
+            samples,
+            workers,
+            backend,
+            fft_workers,
+        )
+    }
+
     /// Construct only after the complete sampling and W3 reservation fits.
     pub fn new_with_catalog(
         domain: Domain,
@@ -220,6 +237,51 @@ impl ParallelReducedV2ForceW3 {
         })
     }
 
+    /// Construct the sampling pool and explicit shared-executor W3 transform.
+    pub fn new_with_catalog_parallel_fft(
+        domain: Domain,
+        samples: Layout,
+        workers: usize,
+        catalog: &FftCatalog,
+        fft_workers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_parallel_fft_backend(
+            domain,
+            samples,
+            workers,
+            catalog.backend(),
+            fft_workers,
+        )?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let transform_limits = ReducedV2ForceW3::preflight_with_parallel_fft_backend(
+            domain,
+            samples,
+            catalog.backend(),
+            fft_workers,
+        )?;
+        Ok(Self {
+            inner: ReducedV2ForceW3::new_with_catalog_parallel_fft(
+                domain,
+                samples,
+                catalog,
+                fft_workers,
+                transform_limits.storage_bytes,
+            )?,
+            pool: Pool::new(samples, workers, Arithmetic::Reduced)?,
+            limits,
+            identity: ParallelReducedIdentity {
+                retained: domain.layout(),
+                sampled: samples,
+                workers,
+                cap_bytes: cap,
+            },
+            fft_backend: catalog.backend(),
+        })
+    }
+
     /// Existing sampling identity remains separate from the W3 execution identity.
     pub fn identity(&self) -> ParallelReducedIdentity {
         self.identity
@@ -228,6 +290,11 @@ impl ParallelReducedV2ForceW3 {
     /// Explicit transform-owner identity for artifact binding.
     pub fn w3_fft_identity(&self) -> W3FftIdentity {
         self.inner.fft_identity()
+    }
+
+    /// Shared intra-transform executor identity for the explicit parallel constructor.
+    pub fn parallel_fft_identity(&self) -> Option<ParallelFftIdentity> {
+        self.inner.parallel_fft_identity()
     }
 
     /// Immutable scalar-transform backend used after sampling.

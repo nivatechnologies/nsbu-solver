@@ -1,5 +1,8 @@
 //! Three-halves padded rotational nonlinearity and physical-pressure reconstruction.
-use super::{FftBackend, FftCatalog, FftPlan, FftWorkspace, W3FftIdentity, W3FftMode, W3FftPool};
+use super::{
+    FftBackend, FftCatalog, FftPlan, FftWorkspace, ParallelFftIdentity, W3FftIdentity, W3FftMode,
+    W3FftPool,
+};
 use crate::{
     domain::{Domain, Layout},
     storage::filled,
@@ -77,6 +80,23 @@ impl RotationalWorkspace {
             domain.padded_layout()?,
             backend,
             W3FftMode::Bidirectional,
+        )?;
+        base.checked_add(additional)
+            .ok_or(SolverError::SizeOverflow)
+    }
+
+    /// Opt-in reservation for W3 lanes sharing one bounded intra-transform executor.
+    pub fn reservation_with_parallel_w3_fft_backend(
+        domain: Domain,
+        backend: FftBackend,
+        workers: usize,
+    ) -> Result<usize, SolverError> {
+        let base = Self::reservation_with_fft_backend(domain, backend)?;
+        let additional = W3FftPool::additional_parallel_reservation_with_backend(
+            domain.padded_layout()?,
+            backend,
+            W3FftMode::Bidirectional,
+            workers,
         )?;
         base.checked_add(additional)
             .ok_or(SolverError::SizeOverflow)
@@ -173,11 +193,53 @@ impl RotationalWorkspace {
         Ok(owner)
     }
 
+    /// Construct explicit W3 lanes sharing one bounded intra-transform executor.
+    pub fn new_with_catalog_parallel_w3(
+        domain: Domain,
+        catalog: &FftCatalog,
+        workers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let total =
+            Self::reservation_with_parallel_w3_fft_backend(domain, catalog.backend(), workers)?;
+        if total > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let base = Self::reservation_with_catalog(domain, catalog)?;
+        let mut owner = Self::new_with_catalog(domain, catalog, base)?;
+        let additional = total.checked_sub(base).ok_or(SolverError::SizeOverflow)?;
+        let TransformOwner::Serial {
+            fft,
+            workspace,
+            staging,
+        } = owner.transform
+        else {
+            return Err(SolverError::InvalidPayload);
+        };
+        owner.transform = TransformOwner::W3(W3FftPool::from_scalar_lane_parallel(
+            owner.padded,
+            catalog,
+            W3FftMode::Bidirectional,
+            workers,
+            (fft, workspace, staging),
+            additional,
+        )?);
+        Ok(owner)
+    }
+
     /// W3 execution identity, present only for the explicit opt-in constructor.
     pub fn w3_fft_identity(&self) -> Option<W3FftIdentity> {
         match &self.transform {
             TransformOwner::Serial { .. } => None,
             TransformOwner::W3(pool) => Some(pool.identity()),
+        }
+    }
+
+    /// Shared intra-transform executor identity for the explicit parallel W3 constructor.
+    pub fn parallel_fft_identity(&self) -> Option<ParallelFftIdentity> {
+        match &self.transform {
+            TransformOwner::W3(pool) => pool.parallel_fft_identity(),
+            TransformOwner::Serial { .. } => None,
         }
     }
 

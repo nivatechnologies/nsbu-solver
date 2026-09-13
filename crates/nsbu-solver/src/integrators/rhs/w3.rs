@@ -3,7 +3,7 @@ use super::SpectralRhs;
 use crate::{
     domain::Domain,
     integrators::forcing::{ForceLimits, PrescribedForce},
-    spectral::{FftBackend, FftCatalog, RotationalWorkspace, W3FftIdentity},
+    spectral::{FftBackend, FftCatalog, ParallelFftIdentity, RotationalWorkspace, W3FftIdentity},
     SolverError,
 };
 
@@ -47,9 +47,62 @@ impl<F: PrescribedForce> SpectralRhs<F> {
         )
     }
 
+    /// Reserve an explicit W3 operator with one shared bounded intra-transform executor.
+    pub fn reservation_with_parallel_w3_fft_backend(
+        domain: Domain,
+        limits: ForceLimits,
+        backend: FftBackend,
+        workers: usize,
+    ) -> Result<usize, SolverError> {
+        Self::validate_limits(limits)?;
+        let operator = RotationalWorkspace::reservation_with_parallel_w3_fft_backend(
+            domain, backend, workers,
+        )?;
+        Self::reservation_parts(domain, limits, operator)
+    }
+
+    /// Construct only the explicit shared-executor W3 path.
+    pub fn new_with_catalog_parallel_w3(
+        domain: Domain,
+        force: F,
+        advective_limit: f64,
+        catalog: &FftCatalog,
+        workers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = force.limits().ok_or(SolverError::UnknownProviderCost)?;
+        let storage_bytes = Self::reservation_with_parallel_w3_fft_backend(
+            domain,
+            limits,
+            catalog.backend(),
+            workers,
+        )?;
+        if storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        if !advective_limit.is_finite() || advective_limit <= 0.0 {
+            return Err(SolverError::InvalidStep);
+        }
+        let operator =
+            RotationalWorkspace::new_with_catalog_parallel_w3(domain, catalog, workers, cap)?;
+        Self::allocate(
+            domain,
+            force,
+            limits,
+            advective_limit,
+            storage_bytes,
+            operator,
+        )
+    }
+
     /// Experimental W3 operator identity; absent for every existing constructor.
     pub fn w3_fft_identity(&self) -> Option<W3FftIdentity> {
         self.operator.w3_fft_identity()
+    }
+
+    /// Shared intra-transform executor identity for the explicit parallel W3 path.
+    pub fn parallel_fft_identity(&self) -> Option<ParallelFftIdentity> {
+        self.operator.parallel_fft_identity()
     }
 }
 

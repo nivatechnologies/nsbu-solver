@@ -15,6 +15,9 @@ impl FftPlan {
         output: &mut [Complex64],
         work: &mut FftWorkspace,
     ) -> Result<(), SolverError> {
+        if let BackendPlan::ParallelAvx(owner) = &self.backend {
+            return owner.executor.forward(self, input, output, work);
+        }
         self.validate(input.len(), output.len(), work)?;
         finite_real(input)?;
         let [nx, ny, nz] = self.layout.dimensions();
@@ -47,6 +50,9 @@ impl FftPlan {
         output: &mut [f64],
         work: &mut FftWorkspace,
     ) -> Result<(), SolverError> {
+        if let BackendPlan::ParallelAvx(owner) = &self.backend {
+            return owner.executor.inverse(self, input, output, work);
+        }
         self.validate(output.len(), input.len(), work)?;
         crate::spectral::hermitian::validate(self.layout, input)?;
         work.grid.copy_from_slice(input);
@@ -90,8 +96,8 @@ impl FftPlan {
                 owned::roots(roots, axis),
                 inverse,
             ),
-            BackendPlan::Avx(axes) => {
-                let axes = &axes[0];
+            BackendPlan::Avx(_) | BackendPlan::ParallelAvx(_) => {
+                let axes = self.avx_axes().expect("AVX backend has axes");
                 let plan = if inverse {
                     &axes.inverse[axis]
                 } else {
@@ -115,7 +121,10 @@ impl FftPlan {
     }
 
     fn transverse_axis(&self, work: &mut FftWorkspace, inverse: bool, axis: usize) {
-        if matches!(&self.backend, BackendPlan::Avx(_)) {
+        if matches!(
+            &self.backend,
+            BackendPlan::Avx(_) | BackendPlan::ParallelAvx(_)
+        ) {
             self.transverse_axis_tiled(work, inverse, axis);
             return;
         }

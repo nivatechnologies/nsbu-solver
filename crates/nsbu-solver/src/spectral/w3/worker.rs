@@ -1,6 +1,6 @@
 //! Persistent worker lane protocol and panic-to-failure boundary.
 use super::STACK_BYTES;
-use crate::spectral::{FftPlan, FftWorkspace};
+use crate::spectral::{FftPlan, FftWorkspace, ParallelFftExecutor};
 use crate::{Complex64, SolverError};
 use std::{
     sync::{Arc, Condvar, Mutex},
@@ -51,7 +51,10 @@ pub(super) struct Worker {
 }
 
 impl Worker {
-    pub(super) fn new(lane: Lane) -> Result<Self, SolverError> {
+    pub(super) fn new(
+        lane: Lane,
+        executor: Option<Arc<ParallelFftExecutor>>,
+    ) -> Result<Self, SolverError> {
         let shared = Arc::new(Shared {
             state: Mutex::new(WorkerState {
                 started: false,
@@ -70,7 +73,7 @@ impl Worker {
         let thread = Arc::clone(&shared);
         let handle = Builder::new()
             .stack_size(STACK_BYTES)
-            .spawn(move || worker_loop(&thread))
+            .spawn(move || worker_entry(&thread, executor))
             .map_err(|_| SolverError::AllocationFailed)?;
         let worker = Self {
             shared,
@@ -125,6 +128,26 @@ impl Worker {
                 .unwrap_or_else(std::sync::PoisonError::into_inner);
         }
         state.complete.take().ok_or(Failure::Protocol)?
+    }
+}
+
+fn worker_entry(shared: &Shared, executor: Option<Arc<ParallelFftExecutor>>) {
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| match executor {
+        Some(executor) => executor.install_worker(|| worker_loop(shared)),
+        None => worker_loop(shared),
+    }));
+    if result.is_err() {
+        let mut state = shared
+            .state
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        state.stop = true;
+        if state.complete.is_none() {
+            state.pending = None;
+            state.complete = Some(Err(Failure::Panic));
+        }
+        drop(state);
+        shared.done.notify_all();
     }
 }
 

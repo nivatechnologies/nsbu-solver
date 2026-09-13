@@ -1,6 +1,10 @@
 //! Public plan admission, construction, and backend identity.
-use super::{avx, owned, BackendPlan, FftBackend, FftCatalog, FftPlan, FftWorkspace};
+use super::{
+    avx, owned, BackendPlan, FftBackend, FftCatalog, FftPlan, FftWorkspace, ParallelAvxPlan,
+    ParallelFftExecutor, ParallelFftIdentity,
+};
 use crate::{domain::Layout, SolverError};
+use std::sync::Arc;
 
 impl FftPlan {
     /// Exact element-storage reservation for roots and one workspace, plus object headers.
@@ -80,7 +84,62 @@ impl FftPlan {
     pub fn backend(&self) -> FftBackend {
         match self.backend {
             BackendPlan::Owned(_) => FftBackend::OwnedRadix,
-            BackendPlan::Avx(_) => FftBackend::RustFft6_4_1AvxFma,
+            BackendPlan::Avx(_) | BackendPlan::ParallelAvx(_) => FftBackend::RustFft6_4_1AvxFma,
+        }
+    }
+
+    pub(crate) fn with_parallel_executor(
+        self,
+        executor: Arc<ParallelFftExecutor>,
+    ) -> Result<Self, SolverError> {
+        if executor.identity().layout != self.layout
+            || executor.identity().backend != FftBackend::RustFft6_4_1AvxFma
+        {
+            return Err(SolverError::InvalidPayload);
+        }
+        let Self { layout, backend } = self;
+        let BackendPlan::Avx(axes) = backend else {
+            return Err(SolverError::InvalidPayload);
+        };
+        let mut axes = axes.into_vec();
+        if axes.len() != 1 {
+            return Err(SolverError::InvalidPayload);
+        }
+        let axes_value = axes.pop().ok_or(SolverError::InvalidPayload)?;
+        drop(axes);
+        Ok(Self {
+            layout,
+            backend: BackendPlan::ParallelAvx(Box::new(ParallelAvxPlan {
+                axes: axes_value,
+                executor,
+            })),
+        })
+    }
+
+    pub(crate) fn parallel_wrapper_additional_reservation() -> usize {
+        size_of::<ParallelAvxPlan>() - size_of::<avx::Axes>()
+    }
+
+    /// Identity of the explicitly attached intra-transform executor, if present.
+    pub fn parallel_fft_identity(&self) -> Option<ParallelFftIdentity> {
+        match &self.backend {
+            BackendPlan::ParallelAvx(owner) => Some(owner.executor.identity()),
+            BackendPlan::Owned(_) | BackendPlan::Avx(_) => None,
+        }
+    }
+
+    pub(crate) fn parallel_executor(&self) -> Option<Arc<ParallelFftExecutor>> {
+        match &self.backend {
+            BackendPlan::ParallelAvx(owner) => Some(Arc::clone(&owner.executor)),
+            BackendPlan::Owned(_) | BackendPlan::Avx(_) => None,
+        }
+    }
+
+    pub(in crate::spectral::fft) fn avx_axes(&self) -> Option<&avx::Axes> {
+        match &self.backend {
+            BackendPlan::Avx(axes) => axes.first(),
+            BackendPlan::ParallelAvx(owner) => Some(&owner.axes),
+            BackendPlan::Owned(_) => None,
         }
     }
 }

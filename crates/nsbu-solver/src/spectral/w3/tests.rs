@@ -213,3 +213,73 @@ fn small_avx_w3_forward_matches_serial_bits_and_preserves_inputs() {
         assert!(same_bits(&actual, &expected), "lane {lane}");
     }
 }
+
+#[test]
+fn explicit_parallel_w3_shares_identity_and_matches_serial_bits() {
+    if !avx_available() {
+        return;
+    }
+    let layout = Layout::new([6; 3]).unwrap();
+    let catalog = catalog();
+    let workers = 2;
+    for excluded in [1, 62] {
+        assert_eq!(
+            W3FftPool::additional_parallel_reservation_with_backend(
+                layout,
+                BACKEND,
+                W3FftMode::Forward,
+                excluded,
+            ),
+            Err(SolverError::InvalidPayload)
+        );
+    }
+    let cap = W3FftPool::additional_parallel_reservation_with_backend(
+        layout,
+        BACKEND,
+        W3FftMode::Forward,
+        workers,
+    )
+    .unwrap();
+    assert!(matches!(
+        W3FftPool::from_scalar_lane_parallel(
+            layout,
+            &catalog,
+            W3FftMode::Forward,
+            workers,
+            seed(layout, &catalog),
+            cap - 1,
+        ),
+        Err(SolverError::ResourceLimit)
+    ));
+    let mut owner = W3FftPool::from_scalar_lane_parallel(
+        layout,
+        &catalog,
+        W3FftMode::Forward,
+        workers,
+        seed(layout, &catalog),
+        cap,
+    )
+    .unwrap();
+    let identity = owner.parallel_fft_identity().unwrap();
+    assert_eq!(identity.layout, layout);
+    assert_eq!(identity.backend, BACKEND);
+    assert_eq!(identity.helper_workers, workers);
+    assert_eq!(identity.persistent_callers, WIDTH);
+    assert_eq!(identity.workers, workers + WIDTH);
+    assert_eq!(owner.identity().additional_bytes, cap);
+
+    let mut values = inputs(layout);
+    owner.forward3(&mut values).unwrap();
+    let serial_cap = FftPlan::reservation_from_catalog(layout, &catalog).unwrap();
+    let (serial, mut workspace) = FftPlan::new_from_catalog(layout, &catalog, serial_cap).unwrap();
+    for (lane, values) in values.iter().enumerate() {
+        let mut expected = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+        serial
+            .forward(values, &mut expected, &mut workspace)
+            .unwrap();
+        let actual = owner
+            .with_spectrum(lane, |spectrum| spectrum.to_vec())
+            .unwrap();
+        assert!(same_bits(&actual, &expected), "lane {lane}");
+    }
+}

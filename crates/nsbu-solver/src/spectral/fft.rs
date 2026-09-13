@@ -9,6 +9,7 @@ mod workspace;
 use crate::{domain::Layout, Complex64, SolverError};
 pub use avx::FftCatalog;
 pub use parallel::{ParallelFftExecutor, ParallelFftIdentity};
+use std::sync::Arc;
 
 const AVX_SCRATCH_LANES: usize = 4;
 const TRANSVERSE_TILE_LANES: usize = 8;
@@ -35,6 +36,12 @@ impl FftBackend {
 enum BackendPlan {
     Owned([Vec<Complex64>; 3]),
     Avx(Box<[avx::Axes]>),
+    ParallelAvx(Box<ParallelAvxPlan>),
+}
+
+struct ParallelAvxPlan {
+    axes: avx::Axes,
+    executor: Arc<ParallelFftExecutor>,
 }
 
 /// Immutable plan for one explicitly selected scalar-transform backend.

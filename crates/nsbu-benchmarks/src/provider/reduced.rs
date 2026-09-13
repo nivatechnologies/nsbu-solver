@@ -198,6 +198,26 @@ impl ReducedV2ForceW3 {
         Ok(limits)
     }
 
+    pub(super) fn preflight_with_parallel_fft_backend(
+        domain: Domain,
+        sampled: Layout,
+        backend: FftBackend,
+        fft_workers: usize,
+    ) -> Result<ForceLimits, SolverError> {
+        let mut limits = ReducedV2Force::preflight_with_fft_backend(domain, sampled, backend)?;
+        let additional = W3FftPool::additional_parallel_reservation_with_backend(
+            sampled,
+            backend,
+            W3FftMode::Forward,
+            fft_workers,
+        )?;
+        limits.storage_bytes = limits
+            .storage_bytes
+            .checked_add(additional)
+            .ok_or(SolverError::SizeOverflow)?;
+        Ok(limits)
+    }
+
     pub(super) fn new_with_catalog(
         domain: Domain,
         sampled: Layout,
@@ -244,6 +264,59 @@ impl ReducedV2ForceW3 {
         })
     }
 
+    pub(super) fn new_with_catalog_parallel_fft(
+        domain: Domain,
+        sampled: Layout,
+        catalog: &FftCatalog,
+        fft_workers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let limits = Self::preflight_with_parallel_fft_backend(
+            domain,
+            sampled,
+            catalog.backend(),
+            fft_workers,
+        )?;
+        if limits.storage_bytes > cap {
+            return Err(SolverError::ResourceLimit);
+        }
+        let base_limits =
+            ReducedV2Force::preflight_with_fft_backend(domain, sampled, catalog.backend())?;
+        let serial =
+            ReducedV2Force::new_with_catalog(domain, sampled, catalog, base_limits.storage_bytes)?;
+        let ReducedV2Force {
+            retained,
+            sampled,
+            plan,
+            workspace,
+            physical,
+            spectral,
+            roots,
+            last_root_iterations,
+            ..
+        } = serial;
+        let additional = limits
+            .storage_bytes
+            .checked_sub(base_limits.storage_bytes)
+            .ok_or(SolverError::SizeOverflow)?;
+        Ok(Self {
+            retained,
+            sampled,
+            transform: W3FftPool::from_scalar_lane_parallel(
+                sampled,
+                catalog,
+                W3FftMode::Forward,
+                fft_workers,
+                (plan, workspace, spectral),
+                additional,
+            )?,
+            physical,
+            _roots: roots,
+            _limits: limits,
+            last_root_iterations,
+        })
+    }
+
     pub(super) fn transform(&mut self, output: [&mut [Complex64]; 3]) -> Result<(), SolverError> {
         if output.iter().any(|v| v.len() != self.retained.half_len()) {
             return Err(SolverError::InvalidPayload);
@@ -259,6 +332,12 @@ impl ReducedV2ForceW3 {
 
     pub(super) fn fft_identity(&self) -> W3FftIdentity {
         self.transform.identity()
+    }
+
+    pub(super) fn parallel_fft_identity(
+        &self,
+    ) -> Option<nsbu_solver::spectral::ParallelFftIdentity> {
+        self.transform.parallel_fft_identity()
     }
 
     pub(super) fn is_terminated(&self) -> bool {

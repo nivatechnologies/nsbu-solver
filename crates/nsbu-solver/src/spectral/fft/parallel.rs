@@ -1,6 +1,6 @@
 //! Opt-in bounded intra-transform execution for the AVX backend.
 use super::workspace::finite_real;
-use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES};
+use super::{FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES};
 use crate::storage::filled;
 use crate::{domain::Layout, Complex64, SolverError};
 use rayon::prelude::*;
@@ -21,8 +21,12 @@ pub struct ParallelFftIdentity {
     pub layout: Layout,
     /// Fixed arithmetic backend.
     pub backend: FftBackend,
-    /// Total Rayon worker count shared by every concurrent caller.
+    /// Total Rayon worker count, including persistent in-pool callers.
     pub workers: usize,
+    /// Workers available to help persistent W3 callers.
+    pub helper_workers: usize,
+    /// Persistent W3 caller loops entered into the pool at construction.
+    pub persistent_callers: usize,
     /// Complete additional reservation beyond caller-owned scalar lanes.
     pub additional_bytes: usize,
 }
@@ -51,7 +55,35 @@ impl ParallelFftExecutor {
         backend: FftBackend,
         workers: usize,
     ) -> Result<usize, SolverError> {
+        Self::reservation_parts(layout, backend, workers, workers, 0)
+    }
+
+    pub(crate) fn additional_w3_reservation(
+        layout: Layout,
+        backend: FftBackend,
+        helper_workers: usize,
+        persistent_callers: usize,
+    ) -> Result<usize, SolverError> {
+        if !(2..=61).contains(&helper_workers) || persistent_callers != 3 {
+            return Err(SolverError::InvalidPayload);
+        }
+        let workers = helper_workers
+            .checked_add(persistent_callers)
+            .ok_or(SolverError::SizeOverflow)?;
+        Self::reservation_parts(layout, backend, workers, helper_workers, persistent_callers)
+    }
+
+    fn reservation_parts(
+        layout: Layout,
+        backend: FftBackend,
+        workers: usize,
+        helper_workers: usize,
+        persistent_callers: usize,
+    ) -> Result<usize, SolverError> {
         if backend != FftBackend::RustFft6_4_1AvxFma || !(2..=64).contains(&workers) {
+            return Err(SolverError::InvalidPayload);
+        }
+        if helper_workers == 0 || helper_workers + persistent_callers != workers {
             return Err(SolverError::InvalidPayload);
         }
         let maximum = layout
@@ -83,7 +115,39 @@ impl ParallelFftExecutor {
         workers: usize,
         cap: usize,
     ) -> Result<Self, SolverError> {
-        let additional = Self::additional_reservation(layout, backend, workers)?;
+        Self::new_parts(layout, backend, workers, workers, 0, cap)
+    }
+
+    pub(crate) fn new_for_w3(
+        layout: Layout,
+        backend: FftBackend,
+        helper_workers: usize,
+        persistent_callers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let workers = helper_workers
+            .checked_add(persistent_callers)
+            .ok_or(SolverError::SizeOverflow)?;
+        Self::new_parts(
+            layout,
+            backend,
+            workers,
+            helper_workers,
+            persistent_callers,
+            cap,
+        )
+    }
+
+    fn new_parts(
+        layout: Layout,
+        backend: FftBackend,
+        workers: usize,
+        helper_workers: usize,
+        persistent_callers: usize,
+        cap: usize,
+    ) -> Result<Self, SolverError> {
+        let additional =
+            Self::reservation_parts(layout, backend, workers, helper_workers, persistent_callers)?;
         if additional > cap {
             return Err(SolverError::ResourceLimit);
         }
@@ -123,6 +187,8 @@ impl ParallelFftExecutor {
                 layout,
                 backend,
                 workers,
+                helper_workers,
+                persistent_callers,
                 additional_bytes: additional,
             },
             pool,
@@ -139,6 +205,11 @@ impl ParallelFftExecutor {
     /// Whether a worker panic or poisoned scratch permanently terminated this owner.
     pub fn is_terminated(&self) -> bool {
         self.failed.load(Ordering::Acquire)
+    }
+
+    /// Enter a persistent W3 caller once; subsequent installs from it are nested in-pool.
+    pub(crate) fn install_worker(&self, operation: impl FnOnce() + Send) {
+        self.pool.install(operation);
     }
 
     /// Forward transform with identical normalization and per-line RustFFT calls.
@@ -297,13 +368,13 @@ impl ParallelFftExecutor {
 }
 
 fn process(plan: &FftPlan, line: &mut LineWorkspace, axis: usize, inverse: bool) {
-    let BackendPlan::Avx(axes) = &plan.backend else {
-        unreachable!("parallel executor validation admits only AVX")
-    };
+    let axes = plan
+        .avx_axes()
+        .expect("parallel executor validation admits only AVX");
     let fft: &Arc<dyn Fft<f64>> = if inverse {
-        &axes[0].inverse[axis]
+        &axes.inverse[axis]
     } else {
-        &axes[0].forward[axis]
+        &axes.forward[axis]
     };
     let length = plan.layout.dimensions()[axis];
     let maximum = plan.layout.dimensions().into_iter().max().unwrap();
