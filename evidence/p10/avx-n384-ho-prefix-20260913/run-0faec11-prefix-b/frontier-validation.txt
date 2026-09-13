@@ -1,0 +1,12 @@
+schema=p10-avx-ho-prefix-frontier-validation-v1
+result=passed
+rest_metadata=true
+durable_attempts=40
+durable_clock=3072
+scheduled_positive_nodes=6
+state_files=40
+state_bytes_each=1366033539
+partial_paths=0
+endpoint_complete=false
+qualification_incomplete_marker=false
+attempt41_artifact=false
