@@ -611,6 +611,30 @@ fn ordered_hessian_option_serializes_bound_output_and_rejects_clock_or_profile_g
     assert!(super::run(&args)
         .unwrap_err()
         .contains("exact profile binding"));
+
+    right.profile = left.profile.clone();
+    right.evolution.viscosity = 0.02;
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    assert!(super::run(&args)
+        .unwrap_err()
+        .contains("evolution semantics mismatch"));
+    right.evolution.viscosity = left.evolution.viscosity;
+    right.evolution.schedule = vec![
+        ScheduleSegment {
+            from_inclusive: 0,
+            until_exclusive: 32,
+            step_ticks: 16,
+        },
+        ScheduleSegment {
+            from_inclusive: 32,
+            until_exclusive: 64,
+            step_ticks: 32,
+        },
+    ];
+    fs::write(&right_path, serde_json::to_vec(&right).unwrap()).unwrap();
+    assert!(super::run(&args)
+        .unwrap_err()
+        .contains("evolution semantics mismatch"));
 }
 
 #[test]
