@@ -1,0 +1,33 @@
+{
+  "schema": "p10-avx-n384-m512-fresh-endpoint-r6-staging-receipt-v1",
+  "status": "staged_verified_no_launch",
+  "no_launch": true,
+  "observed_utc": "2026-09-13T10:37:40Z",
+  "host": "sulaco",
+  "stage": "/tmp/nsbu-p10-sulaco-m512-endpoint-r6-20260913",
+  "source_stage": "/tmp/nsbu-p10-sulaco-m512-20260913-r4",
+  "preserved_stages": [
+    "/tmp/nsbu-p10-sulaco-m512-20260913-r4",
+    "/tmp/nsbu-p10-sulaco-m512-prefix-r5"
+  ],
+  "files": {
+    "p10-avx-n384-m512-piecewise-cadv33": {"sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57", "mode": "755"},
+    "frozen-plan.json": {"sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84", "mode": "664"},
+    "pgid-watchdog-v3.sh": {"sha256": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01", "mode": "755"},
+    "frozen-execution-envelope.json": {"sha256": "9f65e80899e78474b489ff969602744e9a44a8baead6e98cf1188dedc55072d9", "mode": "664"},
+    "launch-reviewed.sh": {"sha256": "e2670f57e702f834bdf41f94a10c0e97f35e48903ec4fe81f63d26b87d956baf", "mode": "775"}
+  },
+  "live_baseline": {
+    "mem_available_kib": 250553164,
+    "swap_total_kib": 8388604,
+    "swap_free_kib": 1975548,
+    "stage_filesystem_available_bytes": 1646757646336,
+    "p10_solver_processes": 0
+  },
+  "operations_excluded": [
+    "solver execution",
+    "binary preflight",
+    "run directory creation",
+    "changes to r4 or r5"
+  ]
+}
