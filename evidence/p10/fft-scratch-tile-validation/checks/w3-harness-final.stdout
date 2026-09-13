@@ -1,0 +1,9 @@
+
+running 4 tests
+test tests::coefficient_bit_comparison_rejects_length_mismatch ... ok
+test tests::planned_whole_control_peaks_fit_the_declared_external_caps ... ok
+test tests::reviewed_768_admission_matches_formulas_and_1024_remains_closed ... ok
+test tests::strict_hermitian_multidirectional_fixture_has_nonzero_projected_advection ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

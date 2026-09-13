@@ -1,0 +1,37 @@
+{
+  "schema": "p10-fft-scratch-tile-validation-plan-v1",
+  "status": "prepared_not_executed_not_adopted",
+  "algorithm_source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "test_constant_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "harness_source": "3afdfddf3c7b4d230ce5994100ecddc4f00901e9",
+  "scalar": {
+    "layout": 768,
+    "round_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+    "untiled_binary_sha256": "003969a932f7cc794db8030c99dc50aca6256f48307c34fdd80eedf7d9b2b984",
+    "tiled_binary_sha256": "631067278e605e0901539069387fd647d188c26e223ce6628c7aab57b8ff4c43",
+    "untiled_workspace_bytes": 3633389976,
+    "tiled_workspace_bytes": 3633488280,
+    "workspace_delta_bytes": 98304,
+    "untiled_payload_workspace_catalog_bytes": 14543825608,
+    "tiled_payload_workspace_catalog_bytes": 14543923912,
+    "address_space_limit_bytes": 25769803776,
+    "timeout_seconds_per_round": 600,
+    "kill_grace_seconds": 60
+  },
+  "tiled_w3": {
+    "binary_sha256": "73d0c8ad66f4f62db670d6d20c66b67f4d059797f339c04008c525f36463e8c9",
+    "forward_additional_bytes": 14540099328,
+    "bidirectional_additional_bytes": 21787856768,
+    "force_whole_peak_bytes": 50117086952,
+    "rhs_whole_peak_bytes": 72386085024,
+    "force_expected_sha256": "a5a74f8126567c1d29fb091090c108305c9c9404aa92ad04abc101036c9ca65b",
+    "rhs_expected_sha256": "7fbbe90cb2aeeb116e70abf180a86eae4448d3adaac131c65399b55f730b5c73",
+    "force_address_space_limit_bytes": 68719476736,
+    "rhs_address_space_limit_bytes": 103079215104,
+    "force_timeout_seconds": 900,
+    "rhs_timeout_seconds": 1800,
+    "kill_grace_seconds": 60
+  },
+  "qualification": false,
+  "production_adoption": false
+}
