@@ -349,7 +349,16 @@ def test_cli_rejects_malformed_config(tmp_path: Path, payload: str, message: str
         load_config(path)
 
 
-@pytest.mark.parametrize("payload", ['{}', '[1]', '[{"task_id":"missing"}]'])
+@pytest.mark.parametrize(
+    "payload",
+    [
+        '{}',
+        '[1]',
+        '[{"task_id":"missing"}]',
+        '[{"task_id":"t","family":"f","instructions":"i","inputs":{},'
+        '"output_contract":{},"validator":"v","review_required":"yes"}]',
+    ],
+)
 def test_cli_rejects_malformed_task_payloads(tmp_path: Path, payload: str) -> None:
     path = tmp_path / "bad-tasks.json"
     path.write_text(payload, encoding="utf-8")
@@ -399,3 +408,27 @@ def test_http_transport_bounds_and_closes_failed_reads() -> None:
         with pytest.raises(OSError, match="read failed"):
             HttpTransport("http://local").complete({}, 1)
     assert failed.closed
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        b'{"choices":{},"usage":{}}',
+        b'{"choices":[],"usage":{}}',
+        b'{"choices":[{"finish_reason":"stop","message":{"tool_calls":{}}}],"usage":{}}',
+        b'{"choices":[{"finish_reason":"stop","message":{}}],"usage":{"prompt_tokens":true}}',
+    ],
+)
+def test_http_transport_rejects_malformed_response_shapes(body: bytes) -> None:
+    response = FakeHttpResponse(body)
+    with patch("tools.local_agents.transport.urlopen", return_value=response):
+        with pytest.raises(ValueError):
+            HttpTransport("http://local").complete({}, 1)
+    assert response.closed
+
+
+def test_cli_rejects_boolean_numeric_config(tmp_path: Path) -> None:
+    path = tmp_path / "bad-number.json"
+    path.write_text('{"max_run_seconds":true}', encoding="utf-8")
+    with pytest.raises(ValueError, match="must be a number"):
+        load_config(path)
