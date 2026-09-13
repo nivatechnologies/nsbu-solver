@@ -7,3 +7,5 @@ This harness owns standalone backend controls. `preflight` has no numerical-grid
 Execution receipts include the case SHA-256 and reviewed-admission commit. The control has no observer, trajectory, archive, resume, or qualification path.
 
 Both full-size controls matched serial coefficients bit-for-bit and reported zero steady allocations across three evaluations. The force control took 338.37 seconds and RHS took 356.50 seconds. Root independently verified the terminal log hashes and seven focused W3 core tests, including refusals for 1024 and 1152. These checks admit the 768 backend layout; they do not qualify a trajectory. The original preparation receipt remains historical and does not replace the terminal execution receipt.
+
+A [launch metadata erratum](prepared/runs/force-20260913T112700Z/metadata-erratum.json) records an invalid transcribed process-start tick in the force receipt. The original metadata is preserved; its ownership binding cannot be independently recovered. Numerical output, bitwise/allocation results, and exit/timing receipts are unchanged.

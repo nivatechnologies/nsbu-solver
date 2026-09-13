@@ -516,6 +516,7 @@
     "rhs_bitwise_serial_match": true,
     "steady_allocations": 0,
     "root_focused_core_tests_passed": 7,
-    "scope": "Forward force and bidirectional RHS at retained N512/layout768, three repeated evaluations. Larger layouts1024/1152 remain refused. Backend admission only; no N512 trajectory, convergence or PDE qualification."
+    "scope": "Forward force and bidirectional RHS at retained N512/layout768, three repeated evaluations. Larger layouts1024/1152 remain refused. Backend admission only; no N512 trajectory, convergence or PDE qualification.",
+    "launch_metadata_erratum": "evidence/p10/w3-768-controls-20260913/prepared/runs/force-20260913T112700Z/metadata-erratum.json"
   }
 }
