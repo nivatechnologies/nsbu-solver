@@ -109,16 +109,17 @@ smaller. The [regional result](../evidence/p10/n384-regional-snapshot-diagnostic
 uses diagnostic normalization floors rather than accepted error budgets; it
 does not qualify collar volume, peak location or vorticity.
 
-The first off-stage residual probe at clock 1112 confirms that force sampling
-dominates that diagnostic. Its independent M768-force residual has H1
+The first off-stage residual probe at clock 1112 shows that force-representation
+differences, including the unresolved higher-frequency force, dominate that
+diagnostic. Its independent M768-force residual has H1
 `2147.4147`; replacing only the force term by the discrete retained M384 force
 drops H1 to `0.89876`. The replacement changes the diagnostic equation and is
 not a residual repair or PDE pass. The archived [localization evidence](../evidence/p10/offline-residual-probe/localization-summary.json)
 also retains the failed strict arithmetic-closure checks and the separate broad
 internal-consistency heuristic.
 
-Analytical-reference spectrum screens identify N192, N256 and N384 as the
-provisional next spatial ladder. These screens guide grid choice; they are
+Analytical-reference spectrum screens provided the historical planning basis
+for the completed N192, N256 and N384 spatial ladder. These screens guide grid choice; they are
 binary64 sampled-reference evidence, not continuum error bounds or PDE
 validation. Fixed-retained force screens separately rank M384 as the cheaper
 feasibility profile and M512 as its refinement partner. The N256
@@ -182,12 +183,11 @@ The active bounded gates are the same-state M512 force-refinement and HO method
 trajectories, each preserved through clock 2048 and conditionally continuing to
 clock 3072 under its frozen wall-time rule. Completed read-only diagnostics now
 cover sampled references, one off-stage residual probe and one clock-512
-regional derivative screen. The next qualification work must turn those
-diagnostics into independently frozen force, time, method, residual, pressure
-and regional refinement channels. Preserve every guard, local-error, resource
-and deadline refusal. Compare only identical physical and arithmetic profiles
-when attributing a channel; keep sampled-reference bridge values explicitly
-diagnostic.
+regional derivative screen. The next qualification work must complete the
+missing refinement studies under predeclared force, time, method, residual,
+pressure and regional policies. Preserve every guard, local-error, resource and
+deadline refusal. Compare only identical physical and arithmetic profiles when
+attributing a channel; keep sampled-reference bridge values explicitly diagnostic.
 
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
