@@ -69,9 +69,32 @@ confirms that the old small-grid family is underresolved and supersedes it as a
 resolution-planning basis. The raw states, failures and comparisons remain in
 the [fixed-force spatial screen](../evidence/p10/first-endpoint-force-spatial-1b89176/README.md).
 
-Analytical-reference spectrum screens at clock 4096 identify N192, N256 and
-N384 as the provisional next spatial ladder. These screens guide grid choice;
-they are binary64 sampled-reference evidence, not continuum error bounds or PDE
+The completed P10 N192/N256/N384 matched spatial screen covers eight positive
+observer clocks, 512 through 4096, with the same fixed M384 force trajectory
+and piecewise schedule. At clock 512 the N256-to-N384 pair is
+0.988227809391572 times the allocated H1 budget and 0.9888821775622612 times
+the allocated vorticity budget; at clock 4096 those values are
+0.9290197651344548 and 0.9296268180066143. Fine-pair errors decrease at every
+node, while the N192-to-N256 pair exceeds the allocated H1/vorticity context
+budget. The fine pair is smaller than the coarse pair at every clock; this is
+a spatial comparison across clocks, not a claim that the error is monotone in
+time, and the coarse pair need not meet the fine-pair budget. This is a matched
+spatial screen only; it does not establish an accepted window. See the [eight-node aggregate](../evidence/p10/snapshot-comparison-adapter/spatial-screen-8nodes/RESULT.md)
+and [clock-4096 detail](../evidence/p10/snapshot-comparison-adapter/screen-clock4096/RESULT.md).
+
+The current read-only bridge compares the actual N384 states with an
+independently evaluated M768 analytical velocity, cropped to the retained band.
+At clock 512 its sampled-band H1 difference is
+`0.00006749991863805842`, relative `2.24157e-5`; at clock 4096 the values are
+`0.0010804989124323632` and `2.1239367419e-5`. These are retained-band,
+sampled-binary64 reference diagnostics, not continuum-tail, reference-precision,
+trajectory-error or PDE qualification evidence. The archived [bridge summary](../evidence/p10/external-reference-bridge/results/summary.json)
+and [bridge README](../evidence/p10/external-reference-bridge/README.md) retain
+the source, snapshot, resource and result bindings.
+
+Analytical-reference spectrum screens identify N192, N256 and N384 as the
+provisional next spatial ladder. These screens guide grid choice; they are
+binary64 sampled-reference evidence, not continuum error bounds or PDE
 validation. Fixed-retained force screens separately rank M384 as the cheaper
 feasibility profile and M512 as its refinement partner. The N256
 [force-grid ranking](../evidence/p10/force-grid-ranking-de6dd09/README.md) and
@@ -130,25 +153,24 @@ open.
 
 ## Next bounded integration increment
 
-Complete and compare the actual-from-rest N192/N256/N384 feasibility ladder at
-clock 4096 on explicitly frozen execution profiles. Preserve every guard,
-local-error, resource and deadline refusal. Compare only matched force,
-arithmetic, time and method profiles as a spatial sequence. A differing guard
-threshold is admission metadata and does not change a trajectory when every
-otherwise identical step commits; preserve it and its refusals without
-inventing a state difference. Piecewise-step studies remain time/admission
-evidence until independent matched controls exist. Use M384 as the measured
-cheap force baseline and M512 as the first matched force-refinement partner
-rather than assuming an automatic 2N or 2M force choice.
+The next bounded gates are matched M384/M512 force trajectories, a complete
+N384 time refinement, a matched CM/HO method comparison, an independent
+current-profile reference bridge, off-stage residuals, pressure and regional
+derivative-sensitive measurements. Preserve every guard, local-error, resource
+and deadline refusal. Compare only identical physical and arithmetic profiles
+when attributing a channel; keep sampled-reference bridge values explicitly
+diagnostic.
 
 After a three-grid trajectory sequence has the required reduction and fine-pair
 budget behavior, populate the full review geometry from its captured actual
-states. The fine observable schedule needs pressure, balances, residuals,
-regional derivative-sensitive quantities and off-stage reconstruction at its
-declared clocks, followed by nested time, method, force, arithmetic, reference,
-sampling, reconstruction and quadrature refinements. Source-bound profile
-admission and endpoint completion alone remain unqualified; zero concentrating
-windows are accepted until every required channel and lineage review passes.
+states. The fine observable schedule still needs pressure, regional
+derivative-sensitive quantities, off-stage residuals, sampling, arithmetic,
+reference precision, force and time channels, plus typed balances and
+quadrature. Quality exceptions remain separate and attached to their exact
+scope. Source-bound profile admission, the eight-node screen,
+sampled-reference diagnostics and endpoint completion alone remain unqualified;
+zero concentrating windows are accepted until every required channel and
+lineage review passes.
 
 See [PROTOCOL_FORMAT.md](PROTOCOL_FORMAT.md), [EXPERIMENTS.md](EXPERIMENTS.md),
 and the active [P08/P09/P10 plan](../IMPLEMENTATION_PLAN.md) for the governing
