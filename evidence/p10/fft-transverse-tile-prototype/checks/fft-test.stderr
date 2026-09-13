@@ -1,2 +1,3 @@
-    Finished `test` profile [optimized + debuginfo] target(s) in 0.07s
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-fft-transverse-tile-20260913/crates/nsbu-solver)
+    Finished `test` profile [optimized + debuginfo] target(s) in 1.12s
      Running tests/fft.rs (target/debug/deps/fft-b11cb8d55bf03b34)

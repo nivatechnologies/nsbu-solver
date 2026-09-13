@@ -133,6 +133,10 @@ fn execution_catalog_is_eager_shared_and_separately_reserved() {
     let layout = Layout::new([6; 3]).unwrap();
     let workspace_bytes = FftPlan::reservation_from_catalog(layout, &catalog).unwrap();
     assert!(workspace_bytes < FftPlan::reservation_with_backend(layout, backend).unwrap());
+    assert!(matches!(
+        FftPlan::new_from_catalog(layout, &catalog, workspace_bytes - 1),
+        Err(SolverError::ResourceLimit)
+    ));
     let (plan, _) = FftPlan::new_from_catalog(layout, &catalog, workspace_bytes).unwrap();
     assert_eq!(plan.backend(), backend);
 }

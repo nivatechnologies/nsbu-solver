@@ -16,5 +16,5 @@ test validation::inverse_checks_both_conjugate_planes_and_declared_roundoff_boun
 test validation::plans_refuse_unsupported_lengths_memory_caps_and_payloads ... ok
 test validation::reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit ... ok
 
-test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
 

@@ -1,2 +1,2 @@
-    Finished `test` profile [optimized + debuginfo] target(s) in 0.04s
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.05s
      Running tests/fft_avx_allocation.rs (target/debug/deps/fft_avx_allocation-3817f86afdfba210)
