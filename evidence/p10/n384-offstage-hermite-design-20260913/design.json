@@ -1,0 +1,77 @@
+{
+  "schema": "p10-n384-offstage-hermite-design-v1",
+  "status": "read_only_design_not_executed_not_acceptance",
+  "purpose": "Freeze sampled three-level quintic-Hermite reconstruction geometry and non-interpolation residual probes for the completed N384/M384 piecewise archive.",
+  "design_basis": {
+    "complete_design": "docs/design/COMPLETE_DESIGN.md:404",
+    "requirement": "Three strictly nested actual accepted-node histories per probe; residual probes are off interpolation nodes and quarter-stage clocks; evaluate residual through a separately implemented conservative 2N product path.",
+    "trajectory_identity_prefix": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+    "archive_state_manifest": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/endpoint/remote-state-files.sha256",
+    "archive_state_manifest_sha256": "45a95d75a6b4c37eda8a1f3d5772018a48f1c3e4b71e78591ed6452a3c371fba",
+    "archive_state_location": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint",
+    "cadence": {
+      "from_exclusive": 0,
+      "through_inclusive": 2048,
+      "step_ticks": 64,
+      "after_through_endpoint_step_ticks": 128,
+      "endpoint": 4096
+    }
+  },
+  "offstage_residual_probes": [
+    {
+      "clock": 1112,
+      "supports_coarse_to_fine": [
+        {"nodes": [896, 1152, 1408], "node_spacing_ticks": 256},
+        {"nodes": [1024, 1152, 1280], "node_spacing_ticks": 128},
+        {"nodes": [1088, 1152, 1216], "node_spacing_ticks": 64}
+      ]
+    },
+    {
+      "clock": 1752,
+      "supports_coarse_to_fine": [
+        {"nodes": [1536, 1792, 2048], "node_spacing_ticks": 256},
+        {"nodes": [1664, 1792, 1920], "node_spacing_ticks": 128},
+        {"nodes": [1728, 1792, 1856], "node_spacing_ticks": 64}
+      ]
+    },
+    {
+      "clock": 2760,
+      "supports_coarse_to_fine": [
+        {"nodes": [2304, 2816, 3328], "node_spacing_ticks": 512},
+        {"nodes": [2560, 2816, 3072], "node_spacing_ticks": 256},
+        {"nodes": [2688, 2816, 2944], "node_spacing_ticks": 128}
+      ]
+    },
+    {
+      "clock": 3560,
+      "supports_coarse_to_fine": [
+        {"nodes": [3072, 3584, 4096], "node_spacing_ticks": 512},
+        {"nodes": [3328, 3584, 3840], "node_spacing_ticks": 256},
+        {"nodes": [3456, 3584, 3712], "node_spacing_ticks": 128}
+      ]
+    }
+  ],
+  "distinct_actual_node_clocks": [896, 1024, 1088, 1152, 1216, 1280, 1408, 1536, 1664, 1728, 1792, 1856, 1920, 2048, 2304, 2560, 2688, 2816, 2944, 3072, 3328, 3456, 3584, 3712, 3840, 4096],
+  "resource_accounting": {
+    "archived_n384_state_coefficient_bytes": 1366032384,
+    "distinct_support_state_count": 26,
+    "distinct_support_state_bytes": 35516841984,
+    "active_three_node_value_bytes": 4098097152,
+    "active_three_node_value_and_derivative_bytes": 8196194304,
+    "reconstruction_history_accepted_and_pending_value_and_derivative_bytes": 16392388608,
+    "n768_half_spectrum_coefficients_per_component": 227082240,
+    "n768_three_component_state_bytes": 10899947520,
+    "n768_conservative_residual_workspace_total_bytes": "unplanned; must be separately preflighted as a multi-field workspace"
+  },
+  "required_future_inputs": [
+    "For every selected actual node, obtain or independently recompute and hash all three physical-time RHS derivative spectra under the exact archived identity. The archive currently retains state values and hashes, not derivative spectra.",
+    "Stream and verify only the selected remote state files against the archive manifest under a bounded reader; do not assume all 48 state payloads are locally available.",
+    "Preflight a fresh independently implemented conservative N768 product/residual path, its force evaluation, all output scratch, finite work, and artifact capacity. Existing observer768 measurements are not this independent path."
+  ],
+  "generic_review_scope": {
+    "current_partition_support": "The generic diagnostic plan distinguishes a disjoint accepted-state schedule from a residual-only offstage schedule.",
+    "not_reusable_without_semantic_change": "The shipped exact-v2 review adapter fixes seven events and exact-v2 family/profile semantics. Resizing its event count cannot bind this N384 archive's node triples, derivative hashes, or N768 product provenance.",
+    "required_artifact_shape": "A dedicated N384 archival manifest must retain separate accepted_state_clocks and offstage_residual_clocks, every coarse/middle/fine node triple, state and derivative hashes, and conservative-product identity.",
+    "acceptance": "No consumer, residual measurement, generic-review rewrite, acceptance determination, or PDE qualification is created by this design."
+  }
+}
