@@ -81,3 +81,11 @@ That sharp change localizes sensitivity to the force discretization; because the
 the target equation outside N384, it does not establish a PDE residual pass. Complete terms,
 cross contributions, cancellation factors, hashes, and identity observations are recorded in the
 localization result and summary artifacts.
+
+At the unchanged `5e-11` threshold, both identity metrics have the same 12-failure pattern: L2,
+H1, and vorticity L2 fail for both the base and retained-force equations on the strict-N384 and
+full-N768 bands. All divergence channels and all new-shell channels pass. The worst original
+residual-relative observation is full-N768 retained-force vorticity at
+`1.0224415636947803`. The worst term-scaled observation is full-N768 retained-force H1 at
+`3.6022323005541866e-10`; it fails `5e-11` while passing the broader
+`3.210274371667765e-6` internal-consistency heuristic.

@@ -453,5 +453,61 @@
     "formula": "64 * 225902976 processed modes * binary64 epsilon",
     "value": 3.210274371667765e-06,
     "scope": "conservative first-order sequential-sum heuristic for internal consistency only; not a rigorous gamma bound, interval enclosure, or PDE error bound"
+  },
+  "classification_at_5e11": {
+    "original_residual_relative": {
+      "threshold": 5e-11,
+      "passed": 12,
+      "failed": 12,
+      "worst": {
+        "band": "full_n768",
+        "equation": "discrete_retained_force_m384",
+        "channel": "vorticity_l2",
+        "value": 1.0224415636947803
+      },
+      "failures_by_channel": {
+        "l2": 4,
+        "h1": 4,
+        "vorticity_l2": 4,
+        "divergence_l2": 0
+      },
+      "failures_by_band": {
+        "retained_strict_n384": 6,
+        "new_shell_n768": 0,
+        "full_n768": 6
+      },
+      "failures_by_equation": {
+        "base_m768": 6,
+        "discrete_retained_force_m384": 6
+      },
+      "failure_pattern": "L2, H1, and vorticity L2 fail for both equations on retained_strict_n384 and full_n768; all divergence channels and all new_shell_n768 channels pass"
+    },
+    "term_scaled": {
+      "threshold": 5e-11,
+      "passed": 12,
+      "failed": 12,
+      "worst": {
+        "band": "full_n768",
+        "equation": "discrete_retained_force_m384",
+        "channel": "h1",
+        "value": 3.6022323005541866e-10
+      },
+      "failures_by_channel": {
+        "l2": 4,
+        "h1": 4,
+        "vorticity_l2": 4,
+        "divergence_l2": 0
+      },
+      "failures_by_band": {
+        "retained_strict_n384": 6,
+        "new_shell_n768": 0,
+        "full_n768": 6
+      },
+      "failures_by_equation": {
+        "base_m768": 6,
+        "discrete_retained_force_m384": 6
+      },
+      "failure_pattern": "L2, H1, and vorticity L2 fail for both equations on retained_strict_n384 and full_n768; all divergence channels and all new_shell_n768 channels pass"
+    }
   }
 }
