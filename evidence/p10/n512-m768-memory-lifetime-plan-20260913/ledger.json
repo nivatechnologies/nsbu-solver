@@ -1,0 +1,63 @@
+{
+  "schema": "p10-n512-m768-memory-lifetime-planning-v1",
+  "status": "planning_only_non_admissible_not_a_cap_not_a_run",
+  "purpose": "Separate persistent N512/M768 integration ownership from a per-state offline N1024/M1024 observer estimate.",
+  "source_reviewed_at_commit": "f5aa345bbc598ee3833878e207c9be31b7a84ab3",
+  "candidate_geometry": {
+    "retained_n": 512,
+    "integration_force_m": 768,
+    "rhs_padded": 768,
+    "observer_diagnostic_n": 1024,
+    "observer_force_m": 1024,
+    "retained_half_len": 67371008,
+    "rhs_padded_real_len": 452984832,
+    "rhs_padded_half_len": 227082240
+  },
+  "integration_formula_derived_bytes": {
+    "resource_plan_base_classes": 85554364416,
+    "avx_catalog": 29362480,
+    "cox_matthews_attempt": 30182212728,
+    "cached_m768_force_hypothetical_w3_extension": 59788787144,
+    "rhs_hypothetical_w3_extension": 122443722464,
+    "existing_fixed_overhead": 1310736,
+    "total": 238210972824,
+    "gib": 221.8512565121
+  },
+  "offline_observer_formula_derived_bytes": {
+    "reduced_observer": 232283722008,
+    "shared_avx_catalog": 29362480,
+    "one_decoded_n512_state": 3233808384,
+    "minimum_total_before_importer_manifest_output_and_os": 235546892872,
+    "gib": 219.3680936024
+  },
+  "combined_current_owner_lifetime_bytes": {
+    "integration_plus_observer": 470494694832,
+    "gib": 438.1823305339,
+    "meaning": "The existing owner construction keeps RHS and observer live together; this is not the proposed split lifetime."
+  },
+  "observer_delta_from_existing_n384_m512_owner": {
+    "existing_observer": 98075173144,
+    "conservative_workspace_delta": 44731228160,
+    "parallel_force_delta": 39743361024,
+    "ten_component_fields_delta": 49733959680,
+    "result": 232283722008
+  },
+  "admission_status": {
+    "w3_layout_768": "refused by current closed admission",
+    "w3_layout_1024": "refused by current closed admission",
+    "sulaco_256_gib": "combined lifetime exceeds host; each separately-scoped formula total is below 256 GiB before unresolved overhead",
+    "localhost_503_gib": "combined formula total is below physical capacity but is not a reviewed cap or launch authorization"
+  },
+  "unresolved_before_any_admission": [
+    "Reviewed W3 admission, construction identity, and exact resource controls for layout 768; this ledger extrapolates the existing reservation arithmetic only.",
+    "Exact external snapshot import, manifest binding, decoder, and output peak for the offline observer.",
+    "Allocator, process, operating-system, and concurrent-host headroom; formula reservations are not measured RSS or a host cap.",
+    "Runtime, disk I/O, observer scheduling, and any scientific/qualification review."
+  ],
+  "run_or_qualification": {
+    "solver_runs_started": 0,
+    "heavy_allocations_started": 0,
+    "accepted_pde_windows": 0,
+    "resume_or_state_import_implemented": false
+  }
+}
