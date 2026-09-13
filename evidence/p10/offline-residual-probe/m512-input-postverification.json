@@ -1,0 +1,30 @@
+{
+  "schema": "p10-offline-residual-m512-post-run-input-verification-v1",
+  "status": "three_staged_files_whole_hashes_unchanged_after_successful_read_only_run",
+  "staged_root": "/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913",
+  "files": [
+    {
+      "clock": 1088,
+      "snapshot": "step-017-clock-1088/state.bin",
+      "expected_file_sha256": "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e",
+      "observed_file_sha256": "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e",
+      "matched": true
+    },
+    {
+      "clock": 1152,
+      "snapshot": "step-018-clock-1152/state.bin",
+      "expected_file_sha256": "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8",
+      "observed_file_sha256": "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8",
+      "matched": true
+    },
+    {
+      "clock": 1216,
+      "snapshot": "step-019-clock-1216/state.bin",
+      "expected_file_sha256": "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca",
+      "observed_file_sha256": "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca",
+      "matched": true
+    }
+  ],
+  "runtime_owner_imported": false,
+  "snapshot_content_injected": false
+}

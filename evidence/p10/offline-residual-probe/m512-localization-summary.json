@@ -1,0 +1,127 @@
+{
+  "schema": "p10-offline-residual-m512-localization-summary-v1",
+  "status": "one_probe_fine_localization_complete_diagnostic_only",
+  "probe_clock": 1112,
+  "support": [
+    1088,
+    1152,
+    1216
+  ],
+  "implementation_commit": "2a2db1e07faa9c806a00dd4ff36db87de41e5b6f",
+  "launcher_commit": "fedab6f",
+  "release_binary_sha256": "ff5456f81007dc7a605cebaa2150c13d8a22c2e8ecf574f5122d8e4b58966ed6",
+  "plan_sha256": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "exit_status": 0,
+  "started_utc": "2026-09-13T11:25:42Z",
+  "ended_utc": "2026-09-13T11:42:58Z",
+  "wall_seconds": 1035.94,
+  "maximum_rss_kib": 60740936,
+  "swaps": 0,
+  "ownership": {
+    "owner_pid": 1546577,
+    "owner_pgid": 1546577,
+    "owner_starttime": 10047985,
+    "owner_cmdline_sha256": "303e317cba02cbe40fef884dbe4c8d053f9ecaf889d61a8341ae51739f92dfae",
+    "expected_owner_cmdline_sha256": "303e317cba02cbe40fef884dbe4c8d053f9ecaf889d61a8341ae51739f92dfae"
+  },
+  "replay": {
+    "reconstructed_value_sha256": "e727ad99b0ad1a6032df9563d9a47d3d5aefbc0d0b419f3f5eb2f90187728e95",
+    "reconstructed_derivative_sha256": "6922a497679e644a4b301933d964b496e2c9ef1b5fd2ea6f319d753ef0345925",
+    "base_residual_sha256": "5d0fdec40e86d03dba887d1c0b0f2ad02a019ab05837bbca87c26414ffc1e805"
+  },
+  "bands": {
+    "retained_strict_n384_modes": 28164288,
+    "omitted_shell_n384_to_n768_modes": 197738688,
+    "excluded_nyquist_slots": 1179264
+  },
+  "h1_comparison_file": "m512-localization-comparison.json",
+  "m512_h1": {
+    "retained_strict_n384": {
+      "base_m768_residual": 22.30291070361835,
+      "retained_force_control": 0.7830303074768855,
+      "projected_force_delta": 22.28924959052972
+    },
+    "omitted_shell_n384_to_n768": {
+      "base_m768_residual": 1932.9133166324302,
+      "retained_force_control": 0.263213755237346,
+      "projected_force_delta": 1932.914846937184
+    },
+    "full_n768": {
+      "base_m768_residual": 1933.0419833621916,
+      "retained_force_control": 0.8260859176704874,
+      "projected_force_delta": 1933.043355995283
+    }
+  },
+  "identity_closure": {
+    "residual_relative_tolerance": 5e-11,
+    "residual_relative_maximum": 1.020508998667014,
+    "residual_relative_passed": false,
+    "term_scaled_tolerance": 3.210274371667765e-06,
+    "term_scaled_maximum": 3.220010839792072e-10,
+    "term_scaled_passed": true,
+    "term_scaled_bound_basis": "64 rounded accumulator contributions per processed mode times binary64 epsilon; residual-relative 5e-11 status is reported independently and is not relabeled",
+    "classification_at_5e11": {
+      "residual_relative": {
+        "threshold": 5e-11,
+        "passed": 12,
+        "failed": 12,
+        "worst": {
+          "band": "full_n768",
+          "equation": "discrete_retained_force_m384",
+          "channel": "vorticity_l2",
+          "value": 1.020508998667014
+        },
+        "failure_pattern": "L2, H1, and vorticity L2 fail for both equations on retained_strict_n384 and full_n768; all divergence and new_shell_n768 channels pass"
+      },
+      "term_scaled": {
+        "threshold": 5e-11,
+        "passed": 12,
+        "failed": 12,
+        "worst": {
+          "band": "full_n768",
+          "equation": "discrete_retained_force_m384",
+          "channel": "h1",
+          "value": 3.220010839792072e-10
+        },
+        "failure_pattern": "L2, H1, and vorticity L2 fail for both equations on retained_strict_n384 and full_n768; all divergence and new_shell_n768 channels pass"
+      }
+    },
+    "heuristic_observations_passed": 24,
+    "heuristic_observations_failed": 0,
+    "qualification": "term-scaled threshold is an internal-consistency heuristic only; original residual-relative failures are preserved"
+  },
+  "force_work": {
+    "base_m768_work_units": 452987946,
+    "base_m768_scalar_transforms": 3,
+    "control_m512_work_units": 219596835,
+    "control_m512_scalar_transforms": 3
+  },
+  "reservation": {
+    "schema": "p10-offline-residual-probe-reservation-v1",
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 46267356216,
+    "integration_force_bytes": 19816525256,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 57241754984,
+    "residual_peak_bytes": 122035933584,
+    "admitted_peak_bytes": 122035933584,
+    "cap_bytes": 137438953472
+  },
+  "legacy_localization_field_mapping": "legacy fields conservative_m384, residual_m384, and residual_m384_component_sha256 denote strict retained N384/control storage; their sampled-force grid is M512 in this result schema",
+  "post_run_input_whole_file_hashes_verified": true,
+  "interpretation": "force refinement strongly contracts the retained-band discrepancy while the unresolved N384-to-N768 band remains and dominates the full acceleration residual; this supports sampled-force convergence on retained modes, not a velocity H1 error estimate, PDE residual pass, interpolation qualification, or accepted window",
+  "runtime_owner_imported": false,
+  "reference_state_injected": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": false,
+  "arithmetic_limitation": "binary64; empirical values have no outward-rounding or interval enclosure"
+}

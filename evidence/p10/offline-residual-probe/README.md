@@ -120,5 +120,23 @@ cargo run --release --manifest-path evidence/p10/offline-residual-probe/harness/
   preflight evidence/p10/offline-residual-probe/m512-probe-plan.json 137438953472
 ```
 
-It admits 122,035,933,584 bytes under the existing 128 GiB cap. The heavy `run` remains subject
-to a separate resource handoff and has not been executed.
+It admits 122,035,933,584 bytes under the existing 128 GiB cap. After the separately reviewed
+projection diagnostic released its process group and memory reservation, the heavy run completed
+in 1035.94 seconds with exit status zero, maximum RSS 60,740,936 KiB, and no swap. The three input
+files retained their exact whole-file hashes after execution.
+
+The matched M384/M512 comparison sharply contracts the strict-N384 base residual H1 norm from
+935.5579161334231 to 22.30291070361835. At M512, this is close to the independently computed
+M512-to-M768 projected-force difference 22.28924959052972. The omitted N384--N768 shell remains
+1932.9133166324302 and therefore dominates the full 1933.0419833621916 norm. The separately
+labeled retained-force control is 0.8260859176704874 over the full grid. These observations
+support improved sampled-force convergence on retained modes while identifying the unresolved
+band as the remaining source of the large full acceleration norm. They do not turn that raw
+acceleration norm into a velocity H1 error, qualify interpolation, or establish an accepted
+window. The original residual-relative closure flags remain false; all term-scaled internal
+consistency checks pass their separately declared heuristic.
+
+`m512-localization-comparison.json` records the matched H1 table and its limited interpretation.
+`m512-localization-summary.json` records the complete execution identity, resources, hashes, band
+norms, closure classifications, and claim limits. Raw stdout, stderr, timing, ownership receipt,
+and exit records remain under `raw/m512-localization-r5-20260913`.

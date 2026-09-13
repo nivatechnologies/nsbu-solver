@@ -1,0 +1,24 @@
+{
+  "schema": "p10-offline-residual-m512-localization-artifact-sha256-v1",
+  "source_commit": "2a2db1e07faa9c806a00dd4ff36db87de41e5b6f",
+  "launcher_commit": "fedab6f",
+  "release_binary_sha256": "ff5456f81007dc7a605cebaa2150c13d8a22c2e8ecf574f5122d8e4b58966ed6",
+  "files": {
+    "README.md": "05f1c0f1bb1745abb0a7c1b85a373369adde49ab183bc2b839fdae0e3ca44af2",
+    "m512-probe-plan.json": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
+    "m512-preflight.json": "356c4f9a41b94a625a6036649d9417f74b54131a14cbc7d4d0c449dc7d4ee85c",
+    "m512-launch-plan.json": "99f073e253404c78d7cecfb770e170f8604491aec824e844c784db4ed748f359",
+    "launch-m512-localization.sh": "9b3608f2b86825dc9dece0bd81e79ce5b84ca062ec7c675d29f91c9bb79c2ba4",
+    "m512-localization-comparison.json": "6416b28fc19a59e57b271e3b73bde553b249b9cb67630b8a5f8a16b122934db1",
+    "m512-localization-summary.json": "a221b5017efa511fc6606de0d6ad542976728ffdfaea43232d6ec994e990df8d",
+    "m512-input-postverification.json": "508f4a09b2af91ae714f47d0e6d0b0bc50adf072c8a61904b36ffe10b7167fca",
+    "raw/m512-localization-r5-20260913/launch-receipt.json": "18bd875d17e4165d93ead42e2c545ac63c64e54a5f39e6fd7a956bcce12fe304",
+    "raw/m512-localization-r5-20260913/run.start-utc": "85898649244346a9395fbbea0bf40b6bb2d220300c8d92b39bb771367ae88fff",
+    "raw/m512-localization-r5-20260913/run.end-utc": "10088ab8acbeb34e8baef13fc46b9129819fec4557aca261a9b9859c6c393263",
+    "raw/m512-localization-r5-20260913/run.rlimit-as-bytes": "62497aa7d755cf0a3aa04ce070e56be0d979088134f2273ecb2f5a7f617f9fb0",
+    "raw/m512-localization-r5-20260913/run.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "raw/m512-localization-r5-20260913/run.stdout": "2849e93fcca83e3db9f7b96db31616b1f12a446e76b2503c5316e2efeb8fe8c8",
+    "raw/m512-localization-r5-20260913/run.stderr": "42506c0b233f9aca8af5da22eded229e6207b6f18a1c3de5469832d05415530d",
+    "raw/m512-localization-r5-20260913/run.time": "437f9f4cd99ca4aee1e1696cc26e7eadea4bf1e112c6f89a4694992a1d8f318b"
+  }
+}

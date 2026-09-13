@@ -1,0 +1,18 @@
+{
+  "schema": "p10-offline-residual-m512-launch-receipt-v1",
+  "source_commit": "2a2db1e07faa9c806a00dd4ff36db87de41e5b6f",
+  "binary_sha256": "ff5456f81007dc7a605cebaa2150c13d8a22c2e8ecf574f5122d8e4b58966ed6",
+  "plan_sha256": "4bf2e35d24dd1ad231139fd07992bd691691f8cfe22dc446167163994dba4b63",
+  "cap_bytes": 137438953472,
+  "mem_available_kib": 451490860,
+  "minimum_mem_available_bytes": 154618822656,
+  "timeout_seconds": 2700,
+  "kill_grace_seconds": 60,
+  "projection_pid_confirmed_absent": 1509730,
+  "owner_pid": 1546577,
+  "owner_pgid": 1546577,
+  "owner_starttime": 10047985,
+  "owner_cmdline_sha256": "303e317cba02cbe40fef884dbe4c8d053f9ecaf889d61a8341ae51739f92dfae",
+  "expected_owner_cmdline_sha256": "303e317cba02cbe40fef884dbe4c8d053f9ecaf889d61a8341ae51739f92dfae",
+  "run_dir": "/mnt/niva-array/nsbu-solver/work/p10-m512-offline-residual-prep-20260913/evidence/p10/offline-residual-probe/raw/m512-localization-r5-20260913"
+}

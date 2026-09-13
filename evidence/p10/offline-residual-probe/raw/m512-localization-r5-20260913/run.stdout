@@ -1,0 +1,558 @@
+{
+  "schema": "p10-offline-residual-m512-localization-result-v1",
+  "status": "one_probe_fine_localization_complete_diagnostic_only",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "arithmetic": "binary64; empirical values have no outward-rounding or interval enclosure",
+  "integration_force": "exact r5 constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout512 width3 forward provider add4318334720 with32 workers",
+  "base_residual_force": "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112",
+  "discrete_retained_force_control": "fresh exact r5 integration CachedReducedForce targeting N384/M512 at clock1112; strict zero padding; R512=R768+P(f768-pad(f512)); changes diagnostic forcing on strict retained N384 and removes M768 forcing on the omitted N384-to-N768 band; does not modify the trajectory",
+  "legacy_localization_field_mapping": "legacy fields conservative_m384, residual_m384, and residual_m384_component_sha256 denote strict retained N384/control storage; their sampled-force grid is M512 in this result schema",
+  "retained_grid": [
+    384,
+    384,
+    384
+  ],
+  "diagnostic_grid": [
+    768,
+    768,
+    768
+  ],
+  "probe_clock": 1112,
+  "support": [
+    1088,
+    1152,
+    1216
+  ],
+  "reservations": {
+    "schema": "p10-offline-residual-probe-reservation-v1",
+    "source_state_bytes": 1366032384,
+    "diagnostic_field_bytes": 3633315840,
+    "fft_catalog_bytes": 29362480,
+    "integration_rhs_bytes": 46267356216,
+    "integration_force_bytes": 19816525256,
+    "residual_force_bytes": 29079844536,
+    "conservative_workspace_bytes": 32662168544,
+    "reconstruction_peak_bytes": 57241754984,
+    "residual_peak_bytes": 122035933584,
+    "admitted_peak_bytes": 122035933584,
+    "cap_bytes": 137438953472
+  },
+  "nodes": [
+    {
+      "clock": 1088,
+      "state_file_sha256": "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e",
+      "coefficient_sha256": "ee970eca7a3a4bdab948242508decf25db181bdb66071b371024646c500d51f5",
+      "physical_derivative_sha256": "44a5a7ae96fd982b026c30638e7faef87e0baab2da28bab9065a30d47a447078",
+      "rhs_calls": 1,
+      "rhs_work_units": 219596835,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1152,
+      "state_file_sha256": "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8",
+      "coefficient_sha256": "836bc42ce42ce056d44b56d063fa41d9ca60144e8300bca199db51a6d007d7a0",
+      "physical_derivative_sha256": "66054375808677d3f4c176cc19d9085fa95bb84c3a6aa0154f740bb87b921c52",
+      "rhs_calls": 1,
+      "rhs_work_units": 219596835,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    },
+    {
+      "clock": 1216,
+      "state_file_sha256": "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca",
+      "coefficient_sha256": "28a244c7153b4f1572683a38b677cecdf71e1301287f7df128e1e391f4a9bac5",
+      "physical_derivative_sha256": "ca20511228735fe3058fc30b5e6ca3c3cfb5438c04aa43c05bc6662f79ee1527",
+      "rhs_calls": 1,
+      "rhs_work_units": 219596833,
+      "rhs_scalar_transforms": 13,
+      "force_cache_hits": 0,
+      "force_cache_misses": 1
+    }
+  ],
+  "reconstructed_value_sha256": "e727ad99b0ad1a6032df9563d9a47d3d5aefbc0d0b419f3f5eb2f90187728e95",
+  "reconstructed_derivative_sha256": "6922a497679e644a4b301933d964b496e2c9ef1b5fd2ea6f319d753ef0345925",
+  "base_residual_sha256": "5d0fdec40e86d03dba887d1c0b0f2ad02a019ab05837bbca87c26414ffc1e805",
+  "base_force_work_units": 452987946,
+  "base_force_scalar_transforms": 3,
+  "control_force_work_units": 219596835,
+  "control_force_scalar_transforms": 3,
+  "localization": {
+    "retained_strict_n384": {
+      "derivative": {
+        "l2": 1757.0225338618677,
+        "h1": 48189.52499400422,
+        "vorticity_l2": 48157.48324510198,
+        "divergence_l2": 5.2947926087383444e-11
+      },
+      "viscous": {
+        "l2": 1947.8352238767857,
+        "h1": 323423.4097436665,
+        "vorticity_l2": 323417.5442924457,
+        "divergence_l2": 6.470534233211984e-11
+      },
+      "conservative_m768": {
+        "l2": 3085.6374243913124,
+        "h1": 346605.1094817029,
+        "vorticity_l2": 346591.3744341945,
+        "divergence_l2": 1.9788505285472663e-11
+      },
+      "residual_m768": {
+        "l2": 0.017253512752179342,
+        "h1": 22.30291070361835,
+        "vorticity_l2": 22.302904035875933,
+        "divergence_l2": 9.214628252741312e-11
+      },
+      "projected_force_delta": {
+        "l2": 0.017111547052520232,
+        "h1": 22.28924959052972,
+        "vorticity_l2": 22.28924302834885,
+        "divergence_l2": 3.7424028953552214e-15
+      },
+      "conservative_m384": {
+        "l2": 3085.6374244312588,
+        "h1": 346605.11016103055,
+        "vorticity_l2": 346591.3751129196,
+        "divergence_l2": 2.2087768217206076e-11
+      },
+      "residual_m384": {
+        "l2": 0.00220929189040847,
+        "h1": 0.7830303074768855,
+        "vorticity_l2": 0.7830271909532741,
+        "divergence_l2": 9.214628246396297e-11
+      },
+      "base_cross": [
+        {
+          "l2": 2639963.907127291,
+          "h1": 13209947361.174444,
+          "vorticity_l2": 13207307397.267317,
+          "divergence_l2": 1.4786326192401402e-21
+        },
+        {
+          "l2": -8814221.224317886,
+          "h1": -17854413603.788525,
+          "vorticity_l2": -17845599382.56421,
+          "divergence_l2": -1.2920940198372064e-23
+        },
+        {
+          "l2": -10228091.244927067,
+          "h1": -222415567622.4931,
+          "vorticity_l2": -222405339531.24817,
+          "divergence_l2": -5.738182147672473e-23
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 2639963.907127291,
+          "h1": 13209947361.174444,
+          "vorticity_l2": 13207307397.267317,
+          "divergence_l2": 1.4786326192401402e-21
+        },
+        {
+          "l2": -8814221.224318953,
+          "h1": -17854413604.738167,
+          "vorticity_l2": -17845599383.513847,
+          "divergence_l2": -2.1242967039566416e-23
+        },
+        {
+          "l2": -10228091.245469814,
+          "h1": -222415568589.66498,
+          "vorticity_l2": -222405340498.4195,
+          "divergence_l2": -5.645414654915556e-23
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": 0.3856900606796633,
+          "h1": 0.42378637962405363,
+          "vorticity_l2": 0.42399128802253333,
+          "divergence_l2": 0.2157949085937669
+        },
+        {
+          "l2": -0.8128898974180088,
+          "h1": -0.5344757303799662,
+          "vorticity_l2": -0.5345884988246531,
+          "divergence_l2": -0.006165980907319444
+        },
+        {
+          "l2": -0.8508783816070236,
+          "h1": -0.9920390643245488,
+          "vorticity_l2": -0.9920507470190566,
+          "divergence_l2": -0.022407386426177046
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": 0.3856900606796633,
+          "h1": 0.42378637962405363,
+          "vorticity_l2": 0.42399128802253333,
+          "divergence_l2": 0.2157949085937669
+        },
+        {
+          "l2": -0.8128898974075837,
+          "h1": -0.5344757293608499,
+          "vorticity_l2": -0.5345884978062235,
+          "divergence_l2": -0.00908206047382163
+        },
+        {
+          "l2": -0.8508783816411595,
+          "h1": -0.9920390666940767,
+          "vorticity_l2": -0.9920507493904561,
+          "divergence_l2": -0.019750308109186373
+        }
+      ],
+      "base_cancellation": {
+        "l2": 2.5408327801460062e-6,
+        "h1": 0.00003105311942957272,
+        "vorticity_l2": 0.00003105534312750193,
+        "divergence_l2": 0.6704386886421349
+      },
+      "control_cancellation": {
+        "l2": 3.2535063071828695e-7,
+        "h1": 1.0902403706486177e-6,
+        "vorticity_l2": 1.090314428610739e-6,
+        "divergence_l2": 0.6594074631313888
+      },
+      "base_identity_relative_error": {
+        "l2": 0.003737586961566959,
+        "h1": 0.31027396434735294,
+        "vorticity_l2": 0.06658804847113642,
+        "divergence_l2": 2.992416186482203e-22
+      },
+      "control_identity_relative_error": {
+        "l2": 0.0037420810222031213,
+        "h1": 1.0039782734502622,
+        "vorticity_l2": 1.0183885545695772,
+        "divergence_l2": 3.881318418118279e-22
+      }
+    },
+    "new_shell_n768": {
+      "derivative": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "viscous": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "conservative_m768": {
+        "l2": 1.2957955457931047,
+        "h1": 1932.9133166324302,
+        "vorticity_l2": 1932.912886241401,
+        "divergence_l2": 9.823273150528285e-14
+      },
+      "residual_m768": {
+        "l2": 1.2957955457931047,
+        "h1": 1932.9133166324302,
+        "vorticity_l2": 1932.912886241401,
+        "divergence_l2": 9.823273150528285e-14
+      },
+      "projected_force_delta": {
+        "l2": 1.2957957480492102,
+        "h1": 1932.914846937184,
+        "vorticity_l2": 1932.9144165457196,
+        "divergence_l2": 9.820044967749259e-14
+      },
+      "conservative_m384": {
+        "l2": 0.00020235088189787633,
+        "h1": 0.263213755237346,
+        "vorticity_l2": 0.26321367758323416,
+        "divergence_l2": 9.809581851639529e-14
+      },
+      "residual_m384": {
+        "l2": 0.00020235088189787633,
+        "h1": 0.263213755237346,
+        "vorticity_l2": 0.26321367758323416,
+        "divergence_l2": 9.809581851639529e-14
+      },
+      "base_cross": [
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        },
+        {
+          "l2": 0.0,
+          "h1": 0.0,
+          "vorticity_l2": 0.0,
+          "divergence_l2": 0.0
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        },
+        {
+          "l2": null,
+          "h1": null,
+          "vorticity_l2": null,
+          "divergence_l2": null
+        }
+      ],
+      "base_cancellation": {
+        "l2": 1.0,
+        "h1": 1.0,
+        "vorticity_l2": 1.0,
+        "divergence_l2": 1.0
+      },
+      "control_cancellation": {
+        "l2": 1.0,
+        "h1": 1.0,
+        "vorticity_l2": 1.0,
+        "divergence_l2": 1.0
+      },
+      "base_identity_relative_error": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      },
+      "control_identity_relative_error": {
+        "l2": 0.0,
+        "h1": 0.0,
+        "vorticity_l2": 0.0,
+        "divergence_l2": 0.0
+      }
+    },
+    "full_n768": {
+      "derivative": {
+        "l2": 1757.0225338618677,
+        "h1": 48189.52499400422,
+        "vorticity_l2": 48157.48324510198,
+        "divergence_l2": 5.2947926087383444e-11
+      },
+      "viscous": {
+        "l2": 1947.8352238767857,
+        "h1": 323423.4097436665,
+        "vorticity_l2": 323417.5442924457,
+        "divergence_l2": 6.470534233211984e-11
+      },
+      "conservative_m768": {
+        "l2": 3085.6376964722135,
+        "h1": 346610.4990803263,
+        "vorticity_l2": 346596.76424399845,
+        "divergence_l2": 1.9788749104041884e-11
+      },
+      "residual_m768": {
+        "l2": 1.2959104059307263,
+        "h1": 1933.0419833621916,
+        "vorticity_l2": 1933.0415529228794,
+        "divergence_l2": 9.214633488799964e-11
+      },
+      "projected_force_delta": {
+        "l2": 1.2959087258387232,
+        "h1": 1933.043355995283,
+        "vorticity_l2": 1933.0429255567649,
+        "divergence_l2": 9.827173498159539e-14
+      },
+      "conservative_m384": {
+        "l2": 3085.6374244312656,
+        "h1": 346605.1101611305,
+        "vorticity_l2": 346591.37511301955,
+        "divergence_l2": 2.2087986046867862e-11
+      },
+      "residual_m384": {
+        "l2": 0.0022185392798932994,
+        "h1": 0.8260859176704874,
+        "vorticity_l2": 0.8260829388379026,
+        "divergence_l2": 9.214633467869495e-11
+      },
+      "base_cross": [
+        {
+          "l2": 2639963.907127291,
+          "h1": 13209947361.174444,
+          "vorticity_l2": 13207307397.267317,
+          "divergence_l2": 1.4786326192401402e-21
+        },
+        {
+          "l2": -8814221.224317886,
+          "h1": -17854413603.788525,
+          "vorticity_l2": -17845599382.56421,
+          "divergence_l2": -1.2920940198372064e-23
+        },
+        {
+          "l2": -10228091.244927067,
+          "h1": -222415567622.4931,
+          "vorticity_l2": -222405339531.24817,
+          "divergence_l2": -5.738182147672473e-23
+        }
+      ],
+      "control_cross": [
+        {
+          "l2": 2639963.907127291,
+          "h1": 13209947361.174444,
+          "vorticity_l2": 13207307397.267317,
+          "divergence_l2": 1.4786326192401402e-21
+        },
+        {
+          "l2": -8814221.224318953,
+          "h1": -17854413604.738167,
+          "vorticity_l2": -17845599383.513847,
+          "divergence_l2": -2.1242967039566416e-23
+        },
+        {
+          "l2": -10228091.245469814,
+          "h1": -222415568589.66498,
+          "vorticity_l2": -222405340498.4195,
+          "divergence_l2": -5.645414654915556e-23
+        }
+      ],
+      "base_alignment": [
+        {
+          "l2": 0.3856900606796633,
+          "h1": 0.42378637962405363,
+          "vorticity_l2": 0.42399128802253333,
+          "divergence_l2": 0.2157949085937669
+        },
+        {
+          "l2": -0.8128898257401783,
+          "h1": -0.5344674195824909,
+          "vorticity_l2": -0.5345801856185609,
+          "divergence_l2": -0.0061659049358351046
+        },
+        {
+          "l2": -0.8508783065794995,
+          "h1": -0.9920236386741728,
+          "vorticity_l2": -0.992035319971277,
+          "divergence_l2": -0.02240711034319324
+        }
+      ],
+      "control_alignment": [
+        {
+          "l2": 0.3856900606796633,
+          "h1": 0.42378637962405363,
+          "vorticity_l2": 0.42399128802253333,
+          "divergence_l2": 0.2157949085937669
+        },
+        {
+          "l2": -0.8128898974075819,
+          "h1": -0.5344757293606958,
+          "vorticity_l2": -0.5345884978060693,
+          "divergence_l2": -0.009081970907386867
+        },
+        {
+          "l2": -0.8508783816411576,
+          "h1": -0.9920390666937906,
+          "vorticity_l2": -0.99205074939017,
+          "divergence_l2": -0.01975011333348675
+        }
+      ],
+      "base_cancellation": {
+        "l2": 0.0001908418045000114,
+        "h1": 0.002691421488555939,
+        "vorticity_l2": 0.0026916144229608965,
+        "divergence_l2": 0.6704378802662299
+      },
+      "control_cancellation": {
+        "l2": 3.267124444353644e-7,
+        "h1": 1.1501881963810657e-6,
+        "vorticity_l2": 1.150266756825498e-6,
+        "divergence_l2": 0.6594068088952934
+      },
+      "base_identity_relative_error": {
+        "l2": 0.002225570425347361,
+        "h1": 0.000041303403928673496,
+        "vorticity_l2": 8.864150464793841e-6,
+        "divergence_l2": 2.992416186482218e-22
+      },
+      "control_identity_relative_error": {
+        "l2": 0.0037420772645989447,
+        "h1": 1.0044297903948538,
+        "vorticity_l2": 1.020508998667014,
+        "divergence_l2": 3.881318418118294e-22
+      }
+    },
+    "retained_modes": 28164288,
+    "new_shell_modes": 197738688,
+    "excluded_nyquist_slots": 1179264,
+    "projected_force_delta_component_sha256": [
+      "a2c4d3faa481caa6095caac7863e2b4cb97bcc30e7508413717f3d4dc0994af8",
+      "1f1abefd46986e458d3e712ebecebcf20556eb0c61c9c921337eb58606e25884",
+      "9a714ca5512fee4a247826c48612fd4419c28650700b5938bf4339e671959955"
+    ],
+    "residual_m384_component_sha256": [
+      "e9abbc29195500c695c465b504b965f66dbe03db16a37b632ab15821ee74943e",
+      "ee29045e2f0ce07495c791ba548b5f27bf41bb17c121f0118b4a7448550a4d74",
+      "7b28878b10b90c0553914a0f44c7e23d67bbf77135b4f8e3b435793990db539e"
+    ]
+  },
+  "identity_closure": {
+    "residual_relative_tolerance": 5e-11,
+    "residual_relative_maximum": 1.020508998667014,
+    "residual_relative_passed": false,
+    "term_scaled_tolerance": 3.210274371667765e-6,
+    "term_scaled_maximum": 3.220010839792072e-10,
+    "term_scaled_passed": true,
+    "term_scaled_bound_basis": "64 rounded accumulator contributions per processed mode times binary64 epsilon; residual-relative 5e-11 status is reported independently and is not relabeled"
+  },
+  "runtime_owner_imported": false,
+  "accepted_interpolation": false,
+  "acceptance_windows": 0,
+  "qualification": "offline empirical binary64 localization only; no velocity-budget, residual-pass, qualification, accepted interpolation, or accepted-window claim"
+}

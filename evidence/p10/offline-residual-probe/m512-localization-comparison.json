@@ -1,0 +1,45 @@
+{
+  "schema": "p10-offline-residual-m384-m512-h1-comparison-v1",
+  "status": "matched_clock1112_diagnostic_only",
+  "clock": 1112,
+  "norm": "residual acceleration H1",
+  "m384_trajectory": {
+    "retained_strict_n384": {
+      "base_m768_residual": 935.5579161334231,
+      "retained_force_control": 0.7830415812306416,
+      "projected_force_delta": 935.561405170177
+    },
+    "omitted_shell_n384_to_n768": {
+      "base_m768_residual": 1932.9048270592857,
+      "retained_force_control": 0.441153443692872,
+      "projected_force_delta": 1932.914846937184
+    },
+    "full_n768": {
+      "base_m768_residual": 2147.4146513677792,
+      "retained_force_control": 0.8987605236203153,
+      "projected_force_delta": 2147.4251903976055
+    }
+  },
+  "m512_trajectory": {
+    "retained_strict_n384": {
+      "base_m768_residual": 22.30291070361835,
+      "retained_force_control": 0.7830303074768855,
+      "projected_force_delta": 22.28924959052972
+    },
+    "omitted_shell_n384_to_n768": {
+      "base_m768_residual": 1932.9133166324302,
+      "retained_force_control": 0.263213755237346,
+      "projected_force_delta": 1932.914846937184
+    },
+    "full_n768": {
+      "base_m768_residual": 1933.0419833621916,
+      "retained_force_control": 0.8260859176704874,
+      "projected_force_delta": 1933.043355995283
+    }
+  },
+  "retained_base_contraction_ratio": 0.023839155565904758,
+  "m512_retained_base_minus_projected_force_delta": 0.013661113088627275,
+  "interpretation": "force refinement strongly contracts the retained-band discrepancy while the unresolved N384-to-N768 band remains and dominates the full acceleration residual; this supports sampled-force convergence on retained modes, not a velocity H1 error estimate, PDE residual pass, interpolation qualification, or accepted window",
+  "control_scope": "the separately labeled control changes diagnostic forcing on retained and omitted bands but never modifies either trajectory",
+  "acceptance_windows": 0
+}
