@@ -1,0 +1,7 @@
+captured_utc=2026-09-13T15:13:08Z
+solver_pid=1688305
+solver_vm_rss_kib=297845396
+solver_vm_swap_kib=0
+system_swap_total_kib=8388604
+system_swap_free_kib=7922684
+scope=contextual_system_observation_not_job_specific_attribution

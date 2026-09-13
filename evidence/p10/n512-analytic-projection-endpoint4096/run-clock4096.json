@@ -1,0 +1,61 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-endpoint4096-run-v1",
+  "status": "timeout_exit_124_no_result",
+  "source_commit": "9b4a980f147978b03cece70a265cc97090984c91",
+  "launcher": {
+    "launch_utc": "2026-09-13T13:55:03Z",
+    "time_log_mtime_utc": "2026-09-13T15:35:53.335857137Z",
+    "wall_seconds": 6049,
+    "owned_pgid": 1688301,
+    "time_wrapper_pid": 1688301,
+    "timeout_foreground_pid": 1688304,
+    "diagnostic_pid": 1688305,
+    "exit_code": 124,
+    "timeout_term_seconds": 6000,
+    "timeout_kill_after_seconds": 60,
+    "campaign_deadline_utc": "2026-09-13T19:52:54Z"
+  },
+  "fresh_admission": {
+    "timing_owner_resource_release_confirmed": true,
+    "other_heavy_campaign_jobs_idle": true,
+    "mem_available_bytes": 390325448704,
+    "minimum_mem_available_bytes": 322265386072,
+    "required_workers": 32,
+    "internal_reservation_bytes": 305085516888,
+    "actual_rlimit_as_soft_bytes": 343597383680,
+    "actual_rlimit_as_hard_bytes": 343597383680
+  },
+  "observed_resources": {
+    "maximum_rss_kib": 297836312,
+    "maximum_rss_gib": 284.0388412475586,
+    "cpu_percent": 1223,
+    "major_page_faults": 1,
+    "process_swaps": 0,
+    "captured_process_vm_swap_kib": 0,
+    "system_swap_observation": "context_only_not_job_specific_attribution",
+    "post_release_mem_available_bytes": 481759285248
+  },
+  "bindings": {
+    "release_binary_sha256": "bdf43acd1926f45ae5b066679e59753653f19473d38bf21585009a715ca432a5",
+    "endpoint_preflight_sha256": "f957067b0424267749b469477bfc4fab65133b102026254f830bb015c707aabc",
+    "time_log_sha256": "31832359a8f00f9270bccc7f6bc6f5196d54297f1ce441dfcc46869572b0f20b",
+    "launch_identities_sha256": "5f9e97194af30dcde54c9b0a0f5ca6ce035b1e716c2731e45b9ee9f57d27930a"
+  },
+  "validation": {
+    "final_result_absent": true,
+    "candidate_result_absent": true,
+    "stdout_empty": true,
+    "stderr_empty": true,
+    "owned_pids_absent_before_release": true,
+    "owned_process_group_absent_before_release": true,
+    "retry_performed": false,
+    "timeout_extended": false
+  },
+  "claims": {
+    "endpoint_diagnostic": "unresolved_timeout_no_result",
+    "acceptance": "not_assessed",
+    "continuum_or_peak_qualification": "not_assessed",
+    "trajectory": "not_applicable_sampled_analytic_projection",
+    "state_import_or_resume": "absent"
+  }
+}

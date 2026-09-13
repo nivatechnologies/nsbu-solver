@@ -25,3 +25,11 @@ manifests. To verify the frozen source independently, extract `git archive
 9b4a980f147978b03cece70a265cc97090984c91` into an empty directory, change to that directory, and
 run `sha256sum -c` using this variant's `SOURCE_SHA256SUMS`. `prepared/implementation.json` binds the
 binary, both preflights, resource gates, and zero heavy executions.
+
+The root-reviewed endpoint execution reached the fixed 6000-second timeout and exited with status
+124 after 1:40:49. No final or candidate result was created, so the endpoint diagnostic remains
+unresolved. The process itself reported zero swaps and one major page fault; a separately captured
+system swap reading is retained as context without attributing it to this job. All owned process
+identities and the single `timeout --foreground` process group were absent before resource release.
+No retry or timeout extension was performed. Exact launch, resource, and absence evidence is in
+`run-clock4096.json` and `run-clock4096/`.
