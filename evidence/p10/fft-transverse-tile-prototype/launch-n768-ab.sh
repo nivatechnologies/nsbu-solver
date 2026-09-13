@@ -8,6 +8,7 @@ readonly UNTILED_BINARY_SHA256=003969a932f7cc794db8030c99dc50aca6256f48307c34fdd
 readonly AS_BYTES=25769803776
 readonly MIN_AVAILABLE_KIB=67108864
 readonly MAX_ARTIFACT_BYTES=4194304
+readonly MIN_DISK_AVAILABLE_BYTES=8388608
 readonly CAMPAIGN_DEADLINE_UTC=2026-09-13T19:52:54Z
 readonly CAMPAIGN_DEADLINE_EPOCH=1789329174
 readonly ENDPOINT_PIDS=(1688301 1688304 1688305)
@@ -50,29 +51,35 @@ fi
     echo 'refusing launch without ENDPOINT_RELEASE_CONFIRMED=1' >&2
     exit 64
 }
-for endpoint_pid in "${ENDPOINT_PIDS[@]}"; do
-    [[ ! -e /proc/$endpoint_pid ]] || {
-        echo "refusing launch while endpoint projection PID $endpoint_pid exists" >&2
+
+check_endpoint() {
+    for endpoint_pid in "${ENDPOINT_PIDS[@]}"; do
+        [[ ! -e /proc/$endpoint_pid ]] || {
+            echo "refusing launch while endpoint projection PID $endpoint_pid exists" >&2
+            exit 64
+        }
+    done
+    if pgrep -f 'projection-n512-endpoint-execute' >/dev/null; then
+        echo 'refusing launch while an endpoint projection command remains' >&2
         exit 64
-    }
-done
-if pgrep -f 'projection-n512-endpoint-execute' >/dev/null; then
-    echo 'refusing launch while an endpoint projection command remains' >&2
-    exit 64
-fi
-[[ $(git -C "$repo" rev-parse --verify "$PROTOTYPE_SOURCE") == "$PROTOTYPE_SOURCE"* ]]
-git -C "$repo" diff --quiet "$PROTOTYPE_SOURCE" -- \
-    crates/nsbu-solver evidence/p10/fft-transverse-tile-prototype/harness
-git -C "$repo" diff --quiet -- \
-    crates/nsbu-solver evidence/p10/fft-transverse-tile-prototype/harness
-[[ $(git -C "$baseline_repo" rev-parse HEAD) == "$UNTILED_SOURCE" ]]
-git -C "$baseline_repo" diff --quiet -- crates/nsbu-solver
-for source in Cargo.toml Cargo.lock src/main.rs src/bin/anisotropic.rs; do
-    cmp -s "$script_dir/harness/$source" \
-        "$baseline_repo/evidence/p10/fft-transverse-tile-prototype/harness/$source"
-done
-[[ $(sha256sum "$tiled_binary" | awk '{ print $1 }') == "$TILED_BINARY_SHA256" ]]
-[[ $(sha256sum "$untiled_binary" | awk '{ print $1 }') == "$UNTILED_BINARY_SHA256" ]]
+    fi
+}
+
+check_bindings() {
+    [[ $(git -C "$repo" rev-parse --verify "$PROTOTYPE_SOURCE") == "$PROTOTYPE_SOURCE"* ]]
+    git -C "$repo" diff --quiet "$PROTOTYPE_SOURCE" -- \
+        crates/nsbu-solver evidence/p10/fft-transverse-tile-prototype/harness
+    git -C "$repo" diff --quiet -- \
+        crates/nsbu-solver evidence/p10/fft-transverse-tile-prototype/harness
+    [[ $(git -C "$baseline_repo" rev-parse HEAD) == "$UNTILED_SOURCE" ]]
+    git -C "$baseline_repo" diff --quiet -- crates/nsbu-solver
+    for source in Cargo.toml Cargo.lock src/main.rs src/bin/anisotropic.rs; do
+        cmp -s "$script_dir/harness/$source" \
+            "$baseline_repo/evidence/p10/fft-transverse-tile-prototype/harness/$source"
+    done
+    [[ $(sha256sum "$tiled_binary" | awk '{ print $1 }') == "$TILED_BINARY_SHA256" ]]
+    [[ $(sha256sum "$untiled_binary" | awk '{ print $1 }') == "$UNTILED_BINARY_SHA256" ]]
+}
 
 check_available() {
     available_kib=$(awk '$1 == "MemAvailable:" { print $2 }' /proc/meminfo)
@@ -92,8 +99,19 @@ check_deadline() {
     }
 }
 
+check_disk() {
+    disk_available_bytes=$(df -PB1 "$script_dir" | awk 'NR == 2 { print $4 }')
+    [[ $disk_available_bytes =~ ^[0-9]+$ && $disk_available_bytes -ge $MIN_DISK_AVAILABLE_BYTES ]] || {
+        echo "refusing launch: disk available ${disk_available_bytes:-unknown} below $MIN_DISK_AVAILABLE_BYTES bytes" >&2
+        exit 64
+    }
+}
+
+check_endpoint
+check_bindings
 check_available
 check_deadline 4
+check_disk
 if [[ ${1-} == --preflight-only ]]; then
     echo "preflight passed MemAvailable=${available_kib}KiB deadline=$CAMPAIGN_DEADLINE_UTC"
     exit 0
@@ -117,6 +135,8 @@ cat > "$run_dir/launch-receipt.json" <<EOF
   "prelaunch_mem_available_kib": $available_kib,
   "minimum_mem_available_bytes": 68719476736,
   "maximum_artifact_bytes": $MAX_ARTIFACT_BYTES,
+  "prelaunch_disk_available_bytes": $disk_available_bytes,
+  "minimum_disk_available_bytes": $MIN_DISK_AVAILABLE_BYTES,
   "campaign_deadline_utc": "$CAMPAIGN_DEADLINE_UTC",
   "campaign_deadline_epoch": $CAMPAIGN_DEADLINE_EPOCH,
   "round_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"]
@@ -137,8 +157,11 @@ launch_round() {
     local round_dir="$run_dir/$round"
     local owner_pgid owner_cmdline_sha256 owner_starttime status
     local stable=0
+    check_endpoint
+    check_bindings
     check_available
     check_deadline "$remaining"
+    check_disk
     mkdir "$round_dir"
     setsid "$script_dir/launch-n768-ab.sh" --worker "$variant" "$round" "$round_dir" </dev/null &
     owner_pid=$!

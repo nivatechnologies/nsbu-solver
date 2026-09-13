@@ -1,19 +1,19 @@
 {
-  "schema": "p10-fft-transverse-tile-n768-launcher-freeze-v1",
+  "schema": "p10-fft-transverse-tile-n768-launcher-freeze-v2",
   "status": "prepared_refusals_passed_not_executed",
   "launcher": "launch-n768-ab.sh",
-  "launcher_sha256": "4dba84aaa6ce9e620e466a3b3652c82fb0dd041e4df94b4900e1e262d603e47f",
+  "launcher_sha256": "48ff23d23565d227068d70982a05d8d3d286a0db4bf2bb8bc15d4305ad99d6fb",
   "prototype_source_commit": "47c8927",
   "untiled_source_commit": "f3960e157f26f37fa9a9fe808a4a596395164706",
   "prototype_binary_sha256": "f151b41a1c03874d699a49154321a1e45038f3f98cb5d4443ffbae5aa97dea04",
   "untiled_binary_sha256": "003969a932f7cc794db8030c99dc50aca6256f48307c34fdd80eedf7d9b2b984",
   "controls": {
     "bash_syntax": true,
-    "missing_release": {
+    "missing_release_v2": {
       "exit": 64,
       "stderr_sha256": "300f67ca504aa8340a23e0aa10b480a0074a94024231bcbc52f9a58666d797d0"
     },
-    "active_endpoint": {
+    "active_endpoint_v2": {
       "exit": 64,
       "stderr_sha256": "6a2b71020a2e6d52d0e26a2ce16ac718c804f0d1584eea936407090fdac57f71"
     },
@@ -28,8 +28,10 @@
     "preparation_margin_seconds": 300,
     "address_space_limit_bytes": 25769803776,
     "minimum_mem_available_bytes": 68719476736,
-    "artifact_bytes": 4194304,
+    "maximum_artifact_bytes": 4194304,
+    "minimum_disk_available_bytes": 8388608,
     "campaign_deadline_utc": "2026-09-13T19:52:54Z"
   },
+  "repeated_gates": "Endpoint absence, source/harness/binary bindings, memory, disk and remaining-round campaign deadline are checked once at preflight and immediately before every round.",
   "ownership": "Each round uses a new setsid owner, foreground timeout, stable PID=PGID/starttime/cmdline captured twice, identity-bound TERM/60/KILL cleanup, and no signal when identity cannot be bound."
 }

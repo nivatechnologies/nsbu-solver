@@ -57,7 +57,7 @@
   "qualification": false,
   "launcher": {
     "path": "evidence/p10/fft-transverse-tile-prototype/launch-n768-ab.sh",
-    "sha256": "4dba84aaa6ce9e620e466a3b3652c82fb0dd041e4df94b4900e1e262d603e47f",
+    "sha256": "48ff23d23565d227068d70982a05d8d3d286a0db4bf2bb8bc15d4305ad99d6fb",
     "freeze": "launcher-freeze.json"
   }
 }
