@@ -32,6 +32,14 @@ pub(crate) fn authorize_full_run(binary_sha256: &str) -> Result<(), String> {
     launch_gate(binary_sha256)
 }
 
+pub(crate) fn authorize_projection_run(
+    binary_sha256: &str,
+    address_space_limit: usize,
+    minimum_mem_available: usize,
+) -> Result<(), String> {
+    policy::launch_gate_with(binary_sha256, address_space_limit, minimum_mem_available)
+}
+
 pub(crate) fn hash_coefficients(coefficients: [&[nsbu_solver::Complex64]; 3]) -> String {
     coefficient_hash(coefficients)
 }
@@ -397,25 +405,42 @@ pub(crate) fn measure_coefficients(
     coefficients: [&[nsbu_solver::Complex64]; 3],
     clock: model::ClockHeader,
 ) -> Result<Measurements, String> {
-    let domain = nsbu_solver::domain::Domain::new([384; 3], [1.0; 3], 1.0).map_err(model::debug)?;
-    let samples = Layout::new([DIMENSION; 3]).map_err(model::debug)?;
+    measure_coefficients_at(
+        coefficients,
+        clock,
+        384,
+        DIMENSION,
+        DERIVATIVE_WORKSPACE_BUDGET,
+    )
+}
+
+pub(crate) fn measure_coefficients_at(
+    coefficients: [&[nsbu_solver::Complex64]; 3],
+    clock: model::ClockHeader,
+    retained_dimension: usize,
+    sample_dimension: usize,
+    derivative_workspace_budget: usize,
+) -> Result<Measurements, String> {
+    let domain = nsbu_solver::domain::Domain::new([retained_dimension; 3], [1.0; 3], 1.0)
+        .map_err(model::debug)?;
+    let samples = Layout::new([sample_dimension; 3]).map_err(model::debug)?;
     let mut cache = try_zeros(samples.real_len())?;
     let mut labels = try_zeros(samples.real_len())?;
-    let region_counts = sample_reference(&mut cache, &mut labels, clock)?;
+    let region_counts = sample_reference(&mut cache, &mut labels, clock, sample_dimension)?;
     let catalog =
         FftCatalog::new(FftBackend::RustFft6_4_1AvxFma, FFT_CATALOG_BYTES).map_err(model::debug)?;
     let reservation = DerivativeWorkspace::reservation_from_catalog(domain, samples, &catalog)
         .map_err(model::debug)?;
-    if reservation > DERIVATIVE_WORKSPACE_BUDGET {
+    if reservation > derivative_workspace_budget {
         return Err(format!(
-            "derivative workspace reservation {reservation} exceeds admitted budget {DERIVATIVE_WORKSPACE_BUDGET}"
+            "derivative workspace reservation {reservation} exceeds admitted budget {derivative_workspace_budget}"
         ));
     }
     let mut workspace = DerivativeWorkspace::new_from_catalog(
         domain,
         samples,
         &catalog,
-        DERIVATIVE_WORKSPACE_BUDGET,
+        derivative_workspace_budget,
     )
     .map_err(model::debug)?;
     let mut errors = try_zeros(samples.real_len())?;

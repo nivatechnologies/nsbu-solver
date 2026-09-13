@@ -173,6 +173,18 @@ pub(super) fn work(manifest: &Manifest) -> Result<Work, String> {
 }
 
 pub(super) fn launch_gate(binary_sha256: &str) -> Result<(), String> {
+    launch_gate_with(
+        binary_sha256,
+        SCOPED_RLIMIT_AS_BYTES,
+        CAP_BYTES + EXTRA_MEMORY_GATE,
+    )
+}
+
+pub(super) fn launch_gate_with(
+    binary_sha256: &str,
+    expected_address_space_limit: usize,
+    minimum_mem_available: usize,
+) -> Result<(), String> {
     if std::env::var("P10_ROOT_FULL_RUN_REVIEW").as_deref() != Ok("approved") {
         return Err("full run requires P10_ROOT_FULL_RUN_REVIEW=approved".into());
     }
@@ -183,9 +195,9 @@ pub(super) fn launch_gate(binary_sha256: &str) -> Result<(), String> {
         return Err("full run requires the reviewed P10_CPU_WORKERS=32 fit".into());
     }
     let limits = address_space_limits()?;
-    if limits != [SCOPED_RLIMIT_AS_BYTES; 2] {
+    if limits != [expected_address_space_limit; 2] {
         return Err(format!(
-            "full run requires actual RLIMIT_AS soft/hard limits of {SCOPED_RLIMIT_AS_BYTES}, observed {limits:?}"
+            "full run requires actual RLIMIT_AS soft/hard limits of {expected_address_space_limit}, observed {limits:?}"
         ));
     }
     if std::env::var("P10_DIAGNOSTIC_BINARY_SHA256").as_deref() != Ok(binary_sha256) {
@@ -202,12 +214,9 @@ pub(super) fn launch_gate(binary_sha256: &str) -> Result<(), String> {
         ));
     }
     let available_memory = mem_available()?;
-    let required = CAP_BYTES
-        .checked_add(EXTRA_MEMORY_GATE)
-        .ok_or("memory gate overflow")?;
-    if available_memory < required {
+    if available_memory < minimum_mem_available {
         return Err(format!(
-            "MemAvailable {available_memory} is below required {required}"
+            "MemAvailable {available_memory} is below required {minimum_mem_available}"
         ));
     }
     Ok(())

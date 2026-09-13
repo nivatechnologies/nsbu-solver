@@ -1,7 +1,7 @@
 use super::policy::{region_counts, region_index, region_names};
 use super::{
     model, CoverageOutput, Quantity, QuantityReport, RegionCount, RegionOutput, SampleOutput,
-    DIMENSION, ROOT_BUDGET, STACK_BYTES, WORKERS,
+    ROOT_BUDGET, STACK_BYTES, WORKERS,
 };
 use crate::cache::PackedReference;
 use nsbu_benchmarks::{
@@ -22,15 +22,20 @@ pub(super) fn sample_reference(
     cache: &mut [PackedReference],
     labels: &mut [u8],
     header: model::ClockHeader,
+    dimension: usize,
 ) -> Result<[RegionCount; 5], String> {
-    if cache.len() != DIMENSION.pow(3) || labels.len() != cache.len() {
+    if !dimension.is_multiple_of(WORKERS)
+        || cache.len() != dimension.pow(3)
+        || labels.len() != cache.len()
+    {
         return Err("reference cache shape mismatch".into());
     }
     let clock = TickClock::restore(-20, 8192, header.elapsed, 8192 - header.elapsed)
         .map_err(model::debug)?;
     let time = BenchmarkTime::new(clock).map_err(model::debug)?;
-    let plane = DIMENSION * DIMENSION;
-    let chunk = 24 * plane;
+    let plane = dimension * dimension;
+    let planes_per_worker = dimension / WORKERS;
+    let chunk = planes_per_worker * plane;
     let counts = std::thread::scope(|scope| -> Result<[usize; 5], String> {
         let mut handles = Vec::new();
         handles
@@ -41,12 +46,19 @@ pub(super) fn sample_reference(
             .zip(labels.chunks_mut(chunk))
             .enumerate()
         {
-            let start_plane = worker * 24;
+            let start_plane = worker * planes_per_worker;
             let handle = std::thread::Builder::new()
                 .name(format!("regional-reference-{worker:02}"))
                 .stack_size(STACK_BYTES)
                 .spawn_scoped(scope, move || {
-                    sample_reference_chunk(cache_chunk, label_chunk, start_plane, clock, time)
+                    sample_reference_chunk(
+                        cache_chunk,
+                        label_chunk,
+                        start_plane,
+                        dimension,
+                        clock,
+                        time,
+                    )
                 })
                 .map_err(model::debug)?;
             handles.push(handle);
@@ -70,10 +82,11 @@ fn sample_reference_chunk(
     cache: &mut [PackedReference],
     labels: &mut [u8],
     start_plane: usize,
+    dimension: usize,
     clock: TickClock,
     time: BenchmarkTime,
 ) -> Result<[usize; 5], String> {
-    let plane = DIMENSION * DIMENSION;
+    let plane = dimension * dimension;
     if cache.len() != labels.len() || !cache.len().is_multiple_of(plane) {
         return Err("reference worker chunk shape mismatch".into());
     }
@@ -81,12 +94,12 @@ fn sample_reference_chunk(
     for (local, (packed, label)) in cache.iter_mut().zip(labels).enumerate() {
         let i = start_plane + local / plane;
         let within = local % plane;
-        let j = within / DIMENSION;
-        let k = within % DIMENSION;
+        let j = within / dimension;
+        let k = within % dimension;
         let point = [
-            i as f64 / DIMENSION as f64,
-            j as f64 / DIMENSION as f64,
-            k as f64 / DIMENSION as f64,
+            i as f64 / dimension as f64,
+            j as f64 / dimension as f64,
+            k as f64 / dimension as f64,
         ];
         let independent = reference::evaluate(point, time).map_err(model::debug)?;
         *packed = PackedReference::pack_checked(&independent)?;
