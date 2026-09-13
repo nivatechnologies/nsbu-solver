@@ -100,3 +100,23 @@ A larger Rust consumer generation trial exhausted its output and time budgets;
 no code was accepted. That task class was paused rather than repeatedly retried.
 These results support narrow fixture delegation, not general autonomous coding
 or PDE acceptance. Review time remains unmeasured.
+
+## Current task sizing
+
+The current local deployment admits eight simultaneous sequences. Its 262,144
+context tokens include prompt and generated output. The 8,192-token scheduler
+iteration budget uses chunked prefill; it is not the maximum prompt length or
+an output cap. Keep the operating concurrency at eight for this deployment.
+
+Reasoning consumes the client output budget. Use about 8,192 output tokens for
+compact fixture packets and 16,384–32,768 for bounded coding packets, with a
+600–900-second coding task limit and a separate final-report time reserve.
+Supply the relevant interfaces and contract rather than an unrelated full file.
+The transport byte cap covers the entire response, including reasoning: allow
+sufficient space (for example 524,288 bytes for a 32K-token coding request), then
+limit the final code artifact separately in its trusted validator. These are
+task settings, not permission to increase tool, repair or review budgets.
+
+Report actual endpoint activity. A prepared packet is not a running agent, and
+zero running/waiting requests must not be explained away as prefill without
+evidence. Idle time after a completed queue is distinct from inference failure.
