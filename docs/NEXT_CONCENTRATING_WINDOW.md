@@ -96,11 +96,16 @@ The matched M384-to-M512 trajectory-force differences at clocks 512, 1024,
 M512 states, or `0.145` to `0.149` of the frozen ForceResolution pilot
 allocation. Independently sampled M768 references against the M512 trajectory
 give retained-band H1 differences of `3.51e-6`, `1.17e-5`, `2.33e-5` and
-`2.36e-5` at clocks 512, 1024, 2048 and 3072. The M512 and HO trajectories
-both reached durable clock 3072 and were then stopped because their frozen
-wall-time continuation formulas could not admit the final segment. They are
-useful incomplete prefixes; they do not qualify force sampling, method,
-reference precision, the unresolved tail or the endpoint.
+`2.36e-5` at clocks 512, 1024, 2048 and 3072. The earlier M512 and HO trajectories
+were stopped at durable clock 3072 under their frozen continuation guards.
+A fresh M512 r6 trajectory has now completed all 48 steps from rest through
+clock 4096 in 5:47:52. New force comparisons at clocks 2560, 3584 and 4096
+complete the eight-node diagnostic inventory alongside the earlier r5 results.
+Their absolute H1 differences are about 0.001063, 0.001075 and 0.001081.
+All 48 states and 98 metadata files have matching local and remote SHA-256
+inventories. See the [r6 endpoint evidence](../evidence/p10/m512-endpoint-r6-20260913/README.md).
+The HO trajectory remains incomplete. These results do not qualify force
+sampling, method, reference precision, the unresolved tail or the endpoint.
 
 One read-only physical diagnostic evaluated the N384/M384 state at clock 512
 on a 768-cubed grid. Its global RMS/peak errors were `9.74e-8`/`2.91e-6` for
@@ -231,9 +236,10 @@ open.
 
 ## Next bounded integration increment
 
-The same-state M512 force-refinement and HO method trajectories are preserved
-through durable clock 3072. Each was stopped after its frozen wall-time rule
-refused continuation to 4096, so neither is an endpoint trajectory. Completed
+The fresh M512 force-refinement trajectory is preserved through endpoint clock
+4096; the earlier HO method trajectory remains at clock 3072 after its frozen
+wall-time rule refused continuation. The combined r5/r6 force-comparison
+inventory covers all eight nonzero observer clocks. Completed
 read-only diagnostics now cover sampled references, one off-stage residual
 probe and one clock-512 regional derivative screen. The next qualification
 work must complete the missing refinement studies under predeclared force, time, method, residual,

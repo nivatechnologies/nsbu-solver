@@ -551,5 +551,28 @@
     "maximum_rss_kib": 297836312,
     "accepted_windows": 0,
     "scope": "Sampled analytical diagnostic only. Fixed 6000-second timeout plus termination grace; no final or candidate result, no retry, no endpoint qualification. Source-specific preflight preserved separately."
+  },
+  "p10_m512_endpoint_r6": {
+    "status": "endpoint_complete_force_diagnostics_not_qualified",
+    "evidence": "evidence/p10/m512-endpoint-r6-20260913/README.md",
+    "final_clock": 4096,
+    "completed_steps": 48,
+    "exit_code": 0,
+    "wall_seconds": 20872,
+    "final_coefficient_sha256": "1d1500409962c4af37182f6733c2c88a086247c8e8728570e9c93238ed1c04fd",
+    "combined_r5_r6_force_comparison_clocks": [
+      512,
+      1024,
+      1536,
+      2048,
+      2560,
+      3072,
+      3584,
+      4096
+    ],
+    "archived_state_files": 48,
+    "archived_metadata_files": 98,
+    "accepted_windows": 0,
+    "scope": "Fresh independent from-rest N384/M512 trajectory. New r6 force comparisons at2560/3584/4096 supplement earlier r5 comparisons; diagnostic inventory only. HO remains incomplete at3072; force-channel qualification and all required PDE acceptance channels remain outstanding."
   }
 }

@@ -8,14 +8,14 @@ coefficient hash is
 status, timings, identities, and final hashes. The clock 512, 2048, and 3072
 coefficient hashes exactly matched the prior r5 trajectory at those prefixes.
 
-The actual independently evolved M384 trajectory was compared with the r6 M512
-trajectory at every nonzero observer clock. Earlier results at clocks
+The actual independently evolved M384 trajectory now has M512 force comparisons
+at every nonzero observer clock. Earlier r5 M512 results at clocks
 [512](../snapshot-comparison-adapter/review-force-clock0512),
 [1024](../snapshot-comparison-adapter/review-force-clock1024),
 [1536](../snapshot-comparison-adapter/review-force-clock1536),
 [2048](../snapshot-comparison-adapter/review-force-clock2048), and
 [3072](../snapshot-comparison-adapter/review-force-clock3072) are preserved in
-the adapter evidence. This directory adds clock 2560 in
+the adapter evidence. This directory adds r6 comparisons at clock 2560 in
 `force-comparison-clock2560-run/` and clocks 3584 and 4096 in
 `force-comparison-run/`. `force-comparison-results.json` records the combined
 eight-clock inventory. All three new diagnostics exited zero under the reviewed
