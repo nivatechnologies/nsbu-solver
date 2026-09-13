@@ -1,0 +1,66 @@
+{
+  "schema": "nsbu-local-agent-pilot-v1",
+  "status": "packet_only_no_endpoint_no_execution",
+  "created_utc": "2026-09-13",
+  "purpose": "Bounded two-agent pilot on DGX Spark local Qwen3.8 Flash Next endpoints once endpoint details are supplied.",
+  "model_policy": {
+    "required_model": "Qwen3.8 Flash Next",
+    "execution": "local_endpoints_only",
+    "endpoint": "supplied_later_by_operator",
+    "cloud_fallback": false,
+    "remote_execution": false
+  },
+  "immutable_inputs": [
+    {"path": "evidence/p10/n384-regional-force-correction-plan-20260913/plan.json", "sha256": "0d070b5d378038f87da712cf86c4a91e618b0fef80aa2763d40e44bf50d304f6"},
+    {"path": "evidence/p10/n384-regional-force-correction-plan-20260913/README.md", "sha256": "d6f2a905f44c7e2ecbbbba9fc0000def0f3d95a2293f146b18ed8da80bdee138"},
+    {"git_commit": "1f49f47", "role": "reviewed regional force-correction plan source"},
+    {"path": "docs/PROTOCOL_FORMAT.md", "role": "evidence/provenance contract"},
+    {"path": "docs/QUALITY.md", "role": "verification policy"}
+  ],
+  "worktree_policy": {
+    "implementation_agent": "one disposable worktree branched from the operator-approved integration base",
+    "review_agent": "separate disposable worktree at the same immutable base",
+    "allowed_paths": ["crates/", "tools/", "docs/", "evidence/pilot-local-qwen38/"],
+    "forbidden_paths": ["evidence/p10/", "work/", "models/", "active numerical binaries", "active trajectory logs"],
+    "merge": "operator/root only after both agent receipts and review pass",
+    "source_mutation": "no changes to frozen inputs"
+  },
+  "tasks": [
+    {
+      "id": "regional-force-correction-implementation",
+      "agent_role": "implementer",
+      "objective": "Implement the already-reviewed regional force-correction diagnostic from commit 1f49f47, preserving read-only diagnostic semantics and producing no PDE acceptance claim.",
+      "scope": "clock-512 N384 M384-versus-M512 force-grid delta on the fixed unshifted M768 lattice and five exclusive sampled regions",
+      "required_math": [
+        "triangle bounds for each RMS channel",
+        "triangle bounds for each peak channel",
+        "floor-normalized peak bounds using identical fixed archived floors",
+        "no vector alignment, cancellation, or inferred direction"
+      ],
+      "limits": {"max_attempts": 2, "retry_on": ["transient local transport failure", "endpoint process failure before receipt"], "max_wall_seconds": 1800},
+      "outputs": ["source diff", "tests", "preflight receipt", "diagnostic output receipt", "SHA256SUMS"]
+    },
+    {
+      "id": "regional-force-correction-independent-review",
+      "agent_role": "reviewer",
+      "objective": "Independently review the implementation diff, source/tests, resource preflight, immutable-input binding, and output semantics before any heavy execution.",
+      "scope": "review only; no implementation and no numerical run",
+      "checks": ["triangle RMS and peak bounds are mathematically valid", "fixed floors are byte/hash bound and identical", "no vector alignment inference", "read-only diagnostic and excluded claims are explicit", "resource and wall limits precede work", "receipt hashes and unperformed work are recorded"],
+      "limits": {"max_attempts": 1, "max_wall_seconds": 900},
+      "outputs": ["independent review receipt", "blocking findings or PASS", "input and diff hashes"]
+    }
+  ],
+  "evidence_contract": {
+    "format": "JSON receipt plus SHA256SUMS and human README",
+    "required_fields": ["schema", "task_id", "status", "source_commit", "input_hashes", "command_or_review_scope", "model_identity", "endpoint_identity_redacted", "resource_preflight", "started_utc", "finished_utc", "attempt", "wall_seconds", "output_hashes", "unperformed_work", "claims_excluded"],
+    "endpoint_privacy": "record a stable redacted endpoint identity or local transport label; never record credentials",
+    "failure": "preserve partial logs and receipt; classify refusal, timeout, transport failure, or semantic failure",
+    "acceptance": "receipt completeness and independent review only; numerical/PDE acceptance remains outside this pilot"
+  },
+  "authority": {
+    "endpoint_details": "operator",
+    "task_start_and_retry": "root numerical orchestrator",
+    "merge_or_public_claim": "root numerical orchestrator only",
+    "cloud_fallback_or_scope_change": "forbidden without a new explicit authorization"
+  }
+}
