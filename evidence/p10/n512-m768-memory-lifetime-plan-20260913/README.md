@@ -2,9 +2,9 @@
 
 This is a formula review only. It starts no solver, allocates no numerical grid, creates no W3 admission, and is not a host cap, execution plan, or qualification result.
 
-The current endpoint owner constructs the integration RHS and the observer together. Applying the existing reservation formulas to N512 retained state, M768 integration force, padded-768 RHS, and a doubled N1024/M1024 observer gives 238,210,972,824 bytes for integration and 232,283,722,008 bytes for the observer. Their simultaneous lifetime is 470,494,694,832 bytes. The integration and observer are therefore the source of the apparent greater-than-256-GiB requirement together.
+The current endpoint owner constructs the integration RHS and the observer together. Applying the existing reservation formulas to N512 retained state, M768 integration force, padded-768 RHS, and a doubled N1024/M1024 scalar-AVX observer gives 238,210,972,824 bytes for integration and 232,283,722,008 bytes for the observer. The 59,788,787,144-byte cached M768 force is included within the 122,443,722,464-byte RHS total, so those values are not additive. Their simultaneous lifetime is 470,494,694,832 bytes. The integration and observer are therefore the source of the apparent greater-than-256-GiB requirement together.
 
-A separate observer process can instead hold its observer, catalog, and one decoded N512 state: the formula minimum is 235,546,892,872 bytes before importer, manifest, output, allocator, and operating-system overhead. That is an ownership observation, not an admission: the current W3 allowlist refuses both layout 768 and 1024.
+A separate observer process can instead hold its observer, catalog, and one decoded N512 state: the formula minimum is 235,546,892,872 bytes before importer, manifest, output, allocator, and operating-system overhead. That is an ownership observation, not an admission: the N512/M768 trajectory needs a W3 admission only for layout 768 (padded RHS and M768 force). The N1024/M1024 observer follows its existing scalar-AVX path.
 
 ## Formula sources
 
@@ -13,7 +13,7 @@ A separate observer process can instead hold its observer, catalog, and one deco
 - `crates/nsbu-solver/src/spectral/{rotational.rs,w3/admission.rs,fft/avx.rs}` and `integrators/rhs.rs`: RHS, AVX workspace, and hypothetical extension of the existing W3 arithmetic ledger.
 - `crates/nsbu-benchmarks/src/provider/{reduced.rs,parallel/admission.rs,parallel_reduced.rs}` and `evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs`: cached M768 force formula.
 - `crates/nsbu-solver/src/diagnostics/conservative.rs` and `evidence/p10/avx-parallel-reduced-composite-7467e26/harness/src/observer.rs`: observer formula and its ten N1024 component fields.
-- `crates/nsbu-solver/src/spectral/w3/admission.rs`: current closed cubic W3 set is only 6, 384, 512, and 576. It refuses 768 and 1024.
+- `crates/nsbu-solver/src/spectral/w3/admission.rs`: current closed cubic W3 set is only 6, 384, 512, and 576. N512/M768 requires an extension for 768 only; the observer uses scalar AVX.
 
 ## Minimal future controls, not executed
 

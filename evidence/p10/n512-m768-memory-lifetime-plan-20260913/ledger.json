@@ -17,11 +17,15 @@
     "resource_plan_base_classes": 85554364416,
     "avx_catalog": 29362480,
     "cox_matthews_attempt": 30182212728,
-    "cached_m768_force_hypothetical_w3_extension": 59788787144,
-    "rhs_hypothetical_w3_extension": 122443722464,
     "existing_fixed_overhead": 1310736,
     "total": 238210972824,
-    "gib": 221.8512565121
+    "gib": 221.8512565121,
+    "rhs_hypothetical_w3_extension": {
+      "total_including_cached_force": 122443722464,
+      "cached_m768_force_included_not_additive": 59788787144,
+      "other_rhs_storage": 62654935320
+    },
+    "top_level_additive_sum_check": 238210972824
   },
   "offline_observer_formula_derived_bytes": {
     "reduced_observer": 232283722008,
@@ -44,9 +48,9 @@
   },
   "admission_status": {
     "w3_layout_768": "refused by current closed admission",
-    "w3_layout_1024": "refused by current closed admission",
     "sulaco_256_gib": "combined lifetime exceeds host; each separately-scoped formula total is below 256 GiB before unresolved overhead",
-    "localhost_503_gib": "combined formula total is below physical capacity but is not a reviewed cap or launch authorization"
+    "localhost_503_gib": "combined formula total is below physical capacity but is not a reviewed cap or launch authorization",
+    "n512_m768_required_w3_layouts": "768 only: padded RHS and M768 integration force; the N1024/M1024 observer is scalar AVX"
   },
   "unresolved_before_any_admission": [
     "Reviewed W3 admission, construction identity, and exact resource controls for layout 768; this ledger extrapolates the existing reservation arithmetic only.",
