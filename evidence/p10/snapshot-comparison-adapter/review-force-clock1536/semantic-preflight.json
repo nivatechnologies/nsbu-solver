@@ -1,0 +1,24 @@
+{
+  "schema": "p10-force-resolution-semantic-preflight-v1",
+  "status": "passed_before_single_execution",
+  "checks": {
+    "comparison_kind_both_force": true,
+    "same_dimensions": true,
+    "force_direction": true,
+    "same_bound_physics_except_force": true,
+    "same_clock_epoch_steps": true,
+    "prefix_schedule": true,
+    "prefix24_within_cap48": true,
+    "left_plan_hash": true,
+    "right_plan_hash": true,
+    "left_record_hash": true,
+    "left_attempt_hash": true,
+    "right_record_hash": true,
+    "right_attempt_hash": true
+  },
+  "state_sizes_bytes": {
+    "left": 1366033529,
+    "right": 1366033529
+  },
+  "exact_cap_bytes": 2733113344
+}
