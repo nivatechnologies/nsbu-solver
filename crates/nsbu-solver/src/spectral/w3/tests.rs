@@ -124,13 +124,13 @@ fn exact_additional_cap_constructs_and_one_byte_short_refuses() {
 }
 
 #[test]
-fn admission_is_closed_to_fixture_6_and_experiment_lengths_384_512_and_576() {
-    for edge in [384, 512, 576] {
+fn admission_is_closed_to_fixture_6_and_experiment_lengths_through_768() {
+    for edge in [384, 512, 576, 768] {
         let layout = Layout::new([edge; 3]).unwrap();
         assert!(super::admission::additional(layout, BACKEND, W3FftMode::Forward).is_ok());
         assert!(super::admission::additional(layout, BACKEND, W3FftMode::Bidirectional).is_ok());
     }
-    for edge in [288, 510, 514] {
+    for edge in [288, 510, 514, 1024, 1152] {
         let excluded = Layout::new([edge; 3]).unwrap();
         assert_eq!(
             super::admission::additional(excluded, BACKEND, W3FftMode::Forward),
@@ -145,10 +145,21 @@ fn admission_is_closed_to_fixture_6_and_experiment_lengths_384_512_and_576() {
 }
 
 #[test]
-fn m512_force_layout_has_exact_forward_reservation() {
-    let layout = Layout::new([512; 3]).unwrap();
-    let bytes = super::admission::additional(layout, BACKEND, W3FftMode::Forward).unwrap();
-    assert_eq!(bytes, 4_318_334_720);
+fn admitted_force_layouts_have_exact_w3_reservations() {
+    let m512 = Layout::new([512; 3]).unwrap();
+    assert_eq!(
+        super::admission::additional(m512, BACKEND, W3FftMode::Forward).unwrap(),
+        4_318_334_720
+    );
+    let m768 = Layout::new([768; 3]).unwrap();
+    assert_eq!(
+        super::admission::additional(m768, BACKEND, W3FftMode::Forward).unwrap(),
+        14_539_902_720
+    );
+    assert_eq!(
+        super::admission::additional(m768, BACKEND, W3FftMode::Bidirectional).unwrap(),
+        21_787_660_160
+    );
 }
 
 #[test]
