@@ -48,3 +48,9 @@ The frozen preflight source is `6442ec98bf55582e1990aac874e3b0234252add8`. Its r
 SHA-256 is `0df5f007d26d836819f582a7028bb5534ca8a5c5d3047831c8022fac1f6f0e88`.
 `prepared/implementation.json` records the exact launch bounds and zero executed numerical attempts;
 `prepared/source-sha256.json` binds the harness and reused production sources.
+
+`launch-one-attempt.sh` reuses the reviewed foreground-timeout process-group pattern. It refuses
+while projection PID 1586745 exists, then requires the exact binary and source hashes, fresh
+`MemAvailable`, create-new run storage, and a stable PID/PGID/starttime/cmdline identity before
+recording a launch receipt. `prepared/launch-plan.json` binds the command and all limits. This does
+not authorize launch before explicit projection-owner resource release and root handoff.
