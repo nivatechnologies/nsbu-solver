@@ -22,7 +22,7 @@
     },
     {
       "kind": "temporal_residual_integration",
-      "claim": "The frozen design requires non-node off-stage residuals from three nested accepted-node quintic-Hermite reconstructions, refinement at unchanged probe times, an independent conservative 2N product, and a bound or measured convergence for forcing above that band. If residuals are used to control reference L2 error, the documented formula is an energy/Gronwall time integral of the L2 defect b(s), amplified by the integral of a strain bound; sampled strain maxima are not rigorous bounds and the estimate may be uninformative.",
+      "claim": "The frozen complete design requires a quintic-Hermite temporal reconstruction, non-node off-stage probes, refinement, an independent conservative 2N product, and a bound or measured convergence for forcing above that band. The current P10 probe plan instantiates that general contract with three nested actual accepted-node support triples at decreasing spacings. If residuals are used to control reference L2 error, the documented formula is an energy/Gronwall time integral of the L2 defect b(s), amplified by the integral of a strain bound; sampled strain maxima are not rigorous bounds and the estimate may be uninformative.",
       "citations": [
         "docs/design/COMPLETE_DESIGN.md:398-413",
         "evidence/p10/n384-offstage-hermite-design-20260913/design.json:3-7",
@@ -40,7 +40,7 @@
       ]
     }
   ],
-  "blocking_check": "The residual-specific missing empirical check is a qualified off-stage residual refinement sequence on the same profile: actual accepted-node three-level Hermite supports at unchanged non-stage probe times, independent conservative 2N residual evaluation, and controlled force above the represented band, bound to a predeclared residual observable/policy across the required fine schedule. The single clock-1112 probe is insufficient. This check is one of several still-missing mandatory channels, so completing it alone cannot accept a window.",
+  "blocking_check": "The residual-specific missing empirical check is a qualified off-stage residual refinement sequence on the same profile: the frozen design's quintic-Hermite, non-node, independently conservative 2N residual contract with controlled force above the represented band, instantiated by the current P10 plan as three nested actual accepted-node support triples at decreasing spacings and bound to a predeclared residual observable/policy across the required fine schedule. The single clock-1112 probe is insufficient. This check is one of several still-missing mandatory channels, so completing it alone cannot accept a window.",
   "implemented_weighting": "No Stokes or semigroup-weighted residual estimator is implemented in the inspected current verifier. The frozen design states an L2 energy/Gronwall amplification formula, not a Stokes-semigroup estimator; the current verifier only reviews supplied empirical values and refinements.",
   "residual_to_velocity_bound": "No existing implemented residual-to-velocity bound was found in the current Rust verifier or residual diagnostics. The design-only L2 formula requires temporal integration and strain/forcing controls that the current verifier does not compute. It does not yield a velocity H1 bound from the raw H1 acceleration residual."
 }
