@@ -474,10 +474,21 @@
     "evidence": "evidence/p10/force-coefficient-clock1112/summary.json",
     "projected_h1_m384_to_m512": 935.8629343304156,
     "projected_h1_m512_to_m768": 22.289249597246233,
-    "scope": "Fixed retained N384 scalar-provider force coefficients; approximately42-fold adjacent contraction, subject to documented W3 equivalence caveat. No trajectory, continuum tail bound, force sufficiency or PDE qualification."
+    "scope": "Fixed retained N384 scalar-provider force coefficients; approximately 42-fold adjacent contraction, subject to documented W3 equivalence caveat. No trajectory, continuum tail bound, force sufficiency or PDE qualification."
   },
   "p10_residual_identity_counterexample": {
     "evidence": "evidence/p10/residual-identity-cancellation-20260913/summary.json",
     "scope": "Exact binary64 counterexample reproduces cancellation in expanded squared-norm closure with unchanged direct residual coefficients. No production arithmetic or acceptance tolerance changed."
+  },
+  "p10_m512_regional_clock512": {
+    "status": "diagnostic_complete_not_qualified",
+    "evidence": "evidence/p10/n384-regional-snapshot-diagnostic/run-m512-clock0512.json",
+    "result": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512-m512.json",
+    "global_rms_error": {
+      "velocity": 7.92495486291352e-08,
+      "gradient": 9.799532886426363e-05,
+      "ordered_hessian": 0.14289332006020505
+    },
+    "scope": "Actual from-rest N384/M512 state measured on identical 768-cubed lattice and regional floors as archived M384. Finer force improves errors, but derivative errors remain of the same order. Diagnostic floors are not acceptance tolerances; no PDE qualification."
   }
 }

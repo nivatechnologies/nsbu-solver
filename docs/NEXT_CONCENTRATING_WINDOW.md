@@ -111,6 +111,17 @@ smaller. The [regional result](../evidence/p10/n384-regional-snapshot-diagnostic
 uses diagnostic normalization floors rather than accepted error budgets; it
 does not qualify collar volume, peak location or vorticity.
 
+The matched N384/M512 clock-512 diagnostic completed on the identical lattice,
+regions and normalization floors. Global RMS errors decreased to `7.925e-8`
+(velocity), `9.800e-5` (gradient), and `0.142893` (ordered Hessian). The collar
+Hessian floor-normalized peak decreased from `1.67380` to `1.16670`.
+This is a measurable improvement from force refinement, with remaining errors
+of the same order; the diagnostic floor is not an acceptance tolerance. See the
+[matched result](../evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512-m512.json)
+and [execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-m512-clock0512.json).
+The separate analytical-projection diagnostic is prepared to isolate the sampled
+N384 representation contribution without using or modifying trajectory state.
+
 The first off-stage residual probe at clock 1112 shows that force-representation
 differences, including the unresolved higher-frequency force, dominate that
 diagnostic. Its independent M768-force residual has H1
