@@ -204,13 +204,13 @@
   ],
   "triangle_inequality_context": {
     "per_quantity_per_region": {
-      "rms_lower": "max(0, archived_m384_reference_rms_error - measured_delta_rms)",
+      "rms_lower": "abs(archived_m384_reference_rms_error - measured_delta_rms)",
       "rms_upper": "archived_m384_reference_rms_error + measured_delta_rms",
-      "peak_lower": "max(0, archived_m384_reference_peak_error - measured_delta_peak)",
+      "peak_lower": "abs(archived_m384_reference_peak_error - measured_delta_peak)",
       "peak_upper": "archived_m384_reference_peak_error + measured_delta_peak"
     },
     "interpretation": "These are norm bounds on the unknown M512 analytical-reference error. They make no claim about vector alignment, cancellation, pointwise sign, or whether M512 is closer to the reference.",
-    "floors": "Carry the archived per-quantity floors unchanged as scale metadata. If peak/floor is emitted, label it peak_over_archived_floor; never label it analytical relative error."
+    "floors": "Carry the archived per-quantity floors unchanged as scale metadata. If correction peak/floor is emitted, label it peak_over_archived_floor; never label it analytical relative error. Without the reference field, this ratio is only an upper bound on the weighted correction peak, so the valid pointwise-relative interval is max(0, archived_relative_peak - peak_over_archived_floor) through archived_relative_peak + peak_over_archived_floor. The absolute-value lower bound is invalid because the maxima may occur at different points."
   },
   "reusable_code": [
     {

@@ -18,9 +18,12 @@ those 461 mask-only roots, but no such sidecar is currently archived.
 
 For each quantity and region, emit only correction RMS and sampled peak. Join those values to the
 hash-bound archived M384 analytical-reference RMS/peak using reverse and forward triangle bounds:
-`max(0,E384-D) <= E512 <= E384+D`. These scalar norm bounds do not reveal vector alignment,
+`abs(E384-D) <= E512 <= E384+D`. These scalar norm bounds do not reveal vector alignment,
 cancellation, sign, or whether M512 is closer to the analytical reference. Carry the existing
-floors only as scale metadata; an optional ratio must be named `peak_over_archived_floor`.
+floors only as scale metadata; an optional correction ratio must be named
+`peak_over_archived_floor`. Without the reference field, that ratio gives only the conservative
+pointwise-relative bound `max(0,P384-Dpeak/floor) <= P512 <= P384+Dpeak/floor`; the absolute-value
+lower bound is invalid because the same `Dpeak` need not occur where `P384` is attained.
 
 The exact internal reservation is 16,431,131,744 bytes (15.303 GiB), including one retained
 difference state, the shared AVX catalog/workspace, one M768 f64 magnitude array, one M768 u8 label
