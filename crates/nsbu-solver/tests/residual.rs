@@ -191,3 +191,73 @@ fn localized_evaluator_is_bitwise_equal_to_ordinary_residual() {
     assert!(result.retained_strict_n384.conservative_m768.l2 > 0.0);
     assert!(result.new_shell_n768.residual_m768.l2 > 0.0);
 }
+
+#[test]
+fn localized_identity_reports_retained_cancellation_without_changing_residual_coefficients() {
+    // These binary64 integers have the exact scalar identity
+    // (-100_000_000) + 100_000_001 = 1.  Expanding the squared norm from
+    // separately rounded O(1e16) terms instead loses the unit remainder.
+    let domain = Domain::new([4; 3], [1.0; 3], 0.5).unwrap();
+    let diagnostic = ConservativeWorkspace::diagnostic_domain(domain).unwrap();
+    let velocity = zero(domain.layout());
+    let mut derivative = zero(domain.layout());
+    let mut conservative = zero(diagnostic.layout());
+    let force_m768 = zero(diagnostic.layout());
+    let force_m384 = zero(domain.layout());
+    let retained = [1, 0, 0];
+    let shell = [3, 0, 0];
+
+    mode(
+        domain.layout(),
+        &mut derivative,
+        retained,
+        [Complex64::new(-100_000_000.0, 0.0); 3],
+    );
+    mode(
+        diagnostic.layout(),
+        &mut conservative,
+        retained,
+        [Complex64::new(100_000_001.0, 0.0); 3],
+    );
+    // A shell-only conservative mode is a control: D=V=0 and R=C there.
+    mode(
+        diagnostic.layout(),
+        &mut conservative,
+        shell,
+        [Complex64::new(7.0, 0.0); 3],
+    );
+
+    let (_, ordinary) = measured(domain, &velocity, &derivative, &conservative);
+    let mut localized = zero(diagnostic.layout());
+    let [a, b, c] = &mut localized;
+    let result = ResidualPlan::new(domain)
+        .unwrap()
+        .evaluate_localized(
+            slices(&velocity),
+            slices(&derivative),
+            slices(&conservative),
+            slices(&force_m768),
+            slices(&force_m384),
+            [a, b, c],
+        )
+        .unwrap();
+
+    let mut exact_coefficient_oracle = zero(diagnostic.layout());
+    mode(
+        diagnostic.layout(),
+        &mut exact_coefficient_oracle,
+        retained,
+        [Complex64::new(1.0, 0.0); 3],
+    );
+    mode(
+        diagnostic.layout(),
+        &mut exact_coefficient_oracle,
+        shell,
+        [Complex64::new(7.0, 0.0); 3],
+    );
+    assert_eq!(ordinary, exact_coefficient_oracle);
+    assert_eq!(localized, exact_coefficient_oracle);
+    assert!(result.retained_strict_n384.base_identity_relative_error.l2 > 0.9);
+    assert_eq!(result.new_shell_n768.base_identity_relative_error.l2, 0.0);
+    assert_eq!(result.new_shell_n768.control_identity_relative_error.l2, 0.0);
+}
