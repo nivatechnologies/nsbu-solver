@@ -1,0 +1,51 @@
+{
+  "schema": "p10-method-diagnostic-result-v1",
+  "status": "completed_not_assessed",
+  "comparison_kind": "METHOD_DIAGNOSTIC",
+  "host": "local",
+  "source_commit": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "adapter_binary_sha256": "d1dde0333286e2ace34a1ee22df0dec8c25188cbaebcb846929d55f54e6d4106",
+  "comparison_output_sha256": "684c22fc18f7a35b164a78cac81c0a7bada50cfb1a6519bfe0855091418c93ed",
+  "cap_bytes": 2733113344,
+  "full": {
+    "l2": 1.1002330318977497e-09,
+    "h1": 1.6897441231839685e-07,
+    "vorticity_l2": 1.6897083036939742e-07,
+    "divergence_l2": 1.9890307351413066e-16
+  },
+  "right_total": {
+    "l2": 0.10957221400393877,
+    "h1": 3.011266818657228,
+    "vorticity_l2": 3.0092726346065946,
+    "divergence_l2": 1.7245443464478435e-16
+  },
+  "relative_to_right_total": {
+    "l2": 1.0041168209471426e-08,
+    "h1": 5.611406178670851e-08,
+    "vorticity_l2": 5.615005713548024e-08,
+    "divergence_l2": 1.1533659538754355
+  },
+  "method_budget": {
+    "status": "unassigned",
+    "candidate_2e-4_not_applied": "No active policy supplied to this run explicitly assigns Method to Time."
+  },
+  "shell_partition": {
+    "same_retained_dimensions": true,
+    "common_equals_full": true,
+    "newly_resolved": {
+      "l2": 0.0,
+      "h1": 0.0,
+      "vorticity_l2": 0.0,
+      "divergence_l2": 0.0
+    }
+  },
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "interpretation_limits": [
+    "Diagnostic isolates Cox-Matthews versus Hochbruck-Ostermann at the bound N384/M384 clock-512 prefix.",
+    "No acceptance decision or budget claim is made.",
+    "No finest-grid qualification, whole-trajectory equivalence, pointwise claim, or continuum claim is made."
+  ]
+}
