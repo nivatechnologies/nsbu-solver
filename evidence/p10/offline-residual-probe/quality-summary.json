@@ -1,0 +1,13 @@
+{
+  "schema": "p10-offline-residual-probe-quality-v1",
+  "status": "focused_controls_passed_production_quality_partition_deferred",
+  "tests": {"passed": 5, "failed": 0},
+  "cargo_fmt_check": "passed",
+  "cargo_clippy_all_targets_deny_warnings": "passed",
+  "release_preflight_128gib": "passed",
+  "constructor_selection_control": "W3 AVX output bit-identical to archived scalar AVX reference on admitted N4/padded6/force6 fixture",
+  "viscosity_sign_control": "passed explicit-RHS omission plus exactly-once physical derivative and residual cancellation",
+  "main_rs_lines": 703,
+  "deferred": "partition the harness main module and run repository-wide quality tooling after the bounded numerical result; this does not weaken the focused constructor, binding, Hermite, or sign controls",
+  "real_evaluation_started": false
+}

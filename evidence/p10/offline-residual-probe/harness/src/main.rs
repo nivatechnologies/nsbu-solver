@@ -186,9 +186,11 @@ fn reservations(plan: &ProbePlan, cap: usize) -> Result<ReservationOutput, Strin
     let residual_force_bytes = residual_force.storage_bytes;
     let conservative_workspace_bytes =
         ConservativeWorkspace::reservation_with_fft_backend(source, backend).map_err(debug)?;
-    // Three values plus three derivatives, current and previous reconstructed value/derivative.
+    // Three values plus three derivatives, current and previous reconstructed value/derivative,
+    // and the previous full diagnostic residual retained for the next adjacent comparison.
     let reconstruction_peak_bytes = checked_sum(&[
         checked_mul(source_state_bytes, 10)?,
+        checked_mul(diagnostic_field_bytes, 3)?,
         integration_rhs_bytes,
         fft_catalog_bytes,
         FIXED_OVERHEAD_BYTES,
