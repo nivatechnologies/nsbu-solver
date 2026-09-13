@@ -51,6 +51,50 @@ fn fixture_plan() -> ProbePlan {
     }
 }
 
+fn m512_fixture_plan() -> ProbePlan {
+    let mut plan = fixture_plan();
+    plan.schema = "p10-offline-residual-probe-m512-plan-v1".into();
+    plan.status = "frozen_m512_one_probe_not_executed".into();
+    plan.source_commit = M512_SOURCE.into();
+    plan.frozen_plan_sha256 = M512_PLAN_SHA256.into();
+    plan.profile = M512_PROFILE.into();
+    plan.snapshot_identity = M512_IDENTITY.into();
+    plan.integration_force_dimensions = [512; 3];
+    plan.nodes = [
+        (
+            1088,
+            "step-017-clock-1088/state.bin",
+            "ee970eca7a3a4bdab948242508decf25db181bdb66071b371024646c500d51f5",
+            "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e",
+        ),
+        (
+            1152,
+            "step-018-clock-1152/state.bin",
+            "836bc42ce42ce056d44b56d063fa41d9ca60144e8300bca199db51a6d007d7a0",
+            "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8",
+        ),
+        (
+            1216,
+            "step-019-clock-1216/state.bin",
+            "28a244c7153b4f1572683a38b677cecdf71e1301287f7df128e1e391f4a9bac5",
+            "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca",
+        ),
+    ]
+    .into_iter()
+    .map(
+        |(clock, snapshot, coefficient_sha256, file_sha256)| NodeBinding {
+            clock,
+            epoch: clock / 64,
+            accepted_steps: clock / 64,
+            snapshot: snapshot.into(),
+            coefficient_sha256: coefficient_sha256.into(),
+            file_sha256: file_sha256.into(),
+        },
+    )
+    .collect();
+    plan
+}
+
 #[test]
 fn exact_lineage_and_one_probe_shape_are_enforced() {
     let mut plan = fixture_plan();
@@ -66,6 +110,35 @@ fn exact_lineage_and_one_probe_shape_are_enforced() {
     plan = fixture_plan();
     plan.nodes[0].file_sha256 = "not-a-hash".into();
     assert!(validate_plan(&plan).unwrap_err().contains("node binding"));
+}
+
+#[test]
+fn exact_m512_three_node_lineage_is_closed_and_resource_bounded() {
+    let plan = m512_fixture_plan();
+    validate_plan(&plan).unwrap();
+    let reservation = reservations(&plan, 137_438_953_472).unwrap();
+    assert_eq!(reservation.integration_force_bytes, 19_816_525_256);
+    assert_eq!(reservation.integration_rhs_bytes, 46_267_356_216);
+    assert_eq!(reservation.reconstruction_peak_bytes, 57_241_754_984);
+    assert_eq!(reservation.residual_peak_bytes, 122_035_933_584);
+    assert!(reservation.admitted_peak_bytes <= reservation.cap_bytes);
+
+    let mutations: [fn(&mut ProbePlan); 6] = [
+        |plan: &mut ProbePlan| plan.source_commit.replace_range(..1, "a"),
+        |plan: &mut ProbePlan| plan.profile.push('x'),
+        |plan: &mut ProbePlan| plan.snapshot_identity.push('x'),
+        |plan: &mut ProbePlan| plan.integration_force_dimensions = [384; 3],
+        |plan: &mut ProbePlan| plan.nodes[0].clock = 1089,
+        |plan: &mut ProbePlan| plan.nodes[0].file_sha256.replace_range(..1, "a"),
+    ];
+    for mutate in mutations {
+        let mut changed = m512_fixture_plan();
+        mutate(&mut changed);
+        assert!(validate_plan(&changed).is_err());
+    }
+    let mut extra = m512_fixture_plan();
+    extra.nodes.push(extra.nodes[0].clone());
+    assert!(validate_plan(&extra).is_err());
 }
 
 #[derive(Clone, Copy)]

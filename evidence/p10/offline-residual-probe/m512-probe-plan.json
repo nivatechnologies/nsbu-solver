@@ -1,0 +1,30 @@
+{
+  "schema": "p10-offline-residual-probe-m512-plan-v1",
+  "status": "frozen_m512_one_probe_not_executed",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "frozen_plan": "../avx-n384-m512-deployment-20260912/frozen-plan.json",
+  "frozen_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+  "snapshot_identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "dimensions": [384, 384, 384],
+  "lengths": [1.0, 1.0, 1.0],
+  "viscosity": 1.0,
+  "quantum_exponent": -20,
+  "clock_target": 8192,
+  "method": "cox-matthews",
+  "integration_force_dimensions": [512, 512, 512],
+  "integration_force_workers": 32,
+  "residual_force_dimensions": [768, 768, 768],
+  "residual_force_workers": 32,
+  "advective_limit": 3.3,
+  "probe_clock": 1112,
+  "supports": [[896, 1152, 1408], [1024, 1152, 1280], [1088, 1152, 1216]],
+  "nodes": [
+    {"clock": 1088, "epoch": 17, "accepted_steps": 17, "snapshot": "step-017-clock-1088/state.bin", "coefficient_sha256": "ee970eca7a3a4bdab948242508decf25db181bdb66071b371024646c500d51f5", "file_sha256": "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e"},
+    {"clock": 1152, "epoch": 18, "accepted_steps": 18, "snapshot": "step-018-clock-1152/state.bin", "coefficient_sha256": "836bc42ce42ce056d44b56d063fa41d9ca60144e8300bca199db51a6d007d7a0", "file_sha256": "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8"},
+    {"clock": 1216, "epoch": 19, "accepted_steps": 19, "snapshot": "step-019-clock-1216/state.bin", "coefficient_sha256": "28a244c7153b4f1572683a38b677cecdf71e1301287f7df128e1e391f4a9bac5", "file_sha256": "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca"}
+  ],
+  "claims": {"runtime_owner_imported": false, "accepted_interpolation": false, "acceptance_windows": 0, "arithmetic": "binary64", "purpose": "read-only-offline-diagnostic"}
+}

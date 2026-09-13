@@ -89,3 +89,29 @@ residual-relative observation is full-N768 retained-force vorticity at
 `1.0224415636947803`. The worst term-scaled observation is full-N768 retained-force H1 at
 `3.6022323005541866e-10`; it fails `5e-11` while passing the broader
 `3.210274371667765e-6` internal-consistency heuristic.
+
+## Exact M512 r5 preparation
+
+`m512-probe-plan.json` adds one closed diagnostic lineage for the actual N384/M512 r5
+trajectory. It admits only the immutable snapshots at clocks 1088, 1152, and 1216, with their
+exact source, profile, full frozen-plan hash, complete snapshot identity, relative paths, clocks,
+epochs, accepted-step counts, coefficient-trailer hashes, and whole-file hashes. The historical
+M384 schema, seven-node validation, and known replay hashes remain unchanged. The M512 result has
+its own schema and no predeclared output hash oracle.
+
+The node derivatives and retained force control use the exact M512 cached W3 force constructor.
+The base residual force remains a fresh independent scalar M768 evaluation at clock 1112. This is
+a read-only comparison of the actual finer-force trajectory against the M768 force; it does not
+replace either force, import a runtime owner, inject a reference state, or claim acceptance.
+
+The three source files are staged outside Git under
+`/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913`, requiring 4,098,100,587 bytes.
+Preflight is cheap and does not decode or evaluate those files:
+
+```text
+cargo run --release --manifest-path evidence/p10/offline-residual-probe/harness/Cargo.toml -- \
+  preflight evidence/p10/offline-residual-probe/m512-probe-plan.json 137438953472
+```
+
+It admits 122,035,933,584 bytes under the existing 128 GiB cap. The heavy `run` remains subject
+to a separate resource handoff and has not been executed.

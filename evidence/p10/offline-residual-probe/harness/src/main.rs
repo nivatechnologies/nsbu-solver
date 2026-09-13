@@ -6,8 +6,8 @@ mod model;
 use cache::CachedReducedForce;
 use model::{
     debug, IdentityClosureOutput, LocalizationRunOutput, NodeBinding, NodeOutput, ProbePlan,
-    ReservationOutput, Snapshot, CASE_SHA256, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS,
-    W3_SOURCE,
+    ReservationOutput, Snapshot, CASE_SHA256, M512_IDENTITY, M512_PLAN_SHA256, M512_PROFILE,
+    M512_SOURCE, PLAN_SHA256, PROBE, PROFILE, SOURCE, SUPPORTS, W3_SOURCE,
 };
 use nsbu_benchmarks::provider::parallel_reduced::ParallelReducedV2Force;
 use nsbu_solver::{
@@ -72,27 +72,65 @@ fn parse_cap(value: &OsString) -> Result<usize, String> {
 
 pub(crate) fn validate_plan(plan: &ProbePlan) -> Result<(), String> {
     let expected_nodes = [896, 1024, 1088, 1152, 1216, 1280, 1408];
-    if plan.schema != "p10-offline-residual-probe-plan-v1"
-        || plan.status != "frozen_one_probe_not_executed"
-        || plan.source_commit != SOURCE
+    let historical = plan.schema == "p10-offline-residual-probe-plan-v1"
+        && plan.status == "frozen_one_probe_not_executed"
+        && plan.source_commit == SOURCE
+        && plan.frozen_plan_sha256 == PLAN_SHA256
+        && plan.profile == PROFILE
+        && plan.integration_force_dimensions == [384; 3];
+    let m512_nodes = [
+        (
+            1088,
+            "step-017-clock-1088/state.bin",
+            "ee970eca7a3a4bdab948242508decf25db181bdb66071b371024646c500d51f5",
+            "5ce6a433cb45c19561eec3ca653b6062cba40ef5537b3687e8081f43c78b797e",
+        ),
+        (
+            1152,
+            "step-018-clock-1152/state.bin",
+            "836bc42ce42ce056d44b56d063fa41d9ca60144e8300bca199db51a6d007d7a0",
+            "6eab4cd0980c612bedb83790412c80fb9cab06dede669e03aacc644330467df8",
+        ),
+        (
+            1216,
+            "step-019-clock-1216/state.bin",
+            "28a244c7153b4f1572683a38b677cecdf71e1301287f7df128e1e391f4a9bac5",
+            "9927e92775d09bd5c620c2852913e31c36c64bcd1add47c401302d029e32c2ca",
+        ),
+    ];
+    let m512 = plan.schema == "p10-offline-residual-probe-m512-plan-v1"
+        && plan.status == "frozen_m512_one_probe_not_executed"
+        && plan.source_commit == M512_SOURCE
+        && plan.frozen_plan_sha256 == M512_PLAN_SHA256
+        && plan.profile == M512_PROFILE
+        && plan.snapshot_identity == M512_IDENTITY
+        && plan.integration_force_dimensions == [512; 3]
+        && plan.nodes.len() == m512_nodes.len()
+        && m512_nodes.iter().zip(&plan.nodes).all(
+            |(&(clock, path, coefficient_sha256, file_sha256), node)| {
+                node.clock == clock
+                    && node.epoch == clock / 64
+                    && node.accepted_steps == clock / 64
+                    && node.snapshot == std::path::Path::new(path)
+                    && node.coefficient_sha256 == coefficient_sha256
+                    && node.file_sha256 == file_sha256
+            },
+        );
+    if (!historical && !m512)
         || plan.w3_source_commit != W3_SOURCE
         || plan.case_sha256 != CASE_SHA256
-        || plan.frozen_plan_sha256 != PLAN_SHA256
-        || plan.profile != PROFILE
         || plan.dimensions != [384; 3]
         || plan.lengths != [1.0; 3]
         || plan.viscosity.to_bits() != 1.0_f64.to_bits()
         || plan.quantum_exponent != -20
         || plan.clock_target != 8192
         || plan.method != "cox-matthews"
-        || plan.integration_force_dimensions != [384; 3]
         || plan.integration_force_workers != 32
         || plan.residual_force_dimensions != [768; 3]
         || plan.residual_force_workers != 32
         || plan.advective_limit.to_bits() != 3.3_f64.to_bits()
         || plan.probe_clock != PROBE
         || plan.supports != SUPPORTS
-        || plan.nodes.len() != expected_nodes.len()
         || plan.claims.runtime_owner_imported
         || plan.claims.accepted_interpolation
         || plan.claims.acceptance_windows != 0
@@ -102,11 +140,11 @@ pub(crate) fn validate_plan(plan: &ProbePlan) -> Result<(), String> {
         return Err("invalid frozen offline-probe lineage".into());
     }
     let required_identity = [
-        format!("source={SOURCE}"),
+        format!("source={}", plan.source_commit),
         format!("case={CASE_SHA256}"),
-        format!("profile={PROFILE}"),
+        format!("profile={}", plan.profile),
         "retained=384".into(),
-        "force_samples=384".into(),
+        format!("force_samples={}", plan.integration_force_dimensions[0]),
         "observer_force_samples=768".into(),
         "method=cox-matthews".into(),
     ];
@@ -116,15 +154,20 @@ pub(crate) fn validate_plan(plan: &ProbePlan) -> Result<(), String> {
     {
         return Err("snapshot identity omits required lineage".into());
     }
-    for (&clock, node) in expected_nodes.iter().zip(&plan.nodes) {
-        if node.clock != clock
-            || node.epoch != clock / 64
-            || node.accepted_steps != clock / 64
-            || !is_hex(&node.coefficient_sha256, 64)
-            || !is_hex(&node.file_sha256, 64)
-        {
-            return Err("invalid frozen node binding".into());
-        }
+    if historical
+        && (plan.nodes.len() != expected_nodes.len()
+            || expected_nodes
+                .iter()
+                .zip(&plan.nodes)
+                .any(|(&clock, node)| {
+                    node.clock != clock
+                        || node.epoch != clock / 64
+                        || node.accepted_steps != clock / 64
+                        || !is_hex(&node.coefficient_sha256, 64)
+                        || !is_hex(&node.file_sha256, 64)
+                }))
+    {
+        return Err("invalid frozen node binding".into());
     }
     for support in SUPPORTS {
         HermiteWeights::at(support.map(clock), clock(PROBE)).map_err(debug)?;
@@ -171,7 +214,9 @@ fn reservations(plan: &ProbePlan, cap: usize) -> Result<ReservationOutput, Strin
         W3FftMode::Forward,
     )
     .map_err(debug)?;
-    if rhs_w3_additional != 9_200_779_136 || force_w3_additional != 1_827_942_144 {
+    if rhs_w3_additional != 9_200_779_136
+        || force_w3_additional != expected_force_w3_additional(plan)?
+    {
         return Err("production W3 identity does not match archived constructor".into());
     }
     let residual_samples = Layout::new(plan.residual_force_dimensions).map_err(debug)?;
@@ -243,6 +288,14 @@ fn checked_sum(values: &[usize]) -> Result<usize, String> {
     })
 }
 
+fn expected_force_w3_additional(plan: &ProbePlan) -> Result<usize, String> {
+    match plan.integration_force_dimensions {
+        [384, 384, 384] => Ok(1_827_942_144),
+        [512, 512, 512] => Ok(4_318_334_720),
+        _ => Err("unadmitted integration force layout".into()),
+    }
+}
+
 #[derive(Debug)]
 struct Node {
     value: Snapshot,
@@ -268,6 +321,7 @@ fn evaluate(
     snapshot_root: PathBuf,
     reservations: ReservationOutput,
 ) -> Result<LocalizationRunOutput, String> {
+    let m512 = plan.schema == "p10-offline-residual-probe-m512-plan-v1";
     let source = plan.domain()?;
     let mut nodes = Vec::new();
     let support = SUPPORTS[2];
@@ -307,16 +361,20 @@ fn evaluate(
     drop(right);
     let reconstructed_value_sha256 = hash_field(&reconstruction.value);
     let reconstructed_derivative_sha256 = hash_field(&reconstruction.derivative);
-    if reconstructed_value_sha256
-        != "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865"
-        || reconstructed_derivative_sha256
-            != "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c"
+    if !m512
+        && (reconstructed_value_sha256
+            != "10ee2d2fa114620628e3a9b142881e6cc4594348bcf79beb933e14cfa2bae865"
+            || reconstructed_derivative_sha256
+                != "7fb0c8b34cab4b773df75f4947c6c209369762f624ad4ed3639feb595bcb522c")
     {
         return Err("fine reconstruction replay hash mismatch".into());
     }
     let residual = localized_residual(plan, source, &reconstruction)?;
     let base_residual_sha256 = hash_field(&residual.coefficients);
-    if base_residual_sha256 != "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8" {
+    if !m512
+        && base_residual_sha256
+            != "0f156b5c1ca4470a34c0a1524601a7bc12e53ad9e86781c33cb48fe07d7bd9b8"
+    {
         return Err("base M768 residual replay hash mismatch".into());
     }
     if residual.localization.retained_modes != 28_164_288
@@ -328,17 +386,33 @@ fn evaluate(
     let identity_closure = enforce_identity_tolerance(&residual.localization, 5e-11)?;
     nodes.sort_by_key(|node| node.clock);
     Ok(LocalizationRunOutput {
-        schema: "p10-offline-residual-localization-result-v1",
+        schema: if m512 {
+            "p10-offline-residual-m512-localization-result-v1"
+        } else {
+            "p10-offline-residual-localization-result-v1"
+        },
         status: "one_probe_fine_localization_complete_diagnostic_only",
-        source_commit: SOURCE,
+        source_commit: if m512 { M512_SOURCE } else { SOURCE },
         w3_source_commit: W3_SOURCE,
         case_sha256: CASE_SHA256,
-        frozen_plan_sha256: PLAN_SHA256,
-        profile: PROFILE,
+        frozen_plan_sha256: if m512 {
+            M512_PLAN_SHA256
+        } else {
+            PLAN_SHA256
+        },
+        profile: if m512 { M512_PROFILE } else { PROFILE },
         arithmetic: "binary64; empirical values have no outward-rounding or interval enclosure",
-        integration_force: "exact archived constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout384 width3 forward provider add1827942144 with32 workers",
+        integration_force: if m512 {
+            "exact r5 constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout512 width3 forward provider add4318334720 with32 workers"
+        } else {
+            "exact archived constructor: RustFft6_4_1AvxFma FftCatalog + layout576 width3 bidirectional rotational RHS add9200779136 + cached parallel-reduced layout384 width3 forward provider add1827942144 with32 workers"
+        },
         base_residual_force: "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112",
-        discrete_retained_force_control: "fresh exact integration CachedReducedForce targeting N384/M384 at clock1112; strict zero padding; R384=R768+P(f768-pad(f384)); changes the discrete target equation outside the retained band",
+        discrete_retained_force_control: if m512 {
+            "fresh exact r5 integration CachedReducedForce targeting N384/M512 at clock1112; strict zero padding; R512=R768+P(f768-pad(f512)); changes the discrete target equation outside the retained band"
+        } else {
+            "fresh exact integration CachedReducedForce targeting N384/M384 at clock1112; strict zero padding; R384=R768+P(f768-pad(f384)); changes the discrete target equation outside the retained band"
+        },
         retained_grid: [384; 3],
         diagnostic_grid: [768; 3],
         probe_clock: PROBE,
@@ -684,7 +758,10 @@ fn localized_residual(
     source: Domain,
     reconstruction: &Reconstruction,
 ) -> Result<LocalizedResidualResult, String> {
-    eprintln!("offline-probe: M384 force control and independent N768 residual at clock={PROBE}");
+    eprintln!(
+        "offline-probe: M{} force control and independent N768 residual at clock={PROBE}",
+        plan.integration_force_dimensions[0]
+    );
     let diagnostic = ConservativeWorkspace::diagnostic_domain(source).map_err(debug)?;
     let backend = FftBackend::RustFft6_4_1AvxFma;
     let catalog_bytes = FftCatalog::reservation(backend).map_err(debug)?;
@@ -712,7 +789,7 @@ fn localized_residual(
         backend,
         width: 3,
         mode: W3FftMode::Forward,
-        additional_bytes: 1_827_942_144,
+        additional_bytes: expected_force_w3_additional(plan)?,
     };
     if retained_provider.w3_identity() != Some(expected_retained) {
         return Err("retained force constructor identity mismatch".into());
