@@ -98,3 +98,96 @@ fn residual_refuses_incomplete_output() {
         SolverError::InvalidPayload
     );
 }
+
+#[test]
+fn localized_evaluator_is_bitwise_equal_to_ordinary_residual() {
+    let domain = Domain::new([4; 3], [1.0, 1.5, 2.0], 0.375).unwrap();
+    let diagnostic = ConservativeWorkspace::diagnostic_domain(domain).unwrap();
+    let mut velocity = zero(domain.layout());
+    let mut derivative = zero(domain.layout());
+    let mut conservative = zero(diagnostic.layout());
+    let mut force_m768 = zero(diagnostic.layout());
+    let mut force_m384 = zero(domain.layout());
+
+    mode(
+        domain.layout(),
+        &mut velocity,
+        [1, 0, 0],
+        [
+            Complex64::new(0.125, -0.375),
+            Complex64::new(-0.625, 0.25),
+            Complex64::new(0.5, 0.75),
+        ],
+    );
+    mode(
+        domain.layout(),
+        &mut derivative,
+        [1, 0, 0],
+        [
+            Complex64::new(-0.25, 0.5),
+            Complex64::new(0.75, -0.125),
+            Complex64::new(-0.375, -0.625),
+        ],
+    );
+    mode(
+        diagnostic.layout(),
+        &mut conservative,
+        [1, 0, 0],
+        [
+            Complex64::new(0.875, -0.25),
+            Complex64::new(-0.5, 0.375),
+            Complex64::new(0.25, 0.625),
+        ],
+    );
+    mode(
+        diagnostic.layout(),
+        &mut conservative,
+        [3, 0, 0],
+        [
+            Complex64::new(-0.125, 0.5),
+            Complex64::new(0.375, -0.75),
+            Complex64::new(0.625, 0.25),
+        ],
+    );
+    mode(
+        diagnostic.layout(),
+        &mut force_m768,
+        [1, 0, 0],
+        [
+            Complex64::new(0.25, 0.125),
+            Complex64::new(-0.375, 0.5),
+            Complex64::new(0.625, -0.75),
+        ],
+    );
+    mode(
+        domain.layout(),
+        &mut force_m384,
+        [1, 0, 0],
+        [
+            Complex64::new(-0.5, 0.375),
+            Complex64::new(0.125, -0.25),
+            Complex64::new(0.75, 0.625),
+        ],
+    );
+
+    let (_, ordinary) = measured(domain, &velocity, &derivative, &conservative);
+    let mut localized = zero(diagnostic.layout());
+    let [a, b, c] = &mut localized;
+    let result = ResidualPlan::new(domain)
+        .unwrap()
+        .evaluate_localized(
+            slices(&velocity),
+            slices(&derivative),
+            slices(&conservative),
+            slices(&force_m768),
+            slices(&force_m384),
+            [a, b, c],
+        )
+        .unwrap();
+
+    assert_eq!(ordinary, localized);
+    assert!(result.retained_strict_n384.derivative.l2 > 0.0);
+    assert!(result.retained_strict_n384.viscous.l2 > 0.0);
+    assert!(result.retained_strict_n384.conservative_m768.l2 > 0.0);
+    assert!(result.new_shell_n768.residual_m768.l2 > 0.0);
+}
