@@ -330,7 +330,7 @@ fn validate_schedule_bound_side(manifest: &Manifest) -> Result<(), String> {
         return Err("diagnostic schedule/header derivation mismatch".into());
     }
     let profile = manifest.profile.as_ref().ok_or("missing exact profile")?;
-    if !valid_profile_binding(&manifest.identity, profile) {
+    if !profile.matches_identity(&manifest.identity) {
         return Err("exact profile does not match snapshot identity".into());
     }
     Ok(())
@@ -355,22 +355,6 @@ fn validate_time_lineage(manifest: &Manifest, left: bool) -> Result<(), String> 
         return Err("arithmetic-control side binding mismatch".into());
     }
     Ok(())
-}
-
-fn valid_profile_binding(identity: &str, profile: &crate::model::ProfileBinding) -> bool {
-    use crate::model::ProfileBindingKind::{IdentityProfileField, LegacyFullIdentity};
-    match profile.kind {
-        LegacyFullIdentity => profile.value == identity,
-        IdentityProfileField => {
-            !profile.value.is_empty() && identity_profile(identity) == Some(&profile.value)
-        }
-    }
-}
-
-fn identity_profile(identity: &str) -> Option<&str> {
-    identity
-        .split(';')
-        .find_map(|field| field.strip_prefix("profile="))
 }
 
 fn schedule_steps(evolution: &Evolution) -> Result<u128, String> {

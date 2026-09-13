@@ -6,7 +6,7 @@
 
 use crate::model::{
     debug, AcceptanceOutput, AdmissionGuard, ComparisonKind, Evolution, Hashes, Manifest,
-    ProfileBinding, ProfileBindingKind, Snapshot, TimeClockOutput,
+    ProfileBinding, Snapshot, TimeClockOutput,
 };
 use nsbu_solver::{
     domain::{validate_spectrum, Domain},
@@ -149,7 +149,7 @@ fn validate_manifest_side(manifest: &Manifest) -> Result<(), String> {
         .admission_guard
         .as_ref()
         .ok_or("ordered Hessian diagnostic requires admission guard metadata")?;
-    if !profile_matches_identity(&manifest.identity, profile)
+    if !profile.matches_identity(&manifest.identity)
         || manifest.epoch != manifest.accepted_steps
         || manifest.accepted_steps > guard.maximum_attempts
         || schedule_steps(&manifest.evolution)? != manifest.accepted_steps
@@ -157,19 +157,6 @@ fn validate_manifest_side(manifest: &Manifest) -> Result<(), String> {
         return Err("ordered Hessian manifest binding mismatch".into());
     }
     Ok(())
-}
-
-fn profile_matches_identity(identity: &str, profile: &ProfileBinding) -> bool {
-    match profile.kind {
-        ProfileBindingKind::LegacyFullIdentity => profile.value == identity,
-        ProfileBindingKind::IdentityProfileField => {
-            !profile.value.is_empty()
-                && identity
-                    .split(';')
-                    .find_map(|field| field.strip_prefix("profile="))
-                    == Some(profile.value.as_str())
-        }
-    }
 }
 
 fn schedule_steps(evolution: &Evolution) -> Result<u128, String> {

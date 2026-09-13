@@ -105,26 +105,31 @@ fn validate_evolution(manifest: &Manifest, admission: ForceAdmission) -> Result<
 
 fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolution) -> bool {
     match kind {
-        ComparisonKind::MatchedSpatial | ComparisonKind::TimeDiagnostic => {
-            evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [384; 3]
+        ComparisonKind::MatchedSpatial | ComparisonKind::TimeDiagnostic => valid_cm_m384(evolution),
+        ComparisonKind::ForceResolutionDiagnostic | ComparisonKind::MixedForceSpaceDiagnostic => {
+            valid_force_resolution_profile(evolution)
         }
-        ComparisonKind::ForceResolutionDiagnostic => {
-            evolution.method == "cox-matthews"
-                && (evolution.integration_force_dimensions == [384; 3]
-                    || evolution.integration_force_dimensions == [512; 3])
-        }
-        ComparisonKind::MethodDiagnostic => {
-            matches!(
-                evolution.method.as_str(),
-                "cox-matthews" | "hochbruck-ostermann"
-            ) && evolution.integration_force_dimensions == [384; 3]
-        }
-        ComparisonKind::MixedForceSpaceDiagnostic => {
-            evolution.method == "cox-matthews"
-                && (evolution.integration_force_dimensions == [384; 3]
-                    || evolution.integration_force_dimensions == [512; 3])
-        }
+        ComparisonKind::MethodDiagnostic => valid_method_profile(evolution),
     }
+}
+
+fn valid_cm_m384(evolution: &crate::model::Evolution) -> bool {
+    evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [384; 3]
+}
+
+fn valid_force_resolution_profile(evolution: &crate::model::Evolution) -> bool {
+    evolution.method == "cox-matthews"
+        && matches!(
+            evolution.integration_force_dimensions,
+            [384, 384, 384] | [512, 512, 512]
+        )
+}
+
+fn valid_method_profile(evolution: &crate::model::Evolution) -> bool {
+    matches!(
+        evolution.method.as_str(),
+        "cox-matthews" | "hochbruck-ostermann"
+    ) && evolution.integration_force_dimensions == [384; 3]
 }
 
 fn validate_tolerances(evolution: &crate::model::Evolution) -> Result<(), String> {

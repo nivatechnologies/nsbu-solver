@@ -79,6 +79,23 @@ pub(crate) enum ProfileBindingKind {
     IdentityProfileField,
 }
 
+impl ProfileBinding {
+    pub(crate) fn matches_identity(&self, identity: &str) -> bool {
+        match self.kind {
+            ProfileBindingKind::LegacyFullIdentity => self.value == identity,
+            ProfileBindingKind::IdentityProfileField => self.matches_profile_field(identity),
+        }
+    }
+
+    fn matches_profile_field(&self, identity: &str) -> bool {
+        !self.value.is_empty()
+            && identity
+                .split(';')
+                .find_map(|field| field.strip_prefix("profile="))
+                == Some(self.value.as_str())
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct ArithmeticControl {
