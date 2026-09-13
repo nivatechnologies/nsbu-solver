@@ -3,9 +3,18 @@
   "status": "prepared_not_executed_not_adopted",
   "untiled_source_commit": "f3960e157f26f37fa9a9fe808a4a596395164706",
   "prototype_source_commit_before_hash_harness": "75ad6ec908a7ba919be41a3543490531f19b8942",
-  "layout": [768, 768, 768],
+  "layout": [
+    768,
+    768,
+    768
+  ],
   "repeats_per_round": 1,
-  "round_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+  "round_order": [
+    "untiled-a",
+    "tiled-a",
+    "tiled-b",
+    "untiled-b"
+  ],
   "per_round": {
     "warm_forward": 1,
     "warm_inverse": 1,
@@ -24,6 +33,10 @@
     "untiled_total": 14543825608,
     "tiled_total": 14543923936,
     "tiled_minus_untiled": 98328,
+    "classification": "exact element payload plus API workspace reservation and conservative catalog allowance; not by itself a full process peak",
+    "harness_runtime_overhead_allowance": 1048576,
+    "untiled_declared_peak_with_allowance": 14544874184,
+    "tiled_declared_peak_with_allowance": 14544972512,
     "address_space_limit": 25769803776,
     "minimum_mem_available": 68719476736
   },
@@ -41,5 +54,10 @@
     "identity-bound process group cleanup uses bounded TERM then KILL only for the captured identity"
   ],
   "selection_heuristic": "Exploratory performance selection only: proceed to full W3 correctness/allocation and representative RHS timing review only if combined median improves at least 10 percent and neither direction regresses.",
-  "qualification": false
+  "qualification": false,
+  "launcher": {
+    "path": "evidence/p10/fft-transverse-tile-prototype/launch-n768-ab.sh",
+    "sha256": "4dba84aaa6ce9e620e466a3b3652c82fb0dd041e4df94b4900e1e262d603e47f",
+    "freeze": "launcher-freeze.json"
+  }
 }

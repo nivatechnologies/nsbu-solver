@@ -9,3 +9,10 @@ The final alternating order was untiled A, tiled A, tiled B, untiled B. Forward 
 Final median tiled time relative to untiled was 0.943 forward / 0.926 inverse at N96, 1.096 / 0.970 at N192, and 0.727 / 0.730 at N256. Thus the page-aligned N256 case improved about 27% in both directions, while smaller cases were mixed. The N512 endpoint projection owned the heavy localhost slot during these small tests, so these are shared-host exploratory timings. The result justifies a representative N768 A/B after resource handoff; it does not justify production adoption or a full-trajectory speedup claim.
 
 `comparison.json` preserves both the simple and helper-extracted measurements, exact reservations and artifact hashes. Raw word files remain local and ignored because they are large; their hashes are bound in the comparison. The baseline binary SHA is `0c1d8835eb5e5c85fbf33176b3359e07c9884eb1280dc88d9590575a23b3a695`; the final prototype binary SHA is `68b74b72fed6ec937f8e5db04d5b54cd5bfdd62b298083510942039faf785119`.
+
+The original sparse anisotropic receipts record binary hashes `254a320f...` and
+`a7ca5fe9...`, but those binaries were subsequently overwritten before a source/build
+receipt was frozen. Their word equality remains observed evidence, not a retrospectively
+proven immutable build relation. The later dense width-four controls and prepared N768
+binaries have explicit source, harness and build bindings. This historical limitation does
+not block the prepared N768 comparison.
