@@ -1,0 +1,32 @@
+{
+  "schema": "p10-fft-transverse-tile-w3-cross-source-plan-v1",
+  "status": "prepared_not_executed_not_adopted",
+  "untiled_source": "ca42569",
+  "tiled_source": "335f674",
+  "layout": 768,
+  "retained": 512,
+  "workers": 32,
+  "workspace_delta_bytes": 98328,
+  "w3_additional": {
+    "untiled_forward": 14539902720,
+    "tiled_forward": 14540099376,
+    "untiled_bidirectional": 21787660160,
+    "tiled_bidirectional": 21787856816
+  },
+  "tiled_actual_api_whole_peak_bytes": {
+    "force_serial": 32343179296,
+    "force_w3": 50117087056,
+    "rhs_serial": 47364419936,
+    "rhs_w3": 72386085136
+  },
+  "required_controls": [
+    "untiled serial equals untiled W3 full coefficient words",
+    "tiled serial equals tiled W3 full coefficient words",
+    "untiled and tiled canonical output hashes match for force",
+    "untiled and tiled canonical output hashes match for RHS",
+    "both W3 paths report zero steady allocations over three repeats"
+  ],
+  "large_execution_authorized": false,
+  "qualification": false,
+  "production_adoption": false
+}
