@@ -1,0 +1,15 @@
+[package]
+name = "p10-force-coefficient-clock1112"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+nsbu-benchmarks = { path = "../../../crates/nsbu-benchmarks" }
+nsbu-solver = { path = "../../../crates/nsbu-solver" }
+sha2 = "=0.10.9"
+
+[lints.rust]
+unsafe_code = "forbid"

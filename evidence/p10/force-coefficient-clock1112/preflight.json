@@ -1,0 +1,70 @@
+{
+  "schema": "p10-force-coefficient-clock1112-preflight-v1",
+  "status": "compile_tested_dry_run_only",
+  "source_commit": "dd5f14ad03621c996fcfee014d89fd0684ae0efc",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": {
+    "quantum_exponent": -20,
+    "target": 8192,
+    "elapsed": 1112,
+    "remaining": 7080
+  },
+  "retained_grid": 384,
+  "workers": 32,
+  "backend": "RustFft6_4_1AvxFma",
+  "cap_bytes": 103079215104,
+  "catalog_bytes": 29362480,
+  "retained_output_bytes": 1366032384,
+  "runs": [
+    {
+      "sample_grid": 384,
+      "provider_storage_bytes": 3698181816,
+      "provider_work_units": 7304380416,
+      "scalar_transforms": 3,
+      "peak_with_previous_spectrum_bytes": 6460723176
+    },
+    {
+      "sample_grid": 512,
+      "provider_storage_bytes": 8668026552,
+      "provider_work_units": 17314086912,
+      "scalar_transforms": 3,
+      "peak_with_previous_spectrum_bytes": 11430567912
+    },
+    {
+      "sample_grid": 768,
+      "provider_storage_bytes": 29079844536,
+      "provider_work_units": 58435043328,
+      "scalar_transforms": 3,
+      "peak_with_previous_spectrum_bytes": 31842385896
+    },
+    {
+      "sample_grid": 1024,
+      "conditional": true,
+      "provider_storage_bytes": 68823209656,
+      "provider_work_units": 138512695296,
+      "scalar_transforms": 3,
+      "peak_with_previous_spectrum_bytes": 71585751016
+    }
+  ],
+  "tests": {
+    "command": "RUN_SOURCE=dd5f14a000000000000000000000000000000000 cargo test",
+    "passed": 4,
+    "failed": 0,
+    "clippy_all_targets_denied_warnings": true,
+    "release_build": true
+  },
+  "execution": {
+    "mode": "sequential",
+    "first_ladder": [384, 512, 768],
+    "conditional_ladder": [1024],
+    "actual_run_started": false,
+    "resource_review_required": true
+  },
+  "claims": {
+    "trajectory_evolved": false,
+    "force_sufficiency": false,
+    "continuum_tail_bound": false,
+    "pde_qualification": false,
+    "accepted_pde_windows": 0
+  }
+}
