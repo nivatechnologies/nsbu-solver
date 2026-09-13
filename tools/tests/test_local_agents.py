@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import time
+from io import BytesIO
 from collections.abc import Sequence
 from dataclasses import replace
 from pathlib import Path
 from typing import TypedDict, Unpack
+from unittest.mock import patch
 
 import pytest
 
@@ -13,6 +15,7 @@ from tools.local_agents.contracts import JsonValue
 from tools.local_agents.contracts import validate_contract
 from tools.local_agents.transport import HttpTransport, ModelReply, ToolCall
 from tools.local_agents.validators import exact_expected
+from tools.local_agents.__main__ import load_config, load_tasks
 from tools.json_types import array_value, decode, object_value, string_value
 
 
@@ -309,3 +312,90 @@ def test_task_timeouts_count_toward_family_pause(tmp_path: Path) -> None:
     paused, fake = runner(tmp_path, [])
     assert paused.run([packet("paused")])[-1]["status"] == "family_paused"
     assert not fake.requests
+
+
+def test_cli_loads_checked_config_and_task_packets(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    config_path = tmp_path / "config.json"
+    config_path.write_text('{"concurrency":3,"max_tokens":99}', encoding="utf-8")
+    monkeypatch.setenv("LOCAL_QWEN_ENDPOINT", "http://local/v1")
+    monkeypatch.setenv("LOCAL_QWEN_MODEL", "fixed-model")
+    loaded = load_config(config_path, tmp_path / "state.json")
+    assert (loaded.endpoint, loaded.model, loaded.concurrency, loaded.max_tokens) == (
+        "http://local/v1",
+        "fixed-model",
+        3,
+        99,
+    )
+    task_path = tmp_path / "tasks.json"
+    task_path.write_text(
+        '[{"task_id":"t","family":"f","instructions":"i","inputs":{},'
+        '"output_contract":{"required":[],"properties":{}},"validator":"exact_expected"}]',
+        encoding="utf-8",
+    )
+    assert load_tasks(task_path)[0].task_id == "t"
+
+
+@pytest.mark.parametrize(
+    ("payload", "message"),
+    [
+        ('{"unknown":1}', "unknown config"),
+        ('{"concurrency":"many"}', "must be an integer"),
+    ],
+)
+def test_cli_rejects_malformed_config(tmp_path: Path, payload: str, message: str) -> None:
+    path = tmp_path / "bad.json"
+    path.write_text(payload, encoding="utf-8")
+    with pytest.raises(ValueError, match=message):
+        load_config(path)
+
+
+@pytest.mark.parametrize("payload", ['{}', '[1]', '[{"task_id":"missing"}]'])
+def test_cli_rejects_malformed_task_payloads(tmp_path: Path, payload: str) -> None:
+    path = tmp_path / "bad-tasks.json"
+    path.write_text(payload, encoding="utf-8")
+    with pytest.raises(ValueError):
+        load_tasks(path)
+
+
+class FakeHttpResponse:
+    def __init__(self, body: bytes, *, fail_read: bool = False) -> None:
+        self.body = BytesIO(body)
+        self.fail_read = fail_read
+        self.closed = False
+
+    def read(self, limit: int) -> bytes:
+        if self.fail_read:
+            raise OSError("read failed")
+        return self.body.read(limit)
+
+    def close(self) -> None:
+        self.closed = True
+
+
+def test_http_transport_parses_usage_tools_and_closes_response() -> None:
+    body = (
+        b'{"choices":[{"finish_reason":"tool_calls","message":{"content":null,'
+        b'"tool_calls":[{"id":"c","function":{"name":"read_artifact",'
+        b'"arguments":"{\\"name\\":\\"fixture\\"}"}}]}}],"usage":{'
+        b'"prompt_tokens":7,"completion_tokens":3,"completion_tokens_details":'
+        b'{"reasoning_tokens":2}}}'
+    )
+    response = FakeHttpResponse(body)
+    with patch("tools.local_agents.transport.urlopen", return_value=response):
+        reply = HttpTransport("http://local/v1").complete({"model": "m"}, 1)
+    assert response.closed
+    assert (reply.prompt_tokens, reply.completion_tokens, reply.reasoning_tokens) == (7, 3, 2)
+    assert reply.tool_calls[0].name == "read_artifact"
+
+
+def test_http_transport_bounds_and_closes_failed_reads() -> None:
+    oversized = FakeHttpResponse(b"12345")
+    with patch("tools.local_agents.transport.urlopen", return_value=oversized):
+        with pytest.raises(ValueError, match="byte limit"):
+            HttpTransport("http://local", max_response_bytes=4).complete({}, 1)
+    assert oversized.closed
+    failed = FakeHttpResponse(b"", fail_read=True)
+    with patch("tools.local_agents.transport.urlopen", return_value=failed):
+        with pytest.raises(OSError, match="read failed"):
+            HttpTransport("http://local").complete({}, 1)
+    assert failed.closed

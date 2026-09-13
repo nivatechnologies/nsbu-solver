@@ -17,7 +17,7 @@ def _object(path: Path) -> dict[str, JsonValue]:
     return dict(object_value(decode(path.read_text(encoding="utf-8"))))
 
 
-def _config(path: Path, state: Path | None) -> RunnerConfig:
+def load_config(path: Path, state: Path | None = None) -> RunnerConfig:
     raw = _object(path)
     endpoint = _optional_string(raw.pop("endpoint", "")) or os.environ.get("LOCAL_QWEN_ENDPOINT", "")
     model = _optional_string(raw.pop("model", "")) or os.environ.get("LOCAL_QWEN_MODEL", "")
@@ -57,7 +57,7 @@ def _config(path: Path, state: Path | None) -> RunnerConfig:
     )
 
 
-def _tasks(path: Path) -> list[TaskPacket]:
+def load_tasks(path: Path) -> list[TaskPacket]:
     raw = decode(path.read_text(encoding="utf-8"))
     if not isinstance(raw, Sequence) or isinstance(raw, str):
         raise ValueError("task file must be a JSON array")
@@ -93,12 +93,12 @@ def main() -> int:
     parser.add_argument("--tasks", type=Path, required=True)
     parser.add_argument("--state", type=Path)
     args = parser.parse_args(namespace=_Args())
-    config = _config(args.config, args.state)
+    config = load_config(args.config, args.state)
     QueueRunner(
         config,
         validators=BUILTIN_VALIDATORS,
         trusted_nonreview_validators=TRUSTED_NONREVIEW,
-    ).run(_tasks(args.tasks))
+    ).run(load_tasks(args.tasks))
     return 0
 
 
