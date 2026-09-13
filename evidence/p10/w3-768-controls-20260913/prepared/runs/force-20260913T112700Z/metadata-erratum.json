@@ -1,0 +1,30 @@
+{
+  "schema": "p10-w3-768-force-metadata-erratum-v1",
+  "scope": "force launch ownership metadata only",
+  "original_records_preserved_byte_for_byte": [
+    "launch-identity.json",
+    "actual-launch-time.json"
+  ],
+  "original_starttime_field": 15668790,
+  "original_starttime_status": "invalid_transcribed_value",
+  "invalidity": {
+    "boot_time_epoch_seconds": 1789198262,
+    "clock_ticks_per_second": 100,
+    "original_field_maps_to_utc": "2026-09-13T19:25:49.900000Z",
+    "contradicts_force_artifact_creation_utc": "2026-09-13T11:44:19.713513140Z"
+  },
+  "derived_starttime_ticks": 10159699,
+  "derived_starttime_status": "derived_not_primary",
+  "derivation": {
+    "launch_time_receipt": "actual-launch-time.json",
+    "receipt_actual_launch_utc": "2026-09-13T11:44:18.990000Z",
+    "formula": "(utc_epoch_seconds - boot_time_epoch_seconds) * clock_ticks_per_second",
+    "cross_check": "rhs starttime_ticks 10206690 minus force-to-rhs receipt interval 469.91 seconds times 100 equals 10159699"
+  },
+  "primary_proc_starttime_available": false,
+  "ownership_binding_status": "not_independently_verified_after_transcription_error",
+  "numerical_receipts_unchanged": {
+    "stdout": "bitwise=true; steady_allocations=0",
+    "time": "exit_status=0; elapsed=5:38.37; maximum_resident_set_size_kib=48839672"
+  }
+}
