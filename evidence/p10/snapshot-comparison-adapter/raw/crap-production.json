@@ -61,9 +61,16 @@
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
       "function": "run",
-      "cyclomatic": 22.0,
+      "cyclomatic": 13.0,
       "branch_coverage_fraction": 0.875,
-      "crap": 22.9453125
+      "crap": 13.330078125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "format_output",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
     },
     {
       "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
@@ -605,5 +612,5 @@
       "crap": 4.125
     }
   ],
-  "maximum": 22.9453125
+  "maximum": 18.515625
 }

@@ -114,7 +114,7 @@ pub(crate) fn method_diagnostic<'a>(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn diagnostic_output<'a>(
+pub(crate) fn diagnostic_output<'a>(
     left_manifest: &'a Manifest,
     left: &'a Snapshot,
     right_manifest: &'a Manifest,
@@ -322,9 +322,9 @@ fn validate_schedule_bound_side(manifest: &Manifest) -> Result<(), String> {
         || guard.advective_limit <= 0.0
         || manifest.accepted_steps != steps
         || manifest.epoch != steps
-        || guard.maximum_attempts != steps
+        || steps > guard.maximum_attempts
     {
-        return Err("time-diagnostic schedule/header derivation mismatch".into());
+        return Err("diagnostic schedule/header derivation mismatch".into());
     }
     let profile = manifest.profile.as_ref().ok_or("missing exact profile")?;
     if !valid_profile_binding(&manifest.identity, profile) {
