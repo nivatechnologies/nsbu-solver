@@ -1,0 +1,113 @@
+{
+  "schema": "p10-snapshot-time-diagnostic-output-v1",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+  "left_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [1.0, 1.0, 1.0],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [384, 384, 384],
+    "schedule": [{"from_inclusive": 0, "until_exclusive": 4096, "step_ticks": 32}],
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001]
+  },
+  "right_evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "lengths": [1.0, 1.0, 1.0],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [384, 384, 384],
+    "schedule": [
+      {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 64},
+      {"from_inclusive": 2048, "until_exclusive": 4096, "step_ticks": 128}
+    ],
+    "absolute_tolerances": [0.00001, 0.0001],
+    "relative_tolerances": [0.00001, 0.00001]
+  },
+  "left_identity": "source=codex/p10-fft-batch-20260912@81bd07ec0e52;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384;backend=rustfft-6.4.1-avx-avx2-fma;provider=parallel-reduced-attempt-cache;n=256;m=384;workers=32;method=cox-matthews;step=32;endpoint=4096;advective_limit=0.45;cap=103079215104;schema=p10-avx-scheduled-endpoint-v2;resume=unsupported",
+  "left_profile": {"kind": "identity-profile-field", "value": "n256-m384"},
+  "left_admission_guard": {"advective_limit": 0.45, "maximum_attempts": 128},
+  "left_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "left_execution": "serial-component-fft;parallel-reduced-attempt-cache;workers=32",
+  "left_source_commit": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+  "left_plan_sha256": "65e5aeb68900da0c8057dbf3c1cf2d2ccc76e0700328ff86104bf87321fa184f",
+  "right_identity": "source=569fd0ced7a755b1f6c066a7c00016f537fbc4bf;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=256;force_samples=384;observer_force_samples=768;observer_conservative=512;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=local;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "right_profile": {"kind": "identity-profile-field", "value": "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"},
+  "right_admission_guard": {"advective_limit": 3.3, "maximum_attempts": 48},
+  "right_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "right_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=local",
+  "right_source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+  "right_plan_sha256": "daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e",
+  "arithmetic_control": {
+    "evidence": "arithmetic-review.json",
+    "evidence_sha256": "da6e4ff302b8f3727bedbb1e71380d382a8eaac707189feef60fa402416fdba3",
+    "review": {
+      "schema": "p10-time-arithmetic-review-v1",
+      "conclusion": "reviewed-equivalence-supported-by-controls",
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "method": "cox-matthews",
+      "integration_force_dimensions": [384, 384, 384],
+      "measured_control": {
+        "outcome": "successful-exact-bit",
+        "serial": {
+          "source_commit": "8f579375d2d5ad79a573880393c05a297acf98d5",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "serial;provider=parallel-reduced-attempt-cache;observer=parallel-reduced-2m;retained=256;sampled=384;observer_sampled=768;workers=32;ticks=32;attempts=1",
+          "configuration": "n256-m384-h32-startup-rest-serial-pre-split-8f579375"
+        },
+        "w3": {
+          "source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "separate-rhs-force-w3;provider=parallel-reduced-attempt-cache;observer=parallel-reduced-2m;retained=256;sampled=384;observer_sampled=768;workers=32;ticks=32;attempts=1;rhs_w3=layout384-width3-bidirectional;force_w3=layout384-width3-forward",
+          "configuration": "n256-m384-h32-startup-rest-w3-integrated-f13c29c"
+        }
+      },
+      "reviewed_lineage": {
+        "status": "reviewed-unchanged-kernel-lineage",
+        "left_control_role": "serial",
+        "right_control_role": "w3",
+        "left": {
+          "source_commit": "81bd07ec0e52a16044e2814bf0dbf9711669830e",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "serial-component-fft;parallel-reduced-attempt-cache;workers=32",
+          "profile": {"kind": "identity-profile-field", "value": "n256-m384"}
+        },
+        "right": {
+          "source_commit": "569fd0ced7a755b1f6c066a7c00016f537fbc4bf",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_fft=layout384-width3-bidirectional-add2733911936;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=local",
+          "profile": {"kind": "identity-profile-field", "value": "n256-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"}
+        }
+      }
+    }
+  },
+  "left_hashes": {
+    "coefficient_sha256": "e6fb1c5482f3dafff4ada005a84ed43d65c5392c9479fc6feabdf8bdb8143831",
+    "file_sha256": "5b638492dba468ba610a25b539d733c98967954cc4ae40b8f14853e2bc117d15"
+  },
+  "right_hashes": {
+    "coefficient_sha256": "793c45ed6e5f18e352e2a1c2f013ab6972c5d9870a40e390e1bf5503f2997fcc",
+    "file_sha256": "b3289a527271982a560f44d20d18867c065a18d64b5f75c7f80f4ccbfc766c8b"
+  },
+  "clock": {
+    "elapsed": 4096,
+    "target": 8192,
+    "left_epoch": 128,
+    "right_epoch": 48,
+    "left_accepted_steps": 128,
+    "right_accepted_steps": 48
+  },
+  "full": {"l2": 6.299858537050901e-9, "h1": 9.956006384425095e-7, "vorticity_l2": 9.955807065221843e-7, "divergence_l2": 1.0904124107440259e-14},
+  "common": {"l2": 6.299858537050901e-9, "h1": 9.956006384425095e-7, "vorticity_l2": 9.955807065221843e-7, "divergence_l2": 1.0904124107440259e-14},
+  "newly_resolved": {"l2": 0.0, "h1": 0.0, "vorticity_l2": 0.0, "divergence_l2": 0.0},
+  "fine_absolute": {"l2": 1.83889988831728, "h1": 50.872458584803965, "vorticity_l2": 50.83921213196826, "divergence_l2": 4.903251598879102e-15},
+  "mean_error": [-7.828199586395001e-20, 3.0981508183540425e-20, -2.3903860171678565e-19],
+  "admitted_bytes": 812646400
+}
