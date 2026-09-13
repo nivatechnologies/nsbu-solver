@@ -1,0 +1,69 @@
+{
+  "family_consecutive_failures": {
+    "regional-projection-helper": 2
+  },
+  "inflight": {},
+  "receipts": [
+    {
+      "attempts": [
+        {
+          "number": 1,
+          "validator_errors": [
+            "inference failed: ValueError: HTTP model response exceeds byte limit"
+          ]
+        }
+      ],
+      "completion_tokens": 53,
+      "errors": [
+        "task or run wall-clock budget exhausted"
+      ],
+      "family": "regional-projection-helper",
+      "input_hash": "601e20c6c72d31af001d0bb686b606471f01716c1dd654447d81212b3787cc99",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 835,
+      "reasoning_tokens": 24,
+      "review_required": true,
+      "scientific_accepted": false,
+      "status": "budget_exhausted",
+      "task_id": "regional-sampled-analytic-projection-helper-v1",
+      "timing_seconds": 343.837133,
+      "tool_calls": 1
+    },
+    {
+      "attempts": [
+        {
+          "checker_seconds": 0.0,
+          "number": 1,
+          "validator_errors": [
+            "final output is not one JSON object"
+          ]
+        },
+        {
+          "checker_seconds": 0.0,
+          "number": 2,
+          "validator_errors": [
+            "missing required output field: patch"
+          ]
+        }
+      ],
+      "completion_tokens": 6178,
+      "errors": [
+        "missing required output field: patch"
+      ],
+      "family": "regional-projection-helper",
+      "input_hash": "ec115cb68935de692ff147820b61b9dd0ac6d56c3a1859a15bfa6b15c1b38473",
+      "output": null,
+      "output_hash": null,
+      "prompt_tokens": 3031,
+      "reasoning_tokens": 5178,
+      "review_required": true,
+      "scientific_accepted": false,
+      "status": "failed",
+      "task_id": "regional-sampled-analytic-projection-helper-v2",
+      "timing_seconds": 107.130308,
+      "tool_calls": 1
+    }
+  ],
+  "schema": "nsbu-local-agent-queue-v1"
+}

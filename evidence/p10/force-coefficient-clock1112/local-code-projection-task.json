@@ -1,0 +1,22 @@
+[
+  {
+    "task_id": "regional-sampled-analytic-projection-helper-v2",
+    "family": "regional-projection-helper",
+    "instructions": "Read the named producer example once. Return one JSON object whose patch field is a unified diff adding only evidence/p10/n384-regional-snapshot-diagnostic/harness/src/projection.rs, with at most 60 added Rust lines including tests and no prose in the patch. Implement a harness-private helper that consumes [Vec<f64>;3] physical velocity and returns [Vec<Complex64>;3] after normalized forward FFT on samples: Layout and strict-band transfer(samples, retained,...). Accept &FftCatalog plus an explicit FFT budget. Use public FftPlan::new_from_catalog(samples,catalog,budget), plan.forward, and nsbu_solver::spectral::transfer. Allocate spectrum and each output with Vec::try_reserve_exact and checked errors. Do not sample fields, touch trajectories/snapshots, alter measurement.rs, or make claims. Include one small independent test for samples 12^3 to retained 6^3: physical component 0 contains cos(2*pi*(x+4y)) plus cos(2*pi*4x); assert normalized coefficient 0.5 at retained mode [1,2,0] using Layout::locate and assert the outside-N6 mode is absent by checking all other retained coefficients without using transfer to construct expected values. Components 1 and 2 are zero. Inline public signatures: transfer(source:Layout,target:Layout,input:&[Complex64],output:&mut[Complex64])->Result<(),SolverError>; FftPlan::new_from_catalog(layout:Layout,catalog:&FftCatalog,cap:usize)->Result<(FftPlan,FftWorkspace),SolverError>; FftPlan::forward(&self,input:&[f64],output:&mut[Complex64],workspace:&mut FftWorkspace)->Result<(),SolverError>. The target crate already depends on nsbu_solver.",
+    "inputs": {
+      "source_commit": "2c59233b9a849f596aa04f91149d906641330798",
+      "target": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/projection.rs",
+      "maximum_added_lines": 60,
+      "no_heavy_execution": true
+    },
+    "output_contract": {
+      "required": ["patch"],
+      "properties": {"patch": {"type": "string"}}
+    },
+    "validator": "projection_patch_shape",
+    "artifacts": {
+      "producer_example": "/mnt/niva-array/nsbu-solver/work/p10-m512-regional-snapshot-20260913/evidence/p10/external-reference-bridge/harness/src/bridge/producer.rs"
+    },
+    "review_required": true
+  }
+]

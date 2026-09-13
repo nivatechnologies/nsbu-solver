@@ -35,8 +35,11 @@ RUN_SOURCE=$(git rev-parse HEAD) cargo run --release -- sample 768 work/m768.bin
 RUN_SOURCE=$(git rev-parse HEAD) cargo run --release -- sample 1024 work/m1024.bin --dry-run
 ```
 
-Actual sample runs require the separately reviewed host resource plan. Artifacts are create-new,
-source/case/clock bound, and refused on mismatch. They remain local because each retained N384
+Actual sample runs require the separately reviewed host resource plan. The sampler refuses a final
+path that exists before evaluation, and the actual unique paths did not collide. Its final
+`rename`, however, is not a no-clobber publication primitive: a concurrently created destination
+could be replaced between the precheck and rename. Artifacts are source/case/clock bound and
+refused on mismatch. They remain local because each retained N384
 artifact is about 1.37 GB. All results are empirical binary64 diagnostics without interval
 enclosure, force sufficiency, PDE qualification, accepted interpolation, or accepted window.
 
@@ -50,13 +53,18 @@ essentially the same contraction, from `935.7371539965881` to `22.28445957063686
 Stokes-response H1 proxy contracted from `6.134187955851721e-4` to
 `1.351263724368082e-5`.
 
-This fixed-retained contraction strongly supports coarse M384 sampled-force aliasing or
-discretization sensitivity as the main cause of the huge retained residual response. Together
-with the exact archived residual replay and the nearly one-for-one residual/force-delta H1 values,
-it disfavors reconstruction or operator assembly as the main cause. It does not prove every
+This fixed-retained contraction directly supports coarse M384 sampled-force aliasing or
+discretization sensitivity in the scalar parallel-reduced provider. The archived residual used a
+width-three W3 cached provider. Existing controls compare that W3 path bit-for-bit with the scalar
+AVX path on the admitted N4/padded6/force6 constructor fixture, and the separate admitted M512
+force control compares every serial/W3 coefficient word and complete `ForceWork`. There is no
+direct same-source, same-clock M384 scalar/W3 comparison bound to this ladder. Applying this result
+to the archived W3 residual therefore relies on those execution-equivalence controls and the shared
+provider arithmetic. With that caveat, the exact archived replay and nearly one-for-one
+residual/force-delta H1 values disfavor reconstruction or operator assembly as the main cause. It does not prove every
 archived coefficient error is bounded, that M768 is force-sufficient, or that its new shell is a
 continuum tail. M1024 was therefore not run. Full identities, timings, hashes, and limitations are
-in `summary.json`.
+in `summary.json`; compact captured sample receipts and rerun analyzer stdout are in `run-logs/`.
 
 Eight independently checked exact modal fixtures were also requested through the maintained local
 Qwen controller. The first overlarge-context packet validated one task after repair and exhausted
@@ -64,3 +72,9 @@ seven tasks after 15 total repairs; that failed batch is preserved. The explicit
 compact redesign validated the remaining seven tasks, five on the first attempt and two after one
 local repair each. All eight outputs are consumed by the Rust shell/norm test table. These fixture
 results validate finite analyzer arithmetic cases only and make no scientific acceptance claim.
+
+The later Qwen projection-helper experiment produced no candidate. Its first request is preserved
+as a client byte-cap failure. The corrected request also failed its output schema after its one
+authorized repair. Its task packet additionally says `cos(2*pi*(x+4y))` while expecting retained
+mode `[1,2,0]`; the matching expression would be `cos(2*pi*(x+2y))`. That inconsistency prevents a
+model-capability conclusion from this failed packet. The receipt and faulty packet remain preserved.

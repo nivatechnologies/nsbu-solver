@@ -1,0 +1,10 @@
+{
+  "schema": "p10-force-clock1112-captured-run-receipts-v1",
+  "note": "Small fields transcribed from the captured successful sample invocations; the original full terminal streams were not redirected to files. No sample was rerun to manufacture a log.",
+  "source_commit": "f7bb5880013f0bf0bc4f61506fc4654a7f2fc444",
+  "samples": [
+    {"grid": 384, "exit_status": 0, "force_seconds": 12.708305836, "wall_seconds": 30.76, "maximum_rss_kib": 4881408, "swaps": 0, "coefficient_sha256": "1568239009c96b8332f7746e1a13c54f582bcda5c2bf09f5f469f539fb152c41", "artifact_sha256": "6616f8c93920cb46c1b61540c471490394faa95187c2fd89d90f2c47871ed8df", "artifact_bytes": 1366032600},
+    {"grid": 512, "exit_status": 0, "force_seconds": 30.187083677, "wall_seconds": 51.40, "maximum_rss_kib": 9736192, "swaps": 0, "coefficient_sha256": "5e5e242248066c89b8a595bec1475afde76dd52aa4575ae6587c19831ebc7d1f", "artifact_sha256": "b820f93e1750b5b1b41635664103b4b9d8d0b63f111500dd233c0e268d3cb790", "artifact_bytes": 1366032600},
+    {"grid": 768, "exit_status": 0, "force_seconds": 99.268964959, "wall_seconds": 132.95, "maximum_rss_kib": 29668352, "swaps": 0, "coefficient_sha256": "9ba0e99619b59c7a0c71728e2bd341f5e6a681be0670532ef7ca5035b2df7ced", "artifact_sha256": "d1761aebd8d2185d0226980ada012b95cef13b6d52fa165056819bf411faaf16", "artifact_bytes": 1366032600}
+  ]
+}

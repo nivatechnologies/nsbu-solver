@@ -2,6 +2,7 @@
   "schema": "p10-force-coefficient-clock1112-result-v1",
   "status": "force_only_sampling_ladder_complete_diagnostic_only",
   "source_commit": "f7bb5880013f0bf0bc4f61506fc4654a7f2fc444",
+  "analyzer_commit": "97b84eef519ca992aa546ea3ce16b1fe841f81e7",
   "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
   "clock": {"quantum_exponent": -20, "target": 8192, "elapsed": 1112, "remaining": 7080},
   "retained_grid": 384,
@@ -20,6 +21,10 @@
     "adjacent_stokes_h1_ratio": 0.02202840431517983
   },
   "dominant_initial_outer_shell": {"shell": "n192_to_n384_before_n256_split", "m384_to_m512_projected_h1": 935.7371539965881, "m512_to_m768_projected_h1": 22.28445957063686, "adjacent_ratio": 0.023814870955437252},
+  "split_outer_shells": {
+    "m384_to_m512": {"n192_to_n256_projected_h1": 67.32707095220039, "n256_to_n384_projected_h1": 933.3118915382079, "full_projected_h1": 935.8629343304156},
+    "m512_to_m768": {"n192_to_n256_projected_h1": 1.980199921737096, "n256_to_n384_projected_h1": 22.196304796639776, "full_projected_h1": 22.289249597246233}
+  },
   "relation_to_offline_residual": {
     "m768_minus_padded_m384_retained_projected_h1": 935.561405170177,
     "m768_minus_padded_m384_new_shell_projected_h1": 1932.914846937184,
@@ -29,8 +34,25 @@
     "discrete_m384_residual_retained_h1": 0.7830415812306416,
     "discrete_m384_residual_new_shell_h1": 0.441153443692872
   },
-  "interpretation": "the fixed-retained projected force difference contracts by about 42 times from M384-to-M512 to M512-to-M768, including the dominant upper retained modes; this strongly supports M384 sampled-force aliasing/discretization sensitivity as the source of the huge retained residual response and disfavors reconstruction or operator assembly as its main cause",
-  "limitations": "the M768-only N384-to-N768 shell remains sampled content rather than a proven continuum tail; residual acceleration H1 is not a velocity H1 error; all arithmetic is empirical binary64 without outward enclosure",
+  "execution_path_relation": {
+    "ladder": "scalar AVX ParallelReducedV2Force",
+    "archived_residual": "width-three W3 cached parallel-reduced provider",
+    "existing_controls": "offline residual N4/padded6/force6 constructor control is bit-identical against scalar AVX; separate admitted M512 force control compares every serial/W3 coefficient word and complete ForceWork",
+    "caveat": "no direct same-source same-clock M384 scalar/W3 comparison is bound to this ladder; relation to the archived residual relies on existing execution-equivalence controls and shared provider arithmetic"
+  },
+  "run_log_sha256": {
+    "run-logs/sample-run-receipts.json": "b188936fde4412f07fef905677eda6da48634014f53669d3f121b70465ef2f46",
+    "run-logs/compare-m384-m512.stdout": "81d1bbaf040b24924a1a8f65011e0ade704c165cd9087e58c5d7a2c81655ae49",
+    "run-logs/compare-m512-m768.stdout": "103e4d35d561d8e38ccc40eb9493cc835c2947220d5100e674e9623d5b5ee7c3"
+  },
+  "local_projection_helper_trial": {
+    "candidate_produced": false,
+    "v1": {"status": "budget_exhausted", "timing_seconds": 343.837133, "prompt_tokens": 835, "completion_tokens": 53, "reasoning_tokens": 24, "tool_calls": 1, "failure": "client whole-response byte cap; rejected body generation token usage unavailable"},
+    "v2": {"status": "failed", "timing_seconds": 107.130308, "prompt_tokens": 3031, "completion_tokens": 6178, "reasoning_tokens": 5178, "tool_calls": 1, "attempts": 2, "failure": "output schema failure after one authorized repair"},
+    "task_defect": "packet expression cos(2*pi*(x+4y)) conflicts with expected mode [1,2,0]; matching expression is cos(2*pi*(x+2y)); no model-capability conclusion is drawn"
+  },
+  "interpretation": "the scalar-provider fixed-retained projected force difference contracts by about 42 times from M384-to-M512 to M512-to-M768, including the dominant upper retained modes; subject to the documented W3 execution-equivalence caveat, this strongly supports M384 sampled-force aliasing/discretization sensitivity as the source of the huge retained residual response and disfavors reconstruction or operator assembly as its main cause",
+  "limitations": "the M768-only N384-to-N768 shell remains sampled content rather than a proven continuum tail; residual acceleration H1 is not a velocity H1 error; all arithmetic is empirical binary64 without outward enclosure; sampler destination precheck plus rename has a TOCTOU overwrite race although the actual unique paths did not collide",
   "conditional_m1024_run": false,
   "trajectory_evolved": false,
   "reference_replaced": false,
