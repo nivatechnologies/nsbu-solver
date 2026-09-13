@@ -1,0 +1,17 @@
+   Compiling num-traits v0.2.19
+   Compiling generic-array v0.14.7
+    Checking typenum v1.20.1
+    Checking num-integer v0.1.47
+    Checking strength_reduce v0.2.4
+    Checking transpose v0.2.3
+    Checking primal-check v0.3.4
+    Checking num-complex v0.4.6
+    Checking block-buffer v0.10.4
+    Checking crypto-common v0.1.7
+    Checking digest v0.10.7
+    Checking cpufeatures v0.2.17
+    Checking cfg-if v1.0.4
+    Checking rustfft v6.4.1
+    Checking sha2 v0.10.9
+    Checking nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-fft-transverse-tile-20260913/crates/nsbu-solver)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.98s

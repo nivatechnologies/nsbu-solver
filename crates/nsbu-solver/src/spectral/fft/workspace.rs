@@ -38,6 +38,9 @@ impl FftPlan {
                 .max()
                 .ok_or(SolverError::InvalidDomain)?,
         };
+        let required_tile = maximum
+            .checked_mul(super::TRANSVERSE_TILE_LANES)
+            .ok_or(SolverError::SizeOverflow)?;
         if real != self.layout.real_len()
             || half != self.layout.half_len()
             || work.layout != self.layout
@@ -45,6 +48,7 @@ impl FftPlan {
             || work.input.len() != maximum
             || work.output.len() != maximum
             || work.scratch.len() < required_scratch
+            || work.transverse_tile.len() != required_tile
         {
             return Err(SolverError::InvalidPayload);
         }

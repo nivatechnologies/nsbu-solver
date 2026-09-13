@@ -8,6 +8,8 @@ mod workspace;
 use crate::{domain::Layout, Complex64, SolverError};
 pub use avx::FftCatalog;
 
+const TRANSVERSE_TILE_LANES: usize = 8;
+
 /// Immutable arithmetic/backend identity for every scalar transform owner.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FftBackend {
@@ -46,6 +48,7 @@ pub struct FftWorkspace {
     input: Vec<Complex64>,
     output: Vec<Complex64>,
     scratch: Vec<Complex64>,
+    transverse_tile: Vec<Complex64>,
 }
 
 impl std::fmt::Debug for FftPlan {

@@ -103,7 +103,7 @@ fn reservation_accounts_for_every_owned_buffer_and_inclusive_axis_limit() {
         let layout = Layout::new(dimensions).unwrap();
         let expected = 16
             * (layout.half_len()
-                + 3 * dimensions.iter().max().unwrap()
+                + 11 * dimensions.iter().max().unwrap()
                 + dimensions.iter().sum::<usize>())
             + std::mem::size_of::<FftPlan>()
             + std::mem::size_of::<FftWorkspace>();

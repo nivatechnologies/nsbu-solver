@@ -1,0 +1,10 @@
+[package]
+name = "p10-fft-transverse-tile-benchmark"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+
+[workspace]
