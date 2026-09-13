@@ -8,6 +8,7 @@ mod workspace;
 use crate::{domain::Layout, Complex64, SolverError};
 pub use avx::FftCatalog;
 
+const AVX_SCRATCH_LANES: usize = 4;
 const TRANSVERSE_TILE_LANES: usize = 8;
 
 /// Immutable arithmetic/backend identity for every scalar transform owner.
@@ -48,7 +49,6 @@ pub struct FftWorkspace {
     input: Vec<Complex64>,
     output: Vec<Complex64>,
     scratch: Vec<Complex64>,
-    transverse_tile: Vec<Complex64>,
 }
 
 impl std::fmt::Debug for FftPlan {

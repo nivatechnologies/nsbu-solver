@@ -1,5 +1,7 @@
 //! Closed-size RustFFT AVX plan ownership and mutable workspace construction.
-use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace, TRANSVERSE_TILE_LANES};
+use super::{
+    BackendPlan, FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES, TRANSVERSE_TILE_LANES,
+};
 use crate::storage::filled;
 use crate::{domain::Layout, Complex64, SolverError};
 use rustfft::{Fft, FftDirection};
@@ -100,7 +102,7 @@ pub(super) fn workspace_reservation(layout: Layout) -> Result<usize, SolverError
     let dimensions = validate_layout(layout)?;
     let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
     let workspace_elements = maximum
-        .checked_mul(6 + TRANSVERSE_TILE_LANES)
+        .checked_mul(2 + AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES)
         .and_then(|n| layout.half_len().checked_add(n))
         .ok_or(SolverError::SizeOverflow)?;
     workspace_elements
@@ -163,7 +165,7 @@ fn from_parts(
         .map(|plan| plan.get_inplace_scratch_len())
         .max()
         .ok_or(SolverError::InvalidDomain)?;
-    if required > 4 * maximum {
+    if required > AVX_SCRATCH_LANES * maximum {
         return Err(SolverError::ResourceLimit);
     }
     let workspace = FftWorkspace {
@@ -171,10 +173,9 @@ fn from_parts(
         grid: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
         input: filled(maximum, Complex64::new(0.0, 0.0))?,
         output: filled(maximum, Complex64::new(0.0, 0.0))?,
-        scratch: filled(4 * maximum, Complex64::new(0.0, 0.0))?,
-        transverse_tile: filled(
-            maximum
-                .checked_mul(TRANSVERSE_TILE_LANES)
+        scratch: filled(
+            (AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES)
+                .checked_mul(maximum)
                 .ok_or(SolverError::SizeOverflow)?,
             Complex64::new(0.0, 0.0),
         )?,

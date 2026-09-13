@@ -84,13 +84,14 @@ fn same_layout_cross_backend_workspaces_are_checked_before_transform() {
         .collect::<Vec<_>>();
     let mut owned_with_avx_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
     let mut avx_with_owned_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
-    owned
-        .forward(&input, &mut owned_with_avx_work, &mut avx_work)
-        .unwrap();
-    avx.forward(&input, &mut avx_with_owned_work, &mut owned_work)
-        .unwrap();
-    assert!(owned_with_avx_work.iter().all(|value| value.is_finite()));
-    assert!(avx_with_owned_work.iter().all(|value| value.is_finite()));
+    assert_eq!(
+        owned.forward(&input, &mut owned_with_avx_work, &mut avx_work),
+        Err(SolverError::InvalidPayload)
+    );
+    assert_eq!(
+        avx.forward(&input, &mut avx_with_owned_work, &mut owned_work),
+        Err(SolverError::InvalidPayload)
+    );
 }
 
 #[test]

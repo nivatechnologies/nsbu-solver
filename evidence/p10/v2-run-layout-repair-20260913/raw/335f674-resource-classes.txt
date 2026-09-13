@@ -1,0 +1,17 @@
+
+running 1 test
+classes=[27648, 15552, 6912, 2304, 0, 37792, 154696, 10936]
+
+thread 'direct_layout_resources_and_pre_cache_archive_remain_compatible' (1913744) panicked at crates/nsbu-benchmarks/tests/v2_archive.rs:193:69:
+called `Result::unwrap()` on an `Err` value: InvalidEncoding
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+direct_layout_resources_and_pre_cache_archive_remain_compatible --- FAILED
+
+failures:
+
+failures:
+    direct_layout_resources_and_pre_cache_archive_remain_compatible
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p nsbu-benchmarks --test v2_archive`

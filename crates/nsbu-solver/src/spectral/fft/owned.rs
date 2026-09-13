@@ -1,5 +1,5 @@
 //! Project-owned mixed-radix plan construction and reservation accounting.
-use super::{BackendPlan, FftPlan, FftWorkspace, TRANSVERSE_TILE_LANES};
+use super::{BackendPlan, FftPlan, FftWorkspace};
 use crate::storage::filled;
 use crate::{domain::Layout, Complex64, SolverError};
 
@@ -7,13 +7,9 @@ pub(super) fn reservation(layout: Layout) -> Result<usize, SolverError> {
     let dimensions = layout.dimensions();
     validate_dimensions(dimensions)?;
     let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
-    let workspace = maximum
-        .checked_mul(3 + TRANSVERSE_TILE_LANES)
-        .and_then(|n| n.checked_add(dimensions.iter().sum::<usize>()))
-        .ok_or(SolverError::SizeOverflow)?;
     let elements = layout
         .half_len()
-        .checked_add(workspace)
+        .checked_add(3 * maximum + dimensions.iter().sum::<usize>())
         .ok_or(SolverError::SizeOverflow)?;
     elements
         .checked_mul(16)
@@ -37,12 +33,6 @@ pub(super) fn new(layout: Layout) -> Result<(FftPlan, FftWorkspace), SolverError
         input: filled(maximum, Complex64::new(0.0, 0.0))?,
         output: filled(maximum, Complex64::new(0.0, 0.0))?,
         scratch: filled(maximum, Complex64::new(0.0, 0.0))?,
-        transverse_tile: filled(
-            maximum
-                .checked_mul(TRANSVERSE_TILE_LANES)
-                .ok_or(SolverError::SizeOverflow)?,
-            Complex64::new(0.0, 0.0),
-        )?,
     };
     Ok((
         FftPlan {

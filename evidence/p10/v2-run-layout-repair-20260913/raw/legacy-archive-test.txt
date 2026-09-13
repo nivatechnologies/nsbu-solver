@@ -1,0 +1,16 @@
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-20260913/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 2.85s
+     Running tests/v2_archive.rs (target/debug/deps/v2_archive-2c18c60751317a20)
+
+running 8 tests
+test accelerated_arithmetic_plan_is_not_relabelled_as_version_one_archive ... ok
+test direct_layout_resources_and_pre_cache_archive_remain_compatible ... ok
+test direct_read_reservation_refuses_excess_records ... ok
+test cached_profile_refuses_every_version_one_archive_operation ... ok
+test rejects_short_output_hash_and_caps ... ok
+test hochbruck_round_trip_keeps_full_work_ledger ... ok
+test round_trip_preserves_cm_full_state ... ok
+test round_trip_preserves_ho_full_state ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+

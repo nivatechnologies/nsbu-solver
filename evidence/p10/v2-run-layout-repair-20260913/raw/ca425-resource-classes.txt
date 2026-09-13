@@ -1,0 +1,6 @@
+
+running 1 test
+classes=[27648, 15552, 6912, 2304, 0, 36376, 152552, 10840]
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s
+

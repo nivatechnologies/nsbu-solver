@@ -1,5 +1,7 @@
 //! Workspace identity, shape, scratch, and finite-value validation.
-use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace};
+use super::{
+    BackendPlan, FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES, TRANSVERSE_TILE_LANES,
+};
 use crate::{domain::Layout, SolverError};
 
 impl FftPlan {
@@ -28,27 +30,27 @@ impl FftPlan {
             .into_iter()
             .max()
             .ok_or(SolverError::InvalidDomain)?;
-        let required_scratch = match &self.backend {
-            BackendPlan::Owned(_) => maximum,
-            BackendPlan::Avx(axes) => axes[0]
-                .forward
-                .iter()
-                .chain(&axes[0].inverse)
-                .map(|plan| plan.get_inplace_scratch_len())
-                .max()
-                .ok_or(SolverError::InvalidDomain)?,
+        let valid_scratch = match &self.backend {
+            BackendPlan::Owned(_) => work.scratch.len() == maximum,
+            BackendPlan::Avx(axes) => {
+                let required = axes[0]
+                    .forward
+                    .iter()
+                    .chain(&axes[0].inverse)
+                    .map(|plan| plan.get_inplace_scratch_len())
+                    .max()
+                    .ok_or(SolverError::InvalidDomain)?;
+                required <= AVX_SCRATCH_LANES * maximum
+                    && work.scratch.len() == (AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES) * maximum
+            }
         };
-        let required_tile = maximum
-            .checked_mul(super::TRANSVERSE_TILE_LANES)
-            .ok_or(SolverError::SizeOverflow)?;
         if real != self.layout.real_len()
             || half != self.layout.half_len()
             || work.layout != self.layout
             || work.grid.len() != self.layout.half_len()
             || work.input.len() != maximum
             || work.output.len() != maximum
-            || work.scratch.len() < required_scratch
-            || work.transverse_tile.len() != required_tile
+            || !valid_scratch
         {
             return Err(SolverError::InvalidPayload);
         }

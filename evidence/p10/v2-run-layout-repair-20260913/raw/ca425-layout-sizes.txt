@@ -1,0 +1,1 @@
+RunForce=592 V2Force=512 Parallel=592 RHS=1504 FFTPlan=112 FFTWork=136 Rotational=696 Plan=512 Run=5840 ReconstructedPlan=480 ReconstructedRun=7136
