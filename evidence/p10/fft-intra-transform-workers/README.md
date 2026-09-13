@@ -13,7 +13,10 @@ allocations across more than 63 operations, and an actual one-attempt timing.
 - Initial benchmark binary: `da2b756fd4454c3cc99dba52fc8b13f1b16f5f6a78e366d10c72bd0dbba11386`
 - Batched benchmark binary: `3cd7ce1eeb64d4fc0b3fc0c68dfda993dec0e5dbe67337df25bbd7e74b55212d`
 
-The harness uses deterministic dense real input, performs untimed serial and
+The archived binaries were built from `harness/src/main.used.rs`. The current
+`harness/src/main.rs` adds deterministic elapsed phase receipts before every
+long operation for any future bounded run. The run harness uses deterministic
+dense real input, performs untimed serial and
 parallel warmups, verifies canonical little-endian output-word hashes, then
 times one serial and parallel forward and inverse transform. Allocation regions
 cover each timed parallel call after warmup.

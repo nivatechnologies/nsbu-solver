@@ -62,6 +62,13 @@ each declares MIT OR Apache-2.0. num-traits also uses its build dependency autoc
 1.5.1 (Apache-2.0 OR MIT). The lockfile checksums and the registry package license
 files are authoritative for these separately fetched dependencies; no dependency
 source is vendored or relicensed.
+
+The opt-in bounded intra-transform worker prototype adds rayon 1.12.0 and its
+resolved runtime dependencies rayon-core 1.13.0, crossbeam-deque 0.8.8,
+crossbeam-epoch 0.9.21, crossbeam-utils 0.8.23 and either 1.18.0. Each declares
+MIT OR Apache-2.0. Exact registry checksums are recorded in Cargo.lock; these
+packages are fetched separately and no dependency source is vendored. The
+legacy FFT backends do not select the opt-in worker owner implicitly.
 Separately installed Rust quality tools and their licenses are declared in
 [quality/rust/README.md](quality/rust/README.md); none is a runtime dependency.
 

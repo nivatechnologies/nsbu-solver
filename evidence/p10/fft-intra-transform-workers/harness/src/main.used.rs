@@ -10,7 +10,6 @@ use std::time::Instant;
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
 fn main() {
-    let process_started = Instant::now();
     let args = std::env::args().collect::<Vec<_>>();
     assert_eq!(args.len(), 3, "usage: benchmark N WORKERS");
     let n = args[1].parse::<usize>().unwrap();
@@ -23,51 +22,37 @@ fn main() {
     let (parallel, mut parallel_work) = FftPlan::new_from_catalog(layout, &catalog, lane_bytes).unwrap();
     let extra = ParallelFftExecutor::additional_reservation(layout, backend, workers).unwrap();
     let executor = ParallelFftExecutor::new(layout, backend, workers, extra).unwrap();
-    phase("plans_ready", process_started);
     let input = (0..layout.real_len()).map(|index| {
         let bits = (index as u64).wrapping_mul(0x9e37_79b9_7f4a_7c15).rotate_left(17);
         (bits >> 11) as f64 * (1.0 / ((1_u64 << 53) as f64)) - 0.5
     }).collect::<Vec<_>>();
-    phase("input_ready", process_started);
     let mut serial_spectrum = vec![Complex64::new(0.0, 0.0); layout.half_len()];
     let mut parallel_spectrum = serial_spectrum.clone();
     let mut serial_real = vec![0.0; layout.real_len()];
     let mut parallel_real = serial_real.clone();
     serial.forward(&input, &mut serial_spectrum, &mut serial_work).unwrap();
-    phase("serial_forward_warm", process_started);
     executor.forward(&parallel, &input, &mut parallel_spectrum, &mut parallel_work).unwrap();
-    phase("parallel_forward_warm", process_started);
     serial.inverse(&serial_spectrum, &mut serial_real, &mut serial_work).unwrap();
-    phase("serial_inverse_warm", process_started);
     executor.inverse(&parallel, &parallel_spectrum, &mut parallel_real, &mut parallel_work).unwrap();
-    phase("parallel_inverse_warm", process_started);
     assert_eq!(hash_complex(&serial_spectrum), hash_complex(&parallel_spectrum));
     assert_eq!(hash_real(&serial_real), hash_real(&parallel_real));
     let started = Instant::now();
     serial.forward(&input, &mut serial_spectrum, &mut serial_work).unwrap();
     let serial_forward = started.elapsed().as_nanos();
-    phase("serial_forward_timed", process_started);
     let forward_region = Region::new(GLOBAL);
     let started = Instant::now();
     executor.forward(&parallel, &input, &mut parallel_spectrum, &mut parallel_work).unwrap();
     let parallel_forward = started.elapsed().as_nanos();
-    phase("parallel_forward_timed", process_started);
     let forward_allocations = forward_region.change();
     let started = Instant::now();
     serial.inverse(&serial_spectrum, &mut serial_real, &mut serial_work).unwrap();
     let serial_inverse = started.elapsed().as_nanos();
-    phase("serial_inverse_timed", process_started);
     let inverse_region = Region::new(GLOBAL);
     let started = Instant::now();
     executor.inverse(&parallel, &parallel_spectrum, &mut parallel_real, &mut parallel_work).unwrap();
     let parallel_inverse = started.elapsed().as_nanos();
-    phase("parallel_inverse_timed", process_started);
     let inverse_allocations = inverse_region.change();
     println!("{{\"n\":{n},\"workers\":{workers},\"lane_bytes\":{lane_bytes},\"additional_bytes\":{extra},\"serial_forward_ns\":{serial_forward},\"parallel_forward_ns\":{parallel_forward},\"serial_inverse_ns\":{serial_inverse},\"parallel_inverse_ns\":{parallel_inverse},\"forward_allocations\":[{},{},{}],\"inverse_allocations\":[{},{},{}],\"forward_sha256\":\"{}\",\"inverse_sha256\":\"{}\"}}", forward_allocations.allocations, forward_allocations.deallocations, forward_allocations.reallocations, inverse_allocations.allocations, inverse_allocations.deallocations, inverse_allocations.reallocations, hash_complex(&parallel_spectrum), hash_real(&parallel_real));
-}
-
-fn phase(name: &str, process_started: Instant) {
-    eprintln!("{{\"phase\":\"{name}\",\"elapsed_ns\":{}}}", process_started.elapsed().as_nanos());
 }
 
 fn hash_complex(values: &[Complex64]) -> String {
