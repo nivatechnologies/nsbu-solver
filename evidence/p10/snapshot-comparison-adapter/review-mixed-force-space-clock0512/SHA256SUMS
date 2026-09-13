@@ -1,4 +1,4 @@
-b667d2673dbc702b56f893b00b11f8fdf42f3aac82c5dffe1e28dead0ea76190  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/HANDOFF.md
+73e0d86df7b2b1778e31b3fa5bef55e78b60a59467757fcbfd4b8b934a0ad1aa  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/HANDOFF.md
 9a2f214629498338af374ea41758f62f76c0b43eb342a60a84000ed197276b12  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/PROPOSED-COMMAND.txt
 5063eae4038ab0a9773af147c4d5b251b5c14d8adc1676469a0ce082f6e810f7  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/baseline-n384-m384.json
 62963ed7babb537fcaf3fe5b2ea9b135eef9753656340d8b0494a64684eb7972  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/coarse-n256-m384.json
@@ -9,5 +9,5 @@ daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e  evidence/p10/s
 1cf1d0367c4dbdbbab770650898d1598068eb71f93ef44362726bbcc2bfc5981  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m384-clock0512-record.json
 0702d169488e7bf50665a2bd4c38ba9341d7268c8db8e70a640f675dd428c9b7  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m512-clock0512-attempt.json
 1ff72cfc499f48b508f78ad42f25c9060894d73a94e7546e27ba7dda62d7e8b3  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m512-clock0512-record.json
-3e40ae93df015c65fc40d1332de2258dbae83c4377e3d58ada0d21699deaa643  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/review-provenance.json
-67075f146e01f99931b668976261df6818b3e8667e6f17bb20f49cb38539bc82  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/semantic-preflight.json
+e601fcdd3654c5e11bbd3a411b7cc50a08af2511dadd4023826f9551a2b48e81  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/review-provenance.json
+87b5022af5f98a0591f083991c68906f7a3b958457c5f0fac96a321f78e949b1  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/semantic-preflight.json
