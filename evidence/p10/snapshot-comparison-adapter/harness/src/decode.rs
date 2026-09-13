@@ -1,4 +1,4 @@
-use crate::model::{debug, ClockHeader, Manifest, Snapshot};
+use crate::model::{debug, ClockHeader, ComparisonKind, Manifest, Snapshot};
 use nsbu_solver::{domain::validate_spectrum, Complex64};
 use sha2::{Digest, Sha256};
 use std::{
@@ -69,14 +69,32 @@ fn validate_evolution(manifest: &Manifest) -> Result<(), String> {
     let evolution = &manifest.evolution;
     if evolution.clock_target != manifest.target
         || evolution.comparison_endpoint != manifest.elapsed
-        || evolution.method != "cox-matthews"
-        || evolution.integration_force_dimensions != [384; 3]
+        || !valid_evolution_profile(manifest.comparison_kind, evolution)
         || evolution.schedule.is_empty()
     {
         return Err("invalid evolution semantics".into());
     }
     validate_tolerances(evolution)?;
     validate_schedule(evolution)
+}
+
+fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolution) -> bool {
+    match kind {
+        ComparisonKind::MatchedSpatial | ComparisonKind::TimeDiagnostic => {
+            evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [384; 3]
+        }
+        ComparisonKind::ForceResolutionDiagnostic => {
+            evolution.method == "cox-matthews"
+                && (evolution.integration_force_dimensions == [384; 3]
+                    || evolution.integration_force_dimensions == [512; 3])
+        }
+        ComparisonKind::MethodDiagnostic => {
+            matches!(
+                evolution.method.as_str(),
+                "cox-matthews" | "hochbruck-ostermann"
+            ) && evolution.integration_force_dimensions == [384; 3]
+        }
+    }
 }
 
 fn validate_tolerances(evolution: &crate::model::Evolution) -> Result<(), String> {

@@ -49,9 +49,13 @@ pub(crate) enum ComparisonKind {
     MatchedSpatial,
     #[serde(rename = "TIME_DIAGNOSTIC")]
     TimeDiagnostic,
+    #[serde(rename = "FORCE_RESOLUTION_DIAGNOSTIC")]
+    ForceResolutionDiagnostic,
+    #[serde(rename = "METHOD_DIAGNOSTIC")]
+    MethodDiagnostic,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct AdmissionGuard {
     pub advective_limit: f64,
@@ -261,7 +265,8 @@ pub(crate) struct TimeDiagnosticOutput<'a> {
     pub right_execution: &'a str,
     pub right_source_commit: &'a str,
     pub right_plan_sha256: &'a str,
-    pub arithmetic_control: &'a ArithmeticControl,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub arithmetic_control: Option<&'a ArithmeticControl>,
     pub left_hashes: Hashes<'a>,
     pub right_hashes: Hashes<'a>,
     pub clock: TimeClockOutput,

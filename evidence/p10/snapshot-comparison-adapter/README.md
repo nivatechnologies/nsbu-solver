@@ -54,6 +54,26 @@ labels itself `TIME_DIAGNOSTIC`, and always reports acceptance as
 `not_assessed` with zero accepted windows. It is not a trajectory, resume,
 state-injection, acceptance, or PDE-qualification interface.
 
+Two additional modes are closed, directional diagnostics for completed N384
+states. `FORCE_RESOLUTION_DIAGNOSTIC` admits only a left M384 and right M512
+integration-force grid with Cox–Matthews. Retained N384 dimensions, the complete
+schedule and clocks, case, quantum, endpoint, domain, viscosity, and tolerances
+must otherwise match bit for bit. `METHOD_DIAGNOSTIC` admits only left
+`cox-matthews` and right `hochbruck-ostermann` at retained N384 and integration
+force M384, again with every other evolution field identical. Both modes
+validate each exact identity/profile, schedule-derived epoch and accepted-step
+count, and admission guard. They preserve both sides' guards, identities,
+sources, backends, executions, plans, hashes, schedules, and clocks in their
+outputs. An arithmetic-control object is refused in these modes because the
+time-specific review schema cannot override their changed force or method
+contract. Their output schemas are respectively
+`p10-snapshot-force-resolution-diagnostic-output-v1` and
+`p10-snapshot-method-diagnostic-output-v1`; both report acceptance as
+`not_assessed` with zero accepted windows. Mixed modes, reversed directions,
+other force sizes or methods, and any additional physics difference are
+refused before state allocation. Neither mode may be used before a separate
+root review of the exact manifests.
+
 Before allocating either coefficient array, the harness checks both exact file lengths and admits `left coefficient bytes + right coefficient bytes + 1 MiB fixed overhead` under `CAP_BYTES`. The cushion conservatively covers bounded manifest and plan streaming, identity decode, SHA states, JSON output, and allocator bookkeeping. It streams each snapshot once and retains only its decoded three-component state. The decoder checks framing, exact identity and u128 clock fields, coefficient trailer SHA-256, finite values, Hermitian zero plane, and exact Nyquist zero. It reports the coefficient-state SHA-256 separately from the whole-file SHA-256; hashes across different retained grids are provenance, never an equality condition.
 
 For cubic retained grids, the admitted pair bounds are 1,538,719,744 bytes for N192/N384 and 1,772,879,872 bytes for N256/N384. The Rust runtime and thread stack remain process overhead outside this single-threaded harness allocation bound.

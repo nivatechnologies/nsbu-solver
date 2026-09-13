@@ -149,6 +149,44 @@ fn enable_time(left: &mut Manifest, right: &mut Manifest, root: &std::path::Path
     right.arithmetic_control = Some(control);
 }
 
+fn enable_fixed_diagnostic(left: &mut Manifest, right: &mut Manifest, kind: ComparisonKind) {
+    left.comparison_kind = kind;
+    right.comparison_kind = kind;
+    left.dimensions = [384; 3];
+    right.dimensions = [384; 3];
+    left.epoch = 2;
+    right.epoch = 2;
+    left.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "left-n384-profile".into(),
+    });
+    right.profile = Some(ProfileBinding {
+        kind: ProfileBindingKind::IdentityProfileField,
+        value: "right-n384-profile".into(),
+    });
+    left.identity = "fixture;profile=left-n384-profile".into();
+    right.identity = "fixture;profile=right-n384-profile".into();
+    left.admission_guard = Some(AdmissionGuard {
+        advective_limit: 0.45,
+        maximum_attempts: 2,
+    });
+    right.admission_guard = Some(AdmissionGuard {
+        advective_limit: 3.3,
+        maximum_attempts: 2,
+    });
+    left.arithmetic_control = None;
+    right.arithmetic_control = None;
+    match kind {
+        ComparisonKind::ForceResolutionDiagnostic => {
+            right.evolution.integration_force_dimensions = [512; 3];
+        }
+        ComparisonKind::MethodDiagnostic => {
+            right.evolution.method = "hochbruck-ostermann".into();
+        }
+        _ => unreachable!(),
+    }
+}
+
 fn fields(layout: Layout, scale: f64) -> [Vec<Complex64>; 3] {
     let mut result = std::array::from_fn(|_| vec![Complex64::new(0.0, 0.0); layout.half_len()]);
     for (axis, component) in result.iter_mut().enumerate() {
@@ -670,4 +708,130 @@ fn legacy_profile_binding_requires_the_exact_complete_identity() {
     assert!(compare::validate_manifest_pair(&left, &right)
         .unwrap_err()
         .contains("profile does not match"));
+}
+
+#[test]
+fn force_resolution_diagnostic_is_closed_and_directional() {
+    let root = root("force-diagnostic");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    let values = fields(left.domain().unwrap().layout(), 1.0);
+    write(&mut left, &values);
+    write(&mut right, &values);
+    enable_fixed_diagnostic(
+        &mut left,
+        &mut right,
+        ComparisonKind::ForceResolutionDiagnostic,
+    );
+    assert_manifest_decodes(&root, "force-left.json", &left);
+    assert_manifest_decodes(&root, "force-right.json", &right);
+    assert!(compare::validate_manifest_pair(&left, &right).is_ok());
+    assert_ne!(left.admission_guard, right.admission_guard);
+
+    let mut changed = right.clone();
+    changed.evolution.integration_force_dimensions = [384; 3];
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    let mut reversed_left = left.clone();
+    let mut reversed_right = right.clone();
+    reversed_left.evolution.integration_force_dimensions = [512; 3];
+    reversed_right.evolution.integration_force_dimensions = [384; 3];
+    assert!(compare::validate_manifest_pair(&reversed_left, &reversed_right).is_err());
+    changed = right.clone();
+    changed.evolution.method = "hochbruck-ostermann".into();
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    changed = right.clone();
+    changed.dimensions = [383; 3];
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    assert_other_physics_rejected(&left, &right);
+}
+
+#[test]
+fn method_diagnostic_is_closed_and_directional() {
+    let root = root("method-diagnostic");
+    let mut left = manifest(root.join("left.bin"), 4, "left");
+    let mut right = manifest(root.join("right.bin"), 4, "right");
+    let values = fields(left.domain().unwrap().layout(), 1.0);
+    write(&mut left, &values);
+    write(&mut right, &values);
+    enable_fixed_diagnostic(&mut left, &mut right, ComparisonKind::MethodDiagnostic);
+    assert_manifest_decodes(&root, "method-left.json", &left);
+    assert_manifest_decodes(&root, "method-right.json", &right);
+    assert!(compare::validate_manifest_pair(&left, &right).is_ok());
+    assert_ne!(left.admission_guard, right.admission_guard);
+
+    let mut changed = right.clone();
+    changed.evolution.method = "cox-matthews".into();
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    let mut reversed_left = left.clone();
+    let mut reversed_right = right.clone();
+    reversed_left.evolution.method = "hochbruck-ostermann".into();
+    reversed_right.evolution.method = "cox-matthews".into();
+    assert!(compare::validate_manifest_pair(&reversed_left, &reversed_right).is_err());
+    changed = right.clone();
+    changed.evolution.integration_force_dimensions = [512; 3];
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    changed = right.clone();
+    changed.dimensions = [256; 3];
+    assert!(compare::validate_manifest_pair(&left, &changed).is_err());
+    assert_other_physics_rejected(&left, &right);
+}
+
+fn assert_other_physics_rejected(left: &Manifest, right: &Manifest) {
+    let rejects = |candidate: &Manifest| compare::validate_manifest_pair(left, candidate).is_err();
+    let mut changed = right.clone();
+    changed.evolution.case_sha256 = "d".repeat(64);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.quantum_exponent += 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.clock_target += 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.comparison_endpoint -= 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.lengths[0] = f64::from_bits(1.0_f64.to_bits() + 1);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.viscosity = f64::from_bits(0.01_f64.to_bits() + 1);
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.schedule[0].step_ticks = 16;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.absolute_tolerances[0] = 2e-5;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.evolution.relative_tolerances[1] = 2e-5;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.accepted_steps -= 1;
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.profile.as_mut().unwrap().value.push_str("-changed");
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.arithmetic_control = left.arithmetic_control.clone().or_else(|| {
+        let mut l = left.clone();
+        let mut r = right.clone();
+        let suffix = match left.comparison_kind {
+            ComparisonKind::ForceResolutionDiagnostic => "force",
+            ComparisonKind::MethodDiagnostic => "method",
+            _ => unreachable!("helper is only used by fixed-schedule diagnostics"),
+        };
+        let temp = root(&format!("forbidden-control-{suffix}"));
+        enable_time(&mut l, &mut r, &temp);
+        l.arithmetic_control
+    });
+    assert!(rejects(&changed));
+    changed = right.clone();
+    changed.comparison_kind = ComparisonKind::MatchedSpatial;
+    assert!(rejects(&changed));
+}
+
+fn assert_manifest_decodes(root: &std::path::Path, name: &str, manifest: &Manifest) {
+    let path = root.join(name);
+    fs::write(&path, serde_json::to_vec(manifest).unwrap()).unwrap();
+    decode::read_manifest(&path).unwrap();
 }
