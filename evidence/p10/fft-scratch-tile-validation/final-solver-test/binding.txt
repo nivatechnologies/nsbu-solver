@@ -1,0 +1,5 @@
+source_commit=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
+archive_parent=a3a0765f9bb9baebc1cd2b50b2a88451fe6563f0
+CARGO_BUILD_JOBS=2
+CARGO_TARGET_DIR=/mnt/niva-array/nsbu-solver/work/p10-fft-scratch-tile-validation-20260913/target-final-solver-test-9eba11f
+command=timeout --foreground --signal=TERM --kill-after=60s 1200s cargo test -p nsbu-solver --locked --no-fail-fast -- --test-threads=1

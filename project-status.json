@@ -574,5 +574,20 @@
     "archived_metadata_files": 98,
     "accepted_windows": 0,
     "scope": "Fresh independent from-rest N384/M512 trajectory. New r6 force comparisons at2560/3584/4096 supplement earlier r5 comparisons; diagnostic inventory only. HO remains incomplete at3072; force-channel qualification and all required PDE acceptance channels remain outstanding."
+  },
+  "p10_avx_scratch_tail_fft_candidate": {
+    "status": "validated_candidate_not_integrated",
+    "production_source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+    "test_correction_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+    "evidence": "evidence/p10/fft-scratch-tile-validation/README.md",
+    "solver_tests_passed": 251,
+    "solver_tests_failed": 0,
+    "scalar_n768_four_round_word_hashes_identical": true,
+    "force_and_rhs_baseline_word_hashes_identical": true,
+    "steady_allocations": 0,
+    "actual_attempt_evidence": "evidence/p10/n512-m768-scratch-tail-timing-20260913/execution-receipt.json",
+    "actual_attempt_integration_seconds": 1982.648986471,
+    "prior_actual_attempt_integration_seconds": 2067.912943179,
+    "scope": "AVX scratch-tail layout preserves OwnedRadix allocation and traversal. Full experiment regression remains pending. One actual from-rest uncommitted attempt, exact local-error words versus prior source, no prior candidate hash for state equality comparison. Single-sample timing does not establish general speedup. No PDE qualification or accepted window."
   }
 }

@@ -1,0 +1,7 @@
+{
+  "schema": "p10-fft-scratch-tile-scalar-authorization-v1",
+  "launcher_sha256": "6134c1973d77095f02212afcb6ff42a81ba298bcac524efe389695b118c6dd0e",
+  "authorized_order": ["untiled-a", "tiled-a", "tiled-b", "untiled-b"],
+  "scope": "four-round scalar N768 diagnostic after fresh launcher gates",
+  "production_adoption": false
+}

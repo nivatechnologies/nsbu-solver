@@ -1,0 +1,10 @@
+{
+  "schema": "p10-fft-scratch-tile-validation-identity-v1",
+  "algorithm_source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "validation_source": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "harness_source": "3afdfddf3c7b4d230ce5994100ecddc4f00901e9",
+  "scalar_tiled_binary_sha256": "631067278e605e0901539069387fd647d188c26e223ce6628c7aab57b8ff4c43",
+  "scalar_untiled_binary_sha256": "003969a932f7cc794db8030c99dc50aca6256f48307c34fdd80eedf7d9b2b984",
+  "w3_tiled_binary_sha256": "73d0c8ad66f4f62db670d6d20c66b67f4d059797f339c04008c525f36463e8c9",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+}

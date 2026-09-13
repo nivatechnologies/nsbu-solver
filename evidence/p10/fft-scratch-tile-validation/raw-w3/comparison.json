@@ -1,0 +1,28 @@
+{
+  "schema": "p10-fft-scratch-tile-w3-result-v1",
+  "status": "completed_controls_not_adopted",
+  "tiled_force": {
+    "exit": 0,
+    "wall_seconds": 689.61,
+    "max_rss_kib": 48841448,
+    "additional_bytes": 14540099328,
+    "output_sha256": "a5a74f8126567c1d29fb091090c108305c9c9404aa92ad04abc101036c9ca65b",
+    "matches_frozen_untiled": true,
+    "internal_serial_w3_words_equal": true,
+    "steady_allocations_zero": true
+  },
+  "tiled_rhs": {
+    "exit": 0,
+    "wall_seconds": 606.52,
+    "max_rss_kib": 70656428,
+    "additional_bytes": 21787856768,
+    "output_sha256": "7fbbe90cb2aeeb116e70abf180a86eae4448d3adaac131c65399b55f730b5c73",
+    "matches_frozen_untiled": true,
+    "internal_serial_w3_words_equal": true,
+    "steady_allocations_zero": true
+  },
+  "swaps": 0,
+  "major_faults": 0,
+  "qualification": false,
+  "production_adoption": false
+}

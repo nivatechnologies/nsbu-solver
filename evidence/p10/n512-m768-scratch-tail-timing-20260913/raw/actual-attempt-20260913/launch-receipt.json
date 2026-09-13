@@ -1,0 +1,21 @@
+{
+  "schema": "p10-n512-m768-scratch-tail-launch-receipt-v1",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "test_source_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "harness_source_commit": "6442ec98bf55582e1990aac874e3b0234252add8",
+  "binary_sha256": "e36b36b725b2caa1f9ca6835e4cb66c75a3c2881438f5b3528f0ffa27028ea0d",
+  "internal_resource_bytes": 238210324976,
+  "address_space_limit_bytes": 274877906944,
+  "mem_available_kib": 407930852,
+  "disk_available_bytes": 6748723179520,
+  "minimum_disk_available_bytes": 1073741824,
+  "timeout_seconds": 2700,
+  "kill_grace_seconds": 60,
+  "review_cleanup_reserve_seconds": 300,
+  "campaign_deadline_epoch": 1789329174,
+  "owner_pid": 2027209,
+  "owner_pgid": 2027209,
+  "owner_starttime": 12283253,
+  "owner_cmdline_sha256": "5a52a219e8bfa54b1d034726fc904c979150ef9994e492cc93048ef3ef04fd1c",
+  "run_dir": "/mnt/niva-array/nsbu-solver/work/p10-n512-m768-scratch-tail-timing-prep-20260913/evidence/p10/n512-m768-scratch-tail-timing-20260913/raw/actual-attempt-20260913"
+}

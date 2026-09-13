@@ -1,0 +1,39 @@
+{
+  "schema": "p10-n512-m768-scratch-tail-timing-comparison-v1",
+  "inputs_equal": true,
+  "old": {
+    "source_commit": "6442ec98bf55582e1990aac874e3b0234252add8",
+    "result_sha256": "2651aefa9055cc19c8c2fde0367f6beea57de592ba1cf1bea7970e53778a8102",
+    "wall_seconds": 2209.71,
+    "integration_seconds": 2067.912943179,
+    "rhs_seconds": 1969.460301335,
+    "maximum_rss_kib": 155283456,
+    "candidate_coefficient_sha256": null
+  },
+  "scratch_tail": {
+    "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+    "result_sha256": "d45f2312626503e4f6f1b7096e207f1b8266b91950ee32d5c08bc5314fecf837",
+    "wall_seconds": 2179.18,
+    "integration_seconds": 1982.648986471,
+    "rhs_seconds": 1884.472128906,
+    "maximum_rss_kib": 155286528,
+    "candidate_coefficient_sha256": "2fdef176af2ca28e6d78183075539e8204095120a0d2975694bec240679d5e13"
+  },
+  "deltas_scratch_tail_minus_old": {
+    "wall_seconds": -30.53,
+    "integration_seconds": -85.263956708,
+    "rhs_seconds": -84.988172429,
+    "maximum_rss_kib": 3072
+  },
+  "local_error_word_comparison": {
+    "l2_equal": true,
+    "l2_little_endian_u64_bytes_hex": "78cacf927e0c513e",
+    "h1_equal": true,
+    "h1_little_endian_u64_bytes_hex": "c320a0dfcc37673e"
+  },
+  "limits": [
+    "one timing sample per implementation under different ambient host conditions",
+    "the old result did not record a candidate coefficient hash, so no old/new candidate hash equality can be assessed",
+    "local integrator acceptance is not PDE qualification or window acceptance"
+  ]
+}

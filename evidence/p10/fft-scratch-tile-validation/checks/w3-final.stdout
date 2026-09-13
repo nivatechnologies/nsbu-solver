@@ -1,0 +1,12 @@
+
+running 7 tests
+test spectral::w3::tests::admission_is_closed_to_fixture_6_and_experiment_lengths_through_768 ... ok
+test spectral::w3::tests::admitted_force_layouts_have_exact_w3_reservations ... ok
+test spectral::w3::tests::every_caught_injected_panic_drains_and_terminates_the_owner ... ok
+test spectral::w3::tests::every_injected_numerical_failure_drains_and_terminates_the_owner ... ok
+test spectral::w3::tests::exact_additional_cap_constructs_and_one_byte_short_refuses ... ok
+test spectral::w3::tests::mismatched_seed_backend_refuses_before_owner_construction ... ok
+test spectral::w3::tests::small_avx_w3_forward_matches_serial_bits_and_preserves_inputs ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.01s
+

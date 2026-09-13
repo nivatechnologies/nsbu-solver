@@ -1,0 +1,14 @@
+{
+  "schema": "p10-fft-scratch-tile-initial-w3-test-failure-v1",
+  "source": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "command": "cargo test -p nsbu-solver --lib spectral::w3::tests::admitted_force_layouts_have_exact_w3_reservations -- --exact --nocapture --test-threads=1",
+  "status": 101,
+  "first_observed_mismatch": {
+    "layout": 512,
+    "mode": "forward",
+    "actual": 4318465792,
+    "stale_expected": 4318465840
+  },
+  "classification": "test constants retained the prior separate-Vec header; production reservation arithmetic was unchanged",
+  "raw_log_archived": false
+}

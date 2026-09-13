@@ -1,0 +1,145 @@
+diff -ruN --exclude target evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/Cargo.lock evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.lock
+--- evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/Cargo.lock	2026-09-13 17:23:07.121499990 +0000
++++ evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.lock	2026-09-13 17:21:43.792714688 +0000
+@@ -113,11 +113,12 @@
+ ]
+ 
+ [[package]]
+-name = "p10-n512-m768-one-attempt-timing"
++name = "p10-n512-m768-scratch-tail-timing"
+ version = "0.0.0"
+ dependencies = [
+  "nsbu-benchmarks",
+  "nsbu-solver",
++ "sha2",
+  "stats_alloc",
+ ]
+ 
+diff -ruN --exclude target evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/Cargo.toml evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.toml
+--- evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/Cargo.toml	2026-09-13 17:23:07.111499776 +0000
++++ evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.toml	2026-09-13 17:21:33.274489134 +0000
+@@ -1,5 +1,5 @@
+ [package]
+-name = "p10-n512-m768-one-attempt-timing"
++name = "p10-n512-m768-scratch-tail-timing"
+ version = "0.0.0"
+ edition = "2021"
+ publish = false
+@@ -10,3 +10,4 @@
+ nsbu-benchmarks = { path = "../../../../crates/nsbu-benchmarks" }
+ nsbu-solver = { path = "../../../../crates/nsbu-solver" }
+ stats_alloc = "=0.1.10"
++sha2 = { version = "=0.10.9", default-features = false, features = ["force-soft"] }
+diff -ruN --exclude target evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/src/main.rs evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/main.rs
+--- evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/src/main.rs	2026-09-13 17:23:07.135500289 +0000
++++ evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/main.rs	2026-09-13 17:21:11.659025457 +0000
+@@ -15,6 +15,7 @@
+     spectral::{FftBackend, FftCatalog, W3FftIdentity, W3FftMode, W3FftPool},
+     SolverError,
+ };
++use sha2::{Digest, Sha256};
+ use stats_alloc::{Region, StatsAlloc, INSTRUMENTED_SYSTEM};
+ use std::{
+     alloc::System,
+@@ -34,12 +35,14 @@
+ const WORKERS: usize = 32;
+ const TICKS: u128 = 64;
+ const ADVECTIVE_LIMIT: f64 = 3.3;
+-const CAP: usize = 238_209_735_152;
++const CAP: usize = 238_210_324_976;
+ const OVERHEAD: usize =
+     64 * 1024 + TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead();
+-const FORWARD_ADDITIONAL: usize = 14_539_902_720;
+-const BIDIRECTIONAL_ADDITIONAL: usize = 21_787_660_160;
+-const SOURCE_COMMIT: &str = env!("RUN_SOURCE");
++const FORWARD_ADDITIONAL: usize = 14_540_099_328;
++const BIDIRECTIONAL_ADDITIONAL: usize = 21_787_856_768;
++const PRODUCTION_SOURCE_COMMIT: &str = "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0";
++const TEST_SOURCE_COMMIT: &str = "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645";
++const HARNESS_SOURCE_COMMIT: &str = "6442ec98bf55582e1990aac874e3b0234252add8";
+ 
+ #[derive(Clone, Copy)]
+ struct Admission {
+@@ -113,7 +116,7 @@
+         return Err("closed peak or one-byte-under admission mismatch".into());
+     }
+     println!(
+-        "status=preflight_only source={SOURCE_COMMIT} case_sha256={CASE_SHA256} retained={RETAINED} samples={SAMPLES} method=cox-matthews ticks={TICKS} maximum_attempts=1 advective_limit={ADVECTIVE_LIMIT} absolute_tolerance_l2=1e-5 absolute_tolerance_h1=1e-4 relative_tolerance_l2=1e-5 relative_tolerance_h1=1e-5 catalog_bytes={} cached_force_bytes={} force_work_units={} force_scalar_transforms={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={CAP}",
++        "status=preflight_only production_source={PRODUCTION_SOURCE_COMMIT} test_source={TEST_SOURCE_COMMIT} harness_source={HARNESS_SOURCE_COMMIT} case_sha256={CASE_SHA256} retained={RETAINED} samples={SAMPLES} method=cox-matthews ticks={TICKS} maximum_attempts=1 advective_limit={ADVECTIVE_LIMIT} absolute_tolerance_l2=1e-5 absolute_tolerance_h1=1e-4 relative_tolerance_l2=1e-5 relative_tolerance_h1=1e-5 catalog_bytes={} cached_force_bytes={} force_work_units={} force_scalar_transforms={} rhs_bytes={} attempt_bytes={} overhead_bytes={OVERHEAD} total={CAP}",
+         a.catalog, a.force.storage_bytes, a.force.work_units, a.force.scalar_transforms, a.rhs, a.attempt
+     );
+     Ok(())
+@@ -173,10 +176,37 @@
+     if result.rhs_calls != 12 || measurement.calls != 12 || hits != [7, 5] || consumption[0] != 12 {
+         return Err("attempt work identity mismatch".into());
+     }
+-    writeln!(output, "{{\"schema\":\"p10-n512-m768-one-attempt-timing-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"source_commit\":\"{SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":768,\"method\":\"cox-matthews\",\"advective_limit\":3.3,\"absolute_tolerances\":[1e-5,1e-4],\"relative_tolerances\":[1e-5,1e-5],\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"w3_forward_additional_bytes\":{FORWARD_ADDITIONAL},\"w3_bidirectional_additional_bytes\":{BIDIRECTIONAL_ADDITIONAL},\"timer_identity\":\"{}\",\"qualification\":false}}", result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
++    let candidate_sha256 = match result.accepted.as_ref() {
++        Some(token) => Some(coefficient_sha256(
++            candidate.proposal(&state, token).map_err(debug)?,
++        )?),
++        None => None,
++    };
++    writeln!(output, "{{\"schema\":\"p10-n512-m768-scratch-tail-one-attempt-timing-v1\",\"status\":\"actual_from_rest_attempt_complete_uncommitted\",\"production_source_commit\":\"{PRODUCTION_SOURCE_COMMIT}\",\"test_source_commit\":\"{TEST_SOURCE_COMMIT}\",\"harness_source_commit\":\"{HARNESS_SOURCE_COMMIT}\",\"case_sha256\":\"{CASE_SHA256}\",\"retained\":512,\"samples\":768,\"method\":\"cox-matthews\",\"advective_limit\":3.3,\"absolute_tolerances\":[1e-5,1e-4],\"relative_tolerances\":[1e-5,1e-5],\"clock_exponent\":-20,\"clock_target\":8192,\"attempted_from\":0,\"ticks\":64,\"attempted_to\":64,\"maximum_attempts\":1,\"rhs_calls\":{},\"rhs_timed_calls\":{},\"cache_misses\":{},\"cache_hits\":{},\"consumed_work_units\":{},\"consumed_scalar_transforms\":{},\"integration_seconds\":{:.17e},\"rhs_seconds\":{:.17e},\"error_ratio_l2\":{:.17e},\"error_ratio_h1\":{:.17e},\"local_accepted_token_present\":{},\"candidate_coefficient_sha256\":{},\"candidate_hash_encoding\":\"component-major-axis-0-through-2;coefficient-order;re-u64-le-then-im-u64-le\",\"committed\":false,\"published\":false,\"steady_allocations\":0,\"resource_bytes\":{},\"w3_forward_additional_bytes\":{FORWARD_ADDITIONAL},\"w3_bidirectional_additional_bytes\":{BIDIRECTIONAL_ADDITIONAL},\"timer_identity\":\"{}\",\"qualification\":false}}", result.rhs_calls, measurement.calls, hits[1], hits[0], consumption[1], consumption[2], seconds, measurement.seconds, result.indicators.ratios[0], result.indicators.ratios[1], result.accepted.is_some(), candidate_sha256.as_ref().map_or("null".to_string(), |value| format!("\"{value}\"")), a.plan.total(), timed_rhs::IDENTITY).map_err(|e| e.to_string())?;
+     output.flush().map_err(|e| e.to_string())
+ }
+ 
++fn coefficient_sha256(state: &SpectralState) -> Result<String, String> {
++    coefficient_sha256_components([
++        state.component(0).map_err(debug)?,
++        state.component(1).map_err(debug)?,
++        state.component(2).map_err(debug)?,
++    ])
++}
++
++fn coefficient_sha256_components(
++    components: [&[nsbu_solver::Complex64]; 3],
++) -> Result<String, String> {
++    let mut hash = Sha256::new();
++    for component in components {
++        for value in component {
++            hash.update(value.re.to_bits().to_le_bytes());
++            hash.update(value.im.to_bits().to_le_bytes());
++        }
++    }
++    Ok(format!("{:x}", hash.finalize()))
++}
++
+ fn require_identities(
+     domain: Domain,
+     samples: Layout,
+diff -ruN --exclude target evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/src/tests.rs evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/tests.rs
+--- evidence/p10/n512-m768-scratch-tail-timing-20260913/prepared/original-harness/src/tests.rs	2026-09-13 17:23:07.145500504 +0000
++++ evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/tests.rs	2026-09-13 17:21:11.669025671 +0000
+@@ -15,12 +15,12 @@
+             10_899_947_520,
+             3_233_808_384,
+             29_362_480,
+-            122_443_729_976,
++            122_444_319_800,
+             30_182_212_728,
+             65_552,
+         ]
+     );
+-    assert_eq!(a.force.storage_bytes, 59_788_791_240);
++    assert_eq!(a.force.storage_bytes, 59_789_086_152);
+     assert_eq!(
+         TimedRhs::<SpectralRhs<CachedReducedForce>>::reservation_overhead(),
+         16
+@@ -30,6 +30,16 @@
+ }
+ 
+ #[test]
++fn candidate_hash_uses_component_order_and_little_endian_binary64_words() {
++    let a = [Complex64::new(1.0, -2.0), Complex64::new(0.5, -0.0)];
++    let b = [Complex64::new(3.25, 4.5)];
++    assert_eq!(
++        coefficient_sha256_components([&a, &b, &[]]).unwrap(),
++        "7756e4b9b28758c9eecd0ba6dfb48d0072624596dfb7b365b34be0bd51968e59"
++    );
++}
++
++#[test]
+ fn sole_from_rest_interval_has_exact_clock_and_five_cache_nodes() {
+     let clock = TickClock::from_rest(-20, 8192).unwrap();
+     assert_eq!(clock.elapsed(), 0);

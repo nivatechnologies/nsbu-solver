@@ -1,0 +1,16 @@
+--- /mnt/niva-array/nsbu-solver/work/p10-fft-tile-w3-controls-20260913/evidence/p10/fft-transverse-tile-w3-controls/harness/src/tests.rs	2026-09-13 16:04:57.098152328 +0000
++++ evidence/p10/fft-scratch-tile-validation/w3-harness/src/tests.rs	2026-09-13 17:01:57.672924014 +0000
+@@ -48,11 +48,11 @@
+ fn reviewed_768_admission_matches_formulas_and_1024_remains_closed() {
+     assert_eq!(
+         TILED_FORWARD_ADDITIONAL - UNTILED_FORWARD_ADDITIONAL,
+-        196_656
++        196_608
+     );
+     assert_eq!(
+         TILED_BIDIRECTIONAL_ADDITIONAL - UNTILED_BIDIRECTIONAL_ADDITIONAL,
+-        196_656
++        196_608
+     );
+     let b = FftBackend::RustFft6_4_1AvxFma;
+     if b.ensure_available().is_ok() {

@@ -147,6 +147,13 @@ in RHS evaluation. This exceeds the preliminary runtime estimate and motivates
 a bounded FFT locality benchmark before a long trajectory; it does not establish
 trajectory convergence. See the [timing result](../evidence/p10/n512-m768-one-attempt-timing/RUN-RESULT.md).
 
+The isolated AVX scratch-tail FFT candidate passed 251 solver tests and full-size
+force/RHS word-equality controls. Its actual N512/M768 attempt took 1982.65 seconds
+in integration versus 2067.91 seconds previously; the local-error words matched
+exactly. This single sample gives about 4.1% lower integration time, rather than
+the roughly 35% isolated scalar-transform improvement. Experiment-level regression
+is still pending; the candidate is not integrated. See the [execution comparison](../evidence/p10/n512-m768-scratch-tail-timing-20260913/timing-comparison.json).
+
 The matched M512-force residual probe at clock 1112 is now complete. Its retained-band
 H1 residual decreases from `935.56` to `22.303`, while the omitted-band value
 remains near `1932.91`; full H1 decreases from `2147.41` to `1933.04`. This

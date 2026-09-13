@@ -1,0 +1,326 @@
+diff --git a/crates/nsbu-solver/src/spectral/fft.rs b/crates/nsbu-solver/src/spectral/fft.rs
+index 0de919b..a43fae3 100644
+--- a/crates/nsbu-solver/src/spectral/fft.rs
++++ b/crates/nsbu-solver/src/spectral/fft.rs
+@@ -8,6 +8,9 @@ mod workspace;
+ use crate::{domain::Layout, Complex64, SolverError};
+ pub use avx::FftCatalog;
+ 
++const AVX_SCRATCH_LANES: usize = 4;
++const TRANSVERSE_TILE_LANES: usize = 8;
++
+ /// Immutable arithmetic/backend identity for every scalar transform owner.
+ #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+ pub enum FftBackend {
+diff --git a/crates/nsbu-solver/src/spectral/fft/avx.rs b/crates/nsbu-solver/src/spectral/fft/avx.rs
+index da164fc..6250e52 100644
+--- a/crates/nsbu-solver/src/spectral/fft/avx.rs
++++ b/crates/nsbu-solver/src/spectral/fft/avx.rs
+@@ -1,5 +1,7 @@
+ //! Closed-size RustFFT AVX plan ownership and mutable workspace construction.
+-use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace};
++use super::{
++    BackendPlan, FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES, TRANSVERSE_TILE_LANES,
++};
+ use crate::storage::filled;
+ use crate::{domain::Layout, Complex64, SolverError};
+ use rustfft::{Fft, FftDirection};
+@@ -99,9 +101,9 @@ pub(super) fn reservation(layout: Layout) -> Result<usize, SolverError> {
+ pub(super) fn workspace_reservation(layout: Layout) -> Result<usize, SolverError> {
+     let dimensions = validate_layout(layout)?;
+     let maximum = *dimensions.iter().max().ok_or(SolverError::InvalidDomain)?;
+-    let workspace_elements = layout
+-        .half_len()
+-        .checked_add(6 * maximum)
++    let workspace_elements = maximum
++        .checked_mul(2 + AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES)
++        .and_then(|n| layout.half_len().checked_add(n))
+         .ok_or(SolverError::SizeOverflow)?;
+     workspace_elements
+         .checked_mul(size_of::<Complex64>())
+@@ -163,7 +165,7 @@ fn from_parts(
+         .map(|plan| plan.get_inplace_scratch_len())
+         .max()
+         .ok_or(SolverError::InvalidDomain)?;
+-    if required > 4 * maximum {
++    if required > AVX_SCRATCH_LANES * maximum {
+         return Err(SolverError::ResourceLimit);
+     }
+     let workspace = FftWorkspace {
+@@ -171,7 +173,12 @@ fn from_parts(
+         grid: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
+         input: filled(maximum, Complex64::new(0.0, 0.0))?,
+         output: filled(maximum, Complex64::new(0.0, 0.0))?,
+-        scratch: filled(4 * maximum, Complex64::new(0.0, 0.0))?,
++        scratch: filled(
++            (AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES)
++                .checked_mul(maximum)
++                .ok_or(SolverError::SizeOverflow)?,
++            Complex64::new(0.0, 0.0),
++        )?,
+     };
+     Ok((
+         FftPlan {
+diff --git a/crates/nsbu-solver/src/spectral/fft/transform.rs b/crates/nsbu-solver/src/spectral/fft/transform.rs
+index 4d1079b..1d6c7d7 100644
+--- a/crates/nsbu-solver/src/spectral/fft/transform.rs
++++ b/crates/nsbu-solver/src/spectral/fft/transform.rs
+@@ -1,9 +1,11 @@
+ //! Forward and inverse transform execution for an admitted plan and workspace.
+ use super::workspace::finite_real;
+-use super::{owned, BackendPlan, FftPlan, FftWorkspace};
++use super::{owned, BackendPlan, FftPlan, FftWorkspace, AVX_SCRATCH_LANES};
+ use crate::spectral::radix::transform;
+ use crate::{Complex64, SolverError};
+ 
++mod tiled;
++
+ impl FftPlan {
+     /// Forward R2C coefficients include division by the complete physical sample count.
+     /// Nyquist coefficients are represented here; strict-band cropping is a separate operator.
+@@ -95,7 +97,12 @@ impl FftPlan {
+                 } else {
+                     &axes.forward[axis]
+                 };
+-                plan.process_with_scratch(&mut input[..length], scratch);
++                let [nx, ny, nz] = self.layout.dimensions();
++                let maximum = nx.max(ny).max(nz);
++                plan.process_with_scratch(
++                    &mut input[..length],
++                    &mut scratch[..AVX_SCRATCH_LANES * maximum],
++                );
+                 output[..length].copy_from_slice(&input[..length]);
+             }
+         }
+@@ -108,6 +115,10 @@ impl FftPlan {
+     }
+ 
+     fn transverse_axis(&self, work: &mut FftWorkspace, inverse: bool, axis: usize) {
++        if matches!(&self.backend, BackendPlan::Avx(_)) {
++            self.transverse_axis_tiled(work, inverse, axis);
++            return;
++        }
+         let [nx, ny, nz] = self.layout.dimensions();
+         let half = nz / 2 + 1;
+         let (length, rows, stride) = if axis == 0 {
+diff --git a/crates/nsbu-solver/src/spectral/fft/transform/tiled.rs b/crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+new file mode 100644
+index 0000000..7ae85d0
+--- /dev/null
++++ b/crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+@@ -0,0 +1,103 @@
++//! Backend-local tiled transverse traversal for the AVX FFT profile.
++use super::*;
++use crate::spectral::fft::TRANSVERSE_TILE_LANES;
++
++impl FftPlan {
++    pub(super) fn transverse_axis_tiled(
++        &self,
++        work: &mut FftWorkspace,
++        inverse: bool,
++        axis: usize,
++    ) {
++        let [nx, ny, nz] = self.layout.dimensions();
++        let maximum = nx.max(ny).max(nz);
++        let half = nz / 2 + 1;
++        let (length, rows, stride) = if axis == 0 {
++            (nx, ny, ny * half)
++        } else {
++            (ny, nx, half)
++        };
++        let prefix = AVX_SCRATCH_LANES * maximum;
++        for row in 0..rows {
++            let row_base = if axis == 0 {
++                row * half
++            } else {
++                row * ny * half
++            };
++            for k_start in (0..half).step_by(TRANSVERSE_TILE_LANES) {
++                let width = (half - k_start).min(TRANSVERSE_TILE_LANES);
++                {
++                    let tile = &mut work.scratch[prefix..];
++                    gather_tile(&work.grid, tile, row_base + k_start, width, length, stride);
++                }
++                self.transform_transverse_tile(work, inverse, axis, width, length, prefix);
++                {
++                    let tile = &work.scratch[prefix..];
++                    scatter_tile(
++                        &mut work.grid,
++                        tile,
++                        row_base + k_start,
++                        width,
++                        length,
++                        stride,
++                    );
++                }
++            }
++        }
++    }
++
++    fn transform_transverse_tile(
++        &self,
++        work: &mut FftWorkspace,
++        inverse: bool,
++        axis: usize,
++        width: usize,
++        length: usize,
++        prefix: usize,
++    ) {
++        for lane in 0..width {
++            let range = prefix + lane * length..prefix + (lane + 1) * length;
++            work.input[..length].copy_from_slice(&work.scratch[range.clone()]);
++            self.transform_axis(
++                axis,
++                inverse,
++                &mut work.input,
++                &mut work.output,
++                &mut work.scratch[..prefix],
++            );
++            work.scratch[range].copy_from_slice(&work.output[..length]);
++        }
++    }
++}
++
++fn gather_tile(
++    grid: &[Complex64],
++    tile: &mut [Complex64],
++    base: usize,
++    width: usize,
++    length: usize,
++    stride: usize,
++) {
++    for j in 0..length {
++        let source = base + j * stride;
++        for lane in 0..width {
++            tile[lane * length + j] = grid[source + lane];
++        }
++    }
++}
++
++fn scatter_tile(
++    grid: &mut [Complex64],
++    tile: &[Complex64],
++    base: usize,
++    width: usize,
++    length: usize,
++    stride: usize,
++) {
++    for j in 0..length {
++        let target = base + j * stride;
++        for lane in 0..width {
++            grid[target + lane] = tile[lane * length + j];
++        }
++    }
++}
+diff --git a/crates/nsbu-solver/src/spectral/fft/workspace.rs b/crates/nsbu-solver/src/spectral/fft/workspace.rs
+index 09f976f..af4c983 100644
+--- a/crates/nsbu-solver/src/spectral/fft/workspace.rs
++++ b/crates/nsbu-solver/src/spectral/fft/workspace.rs
+@@ -1,5 +1,7 @@
+ //! Workspace identity, shape, scratch, and finite-value validation.
+-use super::{BackendPlan, FftBackend, FftPlan, FftWorkspace};
++use super::{
++    BackendPlan, FftBackend, FftPlan, FftWorkspace, AVX_SCRATCH_LANES, TRANSVERSE_TILE_LANES,
++};
+ use crate::{domain::Layout, SolverError};
+ 
+ impl FftPlan {
+@@ -28,15 +30,19 @@ impl FftPlan {
+             .into_iter()
+             .max()
+             .ok_or(SolverError::InvalidDomain)?;
+-        let required_scratch = match &self.backend {
+-            BackendPlan::Owned(_) => maximum,
+-            BackendPlan::Avx(axes) => axes[0]
+-                .forward
+-                .iter()
+-                .chain(&axes[0].inverse)
+-                .map(|plan| plan.get_inplace_scratch_len())
+-                .max()
+-                .ok_or(SolverError::InvalidDomain)?,
++        let valid_scratch = match &self.backend {
++            BackendPlan::Owned(_) => work.scratch.len() == maximum,
++            BackendPlan::Avx(axes) => {
++                let required = axes[0]
++                    .forward
++                    .iter()
++                    .chain(&axes[0].inverse)
++                    .map(|plan| plan.get_inplace_scratch_len())
++                    .max()
++                    .ok_or(SolverError::InvalidDomain)?;
++                required <= AVX_SCRATCH_LANES * maximum
++                    && work.scratch.len() == (AVX_SCRATCH_LANES + TRANSVERSE_TILE_LANES) * maximum
++            }
+         };
+         if real != self.layout.real_len()
+             || half != self.layout.half_len()
+@@ -44,7 +50,7 @@ impl FftPlan {
+             || work.grid.len() != self.layout.half_len()
+             || work.input.len() != maximum
+             || work.output.len() != maximum
+-            || work.scratch.len() < required_scratch
++            || !valid_scratch
+         {
+             return Err(SolverError::InvalidPayload);
+         }
+diff --git a/crates/nsbu-solver/src/spectral/w3/tests.rs b/crates/nsbu-solver/src/spectral/w3/tests.rs
+index 7f35105..a8b149d 100644
+--- a/crates/nsbu-solver/src/spectral/w3/tests.rs
++++ b/crates/nsbu-solver/src/spectral/w3/tests.rs
+@@ -149,16 +149,16 @@ fn admitted_force_layouts_have_exact_w3_reservations() {
+     let m512 = Layout::new([512; 3]).unwrap();
+     assert_eq!(
+         super::admission::additional(m512, BACKEND, W3FftMode::Forward).unwrap(),
+-        4_318_334_720
++        4_318_465_840
+     );
+     let m768 = Layout::new([768; 3]).unwrap();
+     assert_eq!(
+         super::admission::additional(m768, BACKEND, W3FftMode::Forward).unwrap(),
+-        14_539_902_720
++        14_540_099_376
+     );
+     assert_eq!(
+         super::admission::additional(m768, BACKEND, W3FftMode::Bidirectional).unwrap(),
+-        21_787_660_160
++        21_787_856_816
+     );
+ }
+ 
+diff --git a/crates/nsbu-solver/tests/fft/avx.rs b/crates/nsbu-solver/tests/fft/avx.rs
+index ca41ea0..102c30c 100644
+--- a/crates/nsbu-solver/tests/fft/avx.rs
++++ b/crates/nsbu-solver/tests/fft/avx.rs
+@@ -84,13 +84,14 @@ fn same_layout_cross_backend_workspaces_are_checked_before_transform() {
+         .collect::<Vec<_>>();
+     let mut owned_with_avx_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+     let mut avx_with_owned_work = vec![Complex64::new(0.0, 0.0); layout.half_len()];
+-    owned
+-        .forward(&input, &mut owned_with_avx_work, &mut avx_work)
+-        .unwrap();
+-    avx.forward(&input, &mut avx_with_owned_work, &mut owned_work)
+-        .unwrap();
+-    assert!(owned_with_avx_work.iter().all(|value| value.is_finite()));
+-    assert!(avx_with_owned_work.iter().all(|value| value.is_finite()));
++    assert_eq!(
++        owned.forward(&input, &mut owned_with_avx_work, &mut avx_work),
++        Err(SolverError::InvalidPayload)
++    );
++    assert_eq!(
++        avx.forward(&input, &mut avx_with_owned_work, &mut owned_work),
++        Err(SolverError::InvalidPayload)
++    );
+ }
+ 
+ #[test]
+@@ -133,6 +134,10 @@ fn execution_catalog_is_eager_shared_and_separately_reserved() {
+     let layout = Layout::new([6; 3]).unwrap();
+     let workspace_bytes = FftPlan::reservation_from_catalog(layout, &catalog).unwrap();
+     assert!(workspace_bytes < FftPlan::reservation_with_backend(layout, backend).unwrap());
++    assert!(matches!(
++        FftPlan::new_from_catalog(layout, &catalog, workspace_bytes - 1),
++        Err(SolverError::ResourceLimit)
++    ));
+     let (plan, _) = FftPlan::new_from_catalog(layout, &catalog, workspace_bytes).unwrap();
+     assert_eq!(plan.backend(), backend);
+ }
