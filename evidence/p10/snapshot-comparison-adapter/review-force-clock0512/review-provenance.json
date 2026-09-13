@@ -1,0 +1,159 @@
+{
+  "schema": "p10-force-resolution-clock0512-review-handoff-v1",
+  "status": "review_only_right_clock0512_state_pending_no_comparison_authorized",
+  "adapter_source_commit": "f046bce428ac4facc86237e1dbaf67062fa905d9",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "host": "sulaco",
+  "fft_policy": "FFT-free coefficient decode, validation, weighted norms, and band partition only",
+  "admission": {
+    "left_coefficient_bytes": 1366032384,
+    "right_coefficient_bytes": 1366032384,
+    "fixed_overhead_bytes": 1048576,
+    "exact_cap_bytes": 2733113344
+  },
+  "common_prefix": {
+    "retained_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 512,
+        "step_ticks": 64
+      }
+    ],
+    "elapsed": 512,
+    "target": 8192,
+    "epoch": 8,
+    "accepted_steps": 8,
+    "admission_guard": {
+      "advective_limit": 3.3,
+      "maximum_attempts": 48
+    },
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "only_admitted_difference": {
+    "left_integration_force_dimensions": [
+      384,
+      384,
+      384
+    ],
+    "right_integration_force_dimensions": [
+      512,
+      512,
+      512
+    ]
+  },
+  "left": {
+    "manifest": "left-n384-m384-clock0512.json",
+    "record_sha256": "1cf1d0367c4dbdbbab770650898d1598068eb71f93ef44362726bbcc2bfc5981",
+    "remote_state_path": "/tmp/nsbu-p10-sulaco-20260912T1420Z/n384-piecewise-cadv33-aed49b7/endpoint/output/step-008-clock-0512/state.bin",
+    "file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+    "coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+    "clock_header": [
+      512,
+      8192,
+      8,
+      8
+    ],
+    "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+    "identity": "source=aed49b7d7874a0a720dee88b65ba180c7286fa65;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=384;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout384-width3-forward-add1827942144;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=768;host=sulaco",
+    "profile": {
+      "kind": "identity-profile-field",
+      "value": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c"
+    },
+    "plan": {
+      "path": "plans/n384-m384-frozen-plan.json",
+      "sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+      "origin": "/mnt/niva-array/nsbu-solver/work/p10-sulaco-remote-20260912/n384-piecewise-cadv33-complete/aed49b7d7874a0a720dee88b65ba180c7286fa65/frozen-plan-piecewise-cadv33.json"
+    },
+    "record": {
+      "path": "records/n384-m384-clock0512-record.json",
+      "sha256": "1cf1d0367c4dbdbbab770650898d1598068eb71f93ef44362726bbcc2bfc5981",
+      "origin": "/mnt/niva-array/nsbu-solver/work/p10-sulaco-remote-20260912/n384-piecewise-cadv33-complete/endpoint/output/step-008-clock-0512/record.json"
+    },
+    "remote_state_checksum_record": {
+      "path": "records/n384-m384-remote-state-files.sha256",
+      "sha256": "45a95d75a6b4c37eda8a1f3d5772018a48f1c3e4b71e78591ed6452a3c371fba",
+      "matched_line": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243  ./output/step-008-clock-0512/state.bin"
+    }
+  },
+  "right": {
+    "template": "right-n384-m512-clock0512.template.json",
+    "publication_status": "pending",
+    "required_record": {
+      "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+      "clock": 512,
+      "epoch": 8,
+      "accepted_steps": 8,
+      "coefficient_bytes": 1366032384
+    },
+    "required_state_bindings": [
+      "exact Sulaco path",
+      "coefficient SHA-256 from record",
+      "whole-file SHA-256 from remote checksum",
+      "exact clock header [512,8192,8,8]"
+    ],
+    "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+    "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+    "profile": {
+      "kind": "identity-profile-field",
+      "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"
+    },
+    "plan": {
+      "path": "plans/n384-m512-frozen-plan.json",
+      "sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+      "origin": "/mnt/niva-array/nsbu-solver/work/p10-m512-force-profile-20260912/deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72/frozen-plan.json"
+    },
+    "preflight_identity_record": {
+      "path": "records/n384-m512-preflight.stdout",
+      "sha256": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
+      "origin": "/mnt/niva-array/nsbu-solver/work/p10-m512-force-profile-20260912/deployment/326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72/preflight.stdout"
+    }
+  },
+  "execution_gate": [
+    "M512 clock-512 record and complete state published",
+    "right template materialized as a new final manifest with exact hashes/path",
+    "both exact state files and plan hashes reverified on Sulaco",
+    "root semantic review approves the final pair and exact command",
+    "fresh memory and process admission recorded"
+  ],
+  "proposed_command": [
+    "cargo",
+    "run",
+    "--release",
+    "--manifest-path",
+    "evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml",
+    "--",
+    "evidence/p10/snapshot-comparison-adapter/review-force-clock0512/left-n384-m384-clock0512.json",
+    "evidence/p10/snapshot-comparison-adapter/review-force-clock0512/right-n384-m512-clock0512.json",
+    "2733113344"
+  ],
+  "run_count": 0,
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  }
+}

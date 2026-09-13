@@ -1,0 +1,69 @@
+{
+  "schema": "p10-force-resolution-diagnostic-report-template-v1",
+  "status": "not_run_right_clock0512_publication_and_root_semantic_review_required",
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "adapter_output_sha256": null,
+  "absolute_difference": {
+    "source": "adapter_output.full",
+    "l2": null,
+    "h1": null,
+    "vorticity_l2": null,
+    "divergence_l2": null
+  },
+  "right_state_absolute": {
+    "source": "adapter_output.fine_absolute",
+    "l2": null,
+    "h1": null,
+    "vorticity_l2": null,
+    "divergence_l2": null
+  },
+  "relative_to_right_total": {
+    "formula": "absolute_difference[channel] / right_state_absolute[channel]",
+    "l2": null,
+    "h1": null,
+    "vorticity_l2": null,
+    "divergence_l2": null,
+    "divergence_note": "report only with its tiny absolute denominator alongside it"
+  },
+  "allocated_force_relative_budgets": {
+    "source": "pilot target times frozen force fraction 0.15",
+    "l2": 1.5e-05,
+    "h1": 0.00015,
+    "vorticity_l2": 0.00015
+  },
+  "multiples_of_allocated_force_budget": {
+    "formula": "relative_to_right_total[channel] / allocated_force_relative_budgets[channel]",
+    "l2": null,
+    "h1": null,
+    "vorticity_l2": null
+  },
+  "same_retained_grid_bands": {
+    "common": {
+      "source": "adapter_output.common",
+      "l2": null,
+      "h1": null,
+      "vorticity_l2": null,
+      "divergence_l2": null
+    },
+    "newly_resolved": {
+      "source": "adapter_output.newly_resolved",
+      "l2": null,
+      "h1": null,
+      "vorticity_l2": null,
+      "divergence_l2": null
+    },
+    "required_identity": "common equals full and newly_resolved is exact zero because both retained grids are N384"
+  },
+  "force_grid_geometry_context": {
+    "M384_to_M512_cubic_point_ratio": 2.3703703703703702,
+    "M384_to_M512_stored_half_spectrum_ratio": 2.3672999424294763,
+    "M384_forward_w3_addition_bytes": 1827942144,
+    "M512_forward_w3_addition_bytes": 4318334720,
+    "forward_w3_addition_ratio": 2.362402297126533
+  },
+  "interpretation": "prefix force-resolution diagnostic only; no acceptance or force-sufficiency claim"
+}
