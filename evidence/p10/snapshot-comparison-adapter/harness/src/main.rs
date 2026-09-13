@@ -27,12 +27,7 @@ fn run(args: &[OsString]) -> Result<String, String> {
         .map_err(model::debug)?;
     let left_manifest = decode::read_manifest(&PathBuf::from(&args[0]))?;
     let right_manifest = decode::read_manifest(&PathBuf::from(&args[1]))?;
-    if ordered_hessian
-        || left_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
-        || right_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
-    {
-        compare::validate_manifest_pair(&left_manifest, &right_manifest)?;
-    }
+    validate_requested_pair(ordered_hessian, &left_manifest, &right_manifest)?;
     let admitted = decode::preflight(&left_manifest, &right_manifest)?;
     if admitted > cap {
         return Err(format!(
@@ -55,6 +50,22 @@ fn ordered_hessian_requested(args: &[OsString]) -> Result<bool, String> {
     }
 }
 
+fn validate_requested_pair(
+    ordered_hessian: bool,
+    left: &model::Manifest,
+    right: &model::Manifest,
+) -> Result<(), String> {
+    if ordered_hessian {
+        return hessian::validate_manifest_pair(left, right);
+    }
+    if left.comparison_kind != model::ComparisonKind::MatchedSpatial
+        || right.comparison_kind != model::ComparisonKind::MatchedSpatial
+    {
+        return compare::validate_manifest_pair(left, right);
+    }
+    Ok(())
+}
+
 fn format_hessian_output(
     left_manifest: &model::Manifest,
     left: &model::Snapshot,
@@ -62,11 +73,6 @@ fn format_hessian_output(
     right: &model::Snapshot,
     admitted: usize,
 ) -> Result<String, String> {
-    if left_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
-        || right_manifest.comparison_kind != model::ComparisonKind::MatchedSpatial
-    {
-        return Err("ordered Hessian diagnostic requires MATCHED_SPATIAL inputs".into());
-    }
     let output = hessian::diagnostic_output(left_manifest, left, right_manifest, right, admitted)?;
     serde_json::to_string_pretty(&output).map_err(model::debug)
 }

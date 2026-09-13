@@ -5,8 +5,8 @@
 //! Frobenius norm and `l2` is the corresponding physical-domain integral norm.
 
 use crate::model::{
-    debug, AcceptanceOutput, AdmissionGuard, Hashes, Manifest, ProfileBinding, Snapshot,
-    TimeClockOutput,
+    debug, AcceptanceOutput, AdmissionGuard, ComparisonKind, Evolution, Hashes, Manifest,
+    ProfileBinding, ProfileBindingKind, Snapshot, TimeClockOutput,
 };
 use nsbu_solver::{
     domain::{validate_spectrum, Domain},
@@ -45,6 +45,8 @@ pub(crate) struct HessianDiagnosticOutput<'a> {
     pub comparison_kind: &'static str,
     pub acceptance: AcceptanceOutput,
     pub normalization: &'static str,
+    pub left_dimensions: [usize; 3],
+    pub left_evolution: &'a Evolution,
     pub left_identity: &'a str,
     pub left_profile: Option<&'a ProfileBinding>,
     pub left_admission_guard: Option<&'a AdmissionGuard>,
@@ -53,6 +55,8 @@ pub(crate) struct HessianDiagnosticOutput<'a> {
     pub left_source_commit: &'a str,
     pub left_plan_sha256: &'a str,
     pub left_hashes: Hashes<'a>,
+    pub right_dimensions: [usize; 3],
+    pub right_evolution: &'a Evolution,
     pub right_identity: &'a str,
     pub right_profile: Option<&'a ProfileBinding>,
     pub right_admission_guard: Option<&'a AdmissionGuard>,
@@ -73,6 +77,7 @@ pub(crate) fn diagnostic_output<'a>(
     right: &'a Snapshot,
     admitted_bytes: usize,
 ) -> Result<HessianDiagnosticOutput<'a>, String> {
+    validate_manifest_pair(left_manifest, right_manifest)?;
     let hessian = screen_ordered_hessian(
         left_manifest.domain()?,
         std::array::from_fn(|axis| left.coefficients[axis].as_slice()),
@@ -87,6 +92,8 @@ pub(crate) fn diagnostic_output<'a>(
             accepted_windows: 0,
         },
         normalization: "all-27-ordered-entries; rms=volume-average; l2=physical-domain-integral",
+        left_dimensions: left_manifest.dimensions,
+        left_evolution: &left_manifest.evolution,
         left_identity: &left_manifest.identity,
         left_profile: left_manifest.profile.as_ref(),
         left_admission_guard: left_manifest.admission_guard.as_ref(),
@@ -95,6 +102,8 @@ pub(crate) fn diagnostic_output<'a>(
         left_source_commit: &left_manifest.source_commit,
         left_plan_sha256: &left_manifest.plan_sha256,
         left_hashes: snapshot_hashes(left),
+        right_dimensions: right_manifest.dimensions,
+        right_evolution: &right_manifest.evolution,
         right_identity: &right_manifest.identity,
         right_profile: right_manifest.profile.as_ref(),
         right_admission_guard: right_manifest.admission_guard.as_ref(),
@@ -113,6 +122,64 @@ pub(crate) fn diagnostic_output<'a>(
         },
         hessian,
         admitted_bytes,
+    })
+}
+
+pub(crate) fn validate_manifest_pair(left: &Manifest, right: &Manifest) -> Result<(), String> {
+    if left.comparison_kind != ComparisonKind::MatchedSpatial
+        || right.comparison_kind != ComparisonKind::MatchedSpatial
+        || left.elapsed != right.elapsed
+        || left.target != right.target
+        || left.epoch != right.epoch
+        || left.accepted_steps != right.accepted_steps
+    {
+        return Err("ordered Hessian diagnostic requires matched spatial clocks".into());
+    }
+    validate_manifest_side(left)?;
+    validate_manifest_side(right)
+}
+
+fn validate_manifest_side(manifest: &Manifest) -> Result<(), String> {
+    let profile = manifest
+        .profile
+        .as_ref()
+        .ok_or("ordered Hessian diagnostic requires an exact profile binding")?;
+    let guard = manifest
+        .admission_guard
+        .as_ref()
+        .ok_or("ordered Hessian diagnostic requires admission guard metadata")?;
+    if !profile_matches_identity(&manifest.identity, profile)
+        || manifest.epoch != manifest.accepted_steps
+        || manifest.accepted_steps > guard.maximum_attempts
+        || schedule_steps(&manifest.evolution)? != manifest.accepted_steps
+    {
+        return Err("ordered Hessian manifest binding mismatch".into());
+    }
+    Ok(())
+}
+
+fn profile_matches_identity(identity: &str, profile: &ProfileBinding) -> bool {
+    match profile.kind {
+        ProfileBindingKind::LegacyFullIdentity => profile.value == identity,
+        ProfileBindingKind::IdentityProfileField => {
+            !profile.value.is_empty()
+                && identity
+                    .split(';')
+                    .find_map(|field| field.strip_prefix("profile="))
+                    == Some(profile.value.as_str())
+        }
+    }
+}
+
+fn schedule_steps(evolution: &Evolution) -> Result<u128, String> {
+    evolution.schedule.iter().try_fold(0_u128, |sum, segment| {
+        let span = segment
+            .until_exclusive
+            .checked_sub(segment.from_inclusive)
+            .filter(|_| segment.step_ticks != 0)
+            .ok_or_else(|| "invalid ordered Hessian schedule".to_string())?;
+        sum.checked_add(span / segment.step_ticks)
+            .ok_or_else(|| "ordered Hessian schedule step count overflow".into())
     })
 }
 
