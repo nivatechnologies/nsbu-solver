@@ -1,0 +1,89 @@
+# Local agent work policy
+
+The Sparks should spend their inference capacity on useful, independently
+checkable solver work. GPU utilization is an operating measurement, not a
+success criterion. Repeated exploration, duplicate tasks, and a growing cloud
+review queue are reasons to reduce dispatch, even when a GPU would otherwise
+be idle.
+
+This policy supersedes the execution recommendations in the historical
+[first local pilot](pilots/local-qwen38-flash-next-20260913/RESULT.md). Its
+failures and receipts remain historical evidence. Numerical acceptance rules,
+frozen inputs, and package exit requirements are unchanged.
+
+## Worker contract
+
+- Use the explicitly configured local endpoint and model with reasoning enabled.
+  There is no automatic cloud fallback, model-server reconfiguration, or SSH.
+- Receive a bounded task packet: source identities, named input artifacts, exact
+  deliverable contract, trusted validator, and explicit time/tool/repair limits.
+- Read only named artifacts during the tool phase. The controller enforces the
+  tool-call budget; a sentence asking the model to stop is insufficient.
+- Reserve time for a separate terminal request. Omit tool definitions and tool
+  choice entirely in this request. Preserve relevant evidence and require the
+  contracted structured result.
+- Validate schema, provenance, and task-specific behavior before promoting a
+  result. A successful HTTP response or normal stop reason is not task success.
+- Feed concrete validator failures into at most two local repair attempts.
+  Preserve each failed attempt. Exhaustion creates a compact escalation receipt;
+  it does not automatically summon a cloud model or change the contract.
+
+## Dispatch and backpressure
+
+Eight concurrent local workers are the initial capacity ceiling. Twelve is an
+available configuration ceiling, not an established useful operating point.
+Increase concurrency only after measuring useful completions and review burden,
+not merely successful API requests.
+
+The queue contains real dependency-ready work. It does not manufacture work to
+fill slots or repeatedly retry completed task identifiers. Persist outcomes and
+attempt counts across restarts.
+
+Reserve review capacity before dispatching tasks that need human or cloud
+review. The initial cap is two review-required tasks, counting both running
+tasks and finished candidates awaiting review. This prevents an eight-worker
+burst from silently creating eight reviews. Other slots may serve tasks whose
+trusted, task-specific validators can complete routine artifact checks without
+manual review. A packet cannot exempt itself from review through model output.
+
+Pause a task family after three consecutive terminal failures. Other ready
+families may continue. Report local repair frequency as well as terminal
+failures: a class that succeeds only after frequent repairs may still have poor
+useful throughput. Invalid or unverifiable scientific claims never become
+acceptable merely because a repair budget has been exhausted.
+
+Default work windows are bounded to two hours, with durable receipts and queue
+state at the checkpoint. Empty queues, budget exhaustion, review backpressure,
+and task failures are different states and must be reported separately.
+
+## What validation means
+
+A validated code candidate is ready for review. It is not automatically merged,
+published, or scientifically accepted. A checked fixture or derived diagnostic
+artifact may finish automatically only under a trusted validator authorized for
+that scope. Validators must check the actual artifact rather than trusting an
+agent's self-reported test result.
+
+PDE trajectories, numerical-budget changes, acceptance decisions, and reviewed
+input changes retain their existing gates. Local workers cannot reset an
+integrated state to a reference solution, manufacture missing measurements, or
+reinterpret a sampled diagnostic as an accepted window.
+
+## Measurements at each checkpoint
+
+Report completed useful tasks, first-attempt successes, local repairs, terminal
+failures, outstanding reviews, and blocked task families. Bind results to source
+and input hashes. Record request latency, token usage where available, validator
+time, and the actual stop reason. Record cloud/human review time when measured;
+otherwise report it as unmeasured, never as zero.
+
+Observe GPU utilization and throughput separately from queue occupancy and
+KV-cache utilization. Low KV-cache use is not low physical memory use: the model
+server may preallocate most device/unified memory. Transient input-processing
+queues are distinct from out-of-memory failures. The controller does not tune
+GPU or model-server settings automatically.
+
+Before making a broad local-autonomy claim, demonstrate that real task families
+complete with low repair and review cost over successive work windows. The
+earlier small successful fixture is evidence for a narrow workflow, not proof
+that 99% of the project can already proceed autonomously.
