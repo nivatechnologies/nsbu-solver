@@ -1,0 +1,361 @@
+{
+  "schema": "p10-n384-regional-force-correction-plan-v1",
+  "status": "proposal_only_no_state_payload_read_no_heavy_execution",
+  "date_utc": "2026-09-13",
+  "objective": "Measure the clock-512 force-grid correction delta=U(N384,M512)-U(N384,M384) on the same unshifted M768 physical lattice and five exclusive sampled regions as the archived M384 analytical-reference diagnostic.",
+  "required_quantities": [
+    {
+      "name": "delta_velocity",
+      "components": 3,
+      "ordered_entries": 3,
+      "scalar_inverse_transforms": 3
+    },
+    {
+      "name": "delta_gradient",
+      "components": 9,
+      "ordered_entries": 9,
+      "scalar_inverse_transforms": 9
+    },
+    {
+      "name": "delta_ordered_hessian",
+      "components": 27,
+      "ordered_entries": 27,
+      "scalar_inverse_transforms": 27
+    }
+  ],
+  "claims_excluded": [
+    "analytical-reference comparison",
+    "vector alignment or cancellation inference",
+    "vorticity measurement",
+    "PDE-window acceptance",
+    "collar physical-volume coverage",
+    "sampled peak qualification",
+    "state import, resume, injection or evolution"
+  ],
+  "state_bindings": {
+    "left_m384": {
+      "manifest": "evidence/p10/external-reference-bridge/inputs/clock0512/snapshot.json",
+      "manifest_sha256": "cc9e328b6b0dcd4518c27cd2724e839f50a7d64539ed45e7ac902dfd68c71d21",
+      "state_file_sha256": "951be3d85acd3179c2e152a11220e5231ead5d5b8a709217da83b988e9abc243",
+      "coefficient_sha256": "5f559ad2e80747f102c1bf426211ca2313a89ac63b35cfecf4db723aaf57b44a",
+      "source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+      "plan_sha256": "2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a",
+      "profile": "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c",
+      "integration_force_dimensions": [
+        384,
+        384,
+        384
+      ],
+      "state_file_bytes": 1366033529
+    },
+    "right_m512": {
+      "manifest": "evidence/p10/external-reference-bridge/inputs/clock0512-m512/snapshot.json",
+      "manifest_sha256": "92bf674356740ae230fe10eab617c9d9c1bdcb4edf84c2f446983a12d148f4d1",
+      "state_file_sha256": "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+      "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+      "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+      "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+      "profile": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c",
+      "integration_force_dimensions": [
+        512,
+        512,
+        512
+      ],
+      "state_file_bytes": 1366033529
+    },
+    "pair_contract": {
+      "retained_dimensions": [
+        384,
+        384,
+        384
+      ],
+      "sample_dimensions": [
+        768,
+        768,
+        768
+      ],
+      "clock_elapsed": 512,
+      "clock_target": 8192,
+      "epoch": 8,
+      "accepted_steps": 8,
+      "method": "cox-matthews",
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 512,
+          "step_ticks": 64
+        }
+      ],
+      "same_case_lengths_viscosity_tolerances_and_schedule": true,
+      "only_reviewed_trajectory_and_force_grid_differ": true
+    }
+  },
+  "archived_m384_reference_context": {
+    "path": "evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json",
+    "sha256": "1a56d5e62982c6c18983da8ce53c67d011dd3f17011a499ddcc67de609c5cf07",
+    "region_counts": {
+      "core": 2028843,
+      "annulus": 19840884,
+      "interior_outside_nominal": 29361750,
+      "collar": 89342992,
+      "exterior": 312410363
+    },
+    "quantities": {
+      "velocity": {
+        "relative_floor": 0.0006786014108170402,
+        "regions": {
+          "core": {
+            "samples": 2028843,
+            "m384_reference_rms_error": 1.1029833266739981e-07,
+            "m384_reference_peak_error": 1.9311642419772142e-07
+          },
+          "annulus": {
+            "samples": 19840884,
+            "m384_reference_rms_error": 5.131561593657724e-08,
+            "m384_reference_peak_error": 1.636510514199761e-07
+          },
+          "interior_outside_nominal": {
+            "samples": 29361750,
+            "m384_reference_rms_error": 9.047625190666182e-08,
+            "m384_reference_peak_error": 2.45913974039199e-07
+          },
+          "collar": {
+            "samples": 89342992,
+            "m384_reference_rms_error": 1.9396340411143667e-07,
+            "m384_reference_peak_error": 2.907671224709595e-06
+          },
+          "exterior": {
+            "samples": 312410363,
+            "m384_reference_rms_error": 4.4521778852935505e-08,
+            "m384_reference_peak_error": 1.4315574800418675e-06
+          }
+        }
+      },
+      "gradient": {
+        "relative_floor": 0.02183837208094269,
+        "regions": {
+          "core": {
+            "samples": 2028843,
+            "m384_reference_rms_error": 4.160535063224189e-05,
+            "m384_reference_peak_error": 9.465883196590809e-05
+          },
+          "annulus": {
+            "samples": 19840884,
+            "m384_reference_rms_error": 4.067332436508683e-05,
+            "m384_reference_peak_error": 0.00011430505122725253
+          },
+          "interior_outside_nominal": {
+            "samples": 29361750,
+            "m384_reference_rms_error": 6.190560582997095e-05,
+            "m384_reference_peak_error": 0.00029993873748978205
+          },
+          "collar": {
+            "samples": 89342992,
+            "m384_reference_rms_error": 0.00023859234817552862,
+            "m384_reference_peak_error": 0.003341018827507489
+          },
+          "exterior": {
+            "samples": 312410363,
+            "m384_reference_rms_error": 6.128969986553007e-05,
+            "m384_reference_peak_error": 0.0020129580765255698
+          }
+        }
+      },
+      "ordered_hessian": {
+        "relative_floor": 2.398140767018279,
+        "regions": {
+          "core": {
+            "samples": 2028843,
+            "m384_reference_rms_error": 0.050385222251745354,
+            "m384_reference_peak_error": 0.1131053740869405
+          },
+          "annulus": {
+            "samples": 19840884,
+            "m384_reference_rms_error": 0.05439000396027565,
+            "m384_reference_peak_error": 0.13851017300072263
+          },
+          "interior_outside_nominal": {
+            "samples": 29361750,
+            "m384_reference_rms_error": 0.08096103729663326,
+            "m384_reference_peak_error": 0.3529393789153649
+          },
+          "collar": {
+            "samples": 89342992,
+            "m384_reference_rms_error": 0.3337399549663379,
+            "m384_reference_peak_error": 4.136586523439207
+          },
+          "exterior": {
+            "samples": 312410363,
+            "m384_reference_rms_error": 0.08231970325051452,
+            "m384_reference_peak_error": 2.1671708352466217
+          }
+        }
+      }
+    },
+    "use": "Immutable context only. Do not resample the analytical field and do not interpret the scalar norm bounds as vector alignment evidence."
+  },
+  "computation": [
+    "Before state access, hash and validate both manifests, both frozen plans, exact profiles, pair semantics, file lengths, CPU/memory gates, executable hash and external address-space limit.",
+    "Decode and verify both state files into separate owned snapshots. From immutable coefficient borrows allocate a third retained-grid vector delta_hat=right_M512-left_M384; rehash both source coefficient vectors before dropping them, then hash-bind delta_hat.",
+    "Build one M768 u8 label array. Recompute the exact clock-512 masks with one q(z) root per eligible z plane and the same binary64 operation order as regions::classify; only 461 of 768 z planes require q, capped at 59008 root iterations total. Verify the five counts exactly match the archived count vector. A future hash-bound label sidecar may replace this pass.",
+    "Use one FftCatalog and one DerivativeWorkspace::new_from_catalog on delta_hat. Sample the same component-major velocity, gradient and ordered-Hessian schedule sequentially: exactly 39 inverse transforms.",
+    "Reuse one f64 array to accumulate Euclidean/Frobenius magnitude across each quantity components, then reduce it globally and over the cached five-class labels before clearing it for the next quantity.",
+    "Rehash delta_hat after all transforms. Emit one bounded transactional JSON result with both source bindings, delta hash, counts, RMS/peak rows, triangle context and explicit non-claims."
+  ],
+  "triangle_inequality_context": {
+    "per_quantity_per_region": {
+      "rms_lower": "max(0, archived_m384_reference_rms_error - measured_delta_rms)",
+      "rms_upper": "archived_m384_reference_rms_error + measured_delta_rms",
+      "peak_lower": "max(0, archived_m384_reference_peak_error - measured_delta_peak)",
+      "peak_upper": "archived_m384_reference_peak_error + measured_delta_peak"
+    },
+    "interpretation": "These are norm bounds on the unknown M512 analytical-reference error. They make no claim about vector alignment, cancellation, pointwise sign, or whether M512 is closer to the reference.",
+    "floors": "Carry the archived per-quantity floors unchanged as scale metadata. If peak/floor is emitted, label it peak_over_archived_floor; never label it analytical relative error."
+  },
+  "reusable_code": [
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "sha256": "d1787452acd4003486802abbc5514f51bba1c692a3828a9cf05f74c7600133b2",
+      "symbols": [
+        "read_external_reference_manifest",
+        "preflight",
+        "load"
+      ],
+      "use": "bounded hash-validating two-state decode"
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "sha256": "899f3b4244b108edba5f59797b00a62b5a640f6e8be8230160f05ba856d569d4",
+      "symbols": [
+        "validate_force_manifests",
+        "same_evolution_except_force"
+      ],
+      "use": "pair-contract template; helper visibility or harness-local exact validator is required"
+    },
+    {
+      "path": "crates/nsbu-solver/src/diagnostics/derivatives.rs",
+      "sha256": "c3285b370dd7193dbd3e01e1a1a96cfa281287be10f7172ed645b91ee664d0b4",
+      "symbols": [
+        "Derivative",
+        "DerivativeWorkspace::reservation_from_catalog",
+        "DerivativeWorkspace::new_from_catalog",
+        "DerivativeWorkspace::sample"
+      ],
+      "use": "39 AVX inverse samples on the retained difference spectrum"
+    },
+    {
+      "path": "crates/nsbu-solver/src/diagnostics/local.rs",
+      "sha256": "421b8e4cb647981c1f484c6979bd55c80f3a07777a559bdc8ea7129726a4c3b0",
+      "symbols": [
+        "TensorErrors::new",
+        "TensorErrors::push_magnitudes",
+        "TensorErrors::finish"
+      ],
+      "use": "RMS/peak reduction with archived floors; expose only correction norms and clearly named floor scaling"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/regions/point.rs",
+      "sha256": "efab39819df44a98ba168b3be9f5d2faaafa7d244ae8a8d17cd491cfa0e183bd",
+      "symbols": [
+        "classify",
+        "SpatialRegion"
+      ],
+      "use": "mask oracle and parity test for the z-table classifier"
+    },
+    {
+      "path": "crates/nsbu-benchmarks/src/root.rs",
+      "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b",
+      "symbols": [
+        "solve"
+      ],
+      "use": "at most 461 mask-only q(z) solves, never an analytical field evaluation"
+    },
+    {
+      "path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/diagnostic/measurement.rs",
+      "sha256": "b10fde8ea58d8d690f35cf4485dce618f00c85621398c07be23aa4e8952c6975",
+      "symbols": [
+        "measure",
+        "reduce"
+      ],
+      "use": "component ordering, label reduction and output pattern; remove PackedReference/reference arrays"
+    },
+    {
+      "path": "evidence/p10/n384-regional-snapshot-diagnostic/harness/src/diagnostic/policy.rs",
+      "sha256": "27ba08326b2f3f3a1664373ff135ad70f25c9ee4abe04c832a02338899df1479",
+      "symbols": [
+        "launch_gate",
+        "coefficient_hash",
+        "try_zeros equivalent"
+      ],
+      "use": "admission and immutable hash pattern"
+    }
+  ],
+  "missing_adapter_glue": [
+    "A strict two-manifest force-pair binder for the exact M384/M512 manifests; the regional harness currently binds only M384 and compare::validate_force_manifests is private and expects FORCE_RESOLUTION_DIAGNOSTIC manifests.",
+    "A checked difference-spectrum constructor from immutable source borrows plus before/drop and after-measurement hashes.",
+    "A z-table M768 label builder that is parity-tested against regions::classify and refuses unless counts equal the archived five-class vector.",
+    "A correction norm output type that names delta RMS/peak and optional peak_over_archived_floor without implying analytical reference or vector alignment.",
+    "A triangle-bound join keyed by quantity and region against the hash-bound archived clock0512 JSON.",
+    "A new explicit command and launch gate; no state import/resume/evolution interface."
+  ],
+  "storage": {
+    "charged_buckets_bytes": {
+      "single_retained_difference_state": 1366032384,
+      "snapshot_decoder_and_manifest_overhead": 1048576,
+      "shared_avx_fft_catalog": 29362480,
+      "single_catalog_backed_derivative_workspace": 10890584880,
+      "one_reused_pointwise_tensor_magnitude_array": 3623878656,
+      "cached_u8_region_labels": 452984832,
+      "thirty_two_worker_stacks": 67108864,
+      "allocator_allowance": 65536,
+      "serialization": 65536
+    },
+    "internal_exact_cap_bytes": 16431131744,
+    "internal_exact_cap_gib": 15.302683919668198,
+    "dual_source_plus_difference_decode_phase_bytes": 4099145728,
+    "phase_max": "measurement phase; both source snapshots must be dropped before catalog/workspace allocation",
+    "external_rlimit_as_bytes": 21474836480,
+    "external_rlimit_as_gib": 20,
+    "minimum_mem_available_bytes": 33611000928,
+    "minimum_mem_available_rule": "internal exact cap plus 16 GiB",
+    "savings_vs_archived_regional_internal_cap_bytes": 112340238328
+  },
+  "work": {
+    "sample_points": 452984832,
+    "scalar_inverse_transforms": 39,
+    "coefficient_visits_per_transform": 171343872,
+    "derivative_coefficient_visits": 6682411008,
+    "tensor_component_point_visits": 17666408448,
+    "difference_complex_coefficients": 85377024,
+    "difference_construction_visits": 256131072,
+    "region_label_writes": 452984832,
+    "mask_q_roots": 461,
+    "maximum_mask_root_iterations": 59008,
+    "analytical_reference_evaluations": 0,
+    "analytical_jet_cache_bytes": 0,
+    "ordered_hessian_reference_mapping_comparisons": 0
+  },
+  "runtime_estimate": {
+    "central_seconds": 1100,
+    "planning_range_seconds": [
+      1050,
+      1350
+    ],
+    "recommended_timeout_seconds": 1800,
+    "kill_after_seconds": 60,
+    "basis": "The archived one-state 39-transform regional run took about 1909 seconds. Its x-plane pilot projected about 853 seconds for the removed 452984832 analytical-reference evaluations. The residual about 1056 seconds covers decode, 39 transforms, reductions, coverage and serialization; add a second decode, difference construction/hash and cheap label pass, then retain roughly 250 seconds margin below the 1800-second timeout.",
+    "uncertainty": "The prior run did not record phase timestamps, so the subtraction is a planning estimate rather than a measured transform-only timing."
+  },
+  "validation_before_any_reviewed_run": [
+    "Unit-test right-minus-left sign and all 39 component/derivative mappings on small analytic spectra.",
+    "Test one-byte-short refusal for the 16431131744-byte internal cap and exact 20 GiB RLIMIT_AS gate.",
+    "Compare the z-table classifier against regions::classify on the full x=0 plane and representative cutoff/interior/collar coordinates; require the eventual full five-class counts to equal the archived vector.",
+    "Test triangle-bound arithmetic and names so no field is called a reference error or acceptance result.",
+    "Run cargo fmt, cargo clippy -D warnings and unit tests only. Require a separate root review and fresh resource admission before any payload read or full execution."
+  ],
+  "execution_authorization": {
+    "full_run_authorized": false,
+    "state_payload_read_authorized": false,
+    "additional_regional_run_authorized": false
+  }
+}
