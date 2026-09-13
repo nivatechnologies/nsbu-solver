@@ -1,0 +1,72 @@
+{
+  "schema": "p10-external-reference-bridge-input-v1",
+  "snapshot_manifest": "snapshot.json",
+  "snapshot_manifest_sha256": "0dbe8bb5aa0dcb8a474eb4c54a4d60f0c524718c6720875b36f9603a7b7fce26",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "reference_source_commit": "6bdea3084d737ce6585cb67ab5d48810bd03cd50",
+  "reference_sources": [
+    {
+      "role": "scalar-evaluator",
+      "path": "../../../../../crates/nsbu-benchmarks/src/scalar.rs",
+      "sha256": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8"
+    },
+    {
+      "role": "scalar-root",
+      "path": "../../../../../crates/nsbu-benchmarks/src/root.rs",
+      "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b"
+    },
+    {
+      "role": "benchmark-time",
+      "path": "../../../../../crates/nsbu-benchmarks/src/time.rs",
+      "sha256": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06"
+    },
+    {
+      "role": "benchmark-error",
+      "path": "../../../../../crates/nsbu-benchmarks/src/error.rs",
+      "sha256": "9cd63ed56079fcf20e90d3139aeff3ebe45525f9b2acf81ef9bcea522a97137a"
+    },
+    {
+      "role": "benchmark-module",
+      "path": "../../../../../crates/nsbu-benchmarks/src/lib.rs",
+      "sha256": "398dd1e167349fa99e79ada2815e34cedd458d7989855a19973135688986ef2b"
+    },
+    {
+      "role": "tick-clock",
+      "path": "../../../../../crates/nsbu-solver/src/domain/clock.rs",
+      "sha256": "c8d56c25c03aeda44fb69e8896406ee02eb32646de0222ea5782c11fac5cc4ce"
+    },
+    {
+      "role": "case-definition",
+      "path": "../../../../../crates/nsbu-benchmarks/data/similarity-mms-v2.json",
+      "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    }
+  ],
+  "harness_source_commit": "c0b711174bfc8406d6bfff1b1a85d4affd03829a",
+  "binary_sha256": "87656e3654a5a9c1a3861a785f9f856e5d3ba3dadeda48a0215ea73964eb6ebc",
+  "reference_evaluator": "nsbu_benchmarks::scalar::evaluate",
+  "arithmetic": "binary64-explicit-scalar-root-and-velocity",
+  "sample_dimensions": [
+    768,
+    768,
+    768
+  ],
+  "retained_dimensions": [
+    384,
+    384,
+    384
+  ],
+  "physical_grid": "unshifted-periodic-x_i=i/n",
+  "fft_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "fft_normalization": "forward-r2c-divide-by-complete-real-sample-count",
+  "crop": "normalization-preserving-strict-band-transfer-no-rescale",
+  "nyquist": "sample-nyquist-not-retained;target-nyquist-explicit-zero",
+  "projection": "none",
+  "coordinate_shift": false,
+  "mean_alignment": false,
+  "classification": "sampled-binary64-reference-diagnostic-not-continuum-or-enclosure",
+  "execution_context": "contended-local-p10-campaign-bounded-1800s",
+  "execution_cap_bytes": 20900924104,
+  "clock_exponent": -20,
+  "clock_target": 8192,
+  "elapsed": 1024
+}
