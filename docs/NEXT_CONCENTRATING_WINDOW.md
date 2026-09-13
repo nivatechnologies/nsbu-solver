@@ -74,8 +74,7 @@ observer clocks, 512 through 4096, with the same fixed M384 force trajectory
 and piecewise schedule. At clock 512 the N256-to-N384 pair is
 0.988227809391572 times the allocated H1 budget and 0.9888821775622612 times
 the allocated vorticity budget; at clock 4096 those values are
-0.9290197651344548 and 0.9296268180066143. Fine-pair errors decrease at every
-node. At every node, the N256-to-N384 difference is smaller than the
+0.9290197651344548 and 0.9296268180066143. At every node, the N256-to-N384 difference is smaller than the
 N192-to-N256 difference. The coarse pair exceeds the allocated H1/vorticity
 context budget; that is not a failure of the required spatial sequence, and the
 coarse pair need not meet the fine-pair budget. This is a matched spatial screen
@@ -91,6 +90,32 @@ sampled-binary64 reference diagnostics, not continuum-tail, reference-precision,
 trajectory-error or PDE qualification evidence. The archived [bridge summary](../evidence/p10/external-reference-bridge/results/summary.json)
 and [bridge README](../evidence/p10/external-reference-bridge/README.md) retain
 the source, snapshot, resource and result bindings.
+
+The matched M384-to-M512 trajectory-force differences at clocks 512, 1024,
+1536 and 2048 have H1 values of about `2.21e-5` to `2.24e-5` relative to the
+M512 states, or `0.147` to `0.149` of the frozen ForceResolution pilot
+allocation. Independently sampled M768 references against the M512 trajectory
+give retained-band H1 differences of `3.51e-6`, `1.17e-5` and `2.33e-5` at
+clocks 512, 1024 and 2048. These measurements support continuing the M512
+force-refinement trajectory, but they do not qualify its force sampling,
+reference precision or unresolved tail.
+
+One read-only physical diagnostic evaluated the N384/M384 state at clock 512
+on a 768-cubed grid. Its global RMS/peak errors were `9.74e-8`/`2.91e-6` for
+velocity, `1.19e-4`/`0.00334` for the gradient, and `0.16495`/`4.1366` for the
+ordered Hessian. The largest floor-normalized derivative peaks occur in the
+cutoff collar and near-zero exterior, while core and annulus values are much
+smaller. The [regional result](../evidence/p10/n384-regional-snapshot-diagnostic/results/clock0512.json)
+uses diagnostic normalization floors rather than accepted error budgets; it
+does not qualify collar volume, peak location or vorticity.
+
+The first off-stage residual probe at clock 1112 confirms that force sampling
+dominates that diagnostic. Its independent M768-force residual has H1
+`2147.4147`; replacing only the force term by the discrete retained M384 force
+drops H1 to `0.89876`. The replacement changes the diagnostic equation and is
+not a residual repair or PDE pass. The archived [localization evidence](../evidence/p10/offline-residual-probe/localization-summary.json)
+also retains the failed strict arithmetic-closure checks and the separate broad
+internal-consistency heuristic.
 
 Analytical-reference spectrum screens identify N192, N256 and N384 as the
 provisional next spatial ladder. These screens guide grid choice; they are
@@ -153,10 +178,13 @@ open.
 
 ## Next bounded integration increment
 
-The next bounded gates are matched M384/M512 force trajectories, a complete
-N384 time refinement, a matched CM/HO method comparison, an independent
-current-profile reference bridge, off-stage residuals, pressure and regional
-derivative-sensitive measurements. Preserve every guard, local-error, resource
+The active bounded gates are the same-state M512 force-refinement and HO method
+trajectories, each preserved through clock 2048 and conditionally continuing to
+clock 3072 under its frozen wall-time rule. Completed read-only diagnostics now
+cover sampled references, one off-stage residual probe and one clock-512
+regional derivative screen. The next qualification work must turn those
+diagnostics into independently frozen force, time, method, residual, pressure
+and regional refinement channels. Preserve every guard, local-error, resource
 and deadline refusal. Compare only identical physical and arithmetic profiles
 when attributing a channel; keep sampled-reference bridge values explicitly
 diagnostic.
