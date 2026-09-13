@@ -1,0 +1,63 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "MATCHED_SPATIAL",
+  "snapshot": "staged/n384-state.bin",
+  "plan": "../../../avx-n384-m512-deployment-20260912/frozen-plan.json",
+  "identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "coefficient_sha256": "bb12be8f266268813ffbeddc3c78659bc84efb2361f14dfd471e5da354fc2324",
+  "file_sha256": "d62fdf81db2547e6343e21e6be6faabfdf0130a8e686d771785434fe2bd16365",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;observer_conservative=768;host=sulaco",
+  "dimensions": [
+    384,
+    384,
+    384
+  ],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 1024,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      512,
+      512,
+      512
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 1024,
+        "step_ticks": 64
+      }
+    ],
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "elapsed": 1024,
+  "target": 8192,
+  "epoch": 16,
+  "accepted_steps": 16,
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"
+  },
+  "admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 48
+  }
+}
