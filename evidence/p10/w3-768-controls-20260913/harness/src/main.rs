@@ -81,7 +81,6 @@ fn force_control() -> Result<(), String> {
     let backend = backend()?;
     let domain = Domain::new([RETAINED; 3], [1.0; 3], 1.0).map_err(debug)?;
     let samples = Layout::new([LAYOUT; 3]).map_err(debug)?;
-    let catalog = catalog(backend)?;
     let serial_limits =
         ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, WORKERS, backend)
             .map_err(debug)?;
@@ -95,6 +94,7 @@ fn force_control() -> Result<(), String> {
     {
         return Err("force W3 incremental reservation mismatch".into());
     }
+    let catalog = catalog(backend)?;
     if !matches!(
         ParallelReducedV2ForceW3::new_with_catalog(
             domain,
@@ -166,7 +166,6 @@ fn force_control() -> Result<(), String> {
 fn rhs_control() -> Result<(), String> {
     let backend = backend()?;
     let domain = Domain::new([RETAINED; 3], [1.0; 3], 1.0).map_err(debug)?;
-    let catalog = catalog(backend)?;
     let limits = FixtureForce::LIMITS;
     let serial_bytes =
         SpectralRhs::<FixtureForce>::reservation_with_fft_backend(domain, limits, backend)
@@ -177,6 +176,7 @@ fn rhs_control() -> Result<(), String> {
     if w3_bytes.checked_sub(serial_bytes) != Some(BIDIRECTIONAL_ADDITIONAL) {
         return Err("RHS W3 incremental reservation mismatch".into());
     }
+    let catalog = catalog(backend)?;
     if !matches!(
         SpectralRhs::new_with_catalog_w3(domain, FixtureForce, 1.0e9, &catalog, w3_bytes - 1),
         Err(SolverError::ResourceLimit)
