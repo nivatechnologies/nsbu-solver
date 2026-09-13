@@ -299,6 +299,8 @@ pub(crate) struct LocalizationRunOutput {
     pub integration_force: &'static str,
     pub base_residual_force: &'static str,
     pub discrete_retained_force_control: &'static str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub legacy_localization_field_mapping: Option<&'static str>,
     pub retained_grid: [usize; 3],
     pub diagnostic_grid: [usize; 3],
     pub probe_clock: u128,

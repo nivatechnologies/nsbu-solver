@@ -409,10 +409,13 @@ fn evaluate(
         },
         base_residual_force: "fresh independent AVX scalar parallel-reduced M768/32-worker provider at clock1112",
         discrete_retained_force_control: if m512 {
-            "fresh exact r5 integration CachedReducedForce targeting N384/M512 at clock1112; strict zero padding; R512=R768+P(f768-pad(f512)); changes the discrete target equation outside the retained band"
+            "fresh exact r5 integration CachedReducedForce targeting N384/M512 at clock1112; strict zero padding; R512=R768+P(f768-pad(f512)); changes diagnostic forcing on strict retained N384 and removes M768 forcing on the omitted N384-to-N768 band; does not modify the trajectory"
         } else {
             "fresh exact integration CachedReducedForce targeting N384/M384 at clock1112; strict zero padding; R384=R768+P(f768-pad(f384)); changes the discrete target equation outside the retained band"
         },
+        legacy_localization_field_mapping: m512.then_some(
+            "legacy fields conservative_m384, residual_m384, and residual_m384_component_sha256 denote strict retained N384/control storage; their sampled-force grid is M512 in this result schema",
+        ),
         retained_grid: [384; 3],
         diagnostic_grid: [768; 3],
         probe_clock: PROBE,

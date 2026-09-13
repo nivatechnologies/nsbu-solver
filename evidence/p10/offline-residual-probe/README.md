@@ -101,8 +101,15 @@ its own schema and no predeclared output hash oracle.
 
 The node derivatives and retained force control use the exact M512 cached W3 force constructor.
 The base residual force remains a fresh independent scalar M768 evaluation at clock 1112. This is
-a read-only comparison of the actual finer-force trajectory against the M768 force; it does not
-replace either force, import a runtime owner, inject a reference state, or claim acceptance.
+a read-only comparison of the actual finer-force trajectory against the unchanged M768 base
+residual. A separately labeled control changes the diagnostic forcing to M512 on strict retained
+N384 and removes the M768 forcing on the omitted N384--N768 band; neither calculation modifies the
+trajectory. It does not import a runtime owner, inject a reference state, or claim acceptance.
+
+The production localization type retains legacy field names `conservative_m384`, `residual_m384`,
+and `residual_m384_component_sha256`. Under the M512 result schema, their `_m384` suffix denotes
+the strict retained N384/control storage, while the sampled force is M512. The M512 result records
+this mapping explicitly.
 
 The three source files are staged outside Git under
 `/mnt/niva-array/p10-offline-residual-probe-m512-input-20260913`, requiring 4,098,100,587 bytes.
