@@ -1,0 +1,1 @@
+attempt=1 clock=64 integration_seconds=346.170822387 rhs_evaluate_seconds=302.103202195 rhs_timed_calls=12 outside_rhs_evaluate_seconds=44.067620192 cache_hit_miss=[7, 5] observer_seconds=None ratios=[1.5877938231527918e-8, 4.324683895722008e-8] publication=Step state_sha256=Some("0e5aa2cf212215002a63603153255fd8330aa8de6c565b538bd714426f8f4913") steady_allocations=0

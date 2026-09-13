@@ -1,0 +1,79 @@
+{
+  "schema": "p10-avx-n384-m512-prefix3072-run-summary-v1",
+  "host": "sulaco",
+  "stage": "/tmp/nsbu-p10-sulaco-m512-prefix-r5",
+  "classification": "manual_deadline_gate_stop",
+  "numerical_refusal": false,
+  "timeout": false,
+  "os_exit_code": null,
+  "os_exit_code_status": "unrecorded_manual_group_termination_time_file_empty",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72",
+  "evidence_branch_head_at_launch": "11b7582570967caf557632f676912046940513b6",
+  "binary_sha256": "85659a06a1b914d7b64feec20522eb47e876a17c626c3703d4ef59b6cb379b57",
+  "full_plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "prefix_plan_sha256": "07d6eba0c7104388554e354ba075ea969ccce4d8fbfcbcc95decaa7f2cfbebb9",
+  "preflight_sha256": "b085d0678c1576aee4977c413f8072c70a85c1da6249f46cd6bc2fff8b8c1274",
+  "watchdog_v3_sha256": "0628e9d65dd65f7738cbaf3bffe720dc357faba1d116d45ec1cdf2c60507ab01",
+  "launcher_sha256": "bdf92537d27cf2d3d1a7bf961855b1480f95650f07c9f71a62f563952a49ede7",
+  "solver_pid": 217824,
+  "process_group": 217818,
+  "solver_starttime": 33766799,
+  "solver_cmdline_sha256": "cf6fa26bd94818ea43c47baf90798baf990f8cc507e7acc5fb345b504578c7b9",
+  "watchdog_pid": 217847,
+  "deadline_epoch": 1789282800,
+  "attempts_committed": 40,
+  "last_clock": 3072,
+  "attempt41_committed": false,
+  "terminal_record_present": false,
+  "rest_record_present": true,
+  "snapshot_directories": 40,
+  "snapshot_state_bytes_each": 1366033529,
+  "output_tree_bytes": 54641461024,
+  "output_file_count": 121,
+  "integration_seconds": {
+    "sum": 15082.069793169,
+    "mean": 377.05174482922496,
+    "max": 416.261941069,
+    "last8_max": 361.490995328,
+    "last8_mean": 351.344679196875
+  },
+  "observer_seconds": {
+    "count": 6,
+    "sum": 1689.263711285,
+    "mean": 281.54395188083333,
+    "max_positive": 293.017052202
+  },
+  "max_error_ratio_l2": 0.12640355447158066,
+  "max_error_ratio_h1": 0.9636019710414355,
+  "all_steady_allocations_zero": true,
+  "frontier": {
+    "attempt": 40,
+    "clock": 3072,
+    "payload_sha256": "bf48328467b01d96dcd9d7412b889710e7801d7e5f5e6955f451e16890fb74ac",
+    "state_file_sha256": "7bae7d6749f209a89bd990ea70befdffbdfd6e577d80e27107b4537ca082a8bd",
+    "state_file_bytes": 1366033529,
+    "attempt_file_sha256": "07537180a3f877b45526be38d29e12cdea7a21c1df40ac3ce1e79faadff9591b",
+    "record_file_sha256": "d2c086e8a2a176d01bc1d6b333e7c211c26955ff7dab8933b972ad8630136218",
+    "record_mtime_utc": "2026-09-13T05:52:27.858164722Z"
+  },
+  "watchdog_exit_observations": [
+    {
+      "utc": "2026-09-13T05:56:33Z",
+      "component": "state",
+      "observed_state": "Z"
+    },
+    {
+      "utc": "2026-09-13T05:56:34Z",
+      "component": "proc_missing",
+      "observed_state": "missing"
+    }
+  ],
+  "all_owned_pids_gone_observed_utc": "2026-09-13T06:00:08Z",
+  "claim": "feasibility_incomplete_no_endpoint_no_window",
+  "checkpoint_publication_stdout_mtime_utc": "2026-09-13T05:52:27.860164714Z",
+  "gate_evaluated_after_publication": true,
+  "attempt41_status": "begun_in_memory_after_checkpoint_then_discarded_unpublished_by_manual_group_term",
+  "attempt41_artifacts_present": false,
+  "clock2048_gate": "continuation-gate-2048.json",
+  "clock3072_gate": "continuation-gate-3072.json"
+}
