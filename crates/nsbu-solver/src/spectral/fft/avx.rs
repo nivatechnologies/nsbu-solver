@@ -235,6 +235,31 @@ fn require_features() -> Result<(), SolverError> {
     }
 }
 
+#[cfg(all(test, target_arch = "x86_64"))]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn from_parts_refuses_plans_exceeding_the_closed_scratch_allowance() {
+        if ensure_available().is_err() {
+            return;
+        }
+        let layout = Layout::new([6; 3]).unwrap();
+        let mut planner = rustfft::FftPlannerAvx::<f64>::new().unwrap();
+        let forward = planner.plan_fft(1536, FftDirection::Forward);
+        let inverse = planner.plan_fft(1536, FftDirection::Inverse);
+        assert!(forward.get_inplace_scratch_len() > AVX_SCRATCH_LANES * 6);
+        assert!(matches!(
+            from_parts(
+                layout,
+                std::array::from_fn(|_| Arc::clone(&forward)),
+                std::array::from_fn(|_| Arc::clone(&inverse)),
+            ),
+            Err(SolverError::ResourceLimit)
+        ));
+    }
+}
+
 #[cfg(target_arch = "x86_64")]
 pub(super) fn ensure_available() -> Result<(), SolverError> {
     require_features()
