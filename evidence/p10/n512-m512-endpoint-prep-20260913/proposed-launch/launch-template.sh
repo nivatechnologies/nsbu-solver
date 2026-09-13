@@ -1,0 +1,243 @@
+#!/bin/sh
+# Proposed only: a future deadline and explicit authorization are required.
+set -eu
+
+SOURCE=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
+BINARY_SHA256=7fbe53e794837afbc7dccdebf34d85bf8418f93fdfc608aa61b91d337baed211
+PLAN_SHA256=6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634
+PREFLIGHT_SHA256=4393b5cbbcd963ae0a2bda51c50765bcd38f6b9d1ed2dc39aedec1fe66a3a60d
+WATCHDOG_SHA256=555474618d31235073123cef4025c6e9b9aa955067308a217551d9ede7edebc3
+MEMORY_FLOOR_BYTES=241937824240
+DISK_FLOOR_BYTES=189586276352
+ADDRESS_SPACE_LIMIT_KIB=268435456
+MINIMUM_LAUNCH_REMAINING_SECONDS=66672
+REMAINING_AFTER_FIRST_SECONDS=65410
+FIRST_STEP_INTEGRATION_LIMIT_SECONDS=1200
+STATE_COEFFICIENT_BYTES=3233808384
+PREPARED_BINARY_EXTERNAL_STOP=pgid-watchdog-v2-starttime-cmdline-deadline
+REQUIRED_EXTERNAL_STOP=pgid-watchdog-v3-confirmed-identity-absolute-deadline
+
+numeric() { case "$1" in '' | *[!0-9]*) return 1 ;; esac; }
+
+validate_deadline() {
+    numeric "$1" || { echo "refused: numeric future absolute deadline required" >&2; return 72; }
+    deadline=$1
+    now=$2
+    [ "$deadline" -gt "$now" ] || { echo "refused: absolute deadline has passed" >&2; return 72; }
+    [ "$((deadline - now))" -ge "$MINIMUM_LAUNCH_REMAINING_SECONDS" ] || {
+        echo "refused: deadline leaves less than reviewed run budget" >&2
+        return 73
+    }
+}
+
+require_v3_identity() {
+    [ "$PREPARED_BINARY_EXTERNAL_STOP" = "$REQUIRED_EXTERNAL_STOP" ] || {
+        echo "refused: rebuild and refreeze binary identity for the reviewed v3 watchdog" >&2
+        return 63
+    }
+}
+
+owned_pid=
+owned_pgid=
+owned_starttime=
+owned_cmdline=
+owned_matches() {
+    [ -n "$owned_pid" ] && [ -r "/proc/$owned_pid/stat" ] && [ -r "/proc/$owned_pid/cmdline" ] || return 1
+    owned_stat=$(cat "/proc/$owned_pid/stat" 2>/dev/null) || return 1
+    owned_rest=${owned_stat##*) }
+    set -- $owned_rest
+    [ "$1" != Z ] && [ "$3" = "$owned_pgid" ] && [ "${20}" = "$owned_starttime" ] || return 1
+    [ "$(sha256sum "/proc/$owned_pid/cmdline" | awk '{print $1}')" = "$owned_cmdline" ]
+}
+cleanup_owned() {
+    status=$?
+    trap - EXIT HUP INT TERM
+    if [ "$status" -ne 0 ] && owned_matches; then
+        /bin/kill -TERM -- "-$owned_pgid" 2>/dev/null || true
+    fi
+    exit "$status"
+}
+
+fake_owner_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-watchdog.XXXXXX")
+    setsid /bin/sleep 30 &
+    child=$!
+    pgid=
+    for _ in $(seq 1 100); do
+        stat=$(cat "/proc/$child/stat" 2>/dev/null || true)
+        rest=${stat##*) }
+        set -- $rest
+        if [ "$#" -ge 20 ] && [ "$3" = "$child" ]; then
+            pgid=$3
+            starttime=${20}
+            cmdline=$(sha256sum "/proc/$child/cmdline" | awk '{print $1}')
+            break
+        fi
+        sleep 0.05
+    done
+    [ -n "$pgid" ] || return 1
+    WATCHDOG_POLL_SECONDS=1 "$WATCHDOG" "$child" "$pgid" "$starttime" "$cmdline" "$(( $(date +%s) + 1 ))" "$temp/watchdog.log"
+    wait "$child" 2>/dev/null || true
+    [ ! -r "/proc/$child/stat" ] || { echo "fake owner survived watchdog" >&2; return 1; }
+    grep -q 'deadline_reached_sending_TERM' "$temp/watchdog.log"
+    echo "fake-child owner/deadline test passed"
+}
+
+BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
+case "${1:-}" in
+    --self-test-deadline-refusal)
+        test_now=$(date +%s)
+        if validate_deadline invalid "$test_now"; then exit 1; fi
+        if validate_deadline 1 "$test_now"; then exit 1; fi
+        if validate_deadline "$((test_now + MINIMUM_LAUNCH_REMAINING_SECONDS - 1))" "$test_now"; then exit 1; fi
+        validate_deadline "$((test_now + MINIMUM_LAUNCH_REMAINING_SECONDS))" "$test_now"
+        echo "numeric, expired, short, and admitted deadline tests passed"
+        exit 0
+        ;;
+    --self-test-owner) fake_owner_test; exit $? ;;
+    --self-test-identity-refusal)
+        if require_v3_identity; then exit 1; fi
+        echo "legacy v2 binary identity refusal passed"
+        exit 0
+        ;;
+esac
+
+[ "${NSBU_LAUNCH_N512_M512_ENDPOINT:-}" = 1 ] || {
+    echo "refused: caller must explicitly authorize this future launch" >&2
+    exit 64
+}
+[ "$(hostname)" = sulaco ] || { echo "refused: Sulaco only" >&2; exit 65; }
+[ -n "${NSBU_N512_M512_EXPECTED_BUNDLE:-}" ] && [ "$BUNDLE" = "$NSBU_N512_M512_EXPECTED_BUNDLE" ] || {
+    echo "refused: caller-supplied exact bundle path mismatch" >&2
+    exit 66
+}
+DEADLINE_EPOCH=${NSBU_N512_M512_DEADLINE_EPOCH:-}
+validate_deadline "$DEADLINE_EPOCH" "$(date +%s)"
+require_v3_identity
+ARCHIVE_PARENT=${NSBU_N512_M512_ARCHIVE_PARENT:-}
+case "$ARCHIVE_PARENT" in /*) ;; *) echo "refused: absolute archive parent required" >&2; exit 67 ;; esac
+[ -d "$ARCHIVE_PARENT" ] || { echo "refused: archive parent missing" >&2; exit 67; }
+
+BIN=$BUNDLE/p10-avx-scheduled-endpoint
+PLAN=$BUNDLE/frozen-plan.json
+PREFLIGHT=$BUNDLE/n512-preflight.stdout
+RUN_ROOT=$BUNDLE/run-$DEADLINE_EPOCH
+OUTPUT=$RUN_ROOT/output
+LOG_DIR=$RUN_ROOT/logs
+ARCHIVE=$ARCHIVE_PARENT/n512-m512-endpoint-$DEADLINE_EPOCH
+ARCHIVE_PARTIAL=$ARCHIVE.partial
+
+[ ! -e "$RUN_ROOT" ] && [ ! -e "$ARCHIVE" ] && [ ! -e "$ARCHIVE_PARTIAL" ] || {
+    echo "refused: run or archive target already exists" >&2
+    exit 68
+}
+[ "$(sha256sum "$BIN" | awk '{print $1}')" = "$BINARY_SHA256" ] || exit 69
+[ "$(sha256sum "$PLAN" | awk '{print $1}')" = "$PLAN_SHA256" ] || exit 69
+[ "$(sha256sum "$PREFLIGHT" | awk '{print $1}')" = "$PREFLIGHT_SHA256" ] || exit 69
+[ "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = "$WATCHDOG_SHA256" ] || exit 69
+if pgrep -f 'p10-avx-scheduled-endpoint run ' >/dev/null; then
+    echo "refused: competing endpoint solver exists" >&2
+    exit 70
+fi
+available_kib=$(awk '/MemAvailable/{print $2}' /proc/meminfo)
+[ "$((available_kib * 1024))" -ge "$MEMORY_FLOOR_BYTES" ] || exit 74
+source_disk=$(df -B1 --output=avail "$BUNDLE" | awk 'NR==2{print $1}')
+archive_disk=$(df -B1 --output=avail "$ARCHIVE_PARENT" | awk 'NR==2{print $1}')
+[ "$source_disk" -ge "$DISK_FLOOR_BYTES" ] && [ "$archive_disk" -ge "$DISK_FLOOR_BYTES" ] || exit 75
+
+mkdir -p "$LOG_DIR"
+"$BIN" preflight unused >"$LOG_DIR/preflight.stdout"
+[ "$(sha256sum "$LOG_DIR/preflight.stdout" | awk '{print $1}')" = "$PREFLIGHT_SHA256" ] || exit 76
+
+timeout_seconds=$((DEADLINE_EPOCH - $(date +%s)))
+ulimit -v "$ADDRESS_SPACE_LIMIT_KIB"
+export NSBU_RUN_N512_M512_ENDPOINT_CAPTURE=1
+setsid /usr/bin/time -v -o "$LOG_DIR/time.txt" /usr/bin/timeout --foreground --signal=TERM --kill-after=60s "$timeout_seconds" "$BIN" run "$OUTPUT" >"$LOG_DIR/stdout" 2>"$LOG_DIR/stderr" &
+time_pid=$!
+stat=$(cat "/proc/$time_pid/stat")
+rest=${stat##*) }
+set -- $rest
+time_pgid=$3
+owned_pid=$time_pid
+owned_pgid=$time_pgid
+owned_starttime=${20}
+owned_cmdline=$(sha256sum "/proc/$time_pid/cmdline" | awk '{print $1}')
+trap cleanup_owned EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+solver_pid=
+for _ in $(seq 1 100); do
+    timeout_pid=$(pgrep -P "$time_pid" || true)
+    [ -n "$timeout_pid" ] && solver_pid=$(pgrep -P "$timeout_pid" || true) && [ -n "$solver_pid" ] && break
+    sleep 0.05
+done
+[ -n "$solver_pid" ] || { /bin/kill -TERM -- "-$time_pgid" 2>/dev/null || true; exit 77; }
+stat=$(cat "/proc/$solver_pid/stat")
+rest=${stat##*) }
+set -- $rest
+pgid=$3
+starttime=${20}
+cmdline=$(sha256sum "/proc/$solver_pid/cmdline" | awk '{print $1}')
+[ "$pgid" = "$time_pgid" ] || { /bin/kill -TERM -- "-$time_pgid" 2>/dev/null || true; exit 77; }
+owned_pid=$solver_pid
+owned_pgid=$pgid
+owned_starttime=$starttime
+owned_cmdline=$cmdline
+setsid "$WATCHDOG" "$solver_pid" "$pgid" "$starttime" "$cmdline" "$DEADLINE_EPOCH" "$LOG_DIR/watchdog.log" >"$LOG_DIR/watchdog.stdout" 2>"$LOG_DIR/watchdog.stderr" &
+watchdog_pid=$!
+
+waited=0
+while ! grep -q '^attempt=1 clock=64 ' "$LOG_DIR/stdout" 2>/dev/null; do
+    [ "$waited" -lt 1500 ] && kill -0 "$solver_pid" 2>/dev/null && kill -0 "$watchdog_pid" 2>/dev/null || {
+        /bin/kill -TERM -- "-$pgid" 2>/dev/null || true
+        exit 78
+    }
+    sleep 5
+    waited=$((waited + 5))
+done
+first=$(grep '^attempt=1 clock=64 ' "$LOG_DIR/stdout" | head -n 1)
+printf '%s\n' "$first" | grep -q 'rhs_timed_calls=12 ' || exit 79
+printf '%s\n' "$first" | grep -q 'cache_hit_miss=\[7, 5\] ' || exit 79
+printf '%s\n' "$first" | grep -q 'steady_allocations=0$' || exit 79
+first_seconds=$(printf '%s\n' "$first" | sed -n 's/.*integration_seconds=\([0-9.]*\).*/\1/p')
+awk -v actual="$first_seconds" -v limit="$FIRST_STEP_INTEGRATION_LIMIT_SECONDS" 'BEGIN{exit !(actual ~ /^[0-9]+([.][0-9]+)?$/ && actual <= limit)}' || exit 80
+[ "$((DEADLINE_EPOCH - $(date +%s)))" -ge "$REMAINING_AFTER_FIRST_SECONDS" ] || exit 81
+
+if wait "$time_pid"; then solver_status=0; else solver_status=$?; fi
+[ "$solver_status" -eq 0 ] || exit "$solver_status"
+owned_pid=
+wait "$watchdog_pid" 2>/dev/null || true
+grep -q '^terminal endpoint_capture_complete_offline_observer_required clock=4096$' "$LOG_DIR/stdout" || exit 82
+python3 - "$OUTPUT" "$STATE_COEFFICIENT_BYTES" <<'PY'
+import json, pathlib, sys
+root, coefficient_bytes = pathlib.Path(sys.argv[1]), int(sys.argv[2])
+clocks = [64 * i for i in range(1, 33)] + [2048 + 128 * i for i in range(1, 17)]
+observer = {512, 1024, 1536, 2048, 2560, 3072, 3584, 4096}
+for attempt, clock in enumerate(clocks, 1):
+    step = root / f"step-{attempt:03d}-clock-{clock:04d}"
+    if not step.is_dir(): raise SystemExit(f"missing {step.name}")
+    with (step / "attempt.json").open() as stream: attempted = json.load(stream)
+    with (step / "record.json").open() as stream: record = json.load(stream)
+    expected = (attempt, clock, "committed", 12, 7, 5, 0)
+    actual = (attempted.get("attempt"), attempted.get("attempted_to"), attempted.get("outcome"), attempted.get("rhs_calls"), attempted.get("cache_hits"), attempted.get("cache_misses"), attempted.get("steady_allocations"))
+    if actual != expected: raise SystemExit(f"attempt identity mismatch {attempt}: {actual}")
+    if record.get("clock") != clock or record.get("coefficient_bytes") != coefficient_bytes: raise SystemExit(f"state record mismatch {attempt}")
+    if record.get("offline_observer_node") != (clock in observer) or record.get("qualification") is not False: raise SystemExit(f"observer marker mismatch {attempt}")
+    if (step / "state.bin").stat().st_size <= coefficient_bytes: raise SystemExit(f"state payload truncated {attempt}")
+print("all_48_committed_states=passed offline_observer_nodes=8")
+PY
+
+archive_disk=$(df -B1 --output=avail "$ARCHIVE_PARENT" | awk 'NR==2{print $1}')
+[ "$archive_disk" -ge "$DISK_FLOOR_BYTES" ] || exit 75
+mkdir "$ARCHIVE_PARTIAL"
+(cd "$OUTPUT" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$LOG_DIR/source.sha256"
+cp -a "$OUTPUT/." "$ARCHIVE_PARTIAL/"
+(cd "$ARCHIVE_PARTIAL" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) >"$LOG_DIR/archive.sha256"
+cmp "$LOG_DIR/source.sha256" "$LOG_DIR/archive.sha256"
+sync "$ARCHIVE_PARTIAL"
+mv "$ARCHIVE_PARTIAL" "$ARCHIVE"
+printf 'archive=%s files=%s bytes=%s\n' "$ARCHIVE" "$(find "$ARCHIVE" -type f | wc -l)" "$(du -sb "$ARCHIVE" | awk '{print $1}')" >"$LOG_DIR/archive-receipt.txt"
+echo "endpoint and archive complete; offline baccus observer remains required"
