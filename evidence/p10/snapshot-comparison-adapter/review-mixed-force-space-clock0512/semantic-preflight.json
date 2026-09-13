@@ -1,0 +1,18 @@
+{
+  "schema": "p10-mixed-force-space-semantic-preflight-v1",
+  "status": "passed_no_state_decode_no_numerical_use",
+  "comparison_kind": "MIXED_FORCE_SPACE_DIAGNOSTIC",
+  "source_commit": "beef0b06801a0f2bd7c4225aee8da5265a996f6b",
+  "checks": [
+    "ordered dimensions N256,N384,N384",
+    "ordered integration force M384,M384,M512",
+    "identical exact case/domain/viscosity/quantum/clock/endpoint/method/schedule/tolerances except admitted force dimension",
+    "epoch=accepted_steps=derived schedule steps=8 <= each maximum_attempts=48",
+    "identity-profile bindings exact",
+    "plans hash exact",
+    "state file lengths exact",
+    "no arithmetic override"
+  ],
+  "exact_cap_bytes": 3138912256,
+  "numerical_use": false
+}
