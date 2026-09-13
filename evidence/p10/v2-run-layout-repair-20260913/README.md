@@ -27,3 +27,8 @@ numerical tolerance or archive codec.
 The initially reported clean-baseline `ResourceLimit` failures were caused by reuse of a tiled
 Cargo target; a clean isolated `ca425` target passed the reproduced pressure test. Those failures
 are not attributed to the baseline source.
+
+The final source-only split moves the AVX tiled traversal into `transform/tiled.rs`; it changes no
+method body or numerical ownership. `rust-code-analysis-cli 0.0.25` reports file-level Halstead
+70.0 for `transform.rs` and 45.8333 for `tiled.rs`; the maximum function cognitive complexity is
+15 and maximum function Halstead difficulty is 37.0527. Both files satisfy the strict gates.

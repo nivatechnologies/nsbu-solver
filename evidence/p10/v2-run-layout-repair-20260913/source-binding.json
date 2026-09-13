@@ -17,7 +17,7 @@
     },
     {
       "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
-      "sha256": "b8d7f894088b4f29c39348b604239a52b4ce9c724443ba9d61950544c3247ecb"
+      "sha256": "2cb8e2fd329f720bf93a6389d6089b2197bbe9b02e115bb1a69c9d328678217b"
     },
     {
       "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
@@ -30,6 +30,10 @@
     {
       "path": "crates/nsbu-solver/tests/fft/validation.rs",
       "sha256": "87bef3a4abfd136660f46bca16efe925c28b4768386ea22c0a63942e2a5838a8"
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "sha256": "748a9bff6e16be5212b05c135b75aafcda7ae51e135465208adc53f93a5fa570"
     }
   ],
   "layout_sizes": {
@@ -44,5 +48,12 @@
     "owned_radix_layout_and_reservation_restored": true,
     "v1_codec_changed": false,
     "tolerances_changed": false
+  },
+  "metrics": {
+    "tool": "rust-code-analysis-cli 0.0.25",
+    "transform_file_halstead_difficulty": 70.0,
+    "tiled_file_halstead_difficulty": 45.833333333333336,
+    "maximum_function_halstead_difficulty": 37.05263157894737,
+    "maximum_function_cognitive": 15.0
   }
 }

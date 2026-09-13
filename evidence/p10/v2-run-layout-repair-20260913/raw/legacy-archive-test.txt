@@ -1,5 +1,11 @@
-   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-20260913/crates/nsbu-benchmarks)
-    Finished `test` profile [optimized + debuginfo] target(s) in 2.85s
+   Compiling serde_core v1.0.229
+   Compiling serde_json v1.0.145
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling ryu v1.0.23
+   Compiling m512-alloc-trace v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/m512-alloc-trace)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-v2-layout-repair-split-20260913/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 12.19s
      Running tests/v2_archive.rs (target/debug/deps/v2_archive-2c18c60751317a20)
 
 running 8 tests
@@ -12,5 +18,5 @@ test hochbruck_round_trip_keeps_full_work_ledger ... ok
 test round_trip_preserves_cm_full_state ... ok
 test round_trip_preserves_ho_full_state ... ok
 
-test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.44s
 

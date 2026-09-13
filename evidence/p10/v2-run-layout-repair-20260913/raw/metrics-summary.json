@@ -1,0 +1,93 @@
+[
+  {
+    "name": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+    "kind": "unit",
+    "halstead": 70.0,
+    "cognitive": 29.0,
+    "cyclomatic": 28.0
+  },
+  {
+    "name": "FftPlan",
+    "kind": "impl",
+    "halstead": 74.66666666666667,
+    "cognitive": 29.0,
+    "cyclomatic": 27.0
+  },
+  {
+    "name": "forward",
+    "kind": "function",
+    "halstead": 27.3,
+    "cognitive": 4.0,
+    "cyclomatic": 6.0
+  },
+  {
+    "name": "inverse",
+    "kind": "function",
+    "halstead": 37.05263157894737,
+    "cognitive": 5.0,
+    "cyclomatic": 6.0
+  },
+  {
+    "name": "transform_axis",
+    "kind": "function",
+    "halstead": 21.065217391304348,
+    "cognitive": 4.0,
+    "cyclomatic": 4.0
+  },
+  {
+    "name": "transverse",
+    "kind": "function",
+    "halstead": 8.642857142857142,
+    "cognitive": 1.0,
+    "cyclomatic": 2.0
+  },
+  {
+    "name": "transverse_axis",
+    "kind": "function",
+    "halstead": 32.8125,
+    "cognitive": 15.0,
+    "cyclomatic": 8.0
+  },
+  {
+    "name": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+    "kind": "unit",
+    "halstead": 45.833333333333336,
+    "cognitive": 15.0,
+    "cyclomatic": 15.0
+  },
+  {
+    "name": "FftPlan",
+    "kind": "impl",
+    "halstead": 39.310344827586206,
+    "cognitive": 9.0,
+    "cyclomatic": 8.0
+  },
+  {
+    "name": "transverse_axis_tiled",
+    "kind": "function",
+    "halstead": 30.76923076923077,
+    "cognitive": 8.0,
+    "cyclomatic": 5.0
+  },
+  {
+    "name": "transform_transverse_tile",
+    "kind": "function",
+    "halstead": 22.666666666666668,
+    "cognitive": 1.0,
+    "cyclomatic": 2.0
+  },
+  {
+    "name": "gather_tile",
+    "kind": "function",
+    "halstead": 16.363636363636363,
+    "cognitive": 3.0,
+    "cyclomatic": 3.0
+  },
+  {
+    "name": "scatter_tile",
+    "kind": "function",
+    "halstead": 16.363636363636363,
+    "cognitive": 3.0,
+    "cyclomatic": 3.0
+  }
+]
