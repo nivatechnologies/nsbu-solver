@@ -1,0 +1,25 @@
+{
+  "schema": "p10-offline-residual-probe-kernel-lineage-v1",
+  "baseline_source_commit": "aed49b7d7874a0a720dee88b65ba180c7286fa65",
+  "harness_base_commit": "b4ca117dccc5af981405007b1e03533dffd4825b",
+  "w3_source_commit": "f13c29c9ae91d0b8cf7a790132deb9bd076911c0",
+  "identical_baseline_and_harness_sources": {
+    "crates/nsbu-solver/src/diagnostics/hermite.rs": "ce6bc5e97a57ef6ee80f668aec78eae060e4a7710e0f535d903ac35d403f94ad",
+    "crates/nsbu-solver/src/diagnostics/residual.rs": "54e7b47dd3e7e3c053cc9964868b9d74bee3e7770b2efd54ef46ca1b2695cb63",
+    "crates/nsbu-solver/src/diagnostics/conservative.rs": "54f527487e7bef09efd227b329f2d581ebe4b31922529b948a58bc1eee7f17e2",
+    "crates/nsbu-solver/src/integrators/rhs.rs": "cdac32989e906f22345c4b4644adccc821e9131918f2093012bec0bdaf464540",
+    "crates/nsbu-solver/src/integrators/rhs/w3.rs": "8acbe1d49972e450a0a49bae8d20d8ce40d81145cb5a5e50fd49901fc7f440e2",
+    "crates/nsbu-benchmarks/src/runtime_force.rs": "93c2b585b3d20a012c3c1a018572db11173098710994e9e108f5d97a42178b64",
+    "crates/nsbu-benchmarks/src/provider/parallel_reduced.rs": "14565a26a47bab09dab7b500a17881025197b256bef5a1691ef778a203920ed2",
+    "evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs": "875b1decd9844d3f3605dea8dd367c2cd8006cb543e6d7b246e58f895e6ec4c4"
+  },
+  "admission_only_source_difference": {
+    "path": "crates/nsbu-benchmarks/src/provider/reduced.rs",
+    "baseline_sha256": "308e5fec15021f18b1b17738e75e7c4b9a9245a693813a45ce392f6988edd39d",
+    "harness_sha256": "38e5a5f46e069ea50e7bf8fd54d34b75c088d5d5f4e8886436b8e5508c1d379c",
+    "scope": "defer FFT reservation until after generic checked provider admission; evaluate arithmetic unchanged"
+  },
+  "pre_review_release_binary_sha256": "9cf3f8351cdc0cb743c333d5eaff0abaa58519686fc5d43920fcec8db8759e4a",
+  "arithmetic": "binary64",
+  "limitation": "empirical values are not outward-rounded intervals"
+}
