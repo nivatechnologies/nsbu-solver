@@ -2,6 +2,7 @@ mod absolute;
 mod compare;
 mod decode;
 mod hessian;
+mod mixed;
 mod model;
 
 use std::{env, ffi::OsString, path::PathBuf};
@@ -13,6 +14,13 @@ fn main() -> Result<(), String> {
 }
 
 fn run(args: &[OsString]) -> Result<String, String> {
+    if args.len() == 5 && args[4] == "--mixed-force-space" {
+        return run_mixed(args);
+    }
+    run_pair(args)
+}
+
+fn run_pair(args: &[OsString]) -> Result<String, String> {
     if !(3..=4).contains(&args.len()) {
         return Err(
             "usage: p10-snapshot-comparison-adapter LEFT.json RIGHT.json CAP_BYTES [--ordered-hessian]"
@@ -40,6 +48,37 @@ fn run(args: &[OsString]) -> Result<String, String> {
         return format_output(&left_manifest, &left, &right_manifest, &right, admitted);
     }
     format_hessian_output(&left_manifest, &left, &right_manifest, &right, admitted)
+}
+
+fn run_mixed(args: &[OsString]) -> Result<String, String> {
+    let cap = args[3]
+        .to_str()
+        .ok_or("CAP_BYTES is not UTF-8")?
+        .parse::<usize>()
+        .map_err(model::debug)?;
+    let coarse_manifest = decode::read_manifest(&PathBuf::from(&args[0]))?;
+    let baseline_manifest = decode::read_manifest(&PathBuf::from(&args[1]))?;
+    let force_manifest = decode::read_manifest(&PathBuf::from(&args[2]))?;
+    mixed::validate_manifests(&coarse_manifest, &baseline_manifest, &force_manifest)?;
+    let admitted = decode::preflight_three(&coarse_manifest, &baseline_manifest, &force_manifest)?;
+    if admitted > cap {
+        return Err(format!(
+            "comparison reservation {admitted} exceeds cap {cap}"
+        ));
+    }
+    let coarse = decode::load(&coarse_manifest)?;
+    let baseline = decode::load(&baseline_manifest)?;
+    let force = decode::load(&force_manifest)?;
+    let output = mixed::diagnostic_output(
+        &coarse_manifest,
+        &coarse,
+        &baseline_manifest,
+        &baseline,
+        &force_manifest,
+        &force,
+        admitted,
+    )?;
+    serde_json::to_string_pretty(&output).map_err(model::debug)
 }
 
 fn ordered_hessian_requested(args: &[OsString]) -> Result<bool, String> {

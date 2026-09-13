@@ -231,6 +231,9 @@ pub(crate) fn validate_manifest_pair(
         (ComparisonKind::MethodDiagnostic, ComparisonKind::MethodDiagnostic) => {
             validate_method_manifests(left_manifest, right_manifest)
         }
+        (ComparisonKind::MixedForceSpaceDiagnostic, ComparisonKind::MixedForceSpaceDiagnostic) => {
+            Err("mixed force/space diagnostic requires three inputs".into())
+        }
         _ => Err("comparison kind mismatch".into()),
     }
 }

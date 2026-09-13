@@ -53,6 +53,8 @@ pub(crate) enum ComparisonKind {
     ForceResolutionDiagnostic,
     #[serde(rename = "METHOD_DIAGNOSTIC")]
     MethodDiagnostic,
+    #[serde(rename = "MIXED_FORCE_SPACE_DIAGNOSTIC")]
+    MixedForceSpaceDiagnostic,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
