@@ -32,9 +32,10 @@ class Transport(Protocol):
 
 
 class HttpTransport:
-    def __init__(self, endpoint: str) -> None:
+    def __init__(self, endpoint: str, max_response_bytes: int = 200_000) -> None:
         base = endpoint.rstrip("/")
         self._endpoint = base + "/chat/completions" if base.endswith("/v1") else base + "/v1/chat/completions"
+        self._max_response_bytes = max_response_bytes
 
     def complete(self, request: dict[str, JsonValue], timeout: float) -> ModelReply:
         encoded = json.dumps(request, separators=(",", ":")).encode()
@@ -45,7 +46,10 @@ class HttpTransport:
             method="POST",
         )
         with urlopen(http_request, timeout=timeout) as response:  # noqa: S310 local URL is operator supplied
-            body = json.loads(response.read())
+            encoded_body = response.read(self._max_response_bytes + 1)
+        if len(encoded_body) > self._max_response_bytes:
+            raise ValueError("HTTP model response exceeds byte limit")
+        body = json.loads(encoded_body)
         message = body["choices"][0]["message"]
         calls = tuple(
             ToolCall(call["id"], call["function"]["name"], call["function"]["arguments"])

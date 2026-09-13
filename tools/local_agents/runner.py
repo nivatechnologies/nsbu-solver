@@ -42,7 +42,7 @@ class QueueRunner:
         trusted_nonreview_validators: frozenset[str] = frozenset(),
     ) -> None:
         self.config = config.checked()
-        self.transport = transport or HttpTransport(config.endpoint)
+        self.transport = transport or HttpTransport(config.endpoint, config.max_output_bytes)
         self._stop = threading.Event()
         self.receipts: list[dict[str, JsonValue]] = []
         self._family_failures: dict[str, int] = {}
@@ -173,7 +173,12 @@ class QueueRunner:
                         "checker_seconds": checker_seconds,
                     }
                 )
-                if not errors and self._task_hash(task, refresh=True) == original_hash:
+                try:
+                    unchanged = self._task_hash(task, refresh=True) == original_hash
+                except (OSError, ValueError) as exc:
+                    unchanged = False
+                    errors.append(f"artifact recheck failed: {type(exc).__name__}: {exc}")
+                if not errors and unchanged:
                     status = "validated_candidate"
                     break
                 if not errors:
@@ -400,7 +405,7 @@ class QueueRunner:
 
     def _read_artifact(self, path: Path | None) -> str | None:
         if path is None:
-            return None
+            raise ValueError("model requested an undeclared artifact")
         data = self._artifact_bytes[str(path.resolve())]
         return data.decode("utf-8")
 

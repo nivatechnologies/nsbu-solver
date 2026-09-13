@@ -70,4 +70,23 @@ class TaskPacket:
         for name, path in self.artifacts.items():
             if not name or not path.is_file():
                 raise ValueError(f"declared artifact is unavailable: {name}")
+        _check_contract_definition(self.output_contract)
         return self
+
+
+def _check_contract_definition(contract: dict[str, JsonValue]) -> None:
+    unknown = set(contract) - {"required", "properties"}
+    if unknown:
+        raise ValueError(f"unsupported output contract fields: {sorted(unknown)}")
+    required = contract.get("required", [])
+    properties = contract.get("properties", {})
+    if not isinstance(required, list) or not all(isinstance(name, str) for name in required):
+        raise ValueError("output contract required must be a string array")
+    if not isinstance(properties, dict):
+        raise ValueError("output contract properties must be an object")
+    allowed_types = {"string", "object", "array", "boolean", "number", "integer"}
+    for name, rule in properties.items():
+        if not isinstance(name, str) or not isinstance(rule, dict) or set(rule) != {"type"}:
+            raise ValueError(f"unsupported output property contract: {name}")
+        if rule.get("type") not in allowed_types:
+            raise ValueError(f"unsupported output property type: {rule.get('type')}")

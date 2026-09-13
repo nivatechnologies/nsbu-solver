@@ -26,7 +26,7 @@ Inference has two phases. The first exposes only `read_artifact`, which reads a
 named, declared artifact under a byte cap. The final report request omits the
 `tools` field. Every request enables thinking. Final JSON must pass the declared
 required-field and primitive property-type subset of JSON Schema and its
-deterministic validator; unsupported schema keywords have no effect. Validator errors
+deterministic validator; unsupported schema keywords are rejected before inference. Validator errors
 are supplied verbatim to at most two repair attempts. Receipts keep input/output
 hashes, attempts, timing, token counts, and outcomes. `validated_candidate` is
 always distinct from `scientific_accepted`, which the runner leaves false.

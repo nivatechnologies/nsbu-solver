@@ -203,3 +203,12 @@ def test_endpoint_normalization_and_truncated_reply_refusal(tmp_path: Path) -> N
     receipt = queue.run([packet()])[0]
     assert receipt["status"] == "failed"
     assert "finish_reason=length" in receipt["errors"][0]
+
+
+def test_unsupported_contract_is_rejected_before_inference(tmp_path: Path) -> None:
+    task = packet()
+    invalid = TaskPacket(**{**task.__dict__, "output_contract": {"additionalProperties": False}})
+    queue, fake = runner(tmp_path, [])
+    with pytest.raises(ValueError, match="unsupported output contract"):
+        queue.run([invalid])
+    assert not fake.requests
