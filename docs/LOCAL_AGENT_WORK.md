@@ -30,10 +30,10 @@ frozen inputs, and package exit requirements are unchanged.
 
 ## Dispatch and backpressure
 
-Eight concurrent local workers are the initial capacity ceiling. Twelve is an
-available configuration ceiling, not an established useful operating point.
-Increase concurrency only after measuring useful completions and review burden,
-not merely successful API requests.
+Eight concurrent local workers are the current server capacity ceiling. The
+controller can configure twelve, but this deployment admits only eight
+simultaneous sequences. Revisit concurrency only after measuring useful
+completions and review burden, not merely successful API requests.
 
 The queue contains real dependency-ready work. It does not manufacture work to
 fill slots or repeatedly retry completed task identifiers. Persist outcomes and
