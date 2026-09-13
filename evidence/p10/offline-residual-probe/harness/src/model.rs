@@ -130,6 +130,7 @@ pub(crate) struct ScaleOutput {
     pub residual_acceleration: NormOutput,
     pub residual_force_work_units: usize,
     pub residual_force_scalar_transforms: usize,
+    pub residual_sha256: String,
     pub reconstructed_value_sha256: String,
     pub reconstructed_derivative_sha256: String,
 }
@@ -140,6 +141,7 @@ pub(crate) struct DifferenceOutput {
     pub right: &'static str,
     pub reconstructed_velocity: NormOutput,
     pub reconstructed_derivative: NormOutput,
+    pub residual_acceleration: NormOutput,
 }
 
 #[derive(Debug, Serialize)]

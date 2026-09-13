@@ -18,15 +18,16 @@ Hermite reconstruction.
 For each reconstruction, the residual path independently samples the force on M768 at clock
 1112 with the scalar AVX parallel-reduced provider, evaluates the conservative product with the
 shared AVX catalog on the complete doubled N768 grid, and calls the existing residual kernel.
-The report contains residual-acceleration L2, H1, curl L2, and
-divergence L2 norms plus coarse-to-middle and middle-to-fine value/derivative differences. It
+The report contains residual-acceleration L2, H1, curl L2, and divergence L2 norms, hashes each
+full residual field, and reports coarse-to-middle and middle-to-fine residual-field and
+value/derivative differences. It
 makes no velocity-budget or pass claim because no reviewed dimensional comparison policy has
 been supplied.
 
 Storage is sequential. At most three node values and three node derivatives are resident. The
 shared center is evaluated once; the two side nodes are evaluated per support. The current and
 previous reconstructions are retained only for adjacent differences. The checked conservative
-admission peak is 106,317,505,480 bytes. The scoped 128 GiB cap leaves 31,121,447,992 bytes of
+admission peak is 117,217,453,000 bytes. The scoped 128 GiB cap leaves 20,221,500,472 bytes of
 headroom above the checked owned classes. A live-run cap must cover this reservation after other
 active reservations are subtracted from `MemAvailable`.
 
