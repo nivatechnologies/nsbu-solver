@@ -1,0 +1,31 @@
+{
+  "schema": "p10-force-resolution-diagnostic-derived-correction-v1",
+  "supersedes_derived_fields_in": "result-summary.json",
+  "raw_comparison_output": "comparison-output.json",
+  "raw_comparison_output_sha256": "37577a5fd544fee8d1dd46d3608b428821190038857b62bd342a2ed78948026d",
+  "reason": "The first summary divided absolute differences by relative budgets. The frozen policy requires relative-to-right-total differences divided by the ForceResolution pilot allocation.",
+  "relative_to_right_total": {
+    "l2": 5.172299915391243e-07,
+    "h1": 2.239986661649563e-05,
+    "vorticity_l2": 2.2414702648564237e-05,
+    "divergence_l2": 1.1461773233184465
+  },
+  "force_resolution_pilot_allocation": {
+    "l2": 1.5e-05,
+    "h1": 0.00015,
+    "vorticity_l2": 0.00015
+  },
+  "multiples_of_force_resolution_pilot_allocation": {
+    "l2": 0.03448199943594162,
+    "h1": 0.14933244410997087,
+    "vorticity_l2": 0.14943135099042826
+  },
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "interpretation_limits": [
+    "Correction applies only to derived ratios; the immutable raw adapter output is unchanged.",
+    "No finest-grid qualification, whole-trajectory equivalence, pointwise claim, or continuum claim is made."
+  ]
+}

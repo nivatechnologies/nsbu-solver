@@ -2,6 +2,7 @@ dc86d5a27228e9d5b8002f4ec6275c4864ac87baca365e45575bd323a15922f6  evidence/p10/s
 37577a5fd544fee8d1dd46d3608b428821190038857b62bd342a2ed78948026d  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/comparison-output.json
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/comparison-status.txt
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/comparison-stderr.txt
+e0779d7c8316e73c88f8bc8a92df234dba84ef02cf8a2ecded991a55279dc952  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/derived-correction.json
 50e407205730e818a3d62df6e03bcafb9fcfffaa95527906f0985e1306d1de7d  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/left-n384-m384-clock0512.json
 2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/plans/n384-m384-frozen-plan.json
 2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84  evidence/p10/snapshot-comparison-adapter/review-force-clock0512/plans/n384-m512-frozen-plan.json
