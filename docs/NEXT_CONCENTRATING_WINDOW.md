@@ -127,6 +127,14 @@ measured derivatives. These ratios are not an exact error decomposition or a
 continuum bound. The next spatial diagnostic is an N512 analytical projection;
 it has not run. See the [projection execution evidence](../evidence/p10/n384-regional-snapshot-diagnostic/run-analytic-projection-clock0512.json).
 
+The matched M512-force residual probe at clock 1112 is now complete. Its retained-band
+H1 residual decreases from `935.56` to `22.303`, while the omitted-band value
+remains near `1932.91`; full H1 decreases from `2147.41` to `1933.04`. This
+supports prioritizing retained spatial resolution after force refinement. The
+original expanded squared-norm identity failures remain recorded; passing the
+separate term-scaled heuristic does not qualify the residual. These are acceleration
+residuals, not velocity H1 error estimates. See the [matched residual evidence](../evidence/p10/offline-residual-probe/m512-localization-summary.json).
+
 The first off-stage residual probe at clock 1112 shows that force-representation
 differences, including the unresolved higher-frequency force, dominate that
 diagnostic. Its independent M768-force residual has H1

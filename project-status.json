@@ -500,5 +500,13 @@
       "ordered_hessian": 0.14287949615532405
     },
     "scope": "Sampled analytical projection onto retained N384, measured on 768-cubed lattice without trajectory input. Derivative errors closely match actual M512-force trajectory, supporting a spatial representation bottleneck. Ratios are not an exact error decomposition, continuum bound or PDE qualification."
+  },
+  "p10_m512_residual_clock1112": {
+    "status": "diagnostic_complete_strict_identity_failure_preserved",
+    "evidence": "evidence/p10/offline-residual-probe/m512-localization-summary.json",
+    "retained_h1_residual": 22.30291070361835,
+    "omitted_h1_residual": 1932.9133166324302,
+    "full_h1_residual": 1933.0419833621916,
+    "scope": "Actual from-rest M512-force history, independent M768 force. Retained residual contracts but unresolved spatial band dominates. Strict expanded squared-norm closure fails; term-scaled heuristic is not qualification. No velocity error bound or accepted PDE window."
   }
 }
