@@ -27,6 +27,8 @@ mutation. SHA-256 consumes components in axis order, coefficients in stored
 order, and each real then imaginary binary64 word in little-endian order. The
 token is dropped; no candidate is committed or published.
 
+A read-only Sulaco snapshot at 2026-09-13T18:14:49Z reported 257,334,657,024 bytes available. The exact internal peak fits with 49,757,816,336 bytes remaining. A possible host-specific gate of exact peak plus the existing 16 GiB operational margin would be 224,756,709,872 bytes and also fits that snapshot, but it is only a proposal for separate review. The prepared 272 GiB floor is unchanged and therefore does not currently admit Sulaco.
+
 The prepared launcher allows 2700 seconds plus a 60-second kill grace and keeps
 300 seconds for review and cleanup before the campaign deadline. The latest
 launch is 2026-09-13T19:01:54Z. No numerical attempt has been executed here.

@@ -3,9 +3,9 @@ set -euo pipefail
 
 readonly PRODUCTION_SOURCE=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0
 readonly TEST_SOURCE=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645
-readonly HARNESS_SOURCE=6442ec98bf55582e1990aac874e3b0234252add8
-readonly BINARY_SHA256=e36b36b725b2caa1f9ca6835e4cb66c75a3c2881438f5b3528f0ffa27028ea0d
-readonly INTERNAL_BYTES=238210324976
+readonly HARNESS_SOURCE=f82df1b6d0e9a507d7bf11cd749dd94e19b08212
+readonly BINARY_SHA256=635726f54b5078fa6a2093c812a4750ce904d67e517728f58e82a9b2f003d9f0
+readonly INTERNAL_BYTES=207576840688
 readonly AS_BYTES=274877906944
 readonly MIN_AVAILABLE_KIB=285212672
 readonly MIN_DISK_AVAILABLE_BYTES=1073741824
@@ -43,16 +43,16 @@ fi
     echo 'refused: exact root launch variable required' >&2
     exit 64
 }
-[[ ${W3_RESOURCE_RELEASE_CONFIRMED:-} == 1 ]] || {
-    echo 'refused: W3 resource release confirmation required' >&2
+[[ ${PRIOR_N512_M768_RELEASE_CONFIRMED:-} == 1 ]] || {
+    echo 'refused: prior N512/M768 owner release confirmation required' >&2
     exit 64
 }
 for command_file in /proc/[0-9]*/cmdline; do
     [[ -r $command_file ]] || continue
     command=$(tr '\0' ' ' < "$command_file" 2>/dev/null || true)
     case "$command" in
-        *p10-fft-scratch-tile-validation-20260913*launch-w3.sh*|*p10-w3-768-controls*)
-            echo "refused: active W3 control owner: $command" >&2
+        *p10-n512-m768-scratch-tail-timing-20260913*|*p10-n512-m768-scratch-tail-timing*)
+            echo "refused: active prior N512/M768 timing owner: $command" >&2
             exit 64
             ;;
     esac
