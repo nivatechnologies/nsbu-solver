@@ -289,5 +289,10 @@ requirements.
 The five changed production FFT files pass the measured complexity and file-size
 thresholds, with 94.65% line and 82.5% branch coverage in the focused solver run.
 The source-bound CRAP check reports 26.125 for `avx.rs::from_parts`, above the
-required <25. This remains an open quality finding; see the
+required <25. The failure is preserved in the
 [raw quality evidence](../evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/README.md).
+
+A subsequent test exercises rejection of an FFT plan whose scratch requirement
+exceeds the reserved allowance. The package coverage run passes 252 tests; the
+five-file maximum CRAP is now 19.125. Production behavior and thresholds are
+unchanged. See the [source-bound closure](../evidence/p10/fft-scratch-tail-coverage-20260913/crap-remediation/README.md).
