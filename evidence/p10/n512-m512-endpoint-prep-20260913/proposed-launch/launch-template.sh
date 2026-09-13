@@ -7,6 +7,7 @@ BINARY_SHA256=2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143
 PLAN_SHA256=85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360
 PREFLIGHT_SHA256=b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6
 WATCHDOG_SHA256=e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1
+ARCHIVE_HELPER_SHA256=947f6738c75257a49917396587780a765538979523eb39ee70cb498fc62eae6f
 MEMORY_FLOOR_BYTES=241937824240
 DISK_FLOOR_BYTES=189586276352
 ADDRESS_SPACE_LIMIT_KIB=268435456
@@ -146,6 +147,7 @@ fake_archive_timeout_test() {
 
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
+ARCHIVE_HELPER=$BUNDLE/archive-local.sh
 case "${1:-}" in
     --self-test-deadline-refusal)
         test_now=$(date +%s)
@@ -195,6 +197,7 @@ ARCHIVE_PARTIAL=$ARCHIVE.partial
 [ "$(sha256sum "$PLAN" | awk '{print $1}')" = "$PLAN_SHA256" ] || exit 69
 [ "$(sha256sum "$PREFLIGHT" | awk '{print $1}')" = "$PREFLIGHT_SHA256" ] || exit 69
 [ "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = "$WATCHDOG_SHA256" ] || exit 69
+[ "$(sha256sum "$ARCHIVE_HELPER" | awk '{print $1}')" = "$ARCHIVE_HELPER_SHA256" ] || exit 69
 if pgrep -f 'p10-avx-scheduled-endpoint run ' >/dev/null; then
     echo "refused: competing endpoint solver exists" >&2
     exit 70
@@ -280,7 +283,7 @@ PY
 
 archive_disk=$(df -B1 --output=avail "$ARCHIVE_PARENT" | awk 'NR==2{print $1}')
 [ "$archive_disk" -ge "$DISK_FLOOR_BYTES" ] || exit 75
-setsid "$BUNDLE/archive-local.sh" "$OUTPUT" "$ARCHIVE_PARTIAL" "$ARCHIVE" "$LOG_DIR" >"$LOG_DIR/archive.stdout" 2>"$LOG_DIR/archive.stderr" &
+setsid "$ARCHIVE_HELPER" "$OUTPUT" "$ARCHIVE_PARTIAL" "$ARCHIVE" "$LOG_DIR" >"$LOG_DIR/archive.stdout" 2>"$LOG_DIR/archive.stderr" &
 archive_pid=$!
 acquire_owned_identity "$archive_pid" /bin/sh || { echo "refused: archive owner identity handshake failed" >&2; exit 83; }
 setsid "$WATCHDOG" "$owned_pid" "$owned_pgid" "$owned_starttime" "$owned_cmdline" "$DEADLINE_EPOCH" "$LOG_DIR/archive-watchdog.log" >"$LOG_DIR/archive-watchdog.stdout" 2>"$LOG_DIR/archive-watchdog.stderr" &

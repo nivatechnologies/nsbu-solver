@@ -3,7 +3,7 @@
   "status": "prepared_unexecuted",
   "harness_commit_and_run_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
   "launch_plan_sha256": "85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360",
-  "launcher_sha256": "33e4f48593228a55f35afee23a0dd872866914a8bd7b04364e3cffb766f2b97b",
+  "launcher_sha256": "a08527f7630c572e5a76feaee7fae26fb1604516eef489d7f2767dfb8cdd230c",
   "binary_sha256": "2c9ae9401733a5062eb65e096803b7eea3075fa11d6ad87388d8c30b7ca49143",
   "preflight_sha256": "b8180201ae96fca1856e032f36756eaab8292d8a1ad993b7f838218ee54887e6",
   "watchdog_sha256": "e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
