@@ -50,3 +50,9 @@ startup 64-tick segment reaches H1 ratio 0.963602 at clocks 192–256, close to
 the local rejection threshold of 1. The later 128-tick segment reaches
 0.007762 at clocks 3968–4096. These observed ratios do not establish temporal
 convergence or justify enlarging the matched spatial comparison schedule.
+
+The [timing distribution](timing-distribution.json) covers all 48 archived attempt
+records with their hashes. Mean integration cost was 4.78% above the first step;
+the slowest was 12.52% above it. Integration excludes observation and durable
+publication. These older N384 measurements inform contingency planning, but
+do not establish later-step N512 runtime or acceptance.
