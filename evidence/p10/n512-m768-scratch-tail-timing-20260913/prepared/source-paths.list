@@ -1,0 +1,13 @@
+crates/nsbu-solver/src/spectral/fft.rs
+crates/nsbu-solver/src/spectral/fft/avx.rs
+crates/nsbu-solver/src/spectral/fft/transform.rs
+crates/nsbu-solver/src/spectral/fft/transform/tiled.rs
+crates/nsbu-solver/src/spectral/fft/workspace.rs
+crates/nsbu-solver/src/spectral/w3/tests.rs
+crates/nsbu-solver/tests/fft/avx.rs
+evidence/p10/avx-scheduled-endpoint/harness/src/timed_rhs.rs
+evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs
+evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.lock
+evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.toml
+evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/main.rs
+evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/src/tests.rs

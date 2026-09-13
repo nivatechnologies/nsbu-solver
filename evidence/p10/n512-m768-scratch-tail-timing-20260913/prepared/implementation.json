@@ -1,0 +1,67 @@
+{
+  "schema": "p10-n512-m768-scratch-tail-timing-prepared-v1",
+  "status": "prepared_not_launched_pending_root_review_and_w3_release",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "production_base_commit": "ca4256930c86f59864631a888d990cb9ec9d6ab8",
+  "test_only_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "reused_harness_source_commit": "6442ec98bf55582e1990aac874e3b0234252add8",
+  "release_binary_sha256": "e36b36b725b2caa1f9ca6835e4cb66c75a3c2881438f5b3528f0ffa27028ea0d",
+  "preflight_stdout_sha256": "5bd3484b2bc17abfd606a44bafb48519ce92c985718e4d5f4147b8408b352e73",
+  "preflight_status": 0,
+  "focused_tests": {
+    "passed": 6,
+    "failed": 0,
+    "serial": true
+  },
+  "clippy_all_targets_deny_warnings": "passed",
+  "retained": 512,
+  "samples": 768,
+  "workers": 32,
+  "method": "cox-matthews",
+  "ticks": 64,
+  "maximum_attempts": 1,
+  "internal_resource_bytes": 238210324976,
+  "resource_increase_over_serial_baseline_bytes": 589824,
+  "resource_classes_bytes": [
+    38805700608,
+    32614907904,
+    10899947520,
+    3233808384,
+    29362480,
+    122444319800,
+    30182212728,
+    65552
+  ],
+  "cached_force_bytes": 59789086152,
+  "w3_forward_additional_bytes": 14540099328,
+  "w3_bidirectional_additional_bytes": 21787856768,
+  "external_address_space_limit_bytes": 274877906944,
+  "minimum_mem_available_bytes": 292057776128,
+  "candidate_hash_instrumentation": {
+    "scope": "harness only after timed integration",
+    "production_api_change": false,
+    "access": "AcceptedAttempt reference through public CandidateState::proposal, then read-only SpectralState::component",
+    "encoding": "component axes 0,1,2; stored coefficient order; real then imaginary IEEE-754 u64 bits, each little-endian",
+    "fixture_sha256": "7756e4b9b28758c9eecd0ba6dfb48d0072624596dfb7b365b34be0bd51968e59",
+    "state_written": false,
+    "candidate_committed": false,
+    "candidate_published": false
+  },
+  "numerical_attempts_executed": 0,
+  "qualification": false,
+  "inherited_helpers": [
+    {
+      "path": "evidence/p10/avx-w3-n256-integration-20260912/harness/src/cache.rs",
+      "sha256": "875b1decd9844d3f3605dea8dd367c2cd8006cb543e6d7b246e58f895e6ec4c4",
+      "matches_commit_6442ec98": true,
+      "transitive_path_modules": []
+    },
+    {
+      "path": "evidence/p10/avx-scheduled-endpoint/harness/src/timed_rhs.rs",
+      "sha256": "cad9391eae9784be75a636bbee03808f565a9ef1c18633feb59942da7bb7e5e1",
+      "matches_commit_6442ec98": true,
+      "transitive_path_modules": []
+    }
+  ],
+  "minimum_disk_available_bytes": 1073741824
+}

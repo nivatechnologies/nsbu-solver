@@ -1,0 +1,23 @@
+	Command being timed: "cargo build --release --locked --manifest-path evidence/p10/n512-m768-scratch-tail-timing-20260913/harness/Cargo.toml"
+	User time (seconds): 70.73
+	System time (seconds): 4.82
+	Percent of CPU this job got: 371%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:20.34
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 455572
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 647239
+	Voluntary context switches: 3492
+	Involuntary context switches: 1647
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 143104
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,12 @@
+{
+  "schema": "p10-n512-m768-scratch-tail-preparation-envelope-v1",
+  "status": "frozen_not_launched",
+  "production_source_commit": "0843b8b18e6a096a0208e3d896e391c7b1b2f5e0",
+  "test_only_commit": "9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645",
+  "binary_sha256": "e36b36b725b2caa1f9ca6835e4cb66c75a3c2881438f5b3528f0ffa27028ea0d",
+  "launcher_sha256": "0ed4a2af43243cce31acc4b96b21946220833250f602dfa8f41e2b4e7834dbaf",
+  "implementation_sha256": "a6babc926750673ab7a40fb49e4f4fbafe29ac7b9b74b37749aee5dd9e361cb0",
+  "launch_plan_sha256": "ea580db7ed075930d3e1c8f99c9a4438012b74398e16ed9416cf72ec199f61a3",
+  "source_sha256_list_sha256": "4332b12f62e66f1a6cc54d748cf23cce315898d58288b3c05f1f8ee6cf695d12",
+  "numerical_attempts_executed": 0
+}
