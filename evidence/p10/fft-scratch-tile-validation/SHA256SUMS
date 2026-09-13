@@ -24,3 +24,4 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/f
 9c2aa7a3720f02201b5619e10ce922102c303ed158d59e562a17ab43da19fc66  evidence/p10/fft-scratch-tile-validation/prepared/w3-tests-vs-prior.diff
 08d5b25660569a9a65f75c05c939ab43e2484daacaa3a8edc692c64bc14b5dfa  evidence/p10/fft-scratch-tile-validation/prepared/w3-tiled-binary.sha256
 4d29d6c2d99e390e3724e4d794c49a734848004a68d870e629816608665684d7  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/SHA256SUMS
+fd5b9b0aa9d684b1bc70e3c42b444dda0723ccdfd3ef95d6b5cef89991712481  evidence/p10/fft-scratch-tile-validation/raw-w3/SHA256SUMS

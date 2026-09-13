@@ -29,3 +29,9 @@ forward time fell from 13.8865 s to 9.0182 s and inverse from 14.0578 s to 9.184
 combined median improved 34.86% with neither direction regressing. This passes the
 exploratory selection heuristic. It is validation of an isolated optimization candidate,
 not production adoption or a PDE acceptance gate.
+
+The subsequent tiled force and RHS controls also completed. Both internally matched
+serial and W3 coefficient words, made zero steady allocations across three repeats, and
+matched the frozen untiled canonical hashes exactly. No swap or major fault occurred.
+Production adoption remains conditional on the independently running maintained-workspace
+regression and final integration review.

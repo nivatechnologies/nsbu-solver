@@ -1,0 +1,1 @@
+control=rhs-bidirectional variant=tiled retained=512 padded=768 serial_bytes=40867375088 w3_bytes=62655231856 additional=21787856768 repeated=3 bitwise=true steady_allocations=0 output_sha256=7fbbe90cb2aeeb116e70abf180a86eae4448d3adaac131c65399b55f730b5c73 source_case_sha256=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e
