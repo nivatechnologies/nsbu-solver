@@ -87,3 +87,16 @@ Before making a broad local-autonomy claim, demonstrate that real task families
 complete with low repair and review cost over successive work windows. The
 earlier small successful fixture is evidence for a narrow workflow, not proof
 that 99% of the project can already proceed autonomously.
+
+## First bounded workload evidence
+
+The eight-task modal fixture batch completed in 166.94 seconds: eight first-pass
+successes, 312 independently checked integer derivative entries, no local
+repairs, and no pending fixture reviews. Both GPUs averaged about 92% utilization
+in this short run. A separate native named-artifact call and tool-free terminal
+report also passed. See the [preserved receipts and limitations](../evidence/p10/local-modal-derivative-fixtures-20260913/README.md).
+
+A larger Rust consumer generation trial exhausted its output and time budgets;
+no code was accepted. That task class was paused rather than repeatedly retried.
+These results support narrow fixture delegation, not general autonomous coding
+or PDE acceptance. Review time remains unmeasured.

@@ -93,7 +93,7 @@ the source, snapshot, resource and result bindings.
 
 The matched M384-to-M512 trajectory-force differences at clocks 512, 1024,
 1536, 2048 and 3072 have H1 values of about `2.18e-5` to `2.24e-5` relative to the
-M512 states, or `0.147` to `0.149` of the frozen ForceResolution pilot
+M512 states, or `0.145` to `0.149` of the frozen ForceResolution pilot
 allocation. Independently sampled M768 references against the M512 trajectory
 give retained-band H1 differences of `3.51e-6`, `1.17e-5`, `2.33e-5` and
 `2.36e-5` at clocks 512, 1024, 2048 and 3072. The M512 and HO trajectories

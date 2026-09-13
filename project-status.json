@@ -447,5 +447,16 @@
     "regional_lifecycle_evidence": "evidence/p09/v2-probe-regional/summary.json",
     "completed_utc": "2026-09-12T09:25:51Z",
     "outcome": "Integrated shared-force and accepted nominal-coverage increments, completed N48/N64 fixed-M96 midpoint runs and their comparison, and added the standalone probe-regional lifecycle consumer. Scientific qualification remains open with zero accepted concentrating PDE windows."
+  },
+  "local_agent_bounded_fixture_pilot": {
+    "date": "2026-09-13",
+    "tasks": 8,
+    "first_attempt_validated": 8,
+    "checked_modal_entries": 312,
+    "local_repairs": 0,
+    "pending_fixture_reviews": 0,
+    "wall_seconds": 166.93946338399837,
+    "evidence": "evidence/p10/local-modal-derivative-fixtures-20260913/README.md",
+    "scope": "Artificial integer modal fixtures only; not a PDE trajectory or general coding-autonomy demonstration. Separate Rust consumer generation exhausted its budget and was not accepted. Cloud review time unmeasured."
   }
 }
