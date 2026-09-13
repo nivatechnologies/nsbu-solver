@@ -56,3 +56,11 @@ timeout followed by 60 seconds of TERM/KILL grace. The measured N384/M768 runtim
 seconds; cubic lattice scaling predicts roughly 2.37 times as many samples, so the bounded planning
 estimate is 75--80 minutes. No heavy execution is admitted until root review and explicit local
 resource handoff.
+
+The frozen implementation source is `a1d04a7ffc866fa3c826c01eae7269c575ba927a`.
+Its release binary SHA-256 is
+`992505c58def855cc4f81483411c610af9909a2f32a938f80bb6da047186ae2f`; the archived
+allocation-free preflight SHA-256 is
+`b96e88b1dcf02a38270cd8adc5cf4bcecb3f6eb26d98ed5d075441f392221159`.
+All 16 focused tests and clippy with warnings denied pass. Dry runs refuse both a mismatched cap and
+a missing root-review gate before allocating the producer, and neither creates an output file.

@@ -1,0 +1,30 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-implementation-v1",
+  "status": "frozen_preflight_validated_not_executed",
+  "source_commit": "a1d04a7ffc866fa3c826c01eae7269c575ba927a",
+  "release_binary_sha256": "992505c58def855cc4f81483411c610af9909a2f32a938f80bb6da047186ae2f",
+  "preflight_sha256": "b96e88b1dcf02a38270cd8adc5cf4bcecb3f6eb26d98ed5d075441f392221159",
+  "validation": {
+    "focused_tests_passed": 16,
+    "clippy_all_targets_warnings_denied": true,
+    "mismatched_cap_refused_before_producer": true,
+    "missing_root_review_refused_before_producer": true,
+    "negative_control_output_absent": true
+  },
+  "execution": {
+    "status": "not_authorized_not_run",
+    "exact_cap_bytes": 305085516888,
+    "external_address_space_limit_bytes": 343597383680,
+    "minimum_mem_available_bytes": 322265386072,
+    "workers": 32,
+    "timeout_seconds": 6000,
+    "term_kill_grace_seconds": 60
+  },
+  "provenance": {
+    "origin": "sampled_analytic_projection",
+    "state_inputs": 0,
+    "trajectory_from_rest_claims": 0,
+    "state_import_or_resume_interfaces": 0,
+    "acceptance": "not_assessed"
+  }
+}
