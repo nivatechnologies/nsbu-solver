@@ -37,5 +37,21 @@ tiled RHS. It rechecks both source trees, the identical harness sources, binary 
 memory, disk, quiet-host state, and the campaign deadline before every round. Each worker
 has an identity-bound process group, foreground timeout, 60-second kill grace, and the
 reviewed 64/96 GiB address-space cap. The launcher refuses unless
-`CONTROL_LAUNCH_AUTHORIZED=1` is explicitly supplied. No large force or RHS control has
-been launched from this tree.
+`CONTROL_LAUNCH_AUTHORIZED=1` is explicitly supplied. At launcher freeze, no large force
+or RHS control had been launched from this tree.
+
+## Completed prototype controls
+
+The authorized four-control sequence completed at `2026-09-13T16:57:41Z`. All rounds
+exited zero with no swaps or major faults. Untiled and tiled force outputs have identical
+SHA-256 `a5a74f81...a65b`; untiled and tiled RHS outputs have identical SHA-256
+`7fbbe90c...5c73`. Every round independently reports serial/W3 bit equality and zero
+steady allocations. Wall times were 12:08.88 / 11:56.98 for untiled/tiled force and
+11:18.43 / 10:17.29 for untiled/tiled RHS. These are run conditions, not a controlled
+performance comparison.
+
+Subsequent architecture review found that this prototype's added `Vec` changes the public
+owner layout covered by the v1 checkpoint compatibility contract. The successful controls
+remain evidence about its arithmetic, traversal, and allocations, but the implementation
+is excluded from production adoption. A replacement design must preserve the public owner
+layout and repeat the tiled-side controls against the canonical untiled hashes.

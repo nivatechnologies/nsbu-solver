@@ -1,0 +1,10 @@
+{
+  "schema": "p10-fft-tile-w3-cross-source-completion-v1",
+  "launcher_pid": 1846360,
+  "launcher_pgid": 1846360,
+  "launcher_exit": 0,
+  "completed_utc": "2026-09-13T16:57:41Z",
+  "round_owner_pid_pgids": [1846608, 1883758, 1915652, 1925087],
+  "all_recorded_pids_and_pgids_absent": true,
+  "postrun_mem_available_bytes": 431428952064
+}

@@ -1,0 +1,23 @@
+	Command being timed: "timeout --foreground --signal=TERM --kill-after=60s 900s env NSBU_RUN_W3_768_FORCE_CONTROL=1 /mnt/niva-array/nsbu-solver/work/p10-fft-untiled-w3-controls-20260913/evidence/p10/fft-transverse-tile-w3-controls/harness/target/release/p10-w3-768-controls force"
+	User time (seconds): 13818.78
+	System time (seconds): 83.66
+	Percent of CPU this job got: 1907%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 12:08.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 48840744
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 19293386
+	Voluntary context switches: 380
+	Involuntary context switches: 75958
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
