@@ -66,7 +66,8 @@ fn hash_complex(values: &[Complex64]) -> String {
         hash.update(value.re.to_bits().to_le_bytes());
         hash.update(value.im.to_bits().to_le_bytes());
     }
-    format!("{hash:x}")
+    let digest = hash.finalize();
+    format!("{digest:x}")
 }
 
 fn hash_real(values: &[f64]) -> String {
@@ -74,7 +75,8 @@ fn hash_real(values: &[f64]) -> String {
     for value in values {
         hash.update(value.to_bits().to_le_bytes());
     }
-    format!("{hash:x}")
+    let digest = hash.finalize();
+    format!("{digest:x}")
 }
 
 fn write_complex(path: &Path, values: &[Complex64]) {
