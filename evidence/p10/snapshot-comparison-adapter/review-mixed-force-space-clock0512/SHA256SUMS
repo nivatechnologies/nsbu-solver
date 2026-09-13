@@ -2,6 +2,9 @@
 9a2f214629498338af374ea41758f62f76c0b43eb342a60a84000ed197276b12  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/PROPOSED-COMMAND.txt
 5063eae4038ab0a9773af147c4d5b251b5c14d8adc1676469a0ce082f6e810f7  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/baseline-n384-m384.json
 62963ed7babb537fcaf3fe5b2ea9b135eef9753656340d8b0494a64684eb7972  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/coarse-n256-m384.json
+3463c3b1adcb83e305b0a187bd290b60f298e10cc9f56b103768bf8f70cdab1e  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/comparison-output.json
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/comparison-status.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/comparison-stderr.txt
 9a4e2be58fdb789528328a417a506c5cf00882dcd1885e8e86fb634ec004a7b1  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/force-n384-m512.json
 daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/plans/n256-m384-frozen-plan.json
 2c20dbfede51b2ad9ce3f64e2d2ded818eb38a19534e2379da8204560047fb9a  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/plans/n384-m384-frozen-plan.json
@@ -9,5 +12,8 @@ daf8f611baea051a387e1b1e62b41595f27fac1743975bda99a48b687377da2e  evidence/p10/s
 1cf1d0367c4dbdbbab770650898d1598068eb71f93ef44362726bbcc2bfc5981  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m384-clock0512-record.json
 0702d169488e7bf50665a2bd4c38ba9341d7268c8db8e70a640f675dd428c9b7  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m512-clock0512-attempt.json
 1ff72cfc499f48b508f78ad42f25c9060894d73a94e7546e27ba7dda62d7e8b3  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/records/n384-m512-clock0512-record.json
-e601fcdd3654c5e11bbd3a411b7cc50a08af2511dadd4023826f9551a2b48e81  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/review-provenance.json
+744d3d7c41aa1a501ce81075d7f5e172afbbeda400fb0d5aa022d3c3b43ba06c  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/result-summary.json
+fbf346e24627b960e092485096078534f6507f5d513c7eefcf1409676e4ab75d  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/review-provenance.json
+229d44ce0ba806d2be237bf2f4f85b4a813736e1ef9a8cfdb491d76174c7adde  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/run.time
 87b5022af5f98a0591f083991c68906f7a3b958457c5f0fac96a321f78e949b1  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/semantic-preflight.json
+38d4edf5095a28863edf4cdf0e49b5e0d7727e9a023b96a9008f83dbe208d0e3  evidence/p10/snapshot-comparison-adapter/review-mixed-force-space-clock0512/verification.json

@@ -1,0 +1,93 @@
+{
+  "schema": "p10-mixed-force-space-clock0512-verification-v1",
+  "status": "passed",
+  "prior_norm_reproduction": {
+    "A": {
+      "l2": {
+        "mixed": 1.2096041932421298e-06,
+        "prior": 1.2096041932421298e-06,
+        "absolute_difference": 0.0,
+        "relative_difference": 0.0
+      },
+      "h1": {
+        "mixed": 0.001190327045752841,
+        "prior": 0.001190327045752841,
+        "absolute_difference": 0.0,
+        "relative_difference": 0.0
+      },
+      "vorticity_l2": {
+        "mixed": 0.0011903264313918459,
+        "prior": 0.0011903264313918459,
+        "absolute_difference": 0.0,
+        "relative_difference": 0.0
+      }
+    },
+    "B": {
+      "l2": {
+        "mixed": 5.6674035312333814e-08,
+        "prior": 5.667403531207599e-08,
+        "absolute_difference": 2.578222707654281e-19,
+        "relative_difference": 4.549213221640701e-12
+      },
+      "h1": {
+        "mixed": 6.74519751074314e-05,
+        "prior": 6.745197510087965e-05,
+        "absolute_difference": 6.551738860639811e-15,
+        "relative_difference": 9.713190534215163e-11
+      },
+      "vorticity_l2": {
+        "mixed": 6.745195130986213e-05,
+        "prior": 6.745195130951441e-05,
+        "absolute_difference": 3.4771718924325734e-16,
+        "relative_difference": 5.155035287974096e-12
+      }
+    }
+  },
+  "accumulation_tolerance_relative": 1e-09,
+  "prior_norms_within_tolerance": true,
+  "closure_c_squared_equals_a_squared_plus_b_squared_plus_cross": {
+    "full": {
+      "l2": {
+        "residual": 3.9200202319987354e-24,
+        "relative_to_term_scale": 2.6625182116480682e-12
+      },
+      "h1": {
+        "residual": 4.1145684204061707e-17,
+        "relative_to_term_scale": 2.8772773513813596e-11
+      },
+      "vorticity_l2": {
+        "residual": 1.926152922056279e-17,
+        "relative_to_term_scale": 1.3469412379160755e-11
+      }
+    },
+    "common": {
+      "l2": {
+        "residual": -6.162975822039155e-31,
+        "relative_to_term_scale": 4.065131099582869e-15
+      },
+      "h1": {
+        "residual": 1.2986735617082534e-22,
+        "relative_to_term_scale": 1.321085990373092e-12
+      },
+      "vorticity_l2": {
+        "residual": -2.24760482067143e-23,
+        "relative_to_term_scale": 2.2863973726751956e-13
+      }
+    },
+    "newly_resolved": {
+      "l2": {
+        "residual": 3.9200202319987354e-24,
+        "relative_to_term_scale": 2.662792403364249e-12
+      },
+      "h1": {
+        "residual": 4.1145684204061707e-17,
+        "relative_to_term_scale": 2.8774751553144352e-11
+      },
+      "vorticity_l2": {
+        "residual": 1.9261740978799603e-17,
+        "relative_to_term_scale": 1.3470486449985317e-11
+      }
+    }
+  },
+  "comparison_output_sha256": "3463c3b1adcb83e305b0a187bd290b60f298e10cc9f56b103768bf8f70cdab1e"
+}

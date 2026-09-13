@@ -1,0 +1,115 @@
+{
+  "schema": "p10-mixed-force-space-clock0512-result-v1",
+  "status": "completed_not_assessed",
+  "source_commit": "62b763546e70ff59edd2cc56396e72998e31e290",
+  "adapter_binary_sha256": "edd546528b1da7ec68a46be624f8dcb799161773d266995f401f2e1e1e7e5dc3",
+  "comparison_output_sha256": "3463c3b1adcb83e305b0a187bd290b60f298e10cc9f56b103768bf8f70cdab1e",
+  "cap_bytes": 3138912256,
+  "clock": {
+    "elapsed": 512,
+    "target": 8192,
+    "epoch": 8,
+    "accepted_steps": 8
+  },
+  "metrics": {
+    "spatial_a": {
+      "full": {
+        "l2": 1.2096041932421298e-06,
+        "h1": 0.001190327045752841,
+        "vorticity_l2": 0.0011903264313918459
+      },
+      "common": {
+        "l2": 3.9551997629170425e-11,
+        "h1": 3.360004418935379e-08,
+        "vorticity_l2": 3.360002091324126e-08
+      },
+      "newly_resolved": {
+        "l2": 1.2096041925954883e-06,
+        "h1": 0.0011903270452786171,
+        "vorticity_l2": 0.0011903264309176223
+      }
+    },
+    "force_b": {
+      "full": {
+        "l2": 5.6674035312333814e-08,
+        "h1": 6.74519751074314e-05,
+        "vorticity_l2": 6.745195130986213e-05
+      },
+      "common": {
+        "l2": 1.2312746037281554e-08,
+        "h1": 9.914737253037577e-06,
+        "vorticity_l2": 9.914729608215602e-06
+      },
+      "newly_resolved": {
+        "l2": 5.5320363010423814e-08,
+        "h1": 6.671931452807929e-05,
+        "vorticity_l2": 6.671929160523202e-05
+      }
+    },
+    "combined_c": {
+      "full": {
+        "l2": 1.2084744529458722e-06,
+        "h1": 0.0011886273630703078,
+        "vorticity_l2": 0.0011886267489713965
+      },
+      "common": {
+        "l2": 1.2312832002305394e-08,
+        "h1": 9.91481136959822e-06,
+        "vorticity_l2": 9.914803724718964e-06
+      },
+      "newly_resolved": {
+        "l2": 1.2084117251958904e-06,
+        "h1": 0.0011885860106677086,
+        "vorticity_l2": 0.0011885853966112033
+      }
+    },
+    "cross_a_b": {
+      "full": {
+        "twice_real_inner_product": {
+          "l2": -5.9437471686223855e-15,
+          "h1": -8.593236598252155e-09,
+          "vorticity_l2": -8.593230654504986e-09
+        },
+        "cosine_similarity": {
+          "l2": -0.04335137847477781,
+          "h1": -0.05351380123881023,
+          "vorticity_l2": -0.05351381072456552
+        }
+      },
+      "common": {
+        "twice_real_inner_product": {
+          "l2": 5.525778873910808e-22,
+          "h1": 3.4073484362594796e-16,
+          "vorticity_l2": 3.4073429104806057e-16
+        },
+        "cosine_similarity": {
+          "l2": 0.0005673357633132433,
+          "h1": 0.0005114056161723135,
+          "vorticity_l2": 0.0005114055354071312
+        }
+      },
+      "newly_resolved": {
+        "twice_real_inner_product": {
+          "l2": -5.943747721200273e-15,
+          "h1": -8.593236938986998e-09,
+          "vorticity_l2": -8.593230995239277e-09
+        },
+        "cosine_similarity": {
+          "l2": -0.04441217755171056,
+          "h1": -0.05410145111892233,
+          "vorticity_l2": -0.054101460209148564
+        }
+      }
+    }
+  },
+  "prior_norm_verification": "verification.json",
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  },
+  "assigned_budget": null,
+  "interpretation_limits": [
+    "No spatial or force acceptance.",
+    "No pointwise, time-supremum, finest-grid, or continuum claim."
+  ]
+}
