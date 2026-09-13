@@ -26,7 +26,9 @@ been supplied.
 
 Storage is sequential. At most three node values and three node derivatives are resident. The
 shared center is evaluated once; the two side nodes are evaluated per support. The current and
-previous reconstructions are retained only for adjacent differences. The checked conservative
+previous reconstructions and the previous full residual are retained only for adjacent
+differences; the previous residual is included in both the reconstruction and residual phase
+admissions. The checked conservative
 admission peak is 117,217,453,000 bytes. The scoped 128 GiB cap leaves 20,221,500,472 bytes of
 headroom above the checked owned classes. A live-run cap must cover this reservation after other
 active reservations are subtracted from `MemAvailable`.

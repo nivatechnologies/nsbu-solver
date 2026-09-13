@@ -8,7 +8,7 @@
   "integration_force_bytes": 12356287944,
   "residual_force_bytes": 29079844536,
   "conservative_workspace_bytes": 32662168544,
-  "reconstruction_peak_bytes": 52513582440,
+  "reconstruction_peak_bytes": 63413529960,
   "residual_peak_bytes": 117217453000,
   "admitted_peak_bytes": 117217453000,
   "scoped_cap_bytes": 137438953472,

@@ -1,0 +1,18 @@
+{
+  "schema": "p10-offline-residual-probe-source-sha256-v1",
+  "files": {
+    "harness/Cargo.toml": "438f7c1c96b6d081da1cfb4f0777c942443dadd1e74fde2341611840957ca34b",
+    "harness/Cargo.lock": "3b73eb87216038ebac6d5e85bd51dd82f2157658ccaba49e71e991aa51b4475c",
+    "harness/src/decode.rs": "3746a75806dfa696eadf197bae23ac27e8a049486d96ac049fbd2e8619be0208",
+    "harness/src/main.rs": "b700d20bd2c22a01576f1c7bc0036c169eafea39964f7191c5d9662bf1353182",
+    "harness/src/model.rs": "f807160791654285e242be6a40f2595e05bb7f96457d954e9c511d7dfd9cae2b",
+    "harness/src/tests.rs": "d7a65a7b36025817870e3f3cc881dbd27550fce2528423d77e020a3e8975e763",
+    "probe-plan.json": "45fe8993e6c6fdc3b947221934f72dff0ec40999cf71437f2f30de171f5ae0c6",
+    "preflight.json": "9be7a50cf8677bebb2d5591a0731ed83acc92eb0e7f2efe5ddcc21585554c9e8",
+    "README.md": "11c60b2af57cadceaede4d19155d3b3c76ad028e98844750354dd4cd846afbf6",
+    "external-cache-source": "875b1decd9844d3f3605dea8dd367c2cd8006cb543e6d7b246e58f895e6ec4c4"
+  },
+  "release_binary_sha256": "308a07dc16fab3253ea8a7c6268db659ab7efb41300383d0037037ccd163525c",
+  "rustc": "rustc 1.94.0 (4a4ef493e 2026-03-02)",
+  "cargo": "cargo 1.94.0 (85eff7c80 2026-01-15)"
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "p10-offline-residual-probe-input-verification-v1",
+  "status": "seven_staged_files_and_coefficient_trailers_verified_no_evaluation",
+  "source_manifest": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/endpoint/remote-state-files.sha256",
+  "staged_root": "/mnt/niva-array/p10-offline-residual-probe-input-20260913",
+  "snapshot_bytes_each": 1366033529,
+  "files": [
+    {"clock": 896, "file_sha256": "b85aee25a9365c41cd3ca24d4a559e3addf630181521edb85e08fc13eb0cc490", "coefficient_trailer_sha256": "7ff551613ca80ea9d46e0061beb84ef7096ff0708dd67397bde949d577a4761f"},
+    {"clock": 1024, "file_sha256": "909c3ff78c9d182b141b9393bde25677459c533a426410cc2890b94419bf2420", "coefficient_trailer_sha256": "35160a4319fc1f20bb4cc6af1ac87d57a60b3923ee16402f83178feaf8a4f05a"},
+    {"clock": 1088, "file_sha256": "b2bf7efe0231b0d7940b7a1e9332bcd15967d4c27889eeb8b116b7a8723e33c7", "coefficient_trailer_sha256": "ce8d57a69f249b2b4838f01d79eb7478e8041baa0bc928877d280bdae64616da"},
+    {"clock": 1152, "file_sha256": "1b04fad79092f3f561b752e2fa817237c133bb92db85fd77bbfb77e565374d84", "coefficient_trailer_sha256": "1ea19cb3c37004c147a906ff07c7c8555410e0cb7611ea03ab3b4afc2233a6f4"},
+    {"clock": 1216, "file_sha256": "d236a0ab72874906a84690c583e44a86db7d75c3c7ab109f94a0b4b680d61874", "coefficient_trailer_sha256": "28ba1b97c02efc1477200a9d72067929f7b88c234c9436ab4f8b8699ddef0bce"},
+    {"clock": 1280, "file_sha256": "8bf5dc7d8d2406ba0bc9019752451001f5f43dde34b9c25ce7d47b5cc6a31a63", "coefficient_trailer_sha256": "90b25cbb66dc1b5993b35d6df334560527d9ff5d13c5cd95ebc746696845d3d5"},
+    {"clock": 1408, "file_sha256": "4e0ed778077ec81d6466e8e585ed74225e0f737d845fecc7aec19707a2f5f9c2", "coefficient_trailer_sha256": "72f4e4a18e26a2ed79310e7098bc9bcd53d5b0acaad666af0e99cbc8ffa40f6e"}
+  ],
+  "runtime_owner_imported": false,
+  "snapshot_content_injected": false
+}
