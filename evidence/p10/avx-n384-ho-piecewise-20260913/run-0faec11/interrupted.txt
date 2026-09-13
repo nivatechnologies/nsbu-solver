@@ -1,0 +1,13 @@
+status=startup_identity_refusal_before_rest
+started_at=2026-09-13T00:21:02Z
+solver_started=true
+stdout_scope=preflight_only
+stderr_empty=true
+time_empty=true
+node0_published=false
+state_payload_published=false
+frontier_published=false
+watchdog_result=solver identity did not match before monitoring
+cause=one-shot proc identity sampled during timeout-to-solver exec transition; executable matched but the second watchdog snapshot did not
+fix=freeze exact argv SHA and require identical PID/starttime/PGID/cmdline/executable in two successive polls before watchdog bind
+retry_authorization=root-explicit-one-corrected-startup

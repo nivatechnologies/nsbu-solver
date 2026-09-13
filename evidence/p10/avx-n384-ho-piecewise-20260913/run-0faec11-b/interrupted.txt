@@ -1,0 +1,15 @@
+status=corrected_retry_startup_identity_refusal_before_rest
+started_at=2026-09-13T00:27:59Z
+launcher_exit_status=73
+stdout_scope=preflight_only
+stderr_empty=true
+time_empty=true
+output_directory_empty=true
+node0_published=false
+state_payload_published=false
+frontier_published=false
+launcher_identity_result=exact_executable_argv_pid_starttime_pgid_stable_for_two_polls
+watchdog_result=solver identity did not match before monitoring
+diagnosis=the static watchdog parser and field order passed an instrumented time-timeout-sleep control; the original watchdog did not record which identity field diverged after the launcher polls, so the exact transient is unrecoverable
+oom_kernel_record=false
+further_launches=stopped_by_root
