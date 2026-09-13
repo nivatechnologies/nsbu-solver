@@ -33,7 +33,7 @@ pub(crate) struct CrossChannels {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize)]
-pub(crate) struct AngleChannels {
+pub(crate) struct CosineSimilarityChannels {
     pub l2: Option<f64>,
     pub h1: Option<f64>,
     pub vorticity_l2: Option<f64>,
@@ -42,7 +42,7 @@ pub(crate) struct AngleChannels {
 #[derive(Clone, Copy, Debug, PartialEq, Serialize)]
 pub(crate) struct CrossOutput {
     pub twice_real_inner_product: CrossChannels,
-    pub angle: AngleChannels,
+    pub cosine_similarity: CosineSimilarityChannels,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Serialize)]
@@ -60,7 +60,7 @@ pub(crate) struct MixedMetrics {
     pub force_b: SplitNorms,
     /// `U384M512 - lift(U256M384) = A + B`.
     pub combined_c: SplitNorms,
-    /// Weighted `2 Re <A,B>` and the corresponding real angle.
+    /// Weighted `2 Re <A,B>` and the corresponding cosine similarity.
     pub cross_a_b: SplitCrossOutput,
 }
 
@@ -532,15 +532,15 @@ fn add_cross(left: CrossChannels, right: CrossChannels) -> Result<CrossChannels,
 fn cross_output(cross: CrossChannels, a: MixedNorms, b: MixedNorms) -> Result<CrossOutput, String> {
     Ok(CrossOutput {
         twice_real_inner_product: cross,
-        angle: AngleChannels {
-            l2: angle(cross.l2, a.l2, b.l2)?,
-            h1: angle(cross.h1, a.h1, b.h1)?,
-            vorticity_l2: angle(cross.vorticity_l2, a.vorticity_l2, b.vorticity_l2)?,
+        cosine_similarity: CosineSimilarityChannels {
+            l2: cosine_similarity(cross.l2, a.l2, b.l2)?,
+            h1: cosine_similarity(cross.h1, a.h1, b.h1)?,
+            vorticity_l2: cosine_similarity(cross.vorticity_l2, a.vorticity_l2, b.vorticity_l2)?,
         },
     })
 }
 
-fn angle(twice_inner: f64, left: f64, right: f64) -> Result<Option<f64>, String> {
+fn cosine_similarity(twice_inner: f64, left: f64, right: f64) -> Result<Option<f64>, String> {
     if left == 0.0 || right == 0.0 {
         return Ok(None);
     }
