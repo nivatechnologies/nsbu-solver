@@ -1,0 +1,23 @@
+	Command being timed: "timeout --foreground --signal=TERM --kill-after=60s 2400s /mnt/niva-array/nsbu-solver/work/p10-n512-m768-one-attempt-20260913/evidence/p10/n512-m768-one-attempt-timing/harness/target/release/p10-n512-m768-one-attempt-timing run /mnt/niva-array/nsbu-solver/work/p10-n512-m768-one-attempt-20260913/evidence/p10/n512-m768-one-attempt-timing/raw/one-attempt-20260913/result.json"
+	User time (seconds): 20319.86
+	System time (seconds): 131.86
+	Percent of CPU this job got: 925%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 36:49.71
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 155283456
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 38821844
+	Voluntary context switches: 490
+	Involuntary context switches: 56823
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

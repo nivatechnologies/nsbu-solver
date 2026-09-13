@@ -1,0 +1,31 @@
+{
+  "schema": "p10-n512-m768-one-attempt-run-validation-v1",
+  "checks": {
+    "exit_zero": true,
+    "source_exact": true,
+    "binary_exact": true,
+    "rlimit_exact": true,
+    "resource_exact": true,
+    "single_attempt": true,
+    "rhs_accounting": true,
+    "uncommitted_unpublished": true,
+    "local_token_preserved": true,
+    "zero_steady_allocations": true,
+    "empty_stdout": true,
+    "empty_stderr": true
+  },
+  "result_sha256": "2651aefa9055cc19c8c2fde0367f6beea57de592ba1cf1bea7970e53778a8102",
+  "start_utc": "2026-09-13T13:15:59Z",
+  "end_utc": "2026-09-13T13:52:49Z",
+  "wall_seconds": 2209.71,
+  "maximum_rss_kib": 155283456,
+  "swaps": 0,
+  "post_exit_mem_available_kib": 382115372,
+  "processes_confirmed_absent": [
+    1644309,
+    1644321,
+    1644322,
+    1644323
+  ],
+  "interpretation": "One actual from-rest N512/M768 CM64 attempt completed within the frozen cap and produced a local accepted token; it was deliberately not committed or published and is timing/resource evidence only, not trajectory, refinement, residual, qualification, or acceptance evidence."
+}
