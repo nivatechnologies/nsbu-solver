@@ -18,5 +18,11 @@ need execution. Their hashes must equal the already frozen canonical untiled has
 `a5a74f81...a65b` for force and `7fbbe90c...5c73` for RHS. Each control also requires
 internal serial/W3 word equality and zero steady allocations.
 
+Cheap prelaunch controls match every frozen untiled forward and inverse hash for
+anisotropic `[6,96,192]` and `[96,6,192]` sparse inputs and dense `[96,6,6]`, under both
+OwnedRadix and AVX. These cover unequal axes plus one-lane and four-lane partial tile
+tails. The scalar harness is byte-identical to the earlier hash harness. The W3 harness
+diff contains only the two scratch-tail reservation constants and their two delta checks.
+
 No N768 diagnostic from this replacement source has been launched. This is validation of
 an isolated optimization candidate, not production adoption or a PDE acceptance gate.

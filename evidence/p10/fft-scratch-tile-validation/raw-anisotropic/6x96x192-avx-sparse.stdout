@@ -1,0 +1,1 @@
+{"dimensions":[6, 96, 192],"backend":"avx","input":"cosine-plus-nyquist-v1","reservation_bytes":937368}

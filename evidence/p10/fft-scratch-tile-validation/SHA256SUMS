@@ -17,7 +17,10 @@ d8cd8eac945a28299861b084ea8a269a52e572fa27072ddba64b159e66fa5972  evidence/p10/f
 594827f1fada85c10d90323cae6607da6bd9ddf6c97f194729afe702689e0ff9  evidence/p10/fft-scratch-tile-validation/prepared/scalar-harness.sha256
 ae71320ea142fa63e48d01f0d2e40c03131bd69194bc68ae669bb511b6fb7967  evidence/p10/fft-scratch-tile-validation/prepared/scalar-tiled-binary.sha256
 18bec649f4cf2e29ded9b46986319b7fc8254a7fa5ed9f460d44b53e9be28827  evidence/p10/fft-scratch-tile-validation/prepared/w3-harness.sha256
+09c308479c9641cccd782bc90ae9e4cf398d72c30e50f5c80c770bfc490e23f9  evidence/p10/fft-scratch-tile-validation/prepared/w3-main-vs-prior.diff
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/fft-scratch-tile-validation/prepared/w3-preflight.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/prepared/w3-preflight.stderr
 9d2fa14aec015ca6c4d7eb33ebead05ae81b229f1e2f1353258bfb0faa68db63  evidence/p10/fft-scratch-tile-validation/prepared/w3-preflight.stdout
+9c2aa7a3720f02201b5619e10ce922102c303ed158d59e562a17ab43da19fc66  evidence/p10/fft-scratch-tile-validation/prepared/w3-tests-vs-prior.diff
 08d5b25660569a9a65f75c05c939ab43e2484daacaa3a8edc692c64bc14b5dfa  evidence/p10/fft-scratch-tile-validation/prepared/w3-tiled-binary.sha256
+4d29d6c2d99e390e3724e4d794c49a734848004a68d870e629816608665684d7  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/SHA256SUMS

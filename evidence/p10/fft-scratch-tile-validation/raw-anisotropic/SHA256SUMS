@@ -1,0 +1,14 @@
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/6x96x192-avx-sparse.stderr
+6e80d48aeade69984dd60eb402ce2abdb497a92415ee0bf1000bd7f27b2acc2b  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/6x96x192-avx-sparse.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/6x96x192-owned-sparse.stderr
+7834f8beab75f360eb1e8a8e1782ad9d70133a12bbd6ab954cb638677600b29f  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/6x96x192-owned-sparse.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x192-avx-sparse.stderr
+5e215d9090fbd22548b5b5c48e00ac49b1d379de7eb1eacb26349e4eaf527e35  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x192-avx-sparse.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x192-owned-sparse.stderr
+981c2330f31bbf5aa34715e5d76235c7e4c99c39390520f3add2decd895c00b2  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x192-owned-sparse.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x6-avx-dense.stderr
+b6cb1b9adc221ef2a0d607eca887dcd2fca7bc76ac5314b78a861800f6cd0e71  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x6-avx-dense.stdout
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x6-owned-dense.stderr
+9b9501a4176477925c5abc502cb60fa02805b0764c10a92cdda5cf3fdd759454  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/96x6x6-owned-dense.stdout
+baf5286c1ec22c15a2315dc0cdd30e4cbb4d235d8c2bbb1cb2c9af4ca7c9a25a  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/SHA256SUMS
+0a7f3a148387cfaf83ebfb98e4e4a352bea84ded89299f76140f06456e7fd6fd  evidence/p10/fft-scratch-tile-validation/raw-anisotropic/comparison.json
