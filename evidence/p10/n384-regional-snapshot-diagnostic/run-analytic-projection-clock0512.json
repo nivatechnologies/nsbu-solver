@@ -1,0 +1,72 @@
+{
+  "schema": "p10-n384-analytic-projection-run-v1",
+  "status": "complete_exit_0_validated",
+  "source_commit": "dc3c49ebe4b147ff89405b91ccf7180be9a2c75c",
+  "launcher": {
+    "launch_utc": "2026-09-13T10:52:40Z",
+    "output_mtime_utc": "2026-09-13T11:24:05.564051719Z",
+    "wall_seconds": 1884.70,
+    "timeout_pid": 1509729,
+    "diagnostic_pid": 1509730,
+    "exit_code": 0,
+    "timeout_term_seconds": 2400,
+    "timeout_kill_after_seconds": 60
+  },
+  "fresh_admission": {
+    "other_heavy_campaign_jobs_idle": true,
+    "mem_available_bytes": 498599677952,
+    "minimum_mem_available_bytes": 145951239256,
+    "visible_cpus": 128,
+    "required_workers": 32,
+    "internal_reservation_bytes": 128771370072,
+    "actual_rlimit_as_soft_bytes": 137438953472,
+    "actual_rlimit_as_hard_bytes": 137438953472
+  },
+  "observed_resources": {
+    "maximum_rss_kib": 125659132,
+    "maximum_rss_gib": 119.83788681030273,
+    "cpu_percent": 974,
+    "major_page_faults": 0,
+    "swaps": 0
+  },
+  "bindings": {
+    "release_binary_sha256": "4e37afbe5df387e9b5814f7bc20f243c0a4a856a7170b12389e0c6450c5c1e56",
+    "release_preflight_sha256": "96dc29097875cd572ad4011f8f54238eadcd1695afbc6a774c610c2071367a32",
+    "projected_coefficient_sha256_before_and_after": "fb99e8267c75d07189051a55260e8783089a206abeb3e3f68a55beb0338dd66b",
+    "result_sha256": "3bd863cb8206f3958d59dfcd9b9fdda83fe7bafb73b1e831a1d1f687501d4872",
+    "time_log_sha256": "77ffc4c65f2963912af838978061a60a3f07f679a6f110f6b2837e0a62366614"
+  },
+  "validation": {
+    "root_independent_validation": [
+      "result_sha256",
+      "origin_clock_and_no_state_claims",
+      "projected_coefficient_hash_equality",
+      "region_counts_equal_actual_state_results",
+      "global_rms_ratios"
+    ],
+    "region_counts_sum_to_768_cubed": true,
+    "region_counts_equal_actual_state_results": true,
+    "every_quantity_global_sample_count_complete": true,
+    "every_quantity_has_all_five_sampled_regions": true,
+    "all_reported_measurements_finite": true,
+    "immutable_projected_coefficient_hash_equal": true,
+    "transactional_final_present_and_candidate_absent": true,
+    "stdout_empty": true,
+    "stderr_empty": true,
+    "state_inputs": 0,
+    "trajectory_from_rest_claims": 0,
+    "state_import_or_resume_interfaces": 0
+  },
+  "comparison": {
+    "actual_m512_result": "results/clock0512-m512.json",
+    "actual_m512_result_sha256": "1926f05798c20f1caa9d58f9b3d7e20ad4bacc3f649f13bd752bf9288ad441a6",
+    "table": "m512-vs-analytic-n384-projection-clock0512.tsv",
+    "interpretation": "Closely comparable derivative norms and peaks strongly support retained N384 representation as the dominant limitation; ratios are not an exact error decomposition."
+  },
+  "claims": {
+    "acceptance": {"status": "not_assessed", "accepted_windows": 0},
+    "continuum_or_peak_qualification": "not_assessed",
+    "trajectory": "not_applicable_sampled_analytic_projection",
+    "state_import_or_resume": "absent"
+  }
+}

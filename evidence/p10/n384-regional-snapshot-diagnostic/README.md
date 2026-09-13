@@ -95,3 +95,13 @@ the FFT projection subphase. The projected coefficients survive into measurement
 producer allocations drop. The measurement peak is 128770321496 bytes, exactly the historical
 measurement reservation with the 1048576-byte snapshot decoder overhead removed. The external cap
 and minimum-memory gate remain conservatively unchanged.
+
+The root-reviewed analytical projection run completed in 1884.70 seconds with result
+`results/clock0512-analytic-n384-projection.json`. Its projected coefficient hash was unchanged
+through measurement, all reported values were finite, and the five region counts matched the two
+actual-state diagnostics exactly. The matched actual-M512 comparison is recorded in
+`m512-vs-analytic-n384-projection-clock0512.tsv`. The gradient and ordered-Hessian norms and peaks
+are closely comparable, including the collar and exterior regions, which strongly supports the
+retained N384 representation as the dominant limitation in these derivative diagnostics. Ratios
+are not an exact error decomposition because cross terms and local cancellation remain possible.
+This diagnostic makes no continuum, peak-qualification, or acceptance claim.
