@@ -1,0 +1,36 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-endpoint4096-implementation-v1",
+  "status": "frozen_preflight_validated_not_executed",
+  "source_commit": "9b4a980f147978b03cece70a265cc97090984c91",
+  "base_early512_source_commit": "a1d04a7ffc866fa3c826c01eae7269c575ba927a",
+  "release_binary_sha256": "bdf43acd1926f45ae5b066679e59753653f19473d38bf21585009a715ca432a5",
+  "endpoint_preflight_sha256": "f957067b0424267749b469477bfc4fab65133b102026254f830bb015c707aabc",
+  "early512_control_preflight_sha256": "4d1b82228b138dfda143803f3cfb8f695568ac8c4cb517427abfeafdc3217449",
+  "preflight_records_equal_except_clock": true,
+  "endpoint_clock": [
+    -20,
+    8192,
+    4096
+  ],
+  "endpoint_remaining_ticks": 4096,
+  "sample_dimensions": [
+    1024,
+    1024,
+    1024
+  ],
+  "retained_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "conservative_cap_bytes": 305085516888,
+  "external_address_space_limit_bytes": 343597383680,
+  "minimum_mem_available_bytes": 322265386072,
+  "hard_timeout_seconds": 6000,
+  "kill_grace_seconds": 60,
+  "state_inputs": 0,
+  "trajectory_from_rest_claims": 0,
+  "state_import_or_resume_interfaces": 0,
+  "heavy_executions": 0,
+  "acceptance": "not_assessed"
+}

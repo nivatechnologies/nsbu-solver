@@ -1,0 +1,74 @@
+{
+  "schema": "p10-n512-m1024-analytic-projection-regional-diagnostic-v1",
+  "status": "bound_preflight_only_no_state_input",
+  "origin": "sampled_analytic_projection",
+  "reference_source_commit": "6bdea3084d737ce6585cb67ab5d48810bd03cd50",
+  "reference_sources": [
+    {
+      "role": "scalar-evaluator",
+      "sha256": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8"
+    },
+    {
+      "role": "scalar-root",
+      "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b"
+    },
+    {
+      "role": "benchmark-time",
+      "sha256": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06"
+    },
+    {
+      "role": "case-definition",
+      "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+    }
+  ],
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "clock": [
+    -20,
+    8192,
+    512
+  ],
+  "sample_dimensions": [
+    1024,
+    1024,
+    1024
+  ],
+  "retained_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "physical_grid": "unshifted-periodic-x_i=i/n",
+  "fft_normalization": "forward-r2c-divide-by-complete-real-sample-count",
+  "crop": "normalization-preserving-strict-band-transfer-no-rescale",
+  "producer_peak_bytes": 46246603464,
+  "producer_allocator_allowance_bytes": 40960,
+  "serialization_bytes": 65536,
+  "measurement_peak_bytes": 305085516888,
+  "conservative_cap_bytes": 305085516888,
+  "external_address_space_limit_bytes": 343597383680,
+  "minimum_mem_available_bytes": 322265386072,
+  "hard_timeout_seconds": 6000,
+  "measurement_storage": {
+    "projected_coefficients": 3233808384,
+    "fft_catalog": 29362480,
+    "derivative_workspace_required": 25803457328,
+    "derivative_workspace_budget": 25803457328,
+    "derivative_workspace_allowance": 0,
+    "packed_reference_cache": 257698037760,
+    "two_magnitude_arrays": 17179869184,
+    "cached_region_labels": 1073741824,
+    "worker_stacks": 67108864,
+    "allocator_allowance": 65528,
+    "serialization": 65536,
+    "measurement_total": 305085516888
+  },
+  "producer_scratch_dropped_before_measurement": true,
+  "diagnostic_binary_sha256": "bdf43acd1926f45ae5b066679e59753653f19473d38bf21585009a715ca432a5",
+  "state_inputs": 0,
+  "trajectory_from_rest_claims": 0,
+  "state_import_or_resume_interfaces": 0,
+  "acceptance": {
+    "status": "not_assessed",
+    "accepted_windows": 0
+  }
+}
