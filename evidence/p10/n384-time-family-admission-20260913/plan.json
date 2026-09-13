@@ -1,0 +1,126 @@
+{
+  "schema": "p10-n384-time-family-admission-plan-v1",
+  "status": "read_only_plan_no_trajectory_no_acceptance_claim",
+  "base_repository_head": "100a301189a7328ef1f69ffaed358c91fb3308a0",
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "scope": {
+    "retained_layout": 384,
+    "integration_force_layout": 384,
+    "method": "cox-matthews",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "meaning_of_24_48_96": "accepted macro-attempt counts, not tick sizes",
+    "from_rest": true
+  },
+  "proposed_nested_family": [
+    {
+      "name": "coarse-24",
+      "accepted_attempts": 24,
+      "schedule": [
+        {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 128, "attempts": 16},
+        {"from_inclusive": 2048, "until_exclusive": 4096, "step_ticks": 256, "attempts": 8}
+      ]
+    },
+    {
+      "name": "middle-48-existing",
+      "accepted_attempts": 48,
+      "schedule": [
+        {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 64, "attempts": 32},
+        {"from_inclusive": 2048, "until_exclusive": 4096, "step_ticks": 128, "attempts": 16}
+      ],
+      "existing_terminal_logical_sha256": "921e2e3b83eea4b259d9794eb0e663ce8f8f913322283312997820e31a1cb72b",
+      "existing_terminal_encoded_sha256": "2868bc6e5ccbfb5ce5967aefd3d82cccbaec0a72baaeaad0944f517948187592"
+    },
+    {
+      "name": "fine-96",
+      "accepted_attempts": 96,
+      "schedule": [
+        {"from_inclusive": 0, "until_exclusive": 2048, "step_ticks": 32, "attempts": 64},
+        {"from_inclusive": 2048, "until_exclusive": 4096, "step_ticks": 64, "attempts": 32}
+      ]
+    }
+  ],
+  "schedule_checks": {
+    "all_intervals_divisible_by_four": true,
+    "all_end_at_4096": true,
+    "fine_nodes_contain_middle_nodes": true,
+    "middle_nodes_contain_coarse_nodes": true,
+    "step_ratio_at_each_clock_slab": "4:2:1",
+    "comparison_pairs": ["coarse-24/middle-48-existing", "middle-48-existing/fine-96"]
+  },
+  "source_path_result": {
+    "candidate_payload": "the second of two chained half steps",
+    "local_tolerance_use": "after all full-step and two-half-step arithmetic, only as the denominator of two discrepancy ratios and the <=1 token gate",
+    "advective_guard_use": "after each RHS output is computed, only as a refusal gate",
+    "commit": "validated infallible swap of private candidate and committed payloads",
+    "consequence": "when an attempt passes both an old and a looser policy, changing only those gates cannot select different already-computed candidate coefficients"
+  },
+  "current_local_admission": {
+    "absolute": [0.00001, 0.0001],
+    "relative": [0.00001, 0.00001],
+    "advective_limit": 3.3,
+    "assessment": "the only source-established common policy, but the coarse-24 startup is at substantial rejection risk"
+  },
+  "screening_extrapolation": {
+    "kind": "heuristic_h_fifth_scaling_not_order_evidence_not_a_bound",
+    "basis": {
+      "observed_h64_max_ratio_l2": 0.12640355448293944,
+      "observed_h64_max_ratio_h1": 0.9636019681132327,
+      "observed_late_h128_max_ratio_l2": 0.0011706010613226408,
+      "observed_late_h128_max_ratio_h1": 0.007761858743615543
+    },
+    "hypothetical_h128_from_h64": {"ratio_l2": 4.044913743454062, "ratio_h1": 30.835262979623447},
+    "hypothetical_h256_from_h64_startup": {"ratio_l2": 129.43723979053, "ratio_h1": 986.7284153479503},
+    "hypothetical_late_h256_from_late_h128": {"ratio_l2": 0.037459233962324506, "ratio_h1": 0.24837947979569738},
+    "interpretation": "do not start a coarse branch at h256; even h128 startup should be expected to reject under the current local gate until measured"
+  },
+  "conditional_common_pilot_policy": {
+    "status": "candidate_for_separate_predeclared_refusal_preserving_pilot_not_approved_for_trajectory",
+    "absolute": [0.00064, 0.0064],
+    "relative": [0.00064, 0.00064],
+    "advective_limit": 6.6,
+    "rationale": "64x local denominators put the h-fifth h128 screen near 0.0632/0.4818; 2x the proven h128 guard accommodates the planned h256 duration only as a screening margin",
+    "limitations": "the design forbids promoting h-fifth extrapolation to order evidence; actual h128 and h256 attempts may still reject and must not be retried under changed settings"
+  },
+  "scientific_policy_unchanged": {
+    "global_velocity_relative_target": 0.0001,
+    "global_h1_and_vorticity_relative_target": 0.001,
+    "absolute_floors": 1e-8,
+    "meaning": "global comparison targets remain frozen; local attempt admission is not allocated scientific error and does not establish a window"
+  },
+  "existing_48_state": {
+    "all_48_current_attempts_passed_current_local_tolerances": true,
+    "all_48_passed_advective_limit_3_3": true,
+    "source_level_bit_identity_implication": "the existing candidate chosen at each attempt also passes the looser conditional gates, and tolerance/guard values are not operands in candidate construction",
+    "evidence_limit": "this is not a cross-binary reproducibility result and does not authorize relabelling the archived plan metadata"
+  },
+  "policy_and_adapter_gap": {
+    "design_requires": "at least three predeclared temporal settings, raw non-extrapolated differences, fixed global budgets, and current-regime order evidence before a Richardson divisor",
+    "design_does_not_state": "that local acceptance tolerance words must be bit-identical among temporal branches",
+    "library_family_constraint": "FamilySettings supplies one tolerance object and one advective limit to every branch",
+    "snapshot_adapter_constraint": "TIME_DIAGNOSTIC same_evolution_except_schedule compares absolute and relative tolerance words exactly; it does not compare advective limits there, although each side must carry a positive admission guard",
+    "missing_bridge": "a reviewed dominance rule proving each archived attempt passed a componentwise tighter local gate, binding every attempt record and state hash, and distinguishing operational admission metadata from unchanged scientific comparison budgets",
+    "required_before_reuse": "extend policy and adapter with that explicit dominance proof or run all three branches under literal common metadata; do not edit or silently reinterpret an existing manifest"
+  },
+  "source_bindings": [
+    {"path": "crates/nsbu-solver/src/integrators/attempt.rs", "sha256": "29c7bdcc8696b3c32d15724a56883d04cb48307c74feb6aa976fec8851f309bf"},
+    {"path": "crates/nsbu-solver/src/integrators/indicator.rs", "sha256": "bbd73928a3cc0fa92c4edc834e2e0a4dcd9469dba929e156d6df2e0211674fa8"},
+    {"path": "crates/nsbu-solver/src/integrators/transaction.rs", "sha256": "c9fe5d1d57afed0b7c9545a7158a58129c4cc1c11f42486c9a29f17d9254a472"},
+    {"path": "crates/nsbu-solver/src/integrators/rhs.rs", "sha256": "cdac32989e906f22345c4b4644adccc821e9131918f2093012bec0bdaf464540"},
+    {"path": "evidence/p10/avx-scheduled-endpoint/harness/src/main.rs", "sha256": "0e85a4d78af8b45c598fea08dd81219c3a421d7d30590bfa114ab2ecc6ebc8c0"},
+    {"path": "evidence/p10/avx-scheduled-endpoint/harness/src/config.rs", "sha256": "a657e6b87c83d9af508502dce44544303365dcabdd0933b3abb14af71801ad6e"},
+    {"path": "evidence/p10/avx-scheduled-endpoint/harness/src/schedule.rs", "sha256": "90f8067b4e7052bf8d7cad265439a4a916cfe4c9baebd73c5b95742e000d374a"},
+    {"path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs", "sha256": "121469b67276f8ce3f16dbcec144ee2c2460eb1e9d97b0f9b2daa53637aec80f"},
+    {"path": "docs/design/COMPLETE_DESIGN.md", "sha256": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9"},
+    {"path": "docs/EXPERIMENTS.md", "sha256": "18de5953aa5fadfcb0fb2d7f80ec49bac1ded34aeef6865d22c2547b428bf88d"},
+    {"path": "evidence/p10/sulaco-remote-window-20260912/n384-piecewise-cadv33-complete/archive-summary.json", "sha256": "e26a93b36dfd27b55c87ae44ea464dc14dc06715d5592ffe5e7ba1e56bf10339"}
+  ],
+  "claims": {
+    "trajectory_run": false,
+    "source_edited": false,
+    "active_tolerance_changed": false,
+    "acceptance_claim": false,
+    "order_claim": false
+  }
+}
