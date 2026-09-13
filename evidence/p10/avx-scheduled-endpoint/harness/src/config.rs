@@ -137,8 +137,13 @@ const PROVIDER: &str = "parallel-reduced-v2-force-w3-attempt-cache";
 const PROVIDER: &str = "parallel-reduced-attempt-cache";
 #[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise-common")))]
 const EXTERNAL_STOP: &str = "pgid-watchdog-v1-starttime-cmdline-deadline";
-#[cfg(feature = "n384-piecewise-common")]
+#[cfg(all(
+    feature = "n384-piecewise-common",
+    not(feature = "n512-m512-piecewise-cadv33")
+))]
 const EXTERNAL_STOP: &str = "pgid-watchdog-v2-starttime-cmdline-deadline";
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const EXTERNAL_STOP: &str = "pgid-watchdog-v3-confirmed-identity-absolute-deadline";
 
 #[derive(Clone, Copy)]
 struct Geometry {
@@ -541,6 +546,9 @@ mod n512_resource_probe {
 
     #[test]
     fn report_each_exact_api_reservation_without_allocation() {
+        assert!(identity().contains(
+            "external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline"
+        ));
         let geometry = geometry().unwrap();
         let (catalog, force, rhs) = execution_reservations(geometry).unwrap();
         assert_eq!(
