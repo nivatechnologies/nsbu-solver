@@ -1,0 +1,12 @@
+observation_utc=2026-09-13T06:08:33Z observation_epoch=1789279713
+pid=217818 status=gone
+pid=217822 status=gone
+pid=217824 status=gone
+pid=217847 status=gone
+attempt_count=40
+attempt41_records=0
+terminal_records=0
+stderr_bytes=0
+time_bytes=0
+step_directories=40
+last_step=step-040-clock-3072

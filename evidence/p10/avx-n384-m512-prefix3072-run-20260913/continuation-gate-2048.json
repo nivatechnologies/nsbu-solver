@@ -1,0 +1,33 @@
+{
+  "schema": "p10-avx-n384-m512-manual-continuation-gate-v1",
+  "checkpoint_clock": 2048,
+  "checkpoint_attempt": 32,
+  "checkpoint_record_mtime_utc": "2026-09-13T04:55:35.683761063Z",
+  "gate_observation_utc": "2026-09-13T04:56:43Z",
+  "gate_observation_epoch": 1789275403,
+  "deadline_utc": "2026-09-13T07:00:00Z",
+  "deadline_epoch": 1789282800,
+  "recent_attempts": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "imax_recent8_seconds": 415.392645648,
+  "positive_observer_count": 4,
+  "omax_all_positive_seconds": 293.017052202,
+  "fixed_overhead_seconds": 300,
+  "margin_multiplier": 1.15,
+  "formula": "ceil(1.15*(8*Imax+2*Omax+300))",
+  "segment_budget_seconds": 4841,
+  "remaining_seconds": 7397,
+  "margin_seconds": 2556,
+  "decision": "continue_exactly_one_segment_to_3072",
+  "decision_owner": "parent numerical orchestrator",
+  "execution": "same_already_running_process_no_reset_no_recompile_no_resume_no_controller",
+  "claim": "feasibility_incomplete_no_endpoint_no_window"
+}
