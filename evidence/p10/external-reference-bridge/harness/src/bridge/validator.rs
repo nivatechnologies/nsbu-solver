@@ -129,6 +129,7 @@ pub(super) fn validate_snapshot_review(
             value.advective_limit.to_bits() == 3.3_f64.to_bits() && value.maximum_attempts == 48
         }),
         expected_schedule(snapshot),
+        admitted_state_hashes(snapshot),
     ];
     matched
         .into_iter()
@@ -179,7 +180,7 @@ fn schedule_steps(snapshot: &SnapshotManifest) -> Result<u128, String> {
 fn expected_schedule(snapshot: &SnapshotManifest) -> bool {
     let segments = &snapshot.evolution.schedule;
     match snapshot.elapsed {
-        512 => segments.len() == 1 && segment(&segments[0], 0, 512, 64),
+        512 | 1024 => segments.len() == 1 && segment(&segments[0], 0, snapshot.elapsed, 64),
         4096 => {
             segments.len() == 2
                 && segment(&segments[0], 0, 2048, 64)
@@ -187,6 +188,24 @@ fn expected_schedule(snapshot: &SnapshotManifest) -> bool {
         }
         _ => false,
     }
+}
+
+fn admitted_state_hashes(snapshot: &SnapshotManifest) -> bool {
+    if snapshot.source_commit != SOURCE_M512 {
+        return true;
+    }
+    let expected = match snapshot.elapsed {
+        512 => (
+            "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+            "7a1d8d21e17c85c7f37ea474f5f5e694a91889ebabcec12424427308d020def9",
+        ),
+        1024 => (
+            "bb12be8f266268813ffbeddc3c78659bc84efb2361f14dfd471e5da354fc2324",
+            "d62fdf81db2547e6343e21e6be6faabfdf0130a8e686d771785434fe2bd16365",
+        ),
+        _ => return false,
+    };
+    snapshot.coefficient_sha256 == expected.0 && snapshot.file_sha256 == expected.1
 }
 
 fn segment(value: &crate::model::ScheduleSegment, from: u128, until: u128, step: u128) -> bool {
