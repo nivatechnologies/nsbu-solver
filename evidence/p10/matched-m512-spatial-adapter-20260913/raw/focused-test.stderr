@@ -1,2 +1,2 @@
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
      Running unittests src/main.rs (/tmp/nsbu-m512-spatial-adapter-target-20260913/debug/deps/p10_snapshot_comparison_adapter-29c8e870e00f4763)

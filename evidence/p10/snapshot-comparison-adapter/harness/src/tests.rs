@@ -237,7 +237,7 @@ fn enable_matched_m512_spatial(left: &mut Manifest, right: &mut Manifest) {
     left.source_commit = "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72".into();
     right.source_commit = "e25f3816f83c6a7c07202cac2878f58ace460511".into();
     left.plan_sha256 = "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84".into();
-    right.plan_sha256 = "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634".into();
+    right.plan_sha256 = "85bf3e9c1b40c55f23528c916d831d79ce8f9db9a5d7003e9beb9707e24b1360".into();
     left.profile = Some(ProfileBinding {
         kind: ProfileBindingKind::IdentityProfileField,
         value: "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c".into(),
