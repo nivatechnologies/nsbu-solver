@@ -120,6 +120,35 @@ fn m512_clock1024_requires_closed_clock_and_state_hashes() {
 }
 
 #[test]
+fn m512_clock2048_requires_closed_clock_hash_source_and_profile() {
+    let mut snapshot = fixture_snapshot([4; 3]);
+    set_m512_trajectory(&mut snapshot);
+    set_elapsed(&mut snapshot, 2048);
+    snapshot.coefficient_sha256 =
+        "461e6f2a95eb578558493bbacebc5456c7e8a3e8f8fb933ac0176a23a3f67cad".into();
+    snapshot.file_sha256 =
+        "25307e71e89cfbdf5ea677efe0c5c8c161e99b4518aa435e431ba553976cdeaa".into();
+    let mut bridge = fixture_bridge([6; 3], [4; 3]);
+    bridge.elapsed = 2048;
+    validate_binding(&bridge, &snapshot).unwrap();
+    validate_snapshot_review(&bridge, &snapshot).unwrap();
+
+    let mut wrong_hash = snapshot.clone();
+    wrong_hash.file_sha256 = "0".repeat(64);
+    assert!(validate_snapshot_review(&bridge, &wrong_hash).is_err());
+    let mut wrong_source = snapshot.clone();
+    wrong_source.source_commit = SOURCE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &wrong_source).is_err());
+    let mut wrong_profile = snapshot.clone();
+    wrong_profile.profile.as_mut().unwrap().value = PROFILE_M384.into();
+    assert!(validate_snapshot_review(&bridge, &wrong_profile).is_err());
+    let mut wrong_clock = snapshot;
+    set_elapsed(&mut wrong_clock, 1536);
+    bridge.elapsed = 1536;
+    assert!(validate_snapshot_review(&bridge, &wrong_clock).is_err());
+}
+
+#[test]
 fn tiny_sampled_reference_is_finite_and_keeps_raw_divergence() {
     let bridge = fixture_bridge([96, 6, 6], [4; 3]);
     let snapshot = fixture_snapshot([4; 3]);
