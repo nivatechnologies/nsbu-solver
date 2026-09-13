@@ -1,0 +1,1267 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "main",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "run",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.25,
+      "crap": 6.796875
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "run_pair",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "run_mixed",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 182.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "ordered_hessian_requested",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "validate_requested_pair",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 4.074074074074074
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "format_hessian_output",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/main.rs",
+      "function": "format_output",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "measure",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "push",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "finish",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "complex",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "push",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs",
+      "function": "norm",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "domain",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "debug",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "diagnostic_output",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 72.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "validate_manifests",
+      "cyclomatic": 14.0,
+      "branch_coverage_fraction": 0.6363636363636364,
+      "crap": 23.424492862509393
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "validate_side",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "same_except_force",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 13.703703703703706
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "bits",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "profile_matches",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 30.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "schedule_steps",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "manifest_clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "arrays",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs",
+      "function": "side",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "calculate",
+      "cyclomatic": 21.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 21.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "validate_domains",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 16.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "validate_values",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finish",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finish",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finish",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finish",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "curl",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "real_inner",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "split",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "add_norms",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "add_cross",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "cross_output",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "cosine_similarity",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finish",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "complex",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "push",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.6,
+      "crap": 8.304
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "norm",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs",
+      "function": "finite",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "diagnostic_output",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "validate_manifest_pair",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5833333333333334,
+      "crap": 14.859374999999998
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "validate_manifest_side",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 16.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "profile_matches_identity",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 30.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "schedule_steps",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "measure_ordered_hessian",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "screen_ordered_hessian",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "validate",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "validate_pair",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "accumulate_absolute",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "accumulate_comparison",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "push_mode",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "finish",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "ratio",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "snapshot_hashes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "complex",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "push",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.6,
+      "crap": 8.304
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs",
+      "function": "norm",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "compare",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 9.583984375
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "time_diagnostic",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "force_resolution_diagnostic",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "method_diagnostic",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "diagnostic_output",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "calculate",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_manifest_pair",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_force_manifests",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.9,
+      "crap": 6.036
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_method_manifests",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.8571428571428571,
+      "crap": 8.1865889212828
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_fixed_diagnostic_pair",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 7.8984375
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_time_manifests",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 18.515625
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_schedule_bound_side",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 10.462962962962962
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "validate_time_lineage",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 8.512
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "valid_profile_binding",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "identity_profile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "schedule_steps",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.6,
+      "crap": 14.184000000000001
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_schedule",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_force",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_evolution_except_method",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.9444444444444444,
+      "crap": 10.017146776406035
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "same_f64_array",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs",
+      "function": "hashes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_manifest",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_envelope",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.6875,
+      "crap": 11.471923828125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_hashes",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_evolution",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_evolution_profile",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 0.4,
+      "crap": 37.135999999999996
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_tolerances",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_schedule",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.6,
+      "crap": 10.136000000000001
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "state_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "admitted_bytes",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "admitted_bytes_three",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "preflight_three",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 20.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "preflight",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "load",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "check_file_len",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "expected_file_len",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_prefix",
+      "cyclomatic": 14.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 15.568
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "finish_snapshot",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "is_hex",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "beside",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_bounded",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_arithmetic_control",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.7,
+      "crap": 9.728000000000002
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_review",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_control",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_reviewed_lineage",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_bounded_hash",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "decode_components",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "exact",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "array",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "u64",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "u128",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "finish",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    }
+  ],
+  "maximum": 182.0
+}
