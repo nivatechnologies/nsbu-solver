@@ -1,68 +1,46 @@
-# Fresh M512 endpoint r6 run evidence
+# Fresh M512 endpoint r6 evidence
 
-This directory records the bounded fresh-from-rest Sulaco endpoint run launched
-through the reviewed r6 wrapper. The run is experimental and does not imply an
-accepted PDE window.
+The fresh-from-rest Sulaco trajectory completed all 48 scheduled integration
+steps through clock 4096 and exited with status zero after 5:47:52. The final
+coefficient hash is
+`1d1500409962c4af37182f6733c2c88a086247c8e8728570e9c93238ed1c04fd`.
+`final-run.json`, `clock-3584.json`, and `clock-4096.json` bind the terminal
+status, timings, identities, and final hashes. The clock 512, 2048, and 3072
+coefficient hashes exactly matched the prior r5 trajectory at those prefixes.
 
-`ownership.json` binds the launched solver and watchdog identities captured by
-the wrapper. `first-step.json` records the passed clock-64 admission gate,
-`clock-0512.json` records the required comparison-only r5 prefix check, and the
-NUMA files record read-only placement observations. The second NUMA observation
-is explicitly post-observer because the monitor result arrived after the first
-observer completed. Final exit and artifact evidence remain pending.
+The actual independently evolved M384 trajectory was compared with the r6 M512
+trajectory at every nonzero observer clock. Earlier results at clocks
+[512](../snapshot-comparison-adapter/review-force-clock0512),
+[1024](../snapshot-comparison-adapter/review-force-clock1024),
+[1536](../snapshot-comparison-adapter/review-force-clock1536),
+[2048](../snapshot-comparison-adapter/review-force-clock2048), and
+[3072](../snapshot-comparison-adapter/review-force-clock3072) are preserved in
+the adapter evidence. This directory adds clock 2560 in
+`force-comparison-clock2560-run/` and clocks 3584 and 4096 in
+`force-comparison-run/`. `force-comparison-results.json` records the combined
+eight-clock inventory. All three new diagnostics exited zero under the reviewed
+2,733,113,344-byte internal cap and 8 GiB external virtual-memory cap.
 
-`checkpoint-20260913T115254Z.json` records the requested durable-progress
-checkpoint; its live remote sample completed twelve seconds after the requested
-wall-clock instant.
+`durable-archive-receipt.json` binds the complete trajectory archive at
+`/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913`.
+Its sorted local and remote SHA-256 inventories match for all 48 state files and
+98 metadata files, totaling 65,569,755,172 bytes. The large state files remain
+outside Git.
 
-`checkpoint-20260913T135254Z.json` records the later requested checkpoint. Its
-remote resource sample completed after the clock-1600 commit and 74 seconds
-after the requested wall-clock instant.
+`ownership.json`, `first-step.json`, the checkpoint files, the NUMA samples,
+and the clock-prefix files preserve observations made during the run. The
+manifest files and launch scripts are the frozen inputs used for the post-exit
+diagnostics. `adapter-build-binding.json` and the adjacent raw logs bind the
+exact adapter source, binary, tests, Clippy check, and release build.
 
-`force-comparison-binding.json` identifies the actual independently evolved
-N384/M384 counterpart for the future clock-3584 and clock-4096 r6 comparisons.
-It excludes the analytical projection and records the missing reviewed adapter
-binary as a post-run dependency.
+The endpoint and comparison outputs remain experimental. Every comparison
+reports `accepted_windows: 0` and `acceptance.status: not_assessed`; they do not
+establish PDE force-channel qualification or an accepted window. The analytical
+projection was excluded as a trajectory counterpart. The second NUMA sample was
+taken immediately after the clock-512 observer rather than during it.
 
-`adapter-build-binding.json` records a fresh isolated local build from the exact
-reviewed force-diagnostic source and its focused validation. It has not been
-staged or used for a large-state comparison.
-The adjacent `adapter-*.log` files preserve the raw merged output from the
-reviewed incremental test, Clippy, and release-build commands.
-
-`clock-2048.json` records the next exact r5 prefix hash match and its scheduled
-observer/resource evidence.
-
-`clock-3072.json` records the final exact r5 prefix match before r6 enters the
-previously uncomputed endpoint segment.
-
-`clock-3584.json` and the paired `force-clock3584-*.json` manifests bind the
-first newly completed endpoint-segment node. The comparison remains unexecuted
-until the solver exits and root reviews the exact manifests.
-
-`clock-4096.json`, the paired `force-clock4096-*.json` manifests, and
-`final-run.json` bind the completed endpoint, clean exit status, final artifact
-hashes, and the remaining comparison review gate. The solver exited zero after
-5:47:52, well before the absolute deadline. The adapter comparisons have not
-been launched and no acceptance conclusion is claimed.
-
-`force-comparison-results.json` and `force-comparison-run/` preserve the two
-reviewed post-exit force-resolution diagnostics at. Both clock 3584 and 4096
-completed with status zero. Their acceptance field remains `not_assessed` and
-these diagnostics do not establish force-channel PDE qualification.
-
-The executed `7cc732e...` launcher bound the precomputed exact-argv command
-hash. Its capture loop checked for two stable samples but lacked a final
-explicit counter assertion, leaving a theoretical final-iteration one-sample
-edge. The actual launches completed normally with expected command hashes.
-The separately prepared clock-2560 evidence closes that edge before any future
-launch.
-
-The independently evolved M384 versus r6 M512 force diagnostic at clock 2560
-also completed with status zero, closing the eight nonzero observer-clock
-inventory. `force-comparison-clock2560-run/` preserves its raw result and
-execution receipts.
-
-`durable-archive-receipt.json` binds a complete local archive outside the Git
-worktree: all 48 state files and 98 metadata files (65,569,755,172 bytes) match
-the remote SHA-256 inventory exactly. Large state files remain outside Git.
+The executed two-clock launcher checked for two stable exact-command samples,
+but lacked a final counter assertion, leaving a theoretical single-sample edge
+on its last polling iteration. Its observed launch receipts match the expected
+command hashes. The later clock-2560 launcher added the explicit assertion and
+completed normally.
