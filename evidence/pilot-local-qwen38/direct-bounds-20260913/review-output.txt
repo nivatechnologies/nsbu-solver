@@ -1,0 +1,68 @@
+{
+  "verdict": "pass",
+  "compile_issues": [],
+  "semantic_issues": [],
+  "missing_cases": [],
+  "independent_test_vectors": [
+    {
+      "function": "norm_bounds",
+      "inputs": [
+        1.0,
+        3.0
+      ],
+      "expected": "Ok((2.0, 4.0))"
+    },
+    {
+      "function": "norm_bounds",
+      "inputs": [
+        1.0,
+        -1.0
+      ],
+      "expected": "Err(BoundError::NegativeInput)"
+    },
+    {
+      "function": "norm_bounds",
+      "inputs": [
+        1.7976931348623157e308,
+        1.7976931348623157e308
+      ],
+      "expected": "Err(BoundError::Overflow)"
+    },
+    {
+      "function": "relative_peak_bounds",
+      "inputs": [
+        1.0,
+        3.0,
+        1.0
+      ],
+      "expected": "Ok((0.0, 4.0))"
+    },
+    {
+      "function": "relative_peak_bounds",
+      "inputs": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "expected": "Err(BoundError::ZeroFloor)"
+    },
+    {
+      "function": "relative_peak_bounds",
+      "inputs": [
+        1.0,
+        1.7976931348623157e308,
+        2.2250738585072014e-308
+      ],
+      "expected": "Err(BoundError::Overflow)"
+    },
+    {
+      "function": "relative_peak_bounds",
+      "inputs": [
+        8.988465674311579e307,
+        8.988465674311579e307,
+        1.0
+      ],
+      "expected": "Err(BoundError::Overflow)"
+    }
+  ]
+}

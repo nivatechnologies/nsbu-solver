@@ -92,13 +92,15 @@ and [bridge README](../evidence/p10/external-reference-bridge/README.md) retain
 the source, snapshot, resource and result bindings.
 
 The matched M384-to-M512 trajectory-force differences at clocks 512, 1024,
-1536 and 2048 have H1 values of about `2.21e-5` to `2.24e-5` relative to the
+1536, 2048 and 3072 have H1 values of about `2.18e-5` to `2.24e-5` relative to the
 M512 states, or `0.147` to `0.149` of the frozen ForceResolution pilot
 allocation. Independently sampled M768 references against the M512 trajectory
-give retained-band H1 differences of `3.51e-6`, `1.17e-5` and `2.33e-5` at
-clocks 512, 1024 and 2048. These measurements support continuing the M512
-force-refinement trajectory, but they do not qualify its force sampling,
-reference precision or unresolved tail.
+give retained-band H1 differences of `3.51e-6`, `1.17e-5`, `2.33e-5` and
+`2.36e-5` at clocks 512, 1024, 2048 and 3072. The M512 and HO trajectories
+both reached durable clock 3072 and were then stopped because their frozen
+wall-time continuation formulas could not admit the final segment. They are
+useful incomplete prefixes; they do not qualify force sampling, method,
+reference precision, the unresolved tail or the endpoint.
 
 One read-only physical diagnostic evaluated the N384/M384 state at clock 512
 on a 768-cubed grid. Its global RMS/peak errors were `9.74e-8`/`2.91e-6` for
@@ -179,12 +181,12 @@ open.
 
 ## Next bounded integration increment
 
-The active bounded gates are the same-state M512 force-refinement and HO method
-trajectories, each preserved through clock 2048 and conditionally continuing to
-clock 3072 under its frozen wall-time rule. Completed read-only diagnostics now
-cover sampled references, one off-stage residual probe and one clock-512
-regional derivative screen. The next qualification work must complete the
-missing refinement studies under predeclared force, time, method, residual,
+The same-state M512 force-refinement and HO method trajectories are preserved
+through durable clock 3072. Each was stopped after its frozen wall-time rule
+refused continuation to 4096, so neither is an endpoint trajectory. Completed
+read-only diagnostics now cover sampled references, one off-stage residual
+probe and one clock-512 regional derivative screen. The next qualification
+work must complete the missing refinement studies under predeclared force, time, method, residual,
 pressure and regional policies. Preserve every guard, local-error, resource and
 deadline refusal. Compare only identical physical and arithmetic profiles when
 attributing a channel; keep sampled-reference bridge values explicitly diagnostic.

@@ -1,0 +1,15 @@
+{
+  "model": "qwen3.8-flash-next",
+  "messages": [
+    {
+      "role": "user",
+      "content": "You are producing a tiny dependency-free Rust module and tests. Return only the complete contents of one Rust source file, with no Markdown fences and no prose.\n\nImplement:\n\n1. `pub fn norm_bounds(error_norm: f64, correction_norm: f64) -> Result<(f64, f64), BoundError>`\n   - Inputs must be finite and nonnegative.\n   - Return the sharp norm triangle interval `(abs(error_norm - correction_norm), error_norm + correction_norm)`.\n   - Reject overflow if the upper bound is not finite.\n\n2. `pub fn relative_peak_bounds(archived_relative_peak: f64, correction_peak: f64, floor: f64) -> Result<(f64, f64), BoundError>`\n   - archived_relative_peak and correction_peak must be finite and nonnegative.\n   - floor must be finite and strictly positive.\n   - Let `u = correction_peak / floor`; reject if u is not finite.\n   - Return `(max(0, archived_relative_peak - u), archived_relative_peak + u)` and reject if the upper bound is not finite.\n   - Do not use `abs(archived_relative_peak - u)` as the lower bound. The correction peak divided by the floor is only an upper bound on a weighted pointwise correction peak; its maximum can occur at another point.\n\nDefine a small public `BoundError` enum with useful variants and derive `Debug, Clone, Copy, PartialEq, Eq`. Use only the Rust standard library. No heap allocations are needed.\n\nInclude unit tests covering exact ordinary cases, every NaN/infinity/negative/zero-floor rejection, addition/division overflow, and this counterexample:\nreference values [30, 1000], old values [60, 1000], new values [63, 1000], floor=1. Then P0=1, correction_peak/floor=3, P1=1.1. The valid conservative relative interval has lower 0 and upper 4; `abs(P0-3)=2` is an invalid lower bound because actual P1=1.1. Assert the function returns (0,4), that P1 lies inside it, and that P1 is below the invalid absolute-value lower bound.\n\nAlso test that norm_bounds(1,3) returns (2,4), preserving the sharp reverse triangle lower bound.\n"
+    }
+  ],
+  "temperature": 0,
+  "max_tokens": 3072,
+  "stream": false,
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  }
+}

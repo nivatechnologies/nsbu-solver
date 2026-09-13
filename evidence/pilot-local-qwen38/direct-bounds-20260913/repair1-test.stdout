@@ -1,0 +1,11 @@
+
+running 6 tests
+test tests::test_norm_bounds_ordinary ... ok
+test tests::test_norm_bounds_overflow ... ok
+test tests::test_norm_bounds_rejections ... ok
+test tests::test_relative_peak_bounds_ordinary ... ok
+test tests::test_relative_peak_bounds_overflow ... ok
+test tests::test_relative_peak_bounds_rejections ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

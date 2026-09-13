@@ -1,0 +1,15 @@
+{
+  "schema": "p10-local-qwen-direct-bounds-pilot-v1",
+  "model": "qwen3.8-flash-next",
+  "cloud_fallback": false,
+  "tasks": [
+    {"name": "implementation", "thinking": false, "wall_seconds": 31.61, "delivery": "complete", "compile": "failed", "test": "not_run"},
+    {"name": "initial_review", "thinking": false, "wall_seconds": 9.18, "delivery": "complete", "review_verdict": "incorrect_pass"},
+    {"name": "implementation_repair_1", "thinking": false, "wall_seconds": 32.19, "delivery": "complete", "compile": "passed", "tests": "6/6 passed"},
+    {"name": "independent_tests", "thinking": false, "wall_seconds": 20.68, "delivery": "complete", "compile": "failed"},
+    {"name": "independent_tests_repair_1", "thinking": false, "wall_seconds": 20.26, "delivery": "complete", "compile": "passed", "tests": "22/23 passed"},
+    {"name": "independent_tests_repair_2", "thinking": true, "wall_seconds": 38.59, "delivery": "complete", "compile": "passed", "tests": "23/23 passed"}
+  ],
+  "scope": "empirical binary64 bound utility and independent tests only",
+  "not_established": ["certified outward enclosure", "regional diagnostic implementation", "PDE acceptance", "broad autonomous repository delivery"]
+}

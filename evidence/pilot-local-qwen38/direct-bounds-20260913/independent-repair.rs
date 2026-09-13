@@ -1,0 +1,130 @@
+mod candidate { include!("repair1.rs"); }
+
+use candidate::{norm_bounds, relative_peak_bounds, BoundError};
+
+#[test]
+fn test_norm_bounds_sharp_reverse_triangle() {
+    let result = norm_bounds(1.0, 3.0);
+    assert_eq!(result, Ok((2.0, 4.0)));
+}
+
+#[test]
+fn test_norm_bounds_equal_norms() {
+    let result = norm_bounds(5.0, 5.0);
+    assert_eq!(result, Ok((0.0, 10.0)));
+}
+
+#[test]
+fn test_norm_bounds_max_plus_one_finite() {
+    let max_val = f64::MAX;
+    // IEEE rounding: max_val + 1.0 == max_val, so upper bound is max_val (finite)
+    let result = norm_bounds(max_val, 1.0);
+    assert!(result.is_ok());
+    let (low, high) = result.unwrap();
+    assert_eq!(low, max_val - 1.0);
+    assert_eq!(high, max_val);
+}
+
+#[test]
+fn test_norm_bounds_max_plus_max_overflow() {
+    let max_val = f64::MAX;
+    let result = norm_bounds(max_val, max_val);
+    assert_eq!(result, Err(BoundError::Overflow));
+}
+
+#[test]
+fn test_norm_bounds_nan() {
+    let result = norm_bounds(f64::NAN, 1.0);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+    let result = norm_bounds(1.0, f64::NAN);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+}
+
+#[test]
+fn test_norm_bounds_positive_infinity() {
+    let result = norm_bounds(f64::INFINITY, 1.0);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+    let result = norm_bounds(1.0, f64::INFINITY);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+}
+
+#[test]
+fn test_norm_bounds_negative_infinity() {
+    let result = norm_bounds(f64::NEG_INFINITY, 1.0);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+    let result = norm_bounds(1.0, f64::NEG_INFINITY);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+}
+
+#[test]
+fn test_norm_bounds_negative_values() {
+    let result = norm_bounds(-1.0, 1.0);
+    assert_eq!(result, Err(BoundError::NegativeInput));
+    let result = norm_bounds(1.0, -1.0);
+    assert_eq!(result, Err(BoundError::NegativeInput));
+}
+
+#[test]
+fn test_relative_peak_bounds_basic() {
+    let result = relative_peak_bounds(1.0, 3.0, 1.0);
+    assert_eq!(result, Ok((0.0, 4.0)));
+    let (low, high) = result.unwrap();
+    assert!(low <= 1.1 && 1.1 <= high);
+    assert!(1.1 < (1.0f64 - 3.0f64).abs());
+}
+
+#[test]
+fn test_relative_peak_bounds_floor_zero() {
+    let result = relative_peak_bounds(1.0, 3.0, 0.0);
+    assert_eq!(result, Err(BoundError::ZeroFloor));
+}
+
+#[test]
+fn test_relative_peak_bounds_negative_zero() {
+    let result = relative_peak_bounds(1.0, 3.0, -0.0);
+    assert_eq!(result, Err(BoundError::ZeroFloor));
+}
+
+#[test]
+fn test_relative_peak_bounds_negative_floor() {
+    let result = relative_peak_bounds(1.0, 3.0, -1.0);
+    assert_eq!(result, Err(BoundError::ZeroFloor));
+}
+
+#[test]
+fn test_relative_peak_bounds_nan_floor() {
+    let result = relative_peak_bounds(1.0, 3.0, f64::NAN);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+}
+
+#[test]
+fn test_relative_peak_bounds_infinity_floor() {
+    let result = relative_peak_bounds(1.0, 3.0, f64::INFINITY);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+    let result = relative_peak_bounds(1.0, 3.0, f64::NEG_INFINITY);
+    assert_eq!(result, Err(BoundError::NonFiniteInput));
+}
+
+#[test]
+fn test_relative_peak_bounds_max_min_positive_overflow() {
+    let max_val = f64::MAX;
+    let min_pos = f64::MIN_POSITIVE;
+    let result = relative_peak_bounds(max_val, max_val, min_pos);
+    assert_eq!(result, Err(BoundError::Overflow));
+}
+
+#[test]
+fn test_relative_peak_bounds_max_plus_max_overflow() {
+    let max_val = f64::MAX;
+    let result = relative_peak_bounds(max_val, max_val, 1.0);
+    assert_eq!(result, Err(BoundError::Overflow));
+}
+
+#[test]
+fn test_relative_peak_bounds_ordinary_non_unit_floor() {
+    let result = relative_peak_bounds(2.0, 5.0, 2.0);
+    assert!(result.is_ok());
+    let (low, high) = result.unwrap();
+    assert_eq!(low, 0.0);
+    assert_eq!(high, 7.0);
+}

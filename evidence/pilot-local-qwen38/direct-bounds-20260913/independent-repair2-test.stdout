@@ -1,0 +1,28 @@
+
+running 23 tests
+test candidate::tests::test_norm_bounds_ordinary ... ok
+test candidate::tests::test_norm_bounds_rejections ... ok
+test candidate::tests::test_norm_bounds_overflow ... ok
+test candidate::tests::test_relative_peak_bounds_overflow ... ok
+test test_norm_bounds_equal_norms ... ok
+test test_norm_bounds_max_plus_max_overflow ... ok
+test test_norm_bounds_max_plus_one_finite ... ok
+test candidate::tests::test_relative_peak_bounds_rejections ... ok
+test candidate::tests::test_relative_peak_bounds_ordinary ... ok
+test test_norm_bounds_nan ... ok
+test test_norm_bounds_negative_infinity ... ok
+test test_norm_bounds_negative_values ... ok
+test test_norm_bounds_positive_infinity ... ok
+test test_norm_bounds_sharp_reverse_triangle ... ok
+test test_relative_peak_bounds_basic ... ok
+test test_relative_peak_bounds_floor_zero ... ok
+test test_relative_peak_bounds_infinity_floor ... ok
+test test_relative_peak_bounds_max_min_positive_overflow ... ok
+test test_relative_peak_bounds_max_plus_max_overflow ... ok
+test test_relative_peak_bounds_nan_floor ... ok
+test test_relative_peak_bounds_negative_floor ... ok
+test test_relative_peak_bounds_negative_zero ... ok
+test test_relative_peak_bounds_ordinary_non_unit_floor ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

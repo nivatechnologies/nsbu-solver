@@ -1,0 +1,164 @@
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:38:40
+   |
+38 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:40:40
+   |
+40 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:46:40
+   |
+46 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:48:40
+   |
+48 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:54:40
+   |
+54 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:56:40
+   |
+56 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:62:40
+   |
+62 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:64:40
+   |
+64 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0689]: can't call method `abs` on ambiguous numeric type `{float}`
+  --> independent.rs:73:31
+   |
+73 |     assert!(1.1 < (1.0 - 3.0).abs());
+   |                               ^^^
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:79:40
+   |
+79 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:85:40
+   |
+85 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:91:40
+   |
+91 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+  --> independent.rs:97:40
+   |
+97 |     assert_eq!(result, Err(BoundError::InvalidInput));
+   |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+   |
+  ::: repair1.rs:4:1
+   |
+ 4 | pub enum BoundError {
+   | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+   --> independent.rs:103:40
+    |
+103 |     assert_eq!(result, Err(BoundError::InvalidInput));
+    |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+    |
+   ::: repair1.rs:4:1
+    |
+  4 | pub enum BoundError {
+    | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error[E0599]: no variant or associated item named `InvalidInput` found for enum `candidate::BoundError` in the current scope
+   --> independent.rs:105:40
+    |
+105 |     assert_eq!(result, Err(BoundError::InvalidInput));
+    |                                        ^^^^^^^^^^^^ variant or associated item not found in `candidate::BoundError`
+    |
+   ::: repair1.rs:4:1
+    |
+  4 | pub enum BoundError {
+    | ------------------- variant or associated item `InvalidInput` not found for this enum
+
+error: aborting due to 15 previous errors
+
+Some errors have detailed explanations: E0599, E0689.
+For more information about an error, try `rustc --explain E0599`.

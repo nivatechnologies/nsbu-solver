@@ -42,3 +42,5 @@ string is guessed. The root numerical orchestrator
 controls start/retry and the merge or any public claim. The operator controls
 endpoint details. Cloud fallback, remote execution, scope expansion, and
 automatic acceptance are prohibited.
+
+The completed pilot outcome and its limitations are recorded in [RESULT.md](RESULT.md).

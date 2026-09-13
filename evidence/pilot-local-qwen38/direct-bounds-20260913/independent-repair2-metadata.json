@@ -1,0 +1,13 @@
+{
+  "finish_reason": "stop",
+  "model": "qwen3.8-flash-next",
+  "usage": {
+    "completion_tokens": 2416,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1124
+    },
+    "prompt_tokens": 1423,
+    "prompt_tokens_details": null,
+    "total_tokens": 3839
+  }
+}

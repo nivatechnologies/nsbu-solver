@@ -1,0 +1,18 @@
+{
+  "schema": "p10-local-qwen-native-implementer-failure-v1",
+  "status": "failed_delivery",
+  "started_utc": "2026-09-13T06:03:19Z",
+  "stopped_utc": "2026-09-13T06:30:23Z",
+  "reason": "The native Codex task used most of its 1800-second cap without a final handoff or test receipt. It was stopped before the cap on reviewer direction.",
+  "runner_jsonl_sha256": "7ed7bece24aaa1fff74079121d58e70a0ef2a61066bb739edba7673b3feef1d5",
+  "runner_started_sha256": "5ef76fd1754f781bd06c3076fa23f4c21c5350e27a521320add572d6fc78c01c",
+  "codex_version_sha256": "5efa0283757c66156d45d082b4e2e8afb881de3a97862bc03aed7fb34f45df7b",
+  "late_harness_tree_sha256": "b9a6c3746a4432797f791322d469e67ea311702f2fcce8db7cdc439476b45764",
+  "review": [
+    "Late source files existed and were preserved outside the maintained branch.",
+    "They were not compiled or accepted.",
+    "Review found invalid floating-point APIs and unsound enclosure claims.",
+    "The dependent native reviewer was stopped before it launched.",
+    "Temporary compiler and probe files outside the requested evidence subtree are recorded as a packet-scope ambiguity; no maintained source, frozen input or active numerical process changed."
+  ]
+}

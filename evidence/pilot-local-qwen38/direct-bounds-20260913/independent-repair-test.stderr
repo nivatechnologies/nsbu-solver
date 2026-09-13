@@ -1,0 +1,6 @@
+
+thread 'test_relative_peak_bounds_ordinary_non_unit_floor' (1314628) panicked at independent-repair.rs:129:5:
+assertion `left == right` failed
+  left: 4.5
+ right: 7.0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
