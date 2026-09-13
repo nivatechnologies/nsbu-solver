@@ -6,7 +6,7 @@ The single authorized attempt ran from `2026-09-13T13:15:59Z` through
 `155,283,456` KiB maximum RSS, zero swaps and one major fault under the exact 256-GiB
 address-space cap. The harness measured `2067.912943179` seconds in the integrator and
 `1969.460301335` seconds in 12 RHS calls, with the expected five cache misses and seven
-hits. It consumed 4,690,292,918 force work units and 135 scalar force transforms, and
+hits. It consumed 4,690,292,918 provider work units and 135 charged scalar transforms: 120 from the RHS allowance plus 15 force transforms across five cache misses. It
 reported zero steady allocations.
 
 The local error ratios were `1.5877938231527898e-08` in L2 and
