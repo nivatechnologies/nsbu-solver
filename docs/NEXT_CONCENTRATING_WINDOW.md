@@ -285,3 +285,9 @@ lineage review passes.
 See [PROTOCOL_FORMAT.md](PROTOCOL_FORMAT.md), [EXPERIMENTS.md](EXPERIMENTS.md),
 and the active [P08/P09/P10 plan](../IMPLEMENTATION_PLAN.md) for the governing
 requirements.
+
+The five changed production FFT files pass the measured complexity and file-size
+thresholds, with 94.65% line and 82.5% branch coverage in the focused solver run.
+The source-bound CRAP check reports 26.125 for `avx.rs::from_parts`, above the
+required <25. This remains an open quality finding; see the
+[raw quality evidence](../evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/README.md).

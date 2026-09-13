@@ -592,7 +592,9 @@
     "regression_evidence": "evidence/p10/fft-scratch-tail-final-validation-20260913/README.md",
     "coverage_evidence": "evidence/p10/fft-scratch-tail-coverage-20260913/changed-files-summary.json",
     "changed_production_line_coverage_percent": 94.65478841870824,
-    "changed_production_branch_coverage_percent": 82.5
+    "changed_production_branch_coverage_percent": 82.5,
+    "static_quality_evidence": "evidence/p10/fft-scratch-tail-coverage-20260913/quality-metrics/summary.json",
+    "static_quality_scope": "Five changed production FFT files only; CC14, cognitive15, Halstead74.6667, maximum file lines258 pass. CRAP26.125 for avx.rs::from_parts fails <25; follow-up pending. No whole-project quality certification."
   },
   "p10_n512_m512_host_controls": {
     "status": "both_hosts_complete_uncommitted",
