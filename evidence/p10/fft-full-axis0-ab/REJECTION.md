@@ -7,3 +7,7 @@ Every emitted transform reported zero allocations. All emitted forward and inver
 The source bindings are library `4b5a6709`, implementation `5c9c61ed`, harness `d9972fe9`, binary SHA-256 `dad76537…`, and launcher `b7aee2d` / SHA-256 `6bc01c9b…`. Verification used `/usr/bin/openssl` SHA-256 `30cc7c49…`; its exact small oracle and 64 MiB throughput receipt are archived. The original word-at-time and batched-software-hash timeout receipts remain additive evidence of measurement overhead, not FFT performance.
 
 After the first full-axis measurements established the regression, the identity-verified outer coordinator was terminated so unstarted repetitions could not launch. The active full-axis process remained untouched and reached its original timeout. This is a performance diagnostic only. It makes no trajectory, PDE acceptance, or qualification claim, and the rejected production prototype must not be integrated.
+
+Reproduction requires the isolated candidate source revisions named above. The
+archived harness is historical experimental evidence and is not a working
+command against the retained axis1/2 source tree.
