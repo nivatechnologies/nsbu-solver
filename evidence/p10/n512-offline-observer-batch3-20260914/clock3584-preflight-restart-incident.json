@@ -1,0 +1,50 @@
+{
+  "schema": "p10-observer-preflight-restart-incident-v1",
+  "clock": 3584,
+  "qualification": false,
+  "accepted_windows": 0,
+  "failed_preflight": {
+    "driver_pid": 349926,
+    "started_utc": "2026-09-14T11:34:38Z",
+    "failed_utc": "2026-09-14T11:34:41Z",
+    "exit_code": 1,
+    "failure": "durable artifact parent directory was absent when copy-preflight attempted to create clock3584",
+    "observer_started": false,
+    "numerical_result_usable": false
+  },
+  "artifact_history": {
+    "created_before_failure": [
+      "remote-verify-clock3584.txt"
+    ],
+    "reused_on_retry": [
+      "remote-verify-clock3584.txt"
+    ],
+    "not_created_before_failure": [
+      "clock3584-balance-input.json",
+      "preflight-3584.json",
+      "execution-clock3584",
+      "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584"
+    ],
+    "path_policy": "Create-only history is not claimed for remote-verify-clock3584.txt. Numerical execution, preflight result, manifest and durable capture paths were created only by the controlled retry."
+  },
+  "controlled_retry": {
+    "root_parent_creation_and_retry_utc": "2026-09-14T11:36:15Z",
+    "clock3584_observer_pid": 352193,
+    "clock3584_observer_pgid": 352193,
+    "clock3584_exit_code": 0,
+    "batch_completed_utc": "2026-09-14T12:02:39Z",
+    "scope": "Only the controlled retry supplies numerical results in this packet.",
+    "driver_identity": "not retained in durable packet evidence; the batch log binds retry timestamps and the observer launch receipt independently binds the numerical child PID/PGID"
+  },
+  "retained_evidence": {
+    "batch_log_path": "batch.log",
+    "raw_worker_transcript_path": "/mnt/niva-array/work/opencode-offline-preparation-20260914/n512-observer-final-batch.jsonl",
+    "raw_worker_transcript_sha256": "4e554fe0bb8e2d17a1b3a936923099d87200dc630bb77382db68578c1c46e998",
+    "raw_worker_transcript_relevant_lines": [
+      56,
+      61,
+      83
+    ]
+  },
+  "scope": "Provenance disclosure for a failed copy-preflight and controlled full-batch retry; no PDE qualification or accepted-window claim."
+}

@@ -1,0 +1,302 @@
+{
+  "schema": "p10-n512-offline-observer-batch3-packet-v1",
+  "import_ready": true,
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-diagnostic-only; qualification=false; accepted_windows=0; no inline parity, force comparison, endpoint completion or window claim",
+  "clock3584_preflight_history": "The first copy-preflight failed before any observer; remote-verify-clock3584.txt was reused. See clock3584-preflight-restart-incident.json.",
+  "wording_policy": "positive-claim scan over authored receipts; negated scope statements permitted; raw machine JSON constrained by semantic qualification/accepted_windows checks",
+  "durable_large_artifacts_excluded_from_packet": [
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584/state.bin",
+      "sha256": "d12ccde448eb6873cddb79731372b867c78850de049b4fde060ac1fc1b2587b7"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584/record.json",
+      "sha256": "1c2bc693ea9dd7f15842bb92398469fa40c93fd3b07920005f4e7580df200446"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584/attempt.json",
+      "sha256": "eac990af3ddafacc45cf5882c390d4a0f2ffed967932948796c93aaa959b14ab"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock4096/state.bin",
+      "sha256": "8d9cc239f1978a410de3edab7238c83269f3e29f201d9de4eeb878fdfc35d2dc"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock4096/record.json",
+      "sha256": "6e3154ea702e6c0c18c9fa5d943a8e607933c718f1c3a550b25127c5ae5740d5"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock4096/attempt.json",
+      "sha256": "9855dd28345d96e3b0cd4e3d2b09d99fe4d345fc86de105e4ae26724df963565"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "batch-summary.json",
+      "sha256": "ae73f75722ca8b2dc5cff99ad946fffa7b6f5765405b99d22ed81a4e6ba22856",
+      "bytes": 2458
+    },
+    {
+      "path": "batch.log",
+      "sha256": "641d13ac691f9149498faf02360aba17169ba2d541cac5a2ce0652f4e0a8b349",
+      "bytes": 1269
+    },
+    {
+      "path": "clock3584-balance-input.json",
+      "sha256": "c04fb2ea8109765eab90ac9c1275e54e858f384d6ee6f965e038ef71b417598b",
+      "bytes": 3171
+    },
+    {
+      "path": "clock3584-preflight-restart-incident.json",
+      "sha256": "145a37895f323ca2e49f0fba6986475d7d587d3841bce62fb56c51314f7f5161",
+      "bytes": 2122
+    },
+    {
+      "path": "clock4096-balance-input.json",
+      "sha256": "a028a27a87f08a5d5afc3be73659bf9db1ea3154a3f80eaa501cfc0aaa4355ea",
+      "bytes": 3171
+    },
+    {
+      "path": "copy-receipts.json",
+      "sha256": "fd6c2c7b68917295d0d52b5c70684c1b60f4687f2b71a9d167eb329f64c5e196",
+      "bytes": 1615
+    },
+    {
+      "path": "execution-clock3584/launch.json",
+      "sha256": "430811bc99aa8dc85c5773349abd9be9d251e4f9ef94e7bd7ab90f11ad98da50",
+      "bytes": 1287
+    },
+    {
+      "path": "execution-clock3584/output.json",
+      "sha256": "63e6521009d27e1f61c96a8cbb7dce2397c4f725cedf1880264ef38f687f2fdc",
+      "bytes": 4493
+    },
+    {
+      "path": "execution-clock3584/result.json",
+      "sha256": "4adff4e25731b8cfb076d62588b911706bb08201d41d1d48d0c637658ccaef41",
+      "bytes": 952
+    },
+    {
+      "path": "execution-clock3584/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock3584/time.txt",
+      "sha256": "b170e6307944f45928a15a2246cd3366a4f7c9f6f39ddc6686ddcf7254bddd49",
+      "bytes": 1019
+    },
+    {
+      "path": "execution-clock4096/launch.json",
+      "sha256": "45ad521cb712aebcfdfed1fe0f0f74f204e9808b53a1b7950a5fe7076fea8842",
+      "bytes": 1287
+    },
+    {
+      "path": "execution-clock4096/output.json",
+      "sha256": "de8816a7121bb0920f8ed8f8a3c15dead28ebea46c0529483194e2ffd1851516",
+      "bytes": 4492
+    },
+    {
+      "path": "execution-clock4096/result.json",
+      "sha256": "6f0a0fb382cee11dc0ec0bb5e16cf055dcd78fb77c907dfea3e32fee3d8f68b3",
+      "bytes": 951
+    },
+    {
+      "path": "execution-clock4096/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock4096/time.txt",
+      "sha256": "a15c483946aea8a69420f7e27c2ee50039c2068ce9d3eeb471a3f2bd34ad275b",
+      "bytes": 1019
+    },
+    {
+      "path": "preflight-3584.json",
+      "sha256": "69eb721919f0d2e1ea6781b21aa030b16a5dc17ebd754cd2ee4b9920d4fa6031",
+      "bytes": 3721
+    },
+    {
+      "path": "preflight-3584.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "preflight-4096.json",
+      "sha256": "a28c27612a179ab44c4f75ea485688a39208d82c6eea439ea7e5dd313ce4741c",
+      "bytes": 3721
+    },
+    {
+      "path": "preflight-4096.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "remote-freeze-initial.txt",
+      "sha256": "ca588dfb6c2cdb2153b53fb481e353ce9bf7d533b8394b3391ea34716bbb8f31",
+      "bytes": 1008
+    },
+    {
+      "path": "remote-step-044-clock-3584-record.json",
+      "sha256": "1c2bc693ea9dd7f15842bb92398469fa40c93fd3b07920005f4e7580df200446",
+      "bytes": 1573
+    },
+    {
+      "path": "remote-step-048-clock-4096-record.json",
+      "sha256": "6e3154ea702e6c0c18c9fa5d943a8e607933c718f1c3a550b25127c5ae5740d5",
+      "bytes": 1573
+    },
+    {
+      "path": "remote-verify-clock3584.txt",
+      "sha256": "82d3a529e0e22f88ef66354408ec7305ce9dcb13ab6b93246fe27ed99069e4a6",
+      "bytes": 481
+    },
+    {
+      "path": "remote-verify-clock4096.txt",
+      "sha256": "abc3f6d1d8a8b6c90756c0bc08a96afc85d466b2bb7a9694f74592e7c2e83e24",
+      "bytes": 481
+    }
+  ],
+  "validation_checks": [
+    {
+      "check": "3584 remote bundle stat consistent",
+      "pass": true
+    },
+    {
+      "check": "4096 remote bundle stat consistent",
+      "pass": true
+    },
+    {
+      "check": "3584 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "3584 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "3584 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "3584 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "3584 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "3584 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "3584 exact schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "3584 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "3584 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "3584 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "3584 binary sha",
+      "pass": true
+    },
+    {
+      "check": "3584 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "4096 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "4096 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "4096 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "4096 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "4096 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "4096 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "4096 exact schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "4096 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "4096 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "4096 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "4096 binary sha",
+      "pass": true
+    },
+    {
+      "check": "4096 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "3584 failed preflight disclosed before observer",
+      "pass": true
+    },
+    {
+      "check": "3584 controlled retry identity",
+      "pass": true
+    },
+    {
+      "check": "3584 incident raw transcript binding",
+      "pass": true
+    },
+    {
+      "check": "3584 reused verification path disclosed",
+      "pass": true
+    },
+    {
+      "check": "wording batch-summary.json",
+      "pass": true
+    },
+    {
+      "check": "wording copy-receipts.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock3584/result.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock4096/result.json",
+      "pass": true
+    }
+  ]
+}

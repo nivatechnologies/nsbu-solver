@@ -1,0 +1,60 @@
+{
+  "schema": "p10-n512-offline-observer-batch3-receipt-v1",
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-only diagnostic at actual captured final shared clocks 3584/4096 from the completed Sulaco v3 trajectory; no force comparison, endpoint completion, inline control or window claim",
+  "runs": {
+    "3584": {
+      "remote_step": "step-044-clock-3584",
+      "elapsed_clock": 3584,
+      "epoch": 44,
+      "wall_seconds": 787.0,
+      "max_rss_kib": 229920768,
+      "balance": {
+        "divergence_l2": 5.097264043944665e-15,
+        "energy": 1.640302839085779,
+        "energy_dissipation": 2487.2036897766957,
+        "enstrophy": 1243.6018448883478,
+        "enstrophy_dissipation": 11465305.378102232,
+        "forcing_work": 2584.744324297719,
+        "h1": 49.904752214492255,
+        "l2": 1.8112442348207924,
+        "stretching": 13478.719238819289,
+        "vorticity_forcing": 11542063.990046648,
+        "vorticity_l2": 49.87187273179839
+      },
+      "coefficient_sha256": "eb79becb28e9bdf5c22333062b280c4f7c5e6826fada50416c838886cdd8b3dd",
+      "file_sha256": "d12ccde448eb6873cddb79731372b867c78850de049b4fde060ac1fc1b2587b7",
+      "finite": true,
+      "qualification": false
+    },
+    "4096": {
+      "remote_step": "step-048-clock-4096",
+      "elapsed_clock": 4096,
+      "epoch": 48,
+      "wall_seconds": 763.1,
+      "max_rss_kib": 229925888,
+      "balance": {
+        "divergence_l2": 5.225273151692461e-15,
+        "energy": 1.6907764051753083,
+        "energy_dissipation": 2584.6258455439774,
+        "enstrophy": 1292.3129227719887,
+        "enstrophy_dissipation": 11605625.685053846,
+        "forcing_work": 2694.2743363384916,
+        "h1": 50.87246206451091,
+        "l2": 1.838899891334658,
+        "stretching": 12307.56500840093,
+        "vorticity_forcing": 11703688.512835596,
+        "vorticity_l2": 50.83921562675783
+      },
+      "coefficient_sha256": "23bba9ece6a033553f859a3face9f26102cbde2e7c55e9dae786c76b06733472",
+      "file_sha256": "8d9cc239f1978a410de3edab7238c83269f3e29f201d9de4eeb878fdfc35d2dc",
+      "finite": true,
+      "qualification": false
+    }
+  },
+  "accepted_windows": 0,
+  "qualification": false
+}

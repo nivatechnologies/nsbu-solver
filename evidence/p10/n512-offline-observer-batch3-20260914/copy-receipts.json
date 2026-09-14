@@ -1,0 +1,28 @@
+{
+  "3584": {
+    "source_host": "sulaco",
+    "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-044-clock-3584",
+    "destination": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584",
+    "record_state_sha256": "eb79becb28e9bdf5c22333062b280c4f7c5e6826fada50416c838886cdd8b3dd",
+    "file_sha256": "d12ccde448eb6873cddb79731372b867c78850de049b4fde060ac1fc1b2587b7",
+    "record_json_sha256": "1c2bc693ea9dd7f15842bb92398469fa40c93fd3b07920005f4e7580df200446",
+    "attempt_json_sha256": "eac990af3ddafacc45cf5882c390d4a0f2ffed967932948796c93aaa959b14ab",
+    "manifest_sha256": "c04fb2ea8109765eab90ac9c1275e54e858f384d6ee6f965e038ef71b417598b",
+    "hashes_match_remote": true,
+    "bytes": 3233809650,
+    "qualification": false
+  },
+  "4096": {
+    "source_host": "sulaco",
+    "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-048-clock-4096",
+    "destination": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock4096",
+    "record_state_sha256": "23bba9ece6a033553f859a3face9f26102cbde2e7c55e9dae786c76b06733472",
+    "file_sha256": "8d9cc239f1978a410de3edab7238c83269f3e29f201d9de4eeb878fdfc35d2dc",
+    "record_json_sha256": "6e3154ea702e6c0c18c9fa5d943a8e607933c718f1c3a550b25127c5ae5740d5",
+    "attempt_json_sha256": "9855dd28345d96e3b0cd4e3d2b09d99fe4d345fc86de105e4ae26724df963565",
+    "manifest_sha256": "a028a27a87f08a5d5afc3be73659bf9db1ea3154a3f80eaa501cfc0aaa4355ea",
+    "hashes_match_remote": true,
+    "bytes": 3233809650,
+    "qualification": false
+  }
+}

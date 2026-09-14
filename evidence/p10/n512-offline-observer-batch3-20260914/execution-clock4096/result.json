@@ -1,0 +1,26 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 763.0917501449585,
+  "qualification": false,
+  "scope": "final shared-clock balance-only diagnostic at actual captured clocks 3584/4096 from the completed Sulaco v3 trajectory; no force comparison, endpoint completion, inline control or window claim",
+  "finite": true,
+  "elapsed_clock": 4096,
+  "balance": {
+    "divergence_l2": 5.225273151692461e-15,
+    "energy": 1.6907764051753083,
+    "energy_dissipation": 2584.6258455439774,
+    "enstrophy": 1292.3129227719887,
+    "enstrophy_dissipation": 11605625.685053846,
+    "forcing_work": 2694.2743363384916,
+    "h1": 50.87246206451091,
+    "l2": 1.838899891334658,
+    "stretching": 12307.56500840093,
+    "vorticity_forcing": 11703688.512835596,
+    "vorticity_l2": 50.83921562675783
+  },
+  "balance_count": 11,
+  "all_balances_finite": true,
+  "actual_capture_clock_matches": true,
+  "coefficient_hash_matches_record": true,
+  "file_hash_reverified": true
+}

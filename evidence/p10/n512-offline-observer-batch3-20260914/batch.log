@@ -1,0 +1,22 @@
+[2026-09-14T11:34:38Z] copy-preflight clock3584 start
+Traceback (most recent call last):
+  File "/mnt/niva-array/nsbu-solver/work/opencode-n512-observer-batch-20260914/work/n512-observer-batch3/copy-preflight.py", line 37, in <module>
+    art.mkdir(exist_ok=True)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/niva-array/nsbu-solver/work/n512-observer-batch3-artifacts-20260914/clock3584'
+[2026-09-14T11:34:41Z] copy-preflight clock3584 rc=1
+[2026-09-14T11:36:15Z] root repair: created missing durable artifact parent after copy-preflight rc=1; no observer launched and no numerical result produced by failed attempt
+[2026-09-14T11:36:15Z] copy-preflight clock3584 start
+clock3584 copy+preflight ok
+[2026-09-14T11:36:33Z] copy-preflight clock3584 rc=0
+[2026-09-14T11:36:33Z] observe clock3584 start
+clock3584 exit=0 ok=True
+[2026-09-14T11:49:40Z] observe clock3584 rc=0
+[2026-09-14T11:49:40Z] copy-preflight clock4096 start
+clock4096 copy+preflight ok
+[2026-09-14T11:49:56Z] copy-preflight clock4096 rc=0
+[2026-09-14T11:49:56Z] observe clock4096 start
+clock4096 exit=0 ok=True
+[2026-09-14T12:02:39Z] observe clock4096 rc=0
+[2026-09-14T12:02:39Z] batch3 runs complete
