@@ -1,0 +1,66 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 330.936092376709,
+  "qualification": false,
+  "scope": "offline-versus-recorded-inline-balance-parity; not PDE acceptance",
+  "balance_fields": {
+    "l2": {
+      "expected": 1.8388998913346497,
+      "actual": 1.8388998913346497,
+      "bits_equal": true
+    },
+    "h1": {
+      "expected": 50.872462046871895,
+      "actual": 50.872462046871895,
+      "bits_equal": true
+    },
+    "vorticity_l2": {
+      "expected": 50.8392156051891,
+      "actual": 50.8392156051891,
+      "bits_equal": true
+    },
+    "divergence_l2": {
+      "expected": 4.075989244706537e-15,
+      "actual": 4.075989244706537e-15,
+      "bits_equal": true
+    },
+    "energy": {
+      "expected": 1.6907764051752932,
+      "actual": 1.6907764051752932,
+      "bits_equal": true
+    },
+    "enstrophy": {
+      "expected": 1292.3129216754517,
+      "actual": 1292.3129216754517,
+      "bits_equal": true
+    },
+    "energy_dissipation": {
+      "expected": 2584.6258433509033,
+      "actual": 2584.6258433509033,
+      "bits_equal": true
+    },
+    "forcing_work": {
+      "expected": 2694.2743339364924,
+      "actual": 2694.2743339364924,
+      "bits_equal": true
+    },
+    "stretching": {
+      "expected": 12307.565011612654,
+      "actual": 12307.565011612654,
+      "bits_equal": true
+    },
+    "enstrophy_dissipation": {
+      "expected": 11605620.607335545,
+      "actual": 11605620.607335545,
+      "bits_equal": true
+    },
+    "vorticity_forcing": {
+      "expected": 11703683.469753576,
+      "actual": 11703683.469753576,
+      "bits_equal": true
+    }
+  },
+  "all_11_balance_fields_bitwise_equal": true,
+  "coefficient_hash_matches_record": true,
+  "file_hash_reverified": true
+}

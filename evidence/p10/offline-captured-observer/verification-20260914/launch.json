@@ -1,0 +1,31 @@
+{
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "manifest_sha256": "184162727de89bb75030bd20195bf23f80155432ed5078f689b58e3d061cbcb5",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=30s",
+    "1800s",
+    "/usr/bin/time",
+    "-v",
+    "-o",
+    "/mnt/niva-array/work/opencode-offline-preparation-20260914/r6-observer-execution/time.txt",
+    "/tmp/nsbu-opencode-offline-observer-target/release/p10-offline-captured-observer",
+    "run",
+    "/mnt/niva-array/work/opencode-offline-preparation-20260914/captured-metadata/r6-endpoint-local-manifest.json",
+    "768",
+    "32",
+    "128849018880",
+    "rustfft-6.4.1-avx-avx2-fma"
+  ],
+  "started_epoch": 1789366511.153892,
+  "deadline_epoch": 1789368311.153892,
+  "mem_available_bytes": 498620432384,
+  "required_headroom_bytes": 34359738368,
+  "api_bytes": 99471815245,
+  "address_space_limit_bytes": 171798691840,
+  "qualification": false,
+  "pid": 102532,
+  "pgid": 102532
+}

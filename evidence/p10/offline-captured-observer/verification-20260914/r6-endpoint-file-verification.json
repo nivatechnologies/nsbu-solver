@@ -1,0 +1,8 @@
+{
+  "scope": "existing N384 endpoint whole-file integrity only",
+  "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-048-clock-4096/state.bin",
+  "expected_sha256": "43308ca8ddb499916a09183266e3a83811b3214536c14c7ba2f6814363cef0a0",
+  "actual_sha256": "43308ca8ddb499916a09183266e3a83811b3214536c14c7ba2f6814363cef0a0",
+  "seconds": 1.1606820739998511,
+  "qualification": false
+}

@@ -646,7 +646,7 @@
     "qualification": false
   },
   "p10_n512_m512_endpoint_run": {
-    "status": "running_six_steps_observed",
+    "status": "running_28_steps_observed",
     "launch_evidence": "evidence/p10/n512-m512-unattended-20260913/launch-receipt.json",
     "started_utc": "2026-09-13T22:45:30Z",
     "deadline_utc": "2026-09-14T18:45:30Z",
@@ -658,9 +658,9 @@
     "monitor_poll_seconds": 300,
     "continuous_llm_required": false,
     "qualification": false,
-    "observed_clock": 384,
-    "observed_steps": 6,
-    "observation_utc": "2026-09-14T00:37:00Z",
+    "observed_clock": 1792,
+    "observed_steps": 28,
+    "observation_utc": "2026-09-14T06:22:14Z",
     "observed_steady_allocations": 0
   },
   "p10_parallel_fft": {
@@ -700,5 +700,14 @@
     "combined_rust_tests_passed": 31,
     "python_tests_passed": 6,
     "scientific_accepted": false
+  },
+  "p10_offline_captured_observer": {
+    "status": "verified_n384_offline_inline_balance_parity",
+    "evidence": "evidence/p10/offline-captured-observer/verification-20260914/summary.json",
+    "independent_tests_passed": 12,
+    "actual_n384_balances_bitwise_equal": 11,
+    "n512_observer_executed": false,
+    "n512_resource_only_bytes": 235548209862,
+    "qualification": false
   }
 }

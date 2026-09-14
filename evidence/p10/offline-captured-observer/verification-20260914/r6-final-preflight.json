@@ -1,0 +1,89 @@
+{
+  "accepted_windows": 0,
+  "clock": {
+    "elapsed": 4096,
+    "exponent": -20,
+    "remaining": 4096,
+    "target": 8192
+  },
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "evolution": {
+    "absolute_tolerances": [
+      0.00001,
+      0.0001
+    ],
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "clock_target": 8192,
+    "comparison_endpoint": 4096,
+    "integration_force_dimensions": [
+      512,
+      512,
+      512
+    ],
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "method": "cox-matthews",
+    "quantum_exponent": -20,
+    "relative_tolerances": [
+      0.00001,
+      0.00001
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "step_ticks": 64,
+        "until_exclusive": 2048
+      },
+      {
+        "from_inclusive": 2048,
+        "step_ticks": 128,
+        "until_exclusive": 4096
+      }
+    ],
+    "viscosity": 1.0
+  },
+  "fits": true,
+  "ledger": {
+    "basis": "conservative-admission-upper-bound-not-measured-allocator-peak",
+    "catalog_bytes": 29362480,
+    "conservative_allowance_bytes": {
+      "headers": 1050944,
+      "observer_arrays": 36333158400,
+      "snapshot_state": 1366034437
+    },
+    "conservative_bytes": 32662266848,
+    "exact_reservation_bytes": {
+      "catalog": 29362480,
+      "conservative_workspace": 32662266848,
+      "force_storage": 29079942840
+    },
+    "force_storage_bytes": 29079942840,
+    "header_allowance_bytes": 1050944,
+    "observer_array_bytes": 36333158400,
+    "snapshot_state_bytes": 1366034437,
+    "total_bytes": 99471815245
+  },
+  "manifest_backend": "rustfft-6.4.1-avx-avx2-fma",
+  "manifest_execution": "provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;host=sulaco",
+  "manifest_identity": "source=326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c;backend=rustfft-6.4.1-avx-avx2-fma;w3_source=f13c29c9ae91d0b8cf7a790132deb9bd076911c0;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout576-width3-bidirectional-add9200779136;force_w3=layout512-width3-forward-add4318334720;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=384;force_samples=512;observer_force_samples=768;observer_conservative=768;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=206158430208;artifact_cap=137438953472;schema=p10-avx-n384-every-step-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
+  "plan_sha256": "2be3880204aab5da1819e11ed6abb377e43b814f8ef17869d76463f72a33cf84",
+  "qualification": false,
+  "requested": {
+    "backend": "rustfft-6.4.1-avx-avx2-fma",
+    "cap_bytes": 128849018880,
+    "force_sample_dimensions": [
+      768,
+      768,
+      768
+    ],
+    "workers": 32
+  },
+  "reviewed_coefficient_sha256": "1d1500409962c4af37182f6733c2c88a086247c8e8728570e9c93238ed1c04fd",
+  "reviewed_file_sha256": "43308ca8ddb499916a09183266e3a83811b3214536c14c7ba2f6814363cef0a0",
+  "schema": "p10-offline-captured-observer-v1",
+  "scope": "balance-diagnostic-only",
+  "source_commit": "326eeb5cbd5ebe39a7d5f7be77f9acfab8d0db72"
+}

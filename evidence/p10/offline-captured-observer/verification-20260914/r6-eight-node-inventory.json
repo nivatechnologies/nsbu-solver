@@ -1,0 +1,70 @@
+{
+  "scope": "metadata/header/trailer inventory only; payload not rehashed here",
+  "qualification": false,
+  "nodes": [
+    {
+      "clock": 512,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-008-clock-0512/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-008-clock-0512/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "4fbfa9890470ab61dca7ddbb026fd1f93c2f0959d15bf87e713ee0a9111c02af",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 1024,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-016-clock-1024/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-016-clock-1024/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "bb12be8f266268813ffbeddc3c78659bc84efb2361f14dfd471e5da354fc2324",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 1536,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-024-clock-1536/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-024-clock-1536/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "f335f6bdcd42bf31bbca8586e9e27706f46028483fb65ed204b7f2eeedfa51c7",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 2048,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-032-clock-2048/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-032-clock-2048/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "461e6f2a95eb578558493bbacebc5456c7e8a3e8f8fb933ac0176a23a3f67cad",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 2560,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-036-clock-2560/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-036-clock-2560/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "bb675ddbf0217d397df4f137250c8ff870454e07965b41b642d7a3a19f766406",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 3072,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-040-clock-3072/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-040-clock-3072/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "bf48328467b01d96dcd9d7412b889710e7801d7e5f5e6955f451e16890fb74ac",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 3584,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-044-clock-3584/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-044-clock-3584/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "267c1b92de5e4562ae96dc6fcc05813a9c49c6c5238e03add5154503d4afa721",
+      "header_and_record_match": true
+    },
+    {
+      "clock": 4096,
+      "record": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-048-clock-4096/record.json",
+      "snapshot": "/mnt/niva-array/nsbu-solver/work/p10-m512-endpoint-r6-artifacts-20260913/output/step-048-clock-4096/state.bin",
+      "bytes": 1366033529,
+      "coefficient_sha256": "1d1500409962c4af37182f6733c2c88a086247c8e8728570e9c93238ed1c04fd",
+      "header_and_record_match": true
+    }
+  ]
+}

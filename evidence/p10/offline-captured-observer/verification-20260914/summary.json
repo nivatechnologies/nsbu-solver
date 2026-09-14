@@ -1,0 +1,28 @@
+{
+  "status": "verified_n384_offline_inline_balance_parity",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "integration_commit": "2c33bbc",
+  "independent_release_tests_passed": 12,
+  "independent_test_seconds": 26.53,
+  "clippy_all_targets_warnings_denied": "passed",
+  "repository_check": "passed_bootstrap_scope",
+  "actual_n384_retained": 384,
+  "observer_force_samples": 768,
+  "observer_diagnostic_dimension": 768,
+  "clock": 4096,
+  "target": 8192,
+  "all_11_balances_bitwise_equal": true,
+  "snapshot_hashes_reverified": true,
+  "wall_seconds": 330.936092376709,
+  "peak_rss_kib": 97046528,
+  "n512_resource_only_bytes": 235548209862,
+  "n512_observer_executed": false,
+  "qualification": false,
+  "accepted_pde_windows": 0,
+  "quality_scope": "focused functional/Clippy/file-length checks; no new complete coverage or complexity certification",
+  "worker_outcomes": {
+    "offline_flash": "completed after concrete admission repair and AVX validation",
+    "case_27b_initial": "timer expired; no accepted result",
+    "case_27b_continued": "same session corrected and 8 targeted tests passed; patch independently combined and tested"
+  }
+}

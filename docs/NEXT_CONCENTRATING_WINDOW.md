@@ -343,3 +343,13 @@ were 1.88 and 1.84 times slower than the axis1/2 implementation. Emitted hashes
 matched and allocations were zero, but the full trial reached its fixed timeout.
 The prototype remains isolated; additional repetitions and tuning were stopped.
 The running trajectory is unchanged.
+
+## Offline captured-state balance validation (14 September)
+
+The [offline observer verification](../evidence/p10/offline-captured-observer/verification-20260914/README.md)
+reproduces all eleven N384 r6 endpoint balances bit-for-bit from the archived
+actual state. Its combined 12-test suite and Clippy checks pass. The N512
+resource estimate is about 219.4 GiB; actual N512 observation remains pending.
+This enables testing read-only observation on durable early N512 captures while
+integration continues. It does not complete the fine-observable protocol or
+accept a PDE window.
