@@ -1,0 +1,23 @@
+{
+  "schema":"p10-n512-m512-v4-staging-receipt-v1",
+  "status":"staged_not_launched",
+  "host":"sulaco",
+  "stage":"/tmp/nsbu-p10-n512-m512-v4-staged-20260914T002332Z",
+  "stage_created_epoch":1789345418,
+  "stage_created_utc":"2026-09-14T00:23:38Z",
+  "source_head":"7b24e4aec8eea24b95c8bec2c0c2bdd681649e03",
+  "harness_run_source":"af16d5c4b4ea9a71ca118f5c228557a25f95bca5",
+  "binary_sha256":"e6eba9bf3638fbee6318ade7124e042ce60ad428e639ce076c9dd09e7fba9c52",
+  "preflight_sha256":"0784111a02dadaa5a8f099f3788da9e173805b5ff17a1f499860b3175cc08d01",
+  "plan_sha256":"a051f454b97beb2f513a251a384686fe6ffc13f4224d0d5180c7786baf4c3acd",
+  "launcher_sha256":"9060546d8f7cd563a066684a6a0c74f2f0154b452e878f8aaf118d1251c0ba57",
+  "launch_receipt_sha256":"7f8fe2ac27da0914731122d3f834647307b2a7f19c14e56d15946a8f235c757b",
+  "watchdog_sha256":"e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1",
+  "archive_helper_sha256":"048fba75501aea77d9d54dc7e35562b75abb7a6bf981d831f32510113dd37e91",
+  "remote_file_count":41,
+  "all_remote_files_match_local":true,
+  "remote_preflight_matches_frozen":true,
+  "v4_run_root_created":false,
+  "v4_launched":false,
+  "old_v3_solver":{"pid":303603,"pgid":303598,"start_utc":"2026-09-13T22:45:30Z","untouched":true}
+}

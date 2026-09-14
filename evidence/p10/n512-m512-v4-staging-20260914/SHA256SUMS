@@ -1,0 +1,5 @@
+5e49733fb80442a4e02a1e9213e1b7837e8c9bf38adc4954b0fa9a9bdb944680  evidence/p10/n512-m512-v4-staging-20260914/README.md
+f8cab7ad065f9e4f203afa476dc02440ff226cc0d57891bb8893e0afb0e9edad  evidence/p10/n512-m512-v4-staging-20260914/staging-receipt.json
+0cf70702d29303652c00652542eeb3047e8021630113591f80c6c4b8e00a0852  evidence/p10/n512-m512-v4-staging-20260914/remote-files.sha256
+0784111a02dadaa5a8f099f3788da9e173805b5ff17a1f499860b3175cc08d01  evidence/p10/n512-m512-v4-staging-20260914/remote-preflight.stdout
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-staging-20260914/copy-hash-preflight.status
