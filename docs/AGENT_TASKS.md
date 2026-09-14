@@ -47,11 +47,15 @@ policy](LOCAL_AGENT_WORK.md); checkpoints are progress reviews, not kill timers.
 
 ## Model allocation and handoffs
 
-For the currently authorized campaign, the user selected Sol for orchestration
-and bulk coding, Astra for architecture/review, Terra for complex tests and Luna
-for narrow edits. Preserve that allocation unless the user changes it. Assign
-independent useful work; avoid idle reviewers and duplicate investigations.
-Model allocation is not a measured percentage of usage or cost.
+For the currently authorized campaign, the user's latest allocation reserves
+Astra MEDIUM for architecture and reviews, local Qwen3.8FlashNext via OpenCode
+for bulk implementation, tests and orchestration, and local Qwen3.8 27B for
+narrow tasks with concurrency of four or fewer. Preserve that allocation
+unless the user changes it. Assign independent useful work; avoid idle
+reviewers and duplicate investigations. Model allocation is not a measured
+percentage of usage or cost. This is project task-allocation policy; it does
+not claim that any chat model configuration changed, and the current primary
+chat model settings are separate.
 
 At handoff, provide the source SHA, working changes, evidence paths, active job
 ownership, deadline and next decision. Report completed checks separately from

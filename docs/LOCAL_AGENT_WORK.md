@@ -6,8 +6,10 @@ Use standard OpenCode for local coding tasks, in isolated worktrees with
 explicit file ownership, process deadlines and independent test/review gates.
 The initial three-task batch produced twelve reviewed tests: two Flash Next
 jobs and one 27B job. See the [execution evidence](../evidence/p10/opencode-local-validation-20260914/README.md).
-Flash Next serves the Sparks; the local 27B model is assigned narrow tasks with
-a user-authorized concurrency ceiling of four. This batch used one 27B slot.
+Flash Next via OpenCode serves the Sparks with bulk implementation, tests and
+orchestration; the local 27B model is assigned narrow tasks with a
+user-authorized concurrency ceiling of four. The current model allocation is
+recorded in [agent task prompts](AGENT_TASKS.md). This batch used one 27B slot.
 Expand only with dependency-ready work and capacity to check the results.
 
 The custom packet controller described below remains a historical fixture/audit

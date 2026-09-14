@@ -27,8 +27,9 @@ current work block's explicit deadline and leave time to preserve evidence and
 stop owned jobs. A time allowance is a ceiling, not a requirement to consume it.
 Do not infer remaining account credits from elapsed time or agent counts.
 
-For delegated work, use [task prompts](docs/AGENT_TASKS.md). Give each worker a
-bounded outcome and exclusive edit ownership. Keep mutable run state, deadlines
+For delegated work, use [task prompts](docs/AGENT_TASKS.md); the current model
+allocation and handoff policy are recorded there. Give each worker a bounded
+outcome and exclusive edit ownership. Keep mutable run state, deadlines
 and measurements in the task handoff/evidence rather than this file. Prioritize
 work that resolves the current numerical bottleneck; broader infrastructure
 needs a concrete dependency on that outcome.
