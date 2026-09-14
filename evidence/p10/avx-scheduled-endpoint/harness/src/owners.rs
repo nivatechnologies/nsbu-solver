@@ -1,5 +1,7 @@
 //! Construction of the persistent numerical owners admitted by the frozen resource plan.
 use crate::{cache::CachedReducedForce, config, observer::ReducedObserver};
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+use nsbu_solver::spectral::ParallelFftIdentity;
 #[cfg(feature = "n384-prep")]
 use nsbu_solver::spectral::{W3FftIdentity, W3FftMode};
 use nsbu_solver::{
@@ -54,7 +56,7 @@ fn new_rhs_for(
     finish_rhs(domain, force, limits, catalog)
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 fn new_rhs_for(
     domain: Domain,
     samples: Layout,
@@ -73,6 +75,32 @@ fn new_rhs_for(
     finish_rhs(domain, force, limits, catalog)
 }
 
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn new_rhs_for(
+    domain: Domain,
+    samples: Layout,
+    catalog: &FftCatalog,
+) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
+    let limits = CachedReducedForce::preflight(
+        domain,
+        samples,
+        config::WORKERS,
+        catalog.backend(),
+        true,
+        Some(config::FFT_WORKERS),
+    )?;
+    let force = CachedReducedForce::new(
+        domain,
+        samples,
+        config::WORKERS,
+        catalog,
+        limits.storage_bytes,
+        true,
+        Some(config::FFT_WORKERS),
+    )?;
+    finish_rhs(domain, force, limits, catalog)
+}
+
 #[cfg(not(feature = "n384-prep"))]
 fn finish_rhs(
     domain: Domain,
@@ -85,7 +113,7 @@ fn finish_rhs(
     SpectralRhs::new_with_catalog(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 fn finish_rhs(
     domain: Domain,
     force: CachedReducedForce,
@@ -101,6 +129,65 @@ fn finish_rhs(
         SpectralRhs::new_with_catalog_w3(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)?;
     validate_w3_identity(domain, &rhs)?;
     Ok(rhs)
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn finish_rhs(
+    domain: Domain,
+    force: CachedReducedForce,
+    limits: ForceLimits,
+    catalog: &FftCatalog,
+) -> Result<SpectralRhs<CachedReducedForce>, SolverError> {
+    let bytes = SpectralRhs::<CachedReducedForce>::reservation_with_parallel_w3_fft_backend(
+        domain,
+        limits,
+        catalog.backend(),
+        config::FFT_WORKERS,
+    )?;
+    let rhs = SpectralRhs::new_with_catalog_parallel_w3(
+        domain,
+        force,
+        config::ADVECTIVE_LIMIT,
+        catalog,
+        config::FFT_WORKERS,
+        bytes,
+    )?;
+    validate_w3_identity(domain, &rhs)?;
+    validate_parallel_identities(domain, &rhs)?;
+    Ok(rhs)
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn validate_parallel_identities(
+    domain: Domain,
+    rhs: &SpectralRhs<CachedReducedForce>,
+) -> Result<(), SolverError> {
+    for (actual, layout) in [
+        (rhs.parallel_fft_identity(), domain.padded_layout()?),
+        (
+            rhs.provider().parallel_fft_identity(),
+            Layout::new([config::M; 3])?,
+        ),
+    ] {
+        require_parallel_identity(actual.ok_or(SolverError::InvalidPayload)?, layout)?;
+    }
+    Ok(())
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn require_parallel_identity(
+    actual: ParallelFftIdentity,
+    layout: Layout,
+) -> Result<(), SolverError> {
+    if actual.layout != layout
+        || actual.backend != FftBackend::RustFft6_4_1AvxFma
+        || actual.helper_workers != config::FFT_WORKERS
+        || actual.persistent_callers != 3
+        || actual.workers != config::FFT_WORKERS + 3
+    {
+        return Err(SolverError::InvalidPayload);
+    }
+    Ok(())
 }
 
 #[cfg(feature = "n384-prep")]
@@ -177,7 +264,7 @@ const fn force_w3_additional_bytes() -> usize {
 
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
 const fn force_w3_additional_bytes() -> usize {
-    4_318_465_792
+    4_343_035_792
 }
 
 #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
@@ -187,7 +274,7 @@ const fn rhs_w3_additional_bytes() -> usize {
 
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
 const fn rhs_w3_additional_bytes() -> usize {
-    21_787_856_768
+    21_812_652_048
 }
 
 fn new_observer(catalog: &FftCatalog) -> Result<Option<ReducedObserver>, SolverError> {

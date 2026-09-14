@@ -6,8 +6,10 @@ mod balance;
 #[cfg(not(feature = "n384-prep"))]
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/cache.rs"]
 mod cache;
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 #[path = "../../../avx-w3-n256-integration-20260912/harness/src/cache.rs"]
+mod cache;
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
 mod cache;
 mod command;
 mod config;

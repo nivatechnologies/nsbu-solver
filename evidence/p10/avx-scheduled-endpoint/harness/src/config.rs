@@ -88,7 +88,9 @@ pub const CAP: usize = 103_079_215_104;
 #[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 pub const CAP: usize = 192 * 1024 * 1024 * 1024;
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
-pub const CAP: usize = 207_578_085_872;
+pub const CAP: usize = 207_627_451_152;
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+pub const FFT_WORKERS: usize = 8;
 #[cfg(not(feature = "n384-prep"))]
 pub const ADVECTIVE_LIMIT: f64 = 0.45;
 #[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise-common")))]
@@ -120,7 +122,7 @@ const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n384-m512-piecewise-cadv33")]
 const PROFILE: &str = "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
-const PROFILE: &str = "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f";
+const PROFILE: &str = "n512-m512-h64to2048-h128to4096-cadv33-w3-pfft477c418";
 #[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
@@ -260,7 +262,7 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
     Ok((catalog, force, rhs))
 }
 
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
     let catalog = FftCatalog::reservation(geometry.backend)?;
     let force = CachedReducedForce::preflight(
@@ -274,6 +276,26 @@ fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usi
         geometry.domain,
         force,
         geometry.backend,
+    )?;
+    Ok((catalog, force, rhs))
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn execution_reservations(geometry: Geometry) -> Result<(usize, ForceLimits, usize), SolverError> {
+    let catalog = FftCatalog::reservation(geometry.backend)?;
+    let force = CachedReducedForce::preflight(
+        geometry.domain,
+        geometry.samples,
+        WORKERS,
+        geometry.backend,
+        true,
+        Some(FFT_WORKERS),
+    )?;
+    let rhs = SpectralRhs::<CachedReducedForce>::reservation_with_parallel_w3_fft_backend(
+        geometry.domain,
+        force,
+        geometry.backend,
+        FFT_WORKERS,
     )?;
     Ok((catalog, force, rhs))
 }
@@ -405,7 +427,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n512-m512-piecewise-cadv33")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;production_source=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0;test_source=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout768-width3-bidirectional-add21787856768;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};observer_execution=offline-baccus-required;sampling_workers={WORKERS};rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n512-observer-state-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;library_source=477c418d30d9f2c8b117ae05240fc5596ecbd33b;prototype_source=b09fb7719c66cfddb04e56a37fe3f0d0fadba5a5;provider=parallel-reduced-v2-force-w3-parallel8-attempt-cache;rhs_w3=layout768-width3-bidirectional-add21812652048;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};observer_execution=offline-baccus-required;sampling_workers={WORKERS};rhs_w3_persistent_callers=3;rhs_fft_helpers={FFT_WORKERS};rhs_fft_total_workers=11;provider_w3_persistent_callers=3;provider_fft_helpers={FFT_WORKERS};provider_fft_total_workers=11;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n512-observer-state-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
         env!("RUN_SOURCE"),
         force_w3_identity(),
         crate::timed_rhs::IDENTITY,
@@ -451,7 +473,7 @@ fn force_w3_identity() -> &'static str {
 
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
 fn force_w3_identity() -> &'static str {
-    "layout512-width3-forward-add4318465792"
+    "layout512-width3-forward-add4343035792"
 }
 
 #[cfg(all(
@@ -546,14 +568,15 @@ mod n512_resource_probe {
 
     #[test]
     fn report_each_exact_api_reservation_without_allocation() {
-        assert!(identity().contains(
-            "external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline"
-        ));
+        assert!(identity()
+            .contains("external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline"));
+        assert!(identity().contains("rhs_fft_helpers=8;rhs_fft_total_workers=11"));
+        assert!(identity().contains("provider_fft_helpers=8;provider_fft_total_workers=11"));
         let geometry = geometry().unwrap();
         let (catalog, force, rhs) = execution_reservations(geometry).unwrap();
         assert_eq!(
             (catalog, force.storage_bytes, rhs),
-            (29_362_480, 29_155_601_864, 91_810_835_512)
+            (29_362_480, 29_180_171_864, 91_860_200_792)
         );
         assert_eq!(
             diagnostic_reservations(geometry).unwrap(),
@@ -568,22 +591,24 @@ mod n512_resource_probe {
         .unwrap();
         assert_eq!(observer, 232_283_988_248);
         assert_eq!(
-            nsbu_solver::spectral::W3FftPool::additional_reservation_with_backend(
+            nsbu_solver::spectral::W3FftPool::additional_parallel_reservation_with_backend(
                 geometry.domain.padded_layout().unwrap(),
                 geometry.backend,
                 nsbu_solver::spectral::W3FftMode::Bidirectional,
+                FFT_WORKERS,
             )
             .unwrap(),
-            21_787_856_768,
+            21_812_652_048,
         );
         assert_eq!(
-            nsbu_solver::spectral::W3FftPool::additional_reservation_with_backend(
+            nsbu_solver::spectral::W3FftPool::additional_parallel_reservation_with_backend(
                 geometry.samples,
                 geometry.backend,
                 nsbu_solver::spectral::W3FftMode::Forward,
+                FFT_WORKERS,
             )
             .unwrap(),
-            4_318_465_792,
+            4_343_035_792,
         );
         let reservations = reservations(geometry).unwrap();
         assert_eq!(
@@ -604,7 +629,7 @@ mod n512_resource_probe {
             resources(geometry.domain, combined, usize::MAX)
                 .unwrap()
                 .total(),
-            439_862_074_120
+            439_911_439_400
         );
         assert_eq!(schedule::validate(), Ok(()));
         assert_eq!(admit().unwrap().resources.total(), CAP);
