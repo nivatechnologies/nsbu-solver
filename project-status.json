@@ -689,5 +689,16 @@
       "deployed": false,
       "further_tuning": "stopped_to_preserve_usage"
     }
+  },
+  "local_opencode_validation": {
+    "status": "three_tasks_reviewed_and_integrated",
+    "evidence": "evidence/p10/opencode-local-validation-20260914/README.md",
+    "flash_next_tasks": 2,
+    "qwen_27b_tasks": 1,
+    "new_rust_tests": 7,
+    "new_python_tests": 5,
+    "combined_rust_tests_passed": 31,
+    "python_tests_passed": 6,
+    "scientific_accepted": false
   }
 }

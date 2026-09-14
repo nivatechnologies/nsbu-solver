@@ -1,5 +1,19 @@
 # Local agent work policy
 
+## OpenCode coding workflow (2026-09-14)
+
+Use standard OpenCode for local coding tasks, in isolated worktrees with
+explicit file ownership, process deadlines and independent test/review gates.
+The initial three-task batch produced twelve reviewed tests: two Flash Next
+jobs and one 27B job. See the [execution evidence](../evidence/p10/opencode-local-validation-20260914/README.md).
+Flash Next serves the Sparks; the local 27B model is assigned narrow tasks with
+a user-authorized concurrency ceiling of four. This batch used one 27B slot.
+Expand only with dependency-ready work and capacity to check the results.
+
+The custom packet controller described below remains a historical fixture/audit
+workflow; its tool-loop restrictions are not imposed on OpenCode coding jobs.
+
+
 The Sparks should spend their inference capacity on useful, independently
 checkable solver work. GPU utilization is an operating measurement, not a
 success criterion. Repeated exploration, duplicate tasks, and a growing cloud

@@ -1,0 +1,47 @@
+     Locking 6 packages to latest compatible versions
+      Adding crossbeam-deque v0.8.8
+      Adding crossbeam-epoch v0.9.21
+      Adding crossbeam-utils v0.8.23
+      Adding either v1.18.0
+      Adding rayon v1.12.0
+      Adding rayon-core v1.13.0
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-numerical-window-20260912/crates/nsbu-solver)
+   Compiling p10-snapshot-comparison-adapter v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-numerical-window-20260912/evidence/p10/snapshot-comparison-adapter/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.78s
+     Running unittests src/main.rs (/tmp/nsbu-opencode-m512-target/debug/deps/p10_snapshot_comparison_adapter-401af6c0dc8403e9)
+
+running 31 tests
+test tests::arithmetic_review_accepts_64_kib_and_rejects_one_byte_more ... ok
+test tests::decoder_regressions::resealed_clock_word_drift_is_refused_for_every_clock_field ... ok
+test tests::decoder_regressions::resealed_same_length_identity_tamper_is_refused_by_the_identity_invariant ... ok
+test tests::decoder_regressions::resealed_trailer_still_requires_the_reviewed_file_hash_binding ... ok
+test tests::fixed_diagnostics_serialize_tiny_spectrum_outputs ... ok
+test tests::force_resolution_diagnostic_is_closed_and_directional ... ok
+test tests::legacy_profile_binding_requires_the_exact_complete_identity ... ok
+test tests::m512_regressions::matched_m512_rejects_duplicate_required_identity_keys ... ok
+test tests::m512_regressions::matched_m512_rejects_one_sided_left_evolution_changes ... ok
+test tests::m512_regressions::matched_m512_rejects_removed_required_right_identity_fields ... ok
+test tests::m512_regressions::matched_m512_rejects_reversed_pair_direction ... ok
+test tests::manifest_and_command_enforce_schema_and_cap ... ok
+test tests::matched_m512_kind_has_a_distinct_small_decoder_route ... ok
+test tests::matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted ... ok
+test tests::matched_spatial_reports_different_guards_without_gating ... ok
+test tests::method_diagnostic_is_closed_and_directional ... ok
+test tests::mixed_force_space_algebra_preserves_sign_closure_and_band_splits ... ok
+test tests::mixed_force_space_rejects_every_non_force_or_spatial_contract_change ... ok
+test tests::mixed_force_space_small_publication_seam_serializes_bound_output ... ok
+test tests::ordered_hessian_matches_small_grid_parseval_reconstruction ... ok
+test tests::ordered_hessian_option_serializes_bound_output_and_rejects_clock_or_profile_gaps ... ok
+test tests::ordered_hessian_scaled_squares_keep_large_finite_modes_finite ... ok
+test tests::ordered_hessian_single_oblique_mode_uses_hermitian_weight_and_domain_volume ... ok
+test tests::ordered_hessian_sums_all_27_independent_component_derivative_entries ... ok
+test tests::rejects_identity_hash_nonfinite_and_nyquist ... ok
+test tests::rejects_profile_clock_domain_direction_and_cap ... ok
+test tests::rejects_truncated_and_wrong_magic_without_state_allocation ... ok
+test tests::streamed_adapter_matches_comparison_plan ... ok
+test tests::time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope ... ok
+test tests::time_diagnostic_rejects_every_immutable_semantic_change ... ok
+test tests::time_diagnostic_rejects_mode_headers_guards_and_provenance ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s
+

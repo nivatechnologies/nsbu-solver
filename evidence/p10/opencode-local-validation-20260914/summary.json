@@ -1,0 +1,39 @@
+{
+  "base_source": "9bb4780510397bac45500a177d1592a14c61ffa5",
+  "opencode_version": "1.18.30",
+  "scientific_accepted": false,
+  "new_tests": 12,
+  "independent_rust_tests_passed": 31,
+  "independent_python_tests_passed": 6,
+  "clippy": "passed -D warnings",
+  "review_cleanup": [
+    "Removed redundant decoder glob import and unused-import suppression",
+    "Formatted new Rust test modules"
+  ],
+  "tasks": [
+    {
+      "task": "decoder",
+      "model": "qwen3.8-flash-next",
+      "elapsed_seconds": 494.61,
+      "tool_events": 30,
+      "last_finish_reason": "stop",
+      "final_report": "\n\nDone.\n\n**Changed files**\n- New: `evidence/p10/snapshot-comparison-adapter/harness/src/tests/decoder_regressions.rs` (112 lines)\n- Modified: `evidence/p10/snapshot-comparison-adapter/harness/src/tests.rs` \u2014 added only `#[path = \"tests/decoder_regressions.rs\"] mod decoder_regressions;`\n\n**New tests** (child module uses `use super::*` plus explicit fixture imports; fixture `write`/`manifest` layout matches the actual writer `artifact.rs::write_snapshot`: trailer seals payload only, manifest binds whole file):\n1. `resealed_clock_word_drift_is_refused_for_every_clock_field` \u2014 each of the 4 clock u128 words bumped and the file **re-sealed** (new trailer + coefficient + file hashes), so refusal must come from the clock-vs-reviewed-manifest invariant, not a checksum: asserts \"snapshot clock mismatch\" \u00d74, with valid baseline load before and after.\n2. `resealed_trailer_still_requires_the_reviewed_file_hash_binding` \u2014 payload byte tampered, trailer and `coefficient_sha256` recomputed, stale `file_sha256` \u2192 \"snapshot hash does not match reviewed manifest\"; then updating `file_sha256` succeeds (baseline control), returning the tampered coefficient with matching hashes.\n3. `resealed_same_length_identity_tamper_is_refused_by_the_identity_invariant` \u2014 in-file identity bytes swapped same-length with full outer re-seal \u2192 \"snapshot identity mismatch\".\n\n**Commands/results**\n- `cargo test --offline --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml decoder_regressions -- --test-threads=1` \u2192 3 passed, 0 failed.\n- Full harness suite: 27 passed, 0 failed (24 preexisting preserved). Clippy: no warnings for the new module. Repaired twice mid-run (borrow-check, then shared temp-path pollution between loop iterations).\n\n**Limitations**\n- Running the mandated cargo command regenerates `evidence/.../harness/Cargo.lock` (+52 lines); I verified on a stashed clean tree this is pre-existing lock staleness, unrelated to my change, and restored the lock byte-for-byte afterward (so `--locked` would fail until someone intentionally relocks).\n- `use super::*;` alone doesn't reach the parent's private `use` aliases, so the child also lists explicit `use super::{fields, manifest, root, write};` etc. No production code touched; no PDE/acceptance claims."
+    },
+    {
+      "task": "m512",
+      "model": "qwen3.8-flash-next",
+      "elapsed_seconds": 293.15,
+      "tool_events": 19,
+      "last_finish_reason": "stop",
+      "final_report": "\n\nDone.\n\n**Changed files**\n- New: `evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512_regressions.rs` (126 lines)\n- Edited: `tests.rs` \u2014 appended `#[path = \"tests/m512_regressions.rs\"] mod m512_regressions;` only\n\n**New tests** (manifest-only via `compare::validate_manifest_pair`; no N384/N512 arrays, no production changes), each asserting valid baseline admission first and the exact refusal message `\"matched M512 spatial diagnostic contract mismatch\"`:\n- `matched_m512_rejects_reversed_pair_direction` \u2014 full swap plus dimensions-correct/identity-swapped reversal (direction gap not covered by the existing m512 test, which only mutates the right side)\n- `matched_m512_rejects_duplicate_required_identity_keys` \u2014 exact same-value duplicates of left `source` and right `test_source` (existing test only appends wrong-valued duplicates on the right)\n- `matched_m512_rejects_removed_required_right_identity_fields` \u2014 removal of each required `test_source`/`external_stop`/`schema`/`production_source` field (existing test only adds, never removes)\n- `matched_m512_rejects_one_sided_left_evolution_changes` \u2014 viscosity/method/case/schedule changes on the left side only (existing test mutates only the right evolution)\n\n**Actual result**: `cargo test --offline --manifest-path evidence/p10/snapshot-comparison-adapter/harness/Cargo.toml m512_regressions -- --test-threads=1` \u2192 4 passed, 0 failed; full suite 28 passed, 0 failed; one repair iteration fixed two `unused_mut` warnings; incidental `Cargo.lock` rewrite reverted.\n\n**Limitations**: tests cover the manifest-admission contract only (identity, evolution, direction); no snapshot decode, clock, or metric-path coverage, and no PDE/acceptance claims."
+    },
+    {
+      "task": "monitor",
+      "model": "qwen3.8-27b-uncensored-q6",
+      "elapsed_seconds": 97.33,
+      "tool_events": 6,
+      "last_finish_reason": "stop",
+      "final_report": "Done. All checks pass.\n\n**Changed file:** `tools/tests/test_local_run_monitor.py` (15 \u2192 59 lines; only file modified)\n\n**Added tests** (5 new, existing test preserved verbatim):\n- `test_retains_only_latest_eight_lines` \u2014 20-line stdout yields exactly the last 8 lines\n- `test_removes_exit_status_marker_from_returned_lines` \u2014 `EXIT_STATUS=` line stripped from `last_lines`, `exit_status`/`state` asserted\n- `test_missing_marker_is_nonterminal_even_with_finished_prose` \u2014 \"run finished successfully\" prose without marker stays `nonterminal` with `exit_status=None`\n- `test_ssh_error_with_empty_stderr_yields_fallback_error` \u2014 `classify(255, \"\", \"\")` \u2192 `error == \"ssh exited 255\"`\n- `test_utc_epoch_reflects_frozen_clock` \u2014 `unittest.mock.patch(\"tools.local_run_monitor.time.time\", ...)` frozen, asserts `utc_epoch` for terminal, nonterminal, and unreachable observations\n\n**Verification:**\n- `python -m pytest tools/tests/test_local_run_monitor.py -q` \u2192 `6 passed in 0.03s`\n- `git status --porcelain` \u2192 only `M tools/tests/test_local_run_monitor.py`\n\n**Limitations:** No SSH invoked, no production code touched, no PDE/numerical claims; clock assertions cover only `classify`'s epoch (the `run` loop's deadline logic is untested, out of scope)."
+    }
+  ]
+}
