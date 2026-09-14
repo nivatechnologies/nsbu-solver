@@ -16,8 +16,8 @@ test publication::tests::publish_failure_discloses_in_memory_and_provisional_fro
 test publication::tests::successful_attempt_publication_moves_attempt_frontier_only ... ok
 test artifact::tests::atomic_file_refuses_overwrite_and_leaves_no_partial_file ... ok
 test step_artifact::tests::parent_sync_failure_reports_unconfirmed_final_location ... ok
-test step_artifact::tests::scheduled_step_carries_actual_balance_in_same_bundle ... ok
 test step_artifact::tests::captured_actual_state_has_no_inline_observer_claim ... ok
+test step_artifact::tests::scheduled_step_carries_actual_balance_in_same_bundle ... ok
 test step_artifact::tests::rest_is_metadata_only_and_unscheduled_step_has_no_balance ... ok
 
 test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s

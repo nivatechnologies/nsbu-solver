@@ -1,3 +1,5 @@
+e62d9fc4fedfa2d9e4219959f78ada4248f6f4dd46000be0b5e2de9cbe495ea1  crates/nsbu-benchmarks/src/provider/parallel_reduced.rs
+506d1ea6bd79915c46fda5d92d467efe80d87b50d29765534e91423085c82356  crates/nsbu-benchmarks/src/provider/parallel_reduced/tests.rs
 8c3016753c7994783348ec90a5375fe637ccb7a8610d53ffd83ed8eadc270a14  crates/nsbu-solver/src/spectral/fft.rs
 454798f6badb1170a453cfc75a097280ac21e38970de11164f31136e576c1214  crates/nsbu-solver/src/spectral/fft/api.rs
 2f252628c36501fa61887fc027eb4ead3c60fdb6815cf46b87af119ce173f168  crates/nsbu-solver/src/spectral/fft/avx.rs

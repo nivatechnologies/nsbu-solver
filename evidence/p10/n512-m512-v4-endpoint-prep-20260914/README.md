@@ -5,8 +5,9 @@ trajectory. The live Sulaco v3 run and its stage are untouched. Numerical
 library source `477c418d30d9f2c8b117ae05240fc5596ecbd33b` provides the validated
 shared W3 executor; constructor factoring source
 `1ed699568be70dedf72492324be08600d4407c02` changes only construction helpers.
-The capture harness RUN_SOURCE is
-`431bddf26d868823663b26596d887cef12b2c254`.
+Final source `af16d5c4b4ea9a71ca118f5c228557a25f95bca5` additionally moves an
+unchanged provider test module into its own file to keep production files below
+500 lines. It is the capture harness RUN_SOURCE.
 
 The profile starts from exact rest at clock exponent -20 and target 8192. It
 retains the 32 steps of 64 through clock 2048, 16 steps of 128 through 4096,
@@ -34,11 +35,11 @@ before continuing.
 Focused commands completed with status 0:
 
 ```
-RUN_SOURCE=431bddf26d868823663b26596d887cef12b2c254 cargo test --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33
-RUN_SOURCE=431bddf26d868823663b26596d887cef12b2c254 cargo clippy --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33 --all-targets -- -D warnings
+RUN_SOURCE=af16d5c4b4ea9a71ca118f5c228557a25f95bca5 cargo test --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33
+RUN_SOURCE=af16d5c4b4ea9a71ca118f5c228557a25f95bca5 cargo clippy --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33 --all-targets -- -D warnings
 cargo test -p nsbu-solver w3_parallel
-RUN_SOURCE=431bddf26d868823663b26596d887cef12b2c254 cargo test --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33
-RUN_SOURCE=431bddf26d868823663b26596d887cef12b2c254 cargo build --release --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33
+RUN_SOURCE=af16d5c4b4ea9a71ca118f5c228557a25f95bca5 cargo test --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n384-m512-piecewise-cadv33
+RUN_SOURCE=af16d5c4b4ea9a71ca118f5c228557a25f95bca5 cargo build --release --manifest-path evidence/p10/avx-scheduled-endpoint/harness/Cargo.toml --features n512-m512-piecewise-cadv33
 ```
 
 The default launcher refusal is 64. Its deadline, v3 identity, stable owner,
