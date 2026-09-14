@@ -1,0 +1,99 @@
+{
+  "schema": "p10-n512-early-offline-balance-observer-preparation-v1",
+  "status": "prepared_and_root_artifact_binding_verified_observation_run_not_executed",
+  "date_utc": "2026-09-14",
+  "scope": "balance-diagnostic-only",
+  "qualification": false,
+  "accepted_windows": 0,
+  "resumable": false,
+  "snapshot_load_performed": false,
+  "solver_or_network_used": false,
+  "force_comparison_claim": false,
+  "matched_m512_spatial_contract": "unchanged_completed_endpoint_4096_contract_not_used_for_intermediate",
+  "trajectory": {
+    "completed": false,
+    "endpoint_in_identity_and_plan": 4096,
+    "observation_clock": 1536,
+    "target": 8192,
+    "epoch": 24,
+    "accepted_steps": 24,
+    "remaining_ticks": 6656,
+    "identity_source": "e25f3816f83c6a7c07202cac2878f58ace460511",
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "profile": "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f",
+    "coefficient_sha256_from_record_state_sha256": "6501282b8224d19baf2cd68e201e5c6db7ffbf906c277d1a2ebb0495fbc3d509"
+  },
+  "inputs_sha256": {
+    "v3_launch_plan": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+    "clock1536_record": "4fbb8c213a41a5e88eca4599953e3fa4cd5d4a2af8975abe6062b51a066d6376",
+    "frozen_trajectory_plan": "6e8103a1937e3e31be8b147a936b843d4dc166877ef5de5540fb51429e672634"
+  },
+  "template": {
+    "path": "manifests/balance-clock1536-unexecuted-template.json",
+    "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+    "admission_basis": "decode shape gate only (cox-matthews + [512;3] force, comparison_endpoint==elapsed, prefix schedule through 1536, hash-frozen plan 4c14ee16...); no force-comparison pair executed or claimed",
+    "file_sha256_placeholder": true,
+    "snapshot_path_placeholder": "PENDING_ROOT_ARCHIVE_BINDING/state.bin"
+  },
+  "preflight": {
+    "mode": "arithmetic-only via reviewed observer CLI read_manifest path; snapshot file never opened",
+    "status": 0,
+    "ledger_total_bytes": 235548209862,
+    "ledger_basis": "conservative-admission-upper-bound-not-measured-allocator-peak",
+    "fits_at_256_gib_cap": true,
+    "fits_at_total_minus_one": false,
+    "baccus_actual_memory_measurement_still_required": true
+  },
+  "tests": {
+    "driver": "tests/refusals.sh",
+    "passed": 38,
+    "failed": 0,
+    "split": "21 checks executed through the real reviewed Rust read_manifest (observer preflight CLI, arithmetic-only); 17 checks exercise the Python builder binding/publication gates, including tests/builder_unit.py (7 checks)",
+    "coverage": [
+      "wrong case (full and one-character)",
+      "wrong clock (elapsed drift, zero-remaining completed clock)",
+      "wrong schedule (non-prefix full schedule, gap, non-multiple step)",
+      "wrong hash (plan hash, cross-frozen-plan control, non-hex coefficient, truncated file sha)",
+      "wrong kind/method/force-dimensions/backend envelopes",
+      "cap-exact fits true and cap-minus-one fits false",
+      "builder refusals (tampered record clock/steps/state hash, wrong plan, missing or invalid full-file sha)",
+      "builder reproducibility against the committed template",
+      "bounded single-buffer hash+parse binding (oversized input refused, tamper-after-hash impossible)",
+      "create-only atomic publication: replay refused, concurrent race yields exactly one winner, symlink/hardlink/input-alias/mutual-alias refusals, frozen record untouched, no temporary debris"
+    ],
+    "known_limit": "preflight does not verify accepted_steps/epoch against the snapshot header; decode::load does at observation time, and the builder derives them from the hash-frozen record"
+  },
+  "builder_hardening": {
+    "review": "Astra review round 2, 2026-09-14",
+    "defect_1": "inputs were hashed then re-opened for parsing; now one bounded 1 MiB byte buffer binds SHA-256 and JSON parse (read_bounded/bind_hash_and_parse)",
+    "defect_2": "output used overwrite publication; now create-only atomic link(2) with refusal of every existing path and of aliases with all inputs (publish_new)",
+    "wage_fix": "README wording corrected: 38 driver checks = 21 real Rust read_manifest checks + 17 Python builder checks",
+    "frozen_inputs_modified": false,
+    "template_reproducible_after_fix": true
+  },
+  "binary": {
+    "path": "target directory bound by CARGO_TARGET_DIR at preparation time",
+    "sha256": "46332fc6af9ebc4762b15a56aad231661f33fbdbe8a76819b1c00c8a77521d0d",
+    "build": "cargo build --release --offline -j 2",
+    "source": "evidence/p10/offline-captured-observer (reviewed, unmodified)"
+  },
+  "root_artifact_binding": {
+    "pointer": "work/early-observer-inputs/actual-capture-ready.json",
+    "pointer_sha256": "7d7252754ad9d6d995dff9bf26f68bd202f104d34d4a7fe1ad3dbe6331fc9b52",
+    "bundle": "/mnt/niva-array/nsbu-solver/work/n512-early-observer-artifacts-20260914",
+    "bundle_record_equals_reviewed_record": true,
+    "independent_state_bin_sha256": "7a4f05338c3cb7308a18c3788f2cc3a192fea9a93e3c1a07980b9963a3dbff55",
+    "state_bin_sha256_matches_root_receipt": true,
+    "state_bin_bytes": 3233809650,
+    "state_bin_decode_or_load": false,
+    "root_manual_manifest_field_review": "identical in every semantic field; differs only in absolute paths and the now-real file sha",
+    "root_manual_manifest_sha256": "bc538be79bfc6aeddecdda76588722251720d0af4710ae40a062f6e89cf6aefe",
+    "root_external_plan_copy_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+    "bound_manifest": "manifests/balance-clock1536-bound.json",
+    "bound_preflight_status": 0,
+    "bound_preflight_matches_root_preflight_ledger": true,
+    "observation_run_executed": false
+  },
+  "launch_authorized": false,
+  "numerical_results_simulated": false
+}

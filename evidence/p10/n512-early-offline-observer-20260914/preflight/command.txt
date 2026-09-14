@@ -1,0 +1,1 @@
+/tmp/nsbu-opencode-early-observer-target/release/p10-offline-captured-observer preflight manifests/balance-clock1536-unexecuted-template.json 1024 32 274877906944 rustfft-6.4.1-avx-avx2-fma   # cap = 256 GiB address-space limit from the frozen v3 plan

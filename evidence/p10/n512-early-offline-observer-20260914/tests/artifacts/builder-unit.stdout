@@ -1,0 +1,8 @@
+PASS test_bounded_buffer_cap
+PASS test_hash_parse_same_bytes
+PASS test_publish_new_is_create_only_under_race
+PASS test_publish_new_rejects_replay_and_aliases
+PASS test_publish_new_uncertainty_directory_close
+PASS test_publish_new_uncertainty_directory_fsync
+PASS test_publish_new_uncertainty_temporary_cleanup
+== builder unit tests: 7 passed, 0 failed
