@@ -1,0 +1,4 @@
+Intermediate invocation audit:
+1. Stable branch coverage without RUSTC_BOOTSTRAP refused -Z coverage-options (status 101).
+2. Nightly rerun executed four tests but report refused mixed historical stable v10 profiles (status 1); created incompatible v11 profile p10-parallel-fft-review-20260913-2638164-5754480785737484573_0.profraw.
+3. Stable RUSTC_BOOTSTRAP rerun executed four tests but report refused that owned v11 profile (status 1).

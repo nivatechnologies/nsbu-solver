@@ -1,0 +1,22 @@
+
+running 2 tests
+test admission_and_request_refusals_preserve_outputs_and_allow_a_valid_request ... ok
+test complete_fields_and_work_match_for_all_partition_shapes_and_nonmonotone_times ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.91s
+
+
+running 2 tests
+test admission_and_request_refusals_preserve_output ... ok
+test every_parallel_reduced_coefficient_matches_the_serial_reduced_order ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.71s
+
+
+running 3 tests
+test complete_admission_limits_and_request_refusals_precede_output_changes ... ok
+test complete_spectra_match_uncached_direct_sums_and_original_provider_on_three_layouts ... ok
+test independent_80_120_digit_n4_force_fixture_remains_unprojected ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.41s
+

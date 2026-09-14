@@ -1,0 +1,1526 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "reservation_with_w3_fft_backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "new_with_catalog_w3",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "reservation_with_parallel_w3_fft_backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "new_with_catalog_parallel_w3",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 8.814814814814815
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "w3_fft_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "parallel_fft_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "limits",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "evaluate",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+      "function": "explicit_w3_rhs_admission_reports_identity_and_rejects_invalid_inputs",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "reservation_with_backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "new_with_backend",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "reservation_from_catalog",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "reservation_with_shared_backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "new_from_catalog",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "with_parallel_executor",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "parallel_wrapper_additional_reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "parallel_fft_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "parallel_executor",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+      "function": "avx_axes",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "fmt",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 12.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_with_catalog",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_with_fft_backend",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_with_w3_fft_backend",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_with_parallel_w3_fft_backend",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_inner",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "reservation_parts",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "new",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "new_with_catalog",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "new_with_catalog_w3",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 7.765625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "new_with_catalog_parallel_w3",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "w3_fft_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "parallel_fft_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "allocate",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "advective_number",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/rotational.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft.rs",
+      "function": "ensure_available",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft.rs",
+      "function": "fmt",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "function": "matches_lane",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "function": "validate",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 18.515625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "function": "finite_real",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "function": "transverse_axis_tiled",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "function": "transform_transverse_tile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "function": "gather_tile",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+      "function": "scatter_tile",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+      "function": "executor",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+      "function": "panic_terminates_executor_and_refuses_later_work",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+      "function": "poisoned_scratch_is_a_permanent_failure",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+      "function": "invalid_inputs_refuse_before_transform_without_terminating_owner",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "function": "forward",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "function": "inverse",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "function": "transform_axis",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "function": "transverse",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+      "function": "transverse_axis",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "new",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "wait_started",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 10.37037037037037
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "submit",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "collect",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "worker_entry",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 7.765625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "drop",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "worker_loop",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "evaluate_pending",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "additional_reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "additional_w3_reservation",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 4.25
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "reservation_parts",
+      "cyclomatic": 14.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 17.0625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "new_for_w3",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "new_parts",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "is_terminated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "install_worker",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "forward",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "inverse",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "validate",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 5.048828125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "axis1",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "line",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 2.0185185185185186
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "execute",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+      "function": "process",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "avx_available",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "avx_available",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "catalog",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "seed",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "pool",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "inputs",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "ownership",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "same_bits",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "failure_drains_every_lane",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "every_injected_numerical_failure_drains_and_terminates_the_owner",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "every_caught_injected_panic_drains_and_terminates_the_owner",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "exact_additional_cap_constructs_and_one_byte_short_refuses",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "admission_is_closed_to_fixture_6_and_experiment_lengths_through_768",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "admitted_force_layouts_have_exact_w3_reservations",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "mismatched_seed_backend_refuses_before_owner_construction",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "small_avx_w3_forward_matches_serial_bits_and_preserves_inputs",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "explicit_parallel_w3_shares_identity_and_matches_serial_bits",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "parallel_w3_drains_failures_and_panics_before_termination",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "parallel_w3_drop_collects_poisoned_parked_worker",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "validate_seed",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 6.318359375
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "constructor_reservation",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "attach_executor",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "construct_lanes",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "start_workers",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "additional_reservation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "additional_reservation_with_backend",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "additional_parallel_reservation_with_backend",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "from_scalar_lane",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "from_scalar_lane_parallel",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "from_scalar_lane_inner",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "parallel_fft_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "is_terminated",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "inject_failure",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "all_collected",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "prepare_inverse",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 16.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "inverse3",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 19.125
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "forward3",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.375,
+      "crap": 23.625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "forward_one",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "with_spectrum",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 5.390625
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/src/spectral/w3.rs",
+      "function": "execute",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "bits",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "input",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "bounded_parallel_executor_matches_words_and_has_zero_allocations_in_measured_call",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel.rs",
+      "function": "admission_refuses_wrong_backend_worker_bounds_and_one_byte_under_before_allocation",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "fixture",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "pool",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "assert_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "first_roundtrip",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "assert_serial_oracle",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "assert_steady",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel.rs",
+      "function": "three_persistent_callers_run_over_sixty_three_rounds_without_allocating",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "input",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "cbits",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "rbits",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "case",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "exact_avx_layouts_and_reuse",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "three_external_callers_share_one_pool",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+      "function": "shared_executor_eight_workers_reuses_exact_words",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "fixture",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "pool",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "assert_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "first_roundtrip",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "assert_serial_oracle",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "assert_steady",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+      "function": "admitted_cube_helpers_eight_and_sixteen_are_exact_and_steady",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    }
+  ],
+  "maximum": 23.625
+}

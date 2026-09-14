@@ -1,0 +1,208 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling crossbeam-utils v0.8.23
+   Compiling typenum v1.20.1
+   Compiling crossbeam-epoch v0.9.21
+   Compiling crossbeam-deque v0.8.8
+   Compiling rayon-core v1.13.0
+   Compiling strength_reduce v0.2.4
+   Compiling either v1.18.0
+   Compiling cfg-if v1.0.4
+   Compiling cpufeatures v0.2.17
+   Compiling stats_alloc v0.1.10
+   Compiling serde_core v1.0.229
+   Compiling serde_json v1.0.145
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling ryu v1.0.23
+   Compiling m512-alloc-trace v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/crates/m512-alloc-trace)
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling num-integer v0.1.47
+   Compiling num-complex v0.4.6
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling transpose v0.2.3
+   Compiling primal-check v0.3.4
+   Compiling digest v0.10.7
+   Compiling rayon v1.12.0
+   Compiling sha2 v0.10.9
+   Compiling rustfft v6.4.1
+   Compiling nsbu-solver v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/crates/nsbu-solver)
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/crates/nsbu-benchmarks)
+warning: function `compare` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:36:8
+   |
+36 | pub fn compare(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |        ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `assert_bits` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:76:4
+   |
+76 | fn assert_bits(left: &[Complex64], right: &[Complex64]) {
+   |    ^^^^^^^^^^^
+
+warning: function `compare_reconstruction` is never used
+  --> crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs:85:4
+   |
+85 | fn compare_reconstruction(left: &ReconstructedRun, right: &ReconstructedRun) {
+   |    ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `retained_band_excludes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_sampling_oracle.rs:10:15
+   |
+10 | pub(crate) fn retained_band_excludes(state: &SpectralState, mode: [isize; 3]) -> bool {
+   |               ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `nsbu-benchmarks` (test "v2_sampling_oracle") generated 1 warning
+warning: function `coefficient` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs:14:15
+   |
+14 | pub(super) fn coefficient(state: &SpectralState, component: usize, mode: [isize; 3]) -> Complex64 {
+   |               ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `actual` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs:61:15
+   |
+61 | pub(super) fn actual(
+   |               ^^^^^^
+
+warning: function `legacy_actual` is never used
+ --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:9:4
+  |
+9 | fn legacy_actual(
+  |    ^^^^^^^^^^^^^
+
+warning: function `assert_component` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:49:4
+   |
+49 | fn assert_component(actual: f64, legacy: f64, magnitude: f64, terms: usize) {
+   |    ^^^^^^^^^^^^^^^^
+
+warning: function `assert_phases` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:62:4
+   |
+62 | fn assert_phases(
+   |    ^^^^^^^^^^^^^
+
+warning: function `curl` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:88:4
+   |
+88 | fn curl(tensor: &Tensor) -> [f64; 3] {
+   |    ^^^^
+
+warning: function `assert_tensors` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:97:4
+   |
+97 | fn assert_tensors(cached: &Tensor, legacy: &Tensor, magnitudes: &Tensor, terms: usize) {
+   |    ^^^^^^^^^^^^^^
+
+warning: function `assert_legacy_equivalence` is never used
+   --> crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs:135:8
+    |
+135 | pub fn assert_legacy_equivalence(state: &nsbu_solver::domain::SpectralState, samples: Layout) {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `tracking` is never used
+  --> crates/nsbu-benchmarks/tests/v2_reference_oracle/tracking.rs:23:8
+   |
+23 | pub fn tracking(
+   |        ^^^^^^^^
+
+warning: struct `Norms` is never constructed
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:13:12
+   |
+13 | pub struct Norms {
+   |            ^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `views` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:20:4
+   |
+20 | fn views(state: &SpectralState) -> [&[Complex64]; 3] {
+   |    ^^^^^
+
+warning: function `pair_norms` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:26:8
+   |
+26 | pub fn pair_norms(left: &SpectralState, right: &SpectralState, samples: Layout) -> [Norms; 4] {
+   |        ^^^^^^^^^^
+
+warning: function `pair_errors` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:34:8
+   |
+34 | pub fn pair_errors(
+   |        ^^^^^^^^^^^
+
+warning: function `point_magnitudes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:51:8
+   |
+51 | pub fn point_magnitudes(
+   |        ^^^^^^^^^^^^^^^^
+
+warning: function `fixture` is never used
+  --> crates/nsbu-benchmarks/tests/../examples/reduction_support/input.rs:92:8
+   |
+92 | pub fn fixture() -> Vec<u8> {
+   |        ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: fields `candidate`, `attempts`, and `rhs` are never read
+  --> crates/nsbu-benchmarks/tests/smooth_support/mod.rs:18:5
+   |
+16 | pub struct SmoothRun {
+   |            --------- fields in this struct
+17 |     pub state: SpectralState,
+18 |     candidate: CandidateState,
+   |     ^^^^^^^^^
+19 |     attempts: AttemptWorkspace,
+   |     ^^^^^^^^
+20 |     rhs: SpectralRhs<CyclicSine>,
+   |     ^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `advance` is never used
+  --> crates/nsbu-benchmarks/tests/smooth_support/mod.rs:50:12
+   |
+22 | impl SmoothRun {
+   | -------------- method in this implementation
+...
+50 |     pub fn advance(&mut self, endpoint: u128, step: u128) {
+   |            ^^^^^^^
+
+warning: function `point_magnitudes` is never used
+  --> crates/nsbu-benchmarks/tests/v2_physical_oracle.rs:51:8
+   |
+51 | pub fn point_magnitudes(
+   |        ^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `view_point_magnitudes` is never used
+   --> crates/nsbu-benchmarks/tests/v2_physical_oracle_core.rs:192:8
+    |
+192 | pub fn view_point_magnitudes(
+    |        ^^^^^^^^^^^^^^^^^^^^^
+
+warning: `nsbu-benchmarks` (test "integrated_physical") generated 3 warnings
+warning: `nsbu-benchmarks` (test "v2_observer") generated 2 warnings
+warning: `nsbu-benchmarks` (test "reduction_allocation") generated 1 warning
+warning: `nsbu-benchmarks` (test "offstage_residual") generated 3 warnings (3 duplicates)
+warning: `nsbu-benchmarks` (test "reconstruction_archive") generated 3 warnings (3 duplicates)
+warning: `nsbu-benchmarks` (test "v2_probe_physical") generated 5 warnings
+warning: `nsbu-benchmarks` (test "v2_physical_family") generated 2 warnings
+warning: `nsbu-benchmarks` (test "v2_probe_reference") generated 9 warnings
+warning: `nsbu-benchmarks` (test "v2_force_physical") generated 2 warnings (2 duplicates)
+    Finished `test` profile [optimized + debuginfo] target(s) in 50.25s
+     Running unittests src/lib.rs (/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/nsbu_benchmarks-3ed126c1877e6206)

@@ -1,0 +1,15 @@
+{
+  "reason": "Unrelated host process arguments and personal absolute executable paths removed; numeric process statistics and executable basenames retained. Original raw observations retained locally outside tracked evidence. Timing and numerical results unchanged.",
+  "files": [
+    {
+      "file": "processes-after.txt",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "file": "processes-before.txt",
+      "original_sha256": "8e9a7c9d16d704cc7552a121a3376a5acba4f9fb61fcaf380bbf740b03fe45f1",
+      "published_sha256": "5f85a8f6489c55d777a882c53d1ce90f8b2fe025f831e3f45d19c69082d31aad"
+    }
+  ]
+}

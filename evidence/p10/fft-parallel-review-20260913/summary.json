@@ -1,0 +1,85 @@
+{
+  "schema": "nsbu-p10-parallel-fft-final-verification-v1",
+  "source_revision": "8161661972edb81c9a066900b43334997bb59b74",
+  "source_edits_made": false,
+  "checks": {
+    "fmt": {
+      "status": 0
+    },
+    "provider_parallel_reduced_coverage": {
+      "status": 0,
+      "passed": 4,
+      "failed": 0,
+      "target": "/tmp/nsbu-root-parallel-coverage",
+      "no_clean": true
+    },
+    "post_format_solver_coverage": {
+      "status": 0,
+      "passed": 265,
+      "failed": 0,
+      "solver_only": {
+        "lines": {
+          "covered": 16766,
+          "count": 17162,
+          "percent": 97.69257662277124
+        },
+        "regions": {
+          "covered": 30350,
+          "count": 31465,
+          "percent": 96.45638010487843
+        },
+        "functions": {
+          "covered": 1428,
+          "count": 1459,
+          "percent": 97.87525702535983
+        },
+        "branches": {
+          "covered": 1139,
+          "count": 1271,
+          "percent": 89.61447678992918
+        }
+      }
+    },
+    "changed_solver_metrics": {
+      "files": 17,
+      "functions_and_closures": 217,
+      "max_cyclomatic": 15.0,
+      "max_cognitive": 15.0,
+      "max_file_halstead_difficulty": 73.21311475409836,
+      "max_crap": 23.625,
+      "status": 0
+    },
+    "changed_benchmark_metrics": {
+      "files": 5,
+      "functions_and_closures": 88,
+      "max_cyclomatic": 11.0,
+      "max_cognitive": 11.0,
+      "max_file_halstead_difficulty": 58.11328125,
+      "max_crap": 16.0,
+      "status": 0
+    },
+    "broad_coverage": {
+      "status": 143,
+      "classification": "aborted; preserved and not rerun"
+    },
+    "preexisting_fixture_halstead": {
+      "path": "crates/nsbu-solver/tests/fixtures/local_modal_derivatives.rs",
+      "difficulty": 154.07692307692307,
+      "classification": "preexisting, outside changed scope"
+    },
+    "repository": {
+      "status": 1,
+      "reason": "see repository.stdout and repository.stderr"
+    }
+  },
+  "coverage_union_inputs": [
+    "format-solver-coverage.json",
+    "final-provider-coverage.json",
+    "actual-harness-dependencies-coverage.json"
+  ],
+  "packaging": {
+    "large_json": "deterministic gzip -n -9",
+    "raw_hash_manifest": "RAW_JSON_SHA256SUMS",
+    "present_file_manifest": "SHA256SUMS"
+  }
+}

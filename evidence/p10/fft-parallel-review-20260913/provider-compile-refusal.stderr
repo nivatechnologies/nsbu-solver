@@ -1,0 +1,38 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/crates/nsbu-benchmarks)
+error[E0624]: associated function `preflight_with_fft_backend` is private
+   --> crates/nsbu-benchmarks/tests/parallel_reduced_force.rs:141:25
+    |
+141 |           ReducedV2Force::preflight_with_fft_backend(domain, samples, backend).unwrap();
+    |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^ private associated function
+    |
+   ::: crates/nsbu-benchmarks/src/provider/reduced.rs:36:5
+    |
+ 36 | /     pub(crate) fn preflight_with_fft_backend(
+ 37 | |         domain: Domain,
+ 38 | |         sampled: Layout,
+ 39 | |         backend: FftBackend,
+ 40 | |     ) -> Result<ForceLimits, SolverError> {
+    | |_________________________________________- private associated function defined here
+
+error[E0624]: associated function `new_with_catalog` is private
+   --> crates/nsbu-benchmarks/tests/parallel_reduced_force.rs:143:25
+    |
+143 |           ReducedV2Force::new_with_catalog(domain, samples, &catalog, serial_limits.storage_bytes)
+    |                           ^^^^^^^^^^^^^^^^ private associated function
+    |
+   ::: crates/nsbu-benchmarks/src/provider/reduced.rs:93:5
+    |
+ 93 | /     pub(crate) fn new_with_catalog(
+ 94 | |         domain: Domain,
+ 95 | |         sampled: Layout,
+ 96 | |         catalog: &FftCatalog,
+ 97 | |         cap: usize,
+ 98 | |     ) -> Result<Self, SolverError> {
+    | |__________________________________- private associated function defined here
+
+For more information about this error, try `rustc --explain E0624`.
+error: process didn't exit successfully: `/home/todd/.rustup/toolchains/nightly-2026-03-03-x86_64-unknown-linux-gnu/bin/rustc --crate-name parallel_reduced_force --edition=2021 crates/nsbu-benchmarks/tests/parallel_reduced_force.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --emit=dep-info,link -C opt-level=2 -C embed-bitcode=no -C debuginfo=2 --forbid=unsafe_code --deny=missing_docs '--deny=clippy::all' -C debug-assertions=on --test --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values())' -C metadata=7f8171a76d719d00 -C extra-filename=-6998dc4c96242c5e --out-dir /tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps -C incremental=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/incremental -L dependency=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps --extern m512_alloc_trace=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libm512_alloc_trace-a36654be629e05c4.rlib --extern nsbu_benchmarks=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libnsbu_benchmarks-da9890b595f76cee.rlib --extern nsbu_solver=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libnsbu_solver-edcd405b3fe7ce42.rlib --extern serde_json=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libserde_json-5b18123e43f67992.rlib --extern sha2=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libsha2-d4b22051f62d36cd.rlib --extern stats_alloc=/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/libstats_alloc-a37a4788ad06f2e3.rlib -C instrument-coverage -Z coverage-options=branch --cfg=coverage --cfg=coverage_nightly` (exit status: 1)
+error: could not compile `nsbu-benchmarks` (test "parallel_reduced_force") due to 2 previous errors
+error: process didn't exit successfully: `/home/todd/.rustup/toolchains/nightly-2026-03-03-x86_64-unknown-linux-gnu/bin/cargo test --manifest-path /mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/Cargo.toml --target-dir /tmp/nsbu-root-parallel-coverage/llvm-cov-target -p nsbu-benchmarks --test parallel_reduced_force -- --test-threads=1` (exit status: 101)

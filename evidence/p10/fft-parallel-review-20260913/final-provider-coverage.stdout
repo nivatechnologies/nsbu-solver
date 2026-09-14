@@ -1,0 +1,9 @@
+
+running 4 tests
+test provider::parallel_reduced::tests::fixture_w3_force_matches_serial_and_refuses_after_fft_failure ... ok
+test provider::parallel_reduced::tests::opt_in_w3_force_charges_exact_experiment_addition ... ok
+test provider::parallel_reduced::tests::worker_error_drains_the_attempt_and_preserves_the_previous_output ... ok
+test provider::parallel_reduced::tests::worker_panic_drains_the_attempt_and_preserves_unpublished_output ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 47 filtered out; finished in 0.19s
+

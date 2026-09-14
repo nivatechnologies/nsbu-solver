@@ -646,7 +646,7 @@
     "qualification": false
   },
   "p10_n512_m512_endpoint_run": {
-    "status": "running_first_step_pending_at_startup_review",
+    "status": "running_six_steps_observed",
     "launch_evidence": "evidence/p10/n512-m512-unattended-20260913/launch-receipt.json",
     "started_utc": "2026-09-13T22:45:30Z",
     "deadline_utc": "2026-09-14T18:45:30Z",
@@ -657,6 +657,29 @@
     "monitor_status_path": "/mnt/niva-array/nsbu-solver/work/n512-local-monitor-20260913/work/n512-monitor-20260913/status.json",
     "monitor_poll_seconds": 300,
     "continuous_llm_required": false,
-    "qualification": false
+    "qualification": false,
+    "observed_clock": 384,
+    "observed_steps": 6,
+    "observation_utc": "2026-09-14T00:37:00Z",
+    "observed_steady_allocations": 0
+  },
+  "p10_parallel_fft": {
+    "status": "measured_and_staged_not_enabled_in_live_trajectory",
+    "evidence": "evidence/p10/n512-m512-parallel-fft-timing-20260913/README.md",
+    "quality_evidence": "evidence/p10/fft-parallel-review-20260913/README.md",
+    "numerical_source": "477c418d30d9f2c8b117ae05240fc5596ecbd33b",
+    "integration_seconds": 1262.211683181,
+    "rhs_seconds": 1158.127429176,
+    "wall_seconds": 1456.83,
+    "prior_same_host_integration_seconds": 1470.457289408,
+    "prior_same_host_wall_seconds": 1655.39,
+    "candidate_coefficient_sha256": "5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff",
+    "candidate_and_local_error_words_equal": true,
+    "steady_allocations": 0,
+    "staged_host": "sulaco",
+    "staged_path": "/tmp/nsbu-p10-n512-m512-v4-staged-20260914T002332Z",
+    "staging_evidence": "evidence/p10/n512-m512-v4-staging-20260914/README.md",
+    "qualification": false,
+    "scope": "Opt-in shared FFT executor parallelizes axes 1 and 2. One from-rest N512/M512 attempt on a shared host; not a guaranteed throughput improvement or accepted PDE window. Live v3 progress retained because a restart would discard committed steps. Full axis-0 candidate remains separate, unvalidated work."
   }
 }

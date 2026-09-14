@@ -1,0 +1,9 @@
+warning: --branch option is unstable
+info: cargo-llvm-cov currently setting cfg(coverage) and cfg(coverage_nightly); you can opt-out it by passing --no-cfg-coverage and --no-cfg-coverage-nightly
+   Compiling nsbu-benchmarks v0.1.0-alpha.1 (/mnt/niva-array/nsbu-solver/work/p10-parallel-fft-review-20260913/crates/nsbu-benchmarks)
+    Finished `test` profile [optimized + debuginfo] target(s) in 3.71s
+     Running tests/parallel_force.rs (/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/parallel_force-09906a49f047f0fa)
+     Running tests/parallel_reduced_force.rs (/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/parallel_reduced_force-6998dc4c96242c5e)
+     Running tests/reduced_provider.rs (/tmp/nsbu-root-parallel-coverage/llvm-cov-target/debug/deps/reduced_provider-acd2665a35935583)
+
+    Finished report saved to evidence/p10/fft-parallel-review-20260913/provider-coverage.json

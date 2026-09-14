@@ -311,3 +311,28 @@ records actual process identities, preflight and source hashes. A detached,
 read-only monitor polls every five minutes; neither computation nor monitoring
 requires continuous language-model inference. Startup verification is not
 first-step acceptance, endpoint completion or PDE qualification.
+
+## FFT throughput increment (2026-09-14)
+
+The live Sulaco N512/M512 trajectory has published six steps through clock 384
+as observed at 00:37 UTC, each reporting zero steady allocations. This is
+trajectory progress, not an accepted PDE window. Its deadline and guards remain
+unchanged.
+
+An opt-in shared FFT executor now parallelizes axes 1 and 2 while preserving
+the existing line arithmetic. A complete from-rest N512/M512 attempt on baccus
+measured 1262.21 seconds integration and 1456.83 seconds wall time: 14.16% and
+12.00% below the prior same-host scalar trial. Coefficient hashes and local-error
+words matched exactly, with zero steady allocations. These were separate trials
+on a shared host; they do not establish a general speedup. See the
+[timing evidence](../evidence/p10/n512-m512-parallel-fft-timing-20260913/README.md)
+and [focused quality record](../evidence/p10/fft-parallel-review-20260913/README.md).
+
+The [optimized capture bundle](../evidence/p10/n512-m512-v4-staging-20260914/README.md)
+is staged on Sulaco and has passed remote preflight and file verification. It
+has not replaced the live run: restarting from rest would discard six committed
+steps and consume most of this measured gain. There is no supported checkpoint
+resume for this capture. The public CLI does not automatically select this
+experimental executor. Parallelization of the remaining FFT axis is a separate
+candidate requiring exact-output, allocation, resource and timing checks before
+use. No numerical acceptance thresholds have been relaxed.

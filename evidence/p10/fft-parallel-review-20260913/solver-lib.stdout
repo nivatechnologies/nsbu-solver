@@ -1,0 +1,35 @@
+
+running 30 tests
+test diagnostics::derivatives::tests::pair_projection_preserves_exact_subnormal_and_large_pairs ... ok
+test diagnostics::physical::quantity::tests::sampled_curl_has_the_physical_orientation ... ok
+test experiment::tests::failed_refusal_recording_still_discards_a_measured_observer_proposal ... ok
+test experiment::tests::injected_stale_or_inconsistent_holders_cannot_publish_accepted_history ... ok
+test experiment::tests::observer_pending_state_tracks_the_physical_and_history_transaction ... ok
+test experiment::tests::private_rejection_reports_must_actually_fail_a_local_channel ... ok
+test experiment::tests::private_update_admission_refuses_missing_or_misclassified_samples ... ok
+test integrators::indicator::tests::half_storage_weights_apply_to_both_complex_parts_and_both_error_channels ... ok
+test integrators::indicator::tests::overflowing_discrepancy_is_refused_even_with_a_finite_fine_state_budget ... ok
+test integrators::kernel::tests::field_allocation_refusal_propagates_without_partial_payload_construction ... ok
+test diagnostics::derivatives::tests::catalog_avx_sampler_matches_owned_normalization_and_derivatives ... ok
+test integrators::transaction::tests::coefficient_fingerprint_matches_independently_computed_bitstream_fixture ... ok
+test integrators::transaction::tests::accepted_step_counter_exhaustion_does_not_change_committed_time_or_storage ... ok
+test integrators::transaction::tests::every_private_acceptance_identity_is_validated_before_any_payload_exchange ... ok
+test integrators::transaction::tests::exhausted_candidate_generation_invalidates_prior_acceptance ... ok
+test integrators::transaction::tests::matching_private_metadata_commits_and_a_wrong_plan_does_not ... ok
+test spectral::hermitian::tests::finite_components_and_relative_pair_boundaries_are_checked_separately ... ok
+test spectral::fft::avx::tests::from_parts_refuses_plans_exceeding_the_closed_scratch_allowance ... ok
+test spectral::w3::tests::admission_is_closed_to_fixture_6_and_experiment_lengths_through_768 ... ok
+test spectral::w3::tests::admitted_force_layouts_have_exact_w3_reservations ... ok
+test integrators::rhs::w3::tests::explicit_w3_rhs_admission_reports_identity_and_rejects_invalid_inputs ... ok
+test storage::tests::impossible_reservation_returns_a_typed_error ... ok
+test spectral::w3::tests::mismatched_seed_backend_refuses_before_owner_construction ... ok
+test spectral::rotational::tests::drained_w3_failure_does_not_publish_rhs_or_pressure ... ok
+test spectral::rotational::tests::opt_in_w3_operator_matches_serial_and_refuses_one_byte_short ... ok
+test spectral::w3::tests::small_avx_w3_forward_matches_serial_bits_and_preserves_inputs ... ok
+test spectral::w3::tests::exact_additional_cap_constructs_and_one_byte_short_refuses ... ok
+test spectral::w3::tests::explicit_parallel_w3_shares_identity_and_matches_serial_bits ... ok
+test spectral::w3::tests::every_caught_injected_panic_drains_and_terminates_the_owner ... ok
+test spectral::w3::tests::every_injected_numerical_failure_drains_and_terminates_the_owner ... ok
+
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "scope": "bootstrap packaging only",
+  "checks": {
+    "review": {
+      "components_verified": 12,
+      "packet_verified": true,
+      "manifest_sha256": "4393e8766fe00cd4f3d92452479ac6fe1680d08319b05c9b7f1e4a3908fd2297",
+      "baseline_sha256": {
+        "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+        "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+      }
+    },
+    "case": {
+      "benchmark_copy_identical": true,
+      "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f"
+    },
+    "metadata": {
+      "project": "NSBU Solver",
+      "license": "Apache-2.0",
+      "private_dependency_declared": false
+    }
+  },
+  "errors": [
+    "public_content: Personal absolute path in public text: evidence/p10/n512-m512-parallel-fft-timing-20260913/execution/baccus-parallel-attempt-20260914/processes-before.txt"
+  ]
+}
