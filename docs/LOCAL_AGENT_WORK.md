@@ -13,6 +13,19 @@ Expand only with dependency-ready work and capacity to check the results.
 The custom packet controller described below remains a historical fixture/audit
 workflow; its tool-loop restrictions are not imposed on OpenCode coding jobs.
 
+Worker deadlines are failsafes, not expected completion times. Default to one
+hour for narrow local edits and two hours for coding plus numerical tests.
+Allow longer when measured test runtime, compilation or concurrent inference
+requires it; include time for diagnosis and a final report. Do not assign a
+15–30 minute kill timer to an unfamiliar coding/test task. Check progress
+separately: ongoing tests and concrete repairs are progress, while repeated
+identical failures or unrelated exploration warrant intervention. Extend a
+healthy worker before its deadline when authorized, preserving its session,
+worktree and running tests. If interrupted, resume the same session with the
+specific remaining task instead of repeating discovery. Review checkpoints do
+not themselves terminate productive workers or numerical jobs. Keep an explicit
+outer failsafe and preserve each task's actual timing and outcome.
+
 
 The Sparks should spend their inference capacity on useful, independently
 checkable solver work. GPU utilization is an operating measurement, not a

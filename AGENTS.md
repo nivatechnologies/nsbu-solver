@@ -32,3 +32,7 @@ bounded outcome and exclusive edit ownership. Keep mutable run state, deadlines
 and measurements in the task handoff/evidence rather than this file. Prioritize
 work that resolves the current numerical bottleneck; broader infrastructure
 needs a concrete dependency on that outcome.
+
+Worker timeouts are generous failsafes, not short work slices. Follow the sizing
+and session-continuation guidance in [local agent work](docs/LOCAL_AGENT_WORK.md).
+Review progress separately and preserve healthy workers across checkpoints.

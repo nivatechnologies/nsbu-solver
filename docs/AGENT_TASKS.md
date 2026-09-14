@@ -4,6 +4,11 @@ Use the relevant template and fill in concrete values. Link to source/evidence
 instead of copying conversation history or assigning every worker the full plan.
 These templates define outcomes; workers choose routine implementation details.
 
+Size worker timeouts as generous failsafes: normally one hour for narrow local
+edits and two hours for coding plus tests, longer when measured work requires
+it. State expected test duration separately. Follow the [local worker timeout
+policy](LOCAL_AGENT_WORK.md); checkpoints are progress reviews, not kill timers.
+
 ## Numerical orchestrator
 
 > Work in {checkout, branch, base SHA} toward {specific numerical question}.
