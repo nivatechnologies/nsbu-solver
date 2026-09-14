@@ -138,10 +138,15 @@ fn shared_avx_catalog_preserves_reduced_force_and_refuses_underbudget() {
     )
     .unwrap();
     let serial_limits =
-        ReducedV2Force::preflight_with_fft_backend(domain, samples, backend).unwrap();
-    let mut serial =
-        ReducedV2Force::new_with_catalog(domain, samples, &catalog, serial_limits.storage_bytes)
-            .unwrap();
+        ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 1, backend).unwrap();
+    let mut serial = ParallelReducedV2Force::new_with_catalog(
+        domain,
+        samples,
+        1,
+        &catalog,
+        serial_limits.storage_bytes,
+    )
+    .unwrap();
     let clock = TickClock::restore(-10, 8, 2, 6).unwrap();
     let mut actual = output(domain);
     let mut expected = output(domain);
