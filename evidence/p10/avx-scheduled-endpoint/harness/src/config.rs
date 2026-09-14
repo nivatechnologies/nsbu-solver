@@ -122,7 +122,7 @@ const PROFILE: &str = "n384-m384-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n384-m512-piecewise-cadv33")]
 const PROFILE: &str = "n384-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
-const PROFILE: &str = "n512-m512-h64to2048-h128to4096-cadv33-w3-pfft477c418";
+const PROFILE: &str = "n512-m512-h64to2048-h128to4096-cadv33-w3-pfft1ed6995";
 #[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
@@ -427,7 +427,7 @@ pub fn domain() -> Result<Domain, SolverError> {
 pub fn identity() -> String {
     #[cfg(feature = "n512-m512-piecewise-cadv33")]
     return format!(
-        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;library_source=477c418d30d9f2c8b117ae05240fc5596ecbd33b;prototype_source=b09fb7719c66cfddb04e56a37fe3f0d0fadba5a5;provider=parallel-reduced-v2-force-w3-parallel8-attempt-cache;rhs_w3=layout768-width3-bidirectional-add21812652048;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};observer_execution=offline-baccus-required;sampling_workers={WORKERS};rhs_w3_persistent_callers=3;rhs_fft_helpers={FFT_WORKERS};rhs_fft_total_workers=11;provider_w3_persistent_callers=3;provider_fft_helpers={FFT_WORKERS};provider_fft_total_workers=11;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n512-observer-state-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
+        "source={};case={CASE_SHA256};profile={PROFILE};backend=rustfft-6.4.1-avx-avx2-fma;library_source=1ed699568be70dedf72492324be08600d4407c02;prototype_source=b09fb7719c66cfddb04e56a37fe3f0d0fadba5a5;provider=parallel-reduced-v2-force-w3-parallel8-attempt-cache;rhs_w3=layout768-width3-bidirectional-add21812652048;force_w3={};rhs_timer={};retained={N};force_samples={M};observer_force_samples={OBSERVER_M};observer_conservative={};observer_execution=offline-baccus-required;sampling_workers={WORKERS};rhs_w3_persistent_callers=3;rhs_fft_helpers={FFT_WORKERS};rhs_fft_total_workers=11;provider_w3_persistent_callers=3;provider_fft_helpers={FFT_WORKERS};provider_fft_total_workers=11;method=cox-matthews;schedule={};endpoint={};advective_limit={ADVECTIVE_LIMIT};execution_cap={CAP};artifact_cap={};schema=p10-avx-n512-observer-state-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop={EXTERNAL_STOP}",
         env!("RUN_SOURCE"),
         force_w3_identity(),
         crate::timed_rhs::IDENTITY,
