@@ -42,7 +42,10 @@ RUN_SOURCE=431bddf26d868823663b26596d887cef12b2c254 cargo build --release --mani
 ```
 
 The default launcher refusal is 64. Its deadline, v3 identity, stable owner,
-delayed setsid, archive timeout, TERM-resistant child cleanup, and archive
-collision tests all pass. No large attempt, remote copy, signal, switch, or
-deployment was performed. The separately running Baccus attempt remains an
-external validation input and is not represented as completed here.
+delayed setsid, archive timeout, TERM-resistant child cleanup, archive
+collision, and competing legacy/versioned process-name tests all pass. A
+host-wide nonblocking lock serializes admission through capture and archive.
+The later switch must retain the old v3 partial run and any `.partial` archive
+directory exactly. No large attempt, remote copy, signal, switch, or deployment
+was performed. The separately running Baccus attempt remains an external
+validation input and is not represented as completed here.

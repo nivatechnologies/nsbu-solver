@@ -4,10 +4,12 @@ set -eu
 
 SOURCE=431bddf26d868823663b26596d887cef12b2c254
 BINARY_SHA256=00fdf68c237b49436c0a520ea9a76d529535b6110efc826fb49c8d6906e9f1e4
-PLAN_SHA256=27170d13f74c033fd102972ae8a34ff9258e618c29abd71c835ee80becf0541e
+PLAN_SHA256=fda7b5ae1606f4254ae9117f09bbbcb891afc78589a87df4c0e760640d415fe7
 PREFLIGHT_SHA256=b395e481becd9d06d50e0c126865f5b5c311bcf5c85992fc59a1870b8f5aa664
 WATCHDOG_SHA256=e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1
 ARCHIVE_HELPER_SHA256=048fba75501aea77d9d54dc7e35562b75abb7a6bf981d831f32510113dd37e91
+ENDPOINT_PROCESS_ERE='p10-avx-scheduled-endpoint(-v[0-9]+)? run '
+HOST_LAUNCH_LOCK=/tmp/nsbu-n512-m512-endpoint-launch.lock
 MEMORY_FLOOR_BYTES=241987189520
 DISK_FLOOR_BYTES=189586276352
 SAME_FILESYSTEM_DISK_FLOOR_BYTES=344812814336
@@ -199,6 +201,40 @@ fake_archive_collision_test() {
     echo "preexisting archive target refused with partial preserved"
 }
 
+fake_competing_endpoint_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-competing.XXXXXX")
+    cat >"$temp/p10-avx-scheduled-endpoint-v4" <<'SH'
+#!/bin/sh
+sleep 30
+SH
+    chmod +x "$temp/p10-avx-scheduled-endpoint-v4"
+    "$temp/p10-avx-scheduled-endpoint-v4" run fake & child=$!
+    sleep 0.1
+    pgrep -f "$ENDPOINT_PROCESS_ERE" | grep -qx "$child"
+    /bin/kill -TERM "$child" 2>/dev/null || true
+    wait "$child" 2>/dev/null || true
+    "$temp/p10-avx-scheduled-endpoint-v4" preflight fake & child=$!
+    sleep 0.1
+    if pgrep -f "$ENDPOINT_PROCESS_ERE" | grep -qx "$child"; then
+        /bin/kill -TERM "$child" 2>/dev/null || true
+        wait "$child" 2>/dev/null || true
+        return 1
+    fi
+    /bin/kill -TERM "$child" 2>/dev/null || true
+    wait "$child" 2>/dev/null || true
+    echo "legacy/versioned run admitted and non-run rejected by competing-process matcher"
+}
+
+fake_launch_lock_test() {
+    temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-lock.XXXXXX")
+    exec 8>"$temp/lock"
+    flock -n 8
+    if flock -n "$temp/lock" true; then return 1; fi
+    flock -u 8
+    flock -n "$temp/lock" true
+    echo "host launch lock exclusion and release passed"
+}
+
 BUNDLE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCHDOG=$BUNDLE/pgid-watchdog-v3.sh
 ARCHIVE_HELPER=$BUNDLE/archive-local.sh
@@ -217,6 +253,8 @@ case "${1:-}" in
     --self-test-archive-timeout) fake_archive_timeout_test; exit $? ;;
     --self-test-wrapper-cleanup) fake_wrapper_cleanup_test; exit $? ;;
     --self-test-archive-collision) fake_archive_collision_test; exit $? ;;
+    --self-test-competing-endpoint) fake_competing_endpoint_test; exit $? ;;
+    --self-test-launch-lock) fake_launch_lock_test; exit $? ;;
     --self-test-identity) require_v3_identity; echo "v3 binary identity admitted"; exit 0 ;;
 esac
 
@@ -235,6 +273,9 @@ require_v3_identity
 ARCHIVE_PARENT=${NSBU_N512_M512_V4_ARCHIVE_PARENT:-}
 case "$ARCHIVE_PARENT" in /*) ;; *) echo "refused: absolute archive parent required" >&2; exit 67 ;; esac
 [ -d "$ARCHIVE_PARENT" ] || { echo "refused: archive parent missing" >&2; exit 67; }
+command -v flock >/dev/null 2>&1 || { echo "refused: flock unavailable" >&2; exit 70; }
+exec 9>"$HOST_LAUNCH_LOCK"
+flock -n 9 || { echo "refused: endpoint launch lock held" >&2; exit 70; }
 
 BIN=$BUNDLE/p10-avx-scheduled-endpoint-v4
 PLAN=$BUNDLE/v4-launch-plan.json
@@ -254,7 +295,7 @@ ARCHIVE_PARTIAL=$ARCHIVE.partial
 [ "$(sha256sum "$PREFLIGHT" | awk '{print $1}')" = "$PREFLIGHT_SHA256" ] || exit 69
 [ "$(sha256sum "$WATCHDOG" | awk '{print $1}')" = "$WATCHDOG_SHA256" ] || exit 69
 [ "$(sha256sum "$ARCHIVE_HELPER" | awk '{print $1}')" = "$ARCHIVE_HELPER_SHA256" ] || exit 69
-if pgrep -f 'p10-avx-scheduled-endpoint run ' >/dev/null; then
+if pgrep -f "$ENDPOINT_PROCESS_ERE" >/dev/null; then
     echo "refused: competing endpoint solver exists" >&2
     exit 70
 fi

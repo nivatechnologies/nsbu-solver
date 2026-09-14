@@ -17,7 +17,8 @@
   "deadline":{"source":"caller_supplied_authorized_launch_epoch_plus_72000","duration_seconds":72000,"minimum_remaining_at_launch_seconds":66672,"minimum_remaining_after_first_step_seconds":65410},
   "first_step_guard":{"clock":64,"rhs_timed_calls":12,"cache_hits":7,"cache_misses":5,"steady_allocations":0,"integration_limit_seconds":1200,"state_sha256":"5df15fc393b5224170c016aa48cbaad4336e0fbc74d380b5f6c72b5fbe9d21ff"},
   "completion_guard":{"committed_states":48,"terminal_clock":4096,"offline_observer_nodes":8,"qualification":false,"exclusive_local_archive":true},
-  "current_v3_run":{"stage":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z","deadline_epoch":1789411530,"must_remain_untouched_until_separate_switch":true},
+  "admission_guard":{"host_launch_lock":"/tmp/nsbu-n512-m512-endpoint-launch.lock","competing_process_ere":"p10-avx-scheduled-endpoint(-v[0-9]+)? run "},
+  "current_v3_run":{"stage":"/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z","deadline_epoch":1789411530,"must_remain_untouched_until_separate_switch":true,"partial_run_and_archive_directories_preserved":true},
   "launch_authorized":true,
   "deployed":false
 }
