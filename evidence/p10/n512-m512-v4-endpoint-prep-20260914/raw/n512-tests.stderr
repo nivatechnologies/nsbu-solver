@@ -1,0 +1,3 @@
+   Compiling p10-avx-scheduled-endpoint v0.0.0 (/mnt/niva-array/nsbu-solver/work/p10-n512-m512-v4-capture-20260914/evidence/p10/avx-scheduled-endpoint/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.75s
+     Running unittests src/main.rs (evidence/p10/avx-scheduled-endpoint/harness/target/debug/deps/p10_avx_scheduled_endpoint-1a05697bcf737ab3)

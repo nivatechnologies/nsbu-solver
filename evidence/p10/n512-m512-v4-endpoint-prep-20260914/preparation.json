@@ -1,0 +1,16 @@
+{
+  "schema":"p10-n512-m512-v4-capture-preparation-v1",
+  "status":"prepared_not_deployed",
+  "library_source":"477c418d30d9f2c8b117ae05240fc5596ecbd33b",
+  "constructor_refactor_source":"1ed699568be70dedf72492324be08600d4407c02",
+  "harness_run_source":"431bddf26d868823663b26596d887cef12b2c254",
+  "exact_capture_peak_bytes":207627451152,
+  "memory_floor_bytes":241987189520,
+  "binary_sha256":"00fdf68c237b49436c0a520ea9a76d529535b6110efc826fb49c8d6906e9f1e4",
+  "preflight_sha256":"b395e481becd9d06d50e0c126865f5b5c311bcf5c85992fc59a1870b8f5aa664",
+  "plan_sha256":"27170d13f74c033fd102972ae8a34ff9258e618c29abd71c835ee80becf0541e",
+  "launcher_sha256":"4f0a85884c7197424c036d7474188c1bb0a9d8134f3af72c00be941039cae6f1",
+  "endpoint_attempts_executed":0,
+  "live_v3_run_modified":false,
+  "deployed":false
+}
