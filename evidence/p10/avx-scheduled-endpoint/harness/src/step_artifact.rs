@@ -222,6 +222,46 @@ mod tests {
         assert_eq!(disk_preflight(3_233_808_384, 48).unwrap(), 155_226_537_984);
     }
 
+    #[test]
+    fn disk_preflight_refuses_additive_and_multiplicative_overflow() {
+        let overhead = SNAPSHOT_HEADER_ALLOWANCE + RECORD_ALLOWANCE + FILESYSTEM_ALLOWANCE;
+        assert_eq!(
+            disk_preflight(usize::MAX, 1),
+            Err(SolverError::ResourceLimit)
+        );
+        assert_eq!(
+            disk_preflight(usize::MAX - overhead + 1, 1),
+            Err(SolverError::ResourceLimit)
+        );
+        assert_eq!(
+            disk_preflight(usize::MAX - overhead, usize::MAX),
+            Err(SolverError::ResourceLimit)
+        );
+        assert_eq!(disk_preflight(1024, 8).unwrap(), (1024 + overhead) * 8);
+    }
+
+    #[test]
+    fn disk_preflight_one_step_accepts_exact_disk_cap_and_refuses_one_byte_beyond() {
+        let overhead = SNAPSHOT_HEADER_ALLOWANCE + RECORD_ALLOWANCE + FILESYSTEM_ALLOWANCE;
+        let cap = artifact::DISK_CAP_BYTES;
+        assert_eq!(disk_preflight(cap - overhead, 1).unwrap(), cap);
+        assert_eq!(
+            disk_preflight(cap - overhead + 1, 1),
+            Err(SolverError::ResourceLimit)
+        );
+    }
+
+    #[test]
+    fn disk_preflight_two_step_amplification_crosses_disk_cap() {
+        let overhead = SNAPSHOT_HEADER_ALLOWANCE + RECORD_ALLOWANCE + FILESYSTEM_ALLOWANCE;
+        let cap = artifact::DISK_CAP_BYTES;
+        assert_eq!(disk_preflight(cap / 2 - overhead, 2).unwrap(), cap);
+        assert_eq!(
+            disk_preflight(cap / 2 - overhead + 1, 2),
+            Err(SolverError::ResourceLimit)
+        );
+    }
+
     #[cfg(feature = "n512-m512-piecewise-cadv33")]
     #[test]
     fn captured_actual_state_has_no_inline_observer_claim() {

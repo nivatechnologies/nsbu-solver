@@ -1,0 +1,15 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/main.rs (/tmp/nsbu-opencode-capture-disk-tests-target/debug/deps/p10_avx_scheduled_endpoint-7207296b7836e07b)
+
+running 8 tests
+test step_artifact::tests::captured_actual_state_has_no_inline_observer_claim ... ok
+test step_artifact::tests::disk_preflight_one_step_accepts_exact_disk_cap_and_refuses_one_byte_beyond ... ok
+test step_artifact::tests::disk_preflight_refuses_additive_and_multiplicative_overflow ... ok
+test step_artifact::tests::disk_preflight_two_step_amplification_crosses_disk_cap ... ok
+test step_artifact::tests::exact_n384_artifact_profiles_are_bounded ... ok
+test step_artifact::tests::parent_sync_failure_reports_unconfirmed_final_location ... ok
+test step_artifact::tests::rest_is_metadata_only_and_unscheduled_step_has_no_balance ... ok
+test step_artifact::tests::scheduled_step_carries_actual_balance_in_same_bundle ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 14 filtered out; finished in 0.08s
+
