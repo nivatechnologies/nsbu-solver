@@ -1,0 +1,14 @@
+### n256-m512 + n512
+error: n256-m512-piecewise-cadv33 is a mutually exclusive profile
+43 | compile_error!("n256-m512-piecewise-cadv33 is a mutually exclusive profile");
+error: could not compile `p10-avx-scheduled-endpoint` (bin "p10-avx-scheduled-endpoint") due to 12 previous errors; 2 warnings emitted
+### n256-m512 + n384-m512
+error: n256-m512-piecewise-cadv33 is a mutually exclusive profile
+43 | compile_error!("n256-m512-piecewise-cadv33 is a mutually exclusive profile");
+error: could not compile `p10-avx-scheduled-endpoint` (bin "p10-avx-scheduled-endpoint") due to 2 previous errors
+### n256-m512 + n256
+error: n256 and n384-prep are mutually exclusive profiles
+17 | compile_error!("n256 and n384-prep are mutually exclusive profiles");
+error: n256-m512-piecewise-cadv33 is a mutually exclusive profile
+43 | compile_error!("n256-m512-piecewise-cadv33 is a mutually exclusive profile");
+error: could not compile `p10-avx-scheduled-endpoint` (bin "p10-avx-scheduled-endpoint") due to 2 previous errors

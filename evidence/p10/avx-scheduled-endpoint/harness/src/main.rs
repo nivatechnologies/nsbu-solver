@@ -1,7 +1,7 @@
-#![cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(clippy::needless_return))]
+#![cfg_attr(capture_offline, allow(clippy::needless_return))]
 
 mod artifact;
-#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
+#[cfg_attr(capture_offline, allow(dead_code))]
 mod balance;
 #[cfg(not(feature = "n384-prep"))]
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/cache.rs"]
@@ -15,21 +15,21 @@ mod command;
 mod config;
 mod error;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
-#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
+#[cfg_attr(capture_offline, allow(dead_code))]
 mod observer;
-#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
+#[cfg_attr(capture_offline, allow(dead_code))]
 mod owners;
 mod publication;
-#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
+#[cfg_attr(capture_offline, allow(dead_code))]
 mod records;
 mod run_types;
 mod schedule;
 #[cfg(feature = "n384-prep")]
-#[cfg_attr(feature = "n512-m512-piecewise-cadv33", allow(dead_code))]
+#[cfg_attr(capture_offline, allow(dead_code))]
 mod step_artifact;
 mod timed_rhs;
 
-#[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+#[cfg(not(capture_offline))]
 use artifact::NodeRecord;
 use artifact::StagedArtifact;
 use balance::TimedBalance;
@@ -317,10 +317,11 @@ impl RunOwners {
 
     fn finish(&self, output: &Path) -> AnyResult<()> {
         self.validate_finish()?;
-        #[cfg(feature = "n512-m512-piecewise-cadv33")]
+        #[cfg(capture_offline)]
         {
             let terminal = format!(
-                "{{\n  \"schema\": \"p10-avx-n512-endpoint-capture-v1\",\n  \"identity\": {:?},\n  \"clock\": {},\n  \"accepted_steps\": {},\n  \"captured_positive_observer_clocks\": {:?},\n  \"observer_execution\": \"offline-baccus-required\",\n  \"qualification\": false\n}}\n",
+                "{{\n  \"schema\": \"{}\",\n  \"identity\": {:?},\n  \"clock\": {},\n  \"accepted_steps\": {},\n  \"captured_positive_observer_clocks\": {:?},\n  \"observer_execution\": \"offline-baccus-required\",\n  \"qualification\": false\n}}\n",
+                capture_terminal_schema(),
                 self.identity,
                 self.state.clock().elapsed(),
                 self.state.accepted_steps(),
@@ -330,7 +331,7 @@ impl RunOwners {
             println!("terminal endpoint_capture_complete_offline_observer_required clock=4096");
             return Ok(());
         }
-        #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+        #[cfg(not(capture_offline))]
         {
             let integrals = balance::quadrature(&self.balances)?;
             let terminal = balance::terminal_json(
@@ -348,13 +349,22 @@ impl RunOwners {
     fn validate_finish(&self) -> AnyResult<()> {
         if self.state.clock().elapsed() != schedule::ENDPOINT
             || self.frontiers.durable_clock != schedule::ENDPOINT
-            || (!cfg!(feature = "n512-m512-piecewise-cadv33")
-                && self.balances.len() != schedule::FINE.len())
+            || (!cfg!(capture_offline) && self.balances.len() != schedule::FINE.len())
         {
             return Err(SolverError::InvalidClock.into());
         }
         Ok(())
     }
+}
+
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+fn capture_terminal_schema() -> &'static str {
+    "p10-avx-n512-endpoint-capture-v1"
+}
+
+#[cfg(feature = "n256-m512-piecewise-cadv33")]
+fn capture_terminal_schema() -> &'static str {
+    "p10-avx-n256-m512-endpoint-capture-v1"
 }
 
 fn publish_prepared(
@@ -426,12 +436,12 @@ fn observe_proposal(
     proposal: &SpectralState,
     observer: &mut Option<ReducedObserver>,
 ) -> AnyResult<Option<(TimedBalance, ObservationTiming)>> {
-    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    #[cfg(capture_offline)]
     {
         let _ = (proposal, observer);
         return Ok(None);
     }
-    #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+    #[cfg(not(capture_offline))]
     {
         if !schedule::positive_node(proposal.clock().elapsed()) {
             return Ok(None);
@@ -510,7 +520,7 @@ fn stage_artifact(
     }
 }
 
-#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
+#[cfg(all(feature = "n384-prep", not(capture_offline)))]
 fn stage_artifact(
     output: &Path,
     index: usize,
@@ -534,7 +544,7 @@ fn stage_artifact(
         .map_err(HarnessError::from)
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(capture_offline)]
 fn stage_artifact(
     output: &Path,
     index: usize,

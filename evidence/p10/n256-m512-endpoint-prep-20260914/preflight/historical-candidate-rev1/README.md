@@ -1,0 +1,1 @@
+RETAINED PRIOR REVISION (rev1). This candidate preflight carried host=sulaco and external_stop pgid-watchdog-v2 for the new n256-m512-piecewise-cadv33 profile. It is superseded by the corrected host=baccus / pgid-watchdog-v3 candidate and kept byte-for-byte, not overwritten. Still an uncommitted candidate; root freeze pending.

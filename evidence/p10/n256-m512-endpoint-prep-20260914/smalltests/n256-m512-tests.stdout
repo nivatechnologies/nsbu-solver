@@ -1,0 +1,29 @@
+
+running 24 tests
+test artifact::tests::json_string_escapes_quotes_newlines_and_control_characters ... ok
+test config::n256_m512_resource_probe::run_gate_is_opt_in_and_preflight_admits ... ok
+test config::n256_m512_resource_probe::profile_is_exact_n256_and_distinct_from_n384_and_n512 ... ok
+test config::n256_m512_resource_probe::scalar_w3_capture_reservations_are_exact_without_numerical_arrays ... ok
+test owners::tests::exact_w3_identity_values_accept_and_any_change_refuses ... ok
+test publication::tests::observer_failure_does_not_commit_or_move_any_frontier ... ok
+test publication::tests::staged_write_failure_does_not_commit_or_move_any_frontier ... ok
+test schedule::tests::piecewise_transition_and_invalid_clocks_are_exact ... ok
+test schedule::tests::schedule_is_exact_nested_and_has_eight_positive_observations ... ok
+test schedule::tests::unscheduled_and_rest_clocks_do_not_trigger_positive_observation ... ok
+test step_artifact::tests::disk_preflight_one_step_accepts_exact_disk_cap_and_refuses_one_byte_beyond ... ok
+test step_artifact::tests::disk_preflight_refuses_additive_and_multiplicative_overflow ... ok
+test step_artifact::tests::disk_preflight_two_step_amplification_crosses_disk_cap ... ok
+test step_artifact::tests::exact_n384_artifact_profiles_are_bounded ... ok
+test timed_rhs::tests::delegates_and_accounts_each_evaluation ... ok
+test publication::tests::every_step_bundle_moves_durable_attempt_and_clock_together ... ok
+test artifact::tests::failed_write_publishes_nothing_and_removes_partial_file ... ok
+test publication::tests::publish_failure_discloses_in_memory_and_provisional_frontiers ... ok
+test artifact::tests::atomic_file_refuses_overwrite_and_leaves_no_partial_file ... ok
+test publication::tests::successful_attempt_publication_moves_attempt_frontier_only ... ok
+test step_artifact::tests::captured_actual_state_has_no_inline_observer_claim ... ok
+test step_artifact::tests::parent_sync_failure_reports_unconfirmed_final_location ... ok
+test step_artifact::tests::scheduled_step_carries_actual_balance_in_same_bundle ... ok
+test step_artifact::tests::rest_is_metadata_only_and_unscheduled_step_has_no_balance ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

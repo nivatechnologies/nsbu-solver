@@ -251,13 +251,17 @@ fn force_identity() -> Result<W3FftIdentity, SolverError> {
 #[cfg(all(
     feature = "n384-prep",
     not(feature = "n384-m512-piecewise-cadv33"),
-    not(feature = "n512-m512-piecewise-cadv33")
+    not(feature = "n512-m512-piecewise-cadv33"),
+    not(feature = "n256-m512-piecewise-cadv33")
 ))]
 const fn force_w3_additional_bytes() -> usize {
     1_828_040_448
 }
 
-#[cfg(feature = "n384-m512-piecewise-cadv33")]
+#[cfg(any(
+    feature = "n384-m512-piecewise-cadv33",
+    feature = "n256-m512-piecewise-cadv33"
+))]
 const fn force_w3_additional_bytes() -> usize {
     4_318_465_792
 }
@@ -267,7 +271,7 @@ const fn force_w3_additional_bytes() -> usize {
     4_343_035_792
 }
 
-#[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+#[cfg(all(not(feature = "n512-m512-piecewise-cadv33"), not(feature = "n256-m512-piecewise-cadv33")))]
 const fn rhs_w3_additional_bytes() -> usize {
     9_200_926_592
 }
@@ -277,13 +281,18 @@ const fn rhs_w3_additional_bytes() -> usize {
     21_812_652_048
 }
 
+#[cfg(feature = "n256-m512-piecewise-cadv33")]
+const fn rhs_w3_additional_bytes() -> usize {
+    2_734_010_240
+}
+
 fn new_observer(catalog: &FftCatalog) -> Result<Option<ReducedObserver>, SolverError> {
-    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    #[cfg(capture_offline)]
     {
         let _ = catalog;
         return Ok(None);
     }
-    #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
+    #[cfg(not(capture_offline))]
     {
         let domain = config::domain()?;
         let samples = Layout::new([config::OBSERVER_M; 3])?;

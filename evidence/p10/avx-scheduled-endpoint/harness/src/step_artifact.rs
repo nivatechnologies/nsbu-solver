@@ -11,9 +11,14 @@ const SNAPSHOT_HEADER_ALLOWANCE: usize = 4096;
 const RECORD_ALLOWANCE: usize = 2 * 4096;
 const FILESYSTEM_ALLOWANCE: usize = 64 * 1024;
 
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const CAPTURED_SCHEMA: &str = "p10-avx-n512-observer-state-v1";
+#[cfg(feature = "n256-m512-piecewise-cadv33")]
+const CAPTURED_SCHEMA: &str = "p10-avx-n256-m512-observer-state-v1";
+
 pub enum Observation<'a> {
     Scheduled(NodeRecord<'a>),
-    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    #[cfg(capture_offline)]
     Captured {
         identity: &'a str,
         offline_observer_node: bool,
@@ -27,7 +32,7 @@ impl Observation<'_> {
     fn identity(&self) -> &str {
         match self {
             Self::Scheduled(record) => record.identity,
-            #[cfg(feature = "n512-m512-piecewise-cadv33")]
+            #[cfg(capture_offline)]
             Self::Captured { identity, .. } => identity,
             Self::NotScheduled { identity } => identity,
         }
@@ -121,7 +126,7 @@ fn record_json(
                 1,
             )
         }
-        #[cfg(feature = "n512-m512-piecewise-cadv33")]
+        #[cfg(capture_offline)]
         Observation::Captured {
             identity,
             offline_observer_node,
@@ -138,7 +143,7 @@ fn record_json(
     }
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(capture_offline)]
 fn captured_json(
     state: &SpectralState,
     identity: &str,
@@ -148,7 +153,7 @@ fn captured_json(
 ) -> String {
     format!(
         concat!(
-            "{{\n  \"schema\": \"p10-avx-n512-observer-state-v1\",\n",
+            "{{\n  \"schema\": \"{}\",\n",
             "  \"identity\": {},\n  \"resumable\": false,\n",
             "  \"clock\": {},\n  \"epoch\": {},\n  \"accepted_steps\": {},\n",
             "  \"coefficient_bytes\": {},\n  \"state_sha256\": \"{}\",\n",
@@ -157,6 +162,7 @@ fn captured_json(
             "  \"observer_execution\": \"offline-baccus-required\",\n",
             "  \"qualification\": false\n}}\n"
         ),
+        CAPTURED_SCHEMA,
         artifact::json_string(identity),
         state.clock().elapsed(),
         state.epoch().0,
@@ -262,7 +268,7 @@ mod tests {
         );
     }
 
-    #[cfg(feature = "n512-m512-piecewise-cadv33")]
+    #[cfg(capture_offline)]
     #[test]
     fn captured_actual_state_has_no_inline_observer_claim() {
         let root = root("captured");

@@ -18,7 +18,8 @@ pub const DISK_CAP_BYTES: usize = 256 * 1024 * 1024 * 1024;
     feature = "n384-piecewise",
     feature = "n384-piecewise-cadv33",
     feature = "n384-m512-piecewise-cadv33",
-    feature = "n512-m512-piecewise-cadv33"
+    feature = "n512-m512-piecewise-cadv33",
+    feature = "n256-m512-piecewise-cadv33"
 ))]
 #[cfg(not(feature = "n512-m512-piecewise-cadv33"))]
 pub const DISK_CAP_BYTES: usize = 128 * 1024 * 1024 * 1024;
