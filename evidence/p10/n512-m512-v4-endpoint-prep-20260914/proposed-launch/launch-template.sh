@@ -203,16 +203,19 @@ fake_archive_collision_test() {
 
 fake_competing_endpoint_test() {
     temp=$(mktemp -d "${TMPDIR:-/tmp}/nsbu-n512-competing.XXXXXX")
-    cat >"$temp/p10-avx-scheduled-endpoint-v4" <<'SH'
+    cat >"$temp/fake-endpoint" <<'SH'
 #!/bin/sh
 sleep 30
 SH
-    chmod +x "$temp/p10-avx-scheduled-endpoint-v4"
-    "$temp/p10-avx-scheduled-endpoint-v4" run fake & child=$!
-    sleep 0.1
-    pgrep -f "$ENDPOINT_PROCESS_ERE" | grep -qx "$child"
-    /bin/kill -TERM "$child" 2>/dev/null || true
-    wait "$child" 2>/dev/null || true
+    chmod +x "$temp/fake-endpoint"
+    for name in p10-avx-scheduled-endpoint p10-avx-scheduled-endpoint-v4; do
+        cp "$temp/fake-endpoint" "$temp/$name"
+        "$temp/$name" run fake & child=$!
+        sleep 0.1
+        pgrep -f "$ENDPOINT_PROCESS_ERE" | grep -qx "$child"
+        /bin/kill -TERM "$child" 2>/dev/null || true
+        wait "$child" 2>/dev/null || true
+    done
     "$temp/p10-avx-scheduled-endpoint-v4" preflight fake & child=$!
     sleep 0.1
     if pgrep -f "$ENDPOINT_PROCESS_ERE" | grep -qx "$child"; then
@@ -222,7 +225,7 @@ SH
     fi
     /bin/kill -TERM "$child" 2>/dev/null || true
     wait "$child" 2>/dev/null || true
-    echo "legacy/versioned run admitted and non-run rejected by competing-process matcher"
+    echo "legacy and versioned runs admitted; non-run rejected by competing-process matcher"
 }
 
 fake_launch_lock_test() {

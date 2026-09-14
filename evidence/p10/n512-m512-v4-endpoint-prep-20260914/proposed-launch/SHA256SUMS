@@ -10,7 +10,7 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n
 b395e481becd9d06d50e0c126865f5b5c311bcf5c85992fc59a1870b8f5aa664  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/bundle-preflight.stdout
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/competing-endpoint.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/competing-endpoint.stderr
-bff81c4ac414479024d9ec3f2117d92b8395fe1841b1da667079c9366b4da085  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/competing-endpoint.stdout
+1cd888b62de366e93c6cb054a236b0041c7d63fbb0d3242d1d68ee8909908f3f  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/competing-endpoint.stdout
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/deadline.status
 f442404f9e2b88aeaedfdbdc0ac9a6826b2fede988d46c056316e429561cb3f6  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/deadline.stderr
 5cf29875ee8478b15ee3bf2650eb9ddc40c9b8b141431b573e73b9f30815e5ba  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/deadline.stdout
@@ -26,14 +26,14 @@ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/launch-lock.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/launch-lock.stderr
 d3ffa146b236f9e0256dc9e6e8f40987963f72579303c816eac8b7eea54d0cba  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/launch-lock.stdout
-7dccfcb6e7adcb0e241dc40bade9f8d91a71fcb88ffe82edf00293900d630f3f  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/launch-template.sh
+dbba7d6a0a3edffc35dacf74578ec246607f9a0046a82be3f4c8803b9a97fea1  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/launch-template.sh
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/owner.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/owner.stderr
 b8a2b429ffbfb08316685947225566ee146d51723b37348903bac068726e2b53  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/owner.stdout
 00fdf68c237b49436c0a520ea9a76d529535b6110efc826fb49c8d6906e9f1e4  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/p10-avx-scheduled-endpoint-v4
 e07cc2b1a4e6375523f08c50dc176289a36d560f1d0af4b3a61eae02873c50f1  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/pgid-watchdog-v3.sh
 fda7b5ae1606f4254ae9117f09bbbcb891afc78589a87df4c0e760640d415fe7  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/v4-launch-plan.json
-12de6e3c861177248dade1f20ace0aec74c56754e318214eff53bdbe4a3ee32a  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/v4-launch-receipt.json
+443a3f5e53311df00fc234940a3f3c35261502a53c9dccd5fb8f3a12efcdc0ec  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/v4-launch-receipt.json
 b395e481becd9d06d50e0c126865f5b5c311bcf5c85992fc59a1870b8f5aa664  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/v4-n512-preflight.stdout
 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/wrapper-cleanup.status
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  evidence/p10/n512-m512-v4-endpoint-prep-20260914/proposed-launch/wrapper-cleanup.stderr
