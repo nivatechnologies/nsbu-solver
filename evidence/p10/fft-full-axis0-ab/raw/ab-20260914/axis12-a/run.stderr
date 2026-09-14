@@ -1,0 +1,7 @@
+{"phase":"preflight","elapsed_ns":22311,"unix_seconds":1789346751,"unix_nanos":229268075}
+{"phase":"allocated","elapsed_ns":53382692729,"unix_seconds":1789346804,"unix_nanos":611938463}
+{"phase":"warm_pair","elapsed_ns":72432630570,"unix_seconds":1789346823,"unix_nanos":661876074}
+{"phase":"forward_result","round":0,"elapsed_ns":9065047230,"allocations":[0,0,0],"sha256":"be113a733eee8ed8d7571e2150802cf45966e38ffeae2fe5cb4675f3429a9112"}
+{"phase":"timed_forward","elapsed_ns":162520292322,"unix_seconds":1789346913,"unix_nanos":749538026}
+{"phase":"inverse_result","round":0,"elapsed_ns":9264243625,"allocations":[0,0,0],"sha256":"a5b0358eb9506df6273b104c3cce088a3f32c9d511858acbdd260f8110cf02b8"}
+{"phase":"timed_inverse","elapsed_ns":270920181610,"unix_seconds":1789347022,"unix_nanos":149427044}

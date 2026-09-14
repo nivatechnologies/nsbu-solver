@@ -336,3 +336,10 @@ resume for this capture. The public CLI does not automatically select this
 experimental executor. Parallelization of the remaining FFT axis is a separate
 candidate requiring exact-output, allocation, resource and timing checks before
 use. No numerical acceptance thresholds have been relaxed.
+
+The subsequent [full-axis FFT comparison](../evidence/p10/fft-full-axis0-ab/REJECTION.md)
+rejected the transpose candidate: measured N768 forward and inverse transforms
+were 1.88 and 1.84 times slower than the axis1/2 implementation. Emitted hashes
+matched and allocations were zero, but the full trial reached its fixed timeout.
+The prototype remains isolated; additional repetitions and tuning were stopped.
+The running trajectory is unchanged.

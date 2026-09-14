@@ -680,6 +680,14 @@
     "staged_path": "/tmp/nsbu-p10-n512-m512-v4-staged-20260914T002332Z",
     "staging_evidence": "evidence/p10/n512-m512-v4-staging-20260914/README.md",
     "qualification": false,
-    "scope": "Opt-in shared FFT executor parallelizes axes 1 and 2. One from-rest N512/M512 attempt on a shared host; not a guaranteed throughput improvement or accepted PDE window. Live v3 progress retained because a restart would discard committed steps. Full axis-0 candidate remains separate, unvalidated work."
+    "scope": "Opt-in shared FFT executor parallelizes axes 1 and 2. One from-rest N512/M512 attempt on a shared host; not a guaranteed throughput improvement or accepted PDE window. Live v3 progress retained because a restart would discard committed steps. Full axis-0 candidate remains separate, unvalidated work.",
+    "full_axis0_candidate": {
+      "status": "rejected_measured_performance_regression",
+      "evidence": "evidence/p10/fft-full-axis0-ab/REJECTION.md",
+      "forward_ratio_to_axis12": 1.8823193607152913,
+      "inverse_ratio_to_axis12": 1.8370823203456133,
+      "deployed": false,
+      "further_tuning": "stopped_to_preserve_usage"
+    }
   }
 }

@@ -1,0 +1,35 @@
+{
+  "schema": "p10-fft-full-axis0-rejection-v1",
+  "library_source": "4b5a6709b3ce521428a3502b666fc9ec0cb6cae0",
+  "full_axis0_implementation_source": "5c9c61ed0458ee9c495dbd63cb4e3f019aec3090",
+  "harness_source": "d9972fe973a97382451b92165ea64f0a0e182f63",
+  "launcher_source": "b7aee2d",
+  "launcher_sha256": "6bc01c9bc2ecaf4615cc8e5ba53a066ccf715dbb2cfb286f08b5884ec1749a43",
+  "binary_sha256": "dad7653776b8207a24bbe387b53e135896ecbee0c98c1d1eb4542dc62efdfa08",
+  "openssl_binary_sha256": "30cc7c491903d6d8bca54406889c0334a167777397458214b5bd498c51b6fd97",
+  "n": 768,
+  "helpers": 8,
+  "axis12": {
+    "exit": 0,
+    "forward_ns": [9410149488, 10666382969, 9909223472],
+    "inverse_ns": [10480095525, 8973739499, 8506287129],
+    "forward_median_ns": 9909223472,
+    "inverse_median_ns": 8973739499,
+    "allocations": [0, 0, 0],
+    "max_rss_kib": 49604608
+  },
+  "full_axis0": {
+    "exit": 124,
+    "forward_ns": [17942358576, 18931784665, 18652323191],
+    "inverse_ns": [16482826324, 16488170038],
+    "forward_median_ns": 18652323191,
+    "inverse_median_ns": 16485613231,
+    "forward_ratio_to_axis12": 1.8823193607152913,
+    "inverse_ratio_to_axis12": 1.8370823203456133,
+    "all_emitted_transform_allocations": [0, 0, 0],
+    "max_rss_kib": 60249088
+  },
+  "forward_sha256": "be113a733eee8ed8d7571e2150802cf45966e38ffeae2fe5cb4675f3429a9112",
+  "inverse_sha256": "a5b0358eb9506df6273b104c3cce088a3f32c9d511858acbdd260f8110cf02b8",
+  "decision": "reject_full_axis0_candidate"
+}
