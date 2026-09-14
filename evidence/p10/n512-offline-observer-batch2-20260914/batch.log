@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/mnt/niva-array/nsbu-solver/work/opencode-n512-observer-batch-20260914/work/n512-observer-batch2/run-clock.py", line 20, in <module>
+    with (out/"launch.json").open("xb") as lf: json.dump(receipt,lf,indent=2); lf.write("\n"); lf.flush(); os.fsync(lf.fileno())
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 180, in dump
+    fp.write(chunk)
+TypeError: a bytes-like object is required, not 'str'
+clock2048 exit=0 ok=True
+clock2560 exit=0 ok=True
+clock3072 exit=0 ok=True

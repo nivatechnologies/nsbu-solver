@@ -1,0 +1,405 @@
+{
+  "schema": "p10-n512-offline-observer-batch2-packet-v1",
+  "import_ready": true,
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-diagnostic-only; qualification=false; accepted_windows=0; no inline parity, force comparison, endpoint completion or window claim",
+  "clock2048_execution_history": "The successful clock-2048 files are a controlled rerun after an aborted wrapper attempt; see clock2048-rerun-incident.json. Create-only history is not claimed for those reused paths.",
+  "wording_policy": "positive-claim scan over authored receipts; negated scope statements permitted; raw machine JSON constrained by semantic qualification/accepted_windows checks",
+  "durable_large_artifacts_excluded_from_packet": [
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2048/state.bin",
+      "sha256": "dfdfc8d4dd9696fd12584f76efd44888a1bc7d9eb61d81f55bf93b57ac5e940d"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2048/record.json",
+      "sha256": "0f82ee90b15734b097b512dfb61c34c6c4a9cf04b0ae9806547ecc302efb2d8b"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2048/attempt.json",
+      "sha256": "904ef5ac6a738554d25e8888dcc215a6c743bd9b546d5998c0acc5579f8b9113"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2560/state.bin",
+      "sha256": "58f304d4cd52143880b3bd7d6759c5723559745c389105e6dc049aff08380712"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2560/record.json",
+      "sha256": "a1f92c196d82920c1908f1a93895f9e6e07f3c86da452cc7515d9d86b5b9dcd6"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2560/attempt.json",
+      "sha256": "ec7383858b4b8423e122022002858cfd64e5b1fac5c08daa3c778074de3cea71"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock3072/state.bin",
+      "sha256": "2d072c2a93f000182f7cd900d9927d8313008c2955421ee8aef3cff72f947b5c"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock3072/record.json",
+      "sha256": "a97bb45bf3303ac24626db49ac61d8c40ef82ecb7e2c3ee13c94ea3d72311794"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock3072/attempt.json",
+      "sha256": "1f3418003dacd979806328a20d93ee7e135fdec940a793eb9490f05684a02c62"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "batch-summary.json",
+      "sha256": "5b45d73541b0ffd48853b04350e48d158ea97589cde82db38b1afa703a57064b",
+      "bytes": 3359
+    },
+    {
+      "path": "batch.log",
+      "sha256": "2a491aa0cafed93205cd2a4aacaca5ca248825ef03294f68cd8c4362345e2de0",
+      "bytes": 597
+    },
+    {
+      "path": "clock2048-balance-input.json",
+      "sha256": "e989eb39275dd76e43defa8c501e39ac6f6c57864e1ebc6277c06f122c21c11e",
+      "bytes": 3063
+    },
+    {
+      "path": "clock2048-incident-transcript.txt",
+      "sha256": "edc392e4b08dd7303b15fc04ba83e437256ba4a4fdc55685b4f4350f961740b1",
+      "bytes": 1797
+    },
+    {
+      "path": "clock2048-rerun-incident.json",
+      "sha256": "45093174c0b1c53c047122a918bb2beff80f7697495a2ac5b0ff1803b962a60d",
+      "bytes": 2347
+    },
+    {
+      "path": "clock2560-balance-input.json",
+      "sha256": "3d6d3c75afbbb73cec2ea8fc2920aba8b9518c4c2e44b00521ecf104c7e51edd",
+      "bytes": 3171
+    },
+    {
+      "path": "clock3072-balance-input.json",
+      "sha256": "8d629d9fe2c79263717fb60145415c993c4a76885368155230c7009c6886506c",
+      "bytes": 3171
+    },
+    {
+      "path": "copy-receipts.json",
+      "sha256": "982361ded3277da4d9d6761bb019452ea786b4b764220e91f3eb32019ef7bbd3",
+      "bytes": 2421
+    },
+    {
+      "path": "execution-clock2048/launch.json",
+      "sha256": "b4f1ca40e06653f1619730699b2bdee5f8b17c59c6dd476578676e459f24291c",
+      "bytes": 1287
+    },
+    {
+      "path": "execution-clock2048/output.json",
+      "sha256": "81d4cb54aa63a84813053c324da6f5d157d36a61a867db9c94f7e4ea21b1e018",
+      "bytes": 4387
+    },
+    {
+      "path": "execution-clock2048/result.json",
+      "sha256": "c251e2a9ea247af1ee5b3f5a185d2fc2f007a3631507128ba7f4dc4187b1415b",
+      "bytes": 906
+    },
+    {
+      "path": "execution-clock2048/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock2048/time.txt",
+      "sha256": "75924a1348fd5c3904dab6797e066259870c94543fb0b7f27aa4327e291021e7",
+      "bytes": 1019
+    },
+    {
+      "path": "execution-clock2560/launch.json",
+      "sha256": "13f65f17d3e50e07e5366cd2053749e2404a5375c26a923ef62e22c0fc5d53d6",
+      "bytes": 1285
+    },
+    {
+      "path": "execution-clock2560/output.json",
+      "sha256": "e76c5749d42faab3165b351a89aaeee0cdd1861d75ec1549635c104e831fa5bb",
+      "bytes": 4492
+    },
+    {
+      "path": "execution-clock2560/result.json",
+      "sha256": "a5fd0ac77f74e6125de6cd33a13c78cdd190294575c974c2337af72a7fc3b9b3",
+      "bytes": 903
+    },
+    {
+      "path": "execution-clock2560/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock2560/time.txt",
+      "sha256": "abef1c058dfbba15185e1b9ff60e4befa7c3852e3710b0132b3bb3f2d526c615",
+      "bytes": 1019
+    },
+    {
+      "path": "execution-clock3072/launch.json",
+      "sha256": "3119c2a9ecc1f3707a44465dbd3853a834da6bc6ac1483d7a8ad2117ff0fef96",
+      "bytes": 1287
+    },
+    {
+      "path": "execution-clock3072/output.json",
+      "sha256": "a723b99441f8878f5e27955dec901075f7036ec369d54c7a67ca61a91ca4e1a9",
+      "bytes": 4494
+    },
+    {
+      "path": "execution-clock3072/result.json",
+      "sha256": "e6b927b7973192c9a7f13c9d75d57b1952dbdf1abd89476a79cc5e7b2ef9d8f7",
+      "bytes": 904
+    },
+    {
+      "path": "execution-clock3072/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock3072/time.txt",
+      "sha256": "b2cc25b95ec378ab0f976cfe9f5e616baff70f3775fd1e5e953c1ce889a586d6",
+      "bytes": 1020
+    },
+    {
+      "path": "preflight-2048.json",
+      "sha256": "263a84fb2661b3fd6a2d7a67372ae2d36657ecd26e3729b401ed11a975302900",
+      "bytes": 3613
+    },
+    {
+      "path": "preflight-2048.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "preflight-2560.json",
+      "sha256": "2390000778928f0bfb47251ba45e6d6fb617c5ef3dd02a349ea8e69f6a309bd2",
+      "bytes": 3721
+    },
+    {
+      "path": "preflight-2560.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "preflight-3072.json",
+      "sha256": "eb607d11ca5a50e74ece225c37fa17d8cc883594b5f66bec7bf30e14c7b78645",
+      "bytes": 3721
+    },
+    {
+      "path": "preflight-3072.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "remote-verify-clock2048.txt",
+      "sha256": "d28b05d30011a5ca84448287f77255bab0bba8ddf5c04b2d828fd1af285fd2d0",
+      "bytes": 481
+    },
+    {
+      "path": "remote-verify-clock2560.txt",
+      "sha256": "5e1eb8d7f611e17e4e860a2221c2cd56397b06f6af2c50fe69eb5737ee1f7b2b",
+      "bytes": 481
+    },
+    {
+      "path": "remote-verify-clock3072.txt",
+      "sha256": "8686a526423711045a3b77d491caa2fe1cbfbd4c2a70676cec0cf9d5f9604c18",
+      "bytes": 481
+    }
+  ],
+  "validation_checks": [
+    {
+      "check": "2048 remote bundle stat consistent",
+      "pass": true
+    },
+    {
+      "check": "2560 remote bundle stat consistent",
+      "pass": true
+    },
+    {
+      "check": "3072 remote bundle stat consistent",
+      "pass": true
+    },
+    {
+      "check": "2048 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "2048 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "2048 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "2048 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "2048 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "2048 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "2048 exact schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "2048 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "2048 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "2048 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "2048 binary sha",
+      "pass": true
+    },
+    {
+      "check": "2048 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "2560 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "2560 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "2560 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "2560 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "2560 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "2560 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "2560 exact schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "2560 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "2560 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "2560 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "2560 binary sha",
+      "pass": true
+    },
+    {
+      "check": "2560 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "3072 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "3072 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "3072 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "3072 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "3072 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "3072 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "3072 exact schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "3072 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "3072 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "3072 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "3072 binary sha",
+      "pass": true
+    },
+    {
+      "check": "3072 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "2048 incident initial PID/PGID and unusable status",
+      "pass": true
+    },
+    {
+      "check": "2048 incident owned cleanup",
+      "pass": true
+    },
+    {
+      "check": "2048 controlled rerun identity",
+      "pass": true
+    },
+    {
+      "check": "2048 incident transcript binding",
+      "pass": true
+    },
+    {
+      "check": "wording batch-summary.json",
+      "pass": true
+    },
+    {
+      "check": "wording copy-receipts.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock2048/result.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock2560/result.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock3072/result.json",
+      "pass": true
+    }
+  ]
+}

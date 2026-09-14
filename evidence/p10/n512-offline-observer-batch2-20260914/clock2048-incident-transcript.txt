@@ -1,0 +1,27 @@
+Clock 2048 wrapper incident and controlled rerun transcript excerpt
+
+Source: /mnt/niva-array/work/opencode-offline-preparation-20260914/n512-observer-batch2.jsonl
+The incident receipt binds the complete source transcript by SHA-256 and gives its relevant JSONL line numbers. This compact excerpt preserves the operative commands and outputs.
+
+[initial wrapper, line 116]
+python3 work/n512-observer-batch2/run-clock.py 2048 2>&1 | tee -a evidence/p10/n512-offline-observer-batch2-20260914/batch.log
+Traceback: json.dump to launch.json opened with xb raised TypeError: a bytes-like object is required, not 'str'.
+
+[owned-child detection, line 119]
+The root process inspection found the still-running observer child PID 265024 after the wrapper error.
+
+[owned cleanup, line 122]
+pgid=$(ps -o pgid= -p 265024 | tr -d ' '); kill -TERM -- -$pgid; sleep 3; pgrep -af p10-offline-captured-observer ...
+output: pgid=265024; group terminated
+
+[wrapper correction, lines 125-126]
+launch.json and result.json exclusive creation modes were corrected from binary xb to text x.
+
+[artifact removal and controlled rerun, line 130]
+The four initial execution paths were removed after owned cleanup, their directory was recreated, and run-clock.py was run again.
+output: clock2048 exit=0 ok=True
+
+[successful result inspection, line 133]
+The controlled rerun recorded exit_code=0, finite=true, elapsed_clock=2048, eleven finite balances, matching coefficient and whole-file hashes, wall_seconds=755.1397745609283, and maximum RSS 229925888 KiB. Its launch receipt identifies PID/PGID 267001.
+
+The four execution-clock2048 paths contain only the controlled rerun. They were reused and therefore do not preserve create-only history for the initial wrapper attempt. The initial attempt contributes no numerical result.

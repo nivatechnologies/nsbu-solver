@@ -1,0 +1,41 @@
+{
+  "2048": {
+    "source_host": "sulaco",
+    "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-032-clock-2048",
+    "destination": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2048",
+    "record_state_sha256": "653f659cca75e86e8197312c7a06c0cde6e532e02fabda13cc8bc680fc696498",
+    "file_sha256": "dfdfc8d4dd9696fd12584f76efd44888a1bc7d9eb61d81f55bf93b57ac5e940d",
+    "record_json_sha256": "0f82ee90b15734b097b512dfb61c34c6c4a9cf04b0ae9806547ecc302efb2d8b",
+    "attempt_json_sha256": "904ef5ac6a738554d25e8888dcc215a6c743bd9b546d5998c0acc5579f8b9113",
+    "manifest_sha256": "e989eb39275dd76e43defa8c501e39ac6f6c57864e1ebc6277c06f122c21c11e",
+    "hashes_match_remote": true,
+    "bytes": 3233809650,
+    "qualification": false
+  },
+  "2560": {
+    "source_host": "sulaco",
+    "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-036-clock-2560",
+    "destination": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock2560",
+    "record_state_sha256": "84cceb5fc91ad830cac215d532eeda5480c1266675769463765d73d990657bb9",
+    "file_sha256": "58f304d4cd52143880b3bd7d6759c5723559745c389105e6dc049aff08380712",
+    "record_json_sha256": "a1f92c196d82920c1908f1a93895f9e6e07f3c86da452cc7515d9d86b5b9dcd6",
+    "attempt_json_sha256": "ec7383858b4b8423e122022002858cfd64e5b1fac5c08daa3c778074de3cea71",
+    "manifest_sha256": "3d6d3c75afbbb73cec2ea8fc2920aba8b9518c4c2e44b00521ecf104c7e51edd",
+    "hashes_match_remote": true,
+    "bytes": 3233809650,
+    "qualification": false
+  },
+  "3072": {
+    "source_host": "sulaco",
+    "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-040-clock-3072",
+    "destination": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch2-artifacts-20260914/clock3072",
+    "record_state_sha256": "5c4e1c7c1c4a03b6eee79dbe3b5f391dc2c8e4dd1bc84b11039d0d0419ac6515",
+    "file_sha256": "2d072c2a93f000182f7cd900d9927d8313008c2955421ee8aef3cff72f947b5c",
+    "record_json_sha256": "a97bb45bf3303ac24626db49ac61d8c40ef82ecb7e2c3ee13c94ea3d72311794",
+    "attempt_json_sha256": "1f3418003dacd979806328a20d93ee7e135fdec940a793eb9490f05684a02c62",
+    "manifest_sha256": "8d629d9fe2c79263717fb60145415c993c4a76885368155230c7009c6886506c",
+    "hashes_match_remote": true,
+    "bytes": 3233809650,
+    "qualification": false
+  }
+}

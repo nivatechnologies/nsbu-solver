@@ -1,0 +1,26 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 755.3508698940277,
+  "qualification": false,
+  "scope": "early N512 offline balance-only diagnostic at actual captured clocks 2048/2560/3072; no inline control, force comparison or PDE acceptance claim",
+  "finite": true,
+  "elapsed_clock": 2560,
+  "balance": {
+    "divergence_l2": 4.7242972290479754e-15,
+    "energy": 1.5543375549689202,
+    "energy_dissipation": 2338.707431589726,
+    "enstrophy": 1169.353715794863,
+    "enstrophy_dissipation": 11260294.871285638,
+    "forcing_work": 2418.3670731891084,
+    "h1": 48.39231452227308,
+    "l2": 1.7631435307251195,
+    "stretching": 14762.115990403536,
+    "vorticity_forcing": 11309750.58269683,
+    "vorticity_l2": 48.36018436265236
+  },
+  "balance_count": 11,
+  "all_balances_finite": true,
+  "actual_capture_clock_matches": true,
+  "coefficient_hash_matches_record": true,
+  "file_hash_reverified": true
+}

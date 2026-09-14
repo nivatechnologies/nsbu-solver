@@ -1,0 +1,84 @@
+{
+  "schema": "p10-n512-offline-observer-batch2-receipt-v1",
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-only diagnostic at actual captured clocks 2048/2560/3072 from the live Sulaco v3 trajectory; no force comparison, endpoint completion, inline control or window claim",
+  "runs": {
+    "2048": {
+      "remote_step": "step-032-clock-2048",
+      "elapsed_clock": 2048,
+      "epoch": 32,
+      "wall_seconds": 755.1,
+      "max_rss_kib": 229925888,
+      "balance": {
+        "divergence_l2": 5.4234752371334605e-15,
+        "energy": 1.5171430350087918,
+        "energy_dissipation": 2280.4220859408647,
+        "enstrophy": 1140.2110429704323,
+        "enstrophy_dissipation": 11180864.090098046,
+        "forcing_work": 2353.3018111393694,
+        "h1": 47.78552469240502,
+        "l2": 1.7419202249292542,
+        "stretching": 15088.212081284431,
+        "vorticity_forcing": 11221276.159656662,
+        "vorticity_l2": 47.75376514936665
+      },
+      "coefficient_sha256": "653f659cca75e86e8197312c7a06c0cde6e532e02fabda13cc8bc680fc696498",
+      "file_sha256": "dfdfc8d4dd9696fd12584f76efd44888a1bc7d9eb61d81f55bf93b57ac5e940d",
+      "finite": true,
+      "qualification": false
+    },
+    "2560": {
+      "remote_step": "step-036-clock-2560",
+      "elapsed_clock": 2560,
+      "epoch": 36,
+      "wall_seconds": 755.4,
+      "max_rss_kib": 229924864,
+      "balance": {
+        "divergence_l2": 4.7242972290479754e-15,
+        "energy": 1.5543375549689202,
+        "energy_dissipation": 2338.707431589726,
+        "enstrophy": 1169.353715794863,
+        "enstrophy_dissipation": 11260294.871285638,
+        "forcing_work": 2418.3670731891084,
+        "h1": 48.39231452227308,
+        "l2": 1.7631435307251195,
+        "stretching": 14762.115990403536,
+        "vorticity_forcing": 11309750.58269683,
+        "vorticity_l2": 48.36018436265236
+      },
+      "coefficient_sha256": "84cceb5fc91ad830cac215d532eeda5480c1266675769463765d73d990657bb9",
+      "file_sha256": "58f304d4cd52143880b3bd7d6759c5723559745c389105e6dc049aff08380712",
+      "finite": true,
+      "qualification": false
+    },
+    "3072": {
+      "remote_step": "step-040-clock-3072",
+      "elapsed_clock": 3072,
+      "epoch": 40,
+      "wall_seconds": 908.6,
+      "max_rss_kib": 229910528,
+      "balance": {
+        "divergence_l2": 4.8655237496628696e-15,
+        "energy": 1.5951473547399615,
+        "energy_dissipation": 2406.657867431817,
+        "enstrophy": 1203.3289337159085,
+        "enstrophy_dissipation": 11353219.697516453,
+        "forcing_work": 2494.4020213853237,
+        "h1": 49.09020432095594,
+        "l2": 1.7861396108591072,
+        "stretching": 14252.889896468276,
+        "vorticity_forcing": 11414403.331215763,
+        "vorticity_l2": 49.05769936953645
+      },
+      "coefficient_sha256": "5c4e1c7c1c4a03b6eee79dbe3b5f391dc2c8e4dd1bc84b11039d0d0419ac6515",
+      "file_sha256": "2d072c2a93f000182f7cd900d9927d8313008c2955421ee8aef3cff72f947b5c",
+      "finite": true,
+      "qualification": false
+    }
+  },
+  "accepted_windows": 0,
+  "qualification": false
+}

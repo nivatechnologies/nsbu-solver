@@ -1,0 +1,57 @@
+{
+  "schema": "p10-observer-controlled-rerun-incident-v1",
+  "clock": 2048,
+  "qualification": false,
+  "accepted_windows": 0,
+  "initial_execution": {
+    "wrapper_command_started_utc": "2026-09-14T10:24:53.040000Z",
+    "wrapper_error_observed_utc": "2026-09-14T10:24:53.191000Z",
+    "pid": 265024,
+    "pgid": 265024,
+    "failure": "launch receipt was opened in binary exclusive-create mode and json.dump raised TypeError after the observer child had started",
+    "pipeline_status_note": "the shell pipeline status was zero because tee was the last command; this is not an observer success receipt",
+    "result_usable": false
+  },
+  "owned_cleanup": {
+    "child_detected_utc": "2026-09-14T10:25:25.795000Z",
+    "term_command_started_utc": "2026-09-14T10:26:00.990000Z",
+    "group_absence_confirmed_utc": "2026-09-14T10:26:04.167000Z",
+    "signal": "SIGTERM",
+    "confirmation": "group terminated"
+  },
+  "artifact_handling": {
+    "removal_and_rerun_command_started_utc": "2026-09-14T10:26:33.216000Z",
+    "removed_initial_paths": [
+      "execution-clock2048/launch.json",
+      "execution-clock2048/output.json",
+      "execution-clock2048/stderr",
+      "execution-clock2048/time.txt"
+    ],
+    "path_policy": "These four clock-2048 execution paths were removed after owned-group termination and reused for the controlled rerun. They are not create-only records of the initial attempt."
+  },
+  "controlled_rerun": {
+    "pid": 267001,
+    "pgid": 267001,
+    "started_epoch": 1789381593.2871058,
+    "completed_utc": "2026-09-14T10:39:08.460000Z",
+    "exit_code": 0,
+    "result_path": "execution-clock2048/result.json",
+    "launch_path": "execution-clock2048/launch.json",
+    "result_scope": "Only the controlled second run supplies the clock-2048 numerical result in this packet."
+  },
+  "retained_transcript": {
+    "original_path": "/mnt/niva-array/work/opencode-offline-preparation-20260914/n512-observer-batch2.jsonl",
+    "original_sha256": "bc078abb0db167f2469316924861913728c1a5eb279fde242fb79930095737c7",
+    "relevant_jsonl_lines": [
+      116,
+      119,
+      122,
+      125,
+      126,
+      130,
+      133
+    ],
+    "excerpt_path": "clock2048-incident-transcript.txt"
+  },
+  "scope": "Provenance disclosure for an aborted wrapper attempt and controlled rerun; no PDE qualification or accepted-window claim."
+}
