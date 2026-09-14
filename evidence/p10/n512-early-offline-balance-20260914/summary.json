@@ -1,0 +1,73 @@
+{
+  "status": "actual_n512_early_offline_balance_performed",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "observer_binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "production_source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "manifest_sha256": "bc538be79bfc6aeddecdda76588722251720d0af4710ae40a062f6e89cf6aefe",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "snapshot_file_sha256": "7a4f05338c3cb7308a18c3788f2cc3a192fea9a93e3c1a07980b9963a3dbff55",
+  "snapshot_coefficient_sha256": "6501282b8224d19baf2cd68e201e5c6db7ffbf906c277d1a2ebb0495fbc3d509",
+  "snapshot_bytes": 3233809650,
+  "snapshot_state_copied_into_packet": false,
+  "retained_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "diagnostic_and_force_dimensions": [
+    1024,
+    1024,
+    1024
+  ],
+  "workers": 32,
+  "cap_bytes": 300647710720,
+  "ledger_conservative_total_bytes": 235548209862,
+  "clock": {
+    "elapsed": 1536,
+    "target": 8192,
+    "remaining": 6656,
+    "exponent": -20,
+    "epoch": 24,
+    "accepted_steps": 24
+  },
+  "trajectory_endpoint": 4096,
+  "observed_clock_distinct_from_trajectory_endpoint": true,
+  "from_rest_capture": true,
+  "capture_immutable": true,
+  "resumable": false,
+  "comparison_kind": "FORCE_RESOLUTION_DIAGNOSTIC",
+  "kind_selects_decoder_cm512_admission_only": true,
+  "scope": "balance-diagnostic-only",
+  "force_comparison_claimed": false,
+  "exit_code": 0,
+  "wall_seconds": 815.3000466823578,
+  "peak_rss_kib": 229929984,
+  "peak_rss_basis": "Maximum resident set size (kbytes) from the actual time.txt; derived, not estimated",
+  "all_11_balances_finite": true,
+  "balance": {
+    "divergence_l2": 4.263767450893705e-15,
+    "energy": 1.2965618472537115,
+    "energy_dissipation": 1949.408991321288,
+    "enstrophy": 974.704495660644,
+    "enstrophy_dissipation": 9714349.76567205,
+    "forcing_work": 3541.5681806657494,
+    "h1": 44.18146798562313,
+    "l2": 1.6103178861664,
+    "stretching": 12494.510296652303,
+    "vorticity_forcing": 10897143.73447017,
+    "vorticity_l2": 44.152111968979334
+  },
+  "actual_capture_clock_matches": true,
+  "coefficient_hash_matches_record": true,
+  "file_hash_reverified": true,
+  "inline_n512_control_exists": false,
+  "n384_parity_support": {
+    "packet": "evidence/p10/offline-captured-observer/verification-20260914/summary.json",
+    "all_11_balances_bitwise_equal": true,
+    "supports_observer_reuse": true,
+    "proves_numerical_convergence_here": false
+  },
+  "accepted_pde_windows": 0,
+  "qualification": false,
+  "quality_scope": "partial offline balance only; not full fine-observable, pressure or regional acceptance"
+}

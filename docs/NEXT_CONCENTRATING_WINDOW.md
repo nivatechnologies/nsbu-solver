@@ -348,8 +348,21 @@ The running trajectory is unchanged.
 
 The [offline observer verification](../evidence/p10/offline-captured-observer/verification-20260914/README.md)
 reproduces all eleven N384 r6 endpoint balances bit-for-bit from the archived
-actual state. Its combined 12-test suite and Clippy checks pass. The N512
-resource estimate is about 219.4 GiB; actual N512 observation remains pending.
-This enables testing read-only observation on durable early N512 captures while
-integration continues. It does not complete the fine-observable protocol or
-accept a PDE window.
+actual state. Its combined 12-test suite and Clippy checks pass. That packet
+remains the frozen historical N384-only verification; its N512 entry was an
+arithmetic resource estimate of about 219.4 GiB.
+
+The [first actual N512 observation](../evidence/p10/n512-early-offline-balance-20260914/README.md)
+then ran that same frozen observer on the durable from-rest capture at clock
+1536 (target 8192, epoch 24, 24 accepted steps) with N512 retained, doubled
+1024 diagnostic and force grids and 32 workers: exit 0 in
+815.3000466823578 seconds, peak 229,929,984 KiB RSS from the measured
+`time.txt`, all eleven balances finite, and the capture clock, coefficient
+and whole-file hashes reverified. The run is balance-only: the
+`FORCE_RESOLUTION_DIAGNOSTIC` kind selects decoder CM512 admission only and
+claims no force comparison, the trajectory endpoint 4096 stays distinct from
+the observed clock 1536, and the immutable capture was neither resumed nor
+reset. No inline N512 control exists; the earlier N384 parity supports
+observer reuse but does not prove numerical convergence here. Accepted PDE
+windows remain zero; the fine-observable, pressure and regional protocols
+remain open.

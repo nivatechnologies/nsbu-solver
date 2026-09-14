@@ -1,0 +1,24 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 815.3000466823578,
+  "qualification": false,
+  "scope": "first N512 early-clock offline balance measurement; no inline control or PDE acceptance",
+  "finite": true,
+  "elapsed_clock": 1536,
+  "balance": {
+    "divergence_l2": 4.263767450893705e-15,
+    "energy": 1.2965618472537115,
+    "energy_dissipation": 1949.408991321288,
+    "enstrophy": 974.704495660644,
+    "enstrophy_dissipation": 9714349.76567205,
+    "forcing_work": 3541.5681806657494,
+    "h1": 44.18146798562313,
+    "l2": 1.6103178861664,
+    "stretching": 12494.510296652303,
+    "vorticity_forcing": 10897143.73447017,
+    "vorticity_l2": 44.152111968979334
+  },
+  "actual_capture_clock_matches": true,
+  "coefficient_hash_matches_record": true,
+  "file_hash_reverified": true
+}

@@ -6,7 +6,10 @@ reconstructs, integrates or resets a `SpectralState`, and it provides **no
 checkpoint/resume capability**. `scope=balance-diagnostic-only` and
 `qualification=false` in every output: this is a doubled-grid scope balance
 diagnostic, not full fine-observable acceptance, and it qualifies no PDE
-window. No N512 run was performed; capability claims stay out of scope.
+window. No N512 run was performed in this initial historical verification;
+capability claims stay out of scope. The first actual N512 run of this frozen
+observer is recorded in
+[n512-early-offline-balance-20260914](../n512-early-offline-balance-20260914/README.md).
 
 ## Layout
 
@@ -141,5 +144,9 @@ Fixtures use only decoder-admitted profiles (N8, M384 CM `MATCHED_SPATIAL` /
 `METHOD_DIAGNOSTIC` envelopes). The committed N64 state step runs slowly in the
 unoptimized test profile (~10 min); no optimized N512 path was executed. Small
 tests do not qualify any window; N512 and all PDE acceptance remain out of
-scope. Real N512 captures exist on Sulaco, but **this candidate has NOT been
-tested on them** — the N512 evidence here is arithmetic preflight only.
+scope. Real N512 captures exist on Sulaco, but at this initial verification
+**this candidate had NOT been tested on them** — the N512 evidence here is
+arithmetic preflight only. That historical claim is updated, without changing
+this packet, by the first actual N512 early-clock balance run in
+[n512-early-offline-balance-20260914](../n512-early-offline-balance-20260914/README.md),
+which executed this frozen candidate on a real N512 capture.

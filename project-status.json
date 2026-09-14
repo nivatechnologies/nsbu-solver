@@ -702,11 +702,26 @@
     "scientific_accepted": false
   },
   "p10_offline_captured_observer": {
-    "status": "verified_n384_offline_inline_balance_parity",
-    "evidence": "evidence/p10/offline-captured-observer/verification-20260914/summary.json",
+    "status": "actual_n512_early_offline_balance_performed",
+    "evidence": "evidence/p10/n512-early-offline-balance-20260914/summary.json",
+    "n384_parity_evidence": "evidence/p10/offline-captured-observer/verification-20260914/summary.json",
     "independent_tests_passed": 12,
     "actual_n384_balances_bitwise_equal": 11,
-    "n512_observer_executed": false,
+    "n512_observer_executed": true,
+    "n512_early_offline_balance": {
+      "clock": 1536,
+      "target": 8192,
+      "epoch": 24,
+      "accepted_steps": 24,
+      "retained": 512,
+      "diagnostic_and_force_samples": 1024,
+      "workers": 32,
+      "wall_seconds": 815.3000466823578,
+      "peak_rss_kib": 229929984,
+      "all_11_balances_finite": true,
+      "hashes_reverified": true,
+      "accepted_pde_windows": 0
+    },
     "n512_resource_only_bytes": 235548209862,
     "qualification": false
   }

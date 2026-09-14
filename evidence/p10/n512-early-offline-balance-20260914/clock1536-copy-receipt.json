@@ -1,0 +1,9 @@
+{
+  "source_host": "sulaco",
+  "source_bundle": "/tmp/nsbu-p10-n512-m512-v3-20260913T2244Z/run-1789411530/output/step-024-clock-1536",
+  "destination": "/mnt/niva-array/nsbu-solver/work/n512-early-observer-artifacts-20260914/clock1536",
+  "file_sha256": "7a4f05338c3cb7308a18c3788f2cc3a192fea9a93e3c1a07980b9963a3dbff55",
+  "coefficient_sha256": "6501282b8224d19baf2cd68e201e5c6db7ffbf906c277d1a2ebb0495fbc3d509",
+  "bytes": 3233809650,
+  "qualification": false
+}
