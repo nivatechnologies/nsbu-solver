@@ -38,8 +38,8 @@ struct LineWorkspace {
 
 /// Persistent opt-in worker owner shared across scalar or component callers.
 ///
-/// Leaves lock one preallocated line workspace only while running one RustFFT
-/// line. Locks are released before Rayon joins. A worker panic or poisoned line
+/// Leaf tasks borrow one preallocated line workspace while processing a slab of
+/// RustFFT lines. Locks are released before Rayon joins. A worker panic or poisoned line
 /// permanently terminates the executor; partially written outputs are unspecified.
 ///
 /// Direct calls from external threads may allocate scheduler queue blocks even

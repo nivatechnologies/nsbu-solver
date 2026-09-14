@@ -22,7 +22,7 @@ fn input(layout: Layout) -> Vec<f64> {
 }
 
 #[test]
-fn bounded_parallel_executor_matches_scalar_words_and_allocates_no_steady_storage() {
+fn bounded_parallel_executor_matches_words_and_has_zero_allocations_in_measured_call() {
     let backend = FftBackend::RustFft6_4_1AvxFma;
     if backend.ensure_available().is_err() {
         return;
@@ -40,7 +40,9 @@ fn bounded_parallel_executor_matches_scalar_words_and_allocates_no_steady_storag
     let values = input(layout);
     let mut expected = vec![Complex64::new(0.0, 0.0); layout.half_len()];
     let mut actual = expected.clone();
-    serial.forward(&values, &mut expected, &mut serial_work).unwrap();
+    serial
+        .forward(&values, &mut expected, &mut serial_work)
+        .unwrap();
     executor
         .forward(&parallel, &values, &mut actual, &mut parallel_work)
         .unwrap();
@@ -54,7 +56,10 @@ fn bounded_parallel_executor_matches_scalar_words_and_allocates_no_steady_storag
         .inverse(&parallel, &actual, &mut actual_real, &mut parallel_work)
         .unwrap();
     assert_eq!(
-        expected_real.iter().map(|v| v.to_bits()).collect::<Vec<_>>(),
+        expected_real
+            .iter()
+            .map(|v| v.to_bits())
+            .collect::<Vec<_>>(),
         actual_real.iter().map(|v| v.to_bits()).collect::<Vec<_>>()
     );
     let region = Region::new(GLOBAL);
@@ -62,7 +67,14 @@ fn bounded_parallel_executor_matches_scalar_words_and_allocates_no_steady_storag
         .forward(&parallel, &values, &mut actual, &mut parallel_work)
         .unwrap();
     let change = region.change();
-    assert_eq!((change.allocations, change.deallocations, change.reallocations), (0, 0, 0));
+    assert_eq!(
+        (
+            change.allocations,
+            change.deallocations,
+            change.reallocations
+        ),
+        (0, 0, 0)
+    );
 }
 
 #[test]
@@ -86,5 +98,12 @@ fn admission_refuses_wrong_backend_worker_bounds_and_one_byte_under_before_alloc
         Err(SolverError::ResourceLimit)
     ));
     let change = region.change();
-    assert_eq!((change.allocations, change.deallocations, change.reallocations), (0, 0, 0));
+    assert_eq!(
+        (
+            change.allocations,
+            change.deallocations,
+            change.reallocations
+        ),
+        (0, 0, 0)
+    );
 }

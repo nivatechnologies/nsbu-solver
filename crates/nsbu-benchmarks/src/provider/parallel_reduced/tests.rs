@@ -90,11 +90,9 @@ fn fixture_w3_force_matches_serial_and_refuses_after_fft_failure() {
     let catalog_bytes = FftCatalog::reservation(backend).unwrap();
     let catalog = FftCatalog::new(backend, catalog_bytes).unwrap();
     let serial_limits =
-        ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 3, backend)
-            .unwrap();
+        ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 3, backend).unwrap();
     let w3_limits =
-        ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, 3, backend)
-            .unwrap();
+        ParallelReducedV2ForceW3::preflight_with_fft_backend(domain, samples, 3, backend).unwrap();
     let mut serial = ParallelReducedV2Force::new_with_catalog(
         domain,
         samples,

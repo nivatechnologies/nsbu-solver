@@ -259,5 +259,8 @@ fn localized_identity_reports_retained_cancellation_without_changing_residual_co
     assert_eq!(localized, exact_coefficient_oracle);
     assert!(result.retained_strict_n384.base_identity_relative_error.l2 > 0.9);
     assert_eq!(result.new_shell_n768.base_identity_relative_error.l2, 0.0);
-    assert_eq!(result.new_shell_n768.control_identity_relative_error.l2, 0.0);
+    assert_eq!(
+        result.new_shell_n768.control_identity_relative_error.l2,
+        0.0
+    );
 }
