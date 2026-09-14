@@ -46,6 +46,95 @@ pub struct W3FftPool {
     failed: bool,
 }
 
+fn validate_seed(
+    layout: Layout,
+    catalog: &FftCatalog,
+    seed: &(FftPlan, FftWorkspace, Vec<Complex64>),
+) -> Result<(), SolverError> {
+    if seed.0.parallel_fft_identity().is_some()
+        || !seed.0.matches_lane(layout, catalog.backend(), &seed.1)
+        || seed.2.len() != layout.half_len()
+        || seed.2.capacity() < layout.half_len()
+    {
+        return Err(SolverError::InvalidPayload);
+    }
+    Ok(())
+}
+
+fn constructor_reservation(
+    layout: Layout,
+    catalog: &FftCatalog,
+    mode: W3FftMode,
+    executor: Option<&Arc<ParallelFftExecutor>>,
+) -> Result<usize, SolverError> {
+    match executor {
+        Some(executor) => W3FftPool::additional_parallel_reservation_with_backend(
+            layout,
+            catalog.backend(),
+            mode,
+            executor.identity().helper_workers,
+        ),
+        None => W3FftPool::additional_reservation(layout, catalog, mode),
+    }
+}
+
+fn attach_executor(
+    plan: FftPlan,
+    executor: Option<&Arc<ParallelFftExecutor>>,
+) -> Result<FftPlan, SolverError> {
+    match executor {
+        Some(executor) => plan.with_parallel_executor(Arc::clone(executor)),
+        None => Ok(plan),
+    }
+}
+
+fn construct_lanes(
+    layout: Layout,
+    catalog: &FftCatalog,
+    mode: W3FftMode,
+    seed: (FftPlan, FftWorkspace, Vec<Complex64>),
+    executor: Option<&Arc<ParallelFftExecutor>>,
+) -> Result<Vec<Lane>, SolverError> {
+    let mut lanes = Vec::new();
+    lanes
+        .try_reserve_exact(WIDTH)
+        .map_err(|_| SolverError::AllocationFailed)?;
+    lanes.push(Lane {
+        plan: attach_executor(seed.0, executor)?,
+        workspace: seed.1,
+        physical: Vec::new(),
+        spectrum: seed.2,
+    });
+    for _ in 1..WIDTH {
+        let bytes = FftPlan::reservation_from_catalog(layout, catalog)?;
+        let (plan, workspace) = FftPlan::new_from_catalog(layout, catalog, bytes)?;
+        let plan = attach_executor(plan, executor)?;
+        let physical = match mode {
+            W3FftMode::Forward => Vec::new(),
+            W3FftMode::Bidirectional => filled(layout.real_len(), 0.0)?,
+        };
+        lanes.push(Lane {
+            plan,
+            workspace,
+            physical,
+            spectrum: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
+        });
+    }
+    Ok(lanes)
+}
+
+fn start_workers(lanes: Vec<Lane>) -> Result<Vec<Worker>, SolverError> {
+    let mut workers = Vec::new();
+    workers
+        .try_reserve_exact(WIDTH)
+        .map_err(|_| SolverError::AllocationFailed)?;
+    for lane in lanes {
+        let executor = lane.plan.parallel_executor();
+        workers.push(Worker::new(lane, executor)?);
+    }
+    Ok(workers)
+}
+
 impl W3FftPool {
     /// Exact conservative addition beyond one scalar workspace and spectral lane.
     pub fn additional_reservation(
@@ -137,65 +226,13 @@ impl W3FftPool {
         executor: Option<Arc<ParallelFftExecutor>>,
         cap: usize,
     ) -> Result<Self, SolverError> {
-        if seed.0.parallel_fft_identity().is_some()
-            || !seed.0.matches_lane(layout, catalog.backend(), &seed.1)
-            || seed.2.len() != layout.half_len()
-            || seed.2.capacity() < layout.half_len()
-        {
-            return Err(SolverError::InvalidPayload);
-        }
-        let additional = match &executor {
-            Some(executor) => Self::additional_parallel_reservation_with_backend(
-                layout,
-                catalog.backend(),
-                mode,
-                executor.identity().helper_workers,
-            )?,
-            None => Self::additional_reservation(layout, catalog, mode)?,
-        };
+        validate_seed(layout, catalog, &seed)?;
+        let additional = constructor_reservation(layout, catalog, mode, executor.as_ref())?;
         if additional > cap {
             return Err(SolverError::ResourceLimit);
         }
-        let mut lanes = Vec::new();
-        lanes
-            .try_reserve_exact(WIDTH)
-            .map_err(|_| SolverError::AllocationFailed)?;
-        let seed_plan = match &executor {
-            Some(executor) => seed.0.with_parallel_executor(Arc::clone(executor))?,
-            None => seed.0,
-        };
-        lanes.push(Lane {
-            plan: seed_plan,
-            workspace: seed.1,
-            physical: Vec::new(),
-            spectrum: seed.2,
-        });
-        for _ in 1..WIDTH {
-            let bytes = FftPlan::reservation_from_catalog(layout, catalog)?;
-            let (plan, workspace) = FftPlan::new_from_catalog(layout, catalog, bytes)?;
-            let plan = match &executor {
-                Some(executor) => plan.with_parallel_executor(Arc::clone(executor))?,
-                None => plan,
-            };
-            let physical = match mode {
-                W3FftMode::Forward => Vec::new(),
-                W3FftMode::Bidirectional => filled(layout.real_len(), 0.0)?,
-            };
-            lanes.push(Lane {
-                plan,
-                workspace,
-                physical,
-                spectrum: filled(layout.half_len(), Complex64::new(0.0, 0.0))?,
-            });
-        }
-        let mut workers = Vec::new();
-        workers
-            .try_reserve_exact(WIDTH)
-            .map_err(|_| SolverError::AllocationFailed)?;
-        for lane in lanes {
-            let executor = lane.plan.parallel_executor();
-            workers.push(Worker::new(lane, executor)?);
-        }
+        let lanes = construct_lanes(layout, catalog, mode, seed, executor.as_ref())?;
+        let workers = start_workers(lanes)?;
         Ok(Self {
             workers,
             identity: W3FftIdentity {
