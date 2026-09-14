@@ -129,12 +129,16 @@ const PREFLIGHT_SCHEMA: &str = "p10-avx-n384-preflight-v1";
 const PREFLIGHT_SCHEMA: &str = "p10-avx-n512-m512-endpoint-capture-preflight-v1";
 #[cfg(not(feature = "n384-prep"))]
 const PREFLIGHT_SCHEMA: &str = "p10-avx-scheduled-endpoint-v2";
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 const EXECUTION: &str = "separate-rhs-force-w3";
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const EXECUTION: &str = "separate-rhs-force-w3-parallel8";
 #[cfg(not(feature = "n384-prep"))]
 const EXECUTION: &str = "serial-component-fft";
-#[cfg(feature = "n384-prep")]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
 const PROVIDER: &str = "parallel-reduced-v2-force-w3-attempt-cache";
+#[cfg(feature = "n512-m512-piecewise-cadv33")]
+const PROVIDER: &str = "parallel-reduced-v2-force-w3-parallel8-attempt-cache";
 #[cfg(not(feature = "n384-prep"))]
 const PROVIDER: &str = "parallel-reduced-attempt-cache";
 #[cfg(all(feature = "n384-prep", not(feature = "n384-piecewise-common")))]
