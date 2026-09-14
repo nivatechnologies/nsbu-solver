@@ -1537,3 +1537,9 @@ fn assert_manifest_decodes(root: &std::path::Path, name: &str, manifest: &Manife
     fs::write(&path, serde_json::to_vec(manifest).unwrap()).unwrap();
     decode::read_manifest(&path).unwrap();
 }
+
+#[path = "tests/decoder_regressions.rs"]
+mod decoder_regressions;
+
+#[path = "tests/m512_regressions.rs"]
+mod m512_regressions;
