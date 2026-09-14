@@ -387,3 +387,6 @@ fn process(plan: &FftPlan, line: &mut LineWorkspace, axis: usize, inverse: bool)
         &mut line.scratch[..AVX_SCRATCH_LANES * maximum],
     );
 }
+
+#[cfg(test)]
+mod tests;
