@@ -1,0 +1,55 @@
+{
+  "schema": "p10-n512-early-observer-batch-receipt-v1",
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-only diagnostic at actual captured clocks 512/1024; no force comparison, endpoint completion, inline control or window claim",
+  "runs": {
+    "512": {
+      "elapsed_clock": 512,
+      "epoch": 8,
+      "wall_seconds": 810.0,
+      "balance": {
+        "divergence_l2": 1.8154219848515064e-16,
+        "energy": 0.0060030350387219236,
+        "energy_dissipation": 9.055721802337128,
+        "enstrophy": 4.527860901168564,
+        "enstrophy_dissipation": 46397.13506447826,
+        "forcing_work": 111.48198101678967,
+        "h1": 3.0112668205314645,
+        "l2": 0.10957221398440321,
+        "stretching": 4.227838607876894,
+        "vorticity_forcing": 123627.25805452568,
+        "vorticity_l2": 3.0092726367574487
+      },
+      "coefficient_sha256": "d294b9b2b0c0faaec7a0cdd727185483b82e936da50534a016a99c5bbae71e02",
+      "file_sha256": "2daa47603bc5cab82864d55737a936a4449ac5bf3a67e798cdcc304fe8bd4b18",
+      "finite": true,
+      "qualification": false
+    },
+    "1024": {
+      "elapsed_clock": 1024,
+      "epoch": 16,
+      "wall_seconds": 810.7,
+      "balance": {
+        "divergence_l2": 1.8662506901298487e-15,
+        "energy": 0.36286677676455686,
+        "energy_dissipation": 546.2740444026321,
+        "enstrophy": 273.13702220131603,
+        "enstrophy_dissipation": 2762217.352698247,
+        "forcing_work": 2048.1175979451264,
+        "h1": 23.38802636999663,
+        "l2": 0.8518999668559177,
+        "stretching": 1923.189296040787,
+        "vorticity_forcing": 3889814.7964467616,
+        "vorticity_l2": 23.37250616435114
+      },
+      "coefficient_sha256": "a639b8d42b904cdb60326814ccd52344248fb324cb7ab7bb9fd3f74d15e774e5",
+      "file_sha256": "273dd261080e3399cc0271a73bfd47ddcac3cb597a8ef6d81093619f998c824c",
+      "finite": true,
+      "qualification": false
+    }
+  },
+  "qualification": false
+}

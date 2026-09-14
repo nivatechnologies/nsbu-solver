@@ -1,0 +1,81 @@
+{
+  "schema": "p10-n512-early-observer-crossclock-comparison-v1",
+  "scope": "descriptive deltas of the same 11 observed balance quantities at actual captured clocks 512/1024/1536 from the same verified observer binary and identical trajectory identity; balance-diagnostic-only; this is not a force-resolution parity, endpoint-completion or window-acceptance comparison",
+  "qualification": false,
+  "accepted_windows": 0,
+  "clocks": {
+    "512": {
+      "divergence_l2": 1.8154219848515064e-16,
+      "energy": 0.0060030350387219236,
+      "energy_dissipation": 9.055721802337128,
+      "enstrophy": 4.527860901168564,
+      "enstrophy_dissipation": 46397.13506447826,
+      "forcing_work": 111.48198101678967,
+      "h1": 3.0112668205314645,
+      "l2": 0.10957221398440321,
+      "stretching": 4.227838607876894,
+      "vorticity_forcing": 123627.25805452568,
+      "vorticity_l2": 3.0092726367574487
+    },
+    "1024": {
+      "divergence_l2": 1.8662506901298487e-15,
+      "energy": 0.36286677676455686,
+      "energy_dissipation": 546.2740444026321,
+      "enstrophy": 273.13702220131603,
+      "enstrophy_dissipation": 2762217.352698247,
+      "forcing_work": 2048.1175979451264,
+      "h1": 23.38802636999663,
+      "l2": 0.8518999668559177,
+      "stretching": 1923.189296040787,
+      "vorticity_forcing": 3889814.7964467616,
+      "vorticity_l2": 23.37250616435114
+    },
+    "1536": {
+      "divergence_l2": 4.263767450893705e-15,
+      "energy": 1.2965618472537115,
+      "energy_dissipation": 1949.408991321288,
+      "enstrophy": 974.704495660644,
+      "enstrophy_dissipation": 9714349.76567205,
+      "forcing_work": 3541.5681806657494,
+      "h1": 44.18146798562313,
+      "l2": 1.6103178861664,
+      "stretching": 12494.510296652303,
+      "vorticity_forcing": 10897143.73447017,
+      "vorticity_l2": 44.152111968979334
+    }
+  },
+  "deltas": {
+    "1024-512": {
+      "divergence_l2": 1.684708491644698e-15,
+      "energy": 0.35686374172583496,
+      "energy_dissipation": 537.218322600295,
+      "enstrophy": 268.6091613001475,
+      "enstrophy_dissipation": 2715820.217633769,
+      "forcing_work": 1936.6356169283367,
+      "h1": 20.376759549465167,
+      "l2": 0.7423277528715145,
+      "stretching": 1918.96145743291,
+      "vorticity_forcing": 3766187.538392236,
+      "vorticity_l2": 20.363233527593692
+    },
+    "1536-1024": {
+      "divergence_l2": 2.3975167607638565e-15,
+      "energy": 0.9336950704891547,
+      "energy_dissipation": 1403.1349469186562,
+      "enstrophy": 701.5674734593281,
+      "enstrophy_dissipation": 6952132.4129738035,
+      "forcing_work": 1493.450582720623,
+      "h1": 20.7934416156265,
+      "l2": 0.7584179193104823,
+      "stretching": 10571.321000611515,
+      "vorticity_forcing": 7007328.938023409,
+      "vorticity_l2": 20.779605804628194
+    }
+  },
+  "anchor_1536": {
+    "receipt_dir": "/mnt/niva-array/work/opencode-offline-preparation-20260914/n512-clock1536-observer-execution",
+    "result_sha256": "47bf89dcc3a0e7bd13722500113afc7631f44fba1e1ed3d26fd086f8088e3530",
+    "manifest_sha256": "bc538be79bfc6aeddecdda76588722251720d0af4710ae40a062f6e89cf6aefe",
+    "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b"
+  }
+}

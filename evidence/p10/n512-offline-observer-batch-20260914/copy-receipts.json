@@ -1,0 +1,14 @@
+{
+  "512": {
+    "record_state_sha256": "d294b9b2b0c0faaec7a0cdd727185483b82e936da50534a016a99c5bbae71e02",
+    "file_sha256": "2daa47603bc5cab82864d55737a936a4449ac5bf3a67e798cdcc304fe8bd4b18",
+    "manifest_sha256": "3eb06bebf2452cd9180d3f0ccf9cd98f4473fb988ff053c05ed6f3500f142173",
+    "hashes_match_remote": true
+  },
+  "1024": {
+    "record_state_sha256": "a639b8d42b904cdb60326814ccd52344248fb324cb7ab7bb9fd3f74d15e774e5",
+    "file_sha256": "273dd261080e3399cc0271a73bfd47ddcac3cb597a8ef6d81093619f998c824c",
+    "manifest_sha256": "593977be55ac0e0813c26de8a6935fa23a130cf399f382aab41a92e2175ac067",
+    "hashes_match_remote": true
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "schema": "p10-n512-early-observer-batch-packet-v1",
+  "import_ready": true,
+  "binary_sha256": "66b4e2f4105db5377a207257e272f75ed0763e49f0493d50333cfc3be6a7cb8b",
+  "observer_source_commit": "9adc021ae3e0d3bed3411f209f148d9f065f22ad",
+  "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+  "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+  "scope": "balance-diagnostic-only; qualification=false; accepted_windows=0; no inline parity, force comparison, endpoint completion or window claim",
+  "wording_policy": "positive-claim scan over authored receipts; negated scope statements permitted; raw machine JSON constrained by semantic qualification/accepted_windows checks",
+  "durable_large_artifacts_excluded_from_packet": [
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock512/state.bin",
+      "sha256": "2daa47603bc5cab82864d55737a936a4449ac5bf3a67e798cdcc304fe8bd4b18"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock512/record.json",
+      "sha256": "7321becd880f1acb3143188b38256492d66aba054343f6256816e99a4e79c07f"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock512/attempt.json",
+      "sha256": "fa7ad23b498238b12fdbe76bdf2de9618ca5f5ed6a22979dfa5e3426fe2f0869"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock1024/state.bin",
+      "sha256": "273dd261080e3399cc0271a73bfd47ddcac3cb597a8ef6d81093619f998c824c"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock1024/record.json",
+      "sha256": "fc1d2fe16b14f878f8b27e9be90f8ef80e08ee1f9bb26624f4359d76e9bd1ae6"
+    },
+    {
+      "path": "/mnt/niva-array/nsbu-solver/work/n512-observer-batch-artifacts-20260914/clock1024/attempt.json",
+      "sha256": "0505866b147caf4a726a5af774798fed66be0b4ff4dcd4083b3421861bdc4d46"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "batch-summary.json",
+      "sha256": "7631f143e036254bc2c242d0f73ace483f22efa30a691c76b1c579ee49e92aa2",
+      "bytes": 2226
+    },
+    {
+      "path": "clock1024-balance-input.json",
+      "sha256": "593977be55ac0e0813c26de8a6935fa23a130cf399f382aab41a92e2175ac067",
+      "bytes": 3062
+    },
+    {
+      "path": "clock512-balance-input.json",
+      "sha256": "3eb06bebf2452cd9180d3f0ccf9cd98f4473fb988ff053c05ed6f3500f142173",
+      "bytes": 3056
+    },
+    {
+      "path": "copy-receipts.json",
+      "sha256": "7e0e068300d41a7e8349fb6ddf1af44be6289fff0b51e108c4490d03b7a5cd83",
+      "bytes": 646
+    },
+    {
+      "path": "crossclock-comparison.json",
+      "sha256": "c8d19ce6b3dce1b2310024c1465812a04d62d2f01ce086b9e9b895191572fc69",
+      "bytes": 3228
+    },
+    {
+      "path": "execution-clock1024/launch.json",
+      "sha256": "9c6ed85be5c91b67e875eb485e608bff08f59d8a59d4980fccc5b5c68a60b5c9",
+      "bytes": 1233
+    },
+    {
+      "path": "execution-clock1024/output.json",
+      "sha256": "c70964e19f50961ee05fae6d164382a937e750a7ea1a82017b2495adf441dbf1",
+      "bytes": 4385
+    },
+    {
+      "path": "execution-clock1024/result.json",
+      "sha256": "eb899264ba44ac9e3f780a693fc74a3d955926e2a08d9dcb51130cd53cca7c6f",
+      "bytes": 898
+    },
+    {
+      "path": "execution-clock1024/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock1024/time.txt",
+      "sha256": "3534ed1c70ee508c9fd43a91d0cbb81f8cbacaafe9d46126499081e55ecb19d9",
+      "bytes": 993
+    },
+    {
+      "path": "execution-clock512/launch.json",
+      "sha256": "71501f30cbe1060f91af3312466e91b8fe2fbe5371e8e496c1f52a3dd2d15b3f",
+      "bytes": 1229
+    },
+    {
+      "path": "execution-clock512/output.json",
+      "sha256": "2af1db6b2332eb8cbc285e3899f0b0c397742d4e9b115029b16647f869136297",
+      "bytes": 4383
+    },
+    {
+      "path": "execution-clock512/result.json",
+      "sha256": "6be5a8f5064e59fb910504c990118f63c5b3c288b095578bbfdbc41b0fd512a5",
+      "bytes": 900
+    },
+    {
+      "path": "execution-clock512/stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "execution-clock512/time.txt",
+      "sha256": "e27ab65698e282733bf111da58f89c12fd7bfedc85ca9af7b59e3ecc01c10e28",
+      "bytes": 992
+    },
+    {
+      "path": "preflight-1024.json",
+      "sha256": "c91fa1ba98b2bd0b31b6ff5b6f9aafa22fdfceca98bca8a80840d4a38b113d79",
+      "bytes": 3613
+    },
+    {
+      "path": "preflight-512.json",
+      "sha256": "21f63e38cac5afd1974c27dd566f6b346b740f521e242ce60ad889110357ebc6",
+      "bytes": 3610
+    }
+  ],
+  "validation_checks": [
+    {
+      "check": "evidence==work clock512-balance-input.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work clock1024-balance-input.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work preflight-512.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work preflight-1024.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work copy-receipts.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock512/launch.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock512/output.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock512/result.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock512/stderr",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock512/time.txt",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock1024/launch.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock1024/output.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock1024/result.json",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock1024/stderr",
+      "pass": true
+    },
+    {
+      "check": "evidence==work execution-clock1024/time.txt",
+      "pass": true
+    },
+    {
+      "check": "512 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "512 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "512 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "512 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "512 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "512 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "512 schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "512 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "512 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "512 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "512 binary sha",
+      "pass": true
+    },
+    {
+      "check": "512 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "1024 whole-file sha == manifest == output == copy-receipt == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "1024 record sha == manifest coefficient == output coefficient",
+      "pass": true
+    },
+    {
+      "check": "1024 bundle small files == remote-expected",
+      "pass": true
+    },
+    {
+      "check": "1024 clock bindings",
+      "pass": true
+    },
+    {
+      "check": "1024 identity/plan/source preserved",
+      "pass": true
+    },
+    {
+      "check": "1024 manifest hash self-consistent",
+      "pass": true
+    },
+    {
+      "check": "1024 schedule prefix",
+      "pass": true
+    },
+    {
+      "check": "1024 finite 11 balances",
+      "pass": true
+    },
+    {
+      "check": "1024 exit0 accepted_windows0 qualification-false",
+      "pass": true
+    },
+    {
+      "check": "1024 resource/timing receipts",
+      "pass": true
+    },
+    {
+      "check": "1024 binary sha",
+      "pass": true
+    },
+    {
+      "check": "1024 preflight receipt matches",
+      "pass": true
+    },
+    {
+      "check": "1536 anchor valid",
+      "pass": true
+    },
+    {
+      "check": "1536 identity shared",
+      "pass": true
+    },
+    {
+      "check": "wording batch-summary.json",
+      "pass": true
+    },
+    {
+      "check": "wording copy-receipts.json",
+      "pass": true
+    },
+    {
+      "check": "wording crossclock-comparison.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock512/result.json",
+      "pass": true
+    },
+    {
+      "check": "wording execution-clock1024/result.json",
+      "pass": true
+    }
+  ]
+}
