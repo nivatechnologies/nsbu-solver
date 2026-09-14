@@ -104,3 +104,61 @@ fn admission_and_request_refusals_preserve_output() {
         .is_err());
     assert_eq!(values, prior);
 }
+
+#[test]
+fn shared_avx_catalog_preserves_reduced_force_and_refuses_underbudget() {
+    use nsbu_benchmarks::provider::parallel::ParallelV2Force;
+    use nsbu_solver::spectral::{FftBackend, FftCatalog};
+    let backend = FftBackend::RustFft6_4_1AvxFma;
+    if backend.ensure_available().is_err() {
+        return;
+    }
+    let domain = domain();
+    let samples = Layout::new([6; 3]).unwrap();
+    let catalog = FftCatalog::new(backend, FftCatalog::reservation(backend).unwrap()).unwrap();
+    assert!(ParallelV2Force::preflight_with_fft_backend(domain, samples, 2, backend).is_ok());
+    let limits =
+        ParallelReducedV2Force::preflight_with_fft_backend(domain, samples, 2, backend).unwrap();
+    assert!(matches!(
+        ParallelReducedV2Force::new_with_catalog(
+            domain,
+            samples,
+            2,
+            &catalog,
+            limits.storage_bytes - 1,
+        ),
+        Err(SolverError::ResourceLimit)
+    ));
+    let mut parallel = ParallelReducedV2Force::new_with_catalog(
+        domain,
+        samples,
+        2,
+        &catalog,
+        limits.storage_bytes,
+    )
+    .unwrap();
+    let serial_limits =
+        ReducedV2Force::preflight_with_fft_backend(domain, samples, backend).unwrap();
+    let mut serial =
+        ReducedV2Force::new_with_catalog(domain, samples, &catalog, serial_limits.storage_bytes)
+            .unwrap();
+    let clock = TickClock::restore(-10, 8, 2, 6).unwrap();
+    let mut actual = output(domain);
+    let mut expected = output(domain);
+    parallel
+        .evaluate(clock, limits, actual.each_mut().map(Vec::as_mut_slice))
+        .unwrap();
+    serial
+        .evaluate(
+            clock,
+            serial_limits,
+            expected.each_mut().map(Vec::as_mut_slice),
+        )
+        .unwrap();
+    for (a, b) in actual.iter().flatten().zip(expected.iter().flatten()) {
+        assert_eq!(
+            (a.re.to_bits(), a.im.to_bits()),
+            (b.re.to_bits(), b.im.to_bits())
+        );
+    }
+}
