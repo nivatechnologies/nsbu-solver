@@ -291,6 +291,11 @@ fn validate_time_manifests(
     {
         return Err("time-diagnostic immutable semantics mismatch".into());
     }
+    for side in [left_manifest, right_manifest] {
+        if !admitted_time_force_dimensions(side) {
+            return Err("time-diagnostic force dimensions are not admitted".into());
+        }
+    }
     if left_manifest.elapsed != right_manifest.elapsed
         || left_manifest.target != right_manifest.target
     {
@@ -320,6 +325,14 @@ fn validate_time_manifests(
     validate_time_lineage(left_manifest, true)?;
     validate_time_lineage(right_manifest, false)?;
     Ok(())
+}
+
+fn admitted_time_force_dimensions(manifest: &Manifest) -> bool {
+    match manifest.evolution.integration_force_dimensions {
+        [384, 384, 384] => true,
+        [512, 512, 512] => manifest.dimensions == [512, 512, 512],
+        _ => false,
+    }
 }
 
 fn validate_schedule_bound_side(manifest: &Manifest) -> Result<(), String> {

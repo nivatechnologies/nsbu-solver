@@ -1,0 +1,24 @@
+command: python3 -m coverage run --branch -m pytest tools/tests/test_temporal_comparison_contract.py tools/tests/test_prepare_temporal_comparison.py tools/tests/test_prepare_temporal_comparison_refusals.py tools/tests/test_prepare_temporal_m512_evidence.py
+json:    python3 -m coverage json -o work/temporal-coverage-v7.json
+report: python3 -m coverage report --include="tools/temporal_comparison_contract.py,tools/prepare_temporal_comparison.py,tools/tests/temporal_comparison_fixtures.py,tools/tests/test_prepare_temporal_comparison.py,tools/tests/test_prepare_temporal_comparison_refusals.py,tools/tests/test_prepare_temporal_m512_evidence.py,tools/tests/test_temporal_comparison_contract.py"
+environment: python 3.12.3, coverage 7.16.1, pytest 9.0.3 (host interpreter; same pytest version as the .venv focused run)
+measured scope: the seven files above -- the two adapter modules, the shared
+  temporal fixture module and the four focused temporal test files, measured
+  from the single 185-test run recorded in pytest-temporal-adapter.stdout.
+  No other test is claimed as measured by this report.
+separately measured totals over that scope: executable lines 1229/1231 =
+  99.84%; branches 278/280 = 99.29%. Both exceed the >=80% policy gate.
+the only two unexecuted lines (tools/temporal_comparison_contract.py 322 and
+  334) are the profile-duplication and node-nesting refusals, unreachable
+  against the closed family constants; they are the two partial branches.
+Name                                                       Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------------------------------------
+tools/prepare_temporal_comparison.py                         190      0     54      0   100%
+tools/temporal_comparison_contract.py                        308      2    154      2    99%   322, 334
+tools/tests/temporal_comparison_fixtures.py                  106      0     14      0   100%
+tools/tests/test_prepare_temporal_comparison.py              192      0     26      0   100%
+tools/tests/test_prepare_temporal_comparison_refusals.py     189      0      6      0   100%
+tools/tests/test_prepare_temporal_m512_evidence.py            72      0      8      0   100%
+tools/tests/test_temporal_comparison_contract.py             174      0     18      0   100%
+------------------------------------------------------------------------------------------------------
+TOTAL                                                       1231      2    280      2    99%

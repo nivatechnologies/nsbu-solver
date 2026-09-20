@@ -1,0 +1,152 @@
+{
+  "schema": "p10-n512-temporal-family-plan-v1",
+  "status": "prepared_only_no_capture_no_comparison_no_qualification",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "state_schema": "p10-avx-n512-observer-state-v1",
+  "method": "cox-matthews",
+  "dimensions": [
+    512,
+    512,
+    512
+  ],
+  "integration_force_dimensions": [
+    512,
+    512,
+    512
+  ],
+  "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+  "quantum_exponent": -20,
+  "clock_target": 8192,
+  "trajectory_endpoint": 4096,
+  "switch_clock": 2048,
+  "shared_clocks": [
+    512,
+    1024,
+    1536,
+    2048,
+    2560,
+    3072,
+    3584,
+    4096
+  ],
+  "lengths": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "viscosity": 1.0,
+  "absolute_tolerances": [
+    1e-05,
+    0.0001
+  ],
+  "relative_tolerances": [
+    1e-05,
+    1e-05
+  ],
+  "advective_limit": 3.3,
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "coefficient_bytes": 3233808384,
+  "adapter_overhead_bytes": 1048576,
+  "pair_reservation_bytes": 6468665344,
+  "coefficient_bytes_total": 77611401216,
+  "branches": [
+    {
+      "name": "h64",
+      "coarse_step_ticks": 64,
+      "late_step_ticks": 128,
+      "maximum_attempts": 48,
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 2048,
+          "step_ticks": 64
+        },
+        {
+          "from_inclusive": 2048,
+          "until_exclusive": 4096,
+          "step_ticks": 128
+        }
+      ],
+      "schedule_name": "h64-clocks0-through2048-then-h128-through4096",
+      "profile_prefix": "n512-m512-h64to2048-h128to4096-cadv33",
+      "case": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "identity": "source=e25f3816f83c6a7c07202cac2878f58ace460511;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f;backend=rustfft-6.4.1-avx-avx2-fma;production_source=0843b8b18e6a096a0208e3d896e391c7b1b2f5e0;test_source=9eba11f196a25f0843f0cbd0f4ed08c9f7ae4645;provider=parallel-reduced-v2-force-w3-attempt-cache;rhs_w3=layout768-width3-bidirectional-add21787856768;force_w3=layout512-width3-forward-add4318465792;rhs_timer=harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included;retained=512;force_samples=512;observer_force_samples=1024;observer_conservative=1024;observer_execution=offline-baccus-required;sampling_workers=32;rhs_w3_workers=3;provider_w3_workers=3;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;execution_cap=207578085872;artifact_cap=549755813888;schema=p10-avx-n512-observer-state-v1;attempt_schema=p10-avx-scheduled-attempt-v3;resume=unsupported;host=sulaco;numa=whole-host-unbound-all-visible-cpus-memory;external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline",
+      "profile": "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f",
+      "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+      "execution": "offline-baccus-observer",
+      "plan_sha256": "4c14ee169cfbbb2a182d972633aba1292ed041878a9c4322e64a527f87d85da8",
+      "plan_file": "v3-launch-plan.json",
+      "observer_execution": "offline-baccus-required"
+    },
+    {
+      "name": "h32",
+      "coarse_step_ticks": 32,
+      "late_step_ticks": 64,
+      "maximum_attempts": 96,
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 2048,
+          "step_ticks": 32
+        },
+        {
+          "from_inclusive": 2048,
+          "until_exclusive": 4096,
+          "step_ticks": 64
+        }
+      ],
+      "schedule_name": "h32-clocks0-through2048-then-h64-through4096",
+      "profile_prefix": "n512-m512-h32to2048-h64to4096-cadv33",
+      "case": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "identity": "PENDING_BRANCH_IDENTITY_BINDING",
+      "profile": "PENDING_BRANCH_PROFILE_BINDING",
+      "source_commit": "PENDING_BRANCH_SOURCE_BINDING",
+      "execution": "PENDING_BRANCH_EXECUTION_BINDING",
+      "plan_sha256": "PENDING_BRANCH_PLAN_SHA256_BINDING",
+      "plan_file": "PENDING_BRANCH_PLAN_FILE_BINDING",
+      "observer_execution": "offline-baccus-required"
+    },
+    {
+      "name": "h16",
+      "coarse_step_ticks": 16,
+      "late_step_ticks": 32,
+      "maximum_attempts": 192,
+      "schedule": [
+        {
+          "from_inclusive": 0,
+          "until_exclusive": 2048,
+          "step_ticks": 16
+        },
+        {
+          "from_inclusive": 2048,
+          "until_exclusive": 4096,
+          "step_ticks": 32
+        }
+      ],
+      "schedule_name": "h16-clocks0-through2048-then-h32-through4096",
+      "profile_prefix": "n512-m512-h16to2048-h32to4096-cadv33",
+      "case": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "identity": "PENDING_BRANCH_IDENTITY_BINDING",
+      "profile": "PENDING_BRANCH_PROFILE_BINDING",
+      "source_commit": "PENDING_BRANCH_SOURCE_BINDING",
+      "execution": "PENDING_BRANCH_EXECUTION_BINDING",
+      "plan_sha256": "PENDING_BRANCH_PLAN_SHA256_BINDING",
+      "plan_file": "PENDING_BRANCH_PLAN_FILE_BINDING",
+      "observer_execution": "offline-baccus-required"
+    }
+  ],
+  "pairs": [
+    {
+      "coarse": "h64",
+      "fine": "h32"
+    },
+    {
+      "coarse": "h32",
+      "fine": "h16"
+    }
+  ],
+  "arithmetic_files": {
+    "h64--h32": "PENDING_ARITHMETIC_BINDING",
+    "h32--h16": "PENDING_ARITHMETIC_BINDING"
+  }
+}

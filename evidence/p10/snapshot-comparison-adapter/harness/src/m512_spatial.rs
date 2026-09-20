@@ -80,15 +80,28 @@ fn identity_field_equals(identity: &str, key: &str, expected: &str) -> bool {
         .eq([expected])
 }
 
-fn is_r6_evolution(evolution: &Evolution) -> bool {
+pub(crate) fn is_r6_evolution(evolution: &Evolution) -> bool {
+    is_r6_case(evolution)
+        && is_r6_flow(evolution)
+        && is_r6_lattice(evolution)
+        && is_r6_tolerances(evolution)
+}
+
+fn is_r6_case(evolution: &Evolution) -> bool {
     evolution.case_sha256 == CASE_SHA256
         && evolution.quantum_exponent == -20
         && evolution.clock_target == 8192
         && evolution.comparison_endpoint == 4096
-        && evolution.lengths == [1.0; 3]
+}
+
+fn is_r6_flow(evolution: &Evolution) -> bool {
+    evolution.lengths == [1.0; 3]
         && evolution.viscosity.to_bits() == 1.0_f64.to_bits()
         && evolution.method == "cox-matthews"
-        && evolution.integration_force_dimensions == [512; 3]
+}
+
+fn is_r6_lattice(evolution: &Evolution) -> bool {
+    evolution.integration_force_dimensions == [512; 3]
         && evolution.schedule
             == [
                 crate::model::ScheduleSegment {
@@ -102,8 +115,10 @@ fn is_r6_evolution(evolution: &Evolution) -> bool {
                     step_ticks: 128,
                 },
             ]
-        && evolution.absolute_tolerances == [1e-5, 1e-4]
-        && evolution.relative_tolerances == [1e-5, 1e-5]
+}
+
+fn is_r6_tolerances(evolution: &Evolution) -> bool {
+    evolution.absolute_tolerances == [1e-5, 1e-4] && evolution.relative_tolerances == [1e-5, 1e-5]
 }
 
 fn is_r6_guard(manifest: &Manifest) -> bool {

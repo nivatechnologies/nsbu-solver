@@ -1,0 +1,121 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "snapshot": "../../../../root/h16/step-144-clock-2560/state.bin",
+  "plan": "../../../../root/h16/capture-plan.json",
+  "identity": "source=e05eb6452ad6a7c91979a327e1248f27b38639d8;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n512-m512-h16to2048-h32to4096-cadv33-w3-9a30e41b;backend=rustfft-6.4.1-avx-avx2-fma;production_source=1f571e8a0a4d5afdab3a6f5a6b93fd5634c8ad9d;test_source=7f234d77e5aaee13f243367b8a4357202dd881be;method=cox-matthews;retained=512;force_samples=512;endpoint=4096;advective_limit=3.3;schedule=h16-clocks0-through2048-then-h32-through4096;resume=unsupported;observer_execution=offline-baccus-required;host=baccus;external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline;schema=p10-avx-n512-observer-state-v1",
+  "source_commit": "e05eb6452ad6a7c91979a327e1248f27b38639d8",
+  "plan_sha256": "2f7637b88d0fc6e2bf84b834667a15de82e9e2cd156c41fea83cb33fa58b1ed2",
+  "coefficient_sha256": "f57d65d9af8ad06630a1a2babbe8501cd09572853a8b697b60f0316b101ccded",
+  "file_sha256": "4f81ee637062dec49782c479b40a488846ad0962692c09c8f62c244efccb5a66",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "offline-baccus-observer-h16",
+  "dimensions": [
+    512,
+    512,
+    512
+  ],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 2560,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      512,
+      512,
+      512
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 2048,
+        "step_ticks": 16
+      },
+      {
+        "from_inclusive": 2048,
+        "until_exclusive": 2560,
+        "step_ticks": 32
+      }
+    ],
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "elapsed": 2560,
+  "target": 8192,
+  "epoch": 144,
+  "accepted_steps": 144,
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "n512-m512-h16to2048-h32to4096-cadv33-w3-9a30e41b"
+  },
+  "admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 192
+  },
+  "arithmetic_control": {
+    "evidence": "arithmetic-evidence.json",
+    "evidence_sha256": "3b8a145995f2adb506d6f9e9c9d256a014dab887da62d861f4f9c6e0ca4040b9",
+    "review": {
+      "schema": "p10-time-arithmetic-review-v1",
+      "conclusion": "reviewed-equivalence-supported-by-controls",
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "method": "cox-matthews",
+      "integration_force_dimensions": [
+        512,
+        512,
+        512
+      ],
+      "measured_control": {
+        "outcome": "successful-exact-bit",
+        "serial": {
+          "source_commit": "0144b1defcf7561087015f8d830d65b16f024ad7",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "serial-owner",
+          "configuration": "serial-w1"
+        },
+        "w3": {
+          "source_commit": "55eae50b75e2b2990f2c18be84ca079727a85f61",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "w3-owner",
+          "configuration": "w3-w3"
+        }
+      },
+      "reviewed_lineage": {
+        "status": "reviewed-unchanged-kernel-lineage",
+        "left_control_role": "serial",
+        "right_control_role": "w3",
+        "left": {
+          "source_commit": "139127fbc4d677f60caf4a96cc5d24f5e0d25d81",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "offline-baccus-observer-h32",
+          "profile": {
+            "kind": "identity-profile-field",
+            "value": "n512-m512-h32to2048-h64to4096-cadv33-w3-3619df03"
+          }
+        },
+        "right": {
+          "source_commit": "e05eb6452ad6a7c91979a327e1248f27b38639d8",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "offline-baccus-observer-h16",
+          "profile": {
+            "kind": "identity-profile-field",
+            "value": "n512-m512-h16to2048-h32to4096-cadv33-w3-9a30e41b"
+          }
+        }
+      }
+    }
+  }
+}

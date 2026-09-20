@@ -1,0 +1,6 @@
+command: .venv/bin/basedpyright tools/prepare_temporal_comparison.py tools/temporal_comparison_contract.py tools/tests/temporal_comparison_fixtures.py tools/tests/test_prepare_temporal_comparison.py tools/tests/test_prepare_temporal_comparison_refusals.py tools/tests/test_temporal_comparison_contract.py tools/tests/test_prepare_temporal_m512_evidence.py
+cwd: /mnt/niva-array/nsbu-solver/work/opencode-temporal-comparator-20260914
+environment: .venv (basedpyright 1.40.1 + pytest 9.0.3 installed; the [tool.basedpyright] config venvPath=. venv=.venv resolves)
+config: pyproject.toml [tool.basedpyright] strict, reportAny/reportExplicitAny=error, stubPath=typings, pythonVersion=3.12
+0 errors, 0 warnings, 0 notes
+exit status: 0

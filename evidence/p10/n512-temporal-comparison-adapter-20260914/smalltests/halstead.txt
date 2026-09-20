@@ -1,0 +1,41 @@
+tool: rust-code-analysis-cli 0.0.25 (unit ndjson of all 23 adapter-harness .rs files,
+      regenerated from the v7 tree; the CI jq gate expressions applied verbatim)
+before: src/mixed_math.rs file-level Halstead difficulty 87.94117647058823 (blocker, >= 80)
+after split: src/mixed_math.rs 43.932203389830505,
+             src/mixed_math/kernels.rs 62.310344827586206,
+             src/mixed_math/kernels/primitives.rs 48.828125
+exact CI gate invocations and results (exit status 0 = pass, rust.yml step):
+  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cyclomatic.sum] | length > 0 and max < 22" work/rust-metrics-v7.ndjson
+  true (exit 0)
+  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cognitive.sum] | max < 22" work/rust-metrics-v7.ndjson
+  true (exit 0)
+  $ jq -se "[.. | objects | select(has(\"metrics\")) | .metrics.halstead.difficulty | select(. != null)] | max < 80" work/rust-metrics-v7.ndjson
+  true (exit 0)
+maximum file-level halstead.difficulty: 77.98062015503876 ( src/compare.rs )
+maximum function-level halstead.difficulty: 39.0
+per-file unit difficulties:
+src/absolute.rs 45.28125
+src/compare.rs 77.98062015503876
+src/decode.rs 60.83408071748879
+src/hessian.rs 59.49603174603175
+src/m512_spatial.rs 30.072289156626507
+src/main.rs 54.21348314606742
+src/mixed.rs 46.98795180722892
+src/mixed_math.rs 43.932203389830505
+src/mixed_math/kernels.rs 62.310344827586206
+src/mixed_math/kernels/primitives.rs 48.828125
+src/model.rs 46.142857142857146
+src/tests.rs 45.198237885462554
+src/tests/command.rs 53.77777777777778
+src/tests/coverage_refusals.rs 44.86411149825784
+src/tests/decoder_regressions.rs 41.3875
+src/tests/fixed_diagnostics.rs 34.627737226277375
+src/tests/hessian_mixed.rs 60.9472049689441
+src/tests/m512_regressions.rs 30.46951219512195
+src/tests/m512_spatial_evolution.rs 19.95
+src/tests/m512_temporal.rs 27.184615384615384
+src/tests/m512_temporal_admission.rs 40.08045977011494
+src/tests/temporal_e2e.rs 26.209821428571427
+src/tests/time_diagnostics.rs 51.44718309859155
+gate: every file-level and function-level Halstead difficulty below 80
+verdict: PASS - maximum 77.98062015503876 < 80

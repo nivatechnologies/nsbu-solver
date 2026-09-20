@@ -1,0 +1,61 @@
+   Compiling p10-snapshot-comparison-adapter v0.0.0 (/mnt/niva-array/nsbu-solver/work/opencode-temporal-comparator-20260914/evidence/p10/snapshot-comparison-adapter/harness)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.98s
+     Running unittests src/main.rs (target/debug/deps/p10_snapshot_comparison_adapter-e453283ba4500dc1)
+
+running 53 tests
+test tests::coverage_refusals::cli_entry_refuses_usage_and_cap_malformations ... ok
+test tests::hessian_mixed::ordered_hessian_scaled_squares_keep_large_finite_modes_finite ... ok
+test tests::hessian_mixed::ordered_hessian_single_oblique_mode_uses_hermitian_weight_and_domain_volume ... ok
+test tests::hessian_mixed::ordered_hessian_matches_small_grid_parseval_reconstruction ... ok
+test tests::m512_spatial_evolution::closed_r6_evolution_is_admitted ... ok
+test tests::m512_spatial_evolution::r6_evolution_refuses_every_single_field_deviation ... ok
+test tests::hessian_mixed::mixed_force_space_rejects_every_non_force_or_spatial_contract_change ... ok
+test tests::hessian_mixed::ordered_hessian_sums_all_27_independent_component_derivative_entries ... ok
+test tests::m512_regressions::matched_m512_rejects_one_sided_left_evolution_changes ... ok
+test tests::m512_regressions::matched_m512_rejects_reversed_pair_direction ... ok
+test tests::m512_regressions::matched_m512_rejects_removed_required_right_identity_fields ... ok
+test tests::m512_spatial_evolution::r6_evolution_deviation_still_refuses_the_manifest_pair_on_both_sides ... ok
+test tests::m512_regressions::matched_m512_rejects_duplicate_required_identity_keys ... ok
+test tests::fixed_diagnostics::matched_m512_spatial_diagnostic_is_closed_and_exactly_admitted ... ok
+test tests::m512_temporal::producer_emitted_m512_temporal_manifests_are_admitted ... ok
+test tests::m512_temporal::m384_time_family_pair_is_still_admitted ... ok
+test tests::fixed_diagnostics::matched_m512_kind_has_a_distinct_small_decoder_route ... ok
+test tests::m512_temporal::m512_temporal_manifests_refuse_wrong_force_dimensions ... ok
+test tests::decoder_regressions::resealed_same_length_identity_tamper_is_refused_by_the_identity_invariant ... ok
+test tests::time_diagnostics::legacy_profile_binding_requires_the_exact_complete_identity ... ok
+test tests::temporal_e2e::producer_h32_manifest_passes_admission_before_its_pending_plan_file ... ok
+test tests::temporal_e2e::producer_h64_manifest_admits_through_read_manifest_with_co_located_evidence ... ok
+test tests::coverage_refusals::read_manifest_refuses_broken_evolution_and_schedules ... ok
+test tests::fixed_diagnostics::force_resolution_diagnostic_is_closed_and_directional ... ok
+test tests::temporal_e2e::m384_time_manifest_path_still_admits_with_m384_arithmetic_review ... ok
+test tests::fixed_diagnostics::method_diagnostic_is_closed_and_directional ... ok
+test tests::temporal_e2e::read_manifest_refuses_wrong_m_temporal_admissions ... ok
+test tests::command::rejects_truncated_and_wrong_magic_without_state_allocation ... ok
+test tests::decoder_regressions::resealed_trailer_still_requires_the_reviewed_file_hash_binding ... ok
+test tests::hessian_mixed::mixed_force_space_algebra_preserves_sign_closure_and_band_splits ... ok
+test tests::coverage_refusals::read_manifest_refuses_broken_envelopes_and_digest_shapes ... ok
+test tests::coverage_refusals::load_refuses_corrupt_snapshots_and_off_spectrum_fields ... ok
+test tests::command::rejects_identity_hash_nonfinite_and_nyquist ... ok
+test tests::command::ordered_hessian_option_serializes_bound_output_and_rejects_clock_or_profile_gaps ... ok
+test tests::m512_temporal_admission::read_manifest_refuses_malformed_post_2048_schedules_and_bindings ... ok
+test tests::time_diagnostics::time_diagnostic_rejects_every_immutable_semantic_change ... ok
+test tests::time_diagnostics::time_diagnostic_accepts_h32_vs_piecewise_and_reports_scope ... ok
+test tests::decoder_regressions::resealed_clock_word_drift_is_refused_for_every_clock_field ... ok
+test tests::m512_temporal_admission::read_manifest_refuses_tampered_or_divergent_arithmetic_evidence ... ok
+test tests::coverage_refusals::time_validation_refuses_schedule_clock_lineage_and_guard_divergence ... ok
+test tests::coverage_refusals::read_manifest_refuses_every_invalid_arithmetic_review_shape ... ok
+test tests::coverage_refusals::compare_refuses_endpoint_clock_and_fixed_diagnostic_divergence ... ok
+test tests::fixed_diagnostics::fixed_diagnostics_serialize_tiny_spectrum_outputs ... ok
+test tests::time_diagnostics::time_diagnostic_rejects_mode_headers_guards_and_provenance ... ok
+test tests::command::rejects_profile_clock_domain_direction_and_cap ... ok
+test tests::m512_temporal_admission::hash_bound_synthetic_plans_admit_all_four_m512_sides ... ok
+test tests::m512_temporal_admission::both_pairs_admit_through_post_2048_nested_schedules ... ok
+test tests::command::matched_spatial_reports_different_guards_without_gating ... ok
+test tests::command::streamed_adapter_matches_comparison_plan ... ok
+test tests::command::manifest_and_command_enforce_schema_and_cap ... ok
+test tests::hessian_mixed::mixed_force_space_small_publication_seam_serializes_bound_output ... ok
+test tests::time_diagnostics::arithmetic_review_accepts_64_kib_and_rejects_one_byte_more ... ok
+test tests::m512_temporal_admission::read_manifest_refuses_envelope_tolerance_and_bound_violations ... ok
+
+test result: ok. 53 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+

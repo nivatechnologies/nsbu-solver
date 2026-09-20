@@ -21,7 +21,9 @@ pub(crate) fn read_manifest(path: &Path) -> Result<Manifest, String> {
 }
 
 /// Preserve the comparison adapter's M384 contract while admitting the two
-/// explicitly reviewed trajectory force grids for the read-only reference bridge.
+/// explicitly reviewed trajectory evolution force dimensions (M384 or M512)
+/// for the read-only reference bridge. The decoder admits evolution only;
+/// the exact retained lattice stays enforced by the comparator.
 #[allow(dead_code)] // Called when this source is included by the external bridge crate.
 pub(crate) fn read_external_reference_manifest(path: &Path) -> Result<Manifest, String> {
     read_manifest_with(path, ForceAdmission::ExternalReferenceM384OrM512)
@@ -107,7 +109,8 @@ fn validate_evolution(manifest: &Manifest, admission: ForceAdmission) -> Result<
 
 fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolution) -> bool {
     match kind {
-        ComparisonKind::MatchedSpatial | ComparisonKind::TimeDiagnostic => valid_cm_m384(evolution),
+        ComparisonKind::MatchedSpatial => valid_cm_m384(evolution),
+        ComparisonKind::TimeDiagnostic => valid_cm_m384(evolution) || valid_cm_m512(evolution),
         ComparisonKind::MatchedM512SpatialDiagnostic => valid_cm_m512(evolution),
         ComparisonKind::ForceResolutionDiagnostic | ComparisonKind::MixedForceSpaceDiagnostic => {
             valid_force_resolution_profile(evolution)
@@ -116,6 +119,7 @@ fn valid_evolution_profile(kind: ComparisonKind, evolution: &crate::model::Evolu
     }
 }
 
+/// Exact reviewed M384 Cox--Matthews temporal/spatial profile.
 fn valid_cm_m384(evolution: &crate::model::Evolution) -> bool {
     evolution.method == "cox-matthews" && evolution.integration_force_dimensions == [384; 3]
 }
@@ -338,7 +342,9 @@ fn verify_arithmetic_control(manifest_path: &Path, manifest: &Manifest) -> Resul
     let Some(control) = &manifest.arithmetic_control else {
         return Ok(());
     };
-    if !is_hex(&control.evidence_sha256, 64) || !valid_arithmetic_review(&control.review) {
+    if !is_hex(&control.evidence_sha256, 64)
+        || !valid_arithmetic_review(&control.review, &manifest.evolution)
+    {
         return Err("invalid arithmetic-control binding".into());
     }
     let bytes = read_bounded(
@@ -371,12 +377,19 @@ fn valid_measured_side(side: &crate::model::MeasuredSide) -> bool {
         && !side.configuration.is_empty()
 }
 
-fn valid_arithmetic_review(review: &crate::model::ArithmeticReview) -> bool {
+fn valid_arithmetic_review(
+    review: &crate::model::ArithmeticReview,
+    evolution: &crate::model::Evolution,
+) -> bool {
     review.schema == "p10-time-arithmetic-review-v1"
         && review.conclusion == "reviewed-equivalence-supported-by-controls"
         && is_hex(&review.case_sha256, 64)
         && review.method == "cox-matthews"
-        && review.integration_force_dimensions == [384; 3]
+        && matches!(
+            review.integration_force_dimensions,
+            [384, 384, 384] | [512, 512, 512]
+        )
+        && review.integration_force_dimensions == evolution.integration_force_dimensions
         && valid_measured_control(&review.measured_control)
         && valid_reviewed_lineage(&review.reviewed_lineage)
 }

@@ -1,0 +1,218 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0
+rootdir: /mnt/niva-array/nsbu-solver/work/opencode-temporal-comparator-20260914
+configfile: pyproject.toml
+collected 417 items
+
+tools/tests/test_bootstrap_tools.py ...F......                           [  2%]
+tools/tests/test_integrity_contracts.py ........F                        [  4%]
+tools/tests/test_local_agents.py ................................        [ 12%]
+tools/tests/test_local_run_monitor.py ......                             [ 13%]
+tools/tests/test_prepare_snapshot_manifest.py .......................... [ 19%]
+..........                                                               [ 22%]
+tools/tests/test_prepare_snapshot_manifest_contract.py .........sss      [ 25%]
+tools/tests/test_prepare_snapshot_manifest_refusals.py ................. [ 29%]
+........................................................................ [ 46%]
+................                                                         [ 50%]
+tools/tests/test_prepare_temporal_comparison.py ..............           [ 53%]
+tools/tests/test_prepare_temporal_comparison_refusals.py ............... [ 57%]
+.............................                                            [ 64%]
+tools/tests/test_prepare_temporal_m512_evidence.py ....                  [ 65%]
+tools/tests/test_public_content_contracts.py ....                        [ 66%]
+tools/tests/test_repository_checks.py .......                            [ 67%]
+tools/tests/test_temporal_comparison_contract.py ....................... [ 73%]
+........................................................................ [ 90%]
+............................                                             [ 97%]
+tools/tests/test_verification_contracts.py FF.FF                         [ 98%]
+tools/tests/test_verification_runner.py .FF..F                           [100%]
+
+=================================== FAILURES ===================================
+__________ BootstrapTests.test_complete_checkout_and_independent_cwd ___________
+
+self = <test_bootstrap_tools.BootstrapTests testMethod=test_complete_checkout_and_independent_cwd>
+
+    def test_complete_checkout_and_independent_cwd(self) -> None:
+        command = [sys.executable, str(self.root / "tools/check_repository.py")]
+        result = subprocess.run(command, cwd=self.temporary.name, capture_output=True,
+                                text=True, timeout=30)
+>       self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+E       AssertionError: 1 != 0 : {
+E         "schema_version": 1,
+E         "status": "failed",
+E         "scope": "bootstrap packaging only",
+E         "checks": {
+E           "review": {
+E             "components_verified": 12,
+E             "packet_verified": true,
+E             "manifest_sha256": "4393e8766fe00cd4f3d92452479ac6fe1680d08319b05c9b7f1e4a3908fd2297",
+E             "baseline_sha256": {
+E               "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+E               "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+E             }
+E           },
+E           "case": {
+E             "benchmark_copy_identical": true,
+E             "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f"
+E           },
+E           "metadata": {
+E             "project": "NSBU Solver",
+E             "license": "Apache-2.0",
+E             "private_dependency_declared": false
+E           }
+E         },
+E         "errors": [
+E           "public_content: Missing local Markdown target in evidence/p10/w3-768-controls-20260913/README.md: prepared/runs/completion.json"
+E         ]
+E       }
+
+tools/tests/test_bootstrap_tools.py:32: AssertionError
+________________ IntegrityContracts.test_public_report_contract ________________
+
+self = <test_integrity_contracts.IntegrityContracts testMethod=test_public_report_contract>
+
+    def test_public_report_contract(self) -> None:
+        report = check_repository(self.root)
+        self.assertEqual(report['schema_version'],1)
+>       self.assertEqual(report['status'],'passed')
+E       AssertionError: 'failed' != 'passed'
+E       - failed
+E       + passed
+
+tools/tests/test_integrity_contracts.py:20: AssertionError
+__ VerificationContracts.test_documented_default_root_from_another_directory ___
+
+self = <test_verification_contracts.VerificationContracts testMethod=test_documented_default_root_from_another_directory>
+
+    def test_documented_default_root_from_another_directory(self) -> None:
+        for script in ('check_repository.py','verify_design.py'):
+            completed = subprocess.run([sys.executable,str(self.root/'tools'/script)],cwd=self.root.parent,
+                                       capture_output=True,text=True,timeout=180)
+>           self.assertEqual(completed.returncode,0,completed.stderr+completed.stdout)
+E           AssertionError: 1 != 0 : {
+E             "schema_version": 1,
+E             "status": "failed",
+E             "scope": "bootstrap packaging only",
+E             "checks": {
+E               "review": {
+E                 "components_verified": 12,
+E                 "packet_verified": true,
+E                 "manifest_sha256": "4393e8766fe00cd4f3d92452479ac6fe1680d08319b05c9b7f1e4a3908fd2297",
+E                 "baseline_sha256": {
+E                   "COMPLETE_DESIGN.md": "fabca082cf73fee5f64c7f67800308b5115936bbec04838100a0d2ee425b81d9",
+E                   "similarity-mms-v2.json": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+E                 }
+E               },
+E               "case": {
+E                 "benchmark_copy_identical": true,
+E                 "problem_sha256": "ba81b7709e68cb118d3fc60c1d9bbcd27f424358b121ed4be08660ab8b88210f"
+E               },
+E               "metadata": {
+E                 "project": "NSBU Solver",
+E                 "license": "Apache-2.0",
+E                 "private_dependency_declared": false
+E               }
+E             },
+E             "errors": [
+E               "public_content: Missing local Markdown target in evidence/p10/w3-768-controls-20260913/README.md: prepared/runs/completion.json"
+E             ]
+E           }
+
+tools/tests/test_verification_contracts.py:75: AssertionError
+_______ VerificationContracts.test_failure_tail_is_bounded_and_redacted ________
+
+self = <test_verification_contracts.VerificationContracts testMethod=test_failure_tail_is_bounded_and_redacted>
+
+    def test_failure_tail_is_bounded_and_redacted(self) -> None:
+        prefix = 'begin:'+str(self.root)+':'
+        tail = prefix+'x'*(4000-len(prefix))
+        completed = subprocess.CompletedProcess(['fixture'],7,'','older discarded material'+tail)
+        with patch('tools.verify_design.subprocess.run',return_value=completed):
+            result = execute(self.root)
+>       self.assertEqual(result['stage'],'mathematical_checks')
+E       AssertionError: 'repository' != 'mathematical_checks'
+E       - repository
+E       + mathematical_checks
+
+tools/tests/test_verification_contracts.py:40: AssertionError
+_______ VerificationContracts.test_scope_mismatch_and_exact_changed_keys _______
+
+self = <test_verification_contracts.VerificationContracts testMethod=test_scope_mismatch_and_exact_changed_keys>
+
+    def test_scope_mismatch_and_exact_changed_keys(self) -> None:
+        original = self.preserved()
+        for unperformed in ([],['zzzz'],['AAAA']):
+            altered = dict(original)
+            altered['not_performed'] = unperformed
+            completed = subprocess.CompletedProcess(['fixture'],0,json.dumps(altered),'')
+            with patch('tools.verify_design.subprocess.run',return_value=completed):
+>               with self.assertRaisesRegex(ValueError,'unexpected status or evidence scope'):
+E               AssertionError: ValueError not raised
+
+tools/tests/test_verification_contracts.py:51: AssertionError
+______ VerificationContracts.test_subprocess_budget_and_success_metadata _______
+
+self = <test_verification_contracts.VerificationContracts testMethod=test_subprocess_budget_and_success_metadata>
+
+    def test_subprocess_budget_and_success_metadata(self) -> None:
+        calls: list[list[str]] = []
+        def invoke(args: list[str], **options: object) -> subprocess.CompletedProcess[str]:
+            calls.append(args)
+            self.assertEqual(args,[sys.executable,'-E',str(self.root/'docs/design/navier-runtime-verification.py')])
+            self.assertEqual(options['cwd'],self.root)
+            self.assertEqual(options['timeout'],180)
+            self.assertIs(options['capture_output'],True)
+            self.assertEqual(options['encoding'],'utf-8')
+            return subprocess.CompletedProcess(args,0,json.dumps(self.preserved()),'')
+        with patch('tools.verify_design.subprocess.run',side_effect=invoke):
+            result = execute(self.root)
+>       self.assertEqual(len(calls),1)
+E       AssertionError: 0 != 1
+
+tools/tests/test_verification_contracts.py:28: AssertionError
+________________ RunnerTests.test_dependency_and_process_errors ________________
+
+self = <test_verification_runner.RunnerTests testMethod=test_dependency_and_process_errors>
+
+    def test_dependency_and_process_errors(self) -> None:
+        with patch('tools.verify_design.importlib.metadata.version',return_value='wrong'):
+>           with self.assertRaisesRegex(ValueError,'requirements-dev'):
+E           AssertionError: ValueError not raised
+
+tools/tests/test_verification_runner.py:36: AssertionError
+__________ RunnerTests.test_execution_success_and_repository_refusal ___________
+
+self = <test_verification_runner.RunnerTests testMethod=test_execution_success_and_repository_refusal>
+
+    def test_execution_success_and_repository_refusal(self) -> None:
+        with patch('tools.verify_design.subprocess.run',return_value=self.process()):
+            report = runner.execute(self.root)
+>       self.assertEqual(report['status'],'passed')
+E       AssertionError: 'failed' != 'passed'
+E       - failed
+E       + passed
+
+tools/tests/test_verification_runner.py:27: AssertionError
+__________________ RunnerTests.test_scientific_drift_refused ___________________
+
+self = <test_verification_runner.RunnerTests testMethod=test_scientific_drift_refused>
+
+    def test_scientific_drift_refused(self) -> None:
+        original = self.scientific_output()
+        drift = dict(object_value(decode(original)))
+        drift['unexpected_channel'] = 'changed'
+        with patch('tools.verify_design.subprocess.run',return_value=self.process(text=json.dumps(drift))):
+>           with self.assertRaisesRegex(ValueError,'differ from preserved'):
+E           AssertionError: ValueError not raised
+
+tools/tests/test_verification_runner.py:52: AssertionError
+=========================== short test summary info ============================
+FAILED tools/tests/test_bootstrap_tools.py::BootstrapTests::test_complete_checkout_and_independent_cwd
+FAILED tools/tests/test_integrity_contracts.py::IntegrityContracts::test_public_report_contract
+FAILED tools/tests/test_verification_contracts.py::VerificationContracts::test_documented_default_root_from_another_directory
+FAILED tools/tests/test_verification_contracts.py::VerificationContracts::test_failure_tail_is_bounded_and_redacted
+FAILED tools/tests/test_verification_contracts.py::VerificationContracts::test_scope_mismatch_and_exact_changed_keys
+FAILED tools/tests/test_verification_contracts.py::VerificationContracts::test_subprocess_budget_and_success_metadata
+FAILED tools/tests/test_verification_runner.py::RunnerTests::test_dependency_and_process_errors
+FAILED tools/tests/test_verification_runner.py::RunnerTests::test_execution_success_and_repository_refusal
+FAILED tools/tests/test_verification_runner.py::RunnerTests::test_scientific_drift_refused
+============= 9 failed, 405 passed, 3 skipped in 75.72s (0:01:15) ==============

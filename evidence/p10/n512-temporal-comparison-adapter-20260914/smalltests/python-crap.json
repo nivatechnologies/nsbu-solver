@@ -1,0 +1,1176 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_branch",
+      "cyclomatic": 18.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 18.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "arithmetic_review_contract",
+      "cyclomatic": 18.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 18.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_physics",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "schedule_matches",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_clocks",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_arithmetic_files",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_bindings",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "validate_branch_identity",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_branches",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_pairs",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 7.095703125
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "schedule_through",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_require_single",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_validate_family_disk",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "emitted_family_plan",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "attempts_at",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_family_branches",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "branch_entries",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "schedule_name",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "profile_prefix",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "full_schedule",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "bundle_name",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "expected_state_file_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "is_pending",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "validate_family_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/temporal_comparison_contract.py",
+      "function": "_pending_branch",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "prepare",
+      "cyclomatic": 16.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 16.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_verify_inventory",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_verify_record",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "main",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_read_bounded",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_verify_arithmetic",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_side_manifest",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_require_present",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_verify_plan_file",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_publish_all",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_required",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_sha256",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/prepare_temporal_comparison.py",
+      "function": "_relate",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "concrete_family_plan",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_plans",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "branch_list",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "__init__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "branch_list",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_plans",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_captures",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_inventory",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_arithmetic",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "capture_path",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "rewrite_record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "tampered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "run",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_captures",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_inventory",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_write_arithmetic",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "run",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "_hex",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "synthetic_profile",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "synthetic_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "coefficient_hash",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "file_hash",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "record_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "record_document",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "arithmetic_binding",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "side",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "__init__",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "capture_path",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "rewrite_record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/temporal_comparison_fixtures.py",
+      "function": "tampered",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_pair_manifest_carries_exact_side_semantics",
+      "cyclomatic": 16.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 16.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_bookkeeping_binds_state_payload_and_disk_arithmetic",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_truncated_schedules_end_at_every_shared_clock",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_bookkeeping_binds_exact_side_bundles_epochs_and_hashes",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_pair_manifest_evolution_binds_the_contract_constants",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_bookkeeping_binds_exact_names_epochs_and_order",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_bookkeeping_refuses_any_qualification_claim",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_full_preparation_publishes_thirty_three_create_only_outputs",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_preparation_is_deterministic_and_never_touches_the_capture_root",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_bookkeeping_binds_pair_rows_and_epoch_ratios",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_h64_side_carries_the_actual_reviewed_anchor",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_state_payloads_are_never_opened",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_cli_module_runs_as_a_standalone_script",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "tree_digest",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "test_emitted_family_plan_is_the_reviewed_packet_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "bookkeeping",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison.py",
+      "function": "family",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_publication_uncertainty_exits_two_and_stays_incomplete",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "racing_link",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "run_expect",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "tamper_branch",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "binding_review",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "rewrite_inventory",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "binding_lineage",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_missing_bundle_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_missing_state_payload_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_missing_record_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_wrong_bundle_layout_name_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_record_field_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_cross_branch_state_copy_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_reference_substituted_record_identity_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_duplicate_json_key_record_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_non_finite_inventory_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_missing_inventory_key_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_extra_inventory_key_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_duplicate_inventory_hashes_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_hash_layer_collision_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_tampered_capture_plan_file_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_family_plan_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_h64_anchor_relabel_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_pending_family_plan_run_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "tamper_binding",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_missing_arithmetic_binding_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_tampered_arithmetic_evidence_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_wrong_pair_label_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_lineage_execution_conflict_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "mutate",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_lineage_profile_relabel_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "mutate",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_unadmitted_arithmetic_conclusion_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "mutate",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_record_unknown_field_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_oversized_record_is_refused_at_its_byte_bound",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_oversized_inventory_is_refused_at_its_byte_bound",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_wrong_inventory_schema_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_non_object_inventory_files_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "test_unreadable_capture_plan_is_refused_without_partial_output",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_comparison_refusals.py",
+      "function": "family",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "test_evidence_is_materialized_exactly_where_manifests_resolve_it",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "test_nested_schedules_and_exact_epochs_are_emitted",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "_ticks",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "test_non_json_arithmetic_evidence_is_refused_without_publication",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "test_evidence_review_mismatch_is_refused_without_publication",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "_reseal",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_prepare_temporal_m512_evidence.py",
+      "function": "_document",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_schedule_through_covers_every_clock_without_gaps",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_independent_identities_never_reuse_the_h64_anchor",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "edit_branch",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "replace_identity_field",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_bundle_names_are_zero_padded_and_epoch_bound",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "drop_identity_field",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_pending_tokens_are_recognized",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_constants_are_the_frozen_family_values",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_boolean_tick_and_extra_segment_fields_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "branch_list",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "tamper",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_epoch_ladders_are_exact",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_schedule_through_refuses_non_shared_clocks",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_expected_state_file_bytes_binds_identity_width",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_valid_concrete_plan_passes_strict_validation",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_valid_arithmetic_binding_returns_its_control",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_emitted_packet_arithmetic_is_pending_until_reviewed",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "refuse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_float_tick_schedule_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_family_field_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_missing_and_unknown_family_fields_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_branch_field_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_h64_anchor_field_tamper_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_branch_missing_field_and_order_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_identity_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_oversized_identity_and_prefix_equal_profile_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_pending_branches_are_fail_closed_under_strict_only",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_arithmetic_binding_path_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_missing_arithmetic_pair_key_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "binding",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_arithmetic_binding_tampers_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tools/tests/test_temporal_comparison_contract.py",
+      "function": "test_arithmetic_lineage_against_unlisted_branches_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    }
+  ],
+  "maximum": 18.0
+}

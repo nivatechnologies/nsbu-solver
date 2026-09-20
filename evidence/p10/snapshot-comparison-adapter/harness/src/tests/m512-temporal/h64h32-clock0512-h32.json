@@ -1,0 +1,116 @@
+{
+  "schema": "p10-snapshot-comparison-input-v1",
+  "comparison_kind": "TIME_DIAGNOSTIC",
+  "snapshot": "../../../../root/h32/step-016-clock-0512/state.bin",
+  "plan": "../../../../root/h32/capture-plan.json",
+  "identity": "source=139127fbc4d677f60caf4a96cc5d24f5e0d25d81;case=e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e;profile=n512-m512-h32to2048-h64to4096-cadv33-w3-3619df03;backend=rustfft-6.4.1-avx-avx2-fma;production_source=533b07a1b21996cb02c7c9f0acf8d1b7aa4e6ede;test_source=226e82f63159a91e0cadd8af861dc41441304c66;method=cox-matthews;retained=512;force_samples=512;endpoint=4096;advective_limit=3.3;schedule=h32-clocks0-through2048-then-h64-through4096;resume=unsupported;observer_execution=offline-baccus-required;host=baccus;external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline;schema=p10-avx-n512-observer-state-v1",
+  "source_commit": "139127fbc4d677f60caf4a96cc5d24f5e0d25d81",
+  "plan_sha256": "322dd1ed3dd2bd28a9857a2740e2ad25c3f52bf2d5a70c722aff37059411eb25",
+  "coefficient_sha256": "d39925075ee113d9c15bbf6c583042d2cd7fbc0913360a5b0fa387ec019d38d4",
+  "file_sha256": "d0ec508ed446a0e495c5f4e7de6aaf75fa1c4e553d0e97e6e5d8c8c1e969a8f1",
+  "backend": "rustfft-6.4.1-avx-avx2-fma",
+  "execution": "offline-baccus-observer-h32",
+  "dimensions": [
+    512,
+    512,
+    512
+  ],
+  "evolution": {
+    "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+    "quantum_exponent": -20,
+    "clock_target": 8192,
+    "comparison_endpoint": 512,
+    "lengths": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "viscosity": 1.0,
+    "method": "cox-matthews",
+    "integration_force_dimensions": [
+      512,
+      512,
+      512
+    ],
+    "schedule": [
+      {
+        "from_inclusive": 0,
+        "until_exclusive": 512,
+        "step_ticks": 32
+      }
+    ],
+    "absolute_tolerances": [
+      1e-05,
+      0.0001
+    ],
+    "relative_tolerances": [
+      1e-05,
+      1e-05
+    ]
+  },
+  "elapsed": 512,
+  "target": 8192,
+  "epoch": 16,
+  "accepted_steps": 16,
+  "profile": {
+    "kind": "identity-profile-field",
+    "value": "n512-m512-h32to2048-h64to4096-cadv33-w3-3619df03"
+  },
+  "admission_guard": {
+    "advective_limit": 3.3,
+    "maximum_attempts": 96
+  },
+  "arithmetic_control": {
+    "evidence": "arithmetic-evidence.json",
+    "evidence_sha256": "ac7b05041a96d493b2b3e8838192494976f64709e0c40dc1dfc81185cf14ff97",
+    "review": {
+      "schema": "p10-time-arithmetic-review-v1",
+      "conclusion": "reviewed-equivalence-supported-by-controls",
+      "case_sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e",
+      "method": "cox-matthews",
+      "integration_force_dimensions": [
+        512,
+        512,
+        512
+      ],
+      "measured_control": {
+        "outcome": "successful-exact-bit",
+        "serial": {
+          "source_commit": "0144b1defcf7561087015f8d830d65b16f024ad7",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "serial-owner",
+          "configuration": "serial-w1"
+        },
+        "w3": {
+          "source_commit": "55eae50b75e2b2990f2c18be84ca079727a85f61",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "w3-owner",
+          "configuration": "w3-w3"
+        }
+      },
+      "reviewed_lineage": {
+        "status": "reviewed-unchanged-kernel-lineage",
+        "left_control_role": "serial",
+        "right_control_role": "w3",
+        "left": {
+          "source_commit": "e25f3816f83c6a7c07202cac2878f58ace460511",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "offline-baccus-observer",
+          "profile": {
+            "kind": "identity-profile-field",
+            "value": "n512-m512-h64to2048-h128to4096-cadv33-w3-9eba11f"
+          }
+        },
+        "right": {
+          "source_commit": "139127fbc4d677f60caf4a96cc5d24f5e0d25d81",
+          "backend": "rustfft-6.4.1-avx-avx2-fma",
+          "execution": "offline-baccus-observer-h32",
+          "profile": {
+            "kind": "identity-profile-field",
+            "value": "n512-m512-h32to2048-h64to4096-cadv33-w3-3619df03"
+          }
+        }
+      }
+    }
+  }
+}

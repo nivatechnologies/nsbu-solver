@@ -1,0 +1,42 @@
+# Exact measured inputs for this packet, hashed from the tree at reseal time (2026-09-20, v7 pass).
+# Inventory: all 23 measured adapter-harness .rs files (12 production and cfg(test) root modules:
+#   the 10 src/*.rs files plus the v7 src/mixed_math/kernels.rs and
+#   src/mixed_math/kernels/primitives.rs split modules) plus 11 src/tests/*.rs cfg(test)
+#   modules, the 7 measured Python sources/tests, the external design doc
+#   docs/P10_TEMPORAL_COMPARISON_ADAPTER.md and all 4 m512-temporal/ fixture manifests --
+#   35 files total; every measured file is hashed.
+b7b1668b3d2fb34896c92820d3041ea652e7aa180e1104277acdd5d1f906ce49  tools/temporal_comparison_contract.py
+18ffd9447400e9c09774eb3c78ae693810ddb6488cf053a155ac542addc2bc00  tools/prepare_temporal_comparison.py
+6ce6034a795415be9ce4a3029c1597776bdad856500ed3ddddf10c711881b197  tools/tests/temporal_comparison_fixtures.py
+be00b34ba5b3cc145de89f5a310880e351468c87c5033dc48da27c9a6b52a393  tools/tests/test_prepare_temporal_comparison.py
+04288b4b2afe4b6e51c333b3d360d9870400b03dd3961be4612a971f83c853ba  tools/tests/test_prepare_temporal_comparison_refusals.py
+df6d956b214b0b9a391ee9a4a121574c77c2f61504c4fa51e8de243610fd09b6  tools/tests/test_prepare_temporal_m512_evidence.py
+f42f21ff27d29d9b8106a6c9bf4cb6b74935e2860e50696661b16e5ebbe7b4f0  tools/tests/test_temporal_comparison_contract.py
+cf1d7f90ba7900985184bd5ac885e5de6e284644553dc13f8e094c4c086e2b9c  docs/P10_TEMPORAL_COMPARISON_ADAPTER.md
+33ddbd114f809b54f990181833d0e4d2567a704e9721555ecbdb77239e5c19fb  evidence/p10/snapshot-comparison-adapter/harness/src/absolute.rs
+194e27d91ee44760e2a4784ec7798bd8d376415b02b8e01adc97a45978c36389  evidence/p10/snapshot-comparison-adapter/harness/src/compare.rs
+ac11a172ac38cb92c7665ceecb3ee6892d437afd99a8ff3246a61a38e9e5074c  evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs
+77f94b6afe351044e4f2d661fe126a55a0ccbac525bf3aaf5ed93acab377b5f7  evidence/p10/snapshot-comparison-adapter/harness/src/hessian.rs
+34fa826660f99a9001019c6014de0f966766303f294dfd7e5f6630e00bdbff80  evidence/p10/snapshot-comparison-adapter/harness/src/m512_spatial.rs
+dddaec7bf84a38ddf8030dfca45b6f3dbba812d4f6aa87ce5d0c9b30a64fa335  evidence/p10/snapshot-comparison-adapter/harness/src/main.rs
+4632d86cbdd9d97506fb378290dd77489f51fa596dc2eaf941a386b807b96ae1  evidence/p10/snapshot-comparison-adapter/harness/src/mixed.rs
+e22436260784da6fd52d6dc9316cb268fd00e085e48416c8b05886f808c4c880  evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math.rs
+2ecc2b17303a6d194eeb8448ce7d58de3b90602ee0547b4810481c1ed8ae6004  evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math/kernels.rs
+c4bfa85c7da3bd1008e52d08123e528fa7dd202e30b9756759519d722a7829c9  evidence/p10/snapshot-comparison-adapter/harness/src/mixed_math/kernels/primitives.rs
+2df8a28dc9a370d2bd3539caf172c6b474d3c48540eae6c6ff930f292dadb967  evidence/p10/snapshot-comparison-adapter/harness/src/model.rs
+ddcb5c075b8e200e7864bd69bc089f77fde320bdba6b04b69342bdf78bb90f5a  evidence/p10/snapshot-comparison-adapter/harness/src/tests.rs
+4f6f0d41accc7e1d54dc35cb32ec19578427b8b7e2bb0c5190b31323af620a39  evidence/p10/snapshot-comparison-adapter/harness/src/tests/command.rs
+9ad13a93efd93239a1234adf1026c958078b5ced5493e0142b6be04ab92e0019  evidence/p10/snapshot-comparison-adapter/harness/src/tests/coverage_refusals.rs
+60f2d406eaabb7dfde66fa114adeac4c6e3ade75e0e7916d447ac288c2861233  evidence/p10/snapshot-comparison-adapter/harness/src/tests/decoder_regressions.rs
+f90ad88fed1e722918ce895c272668c48bcd0cd2caae49891beadeb9d1a629dc  evidence/p10/snapshot-comparison-adapter/harness/src/tests/fixed_diagnostics.rs
+e2e3ac7ce36cb36c8b6f5597ed3c3cd7b5ae9c8f87b8ef34a32c6a7b80bbf5fd  evidence/p10/snapshot-comparison-adapter/harness/src/tests/hessian_mixed.rs
+7e56c3bece189bee48897489fd72aad7193edbab41f8611c709f67644ad71bd2  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512_regressions.rs
+967e069e2bb3f45f771b4b395d19822ae6b3576f63a888a5b03fa9e1988a251d  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512_spatial_evolution.rs
+99e492f53b1f9550f8fa9494992244865916e6268b6a026bf3887087f9c5c4ac  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512_temporal.rs
+d655fcba255285d6b8f338b5c62298885761b0d18ffd95fec183709be2033a6f  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512_temporal_admission.rs
+35dc660f75903cefc3d688bab2c72cac20f7c19840557a805a19878fb44978b4  evidence/p10/snapshot-comparison-adapter/harness/src/tests/temporal_e2e.rs
+f531b16eccf76c533eee05cc8fb5737bcc2ec8ee089ca404266b29fa70a8d3ca  evidence/p10/snapshot-comparison-adapter/harness/src/tests/time_diagnostics.rs
+1331ee4ad2bb4397bc02012162341c99804f5b516f3306277862a8b24bb5bffa  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512-temporal/h32h16-clock2560-h16.json
+e21160811d847398650fbf7ecee92ca8efda44163bcc517c9135bf73bd845a43  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512-temporal/h32h16-clock2560-h32.json
+597979f86cae76f1772f515fa30225750ff0c6fb8cb45e84b949c6b499da9042  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512-temporal/h64h32-clock0512-h32.json
+ced297bb22d2aab6e2d26b1ec87f2d523306752b1e50693f987c51335f4b7273  evidence/p10/snapshot-comparison-adapter/harness/src/tests/m512-temporal/h64h32-clock0512-h64.json
