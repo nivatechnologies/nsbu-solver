@@ -1,0 +1,18 @@
+{
+  "typeCheckingMode": "strict",
+  "pythonVersion": "3.12",
+  "stubPath": "../../../typings",
+  "extraPaths": [
+    "scripts",
+    "tests"
+  ],
+  "include": [
+    "scripts"
+  ],
+  "exclude": [
+    "**/__pycache__"
+  ],
+  "reportAny": "error",
+  "reportExplicitAny": "error",
+  "reportUnknownMemberType": "error"
+}

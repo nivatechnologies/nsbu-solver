@@ -1,0 +1,34 @@
+warning: function `rhs_w3_additional_bytes` is never used
+   --> src/owners.rs:275:10
+    |
+275 | const fn rhs_w3_additional_bytes() -> usize {
+    |          ^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `p10-avx-scheduled-endpoint` (bin "p10-avx-scheduled-endpoint" test) generated 1 warning
+    Finished `release` profile [optimized] target(s) in 0.03s
+     Running unittests src/main.rs (target/release/deps/p10_avx_scheduled_endpoint-a21d4b2ed455b675)
+
+running 18 tests
+test artifact::tests::disk_preflight_refuses_more_than_the_fixed_cap ... ok
+test artifact::tests::json_string_escapes_quotes_newlines_and_control_characters ... ok
+test barrier::tests::record_state_hash_extraction_requires_exactly_one_valid_field ... ok
+test barrier::tests::token_derivation_is_bound_to_every_handshake_field ... ok
+test barrier::tests::token_derivation_matches_the_python_supervisor_vector ... ok
+test publication::tests::observer_failure_does_not_commit_or_move_any_frontier ... ok
+test publication::tests::staged_write_failure_does_not_commit_or_move_any_frontier ... ok
+test barrier::tests::environment_binding_refuses_partial_or_malformed_armings ... ok
+test schedule::tests::schedule_is_exact_nested_and_has_eight_positive_observations ... ok
+test schedule::tests::unscheduled_and_rest_clocks_do_not_trigger_positive_observation ... ok
+test timed_rhs::tests::delegates_and_accounts_each_evaluation ... ok
+test barrier::tests::malformed_tokens_never_pass_and_abort_token_wins_over_release ... ok
+test artifact::tests::failed_write_publishes_nothing_and_removes_partial_file ... ok
+test publication::tests::publish_failure_discloses_in_memory_and_provisional_frontiers ... ok
+test artifact::tests::atomic_file_refuses_overwrite_and_leaves_no_partial_file ... ok
+test barrier::tests::authenticated_release_completes_the_barrier_one_shot_forever ... ok
+test publication::tests::successful_attempt_publication_moves_attempt_frontier_only ... ok
+test artifact::tests::scheduled_node_stages_and_publishes_snapshot_record_and_attempt_together ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

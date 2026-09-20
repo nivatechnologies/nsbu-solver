@@ -1,0 +1,11 @@
+Simulated-Sulaco preflight-only readiness probe (LOCAL ONLY). (simulated hostname; all measurements real)
+2026-09-20T18:13:20Z preflight-only stage=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5 host=sulaco source=binary built from the frozen source inventory; see docs/source-binding.json (RUN_SOURCE identity token)
+2026-09-20T18:13:20Z   plan_frozen_sha256_expected=ac63c8c71e958d9a0b8e246338a1cccc09373eb9dde9084ea9012a87daa5acb9
+2026-09-20T18:13:20Z   plan_frozen_sha256_observed=ac63c8c71e958d9a0b8e246338a1cccc09373eb9dde9084ea9012a87daa5acb9
+2026-09-20T18:13:20Z   mem_available_bytes=504814534656
+2026-09-20T18:13:20Z   disk_free_bytes=5941981622272 probe=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5
+2026-09-20T18:13:20Z   host_process_census scanned=1486 solver_matches=0 census_unreadable=False
+2026-09-20T18:13:20Z   deadline_epoch=1790093167 now=1789928000
+2026-09-20T18:13:20Z   barrier_dir=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5/barrier barrier_dir_present=True
+2026-09-20T18:13:20Z   output_exists=False logs_state=empty
+2026-09-20T18:13:20Z preflight-only: READY (no launch performed)

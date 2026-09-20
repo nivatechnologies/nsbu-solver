@@ -1,0 +1,11 @@
+2026-09-20T18:13:09Z preflight-only stage=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5 host=baccus source=binary built from the frozen source inventory; see docs/source-binding.json (RUN_SOURCE identity token)
+2026-09-20T18:13:09Z   plan_frozen_sha256_expected=ac63c8c71e958d9a0b8e246338a1cccc09373eb9dde9084ea9012a87daa5acb9
+2026-09-20T18:13:09Z   plan_frozen_sha256_observed=ac63c8c71e958d9a0b8e246338a1cccc09373eb9dde9084ea9012a87daa5acb9
+2026-09-20T18:13:09Z   mem_available_bytes=504849547264
+2026-09-20T18:13:09Z   disk_free_bytes=5941981622272 probe=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5
+2026-09-20T18:13:09Z   host_process_census scanned=1483 solver_matches=0 census_unreadable=False
+2026-09-20T18:13:09Z   deadline_epoch=1790093167 now=1789927989
+2026-09-20T18:13:09Z   barrier_dir=/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5/barrier barrier_dir_present=True
+2026-09-20T18:13:09Z   output_exists=False logs_state=empty
+2026-09-20T18:13:09Z   REFUSE host_mismatch(expected=sulaco,got=baccus)
+2026-09-20T18:13:09Z preflight-only: NOT READY

@@ -1,0 +1,50 @@
+N512/M512 temporal-h32 r5 sealed + r6 current-byte external VERIFIED-subreaper /proc leak + runner-kill census
+generated 2026-09-20T18:15:00Z (fresh output dirs, current byte identity; sealed r5 run retained and re-verified externally NOW)
+census: scripts/leak_census.py --repeats 2 --timeout 600 ; scripts/runner_kill_census.py (delays 0.8/1.6/3.0)
+PR_SET_CHILD_SUBREAPER set+VERIFIED before any job; descendant-reachability attribution (ppid walk decisive)
+every /proc state is counted INCLUDING Z (a zombie is an unreaped leak); foreign processes are NEVER attributed
+(only pids absent from the per-job pre-snapshot AND reparented under the census are counted)
+
+== LEAK CENSUS (per unit method + FULL-suite + SELFTEST, x2 repeats) ==
+r5 sealed run raw summary (verbatim script line):
+CENSUS DONE jobs=308 bad=0 subreaper=VERIFIED zombie_states_counted=True
+r6 current-byte re-run raw summary (verbatim script line, completed 2026-09-20T17:39:41Z):
+CENSUS DONE jobs=308 bad=0 subreaper=VERIFIED zombie_states_counted=True
+per-repeat job counts both runs: r0=154, r1=154 (each repeat = 152 methods + FULL-suite + SELFTEST = 154 jobs; two full repeats = 308)
+total_leak_count=0  leak_states_counted={}  final_unconfirmed_after_sweep=0 (both runs)
+final external live/Z/unconfirmed = 0 live+Z / 0 unconfirmed  -> ZERO (both runs)
+
+== RUNNER-KILL CENSUS (SIGKILL spawn-capable runner mid-method; identify stranding) ==
+r5 sealed run raw summary (verbatim script line):
+RUNNER-KILL CENSUS DONE probes=48 stranded=18 subreaper=VERIFIED
+[editorial, NOT raw output] those 18 stranded records = 40 attributed survivor instances,
+snapshot states {'S': 26, 'Z': 14} (live+Z counted at snapshot), from the authoritative sealed JSONL record set
+survivor-producing probe classes (exact, from the sealed JSONL):
+  test_h32_children.TeardownPathTests 15 records; test_h32_owner.TerminateOwnedTests 2 records;
+  test_h32_children.InterruptionTests 1 record; no other class produced any survivor
+all attributed survivors packet-owned (parented to the census subreaper; packet teardown fixtures)
+per-probe check: 18/18 STRANDED summary lines end unconfirmed=[] (nothing left unconfirmed)
+INDEPENDENT external /proc sweep of all 40 attributed pids re-run NOW: still_live=0 still_zombie=0
+(40/40 absent) -> final external sweep ZERO
+
+r6 current-byte first-run raw summary (verbatim script line, completed 2026-09-20T17:41:41Z):
+RUNNER-KILL CENSUS DONE probes=48 stranded=17 subreaper=VERIFIED
+[editorial, NOT raw output] those 17 stranded records = 38 attributed survivor instances,
+snapshot states {'S': 27, 'Z': 11} (live+Z counted at snapshot), from the run's JSONL record set
+survivor-producing probe classes (exact, from the r6 JSONL):
+  test_h32_children.TeardownPathTests 14 records; test_h32_owner.TerminateOwnedTests 2 records;
+  test_h32_children.InterruptionTests 1 record; no other class produced any survivor
+per-probe check: 17/17 STRANDED summary lines end unconfirmed=[] (nothing left unconfirmed)
+INDEPENDENT external /proc sweep of all 38 attributed pids: live=0 zombie=0 (38/38 absent) -> ZERO
+[editorial] the only delta vs the sealed r5 run: the 3.0s kill probe against
+test_h32_children.TeardownPathTests.test_kill_escalation_reaches_a_term_ignoring_grandchild did not
+land inside that method's leader-death stranding window (5/5 current-byte attempts each returned 17;
+runs 1 and 3 had state split {'S': 27, 'Z': 11}, and runs 2, 4 and 5 had
+{'S': 26, 'Z': 12}; the sealed r5 bytes recorded 18). This is a kill-timing diagnostic on a fixture-boundary probe, not a
+lifecycle-behavior change: the r6 typing repair adds annotations/typed JSON boundary only, and the
+152-test suite and guarded selftest pass identically on the current bytes.
+
+== current byte identity ==
+RUN_SOURCE=fa441601bee855a7c67b2a8f1f29e3a5a2a123b7e3e3a6ca3417b3f294ec6d55 (610 hashed inputs)
+staged solver binary sha256=3b9ccff93d41200d664aadcfbec32a406e139df90c06cca989bda5a518721de4 (byte-reproducible from RUN_SOURCE)
+census attribution is host-exclusivity-independent (subreaper-scoped). The sealed r5 run preceded publication of h32-census-complete.marker; the current-byte r6 rerun occurred later under a separately verified exclusive lifecycle-test lane. The marker is historical evidence, not a lock.

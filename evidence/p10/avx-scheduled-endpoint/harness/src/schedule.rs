@@ -2,22 +2,45 @@
 use nsbu_solver::SolverError;
 
 pub const ENDPOINT: u128 = 4096;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
+#[cfg(all(
+    not(feature = "n384-h64"),
+    not(feature = "n384-piecewise-common"),
+    not(feature = "n512-m512-temporal-h32"),
+    not(feature = "n512-m512-temporal-h16")
+))]
 pub const STEP: u128 = 32;
 #[cfg(feature = "n384-h64")]
 pub const STEP: u128 = 64;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
+#[cfg(all(
+    not(feature = "n384-h64"),
+    not(feature = "n384-piecewise-common"),
+    not(feature = "n512-m512-temporal-h32"),
+    not(feature = "n512-m512-temporal-h16")
+))]
 pub const MAXIMUM_ATTEMPTS: usize = 128;
 #[cfg(feature = "n384-h64")]
 pub const MAXIMUM_ATTEMPTS: usize = 64;
 #[cfg(feature = "n384-piecewise-common")]
 pub const MAXIMUM_ATTEMPTS: usize = 48;
-#[cfg(all(not(feature = "n384-h64"), not(feature = "n384-piecewise-common")))]
+#[cfg(feature = "n512-m512-temporal-h32")]
+pub const MAXIMUM_ATTEMPTS: usize = 96;
+#[cfg(feature = "n512-m512-temporal-h16")]
+pub const MAXIMUM_ATTEMPTS: usize = 192;
+#[cfg(all(
+    not(feature = "n384-h64"),
+    not(feature = "n384-piecewise-common"),
+    not(feature = "n512-m512-temporal-h32"),
+    not(feature = "n512-m512-temporal-h16")
+))]
 pub const IDENTITY: &str = "constant-h32";
 #[cfg(feature = "n384-h64")]
 pub const IDENTITY: &str = "constant-h64";
 #[cfg(feature = "n384-piecewise-common")]
 pub const IDENTITY: &str = "h64-clocks0-through2048-then-h128-through4096";
+#[cfg(feature = "n512-m512-temporal-h32")]
+pub const IDENTITY: &str = "h32-clocks0-through2048-then-h64-through4096";
+#[cfg(feature = "n512-m512-temporal-h16")]
+pub const IDENTITY: &str = "h16-clocks0-through2048-then-h32-through4096";
 pub const FINE: [u128; 9] = [0, 512, 1024, 1536, 2048, 2560, 3072, 3584, 4096];
 pub const MIDDLE: [u128; 5] = [0, 1024, 2048, 3072, 4096];
 pub const COARSE: [u128; 3] = [0, 2048, 4096];
@@ -33,7 +56,11 @@ fn accepted_clock(clock: u128) -> bool {
     step(clock).is_ok()
 }
 
-#[cfg(not(feature = "n384-piecewise-common"))]
+#[cfg(all(
+    not(feature = "n384-piecewise-common"),
+    not(feature = "n512-m512-temporal-h32"),
+    not(feature = "n512-m512-temporal-h16")
+))]
 pub fn step(clock: u128) -> Result<u128, SolverError> {
     if clock < ENDPOINT && clock.is_multiple_of(STEP) {
         Ok(STEP)
@@ -47,6 +74,24 @@ pub fn step(clock: u128) -> Result<u128, SolverError> {
     match clock {
         0..2048 if clock.is_multiple_of(64) => Ok(64),
         2048..4096 if (clock - 2048).is_multiple_of(128) => Ok(128),
+        _ => Err(SolverError::InvalidClock),
+    }
+}
+
+#[cfg(feature = "n512-m512-temporal-h32")]
+pub fn step(clock: u128) -> Result<u128, SolverError> {
+    match clock {
+        0..2048 if clock.is_multiple_of(32) => Ok(32),
+        2048..4096 if (clock - 2048).is_multiple_of(64) => Ok(64),
+        _ => Err(SolverError::InvalidClock),
+    }
+}
+
+#[cfg(feature = "n512-m512-temporal-h16")]
+pub fn step(clock: u128) -> Result<u128, SolverError> {
+    match clock {
+        0..2048 if clock.is_multiple_of(16) => Ok(16),
+        2048..4096 if (clock - 2048).is_multiple_of(32) => Ok(32),
         _ => Err(SolverError::InvalidClock),
     }
 }
@@ -133,5 +178,51 @@ mod tests {
         assert_eq!(reached.len(), 49);
         assert_eq!(reached[32], 2048);
         assert!(FINE.iter().all(|clock| reached.contains(clock)));
+    }
+
+    #[cfg(feature = "n512-m512-temporal-h32")]
+    #[test]
+    fn temporal_h32_transition_lands_on_every_observer_node() {
+        assert_eq!(step(0), Ok(32));
+        assert_eq!(step(2016), Ok(32));
+        assert_eq!(step(2048), Ok(64));
+        assert_eq!(step(4032), Ok(64));
+        for clock in [1, 33, 2080, 4096] {
+            assert_eq!(step(clock), Err(SolverError::InvalidClock));
+        }
+        let mut clock = 0;
+        let mut reached = vec![clock];
+        for _ in 0..MAXIMUM_ATTEMPTS {
+            clock += step(clock).unwrap();
+            reached.push(clock);
+        }
+        assert_eq!(reached.len(), 97);
+        assert_eq!(reached[64], 2048);
+        assert_eq!(reached[96], ENDPOINT);
+        assert!(FINE.iter().all(|clock| reached.contains(clock)));
+        validate().unwrap();
+    }
+
+    #[cfg(feature = "n512-m512-temporal-h16")]
+    #[test]
+    fn temporal_h16_transition_lands_on_every_observer_node() {
+        assert_eq!(step(0), Ok(16));
+        assert_eq!(step(2032), Ok(16));
+        assert_eq!(step(2048), Ok(32));
+        assert_eq!(step(4064), Ok(32));
+        for clock in [1, 17, 2064, 4096] {
+            assert_eq!(step(clock), Err(SolverError::InvalidClock));
+        }
+        let mut clock = 0;
+        let mut reached = vec![clock];
+        for _ in 0..MAXIMUM_ATTEMPTS {
+            clock += step(clock).unwrap();
+            reached.push(clock);
+        }
+        assert_eq!(reached.len(), 193);
+        assert_eq!(reached[128], 2048);
+        assert_eq!(reached[192], ENDPOINT);
+        assert!(FINE.iter().all(|clock| reached.contains(clock)));
+        validate().unwrap();
     }
 }

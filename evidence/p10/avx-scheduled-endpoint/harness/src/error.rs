@@ -8,6 +8,7 @@ pub enum HarnessError {
     Numerical(SolverError),
     Io(io::Error),
     Rejected { ticks: u128, ratios: [f64; 2] },
+    Barrier(&'static str),
 }
 
 impl fmt::Display for HarnessError {
@@ -21,6 +22,7 @@ impl fmt::Display for HarnessError {
                     "attempt_rejected:ticks={ticks}:ratios={ratios:?}"
                 )
             }
+            Self::Barrier(reason) => write!(formatter, "barrier:{reason}"),
         }
     }
 }

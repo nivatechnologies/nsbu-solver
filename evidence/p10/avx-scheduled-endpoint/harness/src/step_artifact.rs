@@ -13,6 +13,10 @@ const FILESYSTEM_ALLOWANCE: usize = 64 * 1024;
 
 #[cfg(feature = "n512-m512-piecewise-cadv33")]
 const CAPTURED_SCHEMA: &str = "p10-avx-n512-observer-state-v1";
+#[cfg(feature = "n512-m512-temporal-h32")]
+const CAPTURED_SCHEMA: &str = "p10-avx-n512-m512-h32-observer-state-v1";
+#[cfg(feature = "n512-m512-temporal-h16")]
+const CAPTURED_SCHEMA: &str = "p10-avx-n512-m512-h16-observer-state-v1";
 #[cfg(feature = "n256-m512-piecewise-cadv33")]
 const CAPTURED_SCHEMA: &str = "p10-avx-n256-m512-observer-state-v1";
 
@@ -226,6 +230,10 @@ mod tests {
         assert_eq!(disk_preflight(state_bytes, 128).unwrap(), 174_862_106_624);
         #[cfg(feature = "n512-m512-piecewise-cadv33")]
         assert_eq!(disk_preflight(3_233_808_384, 48).unwrap(), 155_226_537_984);
+        #[cfg(feature = "n512-m512-temporal-h32")]
+        assert_eq!(disk_preflight(3_233_808_384, 96).unwrap(), 310_453_075_968);
+        #[cfg(feature = "n512-m512-temporal-h16")]
+        assert_eq!(disk_preflight(3_233_808_384, 192).unwrap(), 620_906_151_936);
     }
 
     #[test]
@@ -369,6 +377,10 @@ mod tests {
         assert!(root.join("step-001-clock-0000").exists());
         fs::remove_dir_all(root).unwrap();
     }
+
+    // The h32 snapshot fixture writer (production identity, real writer)
+    // lives with the writer itself: artifact::tests::
+    // real_writer_emits_the_minimal_h32_snapshot_fixture.
 
     fn state() -> SpectralState {
         let domain = Domain::new([4; 3], [1.0; 3], 1.0).unwrap();

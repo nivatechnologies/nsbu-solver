@@ -1,6 +1,6 @@
 //! Construction of the persistent numerical owners admitted by the frozen resource plan.
 use crate::{cache::CachedReducedForce, config, observer::ReducedObserver};
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 use nsbu_solver::spectral::ParallelFftIdentity;
 #[cfg(feature = "n384-prep")]
 use nsbu_solver::spectral::{W3FftIdentity, W3FftMode};
@@ -56,7 +56,7 @@ fn new_rhs_for(
     finish_rhs(domain, force, limits, catalog)
 }
 
-#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-parallel-capture")))]
 fn new_rhs_for(
     domain: Domain,
     samples: Layout,
@@ -75,7 +75,7 @@ fn new_rhs_for(
     finish_rhs(domain, force, limits, catalog)
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 fn new_rhs_for(
     domain: Domain,
     samples: Layout,
@@ -113,7 +113,7 @@ fn finish_rhs(
     SpectralRhs::new_with_catalog(domain, force, config::ADVECTIVE_LIMIT, catalog, bytes)
 }
 
-#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-piecewise-cadv33")))]
+#[cfg(all(feature = "n384-prep", not(feature = "n512-m512-parallel-capture")))]
 fn finish_rhs(
     domain: Domain,
     force: CachedReducedForce,
@@ -131,7 +131,7 @@ fn finish_rhs(
     Ok(rhs)
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 fn finish_rhs(
     domain: Domain,
     force: CachedReducedForce,
@@ -157,7 +157,7 @@ fn finish_rhs(
     Ok(rhs)
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 fn validate_parallel_identities(
     domain: Domain,
     rhs: &SpectralRhs<CachedReducedForce>,
@@ -174,7 +174,7 @@ fn validate_parallel_identities(
     Ok(())
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 fn require_parallel_identity(
     actual: ParallelFftIdentity,
     layout: Layout,
@@ -251,7 +251,7 @@ fn force_identity() -> Result<W3FftIdentity, SolverError> {
 #[cfg(all(
     feature = "n384-prep",
     not(feature = "n384-m512-piecewise-cadv33"),
-    not(feature = "n512-m512-piecewise-cadv33"),
+    not(feature = "n512-m512-parallel-capture"),
     not(feature = "n256-m512-piecewise-cadv33")
 ))]
 const fn force_w3_additional_bytes() -> usize {
@@ -266,17 +266,17 @@ const fn force_w3_additional_bytes() -> usize {
     4_318_465_792
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 const fn force_w3_additional_bytes() -> usize {
     4_343_035_792
 }
 
-#[cfg(all(not(feature = "n512-m512-piecewise-cadv33"), not(feature = "n256-m512-piecewise-cadv33")))]
+#[cfg(all(not(feature = "n512-m512-parallel-capture"), not(feature = "n256-m512-piecewise-cadv33")))]
 const fn rhs_w3_additional_bytes() -> usize {
     9_200_926_592
 }
 
-#[cfg(feature = "n512-m512-piecewise-cadv33")]
+#[cfg(feature = "n512-m512-parallel-capture")]
 const fn rhs_w3_additional_bytes() -> usize {
     21_812_652_048
 }
@@ -329,7 +329,7 @@ fn state_pair(resources: ResourcePlan) -> Result<(SpectralState, CandidateState)
 #[cfg(all(
     test,
     feature = "n384-prep",
-    not(feature = "n512-m512-piecewise-cadv33")
+    not(feature = "n512-m512-parallel-capture")
 ))]
 mod tests {
     use super::*;

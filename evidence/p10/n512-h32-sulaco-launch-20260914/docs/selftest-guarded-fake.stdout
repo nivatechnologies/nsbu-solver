@@ -1,0 +1,38 @@
+2026-09-20T18:12:38Z plan_frozen_sha256_observed=91c8b54285bfad8fd15bfdef7e71b23f5b3a48d26a4f022471f96addff1ca3c1
+2026-09-20T18:12:38Z guarded_run solver_pid=995151 pgid=995151 starttime=48795977 cmdline_sha256=43aa8bd092096c6db78087604f850be6728b39cc4a81801bea8845fecdfae86c
+2026-09-20T18:12:38Z barrier_decision release=True reasons=[] token_status=written (token_issued(release))
+2026-09-20T18:12:43Z solver_already_exited draining_group_members
+2026-09-20T18:12:45Z watchdog_drain outcome=terminated_group
+2026-09-20T18:12:45Z owned_tree_sweep outcome=tree_already_empty term=0 kill=0 drift_refused=0 survivors=[]
+2026-09-20T18:12:45Z adopted_reaped count=2 pids=[995256, 995575]
+2026-09-20T18:12:45Z complete captures=96 exit=0 completion_status=written
+2026-09-20T18:12:45Z plan_frozen_sha256_observed=4422c8d1ea4ae31e4024a21039e8cd33851fe9e890a52ee4397235eaabb061df
+2026-09-20T18:12:46Z guarded_run solver_pid=995584 pgid=995584 starttime=48796758 cmdline_sha256=7ca33771e0cbb3637fe190a569d6ba1cdbcac462f6d9c25b0d9ba10ceb5d64a8
+2026-09-20T18:12:46Z barrier_decision release=False reasons=['durable_bundle_invalid(bundle_invalid(attempt_rhs_calls_mismatch(11)))'] token_status=written (token_issued(abort))
+2026-09-20T18:12:46Z solver_drain outcome=group_already_gone
+2026-09-20T18:12:48Z watchdog_drain outcome=terminated_group
+2026-09-20T18:12:48Z owned_tree_sweep outcome=tree_already_empty term=0 kill=0 drift_refused=0 survivors=[]
+2026-09-20T18:12:48Z adopted_reaped count=1 pids=[995597]
+2026-09-20T18:12:48Z plan_frozen_sha256_observed=cdd0d05e3597ca62027bbe2156e8e71b8fc192b3423d0a6d607638c70c461eb2
+2026-09-20T18:12:49Z guarded_run solver_pid=995627 pgid=995627 starttime=48797030 cmdline_sha256=1acab15e7875eb9c9a946b553fdaa8b1fccfae91cb05f8becab100222b178e8d
+2026-09-20T18:12:49Z barrier_decision release=True reasons=[] token_status=written (token_issued(release))
+2026-09-20T18:12:54Z solver_already_exited draining_group_members
+2026-09-20T18:12:55Z watchdog_drain outcome=terminated_group
+2026-09-20T18:12:56Z owned_tree_sweep outcome=tree_already_empty term=0 kill=0 drift_refused=0 survivors=[]
+2026-09-20T18:12:56Z adopted_reaped count=2 pids=[995737, 996044]
+2026-09-20T18:12:56Z refused: barrier_rearmed_events(2)
+2026-09-20T18:12:56Z plan_frozen_sha256_observed=d58b975777be95ead81daad01911a02c94c1f83191521e880f20cc2d7c90f801
+2026-09-20T18:12:57Z guarded_run solver_pid=996053 pgid=996053 starttime=48797807 cmdline_sha256=976c549ca4b7b79b4ca8769482b2113f60b2b792e699bffa2257b2bc2f44e333
+2026-09-20T18:12:57Z receipt_uncertainty: decision-receipt.json status=uncertain_exists
+2026-09-20T18:12:57Z refused: decision receipt not durable; hard abort before RELEASE
+2026-09-20T18:12:57Z barrier_decision release=False reasons=['decision_receipt_not_durable(uncertain_exists)'] token_status=written (token_issued(abort))
+2026-09-20T18:12:57Z solver_drain outcome=group_already_gone
+2026-09-20T18:12:58Z watchdog_drain outcome=terminated_group
+2026-09-20T18:12:58Z owned_tree_sweep outcome=tree_already_empty term=0 kill=0 drift_refused=0 survivors=[]
+2026-09-20T18:12:58Z adopted_reaped count=1 pids=[996066]
+positive: {'code': 0, 'receipts': ['completion-receipt.json', 'decision-receipt.json', 'launch-receipt.json'], 'tokens': ['barrier-armed.json', 'release.token'], 'captures': 96, 'latency': 0.00099, 'first_step_elapsed': 0.76624, 'failure_stage': None, 'failure_reasons': None}
+abort: {'code': 79, 'receipts': ['decision-receipt.json', 'failure-receipt.json', 'launch-receipt.json'], 'tokens': ['abort.token', 'barrier-armed.json'], 'captures': 1, 'latency': 0.001197, 'first_step_elapsed': 0.767395, 'failure_stage': 'barrier_decision', 'failure_reasons': ['durable_bundle_invalid(bundle_invalid(attempt_rhs_calls_mismatch(11)))']}
+rearm: {'code': 79, 'receipts': ['decision-receipt.json', 'failure-receipt.json', 'launch-receipt.json'], 'tokens': ['barrier-armed.json', 'release.token'], 'captures': 1, 'latency': 0.001019, 'first_step_elapsed': 0.762313, 'failure_stage': 'barrier_one_shot_violation', 'failure_reasons': 'barrier_rearmed_events(2)'}
+decision-uncertain: {'code': 79, 'receipts': ['failure-receipt.json', 'launch-receipt.json'], 'tokens': ['abort.token', 'barrier-armed.json'], 'captures': 1, 'latency': 0.000987, 'first_step_elapsed': None, 'failure_stage': 'barrier_decision', 'failure_reasons': ['decision_receipt_not_durable(uncertain_exists)']}
+SELFTEST PASS
+selftest rc=0

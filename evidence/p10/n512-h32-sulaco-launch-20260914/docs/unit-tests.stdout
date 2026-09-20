@@ -1,0 +1,209 @@
+test_accepts_matching_handshake (test_h32_barrier.ArmedReceiptTests.test_accepts_matching_handshake) ... ok
+test_refuses_every_divergence (test_h32_barrier.ArmedReceiptTests.test_refuses_every_divergence) ... ok
+test_state_binding_and_missing_file (test_h32_barrier.ArmedReceiptTests.test_state_binding_and_missing_file) ... ok
+test_json_receipt_never_overwrites (test_h32_barrier.IssueAndReceiptTests.test_json_receipt_never_overwrites) ... ok
+test_tokens_are_create_only_with_uncertainty (test_h32_barrier.IssueAndReceiptTests.test_tokens_are_create_only_with_uncertainty) ... ok
+test_existing_tokens_are_visible_and_never_issued_twice (test_h32_barrier.OneShotProtocolTests.test_existing_tokens_are_visible_and_never_issued_twice) ... ok
+test_rearm_or_wrong_clock_is_a_violation (test_h32_barrier.OneShotProtocolTests.test_rearm_or_wrong_clock_is_a_violation) ... ok
+test_single_armed_line_at_the_armed_clock_is_clean (test_h32_barrier.OneShotProtocolTests.test_single_armed_line_at_the_armed_clock_is_clean) ... ok
+test_every_field_is_bound (test_h32_barrier.TokenDerivationTests.test_every_field_is_bound) ... ok
+test_malformed_inputs_are_refused (test_h32_barrier.TokenDerivationTests.test_malformed_inputs_are_refused) ... ok
+test_matches_the_cross_language_vector (test_h32_barrier.TokenDerivationTests.test_matches_the_cross_language_vector) ... ok
+test_expected_names_and_set (test_h32_bundles.CompletenessTests.test_expected_names_and_set) ... ok
+test_terminal_line (test_h32_bundles.CompletenessTests.test_terminal_line) ... ok
+test_accepts_exact_bundle (test_h32_bundles.DurableBundleTests.test_accepts_exact_bundle) ... ok
+test_attempt_and_record_identities_must_be_identical (test_h32_bundles.DurableBundleTests.test_attempt_and_record_identities_must_be_identical) ... ok
+test_duplicate_json_keys_are_malformed (test_h32_bundles.DurableBundleTests.test_duplicate_json_keys_are_malformed) ... ok
+test_partial_sibling_is_refused (test_h32_bundles.DurableBundleTests.test_partial_sibling_is_refused) ... ok
+test_rejects_malformed_or_mismatched_records (test_h32_bundles.DurableBundleTests.test_rejects_malformed_or_mismatched_records) ... ok
+test_rejects_missing_and_partial_and_tiny_state (test_h32_bundles.DurableBundleTests.test_rejects_missing_and_partial_and_tiny_state) ... ok
+test_state_payload_corruption_is_rejected (test_h32_bundles.DurableBundleTests.test_state_payload_corruption_is_rejected) ... ok
+test_state_payload_sparse_hole_is_rejected (test_h32_bundles.DurableBundleTests.test_state_payload_sparse_hole_is_rejected) ... ok
+test_state_payload_truncation_and_padding_are_rejected (test_h32_bundles.DurableBundleTests.test_state_payload_truncation_and_padding_are_rejected) ... ok
+test_state_size_must_be_exact (test_h32_bundles.DurableBundleTests.test_state_size_must_be_exact) ... ok
+test_accepts_the_good_line (test_h32_bundles.StdoutGateTests.test_accepts_the_good_line) ... ok
+test_duplicate_tokens_refused (test_h32_bundles.StdoutGateTests.test_duplicate_tokens_refused) ... ok
+test_rejects_malformed_counters_and_tokens (test_h32_bundles.StdoutGateTests.test_rejects_malformed_counters_and_tokens) ... ok
+test_rejects_ratios_above_local_limit_or_nonfinite (test_h32_bundles.StdoutGateTests.test_rejects_ratios_above_local_limit_or_nonfinite) ... ok
+test_all_members_terminated_killed_then_group_disappearance_verified (test_h32_children.DrainTests.test_all_members_terminated_killed_then_group_disappearance_verified) ... ok
+test_member_whose_identity_drifted_mid_drain_is_never_killed (test_h32_children.DrainTests.test_member_whose_identity_drifted_mid_drain_is_never_killed) ... ok
+test_persisting_survivor_after_kill_preserves_adverse_outcome (test_h32_children.DrainTests.test_persisting_survivor_after_kill_preserves_adverse_outcome) ... ok
+test_protected_and_foreign_groups_are_refused (test_h32_children.DrainTests.test_protected_and_foreign_groups_are_refused) ... ok
+test_recycled_leader_pid_blocks_all_group_signals (test_h32_children.DrainTests.test_recycled_leader_pid_blocks_all_group_signals) ... ok
+test_zombie_leader_still_drains_group_descendants (test_h32_children.DrainTests.test_zombie_leader_still_drains_group_descendants) ... ok
+test_abort_recorder_runs_even_with_clean_cleanup (test_h32_children.InterruptionTests.test_abort_recorder_runs_even_with_clean_cleanup) ... ok
+test_cleanup_never_rebinds_a_changed_identity (test_h32_children.InterruptionTests.test_cleanup_never_rebinds_a_changed_identity) ... ok
+test_owned_cleanup_runs_once_for_keyboard_interrupt (test_h32_children.InterruptionTests.test_owned_cleanup_runs_once_for_keyboard_interrupt) ... ok
+test_signal_description_is_truthful (test_h32_children.InterruptionTests.test_signal_description_is_truthful) ... ok
+test_sigterm_inside_deferred_window_is_queued_then_raised_after (test_h32_children.InterruptionTests.test_sigterm_inside_deferred_window_is_queued_then_raised_after) ... ok
+test_watchdog_is_stopped_even_without_solver (test_h32_children.InterruptionTests.test_watchdog_is_stopped_even_without_solver) ... ok
+test_stable_identity_requires_session_leader_then_accepts (test_h32_children.ParseTests.test_stable_identity_requires_session_leader_then_accepts) ... ok
+test_stat_parse_and_cmdline_sha (test_h32_children.ParseTests.test_stat_parse_and_cmdline_sha) ... ok
+test_leader_exit_still_drains_group_and_reaps_direct_child (test_h32_children.RealProcessCleanupTests.test_leader_exit_still_drains_group_and_reaps_direct_child) ... ok
+test_changed_identity_gets_no_signal_from_a_real_drain (test_h32_children.TeardownPathTests.test_changed_identity_gets_no_signal_from_a_real_drain) ... ok
+test_error_path_reaps_both_and_writes_failure_receipt (test_h32_children.TeardownPathTests.test_error_path_reaps_both_and_writes_failure_receipt) ... ok
+test_kill_escalation_reaches_a_term_ignoring_grandchild (test_h32_children.TeardownPathTests.test_kill_escalation_reaches_a_term_ignoring_grandchild) ... ok
+test_reap_escalates_a_term_ignoring_direct_child (test_h32_children.TeardownPathTests.test_reap_escalates_a_term_ignoring_direct_child) ... ok
+test_repaired_watchdog_keeps_escalating_after_leader_exit (test_h32_children.TeardownPathTests.test_repaired_watchdog_keeps_escalating_after_leader_exit) ... ok
+test_sigint_path_reaps_both_and_writes_failure_receipt (test_h32_children.TeardownPathTests.test_sigint_path_reaps_both_and_writes_failure_receipt) ... ok
+test_success_path_stops_watchdog_and_reaps_both (test_h32_children.TeardownPathTests.test_success_path_stops_watchdog_and_reaps_both) ... ok
+test_watchdog_drain_preserves_an_adverse_exit_status (test_h32_children.TeardownPathTests.test_watchdog_drain_preserves_an_adverse_exit_status) ... ok
+test_mandatory_expectation_must_be_lowercase_hex (test_h32_contract.PlanBindingTests.test_mandatory_expectation_must_be_lowercase_hex) ... ok
+test_memory_floor_rule_keeps_exact_measured_minimum (test_h32_contract.PlanBindingTests.test_memory_floor_rule_keeps_exact_measured_minimum) ... ok
+test_missing_or_inconsistent_profile_identity_map_is_refused (test_h32_contract.PlanBindingTests.test_missing_or_inconsistent_profile_identity_map_is_refused) ... ok
+test_parses_the_same_bounded_bytes_it_hashed (test_h32_contract.PlanBindingTests.test_parses_the_same_bounded_bytes_it_hashed) ... ok
+test_plan_shape_refuses_non_sulaco_and_weak_memory_floor (test_h32_contract.PlanBindingTests.test_plan_shape_refuses_non_sulaco_and_weak_memory_floor) ... ok
+test_snapshot_bytes_must_be_derived_from_the_frozen_identity (test_h32_contract.PlanBindingTests.test_snapshot_bytes_must_be_derived_from_the_frozen_identity) ... ok
+test_tampered_byte_and_oversized_plan_are_refused (test_h32_contract.PlanBindingTests.test_tampered_byte_and_oversized_plan_are_refused) ... ok
+test_composed_readiness_and_exit_codes (test_h32_contract.ReadinessDecisionTests.test_composed_readiness_and_exit_codes) ... ok
+test_host_and_optin_and_deadline_and_resources (test_h32_contract.ReadinessDecisionTests.test_host_and_optin_and_deadline_and_resources) ... ok
+test_probe_path_resolves_to_the_real_output_filesystem (test_h32_contract.ReadinessDecisionTests.test_probe_path_resolves_to_the_real_output_filesystem) ... ok
+test_watchdog_env_pinning_and_barrier_precondition (test_h32_contract.ReadinessDecisionTests.test_watchdog_env_pinning_and_barrier_precondition) ... ok
+test_zero_mem_available_is_a_broken_reading_not_free_memory (test_h32_contract.ReadinessDecisionTests.test_zero_mem_available_is_a_broken_reading_not_free_memory) ... ok
+test_read_all_parses_fake_tree (test_h32_hardening.CensusToolTests.test_read_all_parses_fake_tree) ... ok
+test_setsid_escapee_is_counted_and_swept (test_h32_hardening.CensusToolTests.test_setsid_escapee_is_counted_and_swept) ... ok
+test_zombie_under_live_orphaned_intermediate_is_counted (test_h32_hardening.CensusToolTests.test_zombie_under_live_orphaned_intermediate_is_counted) ... ok
+test_decision_flags_each_fingerprint (test_h32_hardening.ExclusivityCensusTests.test_decision_flags_each_fingerprint) ... ok
+test_host_observations_exclude_own_ancestry_only (test_h32_hardening.ExclusivityCensusTests.test_host_observations_exclude_own_ancestry_only) ... ok
+test_unreadable_proc_fails_closed (test_h32_hardening.ExclusivityCensusTests.test_unreadable_proc_fails_closed) ... ok
+test_guard_idle_drain_is_silent_and_empty (test_h32_hardening.GuardTests.test_guard_idle_drain_is_silent_and_empty) ... ok
+test_clean_entry_may_be_updated (test_h32_hardening.LedgerStickyTests.test_clean_entry_may_be_updated) ... ok
+test_uncertain_entry_is_never_overwritten (test_h32_hardening.LedgerStickyTests.test_uncertain_entry_is_never_overwritten) ... ok
+test_attachment_mismatch_refuses_everything_with_65 (test_h32_hardening.ShellWatchdogIdentityTests.test_attachment_mismatch_refuses_everything_with_65) ... ok
+test_exec_drift_after_term_is_never_killed_and_watchdog_fails (test_h32_hardening.ShellWatchdogIdentityTests.test_exec_drift_after_term_is_never_killed_and_watchdog_fails) ... ok
+test_adverse_watchdog_exit_is_never_erased_by_reaping (test_h32_hardening.TeardownRetryTests.test_adverse_watchdog_exit_is_never_erased_by_reaping) ... ok
+/usr/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 994716 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_exception_in_one_phase_never_suppresses_the_others (test_h32_hardening.TeardownRetryTests.test_exception_in_one_phase_never_suppresses_the_others) ... ok
+test_retry_redoes_work_and_never_answers_already_cleaned (test_h32_hardening.TeardownRetryTests.test_retry_redoes_work_and_never_answers_already_cleaned) ... ok
+test_accepts_and_rejects (test_h32_launch_flow.ArmedLineTests.test_accepts_and_rejects) ... ok
+test_receipt_schema_names_and_uncertainty_passthrough (test_h32_launch_flow.DecisionTests.test_receipt_schema_names_and_uncertainty_passthrough) ... ok
+test_release_only_when_every_gate_passed (test_h32_launch_flow.DecisionTests.test_release_only_when_every_gate_passed) ... ok
+test_accepts_within_caps (test_h32_launch_flow.MeasureTests.test_accepts_within_caps) ... ok
+test_refuses_oversized_rss_and_short_disk (test_h32_launch_flow.MeasureTests.test_refuses_oversized_rss_and_short_disk) ... ok
+test_release_time_memory_floor_is_meaningful (test_h32_launch_flow.MeasureTests.test_release_time_memory_floor_is_meaningful) ... ok
+test_exactly_one_token_of_any_kind_per_attempt (test_h32_launch_flow.OneShotBarrierFlowTests.test_exactly_one_token_of_any_kind_per_attempt) ... ok
+test_pre_token_doubts_refuse_uncertain_dead_drifted_and_preexisting (test_h32_launch_flow.OneShotBarrierFlowTests.test_pre_token_doubts_refuse_uncertain_dead_drifted_and_preexisting) ... ok
+test_disk_probe_uses_the_real_output_filesystem_not_the_cwd (test_h32_launch_flow.OutputFilesystemPreflightTests.test_disk_probe_uses_the_real_output_filesystem_not_the_cwd) ... ok
+test_barrier_environment_deadline_is_capped_by_the_plan_deadline (test_h32_launch_flow.ReleaseDeadlineTests.test_barrier_environment_deadline_is_capped_by_the_plan_deadline) ... ok
+test_final_gate_refuses_after_the_deadline_or_with_doubts (test_h32_launch_flow.ReleaseDeadlineTests.test_final_gate_refuses_after_the_deadline_or_with_doubts) ... ok
+test_token_gate_never_releases_past_the_deadline (test_h32_launch_flow.ReleaseDeadlineTests.test_token_gate_never_releases_past_the_deadline) ... ok
+test_first_step_timer_starts_before_popen_so_spawn_latency_counts (test_h32_launch_flow.TimerBeforeSpawnTests.test_first_step_timer_starts_before_popen_so_spawn_latency_counts) ... ok
+test_wall_budget_is_bounded_by_measured_sulaco_evidence (test_h32_launch_flow.WallBudgetTests.test_wall_budget_is_bounded_by_measured_sulaco_evidence) ... ok
+test_watchdog_bytes_must_match_the_reviewed_sha256_before_spawn (test_h32_launch_flow.WatchdogPinTests.test_watchdog_bytes_must_match_the_reviewed_sha256_before_spawn) ... ok
+test_leak_census_main_reports_clean (test_h32_ops.CensusMainTests.test_leak_census_main_reports_clean) ... clean	rc=0	r0:test_h32_receipts.CreateOnlyTests.test_written_proves_durable_content_and_directory	leaks=0	unconfirmed=[]
+ok
+test_runner_kill_main_cleans_its_adoptions (test_h32_ops.CensusMainTests.test_runner_kill_main_cleans_its_adoptions) ... ok
+test_budget_is_double_measured_cost (test_h32_ops.FreezeTests.test_budget_is_double_measured_cost) ... ok
+test_create_exclusive_never_overwrites (test_h32_ops.FreezeTests.test_create_exclusive_never_overwrites) ... ok
+test_exact_peak_requires_stated_equal_total_and_cap (test_h32_ops.FreezeTests.test_exact_peak_requires_stated_equal_total_and_cap) ... ok
+test_frozen_stage_passes_real_preflight_only_path (test_h32_ops.FreezeTests.test_frozen_stage_passes_real_preflight_only_path) ... CENSUS DONE jobs=1 bad=0 subreaper=VERIFIED zombie_states_counted=True
+RUNNER-KILL CENSUS DONE probes=1 stranded=0 subreaper=VERIFIED
+Simulated-Sulaco preflight-only readiness probe (LOCAL ONLY). (simulated hostname; all measurements real)
+2026-09-20T18:12:14Z preflight-only stage=/tmp/tmp5tgewhwi/stage host=sulaco source=binary built from the frozen source inventory; see docs/source-binding.json (RUN_SOURCE identity token)
+2026-09-20T18:12:14Z   plan_frozen_sha256_expected=d05c0f54831143eb9e782e31c2e995e6855d35a131679024c5616e800511b180
+2026-09-20T18:12:14Z   plan_frozen_sha256_observed=d05c0f54831143eb9e782e31c2e995e6855d35a131679024c5616e800511b180
+2026-09-20T18:12:14Z   mem_available_bytes=1000000000000000
+2026-09-20T18:12:14Z   disk_free_bytes=1000000000000000 probe=/tmp/tmp5tgewhwi/stage
+2026-09-20T18:12:14Z   host_process_census scanned=1487 solver_matches=0 census_unreadable=False
+2026-09-20T18:12:14Z   deadline_epoch=1790100734 now=1789927934
+2026-09-20T18:12:14Z   barrier_dir=/tmp/tmp5tgewhwi/stage/barrier barrier_dir_present=True
+2026-09-20T18:12:14Z   output_exists=False logs_state=empty
+2026-09-20T18:12:14Z preflight-only: READY (no launch performed)
+ok
+test_full_freeze_binds_binary_watchdog_preflight_identity (test_h32_ops.FreezeTests.test_full_freeze_binds_binary_watchdog_preflight_identity) ... ok
+test_host_gate_refusal_is_real (test_h32_ops.FreezeTests.test_host_gate_refusal_is_real) ... 2026-09-20T18:12:14Z preflight-only stage=/tmp/tmpb_rei94b/stage host=sulaco source=binary built from the frozen source inventory; see docs/source-binding.json (RUN_SOURCE identity token)
+2026-09-20T18:12:14Z   plan_frozen_sha256_expected=b9b128406a7c79345820a8f2a0543326faaa0cafec196d03edb59147d4ed032d
+2026-09-20T18:12:14Z   plan_frozen_sha256_observed=b9b128406a7c79345820a8f2a0543326faaa0cafec196d03edb59147d4ed032d
+2026-09-20T18:12:14Z   mem_available_bytes=1000000000000000
+2026-09-20T18:12:14Z   disk_free_bytes=1000000000000000 probe=/tmp/tmpb_rei94b/stage
+2026-09-20T18:12:14Z   host_process_census scanned=1486 solver_matches=0 census_unreadable=False
+2026-09-20T18:12:14Z   deadline_epoch=1790100734 now=1789927934
+2026-09-20T18:12:14Z   barrier_dir=/tmp/tmpb_rei94b/stage/barrier barrier_dir_present=True
+2026-09-20T18:12:14Z   output_exists=False logs_state=empty
+2026-09-20T18:12:14Z   REFUSE opt_in_env_missing(NSBU_RUN_N512_TEMPORAL_CAPTURE)
+2026-09-20T18:12:14Z   REFUSE reviewed_host_env_missing(NSBU_N512_TEMPORAL_REVIEWED_HOST)
+2026-09-20T18:12:14Z preflight-only: NOT READY
+ok
+test_launch_recreates_absent_logs_dir_then_refuses_subreaper (test_h32_ops.FreezeTests.test_launch_recreates_absent_logs_dir_then_refuses_subreaper) ... 2026-09-20T18:12:14Z plan_frozen_sha256_observed=9ae266dd99fd712782800d2688b12451b84576805cbe3d9c94c0915531f9ce36
+2026-09-20T18:12:14Z refused: child_subreaper_unavailable (PR_SET_CHILD_SUBREAPER not verified)
+/mnt/niva-array/work/h32-r6-typing-repair-20260920/evidence/p10/n512-h32-sulaco-launch-20260914/scripts/h32_launch_supervisor.py:366: ResourceWarning: unclosed file <_io.BufferedWriter name=3>
+  return run_launch(config, log)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/niva-array/work/h32-r6-typing-repair-20260920/evidence/p10/n512-h32-sulaco-launch-20260914/scripts/h32_launch_supervisor.py:366: ResourceWarning: unclosed file <_io.BufferedWriter name=4>
+  return run_launch(config, log)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/niva-array/work/h32-r6-typing-repair-20260920/evidence/p10/n512-h32-sulaco-launch-20260914/scripts/h32_launch_supervisor.py:366: ResourceWarning: unclosed file <_io.BufferedWriter name=5>
+  return run_launch(config, log)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_launch_refuses_missing_optin_through_reasons_loop (test_h32_ops.FreezeTests.test_launch_refuses_missing_optin_through_reasons_loop) ... ok
+test_launch_refuses_plan_sha_mismatch (test_h32_ops.FreezeTests.test_launch_refuses_plan_sha_mismatch) ... 2026-09-20T18:12:15Z refused: plan_frozen_sha256_mismatch(expected=0000000000000000000000000000000000000000000000000000000000000000,observed=1851b0d2ddc424fd5f0674b63a9413d2007b242866079517fb760f3c5f23a9fd)
+ok
+test_launch_refuses_when_barrier_dir_missing (test_h32_ops.FreezeTests.test_launch_refuses_when_barrier_dir_missing) ... 2026-09-20T18:12:15Z plan_frozen_sha256_observed=51805f787273a5f23d687a08e5d073e246b0c3949dcc4b65daacbaa39ad50b7a
+2026-09-20T18:12:15Z refused: barrier_dir_missing(/tmp/tmpw4khym93/stage/barrier)
+ok
+test_launch_refuses_when_log_file_exists (test_h32_ops.FreezeTests.test_launch_refuses_when_log_file_exists) ... 2026-09-20T18:12:15Z plan_frozen_sha256_observed=12d6da4e7c9298d8a8c237fe24c2c156402ad512598311f0c9f6395b39eb74c8
+2026-09-20T18:12:15Z refused: logs_dir_nonempty
+ok
+test_launch_refuses_without_verified_subreaper (test_h32_ops.FreezeTests.test_launch_refuses_without_verified_subreaper) ... 2026-09-20T18:12:15Z plan_frozen_sha256_observed=3e7951a68132ccd872843d3383b2b9baa8ee9f018a3c37d53f5a883f2edd70a8
+2026-09-20T18:12:15Z refused: child_subreaper_unavailable (PR_SET_CHILD_SUBREAPER not verified)
+ok
+test_profile_identity_must_be_internally_exact (test_h32_ops.FreezeTests.test_profile_identity_must_be_internally_exact) ... ok
+test_inventory_covers_case_json_and_workspace_root (test_h32_ops.SourceInventoryTests.test_inventory_covers_case_json_and_workspace_root) ... ok
+test_main_write_is_reproducible (test_h32_ops.SourceInventoryTests.test_main_write_is_reproducible) ... ok
+test_missing_local_crate_is_refused (test_h32_ops.SourceInventoryTests.test_missing_local_crate_is_refused) ... ok
+test_ancestor_census_excludes_own_tree (test_h32_ops.SupervisorResourceTests.test_ancestor_census_excludes_own_tree) ... ok
+test_census_cmdline_rendering (test_h32_ops.SupervisorResourceTests.test_census_cmdline_rendering) ... ok
+test_clean_measurement_passes (test_h32_ops.SupervisorResourceTests.test_clean_measurement_passes) ... ok
+test_meminfo_reads_good_absent_and_unreadable (test_h32_ops.SupervisorResourceTests.test_meminfo_reads_good_absent_and_unreadable) ... ok
+test_open_exclusive_refuses_existing (test_h32_ops.SupervisorResourceTests.test_open_exclusive_refuses_existing) ... ok
+test_rss_outside_cap_is_reported (test_h32_ops.SupervisorResourceTests.test_rss_outside_cap_is_reported) ... ok
+test_rss_reads_good_missing_and_unparsable (test_h32_ops.SupervisorResourceTests.test_rss_reads_good_missing_and_unparsable) ... ok
+test_detached_orphans_cannot_stall_a_pipe_drain_and_always_die (test_h32_orphans.OrphanSweepTests.test_detached_orphans_cannot_stall_a_pipe_drain_and_always_die) ... ok
+test_live_descendants_include_nested_and_owner_direct (test_h32_owner.IdentityTests.test_live_descendants_include_nested_and_owner_direct) ... ok
+test_parse_proc_stat_and_identity_roundtrip (test_h32_owner.IdentityTests.test_parse_proc_stat_and_identity_roundtrip) ... ok
+test_sha256_bytes_is_stable (test_h32_owner.IdentityTests.test_sha256_bytes_is_stable) ... ok
+test_signal_with_identity_check_refuses_drift_and_protected (test_h32_owner.IdentityTests.test_signal_with_identity_check_refuses_drift_and_protected) ... ok
+test_pump_reaps_untracked_zombie_without_stealing_status (test_h32_owner.PumpTests.test_pump_reaps_untracked_zombie_without_stealing_status) ... /usr/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 994815 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_adopted_zombie_is_reapable_by_this_process (test_h32_owner.SubreaperTests.test_adopted_zombie_is_reapable_by_this_process) ... ok
+test_escapee_reparented_to_subreaper_when_driver_dies (test_h32_owner.SubreaperTests.test_escapee_reparented_to_subreaper_when_driver_dies) ... ok
+test_subreaper_is_enabled_and_verifies (test_h32_owner.SubreaperTests.test_subreaper_is_enabled_and_verifies) ... ok
+test_kill_ignoring_nested_tree_is_swept_and_reaped (test_h32_owner.TerminateOwnedTests.test_kill_ignoring_nested_tree_is_swept_and_reaped) ... ok
+test_protected_pids_are_excluded_from_member_freeze (test_h32_owner.TerminateOwnedTests.test_protected_pids_are_excluded_from_member_freeze) ... ok
+test_bytes_and_json_are_never_overwritten (test_h32_receipts.CreateOnlyTests.test_bytes_and_json_are_never_overwritten) ... ok
+test_error_on_unreachable_parent_is_reported_not_swallowed (test_h32_receipts.CreateOnlyTests.test_error_on_unreachable_parent_is_reported_not_swallowed) ... ok
+test_written_proves_durable_content_and_directory (test_h32_receipts.CreateOnlyTests.test_written_proves_durable_content_and_directory) ... ok
+test_directory_fsync_targets_the_containing_directory (test_h32_receipts.DirectoryFsyncTests.test_directory_fsync_targets_the_containing_directory) ... ok
+test_any_uncertain_write_blocks_every_later_token (test_h32_receipts.ReceiptLedgerTests.test_any_uncertain_write_blocks_every_later_token) ... ok
+test_clean_ledger_permits_release (test_h32_receipts.ReceiptLedgerTests.test_clean_ledger_permits_release) ... ok
+test_error_statuses_also_count_as_uncertainty (test_h32_receipts.ReceiptLedgerTests.test_error_statuses_also_count_as_uncertainty) ... ok
+test_absent_plan_link_is_skipped_not_inconsistent (test_h32_snapshot.ExpectedIdentityMapPlanTests.test_absent_plan_link_is_skipped_not_inconsistent) ... ok
+test_malformed_map_entry_is_refused (test_h32_snapshot.ExpectedIdentityMapPlanTests.test_malformed_map_entry_is_refused) ... ok
+test_same_keyset_different_order_is_order_drift (test_h32_snapshot.ExpectedIdentityMapPlanTests.test_same_keyset_different_order_is_order_drift) ... ok
+test_duplicated_missing_and_unexpected_fields_refused (test_h32_snapshot.IdentityFieldTests.test_duplicated_missing_and_unexpected_fields_refused) ... ok
+test_endpoint40960_rejected_by_endpoint4096_field (test_h32_snapshot.IdentityFieldTests.test_endpoint40960_rejected_by_endpoint4096_field) ... ok
+test_full_writer_identity_with_every_legitimate_field_accepts (test_h32_snapshot.IdentityFieldTests.test_full_writer_identity_with_every_legitimate_field_accepts) ... ok
+test_map_inconsistent_with_plan_identity_is_refused (test_h32_snapshot.IdentityFieldTests.test_map_inconsistent_with_plan_identity_is_refused) ... ok
+test_plan_without_frozen_map_is_refused (test_h32_snapshot.IdentityFieldTests.test_plan_without_frozen_map_is_refused) ... ok
+test_accepts_the_real_rust_written_tiny_fixture (test_h32_snapshot.RustWriterFixtureTests.test_accepts_the_real_rust_written_tiny_fixture) ... ok
+test_production_identity_adversarial_drift_is_refused (test_h32_snapshot.RustWriterFixtureTests.test_production_identity_adversarial_drift_is_refused) ... ok
+test_production_identity_validates_against_the_frozen_map (test_h32_snapshot.RustWriterFixtureTests.test_production_identity_validates_against_the_frozen_map) ... ok
+test_rejects_corrupted_truncated_padded_and_wrong_identity_fixtures (test_h32_snapshot.RustWriterFixtureTests.test_rejects_corrupted_truncated_padded_and_wrong_identity_fixtures) ... ok
+test_accepts_writer_replica (test_h32_snapshot.SyntheticPayloadTests.test_accepts_writer_replica) ... ok
+test_file_level_rejects_truncation_padding_and_sparse_holes (test_h32_snapshot.SyntheticPayloadTests.test_file_level_rejects_truncation_padding_and_sparse_holes) ... ok
+test_rejects_all_zero_and_nul_run_payloads (test_h32_snapshot.SyntheticPayloadTests.test_rejects_all_zero_and_nul_run_payloads) ... ok
+test_rejects_payload_corruption_and_digest_swap (test_h32_snapshot.SyntheticPayloadTests.test_rejects_payload_corruption_and_digest_swap) ... ok
+test_rejects_truncated_padded_and_magic_corrupt (test_h32_snapshot.SyntheticPayloadTests.test_rejects_truncated_padded_and_magic_corrupt) ... ok
+test_rejects_wrong_identity_and_clock_fields (test_h32_snapshot.SyntheticPayloadTests.test_rejects_wrong_identity_and_clock_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 152 tests in 104.244s
+
+OK
+{"entries": 610, "run_source": "fa441601bee855a7c67b2a8f1f29e3a5a2a123b7e3e3a6ca3417b3f294ec6d55", "list": "/tmp/tmphqt2zuhy/list", "written": true}
+unit rc=0

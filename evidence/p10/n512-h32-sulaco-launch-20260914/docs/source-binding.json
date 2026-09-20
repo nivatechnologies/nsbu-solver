@@ -1,0 +1,42 @@
+{
+  "schema": "p10-n512-m512-sulaco-temporal-h32-launch-source-binding-v1",
+  "host_gate": "sulaco (actual socket.gethostname must equal this; refusal proven in docs/)",
+  "stage": "/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5",
+  "source_commit_head": "2b81637",
+  "source_note": "uncommitted-increment barrier/staging/leak-census work owned by this session; identity source token below binds every hashed input byte",
+  "identity_source": "fa441601bee855a7c67b2a8f1f29e3a5a2a123b7e3e3a6ca3417b3f294ec6d55",
+  "binary_sha256": "3b9ccff93d41200d664aadcfbec32a406e139df90c06cca989bda5a518721de4",
+  "watchdog_sha256": "23f5a485c62fb764f0ba933a4d2bb1d524df4719d994e8d400ba23bf310f1c69",
+  "preflight_stdout_sha256": "479b0d4005418bb607498b3ebba85cae8ba304ce41de8ab787c5dca9fe19695c",
+  "frozen_plan_sha256": "ac63c8c71e958d9a0b8e246338a1cccc09373eb9dde9084ea9012a87daa5acb9",
+  "profile": "n512-m512-h32to2048-h64to4096-cadv33-w3-pfft1ed6995",
+  "observer_state_schema": "p10-avx-n512-m512-h32-observer-state-v1",
+  "attempt_schema": "p10-avx-scheduled-attempt-v3",
+  "capture_terminal_schema": "p10-avx-n512-m512-h32-endpoint-capture-v1",
+  "deadline": {
+    "freeze_utc": "2026-09-20T16:06:07Z",
+    "deadline_epoch": 1790093167,
+    "deadline_utc": "2026-09-22T16:06:07Z",
+    "status": "proposed_for_root"
+  },
+  "budgets": {
+    "maximum_first_step_integration_seconds": 1910,
+    "first_step_wall_seconds": 2103,
+    "evidence": {
+      "sulaco_one_attempt_wall_seconds": 1051.2,
+      "sulaco_one_attempt_integration_seconds": 954.894656332,
+      "rule": "ceil(2x measured first-step cost); fresh 48 h absolute deadline proposed_for_root (r5 re-freeze after final re-inventory); re-freeze rather than extend",
+      "identity_document": "docs/identity-expected.json (writer-derived)"
+    }
+  },
+  "resources": {
+    "exact_capture_peak_bytes": 207627647760,
+    "memory_floor_bytes": 241987386128,
+    "address_space_limit_bytes": 274877906944,
+    "disk_bound_bytes": 310453075968,
+    "disk_floor_bytes": 344812814336,
+    "probe_path": "/mnt/niva-array/nsbu-solver/work/n512-h32-sulaco-capture-20260914-r5"
+  },
+  "qualification": false,
+  "accepted_windows": 0
+}
