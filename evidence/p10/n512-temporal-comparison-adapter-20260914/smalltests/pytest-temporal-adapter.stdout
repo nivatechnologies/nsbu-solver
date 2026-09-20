@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0
-rootdir: /mnt/niva-array/nsbu-solver/work/opencode-temporal-comparator-20260914
+rootdir: /mnt/niva-array/work/temporal-v9-rebase-20260920
 configfile: pyproject.toml
 collected 185 items
 
@@ -12,4 +12,4 @@ tools/tests/test_prepare_temporal_comparison_refusals.py ............... [ 82%]
 .............................                                            [ 97%]
 tools/tests/test_prepare_temporal_m512_evidence.py ....                  [100%]
 
-============================= 185 passed in 7.18s ==============================
+============================= 185 passed in 7.12s ==============================

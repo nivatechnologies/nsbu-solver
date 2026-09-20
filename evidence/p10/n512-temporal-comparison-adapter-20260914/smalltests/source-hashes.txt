@@ -1,4 +1,8 @@
-# Exact measured inputs for this packet, hashed from the tree at reseal time (2026-09-20, v7 pass).
+# Exact measured inputs for this packet, hashed from the temporal-v9 destination tree
+# at reseal time (2026-09-20, v8 rebase onto destination commit
+# 0c369302af73b6d6fba37454ca18053e973642d5; every measured input is byte-identical
+# to the Astra-PASS source candidate working tree at base
+# a7f7a576e6f7d201846d10db0b4383f1d362a86c and was rehashed at the destination).
 # Inventory: all 23 measured adapter-harness .rs files (12 production and cfg(test) root modules:
 #   the 10 src/*.rs files plus the v7 src/mixed_math/kernels.rs and
 #   src/mixed_math/kernels/primitives.rs split modules) plus 11 src/tests/*.rs cfg(test)

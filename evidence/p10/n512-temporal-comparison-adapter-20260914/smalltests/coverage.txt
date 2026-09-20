@@ -1,5 +1,5 @@
 command: python3 -m coverage run --branch -m pytest tools/tests/test_temporal_comparison_contract.py tools/tests/test_prepare_temporal_comparison.py tools/tests/test_prepare_temporal_comparison_refusals.py tools/tests/test_prepare_temporal_m512_evidence.py
-json:    python3 -m coverage json -o work/temporal-coverage-v7.json
+json:    python3 -m coverage json -o work/temporal-coverage-v8.json
 report: python3 -m coverage report --include="tools/temporal_comparison_contract.py,tools/prepare_temporal_comparison.py,tools/tests/temporal_comparison_fixtures.py,tools/tests/test_prepare_temporal_comparison.py,tools/tests/test_prepare_temporal_comparison_refusals.py,tools/tests/test_prepare_temporal_m512_evidence.py,tools/tests/test_temporal_comparison_contract.py"
 environment: python 3.12.3, coverage 7.16.1, pytest 9.0.3 (host interpreter; same pytest version as the .venv focused run)
 measured scope: the seven files above -- the two adapter modules, the shared

@@ -1,15 +1,16 @@
 tool: rust-code-analysis-cli 0.0.25 (unit ndjson of all 23 adapter-harness .rs files,
-      regenerated from the v7 tree; the CI jq gate expressions applied verbatim)
+      regenerated from the temporal-v9 destination tree at commit 0c369302af73b6d6fba37454ca18053e973642d5;
+      the CI jq gate expressions applied verbatim)
 before: src/mixed_math.rs file-level Halstead difficulty 87.94117647058823 (blocker, >= 80)
 after split: src/mixed_math.rs 43.932203389830505,
              src/mixed_math/kernels.rs 62.310344827586206,
              src/mixed_math/kernels/primitives.rs 48.828125
 exact CI gate invocations and results (exit status 0 = pass, rust.yml step):
-  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cyclomatic.sum] | length > 0 and max < 22" work/rust-metrics-v7.ndjson
+  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cyclomatic.sum] | length > 0 and max < 22" work/rust-metrics-v8.ndjson
   true (exit 0)
-  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cognitive.sum] | max < 22" work/rust-metrics-v7.ndjson
+  $ jq -se "[.. | objects | select(.kind? == \"function\") | .metrics.cognitive.sum] | max < 22" work/rust-metrics-v8.ndjson
   true (exit 0)
-  $ jq -se "[.. | objects | select(has(\"metrics\")) | .metrics.halstead.difficulty | select(. != null)] | max < 80" work/rust-metrics-v7.ndjson
+  $ jq -se "[.. | objects | select(has(\"metrics\")) | .metrics.halstead.difficulty | select(. != null)] | max < 80" work/rust-metrics-v8.ndjson
   true (exit 0)
 maximum file-level halstead.difficulty: 77.98062015503876 ( src/compare.rs )
 maximum function-level halstead.difficulty: 39.0

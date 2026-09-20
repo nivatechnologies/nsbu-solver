@@ -1,6 +1,6 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.12.3, pytest-9.0.3, pluggy-1.6.0
-rootdir: /mnt/niva-array/nsbu-solver/work/opencode-temporal-comparator-20260914
+rootdir: /mnt/niva-array/work/temporal-v9-rebase-20260920
 configfile: pyproject.toml
 collected 417 items
 
@@ -215,4 +215,4 @@ FAILED tools/tests/test_verification_contracts.py::VerificationContracts::test_s
 FAILED tools/tests/test_verification_runner.py::RunnerTests::test_dependency_and_process_errors
 FAILED tools/tests/test_verification_runner.py::RunnerTests::test_execution_success_and_repository_refusal
 FAILED tools/tests/test_verification_runner.py::RunnerTests::test_scientific_drift_refused
-============= 9 failed, 405 passed, 3 skipped in 75.72s (0:01:15) ==============
+============= 9 failed, 405 passed, 3 skipped in 76.75s (0:01:16) ==============
