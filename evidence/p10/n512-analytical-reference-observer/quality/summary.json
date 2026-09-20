@@ -1,0 +1,62 @@
+{
+  "schema": "p10-n512-analytical-reference-observer-quality-v2",
+  "measured_at_utc": "2026-09-20T10:34:43+00:00",
+  "tests": {
+    "unit_passed": 91,
+    "integration_passed": 4,
+    "failed": 0,
+    "ignored": 0
+  },
+  "clippy_warnings": 0,
+  "coverage_inclusive_totals": {
+    "lines": {
+      "covered": 6744,
+      "count": 6882,
+      "percent": 97.9947689625109
+    },
+    "branches": {
+      "covered": 486,
+      "count": 596,
+      "percent": 81.54362416107382
+    },
+    "functions": {
+      "covered": 639,
+      "count": 665,
+      "percent": 96.09022556390977
+    },
+    "regions": {
+      "covered": 11876,
+      "count": 12242,
+      "percent": 97.0102924358765
+    }
+  },
+  "coverage_scope": "every compiled file: observer sources, verbatim included decode.rs/model.rs, all cfg(test) modules and tests/cli_adversarial.rs; no file or line excluded",
+  "crap": {
+    "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+    "maximum": 22.5,
+    "gate_lt_25": true,
+    "write_fixture_and_tamper": [
+      {
+        "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+        "function": "write_fixture",
+        "cyclomatic": 1.0,
+        "branch_coverage_fraction": 1.0,
+        "crap": 1.0
+      },
+      {
+        "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+        "function": "tamper",
+        "cyclomatic": 4.0,
+        "branch_coverage_fraction": 1.0,
+        "crap": 4.0
+      }
+    ]
+  },
+  "rca": {
+    "function_cyclomatic_max": 20.0,
+    "function_cognitive_max": 10.0,
+    "halstead_difficulty_max": 29.81,
+    "all_files_under_500_physical_lines": true
+  },
+  "production_change_scope": "observer harness sources and the sealed source-inventory decoder digest only; reviewed included sources and both path-dependency inventories byte-identical at 30dc45f"
+}

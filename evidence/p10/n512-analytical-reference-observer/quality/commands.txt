@@ -1,0 +1,22 @@
+# Measurement commands (run from evidence/p10/n512-analytical-reference-observer/harness
+# unless noted; toolchain cargo 1.94.0, coverage nightly-2026-03-03 + cargo-llvm-cov 0.9.x)
+cargo test --offline
+cargo clippy --offline --all-targets
+cargo +nightly-2026-03-03 llvm-cov --offline --all-targets --branch
+# inclusive export over every test/integration/binary object (cargo llvm-cov's own
+# report only covers the plain binary; the merged profdata is identical):
+LLVMCOV=$(find ~/.rustup/toolchains/nightly-2026-03-03-x86_64-unknown-linux-gnu -name llvm-cov -type f | head -1)
+$LLVMCOV export \
+  -object target/llvm-cov-target/debug/deps/p10_n512_analytical_reference_observer-<unit-test> \
+  -object target/llvm-cov-target/debug/deps/p10_n512_analytical_reference_observer-<bin> \
+  -object target/llvm-cov-target/debug/deps/cli_adversarial-<int-test> \
+  -object target/llvm-cov-target/debug/p10-n512-analytical-reference-observer \
+  -instr-profile=target/llvm-cov-target/harness.profdata            # -> quality/coverage.json
+# RCA (from the repository root; adapter paths from evidence/p10 so names suffix-match the coverage file list):
+rust-code-analysis-cli -m -p evidence/p10/n512-analytical-reference-observer/harness/src -O json -o <out>
+(cd evidence/p10 && rust-code-analysis-cli -m -p snapshot-comparison-adapter/harness/src/decode.rs -O json -o <out>)
+(cd evidence/p10 && rust-code-analysis-cli -m -p snapshot-comparison-adapter/harness/src/model.rs -O json -o <out>)
+(cd evidence/p10/n512-analytical-reference-observer/harness && rust-code-analysis-cli -m -p tests/cli_adversarial.rs -O json -o <out>)
+# units concatenated -> quality/rca.jsonl
+# from the repository root:
+python3 quality/check_crap.py rust <rca.jsonl> <coverage.json> quality/crap.json   # exits nonzero iff any CRAP >= 25

@@ -1,0 +1,4697 @@
+{
+  "formula": "CC^2 * (1 - branch_coverage)^3 + CC",
+  "branchless": "observed executable body coverage",
+  "functions": [
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "ledger_request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "test_inputs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "ledger_normalization_refuses_uncovered_grids_and_degenerate_counts",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "observer_construction_and_observation_arms_refuse",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "ledger_record_optional_arms_bind_or_refuse",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "quantity_arithmetic_guards_refuse_nonfinite_measurements",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "report_witnesses_serialize_no_samples_and_stay_finite",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/arm_tests.rs",
+      "function": "request_and_cli_admission_arms_refuse",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "ledger_request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "plan_variant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "run_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "observer_refuses_unbound_source_identities",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "ledger_records_require_every_structured_binding",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "ledger_binds_the_fully_bound_fixture_record_and_echoes_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "transform_count_is_exactly_the_reviewed_fifty_sequence",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "fifteen_gib_ledger_correction_term_is_pinned",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "manifest_envelope_refuses_every_disagreement_between_the_two_bounded_reads",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/binding_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "zero_reference",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "zero_pressure_row",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "point",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "filled",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "velocity_cache",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "pressure_cache",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "lattice_mean",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 5.1157407407407405
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/cache.rs",
+      "function": "coefficient_sha256",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "plan_variant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "run_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "bounded_reads_and_strict_parsers_refuse_adversarial_input",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "manifest_paths_must_stay_inside_the_manifest_directory",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "plan_source_and_endpoint_variant_arms_refuse",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "plan_schedule_variant_arms_refuse",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "plan_source_harness_key_binds_and_missing_endpoint_refuses",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "identity_extension",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "identity_extension_binds_matching_plan_sources_and_refuses_foreign_ones",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "plan_variant_from",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "every_admitted_comparison_kind_binds_through_the_m384_reader",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "local_manifest_variant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/coverage_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "fixture_source_commit",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "synthetic_state",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "write_fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "fixture_plan",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "fixture_identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "fixture_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "snapshot_bytes",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "write_json",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "hex64_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "tamper",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "hex40",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "hex64",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "write_clock_record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/fixtures.rs",
+      "function": "clock_record_json",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "report_finiteness_guards_refuse_nonfinite_witnesses",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "measurement_buffers_and_foreign_clocks_are_refused",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/guard_tests.rs",
+      "function": "snapshot_profile_bindings_must_match_the_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "repo_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "inventory",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "sha256_file",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "disk_file_count",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "inventory_seals_the_included_decoder_and_model_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "published_outputs_carry_the_sealed_included_digests",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "stale_decoder_inventory_refuses_and_current_head_bytes_bind",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/inventory_tests.rs",
+      "function": "inventory_seals_both_path_dependency_crates_completely",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "source",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "samples",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "clock",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "mode_field",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "coupled_component",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "store",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "closed_form",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "sample",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "first_derivatives_match_closed_forms",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "second_derivatives_and_mixed_hessians_match_closed_forms",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "reference_lattice",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "curl_witness_matches_closed_form_curl",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "vector_gradient_and_hessian_measurements_agree_with_closed_forms",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "gauge_fixture_has_exact_hand_computed_peaks_and_offset_cancellation",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "to_witness_index",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "typed_field_peak_identity_is_known",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/known_value_tests.rs",
+      "function": "witness_indices_use_x_major_z_fast_order_on_rectangular_lattices",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "add",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "mul",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "preflight",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "exact_reservations",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "observer_array_bytes",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "comparison_array_bytes",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "reference_cache_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "snapshot_state_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "work_ledger",
+      "cyclomatic": 19.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 19.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "normalize",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/ledger.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "main",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "validate",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "command",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "ledger_arguments",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "live_arguments",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "parse",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "parse_backend",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "layout",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "inputs",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 15.481481481481483
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "admitted_profile",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.7857142857142857,
+      "crap": 8.629737609329446
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "identity_value",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "bind_identity_fields",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 16.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "clock_from",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "execute",
+      "cyclomatic": 18.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 18.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "observe_and_finish",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 13.271484375
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "insert",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "function": "finish",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_plan_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_preflight",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_ledger",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_refuses_wrong_typed_and_rehashed_plan_schemas",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_refuses_wrong_typed_layouts_endpoints_nodes_and_schedules",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_ledger_refuses_wrong_typed_and_missing_canonical_source_commit",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_accepts_the_fully_bound_ledger_record_and_preflight",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "publication_rollback_and_enoent_messages_are_truthful",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "approved_plan_schema_is_the_only_admitted_plan_schema",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_ledger_refuses_forged_capture_claims_and_work_overrun",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "cli_ledger_refuses_an_empty_provider_field",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "ledger_normalization_refuses_each_uncovered_sample_grid_independently",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/mutation_tests.rs",
+      "function": "fixture_tamper_flips_a_leading_zero_digest_to_lowercase_f",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/n512.rs",
+      "function": "n512_ledger",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/n512.rs",
+      "function": "bind_clock_identity",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/n512.rs",
+      "function": "ledger_output_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/n512.rs",
+      "function": "expected_comparison_array_bytes",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "preflight",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "new",
+      "cyclomatic": 20.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 20.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "observe",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 15.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "observe_velocity_family",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "velocity_measure",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "observe_pressure_family",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "evaluate_force",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 10.5
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "construct_pressure",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "actual_pressure_lattice_mean",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "region_name",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "measurement",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "quantity_name",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "field",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "values",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "zeros",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/observer.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "field",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "text",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "u64_field",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "require_false_flag",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "hex",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "optional_source",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "validate_plan",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_plan_source",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 6.5625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "declared_plan_source",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_extension_source",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_plan_artifacts",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 8.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_plan_semantics",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_plan_geometry",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.7857142857142857,
+      "crap": 14.662900874635568
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "parse_plan_segments",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "segment_tick",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_schedule_to_evolution",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 6.0703125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_schedule_contiguity",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "scheduled_landing",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "bind_plan_nodes",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.9,
+      "crap": 10.1
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "parse_plan_body",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/plan.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "read_bounded_bytes",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "read_text",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "parse_strict",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "reject_duplicate_keys",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "is_json_space",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "finish_scan",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "scan_step",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "set_object_key_state",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "scan_and_note_string",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "note_object_key",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "scan_token",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 4.592592592592593
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "is_token_end",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "scan_string",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "identity_fields_strict",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "split_identity_field",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "require_text",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "lower_hex",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "relative_name",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "bind_snapshot",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "bind_manifest_envelope",
+      "cyclomatic": 16.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 16.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "bind_identity_fields",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 0.8,
+      "crap": 13.152
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "bind_plan_file",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 13.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "bind_embedded_identity",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 21.912109375
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/provenance.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "publish",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "publish_with_fault",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "publish_impl",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "fresh_temporary",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "fails_write",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "fails_write",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "stage_payload",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "attach_temporary",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 7.765625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "finalize_attached",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 12.890625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "remove_attached_temporary",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "cleanup_uncertainty",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "residue_status",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "rollback_incomplete",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "sync_parent",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "faulted_directory_sync",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "revoke_parent_write",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "deny_parent",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "restore_parent",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication.rs",
+      "function": "cleanup",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "faults_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "faults_directory",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "refused",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "assert_residue",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 22.5
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "directory_sync_fault_reports_the_genuine_kernel_error",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "write_failure_cleanup_reports_the_leftover_it_cannot_remove",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "truncated_attachment_is_removed_and_reported",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "post_attach_temporary_gone_is_reported_as_absent_not_leftover",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/publication_fault_tests.rs",
+      "function": "attach_race_leaves_the_competing_file_untouched",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "as_str",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "component",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "entry",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "axis_distance",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "measure",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.625,
+      "crap": 11.375
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "sample_components",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "collect_statistics",
+      "cyclomatic": 12.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 12.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "peak_witnesses",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "sample_component",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "accumulate_points",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "hypot",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "maximum",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "relative_maximum",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 5.390625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "witness",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 2.0625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/quantity.rs",
+      "function": "identity",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "validate_record",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "bind_record_schema",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 6.5625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "bind_record_source",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "bind_record_identity",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.875,
+      "crap": 7.095703125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "bind_record_clock",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "bind_record_artifacts",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "positive_u64",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/record.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "ledger_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "work_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "binding_value",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "observation_value",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "peak",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "sampled_error",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "identity_field",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "all_finite",
+      "cyclomatic": 15.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 18.515625
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/report.rs",
+      "function": "pretty",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "plan_variant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "every_qualification_and_authorization_flag_is_required_with_exact_values",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "only_the_named_artifact_hashes_are_admitted",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "the_schedule_must_bind_the_evolution_and_land_exactly",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "observer_nodes_must_be_approved_by_the_schedule",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "tampered_named_hashes_survive_consistent_rehashing",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/schedule_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "sha256_hex",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "harness_directory",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "digest_harness_relative",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "dependency_aggregate",
+      "cyclomatic": 11.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 11.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "sealed_included_digest",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "included_bindings",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/source_bind.rs",
+      "function": "bindings_for",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "parse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "run",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "duplicate_json_keys_are_refused_everywhere",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 3.0416666666666665
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "identity_fields_are_unique_and_delimited",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "entry_schedule_matches_the_reviewed_hand_computed_values",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "periodic_axis_distance_is_hand_checked_minimum_image",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "peak_maximum_first_tie_and_rejections_are_hand_checked",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "pressure_lattice_mean_is_hand_checked",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "n512_ledger_output",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "live_array_ledger_matches_the_actual_n512_allocations",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "n512_ledger_refuses_duplicate_or_unbound_records",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "strict_manifest_provenance_tampering_is_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "atomic_publication_refusals_and_write_failure_leave_nothing",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "run_reports_actual_peaks_height_errors_and_gauge_witnesses",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "parent_sync_runs_after_attach_even_when_cleanup_denies",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "rollback_remove_and_sync_faults_report_the_genuine_outcome",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "create_only_publication_refuses_a_preexisting_stale_temporary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/strict_tests.rs",
+      "function": "residue_status_states_uncertainty_when_existence_cannot_be_confirmed",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "kind_fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "grid_fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "standard",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "manifest_variant",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "read_refusal",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "time_diagnostic_profile_binds_both_reviewed_grids_and_refuses_foreign_ones",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "the_reviewed_m384_admission_accepts_m384_and_refuses_the_bridge_only_grids",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "decoder_envelope_arms_refuse_malformed_bindings",
+      "cyclomatic": 13.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 13.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "decoder_evolution_and_schedule_arms_refuse_every_inconsistency",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "arithmetic_review",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "attach_arithmetic_control",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "arithmetic_control_binds_and_refuses_every_documented_divergence",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "snapshot_variant",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "unbound_snapshot",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "base_snapshot",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "snapshot_reader_arms_refuse_every_malformed_field",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 10.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "load_refuse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "reader_bounds_and_admission_helpers_are_exercised",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "profile_bindings_compare_identity_and_profile_field_forms",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/surface_tests.rs",
+      "function": "compiled_bindings_refuse_foreign_inventories",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "fixture_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "fixture",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "fixture_with",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "parse",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "run",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "run_binds_identities_and_stays_unqualified",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "quantities_carry_global_regions_peaks_and_gauge",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "preflight_reports_fits_without_executing",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "results_publish_create_only",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "tampered_provenance_and_case_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.25,
+      "crap": 1.421875
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "unsupported_profiles_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "fixture_target",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "endpoint_and_foreign_clocks_are_refused",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "work_and_memory_caps_refuse_before_allocation",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "forged_ledgers_are_refused_before_allocation",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "coefficients_are_observed_read_only",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "n512_ledger_is_arithmetic_only_and_bounded",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "n512_ledger_refuses_records_that_are_resumable_or_qualified",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "ledger_request",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "n512_ledger_refuses_foreign_identities",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.16666666666666666,
+      "crap": 4.314814814814815
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "cli_surface_refusals_are_bounded",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "evidence/p10/n512-analytical-reference-observer/harness/src/tests.rs",
+      "function": "test_inputs",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_external_reference_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_manifest_with",
+      "cyclomatic": 10.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 11.5625
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_envelope",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 0.9375,
+      "crap": 9.019775390625
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_hashes",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_evolution",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_evolution_profile",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_cm_m384",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_cm_m512",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_force_resolution_profile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_method_profile",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_tolerances",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.75,
+      "crap": 4.25
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 2.5
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "validate_schedule",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "state_bytes",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "admitted_bytes",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "admitted_bytes_three",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "preflight_three",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "preflight",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "load",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "check_file_len",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "expected_file_len",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_prefix",
+      "cyclomatic": 14.0,
+      "branch_coverage_fraction": 0.9,
+      "crap": 14.196
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "finish_snapshot",
+      "cyclomatic": 9.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 9.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "is_hex",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "beside",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "read_bounded",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 4.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_arithmetic_control",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_side",
+      "cyclomatic": 4.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 6.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_arithmetic_review",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 0.6666666666666666,
+      "crap": 10.37037037037037
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_measured_control",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "valid_reviewed_lineage",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 8.125
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "verify_bounded_hash",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "decode_components",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "new",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "exact",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "array",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "u64",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "u128",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/decode.rs",
+      "function": "finish",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 4.125
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "domain",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "matches_identity",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "matches_profile_field",
+      "cyclomatic": 3.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 3.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "from",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.0,
+      "crap": 2.0
+    },
+    {
+      "path": "snapshot-comparison-adapter/harness/src/model.rs",
+      "function": "debug",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "binary",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "repo_root",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "run",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "preflight_args",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "ledger_args",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "hex40",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "hex64",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "source_commit",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "mutated_manifest",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "snapshot_bytes",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 7.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "ledger_record",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "refuse_plan",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "subprocess_refuses_exact_flag_and_artifact_mutations",
+      "cyclomatic": 8.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 8.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "subprocess_refuses_exact_schedule_and_node_mutations",
+      "cyclomatic": 6.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 6.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "subprocess_ledger_refuses_missing_state_hash_and_accepts_the_bound_record",
+      "cyclomatic": 5.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 5.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "inventory_path",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "disk_aggregate",
+      "cyclomatic": 7.0,
+      "branch_coverage_fraction": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 0.5,
+      "crap": 1.125
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "subprocess_preflight_accepts_the_fully_bound_plan",
+      "cyclomatic": 2.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 2.0
+    },
+    {
+      "path": "tests/cli_adversarial.rs",
+      "function": "<anonymous>",
+      "cyclomatic": 1.0,
+      "branch_coverage_fraction": 1.0,
+      "crap": 1.0
+    }
+  ],
+  "maximum": 22.5
+}

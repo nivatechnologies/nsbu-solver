@@ -1,0 +1,2444 @@
+{
+  "schema": "p10-n512-analytical-reference-observer-source-inventory-v1",
+  "note": "Sealed source bindings for the N512 analytical reference observer: the two verbatim #[path]-included sources and the complete source inventories of both path-dependency crates. The included sources and this inventory are embedded into the binary with include_bytes!, so every published observer output carries the SHA-256 of the exact compiled decoder/model bytes, this inventory's own digest, both crates' full per-file inventories and each crate's aggregate digest (SHA-256 over the sorted 'repository_path  sha256\\n' lines, recomputed from the compiled inventory and cross-checked against the sealed aggregate). The inventory test re-hashes every listed file against these digests.",
+  "included_sources": [
+    {
+      "role": "decoder",
+      "repository_path": "evidence/p10/snapshot-comparison-adapter/harness/src/decode.rs",
+      "included_via": "#[path] module attribute in evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "sha256": "ac11a172ac38cb92c7665ceecb3ee6892d437afd99a8ff3246a61a38e9e5074c"
+    },
+    {
+      "role": "model",
+      "repository_path": "evidence/p10/snapshot-comparison-adapter/harness/src/model.rs",
+      "included_via": "#[path] module attribute in evidence/p10/n512-analytical-reference-observer/harness/src/main.rs",
+      "sha256": "2df8a28dc9a370d2bd3539caf172c6b474d3c48540eae6c6ff930f292dadb967"
+    }
+  ],
+  "path_dependencies": [
+    {
+      "crate": "nsbu-benchmarks",
+      "manifest": "crates/nsbu-benchmarks/Cargo.toml",
+      "file_count": 392,
+      "aggregate_sha256": "b609d19dcb47376ff9dc4eba10f334d77a9e806918c884b999ee9fdfe831efb5",
+      "files": [
+        {
+          "repository_path": "crates/nsbu-benchmarks/Cargo.toml",
+          "sha256": "8f53473dc2faf2bda00416348644fd1d7cebd8f135ff6a5f5561d95a5735ecf9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/NOTICE",
+          "sha256": "67b5abd956371339ece674d283a672be961eddc3ee26c6a1db3d6e63f80c03a2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/README.md",
+          "sha256": "84e20db2a4acd96473b9f4483b79478f1a4b2b802d849ecac1e1b9254cc9100c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/reduction-n4.bin",
+          "sha256": "083c7354e94c29648d9a6cf29c86654b36b0fe3a64363944d318ee594f90dc7e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/similarity-mms-v2.json",
+          "sha256": "e1236f7b3c51537acd17381402ca420ba7872a7b9dbc64b2f0d9d5108a468f7e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/v2-pressure-gauge/clock0.json",
+          "sha256": "cb4c80287af0694a57e2f84776d62162f15193bd5c7657423e62f93cf69f10c9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/v2-pressure-gauge/clock128.json",
+          "sha256": "70933d509cdf65f59feb3f766cf2e86a4f0ec04f80a5c43293fdda7aca4350d1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/v2-pressure-gauge/clock2048.json",
+          "sha256": "f20eb0e9b15d3316640e039ce8afcd432ed562c895f6434fe9a19fa448d39a44"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/v2-pressure-gauge/clock4096.json",
+          "sha256": "dff3b5075ca84c7c6698875e0613be4149bea7eafc000624231fda04cb25f84d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/data/v2-pressure-gauge/clock64.json",
+          "sha256": "3b3d7eb41d22437fa1ec389b6cdf509e33cffbf877f24a0a6804d0cd541a371a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/arithmetic_support/evolution.rs",
+          "sha256": "8e7111e250aa73c13107d879980d00f2692b3a4d4bb379aa66d3b5b753683343"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/arithmetic_support/mod.rs",
+          "sha256": "f5d8240d6bfd604df9eda116ebfb8763cc3d0de84d1fb027df6fd70faa552aa6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/derived_support/mod.rs",
+          "sha256": "f3530b07d91d58f3cb1bdcdc2540d70ec4850526bdb637d74ca89d3dde4510d1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/derived_support/output.rs",
+          "sha256": "98704c74463b6e1fa6760a3538b1941107cc0e5deed46cebc597ca2b4a8539fc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/force_cache_profile.rs",
+          "sha256": "ee1a4cf2b07b9cca1d7fa80056b8691d316ccf2851123d6da151aee49ff5504e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/parallel_force_profile.rs",
+          "sha256": "1fa72aa823acf8065a48c2e4861ed7e4aa4adeb7861897956329c056b1cf742f"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduced_force_profile.rs",
+          "sha256": "07a41e81db2b4f44d800cbb3459ab1fa6bb7d4eddbd3913f17ae3c3a41c019fa"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduced_provider_profile.rs",
+          "sha256": "0bd684bb542a5f6006dc426792ef4417209eeee9306b901e18d5991d1e1e2207"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduction_audit.rs",
+          "sha256": "1cc22fedcbe4c33364220569e7431b6f43969f23bffab61048b893f7d0aed019"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduction_support/input.rs",
+          "sha256": "a2b46a3da04bb8dbafa5784efbed0b451b17aa9f3a40f7a621dbb7bbcc1b55e4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduction_support/mod.rs",
+          "sha256": "ad575602aaa969736bd19e1185e70d67f5e9f8f6fa0ba2d72d5412aa3007a790"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduction_support/output.rs",
+          "sha256": "36e9d2ea9d9280894e5f53aa3490cab27ab7c6183c9e7d27a34a92f5ffa4ee90"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/reduction_support/reduce.rs",
+          "sha256": "148877391e94313ec950506724a701f1b8b8c2142bc48c83e522737a0b1d7904"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_balance_quadrature.rs",
+          "sha256": "10f1bfcb5ff926cf3877022b70426ac23d2ddcb2ebfca4ac2b2d1c27348db480"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_coefficients.rs",
+          "sha256": "a7c29bbca15df5a26bf9bd8d2b894653d70a7829e53d301217be797ac341c6cb"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_derived.rs",
+          "sha256": "079eb0aa71426b0a3859b596d8354309fe39d7d30d42d112812c4674f2c184dc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_force_coefficients.rs",
+          "sha256": "ec97850f10a4dc98223401b8991aa19be901822222260da92d765ef57c74d6f7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_from_rest.rs",
+          "sha256": "314782edd3ab45f3a53f4ca66020a7d0e38341ecb47c66cfbf442f449e68cf35"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_probe_diagnostics.rs",
+          "sha256": "c55587f183583ef683a56b5e78501c1ee9e1c6b21571fe3c53f227fd6a59a8b7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_probes.rs",
+          "sha256": "00f4c5a9acfc5ae9ea8183fb2bd715ebc6431cb7f4117a3cb418e48193cf6bc1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_refinement.rs",
+          "sha256": "cacba1ad8a1925f0d418b098d33aae689ecba33688c28a379f8aac72fa3a83d2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_sampling.rs",
+          "sha256": "9f6bc3d1fb466a21209e0b08284cf84fce3f61e571a805c1d92b6c161c27f853"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/smooth_streamed_residuals.rs",
+          "sha256": "f98ef9cfee434bcb9ca9df352a7207c28a03ce4d9e59042187a66c08b21f3c4e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_diagnostic_coordinator.rs",
+          "sha256": "022673fe339fe10044f199baedc21548079b23a455a4a18b0a755693edefa6ef"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_force_refinement.rs",
+          "sha256": "80e92918c4e95104985cc474fe842234d3bdd51b501241c25270feef1bd3dabf"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_node_binding.rs",
+          "sha256": "fa68d92558b8d14cd69c5ca9f07a0e90a672f56e0e3ef034d409626c98cd3d7c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_reference_tracking.rs",
+          "sha256": "9b6dfa285178d8864cf48ce84e9c5011155d0b5496ee711896c132061e418b94"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_refinement.rs",
+          "sha256": "0af744c4c1a7ea8d861701682db3028e5bf8ab2e2d89b8d37d5cfb7185f5b9a8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/examples/v2_regional_tracking.rs",
+          "sha256": "bf9754c946ab95ac2f2b7423318e88f4f27bf4599793cd7899262cde4d5f04f3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/error.rs",
+          "sha256": "9cd63ed56079fcf20e90d3139aeff3ebe45525f9b2acf81ef9bcea522a97137a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/fields.rs",
+          "sha256": "1ab93ec32f70ab4fc5adc37d3bb8c0bf4bfe9b07a457f59fff07e903eb6b45b5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/fields/axial.rs",
+          "sha256": "178622a249812e8737fc1524703149e2eb548d2049b7444969113e4deea98bd2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/fields/reference.rs",
+          "sha256": "4bd80016cf483604ec7cc9e02e2def1c04acb34a22afe638032dff310434c6f5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/jet/derivative_tests.rs",
+          "sha256": "5c56c84c89c9b48b5f22bc7f3feb62732a75116bf3bfc0f416c6f4ddac3fc9cc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/jet/index.rs",
+          "sha256": "86aacbe05c8a8d0527c3f94385545593525b35befe5598153487eb98ede9e03b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/jet/mod.rs",
+          "sha256": "bd8a2a45a9e5db8948664f5d724a5e3bab8f37dc1415ebf1f447eb82b9799e8a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/jet/transcendental.rs",
+          "sha256": "07888a3f269eb9d8a51b60e3123f0ac210cd2741181f35ce4160e71e54918d64"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/lib.rs",
+          "sha256": "398dd1e167349fa99e79ada2815e34cedd458d7989855a19973135688986ef2b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider.rs",
+          "sha256": "dbf9f53ecad1cb098b32e104d7134fa591a568dd70f2bcc2ed18639eba9c4f88"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel.rs",
+          "sha256": "961950a03006b825c9f6371e85c3ffdc834ebdc27bab17a7a129b1992e120636"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel/admission.rs",
+          "sha256": "26dc2ce2a8048d17e9bcd96a5cf0ddaaf83c33a3bd27ae03567531c01e402e00"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel/pool.rs",
+          "sha256": "752426fa51ca1db7cbf1cda42753b603558c522899b50749f2cd8d4c53ecd2fc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel/sampling.rs",
+          "sha256": "7c56e648796d950be51d728b4359faf7fa1fbbcf147f9bb0c8d03e6f0b4eb97b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel/tests.rs",
+          "sha256": "277719037f7df658481147421814dd70443d2542e51a43add7099c8f06c14ca8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel/worker.rs",
+          "sha256": "20d54197e6afc2a282314279b38a69f88eeeb59b22548457950fdb13e1ef3745"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel_reduced.rs",
+          "sha256": "e62d9fc4fedfa2d9e4219959f78ada4248f6f4dd46000be0b5e2de9cbe495ea1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/parallel_reduced/tests.rs",
+          "sha256": "994b1d6515ad431f962ec00a7c765db60d0098adbe61c8e1bde5198431a55f78"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/provider/reduced.rs",
+          "sha256": "bf6f38171a1b03009eb19ec93b706a86470ccb464124fdb1224be39203ff9c7c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/axial.rs",
+          "sha256": "d1376f3470a64a5ef551a87ab6f4d7dbbf5a413df52b0c7132e6b94854638952"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/axial/tests.rs",
+          "sha256": "26fdebd47667e06e132f4151f23bd36a43fb1adffa4fdf19d024d856e99fab2b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/jet/index.rs",
+          "sha256": "c557128288fa908d5da7138ccf8012a41ca14f89a7181a6207d414a74adba325"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/jet/mod.rs",
+          "sha256": "c7f543516633fab19d4265c3bfc70706d9c6756a22fc165baa36452d6e7eff7a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/jet/tests.rs",
+          "sha256": "d08b48782b21bfc59a2870954e1861fd399be7e2e4666fbcb8bde58304f12d1b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/jet/transcendental.rs",
+          "sha256": "d4387366daba98cdb1d11dd0089145a2c6235bd2e8d17873804b903794d39e9c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/mod.rs",
+          "sha256": "11d0f7a41efae870a92d034925da22716835606844d2bffb5383fcaea0637a2d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/potentials.rs",
+          "sha256": "06d5bd6a1c75379c45a0edeaa3b873c70fd8a2c244adbf840e5911ca0b3ca853"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/reduced_force/transport.rs",
+          "sha256": "fa533a50c8025e23b272b5541c426f1daa8d25c772e47008539c6cae40f006d9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/regions/coverage.rs",
+          "sha256": "3a0d3a9b627e44798820b95f1295c0b03714fdbe8b2510c54bb97115dec02fd6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/regions/errors.rs",
+          "sha256": "d379419fed244aa015f444c328d58689980206f4a4b015ef3fead5626928e77e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/regions/mod.rs",
+          "sha256": "310cb7a9d253e1742483135a9b985d870daf201034763012654007bd7568e837"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/regions/physical.rs",
+          "sha256": "3f3916416d51afdcba1b61f32b3a9196f75fbba576062b6e17e36226d103e188"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/regions/point.rs",
+          "sha256": "efab39819df44a98ba168b3be9f5d2faaafa7d244ae8a8d17cd491cfa0e183bd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/root.rs",
+          "sha256": "8b41613dfad4f0c09c2bdb28d9e28d499cebd9e55b2210c3f6cc400730356c3b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/runtime_force.rs",
+          "sha256": "93c2b585b3d20a012c3c1a018572db11173098710994e9e108f5d97a42178b64"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/runtime_force/attempt_cache.rs",
+          "sha256": "dad21ca0bffeeb5d807d6e709e97f6b578dda529b9aacbe41d17bbd9ee3f0ec6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/scalar.rs",
+          "sha256": "2bd8e841dc5b2b1bd4a301ab8bfc392b81716ce58f5c019b8a35b4c9ff599bb8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth.rs",
+          "sha256": "5e672a84a3a680d8f12b12548645006e54a1197018e99968b7f383edab3cec46"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/mod.rs",
+          "sha256": "27ee22ecd96876f7bcb5d1e272f3f327ead25cb367cd8337795587200d59b088"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/physical/mod.rs",
+          "sha256": "9acbdd9e1335611e54c5dea32ae88a5ffec58f275528f45e79a094c847375871"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/physical/plan.rs",
+          "sha256": "f7e009bc4e362c9a6861395a082caa9c08d2ef4eec79f06fe779cfe31476c049"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/physical/probes.rs",
+          "sha256": "d96efd79e4cf06e2cd0eaa5316169b1f7641c5665227e2c4499464fdadf7a846"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/plan.rs",
+          "sha256": "0326e6d5cc61d946249fe8c6543f932d9b1602144b6174342fe4edcfa6c87ff8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/pressure/mod.rs",
+          "sha256": "45fa8adc8f4b200af31ec8b455cca38ff9a1036fefbd4938e0777c91a48a7c3e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/pressure/plan.rs",
+          "sha256": "ede8a656b83fcae06cdd86eb3ccf63cc82c202f553e08a228a04c78974d5636f"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/pressure/probes.rs",
+          "sha256": "6e380d3b8b1cf2f4a258ffdb23846cc56943ec280f691c203fb5713530576393"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/pressure/tests.rs",
+          "sha256": "351f847711ec08bbd46fcd95b0ee2b6e3d1ef04c3feb7af8d33a4084f19fd538"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/balances/mod.rs",
+          "sha256": "a9c645538a92e19a6c9578fd9c8106cd07dc99b863f9ee74a69c1c55d563650a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/balances/plan.rs",
+          "sha256": "c1d2126739c60f6e4924edc41b4a462066011df7add8d645e8892c917c153abd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/balances/quadrature.rs",
+          "sha256": "f15db47b312433b707213c23d7700d7d69479a56429e09ea9acebb22a239ca04"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/balances/quadrature/plan.rs",
+          "sha256": "7dbc8da020b1ceee5058af1eeaab02e4c1579a8e7d3ff9e5fbd1278c6459a781"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/balances/tests.rs",
+          "sha256": "b8876e6b01ad18ee1c3bacf21b6ab527f6caa9368ec5496fa8bf4209992dc7be"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/diagnostics/mod.rs",
+          "sha256": "9ac7abfc27fde9884c22f228e72d9725aa6482b0900570cbbd23cd44e2e6121b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/diagnostics/plan.rs",
+          "sha256": "2b4eb982e665dbcd8c95d31d4c4c400648bb3612468c2277068b403eba4c9152"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/diagnostics/report.rs",
+          "sha256": "fb8680b2f9b0bc8c633273e28c7cf44c07dc0b73c34e03535b879d0ed831270d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/diagnostics/tests.rs",
+          "sha256": "0a8eea8f9cc1347c86ef4d812a7b71d7b626949e847aec740b8e36edaa28a9df"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/mod.rs",
+          "sha256": "d3fb7db6e6e1609a96b4087aff081802882184a4b7331bb9d8e16d7f2d747112"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/plan.rs",
+          "sha256": "fdc57a99e0c694250f4f9c56523fdb6f983f7bb4a12400afe8262be034bc369e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/report.rs",
+          "sha256": "dde410473010d8dbc9a89d4b2a6ae39f29039d56dee66c975bb33bcd9e0852a4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/residuals/mod.rs",
+          "sha256": "f0e605b824030d8cfb81e27cb7c7e88df8ad09bcb654d745bd479b62a2925e3a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/residuals/plan.rs",
+          "sha256": "affda9ea7382f7aa31b5361fe0a2770caf016c3ff68860c11cbb6174fb51b269"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/residuals/report.rs",
+          "sha256": "78e483f89e910043c7a329c447c0b2d9c758c8d5c3d79eecf6830ea1856aff57"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/residuals/tests.rs",
+          "sha256": "b58b4d03f633ce57dac1b6eeb6ec69e5b07d2e9b4610136c949e1b20d4c715d2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/probes/tests.rs",
+          "sha256": "97ddcbf92adfe93362410a27c61914c59624dc652bf4ad8f48dabc78dae7dfa2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/reconstruction.rs",
+          "sha256": "40998a758adf17574a2d847e7a42389a0cc78ef3c961ca38824e1a4ef737578d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/residual.rs",
+          "sha256": "2b9a8967d0587bb9163287860445d84affae24fe43ac5cd5ea8ef35551139089"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/residual/reservation.rs",
+          "sha256": "86e2a2120c338ddece8f3815c3e909b61045715728162c55c6db5856a573a58e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/sampling/mod.rs",
+          "sha256": "a2d27e0df8061e60f793e4c4b9ea21147bc226266a448204bc75dd08c223f09c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/sampling/plan.rs",
+          "sha256": "5662214acd5bebdf7497e6c042f648507d412b65ebaaaf1981e467bd94d9fe96"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/sampling/report.rs",
+          "sha256": "8f9c17ae9875e25f2360aed27899b2bf92d9ea6877648522fca14087e63b4f1a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_experiment/sampling/tests.rs",
+          "sha256": "ddc4dfe124da5048b6cca5abd2944fe402013cbb65a67e9bf1932f9d447096fd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer.rs",
+          "sha256": "de12b7f9ba24bf601cf21b97a65ee8255e53a19e8ae2d5e053022318ea15123c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/kernel.rs",
+          "sha256": "69527e262117171d9dd32510bbc878c997b60f1d5cb7f6a73b145fe5709915b3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction.rs",
+          "sha256": "4bffb741da0e90430c3a6098988610a6437cb4fdf83a2fb468f66fe7a160c934"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction/archive.rs",
+          "sha256": "b51ed6efa3f2c567abd5f8d750719ba51c56cb2fdf8c44bb7c7730ddd8e5d653"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction/archive/codec.rs",
+          "sha256": "38bb4db19da8a63bd52b05e2baf17b61dbc27b5c24d445f39eaa3592faba9dd7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction/archive/read.rs",
+          "sha256": "789add4f62bab3696fb8a2e53e07b4d29038b480125d4c99c88f7ef6f1502c03"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction/snapshot.rs",
+          "sha256": "a9d0a0af2636d1174ffa3fab09ebad7e809d1b5c44ea966f7125b66a96c00010"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/reconstruction/tests.rs",
+          "sha256": "83d4215ba8e6c56287b8e166adf5ffcdf157c9a19c01be89bdb862cd7eb4f5f2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/v2.rs",
+          "sha256": "b9f4b70c5bbaaba88bcea70ed893e97f2b9d723714aa811ebe88fbfb0b0f30de"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_observer/v2_reconstruction.rs",
+          "sha256": "449ccbc8d279ddef9ef97e25e90cf571db907ad9b43e9a89f9d274af344214cc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run.rs",
+          "sha256": "a9a1ba6f638c26bf54ec973f3a43a6af03c0f928f3c4fb0501e2e528739bf20e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/archive.rs",
+          "sha256": "580339dd79327aee934ec6cc4c75380f69b0814917601a9dc1eb4c7bc31724af"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/archive/admission.rs",
+          "sha256": "87fdc1a2f68b31fc9f270a2b7ca8c6ac881b43f410b69e61bd93cf03bc7c4bd0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/observation.rs",
+          "sha256": "0fea5dc60baffadf2da5539e8ae89c171f47712631a4557b3e812636aead6ac6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/plan.rs",
+          "sha256": "401c694bf08bca10a2eb25e2c9aef2aaf96e839a942544ba571a7a75b025d0dc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/reconstructed_archive.rs",
+          "sha256": "aad310da22c10bf4396e755dc85be78912b8e5f2647ec768b2eb582ac7ca613d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/smooth_run/replay.rs",
+          "sha256": "02e4aff2bf358653f53faa7816b24c729961a57426a76c057d3812a101d0189b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/time.rs",
+          "sha256": "c5301d2ab63ea3cec9e331bec3c3e41d0c2c0a4e613807a062e516046a74fd06"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/binding/mod.rs",
+          "sha256": "e8122d8567350fce1eaa32b207d18932e471a0c1958b960717f9ed1aa7b68550"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/binding/plan.rs",
+          "sha256": "604b3980438690418f4b456477f0ca51b55c15f465cb61b65ed9cde4970dd62b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/binding/report.rs",
+          "sha256": "bc505dfdfe4e7b1c778fa160aaefca1d5243c992e18bce5224a1a0829729ffca"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/mod.rs",
+          "sha256": "f170b12633f06fbc1f57917de6424621c338b4c82f799d3a3754dab89464c16d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/plan.rs",
+          "sha256": "968a2bdedafead5ea2b694fc513b318398069112480b5fc77f4a266f9a9ceba7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/report.rs",
+          "sha256": "b8a4603951ca3a10d9b603194ee680d6c25b917aea7ec8b472e31e3e85c02f78"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/coverage/workspace.rs",
+          "sha256": "40601418b7765d7252957aca83e02ab24b6255ada8239c14fbcbcc9f17d8fbf7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/context.rs",
+          "sha256": "b0f6b1578174164cd0267e83e33ff08a04e1e90145d86f5b984c3b15b8ada704"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/coverage.rs",
+          "sha256": "231a70f4ef6224268a8468966abab967ae00ebe8d16f7efc030f8449a938256c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/event.rs",
+          "sha256": "0de0a73af6dd7c2fa116a246063878e6384c3d629e6c051f7d69cd0f472422a8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/findings.rs",
+          "sha256": "3a59bd6ed1f085ae42cf3dc7c0be0b6902cf2057198f5f86edd484a2e1dfd286"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/json.rs",
+          "sha256": "16eb41ba6133fb11844512d7464b8f3ea6fa2eecb9239459efd775798b711ba3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/mod.rs",
+          "sha256": "9479305d387f87e37eb891d09f22e4d6c626b3a309c4ac3e2019533ecd4ce588"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/plan.rs",
+          "sha256": "b956d8661be32b3c0c930ddbb821bf26deeef59d1802df08566299da7291d2e6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/export/values.rs",
+          "sha256": "2a2dfcc733c0a3ca6d00677759e60584eaed3df8f4edded95684289de0946dc9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/mod.rs",
+          "sha256": "bb03e06d3ed411ba64776f849059da8f7685ea52046723e811ea3c08b1bc7795"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/plan.rs",
+          "sha256": "7c305f4d5b5758a03680b2cf2caf439282b11c35d4306da31c0586eb4bb46cc8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/profile.rs",
+          "sha256": "806e5b38f9fd0f034b7b8b334dd836bb1d392bdcfe7f956c79fd1d4c746a88bf"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/diagnostic/report.rs",
+          "sha256": "165f37b0e64a7b5c73c2c00a8e8181b0ead15fb2b87992f63fa87bb5c9393b36"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/identity.rs",
+          "sha256": "7a5efc6fbff239c6d27c2231cfb51c728bb7058e3aaaefef07d6a3590e091c8c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/mod.rs",
+          "sha256": "39d94374edd277318acd06ee2074eadba43ed0c4d28221260c4b835b1791a30d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/extrema.rs",
+          "sha256": "b68bc6da73be2b65c3b8c37c3d85e9e48968c7dbb0dbf4011936b9134fc8831c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/mod.rs",
+          "sha256": "6b854e548165ee3d9b1996cd33a968554aff40a0ac2dee0e8828de20e0652d73"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/plan.rs",
+          "sha256": "44f56615ad83a60e31b8190272ccc269304ed2bda097aa7afa3051f43ccc7633"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/plan/work.rs",
+          "sha256": "1166dcda843b59278175e1dab7f9cf148aa1d86fadf133bc1e9673fb0a394fa1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/report.rs",
+          "sha256": "897e774379413e40b494841f42eb479b1236e2b2a0e561cdcfeb690e5e2abd84"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/workspace.rs",
+          "sha256": "474b63828b1f91c20d9810a14a88da9604946d0d320671f678c35656bea56f59"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/physical/workspace/compute.rs",
+          "sha256": "f950d4f33a41b12b8ee42d4bf7c3135c9c91e3bbedbd44dcbbd8b70a1c63a2ad"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/plan.rs",
+          "sha256": "1d0af892f8d36006d7f72600ff03fbf7258287cc17d70b6db1d8891fe14815b0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure/mod.rs",
+          "sha256": "a7762a89e725efba713294d28db08c6ce195d5fde81ee719e772d0b3b7d8ce8b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure/plan.rs",
+          "sha256": "fb4848c1b9137068738d4de387337f8f604a8fd9cb954e64696ef490781eaced"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure/tests.rs",
+          "sha256": "872394ea88331452fe7ded3357deb06f0e5c2da77e216ad099cbf58c9477a853"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/gauge.rs",
+          "sha256": "059f4a56be8f93ef8bbde303f270342c4d806db24997505ca0c2afdae1659620"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/gauge_data.rs",
+          "sha256": "b7b228366f6bed3e830e4c9449743bc2faea1db5ace389c5a8d3f72b4732f095"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/mod.rs",
+          "sha256": "c59a933c8d69fe79c97a874f4f4cb37e88c04e23cac6e5dacbabfddc7be6a329"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/plan.rs",
+          "sha256": "0aa3d9c811217ec5fad4369c3936caeeccc383c9288a571b7b3805df16b01c5d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/pressure_reference/report.rs",
+          "sha256": "ab6cc18142f95fd837955465b91f5158063bcbc6bafd10394fddac2692341efd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/mod.rs",
+          "sha256": "bfa5f83d93cb2739d3cd3ed9c6ccce240477e7cb80a60cc4020bf27a4c170c9a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/plan.rs",
+          "sha256": "cf3032354e17a4135710769833ee3c94cd8fe47d24ab09c6e017e4f93ffcd554"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/quadrature.rs",
+          "sha256": "4188ba79af1377766830e94644c80024728dfab1bad7c4afa445198d30f45d1c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/quadrature/plan.rs",
+          "sha256": "54eddcc31d16188f4979713cec7ddebd2663300a4fa2a63ab6551e347e6dec14"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/balances/tests.rs",
+          "sha256": "659ad58ebfe7582944073895a7360545df5501d6a26e15aaf3ebfbe22b380301"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/mod.rs",
+          "sha256": "7886af7c553c3bb40391220c2c007876f8efb095ef9ffedd30aa95b4461a6d46"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/physical/mod.rs",
+          "sha256": "bdb3e7d6838b7974df01bc34eac99ed6b322674721f8cd52fed55e5f3a9a378c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/physical/plan.rs",
+          "sha256": "d86b97ce4d0c39c2b4eeaaa8174b795b656a32597ca3fbc0cd2f72f91bbb6df0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/physical/report.rs",
+          "sha256": "a7b5925448feb3ed01b0001ee04775202a88b2b5cb54095d251f1e62f546f165"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/physical/workspace.rs",
+          "sha256": "237ee103446c9ff011e5a59444a20ff4842314f0b9a10707c6bdc19266bafe2f"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/plan.rs",
+          "sha256": "49a068f75f4a27bee4475e019517aa8b88ae3d5500354db4e45e098c772bed95"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/mod.rs",
+          "sha256": "7b0497919c7a550c1074edb383ca7d3fb2a68bda6c5d3bb3b47ba445cf233358"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/plan.rs",
+          "sha256": "e271f04c421a2ca93786afbb830400eaf8c5fdf9f039ab5892a2a29a99cb7120"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/report.rs",
+          "sha256": "e63cf09034cb39172c8f13a6420205f266a3b1372aa7c3ae49c91598ab338529"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/pressure/workspace.rs",
+          "sha256": "bd0bf0a91623b25db508d2f4cecd1cc9727b8e354e970d0abde43f62afccd02c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/reference/mod.rs",
+          "sha256": "079cc515b32599e75f97d19840fe71e04ab230309e713eef8add8e64d1e44297"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/reference/plan.rs",
+          "sha256": "8bd404e1b78e3abab38d03066c01eb9c8077d013f9d6d692ad701d9b54189181"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/reference/report.rs",
+          "sha256": "3c8d32f6019919bfc19a319a9374dbcd423828c8f8b34178e38c139c98505419"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/reference/workspace.rs",
+          "sha256": "9872d98ccf80f60b64d0f158226847084dee46b31bb2dfccbba257e5307742d5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/regional/mod.rs",
+          "sha256": "bb9a178ca20d97eb2ccbeb20fc153428064263f7d15b40cde7e0937b7cd2ee20"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/regional/plan.rs",
+          "sha256": "e294a893fc7fe63a539e8b039940fcbad7ee5af891fbc1a7994fa6f00716e010"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/regional/report.rs",
+          "sha256": "21b1f76da659b24121c5170d8304e48b402da4a3bbb200d35cc01891ddf1672a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/report.rs",
+          "sha256": "6826ddaf19c255ff4e2f389e0d880887f8307094104988af27060fd6cfa331d6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/mod.rs",
+          "sha256": "3bf0771fe215b488b4d7ef223f45fc0ea345831f6dfdb8f29e51bf290ae56284"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/plan.rs",
+          "sha256": "2441dc092c03b9f5ad75693930048115b7dd4606d068d45205320f711a716361"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/report.rs",
+          "sha256": "84b0b4c7675e1e0f322f41c45edaee4fbef0dc80fd0cd81cc88ca475aa508c44"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/probes/residuals/workspace.rs",
+          "sha256": "aea83a8fcf2fa27f8477f90bbb542b8cb8f571519765cd241975638673a9e4d9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/mod.rs",
+          "sha256": "8f615aae7415806e78afa0a072aade89b60cf121f4b07a5e1b5943c26231a6c1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/plan.rs",
+          "sha256": "646a9ecd40428daee14eb31a2d30c2570ec9550bc3c8931f69c506c7621f67a1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/mod.rs",
+          "sha256": "631e10b3a24bf8472177ad5a8bba2a9e922e41780be8970521e1d81018b520a5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/plan.rs",
+          "sha256": "edd969d063793c291f11e3f329f978ba0fc77b3fa49c5043d079b1319e138604"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/regional/report.rs",
+          "sha256": "f7882fd511d160528435a86ca46f902aa279e75cbfcbf4890ae934b485eed9c0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/report.rs",
+          "sha256": "b20a5ca8358f29b8332a44d4918c0d5b37c83d5816b84a76555f9a1ae70cda51"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/reference/tracking.rs",
+          "sha256": "54a22b02cf8e94f7d23028c39811f6b8d5524342710083f92acf8fdab3aeabd8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/mod.rs",
+          "sha256": "39566e3667c05ec13802e5d35406123b913829aa47a0f020deb074913181d600"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_adapter/validate.rs",
+          "sha256": "12ca29e3cd2b11fbdf0216de634866261a5668bd86476a2e0a662ddc4fcffb80"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/admission.rs",
+          "sha256": "b5dbfdca9bd30c4096e33d029ff5a8c6ea8940e9f4fdc29da1fca30144dc0935"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/geometry.rs",
+          "sha256": "92bd7d4bb194a881475a01417dde2536bb4d4a7474ffb1ed055325b6534ce943"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/inventory.rs",
+          "sha256": "422da482a5ed4cc9a22dc96eba9a83ac8adb45d632055627357ad84c4b4fd43c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/review_profile/mod.rs",
+          "sha256": "a4252cfdd2d67a8c9f361a82a6c792922ca8f208897eae39aead3b725cd48831"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/sampling/compute.rs",
+          "sha256": "046a2e03232750aceaf5aaa64abd32bda7c54516383ffc38459770d42dde693a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/sampling/mod.rs",
+          "sha256": "d74077b58de7a2718844ffce6da30ea6941b0fdef6f38e2d3fb1cb7d379ea832"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/sampling/plan.rs",
+          "sha256": "d6a60e9f1b8e0fcab595015a8608a555f3bf9db79dd8cda364fd1034f7bf2a79"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/sampling/plan/reservation.rs",
+          "sha256": "a9d34e0587febeb12db5285bd79ba564af0b0b7f80739668c79daae6af7d9ba5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/sampling/report.rs",
+          "sha256": "074df6c37c9daf8d1dd96d9c31db6498ad7bbd07354c9eec9a678a4e1e3f8cc5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/adapter/mod.rs",
+          "sha256": "e04a9c642c50c818a7d64727c9359f3b9863b2f7f0b0bf8630f08aa95ed68cb6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/adapter/plan.rs",
+          "sha256": "6c76f930bc31f2b36f9c07130aeb616df8bcf476d7dade9ca260703a9f42eafb"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/adapter/provider.rs",
+          "sha256": "0367b298ea456d6c345c585a0af251ddb2167cdba85ce84c1d7b8a8c079ce286"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/identity.rs",
+          "sha256": "1157721a7c0aaf454bc3d0b7fe951055e5fc2b64143ebe0dff23b20991efd4f2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/mod.rs",
+          "sha256": "61510ecfbb49449d3ad212e7cb87726b4139e434b78a79c563115922229964cc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/plan.rs",
+          "sha256": "5be789266a63a524c3e4c3e4da63885693cc7ab20746c29f775df5ff4bd7fd8a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_experiment/shared_force/table.rs",
+          "sha256": "d7eea7fca47e7d314d62b5b650ccacd277761e0784934c0607fe3710cf141793"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/binding.rs",
+          "sha256": "44d187277c31efc6c43612886f161e280e64d9c4e548e6975ff53ee949c6f0c8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/identity.rs",
+          "sha256": "4b81b5b18156fa8072d0d58d31ea857602dc0539c01623b596bdb37c0f2410d1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/mod.rs",
+          "sha256": "7bb2b64e7bd154e663c7d84e0a6e6d3ac0bda01461f9c8398bf0cead3812bca4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/mod.rs",
+          "sha256": "03503bfbed65c70befd95c59242de1c6a5c8a5c85fe544c1c8a22fa4f0dad5e4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/plan.rs",
+          "sha256": "e2850115deca8bc8568b5dc3bcf9e143b18ec674c2ecbaaff3647d2abdd64da2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/report.rs",
+          "sha256": "d3e84c1b12b9914b97a7d96990390dd91ad288ca8a86791be408af4f9dc56262"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/physical/workspace.rs",
+          "sha256": "c78ff1eba4a18bc628757ee5e5fcaa8de82ef48985ed52fd0ce4667b2d08988a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_force_experiment/plan.rs",
+          "sha256": "881db3de3561dc26de45d9f5beef981ea13e0858fd245286d24eed5d6e14e2ea"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run.rs",
+          "sha256": "27e4f65308dcbf49dfe158d9dafafc3871d8af717377c759efd143fbdc92cd2f"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run/archive.rs",
+          "sha256": "5a3551e901b725b7a132de4562d1f6d649acea40a9abfca26a111b24b35c949e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run/archive/admission.rs",
+          "sha256": "9167aa16dbfb8d5c1515bc32bf304b9534359dc6e00da7dc54f535c765f66c9e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run/plan.rs",
+          "sha256": "cad699226e361c6efa998bee89d7f21f87a3efb7dd02d5b96afa62498379771d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run/reconstructed.rs",
+          "sha256": "0903e838ac36cd7797a2015c10a7424eafd724f20cef2a343258b00efa343746"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/src/v2_run/work.rs",
+          "sha256": "8becd6126f9c84efb0f4f18c10b183cc9f70db99b6c12154bf450d6c2f5d3908"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/algebra.rs",
+          "sha256": "b7df4cf3961129badf46a19381f0e758f1bfbf164fefcc90d558c62e4cb160c7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/allocation.rs",
+          "sha256": "1c6cdf16d6684303df1711940114bbc1cec7299c803aa9ecc91565517e4b3001"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/axial_force_cache.rs",
+          "sha256": "2bfc42c1d81169ccedb7b33021a7614ec48bd5b450960f75474beeefcabc6e8d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/balance_history.rs",
+          "sha256": "f048baac3101f144616b3fea056412c37ec73e890acbecdf417dee0148f31bac"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/balance_probe_allocation_support/mod.rs",
+          "sha256": "5b503f7d34074adb51c994c6fb561c145925c1143c14ab7c3aff3addbf60a3c8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/balance_probes.rs",
+          "sha256": "1a2bba67b771b49507faeef8eb47bd9da19e7c35c990db1b67798e62332de30a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/clock_root.rs",
+          "sha256": "481011042950e69b85142d372e9b0bc70aeb82c514442c451b2c67c2fde3d40e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/concentrating.rs",
+          "sha256": "478168760186bc19af5db93a8d68cbce7b6fb7e9289305b33f814d868a3dae90"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/concentrating_support/mod.rs",
+          "sha256": "fa3373a0299ff958bfb5cf013b6f905a691e2fc9e0726c9fbe3dd2af2b7f323d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/cutoff.rs",
+          "sha256": "5be50bb50409c643b49a73a6e7dc29b5689876ca1a256b4779a4af22831a81a9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/diagnostic_history.rs",
+          "sha256": "433869117916550763e96ddaf1284ec7248440e95ff2ea4f845630cd38374057"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fields.rs",
+          "sha256": "342d71d294da986d74e20b65f8c22fb087e2d87cc9c76c9d6f6504e796a85567"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixture_support/mod.rs",
+          "sha256": "dd6a3a6ed37a961962039f9f82beb3881ed535e10b3b797f711daca178f8a0de"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/balance-quadrature.tsv",
+          "sha256": "79deb5a4ba52bfaaa7102cf0e32db3f880162eb5f033b2f2c111037072e4564e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/concentrating-ho-n4.tsv",
+          "sha256": "402cb6e85b0bb43fa56d54d3c2d76663bf8b0031b4be8b60590e23db3805c750"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/concentrating-n4.tsv",
+          "sha256": "e797f61c5652e59da58cf03279078cec4e5f3d6da96220d80d717772c8d3fcb3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/derivatives.tsv",
+          "sha256": "990691318b6ba9d783023f743ba1507c05fb6e476bbf150ecc710a0dcd7e5e6b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/fields.tsv",
+          "sha256": "aa73721dd58820bf9b368283e742d131f7f77247734bd4b6ee7ec13c9ed13480"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/force-n4.tsv",
+          "sha256": "524a545dcb82bd6b40dd23e0f7ea08831f0b3570ca6520ae69141baa22be8be3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/reduced-force-words.tsv",
+          "sha256": "8e25b8518e96ab6cf3e28024cb9371e022ba95669cf1ea8484c798d11a44d051"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/region-coverage.tsv",
+          "sha256": "88f68ec48742097f02efe8f1e3d3a423d96037ab3adc2c19aacb59c0857b6698"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/root-jets.tsv",
+          "sha256": "03e2b6d48f95fc31f0d81338f9f1a946a1be0992c04298a69e87a3635ee6ebb1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/smooth-force.tsv",
+          "sha256": "6ba6ef96f216b6c4497a3115f8799facef67aadd5f9bc772562eccd90b76b444"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/v2-archive-pre-cache.bin",
+          "sha256": "ea2472d3397909ad79d9fc0afb6c4ed631f46244511664a15d117f05c370196c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/v2-family-identity-v1.sha256",
+          "sha256": "63469304e63a37bc06d56a12dd378f033f4dd69de20f43487f243a295f730f8a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/fixtures/v2-force-family-identity-v1.sha256",
+          "sha256": "2936b29a45eeef5622a00144be5715b034c3a591ab3e036e24b4d63fcb4257bb"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/history_support/mod.rs",
+          "sha256": "a5d57aa0a3ea1bb9f7dbeb384a75f08526fa95e1479acc6bf7960309988b50ce"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/integrated_derivatives.rs",
+          "sha256": "47fa341631ea4d1882d28f14d40e0a97c146ebf384b089cf8e24bc658ab5a197"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/integrated_physical.rs",
+          "sha256": "38ba0a41107ad59fe6a45b4df58b3c992809865c7a64d4263311492a29bc93f3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/offstage_residual.rs",
+          "sha256": "bf2ab18d451335ce9ca963c7649f75ebce98a0a26fcfa4e586c053414c82a5db"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/owned_reconstruction.rs",
+          "sha256": "88c88478c6c4d25e83fb15f314446f018d55e816db27de65aa5e59c411695d4a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/owned_reconstruction_support/mod.rs",
+          "sha256": "3db7cb8d8528bf26b7e4849b0e2ebe580993c108ddb726619cde029df6a14883"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_force.rs",
+          "sha256": "4109569f71c6b3b70aa96e190dc040b4d29c7babecb706d53222c22a65d2a3b3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_force_allocation.rs",
+          "sha256": "88b322bca9340494fbb35efcff7584cb20e020b68e857c87d8c3650e24e1066d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_reduced_force.rs",
+          "sha256": "fae9e4f35140c36de07a679ca6e2d3d645eef14b468c9030bf27e44569c92c25"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_reduced_force_allocation.rs",
+          "sha256": "b67cec58c2eb028682e5cad12d83100a51309d38b0ba35acd6aae7fd7148fa75"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512.rs",
+          "sha256": "7d568644febf60938706526111315abcd57d5fc7a85d1ae7cae8d0205cbf66ce"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/parallel_reduced_w3_m512_standalone.rs",
+          "sha256": "fe2b8cf4821c82df279b68435647afa067608388b401750a2d226668377fc59a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/physical_family.rs",
+          "sha256": "2819f0c0d4fb8f0a82d5167b258577b2e4724d4226dc98ccfa5b71840269ba69"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/pressure_family.rs",
+          "sha256": "028592ad33e67e841a455dd4ecbbf623619f1be7c5e5cf620b5e13463aa72b7e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/probe_allocation_support/mod.rs",
+          "sha256": "f5a1242e9b58f81c140edc97a589834791ab707b4e68649cf4f6716b849736d5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/probe_diagnostic_allocation_support/mod.rs",
+          "sha256": "d11fabec7b9f18ddd817b1137ff0a1661227fdd8ff9fbce3246c5ba30826ca14"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/probe_diagnostics.rs",
+          "sha256": "b4e7bc8538edf01d41b6d3c2a5d57cb8215cd581db0b81e0187969688f87414d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/probe_family.rs",
+          "sha256": "b001381081508d1005070f6d1a41720aa55c16ada06052e66a492933b844e879"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/provider.rs",
+          "sha256": "990026882a033f54d976171b8bd5c28b4b797a7da84b8850a462817f0d4ff82e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reconstructed_owner_archive.rs",
+          "sha256": "3e7a3def1a401c238570d78ebdf4ea7300e5d42a9021a3e1cff8171a8dbed01d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reconstructed_replay.rs",
+          "sha256": "87b8cb12e0dd1b2b873aa3b53ef8854137bbf0e6b0fa007eb8f5dfedc2da048b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reconstruction_archive.rs",
+          "sha256": "c050bd6736c9eace159e98a1e32c51bafd347a6d6ea860c33f512c79bd6ed290"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reconstruction_observer.rs",
+          "sha256": "7332dd4383a2434709d36ba99f73cf4aa76648ba291bed8b2d8e8e8f6a5818e1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reconstruction_observer_support/mod.rs",
+          "sha256": "6a34d420bd733dbab78be4f79b75a73cdeb2192b14bcf2a8880e035e46befecf"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_force.rs",
+          "sha256": "4ee5bbea09e51af817e10cf67b76573de9a8610fc38593fd80b9812ec639a4f1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_force_allocation.rs",
+          "sha256": "91f3dfb0ff2b37c1937915984e8415c7e9a418fbb612e3983d42023c07329e01"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_provider.rs",
+          "sha256": "1a26810569e63cfe620b90ccb9e4ad0e88c659f9295ef6baa8f19783f1cc2c1c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_provider_allocation.rs",
+          "sha256": "c93c50c6266ab4a4a151a6a3aab9078275a6658546acc202bfcf2d132c59cdd3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_provider_oracle.rs",
+          "sha256": "7620c24bcd212e436f11f70278a65fda2cdb1091a1a0e44db8ccdd040943ec39"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_trajectory.rs",
+          "sha256": "1ecd117e58d1627419cb8f2a51e7a0af531a1c6d79f1e5e38be73c8f43581b21"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduced_trajectory_support.rs",
+          "sha256": "a2fbe2c9b2c2717064645fe15a2bc819d8cd0efe7a0f956c77a604ae33d364ce"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reduction_allocation.rs",
+          "sha256": "7a5c8563ff7ce77b5a051440b5ed2fa92edfae984efc2dcb7f118a8af68b861e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/reference_derivatives.rs",
+          "sha256": "b047ea0ab0d7c7eced321ddf0517518eba35c07b9150ce7fe83d99f6a0b15ae1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/refinement.rs",
+          "sha256": "65100cf411fb6625d01957d3c97dbf013b7f15fce0070008d994f271f7091017"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/regional_errors.rs",
+          "sha256": "164b3387c456788ed91a07fd27d8d93a7bd7ca0f233aeba891eee19636ccb0ec"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/regional_physical.rs",
+          "sha256": "a10c16502c250d594e62dfaba5b4e6f5160c55ffdf4684f33d4c7c581882b3ed"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/regional_tensors.rs",
+          "sha256": "f91def73d6db3944313817f6bf29e6478098a8e1869fe703e90f6a2375faf7ec"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/regions.rs",
+          "sha256": "2ea1aa58412799561bf93bdc3c417fa7da86e1b7de42bc7ade5c7c34bd4e2e90"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/runtime_force.rs",
+          "sha256": "1f8247e279044ef0f46ae5991d8f48de73a2ac3ca40f0775f35bd5c90bfaa82a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/sampling_allocation.rs",
+          "sha256": "bf95240b03b9eae23b7724942b4aa587a602a2bdd3b0ffa3f38a758ac35947dc"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/sampling_family.rs",
+          "sha256": "11091a3aa82280009869fea2c53cc0ff1808f96d2a82e8f44867cf73fcbf236b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth.rs",
+          "sha256": "6496be125f06e84a7f5486c584811b2409906b84d2d05b17835cb3560c5c6214"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_family.rs",
+          "sha256": "68b1d9e8ad0bf3b192369343246141bdead9e8858c4a9ea23afe6ec9c644e43d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_family_support/mod.rs",
+          "sha256": "8e510421b17e898b943e5fb022981676f6d5149c7f835282f647339563357eb8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_force_support/mod.rs",
+          "sha256": "70445289295e376a278e0318ec6ade1c276e953a9dac9014d7684270c155d61a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_observer.rs",
+          "sha256": "4275a90cd7ba9d03d5b0b825f582ff1cb28357f4103cf8a2b0a4e4feaf5da4b1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_observer_support/mod.rs",
+          "sha256": "12d87f493b45c858a50e7f72cf27c515a2f9c38aafcb4185daa4634e912a4301"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_run.rs",
+          "sha256": "ba8de7b7fff9c65d1555be04abf075fdc975d808feda1ad1e81db0d56b8594c8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_run_archive.rs",
+          "sha256": "6887b8c9a74c5ee1c3e9064521e549f3c501ea598d54281878fe5290d06cc8d3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/smooth_support/mod.rs",
+          "sha256": "f5cd993141a54cd61cd742ad46ab3183235a414a299bb76d8be84327a8c34cb5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/streamed_residual_allocation_support/mod.rs",
+          "sha256": "440cc6560a0b86830d9f36102572a8c0fa0bd091201fe8a2fd5e39c55b6dc526"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/streamed_residuals.rs",
+          "sha256": "d60a4645e96854a08f8ff7e4a0aa37ce16620b3d40c5bb26b5e161d170a3fdb9"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_archive.rs",
+          "sha256": "87de421a9e1d780b8c2f9ff6e06485da9533e4b8ae1f1e8e72fd3943bd125a16"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_archive_negative.rs",
+          "sha256": "9ac194278818579e0191e3c87b6202508d0a14f03ad51337299ed3093caaf9b5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_attempt_force_cache.rs",
+          "sha256": "8cc2280be8413547341be58a6c4d22eaaee6d9aa4c00d005c2a38a9275baebbd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_attempt_force_cache_allocation.rs",
+          "sha256": "6328678c645962f47516f193d1c12a97b8ed61f67c36746aae00781e9248da7e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_balance_quadrature.rs",
+          "sha256": "61f5524ecc4a1880638941eda494b08bf4644c44c296bd544b4e4023e4d407d6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_balance_quadrature_allocation.rs",
+          "sha256": "66382776627fcb2aba45400f664b29c1c0226c80289a5649fd4de63449622bcb"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_balance_support.rs",
+          "sha256": "8df996fbca0ef23214b4163b9010a801a510f8160afcd49b9ea730e7e62fc891"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_cached_integration.rs",
+          "sha256": "0e69b7a842069e4aefdbad1b4f36d24b2518df5b5e97870d5ecd74e0c13fc72f"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_cached_run_allocation.rs",
+          "sha256": "5a26c043eb02966550ad922055982d4c08cd31478d7c321e2b389833fbfdbaed"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_diagnostic_coordinator.rs",
+          "sha256": "092fff81b717c72c60bc27caeaaf2073a3be123fe25df530057d2efe75864b27"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_diagnostic_coordinator_allocation.rs",
+          "sha256": "27aead9b2bce4218d2dad209eff2d5232a3a267cdd6b8e66442f2fb33eeb2f63"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_diagnostic_export.rs",
+          "sha256": "abedd9cedd04b5d655a0862f24adc1fb7b5a3c6175cf61ce6f9411b9e2e48bce"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_diagnostic_export_oracle.rs",
+          "sha256": "4c84c82e162231fbe58d217be376a8c26f3f6496e1ed79ee6167ca2fa9668c50"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_family.rs",
+          "sha256": "35f8cc28a302d76cae8bfe3cc9c1abab47f2fb80a875284f25e0957f3a458b41"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_family_allocation.rs",
+          "sha256": "f820924dace3c735be20089a5ccdbd07f78f5851c75eb23289c572f7b5bbdd31"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_family_oracle.rs",
+          "sha256": "bbee3e18c224f3e6755cbec979c5d5851c6b6e3e6804ce2188716a33b6826e3b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_family_support.rs",
+          "sha256": "bf92967a6916008c1019a39607a402e29eff0d737c8010bdbd433e2e2605251c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_binding.rs",
+          "sha256": "aff6076414d3315da9b39d51e16e2a04fb97ff5c6b75f14a1664d77858291c9a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_binding_allocation.rs",
+          "sha256": "14c8a8f44a449c77fb12622bbc3a7574eb56f45120541fafaad810f576ff2062"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_crop_equivalence.rs",
+          "sha256": "4b983a40e70f0247b0eadd0cb38e98eade6f600480b58c023ba3990a9a5edfbd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_family.rs",
+          "sha256": "acf16982cb41379481935255fcab1e71723e1018d0fa3365be5b505b02e6d91b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_family_allocation.rs",
+          "sha256": "ff51b4b437a3766207e461e5a40b82f2cca0a3db05c9071ebbf31e1cd9f5b763"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_family_support.rs",
+          "sha256": "1c31b765d6de9ca9c2f2014c4e2907802d991f9a88d045c4f9cb9788ff932b42"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_physical.rs",
+          "sha256": "ed6a1657ccd5bcb8295ed97de7b046a962727fe03ac12b4cf788f999e931f2b0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_force_physical_allocation.rs",
+          "sha256": "616f33d6ff5c4b184daecd9f89a9f4d4afa758a41ac93ab1fb7ff9655d5bfb0c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_node_binding.rs",
+          "sha256": "e91dc9a5e013dd0c7ab3717635a5090704a9aeddf1ba5169ba9d5cb165259536"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_node_binding_allocation.rs",
+          "sha256": "93afee8b4adb14cc2567df073cdd2b9450b85509068b47b347ea9c807d2e37c3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_observer.rs",
+          "sha256": "e6476ab58a09a704b4f27c4fddce59c7df43f89e9802d345bcbf1961f39094fe"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_physical_allocation.rs",
+          "sha256": "3c10f83aa88ca571b36da0e2ee2d69ea8bd02b64889745d1cca42d6425afcde5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_physical_family.rs",
+          "sha256": "bbd0d4ff6310b2148441cb2f3a7d14cc882285f2cebca208b15b4fde0b7740f3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_physical_oracle.rs",
+          "sha256": "0bf14f16b8d820aeeeadcada32daa3ffa6eb5e8962c0236df71ebf70c3ef7468"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_physical_oracle_core.rs",
+          "sha256": "a04353d6dd31570dae52c492ae64dbd878ddc146cafcab5347b627a39ceebbd0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_allocation.rs",
+          "sha256": "cc43cb204b98b8272e041f7f989fa2e9839acdf714c8fc973deaef65750e6cee"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_family.rs",
+          "sha256": "871e247d72108cb26eeb8a8723a15092b143a1ebf6cf050a5a625ecd4d3e810b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_oracle.rs",
+          "sha256": "0b17dd8f886502dd0e334a4050ceb8dc51f4a0b69c9ed944cb73600458d31a4e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_oracle/convolution.rs",
+          "sha256": "8d8d7eb9c41cac20e71dd3dd0b6b90f4c74033978b84ca10d0f6071b2fa5bf72"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_oracle/dft.rs",
+          "sha256": "f6e60d6d4e0156295b9610f8bc4cf4e165cc11d730ea8efb73f60e3821b069ae"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_oracle/modes.rs",
+          "sha256": "166d5198ab7326cf77d3a046969e24c0fbe6299b29d1375e9768a8511264fbef"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_reference.rs",
+          "sha256": "a4a2077394a7e05b9994972b5c0e071b6e6519e570963dbb2280aa4decd7eaec"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_pressure_reference_allocation.rs",
+          "sha256": "1a59e7d456e31482026b30be4ed4c9785ed6b01ca04c89d73ba45a84a14d04ec"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_family.rs",
+          "sha256": "d243e62c6697588849928ac1f4c4f059adf5697544aec5082da0c3eb8f1b142a"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_family_allocation.rs",
+          "sha256": "773dc6a46a76dae3dc0d5896e9d603a1328bf2cc9daa636b6b03b4258ca41f59"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_physical.rs",
+          "sha256": "576c7698c885d567b7d3a357e157c9519ef7fadbc368b4a9f1d25e3eb4acdf23"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_physical_allocation.rs",
+          "sha256": "8910aee8b7def279594467bc4791ff7128e73e4d7a445762c1237ec6a900676d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_pressure.rs",
+          "sha256": "26f8066dad34fcce5d0b0218e194a70b10716945ade970ba9a8d366ae7960bf5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_allocation.rs",
+          "sha256": "4a1279d803ff557b654dce7bdd737c216385a374a911ece1b74095a0e7bc9ffd"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_oracle.rs",
+          "sha256": "5f8d05f787e4036da9fc34db4ec6d83e6ad9141a355fbf8d54538e56f2163a7c"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_pressure_oracle/absolute.rs",
+          "sha256": "8726127ed220971fc6c1cb633edf1032f9c87c7b34075f9fb8564bf6db9f7924"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_reference.rs",
+          "sha256": "2f9d8469cf6e2a9923baf957e3ac057b039dacd72ed4166a48829a59b72ecbf0"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_reference_allocation.rs",
+          "sha256": "440d0f13af1dde3d3c9f5af0c4fd402a6f34af25b6944e38aeafdd11c4178cb1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_regional.rs",
+          "sha256": "cc50558f84963a19babde937d2f04bb5f8b97717eb3ddcc8c277630c62aad15d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_probe_regional_allocation.rs",
+          "sha256": "e4c1db41b7564f280c539a64d0d14239c4528dbc17c6e8ea768da50618fce8bf"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reconstructed_run.rs",
+          "sha256": "9eded1bb68cf3bed6cb41902ba0aae65bd77eb124662ad4ee632c632052cb1f6"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reconstructed_run_allocation.rs",
+          "sha256": "0ad38c81525cda3ae99373b5a68bd40f03524d6c0f2c6a8fba2e92790541bf02"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_arithmetic_pilot.rs",
+          "sha256": "703cf7f5c6b2412c68cc20d8147130bc098b4fc94128581713b8f384baec0b67"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_oracle.rs",
+          "sha256": "0282c7d79ac41dff9efc1189f2d8efcc90ad1a2f01a2823bfa006e7f7e2ee3b4"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_oracle/core.rs",
+          "sha256": "ccb82dab967ccf2b77f74fea91cac2e75aa97fd2a1d8476d1784188ab3e48092"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_oracle/legacy.rs",
+          "sha256": "7bc33438965f0253f9bbac425e924780a0dee8ed5aa32e3f68025588efda3f61"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_oracle/phase.rs",
+          "sha256": "be01f2df668327b535b940aa33dbacbf1435366e7bd5027102819f2dfdcc693d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_oracle/tracking.rs",
+          "sha256": "e007ba70c20168eb7595bd5ffd7d432694b8fdee24f6a2aff49964c8fec26473"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_tracking.rs",
+          "sha256": "f9ab8cfd2b86a74b21974df09d3f122e99711df0746cede87aeb7a78fbd4d909"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_reference_tracking_allocation.rs",
+          "sha256": "1b7c83b3797c8ab99226071772854ada6610cb4ac36bdc1a1f30bebb8a16dd97"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_region_coverage.rs",
+          "sha256": "955390d231cf7c23b90d7e56fe1ab9a617a22976b0086bf7a2056535181097ae"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_regional_tracking.rs",
+          "sha256": "2a314ed830caf571a94e67c874862f6248cb41c81efba27efc838978abfd69a5"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_regional_tracking_allocation.rs",
+          "sha256": "7a04261940bfbb6e232661d01daae3f93380ce1117f10290b9023364f04d7cb7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_residual_family.rs",
+          "sha256": "8d5dcb5e62b0f0d12a96ed2495d35f7b5a09719178b6d36da094f9b97230c287"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_residual_family_allocation.rs",
+          "sha256": "f513a9e22fda4a665723184272add407ad87505229015c8b12a7f91237530737"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_review_adapter.rs",
+          "sha256": "ffb708c1da3bf4299e15613debced3512c423981c42e00a082c29ee9bcde240e"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_review_profile.rs",
+          "sha256": "d10243d4cbac195795cb66a010858e00ee7d8d316de9971c845f62cea2d85cb8"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_review_profile_allocation.rs",
+          "sha256": "8bded47cb23b1a7e3d066bac64710511cc40a5a3346be359660f9c2eaf089ad7"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_run.rs",
+          "sha256": "3d82ff0c4c1f8adfd8f783f0a7db7f7c78a6fa72a82638da973af0c897e3bbe3"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_run_allocation.rs",
+          "sha256": "f083195e161514e7718261515f16710276b468a2d2dfb201a2395e227e89e32b"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_sampling.rs",
+          "sha256": "c485a9802b5d37433980c772b42d933aeef0af94ab7d4dab4d89ff8527f6bd30"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_sampling/actual.rs",
+          "sha256": "b98983c71cf2a3e918a32bbac3eda517ce71c118db5459bc637c88a95a96edbe"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_sampling_allocation.rs",
+          "sha256": "ed967660be5aecc5ac5531192e6346cf050edd3ff7c30bb1482d856a2fbfb019"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_sampling_oracle.rs",
+          "sha256": "47f56760409cda4b6ee3c566016996a8b9959d329d4f3c89721162deaa5a6c7d"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_sampling_oracle/modes.rs",
+          "sha256": "2d0c718439944ad9eae3d574e5f9e0d94a4ebd293d252b4355df0aab1517d8ab"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_shared_force_adapter.rs",
+          "sha256": "cc0c2f8caa648dd860356b9a48bf7d6bc84fd5e8a445190bc7397b042bbbf846"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_shared_force_adapter_allocation.rs",
+          "sha256": "fa124961bcf051a83f996e8de7887a9464861b5070e07db55e89ead687e78397"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_shared_force_table.rs",
+          "sha256": "9fe33ae94c357ebd1f4cc12e8dce6bc06d03b57663f5269ab035d24311793cd1"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_shared_force_table_allocation.rs",
+          "sha256": "446c828ea0ffd3a4454b568cfed3e1aff2217783ff1fa8a5b42f20afa5b2a7b2"
+        },
+        {
+          "repository_path": "crates/nsbu-benchmarks/tests/v2_startup_profile.rs",
+          "sha256": "29a77f53edf7733507d1fbf344583f3c8843d275cfb14b1f27cc8c6a61e4ea17"
+        }
+      ]
+    },
+    {
+      "crate": "nsbu-solver",
+      "manifest": "crates/nsbu-solver/Cargo.toml",
+      "file_count": 210,
+      "aggregate_sha256": "0ea374859ca19f8b9ebdd5b5becba1b7e349739eee310d916a492b3d57bba81c",
+      "files": [
+        {
+          "repository_path": "crates/nsbu-solver/Cargo.toml",
+          "sha256": "3cc63c6de6bcc5bc7cd696da91bc955c01caaff8feff0307ce250818cad8789c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/NOTICE",
+          "sha256": "4a35d9af9cfb03399b17220dd70584ac8cf1350b03a0eb8f9b8c132f886c17d8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/README.md",
+          "sha256": "5112d3edd89d2966438be31cef64a75094a6c46844af890c1e526dec0f253fff"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/archive.rs",
+          "sha256": "2f316c33574dbab49eed511d3305fff538a44e319b22fce7296f33cfa08b8dea"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/artifacts.rs",
+          "sha256": "2494d18f24d104f51072fd16656893d49215478b49daca3be7a243b31830c1da"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/bytes.rs",
+          "sha256": "2e704eace3d9e218f38f5250a85a089b9e0f99027eefeb5d466cccd20203b995"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/failure.rs",
+          "sha256": "b1532710466c54f26623fcd2d0b3ed2a5e8424b57294cbacb31836a6a85fd267"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/history.rs",
+          "sha256": "fe83aba4fe9e8d2344c808f0ddc88e788c0dbc9eae326b8783ffddfb328d0942"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/mod.rs",
+          "sha256": "6ba40d3ff098c6ff38fd815262a1ca53f841c5cd1e4db1cab6ca239b1eb0d7d8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/physical.rs",
+          "sha256": "a70755961fcf128cd70be1d6c1dfd6aa2e38bed398133ae6cbb221b5458a66c8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/checkpoint/record.rs",
+          "sha256": "8b150c81723565efbfc9043f8fe1b873aeaaa42cfde6904c31058573c05926f0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/balances.rs",
+          "sha256": "0c3f4fb88be204a3b3602da61f3566cc88fcc9cc9f38ae79f01903f44c0c55e1"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/comparison.rs",
+          "sha256": "f078c3c97b600564a224385f02a8ad943ddda8a00122dd8aed160cd8fba180c0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/conservative.rs",
+          "sha256": "54f527487e7bef09efd227b329f2d581ebe4b31922529b948a58bc1eee7f17e2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/derivatives.rs",
+          "sha256": "c3285b370dd7193dbd3e01e1a1a96cfa281287be10f7172ed645b91ee664d0b4"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/hermite.rs",
+          "sha256": "ce6bc5e97a57ef6ee80f668aec78eae060e4a7710e0f535d903ac35d403f94ad"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/history.rs",
+          "sha256": "aec489f8a4c1c7d3d84c48ac420f7f536e705ee3b97f1a152370e02973189e46"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/integrity.rs",
+          "sha256": "3e62ee693ee285c1b73af1f85aac3c1ba17d9170162c90222ac07bf5778be848"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/local.rs",
+          "sha256": "421b8e4cb647981c1f484c6979bd55c80f3a07777a559bdc8ea7129726a4c3b0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/mod.rs",
+          "sha256": "7160744dfd5ace39b44e2a1095ca16646a43301926a179879456f1bda4e8bb5b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/modes.rs",
+          "sha256": "3f6fb298872d9721a978ccbf07ffa0fbcfdd460f84133fc3c2d287814cbe807c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/norms.rs",
+          "sha256": "c4949119f287d2cc93b3ffbf5acd03cb249099aa5631115adfa3d91ca36b38e9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/physical/mod.rs",
+          "sha256": "1ccd5f7eef19ee2310bac1bed99ef37a724ef9e8da2de90561e09a743d26c425"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/physical/quantity.rs",
+          "sha256": "77a20e2bf8a1440515296d8717f3548befbd0e192ef258e2f415571def7e8561"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/quadrature.rs",
+          "sha256": "37f9abcfb78d0c27b2ca5247e08667d6948ec466a22a724a73eb51bbb3b8a171"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/reconstruction_history.rs",
+          "sha256": "b943c5a88fe3a06fed35803007a064fd89078cc5d862be80cb98383a56144f4c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/residual.rs",
+          "sha256": "7010031d7c3365947884bfeec700a41e61d4c46fae364425266384e532e5528c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/residual/accumulation.rs",
+          "sha256": "28326a3885ef35afe743b989ff5a423967b9ad58067fbf8f92ca83c9b9e21e73"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/residual/localized.rs",
+          "sha256": "dbffc736b6c01a3c7d43ddf1015579e82e3bd2732178c4b7c33ada9d3baa2f88"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/sampling.rs",
+          "sha256": "967006a4644042265d0c71ff0930aacc4ef08897871e694b9fae72f380b36a30"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/squares.rs",
+          "sha256": "257fd3b7a7ee371f9a9d6a68f89aaf3bbec72d99d1c83bc45eae9c547911fc47"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/summation.rs",
+          "sha256": "02bcdddd4675b1133c88e409570eec124f84cafda6a3ca5dbabad4dc15d4764a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/diagnostics/tails.rs",
+          "sha256": "fa257037982f7f142f1d5804b639153e9615220be39fa17f4bdfb313ae274552"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/clock.rs",
+          "sha256": "c8d56c25c03aeda44fb69e8896406ee02eb32646de0222ea5782c11fac5cc4ce"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/epoch.rs",
+          "sha256": "523dcdfb16cfceaa07894c6de7b290fa8ed0bff9ab1716ccc1af37549296f3d3"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/geometry.rs",
+          "sha256": "258d0b8972698b0cd371d21bdf7c1e9d9f3fc2d9d42f0a63654d00184f2796df"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/layout.rs",
+          "sha256": "0bd0ed3f90949b034e237f1582da8859200515e28f1bf0459de75ddd9602a163"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/mod.rs",
+          "sha256": "06a4b001aebe665ee9fd15d51e41f3ffb237d8023c3bbcb642904ba7124049a5"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/resources.rs",
+          "sha256": "4ecff25c131b6bc56c89bbeee55bfc17b34ecdfabc4bfe6dfa76119085f0dc80"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/spectrum.rs",
+          "sha256": "8da263a555b827ba25fbdb44978bf95d002abde4d77da6e1d702d46fff591687"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/domain/state.rs",
+          "sha256": "d2385f37cf3f3421e86400dbbef65f2957e7337de9f349110072dbd50eed61ab"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/error.rs",
+          "sha256": "e4623e64c708d2b15e69a91e87887a3e5df35582086354b808fe660bdb708e27"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/control.rs",
+          "sha256": "dcdfa5db6540151f9116a5d69816b13f77b3b77b2b4ad8a77110ea2eb7540cdf"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/log.rs",
+          "sha256": "3b4402140c88de5d9d9232bb62d38ffaf80946e7e86ee86ad6e2c3df4e4b21aa"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/mod.rs",
+          "sha256": "87c732adf633d7faeba221cd48eb6aa22a0f16960e51aae3d6b6557b8a5835fb"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/observer.rs",
+          "sha256": "02b216a036f889fa5fc6eff443fc1c864886d6f320fe6a7c24bfcbd553790266"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/runner.rs",
+          "sha256": "3da87ef2246a9a1560f87cf4a16884e937793b7d640d053f8cbd1ae84cfe9eb1"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/experiment/tests.rs",
+          "sha256": "3b4805b6d4f5b4a327f2e7d91d5b2ac7530c5e06bc766a8380f4a7c307f328d4"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/attempt.rs",
+          "sha256": "29c7bdcc8696b3c32d15724a56883d04cb48307c74feb6aa976fec8851f309bf"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/coefficients.rs",
+          "sha256": "fa8cdf5396dd35b29678991313f81d48de441909ac18e4efcd2459528f0afc84"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/forcing.rs",
+          "sha256": "c90fc8960dab7d44a763f38e358d5a5da16c5aa28b6b63bff614cd40d36897b2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/ho_coefficients.rs",
+          "sha256": "6c00021491d4277f71fe281c312f33828807a6fa15392a16c52a7fcb94c3c7ce"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/ho_kernel.rs",
+          "sha256": "4c68df6359d48b28fbb560033ad2c0eedaad987d32c5ed6bb4947f2a45faf115"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/indicator.rs",
+          "sha256": "bbd73928a3cc0fa92c4edc834e2e0a4dcd9469dba929e156d6df2e0211674fa8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/kernel.rs",
+          "sha256": "11fd4de8e9414f15f0d8fd937ced9babec68acf373c3ba7f867ae7b38d97c7a8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/method.rs",
+          "sha256": "06759ff71c0ca57b39cf2aaabcced7acaf1fe5d0abaff866e9727288cdf2d6d9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/mod.rs",
+          "sha256": "de1e72ebe48ed2e60127658a0c2b6498cdf80e0000abe51155c53104b0b991d0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/rhs.rs",
+          "sha256": "cdac32989e906f22345c4b4644adccc821e9131918f2093012bec0bdaf464540"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/rhs/w3.rs",
+          "sha256": "e07fada298332dd8af7c44d838b0b9e72fc579b6f0a86a0cd36a76b40252357c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/scheduler.rs",
+          "sha256": "14f82b29a58233c432c9abdedc14bc7325ae94d2c1b44d88b4c8ad6aff40cd43"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/time.rs",
+          "sha256": "20a9e672f00046261d5c21140c93da219355dde5cb9838a69eae6ace12a1f4ec"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/trajectory.rs",
+          "sha256": "98fcd1f91cbf58a896329e875771ff424f516bf07e99902439c34afa616476e0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/transaction.rs",
+          "sha256": "c9fe5d1d57afed0b7c9545a7158a58129c4cc1c11f42486c9a29f17d9254a472"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/integrators/transaction_tests.rs",
+          "sha256": "9794754737f6ba0bcabdda391452bf37c7e39cf3315d71c2637b15cadd291be8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lib.rs",
+          "sha256": "4452a4b3de57239e2cec997369cd00ec4562945535c01b05acdf098a6658cda7"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/archive.rs",
+          "sha256": "30658e8483d0e146274c3352ac476546951f55a91ad1d7c038bcc012047a505e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/archive/codec.rs",
+          "sha256": "36b5000ccc7c6582333d04c8faec6f875b1a3c1e3bc8bcd6eda49989fe9409f8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/image.rs",
+          "sha256": "78cfee49c2b62780140e5999867bdf13b3768c8c97c6f1eebf34f659c46b1770"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/mod.rs",
+          "sha256": "7ff6815e207ff4b6eeb76c97b2b6ed15b28d8f6e69eddb60cfc51194040184e9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/prolong.rs",
+          "sha256": "998ee1a594cc7f8de81cb70b533704b2e814a68e8a30032d282a778c08b1a319"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/record.rs",
+          "sha256": "70987f90f261e0cc4fa04c2ac54d9ac80f67d269db227aaaf427dd39249b2c09"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/lineage/registry.rs",
+          "sha256": "80f41e2355686c4822bac0dd3ba49cdbea53559a321c8eaec45d059010af2743"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft.rs",
+          "sha256": "8c3016753c7994783348ec90a5375fe637ccb7a8610d53ffd83ed8eadc270a14"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/api.rs",
+          "sha256": "454798f6badb1170a453cfc75a097280ac21e38970de11164f31136e576c1214"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/avx.rs",
+          "sha256": "2f252628c36501fa61887fc027eb4ead3c60fdb6815cf46b87af119ce173f168"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/owned.rs",
+          "sha256": "cad008bc4934fa71a07962e6ebfe364ab2df7ebe12ce5112b7db40642f5ba609"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/parallel.rs",
+          "sha256": "f8b6368191e2f9e3bf2ca02831697f4fb649574d61aece216a37406ca0d51a5d"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/parallel/tests.rs",
+          "sha256": "aa26fd9a3da666729c4c971cbc2d148fab9b006d8f5e4e6ad2b8c44125311e26"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/transform.rs",
+          "sha256": "26c717e09ad38ad7e48ad901ebf7f60482f0a41a35fa4f20f50305a24b52fb36"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/transform/tiled.rs",
+          "sha256": "dc6d755d7fbcd161ec019997bed387a09dd2459b344673d5423dc3a87b74f5bc"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/fft/workspace.rs",
+          "sha256": "9f817daff8290c399bf54677e0c29dc3d02d03d226085078d2e4ebe6896bef96"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/hermitian.rs",
+          "sha256": "9e79b935c5ab4c7e83c741776835a228f4d4bc44594da091a757604a87dcf239"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/mod.rs",
+          "sha256": "ba4a44ee8e6632db03f8900071e8973b2eb93fa12c2dc6fd90e5ed89cf2bdd35"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/modal.rs",
+          "sha256": "adc5cae05ef688c8ac0783a8da35ee6268802d4d985c85bccd306e8d3510e727"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/radix.rs",
+          "sha256": "b3b1fde51365d8490d1efad06847afdd4f771b2934a14aacec6651fafefec92e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/rotational.rs",
+          "sha256": "db744d93b9c2e9e457fa9a78c5c42ba393270c25e5d783e222ac42f796f93219"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/rotational/evaluate.rs",
+          "sha256": "7642805039f17ba4a138a952b5fecb1f702edf4b60b8001effdb094109c21596"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/rotational/fields.rs",
+          "sha256": "05c3c946d8b4444b1361155b3b3feb7e3ad6ac600e7e2753b27b3ace4b5c0c8a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/rotational/tests.rs",
+          "sha256": "7301b8a48a3f3ae891bc4125cb6528f259d426830a6e08b9ea8237d6cd14d611"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/transfer.rs",
+          "sha256": "851cf11c39678e2da55ab024c2e481a3de36b376af8b77ec3eea96a9a726cb79"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/w3.rs",
+          "sha256": "63a5eb4d6d1f64b5a66680a3b6445b88b77900eb9470e9b20644bc2fd4781438"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/w3/admission.rs",
+          "sha256": "0fc47b1e72bb8f6c821ede4607ad495d66e8d4a6041cb1c83952a7383b2dff24"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/w3/tests.rs",
+          "sha256": "3c5465902c29d89c4947bf77f552b0be40e591ec0a5fd06fc63314ecbdcf6d85"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/spectral/w3/worker.rs",
+          "sha256": "71c8c7b5e68771fad989b12e96f72af4ba9bdc2964456e1bca7024e039863a9d"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/storage.rs",
+          "sha256": "8221c264c4628d95ecb5f9a71978e0a009b48b99e02add57ca5442b76ef75bc3"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/test_support.rs",
+          "sha256": "4f4b65ae4fbd2fd1759021f7f93f57ff9dda7119b9ac586551c9d4ee6822371c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/budget.rs",
+          "sha256": "b6a973d4cde3367b3cbc20c06c2449cd1e9c6a0a7125b96e6c64769cc31555c7"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/mod.rs",
+          "sha256": "e280902eeda8fd1eca72bee14756d9e149a7b3cfcd5151e513d118f583cfd5f2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/observation.rs",
+          "sha256": "b1c0051392b5025ecf9e0e3bcf2cbc90af499a14b9894d3611b337a38fd54c4c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/policy.rs",
+          "sha256": "191f6705968d4de1fb297aea2318e623a583aa8cf2f1b924b42ee37e9f604b44"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/protocol.rs",
+          "sha256": "67367953399e9a4632c0c6e4920a606f3ad6ac2b05fba80918a1c68d31cc2cff"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/protocol/encoding.rs",
+          "sha256": "cbf543b27f53f0fd5c3f2a301285f7860161f566ed418066ea0d195a4013d86e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/reconstruction.rs",
+          "sha256": "e278c067b4f3c1a3e83ee130c9d94263e2fb183dc92ead4053c26bcdfb48cb21"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/refinement.rs",
+          "sha256": "5a529fb168779542f6be271d545286cf92b8c8bbd137f93b037634afa4503fe2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/review.rs",
+          "sha256": "51d40784edd77d5bae5f708748d7e32dce7fa588e5b466d93cdfbe54a12d89dd"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/src/verification/times.rs",
+          "sha256": "30d38cda7bc8467473460aef500b65eb3bfe7beebfd5ea362eb13726019a71df"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/advection.rs",
+          "sha256": "30f92bacfbcba681f4d76396a63a6d758083ab620be3c27d3fd99776295944d7"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/alias_control.rs",
+          "sha256": "9ff50aa1c60f3bb034756b037d8f4b69c358cbeb17dfcc19fc9e7ea5f0554639"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/allocation.rs",
+          "sha256": "6990659e017df94b01ce55702f43bffc52dd29dc8a8631ddf2746a5c0e68e443"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/artifact_archive.rs",
+          "sha256": "28f4a88b016a52e836b9aa8b8de5849c4e163e6601d9ab63d429d7a44d8257ab"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/attempt_admission.rs",
+          "sha256": "993d378772b1f00e0d30b7f1c7d7a7713e5f3a869b590a690669b55ce4f42910"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/attempt_allocation.rs",
+          "sha256": "7316b76b664ca4b474ba9a3eed0d3dd2676e70d14d063e21b0f11f29b79629c3"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/balance_history.rs",
+          "sha256": "632a6c0c3dd11b8f4be191bf465564b98b49b1f14d64b21a2d8b90bd4ea50b2f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/balanced_commit.rs",
+          "sha256": "bbf7bff2877a7aab360a932776d9ba70abdf7857e345e7b3accf0600c66f596f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/band_comparison.rs",
+          "sha256": "14b3cffb441bab7dbee54cfb8b901c8a90a253b0fdc1d411541c133a85a55d61"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/checkpoint_artifacts.rs",
+          "sha256": "b637eb13ae278ead18c6e0a52519918fb1cc50e1c21103edced4c3c02d9f32e9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/checkpoint_support/mod.rs",
+          "sha256": "6abf0bdc7de6d2f7db2dfada254367f9b6d57d782d59ca17349c5c9a25b08edd"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/clock.rs",
+          "sha256": "9c941ffb51d3ea2f4aa90a940a3cb88db70c595da6f5f2810025ae33e0fd12ba"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/cm_dft.rs",
+          "sha256": "333bfaf2a46532f79aa666e9cbee6f03098142fc20f102b38f441c80c3fd26d1"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/cm_kernel.rs",
+          "sha256": "f7623ca4b2649f7b3583edcabeec59577f20f50f5c65416ea607f022bbd2b3bf"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/coefficients.rs",
+          "sha256": "67ae0b7010b13d721de10a56103ab41104e54a06a5d5a6a18814e46e1fbd68e0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/conservative.rs",
+          "sha256": "a418dca422cb6f770cb6b453a418dc972ab7cefc49b0a870c530c1dfe0b99d0b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/controller.rs",
+          "sha256": "aab6c840f7f12cb2c34353942321deb086b240310cbeba5df182a9810cdd207a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/convolution.rs",
+          "sha256": "e7cc51cf5ed35f7d07b81e4b2e158848576b81cab53b226f333b28a383bcd43b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/derivative_modal_fixtures.rs",
+          "sha256": "9714364a7f0421f51429e3a8cf7cf7843bfef7a764fe896353f75f207a179a26"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/derivative_plane_projection.rs",
+          "sha256": "5e2c42955b689cdcc83fe4b490496c450decd0578cfc241162dd376d0f4eeb6f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/derivative_sampling.rs",
+          "sha256": "b4c626e9292a0e15aea357829fc679e60cb8fb68d5705d34e822f013b3ff1c4b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/diagnostic_resolution.rs",
+          "sha256": "a811051f5ac7e283a1aaeccc242d9b8144370daf2438717046cd7ae546bf26c7"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/diagnostics_support/balances.rs",
+          "sha256": "9a6035ae13588a4153c2df953b957f8761e84c1d6e1bf01612d4dde377d3eec9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/diagnostics_support/mod.rs",
+          "sha256": "bed97d78313c9ca01e6f4f7647197a9960b13f33b97be6db9187c932422d0ffb"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/diagnostics_support/refusals.rs",
+          "sha256": "52b681c0acdae3d90e436eb36ed8606fa26a092eadb522c41a989be5a87171ba"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/etd_fixture_support/mod.rs",
+          "sha256": "d55fcdabfa83bb83f7d77d5b4add355e8ee6b4f643c18cba1ea958d741974d16"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft.rs",
+          "sha256": "ebc5553e6d953ffb59139f04679c6810691a7a1bc7b0df0e70e957024f3186c9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft/avx.rs",
+          "sha256": "5f535de675e7b08ce73e9dc7f229ad428c8d68777032fd9ff07c45f44c27fe08"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft/owned_direct.rs",
+          "sha256": "acbdeab538d26fc285edb517e7d6934b41ef8f81739a66538b54967a0efe52c2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft/radix_edges.rs",
+          "sha256": "0cdc7f17ef2745a88e31097f2d39d89fc3e98cc989e4ac04f7f541f9c149b5af"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft/support.rs",
+          "sha256": "9140724592205ef790f27af3cd7c09187eee874c26d15f9636ef4bf2ae7b4931"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft/validation.rs",
+          "sha256": "87bef3a4abfd136660f46bca16efe925c28b4768386ea22c0a63942e2a5838a8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft_allocation.rs",
+          "sha256": "4a49418b0341a8babf10110821ef7dd7168c450e5277292e2c710a3d15cbe852"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft_avx_allocation.rs",
+          "sha256": "6d6bede8281bcd5b9667796acc440c0ca228a70513f344dff892cb90e8d641f3"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft_parallel.rs",
+          "sha256": "30c53f515ca1d79a915543cd967283cf952aa4854f9842ced1cd253d6af791f6"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fft_parallel_independent.rs",
+          "sha256": "5f5af3bade27c59813f380ddc925ca2f2f37e35fc3c68d738be024fde9301464"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/cm-coefficients.json",
+          "sha256": "6bd31e29861d43da6257f9bd5c399309599752797fc8617eec0f4592113d0ba1"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/cm-coefficients.tsv",
+          "sha256": "2ddc5ca3ca2c4e4737cac1531ea20d9f08e49f54f757f757b867d32c245de147"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/cm-step.json",
+          "sha256": "c9630084d4ac8a65c6d38686dd82177d4aa3fd0bc01b32b0de7d003b4256f8f2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/cm-step.tsv",
+          "sha256": "8382cb85351b0e9b285e841dcdff460af5f676fea7381f12f133b30df6c5c85b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/full-band-norms.tsv",
+          "sha256": "cd0d9f41168e04b1ae5a29999ab3451351460390903fba432ae743a900fce733"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/ho-coefficients.tsv",
+          "sha256": "1af17dfb8ec55674e7f5fc27027d1bd3a22849ced15529a7a3820fccb2c4f12f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/ho-step.json",
+          "sha256": "518cedb9e33917cbc6cc03d27c8d586b74e1044f663e2efdf8188bca2e32fa13"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/ho-step.tsv",
+          "sha256": "b2bdb4438c83dc7d89f0658fc9b7cc6f96d3f76569f5135e6c9620d84ebd5ab6"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/ho-stiff-trajectories.tsv",
+          "sha256": "283677c16094cf02b284e1b0b5c1d8f5512cfb989823b8d1db17750c31b5f970"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/fixtures/local_modal_derivatives.rs",
+          "sha256": "c44ccb60d35af5df68aeebede27e9d5bf48796d4aec86f2f3652f9913c45a30f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/force_aliasing.rs",
+          "sha256": "d85d3982e314f08a33ff9ae73193794d9fbc8fb23bcf32f8ed138afaee6c95f2"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/force_budget.rs",
+          "sha256": "0f6f55cd3429d28527dd04ae8459b3dec6e0d3050fe9c1d59f229fdc4658c21a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/hermite.rs",
+          "sha256": "ae2f1fd5ba8cfd9db9a3adc3f5c09a7ba4a772816e6935f44c7df6f1c0192d4b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/history_archive.rs",
+          "sha256": "9c87d25627e368e77dd46c404cc4e8a6d55b91eff4e58535730aa7f8a097c593"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/history_replay.rs",
+          "sha256": "097f2ecf7bcd3173754eed43f98fdaf36a026cae0711b1074dacc135a38efdbf"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/ho_coefficients.rs",
+          "sha256": "c233e85f023b0d0dc601c6ae153de3334104ce87ce003317a778ebcde04411b9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/ho_dft.rs",
+          "sha256": "77717b1ae44401fe095c97174e69c251faa9a78fb551c4a27963fb2744200fc6"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/ho_kernel.rs",
+          "sha256": "39abad29483a2af59abe2e25625d3a401830876e9be6d2ad84a88ea7f188231f"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/ho_refusals.rs",
+          "sha256": "24caf20552a70c4661a07efe3afdf5aa8d8d7e0341a648e34bfc0dcca513df7a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/interval.rs",
+          "sha256": "ccef14080026dff28cbb7b9c51a5c63549fac34a98b313f3b444cee8aed2ea95"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/kernel_refusals.rs",
+          "sha256": "fefb17f2bc641db096b5ceda6cd810b3e39a2886a337d8bd3282fe9282633930"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/layout.rs",
+          "sha256": "19810be8ae44bd3d55eab5d7534bea344ea45b90cf7239fed00e6874859ce42e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/lineage_archive.rs",
+          "sha256": "313cbb6d3a560eaf57572c7a633bfbf9803533b116d7606c4a25bdc4883d3553"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/lineage_registry.rs",
+          "sha256": "bf39501946be62cc43297b61f9bca14f1aac2f1f2418f0103b6879f5eac7b8ff"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/local_errors.rs",
+          "sha256": "ee40e7758e4e016c4a424a5a558d1b45dc313a048ab24164b8b8e5cb61d1f15d"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/mean_balance/mod.rs",
+          "sha256": "98e8df08497a2ee65cf241afaf845ea5d169109796e2798a580b220afd87167d"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/mean_source/mod.rs",
+          "sha256": "7ba0a8cb9da2614d6e91facc311c205197727b8cd353aed44573af012965c8be"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/measurement_review.rs",
+          "sha256": "75c9fd88c44ec5283cf22aa9fcf9a7c4b81f0a77f201c6ce72de88fa0a0986ad"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/modal.rs",
+          "sha256": "fdf9ca639203ec71c3c17017807e19d56ae7a3407402975e84da0ed06a704273"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/newtransactionobserver.rs",
+          "sha256": "d40b2f8183a5dbeae0d8391530402da0202acb97ac9993254df8d050a8402b04"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/physical_archive.rs",
+          "sha256": "cd61b013b2ecb5da3df45e956f1940a94055b33bc2969c8b384c3b7529544e84"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/physical_comparison.rs",
+          "sha256": "966a0ab9fc99cfa962f903b7c89259350939bcc28f596d95da9ff012daea917b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/physical_image.rs",
+          "sha256": "9721eff0efc9f47b3c7e9a1c03c74c989471a723c455d95b7cc0b5a66ea7e535"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/prolongation.rs",
+          "sha256": "faa6a230f1b1c56f6ff130756103d34b36faee09c5705da29256762a4fc62b5e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/protocol.rs",
+          "sha256": "8143db860ce92b97ede012001c416bebccbfc5c95560730614befae14b774b81"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/protocol_allocation.rs",
+          "sha256": "ce19cb239093d51d5eb4d07125853f00d79f557517dd448b02f1f5ccfb875da8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/protocol_support/mod.rs",
+          "sha256": "bee93de576d1cc7a897452894b797f84dc90deaaf8116ca5fd4a40f0f45a5ea5"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/quadrature.rs",
+          "sha256": "3c2fb3d4afdbbca0afa26d1364540e836bc4d74eba6460d4734f5d6dd64ada6c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/reconstruction_history.rs",
+          "sha256": "f5ff8caed754cfadcd0c186e92b2f2fb7c625fe09d3d1285ff7279a73229ac1e"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/reconstruction_policy.rs",
+          "sha256": "49cc49dea92683e44a395728b918992ca83caa29e6dfc302ed81dd3e605d5409"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/reconstruction_samples.rs",
+          "sha256": "ce83d0f35d4531ee1ba1f8bb531551747495913abe52f78e2c3153eb75860eae"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/recorded_allocation.rs",
+          "sha256": "e001a6ced8ca263745cb43b7de7a1a4fad992d5bf6530d31cf56cb4c632a6877"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/recorded_config/mod.rs",
+          "sha256": "2762db01b4fef4119e636e636af370123528c653908443a0b7ffdabf16cf4e12"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/recorded_step.rs",
+          "sha256": "787d5b5e5eb0b69c3ab0b35331cc98137bbe9c9fd34f5223eeef401312284c6b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/recorded_support/mod.rs",
+          "sha256": "36a28135e8eaaabb0935de56f49acfcf1b53491a52788eacce6098424a4326c8"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/refinement_rules.rs",
+          "sha256": "cbf1676055446829dc562395fd92b8ddb33031235eec4ee5d2b4a4e996c38b9a"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/residual.rs",
+          "sha256": "512f5d85f6f8d8fd22988006e57bd586b0c804ab9e2b8fc9194894d9a28514af"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/resources.rs",
+          "sha256": "ff0e092b6afbf346bdf6619341e26dd8e5eea1703ae79252f402c1bce944fb97"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/rotational.rs",
+          "sha256": "75fddd2069267f72bbbea97664c9cb9f972b6a79bfb8ad613f232f260c46a128"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/sampling.rs",
+          "sha256": "dcad229b0d5c3c06fd8701dd4ad015528089a4e9a0c54f8e9c2b4c25a0583aa6"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/source_contract/mod.rs",
+          "sha256": "7f4fcff7a6d8095a69bf702ce582c5e920f4beab70cf291a85a369e156a95865"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/spectrum.rs",
+          "sha256": "8c8de05f18d77aa5ccebabb6003103332cdeab1c501257d39e7c6d4f5da304ac"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/spectrum_integrity.rs",
+          "sha256": "adeb690285c5e623d6d4b6a75c6b8d2461858c6a546e58cba183a7f010feb7e9"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/state.rs",
+          "sha256": "8a474bd590b1c6f5e661f8becfec53445732986d50e09a96fa00c7ff57410519"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/state_support/mod.rs",
+          "sha256": "6143f2fb018335b5bc3175a14f0bae8fa10c78e9c7861cc66246a376e8041327"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/support/mod.rs",
+          "sha256": "a7456fefaa073e8bbd187eb3e66e6557cbe3a5ef0114e6ffb730afec842e76ae"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/tails.rs",
+          "sha256": "bb7ddb79b18d9bee744b6959a20f0b5c139752555ed887b3f239ad55ea78ba34"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/tensor_errors.rs",
+          "sha256": "222531594d691d77e2dcfe5d78698c9aabae7419c68738b396ca1c221cff3120"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/tested_times.rs",
+          "sha256": "59b94f1d24f17e76cab0f6c0ad4585784d2ad757d519b9eaa5744c0be2459b4b"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/trajectory.rs",
+          "sha256": "7565227b9e4a9e4d0277f4e6549542306c47aba887f0844e5524805b140b1d0c"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/trajectory_plan/mod.rs",
+          "sha256": "466d9bc5ea043e942302e5e9ddcc2cf7454795f950d9d1f8dfcdd6b49d23c3c6"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/transaction.rs",
+          "sha256": "699f6884a9e0519ac4aa05bcec121388b74f23a9bde7b50ad56c71ba00713c82"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/transaction_support/mod.rs",
+          "sha256": "676e2a6d437d627ba58f9b57e17675e620aa397950cde66bd3e9fd21d71ecfb7"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/transfer.rs",
+          "sha256": "0b41915350b5e574d959c8b714360fa90c020238b27be23c161e7fcef1bb5007"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/verification_budget.rs",
+          "sha256": "8efdb10878e153078dec4d706f7033d2c4d01f8b6291723b679e1edbec574daa"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/w3_parallel.rs",
+          "sha256": "2bc581fe293a082060a4986a72ddacdfa03499c2f3acbf026fa53963fa3409c0"
+        },
+        {
+          "repository_path": "crates/nsbu-solver/tests/w3_parallel_terra.rs",
+          "sha256": "1e677f135bd6dd1dc15cdf51682f6d305169b4b6af7f0646daf87168603f231f"
+        }
+      ]
+    }
+  ]
+}
