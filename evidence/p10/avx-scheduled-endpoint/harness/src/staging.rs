@@ -9,8 +9,10 @@ use crate::{
     run_types::AcceptedStage,
     schedule,
 };
+#[cfg(not(feature = "n384-prep"))]
+use crate::artifact;
 #[cfg(not(capture_offline))]
-use crate::{artifact, artifact::NodeRecord, GLOBAL};
+use crate::{artifact::NodeRecord, GLOBAL};
 use nsbu_solver::domain::SpectralState;
 #[cfg(not(capture_offline))]
 use {nsbu_solver::SolverError, stats_alloc::Region, std::time::Instant};

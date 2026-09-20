@@ -31,7 +31,7 @@ mod staging;
 mod step_artifact;
 mod timed_rhs;
 
-#[cfg(not(capture_offline))]
+#[cfg(not(feature = "n384-prep"))]
 use artifact::NodeRecord;
 use balance::TimedBalance;
 use cache::CachedReducedForce;
