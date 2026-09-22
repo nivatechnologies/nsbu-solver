@@ -34,6 +34,15 @@ and measurements in the task handoff/evidence rather than this file. Prioritize
 work that resolves the current numerical bottleneck; broader infrastructure
 needs a concrete dependency on that outcome.
 
+Treat local Qwen3.8 27B as a narrow mechanical worker. Assign it bounded test
+additions against an already fixed interface, inventories, documentation,
+formatting, and deterministic evidence checks. Do not assign it architecture,
+cross-module integration, concurrency or lifecycle ownership, transactional
+publication, numerical-control decisions, launch orchestration, or repair of an
+independently rejected candidate. Use Flash Next for those implementation tasks
+and Astra for architecture and independent review. Prefer an idle 27B slot to a
+candidate likely to create more review and repair work.
+
 Worker timeouts are generous failsafes, not short work slices. Follow the sizing
 and session-continuation guidance in [local agent work](docs/LOCAL_AGENT_WORK.md).
 Review progress separately and preserve healthy workers across checkpoints.

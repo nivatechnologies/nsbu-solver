@@ -12,6 +12,17 @@ user-authorized concurrency ceiling of four. The current model allocation is
 recorded in [agent task prompts](AGENT_TASKS.md). This batch used one 27B slot.
 Expand only with dependency-ready work and capacity to check the results.
 
+For 27B, "narrow" means mechanically bounded as well as small. Before dispatch,
+the task must have a stable interface, an explicit path list, deterministic
+acceptance commands, and no unresolved architecture or cross-module ownership
+decision. Use it for specified tests, inventories, documentation, formatting,
+and repeatable evidence checks. Route concurrency/lifecycle code, transactional
+publication, multi-packet integration, numerical-control logic, admission and
+launch orchestration to Flash Next. An independent rejection ends the 27B
+attempt for that candidate; the failure is preserved and any justified repair
+is escalated rather than recursively returned to 27B. Idle capacity is cheaper
+than cloud review and repair of an unsuitable candidate.
+
 The custom packet controller described below remains a historical fixture/audit
 workflow; its tool-loop restrictions are not imposed on OpenCode coding jobs.
 

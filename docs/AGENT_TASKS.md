@@ -57,6 +57,18 @@ percentage of usage or cost. This is project task-allocation policy; it does
 not claim that any chat model configuration changed, and the current primary
 chat model settings are separate.
 
+The 27B boundary is based on downstream repair cost, not available GPU slots.
+Suitable tasks have a stable interface, one small edit surface, deterministic
+acceptance checks, and no authority to interpret a scientific or operational
+gate. Examples are adding specified regression cases, producing hash/path
+inventories, correcting documentation from supplied facts, formatting fixtures,
+and running mechanical repository checks. Do not give 27B tasks involving
+architecture, multi-donor merges, concurrency, signals or process ownership,
+transactional publication, durable launch state, numerical method choices,
+resource admission, or solver launch. Do not send an independently rejected
+27B candidate back to 27B for another repair cycle; preserve the failure and
+escalate the bounded defect to Flash Next, with Astra reviewing the result.
+
 At handoff, provide the source SHA, working changes, evidence paths, active job
 ownership, deadline and next decision. Report completed checks separately from
 queued checks, pilot observations and qualification. Review checkpoints should
