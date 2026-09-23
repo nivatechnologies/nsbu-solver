@@ -162,6 +162,57 @@ fn wrong_binding_field_fails_closed_before_token_check() {
 }
 
 #[test]
+fn non_release_abort_action_is_refused_before_the_token_check() {
+    // Every field and the token would be valid for the given action, yet the
+    // action itself is outside the reviewed vocabulary: refused as malformed.
+    let s = armed_setup("chan-bad-action");
+    let mut bad = frame(
+        &s.secret, "halt", &s.nonce, s.clock, &s.state, 1, s.deadline, &s.rest,
+    );
+    bad.token_hex = super::token::derive_token(&s.secret, "halt", &s.nonce, s.clock, &s.state);
+    let mut barrier = channel_barrier(&s.dir, &s.nonce, s.secret, s.clock, s.deadline, &s.rest);
+    let mut fake = FakeTransport {
+        script: vec![Ok(Some(bad))],
+        ..FakeTransport::default()
+    };
+    let error = barrier
+        .after_commit_with_transport(&s.output, 1, s.clock, &mut fake)
+        .unwrap_err();
+    assert_eq!(reason(error), "barrier:barrier_action_malformed");
+    assert_eq!(barrier.phase, BarrierPhase::Disarmed);
+    assert_eq!(fake.acks.len(), 1);
+    assert_eq!(fake.acks[0].status, ACK_REFUSED);
+    assert_eq!(fake.acks[0].token_digest, [0_u8; 32]);
+    cleanup(&s);
+}
+
+#[test]
+fn deadline_field_mismatch_is_refused_before_the_token_check() {
+    // A frame whose deadline differs from the durable binding's is refused as
+    // a mismatch (not as expiry) even when the frame deadline is still future
+    // and its token is valid for every token-relevant field.
+    let s = armed_setup("chan-bad-deadline");
+    let mut bad = frame(
+        &s.secret, "release", &s.nonce, s.clock, &s.state, 1, s.deadline, &s.rest,
+    );
+    bad.deadline_epoch = s.deadline + 10;
+    let mut barrier = channel_barrier(&s.dir, &s.nonce, s.secret, s.clock, s.deadline, &s.rest);
+    let mut fake = FakeTransport {
+        script: vec![Ok(Some(bad))],
+        ..FakeTransport::default()
+    };
+    let error = barrier
+        .after_commit_with_transport(&s.output, 1, s.clock, &mut fake)
+        .unwrap_err();
+    assert_eq!(reason(error), "barrier:barrier_deadline_mismatch");
+    assert_eq!(barrier.phase, BarrierPhase::Disarmed);
+    assert_eq!(fake.acks.len(), 1);
+    assert_eq!(fake.acks[0].status, ACK_REFUSED);
+    assert_eq!(fake.acks[0].token_digest, [0_u8; 32]);
+    cleanup(&s);
+}
+
+#[test]
 fn wrong_secret_token_is_refused_even_with_everything_else_correct() {
     let s = armed_setup("chan-badtoken");
     let wrong = [99_u8; 32];

@@ -69,6 +69,21 @@ equal to the policy tool's. These partial data cannot establish the policy's
 quality gate is claimed as passing here, and full quality-policy acceptance
 remains unapproved.
 
+## Subsequent complexity refactor
+
+The channel parser and decision consumer now extract their existing checks into
+private helpers. Independent source review found the same refusal order, ACK
+behavior, deadline checks and one-shot decision behavior. With the pinned
+rust-code-analysis tool, `env.rs::parse` changed from CC 23 to 11 and
+`channel.rs::consume_with` from CC 22 to 14; the full harness source maximum
+is 19. Fresh offline default/N256/N512 harness suites pass 46/66/60 tests,
+and strict all-target Clippy passes in all three profiles. This is a
+source-quality improvement only. The earlier six-file measurements above
+describe the original admission-repair base; branch coverage and CRAP for the
+current combined source still require a separately reviewed measurement before
+the quality gate can pass. Transport, host authority, launch and PDE
+qualification remain unapproved.
+
 ## What remains unapproved
 
 Socket transport semantics, ACK delivery and supervisor ACK validation,

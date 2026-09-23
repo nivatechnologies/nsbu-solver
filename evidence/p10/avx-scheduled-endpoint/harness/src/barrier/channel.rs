@@ -11,8 +11,8 @@
 
 use super::Barrier;
 use crate::decision::{
-    token_digest, Decision, DecisionAck, DecisionBinding, DecisionTransport, TransportError,
-    ACK_ACCEPTED, ACK_DISARMED, ACK_EXPIRED, ACK_REFUSED,
+    token_digest, Decision, DecisionAck, DecisionBinding, DecisionTransport, RawDecision,
+    TransportError, ACK_ACCEPTED, ACK_DISARMED, ACK_EXPIRED, ACK_REFUSED,
 };
 use crate::transport::SocketTransport;
 
@@ -65,6 +65,42 @@ fn refuse(
     Err(reason)
 }
 
+/// First mismatch between the received frame and the durable binding, in the
+/// exact historical check order; pure comparisons only, no side effects, so
+/// evaluating the chain here is observationally identical to the previous
+/// inline early-return chain.  The token and the deadline recheck stay at the
+/// acceptance site because they are ordered after this chain.
+fn binding_mismatch(raw: &RawDecision, binding: &DecisionBinding<'_>) -> Option<&'static str> {
+    if !matches!(raw.action.as_str(), "release" | "abort") {
+        return Some("barrier_action_malformed");
+    }
+    if raw.nonce_hex != binding.nonce {
+        return Some("barrier_nonce_mismatch");
+    }
+    if u128::from(raw.clock) != binding.clock {
+        return Some("barrier_clock_mismatch");
+    }
+    if raw.state_hex != binding.state {
+        return Some("barrier_state_mismatch");
+    }
+    if raw.source != binding.source {
+        return Some("barrier_source_mismatch");
+    }
+    if raw.profile != binding.profile {
+        return Some("barrier_profile_mismatch");
+    }
+    if raw.rest != binding.rest {
+        return Some("barrier_rest_mismatch");
+    }
+    if raw.attempt != binding.attempt {
+        return Some("barrier_attempt_mismatch");
+    }
+    if raw.deadline_epoch != binding.deadline_epoch {
+        return Some("barrier_deadline_mismatch");
+    }
+    None
+}
+
 fn consume_with(
     barrier: &Barrier,
     transport: &mut dyn DecisionTransport,
@@ -109,77 +145,8 @@ fn consume_with(
     // Full fail-closed binding verification against the durable truth.  The
     // frame's source/profile/rest are compared to the REVIEWED identity
     // components and the durable REST-record hash, never to each other alone.
-    if !matches!(raw.action.as_str(), "release" | "abort") {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_action_malformed",
-        );
-    }
-    if raw.nonce_hex != binding.nonce {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_nonce_mismatch",
-        );
-    }
-    if u128::from(raw.clock) != binding.clock {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_clock_mismatch",
-        );
-    }
-    if raw.state_hex != binding.state {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_state_mismatch",
-        );
-    }
-    if raw.source != binding.source {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_source_mismatch",
-        );
-    }
-    if raw.profile != binding.profile {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_profile_mismatch",
-        );
-    }
-    if raw.rest != binding.rest {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_rest_mismatch",
-        );
-    }
-    if raw.attempt != binding.attempt {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_attempt_mismatch",
-        );
-    }
-    if raw.deadline_epoch != binding.deadline_epoch {
-        return refuse(
-            transport,
-            ACK_REFUSED,
-            binding.nonce,
-            "barrier_deadline_mismatch",
-        );
+    if let Some(reason) = binding_mismatch(&raw, binding) {
+        return refuse(transport, ACK_REFUSED, binding.nonce, reason);
     }
     let token = super::token::derive_token(
         &barrier.secret,

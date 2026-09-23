@@ -216,6 +216,40 @@ fn channel_descriptor_parsing_is_strict() {
     fs::remove_dir_all(dir).unwrap();
 }
 
+/// The legacy-chain reasons that the earlier suites omitted: a present anchor
+/// directory VALUE that names no directory refuses AFTER all numeric fields
+/// validate (exact historical precedence), and an absent variable inside an
+/// otherwise-present legacy set refuses with its own per-variable reason —
+/// never `Ok(None)` and never a partial arm.
+#[test]
+fn legacy_binding_missing_reasons_precede_the_directory_check() {
+    let _guard = env_guard();
+    clear_all();
+    let dir = temp_dir("legacy-reasons");
+    set_legacy(&dir);
+    // Present value, no such directory: refused last, with barrier_dir_missing.
+    std::env::set_var(DIR_ENV, dir.join("no-such-subdir"));
+    assert!(matches!(
+        Barrier::from_env(),
+        Err(HarnessError::Barrier("barrier_dir_missing"))
+    ));
+    std::env::set_var(DIR_ENV, &dir);
+    // Variable absent inside a present legacy set: per-variable refusal.
+    std::env::remove_var(NONCE_ENV);
+    assert!(matches!(
+        Barrier::from_env(),
+        Err(HarnessError::Barrier("barrier_nonce_missing"))
+    ));
+    std::env::set_var(NONCE_ENV, "a".repeat(64));
+    std::env::remove_var(SECRET_ENV);
+    assert!(matches!(
+        Barrier::from_env(),
+        Err(HarnessError::Barrier("barrier_secret_missing"))
+    ));
+    clear_all();
+    fs::remove_dir_all(dir).unwrap();
+}
+
 #[test]
 fn legacy_only_binding_still_parses_and_channel_never_downgrades() {
     let _guard = env_guard();

@@ -25,7 +25,10 @@
 
 use super::{durable, token, Barrier, BarrierPhase, ChannelConfig};
 use crate::error::HarnessError;
-use std::{path::Path, time::Duration};
+use std::{
+    path::{Path, PathBuf},
+    time::Duration,
+};
 
 pub const DIR_ENV: &str = "NSBU_N512_TEMPORAL_BARRIER_DIR";
 pub const NONCE_ENV: &str = "NSBU_N512_TEMPORAL_BARRIER_NONCE";
@@ -126,11 +129,62 @@ impl<'a> IdentityAnchor<'a> {
     }
 }
 
+/// The fully validated legacy five-variable binding.  Every field is present,
+/// strict, and in the historical check order; the anchor directory exists.
+struct LegacyBinding {
+    dir: PathBuf,
+    nonce: String,
+    secret: [u8; 32],
+    armed_clock: u128,
+    deadline_epoch: u64,
+}
+
+/// Parse the COMPLETE legacy binding or refuse.  The order of the require /
+/// strict-digits / directory checks is exactly the historical one, so every
+/// refusal reason and its precedence are unchanged.
+fn parse_legacy(legacy: &[Slot; 5]) -> Result<LegacyBinding, HarnessError> {
+    let dir = require_text(&legacy[0], "barrier_dir_missing")?;
+    let nonce = require_text(&legacy[1], "barrier_nonce_missing")?;
+    if !token::is_hex64(nonce) {
+        return Err(HarnessError::Barrier("barrier_nonce_malformed"));
+    }
+    let secret = token::parse_secret_env(require_text(&legacy[2], "barrier_secret_missing")?)?;
+    let clock_text = require_text(&legacy[3], "barrier_clock_malformed")?;
+    let armed_clock = digits_to_u128(clock_text)
+        .filter(|&clock| clock > 0 && clock < crate::schedule::ENDPOINT)
+        .ok_or(HarnessError::Barrier("barrier_clock_malformed"))?;
+    let deadline_text = require_text(&legacy[4], "barrier_deadline_not_future")?;
+    let deadline_epoch = digits_to_u64(deadline_text)
+        .filter(|&deadline| deadline > durable::now_epoch())
+        .ok_or(HarnessError::Barrier("barrier_deadline_not_future"))?;
+    if !Path::new(dir).is_dir() {
+        return Err(HarnessError::Barrier("barrier_dir_missing"));
+    }
+    Ok(LegacyBinding {
+        dir: dir.into(),
+        nonce: nonce.to_owned(),
+        secret,
+        armed_clock,
+        deadline_epoch,
+    })
+}
+
 /// Parse the complete binding or refuse; a partially armed barrier is a
 /// configuration error, never a silent fall-through.  Absent EVERY barrier
 /// variable (legacy and channel alike) is the ordinary (unarmed) path.
 pub(super) fn parse(reviewed_identity: Option<&str>) -> Result<Option<Barrier>, HarnessError> {
-    let legacy: Vec<Slot> = LEGACY_KEYS.iter().map(|key| probe(key)).collect();
+    let legacy: [Slot; 5] = LEGACY_KEYS
+        .iter()
+        .map(|key| probe(key))
+        .collect::<Vec<Slot>>()
+        .try_into()
+        .unwrap_or([
+            Slot::Absent,
+            Slot::Absent,
+            Slot::Absent,
+            Slot::Absent,
+            Slot::Absent,
+        ]);
     let channel: [Slot; 4] = CHANNEL_KEYS
         .iter()
         .map(|key| probe(key))
@@ -155,34 +209,22 @@ pub(super) fn parse(reviewed_identity: Option<&str>) -> Result<Option<Barrier>, 
     if !legacy[0].is_present() {
         return Err(HarnessError::Barrier("barrier_partial_environment"));
     }
-    let dir = require_text(&legacy[0], "barrier_dir_missing")?;
-    let nonce = require_text(&legacy[1], "barrier_nonce_missing")?;
-    if !token::is_hex64(nonce) {
-        return Err(HarnessError::Barrier("barrier_nonce_malformed"));
-    }
-    let secret = token::parse_secret_env(require_text(&legacy[2], "barrier_secret_missing")?)?;
-    let clock_text = require_text(&legacy[3], "barrier_clock_malformed")?;
-    let armed_clock = digits_to_u128(clock_text)
-        .filter(|&clock| clock > 0 && clock < crate::schedule::ENDPOINT)
-        .ok_or(HarnessError::Barrier("barrier_clock_malformed"))?;
-    let deadline_text = require_text(&legacy[4], "barrier_deadline_not_future")?;
-    let deadline_epoch = digits_to_u64(deadline_text)
-        .filter(|&deadline| deadline > durable::now_epoch())
-        .ok_or(HarnessError::Barrier("barrier_deadline_not_future"))?;
-    if !Path::new(dir).is_dir() {
-        return Err(HarnessError::Barrier("barrier_dir_missing"));
-    }
+    let binding = parse_legacy(&legacy)?;
     let channel_config = if channel_present {
-        Some(parse_channel(&channel, reviewed_identity, armed_clock)?)
+        Some(parse_channel(
+            &channel,
+            reviewed_identity,
+            binding.armed_clock,
+        )?)
     } else {
         None
     };
     Ok(Some(Barrier {
-        dir: dir.into(),
-        nonce: nonce.to_owned(),
-        secret,
-        armed_clock,
-        deadline_epoch,
+        dir: binding.dir,
+        nonce: binding.nonce,
+        secret: binding.secret,
+        armed_clock: binding.armed_clock,
+        deadline_epoch: binding.deadline_epoch,
         phase: BarrierPhase::Waiting,
         channel: channel_config,
     }))

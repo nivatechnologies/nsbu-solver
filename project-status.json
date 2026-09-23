@@ -692,6 +692,25 @@
     "accepted_windows": 0,
     "qualification": false
   },
+  "p10_n256_channel_cc_refactor": {
+    "status": "independently_reviewed_source_quality_refactor_integrated_operational_and_numerical_gates_unapproved",
+    "base_commit": "8647b75717f8973e31f8b88f7593d0857590d134",
+    "patch_sha256": "fcbcc9d9ef36513fc00ed17e91aee47d2b49ada5dcc7d674d61387a0e33d3aab",
+    "independent_review_report_sha256": "45afe5a75c4fd953bad01651e9c75f2ac8a418d9a4d41446fc52e335ab488abe",
+    "independent_review_seal_sha256": "71b3655c65fea12ea36fe5372b17c83663074830b96e3fa1e142a2212edaaa3f",
+    "tests_passed_default_profile": 46,
+    "tests_passed_n256_profile": 66,
+    "tests_passed_n512_profile": 60,
+    "clippy_all_three_profiles": "passed_with_explicit_dead_code_allowance",
+    "cyclomatic_parse_before_after": [23, 11],
+    "cyclomatic_consume_before_after": [22, 14],
+    "cyclomatic_harness_source_max": 19,
+    "quality_policy_pass": false,
+    "launch_admission_gate": "fail",
+    "trajectory_executed": false,
+    "accepted_windows": 0,
+    "qualification": false
+  },
   "p10_n512_m512_endpoint_run": {
     "status": "running_28_steps_observed",
     "launch_evidence": "evidence/p10/n512-m512-unattended-20260913/launch-receipt.json",
