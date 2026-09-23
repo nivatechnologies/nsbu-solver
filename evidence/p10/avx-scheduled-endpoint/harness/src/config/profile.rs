@@ -197,7 +197,7 @@ pub(crate) const PROFILE: &str = "n512-m512-h32to2048-h64to4096-cadv33-w3-pfft1e
 #[cfg(feature = "n512-m512-temporal-h16")]
 pub(crate) const PROFILE: &str = "n512-m512-h16to2048-h32to4096-cadv33-w3-pfft1ed6995";
 #[cfg(feature = "n256-m512-piecewise-cadv33")]
-pub(crate) const PROFILE: &str = "n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
+pub(crate) const PROFILE: &str = "n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c-user-scope-v1";
 #[cfg(all(
     feature = "n384-prep",
     not(feature = "n512-m512-parallel-capture"),
@@ -244,11 +244,11 @@ pub(crate) const EXTERNAL_STOP: &str = "pgid-watchdog-v1-starttime-cmdline-deadl
     not(feature = "n256-m512-piecewise-cadv33")
 ))]
 pub(crate) const EXTERNAL_STOP: &str = "pgid-watchdog-v2-starttime-cmdline-deadline";
-#[cfg(any(
-    feature = "n512-m512-parallel-capture",
-    feature = "n256-m512-piecewise-cadv33"
-))]
+#[cfg(feature = "n512-m512-parallel-capture")]
 pub(crate) const EXTERNAL_STOP: &str = "pgid-watchdog-v3-confirmed-identity-absolute-deadline";
+#[cfg(feature = "n256-m512-piecewise-cadv33")]
+pub(crate) const EXTERNAL_STOP: &str =
+    "systemd-user-scope-gnu-timeout-term-killafter2s-memorymax103079215104-tasksmax256-v1";
 #[cfg(any(
     feature = "n512-m512-temporal-h32",
     feature = "n512-m512-temporal-h16"

@@ -29,7 +29,7 @@ pub(crate) fn root(name: &str) -> PathBuf {
 
 pub(crate) fn coarse_identity(source: &str) -> String {
     format!(
-        "source={source};case={};profile={};backend=fixture-backend;w3_source={};rhs_w3={};force_w3={};retained=256;force_samples=512;rhs_dealias=384;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;schema={};attempt_schema={};resume=unsupported;host=baccus;external_stop={}",
+        "source={source};case={};profile={};backend=fixture-backend;w3_source={};rhs_w3={};force_w3={};retained=256;force_samples=512;rhs_dealias=384;method=cox-matthews;schedule=h64-clocks0-through2048-then-h128-through4096;endpoint=4096;advective_limit=3.3;schema={};attempt_schema={};resume=unsupported;host=baccus;numa={};external_stop={}",
         contract::CASE_SHA256,
         contract::COARSE_PROFILE,
         contract::COARSE_W3_SOURCE,
@@ -37,6 +37,7 @@ pub(crate) fn coarse_identity(source: &str) -> String {
         contract::COARSE_FORCE_W3,
         contract::COARSE_STATE_SCHEMA,
         contract::COARSE_ATTEMPT_SCHEMA,
+        contract::COARSE_NUMA,
         contract::COARSE_EXTERNAL_STOP,
     )
 }

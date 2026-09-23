@@ -12,10 +12,12 @@ pub(crate) const R6_ENDPOINT_COEFFICIENT_SHA256: &str =
 pub(crate) const R6_ENDPOINT_FILE_SHA256: &str =
     "43308ca8ddb499916a09183266e3a83811b3214536c14c7ba2f6814363cef0a0";
 
-pub(crate) const COARSE_PROFILE: &str = "n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c";
+pub(crate) const COARSE_PROFILE: &str =
+    "n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c-user-scope-v1";
 pub(crate) const COARSE_HOST: &str = "baccus";
 pub(crate) const COARSE_EXTERNAL_STOP: &str =
-    "pgid-watchdog-v3-confirmed-identity-absolute-deadline";
+    "systemd-user-scope-gnu-timeout-term-killafter2s-memorymax103079215104-tasksmax256-v1";
+pub(crate) const COARSE_NUMA: &str = "unbound-all-visible-cpus-cgroup-memory-limit";
 pub(crate) const COARSE_STATE_SCHEMA: &str = "p10-avx-n256-m512-observer-state-v1";
 pub(crate) const COARSE_ATTEMPT_SCHEMA: &str = "p10-avx-scheduled-attempt-v3";
 pub(crate) const COARSE_W3_SOURCE: &str = "f13c29c9ae91d0b8cf7a790132deb9bd076911c0";
@@ -153,6 +155,7 @@ fn validate_coarse_side(left: &Manifest) -> Result<(), String> {
         ("schema", COARSE_STATE_SCHEMA),
         ("attempt_schema", COARSE_ATTEMPT_SCHEMA),
         ("host", COARSE_HOST),
+        ("numa", COARSE_NUMA),
         ("external_stop", COARSE_EXTERNAL_STOP),
         ("endpoint", "4096"),
         ("advective_limit", "3.3"),

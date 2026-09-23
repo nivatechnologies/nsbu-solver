@@ -17,7 +17,7 @@ fn profile_is_exact_n256_and_distinct_from_n384_and_n512() {
     assert_eq!(schedule::ENDPOINT, 4096);
     assert_eq!(require_execution_ready(), Ok(()));
     let identity = identity();
-    assert!(identity.contains("profile=n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c"));
+    assert!(identity.contains("profile=n256-m512-h64to2048-h128to4096-cadv33-w3-f13c29c-user-scope-v1"));
     assert!(identity.contains("retained=256"));
     assert!(identity.contains("force_samples=512"));
     assert!(identity.contains("rhs_dealias=384"));
@@ -28,8 +28,11 @@ fn profile_is_exact_n256_and_distinct_from_n384_and_n512() {
     assert!(identity.contains("provider=parallel-reduced-v2-force-w3-attempt-cache"));
     assert!(identity.contains("rhs_w3_workers=3"));
     assert!(identity.contains("host=baccus"));
-    assert!(identity
-        .contains("external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline"));
+    assert!(identity.contains("numa=unbound-all-visible-cpus-cgroup-memory-limit"));
+    assert!(identity.contains(
+        "external_stop=systemd-user-scope-gnu-timeout-term-killafter2s-memorymax103079215104-tasksmax256-v1"
+    ));
+    assert!(!identity.contains("pgid-watchdog-v3"));
     assert!(identity.contains("observer_force_samples=512"));
     assert!(identity.contains("observer_conservative=512"));
     assert!(!identity.contains("host=sulaco"));

@@ -194,7 +194,11 @@ fn contract_refuses_wrong_rest_proximate_identity_on_coarse_side() {
     for (key, tampered) in [
         ("host=baccus", "host=sulaco"),
         (
-            "external_stop=pgid-watchdog-v3-confirmed-identity-absolute-deadline",
+            "numa=unbound-all-visible-cpus-cgroup-memory-limit",
+            "numa=whole-host-unbound-all-visible-cpus-memory",
+        ),
+        (
+            "external_stop=systemd-user-scope-gnu-timeout-term-killafter2s-memorymax103079215104-tasksmax256-v1",
             "external_stop=pgid-watchdog-v2-starttime-cmdline-deadline",
         ),
         ("retained=256", "retained=384"),
