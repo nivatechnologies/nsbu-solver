@@ -1,0 +1,7 @@
+# The scheduled-endpoint harness's zero-steady-state-allocation invariant is
+# observed through the PROCESS-WIDE stats_alloc counters, and the canonical
+# barrier environment is process-global.  Both are exact for the production
+# (single-run) process, so the test binary runs serially for deterministic,
+# contamination-free execution.
+[env]
+RUST_TEST_THREADS = "1"

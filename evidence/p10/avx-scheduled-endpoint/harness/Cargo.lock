@@ -148,6 +148,7 @@ dependencies = [
 name = "p10-avx-scheduled-endpoint"
 version = "0.0.0"
 dependencies = [
+ "libc",
  "nsbu-benchmarks",
  "nsbu-solver",
  "sha2",

@@ -1,42 +1,53 @@
+//! Frozen filesystem-path regressions, ported verbatim from the reviewed
+//! single-file barrier (token derivation, environment arming refusals, token
+//! reading, record extraction, one-shot completion).
+
+use super::durable::{now_epoch, record_state_sha};
+use super::fixtures::*;
+use super::token::{hex, is_hex64, read_token};
 use super::*;
-
-fn temp_dir(label: &str) -> PathBuf {
-    let nonce = now_epoch();
-    let path = std::env::temp_dir().join(format!(
-        "p10-h32-barrier-{label}-{}-{nonce}-{}",
-        std::process::id(),
-        thread_seq()
-    ));
-    fs::create_dir_all(&path).unwrap();
-    path
-}
-
-thread_local! {
-    static SEQ: std::cell::Cell<u64> = const { std::cell::Cell::new(0) };
-}
-fn thread_seq() -> u64 {
-    SEQ.with(|seq| {
-        let value = seq.get();
-        seq.set(value + 1);
-        value
-    })
-}
 
 #[test]
 fn token_derivation_is_bound_to_every_handshake_field() {
     let secret = [7_u8; 32];
     let base = derive_token(&secret, "release", &"a".repeat(64), 32, &"b".repeat(64));
     assert!(is_hex64(&base));
-    assert_ne!(base, derive_token(&secret, "abort", &"a".repeat(64), 32, &"b".repeat(64)));
-    assert_ne!(base, derive_token(&[8_u8; 32], "release", &"a".repeat(64), 32, &"b".repeat(64)));
-    assert_ne!(base, derive_token(&secret, "release", &"c".repeat(64), 32, &"b".repeat(64)));
-    assert_ne!(base, derive_token(&secret, "release", &"a".repeat(64), 64, &"b".repeat(64)));
-    assert_ne!(base, derive_token(&secret, "release", &"a".repeat(64), 32, &"c".repeat(64)));
+    assert_ne!(
+        base,
+        derive_token(&secret, "abort", &"a".repeat(64), 32, &"b".repeat(64))
+    );
+    assert_ne!(
+        base,
+        derive_token(&[8_u8; 32], "release", &"a".repeat(64), 32, &"b".repeat(64))
+    );
+    assert_ne!(
+        base,
+        derive_token(&secret, "release", &"c".repeat(64), 32, &"b".repeat(64))
+    );
+    assert_ne!(
+        base,
+        derive_token(&secret, "release", &"a".repeat(64), 64, &"b".repeat(64))
+    );
+    assert_ne!(
+        base,
+        derive_token(&secret, "release", &"a".repeat(64), 32, &"c".repeat(64))
+    );
 }
 
 #[test]
 fn environment_binding_refuses_partial_or_malformed_armings() {
-    for key in [DIR_ENV, NONCE_ENV, SECRET_ENV, CLOCK_ENV, DEADLINE_ENV] {
+    let _guard = env_guard();
+    for key in [
+        DIR_ENV,
+        NONCE_ENV,
+        SECRET_ENV,
+        CLOCK_ENV,
+        DEADLINE_ENV,
+        CHANNEL_FD_ENV,
+        SOURCE_ENV,
+        PROFILE_ENV,
+        REST_ENV,
+    ] {
         std::env::remove_var(key);
     }
     assert!(Barrier::from_env().unwrap().is_none());
@@ -108,6 +119,7 @@ fn malformed_tokens_never_pass_and_abort_token_wins_over_release() {
         armed_clock: 32,
         deadline_epoch: now_epoch() + 60,
         phase: BarrierPhase::Armed,
+        channel: None,
     };
     assert!(matches!(
         barrier.wait_for_token(&state),
@@ -128,10 +140,9 @@ fn malformed_tokens_never_pass_and_abort_token_wins_over_release() {
 
 #[test]
 fn token_derivation_matches_the_python_supervisor_vector() {
-    let secret = hex::decode_lossy(
-        "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
-    )
-    .unwrap();
+    let secret =
+        hex::decode_lossy("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
+            .unwrap();
     let nonce = "0a".repeat(32);
     let state = "0b".repeat(32);
     assert_eq!(
@@ -180,14 +191,13 @@ fn authenticated_release_completes_the_barrier_one_shot_forever() {
         armed_clock: 32,
         deadline_epoch: now_epoch() + 60,
         phase: BarrierPhase::Waiting,
+        channel: None,
     };
     barrier.after_commit(&output, 1, 32).unwrap();
     assert_eq!(barrier.phase, BarrierPhase::Completed);
     let receipt = fs::read_to_string(dir.join(ARMED_RECEIPT)).unwrap();
     assert!(receipt.contains("\"clock\": 32"));
 
-    // A valid abort token for any later commit is planted so that any park or
-    // token read after completion would fail closed; completion ignores both.
     fs::write(
         dir.join(ABORT_FILE),
         format!("{}\n", derive_token(&secret, "abort", &nonce, 64, &state)),
@@ -199,15 +209,14 @@ fn authenticated_release_completes_the_barrier_one_shot_forever() {
     )
     .unwrap();
 
-    // A later commit at a different clock completes immediately: no re-arm,
-    // no parking, no token handling.
     barrier.after_commit(&output, 2, 64).unwrap();
-    // A later commit at the armed clock value also completes immediately.
     barrier.after_commit(&output, 3, 32).unwrap();
     assert_eq!(barrier.phase, BarrierPhase::Completed);
 
-    // The single armed receipt is byte-identical and no second receipt exists.
-    assert_eq!(fs::read_to_string(dir.join(ARMED_RECEIPT)).unwrap(), receipt);
+    assert_eq!(
+        fs::read_to_string(dir.join(ARMED_RECEIPT)).unwrap(),
+        receipt
+    );
     let receipts = fs::read_dir(&dir)
         .unwrap()
         .filter_map(|entry| entry.ok())
@@ -220,11 +229,8 @@ fn authenticated_release_completes_the_barrier_one_shot_forever() {
         .count();
     assert_eq!(receipts, 1);
 
-    // A completed barrier ignores even a fresh armed-clock bundle without the
-    // durable record; it returns Ok before touching any state.
     barrier.after_commit(&output, 4, 32).unwrap();
 
-    // Disarming is terminal too: after expiry the hook fails closed forever.
     barrier.phase = BarrierPhase::Disarmed;
     assert!(matches!(
         barrier.after_commit(&output, 5, 32),

@@ -12,6 +12,21 @@ use std::time::Instant;
 pub const IDENTITY: &str =
     "harness-timed-rhs-v1;clock=std-time-Instant;scope=evaluate-inclusive;overhead=included";
 
+/// Cache-provider facts the attempt record reports.  Separated from
+/// `TimedRhs` so the run driver stays generic over the right-hand side and a
+/// safe non-numerical test collaborator can supply the same facts.
+pub trait ProviderFacts {
+    fn hit_miss(&self) -> [usize; 2];
+}
+
+impl ProviderFacts
+    for TimedRhs<nsbu_solver::integrators::rhs::SpectralRhs<crate::cache::CachedReducedForce>>
+{
+    fn hit_miss(&self) -> [usize; 2] {
+        self.inner().provider().hit_miss()
+    }
+}
+
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Measurement {
     pub calls: usize,

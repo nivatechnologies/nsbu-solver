@@ -14,6 +14,7 @@ mod cache;
 mod cache;
 mod command;
 mod config;
+mod decision;
 mod error;
 #[path = "../../../avx-parallel-reduced-composite-7467e26/harness/src/observer.rs"]
 #[cfg_attr(capture_offline, allow(dead_code))]
@@ -23,6 +24,10 @@ mod owners;
 mod publication;
 #[cfg_attr(capture_offline, allow(dead_code))]
 mod records;
+#[cfg(all(test, capture_offline))]
+mod run_owners_channel_deny_test;
+#[cfg(all(test, capture_offline))]
+mod run_owners_test;
 mod run_types;
 mod schedule;
 mod staging;
@@ -30,6 +35,8 @@ mod staging;
 #[cfg_attr(capture_offline, allow(dead_code))]
 mod step_artifact;
 mod timed_rhs;
+mod transport;
+mod wire;
 
 #[cfg(not(feature = "n384-prep"))]
 use artifact::NodeRecord;
@@ -42,6 +49,7 @@ use nsbu_solver::{
     domain::{ResourcePlan, SpectralState},
     integrators::{
         attempt::{AttemptResult, AttemptWorkspace},
+        kernel::RightHandSide,
         rhs::SpectralRhs,
         transaction::{prepare_commit, CandidateState, PreparedCommit},
     },
@@ -53,17 +61,22 @@ use records::AttemptFacts;
 use run_types::{AcceptedFacts, AcceptedStage, StageMeta};
 use stats_alloc::{Region, Stats, StatsAlloc, INSTRUMENTED_SYSTEM};
 use std::{alloc::System, fs, path::Path, time::Instant};
-use timed_rhs::TimedRhs;
+use timed_rhs::{ProviderFacts, TimedRhs};
 
 #[global_allocator]
 static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
 
-struct RunOwners {
+/// The run owners are generic over the right-hand-side provider so the EXACT
+/// `execute`/`attempt` dispatch below can be exercised in tests by a safe,
+/// non-numerical collaborator (see `run_owners_test`).  Production always
+/// instantiates `R = SpectralRhs<CachedReducedForce>`; the dispatch, ordering
+/// and publication code paths are identical for every `R`.
+struct RunOwners<R> {
     resources: ResourcePlan,
     state: SpectralState,
     candidate: CandidateState,
     attempts: AttemptWorkspace,
-    rhs: TimedRhs<SpectralRhs<CachedReducedForce>>,
+    rhs: TimedRhs<R>,
     observer: Option<ReducedObserver>,
     identity: String,
     balances: Vec<TimedBalance>,
@@ -102,7 +115,7 @@ fn prepare_output(output: &Path) -> AnyResult<()> {
     Ok(())
 }
 
-impl RunOwners {
+impl RunOwners<SpectralRhs<CachedReducedForce>> {
     fn new(resources: ResourcePlan) -> AnyResult<Self> {
         let execution = owners::execution(resources)?;
         let state_owners = owners::states(resources)?;
@@ -119,16 +132,30 @@ impl RunOwners {
             frontiers: Frontiers::default(),
         })
     }
+}
 
+impl<R: RightHandSide> RunOwners<R>
+where
+    TimedRhs<R>: timed_rhs::ProviderFacts,
+{
     fn execute(&mut self, output: &Path) -> AnyResult<()> {
         self.publish_rest(output)?;
-        let mut barrier = barrier::Barrier::from_env()?;
+        // The barrier's channel opt-in is bound to the ACTUAL reviewed run
+        // identity owned here; without this proof the channel is refused.
+        let mut barrier = barrier::Barrier::from_env_with_identity(&self.identity)?;
         for index in 1..=schedule::MAXIMUM_ATTEMPTS {
             self.attempt(output, index)?;
             if let Some(barrier) = barrier.as_mut() {
                 let clock = self.frontiers.durable_clock;
                 barrier.after_commit(output, index, clock)?;
             }
+        }
+        // A channel run may only reach the terminal after its single
+        // canonical first-step decision was ACTUALLY consumed; a barrier
+        // that never armed (or never resolved) refuses here instead of
+        // letting the schedule complete silently to the endpoint marker.
+        if let Some(barrier) = barrier.as_ref() {
+            barrier.require_channel_decision_or_unarmed()?;
         }
         self.finish(output)
     }
@@ -267,7 +294,7 @@ impl RunOwners {
             ticks: result.ticks,
             rhs_calls: result.rhs_calls,
             ratios: result.indicators.ratios,
-            hit_miss: self.rhs.inner().provider().hit_miss(),
+            hit_miss: self.rhs.hit_miss(),
             rhs_timing: self.rhs.measurement(),
         };
         Ok(AcceptedFacts { token, facts })
@@ -435,4 +462,3 @@ fn record_publication(
     );
     Ok(())
 }
-
