@@ -4,6 +4,7 @@ members = [
     "crates/nsbu-benchmarks",
     "crates/nsbu-cli",
     "crates/m512-alloc-trace",
+    "crates/p10-n256-m512-pair-adapter",
 ]
 resolver = "2"
 

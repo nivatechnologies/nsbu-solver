@@ -645,6 +645,22 @@
     "snapshot_comparisons": 0,
     "qualification": false
   },
+  "p10_n256_m512_pair_adapter_preparation": {
+    "status": "independently_reviewed_adapter_integrated_offline_validated_no_comparison_executed",
+    "reviewed_package_sha256sums": "0ae6c40e2b133e2d8ced1da33bad2640d76298c4afe90940033795435ac61895",
+    "independent_review_report_sha256": "a1350fd43a2a3b924dddb793f55910fa33981454d2cbfb13745e82ec2d70bcf9",
+    "integration_review_report_sha256": "1a4b5de5a3934f0316e733cc0e72051b14090181da367d94f09307ed55c2f1b2",
+    "workspace_member": "crates/p10-n256-m512-pair-adapter",
+    "documentation": "docs/P10_N256_M512_PAIR_ADAPTER.md",
+    "tests_passed": 70,
+    "source_files_byte_identical_to_reviewed_package": true,
+    "reviewed_anchor_returns_none": true,
+    "runtime_admission": "refused_n256_m512_lineage_absent",
+    "snapshot_comparisons": 0,
+    "comparison_executed": false,
+    "integration_review": "passed_for_adapter_preparation_only",
+    "qualification": false
+  },
   "p10_n512_m512_endpoint_run": {
     "status": "running_28_steps_observed",
     "launch_evidence": "evidence/p10/n512-m512-unattended-20260913/launch-receipt.json",
