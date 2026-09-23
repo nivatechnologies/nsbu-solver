@@ -43,7 +43,7 @@ intermediate state, not endpoint data, and is refused as incomplete for the
 ## Inputs and contract sources
 
 The binary layout follows the transactional writer evidence in
-[`artifact.rs`](../evidence/p10/avx-scheduled-endpoint/harness/src/artifact.rs)
+[`artifact/mod.rs`](../evidence/p10/avx-scheduled-endpoint/harness/src/artifact/mod.rs)
 and [`step_artifact.rs`](../evidence/p10/avx-scheduled-endpoint/harness/src/step_artifact.rs):
 magic `P10AVXSNAP1\0`, u64 identity length, identity bytes, four little-endian
 u128 header words (elapsed, target, epoch, accepted steps), three half-spectrum

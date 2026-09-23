@@ -14,6 +14,6 @@ class CheckoutTestCase(unittest.TestCase):
         self.root = Path(self.temporary.name) / 'checkout'
         shutil.copytree(CHECKOUT, self.root, ignore=shutil.ignore_patterns(
             '.git', '.venv', 'work', 'target', 'mutants', '.complexipy_cache',
-            'runs', 'checkpoints', '__pycache__', '.DS_Store'))
+            'checkpoints', '__pycache__', '.DS_Store'))
         # Instrumented subprocess imports read tool configuration from their cwd.
         shutil.copy2(CHECKOUT / 'pyproject.toml', Path(self.temporary.name) / 'pyproject.toml')
